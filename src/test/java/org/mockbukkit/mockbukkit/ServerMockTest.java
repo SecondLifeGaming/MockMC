@@ -51,6 +51,7 @@ import org.bukkit.GameEvent;
 import org.bukkit.GameMode;
 import org.bukkit.Keyed;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -89,6 +90,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -428,6 +430,7 @@ class ServerMockTest
 	@Test
 	void addRecipe_AddsRecipe_ReturnsTrue()
 	{
+		server.clearRecipes();
 		TestRecipe recipe1 = new TestRecipe();
 		TestRecipe recipe2 = new TestRecipe();
 		server.addRecipe(recipe1);
@@ -446,6 +449,45 @@ class ServerMockTest
 		assumeTrue(server.recipeIterator().hasNext());
 		server.clearRecipes();
 		assertFalse(server.recipeIterator().hasNext());
+	}
+
+	@Nested
+	class GetRecipe
+	{
+
+		@ParameterizedTest
+		@ValueSource(strings = {
+			"minecraft:bamboo_block",
+			"minecraft:bamboo_door",
+			"minecraft:decorated_pot",
+			"minecraft:gray_bundle"
+		})
+		void givenValidValues(String expectedKey)
+		{
+			NamespacedKey key = NamespacedKey.fromString(expectedKey);
+			assertNotNull(key);
+
+			@Nullable Recipe actual = server.getRecipe(key);
+
+			assertNotNull(actual);
+			Keyed actualKeyed = assertInstanceOf(Keyed.class, actual);
+			assertEquals(expectedKey, actualKeyed.getKey().asString());
+		}
+
+		@ParameterizedTest
+		@ValueSource(strings = {
+			"minecraft:non_existing_recipe",
+			"other_namespace:bamboo_door"
+		})
+		void givenInvalidValues(String expectedKey)
+		{
+			NamespacedKey key = NamespacedKey.fromString(expectedKey);
+			assertNotNull(key);
+
+			@Nullable Recipe actual = server.getRecipe(key);
+			assertNull(actual);
+		}
+
 	}
 
 	@Test
