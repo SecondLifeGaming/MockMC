@@ -36,6 +36,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.ClickType;
@@ -78,13 +79,10 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
-import org.mockbukkit.mockbukkit.plugin.PluginMock;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.plugin.TestPlugin;
-import org.mockbukkit.mockbukkit.world.WorldMock;
 import org.mockbukkit.mockbukkit.block.BlockMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.state.ChestStateMock;
 import org.mockbukkit.mockbukkit.block.state.TileStateMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.EnderChestInventoryMock;
@@ -93,6 +91,9 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.map.MapViewMock;
 import org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher;
 import org.mockbukkit.mockbukkit.plugin.PluginManagerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
+import org.mockbukkit.mockbukkit.plugin.TestPlugin;
+import org.mockbukkit.mockbukkit.world.WorldMock;
 
 import java.net.InetSocketAddress;
 import java.util.Collections;
@@ -337,6 +338,56 @@ class PlayerMockTest
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerDeathEvent.class));
 	}
 
+	@Test
+	void damage_Player_Kills_OtherPlayer()
+	{
+		player.setItemInHand(new ItemStackMock(Material.STONE_SWORD));
+		player.setLevel(11);
+		player.setExp(0.5f);
+		player.setFoodLevel(13);
+
+		var killer = server.addPlayer();
+
+		player.simulateDamage(player.getHealth(), killer);
+		assertEquals(0, player.getHealth(), 0);
+		assertTrue(player.isDead());
+		assertEquals(killer, player.getKiller());
+		assertTrue(player.getInventory().isEmpty());
+		assertEquals(0, player.getLevel());
+		assertEquals(0, player.getExp(), 1e-6);
+		assertEquals(0, player.getFoodLevel());
+	}
+
+	@Test
+	void damage_CancelDeathEvent()
+	{
+		server.getPluginManager().registerEvents(new Listener()
+		{
+			@EventHandler
+			void onPlayerDeathEvent(PlayerDeathEvent event)
+			{
+				event.setReviveHealth(10);
+				event.setCancelled(true);
+			}
+		}, MockBukkit.createMockPlugin());
+
+		assertTrue(player.getInventory().isEmpty());
+		player.setItemInHand(new ItemStackMock(Material.STONE_SWORD));
+		player.setLevel(11);
+		player.setExp(0.5f);
+		player.setFoodLevel(13);
+		assertFalse(player.getInventory().isEmpty());
+
+		var killer = server.addPlayer();
+		player.simulateDamage(player.getHealth(), killer);
+		assertEquals(10, player.getHealth(), 0);
+		assertFalse(player.isDead());
+		assertNull(player.getKiller());
+		assertFalse(player.getInventory().isEmpty());
+		assertEquals(11, player.getLevel());
+		assertEquals(0.5f, player.getExp(), 1e-6);
+		assertEquals(13, player.getFoodLevel());
+	}
 	@Test
 	void getAttribute_HealthAttribute_IsMaximumHealth()
 	{
@@ -2713,4 +2764,5 @@ class PlayerMockTest
 		assertEquals(player.nextActionBar(), textComponent2);
 		assertEquals(player.nextActionBar(), textComponent3);
 	}
+
 }

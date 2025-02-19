@@ -72,6 +72,7 @@ import java.util.function.Consumer;
  */
 public abstract class LivingEntityMock extends EntityMock implements LivingEntity
 {
+
 	private final BrainMock brain = new BrainMock();
 	/**
 	 * How much health the entity has.
@@ -166,12 +167,30 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 			return;
 		}
 
+		DamageSource dmg;
+		if (getLastDamageCause() != null && getLastDamageCause().getDamageSource().getDirectEntity() instanceof Player player)
+		{
+			dmg = DamageSource.builder(DamageType.PLAYER_ATTACK).build();
+			setKiller(player);
+		}
+		else
+		{
+			dmg = DamageSource.builder(DamageType.GENERIC).build();
+		}
+
 		this.health = 0;
 
-		EntityDeathEvent event = new EntityDeathEvent(this, DamageSource.builder(DamageType.GENERIC).build(), new ArrayList<>());
-		Bukkit.getPluginManager().callEvent(event);
-
-		this.alive = false;
+		EntityDeathEvent event = new EntityDeathEvent(this, dmg, new ArrayList<>());
+		if (!event.callEvent())
+		{
+			setKiller(null);
+			this.health = event.getReviveHealth();
+			this.alive = true;
+		}
+		else
+		{
+			this.alive = false;
+		}
 	}
 
 	@Override
@@ -668,7 +687,7 @@ public abstract class LivingEntityMock extends EntityMock implements LivingEntit
 	 * Adds multiple potion effects. If one event is canceled, the effect from that event won't be added.
 	 *
 	 * @param effects The Potion Effects to add.
-	 * @param cause The cause.
+	 * @param cause   The cause.
 	 * @return A list of events containing details about adding the potion effects.
 	 */
 	public List<EntityPotionEffectEvent> addPotionEffects(@NotNull Collection<PotionEffect> effects, EntityPotionEffectEvent.Cause cause)
