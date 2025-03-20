@@ -62,6 +62,7 @@ import org.bukkit.entity.ItemDisplay;
 import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.LargeFireball;
 import org.bukkit.entity.LeashHitch;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.LlamaSpit;
 import org.bukkit.entity.MagmaCube;
@@ -73,6 +74,7 @@ import org.bukkit.entity.OminousItemSpawner;
 import org.bukkit.entity.Painting;
 import org.bukkit.entity.Panda;
 import org.bukkit.entity.Parrot;
+import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.PigZombie;
 import org.bukkit.entity.Piglin;
@@ -274,6 +276,7 @@ public final class EntityTypesMock
 			.register(JungleChestBoat.class, JungleChestBoatMock.class, JungleChestBoatMock::new)
 			.register(LargeFireball.class, LargeFireballMock.class, LargeFireballMock::new)
 			.register(LeashHitch.class, LeashHitchMock.class, LeashHitchMock::new)
+			.register(LightningStrike.class, LightningStrikeMock.class, LightningStrikeMock::new)
 			.register(Llama.class, LlamaMock.class, LlamaMock::new)
 			.register(LlamaSpit.class, LlamaSpitMock.class, LlamaSpitMock::new)
 			.register(MagmaCube.class, MagmaCubeMock.class, MagmaCubeMock::new)
@@ -291,6 +294,7 @@ public final class EntityTypesMock
 			.register(PaleOakChestBoat.class, PaleOakChestBoatMock.class, PaleOakChestBoatMock::new)
 			.register(Panda.class, PandaMock.class, PandaMock::new)
 			.register(Parrot.class, ParrotMock.class, ParrotMock::new)
+			.register(Phantom.class, PhantomMock.class, PhantomMock::new)
 			.register(Pig.class, PigMock.class, PigMock::new)
 			.register(Piglin.class, PiglinMock.class, PiglinMock::new)
 			.register(PiglinBrute.class, PiglinBruteMock.class, PiglinBruteMock::new)
