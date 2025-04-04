@@ -1,18 +1,23 @@
 package org.mockbukkit.mockbukkit.block.data;
 
+import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.FaceAttachable;
+import org.bukkit.block.data.Levelled;
 import org.bukkit.block.data.Lightable;
 import org.bukkit.block.data.MultipleFacing;
 import org.bukkit.block.data.Openable;
+import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
+import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
+import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
@@ -103,7 +108,15 @@ public enum BlockDataKey
 	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	UP("up", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance);
+	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
+
+	AXIS("axis", string -> Axis.valueOf(string.toUpperCase(Locale.ROOT)), Orientable.class::isInstance),
+
+	RAIL_SHAPE("shape", string -> Rail.Shape.valueOf(string.toUpperCase(Locale.ROOT)), Rail.class::isInstance),
+
+	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
+
+	CANDLES("candles", Integer::parseInt, Candle.class::isInstance);
 
 	private static final Map<String, BlockDataKey> KEY_TO_BLOCK_DATA_KEY_RELATION = compileKeyRelation();
 
