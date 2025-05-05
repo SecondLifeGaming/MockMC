@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit.block.data;
 
 import org.bukkit.Axis;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Ageable;
+import org.bukkit.block.data.AnaloguePowerable;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
@@ -13,12 +15,14 @@ import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.TestBlock;
@@ -100,9 +104,9 @@ public enum BlockDataKey
 	FACE("face", string -> FaceAttachable.AttachedFace.valueOf(string.toUpperCase(Locale.ROOT)), FaceAttachable.class::isInstance),
 
 
-	AGE_KEY("age", Integer::parseInt, Bamboo.class::isInstance),
+	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
-	STAGE_KEY("stage", Integer::parseInt, Bamboo.class::isInstance),
+	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
@@ -119,7 +123,10 @@ public enum BlockDataKey
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
 	MODE("mode", string -> TestBlock.Mode.valueOf(string.toUpperCase(Locale.ROOT)), TestBlock.class::isInstance),
 
-	CANDLES("candles", Integer::parseInt, Candle.class::isInstance);
+	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
+	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
+
+	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance);
 
 	private static final Set<String> KEYS = compileKeys();
 

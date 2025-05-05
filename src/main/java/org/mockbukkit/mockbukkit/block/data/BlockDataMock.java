@@ -27,6 +27,7 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -34,8 +35,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of {@link BlockData}.
@@ -47,6 +50,7 @@ public class BlockDataMock implements BlockData
 	private static final String NULL_MATERIAL_EXCEPTION_MESSAGE = "Material cannot be null";
 
 	private final @NotNull Material type;
+	private final Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations;
 	private @NotNull Map<String, Object> data;
 	private static final Pattern BLOCK_DATA_PATTERN = Pattern.compile("(^[a-z_:]+)(?:(\\[(.+)\\]$)|($))");
 
@@ -58,9 +62,9 @@ public class BlockDataMock implements BlockData
 	public BlockDataMock(@NotNull Material material)
 	{
 		checkMaterial(material);
-
 		this.type = material;
 		this.data = new LinkedHashMap<>();
+		this.limitations = BlockDataMockRegistry.getInstance().getLimitations(material);
 	}
 
 	@ApiStatus.Internal
@@ -215,17 +219,46 @@ public class BlockDataMock implements BlockData
 		if (value == null)
 		{
 			Object temp = BlockDataMockRegistry.getInstance().getDefault(getMaterial(), key.key());
-			if (temp instanceof String string)
-			{
-				value = (T) key.constructValue(string);
-			}
-			else
-			{
-				value = (T) temp;
-			}
+			value = castObject(key, temp);
 		}
 		Preconditions.checkArgument(value != null, "Cannot get property " + key + " as it does not exist");
 		return value;
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T castObject(@NotNull BlockDataKey key, Object temp)
+	{
+		T value;
+		if (temp instanceof String string)
+		{
+			value = (T) key.constructValue(string);
+		}
+		else
+		{
+			value = (T) temp;
+		}
+		return value;
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> Set<T> getAsSet(@NotNull BlockDataKey key)
+	{
+		Object value = this.get(key);
+		Preconditions.checkArgument(value instanceof Collection<?>, "Cannot get property " + key + " as it is not a collection.");
+		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).collect(Collectors.toUnmodifiableSet());
+	}
+
+	protected <T> T getLimitationValue(BlockDataLimitation.Type<T, ?> type)
+	{
+		return (T) limitations.get(type).getValue();
+	}
+
+	@SuppressWarnings("unchecked")
+	protected <T> List<T> getAsList(@NotNull BlockDataKey key)
+	{
+		Object value = this.get(key);
+		Preconditions.checkArgument(value instanceof Collection<?>, "Cannot get property " + key + " as it is not a collection.");
+		return ((Collection<T>) value).stream().map(v -> (T) castObject(key, v)).toList();
 	}
 
 	@Override
@@ -245,12 +278,13 @@ public class BlockDataMock implements BlockData
 	{
 		StringBuilder stateString = new StringBuilder(getMaterial().getKey() + "[");
 
-		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getBlockData(type).keySet());
+		List<String> keysToShow = new ArrayList<>(hideUnspecified ? data.keySet() : BlockDataMockRegistry.getInstance().getDefaultData(type).keySet());
 		Collections.sort(keysToShow);
 
 		boolean isFirst = true;
 		for (String key : keysToShow)
 		{
+
 			Object value = data.get(key);
 			if (value instanceof Enum<?> enumValue)
 			{
