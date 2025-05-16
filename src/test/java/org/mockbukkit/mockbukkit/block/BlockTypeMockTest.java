@@ -496,7 +496,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRedstoneRail()
 		{
 			RedstoneRail data = BlockType.POWERED_RAIL.createBlockData();
@@ -631,7 +630,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenWaterlogged()
 		{
 			Waterlogged data = BlockType.MANGROVE_ROOTS.createBlockData();
@@ -720,7 +718,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenTnt()
 		{
 			TNT data = BlockType.TNT.createBlockData();
@@ -765,7 +762,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenChest()
 		{
 			Chest data = BlockType.CHEST.createBlockData();
@@ -774,7 +770,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenEnderChest()
 		{
 			EnderChest data = BlockType.ENDER_CHEST.createBlockData();
@@ -791,7 +786,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRedstoneWire()
 		{
 			RedstoneWire data = BlockType.REDSTONE_WIRE.createBlockData();
@@ -800,7 +794,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRepeater()
 		{
 			Repeater data = BlockType.REPEATER.createBlockData();
@@ -897,7 +890,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRedstoneWallTorch()
 		{
 			RedstoneWallTorch data = BlockType.REDSTONE_WALL_TORCH.createBlockData();
@@ -1041,7 +1033,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLight()
 		{
 			Light data = BlockType.LIGHT.createBlockData();
@@ -1050,7 +1041,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenRotatable()
 		{
 			Rotatable data = BlockType.LIGHT_BLUE_BANNER.createBlockData();

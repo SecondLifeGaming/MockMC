@@ -15,16 +15,21 @@ import org.bukkit.block.data.Openable;
 import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.Powerable;
 import org.bukkit.block.data.Rail;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.block.data.Snowable;
 import org.bukkit.block.data.Waterlogged;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.block.data.type.Campfire;
 import org.bukkit.block.data.type.Candle;
+import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.DecoratedPot;
+import org.bukkit.block.data.type.RedstoneWire;
+import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
@@ -92,6 +97,7 @@ public enum BlockDataKey
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
 	TYPE("type", string -> Slab.Type.valueOf(string.toUpperCase(Locale.ROOT)), Slab.class::isInstance),
+	TYPE_CHEST("type", string -> Chest.Type.valueOf(string.toUpperCase(Locale.ROOT)), Chest.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
@@ -107,6 +113,18 @@ public enum BlockDataKey
 	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
 	LEAVES_KEY("leaves", string -> Bamboo.Leaves.valueOf(string.toUpperCase(Locale.ROOT)), Bamboo.class::isInstance),
 	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
+
+	REDSTONE_EAST("east", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+	REDSTONE_WEST("west", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+	REDSTONE_NORTH("north", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+	REDSTONE_SOUTH("south", string -> RedstoneWire.Connection.valueOf(string.toUpperCase(Locale.ROOT)), RedstoneWire.class::isInstance),
+
+	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
+	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
+
+	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
+
+	UNSTABLE("unstable", Boolean::parseBoolean, TNT.class::isInstance),
 
 	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
 	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
