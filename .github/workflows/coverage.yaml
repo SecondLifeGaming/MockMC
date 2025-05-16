@@ -1,10 +1,10 @@
-name: Build
+name: Coverage check
 
 on:
   pull_request:
     branches: [ v1.* ]
   push:
-    branches: [ v1.*]
+    branches: [ v1.* ]
 
 jobs:
   coverage:
