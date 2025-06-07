@@ -528,7 +528,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenGate()
 		{
 			Gate data = BlockType.OAK_FENCE_GATE.createBlockData();
@@ -836,7 +835,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenHopper()
 		{
 			Hopper data = BlockType.HOPPER.createBlockData();
@@ -871,7 +869,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenDoor()
 		{
 			Door data = BlockType.OAK_DOOR.createBlockData();
@@ -1119,7 +1116,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCrafter()
 		{
 			Crafter data = BlockType.CRAFTER.createBlockData();
@@ -1137,7 +1133,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenLectern()
 		{
 			Lectern data = BlockType.LECTERN.createBlockData();

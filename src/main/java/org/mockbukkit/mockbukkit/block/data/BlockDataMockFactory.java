@@ -19,8 +19,11 @@ import org.bukkit.block.data.type.AmethystCluster;
 import org.bukkit.block.data.type.Bamboo;
 import org.bukkit.block.data.type.Barrel;
 import org.bukkit.block.data.type.Chest;
+import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.EnderChest;
+import org.bukkit.block.data.type.Hopper;
+import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
 import org.bukkit.block.data.type.RedstoneRail;
 import org.bukkit.block.data.type.RedstoneWallTorch;
@@ -46,7 +49,9 @@ public final class BlockDataMockFactory
 			.put(Tag.BUTTONS, SwitchDataMock::new)
 			.put(Tag.CAMPFIRES, CampfireDataMock::new)
 			.put(Tag.CANDLES, CandleDataMock::new)
+			.put(Tag.DOORS, DoorDataMock::new)
 			.put(Tag.FENCES, FenceDataMock::new)
+			.put(Tag.FENCE_GATES, FenceGateDataMock::new)
 			.put(Tag.SLABS, SlabDataMock::new)
 			.put(Tag.STAIRS, StairsDataMock::new)
 			.put(Tag.TRAPDOORS, TrapDoorDataMock::new)
@@ -60,8 +65,11 @@ public final class BlockDataMockFactory
 			.put(AmethystCluster.class, AmethystClusterDataMock::new)
 			.put(Bamboo.class, m -> new BambooDataMock())
 			.put(Chest.class, ChestDataMock::new)
+			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(EnderChest.class, EnderChestDataMock::new)
+			.put(Hopper.class, HopperDataMock::new)
+			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
 			.put(Light.class, LightDataMock::new)
 			.put(Lightable.class, LightableDataMock::new)
