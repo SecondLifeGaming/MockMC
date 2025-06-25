@@ -22,6 +22,7 @@ import org.bukkit.block.data.type.Chest;
 import org.bukkit.block.data.type.Crafter;
 import org.bukkit.block.data.type.DecoratedPot;
 import org.bukkit.block.data.type.EnderChest;
+import org.bukkit.block.data.type.Furnace;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Lectern;
 import org.bukkit.block.data.type.Light;
@@ -33,6 +34,8 @@ import org.bukkit.block.data.type.Sapling;
 import org.bukkit.block.data.type.Switch;
 import org.bukkit.block.data.type.TNT;
 import org.bukkit.block.data.type.TestBlock;
+import org.bukkit.block.data.type.TrialSpawner;
+import org.bukkit.block.data.type.Vault;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -68,6 +71,7 @@ public final class BlockDataMockFactory
 			.put(Crafter.class, CrafterDataMock::new)
 			.put(DecoratedPot.class, m -> new DecoratedPotDataMock())
 			.put(EnderChest.class, EnderChestDataMock::new)
+			.put(Furnace.class, FurnaceDataMock::new)
 			.put(Hopper.class, HopperDataMock::new)
 			.put(Lectern.class, LecternDataMock::new)
 			.put(Levelled.class, LevelledDataMock::new)
@@ -77,6 +81,8 @@ public final class BlockDataMockFactory
 			.put(Switch.class, SwitchDataMock::new)
 			.put(TestBlock.class, TestBlockDataMock::new)
 			.put(TNT.class, TNTDataMock::new)
+			.put(TrialSpawner.class, TrialSpawnerDataMock::new)
+			.put(Vault.class, VaultDataMock::new)
 			.put(Barrel.class, BarrelDataMock::new)
 			.put(Sapling.class, SaplingDataMock::new)
 			.put(AnaloguePowerable.class, AnaloguePowerableBlockDataMock::new)
