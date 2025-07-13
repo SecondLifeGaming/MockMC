@@ -115,7 +115,7 @@ class PluginManagerMockTest
 	{
 		Plugin plugin = pluginManager.getPlugin("MockBukkitTestPlugin");
 		assertNotNull(plugin);
-		assertTrue(plugin instanceof TestPlugin);
+		assertInstanceOf(TestPlugin.class, plugin);
 	}
 
 	@Test
