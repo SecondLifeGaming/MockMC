@@ -507,7 +507,6 @@ public class ItemStackMock extends ItemStack
 
 		if (raw instanceof Map<?, ?> map)
 		{
-
 			for (Map.Entry<?, ?> entry : map.entrySet())
 			{
 				String stringKey = entry.getKey().toString();

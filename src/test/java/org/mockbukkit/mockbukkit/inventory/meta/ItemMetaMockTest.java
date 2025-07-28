@@ -26,7 +26,6 @@ import org.bukkit.inventory.meta.Repairable;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,6 +36,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockbukkit.mockbukkit.MockBukkitInject;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
@@ -80,13 +80,8 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatch
 class ItemMetaMockTest
 {
 
+	@MockBukkitInject
 	private ItemMetaMock meta;
-
-	@BeforeEach
-	void setUp()
-	{
-		meta = new ItemMetaMock();
-	}
 
 	@Test
 	void new_CopyConstructor_Copied()
@@ -377,7 +372,6 @@ class ItemMetaMockTest
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
 
-
 	@Test
 	void equals_AttributeModifiersSame_True()
 	{
@@ -422,7 +416,6 @@ class ItemMetaMockTest
 		assertNotEquals(meta2, meta);
 		assertNotEquals(meta.hashCode(), meta2.hashCode());
 	}
-
 
 	@Test
 	void equals_EnchantsSame_True()
@@ -1333,7 +1326,6 @@ class ItemMetaMockTest
 		meta.itemName(Component.text("Test Name"));
 		assertTrue(meta.hasItemName());
 	}
-
 
 	@ParameterizedTest
 	@MethodSource("getItemMetaTypesStream")

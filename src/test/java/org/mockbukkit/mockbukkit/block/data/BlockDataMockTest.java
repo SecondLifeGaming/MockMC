@@ -43,11 +43,12 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith({ MockBukkitExtension.class })
+@ExtendWith(MockBukkitExtension.class)
 class BlockDataMockTest
 {
 
 	@MockBukkitInject
-	ServerMock server;
+	private ServerMock server;
 
 	@Test
 	void matches_DoesMatch()
