@@ -22,6 +22,16 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 		set(BlockDataKey.WATERLOGGED, false);
 	}
 
+	/**
+	 * Create a new {@link DecoratedPotDataMock} based on an existing {@link DecoratedPotDataMock}.
+	 *
+	 * @param other the other block data.
+	 */
+	protected DecoratedPotDataMock(@NotNull DecoratedPotDataMock other)
+	{
+		super(other);
+	}
+
 	@Override
 	public boolean isCracked()
 	{
@@ -63,6 +73,13 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	public void setWaterlogged(boolean waterlogged)
 	{
 		set(BlockDataKey.WATERLOGGED, waterlogged);
+	}
+
+	@Override
+	@SuppressWarnings({"java:S2975", "java:S1182"})
+	public @NotNull DecoratedPotDataMock clone()
+	{
+		return new DecoratedPotDataMock(this);
 	}
 
 }

@@ -4,8 +4,10 @@ import com.destroystokyo.paper.MaterialTags;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.reflect.ClassPath;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import lombok.SneakyThrows;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -45,6 +47,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -1706,6 +1709,43 @@ class ItemMetaMockTest
 	void testGetItemMetaCorrectClass_Skulls(Material skull)
 	{
 		assertInstanceOf(SkullMetaMock.class, new ItemStackMock(skull).getItemMeta());
+	}
+
+	@SneakyThrows
+	@ParameterizedTest
+	@MethodSource("getPossibleItemMetas")
+	void validateAllItemMetaHaveClone(Class<? extends ItemMeta> clazz)
+	{
+		Constructor<?> constructor = clazz.getDeclaredConstructor();
+		constructor.setAccessible(true);
+		Object instance = constructor.newInstance();
+		ItemMeta itemMeta = assertInstanceOf(ItemMeta.class, instance);
+
+		ItemMeta cloned = itemMeta.clone();
+		assertEquals(instance, cloned);
+		assertNotSame(instance, cloned);
+
+		itemMeta.displayName(Component.text("Test name"));
+		assertNotEquals(instance, cloned);
+		assertNotSame(instance, cloned);
+	}
+
+	/**
+	 * Get all {@link ItemMeta} that exist in MockBukkit.
+	 *
+	 * @return The list of possible item metas
+	 *
+	 * @throws IOException If and IOException occurs while loading the class.
+	 */
+	public static Stream<Arguments> getPossibleItemMetas() throws IOException
+	{
+		return ClassPath.from(ClassLoader.getSystemClassLoader())
+				.getAllClasses()
+				.parallelStream()
+				.filter(c -> c.getPackageName().startsWith("org.mockbukkit.mockbukkit.inventory.meta"))
+				.map(ClassPath.ClassInfo::load)
+				.filter(ItemMeta.class::isAssignableFrom)
+				.map(Arguments::of);
 	}
 
 	public static Stream<Arguments> spawnEgg_Materials()
