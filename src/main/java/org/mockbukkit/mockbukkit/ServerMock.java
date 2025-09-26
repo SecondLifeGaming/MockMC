@@ -149,6 +149,7 @@ import org.mockbukkit.mockbukkit.scheduler.paper.FoliaAsyncScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.CriteriaMock;
 import org.mockbukkit.mockbukkit.scoreboard.ScoreboardManagerMock;
 import org.mockbukkit.mockbukkit.services.ServicesManagerMock;
+import org.mockbukkit.mockbukkit.structure.StructureManagerMock;
 import org.mockbukkit.mockbukkit.tags.MaterialTagMock;
 import org.mockbukkit.mockbukkit.tags.TagRegistry;
 import org.mockbukkit.mockbukkit.tags.TagsMock;
@@ -205,6 +206,7 @@ public class ServerMock extends Server.Spigot implements Server
 	private final Set<EntityMock> entities = new HashSet<>();
 	private final List<World> worlds = new ArrayList<>();
 	private final RecipeManager recipeManager = new RecipeManager();
+	private final StructureManager structureManager = new StructureManagerMock();
 	private final Map<NamespacedKey, KeyedBossBarMock> bossBars = new HashMap<>();
 	private final ItemFactoryMock factory = new ItemFactoryMock();
 	private final PlayerMockFactory playerFactory = new PlayerMockFactory(this);
@@ -2393,9 +2395,7 @@ public class ServerMock extends Server.Spigot implements Server
 	@Override
 	public StructureManager getStructureManager()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
+		return this.structureManager;
 	}
 
 	@Override

@@ -2399,6 +2399,12 @@ class ServerMockTest
 
 	}
 
+	@Test
+	void getStructureManager()
+	{
+		assertNotNull(server.getStructureManager());
+	}
+
 }
 
 @ExtendWith(MockBukkitExtension.class)
