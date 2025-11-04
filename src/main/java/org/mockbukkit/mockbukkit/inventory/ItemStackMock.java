@@ -364,6 +364,17 @@ public class ItemStackMock extends ItemStack
 
 			return itemMeta.getPersistentDataContainer().getKeys();
 		}
+
+		@Override
+		public int getSize()
+		{
+			if (itemMeta == null)
+			{
+				return 0;
+			}
+
+			return itemMeta.getPersistentDataContainer().getSize();
+		}
 	};
 
 	@Override
