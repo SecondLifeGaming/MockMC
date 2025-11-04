@@ -41,6 +41,7 @@ import org.bukkit.block.data.type.HangingMoss;
 import org.bukkit.block.data.type.Hopper;
 import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Lectern;
+import org.bukkit.block.data.type.NoteBlock;
 import org.bukkit.block.data.type.Piston;
 import org.bukkit.block.data.type.PistonHead;
 import org.bukkit.block.data.type.RedstoneWire;
@@ -60,6 +61,7 @@ import org.bukkit.block.data.type.Wall;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.data.deserializer.EnumDataDeserializer;
+import org.mockbukkit.mockbukkit.block.data.deserializer.InstrumentDeserializer;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -185,6 +187,8 @@ public enum BlockDataKey
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
 	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
+	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
+	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
 	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance),
 	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
