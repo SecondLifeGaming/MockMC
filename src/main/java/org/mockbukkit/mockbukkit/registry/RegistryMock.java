@@ -185,7 +185,7 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	@Override
 	public @org.jspecify.annotations.Nullable NamespacedKey getKey(T t)
 	{
-		throw new UnimplementedOperationException();
+		return t.getKey();
 	}
 
 	@Override
