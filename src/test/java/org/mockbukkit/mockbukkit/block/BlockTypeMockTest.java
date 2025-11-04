@@ -1200,7 +1200,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenSculkSensor()
 		{
 			SculkSensor data = BlockType.SCULK_SENSOR.createBlockData();
@@ -1209,7 +1208,6 @@ class BlockTypeMockTest
 		}
 
 		@Test
-		@Disabled("Not implemented yet #1088")
 		void givenCalibratedSculkSensor()
 		{
 			CalibratedSculkSensor data = BlockType.CALIBRATED_SCULK_SENSOR.createBlockData();
