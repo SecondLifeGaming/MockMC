@@ -175,6 +175,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
@@ -1923,6 +1924,13 @@ public class ServerMock extends Server.Spigot implements Server
 
 	@Override
 	public @NotNull File getWorldContainer()
+	{
+		// TODO Auto-generated method stub
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull Path getLevelDirectory()
 	{
 		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
