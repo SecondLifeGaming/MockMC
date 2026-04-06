@@ -93,6 +93,8 @@ public class RegistryAccessMock implements RegistryAccess
 	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
 		return List.of(
+				RegistryKey.COW_SOUND_VARIANT,
+				RegistryKey.CHICKEN_SOUND_VARIANT,
 				RegistryKey.DIALOG,
 				RegistryKey.STRUCTURE,
 				RegistryKey.STRUCTURE_TYPE,
@@ -108,12 +110,14 @@ public class RegistryAccessMock implements RegistryAccess
 				RegistryKey.WOLF_VARIANT,
 				RegistryKey.JUKEBOX_SONG,
 				RegistryKey.CAT_VARIANT,
+				RegistryKey.CAT_SOUND_VARIANT,
 				RegistryKey.VILLAGER_PROFESSION,
 				RegistryKey.VILLAGER_TYPE,
 				RegistryKey.FROG_VARIANT,
 				RegistryKey.CHICKEN_VARIANT,
 				RegistryKey.COW_VARIANT,
 				RegistryKey.PIG_VARIANT,
+				RegistryKey.PIG_SOUND_VARIANT,
 				RegistryKey.WOLF_SOUND_VARIANT,
 				RegistryKey.MAP_DECORATION_TYPE,
 				RegistryKey.BANNER_PATTERN,

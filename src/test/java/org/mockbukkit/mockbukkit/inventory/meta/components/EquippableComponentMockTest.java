@@ -181,7 +181,7 @@ class EquippableComponentMockTest
 
 			assertNotNull(actual);
 			assertEquals("HAND", actual.get("slot"));
-			assertEquals(Registry.SOUND_EVENT.getKey(sound), actual.get("shearing-sound"));
+			assertEquals(Registry.SOUND_EVENT.getKey(sound).asString(), actual.get("shearing-sound"));
 		}
 
 	}
