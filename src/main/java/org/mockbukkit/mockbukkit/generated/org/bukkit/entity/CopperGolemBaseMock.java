@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.ShearableBase
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CopperGolemBaseMock extends CopperGolem, GolemBaseMock, ShearableBaseMock
+public interface CopperGolemBaseMock extends CopperGolem, ShearableBaseMock, GolemBaseMock
 {
 	@Override
 	default void setWeatheringState(WeatheringCopperState arg0)

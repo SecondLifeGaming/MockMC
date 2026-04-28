@@ -26,7 +26,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.exception.IncompatiblePaperVersionException;
 import org.mockbukkit.mockbukkit.exception.ItemMetaInitException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.ItemMetaMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
@@ -40,6 +39,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+/**
+ * Mock implementation of an {@link ItemStack}.
+ *
+ * @mockbukkit.version 1.21-1.0.0
+ */
 @SuppressWarnings(
 {"deprecation", "unchecked", "java:S1135"})
 @DelegateDeserialization(ItemStack.class)
@@ -382,13 +386,6 @@ public class ItemStackMock extends ItemStack
 			}
 
 			return itemMeta.getPersistentDataContainer().getSize();
-		}
-
-		@Override
-		public byte @NotNull [] serializeToBytes()
-		{
-			// TODO: Auto-generated method stub
-			throw new UnimplementedOperationException();
 		}
 
 	};

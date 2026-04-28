@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MovingPistonStateMock extends BlockStateMock
 		implements
-			MovingPiston,
 			org.mockbukkit.mockbukkit.generated.io.papermc.paper.block.MovingPistonBaseMock
 {
 

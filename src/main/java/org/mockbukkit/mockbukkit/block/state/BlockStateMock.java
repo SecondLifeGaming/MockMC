@@ -25,11 +25,8 @@ import java.util.List;
  * BlockStates with the appropriate mock class.
  */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class BlockStateMock
-		implements
-			BlockState,
-			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlockStateBaseMock
+{"deprecation", "removal"})
+public class BlockStateMock implements org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlockStateBaseMock
 {
 
 	@NotNull
@@ -181,6 +178,9 @@ public class BlockStateMock
 		}
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.18")
 	public org.bukkit.material.@NotNull MaterialData getData()
@@ -246,6 +246,9 @@ public class BlockStateMock
 		return getBlock().getChunk();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.18")
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
@@ -355,7 +358,7 @@ public class BlockStateMock
 		int hash = 1;
 		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
 		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
-		hash = prime * hash + (this.getBlockData() != null ? this.getBlockData().hashCode() : 0);
+		hash = prime * hash + this.getBlockData().hashCode();
 		return hash;
 	}
 
@@ -366,13 +369,11 @@ public class BlockStateMock
 		{
 			return false;
 		}
-		if (this.getBlockData() != other.getBlockData()
-				&& (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
+		if (!this.getBlockData().equals(other.getBlockData()))
 		{
 			return false;
 		}
-		return !this.isPlaced() || this.getLocation() == other.getLocation()
-				|| (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
+		return !this.isPlaced() || this.getLocation().equals(other.getLocation());
 	}
 
 	// Implement toStringInternal() instead of overriding toString()

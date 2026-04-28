@@ -75,35 +75,7 @@ import net.md_5.bungee.protocol.packet.ViewDistance;
  */
 public interface AbstractPacketHandlerBaseMock
 {
-	default void handle(StartConfiguration arg0) throws Exception
-	{
-	}
-
-	default void handle(ViewDistance arg0) throws Exception
-	{
-	}
-
-	default void handle(ScoreboardScore arg0) throws Exception
-	{
-	}
-
-	default void handle(ServerData arg0) throws Exception
-	{
-	}
-
-	default void handle(StoreCookie arg0) throws Exception
-	{
-	}
-
-	default void handle(PlayerListItemUpdate arg0) throws Exception
-	{
-	}
-
-	default void handle(EncryptionResponse arg0) throws Exception
-	{
-	}
-
-	default void handle(LoginAcknowledged arg0) throws Exception
+	default void handle(KnownPacks arg0) throws Exception
 	{
 	}
 
@@ -111,23 +83,7 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(LegacyPing arg0) throws Exception
-	{
-	}
-
-	default void handle(FinishConfiguration arg0) throws Exception
-	{
-	}
-
-	default void handle(EntityRemoveEffect arg0) throws Exception
-	{
-	}
-
-	default void handle(CookieResponse arg0) throws Exception
-	{
-	}
-
-	default void handle(Kick arg0) throws Exception
+	default void handle(ViewDistance arg0) throws Exception
 	{
 	}
 
@@ -135,7 +91,7 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(Transfer arg0) throws Exception
+	default void handle(ScoreboardScoreReset arg0) throws Exception
 	{
 	}
 
@@ -143,55 +99,7 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(ScoreboardScoreReset arg0) throws Exception
-	{
-	}
-
-	default void handle(StatusRequest arg0) throws Exception
-	{
-	}
-
-	default void handle(ShowDialogDirect arg0) throws Exception
-	{
-	}
-
-	default void handle(PlayerListHeaderFooter arg0) throws Exception
-	{
-	}
-
-	default void handle(EntityEffect arg0) throws Exception
-	{
-	}
-
-	default void handle(PingPacket arg0) throws Exception
-	{
-	}
-
-	default void handle(ScoreboardDisplay arg0) throws Exception
-	{
-	}
-
-	default void handle(ClearDialog arg0) throws Exception
-	{
-	}
-
-	default void handle(Commands arg0) throws Exception
-	{
-	}
-
-	default void handle(LoginPayloadRequest arg0) throws Exception
-	{
-	}
-
-	default void handle(PluginMessage arg0) throws Exception
-	{
-	}
-
-	default void handle(ClientCommand arg0) throws Exception
-	{
-	}
-
-	default void handle(UnsignedClientCommand arg0) throws Exception
+	default void handle(StatusResponse arg0) throws Exception
 	{
 	}
 
@@ -199,19 +107,19 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(Chat arg0) throws Exception
+	default void handle(Respawn arg0) throws Exception
 	{
 	}
 
-	default void handle(TabCompleteResponse arg0) throws Exception
+	default void handle(EntityStatus arg0) throws Exception
 	{
 	}
 
-	default void handle(LoginPayloadResponse arg0) throws Exception
+	default void handle(UnsignedClientCommand arg0) throws Exception
 	{
 	}
 
-	default void handle(PlayerListItem arg0) throws Exception
+	default void handle(CookieRequest arg0) throws Exception
 	{
 	}
 
@@ -219,59 +127,47 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(Title arg0) throws Exception
+	default void handle(ScoreboardScore arg0) throws Exception
 	{
 	}
 
-	default void handle(ClientChat arg0) throws Exception
+	default void handle(EntityEffect arg0) throws Exception
 	{
 	}
 
-	default void handle(Team arg0) throws Exception
+	default void handle(LegacyPing arg0) throws Exception
 	{
 	}
 
-	default void handle(StatusResponse arg0) throws Exception
+	default void handle(PlayerListItemUpdate arg0) throws Exception
 	{
 	}
 
-	default void handle(ClientChatAcknowledgement arg0)
+	default void handle(TabCompleteRequest arg0) throws Exception
 	{
 	}
 
-	default void handle(ShowDialog arg0) throws Exception
+	default void handle(Kick arg0) throws Exception
 	{
 	}
 
-	default void handle(KeepAlive arg0) throws Exception
+	default void handle(ShowDialogDirect arg0) throws Exception
 	{
 	}
 
-	default void handle(PlayerListItemRemove arg0) throws Exception
+	default void handle(PluginMessage arg0) throws Exception
 	{
 	}
 
-	default void handle(LoginRequest arg0) throws Exception
+	default void handle(TabCompleteResponse arg0) throws Exception
 	{
 	}
 
-	default void handle(SystemChat arg0) throws Exception
+	default void handle(ClientCommand arg0) throws Exception
 	{
 	}
 
-	default void handle(Login arg0) throws Exception
-	{
-	}
-
-	default void handle(KnownPacks arg0) throws Exception
-	{
-	}
-
-	default void handle(GameState arg0) throws Exception
-	{
-	}
-
-	default void handle(SetCompression arg0) throws Exception
+	default void handle(Commands arg0) throws Exception
 	{
 	}
 
@@ -279,7 +175,55 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(CookieRequest arg0) throws Exception
+	default void handle(StartConfiguration arg0) throws Exception
+	{
+	}
+
+	default void handle(LoginPayloadResponse arg0) throws Exception
+	{
+	}
+
+	default void handle(ShowDialog arg0) throws Exception
+	{
+	}
+
+	default void handle(DisconnectReportDetails arg0) throws Exception
+	{
+	}
+
+	default void handle(ScoreboardDisplay arg0) throws Exception
+	{
+	}
+
+	default void handle(SystemChat arg0) throws Exception
+	{
+	}
+
+	default void handle(PlayerListItem arg0) throws Exception
+	{
+	}
+
+	default void handle(ClearDialog arg0) throws Exception
+	{
+	}
+
+	default void handle(Team arg0) throws Exception
+	{
+	}
+
+	default void handle(EncryptionResponse arg0) throws Exception
+	{
+	}
+
+	default void handle(ServerData arg0) throws Exception
+	{
+	}
+
+	default void handle(ClientChat arg0) throws Exception
+	{
+	}
+
+	default void handle(EncryptionRequest arg0) throws Exception
 	{
 	}
 
@@ -291,15 +235,43 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(ClientSettings arg0) throws Exception
-	{
-	}
-
 	default void handle(LegacyHandshake arg0) throws Exception
 	{
 	}
 
-	default void handle(Respawn arg0) throws Exception
+	default void handle(Transfer arg0) throws Exception
+	{
+	}
+
+	default void handle(LoginPayloadRequest arg0) throws Exception
+	{
+	}
+
+	default void handle(KeepAlive arg0) throws Exception
+	{
+	}
+
+	default void handle(CookieResponse arg0) throws Exception
+	{
+	}
+
+	default void handle(EntityRemoveEffect arg0) throws Exception
+	{
+	}
+
+	default void handle(PingPacket arg0) throws Exception
+	{
+	}
+
+	default void handle(LoginRequest arg0) throws Exception
+	{
+	}
+
+	default void handle(Chat arg0) throws Exception
+	{
+	}
+
+	default void handle(GameState arg0) throws Exception
 	{
 	}
 
@@ -307,11 +279,11 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(EncryptionRequest arg0) throws Exception
+	default void handle(ClientSettings arg0) throws Exception
 	{
 	}
 
-	default void handle(EntityStatus arg0) throws Exception
+	default void handle(StatusRequest arg0) throws Exception
 	{
 	}
 
@@ -319,11 +291,39 @@ public interface AbstractPacketHandlerBaseMock
 	{
 	}
 
-	default void handle(TabCompleteRequest arg0) throws Exception
+	default void handle(PlayerListItemRemove arg0) throws Exception
 	{
 	}
 
-	default void handle(DisconnectReportDetails arg0) throws Exception
+	default void handle(StoreCookie arg0) throws Exception
+	{
+	}
+
+	default void handle(FinishConfiguration arg0) throws Exception
+	{
+	}
+
+	default void handle(SetCompression arg0) throws Exception
+	{
+	}
+
+	default void handle(ClientChatAcknowledgement arg0)
+	{
+	}
+
+	default void handle(LoginAcknowledged arg0) throws Exception
+	{
+	}
+
+	default void handle(PlayerListHeaderFooter arg0) throws Exception
+	{
+	}
+
+	default void handle(Login arg0) throws Exception
+	{
+	}
+
+	default void handle(Title arg0) throws Exception
 	{
 	}
 }

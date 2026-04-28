@@ -20,12 +20,6 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.block.TileStateInven
 public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, TileStateInventoryHolderBaseMock
 {
 	@Override
-	default Block getBlock()
-	{
-		return null;
-	}
-
-	@Override
 	default void setLastInteractedSlot(int arg0)
 	{
 	}
@@ -46,6 +40,12 @@ public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, TileStateI
 	default int getLastInteractedSlot()
 	{
 		return 0;
+	}
+
+	@Override
+	default Block getBlock()
+	{
+		return null;
 	}
 
 	@Override

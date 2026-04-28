@@ -16,7 +16,7 @@ import org.bukkit.entity.Parrot;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ParrotBaseMock extends Parrot, SittableBaseMock, TameableBaseMock
+public interface ParrotBaseMock extends Parrot, TameableBaseMock, SittableBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

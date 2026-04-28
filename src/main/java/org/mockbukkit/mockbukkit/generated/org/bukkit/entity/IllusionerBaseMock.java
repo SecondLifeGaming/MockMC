@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.entity.Ranged
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface IllusionerBaseMock extends Illusioner, RangedEntityBaseMock, SpellcasterBaseMock
+public interface IllusionerBaseMock extends Illusioner, SpellcasterBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

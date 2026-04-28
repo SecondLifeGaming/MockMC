@@ -83,11 +83,11 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.plugin.messaging.PluginMes
 public interface WorldBaseMock
 		extends
 			World,
-			WorldInfoBaseMock,
-			MetadatableBaseMock,
-			PersistentDataHolderBaseMock,
 			RegionAccessorBaseMock,
-			PluginMessageRecipientBaseMock
+			MetadatableBaseMock,
+			PluginMessageRecipientBaseMock,
+			WorldInfoBaseMock,
+			PersistentDataHolderBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
@@ -289,7 +289,7 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
 	{
 	}
 
@@ -304,13 +304,18 @@ public interface WorldBaseMock
 	}
 
 	@Override
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	{
+	}
+
+	@Override
 	default boolean addPluginChunkTicket(int arg0, int arg1, Plugin arg2)
 	{
 		return false;
 	}
 
 	@Override
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 
@@ -335,17 +340,12 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
+	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 
 	@Override
 	default void playSound(Location arg0, Sound arg1, float arg2, float arg3)
-	{
-	}
-
-	@Override
-	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 
@@ -1133,6 +1133,12 @@ public interface WorldBaseMock
 	}
 
 	@Override
+	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3, Entity arg4)
+	{
+		return false;
+	}
+
+	@Override
 	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3)
 	{
 		return false;
@@ -1145,55 +1151,13 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3, Entity arg4)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(Location arg0, float arg1)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
-	{
-		return false;
-	}
-
-	@Override
-	default boolean createExplosion(Entity arg0, float arg1)
-	{
-		return false;
-	}
-
-	@Override
 	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4, boolean arg5)
 	{
 		return false;
 	}
 
 	@Override
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3)
+	default boolean createExplosion(Location arg0, float arg1)
 	{
 		return false;
 	}
@@ -1211,6 +1175,42 @@ public interface WorldBaseMock
 	}
 
 	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Entity arg0, float arg1)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3)
+	{
+		return false;
+	}
+
+	@Override
 	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5,
 			Entity arg6)
 	{
@@ -1218,7 +1218,7 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
+	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
 	{
 		return false;
 	}
@@ -1445,6 +1445,12 @@ public interface WorldBaseMock
 	}
 
 	@Override
+	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
+			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
+	{
+	}
+
+	@Override
 	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
 	{
 	}
@@ -1456,14 +1462,8 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
-			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
-	{
-	}
-
-	@Override
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9)
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7)
 	{
 	}
 
@@ -1475,6 +1475,17 @@ public interface WorldBaseMock
 	@Override
 	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
 			double arg6, double arg7, T arg8)
+	{
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9)
+	{
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2)
 	{
 	}
 
@@ -1491,18 +1502,18 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7, double arg8)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2)
-	{
-	}
-
-	@Override
 	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4)
+	{
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
+	{
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			double arg6)
 	{
 	}
 
@@ -1514,24 +1525,13 @@ public interface WorldBaseMock
 
 	@Override
 	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
+			double arg7, double arg8)
 	{
 	}
 
 	@Override
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			T arg6)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6)
 	{
 	}
 
@@ -1801,6 +1801,11 @@ public interface WorldBaseMock
 		return false;
 	}
 
+	@Override
+	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
+	{
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -1812,8 +1817,9 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
+	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0)
 	{
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	@Override
@@ -1822,8 +1828,20 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void getChunkAtAsync(Location arg0, boolean arg1, Consumer<? super Chunk> arg2)
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
 	{
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
+	{
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
+	{
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	/**
@@ -1842,13 +1860,9 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
 	{
-	}
-
-	@Override
-	default void getChunkAtAsync(Block arg0, Consumer<? super Chunk> arg1)
-	{
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	/**
@@ -1867,21 +1881,13 @@ public interface WorldBaseMock
 	}
 
 	@Override
-	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
+	default void getChunkAtAsync(Location arg0, boolean arg1, Consumer<? super Chunk> arg2)
 	{
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	@Override
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
+	default void getChunkAtAsync(Block arg0, Consumer<? super Chunk> arg1)
 	{
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	@Override
-	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0)
-	{
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	@Override
@@ -1892,12 +1898,6 @@ public interface WorldBaseMock
 
 	@Override
 	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0, boolean arg1)
-	{
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	@Override
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
 	{
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}

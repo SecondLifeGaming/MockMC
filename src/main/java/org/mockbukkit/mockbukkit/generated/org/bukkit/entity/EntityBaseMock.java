@@ -53,11 +53,11 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.persistence.PersistentData
 public interface EntityBaseMock
 		extends
 			Entity,
-			NameableBaseMock,
-			MetadatableBaseMock,
-			PersistentDataHolderBaseMock,
 			DataComponentViewBaseMock,
-			CommandSenderBaseMock
+			MetadatableBaseMock,
+			NameableBaseMock,
+			CommandSenderBaseMock,
+			PersistentDataHolderBaseMock
 {
 	@Override
 	default Server getServer()

@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.LightableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface FurnaceBaseMock extends Furnace, DirectionalBaseMock, LightableBaseMock
+public interface FurnaceBaseMock extends Furnace, LightableBaseMock, DirectionalBaseMock
 {
 }

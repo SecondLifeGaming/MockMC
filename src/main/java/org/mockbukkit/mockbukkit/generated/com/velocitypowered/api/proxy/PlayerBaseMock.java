@@ -46,11 +46,11 @@ import org.mockbukkit.mockbukkit.generated.com.velocitypowered.api.proxy.message
 public interface PlayerBaseMock
 		extends
 			Player,
-			KeyIdentifiableBaseMock,
-			ChannelMessageSourceBaseMock,
-			InboundConnectionBaseMock,
+			ChannelMessageSinkBaseMock,
 			CommandSourceBaseMock,
-			ChannelMessageSinkBaseMock
+			KeyIdentifiableBaseMock,
+			InboundConnectionBaseMock,
+			ChannelMessageSourceBaseMock
 {
 	@Override
 	default void sendResourcePackOffer(ResourcePackInfo arg0)

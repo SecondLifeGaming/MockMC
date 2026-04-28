@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface AllayBaseMock extends Allay, CreatureBaseMock, InventoryHolderBaseMock
+public interface AllayBaseMock extends Allay, InventoryHolderBaseMock, CreatureBaseMock
 {
 	@Override
 	default Allay duplicateAllay()

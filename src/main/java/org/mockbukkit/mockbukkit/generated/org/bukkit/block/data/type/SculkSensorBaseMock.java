@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.WaterloggedBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SculkSensorBaseMock extends SculkSensor, AnaloguePowerableBaseMock, WaterloggedBaseMock
+public interface SculkSensorBaseMock extends SculkSensor, WaterloggedBaseMock, AnaloguePowerableBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

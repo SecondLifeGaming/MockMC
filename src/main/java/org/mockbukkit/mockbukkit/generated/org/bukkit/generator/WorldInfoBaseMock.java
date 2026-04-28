@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface WorldInfoBaseMock extends WorldInfo, KeyedBaseMock, FeatureFlagSetHolderBaseMock
+public interface WorldInfoBaseMock extends WorldInfo, FeatureFlagSetHolderBaseMock, KeyedBaseMock
 {
 	@Override
 	default String getName()

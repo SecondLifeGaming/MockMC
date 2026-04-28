@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.FrictionalBas
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ItemBaseMock extends Item, FrictionalBaseMock, EntityBaseMock
+public interface ItemBaseMock extends Item, EntityBaseMock, FrictionalBaseMock
 {
 	@Override
 	default void setPickupDelay(int arg0)

@@ -21,12 +21,6 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.block.TileStateInven
 public interface JukeboxBaseMock extends Jukebox, TileStateInventoryHolderBaseMock
 {
 	@Override
-	default Block getBlock()
-	{
-		return null;
-	}
-
-	@Override
 	default JukeboxInventory getInventory()
 	{
 		return null;
@@ -75,6 +69,12 @@ public interface JukeboxBaseMock extends Jukebox, TileStateInventoryHolderBaseMo
 	default boolean eject()
 	{
 		return false;
+	}
+
+	@Override
+	default Block getBlock()
+	{
+		return null;
 	}
 
 	@Override

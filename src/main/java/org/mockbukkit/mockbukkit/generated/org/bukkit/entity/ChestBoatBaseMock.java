@@ -20,9 +20,9 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
 public interface ChestBoatBaseMock
 		extends
 			ChestBoat,
+			InventoryHolderBaseMock,
 			LootableEntityInventoryBaseMock,
-			BoatBaseMock,
-			InventoryHolderBaseMock
+			BoatBaseMock
 {
 	@Override
 	default HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)

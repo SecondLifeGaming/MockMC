@@ -17,7 +17,7 @@ import org.bukkit.entity.Fox;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface FoxBaseMock extends Fox, SittableBaseMock, AnimalsBaseMock
+public interface FoxBaseMock extends Fox, AnimalsBaseMock, SittableBaseMock
 {
 	@Override
 	default void setSleeping(boolean arg0)

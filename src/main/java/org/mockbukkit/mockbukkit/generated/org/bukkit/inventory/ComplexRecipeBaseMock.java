@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ComplexRecipeBaseMock extends ComplexRecipe, KeyedBaseMock, RecipeBaseMock
+public interface ComplexRecipeBaseMock extends ComplexRecipe, RecipeBaseMock, KeyedBaseMock
 {
 	@Override
 	default Key key()

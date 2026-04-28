@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SwitchBaseMock extends Switch, DirectionalBaseMock, FaceAttachableBaseMock, PowerableBaseMock
+public interface SwitchBaseMock extends Switch, PowerableBaseMock, FaceAttachableBaseMock, DirectionalBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

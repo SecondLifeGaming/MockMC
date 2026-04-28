@@ -23,12 +23,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.loot.LootableBaseMock;
 public interface DecoratedPotBaseMock extends DecoratedPot, TileStateInventoryHolderBaseMock, LootableBaseMock
 {
 	@Override
-	default Block getBlock()
-	{
-		return null;
-	}
-
-	@Override
 	default DecoratedPotInventory getSnapshotInventory()
 	{
 		return null;
@@ -52,6 +46,12 @@ public interface DecoratedPotBaseMock extends DecoratedPot, TileStateInventoryHo
 
 	@Override
 	default Material getSherd(DecoratedPot.Side arg0)
+	{
+		return null;
+	}
+
+	@Override
+	default Block getBlock()
 	{
 		return null;
 	}

@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CraftingRecipeBaseMock extends KeyedBaseMock, RecipeBaseMock
+public interface CraftingRecipeBaseMock extends RecipeBaseMock, KeyedBaseMock
 {
 	default CraftingBookCategory getCategory()
 	{

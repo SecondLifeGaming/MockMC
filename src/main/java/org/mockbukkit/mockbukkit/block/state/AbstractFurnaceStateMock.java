@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.FurnaceBaseMock;
  *
  * @see ContainerStateMock
  */
-public abstract class AbstractFurnaceStateMock extends ContainerStateMock implements Furnace, FurnaceBaseMock
+public abstract class AbstractFurnaceStateMock extends ContainerStateMock implements FurnaceBaseMock
 {
 
 	private short burnTime;

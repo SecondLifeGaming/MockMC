@@ -27,7 +27,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface EnchantmentBaseMock extends KeyedBaseMock, TranslatableBaseMock
+public interface EnchantmentBaseMock extends TranslatableBaseMock, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

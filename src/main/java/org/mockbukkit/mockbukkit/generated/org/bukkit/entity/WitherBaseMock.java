@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.entity.Ranged
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface WitherBaseMock extends Wither, RangedEntityBaseMock, BossBaseMock, MonsterBaseMock
+public interface WitherBaseMock extends Wither, MonsterBaseMock, BossBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default boolean isLeashed()

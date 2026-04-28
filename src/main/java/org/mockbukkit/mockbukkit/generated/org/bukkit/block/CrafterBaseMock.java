@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CrafterBaseMock extends Crafter, ContainerBaseMock, LootableBlockInventoryBaseMock
+public interface CrafterBaseMock extends Crafter, LootableBlockInventoryBaseMock, ContainerBaseMock
 {
 	@Override
 	default boolean isTriggered()

@@ -17,14 +17,14 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.material.ColorableBaseMock
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"deprecation", "removal"})
 public interface SheepBaseMock
 		extends
 			Sheep,
+			AnimalsBaseMock,
 			ColorableBaseMock,
 			org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.ShearableBaseMock,
-			ShearableBaseMock,
-			AnimalsBaseMock
+			ShearableBaseMock
 {
 	@Override
 	default boolean isSheared()

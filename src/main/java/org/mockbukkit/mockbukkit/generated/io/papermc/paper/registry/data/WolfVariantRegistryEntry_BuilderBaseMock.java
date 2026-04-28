@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface WolfVariantRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder,
-			RegistryBuilderBaseMock<Wolf.Variant>,
-			WolfVariantRegistryEntryBaseMock
+			WolfVariantRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<Wolf.Variant>
 {
 	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder wildClientTextureAsset(

@@ -45,8 +45,8 @@ public interface HumanEntityBaseMock
 		extends
 			HumanEntity,
 			LivingEntityBaseMock,
-			AnimalTamerBaseMock,
-			InventoryHolderBaseMock
+			InventoryHolderBaseMock,
+			AnimalTamerBaseMock
 {
 	@Override
 	default Location getLastDeathLocation()
@@ -568,7 +568,7 @@ public interface HumanEntityBaseMock
 	}
 
 	@Override
-	default Item dropItem(int arg0, int arg1, boolean arg2, Consumer<Item> arg3)
+	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
 	{
 		return null;
 	}
@@ -580,13 +580,13 @@ public interface HumanEntityBaseMock
 	}
 
 	@Override
-	default Item dropItem(int arg0)
+	default Item dropItem(int arg0, int arg1, boolean arg2, Consumer<Item> arg3)
 	{
 		return null;
 	}
 
 	@Override
-	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
+	default Item dropItem(int arg0)
 	{
 		return null;
 	}

@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface BarrelBaseMock extends Barrel, ContainerBaseMock, LiddedBaseMock, LootableBlockInventoryBaseMock
+public interface BarrelBaseMock extends Barrel, LootableBlockInventoryBaseMock, LiddedBaseMock, ContainerBaseMock
 {
 	@Override
 	default Block getBlock()

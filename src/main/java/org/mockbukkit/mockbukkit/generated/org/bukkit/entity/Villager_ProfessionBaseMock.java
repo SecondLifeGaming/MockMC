@@ -19,8 +19,8 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
 public interface Villager_ProfessionBaseMock
 		extends
 			Villager.Profession,
-			KeyedBaseMock,
-			OldEnumBaseMock<Villager.Profession>
+			OldEnumBaseMock<Villager.Profession>,
+			KeyedBaseMock
 {
 	@Override
 	default Key key()

@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.ShearableBase
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface SnowmanBaseMock extends Snowman, GolemBaseMock, ShearableBaseMock, RangedEntityBaseMock
+public interface SnowmanBaseMock extends Snowman, ShearableBaseMock, RangedEntityBaseMock, GolemBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

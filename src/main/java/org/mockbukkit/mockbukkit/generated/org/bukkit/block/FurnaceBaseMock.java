@@ -45,6 +45,12 @@ public interface FurnaceBaseMock extends Furnace, ContainerBaseMock
 	}
 
 	@Override
+	default Block getBlock()
+	{
+		return null;
+	}
+
+	@Override
 	default void setRecipeUsedCount(CookingRecipe<?> arg0, int arg1)
 	{
 	}
@@ -59,12 +65,6 @@ public interface FurnaceBaseMock extends Furnace, ContainerBaseMock
 	default short getCookTime()
 	{
 		return 0;
-	}
-
-	@Override
-	default Block getBlock()
-	{
-		return null;
 	}
 
 	@Override

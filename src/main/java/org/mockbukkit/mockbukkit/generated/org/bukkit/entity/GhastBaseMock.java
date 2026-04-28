@@ -17,7 +17,7 @@ import org.bukkit.entity.Ghast;
  */
 @SuppressWarnings(
 {"removal", "deprecation"})
-public interface GhastBaseMock extends Ghast, EnemyBaseMock, FlyingBaseMock
+public interface GhastBaseMock extends Ghast, FlyingBaseMock, EnemyBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

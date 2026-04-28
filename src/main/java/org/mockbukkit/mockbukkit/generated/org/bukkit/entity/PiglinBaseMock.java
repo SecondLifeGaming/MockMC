@@ -20,7 +20,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface PiglinBaseMock extends Piglin, PiglinAbstractBaseMock, RangedEntityBaseMock, InventoryHolderBaseMock
+public interface PiglinBaseMock extends Piglin, PiglinAbstractBaseMock, InventoryHolderBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default boolean isAbleToHunt()

@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface FluidBaseMock extends Fluid, KeyedBaseMock, OldEnumBaseMock<Fluid>
+public interface FluidBaseMock extends Fluid, OldEnumBaseMock<Fluid>, KeyedBaseMock
 {
 	@Override
 	default Key key()

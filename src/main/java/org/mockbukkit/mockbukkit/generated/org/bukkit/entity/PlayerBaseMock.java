@@ -86,14 +86,14 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.plugin.messaging.PluginMes
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"deprecation", "removal"})
 public interface PlayerBaseMock
 		extends
 			Player,
+			HumanEntityBaseMock,
+			OfflinePlayerBaseMock,
 			NetworkClientBaseMock,
 			ConversableBaseMock,
-			OfflinePlayerBaseMock,
-			HumanEntityBaseMock,
 			PluginMessageRecipientBaseMock
 {
 	/**
@@ -118,6 +118,21 @@ public interface PlayerBaseMock
 		return false;
 	}
 
+	@Override
+	default void setResourcePack(UUID arg0, String arg1, byte[] arg2, Component arg3, boolean arg4)
+	{
+	}
+
+	@Override
+	default void setResourcePack(String arg0, String arg1, boolean arg2, Component arg3)
+	{
+	}
+
+	@Override
+	default void setResourcePack(String arg0, String arg1, boolean arg2)
+	{
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -129,17 +144,7 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default void setResourcePack(String arg0, String arg1, boolean arg2)
-	{
-	}
-
-	@Override
-	default void setResourcePack(String arg0, String arg1, boolean arg2, Component arg3)
-	{
-	}
-
-	@Override
-	default void setResourcePack(UUID arg0, String arg1, byte[] arg2, Component arg3, boolean arg4)
+	default void setResourcePack(String arg0, byte[] arg1, Component arg2, boolean arg3)
 	{
 	}
 
@@ -154,11 +159,6 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default void setResourcePack(String arg0, byte[] arg1, Component arg2, boolean arg3)
-	{
-	}
-
-	@Override
 	default void setResourcePack(String arg0, String arg1)
 	{
 	}
@@ -169,7 +169,7 @@ public interface PlayerBaseMock
 	 */
 	@Override
 	@Deprecated(since = "1.0")
-	default void setResourcePack(String arg0, byte[] arg1, boolean arg2)
+	default void setResourcePack(String arg0, byte[] arg1)
 	{
 	}
 
@@ -193,18 +193,18 @@ public interface PlayerBaseMock
 	{
 	}
 
-	@Override
-	default void setResourcePack(String arg0, byte[] arg1, Component arg2)
-	{
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
 	@Override
 	@Deprecated(since = "1.0")
-	default void setResourcePack(String arg0, byte[] arg1)
+	default void setResourcePack(String arg0, byte[] arg1, boolean arg2)
+	{
+	}
+
+	@Override
+	default void setResourcePack(String arg0, byte[] arg1, Component arg2)
 	{
 	}
 
@@ -272,6 +272,12 @@ public interface PlayerBaseMock
 		return false;
 	}
 
+	@Override
+	default Location getLocation()
+	{
+		return new org.bukkit.Location(null, 0, 0, 0);
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -290,12 +296,6 @@ public interface PlayerBaseMock
 	@Deprecated(since = "1.20.4")
 	default void setBedSpawnLocation(Location arg0, boolean arg1)
 	{
-	}
-
-	@Override
-	default Location getLocation()
-	{
-		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
 	@Override
@@ -906,7 +906,8 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2)
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9, boolean arg10)
 	{
 	}
 
@@ -914,41 +915,6 @@ public interface PlayerBaseMock
 	default AdvancementProgress getAdvancementProgress(Advancement arg0)
 	{
 		return null;
-	}
-
-	@Override
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, T arg8)
-	{
-	}
-
-	@Override
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9, boolean arg10)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6)
-	{
-	}
-
-	@Override
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9)
-	{
-	}
-
-	@Override
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7, double arg8)
-	{
 	}
 
 	@Override
@@ -969,8 +935,35 @@ public interface PlayerBaseMock
 	}
 
 	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, T arg8)
+	{
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2)
+	{
+	}
+
+	@Override
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			T arg6)
+	{
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
+	{
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9)
+	{
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, T arg3)
 	{
 	}
 
@@ -981,12 +974,19 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7, double arg8)
 	{
 	}
 
 	@Override
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, T arg3)
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			double arg6)
+	{
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
 	{
 	}
 
@@ -1931,11 +1931,6 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
-	{
-	}
-
-	@Override
 	default void playSound(Location arg0, Sound arg1, float arg2, float arg3)
 	{
 	}
@@ -1946,17 +1941,27 @@ public interface PlayerBaseMock
 	}
 
 	@Override
+	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	{
+	}
+
+	@Override
 	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 	}
 
 	@Override
-	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
 	{
 	}
 
 	@Override
-	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
+	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
+	{
+	}
+
+	@Override
+	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 
@@ -1971,22 +1976,17 @@ public interface PlayerBaseMock
 	}
 
 	@Override
-	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
-	{
-	}
-
-	@Override
-	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
-	{
-	}
-
-	@Override
 	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 
 	@Override
 	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	{
+	}
+
+	@Override
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 	}
 

@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface PigVariantRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder,
-			RegistryBuilderBaseMock<Pig.Variant>,
-			PigVariantRegistryEntryBaseMock
+			PigVariantRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<Pig.Variant>
 {
 	@Override
 	default io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder model(

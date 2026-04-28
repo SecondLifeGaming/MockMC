@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.BucketableBas
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface AxolotlBaseMock extends Axolotl, BucketableBaseMock, AnimalsBaseMock
+public interface AxolotlBaseMock extends Axolotl, AnimalsBaseMock, BucketableBaseMock
 {
 	@Override
 	default void setPlayingDead(boolean arg0)

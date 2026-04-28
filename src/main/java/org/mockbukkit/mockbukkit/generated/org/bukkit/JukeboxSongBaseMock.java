@@ -16,7 +16,7 @@ import org.bukkit.Sound;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface JukeboxSongBaseMock extends JukeboxSong, KeyedBaseMock, TranslatableBaseMock
+public interface JukeboxSongBaseMock extends JukeboxSong, TranslatableBaseMock, KeyedBaseMock
 {
 	@Override
 	default Sound getSound()

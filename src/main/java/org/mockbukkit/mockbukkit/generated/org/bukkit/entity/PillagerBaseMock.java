@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface PillagerBaseMock extends Pillager, RangedEntityBaseMock, IllagerBaseMock, InventoryHolderBaseMock
+public interface PillagerBaseMock extends Pillager, InventoryHolderBaseMock, RangedEntityBaseMock, IllagerBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

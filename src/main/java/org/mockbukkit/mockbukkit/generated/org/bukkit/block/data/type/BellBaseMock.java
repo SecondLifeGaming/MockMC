@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface BellBaseMock extends Bell, DirectionalBaseMock, PowerableBaseMock
+public interface BellBaseMock extends Bell, PowerableBaseMock, DirectionalBaseMock
 {
 	@Override
 	default Bell.Attachment getAttachment()

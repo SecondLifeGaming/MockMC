@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.entity.MinecartBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ExplosiveMinecartBaseMock extends ExplosiveMinecart, MinecartBaseMock, ExplosiveBaseMock
+public interface ExplosiveMinecartBaseMock extends ExplosiveMinecart, ExplosiveBaseMock, MinecartBaseMock
 {
 	@Override
 	default boolean isIgnited()

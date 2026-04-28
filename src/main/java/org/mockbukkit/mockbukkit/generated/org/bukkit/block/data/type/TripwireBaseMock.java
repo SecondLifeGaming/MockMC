@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface TripwireBaseMock extends Tripwire, MultipleFacingBaseMock, AttachableBaseMock, PowerableBaseMock
+public interface TripwireBaseMock extends Tripwire, PowerableBaseMock, MultipleFacingBaseMock, AttachableBaseMock
 {
 	@Override
 	default boolean isDisarmed()

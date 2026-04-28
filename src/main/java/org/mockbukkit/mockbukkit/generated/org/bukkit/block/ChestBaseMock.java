@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ChestBaseMock extends Chest, ContainerBaseMock, LiddedBaseMock, LootableBlockInventoryBaseMock
+public interface ChestBaseMock extends Chest, LootableBlockInventoryBaseMock, LiddedBaseMock, ContainerBaseMock
 {
 	@Override
 	default boolean isBlocked()

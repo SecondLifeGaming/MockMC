@@ -21,10 +21,10 @@ import org.bukkit.entity.Entity;
 public interface EnderDragonBaseMock
 		extends
 			EnderDragon,
-			EnemyBaseMock,
-			MobBaseMock,
 			ComplexLivingEntityBaseMock,
-			BossBaseMock
+			EnemyBaseMock,
+			BossBaseMock,
+			MobBaseMock
 {
 	@Override
 	default int getDeathAnimationTicks()

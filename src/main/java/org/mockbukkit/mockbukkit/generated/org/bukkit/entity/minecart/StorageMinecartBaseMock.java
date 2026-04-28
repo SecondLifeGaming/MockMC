@@ -21,9 +21,9 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
 public interface StorageMinecartBaseMock
 		extends
 			StorageMinecart,
+			InventoryHolderBaseMock,
 			LootableEntityInventoryBaseMock,
-			MinecartBaseMock,
-			InventoryHolderBaseMock
+			MinecartBaseMock
 {
 	@Override
 	default HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)

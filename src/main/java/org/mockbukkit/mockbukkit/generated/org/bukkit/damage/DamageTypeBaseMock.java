@@ -19,7 +19,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface DamageTypeBaseMock extends DamageType, KeyedBaseMock, TranslatableBaseMock
+public interface DamageTypeBaseMock extends DamageType, TranslatableBaseMock, KeyedBaseMock
 {
 	@Override
 	default DamageScaling getDamageScaling()

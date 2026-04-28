@@ -22,7 +22,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface BlockTypeBaseMock extends BlockType, KeyedBaseMock, FeatureDependantBaseMock, TranslatableBaseMock
+public interface BlockTypeBaseMock extends BlockType, TranslatableBaseMock, FeatureDependantBaseMock, KeyedBaseMock
 {
 	@Override
 	default String translationKey()

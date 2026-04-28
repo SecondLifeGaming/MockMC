@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.material.ColorableBaseMock
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ShulkerBaseMock extends Shulker, GolemBaseMock, ColorableBaseMock, EnemyBaseMock
+public interface ShulkerBaseMock extends Shulker, ColorableBaseMock, EnemyBaseMock, GolemBaseMock
 {
 	@Override
 	default void setPeek(float arg0)

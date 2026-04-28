@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface SoundEventRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.SoundEventRegistryEntry.Builder,
-			SoundEventRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Sound>
+			RegistryBuilderBaseMock<Sound>,
+			SoundEventRegistryEntryBaseMock
 {
 	@Override
 	default io.papermc.paper.registry.data.SoundEventRegistryEntry.Builder fixedRange(Float arg0)

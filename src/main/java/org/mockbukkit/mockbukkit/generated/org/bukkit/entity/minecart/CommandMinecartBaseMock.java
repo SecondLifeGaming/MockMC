@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.entity.MinecartBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CommandMinecartBaseMock extends CommandMinecart, MinecartBaseMock, CommandBlockHolderBaseMock
+public interface CommandMinecartBaseMock extends CommandMinecart, CommandBlockHolderBaseMock, MinecartBaseMock
 {
 	@Override
 	default void setCommand(String arg0)

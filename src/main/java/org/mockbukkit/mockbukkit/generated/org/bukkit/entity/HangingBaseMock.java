@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.material.AttachableBaseMoc
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface HangingBaseMock extends Hanging, AttachableBaseMock, EntityBaseMock
+public interface HangingBaseMock extends Hanging, EntityBaseMock, AttachableBaseMock
 {
 	@Override
 	default BlockFace getFacing()

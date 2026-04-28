@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface AttributeBaseMock extends Attribute, KeyedBaseMock, OldEnumBaseMock<Attribute>, TranslatableBaseMock
+public interface AttributeBaseMock extends Attribute, OldEnumBaseMock<Attribute>, TranslatableBaseMock, KeyedBaseMock
 {
 	@Override
 	default String translationKey()

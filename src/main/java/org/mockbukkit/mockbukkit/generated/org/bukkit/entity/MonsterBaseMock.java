@@ -16,7 +16,7 @@ import org.bukkit.entity.Monster;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface MonsterBaseMock extends Monster, CreatureBaseMock, EnemyBaseMock
+public interface MonsterBaseMock extends Monster, EnemyBaseMock, CreatureBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

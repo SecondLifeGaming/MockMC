@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface DispenserBaseMock extends Dispenser, ContainerBaseMock, LootableBlockInventoryBaseMock
+public interface DispenserBaseMock extends Dispenser, LootableBlockInventoryBaseMock, ContainerBaseMock
 {
 	@Override
 	default Block getBlock()

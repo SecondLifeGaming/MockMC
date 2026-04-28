@@ -18,12 +18,6 @@ import org.bukkit.inventory.BrewerInventory;
 public interface BrewingStandBaseMock extends BrewingStand, ContainerBaseMock
 {
 	@Override
-	default Block getBlock()
-	{
-		return null;
-	}
-
-	@Override
 	default int getBrewingTime()
 	{
 		return 0;
@@ -43,6 +37,12 @@ public interface BrewingStandBaseMock extends BrewingStand, ContainerBaseMock
 	@Override
 	default void setBrewingTime(int arg0)
 	{
+	}
+
+	@Override
+	default Block getBlock()
+	{
+		return null;
 	}
 
 	@Override

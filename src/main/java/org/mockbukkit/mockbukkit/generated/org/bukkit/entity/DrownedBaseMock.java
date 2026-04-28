@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.entity.Ranged
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface DrownedBaseMock extends Drowned, RangedEntityBaseMock, ZombieBaseMock
+public interface DrownedBaseMock extends Drowned, ZombieBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

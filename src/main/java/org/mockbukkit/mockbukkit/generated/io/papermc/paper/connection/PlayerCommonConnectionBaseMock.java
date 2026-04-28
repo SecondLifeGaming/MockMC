@@ -20,8 +20,8 @@ public interface PlayerCommonConnectionBaseMock
 		extends
 			PlayerCommonConnection,
 			ReadablePlayerCookieConnectionBaseMock,
-			PluginMessageRecipientBaseMock,
-			WritablePlayerCookieConnectionBaseMock
+			WritablePlayerCookieConnectionBaseMock,
+			PluginMessageRecipientBaseMock
 {
 	@Override
 	default void sendReportDetails(Map<String, String> arg0)

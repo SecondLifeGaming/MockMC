@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface ZombieNautilusVariantRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.ZombieNautilusVariantRegistryEntry.Builder,
-			ZombieNautilusVariantRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<ZombieNautilus.Variant>
+			RegistryBuilderBaseMock<ZombieNautilus.Variant>,
+			ZombieNautilusVariantRegistryEntryBaseMock
 {
 	@Override
 	default io.papermc.paper.registry.data.ZombieNautilusVariantRegistryEntry.Builder model(

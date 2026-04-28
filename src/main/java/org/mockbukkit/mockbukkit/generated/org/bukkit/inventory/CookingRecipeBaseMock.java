@@ -19,7 +19,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CookingRecipeBaseMock<T extends CookingRecipe> extends KeyedBaseMock, RecipeBaseMock
+public interface CookingRecipeBaseMock<T extends CookingRecipe> extends RecipeBaseMock, KeyedBaseMock
 {
 	default void setCookingTime(int arg0)
 	{

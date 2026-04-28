@@ -16,7 +16,7 @@ import org.bukkit.entity.Panda;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface PandaBaseMock extends Panda, SittableBaseMock, AnimalsBaseMock
+public interface PandaBaseMock extends Panda, AnimalsBaseMock, SittableBaseMock
 {
 	@Override
 	default boolean isSneezing()

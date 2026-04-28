@@ -16,8 +16,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface GameEventRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.GameEventRegistryEntry.Builder,
-			RegistryBuilderBaseMock<GameEvent>,
-			GameEventRegistryEntryBaseMock
+			GameEventRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<GameEvent>
 {
 	@Override
 	default io.papermc.paper.registry.data.GameEventRegistryEntry.Builder range(int arg0)

@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.BisectedBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface PitcherCropBaseMock extends PitcherCrop, BisectedBaseMock, AgeableBaseMock
+public interface PitcherCropBaseMock extends PitcherCrop, AgeableBaseMock, BisectedBaseMock
 {
 }

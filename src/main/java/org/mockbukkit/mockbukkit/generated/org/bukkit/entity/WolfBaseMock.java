@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.CollarColorab
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface WolfBaseMock extends Wolf, SittableBaseMock, CollarColorableBaseMock, TameableBaseMock
+public interface WolfBaseMock extends Wolf, TameableBaseMock, CollarColorableBaseMock, SittableBaseMock
 {
 	@Override
 	default DyeColor getCollarColor()

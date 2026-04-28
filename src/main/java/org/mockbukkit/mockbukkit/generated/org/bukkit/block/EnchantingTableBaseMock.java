@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.NameableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface EnchantingTableBaseMock extends EnchantingTable, NameableBaseMock, TileStateBaseMock
+public interface EnchantingTableBaseMock extends EnchantingTable, TileStateBaseMock, NameableBaseMock
 {
 }

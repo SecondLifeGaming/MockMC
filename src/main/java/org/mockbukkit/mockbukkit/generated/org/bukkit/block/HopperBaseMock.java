@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface HopperBaseMock extends Hopper, ContainerBaseMock, LootableBlockInventoryBaseMock
+public interface HopperBaseMock extends Hopper, LootableBlockInventoryBaseMock, ContainerBaseMock
 {
 	@Override
 	default int getTransferCooldown()

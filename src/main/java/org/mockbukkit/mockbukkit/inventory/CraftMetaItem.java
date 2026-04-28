@@ -5,4 +5,10 @@ package org.mockbukkit.mockbukkit.inventory;
  */
 public class CraftMetaItem
 {
+
+	private CraftMetaItem()
+	{
+		// Private constructor to satisfy IDE empty class warning
+	}
+
 }

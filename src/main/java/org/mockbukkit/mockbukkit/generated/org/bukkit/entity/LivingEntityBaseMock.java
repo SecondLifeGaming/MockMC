@@ -48,9 +48,9 @@ public interface LivingEntityBaseMock
 		extends
 			LivingEntity,
 			ProjectileSourceBaseMock,
-			DamageableBaseMock,
 			AttributableBaseMock,
-			FrictionalBaseMock
+			FrictionalBaseMock,
+			DamageableBaseMock
 {
 	@Override
 	default double getLastDamage()

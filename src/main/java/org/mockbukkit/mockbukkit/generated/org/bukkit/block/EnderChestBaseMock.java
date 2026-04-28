@@ -13,7 +13,7 @@ import org.bukkit.block.EnderChest;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface EnderChestBaseMock extends EnderChest, TileStateBaseMock, LiddedBaseMock
+public interface EnderChestBaseMock extends EnderChest, LiddedBaseMock, TileStateBaseMock
 {
 	@Override
 	default boolean isBlocked()

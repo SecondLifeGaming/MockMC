@@ -117,14 +117,12 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
@@ -137,7 +135,7 @@ public class ServerMock extends ServerMockBase
 	@NotNull
 	public BukkitSchedulerMock getScheduler()
 	{
-		return (BukkitSchedulerMock) super.getScheduler();
+		return super.getScheduler();
 	}
 
 	private Component motd = Component.text("A Minecraft Server");
@@ -1324,12 +1322,12 @@ public class ServerMock extends ServerMockBase
 		// Wait up to 2.5 seconds for plugins to finish async tasks.
 		try
 		{
-			((BukkitSchedulerMock) getScheduler()).waitActiveWorkersFinished(2500, TimeUnit.MILLISECONDS);
+			getScheduler().waitActiveWorkersFinished(2500, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException _)
 		{
 			Thread.currentThread().interrupt();
 		}
-		((BukkitSchedulerMock) getScheduler()).saveOverdueTasks();
+		getScheduler().saveOverdueTasks();
 		List<Plugin> newPlugins = new ArrayList<>(pluginsClone.length);
 		for (Plugin oldPlugin : pluginsClone)
 		{
@@ -1945,7 +1943,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public int getCurrentTick()
 	{
-		return (int) ((BukkitSchedulerMock) getScheduler()).getCurrentTick();
+		return (int) getScheduler().getCurrentTick();
 	}
 
 	@Override

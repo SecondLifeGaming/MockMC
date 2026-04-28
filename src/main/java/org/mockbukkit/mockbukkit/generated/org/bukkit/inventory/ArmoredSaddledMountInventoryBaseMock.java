@@ -17,8 +17,8 @@ import org.bukkit.inventory.ItemStack;
 public interface ArmoredSaddledMountInventoryBaseMock
 		extends
 			ArmoredSaddledMountInventory,
-			SaddledMountInventoryBaseMock,
-			ArmoredMountInventoryBaseMock
+			ArmoredMountInventoryBaseMock,
+			SaddledMountInventoryBaseMock
 {
 	@Override
 	default ListIterator<ItemStack> iterator()

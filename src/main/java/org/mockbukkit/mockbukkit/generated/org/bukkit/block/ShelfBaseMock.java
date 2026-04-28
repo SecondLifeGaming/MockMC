@@ -19,13 +19,13 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.block.TileStateInven
 public interface ShelfBaseMock extends Shelf, TileStateInventoryHolderBaseMock
 {
 	@Override
-	default Block getBlock()
+	default ShelfInventory getSnapshotInventory()
 	{
 		return null;
 	}
 
 	@Override
-	default ShelfInventory getSnapshotInventory()
+	default Block getBlock()
 	{
 		return null;
 	}

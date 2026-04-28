@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface Villager_TypeBaseMock extends Villager.Type, KeyedBaseMock, OldEnumBaseMock<Villager.Type>
+public interface Villager_TypeBaseMock extends Villager.Type, OldEnumBaseMock<Villager.Type>, KeyedBaseMock
 {
 	@Override
 	default Key key()

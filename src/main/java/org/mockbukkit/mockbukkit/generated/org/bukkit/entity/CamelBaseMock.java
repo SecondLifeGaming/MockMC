@@ -16,7 +16,7 @@ import org.bukkit.entity.Entity;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CamelBaseMock extends Camel, SittableBaseMock, AbstractHorseBaseMock
+public interface CamelBaseMock extends Camel, AbstractHorseBaseMock, SittableBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

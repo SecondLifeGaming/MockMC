@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface BiomeBaseMock extends Biome, KeyedBaseMock, OldEnumBaseMock<Biome>
+public interface BiomeBaseMock extends Biome, OldEnumBaseMock<Biome>, KeyedBaseMock
 {
 	@Override
 	default String translationKey()

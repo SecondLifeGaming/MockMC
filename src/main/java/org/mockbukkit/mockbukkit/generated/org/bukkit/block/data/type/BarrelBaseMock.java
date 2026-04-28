@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.OpenableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface BarrelBaseMock extends Barrel, DirectionalBaseMock, OpenableBaseMock
+public interface BarrelBaseMock extends Barrel, OpenableBaseMock, DirectionalBaseMock
 {
 }

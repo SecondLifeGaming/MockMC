@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ComparatorBaseMock extends Comparator, DirectionalBaseMock, PowerableBaseMock
+public interface ComparatorBaseMock extends Comparator, PowerableBaseMock, DirectionalBaseMock
 {
 	@Override
 	default Comparator.Mode getMode()

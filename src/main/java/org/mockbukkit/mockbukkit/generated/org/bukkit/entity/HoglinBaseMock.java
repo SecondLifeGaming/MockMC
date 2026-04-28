@@ -16,7 +16,7 @@ import org.bukkit.entity.Hoglin;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface HoglinBaseMock extends Hoglin, EnemyBaseMock, AnimalsBaseMock
+public interface HoglinBaseMock extends Hoglin, AnimalsBaseMock, EnemyBaseMock
 {
 	@Override
 	default boolean isAbleToBeHunted()

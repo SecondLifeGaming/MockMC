@@ -20,17 +20,17 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.BlockInventoryHo
 public interface TileStateInventoryHolderBaseMock
 		extends
 			TileStateInventoryHolder,
-			BlockInventoryHolderBaseMock,
-			TileStateBaseMock
+			TileStateBaseMock,
+			BlockInventoryHolderBaseMock
 {
 	@Override
-	default Block getBlock()
+	default Inventory getInventory()
 	{
 		return null;
 	}
 
 	@Override
-	default Inventory getInventory()
+	default Block getBlock()
 	{
 		return null;
 	}

@@ -112,6 +112,30 @@ public interface ScoreboardBaseMock extends Scoreboard
 	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
+	default Objective registerNewObjective(String arg0, String arg1, Component arg2)
+	{
+		return null;
+	}
+
+	@Override
+	default Objective getObjective(String arg0)
+	{
+		return null;
+	}
+
+	@Override
+	default Objective getObjective(DisplaySlot arg0)
+	{
+		return null;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@SuppressWarnings("deprecation")
+	@Deprecated(since = "1.0")
 	default Objective registerNewObjective(String arg0, Criteria arg1, String arg2)
 	{
 		return null;
@@ -125,24 +149,6 @@ public interface ScoreboardBaseMock extends Scoreboard
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.20.5")
 	default Objective registerNewObjective(String arg0, String arg1, String arg2)
-	{
-		return null;
-	}
-
-	@Override
-	default Objective getObjective(String arg0)
-	{
-		return null;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Override
-	@SuppressWarnings("deprecation")
-	@Deprecated(since = "1.0")
-	default Objective registerNewObjective(String arg0, String arg1, Component arg2)
 	{
 		return null;
 	}
@@ -162,18 +168,6 @@ public interface ScoreboardBaseMock extends Scoreboard
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default Objective registerNewObjective(String arg0, Criteria arg1, String arg2, RenderType arg3)
-	{
-		return null;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Override
-	@SuppressWarnings("deprecation")
-	@Deprecated(since = "1.13")
-	default Objective registerNewObjective(String arg0, String arg1)
 	{
 		return null;
 	}
@@ -209,8 +203,14 @@ public interface ScoreboardBaseMock extends Scoreboard
 		return null;
 	}
 
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
 	@Override
-	default Objective getObjective(DisplaySlot arg0)
+	@SuppressWarnings("deprecation")
+	@Deprecated(since = "1.13")
+	default Objective registerNewObjective(String arg0, String arg1)
 	{
 		return null;
 	}

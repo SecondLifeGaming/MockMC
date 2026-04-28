@@ -30,7 +30,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface ItemTypeBaseMock extends ItemType, KeyedBaseMock, FeatureDependantBaseMock, TranslatableBaseMock
+public interface ItemTypeBaseMock extends ItemType, TranslatableBaseMock, FeatureDependantBaseMock, KeyedBaseMock
 {
 	@Override
 	default ItemType getCraftingRemainingItem()

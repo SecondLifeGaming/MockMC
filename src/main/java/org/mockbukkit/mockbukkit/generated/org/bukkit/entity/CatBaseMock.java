@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.CollarColorab
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CatBaseMock extends Cat, SittableBaseMock, CollarColorableBaseMock, TameableBaseMock
+public interface CatBaseMock extends Cat, TameableBaseMock, CollarColorableBaseMock, SittableBaseMock
 {
 	@Override
 	default void setCollarColor(DyeColor arg0)

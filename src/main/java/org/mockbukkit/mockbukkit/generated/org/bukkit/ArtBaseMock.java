@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface ArtBaseMock extends Art, KeyedBaseMock, OldEnumBaseMock<Art>
+public interface ArtBaseMock extends Art, OldEnumBaseMock<Art>, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

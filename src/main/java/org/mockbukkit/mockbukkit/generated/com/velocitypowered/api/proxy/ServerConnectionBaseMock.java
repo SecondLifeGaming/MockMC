@@ -21,8 +21,8 @@ import org.mockbukkit.mockbukkit.generated.com.velocitypowered.api.proxy.message
 public interface ServerConnectionBaseMock
 		extends
 			ServerConnection,
-			ChannelMessageSourceBaseMock,
-			ChannelMessageSinkBaseMock
+			ChannelMessageSinkBaseMock,
+			ChannelMessageSourceBaseMock
 {
 	@Override
 	default ServerInfo getServerInfo()

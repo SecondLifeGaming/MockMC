@@ -18,6 +18,17 @@ import org.bukkit.inventory.ItemStack;
 @SuppressWarnings("deprecation")
 public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, ThrowableProjectileBaseMock
 {
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@SuppressWarnings("removal")
+	@Deprecated(since = "1.20.4", forRemoval = true)
+	default void setItem(ItemStack arg0)
+	{
+	}
+
 	@Override
 	default boolean hasGlint()
 	{
@@ -35,16 +46,21 @@ public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, Throwab
 	{
 	}
 
-	@Override
-	default void setDamage(double arg0)
-	{
-	}
-
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
 	@Override
 	@SuppressWarnings("removal")
+	@Deprecated(since = "1.20.4", forRemoval = true)
 	default ItemStack getItem()
 	{
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
+	}
+
+	@Override
+	default void setDamage(double arg0)
+	{
 	}
 
 	@Override
@@ -73,11 +89,5 @@ public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, Throwab
 	default HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)
 	{
 		return null;
-	}
-
-	@Override
-	@SuppressWarnings("removal")
-	default void setItem(ItemStack arg0)
-	{
 	}
 }

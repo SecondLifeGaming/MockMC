@@ -16,7 +16,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.util.OldEnumBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface MapCursor_TypeBaseMock extends MapCursor.Type, KeyedBaseMock, OldEnumBaseMock<MapCursor.Type>
+public interface MapCursor_TypeBaseMock extends MapCursor.Type, OldEnumBaseMock<MapCursor.Type>, KeyedBaseMock
 {
 	@Override
 	default Key key()

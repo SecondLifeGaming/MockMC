@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.WaterloggedBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SignBaseMock extends Sign, RotatableBaseMock, WaterloggedBaseMock
+public interface SignBaseMock extends Sign, WaterloggedBaseMock, RotatableBaseMock
 {
 }

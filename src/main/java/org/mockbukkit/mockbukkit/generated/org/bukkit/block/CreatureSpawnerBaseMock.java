@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.spawner.SpawnerBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface CreatureSpawnerBaseMock extends CreatureSpawner, TileStateBaseMock, SpawnerBaseMock
+public interface CreatureSpawnerBaseMock extends CreatureSpawner, SpawnerBaseMock, TileStateBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

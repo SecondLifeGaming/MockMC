@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface TrimPatternBaseMock extends TrimPattern, KeyedBaseMock, TranslatableBaseMock
+public interface TrimPatternBaseMock extends TrimPattern, TranslatableBaseMock, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

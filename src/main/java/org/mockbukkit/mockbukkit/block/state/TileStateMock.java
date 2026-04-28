@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 public abstract class TileStateMock extends BlockStateMock
 		implements
-			TileState,
 			org.mockbukkit.mockbukkit.generated.org.bukkit.block.TileStateBaseMock
 {
 

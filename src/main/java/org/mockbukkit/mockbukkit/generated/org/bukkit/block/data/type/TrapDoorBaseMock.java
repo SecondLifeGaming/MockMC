@@ -20,10 +20,10 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.WaterloggedBase
 public interface TrapDoorBaseMock
 		extends
 			TrapDoor,
-			DirectionalBaseMock,
-			BisectedBaseMock,
+			PowerableBaseMock,
 			OpenableBaseMock,
+			DirectionalBaseMock,
 			WaterloggedBaseMock,
-			PowerableBaseMock
+			BisectedBaseMock
 {
 }

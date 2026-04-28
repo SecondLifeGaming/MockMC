@@ -18,14 +18,14 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.block.TileStateInven
 public interface LecternBaseMock extends Lectern, TileStateInventoryHolderBaseMock
 {
 	@Override
-	default Block getBlock()
+	default void setPage(int arg0)
 	{
-		return null;
 	}
 
 	@Override
-	default void setPage(int arg0)
+	default Block getBlock()
 	{
+		return null;
 	}
 
 	@Override

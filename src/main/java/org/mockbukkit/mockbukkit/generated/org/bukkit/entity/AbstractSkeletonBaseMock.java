@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.entity.Ranged
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface AbstractSkeletonBaseMock extends AbstractSkeleton, RangedEntityBaseMock, MonsterBaseMock
+public interface AbstractSkeletonBaseMock extends AbstractSkeleton, MonsterBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

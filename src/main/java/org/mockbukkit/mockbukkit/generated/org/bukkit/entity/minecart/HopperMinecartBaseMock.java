@@ -21,9 +21,9 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
 public interface HopperMinecartBaseMock
 		extends
 			HopperMinecart,
+			InventoryHolderBaseMock,
 			LootableEntityInventoryBaseMock,
-			MinecartBaseMock,
-			InventoryHolderBaseMock
+			MinecartBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

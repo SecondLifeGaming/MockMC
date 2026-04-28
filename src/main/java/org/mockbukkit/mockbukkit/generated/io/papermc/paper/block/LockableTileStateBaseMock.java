@@ -19,8 +19,8 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.TileStateBaseMock;
 public interface LockableTileStateBaseMock
 		extends
 			LockableTileState,
-			LockableBaseMock,
+			TileStateBaseMock,
 			NameableBaseMock,
-			TileStateBaseMock
+			LockableBaseMock
 {
 }

@@ -13,7 +13,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.world.flag.FeatureDe
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface GameRuleBaseMock<T> extends KeyedBaseMock, FeatureDependantBaseMock
+public interface GameRuleBaseMock<T> extends FeatureDependantBaseMock, KeyedBaseMock
 {
 	default Class<T> getType()
 	{

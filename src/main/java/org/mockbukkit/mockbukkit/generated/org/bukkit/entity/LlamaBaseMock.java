@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.entity.Ranged
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface LlamaBaseMock extends Llama, ChestedHorseBaseMock, RangedEntityBaseMock
+public interface LlamaBaseMock extends Llama, RangedEntityBaseMock, ChestedHorseBaseMock
 {
 	@Override
 	default void setColor(Llama.Color arg0)

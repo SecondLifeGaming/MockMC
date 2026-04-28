@@ -17,7 +17,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.NameableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface BannerBaseMock extends Banner, NameableBaseMock, TileStateBaseMock
+public interface BannerBaseMock extends Banner, TileStateBaseMock, NameableBaseMock
 {
 	@Override
 	default int numberOfPatterns()

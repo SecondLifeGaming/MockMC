@@ -41,7 +41,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.persistence.PersistentData
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ItemMetaBaseMock extends ItemMeta, PersistentDataHolderBaseMock, ConfigurationSerializableBaseMock
+public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBaseMock, PersistentDataHolderBaseMock
 {
 	@Override
 	default Map<Enchantment, Integer> getEnchants()

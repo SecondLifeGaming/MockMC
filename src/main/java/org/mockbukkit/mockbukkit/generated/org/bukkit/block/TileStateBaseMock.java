@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.persistence.PersistentData
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface TileStateBaseMock extends TileState, PersistentDataHolderBaseMock, BlockStateBaseMock
+public interface TileStateBaseMock extends TileState, BlockStateBaseMock, PersistentDataHolderBaseMock
 {
 	@Override
 	default PersistentDataContainer getPersistentDataContainer()

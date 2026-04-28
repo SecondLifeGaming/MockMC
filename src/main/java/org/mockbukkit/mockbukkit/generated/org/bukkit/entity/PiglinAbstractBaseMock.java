@@ -16,7 +16,7 @@ import org.bukkit.entity.PiglinAbstract;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface PiglinAbstractBaseMock extends PiglinAbstract, AgeableBaseMock, MonsterBaseMock
+public interface PiglinAbstractBaseMock extends PiglinAbstract, MonsterBaseMock, AgeableBaseMock
 {
 	@Override
 	default boolean isConverting()

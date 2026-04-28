@@ -19,7 +19,7 @@ import org.bukkit.entity.Phantom;
  */
 @SuppressWarnings(
 {"removal", "deprecation"})
-public interface PhantomBaseMock extends Phantom, EnemyBaseMock, FlyingBaseMock
+public interface PhantomBaseMock extends Phantom, FlyingBaseMock, EnemyBaseMock
 {
 	@Override
 	default int getSize()

@@ -17,7 +17,7 @@ import org.bukkit.entity.Zombie;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ZombieBaseMock extends Zombie, AgeableBaseMock, MonsterBaseMock
+public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

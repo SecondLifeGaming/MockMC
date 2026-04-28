@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.WaterloggedBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface StairsBaseMock extends Stairs, DirectionalBaseMock, BisectedBaseMock, WaterloggedBaseMock
+public interface StairsBaseMock extends Stairs, DirectionalBaseMock, WaterloggedBaseMock, BisectedBaseMock
 {
 	@Override
 	default Stairs.Shape getShape()

@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface GateBaseMock extends Gate, DirectionalBaseMock, OpenableBaseMock, PowerableBaseMock
+public interface GateBaseMock extends Gate, PowerableBaseMock, OpenableBaseMock, DirectionalBaseMock
 {
 	@Override
 	default void setInWall(boolean arg0)

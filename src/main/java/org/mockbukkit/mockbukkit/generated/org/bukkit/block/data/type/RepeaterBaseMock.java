@@ -14,7 +14,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.PowerableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface RepeaterBaseMock extends Repeater, DirectionalBaseMock, PowerableBaseMock
+public interface RepeaterBaseMock extends Repeater, PowerableBaseMock, DirectionalBaseMock
 {
 	@Override
 	default int getMinimumDelay()

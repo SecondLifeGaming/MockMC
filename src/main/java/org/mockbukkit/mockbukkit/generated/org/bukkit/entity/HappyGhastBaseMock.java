@@ -16,7 +16,7 @@ import org.bukkit.entity.HappyGhast;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface HappyGhastBaseMock extends HappyGhast, VehicleBaseMock, AnimalsBaseMock
+public interface HappyGhastBaseMock extends HappyGhast, AnimalsBaseMock, VehicleBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

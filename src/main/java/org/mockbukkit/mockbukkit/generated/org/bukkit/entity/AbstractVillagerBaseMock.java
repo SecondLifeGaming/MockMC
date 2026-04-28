@@ -22,9 +22,9 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.MerchantBaseMock
 public interface AbstractVillagerBaseMock
 		extends
 			AbstractVillager,
-			NPCBaseMock,
-			MerchantBaseMock,
 			BreedableBaseMock,
+			MerchantBaseMock,
+			NPCBaseMock,
 			InventoryHolderBaseMock
 {
 	@Override

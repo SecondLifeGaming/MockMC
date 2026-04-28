@@ -19,9 +19,9 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
 public interface ShulkerBoxBaseMock
 		extends
 			ShulkerBox,
-			ContainerBaseMock,
+			LootableBlockInventoryBaseMock,
 			LiddedBaseMock,
-			LootableBlockInventoryBaseMock
+			ContainerBaseMock
 {
 	@Override
 	default DyeColor getColor()

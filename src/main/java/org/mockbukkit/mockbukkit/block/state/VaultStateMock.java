@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class VaultStateMock extends TileStateMock
 		implements
-			Vault,
 			org.mockbukkit.mockbukkit.generated.org.bukkit.block.VaultBaseMock
 {
 

@@ -21,9 +21,9 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
 public interface AbstractNautilusBaseMock
 		extends
 			AbstractNautilus,
-			VehicleBaseMock,
+			TameableBaseMock,
 			InventoryHolderBaseMock,
-			TameableBaseMock
+			VehicleBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

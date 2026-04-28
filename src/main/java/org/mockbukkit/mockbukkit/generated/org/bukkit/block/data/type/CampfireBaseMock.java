@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.WaterloggedBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CampfireBaseMock extends Campfire, DirectionalBaseMock, LightableBaseMock, WaterloggedBaseMock
+public interface CampfireBaseMock extends Campfire, LightableBaseMock, DirectionalBaseMock, WaterloggedBaseMock
 {
 	@Override
 	default void setSignalFire(boolean arg0)

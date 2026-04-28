@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.FaceAttachableB
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface GrindstoneBaseMock extends Grindstone, DirectionalBaseMock, FaceAttachableBaseMock
+public interface GrindstoneBaseMock extends Grindstone, FaceAttachableBaseMock, DirectionalBaseMock
 {
 }

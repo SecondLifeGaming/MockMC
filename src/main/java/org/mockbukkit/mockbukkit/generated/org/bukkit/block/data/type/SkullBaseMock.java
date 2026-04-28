@@ -14,6 +14,6 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.block.data.RotatableBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SkullBaseMock extends Skull, RotatableBaseMock, PowerableBaseMock
+public interface SkullBaseMock extends Skull, PowerableBaseMock, RotatableBaseMock
 {
 }

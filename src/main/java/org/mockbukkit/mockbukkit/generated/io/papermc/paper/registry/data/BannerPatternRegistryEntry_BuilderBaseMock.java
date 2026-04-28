@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface BannerPatternRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.BannerPatternRegistryEntry.Builder,
-			BannerPatternRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<PatternType>
+			RegistryBuilderBaseMock<PatternType>,
+			BannerPatternRegistryEntryBaseMock
 {
 	@Override
 	default io.papermc.paper.registry.data.BannerPatternRegistryEntry.Builder translationKey(String arg0)

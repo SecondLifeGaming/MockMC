@@ -32,10 +32,10 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.permissions.ServerOperator
 public interface OfflinePlayerBaseMock
 		extends
 			OfflinePlayer,
+			ConfigurationSerializableBaseMock,
 			PersistentDataViewHolderBaseMock,
-			ServerOperatorBaseMock,
 			AnimalTamerBaseMock,
-			ConfigurationSerializableBaseMock
+			ServerOperatorBaseMock
 {
 	@Override
 	default PersistentDataContainerView getPersistentDataContainer()

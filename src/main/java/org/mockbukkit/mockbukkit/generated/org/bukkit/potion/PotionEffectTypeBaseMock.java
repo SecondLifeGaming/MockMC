@@ -23,7 +23,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface PotionEffectTypeBaseMock extends KeyedBaseMock, FeatureDependantBaseMock, TranslatableBaseMock
+public interface PotionEffectTypeBaseMock extends TranslatableBaseMock, FeatureDependantBaseMock, KeyedBaseMock
 {
 	default String translationKey()
 	{

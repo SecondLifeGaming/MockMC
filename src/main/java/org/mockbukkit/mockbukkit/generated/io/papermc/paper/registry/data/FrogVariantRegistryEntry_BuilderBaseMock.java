@@ -17,8 +17,8 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.registry.RegistryBui
 public interface FrogVariantRegistryEntry_BuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.FrogVariantRegistryEntry.Builder,
-			RegistryBuilderBaseMock<Frog.Variant>,
-			FrogVariantRegistryEntryBaseMock
+			FrogVariantRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<Frog.Variant>
 {
 	@Override
 	default io.papermc.paper.registry.data.FrogVariantRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)

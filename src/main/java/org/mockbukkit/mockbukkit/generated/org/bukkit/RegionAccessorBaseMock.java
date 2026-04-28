@@ -35,7 +35,7 @@ import org.mockbukkit.mockbukkit.generated.io.papermc.paper.world.flag.FeatureFl
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface RegionAccessorBaseMock extends RegionAccessor, KeyedBaseMock, FeatureFlagSetHolderBaseMock
+public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHolderBaseMock, KeyedBaseMock
 {
 	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, CreatureSpawnEvent.SpawnReason arg2,

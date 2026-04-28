@@ -16,13 +16,13 @@ import org.bukkit.entity.Entity;
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"deprecation", "removal"})
 public interface BoggedBaseMock
 		extends
 			Bogged,
+			AbstractSkeletonBaseMock,
 			org.mockbukkit.mockbukkit.generated.io.papermc.paper.entity.ShearableBaseMock,
-			ShearableBaseMock,
-			AbstractSkeletonBaseMock
+			ShearableBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)

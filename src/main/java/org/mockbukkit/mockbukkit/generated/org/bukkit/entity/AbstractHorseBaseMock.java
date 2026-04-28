@@ -19,7 +19,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryHolderB
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, InventoryHolderBaseMock, TameableBaseMock
+public interface AbstractHorseBaseMock extends AbstractHorse, TameableBaseMock, InventoryHolderBaseMock, VehicleBaseMock
 {
 	@Override
 	default boolean isRearing()

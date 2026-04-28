@@ -18,7 +18,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.TranslatableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("removal")
-public interface TrimMaterialBaseMock extends TrimMaterial, KeyedBaseMock, TranslatableBaseMock
+public interface TrimMaterialBaseMock extends TrimMaterial, TranslatableBaseMock, KeyedBaseMock
 {
 	@Override
 	default Component description()

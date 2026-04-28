@@ -19,7 +19,7 @@ import org.mockbukkit.mockbukkit.generated.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface MenuTypeBaseMock extends MenuType, KeyedBaseMock, FeatureDependantBaseMock
+public interface MenuTypeBaseMock extends MenuType, FeatureDependantBaseMock, KeyedBaseMock
 {
 	@Override
 	default MenuType.Typed<InventoryView, InventoryViewBuilder<InventoryView>> typed()

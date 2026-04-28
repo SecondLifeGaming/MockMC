@@ -15,7 +15,7 @@ import org.mockbukkit.mockbukkit.generated.com.destroystokyo.paper.loottable.Loo
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface DropperBaseMock extends Dropper, ContainerBaseMock, LootableBlockInventoryBaseMock
+public interface DropperBaseMock extends Dropper, LootableBlockInventoryBaseMock, ContainerBaseMock
 {
 	@Override
 	default void drop()

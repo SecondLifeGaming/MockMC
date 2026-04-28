@@ -360,12 +360,6 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	}
 
 	@Override
-	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
-	{
-		return false;
-	}
-
-	@Override
 	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2)
 	{
 		return false;
@@ -391,6 +385,12 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 
 	@Override
 	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3, int arg4)
+	{
+		return false;
+	}
+
+	@Override
+	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
 	{
 		return false;
 	}

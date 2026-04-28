@@ -16,7 +16,7 @@ import org.bukkit.entity.Zoglin;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ZoglinBaseMock extends Zoglin, AgeableBaseMock, MonsterBaseMock
+public interface ZoglinBaseMock extends Zoglin, MonsterBaseMock, AgeableBaseMock
 {
 	@Override
 	default boolean setLeashHolder(Entity arg0)
