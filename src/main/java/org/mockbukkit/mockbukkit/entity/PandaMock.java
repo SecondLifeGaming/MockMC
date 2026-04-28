@@ -5,29 +5,42 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Panda;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class PandaMock extends AnimalsMock implements Panda
+public class PandaMock extends AnimalsMock
+		implements
+			Panda,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PandaBaseMock
 {
 
 	private Gene mainGene = Gene.NORMAL;
+
 	private Gene hiddenGene = Gene.NORMAL;
+
 	private boolean isRolling = false;
+
 	private boolean isSneezing = false;
+
 	private boolean onBack = false;
+
 	private boolean isEating = false;
+
 	private boolean isSitting = false;
+
 	private int unHappyTick = 0;
+
 	private int sneezeTick = 0;
+
 	private int eatTick = 0;
 
 	/**
-	 * Constructs a new {@link PandaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PandaMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PandaMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -35,7 +48,8 @@ public class PandaMock extends AnimalsMock implements Panda
 	}
 
 	@Override
-	public @NotNull Gene getMainGene()
+	@NotNull
+	public Gene getMainGene()
 	{
 		return this.mainGene;
 	}
@@ -48,7 +62,8 @@ public class PandaMock extends AnimalsMock implements Panda
 	}
 
 	@Override
-	public @NotNull Gene getHiddenGene()
+	@NotNull
+	public Gene getHiddenGene()
 	{
 		return this.hiddenGene;
 	}
@@ -163,16 +178,9 @@ public class PandaMock extends AnimalsMock implements Panda
 	}
 
 	@Override
-	public @NotNull Gene getCombinedGene()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PANDA;
 	}
-
 }

@@ -30,7 +30,8 @@ class TagRegistryTest
 		@Test
 		void givenEntityTypes()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.BLOCKS.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.BLOCKS.getTags();
 			assertNotNull(actual);
 			assertTrue(182 < actual.size());
 		}
@@ -56,7 +57,8 @@ class TagRegistryTest
 		@Test
 		void givenEntityTypes()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.ENTITY_TYPES.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.ENTITY_TYPES.getTags();
 			assertNotNull(actual);
 			assertTrue(35 < actual.size());
 		}
@@ -82,7 +84,8 @@ class TagRegistryTest
 		@Test
 		void givenItems()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.ITEMS.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.ITEMS.getTags();
 			assertNotNull(actual);
 			assertTrue(154 < actual.size());
 		}
@@ -108,7 +111,8 @@ class TagRegistryTest
 		@Test
 		void givenFluids()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.FLUIDS.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.FLUIDS.getTags();
 			assertNotNull(actual);
 			assertEquals(6, actual.size());
 		}
@@ -134,7 +138,8 @@ class TagRegistryTest
 		@Test
 		void givenGameEvents()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.GAME_EVENTS.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.GAME_EVENTS.getTags();
 			assertNotNull(actual);
 			assertEquals(5, actual.size());
 		}
@@ -160,7 +165,8 @@ class TagRegistryTest
 		@Test
 		void givenDamageTypes()
 		{
-			@NotNull Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
+			@NotNull
+			Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
 			assertNotNull(actual);
 			assertEquals(33, actual.size());
 		}

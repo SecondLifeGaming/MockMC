@@ -13,7 +13,8 @@ public class LightDataMock extends BlockDataMock implements Light
 	/**
 	 * Constructs a new {@link LightDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public LightDataMock(@NotNull Material material)
 	{
@@ -21,9 +22,11 @@ public class LightDataMock extends BlockDataMock implements Light
 	}
 
 	/**
-	 * Create a new {@link LightDataMock} based on an existing {@link LightDataMock}.
+	 * Create a new {@link LightDataMock} based on an existing
+	 * {@link LightDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected LightDataMock(@NotNull LightDataMock other)
 	{
@@ -39,7 +42,8 @@ public class LightDataMock extends BlockDataMock implements Light
 	@Override
 	public void setLevel(int level)
 	{
-		Preconditions.checkArgument(level >= this.getMinimumLevel() && level <= this.getMaximumLevel(), "Level should be between %s and %s", this.getMinimumLevel(), this.getMaximumLevel());
+		Preconditions.checkArgument(level >= this.getMinimumLevel() && level <= this.getMaximumLevel(),
+				"Level should be between %s and %s", this.getMinimumLevel(), this.getMaximumLevel());
 		this.set(BlockDataKey.LEVEL, level);
 	}
 
@@ -68,7 +72,8 @@ public class LightDataMock extends BlockDataMock implements Light
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LightDataMock clone()
 	{
 		return new LightDataMock(this);

@@ -46,40 +46,30 @@ public class SerializableMeta implements ConfigurationSerializable
 
 	private static final String TYPE_FIELD = "meta-type";
 
-	private static final ImmutableMap<Class<? extends ItemMetaMock>, String> classMap =  ImmutableMap.<Class<? extends ItemMetaMock>, String>builder()
-			.put(ArmorMetaMock.class, "ARMOR")
-			.put(ArmorStandMetaMock.class, "ARMOR_STAND")
-			.put(BannerMetaMock.class, "BANNER")
-			.put(BlockStateMetaMock.class, "TILE_ENTITY")
-			.put(BookMetaMock.class, "BOOK")
+	private static final ImmutableMap<Class<? extends ItemMetaMock>, String> classMap = ImmutableMap
+			.<Class<? extends ItemMetaMock>, String>builder().put(ArmorMetaMock.class, "ARMOR")
+			.put(ArmorStandMetaMock.class, "ARMOR_STAND").put(BannerMetaMock.class, "BANNER")
+			.put(BlockStateMetaMock.class, "TILE_ENTITY").put(BookMetaMock.class, "BOOK")
 			// .put(BookSignedMetaMock.class, "BOOK_SIGNED")
-			.put(SkullMetaMock.class, "SKULL")
-			.put(LeatherArmorMetaMock.class, "LEATHER_ARMOR")
-			.put(ColorableArmorMetaMock.class, "COLORABLE_ARMOR")
-			.put(MapMetaMock.class, "MAP")
-			.put(PotionMetaMock.class, "POTION")
-			.put(ShieldMetaMock.class, "SHIELD")
-			.put(SpawnEggMetaMock.class, "SPAWN_EGG")
-			.put(EnchantmentStorageMetaMock.class, "ENCHANTED")
-			.put(FireworkMetaMock.class, "FIREWORK")
-			.put(FireworkEffectMetaMock.class, "FIREWORK_EFFECT")
+			.put(SkullMetaMock.class, "SKULL").put(LeatherArmorMetaMock.class, "LEATHER_ARMOR")
+			.put(ColorableArmorMetaMock.class, "COLORABLE_ARMOR").put(MapMetaMock.class, "MAP")
+			.put(PotionMetaMock.class, "POTION").put(ShieldMetaMock.class, "SHIELD")
+			.put(SpawnEggMetaMock.class, "SPAWN_EGG").put(EnchantmentStorageMetaMock.class, "ENCHANTED")
+			.put(FireworkMetaMock.class, "FIREWORK").put(FireworkEffectMetaMock.class, "FIREWORK_EFFECT")
 			.put(KnowledgeBookMetaMock.class, "KNOWLEDGE_BOOK")
 			.put(TropicalFishBucketMetaMock.class, "TROPICAL_FISH_BUCKET")
-			.put(AxolotlBucketMetaMock.class, "AXOLOTL_BUCKET")
-			.put(CrossbowMetaMock.class, "CROSSBOW")
+			.put(AxolotlBucketMetaMock.class, "AXOLOTL_BUCKET").put(CrossbowMetaMock.class, "CROSSBOW")
 			.put(SuspiciousStewMetaMock.class, "SUSPICIOUS_STEW")
 			// .put(EntityTagMetaMock.class, "ENTITY_TAG")
-			.put(CompassMetaMock.class, "COMPASS")
-			.put(BundleMetaMock.class, "BUNDLE")
+			.put(CompassMetaMock.class, "COMPASS").put(BundleMetaMock.class, "BUNDLE")
 			// .put(MusicInstrumentMetaMock.class, "MUSIC_INSTRUMENT")
-			.put(OminousBottleMetaMock.class, "OMINOUS_BOTTLE")
-			.put(ItemMetaMock.class, "UNSPECIFIC")
-			.build();
+			.put(OminousBottleMetaMock.class, "OMINOUS_BOTTLE").put(ItemMetaMock.class, "UNSPECIFIC").build();
 	private static final ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> factoryMap = compileFactoryMap();
 
-	private static ImmutableMap<String, Function<Map<String, Object>,? extends ItemMetaMock>> compileFactoryMap()
+	private static ImmutableMap<String, Function<Map<String, Object>, ? extends ItemMetaMock>> compileFactoryMap()
 	{
-		ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> builder = ImmutableMap.builder();
+		ImmutableMap.Builder<String, Function<Map<String, Object>, ? extends ItemMetaMock>> builder = ImmutableMap
+				.builder();
 
 		for (Map.Entry<Class<? extends ItemMetaMock>, String> mapping : SerializableMeta.classMap.entrySet())
 		{
@@ -94,15 +84,13 @@ public class SerializableMeta implements ConfigurationSerializable
 					try
 					{
 						return (ItemMetaMock) deserializeMethod.invoke(null, a);
-					}
-					catch (IllegalAccessException | InvocationTargetException e)
+					} catch (IllegalAccessException | InvocationTargetException e)
 					{
 						throw new ItemSerializationException("Error while calling deserialize method.", e);
 					}
 				});
 				continue;
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				// If we don't found the method, we can then try the next method
 			}
@@ -116,15 +104,13 @@ public class SerializableMeta implements ConfigurationSerializable
 					try
 					{
 						return (ItemMetaMock) deserializeMethod.invoke(null, a);
-					}
-					catch (IllegalAccessException | InvocationTargetException e)
+					} catch (IllegalAccessException | InvocationTargetException e)
 					{
 						throw new ItemSerializationException("Error while calling valueOf method.", e);
 					}
 				});
 				continue;
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
 				// If we don't found the method, we can then try the next method
 			}
@@ -138,24 +124,24 @@ public class SerializableMeta implements ConfigurationSerializable
 					try
 					{
 						return constructor.newInstance(a);
-					}
-					catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+					} catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
 					{
 						throw new ItemSerializationException("Error while calling deserialize constructor.", e);
 					}
 				});
-			}
-			catch (NoSuchMethodException e)
+			} catch (NoSuchMethodException e)
 			{
-				String message = String.format("""
-						There is no deserialization method available for class %s. Make sure that the class follows the
-						rules of class org.bukkit.configuration.serialization.ConfigurationSerializable.
+				String message = String.format(
+						"""
+								There is no deserialization method available for class %s. Make sure that the class follows the
+								rules of class org.bukkit.configuration.serialization.ConfigurationSerializable.
 
-						To be compliant it should have one of the following:
-						- A static method "deserialize" that accepts a single Map<String, Object> and returns the class instance.
-						- A static method "valueOf" that accepts a single Map<String, Object> and returns the class instance.
-						- A constructor that accepts a single Map<String, Object>.
-						""", clazz.getName());
+								To be compliant it should have one of the following:
+								- A static method "deserialize" that accepts a single Map<String, Object> and returns the class instance.
+								- A static method "valueOf" that accepts a single Map<String, Object> and returns the class instance.
+								- A constructor that accepts a single Map<String, Object>.
+								""",
+						clazz.getName());
 				throw new UnsupportedOperationException(message, e);
 			}
 		}
@@ -207,7 +193,8 @@ public class SerializableMeta implements ConfigurationSerializable
 			return clazz.cast(object);
 		}
 
-		// SPIGOT-7675 - More lenient conversion of floating point numbers from other number types:
+		// SPIGOT-7675 - More lenient conversion of floating point numbers from other
+		// number types:
 		if (clazz == Float.class || clazz == Double.class)
 		{
 			if (object instanceof Number number)
@@ -215,8 +202,7 @@ public class SerializableMeta implements ConfigurationSerializable
 				if (clazz == Float.class)
 				{
 					return clazz.cast(number.floatValue());
-				}
-				else
+				} else
 				{
 					return clazz.cast(number.doubleValue());
 				}
@@ -240,7 +226,7 @@ public class SerializableMeta implements ConfigurationSerializable
 		List<?> list = getObject(List.class, map, field, true);
 		if (list != null && !list.isEmpty())
 		{
-			for(Object object : list)
+			for (Object object : list)
 			{
 				T cast = null;
 				if (clazz.isInstance(object))

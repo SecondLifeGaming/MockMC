@@ -3,7 +3,8 @@ package io.papermc.paper.datacomponent.item.blocksattacks;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "UnstableApiUsage" })
+@SuppressWarnings(
+{"UnstableApiUsage"})
 public class BlocksAttacksBridgeMock implements BlocksAttacksBridge
 {
 

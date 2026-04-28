@@ -44,7 +44,8 @@ class ThrownPotionMockTest
 		potionMeta.addCustomEffect(effect, false);
 		potion.setPotionMeta(potionMeta);
 
-		@NotNull Collection<PotionEffect> actual = potion.getEffects();
+		@NotNull
+		Collection<PotionEffect> actual = potion.getEffects();
 
 		assertEquals(1, actual.size());
 		assertSame(effect, Iterators.get(actual.iterator(), 0));
@@ -87,7 +88,8 @@ class ThrownPotionMockTest
 		ItemStack expected = ItemStack.of(input);
 		potion.setItem(expected);
 
-		@NotNull PotionMeta actual = potion.getPotionMeta();
+		@NotNull
+		PotionMeta actual = potion.getPotionMeta();
 		assertNotNull(actual);
 
 		PotionMeta other = potion.getPotionMeta();
@@ -96,9 +98,8 @@ class ThrownPotionMockTest
 	}
 
 	@ParameterizedTest
-	@EnumSource(value = Material.class, names = {
-			"DIRT", "DIAMOND", "ACACIA_BOAT"
-	})
+	@EnumSource(value = Material.class, names =
+	{"DIRT", "DIAMOND", "ACACIA_BOAT"})
 	void getPotionMeta_GiveInvalidPotion(Material input)
 	{
 		ItemStack expected = ItemStack.of(input);
@@ -108,8 +109,7 @@ class ThrownPotionMockTest
 		{
 			potion.getPotionMeta();
 			fail("Non potion material should not be valid potion");
-		}
-		catch (ClassCastException ignored)
+		} catch (ClassCastException ignored)
 		{
 			// Expected
 		}
@@ -129,7 +129,8 @@ class ThrownPotionMockTest
 		potionMeta.setBasePotionType(PotionType.INVISIBILITY);
 		potion.setPotionMeta(potionMeta);
 
-		@NotNull PotionMeta actual = potion.getPotionMeta();
+		@NotNull
+		PotionMeta actual = potion.getPotionMeta();
 
 		assertEquals(potionMeta, actual);
 		assertNotSame(potionMeta, actual);
@@ -142,10 +143,7 @@ class ThrownPotionMockTest
 	 */
 	public static Stream<Arguments> getThrowablePotionMaterials()
 	{
-		return Stream.of(
-				Arguments.of(Material.SPLASH_POTION),
-				Arguments.of(Material.LINGERING_POTION)
-		);
+		return Stream.of(Arguments.of(Material.SPLASH_POTION), Arguments.of(Material.LINGERING_POTION));
 	}
 
 }

@@ -6,7 +6,6 @@ import org.bukkit.entity.Cat;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,20 +13,30 @@ import java.util.UUID;
  *
  * @see TameableAnimalMock
  */
-public class CatMock extends TameableAnimalMock implements Cat
+public class CatMock extends TameableAnimalMock
+		implements
+			Cat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CatBaseMock
 {
 
 	private SoundVariant soundVariant = SoundVariant.CLASSIC;
+
 	private Type type = Type.CALICO;
+
 	private DyeColor collarColour = DyeColor.RED;
+
 	private boolean isLyingDown = false;
+
 	private boolean isHeadUp = false;
 
 	/**
-	 * Constructs a new {@link CatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CatMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -35,7 +44,8 @@ public class CatMock extends TameableAnimalMock implements Cat
 	}
 
 	@Override
-	public @NotNull Type getCatType()
+	@NotNull
+	public Type getCatType()
 	{
 		return this.type;
 	}
@@ -48,7 +58,8 @@ public class CatMock extends TameableAnimalMock implements Cat
 	}
 
 	@Override
-	public @NotNull SoundVariant getSoundVariant()
+	@NotNull
+	public SoundVariant getSoundVariant()
 	{
 		return this.soundVariant;
 	}
@@ -61,7 +72,8 @@ public class CatMock extends TameableAnimalMock implements Cat
 	}
 
 	@Override
-	public @NotNull DyeColor getCollarColor()
+	@NotNull
+	public DyeColor getCollarColor()
 	{
 		return this.collarColour;
 	}
@@ -102,5 +114,4 @@ public class CatMock extends TameableAnimalMock implements Cat
 	{
 		return EntityType.CAT;
 	}
-
 }

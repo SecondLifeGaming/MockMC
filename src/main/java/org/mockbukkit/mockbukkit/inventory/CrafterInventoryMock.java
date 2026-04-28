@@ -13,13 +13,17 @@ import org.jetbrains.annotations.Nullable;
  * @see InventoryMock
  * @see InventoryType#CRAFTER
  */
-public class CrafterInventoryMock extends InventoryMock implements CrafterInventory
+public class CrafterInventoryMock extends InventoryMock
+		implements
+			CrafterInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.CrafterInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link CrafterInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 * @see InventoryMock#InventoryMock(InventoryHolder, InventoryType)
 	 */
 	public CrafterInventoryMock(@Nullable InventoryHolder holder)
@@ -38,5 +42,4 @@ public class CrafterInventoryMock extends InventoryMock implements CrafterInvent
 	{
 		return new CrafterInventoryMock(this);
 	}
-
 }

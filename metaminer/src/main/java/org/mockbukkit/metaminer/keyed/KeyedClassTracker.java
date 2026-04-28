@@ -6,13 +6,29 @@ import org.bukkit.Keyed;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class KeyedClassTracker
 {
 
-	public static final Map<RegistryKey<? extends Keyed>, Class<?>> CLASS_REGISTRY_KEY_RELATION = loadClassRegistryKeyRelation();
+	private KeyedClassTracker()
+	{
+		throw new UnsupportedOperationException("Utility class");
+	}
+
+	private static final Map<RegistryKey<? extends Keyed>, Class<?>> CLASS_REGISTRY_KEY_RELATION = loadClassRegistryKeyRelation();
+
+	/**
+	 * Returns the relation between registry keys and their classes.
+	 *
+	 * @return The relation.
+	 */
+	public static Map<RegistryKey<? extends Keyed>, Class<?>> getClassRegistryKeyRelation()
+	{
+		return CLASS_REGISTRY_KEY_RELATION;
+	}
 
 	private static Map<RegistryKey<? extends Keyed>, Class<?>> loadClassRegistryKeyRelation()
 	{
@@ -25,16 +41,17 @@ public class KeyedClassTracker
 				final Class<?> legacyType = GenericTypeReflector.erase(((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
 				try
 				{
+					@SuppressWarnings("unchecked")
 					RegistryKey<? extends Keyed> registryKey = (RegistryKey<? extends Keyed>) field.get(null);
 					output.put(registryKey, legacyType);
 				}
 				catch (IllegalAccessException e)
 				{
-					throw new RuntimeException(e);
+					throw new IllegalStateException(e);
 				}
 			}
 		}
-		return output;
+		return Collections.unmodifiableMap(output);
 	}
 
 }

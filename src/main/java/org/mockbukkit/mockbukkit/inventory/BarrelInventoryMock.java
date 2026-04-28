@@ -17,7 +17,8 @@ public class BarrelInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link BarrelInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public BarrelInventoryMock(InventoryHolder holder)
 	{

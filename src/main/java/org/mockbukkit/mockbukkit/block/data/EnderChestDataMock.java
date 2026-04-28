@@ -14,7 +14,8 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public EnderChestDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	}
 
 	/**
-	 * Create a new {@link EnderChestDataMock} based on an existing {@link EnderChestDataMock}.
+	 * Create a new {@link EnderChestDataMock} based on an existing
+	 * {@link EnderChestDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected EnderChestDataMock(@NotNull EnderChestDataMock other)
 	{
@@ -63,7 +66,8 @@ public class EnderChestDataMock extends BlockDataMock implements EnderChest
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull EnderChestDataMock clone()
 	{
 		return new EnderChestDataMock(this);

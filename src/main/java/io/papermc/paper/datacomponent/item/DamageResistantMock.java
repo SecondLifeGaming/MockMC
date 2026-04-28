@@ -5,7 +5,8 @@ import org.bukkit.damage.DamageType;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record DamageResistantMock(RegistryKeySet<DamageType> types) implements DamageResistant
 {
 

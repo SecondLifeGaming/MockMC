@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class LivingEntitySimulation
 {
 
@@ -23,18 +25,27 @@ public class LivingEntitySimulation
 	/**
 	 * Simulate damage to this entity and throw an event.
 	 *
-	 * @param amount <p>The amount of damage to be done</p>
-	 * @param source <p>The damager</p>
-	 * @return <p>The EntityDamageEvent that got thrown</p>
+	 * @param amount
+	 *            <p>
+	 *            The amount of damage to be done
+	 *            </p>
+	 * @param source
+	 *            <p>
+	 *            The damager
+	 *            </p>
+	 * @return
+	 *         <p>
+	 *         The EntityDamageEvent that got thrown
+	 *         </p>
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
 		EntityDamageEvent event;
 		if (source.getDirectEntity() != null)
 		{
-			event = new EntityDamageByEntityEvent(source.getDirectEntity(), livingEntityMock, EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
-		}
-		else
+			event = new EntityDamageByEntityEvent(source.getDirectEntity(), livingEntityMock,
+					EntityDamageEvent.DamageCause.ENTITY_ATTACK, source, amount);
+		} else
 		{
 			event = new EntityDamageEvent(livingEntityMock, EntityDamageEvent.DamageCause.CUSTOM, source, amount);
 		}
@@ -51,9 +62,18 @@ public class LivingEntitySimulation
 	/**
 	 * Simulate damage to this entity and throw an event
 	 *
-	 * @param amount <p>The amount of damage to be done</p>
-	 * @param source <p>The damager</p>
-	 * @return <p>The event that got thrown</p>
+	 * @param amount
+	 *            <p>
+	 *            The amount of damage to be done
+	 *            </p>
+	 * @param source
+	 *            <p>
+	 *            The damager
+	 *            </p>
+	 * @return
+	 *         <p>
+	 *         The event that got thrown
+	 *         </p>
 	 */
 	public EntityDamageEvent simulateDamage(double amount, @Nullable Entity source)
 	{
@@ -61,8 +81,7 @@ public class LivingEntitySimulation
 		if (source != null)
 		{
 			damageType = source instanceof HumanEntity ? DamageType.PLAYER_ATTACK : DamageType.MOB_ATTACK;
-		}
-		else
+		} else
 		{
 			damageType = DamageType.GENERIC;
 		}

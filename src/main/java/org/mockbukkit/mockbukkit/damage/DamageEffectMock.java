@@ -4,7 +4,10 @@ import org.bukkit.Sound;
 import org.bukkit.damage.DamageEffect;
 import org.jetbrains.annotations.NotNull;
 
-public class DamageEffectMock implements DamageEffect
+public class DamageEffectMock
+		implements
+			DamageEffect,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.damage.DamageEffectBaseMock
 {
 
 	private final Sound sound;
@@ -15,9 +18,9 @@ public class DamageEffectMock implements DamageEffect
 	}
 
 	@Override
-	public @NotNull Sound getSound()
+	@NotNull
+	public Sound getSound()
 	{
 		return sound;
 	}
-
 }

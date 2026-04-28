@@ -1,15 +1,14 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.UseCooldownComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -18,13 +17,18 @@ import java.util.Map;
 @EqualsAndHashCode
 @SerializableAs("UseCooldown")
 @SuppressWarnings("UnstableApiUsage")
-public class UseCooldownComponentMock implements UseCooldownComponent
+public class UseCooldownComponentMock
+		implements
+			UseCooldownComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.UseCooldownComponentBaseMock
 {
-	private @Nullable NamespacedKey cooldownGroup;
+
+	@Nullable
+	private NamespacedKey cooldownGroup;
 
 	private float cooldownSeconds;
 
-    @Override
+	@Override
 	public float getCooldownSeconds()
 	{
 		return this.cooldownSeconds;
@@ -37,7 +41,8 @@ public class UseCooldownComponentMock implements UseCooldownComponent
 	}
 
 	@Override
-	public @Nullable NamespacedKey getCooldownGroup()
+	@Nullable
+	public NamespacedKey getCooldownGroup()
 	{
 		return this.cooldownGroup;
 	}
@@ -57,7 +62,6 @@ public class UseCooldownComponentMock implements UseCooldownComponent
 		{
 			result.put("cooldown-group", this.getCooldownGroup().toString());
 		}
-
 		return result;
 	}
 
@@ -65,18 +69,13 @@ public class UseCooldownComponentMock implements UseCooldownComponent
 	{
 		Float seconds = SerializableMeta.getObject(Float.class, map, "seconds", false);
 		String cooldownGroup = SerializableMeta.getString(map, "cooldown-group", true);
-
 		Preconditions.checkNotNull(seconds, "seconds must be set");
-
-		return UseCooldownComponentMock.builder()
-				.cooldownSeconds(seconds)
-				.cooldownGroup(cooldownGroup != null ? NamespacedKey.fromString(cooldownGroup) : null)
-				.build();
+		return UseCooldownComponentMock.builder().cooldownSeconds(seconds)
+				.cooldownGroup(cooldownGroup != null ? NamespacedKey.fromString(cooldownGroup) : null).build();
 	}
 
 	public static UseCooldownComponent useDefault()
 	{
 		return builder().build();
 	}
-
 }

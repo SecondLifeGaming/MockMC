@@ -16,7 +16,8 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public BisectedDataMock(@NotNull Material material)
 	{
@@ -24,9 +25,11 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	}
 
 	/**
-	 * Create a new {@link BisectedDataMock} based on an existing {@link BisectedDataMock}.
+	 * Create a new {@link BisectedDataMock} based on an existing
+	 * {@link BisectedDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected BisectedDataMock(BisectedDataMock other)
 	{
@@ -46,7 +49,8 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BisectedDataMock clone()
 	{
 		return new BisectedDataMock(this);
@@ -55,7 +59,8 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	/**
 	 * Convert the half into their respective representation.
 	 *
-	 * @param half The original half
+	 * @param half
+	 *            The original half
 	 *
 	 * @return The string representation.
 	 */
@@ -71,7 +76,8 @@ public class BisectedDataMock extends BlockDataMock implements Bisected
 	/**
 	 * Convert the half from a string representation.
 	 *
-	 * @param half The half as string.
+	 * @param half
+	 *            The half as string.
 	 *
 	 * @return The half converted
 	 */

@@ -32,6 +32,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MushroomCowMockTest
 {
@@ -71,10 +73,9 @@ class MushroomCowMockTest
 	{
 		mushroom.shear();
 
-		soundListener.assertSoundHeard(Sound.ENTITY_MOOSHROOM_SHEAR, (experience) ->
-				experience.getLocation().equals(mushroom.getLocation())
-						&& experience.getCategory() == SoundCategory.PLAYERS
-						&& experience.getPitch() == 1.0F
+		soundListener.assertSoundHeard(Sound.ENTITY_MOOSHROOM_SHEAR,
+				(experience) -> experience.getLocation().equals(mushroom.getLocation())
+						&& experience.getCategory() == SoundCategory.PLAYERS && experience.getPitch() == 1.0F
 						&& experience.getVolume() == 1.0F);
 	}
 
@@ -173,10 +174,11 @@ class MushroomCowMockTest
 		mushroom.shear();
 
 		Cow cow = List.copyOf(mushroom.getWorld().getEntitiesByClass(Cow.class)).getFirst();
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityTransformEvent.class, (e) -> e.getEntity().equals(mushroom)
-				&& e.getTransformedEntities().size() == 1
-				&& e.getTransformedEntity().equals(cow)
-				&& e.getTransformReason() == EntityTransformEvent.TransformReason.SHEARED));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(EntityTransformEvent.class,
+						(e) -> e.getEntity().equals(mushroom) && e.getTransformedEntities().size() == 1
+								&& e.getTransformedEntity().equals(cow)
+								&& e.getTransformReason() == EntityTransformEvent.TransformReason.SHEARED));
 	}
 
 	@Test
@@ -211,7 +213,8 @@ class MushroomCowMockTest
 		for (Item item : items)
 		{
 			assertEquals(1, item.getItemStack().getAmount());
-			assertEquals(variant == Variant.RED ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM, item.getItemStack().getType());
+			assertEquals(variant == Variant.RED ? Material.RED_MUSHROOM : Material.BROWN_MUSHROOM,
+					item.getItemStack().getType());
 		}
 	}
 

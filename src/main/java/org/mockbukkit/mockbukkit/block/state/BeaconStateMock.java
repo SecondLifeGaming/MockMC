@@ -16,13 +16,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Mock implementation of a {@link Beacon}.
  *
  * @see TileStateMock
  */
-public class BeaconStateMock extends LockableTileStateMock implements Beacon
+public class BeaconStateMock extends LockableTileStateMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BeaconBaseMock
 {
 
 	private @Nullable Component customName;
@@ -35,7 +38,8 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	 * Constructs a new {@link BeaconStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#BARREL}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BeaconStateMock(@NotNull Material material)
 	{
@@ -44,10 +48,11 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	}
 
 	/**
-	 * Constructs a new {@link BeaconStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#BEACON}
+	 * Constructs a new {@link BeaconStateMock} for the provided {@link Block}. Only
+	 * supports {@link Material#BEACON}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BeaconStateMock(@NotNull Block block)
 	{
@@ -56,9 +61,11 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	}
 
 	/**
-	 * Constructs a new {@link BeaconStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BeaconStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BeaconStateMock(@NotNull BeaconStateMock state)
 	{
@@ -80,12 +87,8 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", customName=" + customName +
-				", tier=" + tier +
-				", primaryEffect=" + primaryEffect +
-				", secondaryEffect=" + secondaryEffect +
-				", effectRange=" + effectRange;
+		return super.toStringInternal() + ", customName=" + customName + ", tier=" + tier + ", primaryEffect="
+				+ primaryEffect + ", secondaryEffect=" + secondaryEffect + ", effectRange=" + effectRange;
 	}
 
 	@Override
@@ -101,14 +104,13 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 		{
 			throw new IllegalStateException("Cannot get entities in range of a beacon that is not placed");
 		}
-		return getWorld().getLivingEntities().stream()
-				.filter(Player.class::isInstance)
-				.filter(p -> p.getLocation().distance(getLocation()) < getEffectRange())
-				.toList();
+		return getWorld().getLivingEntities().stream().filter(Player.class::isInstance)
+				.filter(p -> p.getLocation().distance(getLocation()) < getEffectRange()).toList();
 	}
 
 	/**
-	 * Calculates the Beacon's tier based off the blocks below it, just as in vanilla.
+	 * Calculates the Beacon's tier based off the blocks below it, just as in
+	 * vanilla.
 	 */
 	public void updateTier()
 	{
@@ -116,14 +118,14 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	}
 
 	/**
-	 * Sets the tier of the Beacon.
-	 * Clamped between 1-4 (inclusive).
+	 * Sets the tier of the Beacon. Clamped between 1-4 (inclusive).
 	 *
-	 * @param tier The tier to set.
+	 * @param tier
+	 *            The tier to set.
 	 */
 	public void setTier(int tier)
 	{
-		this.tier = Math.max(1, Math.min(4, tier));
+		this.tier = Math.clamp(tier, 1, 4);
 	}
 
 	@Override
@@ -222,7 +224,9 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 			{
 				for (int z = getZ() - yOffset; z <= getZ() + yOffset; ++z)
 				{
-					if (!Bukkit.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("beacon_base_blocks"), Material.class).isTagged(getWorld().getBlockAt(x, y, z).getType()))
+					if (!Bukkit
+							.getTag(Tag.REGISTRY_BLOCKS, NamespacedKey.minecraft("beacon_base_blocks"), Material.class)
+							.isTagged(getWorld().getBlockAt(x, y, z).getType()))
 					{
 						return level;
 					}
@@ -263,7 +267,35 @@ public class BeaconStateMock extends LockableTileStateMock implements Beacon
 	 */
 	private boolean hasSecondaryEffect()
 	{
-		return this.getTier() >= 4 && this.primaryEffect != null && !this.primaryEffect.equals(this.secondaryEffect) && this.secondaryEffect != null;
+		return this.getTier() >= 4 && this.primaryEffect != null && !this.primaryEffect.equals(this.secondaryEffect)
+				&& this.secondaryEffect != null;
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof BeaconStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		return tier == that.tier && Double.compare(effectRange, that.effectRange) == 0
+				&& Objects.equals(customName, that.customName) && Objects.equals(primaryEffect, that.primaryEffect)
+				&& Objects.equals(secondaryEffect, that.secondaryEffect);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), customName, tier, primaryEffect, secondaryEffect, effectRange);
 	}
 
 }

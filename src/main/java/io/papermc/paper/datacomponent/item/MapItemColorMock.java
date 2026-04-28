@@ -5,7 +5,8 @@ import org.bukkit.Color;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class MapItemColorMock implements MapItemColor
 {
 

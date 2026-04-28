@@ -30,11 +30,11 @@ public class BubbleColumnDataMock extends BlockDataMock implements BubbleColumn
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BubbleColumnDataMock clone()
 	{
 		return new BubbleColumnDataMock(this);
 	}
-
 
 }

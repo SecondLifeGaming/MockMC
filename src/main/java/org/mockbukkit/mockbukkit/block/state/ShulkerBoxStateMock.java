@@ -6,32 +6,34 @@ import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.ShulkerBox;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 import org.mockbukkit.mockbukkit.inventory.ShulkerBoxInventoryMock;
-
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Mock implementation of a {@link ShulkerBox}.
  *
  * @see ContainerStateMock
  */
-public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBox
+public class ShulkerBoxStateMock extends ContainerStateMock
+		implements
+			ShulkerBox,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.ShulkerBoxBaseMock
 {
 
-	private final @Nullable DyeColor color;
+	@Nullable
+	private final DyeColor color;
+
 	private boolean isOpen = false;
 
 	/**
-	 * Constructs a new {@link ShulkerBoxStateMock} for the provided {@link Material}.
-	 * Only supports materials in {@link Tag#SHULKER_BOXES}
+	 * Constructs a new {@link ShulkerBoxStateMock} for the provided
+	 * {@link Material}. Only supports materials in {@link Tag#SHULKER_BOXES}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public ShulkerBoxStateMock(@NotNull Material material)
 	{
@@ -44,7 +46,8 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	 * Constructs a new {@link ShulkerBoxStateMock} for the provided {@link Block}.
 	 * Only supports materials in {@link Tag#SHULKER_BOXES}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected ShulkerBoxStateMock(@NotNull Block block)
 	{
@@ -54,9 +57,11 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	/**
-	 * Constructs a new {@link ShulkerBoxStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link ShulkerBoxStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected ShulkerBoxStateMock(@NotNull ShulkerBoxStateMock state)
 	{
@@ -93,41 +98,6 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	@Override
-	public void setLootTable(LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable lootTable, long l)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void open()
 	{
 		isOpen = true;
@@ -146,19 +116,22 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	}
 
 	@Override
-	protected @NotNull InventoryMock createInventory()
+	@NotNull
+	protected InventoryMock createInventory()
 	{
 		return new ShulkerBoxInventoryMock(this);
 	}
 
 	@Override
-	public @NotNull ShulkerBoxStateMock getSnapshot()
+	@NotNull
+	public ShulkerBoxStateMock getSnapshot()
 	{
 		return new ShulkerBoxStateMock(this);
 	}
 
 	@Override
-	public @NotNull ShulkerBoxStateMock copy()
+	@NotNull
+	public ShulkerBoxStateMock copy()
 	{
 		return new ShulkerBoxStateMock(this);
 	}
@@ -173,78 +146,7 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 		{
 			throw new NullPointerException("This Shulker Box has not been dyed");
 		}
-
 		return color;
-	}
-
-	@Override
-	public boolean isRefillEnabled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasBeenFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canPlayerLoot(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPlayerLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Long getLastLooted(@NotNull UUID player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasPendingRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getLastFilled()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getNextRefill()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long setNextRefill(long refillAt)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -274,9 +176,6 @@ public class ShulkerBoxStateMock extends ContainerStateMock implements ShulkerBo
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", color=" + color +
-				", isOpen=" + isOpen;
+		return super.toStringInternal() + ", color=" + color + ", isOpen=" + isOpen;
 	}
-
 }

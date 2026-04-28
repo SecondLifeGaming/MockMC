@@ -33,7 +33,8 @@ public class FireDataMock extends BlockDataMock implements Fire
 	@Override
 	public void setAge(int age)
 	{
-		Preconditions.checkArgument(age >= 0 && age <= this.getMaximumAge(), "The age must be between 0 and %s", this.getMaximumAge());
+		Preconditions.checkArgument(age >= 0 && age <= this.getMaximumAge(), "The age must be between 0 and %s",
+				this.getMaximumAge());
 		this.set(AGE_KEY, age);
 	}
 
@@ -47,10 +48,7 @@ public class FireDataMock extends BlockDataMock implements Fire
 	public boolean hasFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		return MultipleFacingDataMock.toKey(face)
-				.map(super::get)
-				.map(Boolean.class::cast)
-				.orElse(false);
+		return MultipleFacingDataMock.toKey(face).map(super::get).map(Boolean.class::cast).orElse(false);
 	}
 
 	@Override
@@ -63,9 +61,7 @@ public class FireDataMock extends BlockDataMock implements Fire
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return getAllowedFaces().stream()
-				.filter(this::hasFace)
-				.collect(Collectors.toSet());
+		return getAllowedFaces().stream().filter(this::hasFace).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -75,7 +71,8 @@ public class FireDataMock extends BlockDataMock implements Fire
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull FireDataMock clone()
 	{
 		return new FireDataMock(this);

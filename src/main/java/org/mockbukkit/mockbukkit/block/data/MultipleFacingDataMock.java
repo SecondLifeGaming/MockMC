@@ -51,7 +51,8 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 	}
 
 	@Override
-	@SuppressWarnings({ "MethodDoesntCallSuperMethod", "java:S2975", "java:S1182" })
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull MultipleFacingDataMock clone()
 	{
 		return new MultipleFacingDataMock(this);
@@ -68,7 +69,8 @@ public class MultipleFacingDataMock extends BlockDataMock implements MultipleFac
 			case WEST -> Optional.of(BlockDataKey.WEST);
 			case UP -> Optional.of(BlockDataKey.UP);
 			case DOWN -> Optional.of(BlockDataKey.DOWN);
-			default -> throw new UnsupportedOperationException(String.format("Unsupported block facing: %s", blockFace));
+			default ->
+				throw new UnsupportedOperationException(String.format("Unsupported block facing: %s", blockFace));
 		};
 	}
 

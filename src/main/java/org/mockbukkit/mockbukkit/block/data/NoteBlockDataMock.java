@@ -59,7 +59,8 @@ public class NoteBlockDataMock extends BlockDataMock implements NoteBlock
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull NoteBlockDataMock clone()
 	{
 		return new NoteBlockDataMock(this);

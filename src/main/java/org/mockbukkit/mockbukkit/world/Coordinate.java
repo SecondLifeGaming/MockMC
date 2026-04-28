@@ -26,9 +26,12 @@ public class Coordinate
 	/**
 	 * Creates a new coordinate object with a specified (x, y, z).
 	 *
-	 * @param x The X coordinate to set.
-	 * @param y The Y coordinate to set.
-	 * @param z The Z coordinate to set.
+	 * @param x
+	 *            The X coordinate to set.
+	 * @param y
+	 *            The Y coordinate to set.
+	 * @param z
+	 *            The Z coordinate to set.
 	 */
 	public Coordinate(int x, int y, int z)
 	{
@@ -79,8 +82,7 @@ public class Coordinate
 		if (obj instanceof Coordinate c)
 		{
 			return x == c.x && y == c.y && z == c.z;
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -89,11 +91,7 @@ public class Coordinate
 	@Override
 	public String toString()
 	{
-		return "Coordinate{" +
-				"x=" + x +
-				", y=" + y +
-				", z=" + z +
-				'}';
+		return "Coordinate{" + "x=" + x + ", y=" + y + ", z=" + z + '}';
 	}
 
 }

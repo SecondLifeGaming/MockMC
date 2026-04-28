@@ -23,8 +23,10 @@ class PlainTextComponentProviderImplTest
 	@Test
 	void plainText_argumentTranslatableSerialization()
 	{
-		TranslatableComponent translatableComponent = Component.translatable("argument.entity.selector.unknown", Component.text("@h"));
-		assertEquals("Unknown selector type '@h'", PlainTextComponentSerializer.plainText().serialize(translatableComponent));
+		TranslatableComponent translatableComponent = Component.translatable("argument.entity.selector.unknown",
+				Component.text("@h"));
+		assertEquals("Unknown selector type '@h'",
+				PlainTextComponentSerializer.plainText().serialize(translatableComponent));
 	}
 
 }

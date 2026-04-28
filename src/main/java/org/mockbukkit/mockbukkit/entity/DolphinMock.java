@@ -6,21 +6,28 @@ import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class DolphinMock extends AgeableMock implements Dolphin
+public class DolphinMock extends AgeableMock
+		implements
+			Dolphin,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.DolphinBaseMock
 {
 
 	private int moistness = 2400;
+
 	private boolean hasFish = false;
+
 	private Location treasureLocation = new Location(null, 0, 0, 0);
 
 	/**
-	 * Constructs a new {@link DolphinMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link DolphinMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public DolphinMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -52,7 +59,8 @@ public class DolphinMock extends AgeableMock implements Dolphin
 	}
 
 	@Override
-	public @NotNull Location getTreasureLocation()
+	@NotNull
+	public Location getTreasureLocation()
 	{
 		return this.treasureLocation;
 	}
@@ -65,9 +73,9 @@ public class DolphinMock extends AgeableMock implements Dolphin
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.DOLPHIN;
 	}
-
 }

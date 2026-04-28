@@ -5,15 +5,20 @@ import org.bukkit.persistence.PersistentDataHolder;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * This is a mock of a {@link PersistentDataHolder}. This implementation uses the
- * {@link PersistentDataContainerMock} for its {@link PersistentDataContainer} implementation.
+ * This is a mock of a {@link PersistentDataHolder}. This implementation uses
+ * the {@link PersistentDataContainerMock} for its
+ * {@link PersistentDataContainer} implementation.
  *
  * @author md5sha256
  */
-public class PersistentDataHolderMock implements PersistentDataHolder
+public class PersistentDataHolderMock
+		implements
+			PersistentDataHolder,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.persistence.PersistentDataHolderBaseMock
 {
 
-	private final @NotNull PersistentDataContainer container;
+	@NotNull
+	private final PersistentDataContainer container;
 
 	/**
 	 * Constructs a new {@link PersistentDataHolderMock}.
@@ -24,9 +29,9 @@ public class PersistentDataHolderMock implements PersistentDataHolder
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	@NotNull
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return container;
 	}
-
 }

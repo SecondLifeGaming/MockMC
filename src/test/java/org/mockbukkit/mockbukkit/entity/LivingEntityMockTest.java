@@ -176,7 +176,8 @@ class LivingEntityMockTest
 		Entity armorStand = world.spawnEntity(new Location(world, 0, 0, 0), EntityType.ARMOR_STAND);
 
 		assertTrue(livingEntity.setLeashHolder(armorStand));
-		// Even though setLeashHolder returns true, isLeashed() returns false for non-Mob holders
+		// Even though setLeashHolder returns true, isLeashed() returns false for
+		// non-Mob holders
 		assertFalse(livingEntity.isLeashed());
 	}
 
@@ -251,7 +252,8 @@ class LivingEntityMockTest
 		// Tick the server enough times to expire the original effect
 		server.getScheduler().performTicks(150);
 
-		// The weaker amplifier effect should NOT be active - it was never added to the queue
+		// The weaker amplifier effect should NOT be active - it was never added to the
+		// queue
 		PotionEffect afterExpiry = livingEntity.getPotionEffect(PotionEffectType.REGENERATION);
 		assertNull(afterExpiry); // No effect should remain, proving weaker effect wasn't queued
 	}
@@ -336,10 +338,13 @@ class LivingEntityMockTest
 		PotionEffect laterEffect = new PotionEffect(PotionEffectType.REGENERATION, 10, 3);
 		livingEntity.addPotionEffect(initialEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		EntityPotionEffectEvent event = livingEntity.addPotionEffect(laterEffect, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEntityPotionEffectEvent(event, initialEffect, laterEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+		assertEntityPotionEffectEvent(event, initialEffect, laterEffect, EntityPotionEffectEvent.Cause.PLUGIN,
+				EntityPotionEffectEvent.Action.CHANGED, true);
 	}
 
-	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect, PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
+	private static void assertEntityPotionEffectEvent(EntityPotionEffectEvent event, PotionEffect oldEffect,
+			PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action,
+			boolean override)
 	{
 		assertEquals(event.getOldEffect(), oldEffect);
 		assertEquals(event.getNewEffect(), newEffect);
@@ -456,7 +461,8 @@ class LivingEntityMockTest
 	@Test
 	void launchProjectile_GivenProjectileAsArgument()
 	{
-		@NotNull WorldMock world = server.addSimpleWorld("world");
+		@NotNull
+		WorldMock world = server.addSimpleWorld("world");
 
 		Location newLocation = livingEntity.getLocation();
 		newLocation.setWorld(world);
@@ -473,7 +479,8 @@ class LivingEntityMockTest
 		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
-		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		@NotNull
+		Vector actualVelocity = snowBall.getVelocity();
 		assertNotNull(actualVelocity);
 		assertEquals(0, actualVelocity.getX());
 		assertEquals(0, actualVelocity.getY());
@@ -483,7 +490,8 @@ class LivingEntityMockTest
 	@Test
 	void launchProjectile_GivenProjectileAndVelocityAsArgument()
 	{
-		@NotNull WorldMock world = server.addSimpleWorld("world");
+		@NotNull
+		WorldMock world = server.addSimpleWorld("world");
 
 		Location newLocation = livingEntity.getLocation();
 		newLocation.setWorld(world);
@@ -502,7 +510,8 @@ class LivingEntityMockTest
 		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
-		@NotNull Vector actualVelocity = snowBall.getVelocity();
+		@NotNull
+		Vector actualVelocity = snowBall.getVelocity();
 		assertNotNull(actualVelocity);
 		assertEquals(3, actualVelocity.getX());
 		assertEquals(2, actualVelocity.getY());
@@ -510,29 +519,15 @@ class LivingEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(classes = {
-			Arrow.class,
-			DragonFireball.class,
-			Egg.class,
-			EnderPearl.class,
-			Firework.class,
-			FishHook.class,
-			LargeFireball.class,
-			LingeringPotion.class,
-			LlamaSpit.class,
-			ShulkerBullet.class,
-			SmallFireball.class,
-			Snowball.class,
-			SpectralArrow.class,
-			ThrownExpBottle.class,
-			ThrownPotion.class,
-			Trident.class,
-			WindCharge.class,
-			WitherSkull.class,
-	})
+	@ValueSource(classes =
+	{Arrow.class, DragonFireball.class, Egg.class, EnderPearl.class, Firework.class, FishHook.class,
+			LargeFireball.class, LingeringPotion.class, LlamaSpit.class, ShulkerBullet.class, SmallFireball.class,
+			Snowball.class, SpectralArrow.class, ThrownExpBottle.class, ThrownPotion.class, Trident.class,
+			WindCharge.class, WitherSkull.class,})
 	<T extends Projectile> void launchProjectile_GivenProjectileAndVelocityAndFunctionAsArgument(Class<T> tClass)
 	{
-		@NotNull WorldMock world = server.addSimpleWorld("world");
+		@NotNull
+		WorldMock world = server.addSimpleWorld("world");
 
 		Location newLocation = livingEntity.getLocation();
 		newLocation.setWorld(world);
@@ -552,7 +547,8 @@ class LivingEntityMockTest
 		assertEquals(0, spawnLocation.getZ());
 
 		// Check velocity
-		@NotNull Vector actualVelocity = projectile.getVelocity();
+		@NotNull
+		Vector actualVelocity = projectile.getVelocity();
 		assertNotNull(actualVelocity);
 		assertEquals(3, actualVelocity.getX());
 		assertEquals(2, actualVelocity.getY());
@@ -769,7 +765,8 @@ class LivingEntityMockTest
 	@Test
 	void testStartUsingItemOffHand()
 	{
-		livingEntity.getEquipment().setItemInOffHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.GOLDEN_APPLE));
+		livingEntity.getEquipment()
+				.setItemInOffHand(new org.bukkit.inventory.ItemStack(org.bukkit.Material.GOLDEN_APPLE));
 		livingEntity.startUsingItem(EquipmentSlot.OFF_HAND);
 
 		assertTrue(livingEntity.hasActiveItem());

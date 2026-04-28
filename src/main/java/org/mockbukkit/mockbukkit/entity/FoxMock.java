@@ -7,7 +7,6 @@ import org.bukkit.entity.Fox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,25 +14,40 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class FoxMock extends AnimalsMock implements Fox
+public class FoxMock extends AnimalsMock
+		implements
+			Fox,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FoxBaseMock
 {
 
 	private Type foxType = Type.RED;
+
 	private boolean crouching = false;
+
 	private boolean sleeping = false;
+
 	private boolean facePlanted = false;
+
 	private AnimalTamer firstTrustedPlayer = null;
+
 	private AnimalTamer secondTrustedPlayer = null;
+
 	private boolean interested = false;
+
 	private boolean leaping = false;
+
 	private boolean defending = false;
+
 	private boolean sitting = false;
 
 	/**
-	 * Constructs a new {@link FoxMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FoxMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public FoxMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -41,7 +55,8 @@ public class FoxMock extends AnimalsMock implements Fox
 	}
 
 	@Override
-	public @NotNull Type getFoxType()
+	@NotNull
+	public Type getFoxType()
 	{
 		return this.foxType;
 	}
@@ -78,7 +93,8 @@ public class FoxMock extends AnimalsMock implements Fox
 	}
 
 	@Override
-	public @Nullable AnimalTamer getFirstTrustedPlayer()
+	@Nullable
+	public AnimalTamer getFirstTrustedPlayer()
 	{
 		return this.firstTrustedPlayer;
 	}
@@ -90,7 +106,8 @@ public class FoxMock extends AnimalsMock implements Fox
 	}
 
 	@Override
-	public @Nullable AnimalTamer getSecondTrustedPlayer()
+	@Nullable
+	public AnimalTamer getSecondTrustedPlayer()
 	{
 		return this.secondTrustedPlayer;
 	}
@@ -162,9 +179,9 @@ public class FoxMock extends AnimalsMock implements Fox
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FOX;
 	}
-
 }

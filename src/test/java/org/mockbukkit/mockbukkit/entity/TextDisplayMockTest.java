@@ -37,12 +37,8 @@ class TextDisplayMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-				"Hello!",
-				"&4Hello!",
-				"This is\nan example\nwith newline",
-				"&aH&be&cl&dl&eo&f!",
-		})
+		@ValueSource(strings =
+		{"Hello!", "&4Hello!", "This is\nan example\nwith newline", "&aH&be&cl&dl&eo&f!",})
 		void givenValidStringValues(String expected)
 		{
 			textDisplay.setText(expected);
@@ -68,12 +64,8 @@ class TextDisplayMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-				"Hello!",
-				"&4Hello!",
-				"This is\nan example\nwith newline",
-				"&aH&be&cl&dl&eo&f!",
-		})
+		@ValueSource(strings =
+		{"Hello!", "&4Hello!", "This is\nan example\nwith newline", "&aH&be&cl&dl&eo&f!",})
 		void givenValidValues(String expected)
 		{
 			TextComponent expectedComponent = LegacyComponentSerializer.legacySection().deserializeOrNull(expected);
@@ -110,7 +102,8 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3, 4, 5, 10, 25, 50, 75, 100, 200 })
+		@ValueSource(ints =
+		{1, 2, 3, 4, 5, 10, 25, 50, 75, 100, 200})
 		void givenPossibleLineWidthValues(int expected)
 		{
 			textDisplay.setLineWidth(expected);
@@ -142,26 +135,9 @@ class TextDisplayMockTest
 
 		private static Stream<Color> getColors()
 		{
-			return Stream.of(
-					Color.AQUA,
-					Color.BLACK,
-					Color.BLUE,
-					Color.FUCHSIA,
-					Color.GRAY,
-					Color.GREEN,
-					Color.LIME,
-					Color.MAROON,
-					Color.NAVY,
-					Color.OLIVE,
-					Color.ORANGE,
-					Color.PURPLE,
-					Color.PURPLE,
-					Color.RED,
-					Color.SILVER,
-					Color.TEAL,
-					Color.WHITE,
-					Color.YELLOW
-			);
+			return Stream.of(Color.AQUA, Color.BLACK, Color.BLUE, Color.FUCHSIA, Color.GRAY, Color.GREEN, Color.LIME,
+					Color.MAROON, Color.NAVY, Color.OLIVE, Color.ORANGE, Color.PURPLE, Color.PURPLE, Color.RED,
+					Color.SILVER, Color.TEAL, Color.WHITE, Color.YELLOW);
 		}
 
 	}
@@ -177,7 +153,8 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(bytes = { -1, 0, 1, 2, 3, 4, 5, 10, 25, 50, 75, 100 })
+		@ValueSource(bytes =
+		{-1, 0, 1, 2, 3, 4, 5, 10, 25, 50, 75, 100})
 		void givenPossibleLineWidthValues(byte expected)
 		{
 			textDisplay.setTextOpacity(expected);
@@ -198,7 +175,8 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setShadowed(expected);
@@ -219,7 +197,8 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setSeeThrough(expected);
@@ -240,7 +219,8 @@ class TextDisplayMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expected)
 		{
 			textDisplay.setDefaultBackground(expected);
@@ -272,7 +252,8 @@ class TextDisplayMockTest
 		@Test
 		void giveNullValue()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> textDisplay.setAlignment(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> textDisplay.setAlignment(null));
 			assertEquals("Alignment cannot be null", e.getMessage());
 		}
 

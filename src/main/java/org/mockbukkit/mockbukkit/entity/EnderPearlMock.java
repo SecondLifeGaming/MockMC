@@ -8,19 +8,25 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
-public class EnderPearlMock extends ThrowableProjectileMock implements EnderPearl
+public class EnderPearlMock extends ThrowableProjectileMock
+		implements
+			EnderPearl,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EnderPearlBaseMock
 {
 
-	private @NotNull ItemStack item = new ItemStackMock(Material.ENDER_PEARL);
+	@NotNull
+	private ItemStack item = new ItemStackMock(Material.ENDER_PEARL);
 
 	/**
-	 * Constructs a new {@link EnderPearlMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EnderPearlMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public EnderPearlMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -28,7 +34,8 @@ public class EnderPearlMock extends ThrowableProjectileMock implements EnderPear
 	}
 
 	@Override
-	public @NotNull ItemStack getItem()
+	@NotNull
+	public ItemStack getItem()
 	{
 		return new ItemStackMock(this.item);
 	}
@@ -43,9 +50,9 @@ public class EnderPearlMock extends ThrowableProjectileMock implements EnderPear
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ENDER_PEARL;
 	}
-
 }

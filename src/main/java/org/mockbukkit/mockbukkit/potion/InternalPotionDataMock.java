@@ -12,28 +12,37 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
-
 import java.util.List;
 
-public class InternalPotionDataMock implements PotionType.InternalPotionData
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class InternalPotionDataMock
+		implements
+			PotionType.InternalPotionData,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.potion.PotionType_InternalPotionDataBaseMock
 {
 
 	private final NamespacedKey namespacedKey;
+
 	private final boolean upgradeable;
+
 	private final boolean extendable;
+
 	private final int maxLevel;
+
 	private final List<PotionEffect> potionEffects;
 
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
 	public InternalPotionDataMock(NamespacedKey namespacedKey)
 	{
-		List<PotionEffect> tempPotionEffects;
 		this.namespacedKey = namespacedKey;
 		JsonObject data = loadData(namespacedKey);
-		tempPotionEffects = getPotionEffectsFromData(data);
-		this.potionEffects = tempPotionEffects;
-		this.upgradeable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "strong_" + namespacedKey.getKey())) != null;
-		this.extendable = Registry.POTION.get(new NamespacedKey(namespacedKey.getNamespace(), "long_" + namespacedKey.getKey())) != null;
-		this.maxLevel = this.isUpgradeable() ? 2 : 1;
+		this.potionEffects = getPotionEffectsFromData(data);
+		this.upgradeable = data.get("upgradeable").getAsBoolean();
+		this.extendable = data.get("extendable").getAsBoolean();
+		this.maxLevel = data.get("maxLevel").getAsInt();
 	}
 
 	private JsonObject loadData(@NotNull NamespacedKey namespacedKey)
@@ -59,12 +68,6 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	}
 
 	@Override
-	public boolean isInstant()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isUpgradeable()
 	{
 		return upgradeable;
@@ -82,13 +85,14 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 		return maxLevel;
 	}
 
-	// TODO probably not the right solution to make this public static, but where should this utility method be located?
-
+	// TODO probably not the right solution to make this public static, but where
+	// should this utility method be located?
 	@ApiStatus.Internal
 	public static PotionEffect getPotionEffectFromData(JsonElement potionEffectData)
 	{
 		JsonObject potionEffectDataObj = potionEffectData.getAsJsonObject();
-		NamespacedKey potionEffectTypeKey = Preconditions.checkNotNull(NamespacedKey.fromString(potionEffectDataObj.get("type").getAsString()));
+		NamespacedKey potionEffectTypeKey = Preconditions
+				.checkNotNull(NamespacedKey.fromString(potionEffectDataObj.get("type").getAsString()));
 		PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
 		int duration = potionEffectDataObj.get("duration").getAsInt();
 		int amplifier = potionEffectDataObj.get("amplifier").getAsInt();
@@ -102,8 +106,6 @@ public class InternalPotionDataMock implements PotionType.InternalPotionData
 	public static List<PotionEffect> getPotionEffectsFromData(JsonObject data)
 	{
 		return data.get("effects").getAsJsonArray().asList().stream()
-				.map(InternalPotionDataMock::getPotionEffectFromData)
-				.toList();
+				.map(InternalPotionDataMock::getPotionEffectFromData).toList();
 	}
-
 }

@@ -22,8 +22,8 @@ class ArtMockTest
 	{
 
 		@ParameterizedTest
-		@CsvSource({
-				"minecraft:alban, 1, 1, '§epainting.minecraft.alban.title', '§7painting.minecraft.alban.author'",
+		@CsvSource(
+		{"minecraft:alban, 1, 1, '§epainting.minecraft.alban.title', '§7painting.minecraft.alban.author'",
 				"minecraft:aztec, 1, 1, '§epainting.minecraft.aztec.title', '§7painting.minecraft.aztec.author'",
 				"minecraft:aztec2, 1, 1, '§epainting.minecraft.aztec2.title', '§7painting.minecraft.aztec2.author'",
 				"minecraft:backyard, 3, 4, '§epainting.minecraft.backyard.title', '§7painting.minecraft.backyard.author'",
@@ -49,9 +49,9 @@ class ArtMockTest
 				"minecraft:kebab, 1, 1, '§epainting.minecraft.kebab.title', '§7painting.minecraft.kebab.author'",
 				"minecraft:lowmist, 4, 2, '§epainting.minecraft.lowmist.title', '§7painting.minecraft.lowmist.author'",
 				"minecraft:match, 2, 2, '§epainting.minecraft.match.title', '§7painting.minecraft.match.author'",
-				"minecraft:meditative, 1, 1, '§epainting.minecraft.meditative.title', '§7painting.minecraft.meditative.author'",
-		})
-		void givenOther(String expectedKey, int expectedWidth, int expectedHeight, String expectedTitle, String expectedAuthor)
+				"minecraft:meditative, 1, 1, '§epainting.minecraft.meditative.title', '§7painting.minecraft.meditative.author'",})
+		void givenOther(String expectedKey, int expectedWidth, int expectedHeight, String expectedTitle,
+				String expectedAuthor)
 		{
 			NamespacedKey key = NamespacedKey.fromString(expectedKey);
 			Art art = RegistryAccess.registryAccess().getRegistry(RegistryKey.PAINTING_VARIANT).get(key);

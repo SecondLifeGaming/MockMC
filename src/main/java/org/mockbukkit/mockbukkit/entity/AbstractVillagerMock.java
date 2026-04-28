@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.MerchantInventoryMock;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -19,29 +18,39 @@ import java.util.UUID;
  *
  * @see AgeableMock
  */
-public abstract class AbstractVillagerMock extends AgeableMock implements Merchant, AbstractVillager, InventoryHolder
+public abstract class AbstractVillagerMock extends AgeableMock
+		implements
+			Merchant,
+			AbstractVillager,
+			InventoryHolder,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.MerchantBaseMock
 {
 
 	private final MerchantInventoryMock inventory = new MerchantInventoryMock(this, this);
+
 	private final List<MerchantRecipe> recipes = new ArrayList<>();
 
-	private @Nullable HumanEntity trader;
+	@Nullable
+	private HumanEntity trader;
 
 	/**
-	 * Constructs a new {@link AbstractVillagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AbstractVillagerMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected AbstractVillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-
 		updateTrades();
 	}
 
 	@Override
-	public @NotNull MerchantInventoryMock getInventory()
+	@NotNull
+	public MerchantInventoryMock getInventory()
 	{
 		return this.inventory;
 	}
@@ -54,7 +63,8 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	}
 
 	@Override
-	public @NotNull List<MerchantRecipe> getRecipes()
+	@NotNull
+	public List<MerchantRecipe> getRecipes()
 	{
 		return List.copyOf(this.recipes);
 	}
@@ -62,16 +72,14 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	@Override
 	public void setRecipes(@NotNull List<MerchantRecipe> recipes)
 	{
-		List<MerchantRecipe> clonedRecipes = recipes.stream()
-				.map(MerchantRecipe::new)
-				.toList();
-
+		List<MerchantRecipe> clonedRecipes = recipes.stream().map(MerchantRecipe::new).toList();
 		this.recipes.clear();
 		this.recipes.addAll(clonedRecipes);
 	}
 
 	@Override
-	public @NotNull MerchantRecipe getRecipe(int i) throws IndexOutOfBoundsException
+	@NotNull
+	public MerchantRecipe getRecipe(int i) throws IndexOutOfBoundsException
 	{
 		return new MerchantRecipe(this.recipes.get(i));
 	}
@@ -95,7 +103,8 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	}
 
 	@Override
-	public @Nullable HumanEntity getTrader()
+	@Nullable
+	public HumanEntity getTrader()
 	{
 		return this.trader;
 	}
@@ -104,7 +113,8 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	 * Sets the player this merchant is trading with, or {@code null} if it is not
 	 * currently trading.
 	 *
-	 * @param trader the trader, or null
+	 * @param trader
+	 *            the trader, or null
 	 */
 	public void setTrader(@Nullable HumanEntity trader)
 	{
@@ -112,5 +122,4 @@ public abstract class AbstractVillagerMock extends AgeableMock implements Mercha
 	}
 
 	protected abstract void updateTrades();
-
 }

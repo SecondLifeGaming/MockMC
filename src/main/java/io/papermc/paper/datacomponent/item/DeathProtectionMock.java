@@ -9,10 +9,10 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record DeathProtectionMock(@Unmodifiable List<ConsumeEffect> deathEffects) implements DeathProtection
 {
-
 
 	static class BuilderMock implements Builder
 	{

@@ -24,7 +24,8 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	 * Constructs a new {@link CampfireDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#CAMPFIRES}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public CampfireDataMock(@NotNull Material type)
 	{
@@ -37,9 +38,11 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	}
 
 	/**
-	 * Create a new {@link CampfireDataMock} based on an existing {@link CampfireDataMock}.
+	 * Create a new {@link CampfireDataMock} based on an existing
+	 * {@link CampfireDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected CampfireDataMock(CampfireDataMock other)
 	{
@@ -103,7 +106,8 @@ public class CampfireDataMock extends BlockDataMock implements Campfire
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CampfireDataMock clone()
 	{
 		return new CampfireDataMock(this);

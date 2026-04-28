@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.WitherSkull;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,16 +11,22 @@ import java.util.UUID;
  *
  * @see FireballMock
  */
-public class WitherSkullMock extends FireballMock implements WitherSkull
+public class WitherSkullMock extends FireballMock
+		implements
+			WitherSkull,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WitherSkullBaseMock
 {
 
 	private boolean charged;
 
 	/**
-	 * Constructs a new {@link WitherSkullMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WitherSkullMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WitherSkullMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -41,9 +46,9 @@ public class WitherSkullMock extends FireballMock implements WitherSkull
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.WITHER_SKULL;
 	}
-
 }

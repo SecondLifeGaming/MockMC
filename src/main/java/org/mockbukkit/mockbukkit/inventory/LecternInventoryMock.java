@@ -13,13 +13,17 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class LecternInventoryMock extends InventoryMock implements LecternInventory
+public class LecternInventoryMock extends InventoryMock
+		implements
+			LecternInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.LecternInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link LecternInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public LecternInventoryMock(InventoryHolder holder)
 	{
@@ -39,9 +43,9 @@ public class LecternInventoryMock extends InventoryMock implements LecternInvent
 	}
 
 	@Override
-	public @Nullable Lectern getHolder()
+	@Nullable
+	public Lectern getHolder()
 	{
 		return (Lectern) super.getHolder();
 	}
-
 }

@@ -40,7 +40,8 @@ class MannequinMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expected)
 		{
 			mannequin.setImmovable(expected);

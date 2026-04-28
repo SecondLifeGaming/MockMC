@@ -3,17 +3,18 @@ package org.mockbukkit.mockbukkit.inventory;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.SmithingInventory;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of an {@link SmithingInventory}.
  *
  * @see InventoryMock
  */
-public class SmithingInventoryMock extends InventoryMock implements SmithingInventory
+public class SmithingInventoryMock extends InventoryMock
+		implements
+			SmithingInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.SmithingInventoryBaseMock
 {
 
 	private static final int RESULT_SLOT = 0;
@@ -21,7 +22,8 @@ public class SmithingInventoryMock extends InventoryMock implements SmithingInve
 	/**
 	 * Constructs a new {@link SmithingInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public SmithingInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -29,7 +31,8 @@ public class SmithingInventoryMock extends InventoryMock implements SmithingInve
 	}
 
 	@Override
-	public @Nullable ItemStack getResult()
+	@Nullable
+	public ItemStack getResult()
 	{
 		return getItem(RESULT_SLOT);
 	}
@@ -39,12 +42,4 @@ public class SmithingInventoryMock extends InventoryMock implements SmithingInve
 	{
 		setItem(RESULT_SLOT, result);
 	}
-
-	@Override
-	public @Nullable Recipe getRecipe()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

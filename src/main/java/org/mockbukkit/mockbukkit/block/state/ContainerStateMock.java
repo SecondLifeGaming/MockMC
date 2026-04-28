@@ -18,6 +18,8 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 
@@ -26,9 +28,11 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	private @Nullable Component customName;
 
 	/**
-	 * Constructs a new {@link ContainerStateMock} for the provided {@link Material}.
+	 * Constructs a new {@link ContainerStateMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	protected ContainerStateMock(@NotNull Material material)
 	{
@@ -40,7 +44,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	/**
 	 * Constructs a new {@link ContainerStateMock} for the provided {@link Block}.
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected ContainerStateMock(@NotNull Block block)
 	{
@@ -50,9 +55,11 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	}
 
 	/**
-	 * Constructs a new {@link ContainerStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link ContainerStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected ContainerStateMock(@NotNull ContainerStateMock state)
 	{
@@ -142,7 +149,8 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 		{
 			return false;
 		}
-		return Objects.equals(customName, that.customName) && Arrays.equals(snapshot.getContents(), that.snapshot.getContents());
+		return Objects.equals(customName, that.customName)
+				&& Arrays.equals(snapshot.getContents(), that.snapshot.getContents());
 	}
 
 	@Override
@@ -158,9 +166,7 @@ public abstract class ContainerStateMock extends LockableTileStateMock implement
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", customName=" + customName +
-				", inventory=" + inventory;
+		return super.toStringInternal() + ", customName=" + customName + ", inventory=" + inventory;
 	}
 
 }

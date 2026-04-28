@@ -11,7 +11,8 @@ public class PluginLoadException extends RuntimeException
 	/**
 	 * Constructs a new runtime exception with the specified detail message.
 	 *
-	 * @param message The detail message.
+	 * @param message
+	 *            The detail message.
 	 */
 	public PluginLoadException(String message)
 	{
@@ -19,10 +20,13 @@ public class PluginLoadException extends RuntimeException
 	}
 
 	/**
-	 * Constructs a new runtime exception with the specified cause and a detail message.
+	 * Constructs a new runtime exception with the specified cause and a detail
+	 * message.
 	 *
-	 * @param message The detail message.
-	 * @param cause   The cause of the exception.
+	 * @param message
+	 *            The detail message.
+	 * @param cause
+	 *            The cause of the exception.
 	 */
 	public PluginLoadException(String message, Throwable cause)
 	{
@@ -30,9 +34,11 @@ public class PluginLoadException extends RuntimeException
 	}
 
 	/**
-	 * Constructs a new runtime exception with the specified cause and a detail message of (cause==null ? null : cause.toString())
+	 * Constructs a new runtime exception with the specified cause and a detail
+	 * message of (cause==null ? null : cause.toString())
 	 *
-	 * @param cause The cause of the exception.
+	 * @param cause
+	 *            The cause of the exception.
 	 */
 	public PluginLoadException(@NotNull Throwable cause)
 	{

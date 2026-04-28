@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class TestPlugin extends JavaPlugin implements Listener
 {
 
@@ -71,7 +73,8 @@ public class TestPlugin extends JavaPlugin implements Listener
 	}
 
 	@Override
-	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String @NotNull [] args)
+	public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command,
+			@NotNull String alias, @NotNull String @NotNull [] args)
 	{
 		if (args.length == 1)
 		{
@@ -118,14 +121,14 @@ public class TestPlugin extends JavaPlugin implements Listener
 			try
 			{
 				barrier.await();
-			}
-			catch (InterruptedException | BrokenBarrierException ignored)
+			} catch (InterruptedException | BrokenBarrierException ignored)
 			{
 			}
 		}
 	}
 
-	public void createCustomClass() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
+	public void createCustomClass()
+			throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException
 	{
 		ConfiguredPluginClassLoader cpcl = (ConfiguredPluginClassLoader) getClassLoader();
 		CustomConfiguredPluginClassLoaderMock ccl = new CustomConfiguredPluginClassLoaderMock(cpcl);

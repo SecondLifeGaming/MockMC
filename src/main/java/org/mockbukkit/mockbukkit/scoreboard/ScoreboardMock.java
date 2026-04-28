@@ -13,62 +13,83 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection;
 
 /**
  * Mock implementation of a {@link Scoreboard}.
  */
-public class ScoreboardMock implements Scoreboard
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ScoreboardMock
+		implements
+			Scoreboard,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.scoreboard.ScoreboardBaseMock
 {
 
 	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";
+
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
 
-	private final @NotNull Map<String, ObjectiveMock> objectives = new HashMap<>();
-	private final @NotNull Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
-	private final @NotNull Map<String, Team> teams = new HashMap<>();
+	@NotNull
+	private final Map<String, ObjectiveMock> objectives = new HashMap<>();
+
+	@NotNull
+	private final Map<DisplaySlot, ObjectiveMock> objectivesByDisplaySlot = new EnumMap<>(DisplaySlot.class);
+
+	@NotNull
+	private final Map<String, Team> teams = new HashMap<>();
 
 	@Override
 	@Deprecated(since = "1.13")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria)
+			throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, name, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@Nullable Component displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, Criteria.create(criteria), displayName, renderType);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@Nullable Component displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(name, "Objective name cannot be null");
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
 		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
-		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE, "The name '%s' is longer than the limit of %d characters", name, Short.MAX_VALUE);
-		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '%s' already exists", name);
+		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE,
+				"The name '%s' is longer than the limit of %d characters", name, Short.MAX_VALUE);
+		Preconditions.checkArgument(!this.objectives.containsKey(name), "An objective of name '%s' already exists",
+				name);
 		ObjectiveMock objective = new ObjectiveMock(this, name, displayName, criteria, renderType);
 		this.objectives.put(name, objective);
 		return objective;
@@ -76,28 +97,34 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated(since = "1.16")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName)
-			throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@NotNull String displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
 	@Deprecated(since = "1.16")
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria, @NotNull String displayName, @NotNull RenderType renderType)
-			throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull String criteria,
+			@NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@NotNull String displayName) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
 	@Override
-	public @NotNull ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria, @NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
+	@NotNull
+	public ObjectiveMock registerNewObjective(@NotNull String name, @NotNull Criteria criteria,
+			@NotNull String displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		return registerNewObjective(name, criteria, legacySection().deserialize(displayName), renderType);
 	}
@@ -110,7 +137,8 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
+	@NotNull
+	public Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
@@ -118,16 +146,17 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
+	@NotNull
+	public Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
-		return objectives.values().stream()
-				.filter(objective -> objective.getTrackedCriteria().equals(criteria))
+		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
 
 	@Override
-	public @NotNull Set<Objective> getObjectives()
+	@NotNull
+	public Set<Objective> getObjectives()
 	{
 		return Set.copyOf(objectives.values());
 	}
@@ -139,22 +168,22 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
+	@NotNull
+	public Set<Score> getScores(@NotNull OfflinePlayer player) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(player, OFFLINE_PLAYER_CANNOT_BE_NULL);
 		return getScores(player.getName());
 	}
 
 	@Override
-	public @NotNull Set<Score> getScores(@NotNull String entry) throws IllegalArgumentException
+	@NotNull
+	public Set<Score> getScores(@NotNull String entry) throws IllegalArgumentException
 	{
 		Set<Score> scores = new HashSet<>();
-
 		for (Objective o : objectives.values())
 		{
 			scores.add(o.getScore(entry));
 		}
-
 		return scores;
 	}
 
@@ -192,7 +221,6 @@ public class ScoreboardMock implements Scoreboard
 				return t;
 			}
 		}
-
 		return null;
 	}
 
@@ -204,13 +232,15 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Set<Team> getTeams()
+	@NotNull
+	public Set<Team> getTeams()
 	{
 		return Set.copyOf(teams.values());
 	}
 
 	@Override
-	public @NotNull Team registerNewTeam(@NotNull String name) throws IllegalArgumentException
+	@NotNull
+	public Team registerNewTeam(@NotNull String name) throws IllegalArgumentException
 	{
 		if (teams.containsKey(name))
 		{
@@ -223,28 +253,26 @@ public class ScoreboardMock implements Scoreboard
 
 	@Override
 	@Deprecated(since = "1.7.10")
-	public @NotNull Set<OfflinePlayer> getPlayers()
+	@NotNull
+	public Set<OfflinePlayer> getPlayers()
 	{
 		Set<OfflinePlayer> players = new HashSet<>();
-
 		for (Team t : teams.values())
 		{
 			players.addAll(t.getPlayers());
 		}
-
 		return players;
 	}
 
 	@Override
-	public @NotNull Set<String> getEntries()
+	@NotNull
+	public Set<String> getEntries()
 	{
 		Set<String> entries = new HashSet<>();
-
 		for (Team t : teams.values())
 		{
 			entries.addAll(t.getEntries());
 		}
-
 		return entries;
 	}
 
@@ -256,7 +284,8 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @NotNull Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
+	@NotNull
+	public Set<Score> getScoresFor(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getScores(entity.getScoreboardEntryName());
@@ -270,7 +299,8 @@ public class ScoreboardMock implements Scoreboard
 	}
 
 	@Override
-	public @Nullable Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
+	@Nullable
+	public Team getEntityTeam(@NotNull Entity entity) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return getEntryTeam(entity.getScoreboardEntryName());
@@ -279,8 +309,10 @@ public class ScoreboardMock implements Scoreboard
 	/**
 	 * Sets the objective to a specific slot.
 	 *
-	 * @param objective The objective to set to the slot.
-	 * @param slot      The slot to set the objective to.
+	 * @param objective
+	 *            The objective to set to the slot.
+	 * @param slot
+	 *            The slot to set the objective to.
 	 */
 	protected void setDisplaySlot(@NotNull ObjectiveMock objective, DisplaySlot slot)
 	{
@@ -290,7 +322,8 @@ public class ScoreboardMock implements Scoreboard
 	/**
 	 * Removes an objective off this scoreboard.
 	 *
-	 * @param objectiveMock The objective to remove.
+	 * @param objectiveMock
+	 *            The objective to remove.
 	 */
 	protected void unregister(@NotNull ObjectiveMock objectiveMock)
 	{
@@ -298,18 +331,17 @@ public class ScoreboardMock implements Scoreboard
 		{
 			objectivesByDisplaySlot.remove(objectiveMock.getDisplaySlot());
 		}
-
 		objectives.remove(objectiveMock.getName());
 	}
 
 	/**
 	 * Removes a team from this scoreboard.
 	 *
-	 * @param teamMock The team to remove.
+	 * @param teamMock
+	 *            The team to remove.
 	 */
 	protected void unregister(@NotNull TeamMock teamMock)
 	{
 		teams.remove(teamMock.getName());
 	}
-
 }

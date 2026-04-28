@@ -4,25 +4,23 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.block.Block;
-import org.bukkit.block.DecoratedPot;
 import org.bukkit.inventory.DecoratedPotInventory;
-import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.DecoratedPotInventoryMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class DecoratedPotStateMock extends ContainerStateMock implements DecoratedPot
+public class DecoratedPotStateMock extends ContainerStateMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.DecoratedPotBaseMock
 {
 
-	private final Map<Side, Material> sherds = new HashMap<>();
+	private final Map<Side, Material> sherds = new EnumMap<>(Side.class);
 
 	DecoratedPotStateMock(@NotNull Material material)
 	{
@@ -39,6 +37,7 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	protected DecoratedPotStateMock(@NotNull DecoratedPotStateMock state)
 	{
 		super(state);
+		this.sherds.putAll(state.sherds);
 	}
 
 	@Override
@@ -62,12 +61,6 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	}
 
 	@Override
-	public void startWobble(@NotNull WobbleStyle wobbleStyle)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public @NotNull ContainerStateMock getSnapshot()
 	{
 		return new DecoratedPotStateMock(this);
@@ -77,7 +70,9 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	public void setSherd(@NotNull Side face, @Nullable Material sherd)
 	{
 		Preconditions.checkArgument(face != null, "side must not be null");
-		Preconditions.checkArgument(sherd == null || sherd == Material.BRICK || Tag.ITEMS_DECORATED_POT_SHERDS.isTagged(sherd), "sherd is not a valid sherd material: %s", sherd);
+		Preconditions.checkArgument(
+				sherd == null || sherd == Material.BRICK || Tag.ITEMS_DECORATED_POT_SHERDS.isTagged(sherd),
+				"sherd is not a valid sherd material: %s", sherd);
 		if (sherd == null)
 		{
 			sherds.remove(face);
@@ -108,48 +103,13 @@ public class DecoratedPotStateMock extends ContainerStateMock implements Decorat
 	@Override
 	public @NotNull List<Material> getShards()
 	{
-		return List.of(
-				getSherd(Side.BACK),
-				getSherd(Side.LEFT),
-				getSherd(Side.RIGHT),
-				getSherd(Side.FRONT)
-		);
+		return List.of(getSherd(Side.BACK), getSherd(Side.LEFT), getSherd(Side.RIGHT), getSherd(Side.FRONT));
 	}
 
 	@Override
 	public @NotNull DecoratedPotStateMock copy()
 	{
 		return new DecoratedPotStateMock(this);
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LootTable getLootTable()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table, long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

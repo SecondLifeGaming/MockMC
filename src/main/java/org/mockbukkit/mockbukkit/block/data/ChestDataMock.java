@@ -14,7 +14,8 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public ChestDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	}
 
 	/**
-	 * Create a new {@link ChestDataMock} based on an existing {@link ChestDataMock}.
+	 * Create a new {@link ChestDataMock} based on an existing
+	 * {@link ChestDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected ChestDataMock(@NotNull ChestDataMock other)
 	{
@@ -75,7 +78,8 @@ public class ChestDataMock extends BlockDataMock implements Chest
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ChestDataMock clone()
 	{
 		return new ChestDataMock(this);

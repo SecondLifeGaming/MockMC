@@ -6,8 +6,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,16 +13,21 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * This is a mock of the {@link PersistentDataContainer} interface to allow the "persistent" storage of data. Only that
- * it isn't persistent of course since it only ever exists in a test environment.
+ * This is a mock of the {@link PersistentDataContainer} interface to allow the
+ * "persistent" storage of data. Only that it isn't persistent of course since
+ * it only ever exists in a test environment.
  *
  * @author TheBusyBiscuit
  */
-public class PersistentDataContainerMock implements PersistentDataContainer
+public class PersistentDataContainerMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.persistence.PersistentDataContainerBaseMock
 {
 
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
-	private final @NotNull Map<NamespacedKey, Object> map;
+
+	@NotNull
+	private final Map<NamespacedKey, Object> map;
 
 	/**
 	 * Constructs a new {@link PersistentDataContainerMock} with no stored data.
@@ -35,9 +38,11 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	/**
-	 * Constructs a new {@link PersistentDataContainerMock}, cloning the data of another.
+	 * Constructs a new {@link PersistentDataContainerMock}, cloning the data of
+	 * another.
 	 *
-	 * @param mock The {@link PersistentDataContainerMock} to clone.
+	 * @param mock
+	 *            The {@link PersistentDataContainerMock} to clone.
 	 */
 	public PersistentDataContainerMock(@NotNull PersistentDataContainerMock mock)
 	{
@@ -55,24 +60,22 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof PersistentDataContainerMock))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-
 		return map.equals(((PersistentDataContainerMock) obj).map);
 	}
 
 	@Override
-	public <T, Z> @Nullable Z get(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
+	@Nullable
+	public <T, Z> Z get(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type)
 	{
 		Object value = map.get(key);
-
 		if (value == null || !type.getPrimitiveType().isInstance(value))
 		{
 			return null;
 		}
-
 		return type.fromPrimitive(type.getPrimitiveType().cast(value), context);
 	}
 
@@ -90,7 +93,8 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public @NotNull PersistentDataAdapterContext getAdapterContext()
+	@NotNull
+	public PersistentDataAdapterContext getAdapterContext()
 	{
 		return context;
 	}
@@ -102,28 +106,15 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public byte @NotNull [] serializeToBytes()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int getSize()
 	{
 		return map.size();
 	}
 
 	@Override
-	public void readFromBytes(byte @NotNull [] bytes, boolean clear)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T, Z> @NotNull Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
-										  @NotNull Z defaultValue)
+	@NotNull
+	public <T, Z> Z getOrDefault(@NotNull NamespacedKey key, @NotNull PersistentDataType<T, Z> type,
+			@NotNull Z defaultValue)
 	{
 		Z value = get(key, type);
 		return value != null ? value : defaultValue;
@@ -142,8 +133,7 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 		if (replace)
 		{
 			target.map.putAll(map);
-		}
-		else
+		} else
 		{
 			map.forEach(target.map::putIfAbsent);
 		}
@@ -156,7 +146,8 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	}
 
 	@Override
-	public @NotNull Set<NamespacedKey> getKeys()
+	@NotNull
+	public Set<NamespacedKey> getKeys()
 	{
 		return Collections.unmodifiableSet(map.keySet());
 	}
@@ -167,7 +158,8 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	 * @return The serialized data.
 	 * @see #deserialize(Map)
 	 */
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		return map.entrySet().stream().collect(Collectors.toMap(e -> e.getKey().toString(), Map.Entry::getValue));
 	}
@@ -175,10 +167,12 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 	/**
 	 * Deserializes a {@link PersistentDataContainerMock} from a map.
 	 *
-	 * @param args The map to deserialize.
+	 * @param args
+	 *            The map to deserialize.
 	 * @return The deserialized {@link PersistentDataContainerMock}.
 	 */
-	public static @NotNull PersistentDataContainerMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static PersistentDataContainerMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PersistentDataContainerMock mock = new PersistentDataContainerMock();
 		for (Map.Entry<String, Object> entry : args.entrySet())
@@ -187,5 +181,4 @@ public class PersistentDataContainerMock implements PersistentDataContainer
 		}
 		return mock;
 	}
-
 }

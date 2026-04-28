@@ -31,7 +31,8 @@ class SkullDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			skull.setPowered(inWall);
@@ -51,9 +52,8 @@ class SkullDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenValidValues(BlockFace face)
 		{
 			skull.setRotation(face);
@@ -61,9 +61,8 @@ class SkullDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> skull.setRotation(face));
@@ -71,6 +70,5 @@ class SkullDataMockTest
 		}
 
 	}
-
 
 }

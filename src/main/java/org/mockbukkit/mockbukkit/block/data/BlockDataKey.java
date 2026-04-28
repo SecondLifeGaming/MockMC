@@ -97,14 +97,16 @@ public enum BlockDataKey
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 */
-	HALF_SINGLE_BLOCK("half", EnumDataDeserializer.of(Bisected.Half.class), o -> o instanceof BlockDataMock blockData && BisectedDataMock.isSingleBlock(blockData)),
+	HALF_SINGLE_BLOCK("half", EnumDataDeserializer.of(Bisected.Half.class),
+			o -> o instanceof BlockDataMock blockData && BisectedDataMock.isSingleBlock(blockData)),
 	/**
 	 * Stores what {@link Bisected.Half} a {@link Bisected} block is placed in.
 	 * Similar to HALF but stores the value as lower or upper.
 	 *
 	 * @see BisectedDataMock
 	 */
-	HALF_MULTI_BLOCK("half", a -> a, o -> o instanceof BlockDataMock blockData && !BisectedDataMock.isSingleBlock(blockData)),
+	HALF_MULTI_BLOCK("half", a -> a,
+			o -> o instanceof BlockDataMock blockData && !BisectedDataMock.isSingleBlock(blockData)),
 
 	/**
 	 * Stores whether a {@link Lightable} is list.
@@ -139,9 +141,9 @@ public enum BlockDataKey
 	/**
 	 * Store what {@link Slab.Type} a {@link Slab} is.
 	 */
-	TYPE("type", EnumDataDeserializer.of(Slab.Type.class), Slab.class::isInstance),
-	TYPE_CHEST("type", EnumDataDeserializer.of(Chest.Type.class), Chest.class::isInstance),
-	TYPE_TECHNICAL_PISTON("type", EnumDataDeserializer.of(TechnicalPiston.Type.class), TechnicalPiston.class::isInstance),
+	TYPE("type", EnumDataDeserializer.of(Slab.Type.class), Slab.class::isInstance), TYPE_CHEST("type",
+			EnumDataDeserializer.of(Chest.Type.class), Chest.class::isInstance), TYPE_TECHNICAL_PISTON("type",
+					EnumDataDeserializer.of(TechnicalPiston.Type.class), TechnicalPiston.class::isInstance),
 
 	/**
 	 * Stores whether a {@link Waterlogged} block is waterlogged.
@@ -149,100 +151,107 @@ public enum BlockDataKey
 	WATERLOGGED("waterlogged", Boolean::parseBoolean, Waterlogged.class::isInstance),
 
 	/**
-	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is facing
+	 * Stores the {@link FaceAttachable.AttachedFace} a {@link FaceAttachable} is
+	 * facing
 	 */
 	FACE("face", EnumDataDeserializer.of(FaceAttachable.AttachedFace.class), FaceAttachable.class::isInstance),
 
-	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance),
-	LEAVES_KEY("leaves", EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance),
-	STAGE_KEY("stage", Integer::parseInt, Sapling.class::isInstance),
-	HANGING_KEY("hanging", Boolean::parseBoolean, Hangable.class::isInstance),
-	BITES("bites", Integer::parseInt, Cake.class::isInstance),
+	AGE_KEY("age", Integer::parseInt, Ageable.class::isInstance), LEAVES_KEY("leaves",
+			EnumDataDeserializer.of(Bamboo.Leaves.class), Bamboo.class::isInstance), STAGE_KEY("stage",
+					Integer::parseInt, Sapling.class::isInstance), HANGING_KEY("hanging", Boolean::parseBoolean,
+							Hangable.class::isInstance), BITES("bites", Integer::parseInt, Cake.class::isInstance),
 
-	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
-	REDSTONE_WEST("west", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
-	REDSTONE_NORTH("north", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
-	REDSTONE_SOUTH("south", EnumDataDeserializer.of(RedstoneWire.Connection.class), RedstoneWire.class::isInstance),
+	REDSTONE_EAST("east", EnumDataDeserializer.of(RedstoneWire.Connection.class),
+			RedstoneWire.class::isInstance), REDSTONE_WEST("west",
+					EnumDataDeserializer.of(RedstoneWire.Connection.class),
+					RedstoneWire.class::isInstance), REDSTONE_NORTH("north",
+							EnumDataDeserializer.of(RedstoneWire.Connection.class),
+							RedstoneWire.class::isInstance), REDSTONE_SOUTH("south",
+									EnumDataDeserializer.of(RedstoneWire.Connection.class),
+									RedstoneWire.class::isInstance),
 
-	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class), SculkSensor.class::isInstance),
-	ATTACHMENT("attachment", EnumDataDeserializer.of(Bell.Attachment.class), Bell.class::isInstance),
+	SCULK_SENSOR_PHASE("sculk_sensor_phase", EnumDataDeserializer.of(SculkSensorDataMock.Phase.class),
+			SculkSensor.class::isInstance), ATTACHMENT("attachment", EnumDataDeserializer.of(Bell.Attachment.class),
+					Bell.class::isInstance),
 
-	DELAY("delay", Integer::parseInt, Repeater.class::isInstance),
-	LOCKED("locked", Boolean::parseBoolean, Repeater.class::isInstance),
-	EYE("eye", Boolean::parseBoolean, EndPortalFrame.class::isInstance),
+	DELAY("delay", Integer::parseInt, Repeater.class::isInstance), LOCKED("locked", Boolean::parseBoolean,
+			Repeater.class::isInstance), EYE("eye", Boolean::parseBoolean, EndPortalFrame.class::isInstance),
 
 	ROTATION("rotation", Integer::parseInt, Rotatable.class::isInstance),
 
 	UNSTABLE("unstable", Boolean::parseBoolean, TNT.class::isInstance),
 
-	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	WEST("west", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	NORTH("north", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	SOUTH("south", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	UP("up", Boolean::parseBoolean, o -> o instanceof MultipleFacing || o instanceof Wall),
-	DOWN("down", Boolean::parseBoolean, MultipleFacing.class::isInstance),
-	CRACKED("cracked", Boolean::parseBoolean, DecoratedPot.class::isInstance),
-	TIP("tip", Boolean::parseBoolean, HangingMoss.class::isInstance),
+	EAST("east", Boolean::parseBoolean, MultipleFacing.class::isInstance), WEST("west", Boolean::parseBoolean,
+			MultipleFacing.class::isInstance), NORTH("north", Boolean::parseBoolean,
+					MultipleFacing.class::isInstance), SOUTH("south", Boolean::parseBoolean,
+							MultipleFacing.class::isInstance), UP("up", Boolean::parseBoolean,
+									o -> o instanceof MultipleFacing || o instanceof Wall), DOWN("down",
+											Boolean::parseBoolean, MultipleFacing.class::isInstance), CRACKED("cracked",
+													Boolean::parseBoolean, DecoratedPot.class::isInstance), TIP("tip",
+															Boolean::parseBoolean, HangingMoss.class::isInstance),
 
-	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance),
-	TRIGGERED("triggered", Boolean::parseBoolean, o -> o instanceof Crafter || o instanceof Dispenser),
-	ENABLED("enabled", Boolean::parseBoolean, Hopper.class::isInstance),
-	ORIENTATION("orientation", EnumDataDeserializer.of(Orientation.class), Crafter.class::isInstance),
-	HINGE("hinge", EnumDataDeserializer.of(Door.Hinge.class), Door.class::isInstance),
-	IN_WALL("in_wall", Boolean::parseBoolean, Gate.class::isInstance),
-	HAS_BOOK("has_book", Boolean::parseBoolean, Lectern.class::isInstance),
+	CRAFTING("crafting", Boolean::parseBoolean, Crafter.class::isInstance), TRIGGERED("triggered",
+			Boolean::parseBoolean, o -> o instanceof Crafter || o instanceof Dispenser), ENABLED("enabled",
+					Boolean::parseBoolean, Hopper.class::isInstance), ORIENTATION("orientation",
+							EnumDataDeserializer.of(Orientation.class), Crafter.class::isInstance), HINGE("hinge",
+									EnumDataDeserializer.of(Door.Hinge.class), Door.class::isInstance), IN_WALL(
+											"in_wall", Boolean::parseBoolean, Gate.class::isInstance), HAS_BOOK(
+													"has_book", Boolean::parseBoolean, Lectern.class::isInstance),
 
-	TRIAL_SPAWNER_STATE("trial_spawner_state", EnumDataDeserializer.of(TrialSpawner.State.class), TrialSpawner.class::isInstance),
-	OMINOUS("ominous", Boolean::parseBoolean, c -> c instanceof TrialSpawner || c instanceof Vault),
+	TRIAL_SPAWNER_STATE("trial_spawner_state", EnumDataDeserializer.of(TrialSpawner.State.class),
+			TrialSpawner.class::isInstance), OMINOUS("ominous", Boolean::parseBoolean,
+					c -> c instanceof TrialSpawner || c instanceof Vault),
 
 	VAULT_STATE("vault_state", EnumDataDeserializer.of(Vault.State.class), Vault.class::isInstance),
 
 	AXIS("axis", EnumDataDeserializer.of(Axis.class), Orientable.class::isInstance),
 
-	TILT("tilt", EnumDataDeserializer.of(BigDripleaf.Tilt.class), BigDripleaf.class::isInstance),
-	RAIL_SHAPE("shape", EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance),
-	INSTRUMENT("instrument", InstrumentDeserializer.INSTANCE, NoteBlock.class::isInstance),
-	NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
+	TILT("tilt", EnumDataDeserializer.of(BigDripleaf.Tilt.class), BigDripleaf.class::isInstance), RAIL_SHAPE("shape",
+			EnumDataDeserializer.of(Rail.Shape.class), Rail.class::isInstance), INSTRUMENT("instrument",
+					InstrumentDeserializer.INSTANCE,
+					NoteBlock.class::isInstance), NOTE("note", Integer::parseInt, NoteBlock.class::isInstance),
 
-	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance),
-	LEVEL("level", Integer::parseInt, Levelled.class::isInstance),
-	DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance),
-	MODE("mode", EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance),
-	COMPARATOR_MODE("mode", EnumDataDeserializer.of(Comparator.Mode.class), Comparator.class::isInstance),
+	CHARGES("charges", Integer::parseInt, RespawnAnchor.class::isInstance), LEVEL("level", Integer::parseInt,
+			Levelled.class::isInstance), DUSTED("dusted", Integer::parseInt, Brushable.class::isInstance), MODE("mode",
+					EnumDataDeserializer.of(TestBlock.Mode.class), TestBlock.class::isInstance), COMPARATOR_MODE("mode",
+							EnumDataDeserializer.of(Comparator.Mode.class), Comparator.class::isInstance),
 
-	CANDLES("candles", Integer::parseInt, Candle.class::isInstance),
-	POWER("power", Integer::parseInt, AnaloguePowerable.class::isInstance),
-	IS_INVERTED("power", Boolean::parseBoolean, DaylightDetector.class::isInstance),
+	CANDLES("candles", Integer::parseInt, Candle.class::isInstance), POWER("power", Integer::parseInt,
+			AnaloguePowerable.class::isInstance), IS_INVERTED("power", Boolean::parseBoolean,
+					DaylightDetector.class::isInstance),
 
-	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance),
-	ATTACHED("attached", Boolean::parseBoolean, Attachable.class::isInstance),
+	SNOWY("snowy", Boolean::parseBoolean, Snowable.class::isInstance), ATTACHED("attached", Boolean::parseBoolean,
+			Attachable.class::isInstance),
 
-	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance),
-	MOISTURE("moisture", Integer::parseInt, Farmland.class::isInstance),
-	HATCH("hatch", Integer::parseInt, Hatchable.class::isInstance),
-	EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance),
+	CONDITIONAL("conditional", Boolean::parseBoolean, CommandBlock.class::isInstance), MOISTURE("moisture",
+			Integer::parseInt, Farmland.class::isInstance), HATCH("hatch", Integer::parseInt,
+					Hatchable.class::isInstance), EGGS("eggs", Integer::parseInt, TurtleEgg.class::isInstance),
 
-	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance),
-	SHORT("short", Boolean::parseBoolean, PistonHead.class::isInstance),
+	EXTENDED("extended", Boolean::parseBoolean, Piston.class::isInstance), SHORT("short", Boolean::parseBoolean,
+			PistonHead.class::isInstance),
 
-	CREAKING_HEART_STATE("creaking_heart_state", EnumDataDeserializer.of(CreakingHeart.State.class), CreakingHeart.class::isInstance),
-	NATURAL("natural", Boolean::parseBoolean, CreakingHeart.class::isInstance),
+	CREAKING_HEART_STATE("creaking_heart_state", EnumDataDeserializer.of(CreakingHeart.State.class),
+			CreakingHeart.class::isInstance), NATURAL("natural", Boolean::parseBoolean,
+					CreakingHeart.class::isInstance),
 
-	SLOT_OCCUPIED_0("slot_0_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
-	SLOT_OCCUPIED_1("slot_1_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
-	SLOT_OCCUPIED_2("slot_2_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
-	SLOT_OCCUPIED_3("slot_3_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
-	SLOT_OCCUPIED_4("slot_4_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
-	SLOT_OCCUPIED_5("slot_5_occupied", Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance),
+	SLOT_OCCUPIED_0("slot_0_occupied", Boolean::parseBoolean,
+			ChiseledBookshelfDataMock.class::isInstance), SLOT_OCCUPIED_1("slot_1_occupied", Boolean::parseBoolean,
+					ChiseledBookshelfDataMock.class::isInstance), SLOT_OCCUPIED_2("slot_2_occupied",
+							Boolean::parseBoolean, ChiseledBookshelfDataMock.class::isInstance), SLOT_OCCUPIED_3(
+									"slot_3_occupied", Boolean::parseBoolean,
+									ChiseledBookshelfDataMock.class::isInstance), SLOT_OCCUPIED_4("slot_4_occupied",
+											Boolean::parseBoolean,
+											ChiseledBookshelfDataMock.class::isInstance), SLOT_OCCUPIED_5(
+													"slot_5_occupied", Boolean::parseBoolean,
+													ChiseledBookshelfDataMock.class::isInstance),
 
-	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance),
-	HAS_BOTTLE_1("has_bottle_1", Boolean::parseBoolean, BrewingStand.class::isInstance),
-	HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean, BrewingStand.class::isInstance),
-	DRAG("drag", Boolean::parseBoolean, BubbleColumn.class::isInstance),
+	HAS_BOTTLE_0("has_bottle_0", Boolean::parseBoolean, BrewingStand.class::isInstance), HAS_BOTTLE_1("has_bottle_1",
+			Boolean::parseBoolean, BrewingStand.class::isInstance), HAS_BOTTLE_2("has_bottle_2", Boolean::parseBoolean,
+					BrewingStand.class::isInstance), DRAG("drag", Boolean::parseBoolean,
+							BubbleColumn.class::isInstance),
 
-	PERSISTENT("persistent",Boolean::parseBoolean, Leaves.class::isInstance),
-	DISTANCE("distance", Integer::parseInt, Leaves.class::isInstance),
-	HONEY_LEVEL("honey_level", Integer::parseInt, Beehive.class::isInstance),
+	PERSISTENT("persistent", Boolean::parseBoolean, Leaves.class::isInstance), DISTANCE("distance", Integer::parseInt,
+			Leaves.class::isInstance), HONEY_LEVEL("honey_level", Integer::parseInt, Beehive.class::isInstance),
 
 	BERRIES("berries", Boolean::parseBoolean, CaveVines.class::isInstance);
 
@@ -271,9 +280,7 @@ public enum BlockDataKey
 
 	private static Set<String> compileKeys()
 	{
-		return Arrays.stream(BlockDataKey.values())
-				.map(BlockDataKey::key)
-				.collect(Collectors.toSet());
+		return Arrays.stream(BlockDataKey.values()).map(BlockDataKey::key).collect(Collectors.toSet());
 	}
 
 	public static @Nullable BlockDataKey fromKey(String key, BlockDataMock blockDataMock)

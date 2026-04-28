@@ -6,20 +6,26 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class ItemDisplayMock extends DisplayMock implements ItemDisplay
+public class ItemDisplayMock extends DisplayMock
+		implements
+			ItemDisplay,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ItemDisplayBaseMock
 {
 
 	private ItemStack itemStack = ItemStack.empty();
+
 	private ItemDisplayTransform itemDisplayTransform = ItemDisplayTransform.NONE;
 
 	/**
-	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ItemDisplayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,7 +33,8 @@ public class ItemDisplayMock extends DisplayMock implements ItemDisplay
 	}
 
 	@Override
-	public @Nullable ItemStack getItemStack()
+	@Nullable
+	public ItemStack getItemStack()
 	{
 		return itemStack.clone();
 	}
@@ -38,15 +45,15 @@ public class ItemDisplayMock extends DisplayMock implements ItemDisplay
 		if (item == null)
 		{
 			this.itemStack = ItemStack.empty();
-		}
-		else
+		} else
 		{
 			this.itemStack = item.clone();
 		}
 	}
 
 	@Override
-	public @NotNull ItemDisplayTransform getItemDisplayTransform()
+	@NotNull
+	public ItemDisplayTransform getItemDisplayTransform()
 	{
 		return this.itemDisplayTransform;
 	}
@@ -62,5 +69,4 @@ public class ItemDisplayMock extends DisplayMock implements ItemDisplay
 	{
 		return EntityType.ITEM_DISPLAY;
 	}
-
 }

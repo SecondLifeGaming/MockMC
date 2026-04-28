@@ -18,14 +18,21 @@ public class RepeatingTask extends ScheduledTask
 	/**
 	 * Constructs a new {@link RepeatingTask} with the provided parameters.
 	 *
-	 * @param id            The task ID.
-	 * @param plugin        The plugin owning the task.
-	 * @param isSync        Whether the task is synchronous.
-	 * @param scheduledTick The tick the task is scheduled to run at.
-	 * @param period        How often the task should run.
-	 * @param runnable      The runnable to run.
+	 * @param id
+	 *            The task ID.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param isSync
+	 *            Whether the task is synchronous.
+	 * @param scheduledTick
+	 *            The tick the task is scheduled to run at.
+	 * @param period
+	 *            How often the task should run.
+	 * @param runnable
+	 *            The runnable to run.
 	 */
-	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, @NotNull Runnable runnable)
+	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period,
+			@NotNull Runnable runnable)
 	{
 		super(id, plugin, isSync, scheduledTick, runnable);
 		this.period = period;
@@ -34,14 +41,21 @@ public class RepeatingTask extends ScheduledTask
 	/**
 	 * Constructs a new {@link RepeatingTask} with the provided parameters.
 	 *
-	 * @param id            The task ID.
-	 * @param plugin        The plugin owning the task.
-	 * @param isSync        Whether the task is synchronous.
-	 * @param scheduledTick The tick the task is scheduled to run at.
-	 * @param period        How often the task should run.
-	 * @param consumer      The consumer to run.
+	 * @param id
+	 *            The task ID.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param isSync
+	 *            Whether the task is synchronous.
+	 * @param scheduledTick
+	 *            The tick the task is scheduled to run at.
+	 * @param period
+	 *            How often the task should run.
+	 * @param consumer
+	 *            The consumer to run.
 	 */
-	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period, @NotNull Consumer<? super BukkitTask> consumer)
+	public RepeatingTask(int id, Plugin plugin, boolean isSync, long scheduledTick, long period,
+			@NotNull Consumer<? super BukkitTask> consumer)
 	{
 		super(id, plugin, isSync, scheduledTick, consumer);
 		this.period = period;

@@ -1,28 +1,34 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.CommandMinecart;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.Objects;
 import java.util.UUID;
 
-public class CommandMinecartMock extends MinecartMock implements CommandMinecart
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class CommandMinecartMock extends MinecartMock
+		implements
+			CommandMinecart,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.minecart.CommandMinecartBaseMock
 {
 
 	private String command = "";
+
 	private int successCount;
 
 	/**
-	 * Constructs a new {@link CommandMinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CommandMinecartMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CommandMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -30,7 +36,8 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	}
 
 	@Override
-	public @NotNull String getCommand()
+	@NotNull
+	public String getCommand()
 	{
 		return this.command;
 	}
@@ -40,21 +47,6 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	{
 		this.command = Objects.requireNonNullElse(command, "");
 		this.successCount = 0;
-	}
-
-	@Override
-	public @NotNull Component lastOutput()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void lastOutput(@Nullable Component lastOutput)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
 	}
 
 	@Override
@@ -70,15 +62,16 @@ public class CommandMinecartMock extends MinecartMock implements CommandMinecart
 	}
 
 	@Override
-	public @NotNull Material getMinecartMaterial()
+	@NotNull
+	public Material getMinecartMaterial()
 	{
 		return Material.COMMAND_BLOCK_MINECART;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.COMMAND_BLOCK_MINECART;
 	}
-
 }

@@ -4,7 +4,8 @@ import org.bukkit.Color;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record DyedItemColorMock(Color color) implements DyedItemColor
 {
 

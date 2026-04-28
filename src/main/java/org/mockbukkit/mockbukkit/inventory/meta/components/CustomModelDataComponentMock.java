@@ -1,15 +1,14 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.CustomModelDataComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,15 +17,28 @@ import java.util.Map;
 @NotNullByDefault
 @EqualsAndHashCode
 @SerializableAs("CustomModelData")
-@SuppressWarnings("UnstableApiUsage")
-public class CustomModelDataComponentMock implements CustomModelDataComponent
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class CustomModelDataComponentMock
+		implements
+			CustomModelDataComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.CustomModelDataComponentBaseMock
 {
-	private @Builder.Default List<Float> floats = List.of();
-	private @Builder.Default List<Boolean> flags = List.of();
-	private @Builder.Default List<String> strings = List.of();
-	private @Builder.Default List<Color> colors = List.of();
 
-	private CustomModelDataComponentMock(List<Float> floats, List<Boolean> flags, List<String> strings, List<Color> colors)
+	@Builder.Default
+	private List<Float> floats = List.of();
+
+	@Builder.Default
+	private List<Boolean> flags = List.of();
+
+	@Builder.Default
+	private List<String> strings = List.of();
+
+	@Builder.Default
+	private List<Color> colors = List.of();
+
+	private CustomModelDataComponentMock(List<Float> floats, List<Boolean> flags, List<String> strings,
+			List<Color> colors)
 	{
 		this.floats = List.copyOf(floats);
 		this.flags = List.copyOf(flags);
@@ -101,15 +113,10 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 		var colorsRaw = SerializableMeta.getList(Object.class, map, "colors");
 		var colors = NbtParser.parseList(colorsRaw, o ->
 		{
-			Preconditions.checkArgument(o instanceof Map<?,?>, "Expected Map<?, ?> but got %s", o.getClass());
+			Preconditions.checkArgument(o instanceof Map<?, ?>, "Expected Map<?, ?> but got %s", o.getClass());
 			return Color.deserialize((Map<String, Object>) o);
 		});
-
-		return CustomModelDataComponentMock.builder()
-				.floats(floats)
-				.flags(flags)
-				.strings(strings)
-				.colors(colors)
+		return CustomModelDataComponentMock.builder().floats(floats).flags(flags).strings(strings).colors(colors)
 				.build();
 	}
 
@@ -117,5 +124,4 @@ public class CustomModelDataComponentMock implements CustomModelDataComponent
 	{
 		return builder().build();
 	}
-
 }

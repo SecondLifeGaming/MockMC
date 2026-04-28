@@ -9,8 +9,6 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -18,23 +16,40 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class BeeMock extends AnimalsMock implements Bee
+public class BeeMock extends AnimalsMock
+		implements
+			Bee,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BeeBaseMock
 {
 
-	private @Nullable Location hive;
-	private @Nullable Location flower;
+	@Nullable
+	private Location hive;
+
+	@Nullable
+	private Location flower;
+
 	private boolean nectar = false;
+
 	private boolean hasStung = false;
+
 	private int anger = 0;
+
 	private int cannotEnterHiveTicks = 0;
-	private @NonNegative int timeSinceSting = 0;
-	private @NotNull TriState rollingOverride = TriState.NOT_SET;
+
+	@NonNegative
+	private int timeSinceSting = 0;
+
+	@NotNull
+	private TriState rollingOverride = TriState.NOT_SET;
 
 	/**
-	 * Constructs a new {@link BeeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link BeeMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BeeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -42,7 +57,8 @@ public class BeeMock extends AnimalsMock implements Bee
 	}
 
 	@Override
-	public @Nullable Location getHive()
+	@Nullable
+	public Location getHive()
 	{
 		return this.hive;
 	}
@@ -50,12 +66,14 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public void setHive(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Hive must be in same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Hive must be in same world");
 		this.hive = location;
 	}
 
 	@Override
-	public @Nullable Location getFlower()
+	@Nullable
+	public Location getFlower()
 	{
 		return this.flower;
 	}
@@ -63,7 +81,8 @@ public class BeeMock extends AnimalsMock implements Bee
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Flower must be in same world");
 		this.flower = location;
 	}
 
@@ -123,7 +142,8 @@ public class BeeMock extends AnimalsMock implements Bee
 	}
 
 	@Override
-	public @NotNull TriState getRollingOverride()
+	@NotNull
+	public TriState getRollingOverride()
 	{
 		return this.rollingOverride;
 	}
@@ -132,34 +152,6 @@ public class BeeMock extends AnimalsMock implements Bee
 	public boolean isRolling()
 	{
 		return this.rollingOverride.toBooleanOrElse(false);
-	}
-
-	@Override
-	public void setCropsGrownSincePollination(int crops)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getCropsGrownSincePollination()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setTicksSincePollination(int ticks)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getTicksSincePollination()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -176,9 +168,9 @@ public class BeeMock extends AnimalsMock implements Bee
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.BEE;
 	}
-
 }

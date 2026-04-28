@@ -9,7 +9,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -17,21 +16,30 @@ import java.util.UUID;
  *
  * @see AbstractProjectileMock
  */
-public class ShulkerBulletMock extends AbstractProjectileMock implements ShulkerBullet
+public class ShulkerBulletMock extends AbstractProjectileMock
+		implements
+			ShulkerBullet,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ShulkerBulletBaseMock
 {
 
 	private final Vector targetDelta = new Vector();
 
 	private int flightSteps;
 
-	private @Nullable Entity finalTarget;
-	private @Nullable BlockFace movementDirection;
+	@Nullable
+	private Entity finalTarget;
+
+	@Nullable
+	private BlockFace movementDirection;
 
 	/**
-	 * Constructs a new {@link ShulkerBullet} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ShulkerBullet} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ShulkerBulletMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -39,7 +47,8 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 	}
 
 	@Override
-	public @Nullable Entity getTarget()
+	@Nullable
+	public Entity getTarget()
 	{
 		return this.finalTarget;
 	}
@@ -52,7 +61,8 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 	}
 
 	@Override
-	public @NotNull Vector getTargetDelta()
+	@NotNull
+	public Vector getTargetDelta()
 	{
 		return this.targetDelta.clone();
 	}
@@ -65,7 +75,8 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 	}
 
 	@Override
-	public @Nullable BlockFace getCurrentMovementDirection()
+	@Nullable
+	public BlockFace getCurrentMovementDirection()
 	{
 		return this.movementDirection;
 	}
@@ -76,8 +87,7 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 		if (movementDirection != null && movementDirection.isCartesian())
 		{
 			this.movementDirection = movementDirection;
-		}
-		else
+		} else
 		{
 			this.movementDirection = null;
 		}
@@ -96,9 +106,9 @@ public class ShulkerBulletMock extends AbstractProjectileMock implements Shulker
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SHULKER_BULLET;
 	}
-
 }

@@ -4,7 +4,6 @@ import org.bukkit.entity.Monster;
 import org.bukkit.entity.SpawnCategory;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see CreatureMock
  */
-public abstract class MonsterMock extends CreatureMock implements Monster
+public abstract class MonsterMock extends CreatureMock
+		implements
+			Monster,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.MonsterBaseMock
 {
 
 	/**
-	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected MonsterMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public abstract class MonsterMock extends CreatureMock implements Monster
 	}
 
 	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
+	@NotNull
+	public SpawnCategory getSpawnCategory()
 	{
 		return SpawnCategory.MONSTER;
 	}
-
 }

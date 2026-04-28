@@ -9,7 +9,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.io.File;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -17,7 +16,11 @@ import java.util.function.Consumer;
 /**
  * A simple plugin that does nothing.
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PluginMock extends JavaPlugin
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.plugin.PluginBaseMock
 {
 
 	/**
@@ -30,18 +33,24 @@ public class PluginMock extends JavaPlugin
 	/**
 	 * MockBukkit constructor.
 	 *
-	 * @param loader      The plugin loader.
-	 * @param description The plugin description file.
-	 * @param dataFolder  The plugins data folder.
-	 * @param file        The plugins file.
+	 * @param loader
+	 *            The plugin loader.
+	 * @param description
+	 *            The plugin description file.
+	 * @param dataFolder
+	 *            The plugins data folder.
+	 * @param file
+	 *            The plugins file.
 	 */
-	protected PluginMock(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected PluginMock(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
+			@NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}
 
 	/**
-	 * Create a builder for mock plugins, allows for on enable, on disable code execution and so on
+	 * Create a builder for mock plugins, allows for on enable, on disable code
+	 * execution and so on
 	 *
 	 * @return A builder for mock plugin
 	 */
@@ -54,9 +63,13 @@ public class PluginMock extends JavaPlugin
 	{
 
 		private Optional<Consumer<PluginMock>> onLoad = Optional.empty();
+
 		private Optional<Consumer<PluginMock>> onEnable = Optional.empty();
+
 		private Optional<Consumer<PluginMock>> onDisable = Optional.empty();
+
 		private String pluginName = "PluginMock";
+
 		private String pluginVersion = "1.0.0";
 
 		private Builder()
@@ -64,7 +77,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onLoad What to run on load
+		 * @param onLoad
+		 *            What to run on load
 		 * @return This builder
 		 */
 		public Builder withOnLoad(@NotNull Consumer<PluginMock> onLoad)
@@ -74,7 +88,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onLoad What to run on load
+		 * @param onLoad
+		 *            What to run on load
 		 * @return This builder
 		 */
 		public Builder withOnLoad(@NotNull Runnable onLoad)
@@ -84,7 +99,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onEnable What to run on enable
+		 * @param onEnable
+		 *            What to run on enable
 		 * @return This builder
 		 */
 		public Builder withOnEnable(@NotNull Consumer<PluginMock> onEnable)
@@ -94,7 +110,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onEnable What to run on load
+		 * @param onEnable
+		 *            What to run on load
 		 * @return This builder
 		 */
 		public Builder withOnEnable(@NotNull Runnable onEnable)
@@ -104,7 +121,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onDisable What to run on disable
+		 * @param onDisable
+		 *            What to run on disable
 		 * @return This builder
 		 */
 		public Builder withOnDisable(@NotNull Consumer<PluginMock> onDisable)
@@ -114,7 +132,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param onDisable What to run on load
+		 * @param onDisable
+		 *            What to run on load
 		 * @return This builder
 		 */
 		public Builder withOnDisable(@NotNull Runnable onDisable)
@@ -124,7 +143,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param name The name of the plugin to build
+		 * @param name
+		 *            The name of the plugin to build
 		 * @return This builder
 		 */
 		public Builder withPluginName(@NotNull String name)
@@ -135,7 +155,8 @@ public class PluginMock extends JavaPlugin
 		}
 
 		/**
-		 * @param version The version of the blugin to build
+		 * @param version
+		 *            The version of the blugin to build
 		 * @return This builder
 		 */
 		public Builder withPluginVersion(@NotNull String version)
@@ -153,14 +174,14 @@ public class PluginMock extends JavaPlugin
 		public PluginMock build()
 		{
 			MockBukkit.ensureMocking();
-
-			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion, InternalPluginMock.class.getName());
+			PluginDescriptionFile description = new PluginDescriptionFile(pluginName, pluginVersion,
+					InternalPluginMock.class.getName());
 			ServerMock mock = MockBukkit.getMock();
-			Plugin instance = mock.getPluginManager().loadPlugin(InternalPluginMock.class, description, new Object[]{ onEnable, onDisable, onLoad });
+			Plugin instance = mock.getPluginManager().loadPlugin(InternalPluginMock.class, description, new Object[]
+			{onEnable, onDisable, onLoad});
 			mock.getPluginManager().enablePlugin(instance);
 			return (PluginMock) instance;
 		}
-
 	}
 
 	@ApiStatus.Internal
@@ -168,10 +189,13 @@ public class PluginMock extends JavaPlugin
 	{
 
 		private final Optional<Consumer<PluginMock>> onEnable;
+
 		private final Optional<Consumer<PluginMock>> onDisable;
+
 		private final Optional<Consumer<PluginMock>> onLoad;
 
-		public InternalPluginMock(Optional<Consumer<PluginMock>> onEnable, Optional<Consumer<PluginMock>> onDisable, Optional<Consumer<PluginMock>> onLoad)
+		public InternalPluginMock(Optional<Consumer<PluginMock>> onEnable, Optional<Consumer<PluginMock>> onDisable,
+				Optional<Consumer<PluginMock>> onLoad)
 		{
 			this.onEnable = onEnable;
 			this.onDisable = onDisable;
@@ -195,7 +219,5 @@ public class PluginMock extends JavaPlugin
 		{
 			onLoad.ifPresent((consumer) -> consumer.accept(this));
 		}
-
 	}
-
 }

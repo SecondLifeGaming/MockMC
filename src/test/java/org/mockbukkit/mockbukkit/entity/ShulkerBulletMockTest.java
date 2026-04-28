@@ -121,16 +121,8 @@ class ShulkerBulletMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = {
-						"UP",
-						"DOWN",
-						"NORTH",
-						"SOUTH",
-						"EAST",
-						"WEST"
-				})
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"UP", "DOWN", "NORTH", "SOUTH", "EAST", "WEST"})
 		void givenPossibleValues_ShouldReturnThePossibleValues(BlockFace direction)
 		{
 			shulkerBullet.setCurrentMovementDirection(direction);
@@ -140,16 +132,8 @@ class ShulkerBulletMockTest
 
 		@ParameterizedTest
 		@NullSource
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = {
-						"UP",
-						"DOWN",
-						"NORTH",
-						"SOUTH",
-						"EAST",
-						"WEST"
-				})
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"UP", "DOWN", "NORTH", "SOUTH", "EAST", "WEST"})
 		void givenNonPossibleValues_ShouldReturnNull(BlockFace direction)
 		{
 			shulkerBullet.setCurrentMovementDirection(direction);
@@ -170,7 +154,8 @@ class ShulkerBulletMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		void givenCustomTarget_ShouldReturnTheTargetSet(int steps)
 		{
 			shulkerBullet.setFlightSteps(steps);

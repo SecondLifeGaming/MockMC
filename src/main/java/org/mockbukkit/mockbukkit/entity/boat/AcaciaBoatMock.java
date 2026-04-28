@@ -5,7 +5,6 @@ import org.bukkit.entity.boat.AcaciaBoat;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.BoatMock;
-
 import java.util.UUID;
 
 /**
@@ -13,7 +12,10 @@ import java.util.UUID;
  *
  * @see BoatMock
  */
-public class AcaciaBoatMock extends BoatMock implements AcaciaBoat
+public class AcaciaBoatMock extends BoatMock
+		implements
+			AcaciaBoat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.boat.AcaciaBoatBaseMock
 {
 
 	public AcaciaBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -22,9 +24,9 @@ public class AcaciaBoatMock extends BoatMock implements AcaciaBoat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ACACIA_BOAT;
 	}
-
 }

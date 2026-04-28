@@ -39,7 +39,8 @@ class SnifferMockTest
 		@Test
 		void defaultExploredLocationsIsEmpty()
 		{
-			@NotNull Collection<Location> actual = sniffer.getExploredLocations();
+			@NotNull
+			Collection<Location> actual = sniffer.getExploredLocations();
 			assertNotNull(actual);
 			assertTrue(actual.isEmpty());
 		}
@@ -47,7 +48,8 @@ class SnifferMockTest
 		@Test
 		void givenNullLocation()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sniffer.addExploredLocation(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> sniffer.addExploredLocation(null));
 			assertEquals("location cannot be null", e.getMessage());
 		}
 
@@ -84,7 +86,8 @@ class SnifferMockTest
 		@Test
 		void givenNullLocation()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sniffer.removeExploredLocation(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> sniffer.removeExploredLocation(null));
 			assertEquals("location cannot be null", e.getMessage());
 		}
 

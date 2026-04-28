@@ -10,16 +10,19 @@ import org.mockbukkit.mockbukkit.command.brigadier.bukkit.BukkitBrigadierForward
 /**
  * Mock implementation of a {@link CommandMap}.
  */
-public class CommandMapMock extends SimpleCommandMap implements CommandMap
+public class CommandMapMock extends SimpleCommandMap
+		implements
+			CommandMap,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.command.CommandMapBaseMock
 {
 
 	/**
-	 * @param server The ServerMock this command map is for.
+	 * @param server
+	 *            The ServerMock this command map is for.
 	 */
 	@ApiStatus.Internal
 	public CommandMapMock(@NotNull ServerMock server)
 	{
 		super(server, BukkitBrigadierForwardingMapMock.INSTANCE);
 	}
-
 }

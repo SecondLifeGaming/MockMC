@@ -8,7 +8,6 @@ import org.bukkit.inventory.MerchantInventory;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.Objects;
 
 /**
@@ -16,7 +15,10 @@ import java.util.Objects;
  *
  * @see InventoryMock
  */
-public class MerchantInventoryMock extends InventoryMock implements MerchantInventory
+public class MerchantInventoryMock extends InventoryMock
+		implements
+			MerchantInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.MerchantInventoryBaseMock
 {
 
 	private final Merchant merchant;
@@ -26,7 +28,6 @@ public class MerchantInventoryMock extends InventoryMock implements MerchantInve
 	public MerchantInventoryMock(@Nullable InventoryHolder holder, @NotNull Merchant merchant)
 	{
 		super(holder, InventoryType.MERCHANT);
-
 		this.merchant = Preconditions.checkNotNull(merchant, "The merchant cannot be null");
 	}
 
@@ -39,24 +40,27 @@ public class MerchantInventoryMock extends InventoryMock implements MerchantInve
 	/**
 	 * Get the index of the currently selected recipe.
 	 *
-	 * @param selectedRecipe the index of the currently selected recipe
+	 * @param selectedRecipe
+	 *            the index of the currently selected recipe
 	 */
 	public void setSelectedRecipeIndex(int selectedRecipe)
 	{
 		final int maxSize = merchant.getRecipeCount();
-		Preconditions.checkArgument(0 <= selectedRecipe && selectedRecipe <= maxSize, "Recipe index out of range, value should be between 0 <= index <= %s", maxSize);
-
+		Preconditions.checkArgument(0 <= selectedRecipe && selectedRecipe <= maxSize,
+				"Recipe index out of range, value should be between 0 <= index <= %s", maxSize);
 		this.selectedRecipeIndex = selectedRecipe;
 	}
 
 	@Override
-	public @Nullable MerchantRecipe getSelectedRecipe()
+	@Nullable
+	public MerchantRecipe getSelectedRecipe()
 	{
 		return merchant.getRecipe(this.selectedRecipeIndex);
 	}
 
 	@Override
-	public @NotNull Merchant getMerchant()
+	@NotNull
+	public Merchant getMerchant()
 	{
 		return this.merchant;
 	}
@@ -72,7 +76,6 @@ public class MerchantInventoryMock extends InventoryMock implements MerchantInve
 		{
 			return false;
 		}
-
 		return selectedRecipeIndex == that.selectedRecipeIndex && Objects.equals(merchant, that.merchant);
 	}
 
@@ -81,5 +84,4 @@ public class MerchantInventoryMock extends InventoryMock implements MerchantInve
 	{
 		return Objects.hash(super.hashCode(), merchant, selectedRecipeIndex);
 	}
-
 }

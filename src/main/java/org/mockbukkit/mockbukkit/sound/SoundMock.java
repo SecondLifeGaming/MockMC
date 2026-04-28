@@ -5,7 +5,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
-public class SoundMock extends OldKeyedEnumMock<Sound> implements Sound
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SoundMock extends OldKeyedEnumMock<Sound>
+		implements
+			Sound,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.SoundBaseMock
 {
 
 	public SoundMock(String name, int ordinal, NamespacedKey key)
@@ -18,8 +23,6 @@ public class SoundMock extends OldKeyedEnumMock<Sound> implements Sound
 		String name = jsonObject.get("name").getAsString();
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		int ordinal = jsonObject.get("ordinal").getAsInt();
-
 		return new SoundMock(name, ordinal, key);
 	}
-
 }

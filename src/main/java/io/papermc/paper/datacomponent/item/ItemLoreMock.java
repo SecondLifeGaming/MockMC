@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class ItemLoreMock implements ItemLore
 {
 
@@ -43,12 +44,8 @@ public class ItemLoreMock implements ItemLore
 		private static void validateLineCount(final int current, final int add)
 		{
 			final int newSize = current + add;
-			Preconditions.checkArgument(
-					newSize <= MAX_LINES,
-					"Cannot have more than %s lines, had %s",
-					MAX_LINES,
-					newSize
-			);
+			Preconditions.checkArgument(newSize <= MAX_LINES, "Cannot have more than %s lines, had %s", MAX_LINES,
+					newSize);
 		}
 
 		@Override

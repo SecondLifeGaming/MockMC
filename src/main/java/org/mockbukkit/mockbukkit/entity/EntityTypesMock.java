@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import lombok.extern.slf4j.Slf4j;
 import org.bukkit.entity.Allay;
 import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.Armadillo;
@@ -198,10 +197,11 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.BiFunction;
 
-@Slf4j
 @ApiStatus.Internal
 public final class EntityTypesMock
 {
+
+	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(EntityTypesMock.class);
 
 	private static final EntityTypesMock INSTANCE = withDefaults().build();
 
@@ -217,8 +217,7 @@ public final class EntityTypesMock
 
 	public static Builder withDefaults()
 	{
-		return builder()
-				.register(AcaciaBoat.class, AcaciaBoatMock.class, AcaciaBoatMock::new)
+		return builder().register(AcaciaBoat.class, AcaciaBoatMock.class, AcaciaBoatMock::new)
 				.register(AcaciaChestBoat.class, AcaciaChestBoatMock.class, AcaciaChestBoatMock::new)
 				.register(Allay.class, AllayMock.class, AllayMock::new)
 				.register(AreaEffectCloud.class, AreaEffectCloudMock.class, AreaEffectCloudMock::new)
@@ -228,8 +227,7 @@ public final class EntityTypesMock
 				.register(Axolotl.class, AxolotlMock.class, AxolotlMock::new)
 				.register(BambooChestRaft.class, BambooChestRaftMock.class, BambooChestRaftMock::new)
 				.register(BambooRaft.class, BambooRaftMock.class, BambooRaftMock::new)
-				.register(Bat.class, BatMock.class, BatMock::new)
-				.register(Bee.class, BeeMock.class, BeeMock::new)
+				.register(Bat.class, BatMock.class, BatMock::new).register(Bee.class, BeeMock.class, BeeMock::new)
 				.register(BirchBoat.class, BirchBoatMock.class, BirchBoatMock::new)
 				.register(BirchChestBoat.class, BirchChestBoatMock.class, BirchChestBoatMock::new)
 				.register(Blaze.class, BlazeMock.class, BlazeMock::new)
@@ -274,8 +272,7 @@ public final class EntityTypesMock
 				.register(Fireball.class, LargeFireballMock.class, LargeFireballMock::new)
 				.register(Firework.class, FireworkMock.class, FireworkMock::new)
 				.register(FishHook.class, FishHookMock.class, FishHookMock::new)
-				.register(Fox.class, FoxMock.class, FoxMock::new)
-				.register(Frog.class, FrogMock.class, FrogMock::new)
+				.register(Fox.class, FoxMock.class, FoxMock::new).register(Frog.class, FrogMock.class, FrogMock::new)
 				.register(Ghast.class, GhastMock.class, GhastMock::new)
 				.register(Giant.class, GiantMock.class, GiantMock::new)
 				.register(GlowItemFrame.class, GlowItemFrameMock.class, GlowItemFrameMock::new)
@@ -380,24 +377,28 @@ public final class EntityTypesMock
 				.register(ZombieVillager.class, ZombieVillagerMock.class, ZombieVillagerMock::new);
 	}
 
-	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server, @NotNull UUID entityUUID)
+	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz,
+			@NotNull ServerMock server, @NotNull UUID entityUUID)
 	{
 		return getInstance().create(bukkitClazz, server, entityUUID);
 	}
 
-	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server)
+	public static <T extends Entity> @NotNull EntityMock createEntity(@NotNull Class<T> bukkitClazz,
+			@NotNull ServerMock server)
 	{
 		return EntityTypesMock.createEntity(bukkitClazz, server, UUID.randomUUID());
 	}
 
 	private final Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> bukkitToMockData;
 
-	private EntityTypesMock(@NotNull Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> bukkitToMockData)
+	private EntityTypesMock(
+			@NotNull Map<Class<? extends Entity>, EntityData<? extends Entity, ? extends EntityMock>> bukkitToMockData)
 	{
 		this.bukkitToMockData = Preconditions.checkNotNull(bukkitToMockData);
 	}
 
-	public <T extends Entity> @NotNull EntityMock create(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server, @NotNull UUID entityUUID)
+	public <T extends Entity> @NotNull EntityMock create(@NotNull Class<T> bukkitClazz, @NotNull ServerMock server,
+			@NotNull UUID entityUUID)
 	{
 		Preconditions.checkArgument(bukkitClazz != null, "bukkitClazz cannot be null");
 		Preconditions.checkArgument(server != null, "server cannot be null");
@@ -406,8 +407,7 @@ public final class EntityTypesMock
 		if (bukkitClazz == Item.class)
 		{
 			throw new IllegalArgumentException("Items must be spawned using World#dropItem(...)");
-		}
-		else if (bukkitClazz == Player.class)
+		} else if (bukkitClazz == Player.class)
 		{
 			throw new IllegalArgumentException("Player Entities cannot be spawned, use ServerMock#addPlayer(...)");
 		}
@@ -417,12 +417,11 @@ public final class EntityTypesMock
 		{
 			var myConstructor = bukkitClazz.getDeclaredConstructor(ServerMock.class, UUID.class);
 			return (EntityMock) myConstructor.newInstance(server, entityUUID);
-		}
-		catch (NoSuchMethodException e)
+		} catch (NoSuchMethodException e)
 		{
-			log.debug("Method with signature '{}' does not exist in '{}', falling back to reflection.", e.getMessage(), bukkitClazz.getName());
-		}
-		catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+			log.debug("Method with signature '{}' does not exist in '{}', falling back to reflection.", e.getMessage(),
+					bukkitClazz.getName());
+		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
 			log.warn("Couldn't find: {} for {}. Falling back to reflection.", e.getMessage(), bukkitClazz.getName(), e);
 		}
@@ -431,34 +430,27 @@ public final class EntityTypesMock
 		if (data == null)
 		{
 			// try a little harder - first look for exact match, then assignable
-			data = bukkitToMockData.values().stream()
-					.filter(entityData -> entityData.mockClass.equals(bukkitClazz))
+			data = bukkitToMockData.values().stream().filter(entityData -> entityData.mockClass.equals(bukkitClazz))
 					.findFirst()
-					.orElse(
-							bukkitToMockData.values().stream()
-									.filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass))
-									.findFirst()
-									.orElse(null)
-					);
-
-			if (data == null)
-			{
-				throw new UnimplementedOperationException(String.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()));
-			}
+					.orElse(bukkitToMockData.values().stream()
+							.filter(entityData -> bukkitClazz.isAssignableFrom(entityData.mockClass)).findFirst()
+							.orElseThrow(() -> new UnimplementedOperationException(String
+									.format("Mock for entity %s was not implemented yet.", bukkitClazz.getName()))));
 		}
 
-		@Nullable EntityMock mockedEntity = data.mockFactory().apply(server, entityUUID);
+		@Nullable
+		EntityMock mockedEntity = data.mockFactory().apply(server, entityUUID);
 		Preconditions.checkState(mockedEntity != null, "After creating the mock the entity was null.");
 
 		Class<?> mockedEntityClass = mockedEntity.getClass();
-		Preconditions.checkState(bukkitClazz.isAssignableFrom(mockedEntityClass), "The class %s is not a subclass of %s", mockedEntityClass, bukkitClazz);
+		Preconditions.checkState(bukkitClazz.isAssignableFrom(mockedEntityClass),
+				"The class %s is not a subclass of %s", mockedEntityClass, bukkitClazz);
 
 		return mockedEntity;
 	}
 
 	private record EntityData<E extends Entity, M extends EntityMock>(@NotNull Class<E> entityClass,
-																	  @NotNull Class<M> mockClass,
-																	  @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
+			@NotNull Class<M> mockClass, @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
 	{
 
 	}
@@ -470,15 +462,17 @@ public final class EntityTypesMock
 
 		@ApiStatus.Internal
 		public <E extends Entity, M extends EntityMock> Builder register(@NotNull Class<E> bukkitClazz,
-																		 @NotNull Class<M> mockClazz,
-																		 @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
+				@NotNull Class<M> mockClazz, @NotNull BiFunction<ServerMock, UUID, EntityMock> mockFactory)
 		{
 			Preconditions.checkArgument(bukkitClazz != null, "Cannot register a null bukkit class");
 			Preconditions.checkArgument(mockClazz != null, "Cannot register a null mock class");
-			Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s", mockClazz, bukkitClazz);
+			Preconditions.checkArgument(bukkitClazz.isAssignableFrom(mockClazz), "The class %s is not a subclass of %s",
+					mockClazz, bukkitClazz);
 			Preconditions.checkArgument(mockFactory != null, "Cannot register a null mock factory");
-			Preconditions.checkArgument(!mapping.containsKey(bukkitClazz), "Cannot register type %s because it's already registered.", bukkitClazz);
-			Preconditions.checkArgument(!mockClazz.isAssignableFrom(Player.class), "Not allowed to register %s.", mockClazz);
+			Preconditions.checkArgument(!mapping.containsKey(bukkitClazz),
+					"Cannot register type %s because it's already registered.", bukkitClazz);
+			Preconditions.checkArgument(!mockClazz.isAssignableFrom(Player.class), "Not allowed to register %s.",
+					mockClazz);
 			mapping.put(bukkitClazz, new EntityData<>(bukkitClazz, mockClazz, mockFactory));
 			return this;
 		}

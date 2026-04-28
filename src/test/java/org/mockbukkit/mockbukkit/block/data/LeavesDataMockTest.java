@@ -108,7 +108,8 @@ class LeavesDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull LeavesDataMock cloned = leavesData.clone();
+		@NotNull
+		LeavesDataMock cloned = leavesData.clone();
 
 		assertEquals(leavesData, cloned);
 		assertEquals(leavesData.isWaterlogged(), cloned.isWaterlogged());

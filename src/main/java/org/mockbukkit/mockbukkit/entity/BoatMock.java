@@ -4,14 +4,9 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.entity.Boat;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -19,19 +14,30 @@ import java.util.UUID;
  *
  * @see VehicleMock
  */
-public class BoatMock extends VehicleMock implements Boat
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class BoatMock extends VehicleMock
+		implements
+			Boat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BoatBaseMock
 {
 
 	private double maxSpeed = 0.4D;
+
 	private double occupiedDeceleration = 0.2D;
+
 	private double unoccupiedDeceleration = -1;
+
 	private boolean workOnLand = false;
 
 	/**
-	 * Constructs a new {@link BoatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link BoatMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -40,7 +46,8 @@ public class BoatMock extends VehicleMock implements Boat
 
 	@Override
 	@Deprecated(since = "1.19")
-	public @NotNull TreeSpecies getWoodType()
+	@NotNull
+	public TreeSpecies getWoodType()
 	{
 		EntityType boatType = getType();
 		return switch (boatType)
@@ -63,7 +70,8 @@ public class BoatMock extends VehicleMock implements Boat
 
 	@Override
 	@Deprecated(since = "1.21.2")
-	public @NotNull Type getBoatType()
+	@NotNull
+	public Type getBoatType()
 	{
 		EntityType boatType = getType();
 		return switch (boatType)
@@ -147,14 +155,8 @@ public class BoatMock extends VehicleMock implements Boat
 	}
 
 	@Override
-	public @NotNull Status getStatus()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Material getBoatMaterial()
+	@NotNull
+	public Material getBoatMaterial()
 	{
 		return switch (getBoatType())
 		{
@@ -171,30 +173,9 @@ public class BoatMock extends VehicleMock implements Boat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.OAK_BOAT;
 	}
-
-	@Override
-	public boolean isLeashed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NonNull Entity getLeashHolder() throws IllegalStateException
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean setLeashHolder(@Nullable Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

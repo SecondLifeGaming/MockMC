@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class HorseMockTest
 {
@@ -100,8 +102,8 @@ class HorseMockTest
 		Field inventory = horse.getClass().getDeclaredField("inventory");
 		inventory.setAccessible(true);
 		inventory.set(horse, null);
-		IllegalStateException illegalStateException =
-				assertThrowsExactly(IllegalStateException.class, horse::getInventory);
+		IllegalStateException illegalStateException = assertThrowsExactly(IllegalStateException.class,
+				horse::getInventory);
 		assertEquals("No inventory has been set", illegalStateException.getMessage());
 	}
 

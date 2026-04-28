@@ -8,7 +8,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.Map;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record MapDecorationsMock(Map<String, DecorationEntry> decorations) implements MapDecorations
 {
 
@@ -19,7 +20,7 @@ public record MapDecorationsMock(Map<String, DecorationEntry> decorations) imple
 	}
 
 	public record DecorationEntryMock(MapCursor.Type type, double x, double z,
-									  float rotation) implements DecorationEntry
+			float rotation) implements DecorationEntry
 	{
 
 	}

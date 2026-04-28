@@ -5,9 +5,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.TileState;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
-
 import java.util.Objects;
 
 /**
@@ -15,15 +13,21 @@ import java.util.Objects;
  *
  * @see BlockStateMock
  */
-public abstract class TileStateMock extends BlockStateMock implements TileState
+public abstract class TileStateMock extends BlockStateMock
+		implements
+			TileState,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.TileStateBaseMock
 {
 
-	private final @NotNull PersistentDataContainerMock container;
+	@NotNull
+	private final PersistentDataContainerMock container;
 
 	/**
-	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Material}.
+	 * Constructs a new {@link SculkCatalystStateMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	protected TileStateMock(@NotNull Material material)
 	{
@@ -32,9 +36,11 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	/**
-	 * Constructs a new {@link SculkCatalystStateMock} for the provided {@link Block}.
+	 * Constructs a new {@link SculkCatalystStateMock} for the provided
+	 * {@link Block}.
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected TileStateMock(@NotNull Block block)
 	{
@@ -43,9 +49,11 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	/**
-	 * Constructs a new {@link SculkCatalystStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SculkCatalystStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected TileStateMock(@NotNull TileStateMock state)
 	{
@@ -54,20 +62,15 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	@NotNull
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return container;
 	}
 
 	@Override
-	public boolean isSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public abstract @NotNull TileStateMock getSnapshot();
+	@NotNull
+	public abstract TileStateMock getSnapshot();
 
 	@Override
 	public boolean equals(Object o)
@@ -98,5 +101,4 @@ public abstract class TileStateMock extends BlockStateMock implements TileState
 	{
 		return super.toStringInternal() + ", container=" + container;
 	}
-
 }

@@ -9,7 +9,8 @@ import java.util.Collection;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record SuspiciousStewEffectsMock(List<SuspiciousEffectEntry> effects) implements SuspiciousStewEffects
 {
 

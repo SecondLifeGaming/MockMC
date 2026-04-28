@@ -12,7 +12,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class BeaconInventoryMock extends InventoryMock implements BeaconInventory
+public class BeaconInventoryMock extends InventoryMock
+		implements
+			BeaconInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.BeaconInventoryBaseMock
 {
 
 	private static final int ITEM_SLOT = 0;
@@ -20,7 +23,8 @@ public class BeaconInventoryMock extends InventoryMock implements BeaconInventor
 	/**
 	 * Constructs a new {@link AbstractHorseInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public BeaconInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -39,15 +43,16 @@ public class BeaconInventoryMock extends InventoryMock implements BeaconInventor
 	}
 
 	@Override
-	public @Nullable ItemStack getItem()
+	@Nullable
+	public ItemStack getItem()
 	{
 		return getItem(ITEM_SLOT);
 	}
 
 	@Override
-	public @NotNull BeaconInventoryMock getSnapshot()
+	@NotNull
+	public BeaconInventoryMock getSnapshot()
 	{
 		return new BeaconInventoryMock(this);
 	}
-
 }

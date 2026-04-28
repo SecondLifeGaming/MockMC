@@ -4,10 +4,7 @@ import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import java.util.Objects;
 
 /**
  * Represents the result of a command invocation.
@@ -21,8 +18,10 @@ public class CommandResult
 	/**
 	 * Constructs a new {@link CommandResult} with the provided parameters.
 	 *
-	 * @param success Whether the command succeeded (returned true).
-	 * @param sender  The message target who executed the command.
+	 * @param success
+	 *            Whether the command succeeded (returned true).
+	 * @param sender
+	 *            The message target who executed the command.
 	 */
 	@ApiStatus.Internal
 	public CommandResult(boolean success, @NotNull MessageTarget sender)
@@ -35,7 +34,8 @@ public class CommandResult
 	/**
 	 * Check if the command executed successfully.
 	 *
-	 * @return {@code true} if the command executed successfully, {@code false} if a problem occurred.
+	 * @return {@code true} if the command executed successfully, {@code false} if a
+	 *         problem occurred.
 	 */
 	public boolean hasSucceeded()
 	{
@@ -48,7 +48,10 @@ public class CommandResult
 	@Deprecated(forRemoval = true)
 	public void assertSucceeded()
 	{
-		assertTrue(success);
+		if (!success)
+		{
+			throw new AssertionError();
+		}
 	}
 
 	/**
@@ -57,13 +60,18 @@ public class CommandResult
 	@Deprecated(forRemoval = true)
 	public void assertFailed()
 	{
-		assertFalse(success);
+		if (success)
+		{
+			throw new AssertionError();
+		}
 	}
 
 	/**
-	 * Assets if the given message was not the next message send to the command sender.
+	 * Assets if the given message was not the next message send to the command
+	 * sender.
 	 *
-	 * @param message The message to check for.
+	 * @param message
+	 *            The message to check for.
 	 * @see MessageTarget#nextMessage()
 	 */
 	@Deprecated(forRemoval = true)
@@ -72,19 +80,24 @@ public class CommandResult
 		String received = sender.nextMessage();
 		if (received != null)
 		{
-			assertEquals(message, received);
-		}
-		else
+			if (!Objects.equals(message, received))
+			{
+				throw new AssertionError(String.format("Expected: %s but was: %s", message, received));
+			}
+		} else
 		{
-			fail("No more messages");
+			throw new AssertionError("No more messages");
 		}
 	}
 
 	/**
-	 * Asserts if a given formatted message was not the next message sent to the command sender.
+	 * Asserts if a given formatted message was not the next message sent to the
+	 * command sender.
 	 *
-	 * @param format  The formatted message to check for.
-	 * @param objects The objects to place into the formatted message.
+	 * @param format
+	 *            The formatted message to check for.
+	 * @param objects
+	 *            The objects to place into the formatted message.
 	 * @see #assertResponse(String)
 	 * @see MessageTarget#nextMessage()
 	 */
@@ -104,7 +117,7 @@ public class CommandResult
 	{
 		if (sender.nextMessage() != null)
 		{
-			fail("More messages");
+			throw new AssertionError("More messages");
 		}
 	}
 

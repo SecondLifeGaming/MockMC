@@ -43,7 +43,8 @@ class BambooDataMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1 })
+	@ValueSource(ints =
+	{0, 1})
 	void setAge(int age)
 	{
 		bamboo.setAge(age);
@@ -63,7 +64,8 @@ class BambooDataMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1 })
+	@ValueSource(ints =
+	{0, 1})
 	void setStage(int age)
 	{
 		bamboo.setStage(age);
@@ -79,7 +81,8 @@ class BambooDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull BambooDataMock cloned = bamboo.clone();
+		@NotNull
+		BambooDataMock cloned = bamboo.clone();
 
 		assertEquals(bamboo, cloned);
 		assertEquals(bamboo.getAge(), cloned.getAge());

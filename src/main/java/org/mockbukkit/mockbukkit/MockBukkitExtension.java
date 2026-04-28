@@ -2,10 +2,7 @@ package org.mockbukkit.mockbukkit;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.bukkit.Location;
-import org.bukkit.Server;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,132 +29,170 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 /**
- * Extension that mocks the Bukkit singleton before each test and subsequently unmocks it after each test. It will also
- * inject instances of {@link ServerMock}, {@link PlayerMock}, {@link WorldMock}, and {@link Plugin} to any field or
- * parameter of those types in the extended test class that is annotated with {@link MockBukkitInject}.
+ * Extension that mocks the Bukkit singleton before each test and subsequently
+ * unmocks it after each test. It will also inject instances of
+ * {@link ServerMock}, {@link PlayerMock}, {@link WorldMock}, and {@link Plugin}
+ * to any field or parameter of those types in the extended test class that is
+ * annotated with {@link MockBukkitInject}.
  *
- * <p>The extension supports injection of the following types:</p>
+ * <p>
+ * The extension supports injection of the following types:
+ * </p>
  * <ul>
- *   <li>{@link Server} or {@link ServerMock} - The main server mock instance</li>
- *   <li>{@link Player} or {@link PlayerMock} - Auto-generated players with unique names (Player0, Player1, etc.) or custom names</li>
- *   <li>{@link World} or {@link WorldMock} - Auto-generated worlds with unique names (World0, World1, etc.) or custom names</li>
- *   <li>{@link Plugin} or {@link PluginMock} - Auto-generated plugins with unique names (Plugin0, Plugin1, etc.) or custom names</li>
+ * <li>{@link org.bukkit.Server} or {@link ServerMock} - The main server mock
+ * instance</li>
+ * <li>{@link org.bukkit.entity.Player} or {@link PlayerMock} - Auto-generated
+ * players with unique names (Player0, Player1, etc.) or custom names</li>
+ * <li>{@link org.bukkit.World} or {@link WorldMock} - Auto-generated worlds
+ * with unique names (World0, World1, etc.) or custom names</li>
+ * <li>{@link Plugin} or {@link PluginMock} - Auto-generated plugins with unique
+ * names (Plugin0, Plugin1, etc.) or custom names</li>
  * </ul>
  *
- * <p>Custom names can be specified using the {@code name} parameter of the {@link MockBukkitInject} annotation.
- * When {@code name} is provided and not empty, it will be used as the exact name for the mock object.
- * When {@code name} is not provided or is an empty string, auto-generated names with incrementing counters
- * will be used (Player0, Player1, World0, World1, Plugin0, Plugin1, etc.).</p>
+ * <p>
+ * Custom names can be specified using the {@code name} parameter of the
+ * {@link MockBukkitInject} annotation. When {@code name} is provided and not
+ * empty, it will be used as the exact name for the mock object. When
+ * {@code name} is not provided or is an empty string, auto-generated names with
+ * incrementing counters will be used (Player0, Player1, World0, World1,
+ * Plugin0, Plugin1, etc.).
+ * </p>
  *
- * <p>Note: The {@code name} parameter only affects {@link PlayerMock}, {@link WorldMock}, and {@link PluginMock} objects.
- * {@link ServerMock} instances ignore the name parameter as there is only one server instance.</p>
+ * <p>
+ * Note: The {@code name} parameter only affects {@link PlayerMock},
+ * {@link WorldMock}, and {@link PluginMock} objects. {@link ServerMock}
+ * instances ignore the name parameter as there is only one server instance.
+ * </p>
  *
- * <p>Example field usage:</p>
+ * <p>
+ * Example field usage:
+ * </p>
  *
- * <pre>{@code
- * @ExtendWith(MockBukkitExtension.class)
- * class FieldExampleTest
+ * <pre>
  * {
+ * 	&#64;code
+ * 	&#64;ExtendWith(MockBukkitExtension.class)
+ * 	class FieldExampleTest
+ * 	{
  *
- *  @MockBukkitInject
- *  private ServerMock serverMock;
+ * 		&#64;MockBukkitInject
+ * 		private ServerMock serverMock;
  *
- *  @MockBukkitInject(name = "testPlayer")
- *  private PlayerMock player;
+ * 		&#64;MockBukkitInject(name = "testPlayer")
+ * 		private PlayerMock player;
  *
- *  @MockBukkitInject // Will be auto-named "World0"
- *  private World world;
+ * 		&#64;MockBukkitInject // Will be auto-named "World0"
+ * 		private World world;
  *
- *  @MockBukkitInject(name = "myPlugin")
- *  private Plugin plugin;
+ * 		&#64;MockBukkitInject(name = "myPlugin")
+ * 		private Plugin plugin;
  *
- *  @Test
- *  void aUnitTest()
- *  {
- *    assert serverMock != null;
- *    assert player != null;
- *    assert player.getName().equals("testPlayer");
- *    assert world != null;
- *    assert world.getName().equals("World0");  // Auto-generated name
- *    assert plugin != null;
- *    assert plugin.getName().equals("myPlugin");
- *    // ...
- *  }
+ * 		&#64;Test
+ * 		void aUnitTest()
+ * 		{
+ * 			assert serverMock != null;
+ * 			assert player != null;
+ * 			assert player.getName().equals("testPlayer");
+ * 			assert world != null;
+ * 			assert world.getName().equals("World0"); // Auto-generated name
+ * 			assert plugin != null;
+ * 			assert plugin.getName().equals("myPlugin");
+ * 			// ...
+ * 		}
  *
+ * 	}
  * }
- * }</pre>
+ * </pre>
  * <p>
  * Example constructor parameter usage:
  *
- * <pre>{@code
- * @ExtendWith(MockBukkitExtension.class)
- * class ConstructorExampleTest
+ * <pre>
  * {
+ * 	&#64;code
+ * 	&#64;ExtendWith(MockBukkitExtension.class)
+ * 	class ConstructorExampleTest
+ * 	{
  *
- *  private ServerMock serverMock;
+ * 		private ServerMock serverMock;
  *
- *  public ConstructorExampleTest(@MockBukkitInject ServerMock serverMock)
- *  {
- *    this.serverMock = serverMock;
- *  }
+ * 		public ConstructorExampleTest(&#64;MockBukkitInject ServerMock serverMock)
+ * 		{
+ * 			this.serverMock = serverMock;
+ * 		}
  *
- *  @Test
- *  void aUnitTest()
- *  {
- *    assert serverMock != null;
- *    // ...
- *  }
+ * 		&#64;Test
+ * 		void aUnitTest()
+ * 		{
+ * 			assert serverMock != null;
+ * 			// ...
+ * 		}
  *
+ * 	}
  * }
- * }</pre>
+ * </pre>
  * <p>
  * Example method parameter usage:
  *
- * <pre>{@code
- * @ExtendWith(MockBukkitExtension.class)
- * class MethodExampleTest
+ * <pre>
  * {
+ * 	&#64;code
+ * 	&#64;ExtendWith(MockBukkitExtension.class)
+ * 	class MethodExampleTest
+ * 	{
  *
- *  @Test
- *  void aUnitTest(@MockBukkitInject ServerMock serverMock,
- *                 @MockBukkitInject(name = "admin") Player player,
- *                 @MockBukkitInject(name = "testWorld") World world)
- *  {
- *    assert serverMock != null;
- *    assert player != null;
- *    assert player.getName().equals("admin");
- *    assert world != null;
- *    assert world.getName().equals("testWorld");
- *    // ...
- *	}
+ * 		&#64;Test
+ * 		void aUnitTest(&#64;MockBukkitInject ServerMock serverMock, &#64;MockBukkitInject(name = "admin") Player player,
+ * 				&#64;MockBukkitInject(name = "testWorld") World world)
+ * 		{
+ * 			assert serverMock != null;
+ * 			assert player != null;
+ * 			assert player.getName().equals("admin");
+ * 			assert world != null;
+ * 			assert world.getName().equals("testWorld");
+ * 			// ...
+ * 		}
  *
+ * 	}
  * }
- * }</pre>
+ * </pre>
  *
- * <p>Example inheritance usage (fields in mixin classes are also supported):</p>
+ * <p>
+ * Example inheritance usage (fields in mixin classes are also supported):
+ * </p>
  *
- * <pre>{@code
- * class BaseMixin
+ * <pre>
  * {
- *  @MockBukkitInject
- *  protected ServerMock serverMock;
+ * 	&#64;code
+ * 	class BaseMixin
+ * 	{
+ * 		&#64;MockBukkitInject
+ * 		protected ServerMock serverMock;
+ * 	}
+ *
+ * 	&#64;ExtendWith(MockBukkitExtension.class)
+ * 	class InheritanceExampleTest extends BaseMixin
+ * 	{
+ *
+ * 		&#64;Test
+ * 		void aUnitTest()
+ * 		{
+ * 			assert serverMock != null; // Injected from parent class
+ * 			// ...
+ * 		}
+ *
+ * 	}
  * }
- *
- * @ExtendWith(MockBukkitExtension.class)
- * class InheritanceExampleTest extends BaseMixin
- * {
- *
- *  @Test
- *  void aUnitTest()
- *  {
- *    assert serverMock != null; // Injected from parent class
- *    // ...
- *  }
- *
- * }
- * }</pre>
+ * </pre>
  */
-public class MockBukkitExtension implements TestInstancePostProcessor, TestInstancePreDestroyCallback, ParameterResolver, BeforeAllCallback, BeforeEachCallback, AfterAllCallback, TestExecutionExceptionHandler
+public class MockBukkitExtension
+		implements
+			TestInstancePostProcessor,
+			TestInstancePreDestroyCallback,
+			ParameterResolver,
+			BeforeAllCallback,
+			BeforeEachCallback,
+			AfterAllCallback,
+			TestExecutionExceptionHandler
 {
 
 	private static final String HORIZONTAL_DIVIDER = "------------------------------------------------------------------------------------";
@@ -174,7 +209,8 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 		injectMocksIntoFields(testInstance, context);
 	}
 
-	private void injectMocksIntoFields(Object testInstance, @NotNull ExtensionContext context) throws IllegalAccessException
+	private void injectMocksIntoFields(Object testInstance, @NotNull ExtensionContext context)
+			throws IllegalAccessException
 	{
 		final Optional<Class<?>> classOptional = context.getTestClass();
 		if (classOptional.isEmpty())
@@ -182,10 +218,8 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			return;
 		}
 
-		final List<Field> allFields = FieldUtils.getAllFieldsList(classOptional.get())
-				.stream()
-				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null)
-				.toList();
+		final List<Field> allFields = FieldUtils.getAllFieldsList(classOptional.get()).stream()
+				.filter(field -> field.getAnnotation(MockBukkitInject.class) != null).toList();
 
 		for (final Field field : allFields)
 		{
@@ -241,8 +275,7 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 			var constructor = type.getDeclaredConstructor();
 			constructor.setAccessible(true);
 			return constructor.newInstance();
-		}
-		catch (ReflectiveOperationException e)
+		} catch (ReflectiveOperationException e)
 		{
 			return null;
 		}
@@ -315,27 +348,26 @@ public class MockBukkitExtension implements TestInstancePostProcessor, TestInsta
 	public void preDestroyTestInstance(ExtensionContext context)
 	{
 		MockBukkit.unmock();
-		MockBukkit.mock(); // Ensure a mock is always available between test runs. Note that after all un-mocks everything after the whole test has run
+		MockBukkit.mock(); // Ensure a mock is always available between test runs. Note that after all
+							// un-mocks everything after the whole test has run
 	}
 
 	@Override
-	public boolean supportsParameter(@NotNull ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
+	public boolean supportsParameter(@NotNull ParameterContext parameterContext, ExtensionContext extensionContext)
+			throws ParameterResolutionException
 	{
 		final Class<?> paramType = parameterContext.getParameter().getType();
 		final boolean paramHasCorrectAnnotation = parameterContext.isAnnotated(MockBukkitInject.class);
 
-		return paramHasCorrectAnnotation && (
-				paramType.isAssignableFrom(ServerMock.class) ||
-						paramType.isAssignableFrom(PlayerMock.class) ||
-						paramType.isAssignableFrom(Location.class) ||
-						paramType.isAssignableFrom(WorldMock.class) ||
-						Plugin.class.isAssignableFrom(paramType) ||
-						Entity.class.isAssignableFrom(paramType)
-		);
+		return paramHasCorrectAnnotation
+				&& (paramType.isAssignableFrom(ServerMock.class) || paramType.isAssignableFrom(PlayerMock.class)
+						|| paramType.isAssignableFrom(Location.class) || paramType.isAssignableFrom(WorldMock.class)
+						|| Plugin.class.isAssignableFrom(paramType) || Entity.class.isAssignableFrom(paramType));
 	}
 
 	@Override
-	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException
+	public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
+			throws ParameterResolutionException
 	{
 		if (!supportsParameter(parameterContext, extensionContext))
 		{

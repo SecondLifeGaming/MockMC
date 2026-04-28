@@ -28,7 +28,8 @@ class CopperBulbDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			bulb.setLit(isLit);
@@ -48,7 +49,8 @@ class CopperBulbDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			bulb.setPowered(inWall);

@@ -69,8 +69,8 @@ class DolphinMockTest
 	@Test
 	void testSetTreasureLocation_Null_ThrowsException()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-				dolphin.setTreasureLocation(null));
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
+				() -> dolphin.setTreasureLocation(null));
 
 		assertEquals("Location can't be null.", illegalArgumentException.getMessage());
 	}

@@ -90,7 +90,8 @@ class CraftingRecipeFactoryTest
 		assertEquals(Material.ACACIA_FENCE, recipe.getResult().getType());
 		assertEquals("wooden_fence", recipe.getGroup());
 		assertEquals(CraftingBookCategory.MISC, recipe.getCategory());
-		assertArrayEquals(new String[]{ "abc", "def" }, recipe.getShape());
+		assertArrayEquals(new String[]
+		{"abc", "def"}, recipe.getShape());
 		assertEquals(6, recipe.getChoiceMap().size());
 	}
 

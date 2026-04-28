@@ -29,7 +29,8 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 	void getInteractionWidth_GivenValidValue(int validValue)
 	{
 		interaction.setInteractionWidth(validValue);
@@ -43,7 +44,8 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 	void getInteractionHeight_GivenValidValue(int validValue)
 	{
 		interaction.setInteractionHeight(validValue);
@@ -57,7 +59,8 @@ class InteractionMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void getInteractionHeight_GivenValidValue(boolean validValue)
 	{
 		interaction.setResponsive(validValue);

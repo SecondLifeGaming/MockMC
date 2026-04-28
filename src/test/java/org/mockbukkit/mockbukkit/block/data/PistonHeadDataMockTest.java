@@ -59,9 +59,8 @@ class PistonHeadDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"})
 		void givenValidValues(BlockFace face)
 		{
 			pistonHead.setFacing(face);
@@ -69,9 +68,8 @@ class PistonHeadDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> pistonHead.setFacing(face));
@@ -91,7 +89,8 @@ class PistonHeadDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isShort)
 		{
 			pistonHead.setShort(isShort);

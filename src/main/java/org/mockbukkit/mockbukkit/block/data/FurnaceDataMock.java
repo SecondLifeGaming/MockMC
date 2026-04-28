@@ -16,7 +16,8 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public FurnaceDataMock(@NotNull Material material)
 	{
@@ -24,9 +25,11 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	}
 
 	/**
-	 * Create a new {@link FurnaceDataMock} based on an existing {@link FurnaceDataMock}.
+	 * Create a new {@link FurnaceDataMock} based on an existing
+	 * {@link FurnaceDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected FurnaceDataMock(@NotNull FurnaceDataMock other)
 	{
@@ -43,7 +46,8 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -66,7 +70,8 @@ public class FurnaceDataMock extends BlockDataMock implements Furnace
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull FurnaceDataMock clone()
 	{
 		return new FurnaceDataMock(this);

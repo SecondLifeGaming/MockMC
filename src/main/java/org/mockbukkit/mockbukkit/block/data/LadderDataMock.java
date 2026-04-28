@@ -16,7 +16,8 @@ public class LadderDataMock extends BlockDataMock implements Ladder
 	/**
 	 * Constructs a new {@link LadderDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public LadderDataMock(@NotNull Material material)
 	{
@@ -24,9 +25,11 @@ public class LadderDataMock extends BlockDataMock implements Ladder
 	}
 
 	/**
-	 * Create a new {@link LadderDataMock} based on an existing {@link LadderDataMock}.
+	 * Create a new {@link LadderDataMock} based on an existing
+	 * {@link LadderDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	public LadderDataMock(@NotNull LadderDataMock other)
 	{
@@ -65,7 +68,8 @@ public class LadderDataMock extends BlockDataMock implements Ladder
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LadderDataMock clone()
 	{
 		return new LadderDataMock(this);

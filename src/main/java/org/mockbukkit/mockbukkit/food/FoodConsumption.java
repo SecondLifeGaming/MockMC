@@ -8,6 +8,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.mockbukkit.mockbukkit.potion.InternalPotionDataMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -15,33 +16,29 @@ import java.util.stream.Collectors;
 
 @ApiStatus.Internal
 public record FoodConsumption(Material name, int nutrition, float saturationModifier, boolean canAlwaysEat,
-							  int eatDurationTicks, List<FoodEffect> foodEffects)
+		int eatDurationTicks, List<FoodEffect> foodEffects)
 {
 
 	private static Map<Material, FoodConsumption> ALL_FOODS = null;
 
 	private static FoodConsumption loadFoodConsumptionFrom(JsonObject jsonObject)
 	{
-		return new FoodConsumption(
-				Material.matchMaterial(jsonObject.get("name").getAsString()),
-				jsonObject.get("nutrition").getAsInt(),
-				jsonObject.get("saturationModifier").getAsFloat(),
-				jsonObject.get("canAlwaysEat").getAsBoolean(),
-				jsonObject.get("eatDurationTicks").getAsInt(),
-				loadFoodEffectsFrom(jsonObject.get("effects").getAsJsonArray())
-		);
+		return new FoodConsumption(Material.matchMaterial(jsonObject.get("name").getAsString()),
+				jsonObject.get("nutrition").getAsInt(), jsonObject.get("saturationModifier").getAsFloat(),
+				jsonObject.get("canAlwaysEat").getAsBoolean(), jsonObject.get("eatDurationTicks").getAsInt(),
+				loadFoodEffectsFrom(jsonObject.get("effects").getAsJsonArray()));
 	}
 
 	private static List<FoodConsumption.FoodEffect> loadFoodEffectsFrom(JsonArray jsonArray)
 	{
-		return jsonArray.asList().stream()
-				.map(jsonElement -> loadFoodEffectFrom(jsonElement.getAsJsonObject()))
+		return jsonArray.asList().stream().map(jsonElement -> loadFoodEffectFrom(jsonElement.getAsJsonObject()))
 				.toList();
 	}
 
 	private static FoodConsumption.FoodEffect loadFoodEffectFrom(JsonObject jsonObject)
 	{
-		return new FoodConsumption.FoodEffect(InternalPotionDataMock.getPotionEffectFromData(jsonObject), jsonObject.get("probability").getAsFloat());
+		return new FoodConsumption.FoodEffect(InternalPotionDataMock.getPotionEffectFromData(jsonObject),
+				jsonObject.get("probability").getAsFloat());
 	}
 
 	@ApiStatus.Internal
@@ -52,7 +49,8 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 			JsonArray jsonArray = ResourceLoader.loadResource("/foods/food_properties.json").getAsJsonArray();
 			ALL_FOODS = jsonArray.asList().stream()
 					.map(jsonElement -> loadFoodConsumptionFrom(jsonElement.getAsJsonObject()))
-					.collect(Collectors.toMap(FoodConsumption::name, Function.identity()));
+					.collect(Collectors.toMap(FoodConsumption::name, Function.identity(), (v1, v2) -> v1,
+							() -> new EnumMap<>(Material.class)));
 		}
 		return ALL_FOODS;
 	}

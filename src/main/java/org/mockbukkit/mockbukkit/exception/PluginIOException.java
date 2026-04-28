@@ -9,9 +9,11 @@ public class PluginIOException extends RuntimeException
 {
 
 	/**
-	 * Constructs a new runtime exception with the specified cause and a detail message of (cause==null ? null : cause.toString())
+	 * Constructs a new runtime exception with the specified cause and a detail
+	 * message of (cause==null ? null : cause.toString())
 	 *
-	 * @param cause The cause of the exception.
+	 * @param cause
+	 *            The cause of the exception.
 	 */
 	public PluginIOException(@NotNull Throwable cause)
 	{

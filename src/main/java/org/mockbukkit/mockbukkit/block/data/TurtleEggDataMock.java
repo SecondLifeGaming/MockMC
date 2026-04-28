@@ -16,7 +16,8 @@ public class TurtleEggDataMock extends BlockDataMock implements TurtleEgg
 	/**
 	 * Constructs a new {@link TurtleEgg} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public TurtleEggDataMock(@NotNull Material material)
 	{
@@ -24,9 +25,11 @@ public class TurtleEggDataMock extends BlockDataMock implements TurtleEgg
 	}
 
 	/**
-	 * Create a new {@link TurtleEggDataMock} based on an existing {@link TurtleEggDataMock}.
+	 * Create a new {@link TurtleEggDataMock} based on an existing
+	 * {@link TurtleEggDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected TurtleEggDataMock(@NotNull TurtleEggDataMock other)
 	{
@@ -44,7 +47,8 @@ public class TurtleEggDataMock extends BlockDataMock implements TurtleEgg
 	{
 		int minimum = this.getMinimumEggs();
 		int maximum = this.getMaximumEggs();
-		Preconditions.checkArgument(minimum <= eggs && eggs <= maximum, "Eggs must be between %s and %s", minimum, maximum);
+		Preconditions.checkArgument(minimum <= eggs && eggs <= maximum, "Eggs must be between %s and %s", minimum,
+				maximum);
 		this.set(BlockDataKey.EGGS, eggs);
 	}
 

@@ -23,7 +23,6 @@ class HatchableDataMockTest
 		this.egg = new HatchableDataMock(Material.SNIFFER_EGG);
 	}
 
-
 	@Nested
 	class SetHatch
 	{
@@ -35,7 +34,8 @@ class HatchableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2 })
+		@ValueSource(ints =
+		{0, 1, 2})
 		void givenValidValues(int age)
 		{
 			egg.setHatch(age);
@@ -43,7 +43,8 @@ class HatchableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1, 3, 4, 5 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1, 3, 4, 5})
 		void giveInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> egg.setHatch(age));

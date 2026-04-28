@@ -4,21 +4,27 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.function.Consumer;
 
-public class PaperScheduledTask implements ScheduledTask
+public class PaperScheduledTask
+		implements
+			ScheduledTask,
+			org.mockbukkit.mockbukkit.generated.io.papermc.paper.threadedregions.scheduler.ScheduledTaskBaseMock
 {
 
 	private final Plugin plugin;
 	private final @NotNull Consumer<ScheduledTask> consumer;
 
 	/**
-	 * Constructs a new {@link org.mockbukkit.mockbukkit.scheduler.paper.PaperScheduledTask} with the provided parameters.
+	 * Constructs a new
+	 * {@link org.mockbukkit.mockbukkit.scheduler.paper.PaperScheduledTask} with the
+	 * provided parameters.
 	 *
-	 * @param plugin   The plugin owning the task.
-	 * @param consumer The consumer to run.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param consumer
+	 *            The consumer to run.
 	 */
 	public PaperScheduledTask(Plugin plugin, @NotNull Consumer<ScheduledTask> consumer)
 	{
@@ -33,27 +39,9 @@ public class PaperScheduledTask implements ScheduledTask
 		return this.plugin;
 	}
 
-	@Override
-	public boolean isRepeatingTask()
-	{
-		throw new UnimplementedOperationException();
-	}
-
 	public void run()
 	{
 		this.consumer.accept(this);
-	}
-
-	@Override
-	public @NotNull CancelledState cancel()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ExecutionState getExecutionState()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 }

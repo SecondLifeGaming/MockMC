@@ -11,7 +11,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class ShelfInventoryMock extends InventoryMock implements ShelfInventory
+public class ShelfInventoryMock extends InventoryMock
+		implements
+			ShelfInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.ShelfInventoryBaseMock
 {
 
 	public ShelfInventoryMock(@Nullable Shelf holder)
@@ -25,15 +28,16 @@ public class ShelfInventoryMock extends InventoryMock implements ShelfInventory
 	}
 
 	@Override
-	public @Nullable Shelf getHolder()
+	@Nullable
+	public Shelf getHolder()
 	{
 		return (Shelf) super.getHolder();
 	}
 
 	@Override
-	public @NotNull ShelfInventoryMock getSnapshot()
+	@NotNull
+	public ShelfInventoryMock getSnapshot()
 	{
 		return new ShelfInventoryMock(this);
 	}
-
 }

@@ -26,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BoatMockTest
 {
@@ -51,7 +53,8 @@ class BoatMockTest
 	@EnumSource(TreeSpecies.class)
 	void setWoodType_isNoLongerSupported(TreeSpecies species)
 	{
-		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> boat.setWoodType(species));
+		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class,
+				() -> boat.setWoodType(species));
 		assertEquals("Not supported - you must spawn a new entity to change boat type.", e.getMessage());
 	}
 
@@ -65,7 +68,8 @@ class BoatMockTest
 	@EnumSource(Boat.Type.class)
 	void setBoatType_isNoLongerSupported(Boat.Type type)
 	{
-		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> boat.setBoatType(type));
+		UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class,
+				() -> boat.setBoatType(type));
 		assertEquals("Not supported - you must spawn a new entity to change boat type.", e.getMessage());
 	}
 
@@ -85,8 +89,8 @@ class BoatMockTest
 	@Test
 	void testSetMaxSpeedToLow()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-				boat.setMaxSpeed(-1D));
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
+				() -> boat.setMaxSpeed(-1D));
 
 		assertEquals("Speed cannot be negative", illegalArgumentException.getMessage());
 	}
@@ -107,8 +111,8 @@ class BoatMockTest
 	@Test
 	void testSetOccupiedDecelerationToLow()
 	{
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-				boat.setOccupiedDeceleration(-1D));
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
+				() -> boat.setOccupiedDeceleration(-1D));
 
 		assertEquals("Rate cannot be negative", illegalArgumentException.getMessage());
 	}
@@ -172,8 +176,7 @@ class BoatMockTest
 				Arguments.of(EntityType.BAMBOO_CHEST_RAFT, Material.BAMBOO_CHEST_RAFT),
 				Arguments.of(EntityType.CHERRY_CHEST_BOAT, Material.CHERRY_CHEST_BOAT),
 				Arguments.of(EntityType.DARK_OAK_CHEST_BOAT, Material.DARK_OAK_CHEST_BOAT),
-				Arguments.of(EntityType.MANGROVE_CHEST_BOAT, Material.MANGROVE_CHEST_BOAT)
-		);
+				Arguments.of(EntityType.MANGROVE_CHEST_BOAT, Material.MANGROVE_CHEST_BOAT));
 	}
 
 }

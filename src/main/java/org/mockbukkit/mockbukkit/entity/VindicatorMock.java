@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Vindicator;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,16 +12,22 @@ import java.util.UUID;
  *
  * @see IllagerMock
  */
-public class VindicatorMock extends IllagerMock implements Vindicator
+public class VindicatorMock extends IllagerMock
+		implements
+			Vindicator,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.VindicatorBaseMock
 {
 
 	private boolean johnny = false;
 
 	/**
-	 * Constructs a new {@link VindicatorMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link VindicatorMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public VindicatorMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -42,15 +47,16 @@ public class VindicatorMock extends IllagerMock implements Vindicator
 	}
 
 	@Override
-	public @NotNull Sound getCelebrationSound()
+	@NotNull
+	public Sound getCelebrationSound()
 	{
 		return Sound.ENTITY_VINDICATOR_CELEBRATE;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.VINDICATOR;
 	}
-
 }

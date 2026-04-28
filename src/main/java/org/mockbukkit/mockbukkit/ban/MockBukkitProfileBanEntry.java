@@ -5,17 +5,24 @@ import org.bukkit.BanEntry;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.Date;
 
-public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
+@SuppressWarnings(
+{"deprecation"})
+public class MockBukkitProfileBanEntry
+		implements
+			BanEntry<PlayerProfile>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.BanEntryBaseMock<PlayerProfile>
 {
 
 	private final PlayerProfile target;
+
 	private Date created;
+
 	private String source;
+
 	private Date expiration;
+
 	private String reason;
 
 	public MockBukkitProfileBanEntry(PlayerProfile target, String source, Date expiration, String reason)
@@ -29,19 +36,22 @@ public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
 
 	@Override
 	@Deprecated(since = "1.20")
-	public @NotNull String getTarget()
+	@NotNull
+	public String getTarget()
 	{
 		return this.target.getName() != null ? this.target.getName() : "";
 	}
 
 	@Override
-	public @NotNull PlayerProfile getBanTarget()
+	@NotNull
+	public PlayerProfile getBanTarget()
 	{
 		return this.target;
 	}
 
 	@Override
-	public @NotNull Date getCreated()
+	@NotNull
+	public Date getCreated()
 	{
 		return this.created;
 	}
@@ -54,7 +64,8 @@ public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
 	}
 
 	@Override
-	public @NotNull String getSource()
+	@NotNull
+	public String getSource()
 	{
 		return this.source;
 	}
@@ -67,7 +78,8 @@ public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
 	}
 
 	@Override
-	public @Nullable Date getExpiration()
+	@Nullable
+	public Date getExpiration()
 	{
 		return this.expiration;
 	}
@@ -79,7 +91,8 @@ public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
 	}
 
 	@Override
-	public @Nullable String getReason()
+	@Nullable
+	public String getReason()
 	{
 		return this.reason;
 	}
@@ -88,20 +101,6 @@ public class MockBukkitProfileBanEntry implements BanEntry<PlayerProfile>
 	public void setReason(@Nullable String reason)
 	{
 		this.reason = reason;
-	}
-
-	@Override
-	public void save()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void remove()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }

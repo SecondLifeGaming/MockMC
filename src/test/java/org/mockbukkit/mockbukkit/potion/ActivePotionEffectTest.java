@@ -67,7 +67,7 @@ public class ActivePotionEffectTest
 		// verify it's OK
 		assertEquals(3, speedFor3S.getDuration()); // The original shouldn't be modified
 
-		var effect = player.getPotionEffect(PotionEffectType.SPEED);  // This has 2s left
+		var effect = player.getPotionEffect(PotionEffectType.SPEED); // This has 2s left
 		assertEquals(2, effect.getDuration());
 
 		assertEquals(2, player.getActivePotionEffects().iterator().next().getDuration()); // And this one too
@@ -140,7 +140,7 @@ public class ActivePotionEffectTest
 	void testCompareTo_SameAmplifier_FiniteEffects_LongerDurationWins()
 	{
 		PotionEffect shortEffect = new PotionEffect(PotionEffectType.SPEED, 150, 1); // duration 150
-		PotionEffect longEffect = new PotionEffect(PotionEffectType.SPEED, 300, 1);  // duration 300
+		PotionEffect longEffect = new PotionEffect(PotionEffectType.SPEED, 300, 1); // duration 300
 
 		ActivePotionEffect shortActive = new ActivePotionEffect(shortEffect);
 		ActivePotionEffect longActive = new ActivePotionEffect(longEffect);
@@ -231,9 +231,9 @@ public class ActivePotionEffectTest
 	void testCompareTo_ComplexScenario()
 	{
 		// Test multiple effects with different combinations
-		PotionEffect effect1 = new PotionEffect(PotionEffectType.SPEED, 200, 3);  // amp 3, duration 200
-		PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, -1, 2);   // amp 2, infinite
-		PotionEffect effect3 = new PotionEffect(PotionEffectType.SPEED, 100, 1);  // amp 1, duration 100
+		PotionEffect effect1 = new PotionEffect(PotionEffectType.SPEED, 200, 3); // amp 3, duration 200
+		PotionEffect effect2 = new PotionEffect(PotionEffectType.SPEED, -1, 2); // amp 2, infinite
+		PotionEffect effect3 = new PotionEffect(PotionEffectType.SPEED, 100, 1); // amp 1, duration 100
 
 		ActivePotionEffect active1 = new ActivePotionEffect(effect1);
 		ActivePotionEffect active2 = new ActivePotionEffect(effect2);

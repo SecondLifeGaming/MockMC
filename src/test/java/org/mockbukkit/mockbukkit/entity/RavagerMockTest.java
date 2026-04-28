@@ -28,7 +28,8 @@ class RavagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 	void getAttackTicks_GivenPossibleValues(int ticks)
 	{
 		ravager.setAttackTicks(ticks);
@@ -43,7 +44,8 @@ class RavagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 	void getStunnedTicks_GivenPossibleValues(int ticks)
 	{
 		ravager.setStunnedTicks(ticks);
@@ -58,7 +60,8 @@ class RavagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 	void getRoarTicks_GivenPossibleValues(int ticks)
 	{
 		ravager.setRoarTicks(ticks);

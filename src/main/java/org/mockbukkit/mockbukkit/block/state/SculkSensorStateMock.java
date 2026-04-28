@@ -18,10 +18,11 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	private int listenerRange;
 
 	/**
-	 * Constructs a new {@link SculkSensorStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#SCULK_SENSOR}
+	 * Constructs a new {@link SculkSensorStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#SCULK_SENSOR}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public SculkSensorStateMock(@NotNull Material material)
 	{
@@ -33,7 +34,8 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	 * Constructs a new {@link SculkSensorStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#SCULK_SENSOR}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected SculkSensorStateMock(@NotNull Block block)
 	{
@@ -42,9 +44,11 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	}
 
 	/**
-	 * Constructs a new {@link SculkSensorStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SculkSensorStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected SculkSensorStateMock(@NotNull SculkSensorStateMock state)
 	{
@@ -74,7 +78,8 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	@Override
 	public void setLastVibrationFrequency(int lastVibrationFrequency)
 	{
-		Preconditions.checkArgument(0 <= lastVibrationFrequency && lastVibrationFrequency <= 15, "Vibration frequency must be between 0-15");
+		Preconditions.checkArgument(0 <= lastVibrationFrequency && lastVibrationFrequency <= 15,
+				"Vibration frequency must be between 0-15");
 		this.lastVibrationFrequency = lastVibrationFrequency;
 	}
 
@@ -94,9 +99,8 @@ public class SculkSensorStateMock extends TileStateMock implements SculkSensor
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", lastVibrationFrequency=" + lastVibrationFrequency +
-				", listenerRange=" + listenerRange;
+		return super.toStringInternal() + ", lastVibrationFrequency=" + lastVibrationFrequency + ", listenerRange="
+				+ listenerRange;
 	}
 
 }

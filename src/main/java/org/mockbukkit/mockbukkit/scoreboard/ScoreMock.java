@@ -1,31 +1,36 @@
 package org.mockbukkit.mockbukkit.scoreboard;
 
-import io.papermc.paper.scoreboard.numbers.NumberFormat;
-import net.kyori.adventure.text.Component;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of a {@link Score}.
  */
-public class ScoreMock implements Score
+public class ScoreMock implements Score, org.mockbukkit.mockbukkit.generated.org.bukkit.scoreboard.ScoreBaseMock
 {
 
 	private final ObjectiveMock objective;
+
 	private final String entry;
-	private @Nullable OfflinePlayer player = null;
+
+	@Nullable
+	private OfflinePlayer player = null;
+
 	private int score = 0;
+
 	private boolean set = false;
 
 	/**
-	 * Constructs a new {@link ScoreMock} for the provided objective with the specified entry.
+	 * Constructs a new {@link ScoreMock} for the provided objective with the
+	 * specified entry.
 	 *
-	 * @param objective The objective.
-	 * @param entry     The entry.
+	 * @param objective
+	 *            The objective.
+	 * @param entry
+	 *            The entry.
 	 */
 	public ScoreMock(ObjectiveMock objective, String entry)
 	{
@@ -36,7 +41,8 @@ public class ScoreMock implements Score
 	/**
 	 * Sets the player that this score is tracking.
 	 *
-	 * @param player The player to track.
+	 * @param player
+	 *            The player to track.
 	 */
 	public void setPlayer(OfflinePlayer player)
 	{
@@ -45,19 +51,22 @@ public class ScoreMock implements Score
 
 	@Override
 	@Deprecated(since = "1.7.10")
-	public @NotNull OfflinePlayer getPlayer()
+	@NotNull
+	public OfflinePlayer getPlayer()
 	{
 		return player;
 	}
 
 	@Override
-	public @NotNull String getEntry()
+	@NotNull
+	public String getEntry()
 	{
 		return entry;
 	}
 
 	@Override
-	public @NotNull ObjectiveMock getObjective()
+	@NotNull
+	public ObjectiveMock getObjective()
 	{
 		return objective;
 	}
@@ -68,8 +77,7 @@ public class ScoreMock implements Score
 		if (objective.isRegistered())
 		{
 			return score;
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Objective is not registered");
 		}
@@ -100,47 +108,4 @@ public class ScoreMock implements Score
 		score = 0;
 		set = false;
 	}
-
-	@Override
-	public boolean isTriggerable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setTriggerable(boolean triggerable)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Component customName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component customName)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable NumberFormat numberFormat()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void numberFormat(@Nullable NumberFormat numberFormat)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

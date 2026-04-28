@@ -22,6 +22,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class PotionEffectTypeMockTest
 {
@@ -29,7 +31,8 @@ class PotionEffectTypeMockTest
 	@Test
 	void constructorValues()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(NamespacedKey.minecraft("speed"), effect.getKey());
 		assertEquals(1, effect.getId());
 		assertEquals("Speed", effect.getName());
@@ -41,7 +44,8 @@ class PotionEffectTypeMockTest
 	@Test
 	void addAttributeModifier_Adds()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		AttributeModifier modifier = new AttributeModifier("mod", 1, AttributeModifier.Operation.ADD_NUMBER);
 		effect.addAttributeModifier(Attribute.ARMOR, modifier);
 
@@ -52,7 +56,8 @@ class PotionEffectTypeMockTest
 	@Test
 	void getEffectAttributes_Immutable()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 
 		assertInstanceOf(ImmutableMap.class, effect.getEffectAttributes());
 	}
@@ -60,8 +65,10 @@ class PotionEffectTypeMockTest
 	@Test
 	void getAttributeModifierAmount()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		effect.addAttributeModifier(Attribute.ARMOR, new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		effect.addAttributeModifier(Attribute.ARMOR,
+				new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
 
 		assertEquals(15, effect.getAttributeModifierAmount(Attribute.ARMOR, 2));
 	}
@@ -69,54 +76,66 @@ class PotionEffectTypeMockTest
 	@Test
 	void getAttributeModifierAmount_NegativeAmplifier_ThrowsException()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		effect.addAttributeModifier(Attribute.ARMOR, new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		effect.addAttributeModifier(Attribute.ARMOR,
+				new AttributeModifier("mod", 5, AttributeModifier.Operation.ADD_NUMBER));
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> effect.getAttributeModifierAmount(Attribute.ARMOR, -1));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> effect.getAttributeModifierAmount(Attribute.ARMOR, -1));
 	}
 
 	@Test
 	void getAttributeModifierAmount_NonExistentAttribute_ThrowsException()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> effect.getAttributeModifierAmount(Attribute.ARMOR, 2));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> effect.getAttributeModifierAmount(Attribute.ARMOR, 2));
 	}
 
 	@Test
 	void testGetDurationModifier()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(1.0, effect.getDurationModifier());
 	}
 
 	@Test
 	void testHashcode()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(1, effect.hashCode());
 	}
 
 	@Test
 	void testEquals()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentId()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
-		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 2, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
+		PotionEffectTypeMock effect2 = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 2, "Speed", false,
+				Color.fromRGB(8171462));
 		assertNotEquals(effect, effect2);
 	}
 
 	@Test
 	void testEquals_DifferentType()
 	{
-		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false, Color.fromRGB(8171462));
+		PotionEffectTypeMock effect = new PotionEffectTypeMock(NamespacedKey.minecraft("speed"), 1, "Speed", false,
+				Color.fromRGB(8171462));
 		assertNotEquals(effect, new Object());
 	}
 
@@ -127,6 +146,7 @@ class PotionEffectTypeMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void registryValue_defaults()
 	{
 		PotionEffectType potionEffectType = PotionEffectType.ABSORPTION;

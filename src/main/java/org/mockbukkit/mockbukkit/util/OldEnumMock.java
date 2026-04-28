@@ -3,10 +3,15 @@ package org.mockbukkit.mockbukkit.util;
 import org.bukkit.util.OldEnum;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class OldEnumMock<T extends OldEnum<T>> implements OldEnum<T>
+import java.io.Serializable;
+
+@SuppressWarnings(
+{"deprecation", "removal"})
+public abstract class OldEnumMock<T extends OldEnum<T>> implements OldEnum<T>, Serializable
 {
 
 	private final String name;
+
 	private final int ordinal;
 
 	public OldEnumMock(String name, int ordinal)
@@ -22,7 +27,8 @@ public abstract class OldEnumMock<T extends OldEnum<T>> implements OldEnum<T>
 	}
 
 	@Override
-	public @NotNull String name()
+	@NotNull
+	public String name()
 	{
 		return name;
 	}
@@ -32,5 +38,4 @@ public abstract class OldEnumMock<T extends OldEnum<T>> implements OldEnum<T>
 	{
 		return ordinal;
 	}
-
 }

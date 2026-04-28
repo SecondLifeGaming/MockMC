@@ -24,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class AreaEffectCloudMockTest
 {
@@ -146,8 +148,8 @@ class AreaEffectCloudMockTest
 	@Test
 	void testSetParticleNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				areaEffectCloud.setParticle(null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> areaEffectCloud.setParticle(null));
 
 		assertEquals("Particle cannot be null", nullPointerException.getMessage());
 	}
@@ -169,9 +171,7 @@ class AreaEffectCloudMockTest
 	@Test
 	void testAddCustomEffect()
 	{
-		assertTrue(areaEffectCloud.addCustomEffect(
-				new PotionEffect(PotionEffectType.ABSORPTION, 1, 1),
-				true));
+		assertTrue(areaEffectCloud.addCustomEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1, 1), true));
 		assertEquals(1, areaEffectCloud.getCustomEffects().size());
 	}
 
@@ -282,8 +282,8 @@ class AreaEffectCloudMockTest
 	@Test
 	void testSetColorNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				areaEffectCloud.setColor(null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> areaEffectCloud.setColor(null));
 
 		assertEquals("Color cannot be null", nullPointerException.getMessage());
 	}

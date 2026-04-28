@@ -11,28 +11,26 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked", "NonExtendableApiUsage", "UnstableApiUsage"})
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public record WrittenBookContentMock(
-		Filtered<String> title,
-		String author,
-		int generation,
-		List<Filtered<Component>> pages,
-		boolean resolved
-) implements WrittenBookContent
+public record WrittenBookContentMock(Filtered<String> title, String author, int generation,
+		List<Filtered<Component>> pages, boolean resolved) implements WrittenBookContent
 {
 
 	static class BuilderMock implements WrittenBookContent.Builder
 	{
 		private static void validateTitle(String title)
 		{
-			Preconditions.checkArgument(title.length() <= 32, "Title cannot be longer than %s, was %s", 32, title.length());
+			Preconditions.checkArgument(title.length() <= 32, "Title cannot be longer than %s, was %s", 32,
+					title.length());
 		}
 
 		private static void validatePageLength(Component page)
 		{
 			String flagPage = GsonComponentSerializer.gson().serializeToTree(page).getAsString();
-			Preconditions.checkArgument(flagPage.length() <= 32767, "Cannot have page length more than %s, had %s", 32767, flagPage.length());
+			Preconditions.checkArgument(flagPage.length() <= 32767, "Cannot have page length more than %s, had %s",
+					32767, flagPage.length());
 		}
 
 		private final List<Filtered<Component>> pages = new ObjectArrayList<>();
@@ -84,7 +82,8 @@ public record WrittenBookContentMock(
 		@Override
 		public Builder generation(@IntRange(from = 0L, to = 3L) int generation)
 		{
-			Preconditions.checkArgument(generation >= 0 && generation <= 3, "generation must be between %s and %s, was %s", 0, 3, generation);
+			Preconditions.checkArgument(generation >= 0 && generation <= 3,
+					"generation must be between %s and %s, was %s", 0, 3, generation);
 			this.generation = generation;
 			return this;
 		}
@@ -108,7 +107,7 @@ public record WrittenBookContentMock(
 		@Override
 		public Builder addPages(List<? extends ComponentLike> pages)
 		{
-			for(ComponentLike page : pages)
+			for (ComponentLike page : pages)
 			{
 				Component component = page.asComponent();
 				validatePageLength(component);
@@ -130,7 +129,8 @@ public record WrittenBookContentMock(
 				validatePageLength(filtered);
 			}
 
-			// this.pages.add(new Filterable(PaperAdventure.asVanilla(raw), Optional.ofNullable(filtered).map(PaperAdventure::asVanilla)));
+			// this.pages.add(new Filterable(PaperAdventure.asVanilla(raw),
+			// Optional.ofNullable(filtered).map(PaperAdventure::asVanilla)));
 			return this;
 		}
 
@@ -144,7 +144,8 @@ public record WrittenBookContentMock(
 		@Override
 		public WrittenBookContent build()
 		{
-			return new WrittenBookContentMock(this.title, this.author, this.generation, new ObjectArrayList(this.pages), this.resolved);
+			return new WrittenBookContentMock(this.title, this.author, this.generation, new ObjectArrayList(this.pages),
+					this.resolved);
 		}
 
 	}

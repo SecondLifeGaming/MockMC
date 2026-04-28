@@ -59,7 +59,8 @@ class TrialSpawnerDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean ominous)
 		{
 			spawner.setOminous(ominous);
@@ -72,7 +73,8 @@ class TrialSpawnerDataMockTest
 	void validateClone()
 	{
 
-		@NotNull TrialSpawnerDataMock cloned = spawner.clone();
+		@NotNull
+		TrialSpawnerDataMock cloned = spawner.clone();
 
 		assertEquals(spawner, cloned);
 		assertEquals(spawner.getTrialSpawnerState(), cloned.getTrialSpawnerState());

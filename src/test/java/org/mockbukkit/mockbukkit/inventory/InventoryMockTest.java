@@ -233,7 +233,8 @@ class InventoryMockTest
 
 		ItemStack item = new ItemStackMock(Material.DIRT, 32);
 
-		inventory.setContents(new ItemStack[]{ item });
+		inventory.setContents(new ItemStack[]
+		{item});
 
 		assertTrue(item.isSimilar(inventory.getItem(0)));
 		for (int i = 1; i < inventory.getSize(); i++)
@@ -246,7 +247,8 @@ class InventoryMockTest
 	@Test
 	void setContents_ArrayWithNulls_NullsIgnores()
 	{
-		assertDoesNotThrow(() -> inventory.setContents(new ItemStack[]{ null }));
+		assertDoesNotThrow(() -> inventory.setContents(new ItemStack[]
+		{null}));
 	}
 
 	@Test
@@ -839,8 +841,7 @@ class InventoryMockTest
 			if (inventoryA == null)
 			{
 				assertNull(inventoryB);
-			}
-			else
+			} else
 			{
 				assertTrue(inventoryA.isIdentical(inventoryB));
 			}
@@ -851,8 +852,7 @@ class InventoryMockTest
 			if (inventoryA == null)
 			{
 				assertNotNull(inventoryB);
-			}
-			else
+			} else
 			{
 				assertFalse(inventoryA.isIdentical(inventoryB));
 			}

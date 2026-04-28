@@ -30,7 +30,8 @@ class CocoaDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2 })
+		@ValueSource(ints =
+		{0, 1, 2})
 		void setAge(int age)
 		{
 			cocoa.setAge(age);
@@ -56,9 +57,8 @@ class CocoaDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			cocoa.setFacing(face);
@@ -66,9 +66,8 @@ class CocoaDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> cocoa.setFacing(face));

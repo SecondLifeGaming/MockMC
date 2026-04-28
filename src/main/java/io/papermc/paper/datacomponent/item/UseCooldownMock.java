@@ -5,10 +5,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record UseCooldownMock(float seconds, @Nullable Key cooldownGroup) implements UseCooldown
 {
-
 
 	static class BuilderMock implements Builder
 	{

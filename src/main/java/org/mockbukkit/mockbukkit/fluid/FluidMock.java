@@ -5,7 +5,11 @@ import org.bukkit.Fluid;
 import org.bukkit.NamespacedKey;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
-public class FluidMock extends OldKeyedEnumMock<Fluid> implements Fluid
+@SuppressWarnings("removal")
+public class FluidMock extends OldKeyedEnumMock<Fluid>
+		implements
+			Fluid,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.FluidBaseMock
 {
 
 	public FluidMock(String name, int ordinal, NamespacedKey key)
@@ -18,8 +22,6 @@ public class FluidMock extends OldKeyedEnumMock<Fluid> implements Fluid
 		String name = object.get("name").getAsString();
 		NamespacedKey key = NamespacedKey.fromString(object.get("key").getAsString());
 		int ordinal = object.get("ordinal").getAsInt();
-
 		return new FluidMock(name, ordinal, key);
 	}
-
 }

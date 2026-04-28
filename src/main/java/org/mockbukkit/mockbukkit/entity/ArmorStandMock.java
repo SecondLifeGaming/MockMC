@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
 import io.papermc.paper.math.Rotations;
-import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.EquipmentSlot;
@@ -12,9 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -26,39 +22,70 @@ import java.util.UUID;
  *
  * @see LivingEntityMock
  */
-public class ArmorStandMock extends LivingEntityMock implements ArmorStand
+public class ArmorStandMock extends LivingEntityMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ArmorStandBaseMock
 {
 
+	private static final String POSE_NULL = "Pose cannot be null";
+	private static final String SLOT_NULL = "Slot cannot be null";
+	private static final String SLOTS_NULL = "Slots cannot be null";
+	private static final String ROTATIONS_NULL = "Rotations cannot be null";
+
 	private boolean hasArms = false;
+
 	private boolean isSmall = false;
+
 	private boolean isMarker = false;
+
 	private boolean hasBasePlate = true;
+
 	private boolean isVisible = true;
+
 	private boolean isMovable = true;
+
 	private boolean isTickable = true;
 
-	private @NotNull EulerAngle headPose = EulerAngle.ZERO;
-	private @NotNull EulerAngle bodyPose = EulerAngle.ZERO;
-	private @NotNull EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
-	private @NotNull EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
-	private @NotNull EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
-	private @NotNull EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
+	@NotNull
+	private EulerAngle headPose = EulerAngle.ZERO;
+
+	@NotNull
+	private EulerAngle bodyPose = EulerAngle.ZERO;
+
+	@NotNull
+	private EulerAngle leftArmPose = new EulerAngle(Math.toRadians(-10.0f), 0.0f, Math.toRadians(-10.0f));
+
+	@NotNull
+	private EulerAngle rightArmPose = new EulerAngle(Math.toRadians(-15.0f), 0.0f, Math.toRadians(10.0f));
+
+	@NotNull
+	private EulerAngle leftLegPose = new EulerAngle(Math.toRadians(-1.0f), 0.0f, Math.toRadians(-1.0f));
+
+	@NotNull
+	private EulerAngle rightLegPose = new EulerAngle(Math.toRadians(1.0f), 0.0f, Math.toRadians(1.0f));
 
 	private final Set<EquipmentSlot> disabledSlots = EnumSet.noneOf(EquipmentSlot.class);
 
 	/**
-	 * Constructs a new {@link ArmorStandMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ArmorStandMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ArmorStandMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ARMOR_STAND;
 	}
@@ -70,17 +97,23 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		{
 			return EntitySubType.SMALL;
 		}
-
 		return super.getSubType();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
-	public @NotNull ItemStack getBoots()
+	@NotNull
+	public ItemStack getBoots()
 	{
 		return getEquipment().getBoots();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
 	public void setBoots(@Nullable ItemStack item)
@@ -88,13 +121,20 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		getEquipment().setBoots(item);
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
-	public @NotNull ItemStack getLeggings()
+	@NotNull
+	public ItemStack getLeggings()
 	{
 		return getEquipment().getLeggings();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
 	public void setLeggings(@Nullable ItemStack item)
@@ -102,13 +142,20 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		getEquipment().setLeggings(item);
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
-	public @NotNull ItemStack getChestplate()
+	@NotNull
+	public ItemStack getChestplate()
 	{
 		return getEquipment().getChestplate();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
 	public void setChestplate(@Nullable ItemStack item)
@@ -116,13 +163,20 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		getEquipment().setChestplate(item);
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
-	public @NotNull ItemStack getHelmet()
+	@NotNull
+	public ItemStack getHelmet()
 	{
 		return getEquipment().getHelmet();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
 	public void setHelmet(@Nullable ItemStack item)
@@ -130,13 +184,20 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		getEquipment().setHelmet(item);
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
-	public @NotNull ItemStack getItemInHand()
+	@NotNull
+	public ItemStack getItemInHand()
 	{
 		return getEquipment().getItemInMainHand();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(since = "1.15.2")
 	public void setItemInHand(@Nullable ItemStack item)
@@ -145,7 +206,8 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public @NotNull EulerAngle getBodyPose()
+	@NotNull
+	public EulerAngle getBodyPose()
 	{
 		return bodyPose;
 	}
@@ -153,12 +215,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setBodyPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.bodyPose = pose;
 	}
 
 	@Override
-	public @NotNull EulerAngle getLeftArmPose()
+	@NotNull
+	public EulerAngle getLeftArmPose()
 	{
 		return leftArmPose;
 	}
@@ -166,12 +229,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftArmPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.leftArmPose = pose;
 	}
 
 	@Override
-	public @NotNull EulerAngle getRightArmPose()
+	@NotNull
+	public EulerAngle getRightArmPose()
 	{
 		return rightArmPose;
 	}
@@ -179,12 +243,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightArmPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.rightArmPose = pose;
 	}
 
 	@Override
-	public @NotNull EulerAngle getLeftLegPose()
+	@NotNull
+	public EulerAngle getLeftLegPose()
 	{
 		return leftLegPose;
 	}
@@ -192,12 +257,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftLegPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.leftLegPose = pose;
 	}
 
 	@Override
-	public @NotNull EulerAngle getRightLegPose()
+	@NotNull
+	public EulerAngle getRightLegPose()
 	{
 		return rightLegPose;
 	}
@@ -205,12 +271,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightLegPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.rightLegPose = pose;
 	}
 
 	@Override
-	public @NotNull EulerAngle getHeadPose()
+	@NotNull
+	public EulerAngle getHeadPose()
 	{
 		return headPose;
 	}
@@ -218,7 +285,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setHeadPose(@NotNull EulerAngle pose)
 	{
-		Preconditions.checkNotNull(pose, "Pose cannot be null");
+		Preconditions.checkNotNull(pose, POSE_NULL);
 		this.headPose = pose;
 	}
 
@@ -234,6 +301,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		this.hasBasePlate = basePlate;
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
 	public boolean isVisible()
 	{
@@ -264,6 +334,9 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 		return isSmall;
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
 	public void setSmall(boolean small)
 	{
@@ -280,27 +353,6 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	public void setMarker(boolean marker)
 	{
 		this.isMarker = marker;
-	}
-
-	@Override
-	public void addEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
-	{
-		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void removeEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
-	{
-		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean hasEquipmentLock(@NotNull EquipmentSlot slot, @NotNull LockType lockType)
-	{
-		// TODO Equipment Locks use byte operations internally, they might be hard to implement
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -328,42 +380,23 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	}
 
 	@Override
-	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	@NotNull
+	public ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
-		return switch (slot)
-		{
-			case HAND -> getEquipment().getItemInMainHand();
-			case OFF_HAND -> getEquipment().getItemInOffHand();
-			case FEET -> getBoots();
-			case LEGS -> getLeggings();
-			case CHEST -> getChestplate();
-			case HEAD -> getHelmet();
-			case BODY, SADDLE -> throw new UnimplementedOperationException();
-		};
+		Preconditions.checkNotNull(slot, SLOT_NULL);
+		return getEquipment().getItem(slot);
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
-		if (item == null)
-		{
-			item = new ItemStackMock(Material.AIR);
-		}
-		switch (slot)
-		{
-		case HAND -> getEquipment().setItemInMainHand(item);
-		case OFF_HAND -> getEquipment().setItemInOffHand(item);
-		case FEET -> setBoots(item);
-		case LEGS -> setLeggings(item);
-		case CHEST -> setChestplate(item);
-		case HEAD -> setHelmet(item);
-		}
+		Preconditions.checkNotNull(slot, SLOT_NULL);
+		getEquipment().setItem(slot, item);
 	}
 
 	@Override
-	public @NotNull Set<EquipmentSlot> getDisabledSlots()
+	@NotNull
+	public Set<EquipmentSlot> getDisabledSlots()
 	{
 		return EnumSet.copyOf(this.disabledSlots);
 	}
@@ -371,7 +404,7 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		Preconditions.checkNotNull(slots, "Slots cannot be null");
+		Preconditions.checkNotNull(slots, SLOTS_NULL);
 		this.disabledSlots.clear();
 		Collections.addAll(this.disabledSlots, slots);
 	}
@@ -379,26 +412,27 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void addDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		Preconditions.checkNotNull(slots, "Slots cannot be null");
+		Preconditions.checkNotNull(slots, SLOTS_NULL);
 		Collections.addAll(this.disabledSlots, slots);
 	}
 
 	@Override
 	public void removeDisabledSlots(@NotNull EquipmentSlot... slots)
 	{
-		Preconditions.checkNotNull(slots, "Slots cannot be null");
+		Preconditions.checkNotNull(slots, SLOTS_NULL);
 		List.of(slots).forEach(this.disabledSlots::remove);
 	}
 
 	@Override
 	public boolean isSlotDisabled(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_NULL);
 		return this.disabledSlots.contains(slot);
 	}
 
 	@Override
-	public @NotNull Rotations getBodyRotations()
+	@NotNull
+	public Rotations getBodyRotations()
 	{
 		return toPaper(getBodyPose());
 	}
@@ -406,12 +440,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setBodyRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setBodyPose(toBukkit(rotations));
 	}
 
 	@Override
-	public @NotNull Rotations getLeftArmRotations()
+	@NotNull
+	public Rotations getLeftArmRotations()
 	{
 		return toPaper(getLeftArmPose());
 	}
@@ -419,12 +454,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftArmRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setLeftArmPose(toBukkit(rotations));
 	}
 
 	@Override
-	public @NotNull Rotations getRightArmRotations()
+	@NotNull
+	public Rotations getRightArmRotations()
 	{
 		return toPaper(getRightArmPose());
 	}
@@ -432,12 +468,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightArmRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setRightArmPose(toBukkit(rotations));
 	}
 
 	@Override
-	public @NotNull Rotations getLeftLegRotations()
+	@NotNull
+	public Rotations getLeftLegRotations()
 	{
 		return toPaper(getLeftLegPose());
 	}
@@ -445,12 +482,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setLeftLegRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setLeftLegPose(toBukkit(rotations));
 	}
 
 	@Override
-	public @NotNull Rotations getRightLegRotations()
+	@NotNull
+	public Rotations getRightLegRotations()
 	{
 		return toPaper(getRightLegPose());
 	}
@@ -458,12 +496,13 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setRightLegRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setRightLegPose(toBukkit(rotations));
 	}
 
 	@Override
-	public @NotNull Rotations getHeadRotations()
+	@NotNull
+	public Rotations getHeadRotations()
 	{
 		return toPaper(getHeadPose());
 	}
@@ -471,26 +510,18 @@ public class ArmorStandMock extends LivingEntityMock implements ArmorStand
 	@Override
 	public void setHeadRotations(@NotNull Rotations rotations)
 	{
-		Preconditions.checkNotNull(rotations, "Rotations cannot be null");
+		Preconditions.checkNotNull(rotations, ROTATIONS_NULL);
 		setHeadPose(toBukkit(rotations));
 	}
 
 	private static EulerAngle toBukkit(Rotations rotation)
 	{
-		return new EulerAngle(
-				Math.toRadians(rotation.x()),
-				Math.toRadians(rotation.y()),
-				Math.toRadians(rotation.z())
-		);
+		return new EulerAngle(Math.toRadians(rotation.x()), Math.toRadians(rotation.y()), Math.toRadians(rotation.z()));
 	}
 
 	private static Rotations toPaper(EulerAngle eulerAngle)
 	{
-		return Rotations.ofDegrees(
-				Math.toDegrees(eulerAngle.getX()),
-				Math.toDegrees(eulerAngle.getY()),
-				Math.toDegrees(eulerAngle.getZ())
-		);
+		return Rotations.ofDegrees(Math.toDegrees(eulerAngle.getX()), Math.toDegrees(eulerAngle.getY()),
+				Math.toDegrees(eulerAngle.getZ()));
 	}
-
 }

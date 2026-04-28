@@ -9,7 +9,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "UnstableApiUsage" })
+@SuppressWarnings(
+{"UnstableApiUsage"})
 public class ConsumableTypesBridgeMock implements ConsumableTypesBridge
 {
 

@@ -56,50 +56,46 @@ class PotionEffectPriorityQueueTests
 
 	private List<EntityPotionEffectEvent> getFiredEvents()
 	{
-		return server.getPluginManager().getFiredEvents()
-				.filter(e -> e instanceof EntityPotionEffectEvent)
-				.map(e -> (EntityPotionEffectEvent) e)
-				.toList();
+		return server.getPluginManager().getFiredEvents().filter(e -> e instanceof EntityPotionEffectEvent)
+				.map(e -> (EntityPotionEffectEvent) e).toList();
 	}
 
 	private void assertEventCountAndClear(EntityPotionEffectEvent.Action expectedAction, PotionEffect expectedOld,
-										  PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause, int count)
+			PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause, int count)
 	{
 		assertEventFired(expectedAction, expectedOld, expectedNew, expectedCause);
 		var amountOfActions = getFiredEvents().stream().filter(e -> e.getAction() == expectedAction).count();
-		assertEquals(count, amountOfActions, String.format("Expected %dx %s action event, got %d", count, expectedAction, amountOfActions));
+		assertEquals(count, amountOfActions,
+				String.format("Expected %dx %s action event, got %d", count, expectedAction, amountOfActions));
 		clearEvents();
 	}
 
 	private void assertEventFired(EntityPotionEffectEvent.Action expectedAction, PotionEffect expectedOld,
-								  PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause)
+			PotionEffect expectedNew, EntityPotionEffectEvent.Cause expectedCause)
 	{
-		var event = getFiredEvents().stream().filter(e -> e.getAction() == expectedAction &&
-						e.getCause() == expectedCause &&
-						effectsMatch(e.getOldEffect(), expectedOld) &&
-						effectsMatch(e.getNewEffect(), expectedNew))
+		var event = getFiredEvents().stream()
+				.filter(e -> e.getAction() == expectedAction && e.getCause() == expectedCause
+						&& effectsMatch(e.getOldEffect(), expectedOld) && effectsMatch(e.getNewEffect(), expectedNew))
 				.findFirst();
-		assertTrue(event.isPresent(), String.format("Expected %s event with cause %s not found", expectedAction, expectedCause));
+		assertTrue(event.isPresent(),
+				String.format("Expected %s event with cause %s not found", expectedAction, expectedCause));
 	}
 
 	private void assertEventNotFired(EntityPotionEffectEvent.Action action)
 	{
-		var events = getFiredEvents().stream().filter(e -> e.getAction() == action)
-				.toList();
+		var events = getFiredEvents().stream().filter(e -> e.getAction() == action).toList();
 
 		// For CHANGED events, we need to be more specific - no change should mean
 		// the old and new effects have the same amplifier and type
 		if (action == EntityPotionEffectEvent.Action.CHANGED)
 		{
-			var invalidChanges = events.stream()
-					.filter(e -> e.getOldEffect() != null && e.getNewEffect() != null)
-					.filter(e -> e.getOldEffect().getType() == e.getNewEffect().getType() &&
-							e.getOldEffect().getAmplifier() == e.getNewEffect().getAmplifier())
+			var invalidChanges = events.stream().filter(e -> e.getOldEffect() != null && e.getNewEffect() != null)
+					.filter(e -> e.getOldEffect().getType() == e.getNewEffect().getType()
+							&& e.getOldEffect().getAmplifier() == e.getNewEffect().getAmplifier())
 					.toList();
 			assertTrue(invalidChanges.isEmpty(),
 					String.format("CHANGED event fired but effects have same amplifier/type: %s", invalidChanges));
-		}
-		else
+		} else
 		{
 			assertTrue(events.isEmpty(), String.format("%s event should not have been fired", action));
 		}
@@ -115,8 +111,7 @@ class PotionEffectPriorityQueueTests
 		{
 			return false;
 		}
-		return actual.getType() == expected.getType() &&
-				actual.getAmplifier() == expected.getAmplifier();
+		return actual.getType() == expected.getType() && actual.getAmplifier() == expected.getAmplifier();
 	}
 
 	private void assertEffectActive(@NotNull PotionEffect expected)
@@ -137,7 +132,8 @@ class PotionEffectPriorityQueueTests
 	{
 		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEntityPotionEffectEvent(event, null, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.ADDED, false);
+		assertEntityPotionEffectEvent(event, null, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN,
+				EntityPotionEffectEvent.Action.ADDED, false);
 		assertEffectActive(weakEffect);
 	}
 
@@ -149,9 +145,11 @@ class PotionEffectPriorityQueueTests
 		assertEffectActive(weakEffect);
 
 		// Add stronger effect
-		EntityPotionEffectEvent event = livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		EntityPotionEffectEvent event = livingEntity.addPotionEffect(strongEffect,
+				EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEntityPotionEffectEvent(event, weakEffect, strongEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+		assertEntityPotionEffectEvent(event, weakEffect, strongEffect, EntityPotionEffectEvent.Cause.PLUGIN,
+				EntityPotionEffectEvent.Action.CHANGED, true);
 		assertEffectActive(strongEffect);
 	}
 
@@ -165,7 +163,8 @@ class PotionEffectPriorityQueueTests
 		// Add weaker effect
 		EntityPotionEffectEvent event = livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
-		assertEntityPotionEffectEvent(event, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CHANGED, true);
+		assertEntityPotionEffectEvent(event, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN,
+				EntityPotionEffectEvent.Action.CHANGED, true);
 		assertEffectActive(strongEffect); // Should still be the strong effect
 	}
 
@@ -179,7 +178,8 @@ class PotionEffectPriorityQueueTests
 		livingEntity.addPotionEffect(longDuration, EntityPotionEffectEvent.Cause.PLUGIN);
 
 		assertEffectActive(longDuration);
-		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, shortDuration, longDuration, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, shortDuration, longDuration,
+				EntityPotionEffectEvent.Cause.PLUGIN);
 	}
 
 	@Test
@@ -213,7 +213,8 @@ class PotionEffectPriorityQueueTests
 		// Tick until weak effect expires
 		server.getScheduler().performTicks(2);
 
-		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED); // weak doesn't fire an event! Because it wasn't added...
+		assertEventNotFired(EntityPotionEffectEvent.Action.REMOVED); // weak doesn't fire an event! Because it wasn't
+																		// added...
 		assertEventNotFired(EntityPotionEffectEvent.Action.CHANGED); // No change to active effect
 		assertEffectActive(strongLong); // Strong effect still active (but duration reduced)
 	}
@@ -228,8 +229,10 @@ class PotionEffectPriorityQueueTests
 
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null,
+				EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect,
+				EntityPotionEffectEvent.Cause.PLUGIN);
 		assertEffectNotActive(strongEffect);
 		assertEffectNotActive(weakEffect);
 	}
@@ -237,7 +240,8 @@ class PotionEffectPriorityQueueTests
 	@Test
 	void testRemoveNonStrongestEffectNoChange()
 	{
-		// This test shows that removePotionEffect removes the TOP effect, not a specific one
+		// This test shows that removePotionEffect removes the TOP effect, not a
+		// specific one
 		livingEntity.addPotionEffect(strongEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 		livingEntity.addPotionEffect(weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
 
@@ -246,8 +250,10 @@ class PotionEffectPriorityQueueTests
 		// Remove effect - will remove all
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
-		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null, EntityPotionEffectEvent.Cause.PLUGIN);
-		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect, EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.REMOVED, strongEffect, null,
+				EntityPotionEffectEvent.Cause.PLUGIN);
+		assertEventFired(EntityPotionEffectEvent.Action.CHANGED, strongEffect, weakEffect,
+				EntityPotionEffectEvent.Cause.PLUGIN);
 
 		assertEffectNotActive(strongEffect);
 		assertEffectNotActive(weakEffect);
@@ -284,20 +290,19 @@ class PotionEffectPriorityQueueTests
 
 		var activeEffects = livingEntity.getActivePotionEffects();
 		assertEquals(2, activeEffects.size()); // Only strongest regen + speed
-		assertTrue(activeEffects.stream().anyMatch(e -> e.getAmplifier() == 3 && e.getType() == PotionEffectType.REGENERATION));
+		assertTrue(activeEffects.stream()
+				.anyMatch(e -> e.getAmplifier() == 3 && e.getType() == PotionEffectType.REGENERATION));
 		assertTrue(activeEffects.stream().anyMatch(e -> e.getType() == PotionEffectType.SPEED));
-		assertFalse(activeEffects.stream().anyMatch(e -> e.getAmplifier() == 1 && e.getType() == PotionEffectType.REGENERATION));
+		assertFalse(activeEffects.stream()
+				.anyMatch(e -> e.getAmplifier() == 1 && e.getType() == PotionEffectType.REGENERATION));
 	}
 
 	void cancelAllNextEvents()
 	{
-		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener()
-				{
-				},
-				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) -> ((EntityPotionEffectEvent) event).setCancelled(true),
-				plugin, false);
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class, new org.bukkit.event.Listener()
+		{
+		}, org.bukkit.event.EventPriority.NORMAL,
+				(listener, event) -> ((EntityPotionEffectEvent) event).setCancelled(true), plugin, false);
 	}
 
 	@Test
@@ -437,18 +442,17 @@ class PotionEffectPriorityQueueTests
 		livingEntity.removePotionEffect(PotionEffectType.REGENERATION);
 
 		// Check if change event was fired - it shouldn't be if effects are equal
-		long changeEvents = server.getPluginManager().getFiredEvents()
-				.filter(e -> e instanceof EntityPotionEffectEvent)
+		long changeEvents = server.getPluginManager().getFiredEvents().filter(e -> e instanceof EntityPotionEffectEvent)
 				.map(e -> (EntityPotionEffectEvent) e)
-				.filter(e -> e.getAction() == EntityPotionEffectEvent.Action.CHANGED)
-				.count();
+				.filter(e -> e.getAction() == EntityPotionEffectEvent.Action.CHANGED).count();
 		assertEquals(1, changeEvents);
 	}
 
 	@Test
 	void testBranchCoverage_GetActivePotionEffectsEmptyFilter()
 	{
-		livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, 1), EntityPotionEffectEvent.Cause.PLUGIN);
+		livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, 1),
+				EntityPotionEffectEvent.Cause.PLUGIN);
 		server.getScheduler().performTicks(1); // Expire the effect
 
 		var activeEffects = livingEntity.getActivePotionEffects();
@@ -473,7 +477,8 @@ class PotionEffectPriorityQueueTests
 	}
 
 	private static void assertEntityPotionEffectEvent(@NotNull EntityPotionEffectEvent event, PotionEffect oldEffect,
-													  PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action, boolean override)
+			PotionEffect newEffect, EntityPotionEffectEvent.Cause cause, EntityPotionEffectEvent.Action action,
+			boolean override)
 	{
 		assertEquals(oldEffect, event.getOldEffect());
 		assertEquals(newEffect, event.getNewEffect());
@@ -499,63 +504,92 @@ class PotionEffectPriorityQueueTests
 	@Test
 	void testLiveTestStrength(@MockBukkitInject @NotNull PlayerMock player)
 	{
-		//[12:01:15 INFO]: BumbaBot issued server command: /effect give BumbaBot minecraft:strength 100 0
+		// [12:01:15 INFO]: BumbaBot issued server command: /effect give BumbaBot
+		// minecraft:strength 100 0
 		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(2000, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		//[12:01:15 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=ADDED, cause=COMMAND, oldEffect=null, newEffect=INCREASE_DAMAGE(lvl=1,dur=2000), cancelled=false
-		//[12:01:15 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.ADDED, null, PotionEffectType.STRENGTH.createEffect(2000, 0), EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:01:15 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=ADDED,
+		// cause=COMMAND, oldEffect=null, newEffect=INCREASE_DAMAGE(lvl=1,dur=2000),
+		// cancelled=false
+		// [12:01:15 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.ADDED, null,
+				PotionEffectType.STRENGTH.createEffect(2000, 0), EntityPotionEffectEvent.Cause.COMMAND, 1);
 
 		server.getScheduler().performTicks(147);
 
-		//[12:01:22 INFO]: BumbaBot issued server command: /effect give BumbaBot minecraft:strength 10 1
+		// [12:01:22 INFO]: BumbaBot issued server command: /effect give BumbaBot
+		// minecraft:strength 10 1
 		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND);
-		//[12:01:22 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED, cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=1853), newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
-		//[12:01:22 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED, PotionEffectType.STRENGTH.createEffect(1853, 0), PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:01:22 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED,
+		// cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=1853),
+		// newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
+		// [12:01:22 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED,
+				PotionEffectType.STRENGTH.createEffect(1853, 0), PotionEffectType.STRENGTH.createEffect(200, 1),
+				EntityPotionEffectEvent.Cause.COMMAND, 1);
 
 		server.getScheduler().performTicks(568);
 
-		//[12:01:51 INFO]: BumbaBot issued server command: /effect give BumbaBot minecraft:strength 10 1
+		// [12:01:51 INFO]: BumbaBot issued server command: /effect give BumbaBot
+		// minecraft:strength 10 1
 		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND);
-		//[12:01:51 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED, cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=1285), newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
-		//[12:01:51 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED, PotionEffectType.STRENGTH.createEffect(1285, 0), PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:01:51 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED,
+		// cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=1285),
+		// newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
+		// [12:01:51 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED,
+				PotionEffectType.STRENGTH.createEffect(1285, 0), PotionEffectType.STRENGTH.createEffect(200, 1),
+				EntityPotionEffectEvent.Cause.COMMAND, 1);
 
-		//[12:01:55 INFO]: BumbaBot issued server command: /effect clear
-		player.removePotionEffect(PotionEffectType.STRENGTH, EntityPotionEffectEvent.Cause.COMMAND, EntityPotionEffectEvent.Action.CLEARED);
+		// [12:01:55 INFO]: BumbaBot issued server command: /effect clear
+		player.removePotionEffect(PotionEffectType.STRENGTH, EntityPotionEffectEvent.Cause.COMMAND,
+				EntityPotionEffectEvent.Action.CLEARED);
 
-		//[12:01:55 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CLEARED, cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=2,dur=112), newEffect=null, cancelled=false
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.CLEARED, PotionEffectType.STRENGTH.createEffect(112, 1), null, EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:01:55 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CLEARED,
+		// cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=2,dur=112), newEffect=null,
+		// cancelled=false
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.CLEARED, PotionEffectType.STRENGTH.createEffect(112, 1),
+				null, EntityPotionEffectEvent.Cause.COMMAND, 1);
 
-		//[12:01:55 INFO]: [BumbaBot: Removed every effect from BumbaBot]
+		// [12:01:55 INFO]: [BumbaBot: Removed every effect from BumbaBot]
 		assertFalse(player.hasPotionEffect(PotionEffectType.STRENGTH));
 	}
 
 	@Test
 	void testLiveTestStrength2(@MockBukkitInject @NotNull PlayerMock player)
 	{
-		//[12:02:55 INFO]: BumbaBot issued server command: /effect give BumbaBot minecraft:strength 20 0
+		// [12:02:55 INFO]: BumbaBot issued server command: /effect give BumbaBot
+		// minecraft:strength 20 0
 		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(400, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		//[12:02:55 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=ADDED, cause=COMMAND, oldEffect=null, newEffect=INCREASE_DAMAGE(lvl=1,dur=400), cancelled=false
-		//[12:02:55 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.ADDED, null, PotionEffectType.STRENGTH.createEffect(400, 0), EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:02:55 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=ADDED,
+		// cause=COMMAND, oldEffect=null, newEffect=INCREASE_DAMAGE(lvl=1,dur=400),
+		// cancelled=false
+		// [12:02:55 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.ADDED, null,
+				PotionEffectType.STRENGTH.createEffect(400, 0), EntityPotionEffectEvent.Cause.COMMAND, 1);
 
 		server.getScheduler().performTicks(84);
 
-		//[12:02:59 INFO]: BumbaBot issued server command: /effect give BumbaBot minecraft:strength 10 1
+		// [12:02:59 INFO]: BumbaBot issued server command: /effect give BumbaBot
+		// minecraft:strength 10 1
 		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND);
 
-		//[12:02:59 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED, cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=316), newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
-		//[12:02:59 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED, PotionEffectType.STRENGTH.createEffect(316, 0), PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND, 1);
+		// [12:02:59 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=CHANGED,
+		// cause=COMMAND, oldEffect=INCREASE_DAMAGE(lvl=1,dur=316),
+		// newEffect=INCREASE_DAMAGE(lvl=2,dur=200), cancelled=false
+		// [12:02:59 INFO]: [BumbaBot: Applied effect Strength to BumbaBot]
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.CHANGED, PotionEffectType.STRENGTH.createEffect(316, 0),
+				PotionEffectType.STRENGTH.createEffect(200, 1), EntityPotionEffectEvent.Cause.COMMAND, 1);
 
 		server.getScheduler().performTicks(200);
 		assertEquals(0, getFiredEvents().size());
 
 		server.getScheduler().performTicks(116);
 
-		//[12:03:15 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=REMOVED, cause=EXPIRATION, oldEffect=INCREASE_DAMAGE(lvl=1,dur=0), newEffect=null, cancelled=false
-		assertEventCountAndClear(EntityPotionEffectEvent.Action.REMOVED, PotionEffectType.STRENGTH.createEffect(0, 0), null, EntityPotionEffectEvent.Cause.EXPIRATION, 1);
+		// [12:03:15 INFO]: [Dummy] PotionEffect: entity=BumbaBot, action=REMOVED,
+		// cause=EXPIRATION, oldEffect=INCREASE_DAMAGE(lvl=1,dur=0), newEffect=null,
+		// cancelled=false
+		assertEventCountAndClear(EntityPotionEffectEvent.Action.REMOVED, PotionEffectType.STRENGTH.createEffect(0, 0),
+				null, EntityPotionEffectEvent.Cause.EXPIRATION, 1);
 	}
 
 	@Test
@@ -564,22 +598,20 @@ class PotionEffectPriorityQueueTests
 		int effectDuration = 10;
 
 		// Keep the potion effects coming! once expired: restart again
-		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener()
-				{
-				},
-				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) ->
-				{
-					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-					{
-						pl.removePotionEffect(_event.getOldEffect().getType());
-						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
-					}
-				},
-				plugin, false);
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class, new org.bukkit.event.Listener()
+		{
+		}, org.bukkit.event.EventPriority.NORMAL, (listener, event) ->
+		{
+			if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl
+					&& _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+			{
+				pl.removePotionEffect(_event.getOldEffect().getType());
+				pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
+			}
+		}, plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0),
+				EntityPotionEffectEvent.Cause.COMMAND);
 		server.getScheduler().performTicks(effectDuration * 2); // Shouldn't error & should keep the effect running
 		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH));
 	}
@@ -590,21 +622,19 @@ class PotionEffectPriorityQueueTests
 		int effectDuration = 10;
 
 		// Listener that adds a new (non-expired) effect type during expiration event
-		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener()
-				{
-				},
-				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) ->
-				{
-					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-					{
-						pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
-					}
-				},
-				plugin, false);
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class, new org.bukkit.event.Listener()
+		{
+		}, org.bukkit.event.EventPriority.NORMAL, (listener, event) ->
+		{
+			if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl
+					&& _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+			{
+				pl.addPotionEffect(_event.getOldEffect().withDuration(effectDuration));
+			}
+		}, plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0),
+				EntityPotionEffectEvent.Cause.COMMAND);
 		server.getScheduler().performTicks(effectDuration + 1); // Expire the effect
 		assertTrue(player.hasPotionEffect(PotionEffectType.STRENGTH)); // Effect should be fully removed
 	}
@@ -615,23 +645,24 @@ class PotionEffectPriorityQueueTests
 		int effectDuration = 10;
 
 		// Removes another effect during effect handling
-		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener()
-				{
-				},
-				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) ->
-				{
-					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-					{
-						var effect = _event.getOldEffect().getType() == PotionEffectType.STRENGTH ? PotionEffectType.SPEED : PotionEffectType.STRENGTH;
-						pl.removePotionEffect(effect);
-					}
-				},
-				plugin, false);
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class, new org.bukkit.event.Listener()
+		{
+		}, org.bukkit.event.EventPriority.NORMAL, (listener, event) ->
+		{
+			if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl
+					&& _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+			{
+				var effect = _event.getOldEffect().getType() == PotionEffectType.STRENGTH
+						? PotionEffectType.SPEED
+						: PotionEffectType.STRENGTH;
+				pl.removePotionEffect(effect);
+			}
+		}, plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
-		player.addPotionEffect(PotionEffectType.SPEED.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0),
+				EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.SPEED.createEffect(effectDuration, 0),
+				EntityPotionEffectEvent.Cause.COMMAND);
 
 		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
 
@@ -639,28 +670,25 @@ class PotionEffectPriorityQueueTests
 		assertFalse(player.hasPotionEffect(PotionEffectType.SPEED));
 	}
 
-
 	@Test
 	void testRemoveYourOwnEffectDuringHandling(@MockBukkitInject PlayerMock player)
 	{
 		int effectDuration = 10;
 
 		// Removes another effect during effect handling
-		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class,
-				new org.bukkit.event.Listener()
-				{
-				},
-				org.bukkit.event.EventPriority.NORMAL,
-				(listener, event) ->
-				{
-					if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl && _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
-					{
-						pl.removePotionEffect(_event.getOldEffect().getType());
-					}
-				},
-				plugin, false);
+		server.getPluginManager().registerEvent(EntityPotionEffectEvent.class, new org.bukkit.event.Listener()
+		{
+		}, org.bukkit.event.EventPriority.NORMAL, (listener, event) ->
+		{
+			if (event instanceof EntityPotionEffectEvent _event && _event.getEntity() instanceof Player pl
+					&& _event.getCause() == EntityPotionEffectEvent.Cause.EXPIRATION)
+			{
+				pl.removePotionEffect(_event.getOldEffect().getType());
+			}
+		}, plugin, false);
 
-		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0), EntityPotionEffectEvent.Cause.COMMAND);
+		player.addPotionEffect(PotionEffectType.STRENGTH.createEffect(effectDuration, 0),
+				EntityPotionEffectEvent.Cause.COMMAND);
 
 		server.getScheduler().performTicks(effectDuration + 1); // Expire the original
 

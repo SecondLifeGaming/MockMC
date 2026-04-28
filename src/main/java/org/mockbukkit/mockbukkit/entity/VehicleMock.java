@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.entity.Vehicle;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -11,14 +10,22 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public abstract class VehicleMock extends EntityMock implements Vehicle
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public abstract class VehicleMock extends EntityMock
+		implements
+			Vehicle,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.VehicleBaseMock
 {
 
 	/**
-	 * Constructs a new {@link VehicleMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link VehicleMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected VehicleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -26,9 +33,9 @@ public abstract class VehicleMock extends EntityMock implements Vehicle
 	}
 
 	@Override
-	public @NotNull String toString()
+	@NotNull
+	public String toString()
 	{
 		return "VehicleMock{passenger=" + getPassenger() + '}';
 	}
-
 }

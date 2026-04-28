@@ -46,6 +46,8 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class PluginManagerMockTest
 {
@@ -140,7 +142,8 @@ class PluginManagerMockTest
 		Player player = server.addPlayer();
 		BlockBreakEvent eventToFire = new BlockBreakEvent(null, player);
 		pluginManager.callEvent(eventToFire);
-		assertThat(pluginManager, hasFiredFilteredEvent(BlockBreakEvent.class, event -> event.getPlayer().equals(player)));
+		assertThat(pluginManager,
+				hasFiredFilteredEvent(BlockBreakEvent.class, event -> event.getPlayer().equals(player)));
 	}
 
 	@Test
@@ -255,7 +258,8 @@ class PluginManagerMockTest
 
 		pluginManager.disablePlugin(plugin);
 
-		assertThat(pluginManager, hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin)));
+		assertThat(pluginManager,
+				hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin)));
 	}
 
 	@Test
@@ -358,7 +362,8 @@ class PluginManagerMockTest
 				throw new IllegalStateException();
 			}
 		}, MockBukkit.createMockPlugin());
-		assertThrowsExactly(IllegalStateException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+		assertThrowsExactly(IllegalStateException.class,
+				() -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 	@Test
@@ -372,7 +377,8 @@ class PluginManagerMockTest
 				throw new Exception();
 			}
 		}, MockBukkit.createMockPlugin());
-		assertThrowsExactly(EventHandlerException.class, () -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
+		assertThrowsExactly(EventHandlerException.class,
+				() -> pluginManager.callEvent(new BlockBreakEvent(null, null)));
 	}
 
 	@ParameterizedTest
@@ -385,7 +391,8 @@ class PluginManagerMockTest
 		PluginDescriptionFile sillyName = new PluginDescriptionFile("Name", "1.0.0", TestPlugin.class.getName());
 		nameField.set(sillyName, name);
 
-		assertThrows(PluginLoadException.class, () -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
+		assertThrows(PluginLoadException.class,
+				() -> pluginManager.loadPlugin(TestPlugin.class, sillyName, new Object[0]));
 	}
 
 	@Test
@@ -400,8 +407,9 @@ class PluginManagerMockTest
 	@Test
 	void loadPluginViaPureLoadPlugin_InvalidPluginYml()
 	{
-		// This works because JavaPlugin is a plugin where the `plugin.yml` file cannot be found.
-		//   So, it'll throw a `FileNotFound`
+		// This works because JavaPlugin is a plugin where the `plugin.yml` file cannot
+		// be found.
+		// So, it'll throw a `FileNotFound`
 		Plugin loadedPlugin = pluginManager.loadPlugin(JavaPlugin.class);
 		assertInstanceOf(JavaPlugin.class, loadedPlugin);
 		assertEquals("JavaPlugin", loadedPlugin.getName());
@@ -418,13 +426,12 @@ class PluginManagerMockTest
 	@Test
 	void test_privateConstructorPlugin()
 	{
-		PluginLoadException exception = assertThrows(
-				PluginLoadException.class,
-				() -> pluginManager.loadPlugin(PrivateConstructorPlugin.class)
-		);
+		PluginLoadException exception = assertThrows(PluginLoadException.class,
+				() -> pluginManager.loadPlugin(PrivateConstructorPlugin.class));
 
 		assertInstanceOf(NoSuchMethodException.class, exception.getCause());
-		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters", exception.getCause().getMessage());
+		assertEquals("No publicly available constructor for PrivateConstructorPluginProxy without parameters",
+				exception.getCause().getMessage());
 	}
 
 	@Test

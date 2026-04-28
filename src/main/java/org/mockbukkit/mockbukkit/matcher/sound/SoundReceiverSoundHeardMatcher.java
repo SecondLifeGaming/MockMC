@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.matcher.sound;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.util.ShadyPines;
+import org.bukkit.Registry;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
@@ -29,7 +30,8 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	@Override
 	protected boolean matchesSafely(SoundReceiver soundReceiver)
 	{
-		return soundReceiver.getHeardSounds().stream().filter(audioExperience -> audioExperience.getSound().equals(soundKey)).anyMatch(filter);
+		return soundReceiver.getHeardSounds().stream()
+				.filter(audioExperience -> audioExperience.getSound().equals(soundKey)).anyMatch(filter);
 	}
 
 	@Override
@@ -41,52 +43,69 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	@Override
 	protected void describeMismatchSafely(SoundReceiver soundReceiver, Description description)
 	{
-		description.appendText("has received the following sounds ").appendValueList("[", ",", "]", soundReceiver.getHeardSounds());
+		description.appendText("has received the following sounds ").appendValueList("[", ",", "]",
+				soundReceiver.getHeardSounds());
 	}
 
 	/**
-	 * @param sound  The required sound for a match
-	 * @param filter A custom filter
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 * @param sound
+	 *            The required sound for a match
+	 * @param filter
+	 *            A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound with filter
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull Sound sound,
+			@NotNull Predicate<AudioExperience> filter)
 	{
 		Preconditions.checkNotNull(sound);
 		Preconditions.checkNotNull(filter);
-		// Extra fields in the Sound instance needs to be checked, this is added to the filter
+		// Extra fields in the Sound instance needs to be checked, this is added to the
+		// filter
 		Predicate<AudioExperience> soundFilter = e -> e.getSource() == sound.source()
-				&& ShadyPines.equals(sound.volume(), e.getVolume())
-				&& ShadyPines.equals(sound.pitch(), e.getPitch());
+				&& ShadyPines.equals(sound.volume(), e.getVolume()) && ShadyPines.equals(sound.pitch(), e.getPitch());
 		return hasHeard(sound.name().asString(), soundFilter.and(filter));
 	}
 
 	/**
-	 * @param sound  The required sound for a match
-	 * @param filter A custom filter
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 * @param sound
+	 *            The required sound for a match
+	 * @param filter
+	 *            A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound with filter
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound,
+			@NotNull Predicate<AudioExperience> filter)
 	{
 		Preconditions.checkNotNull(sound);
-		return hasHeard(sound.getKey().getKey(), filter);
+		return hasHeard(Registry.SOUNDS.getKey(sound).getKey(), filter);
 	}
 
 	/**
-	 * @param sound  The required sound for no match
-	 * @param filter A custom filter
-	 * @return A matcher which matches with any sound receiver which has not heard the specified sound with filter
+	 * @param sound
+	 *            The required sound for no match
+	 * @param filter
+	 *            A custom filter
+	 * @return A matcher which matches with any sound receiver which has not heard
+	 *         the specified sound with filter
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull org.bukkit.Sound sound, @NotNull Predicate<AudioExperience> filter)
+	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull org.bukkit.Sound sound,
+			@NotNull Predicate<AudioExperience> filter)
 	{
 		return not(hasHeard(sound, filter));
 	}
 
 	/**
-	 * @param soundKey The required sound for a match
-	 * @param filter   A custom filter
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound with filter
+	 * @param soundKey
+	 *            The required sound for a match
+	 * @param filter
+	 *            A custom filter
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound with filter
 	 */
-	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull String soundKey, @NotNull Predicate<AudioExperience> filter)
+	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull String soundKey,
+			@NotNull Predicate<AudioExperience> filter)
 	{
 		Preconditions.checkNotNull(soundKey);
 		Preconditions.checkNotNull(filter);
@@ -94,18 +113,24 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param soundKey The required sound for no match
-	 * @param filter   A custom filter
-	 * @return A matcher which matches with any sound receiver which has not heard the specified sound with filter
+	 * @param soundKey
+	 *            The required sound for no match
+	 * @param filter
+	 *            A custom filter
+	 * @return A matcher which matches with any sound receiver which has not heard
+	 *         the specified sound with filter
 	 */
-	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull String soundKey, @NotNull Predicate<AudioExperience> filter)
+	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull String soundKey,
+			@NotNull Predicate<AudioExperience> filter)
 	{
 		return not(hasHeard(soundKey, filter));
 	}
 
 	/**
-	 * @param sound The required sound for a match
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 * @param sound
+	 *            The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound
 	 */
 	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull String sound)
 	{
@@ -113,8 +138,10 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param sound The required sound for no match
-	 * @return A matcher which matches with any sound receiver which has not heard the specified sound
+	 * @param sound
+	 *            The required sound for no match
+	 * @return A matcher which matches with any sound receiver which has not heard
+	 *         the specified sound
 	 */
 	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull String sound)
 	{
@@ -122,8 +149,10 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param sound The required sound for a match
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 * @param sound
+	 *            The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound
 	 */
 	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull Sound sound)
 	{
@@ -131,8 +160,10 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param sound The required sound for no match
-	 * @return A matcher which matches with any sound receiver which has not heard the specified sound
+	 * @param sound
+	 *            The required sound for no match
+	 * @return A matcher which matches with any sound receiver which has not heard
+	 *         the specified sound
 	 */
 	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull Sound sound)
 	{
@@ -140,8 +171,10 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param sound The required sound for a match
-	 * @return A matcher which matches with any sound receiver which has heard the specified sound
+	 * @param sound
+	 *            The required sound for a match
+	 * @return A matcher which matches with any sound receiver which has heard the
+	 *         specified sound
 	 */
 	public static @NotNull SoundReceiverSoundHeardMatcher hasHeard(@NotNull org.bukkit.Sound sound)
 	{
@@ -149,8 +182,10 @@ public class SoundReceiverSoundHeardMatcher extends TypeSafeMatcher<SoundReceive
 	}
 
 	/**
-	 * @param sound The required sound for no match
-	 * @return A matcher which matches with any sound receiver which has not heard the specified sound
+	 * @param sound
+	 *            The required sound for no match
+	 * @return A matcher which matches with any sound receiver which has not heard
+	 *         the specified sound
 	 */
 	public static @NotNull Matcher<SoundReceiver> hasNotHeard(@NotNull org.bukkit.Sound sound)
 	{

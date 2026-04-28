@@ -7,7 +7,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class KineticWeaponMock implements KineticWeapon
 {
 
@@ -95,7 +96,7 @@ public class KineticWeaponMock implements KineticWeapon
 	}
 
 	public record ConditionMock(@NonNegative int maxDurationTicks, float minSpeed,
-								float minRelativeSpeed) implements Condition
+			float minRelativeSpeed) implements Condition
 	{
 
 	}

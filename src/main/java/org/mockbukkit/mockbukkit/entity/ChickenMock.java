@@ -7,7 +7,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -16,20 +15,30 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see AnimalsMock
  */
-public class ChickenMock extends AnimalsMock implements Chicken
+public class ChickenMock extends AnimalsMock
+		implements
+			Chicken,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ChickenBaseMock
 {
 
-	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
-	private @NotNull Variant variant = Variant.TEMPERATE;
+	@NotNull
+	private SoundVariant soundVariant = SoundVariant.CLASSIC;
+
+	@NotNull
+	private Variant variant = Variant.TEMPERATE;
 
 	private boolean isChickenJockey = false;
+
 	private int eggTime;
 
 	/**
-	 * Constructs a new {@link ChickenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ChickenMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ChickenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -38,7 +47,8 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.CHICKEN;
 	}
@@ -51,7 +61,8 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -99,5 +110,4 @@ public class ChickenMock extends AnimalsMock implements Chicken
 	{
 		this.eggTime = eggLayTime;
 	}
-
 }

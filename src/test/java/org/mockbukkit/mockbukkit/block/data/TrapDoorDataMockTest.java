@@ -20,16 +20,14 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class TrapDoorDataMockTest
 {
 
-	private static final Set<BlockFace> VALID_FACES = Set.of(
-			BlockFace.NORTH,
-			BlockFace.SOUTH,
-			BlockFace.EAST,
-			BlockFace.WEST
-	);
+	private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST,
+			BlockFace.WEST);
 
 	private TrapDoorDataMock trapDoor;
 
@@ -88,8 +86,7 @@ class TrapDoorDataMockTest
 	void setFacing_Invalid_ThrowsException()
 	{
 		final Set<BlockFace> invalidFaces = Arrays.stream(BlockFace.values())
-				.filter(face -> !VALID_FACES.contains(face))
-				.collect(Collectors.toSet());
+				.filter(face -> !VALID_FACES.contains(face)).collect(Collectors.toSet());
 		for (BlockFace invalid : invalidFaces)
 		{
 			assertThrowsExactly(IllegalArgumentException.class, () -> trapDoor.setFacing(invalid));

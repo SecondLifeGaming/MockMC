@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class HelpMapMockTest
 {
@@ -89,7 +91,8 @@ class HelpMapMockTest
 	@Test
 	void testAssertRegistered()
 	{
-		HelpTopicFactory<VersionCommand> helpTopicFactory = command -> new IndexHelpTopic("", "short text", "perm", Collections.emptyList());
+		HelpTopicFactory<VersionCommand> helpTopicFactory = command -> new IndexHelpTopic("", "short text", "perm",
+				Collections.emptyList());
 		helpMap.registerHelpTopicFactory(VersionCommand.class, helpTopicFactory);
 
 		assertThat(helpMap, hasFactoryRegistered(helpTopicFactory));

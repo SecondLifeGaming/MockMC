@@ -17,7 +17,6 @@ import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
@@ -30,29 +29,50 @@ import java.util.logging.Level;
 /**
  * Mock implementation of a {@link Team}.
  */
-public class TeamMock implements Team
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class TeamMock implements Team, org.mockbukkit.mockbukkit.generated.org.bukkit.scoreboard.TeamBaseMock
 {
 
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
+
 	private static final String ENTRY_CANNOT_BE_NULL = "Entry cannot be null";
+
 	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";
 
 	private final String name;
+
 	private Component displayName;
-	private @NotNull Component prefix = Component.empty();
-	private @NotNull Component suffix = Component.empty();
-	private @NotNull ChatColor color = ChatColor.RESET;
+
+	@NotNull
+	private Component prefix = Component.empty();
+
+	@NotNull
+	private Component suffix = Component.empty();
+
+	@NotNull
+	private ChatColor color = ChatColor.RESET;
+
 	private boolean allowFriendlyFire = false;
-	private final @NotNull HashSet<String> entries;
+
+	@NotNull
+	private final HashSet<String> entries;
+
 	private boolean canSeeFriendly = true;
+
 	private final EnumMap<Option, OptionStatus> options = new EnumMap<>(Option.class);
-	private @Nullable ScoreboardMock board;
+
+	@Nullable
+	private ScoreboardMock board;
 
 	/**
-	 * Constructs a new {@link TeamMock} for the provided {@link ScoreboardMock} with the specified name.
+	 * Constructs a new {@link TeamMock} for the provided {@link ScoreboardMock}
+	 * with the specified name.
 	 *
-	 * @param name  The name of the team.
-	 * @param board The scoreboard the team is for.
+	 * @param name
+	 *            The name of the team.
+	 * @param board
+	 *            The scoreboard the team is for.
 	 */
 	public TeamMock(@NotNull String name, ScoreboardMock board)
 	{
@@ -64,14 +84,16 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull String getName() throws IllegalStateException
+	@NotNull
+	public String getName() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.name;
 	}
 
 	@Override
-	public @NotNull Component displayName() throws IllegalStateException
+	@NotNull
+	public Component displayName() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.displayName;
@@ -85,7 +107,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull Component prefix() throws IllegalStateException
+	@NotNull
+	public Component prefix() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.prefix;
@@ -99,7 +122,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull Component suffix() throws IllegalStateException
+	@NotNull
+	public Component suffix() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.suffix;
@@ -120,7 +144,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull TextColor color() throws IllegalStateException
+	@NotNull
+	public TextColor color() throws IllegalStateException
 	{
 		Preconditions.checkState(hasColor(), "Team colors must have hex values");
 		return TextColor.color(this.color.asBungee().getColor().getRGB());
@@ -134,7 +159,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull String getDisplayName() throws IllegalStateException
+	@NotNull
+	public String getDisplayName() throws IllegalStateException
 	{
 		checkRegistered();
 		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
@@ -144,13 +170,15 @@ public class TeamMock implements Team
 	public void setDisplayName(@NotNull String displayName)
 	{
 		Preconditions.checkNotNull(displayName, "Display name cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128, "Display name is longer than the limit of 128 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(displayName).length() <= 128,
+				"Display name is longer than the limit of 128 characters");
 		checkRegistered();
 		this.displayName = LegacyComponentSerializer.legacySection().deserialize(displayName);
 	}
 
 	@Override
-	public @NotNull String getPrefix() throws IllegalStateException
+	@NotNull
+	public String getPrefix() throws IllegalStateException
 	{
 		checkRegistered();
 		return LegacyComponentSerializer.legacySection().serialize(this.prefix);
@@ -160,13 +188,15 @@ public class TeamMock implements Team
 	public void setPrefix(@NotNull String prefix)
 	{
 		Preconditions.checkNotNull(prefix, "Prefix cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64, "Prefix is longer than the limit of 64 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(prefix).length() <= 64,
+				"Prefix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.prefix = LegacyComponentSerializer.legacySection().deserialize(prefix);
 	}
 
 	@Override
-	public @NotNull String getSuffix() throws IllegalStateException
+	@NotNull
+	public String getSuffix() throws IllegalStateException
 	{
 		checkRegistered();
 		return LegacyComponentSerializer.legacySection().serialize(this.suffix);
@@ -176,13 +206,15 @@ public class TeamMock implements Team
 	public void setSuffix(@NotNull String suffix)
 	{
 		Preconditions.checkNotNull(suffix, "Suffix cannot be null");
-		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64, "Suffix is longer than the limit of 64 characters");
+		Preconditions.checkArgument(ChatColor.stripColor(suffix).length() <= 64,
+				"Suffix is longer than the limit of 64 characters");
 		checkRegistered();
 		this.suffix = LegacyComponentSerializer.legacySection().deserialize(suffix);
 	}
 
 	@Override
-	public @NotNull ChatColor getColor() throws IllegalStateException
+	@NotNull
+	public ChatColor getColor() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.color;
@@ -229,10 +261,10 @@ public class TeamMock implements Team
 	 */
 	@Override
 	@Deprecated(since = "1.9")
-	public @NotNull NameTagVisibility getNameTagVisibility()
+	@NotNull
+	public NameTagVisibility getNameTagVisibility()
 	{
 		checkRegistered();
-
 		OptionStatus s = options.get(Option.NAME_TAG_VISIBILITY);
 		return switch (s)
 		{
@@ -253,14 +285,13 @@ public class TeamMock implements Team
 	{
 		MockBukkit.getMock().getLogger().log(Level.WARNING, "Consider USE setOption() DEPRECATED");
 		checkRegistered();
-
 		switch (nameTagVisibility)
 		{
-		case ALWAYS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
-		case NEVER -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
-		case HIDE_FOR_OTHER_TEAMS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
-		case HIDE_FOR_OWN_TEAM -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OWN_TEAM);
-		default -> throw new IllegalArgumentException("Option not compatible");
+			case ALWAYS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.ALWAYS);
+			case NEVER -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.NEVER);
+			case HIDE_FOR_OTHER_TEAMS -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OTHER_TEAMS);
+			case HIDE_FOR_OWN_TEAM -> setOption(Option.NAME_TAG_VISIBILITY, OptionStatus.FOR_OWN_TEAM);
+			default -> throw new IllegalArgumentException("Option not compatible");
 		}
 	}
 
@@ -269,7 +300,8 @@ public class TeamMock implements Team
 	 */
 	@Override
 	@Deprecated(since = "1.8.7")
-	public @NotNull Set<OfflinePlayer> getPlayers() throws IllegalStateException
+	@NotNull
+	public Set<OfflinePlayer> getPlayers() throws IllegalStateException
 	{
 		checkRegistered();
 		Set<OfflinePlayer> players = new HashSet<>();
@@ -288,7 +320,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull Set<String> getEntries() throws IllegalStateException
+	@NotNull
+	public Set<String> getEntries() throws IllegalStateException
 	{
 		checkRegistered();
 		return this.entries;
@@ -360,14 +393,16 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public boolean removeEntities(@NotNull Collection<Entity> entities) throws IllegalStateException, IllegalArgumentException
+	public boolean removeEntities(@NotNull Collection<Entity> entities)
+			throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entities, "Entities cannot be null");
 		return removeEntries(entities.stream().map(Entity::getScoreboardEntryName).toList());
 	}
 
 	@Override
-	public boolean removeEntries(@NotNull Collection<String> entries) throws IllegalStateException, IllegalArgumentException
+	public boolean removeEntries(@NotNull Collection<String> entries)
+			throws IllegalStateException, IllegalArgumentException
 	{
 		Preconditions.checkNotNull(entries, "Entries cannot be null");
 		checkRegistered();
@@ -403,7 +438,8 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull OptionStatus getOption(@NotNull Option option) throws IllegalStateException
+	@NotNull
+	public OptionStatus getOption(@NotNull Option option) throws IllegalStateException
 	{
 		Preconditions.checkNotNull(option, "Option cannot be null");
 		checkRegistered();
@@ -454,10 +490,10 @@ public class TeamMock implements Team
 	}
 
 	@Override
-	public @NotNull Iterable<? extends Audience> audiences()
+	@NotNull
+	public Iterable<? extends Audience> audiences()
 	{
 		checkRegistered();
-
 		Set<String> entriesList = getEntries();
 		List<Audience> audiences = new ArrayList<>(entriesList.size());
 		for (String playerName : entriesList)
@@ -468,19 +504,18 @@ public class TeamMock implements Team
 				audiences.add(player);
 			}
 		}
-
 		return audiences;
 	}
 
 	public Component getFormattedName(Component formattedName)
 	{
-		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName).append(this.suffix());
+		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName)
+				.append(this.suffix());
 		TextColor color = this.color();
 		if (color != null)
 		{
 			mutableComponent.color(color);
 		}
-
 		return mutableComponent;
 	}
 
@@ -491,7 +526,6 @@ public class TeamMock implements Team
 		{
 			formattedName = teamMock.getFormattedName(playerName);
 		}
-
 		return formattedName == null ? playerName : formattedName;
 	}
 }

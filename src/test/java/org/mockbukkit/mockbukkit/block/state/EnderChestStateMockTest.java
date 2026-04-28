@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class EnderChestStateMockTest
 {
@@ -52,7 +54,8 @@ class EnderChestStateMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new EnderChestStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new EnderChestStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

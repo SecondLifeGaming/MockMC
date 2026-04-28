@@ -7,7 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 
 /**
- * This class represents an active {@link PotionEffect} which was applied to a {@link LivingEntity}.
+ * This class represents an active {@link PotionEffect} which was applied to a
+ * {@link LivingEntity}.
  *
  * @author TheBusyBiscuit
  * @see LivingEntityMock#addPotionEffect(PotionEffect)
@@ -19,9 +20,11 @@ public final class ActivePotionEffect implements Comparable<ActivePotionEffect>
 	private final int startTick;
 
 	/**
-	 * Constructs a new {@link ActivePotionEffect} with the provided {@link PotionEffect}.
+	 * Constructs a new {@link ActivePotionEffect} with the provided
+	 * {@link PotionEffect}.
 	 *
-	 * @param effect The effect that's been applied.
+	 * @param effect
+	 *            The effect that's been applied.
 	 */
 	public ActivePotionEffect(@NotNull PotionEffect effect)
 	{

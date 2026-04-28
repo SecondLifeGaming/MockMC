@@ -9,14 +9,18 @@ import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
 import net.kyori.adventure.translation.TranslationRegistry;
 import net.kyori.adventure.translation.Translator;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PlainTextComponentProviderImpl implements PlainTextComponentSerializer.Provider
 {
 
@@ -28,9 +32,7 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 	@Override
 	public @NotNull PlainTextComponentSerializer plainTextSimple()
 	{
-		return PlainTextComponentSerializer.builder()
-				.flattener(BASIC_COMPONENT_FLATTENER)
-				.build();
+		return PlainTextComponentSerializer.builder().flattener(BASIC_COMPONENT_FLATTENER).build();
 	}
 
 	@Override
@@ -79,14 +81,14 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			{
 				consumer.accept(Component.text(translated.substring(lastIndex)));
 			}
-		}
-		catch (Throwable e)
+		} catch (Throwable e)
 		{
-			e.printStackTrace();
+			Bukkit.getLogger().log(Level.SEVERE, "Unexpected exception while processing translatable component", e);
 		}
 	}
 
-	private static int dealWithTranslatableArguments(Matcher matcher, Consumer<Component> consumer, List<TranslationArgument> argumentList, int argPosition)
+	private static int dealWithTranslatableArguments(Matcher matcher, Consumer<Component> consumer,
+			List<TranslationArgument> argumentList, int argPosition)
 	{
 		String argIndex = matcher.group(1);
 		if (argIndex != null)
@@ -98,13 +100,11 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 				{
 					consumer.accept(argumentList.get(idx).asComponent());
 				}
-			}
-			catch (final NumberFormatException ex)
+			} catch (final NumberFormatException ex)
 			{
 				// ignore, drop the format placeholder
 			}
-		}
-		else
+		} else
 		{
 			final int idx = argPosition++;
 			if (idx < argumentList.size())

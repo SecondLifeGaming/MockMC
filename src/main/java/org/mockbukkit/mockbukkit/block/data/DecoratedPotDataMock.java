@@ -12,7 +12,8 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 {
 
 	/**
-	 * Constructs a new {@link DecoratedPotDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link DecoratedPotDataMock} for the provided
+	 * {@link Material}.
 	 */
 	public DecoratedPotDataMock()
 	{
@@ -23,9 +24,11 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	}
 
 	/**
-	 * Create a new {@link DecoratedPotDataMock} based on an existing {@link DecoratedPotDataMock}.
+	 * Create a new {@link DecoratedPotDataMock} based on an existing
+	 * {@link DecoratedPotDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected DecoratedPotDataMock(@NotNull DecoratedPotDataMock other)
 	{
@@ -76,7 +79,8 @@ public class DecoratedPotDataMock extends BlockDataMock implements DecoratedPot
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull DecoratedPotDataMock clone()
 	{
 		return new DecoratedPotDataMock(this);

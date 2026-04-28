@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import java.util.Objects;
+
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Color;
 import org.bukkit.NamespacedKey;
@@ -13,16 +15,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 import org.mockbukkit.mockbukkit.potion.PotionUtils;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of a {@link PotionMeta}.
@@ -30,13 +29,26 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class PotionMetaMock extends ItemMetaMock implements PotionMeta
+@SuppressWarnings(
+{"removal", "unchecked"})
+public class PotionMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.PotionMetaBaseMock
 {
 
-	private @Nullable PotionType type;
-	private @NotNull List<PotionEffect> effects = new ArrayList<>();
-	private @Nullable Color color;
-	private @Nullable String customName;
+	public static final String BASE_POTION_TYPE = "base-potion-type";
+
+	@Nullable
+	private PotionType type;
+
+	@NotNull
+	private List<PotionEffect> effects = new ArrayList<>();
+
+	@Nullable
+	private Color color;
+
+	@Nullable
+	private String customName;
 
 	/**
 	 * Constructs a new {@link PotionMetaMock}.
@@ -49,17 +61,18 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	/**
 	 * Constructs a new {@link PotionMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public PotionMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof PotionMeta potionMeta)
 		{
 			this.effects = new ArrayList<>(potionMeta.getCustomEffects());
 			this.type = potionMeta.getBasePotionType();
 			this.color = potionMeta.getColor();
+			this.customName = potionMeta.getCustomPotionName();
 		}
 	}
 
@@ -69,8 +82,9 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + effects.hashCode();
-		result = prime * result + type.hashCode();
-		result = prime * result + (color == null ? 0 : color.hashCode());
+		result = prime * result + Objects.hashCode(type);
+		result = prime * result + Objects.hashCode(color);
+		result = prime * result + Objects.hashCode(customName);
 		return result;
 	}
 
@@ -81,22 +95,24 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 		{
 			return true;
 		}
+		if (obj == null || obj.getClass() != this.getClass())
+		{
+			return false;
+		}
 		if (!super.equals(obj))
 		{
 			return false;
 		}
-		if (!(obj instanceof PotionMetaMock other))
-		{
-			return false;
-		}
-
-		return effects.equals(other.effects) && Objects.equals(color, other.color)
-				&& type == other.type;
+		PotionMetaMock other = (PotionMetaMock) obj;
+		return Objects.equals(this.type, other.type) && Objects.equals(this.color, other.color)
+				&& Objects.equals(this.effects, other.effects) && Objects.equals(this.customName, other.customName);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull PotionMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public PotionMetaMock clone()
 	{
 		return new PotionMetaMock(this);
 	}
@@ -105,24 +121,20 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
 	{
 		int index = indexOf(effect.getType());
-
 		if (index == -1)
 		{
 			effects.add(effect);
 			return true;
 		}
-
 		if (!overwrite)
 		{
 			return false;
 		}
-
 		PotionEffect prev = effects.get(index);
 		if (prev.getDuration() == effect.getDuration())
 		{
 			return false;
 		}
-
 		effects.set(index, effect);
 		return true;
 	}
@@ -136,15 +148,10 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public @NotNull List<PotionEffect> getCustomEffects()
+	@NotNull
+	public List<PotionEffect> getCustomEffects()
 	{
 		return ImmutableList.copyOf(effects);
-	}
-
-	@Override
-	public @NotNull @Unmodifiable List<PotionEffect> getAllEffects()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -164,18 +171,15 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		Iterator<PotionEffect> iterator = effects.iterator();
 		boolean changed = false;
-
 		while (iterator.hasNext())
 		{
 			PotionEffect effect = iterator.next();
-
 			if (type.equals(effect.getType()))
 			{
 				iterator.remove();
 				changed = true;
 			}
 		}
-
 		return changed;
 	}
 
@@ -188,7 +192,6 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
@@ -199,7 +202,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public @Nullable Color getColor()
+	@Nullable
+	public Color getColor()
 	{
 		// Return an immutable copy
 		return color == null ? null : Color.fromRGB(color.asRGB());
@@ -212,19 +216,14 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public @NotNull Color computeEffectiveColor()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean hasCustomPotionName()
 	{
 		return this.customName != null;
 	}
 
 	@Override
-	public @Nullable String getCustomPotionName()
+	@Nullable
+	public String getCustomPotionName()
 	{
 		return this.customName;
 	}
@@ -242,7 +241,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public @Nullable PotionData getBasePotionData()
+	@Nullable
+	public PotionData getBasePotionData()
 	{
 		return PotionUtils.toBukkit(getBasePotionType());
 	}
@@ -254,7 +254,8 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	public @Nullable PotionType getBasePotionType()
+	@Nullable
+	public PotionType getBasePotionType()
 	{
 		return this.type;
 	}
@@ -266,32 +267,38 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	@Override
-	@Deprecated(since = "1.9")
-	public boolean setMainEffect(@NotNull PotionEffectType type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
 		super.deserializeInternal(args);
-		this.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
-				.map(PotionEffect::new).toList();
-		if (args.containsKey("base-potion-type"))
+		this.effects = NbtParser.parseList(args.get("effects"), o -> new PotionEffect((Map<String, Object>) o));
+		if (this.effects == null)
 		{
-			this.type = Registry.POTION.get(NamespacedKey.fromString((String) args.get("base-potion-type")));
+			this.effects = new ArrayList<>();
+		}
+		if (args.containsKey(BASE_POTION_TYPE))
+		{
+			this.type = Registry.POTION.get(NamespacedKey.fromString((String) args.get(BASE_POTION_TYPE)));
+		}
+		if (args.containsKey("custom-color"))
+		{
+			this.color = (Color) args.get("custom-color");
+		}
+		if (args.containsKey("custom-potion-name"))
+		{
+			this.customName = (String) args.get("custom-potion-name");
 		}
 	}
 
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized PotionMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized PotionMetaMock object in a Map&lt;String, Object&gt;
+	 *            format.
 	 * @return A new instance of the PotionMetaMock class.
 	 */
-	public static @NotNull PotionMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static PotionMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		PotionMetaMock serialMock = new PotionMetaMock();
 		serialMock.deserializeInternal(args);
@@ -299,19 +306,28 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	}
 
 	/**
-	 * Serializes the properties of an PotionMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an PotionMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the PotionMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
 		if (hasBasePotionType())
 		{
-			serialized.put("base-potion-type", this.getBasePotionType().key().toString());
+			serialized.put(BASE_POTION_TYPE, this.getBasePotionType().key().toString());
+		}
+		if (color != null)
+		{
+			serialized.put("custom-color", color);
+		}
+		if (customName != null)
+		{
+			serialized.put("custom-potion-name", customName);
 		}
 		return serialized;
 	}
@@ -321,5 +337,4 @@ public class PotionMetaMock extends ItemMetaMock implements PotionMeta
 	{
 		return "POTION";
 	}
-
 }

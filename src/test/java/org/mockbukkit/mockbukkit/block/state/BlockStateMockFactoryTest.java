@@ -24,7 +24,8 @@ class BlockStateMockFactoryTest
 	@CsvFileSource(resources = "/blocks/block_states.csv")
 	void validatePossibleStates_GivenMaterial(Material material, Class<? extends BlockState> blockStateClass)
 	{
-		@NotNull BlockState block = BlockStateMockFactory.mock(material);
+		@NotNull
+		BlockState block = BlockStateMockFactory.mock(material);
 		assertInstanceOf(blockStateClass, block);
 	}
 
@@ -36,7 +37,8 @@ class BlockStateMockFactoryTest
 		world.setType(0, 63, 0, Material.BEDROCK);
 		world.setType(0, 64, 0, material);
 
-		@NotNull BlockState block = world.getBlockAt(0, 64, 0).getState();
+		@NotNull
+		BlockState block = world.getBlockAt(0, 64, 0).getState();
 		assertInstanceOf(blockStateClass, block);
 	}
 

@@ -103,7 +103,8 @@ class ToolComponentMockTest
 			}
 
 			@ParameterizedTest
-			@ValueSource(booleans = {true, false})
+			@ValueSource(booleans =
+			{true, false})
 			void givenDefaultMiningSpeed(boolean expectedValue)
 			{
 				rule.setCorrectForDrops(expectedValue);

@@ -1,4 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
+import java.util.Objects;
 
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.Axolotl;
@@ -7,7 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Map;
 
 /**
@@ -16,7 +16,9 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucketMeta
+public class AxolotlBucketMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.AxolotlBucketMetaBaseMock
 {
 
 	private Axolotl.Variant variant;
@@ -30,14 +32,15 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	}
 
 	/**
-	 * Constructs a new {@link AxolotlBucketMetaMock}, cloning the data from another.
+	 * Constructs a new {@link AxolotlBucketMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public AxolotlBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof AxolotlBucketMeta bucketMeta)
 		{
 			variant = bucketMeta.getVariant();
@@ -45,13 +48,14 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	}
 
 	@Override
-	public @NotNull Axolotl.Variant getVariant()
+	@NotNull
+	public Axolotl.Variant getVariant()
 	{
 		return this.variant;
 	}
 
 	@Override
-	public void setVariant(@NotNull Axolotl.Variant variant)
+	public void setVariant(Axolotl.Variant variant)
 	{
 		if (variant == null)
 		{
@@ -78,16 +82,19 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof AxolotlBucketMeta meta))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		return super.equals(obj) && this.variant == meta.getVariant();
+		AxolotlBucketMetaMock other = (AxolotlBucketMetaMock) obj;
+		return super.equals(obj) && Objects.equals(this.variant, other.variant);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull AxolotlBucketMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public AxolotlBucketMetaMock clone()
 	{
 		return new AxolotlBucketMetaMock(this);
 	}
@@ -95,10 +102,13 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized AxolotlBucketMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized AxolotlBucketMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the AxolotlBucketMetaMock class.
 	 */
-	public static @NotNull AxolotlBucketMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static AxolotlBucketMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		AxolotlBucketMetaMock serialMock = new AxolotlBucketMetaMock();
 		serialMock.deserializeInternal(args);
@@ -110,10 +120,12 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	 * Serializes the properties of an AxolotlBucketMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the AxolotlBucketMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         AxolotlBucketMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("variant", this.variant);
@@ -125,5 +137,4 @@ public class AxolotlBucketMetaMock extends ItemMetaMock implements AxolotlBucket
 	{
 		return "AXOLOTL_BUCKET";
 	}
-
 }

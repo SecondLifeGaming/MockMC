@@ -6,10 +6,16 @@ import org.bukkit.block.banner.PatternType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
-public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements PatternType
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class PatternTypeMock extends OldKeyedEnumMock<PatternType>
+		implements
+			PatternType,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.banner.PatternTypeBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final String identifier;
 
 	public PatternTypeMock(NamespacedKey key, String name, int ordinal, String identifier)
@@ -25,21 +31,21 @@ public class PatternTypeMock extends OldKeyedEnumMock<PatternType> implements Pa
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		int ordinal = jsonObject.get("ordinal").getAsInt();
 		String identifier = jsonObject.get("identifier").getAsString();
-
 		return new PatternTypeMock(key, name, ordinal, identifier);
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return this.key;
 	}
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21")
-	public @NotNull String getIdentifier()
+	@NotNull
+	public String getIdentifier()
 	{
 		return this.identifier;
 	}
-
 }

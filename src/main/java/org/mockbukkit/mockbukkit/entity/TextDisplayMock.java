@@ -9,7 +9,6 @@ import org.bukkit.entity.TextDisplay;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -17,24 +16,41 @@ import java.util.UUID;
  *
  * @see DisplayMock
  */
-public class TextDisplayMock extends DisplayMock implements TextDisplay
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class TextDisplayMock extends DisplayMock
+		implements
+			TextDisplay,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TextDisplayBaseMock
 {
 
-	private @NotNull Component text = Component.empty();
-	private @NotNull TextAlignment textAlignment = TextAlignment.CENTER;
-	private @Nullable Color backgroundColor = null;
+	@NotNull
+	private Component text = Component.empty();
+
+	@NotNull
+	private TextAlignment textAlignment = TextAlignment.CENTER;
+
+	@Nullable
+	private Color backgroundColor = null;
 
 	private int lineWidth = 200;
+
 	private byte textOpacity = -1;
+
 	private boolean isShadowed = false;
+
 	private boolean isSeeThrough = false;
+
 	private boolean isDefaultBackground = false;
 
 	/**
-	 * Constructs a new {@link TextDisplay} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link TextDisplay} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TextDisplayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -42,7 +58,8 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	}
 
 	@Override
-	public @Nullable String getText()
+	@Nullable
+	public String getText()
 	{
 		return LegacyComponentSerializer.legacySection().serializeOrNull(text);
 	}
@@ -54,7 +71,8 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	}
 
 	@Override
-	public @NotNull Component text()
+	@NotNull
+	public Component text()
 	{
 		return this.text;
 	}
@@ -78,7 +96,8 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	}
 
 	@Override
-	public @Nullable Color getBackgroundColor()
+	@Nullable
+	public Color getBackgroundColor()
 	{
 		return this.backgroundColor;
 	}
@@ -138,7 +157,8 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	}
 
 	@Override
-	public @NotNull TextAlignment getAlignment()
+	@NotNull
+	public TextAlignment getAlignment()
 	{
 		return this.textAlignment;
 	}
@@ -147,14 +167,13 @@ public class TextDisplayMock extends DisplayMock implements TextDisplay
 	public void setAlignment(@NotNull TextAlignment alignment)
 	{
 		Preconditions.checkArgument(alignment != null, "Alignment cannot be null");
-
 		this.textAlignment = alignment;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TEXT_DISPLAY;
 	}
-
 }

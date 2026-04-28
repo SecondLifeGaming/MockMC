@@ -5,7 +5,8 @@ import net.kyori.adventure.key.Key;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record SeededContainerLootMock(Key lootTable, long seed) implements SeededContainerLoot
 {
 

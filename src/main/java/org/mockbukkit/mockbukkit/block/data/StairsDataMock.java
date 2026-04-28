@@ -24,7 +24,8 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	 * Constructs a new {@link StairsDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#STAIRS}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public StairsDataMock(@NotNull Material type)
 	{
@@ -37,9 +38,11 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	}
 
 	/**
-	 * Create a new {@link StairsDataMock} based on an existing {@link StairsDataMock}.
+	 * Create a new {@link StairsDataMock} based on an existing
+	 * {@link StairsDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected StairsDataMock(@NotNull StairsDataMock other)
 	{
@@ -105,7 +108,8 @@ public class StairsDataMock extends BlockDataMock implements Stairs
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull StairsDataMock clone()
 	{
 		return new StairsDataMock(this);

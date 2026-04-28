@@ -26,7 +26,8 @@ class IronGolemMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isPlayerCreated_GivenChangesInValue(boolean isPlayerCreated)
 	{
 		ironGolem.setPlayerCreated(isPlayerCreated);

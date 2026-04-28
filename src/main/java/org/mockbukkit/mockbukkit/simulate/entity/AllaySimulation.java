@@ -19,9 +19,11 @@ public class AllaySimulation
 	}
 
 	/**
-	 * Simulates the Interaction of a Player with the Allay to set it's current item.
+	 * Simulates the Interaction of a Player with the Allay to set it's current
+	 * item.
 	 *
-	 * @param material The {@link Material} of the Item the Allay should collect
+	 * @param material
+	 *            The {@link Material} of the Item the Allay should collect
 	 */
 	public void simulatePlayerInteract(@NotNull Material material)
 	{
@@ -39,11 +41,13 @@ public class AllaySimulation
 	}
 
 	/**
-	 * Simulate the Allay picking up an {@link ItemStack} from the ground.
-	 * If the Itemstack is not of the current Type, this will throw a {@link IllegalArgumentException}.
-	 * If the Inventory is full, this will throw a {@link IllegalStateException}.
+	 * Simulate the Allay picking up an {@link ItemStack} from the ground. If the
+	 * Itemstack is not of the current Type, this will throw a
+	 * {@link IllegalArgumentException}. If the Inventory is full, this will throw a
+	 * {@link IllegalStateException}.
 	 *
-	 * @param item The {@link ItemStack} to pick up
+	 * @param item
+	 *            The {@link ItemStack} to pick up
 	 */
 	public void simulateItemPickup(@NotNull ItemStack item)
 	{

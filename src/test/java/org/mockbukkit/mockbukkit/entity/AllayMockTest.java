@@ -65,8 +65,7 @@ class AllayMockTest
 		ItemStack item = new ItemStackMock(Material.DIAMOND, 5);
 
 		allayMock.simulateItemPickup(new ItemStackMock(Material.DIAMOND, 63));
-		assertThrows(IllegalStateException.class,
-				() -> allayMock.simulateItemPickup(item));
+		assertThrows(IllegalStateException.class, () -> allayMock.simulateItemPickup(item));
 
 	}
 
@@ -76,8 +75,7 @@ class AllayMockTest
 		allayMock.simulatePlayerInteract(Material.DIAMOND);
 		ItemStack item = new ItemStackMock(Material.IRON_INGOT, 1);
 
-		assertThrows(IllegalArgumentException.class,
-				() -> allayMock.simulateItemPickup(item));
+		assertThrows(IllegalArgumentException.class, () -> allayMock.simulateItemPickup(item));
 	}
 
 	@Test

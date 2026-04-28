@@ -30,7 +30,8 @@ class HangingSignDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isAttached)
 		{
 			sign.setAttached(isAttached);
@@ -50,9 +51,8 @@ class HangingSignDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenValidValues(BlockFace face)
 		{
 			sign.setRotation(face);
@@ -60,9 +60,8 @@ class HangingSignDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sign.setRotation(face));
@@ -82,7 +81,8 @@ class HangingSignDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			sign.setWaterlogged(isWaterLogged);

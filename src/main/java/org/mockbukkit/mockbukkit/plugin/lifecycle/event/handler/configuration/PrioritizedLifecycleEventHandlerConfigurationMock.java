@@ -9,8 +9,10 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.AbstractLifecycleE
 import java.util.OptionalInt;
 
 public class PrioritizedLifecycleEventHandlerConfigurationMock<O extends LifecycleEventOwner, E extends LifecycleEvent>
-		extends AbstractLifecycleEventHandlerConfigurationMock<O, E>
-		implements PrioritizedLifecycleEventHandlerConfiguration<O>
+		extends
+			AbstractLifecycleEventHandlerConfigurationMock<O, E>
+		implements
+			PrioritizedLifecycleEventHandlerConfiguration<O>
 
 {
 
@@ -19,7 +21,8 @@ public class PrioritizedLifecycleEventHandlerConfigurationMock<O extends Lifecyc
 
 	private OptionalInt priority = DEFAULT_PRIORITY;
 
-	public PrioritizedLifecycleEventHandlerConfigurationMock(final LifecycleEventHandler<? super E> handler, final AbstractLifecycleEventTypeMock<O, E, ?> eventType)
+	public PrioritizedLifecycleEventHandlerConfigurationMock(final LifecycleEventHandler<? super E> handler,
+			final AbstractLifecycleEventTypeMock<O, E, ?> eventType)
 	{
 		super(handler, eventType);
 	}

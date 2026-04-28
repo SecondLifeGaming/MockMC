@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -16,16 +15,22 @@ import java.util.UUID;
  *
  * @see FireballMock
  */
-public class SizedFireballMock extends FireballMock implements SizedFireball
+public class SizedFireballMock extends FireballMock
+		implements
+			SizedFireball,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SizedFireballBaseMock
 {
 
 	private ItemStack displayItem = new ItemStackMock(Material.FIRE_CHARGE);
 
 	/**
-	 * Constructs a new {@link SizedFireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SizedFireballMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SizedFireballMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,7 +38,8 @@ public class SizedFireballMock extends FireballMock implements SizedFireball
 	}
 
 	@Override
-	public @NotNull ItemStack getDisplayItem()
+	@NotNull
+	public ItemStack getDisplayItem()
 	{
 		return this.displayItem;
 	}
@@ -46,9 +52,9 @@ public class SizedFireballMock extends FireballMock implements SizedFireball
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FIREBALL;
 	}
-
 }

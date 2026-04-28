@@ -5,20 +5,25 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Marker;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
  * Mock implementation of a {@link Marker}.
  */
-public class MarkerMock extends EntityMock implements Marker
+public class MarkerMock extends EntityMock
+		implements
+			Marker,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.MarkerBaseMock
 {
 
 	/**
-	 * Constructs a new {@link MarkerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link MarkerMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public MarkerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -26,7 +31,8 @@ public class MarkerMock extends EntityMock implements Marker
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.MARKER;
 	}
@@ -36,5 +42,4 @@ public class MarkerMock extends EntityMock implements Marker
 	{
 		return false;
 	}
-
 }

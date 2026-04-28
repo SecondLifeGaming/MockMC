@@ -4,11 +4,13 @@ import com.google.common.base.Preconditions;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.generated.io.papermc.paper.persistence.PersistentDataContainerViewBaseMock;
 
-public abstract class PersistentDataContainerViewMock implements PersistentDataContainerView
+public abstract class PersistentDataContainerViewMock
+		implements
+			PersistentDataContainerView,
+			PersistentDataContainerViewBaseMock
 {
 
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
@@ -18,7 +20,6 @@ public abstract class PersistentDataContainerViewMock implements PersistentDataC
 	{
 		Preconditions.checkArgument(key != null, "The NamespacedKey key cannot be null");
 		Preconditions.checkArgument(type != null, "The provided type cannot be null");
-
 		final Object value = this.get(key, type);
 		return value != null;
 	}
@@ -47,19 +48,4 @@ public abstract class PersistentDataContainerViewMock implements PersistentDataC
 	{
 		return context;
 	}
-
-	@Override
-	public void copyTo(PersistentDataContainer other, boolean replace)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public byte[] serializeToBytes()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

@@ -18,7 +18,10 @@ import java.util.Objects;
  *
  * @see ContainerStateMock
  */
-public class LecternStateMock extends ContainerStateMock implements Lectern
+public class LecternStateMock extends ContainerStateMock
+		implements
+			Lectern,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.LockableBaseMock
 {
 
 	private int currentPage;
@@ -27,7 +30,8 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	 * Constructs a new {@link LecternStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#LECTERN}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public LecternStateMock(@NotNull Material material)
 	{
@@ -39,7 +43,8 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	 * Constructs a new {@link LecternStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#LECTERN}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected LecternStateMock(@NotNull Block block)
 	{
@@ -48,9 +53,11 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 	}
 
 	/**
-	 * Constructs a new {@link LecternStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link LecternStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected LecternStateMock(@NotNull LecternStateMock state)
 	{
@@ -103,8 +110,7 @@ public class LecternStateMock extends ContainerStateMock implements Lectern
 		if (meta instanceof BookMeta)
 		{
 			return ((BookMeta) meta).getPageCount();
-		}
-		else
+		} else
 		{
 			return 1;
 		}

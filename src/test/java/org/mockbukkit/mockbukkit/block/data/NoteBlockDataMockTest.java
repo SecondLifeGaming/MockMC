@@ -51,7 +51,8 @@ class NoteBlockDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11})
 		void givenValidValue(int noteId)
 		{
 			Note note = new Note(noteId);
@@ -72,7 +73,8 @@ class NoteBlockDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			noteblock.setPowered(inWall);

@@ -10,7 +10,11 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.PaperLifecycleEventMock;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.OwnerAwareLifecycleEventMock;
 
 @DefaultQualifier(NonNull.class)
-public class RegistrarEventMock<R extends PaperRegistrarMock<? super O>, O extends LifecycleEventOwner> implements PaperLifecycleEventMock, OwnerAwareLifecycleEventMock<O>, RegistrarEvent<R>
+public class RegistrarEventMock<R extends PaperRegistrarMock<? super O>, O extends LifecycleEventOwner>
+		implements
+			PaperLifecycleEventMock,
+			OwnerAwareLifecycleEventMock<O>,
+			RegistrarEvent<R>
 {
 
 	private final R registrar;
@@ -46,7 +50,11 @@ public class RegistrarEventMock<R extends PaperRegistrarMock<? super O>, O exten
 		this.registrar.invalidate();
 	}
 
-	public static class ReloadableMock<R extends PaperRegistrarMock<? super O>, O extends LifecycleEventOwner> extends RegistrarEventMock<R, O> implements ReloadableRegistrarEvent<R>
+	public static class ReloadableMock<R extends PaperRegistrarMock<? super O>, O extends LifecycleEventOwner>
+			extends
+				RegistrarEventMock<R, O>
+			implements
+				ReloadableRegistrarEvent<R>
 	{
 
 		private final ReloadableRegistrarEvent.Cause cause;

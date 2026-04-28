@@ -24,11 +24,12 @@ class BossBarImplementationMockTest
 	void updatesBossBar()
 	{
 		PlayerMock player = server.addPlayer();
-		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED,
+				BossBar.Overlay.PROGRESS);
 
 		bossBar.addViewer(player);
 
-		assertTrue(player.getBossBars().contains(bossBar)); //Passed :D
+		assertTrue(player.getBossBars().contains(bossBar)); // Passed :D
 
 		bossBar.viewers().forEach(viewer ->
 		{
@@ -38,7 +39,7 @@ class BossBarImplementationMockTest
 			}
 		});
 
-		assertFalse(player.getBossBars().contains(bossBar)); //Failed :(
+		assertFalse(player.getBossBars().contains(bossBar)); // Failed :(
 	}
 
 }

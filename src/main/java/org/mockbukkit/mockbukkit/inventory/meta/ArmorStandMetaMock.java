@@ -1,14 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import java.util.Objects;
 import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
+import org.mockbukkit.mockbukkit.util.NbtParser;
 import java.util.Map;
 
 /**
@@ -16,22 +14,77 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-@EqualsAndHashCode(callSuper = true)
 @DelegateDeserialization(SerializableMeta.class)
 public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 {
 
-	@Getter
-	@Setter
 	private boolean invisible;
 	private boolean noBasePlate;
 	private boolean showArms;
-	@Getter
-	@Setter
 	private boolean small;
-	@Getter
-	@Setter
 	private boolean marker;
+
+	@Override
+	public boolean isInvisible()
+	{
+		return this.invisible;
+	}
+
+	@Override
+	public void setInvisible(boolean invisible)
+	{
+		this.invisible = invisible;
+	}
+
+	@Override
+	public boolean isSmall()
+	{
+		return this.small;
+	}
+
+	@Override
+	public void setSmall(boolean small)
+	{
+		this.small = small;
+	}
+
+	@Override
+	public boolean isMarker()
+	{
+		return this.marker;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass())
+		{
+			return false;
+		}
+		if (!super.equals(obj))
+		{
+			return false;
+		}
+		ArmorStandMetaMock other = (ArmorStandMetaMock) obj;
+		return this.invisible == other.invisible && this.noBasePlate == other.noBasePlate
+				&& this.showArms == other.showArms && this.small == other.small && this.marker == other.marker;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), invisible, noBasePlate, showArms, small, marker);
+	}
+
+	@Override
+	public void setMarker(boolean marker)
+	{
+		this.marker = marker;
+	}
 
 	/**
 	 * Constructs a new {@link ArmorStandMetaMock}.
@@ -44,7 +97,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	/**
 	 * Constructs a new {@link ArmorStandMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public ArmorStandMetaMock(@NotNull ItemMeta meta)
 	{
@@ -73,7 +127,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	/**
 	 * Sets whether the armor stand should have no base plate.
 	 *
-	 * @param noBasePlate true to remove the base plate
+	 * @param noBasePlate
+	 *            true to remove the base plate
 	 */
 	@Override
 	public void setNoBasePlate(boolean noBasePlate)
@@ -95,7 +150,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	/**
 	 * Sets whether the armor stand should show arms.
 	 *
-	 * @param showArms true to show arms
+	 * @param showArms
+	 *            true to show arms
 	 */
 	@Override
 	public void setShowArms(boolean showArms)
@@ -109,7 +165,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	 * @return a cloned instance of this armor stand meta
 	 */
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ArmorStandMetaMock clone()
 	{
 		return new ArmorStandMetaMock(this);
@@ -118,18 +175,20 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized ArmorStandMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized ArmorStandMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the ArmorStandMetaMock class.
 	 */
 	public static @NotNull ArmorStandMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ArmorStandMetaMock serialMock = new ArmorStandMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.invisible = (boolean) args.get("invisible");
-		serialMock.marker = (boolean) args.get("marker");
-		serialMock.noBasePlate = (boolean) args.get("no-base-plate");
-		serialMock.showArms = (boolean) args.get("show-arms");
-		serialMock.small = (boolean) args.get("small");
+		serialMock.invisible = NbtParser.parseBoolean(args.get("invisible"), false);
+		serialMock.marker = NbtParser.parseBoolean(args.get("marker"), false);
+		serialMock.noBasePlate = NbtParser.parseBoolean(args.get("no-base-plate"), false);
+		serialMock.showArms = NbtParser.parseBoolean(args.get("show-arms"), false);
+		serialMock.small = NbtParser.parseBoolean(args.get("small"), false);
 		return serialMock;
 	}
 
@@ -137,7 +196,8 @@ public class ArmorStandMetaMock extends ItemMetaMock implements ArmorStandMeta
 	 * Serializes the properties of an ArmorStandMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the ArmorStandMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         ArmorStandMetaMock.
 	 */
 	@Override
 	public @NotNull Map<String, Object> serialize()

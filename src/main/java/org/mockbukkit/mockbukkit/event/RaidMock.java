@@ -12,7 +12,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.boss.BossBarMock;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -21,31 +20,42 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link Raid}.
  */
-public class RaidMock implements Raid
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class RaidMock implements Raid, org.mockbukkit.mockbukkit.generated.org.bukkit.RaidBaseMock
 {
 
 	private static final int MAXIMUM_BAD_OMEN_LEVEL = 5;
+
 	private static final String BOSS_BAR_TITLE = "Raid";
 
 	private final int id;
+
 	private final Location location;
+
 	private final BossBar bossBar = new BossBarMock(BOSS_BAR_TITLE, BarColor.RED, BarStyle.SEGMENTED_10);
+
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
 
 	private Set<UUID> heroes = Collections.emptySet();
+
 	private List<Raider> raiders = Collections.emptyList();
 
 	private boolean started;
+
 	private long activeTicks;
+
 	private int badOmenLevel;
+
 	private int spawnedGroups;
+
 	private int waves;
+
 	private RaidStatus status = RaidStatus.ONGOING;
 
 	public RaidMock(int id, Location location)
 	{
 		Preconditions.checkArgument(location != null, "location cannot be null");
-
 		this.id = id;
 		this.location = location;
 	}
@@ -59,7 +69,8 @@ public class RaidMock implements Raid
 	/**
 	 * Sets whether this raid has started or not.
 	 *
-	 * @param started Is raid started?
+	 * @param started
+	 *            Is raid started?
 	 */
 	public void setStarted(boolean started)
 	{
@@ -75,7 +86,8 @@ public class RaidMock implements Raid
 	/**
 	 * Set the amount of time in ticks this raid has existed.
 	 *
-	 * @param activeTicks ticks since start.
+	 * @param activeTicks
+	 *            ticks since start.
 	 */
 	public void setActiveTicks(long activeTicks)
 	{
@@ -92,12 +104,14 @@ public class RaidMock implements Raid
 	@Override
 	public void setBadOmenLevel(int badOmenLevel)
 	{
-		Preconditions.checkArgument(0 <= badOmenLevel && badOmenLevel <= MAXIMUM_BAD_OMEN_LEVEL, "Bad Omen level must be between 0 and %s", MAXIMUM_BAD_OMEN_LEVEL);
+		Preconditions.checkArgument(0 <= badOmenLevel && badOmenLevel <= MAXIMUM_BAD_OMEN_LEVEL,
+				"Bad Omen level must be between 0 and %s", MAXIMUM_BAD_OMEN_LEVEL);
 		this.badOmenLevel = badOmenLevel;
 	}
 
 	@Override
-	public @NotNull Location getLocation()
+	@NotNull
+	public Location getLocation()
 	{
 		return this.location;
 	}
@@ -112,7 +126,8 @@ public class RaidMock implements Raid
 	/**
 	 * Set the current status of the raid.
 	 *
-	 * @param status raid status
+	 * @param status
+	 *            raid status
 	 */
 	public void setStatus(RaidStatus status)
 	{
@@ -129,7 +144,8 @@ public class RaidMock implements Raid
 	/**
 	 * Set the number of raider groups which have already spawned.
 	 *
-	 * @param spawnedGroups the number of groups.
+	 * @param spawnedGroups
+	 *            the number of groups.
 	 */
 	public void setSpawnedGroups(int spawnedGroups)
 	{
@@ -154,15 +170,17 @@ public class RaidMock implements Raid
 	{
 		Preconditions.checkArgument(waves > 0, "Total waves must be greater than 0");
 		Preconditions.checkArgument(waves <= 7, "Total waves must not be greater than 7");
-		Preconditions.checkArgument(waves >= this.getSpawnedGroups(), "Total waves must be greater than or equal to the current spawned groups (%s)", this.getSpawnedGroups());
-
+		Preconditions.checkArgument(waves >= this.getSpawnedGroups(),
+				"Total waves must be greater than or equal to the current spawned groups (%s)",
+				this.getSpawnedGroups());
 		this.waves = waves;
 	}
 
 	/**
 	 * Set the number of waves in this raid (excluding the additional waves).
 	 *
-	 * @param waves number waves.
+	 * @param waves
+	 *            number waves.
 	 *
 	 * @deprecated Use paper API {@link #setTotalWaves(int)} instead.
 	 */
@@ -176,13 +194,14 @@ public class RaidMock implements Raid
 	 * Set the number of waves in this raid based on a difficulty level.
 	 *
 	 * <ul>
-	 *     <li>When difficulty is <i>EASY</i> the wave count is 3.</li>
-	 *     <li>When difficulty is <i>NORMAL</i> the wave count is 5. </li>
-	 *     <li>When difficulty is <i>HARD</i> the wave count is 7.</li>
-	 *     <li>Any other difficulty wave count is 0.</li>
+	 * <li>When difficulty is <i>EASY</i> the wave count is 3.</li>
+	 * <li>When difficulty is <i>NORMAL</i> the wave count is 5.</li>
+	 * <li>When difficulty is <i>HARD</i> the wave count is 7.</li>
+	 * <li>Any other difficulty wave count is 0.</li>
 	 * </ul>
 	 *
-	 * @param difficulty the difficulty level
+	 * @param difficulty
+	 *            the difficulty level
 	 */
 	public void setWaves(Difficulty difficulty)
 	{
@@ -200,17 +219,16 @@ public class RaidMock implements Raid
 	public float getTotalHealth()
 	{
 		double totalHealth = 0.0;
-
 		for (Raider raider : getRaiders())
 		{
 			totalHealth += raider.getHealth();
 		}
-
 		return (float) totalHealth;
 	}
 
 	@Override
-	public @NotNull Set<UUID> getHeroes()
+	@NotNull
+	public Set<UUID> getHeroes()
 	{
 		return Collections.unmodifiableSet(this.heroes);
 	}
@@ -218,7 +236,8 @@ public class RaidMock implements Raid
 	/**
 	 * Set the {@link UUID} of all heroes in this raid.
 	 *
-	 * @param heroes a set containing heroes ids
+	 * @param heroes
+	 *            a set containing heroes ids
 	 */
 	public void setHeroes(Set<UUID> heroes)
 	{
@@ -227,7 +246,8 @@ public class RaidMock implements Raid
 	}
 
 	@Override
-	public @NotNull List<Raider> getRaiders()
+	@NotNull
+	public List<Raider> getRaiders()
 	{
 		return Collections.unmodifiableList(this.raiders);
 	}
@@ -235,7 +255,8 @@ public class RaidMock implements Raid
 	/**
 	 * Set all the remaining {@link Raider} in the current wave.
 	 *
-	 * @param raiders a list of current raiders.
+	 * @param raiders
+	 *            a list of current raiders.
 	 */
 	public void setRaiders(List<Raider> raiders)
 	{
@@ -250,15 +271,16 @@ public class RaidMock implements Raid
 	}
 
 	@Override
-	public @NotNull BossBar getBossBar()
+	@NotNull
+	public BossBar getBossBar()
 	{
 		return this.bossBar;
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	@NotNull
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return this.persistentDataContainer;
 	}
-
 }

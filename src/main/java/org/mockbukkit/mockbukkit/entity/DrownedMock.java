@@ -4,17 +4,23 @@ import org.bukkit.entity.Drowned;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class DrownedMock extends ZombieMock implements Drowned, MockRangedEntity<DrownedMock>
+public class DrownedMock extends ZombieMock
+		implements
+			Drowned,
+			MockRangedEntity<DrownedMock>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.DrownedBaseMock
 {
 
 	/**
-	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public DrownedMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -22,7 +28,8 @@ public class DrownedMock extends ZombieMock implements Drowned, MockRangedEntity
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.DROWNED;
 	}

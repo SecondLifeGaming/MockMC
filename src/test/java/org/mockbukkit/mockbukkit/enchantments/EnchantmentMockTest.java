@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class EnchantmentMockTest
 {
@@ -51,9 +53,12 @@ class EnchantmentMockTest
 		this.maxLevel = 2;
 		this.minLevel = 1;
 		this.name = "Custom enchantment";
-		this.displayNames = new Component[]{ Component.text("Level 1"), Component.text("Level 2") };
-		this.minModifiedCost = new int[]{ 1, 2 };
-		this.maxModifiedCost = new int[]{ 20, 25 };
+		this.displayNames = new Component[]
+		{Component.text("Level 1"), Component.text("Level 2")};
+		this.minModifiedCost = new int[]
+		{1, 2};
+		this.maxModifiedCost = new int[]
+		{20, 25};
 		this.enchantables = Set.of(NamespacedKey.minecraft("trident"));
 		this.translationKey = "translation_key";
 		this.anvilCost = 3;
@@ -192,9 +197,11 @@ class EnchantmentMockTest
 	}
 
 	@Test
+	@SuppressWarnings(
+	{"removal", "deprecation"})
 	void testGetTranslationKey()
 	{
-		assertEquals(translationKey, enchantment.getTranslationKey());
+		assertEquals(translationKey, enchantment.translationKey());
 	}
 
 	@Test

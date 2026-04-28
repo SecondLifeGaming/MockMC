@@ -4,25 +4,30 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Trident;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class TridentMock extends AbstractArrowMock implements Trident
+public class TridentMock extends AbstractArrowMock
+		implements
+			Trident,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TridentBaseMock
 {
 
 	private boolean glint;
+
 	private int loyaltyLevel;
+
 	private boolean dealtDamage = false;
 
 	/**
-	 * Constructs a new {@link TridentMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link TridentMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TridentMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -51,7 +56,8 @@ public class TridentMock extends AbstractArrowMock implements Trident
 	@Override
 	public void setLoyaltyLevel(int loyaltyLevel)
 	{
-		Preconditions.checkArgument(loyaltyLevel >= 0 && loyaltyLevel <= 127, "The loyalty level has to be between 0 and 127");
+		Preconditions.checkArgument(loyaltyLevel >= 0 && loyaltyLevel <= 127,
+				"The loyalty level has to be between 0 and 127");
 		this.loyaltyLevel = loyaltyLevel;
 	}
 
@@ -68,21 +74,9 @@ public class TridentMock extends AbstractArrowMock implements Trident
 	}
 
 	@Override
-	public @NotNull ItemStack getItem()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItem(@NotNull ItemStack item)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TRIDENT;
 	}
-
 }

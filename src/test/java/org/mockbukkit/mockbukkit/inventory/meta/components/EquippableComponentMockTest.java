@@ -96,7 +96,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenDispensableSerialization(boolean value)
 		{
 			component.setSlot(EquipmentSlot.HAND);
@@ -110,7 +111,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenSwappableSerialization(boolean value)
 		{
 			component.setSlot(EquipmentSlot.HAND);
@@ -124,7 +126,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenDamageOnHurtSerialization(boolean value)
 		{
 			component.setSlot(EquipmentSlot.HAND);
@@ -138,7 +141,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenEquipOnInteractSerialization(boolean value)
 		{
 			component.setSlot(EquipmentSlot.HAND);
@@ -152,7 +156,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenCanBeSheared(boolean value)
 		{
 			component.setSlot(EquipmentSlot.HAND);
@@ -166,10 +171,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-			"minecraft:ambient.cave",
-			"ambient.underwater.exit"
-		})
+		@ValueSource(strings =
+		{"minecraft:ambient.cave", "ambient.underwater.exit"})
 		void givenShearingSound(String key)
 		{
 			Sound sound = Registry.SOUND_EVENT.getOrThrow(Objects.requireNonNull(NamespacedKey.fromString(key)));
@@ -260,7 +263,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenDispensableDeserialization(boolean value)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -275,7 +279,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenSwappableDeserialization(boolean value)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -290,7 +295,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenDamageOnHurtDeserialization(boolean value)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -305,7 +311,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenEquipOnInteractDeserialization(boolean value)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -320,7 +327,8 @@ class EquippableComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenCanBeShearedDeserialization(boolean value)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -343,8 +351,8 @@ class EquippableComponentMockTest
 			component.setDamageOnHurt(true);
 			component.setSwappable(true);
 			component.setEquipOnInteract(true);
-			component.setModel(NamespacedKey.minecraft( "test_model" ));
-			component.setCameraOverlay(NamespacedKey.minecraft( "test_camera_overlay" ));
+			component.setModel(NamespacedKey.minecraft("test_model"));
+			component.setCameraOverlay(NamespacedKey.minecraft("test_camera_overlay"));
 			component.setAllowedEntities(Set.of(EntityType.BLAZE, EntityType.BEE));
 			component.setCanBeSheared(true);
 			component.setShearingSound(Sound.ITEM_SHEARS_SNIP);

@@ -8,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class SecondTestPlugin extends JavaPlugin implements Listener
 {
 
@@ -16,7 +18,8 @@ public class SecondTestPlugin extends JavaPlugin implements Listener
 		super();
 	}
 
-	protected SecondTestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description, @NotNull File dataFolder, @NotNull File file)
+	protected SecondTestPlugin(@NotNull JavaPluginLoader loader, @NotNull PluginDescriptionFile description,
+			@NotNull File dataFolder, @NotNull File file)
 	{
 		super(loader, description, dataFolder, file);
 	}

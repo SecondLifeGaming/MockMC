@@ -4,17 +4,22 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Silverfish;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class SilverfishMock extends MonsterMock implements Silverfish
+public class SilverfishMock extends MonsterMock
+		implements
+			Silverfish,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SilverfishBaseMock
 {
 
 	/**
-	 * Constructs a new {@link Silverfish} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link Silverfish} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SilverfishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -22,9 +27,9 @@ public class SilverfishMock extends MonsterMock implements Silverfish
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SILVERFISH;
 	}
-
 }

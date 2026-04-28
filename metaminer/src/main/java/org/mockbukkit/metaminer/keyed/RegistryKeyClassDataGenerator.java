@@ -27,7 +27,7 @@ public class RegistryKeyClassDataGenerator implements DataGenerator
 		File destinationFile = new File(dataFolder, "registry_key_class_relation.json");
 		JsonObject rootObject = new JsonObject();
 
-		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.entrySet())
+		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation().entrySet())
 		{
 			rootObject.add(entry.getKey().key().asString(), new JsonPrimitive(entry.getValue().getName()));
 		}

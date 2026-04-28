@@ -1,6 +1,5 @@
 package org.mockbukkit.mockbukkit.entity;
 
-import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -9,8 +8,6 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -18,19 +15,28 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class TNTPrimedMock extends EntityMock implements TNTPrimed
+public class TNTPrimedMock extends EntityMock
+		implements
+			TNTPrimed,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TNTPrimedBaseMock
 {
 
 	private int fuseTicks = 80;
+
 	private Entity source;
+
 	private float explosionYield = 4;
+
 	private boolean incendiary = false;
 
 	/**
-	 * Constructs a new {@link TNTPrimedMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link TNTPrimedMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected TNTPrimedMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -50,7 +56,8 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	}
 
 	@Override
-	public @Nullable Entity getSource()
+	@Nullable
+	public Entity getSource()
 	{
 		return this.source;
 	}
@@ -61,26 +68,10 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 		if (source instanceof LivingEntity)
 		{
 			this.source = source;
-		}
-		else
+		} else
 		{
 			this.source = null;
 		}
-	}
-
-	@Override
-	public void setBlockData(@NotNull BlockData blockData)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
-
-	@Override
-	public @NotNull BlockData getBlockData()
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -108,7 +99,8 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TNT;
 	}
@@ -116,7 +108,8 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 	/**
 	 * Simulate server tick.
 	 *
-	 * @param ticks The number of ticks to simulate.
+	 * @param ticks
+	 *            The number of ticks to simulate.
 	 */
 	public void tick(int ticks)
 	{
@@ -142,5 +135,4 @@ public class TNTPrimedMock extends EntityMock implements TNTPrimed
 		ExplosionPrimeEvent event = new ExplosionPrimeEvent(this);
 		server.getPluginManager().callEvent(event);
 	}
-
 }

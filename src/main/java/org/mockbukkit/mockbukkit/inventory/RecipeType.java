@@ -5,13 +5,8 @@ import org.jetbrains.annotations.NotNull;
 
 public enum RecipeType
 {
-	BLASTING("blasting"),
-	CAMPFIRE_COOKING("campfire_cooking"),
-	CRAFTING("crafting"),
-	SMELTING("smelting"),
-	SMITHING("smithing"),
-	SMOKING("smoking"),
-	STONECUTTING("stonecutting");
+	BLASTING("blasting"), CAMPFIRE_COOKING("campfire_cooking"), CRAFTING("crafting"), SMELTING("smelting"), SMITHING(
+			"smithing"), SMOKING("smoking"), STONECUTTING("stonecutting");
 
 	private final String key;
 

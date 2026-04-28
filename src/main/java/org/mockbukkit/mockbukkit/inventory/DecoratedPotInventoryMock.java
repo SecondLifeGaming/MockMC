@@ -9,7 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class DecoratedPotInventoryMock extends InventoryMock implements DecoratedPotInventory
+public class DecoratedPotInventoryMock extends InventoryMock
+		implements
+			DecoratedPotInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.DecoratedPotInventoryBaseMock
 {
 
 	public DecoratedPotInventoryMock(@Nullable InventoryHolder holder)
@@ -23,7 +26,8 @@ public class DecoratedPotInventoryMock extends InventoryMock implements Decorate
 	}
 
 	@Override
-	public @NotNull Inventory getSnapshot()
+	@NotNull
+	public Inventory getSnapshot()
 	{
 		return new DecoratedPotInventoryMock(this);
 	}
@@ -35,7 +39,8 @@ public class DecoratedPotInventoryMock extends InventoryMock implements Decorate
 	}
 
 	@Override
-	public @Nullable ItemStack getItem()
+	@Nullable
+	public ItemStack getItem()
 	{
 		return getItem(0);
 	}
@@ -45,5 +50,4 @@ public class DecoratedPotInventoryMock extends InventoryMock implements Decorate
 	{
 		return (DecoratedPot) super.getHolder();
 	}
-
 }

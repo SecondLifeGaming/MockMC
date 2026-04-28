@@ -7,7 +7,6 @@ import org.bukkit.entity.Snowman;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,16 +14,24 @@ import java.util.UUID;
  *
  * @see GolemMock
  */
-public class SnowmanMock extends GolemMock implements Snowman, MockRangedEntity<SnowmanMock>, Shearable
+public class SnowmanMock extends GolemMock
+		implements
+			Snowman,
+			MockRangedEntity<SnowmanMock>,
+			Shearable,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SnowmanBaseMock
 {
 
 	private boolean derpMode;
 
 	/**
-	 * Constructs a new {@link SnowmanMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SnowmanMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SnowmanMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -74,7 +81,8 @@ public class SnowmanMock extends GolemMock implements Snowman, MockRangedEntity<
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SNOW_GOLEM;
 	}

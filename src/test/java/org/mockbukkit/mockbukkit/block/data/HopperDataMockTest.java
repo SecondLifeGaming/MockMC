@@ -38,7 +38,8 @@ class HopperDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isEnabled)
 		{
 			hopper.setEnabled(isEnabled);
@@ -58,9 +59,8 @@ class HopperDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "DOWN", "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"DOWN", "NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			hopper.setFacing(face);
@@ -68,13 +68,13 @@ class HopperDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "DOWN", "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"DOWN", "NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> hopper.setFacing(face));
-			assertEquals("Invalid face, only cartesian face (excluding UP) are allowed for this property!", e.getMessage());
+			assertEquals("Invalid face, only cartesian face (excluding UP) are allowed for this property!",
+					e.getMessage());
 		}
 
 	}

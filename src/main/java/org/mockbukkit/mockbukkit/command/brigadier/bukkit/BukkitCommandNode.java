@@ -31,10 +31,8 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 
 	private BukkitCommandNode(String literal, Command command, BukkitBrigCommand bukkitBrigCommand)
 	{
-		super(
-				literal, bukkitBrigCommand, source -> command.testPermissionSilent(source.getSender()),
-				null, null, false
-		);
+		super(literal, bukkitBrigCommand, source -> command.testPermissionSilent(source.getSender()), null, null,
+				false);
 		this.command = command;
 	}
 
@@ -44,9 +42,7 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		BukkitCommandNode commandNode = new BukkitCommandNode(name, command, bukkitBrigCommand);
 		commandNode.addChild(
 				RequiredArgumentBuilder.<CommandSourceStack, String>argument("args", StringArgumentType.greedyString())
-						.suggests(new BukkitBrigSuggestionProvider(command, name))
-						.executes(bukkitBrigCommand).build()
-		);
+						.suggests(new BukkitBrigSuggestionProvider(command, name)).executes(bukkitBrigCommand).build());
 
 		return commandNode;
 	}
@@ -74,9 +70,12 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 			CommandSender sender = context.getSource().getSender();
 
 			String content = context.getRange().get(context.getInput());
-			String[] args = org.apache.commons.lang3.StringUtils.split(content, ' '); // fix adjacent spaces (from console/plugins) causing empty array elements
+			String[] args = org.apache.commons.lang3.StringUtils.split(content, ' '); // fix adjacent spaces (from
+																						// console/plugins) causing
+																						// empty array elements
 
-			// Note: we don't return the result of target.execute as thats success / failure, we return handled (true) or not handled (false)
+			// Note: we don't return the result of target.execute as thats success /
+			// failure, we return handled (true) or not handled (false)
 			this.command.execute(sender, this.literal, Arrays.copyOfRange(args, 1, args.length));
 
 			// return true as command was handled
@@ -98,32 +97,37 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 		}
 
 		@Override
-		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context, SuggestionsBuilder builder)
+		public CompletableFuture<Suggestions> getSuggestions(CommandContext<CommandSourceStack> context,
+				SuggestionsBuilder builder)
 		{
 			// Paper start
 			org.bukkit.command.CommandSender sender = context.getSource().getSender();
-			String[] args = builder.getRemaining().split(" ", -1); // We need the command included -- Set limit to -1, allow for trailing spaces
+			String[] args = builder.getRemaining().split(" ", -1); // We need the command included -- Set limit to -1,
+																	// allow for trailing spaces
 
 			List<String> results = null;
 			Location pos = context.getSource().getLocation();
 			try
 			{
 				results = this.command.tabComplete(sender, this.literal, args, pos.clone());
-			}
-			catch (CommandException ex)
+			} catch (CommandException ex)
 			{
-				sender.sendMessage(Component.text("An internal error occurred while attempting to tab-complete this command", NamedTextColor.RED));
-				Bukkit.getServer().getLogger().log(Level.SEVERE, "Exception when " + sender.getName() + " attempted to tab complete " + builder.getRemaining(), ex);
+				sender.sendMessage(
+						Component.text("An internal error occurred while attempting to tab-complete this command",
+								NamedTextColor.RED));
+				Bukkit.getServer().getLogger().log(Level.SEVERE,
+						"Exception when " + sender.getName() + " attempted to tab complete " + builder.getRemaining(),
+						ex);
 			}
 
 			if (sender instanceof final Player player)
 			{
-				TabCompleteEvent tabEvent = new org.bukkit.event.server.TabCompleteEvent(player, builder.getInput(), results != null ? results : new ArrayList<>(), true, pos); // Paper - AsyncTabCompleteEvent
+				TabCompleteEvent tabEvent = new org.bukkit.event.server.TabCompleteEvent(player, builder.getInput(),
+						results != null ? results : new ArrayList<>(), true, pos); // Paper - AsyncTabCompleteEvent
 				if (!tabEvent.callEvent())
 				{
 					results = null;
-				}
-				else
+				} else
 				{
 					results = tabEvent.getCompletions();
 				}
@@ -134,7 +138,8 @@ public class BukkitCommandNode extends LiteralCommandNode<CommandSourceStack>
 				return builder.buildFuture();
 			}
 
-			// Defaults to sub nodes, but we have just one giant args node, so offset accordingly
+			// Defaults to sub nodes, but we have just one giant args node, so offset
+			// accordingly
 			builder = builder.createOffset(builder.getInput().lastIndexOf(' ') + 1);
 
 			for (String s : results)

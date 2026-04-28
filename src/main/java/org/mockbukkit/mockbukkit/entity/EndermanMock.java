@@ -11,10 +11,8 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.SplittableRandom;
 import java.util.UUID;
 
@@ -23,40 +21,41 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class EndermanMock extends MonsterMock implements Enderman
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class EndermanMock extends MonsterMock
+		implements
+			Enderman,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EndermanBaseMock
 {
 
 	private static final SplittableRandom random = new SplittableRandom();
-	private @Nullable BlockData carriedBlock = null;
+
+	@Nullable
+	private BlockData carriedBlock = null;
+
 	private boolean isScreaming = false;
+
 	private boolean hasBeenStaredAt = false;
 
 	/**
 	 * Constructs a new {@link EndermanMock} on the provided {@link ServerMock} with
 	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public EndermanMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
 
-	/**
-	 * We're not implementing this as this would randomly fail tests. This is not a
-	 * bug, it's a feature.
-	 */
-	@Override
-	public boolean teleportRandomly()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	@Override
 	@Deprecated(since = "1.18")
-	public @NotNull MaterialData getCarriedMaterial()
+	@NotNull
+	public MaterialData getCarriedMaterial()
 	{
 		assertHasBlock();
 		return new MaterialData(carriedBlock.getMaterial());
@@ -67,11 +66,12 @@ public class EndermanMock extends MonsterMock implements Enderman
 	public void setCarriedMaterial(@NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		carriedBlock = BlockDataMock.mock(material.getItemType());
+		carriedBlock = BlockDataMockFactory.mock(material.getItemType());
 	}
 
 	@Override
-	public @Nullable BlockData getCarriedBlock()
+	@Nullable
+	public BlockData getCarriedBlock()
 	{
 		assertHasBlock();
 		return this.carriedBlock;
@@ -103,8 +103,8 @@ public class EndermanMock extends MonsterMock implements Enderman
 		if (alive)
 		{
 			Vector vector = new Vector(this.getLocation().x() - entity.getLocation().x(),
-					(this.getLocation().y() + 1.45) - entity.getLocation().y(), this.getLocation().z() - entity.getLocation().z());
-
+					(this.getLocation().y() + 1.45) - entity.getLocation().y(),
+					this.getLocation().z() - entity.getLocation().z());
 			vector = vector.normalize();
 			double x = this.getLocation().x() + (random.nextDouble() - 0.5D) * 8.0D - vector.getX() * 16.0D;
 			double y = this.getLocation().y() + (double) (random.nextInt(16) - 8) - vector.getY() * 16.0D;
@@ -154,7 +154,6 @@ public class EndermanMock extends MonsterMock implements Enderman
 		{
 			return EntityState.ANGRY;
 		}
-
 		return super.getEntityState();
 	}
 
@@ -163,5 +162,4 @@ public class EndermanMock extends MonsterMock implements Enderman
 	{
 		return EntityType.ENDERMAN;
 	}
-
 }

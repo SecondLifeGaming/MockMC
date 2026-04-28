@@ -36,7 +36,8 @@ public class ObserverDataMock extends BlockDataMock implements Observer
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian(), "Invalid face, only cartesian face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian(),
+				"Invalid face, only cartesian face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -59,7 +60,8 @@ public class ObserverDataMock extends BlockDataMock implements Observer
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ObserverDataMock clone()
 	{
 		return new ObserverDataMock(this);

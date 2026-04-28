@@ -6,11 +6,11 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockbukkit.mockbukkit.generated.org.bukkit.block.LockableBaseMock;
 
 import java.util.Objects;
 
-public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState
+public abstract class LockableTileStateMock extends TileStateMock implements LockableTileState, LockableBaseMock
 {
 
 	private @NotNull String lock = "";
@@ -50,10 +50,9 @@ public abstract class LockableTileStateMock extends TileStateMock implements Loc
 	}
 
 	@Override
-	public void setLockItem(@Nullable ItemStack itemStack)
+	public void setLockItem(@Nullable ItemStack item)
 	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.lock = (item == null || item.getType().isAir()) ? "" : item.getType().name();
 	}
 
 	@Override

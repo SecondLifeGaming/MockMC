@@ -21,6 +21,8 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class BannerStateMock extends TileStateMock implements Banner
 {
 
@@ -32,7 +34,8 @@ public class BannerStateMock extends TileStateMock implements Banner
 	 * Constructs a new {@link BannerStateMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#BANNERS}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BannerStateMock(@NotNull Material material)
 	{
@@ -42,10 +45,11 @@ public class BannerStateMock extends TileStateMock implements Banner
 	}
 
 	/**
-	 * Constructs a new {@link BannerStateMock} for the provided {@link Block}.
-	 * Only supports materials in {@link Tag#BANNERS}
+	 * Constructs a new {@link BannerStateMock} for the provided {@link Block}. Only
+	 * supports materials in {@link Tag#BANNERS}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BannerStateMock(@NotNull Block block)
 	{
@@ -55,9 +59,11 @@ public class BannerStateMock extends TileStateMock implements Banner
 	}
 
 	/**
-	 * Constructs a new {@link BannerStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BannerStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BannerStateMock(@NotNull BannerStateMock state)
 	{
@@ -176,7 +182,8 @@ public class BannerStateMock extends TileStateMock implements Banner
 		{
 			return false;
 		}
-		return baseColor == that.baseColor && Objects.equals(patterns, that.patterns) && Objects.equals(customName, that.customName);
+		return baseColor == that.baseColor && Objects.equals(patterns, that.patterns)
+				&& Objects.equals(customName, that.customName);
 	}
 
 	@Override
@@ -217,10 +224,8 @@ public class BannerStateMock extends TileStateMock implements Banner
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", baseColor=" + baseColor +
-				", patterns=" + patterns +
-				", customName=" + customName;
+		return super.toStringInternal() + ", baseColor=" + baseColor + ", patterns=" + patterns + ", customName="
+				+ customName;
 	}
 
 }

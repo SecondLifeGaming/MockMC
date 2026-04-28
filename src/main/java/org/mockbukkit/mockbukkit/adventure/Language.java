@@ -4,14 +4,17 @@ public interface Language
 {
 
 	/**
-	 * @param key      The translation key
-	 * @param fallback Fallback translation
+	 * @param key
+	 *            The translation key
+	 * @param fallback
+	 *            Fallback translation
 	 * @return A translated message
 	 */
 	String getOrDefault(String key, String fallback);
 
 	/**
-	 * @param key The translation key
+	 * @param key
+	 *            The translation key
 	 * @return True if translation of key exists
 	 */
 	boolean has(String key);

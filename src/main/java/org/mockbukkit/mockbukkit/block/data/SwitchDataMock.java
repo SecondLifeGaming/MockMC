@@ -16,14 +16,17 @@ import static org.mockbukkit.mockbukkit.block.data.BlockDataKey.POWERED;
 /**
  * Mock implementation of a {@link Switch}.
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class SwitchDataMock extends BlockDataMock implements Switch
 {
 
 	/**
-	 * Constructs a new {@link SwitchDataMock} for the provided {@link Material}. Only
-	 * supports materials in {@link Tag#BUTTONS} and {@link Material#LEVER}
+	 * Constructs a new {@link SwitchDataMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#BUTTONS} and {@link Material#LEVER}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public SwitchDataMock(@NotNull Material type)
 	{
@@ -35,9 +38,11 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	}
 
 	/**
-	 * Create a new {@link SwitchDataMock} based on an existing {@link SwitchDataMock}.
+	 * Create a new {@link SwitchDataMock} based on an existing
+	 * {@link SwitchDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected SwitchDataMock(@NotNull SwitchDataMock other)
 	{
@@ -104,7 +109,8 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SwitchDataMock clone()
 	{
 		return new SwitchDataMock(this);

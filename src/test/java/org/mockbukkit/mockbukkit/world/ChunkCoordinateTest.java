@@ -16,7 +16,8 @@ class ChunkCoordinateTest
 {
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5})
 	void getX(int value)
 	{
 		ChunkCoordinate coord = new ChunkCoordinate(value, 0);
@@ -24,7 +25,8 @@ class ChunkCoordinateTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5})
 	void getZ(int value)
 	{
 		ChunkCoordinate coord = new ChunkCoordinate(0, value);

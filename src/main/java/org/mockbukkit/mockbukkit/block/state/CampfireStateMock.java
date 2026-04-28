@@ -31,7 +31,8 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	 * Constructs a new {@link CampfireStateMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#CAMPFIRES}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public CampfireStateMock(@NotNull Material material)
 	{
@@ -43,7 +44,8 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	 * Constructs a new {@link CampfireStateMock} for the provided {@link Block}.
 	 * Only supports materials in {@link Tag#CAMPFIRES}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected CampfireStateMock(@NotNull Block block)
 	{
@@ -52,9 +54,11 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 	}
 
 	/**
-	 * Constructs a new {@link CampfireStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link CampfireStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected CampfireStateMock(@NotNull CampfireStateMock state)
 	{
@@ -168,22 +172,23 @@ public class CampfireStateMock extends TileStateMock implements Campfire
 		return this.cookingDisabled[index];
 	}
 
-	// TODO: Implement a 'cookTick' method to simulate one server tick worth of cooking items. This currently isn't possible as there's no default recipes to change the item types once fully cooked.
+	// TODO: Implement a 'cookTick' method to simulate one server tick worth of
+	// cooking items. This currently isn't possible as there's no default recipes to
+	// change the item types once fully cooked.
 
 	private static void checkSlot(int index)
 	{
 		int maxSlots = MAX_SLOTS - 1;
-		Validate.isTrue(index >= 0 && index <= maxSlots, "Slot index must be between 0 and " + maxSlots + " (inclusive)");
+		Validate.isTrue(index >= 0 && index <= maxSlots,
+				"Slot index must be between 0 and " + maxSlots + " (inclusive)");
 	}
 
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", cookingDisabled=" + Arrays.toString(cookingDisabled) +
-				", items=" + Arrays.toString(items) +
-				", cookingProgress=" + Arrays.toString(cookingProgress) +
-				", cookingTime=" + Arrays.toString(cookingTime);
+		return super.toStringInternal() + ", cookingDisabled=" + Arrays.toString(cookingDisabled) + ", items="
+				+ Arrays.toString(items) + ", cookingProgress=" + Arrays.toString(cookingProgress) + ", cookingTime="
+				+ Arrays.toString(cookingTime);
 	}
 
 }

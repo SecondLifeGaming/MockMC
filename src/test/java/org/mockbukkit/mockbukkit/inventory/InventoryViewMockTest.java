@@ -24,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class InventoryViewMockTest
 {
@@ -125,7 +127,8 @@ class InventoryViewMockTest
 			view.setPlayer(null);
 			view.setTopInventory(new InventoryMock(player, InventoryType.CHEST));
 
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle("This is a test"));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> view.setTitle("This is a test"));
 			assertEquals("NPCs are not currently supported for this function", e.getMessage());
 		}
 
@@ -136,7 +139,8 @@ class InventoryViewMockTest
 			view.setPlayer(player);
 			view.setTopInventory(new InventoryMock(player, InventoryType.CRAFTING));
 
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> view.setTitle("This is a test"));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> view.setTitle("This is a test"));
 			assertEquals("Only creatable inventories can have their title changed", e.getMessage());
 		}
 
@@ -225,7 +229,8 @@ class InventoryViewMockTest
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
 
-		// Verify no items were dropped (since item was null) [ there can be only 1: the player ]
+		// Verify no items were dropped (since item was null) [ there can be only 1: the
+		// player ]
 		assertEquals(List.of(player), player.getWorld().getEntities());
 	}
 

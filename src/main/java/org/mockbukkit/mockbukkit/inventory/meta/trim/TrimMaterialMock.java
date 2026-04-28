@@ -9,11 +9,18 @@ import org.bukkit.inventory.meta.trim.TrimMaterial;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-public class TrimMaterialMock implements TrimMaterial
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class TrimMaterialMock
+		implements
+			TrimMaterial,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.trim.TrimMaterialBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final Component description;
+
 	private final String translationKey;
 
 	@ApiStatus.Internal
@@ -25,7 +32,8 @@ public class TrimMaterialMock implements TrimMaterial
 	}
 
 	/**
-	 * @param data Json data
+	 * @param data
+	 *            Json data
 	 */
 	@Deprecated(forRemoval = true)
 	public TrimMaterialMock(JsonObject data)
@@ -36,19 +44,22 @@ public class TrimMaterialMock implements TrimMaterial
 	}
 
 	@Override
-	public @NotNull Component description()
+	@NotNull
+	public Component description()
 	{
 		return description;
 	}
 
 	@Override
-	public @NotNull String getTranslationKey()
+	@NotNull
+	public String getTranslationKey()
 	{
 		return this.translationKey;
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return key;
 	}
@@ -63,5 +74,4 @@ public class TrimMaterialMock implements TrimMaterial
 		String translationKey = data.get("translationKey").getAsString();
 		return new TrimMaterialMock(key, description, translationKey);
 	}
-
 }

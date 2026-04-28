@@ -5,9 +5,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public record PotDecorationsMock(@Nullable ItemType back, @Nullable ItemType left,
-								 @Nullable ItemType right, @Nullable ItemType front) implements PotDecorations
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
+public record PotDecorationsMock(@Nullable ItemType back, @Nullable ItemType left, @Nullable ItemType right,
+		@Nullable ItemType front) implements PotDecorations
 {
 	static class BuilderMock implements PotDecorations.Builder
 	{

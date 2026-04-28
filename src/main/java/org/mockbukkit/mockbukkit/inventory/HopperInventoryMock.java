@@ -17,7 +17,8 @@ public class HopperInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link HopperInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public HopperInventoryMock(InventoryHolder holder)
 	{

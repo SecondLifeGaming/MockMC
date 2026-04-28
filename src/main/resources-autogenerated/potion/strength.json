@@ -8,5 +8,8 @@
 			"particles": true,
 			"type": "minecraft:strength"
 		}
-	]
+	],
+	"extendable": true,
+	"maxLevel": 2,
+	"upgradeable": true
 }

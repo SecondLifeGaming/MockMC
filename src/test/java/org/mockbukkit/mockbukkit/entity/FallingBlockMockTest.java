@@ -53,7 +53,8 @@ class FallingBlockMockTest
 	@Test
 	void setBlockData_GivenIllegalArgument()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> fallingBlock.setBlockData(null));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> fallingBlock.setBlockData(null));
 		assertEquals("blockData", e.getMessage());
 	}
 
@@ -70,7 +71,8 @@ class FallingBlockMockTest
 	@Test
 	void setBlockState_GivenIllegalArgument()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> fallingBlock.setBlockState(null));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> fallingBlock.setBlockState(null));
 		assertEquals("blockState", e.getMessage());
 	}
 
@@ -81,7 +83,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void getDropItem_GivenChangedValue(boolean value)
 	{
 		fallingBlock.setDropItem(value);
@@ -95,7 +98,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void getCancelDrop_GivenChangedValue(boolean value)
 	{
 		fallingBlock.setCancelDrop(value);
@@ -109,7 +113,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void canHurtEntities_GivenChangedValue(boolean value)
 	{
 		fallingBlock.setHurtEntities(value);
@@ -131,7 +136,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = { 0.1F, 10 })
+	@ValueSource(floats =
+	{0.1F, 10})
 	void getDamagePerBlock_GivenChangedValue(float value)
 	{
 		fallingBlock.setDamagePerBlock(value);
@@ -140,10 +146,12 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+	@ValueSource(floats =
+	{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 	void setDamagePerBlock_GivenIllegalValue(float value)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> fallingBlock.setDamagePerBlock(value));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> fallingBlock.setDamagePerBlock(value));
 		assertEquals(String.format("damage must be >= 0.0, given %s", value), e.getMessage());
 	}
 
@@ -162,7 +170,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+	@ValueSource(ints =
+	{1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	void getMaxDamage_GivenChangedValue(int value)
 	{
 		fallingBlock.setMaxDamage(value);
@@ -171,10 +180,12 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+	@ValueSource(ints =
+	{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 	void setMaxDamage_GivenIllegalValue(int value)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> fallingBlock.setMaxDamage(value));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> fallingBlock.setMaxDamage(value));
 		assertEquals(String.format("damage must be >= 0, given %s", value), e.getMessage());
 	}
 
@@ -185,7 +196,8 @@ class FallingBlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void doesAutoExpire_GivenChangedValue(boolean value)
 	{
 		fallingBlock.shouldAutoExpire(value);

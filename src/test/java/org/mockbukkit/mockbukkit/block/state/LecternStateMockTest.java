@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class LecternStateMockTest extends ContainerStateMockTest
 {
@@ -62,7 +64,8 @@ class LecternStateMockTest extends ContainerStateMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new LecternStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new LecternStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

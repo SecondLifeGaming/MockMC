@@ -40,9 +40,8 @@ class LadderDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST"})
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			ladderData.setFacing(face);
@@ -50,9 +49,8 @@ class LadderDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> ladderData.setFacing(face));
@@ -76,7 +74,8 @@ class LadderDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull LadderDataMock cloned = ladderData.clone();
+		@NotNull
+		LadderDataMock cloned = ladderData.clone();
 
 		assertEquals(ladderData, cloned);
 		assertEquals(ladderData.isWaterlogged(), cloned.isWaterlogged());

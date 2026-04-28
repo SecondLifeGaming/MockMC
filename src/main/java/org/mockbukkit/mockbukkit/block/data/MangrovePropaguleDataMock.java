@@ -27,7 +27,8 @@ public class MangrovePropaguleDataMock extends BlockDataMock implements Mangrove
 	@Override
 	public void setAge(int age)
 	{
-		Preconditions.checkArgument(age >= 0 && age <= this.getMaximumAge(), "The age must be between 0 and %s", this.getMaximumAge());
+		Preconditions.checkArgument(age >= 0 && age <= this.getMaximumAge(), "The age must be between 0 and %s",
+				this.getMaximumAge());
 		this.set(BlockDataKey.AGE_KEY, age);
 	}
 
@@ -70,7 +71,8 @@ public class MangrovePropaguleDataMock extends BlockDataMock implements Mangrove
 	@Override
 	public void setStage(int stage)
 	{
-		Preconditions.checkArgument(stage >= 0 && stage <= this.getMaximumStage(), "The stage must be between 0 and %s", this.getMaximumStage());
+		Preconditions.checkArgument(stage >= 0 && stage <= this.getMaximumStage(), "The stage must be between 0 and %s",
+				this.getMaximumStage());
 		this.set(BlockDataKey.STAGE_KEY, stage);
 	}
 
@@ -81,7 +83,8 @@ public class MangrovePropaguleDataMock extends BlockDataMock implements Mangrove
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull MangrovePropaguleDataMock clone()
 	{
 		return new MangrovePropaguleDataMock(this);

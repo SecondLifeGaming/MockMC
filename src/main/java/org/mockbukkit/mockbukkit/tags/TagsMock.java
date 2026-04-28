@@ -40,8 +40,10 @@ public final class TagsMock
 	/**
 	 * This loads all default {@link Tag Tags} into the given {@link Server}.
 	 *
-	 * @param server       The {@link ServerMock} instance
-	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
+	 * @param server
+	 *            The {@link ServerMock} instance
+	 * @param skipIfExists
+	 *            Whether to skip an already loaded {@link TagRegistry}
 	 */
 	public static void loadDefaultTags(@NotNull ServerMock server, boolean skipIfExists)
 	{
@@ -50,8 +52,7 @@ public final class TagsMock
 			try
 			{
 				loadRegistry(server, registry, skipIfExists);
-			}
-			catch (URISyntaxException | IOException e)
+			} catch (URISyntaxException | IOException e)
 			{
 				LOGGER.error("Failed to load Tag Registry \"{}\"", registry.getRegistry(), e);
 			}
@@ -61,11 +62,16 @@ public final class TagsMock
 	/**
 	 * This will load all {@link Tag Tags} for the given {@link TagRegistry}.
 	 *
-	 * @param server       The server to add the tags to.
-	 * @param registry     Our {@link TagRegistry}
-	 * @param skipIfExists Whether to skip an already loaded {@link TagRegistry}
-	 * @throws URISyntaxException When a {@link URI} is malformed
-	 * @throws IOException        When there was an issue with I/O
+	 * @param server
+	 *            The server to add the tags to.
+	 * @param registry
+	 *            Our {@link TagRegistry}
+	 * @param skipIfExists
+	 *            Whether to skip an already loaded {@link TagRegistry}
+	 * @throws URISyntaxException
+	 *             When a {@link URI} is malformed
+	 * @throws IOException
+	 *             When there was an issue with I/O
 	 */
 	private static void loadRegistry(@NotNull ServerMock server, @NotNull TagRegistry registry, boolean skipIfExists)
 			throws URISyntaxException, IOException
@@ -81,7 +87,8 @@ public final class TagsMock
 		URL resource = MockBukkit.class.getClassLoader().getResource("tags/" + registry.getRegistry());
 		if (resource == null)
 		{
-			throw new IllegalArgumentException(String.format("No resources found for registry: %s", registry.getRegistry()));
+			throw new IllegalArgumentException(
+					String.format("No resources found for registry: %s", registry.getRegistry()));
 		}
 
 		loadFileSystem(resource.toURI());
@@ -121,8 +128,7 @@ public final class TagsMock
 			Map<String, String> env = new HashMap<>();
 			env.put("create", "true");
 			return FileSystems.newFileSystem(uri, env);
-		}
-		catch (IllegalArgumentException | FileSystemAlreadyExistsException e)
+		} catch (IllegalArgumentException | FileSystemAlreadyExistsException e)
 		{
 			return FileSystems.getDefault();
 		}

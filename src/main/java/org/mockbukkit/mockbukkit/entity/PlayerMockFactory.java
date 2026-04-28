@@ -18,9 +18,11 @@ public final class PlayerMockFactory
 	private int currentNameIndex;
 
 	/**
-	 * Constructs a new {@link PlayerMockFactory} for the provided {@link ServerMock}.
+	 * Constructs a new {@link PlayerMockFactory} for the provided
+	 * {@link ServerMock}.
 	 *
-	 * @param server The server to create the factory for.
+	 * @param server
+	 *            The server to create the factory for.
 	 */
 	public PlayerMockFactory(@NotNull ServerMock server)
 	{
@@ -30,7 +32,8 @@ public final class PlayerMockFactory
 	}
 
 	/**
-	 * Gets a unique random name. Any name that is generated will never be generated again.
+	 * Gets a unique random name. Any name that is generated will never be generated
+	 * again.
 	 *
 	 * @return A unique random name.
 	 */
@@ -59,7 +62,8 @@ public final class PlayerMockFactory
 	}
 
 	/**
-	 * Create a random {@link OfflinePlayerMock} object with a unique name. It will not however contain a UUID.
+	 * Create a random {@link OfflinePlayerMock} object with a unique name. It will
+	 * not however contain a UUID.
 	 *
 	 * @return A newly created player mock object.
 	 */
@@ -69,9 +73,11 @@ public final class PlayerMockFactory
 	}
 
 	/**
-	 * Create a random {@link OfflinePlayerMock} object with a unique name and the given id.
+	 * Create a random {@link OfflinePlayerMock} object with a unique name and the
+	 * given id.
 	 *
-	 * @param uuid the id of the offline player
+	 * @param uuid
+	 *            the id of the offline player
 	 * @return A newly created offline player mock object.
 	 */
 	public @NotNull OfflinePlayerMock createOfflinePlayer(@NotNull UUID uuid)

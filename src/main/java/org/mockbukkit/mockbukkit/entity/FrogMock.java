@@ -7,7 +7,6 @@ import org.bukkit.entity.Frog;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,17 +14,25 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class FrogMock extends AnimalsMock implements Frog
+public class FrogMock extends AnimalsMock
+		implements
+			Frog,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FrogBaseMock
 {
 
-	private @Nullable Entity tongueTarget = null;
+	@Nullable
+	private Entity tongueTarget = null;
+
 	private Variant variant = Variant.TEMPERATE;
 
 	/**
-	 * Constructs a new {@link FrogMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FrogMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public FrogMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,7 +40,8 @@ public class FrogMock extends AnimalsMock implements Frog
 	}
 
 	@Override
-	public @Nullable Entity getTongueTarget()
+	@Nullable
+	public Entity getTongueTarget()
 	{
 		return this.tongueTarget;
 	}
@@ -45,7 +53,8 @@ public class FrogMock extends AnimalsMock implements Frog
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -58,9 +67,9 @@ public class FrogMock extends AnimalsMock implements Frog
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FROG;
 	}
-
 }

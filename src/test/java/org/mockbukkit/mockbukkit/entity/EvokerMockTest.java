@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class EvokerMockTest
 {
@@ -31,14 +33,9 @@ class EvokerMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"NONE, NONE",
-			"SUMMON, SUMMON_VEX",
-			"FANGS, FANGS",
-			"WOLOLO, WOLOLO",
-			"DISAPPEAR, DISAPPEAR",
-			"BLINDNESS, BLINDNESS"
-	})
+	@CsvSource(
+	{"NONE, NONE", "SUMMON, SUMMON_VEX", "FANGS, FANGS", "WOLOLO, WOLOLO", "DISAPPEAR, DISAPPEAR",
+			"BLINDNESS, BLINDNESS"})
 	void getCurrentSpell_GivenValidValues(Evoker.Spell evokerSpell, Spellcaster.Spell spellcasterSpell)
 	{
 		evoker.setCurrentSpell(evokerSpell);

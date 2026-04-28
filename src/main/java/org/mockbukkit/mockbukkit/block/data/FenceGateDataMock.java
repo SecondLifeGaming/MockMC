@@ -14,7 +14,8 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 	/**
 	 * Constructs a new {@link FenceGateDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public FenceGateDataMock(@NotNull Material material)
 	{
@@ -23,9 +24,11 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 	}
 
 	/**
-	 * Create a new {@link FenceGateDataMock} based on an existing {@link FenceGateDataMock}.
+	 * Create a new {@link FenceGateDataMock} based on an existing
+	 * {@link FenceGateDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected FenceGateDataMock(@NotNull FenceGateDataMock other)
 	{
@@ -54,7 +57,8 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -89,7 +93,8 @@ public class FenceGateDataMock extends BlockDataMock implements Gate
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull FenceGateDataMock clone()
 	{
 		return new FenceGateDataMock(this);

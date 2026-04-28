@@ -44,7 +44,8 @@ public class BellDataMock extends BlockDataMock implements Bell
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -67,11 +68,11 @@ public class BellDataMock extends BlockDataMock implements Bell
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BellDataMock clone()
 	{
 		return new BellDataMock(this);
 	}
-
 
 }

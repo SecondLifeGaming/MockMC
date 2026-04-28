@@ -155,7 +155,8 @@ class DamageSourceMockTest
 	void scalesWithDifficulty_WhenDamageScalingIsNever()
 	{
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
-		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
+		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.NEVER, damageEffect,
+				NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, causingEntity, causingEntity, damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
@@ -188,7 +189,8 @@ class DamageSourceMockTest
 	void scalesWithDifficulty_WhenDamageScalingIsCausedByPlayer()
 	{
 		DamageEffectMock damageEffect = new DamageEffectMock(Sound.ENTITY_ZOMBIE_HURT);
-		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, damageEffect, NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
+		DamageTypeMock neverDamage = new DamageTypeMock(DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, damageEffect,
+				NamespacedKey.fromString(NamespacedKey.MINECRAFT), DeathMessageType.DEFAULT, 0.1F, "test");
 		DamageSourceMock damageSource = new DamageSourceMock(neverDamage, serverMock.addPlayer(), null, null);
 
 		assertFalse(damageSource.scalesWithDifficulty());
@@ -207,7 +209,8 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsDoneByLivingEntity()
 	{
-		DamageSourceMock damageSource = new DamageSourceMock(DamageType.MOB_ATTACK, causingEntity, causingEntity, damageLocation);
+		DamageSourceMock damageSource = new DamageSourceMock(DamageType.MOB_ATTACK, causingEntity, causingEntity,
+				damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
 		assertTrue(actual);
@@ -216,7 +219,8 @@ class DamageSourceMockTest
 	@Test
 	void scalesWithDifficulty_WhenDamageScalingIsAlways()
 	{
-		DamageSourceMock damageSource = new DamageSourceMock(DamageType.PLAYER_EXPLOSION, causingEntity, causingEntity, damageLocation);
+		DamageSourceMock damageSource = new DamageSourceMock(DamageType.PLAYER_EXPLOSION, causingEntity, causingEntity,
+				damageLocation);
 
 		boolean actual = damageSource.scalesWithDifficulty();
 		assertTrue(actual);
@@ -241,25 +245,9 @@ class DamageSourceMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"0,0,0,1",
-			"0,0,1,0",
-			"0,0,1,0",
-			"0,1,0,0",
-			"0,1,0,0",
-			"0,1,1,0",
-			"0,1,1,0",
-			"0,1,1,1",
-			"1,0,0,0",
-			"1,0,0,1",
-			"1,0,1,0",
-			"1,0,1,0",
-			"1,1,0,0",
-			"1,1,0,0",
-			"1,1,1,0",
-			"1,1,1,0",
-			"1,1,1,1"
-	})
+	@CsvSource(
+	{"0,0,0,1", "0,0,1,0", "0,0,1,0", "0,1,0,0", "0,1,0,0", "0,1,1,0", "0,1,1,0", "0,1,1,1", "1,0,0,0", "1,0,0,1",
+			"1,0,1,0", "1,0,1,0", "1,1,0,0", "1,1,0,0", "1,1,1,0", "1,1,1,0", "1,1,1,1"})
 	void equals_and_hashCode_WhenNotIdentical(int a, int b, int c, int d)
 	{
 		boolean changedDamageType = a == 1;
@@ -267,12 +255,8 @@ class DamageSourceMockTest
 		boolean secondNull = c == 1;
 		boolean thirdNull = d == 1;
 
-		DamageSourceMock copy = new DamageSourceMock(
-				changedDamageType ? DamageType.ARROW : damageType,
-				firstNull ? null : causingEntity,
-				secondNull ? null : directEntity,
-				thirdNull ? null : damageLocation
-		);
+		DamageSourceMock copy = new DamageSourceMock(changedDamageType ? DamageType.ARROW : damageType,
+				firstNull ? null : causingEntity, secondNull ? null : directEntity, thirdNull ? null : damageLocation);
 		assertNotEquals(damageSourceMock, copy);
 		assertNotEquals(damageSourceMock.hashCode(), copy.hashCode());
 		assertNotEquals(copy, damageSourceMock);

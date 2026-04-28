@@ -3,14 +3,11 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Piglin;
 import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,27 +18,36 @@ import java.util.UUID;
  *
  * @see PiglinAbstractMock
  */
-public class PiglinMock extends PiglinAbstractMock implements Piglin
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class PiglinMock extends PiglinAbstractMock
+		implements
+			Piglin,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PiglinBaseMock
 {
 
 	private final Set<Material> allowedInterestItems = new HashSet<>();
+
 	private final Set<Material> allowedBarteringItems = new HashSet<>();
 
 	private final InventoryMock inventory;
 
 	private boolean canHunt = true;
+
 	private boolean isChargingCrossbow = false;
 
 	/**
-	 * Constructs a new {@link PiglinMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PiglinMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PiglinMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-
 		this.inventory = new InventoryMock(null, 8, InventoryType.CHEST);
 	}
 
@@ -86,13 +92,15 @@ public class PiglinMock extends PiglinAbstractMock implements Piglin
 	}
 
 	@Override
-	public @NotNull Set<Material> getInterestList()
+	@NotNull
+	public Set<Material> getInterestList()
 	{
 		return Collections.unmodifiableSet(this.allowedInterestItems);
 	}
 
 	@Override
-	public @NotNull Set<Material> getBarterList()
+	@NotNull
+	public Set<Material> getBarterList()
 	{
 		return Collections.unmodifiableSet(this.allowedBarteringItems);
 	}
@@ -110,45 +118,16 @@ public class PiglinMock extends PiglinAbstractMock implements Piglin
 	}
 
 	@Override
-	public void setDancing(boolean dancing)
-	{
-		throw new UnimplementedOperationException("SetDancing was not implemented yet.");
-	}
-
-	@Override
-	public void setDancing(long duration)
-	{
-		throw new UnimplementedOperationException("SetDancing was not implemented yet.");
-	}
-
-	@Override
-	public boolean isDancing()
-	{
-		throw new UnimplementedOperationException("IsDancing was not implemented yet.");
-	}
-
-	@Override
-	public void rangedAttack(LivingEntity target, float charge)
-	{
-		throw new UnimplementedOperationException("RangedAttack was not implemented yet.");
-	}
-
-	@Override
-	public void setChargingAttack(boolean raiseHands)
-	{
-		throw new UnimplementedOperationException("SetChargingAttack was not implemented yet.");
-	}
-
-	@Override
-	public @NotNull InventoryMock getInventory()
+	@NotNull
+	public InventoryMock getInventory()
 	{
 		return this.inventory;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PIGLIN;
 	}
-
 }

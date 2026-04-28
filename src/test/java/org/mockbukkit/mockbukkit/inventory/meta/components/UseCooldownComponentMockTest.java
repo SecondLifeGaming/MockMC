@@ -31,7 +31,8 @@ class UseCooldownComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = {0.0f, 1.0f, 2.5f, 3.75f})
+		@ValueSource(floats =
+		{0.0f, 1.0f, 2.5f, 3.75f})
 		void givenCustomCooldownValue(final float value)
 		{
 			component.setCooldownSeconds(value);
@@ -51,10 +52,8 @@ class UseCooldownComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-			"minecraft:test",
-			"custom:test"
-		})
+		@ValueSource(strings =
+		{"minecraft:test", "custom:test"})
 		void givenCustomCooldownGroup(final String key)
 		{
 			NamespacedKey namespacedKey = NamespacedKey.fromString(key);
@@ -82,7 +81,7 @@ class UseCooldownComponentMockTest
 		void givenCustomValue()
 		{
 			component.setCooldownSeconds(10);
-			component.setCooldownGroup(NamespacedKey.minecraft( "test" ));
+			component.setCooldownGroup(NamespacedKey.minecraft("test"));
 
 			Map<String, Object> actual = component.serialize();
 
@@ -129,7 +128,7 @@ class UseCooldownComponentMockTest
 		void givenSerializationAndDeserialization()
 		{
 			component.setCooldownSeconds(10);
-			component.setCooldownGroup(NamespacedKey.minecraft( "test" ));
+			component.setCooldownGroup(NamespacedKey.minecraft("test"));
 
 			UseCooldownComponent actual = UseCooldownComponentMock.deserialize(component.serialize());
 

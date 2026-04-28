@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -15,14 +14,20 @@ import java.util.UUID;
  *
  * @see SchoolableFishMock
  */
-public class CodMock extends SchoolableFishMock implements Cod
+public class CodMock extends SchoolableFishMock
+		implements
+			Cod,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CodBaseMock
 {
 
 	/**
-	 * Constructs a new {@link CodMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CodMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CodMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -30,15 +35,16 @@ public class CodMock extends SchoolableFishMock implements Cod
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.COD_BUCKET);
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.COD;
 	}
-
 }

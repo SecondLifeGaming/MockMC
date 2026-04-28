@@ -10,7 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ItemEnchantmentsMock(Map<Enchantment, Integer> enchantments) implements ItemEnchantments
 {
 
@@ -24,12 +25,8 @@ public record ItemEnchantmentsMock(Map<Enchantment, Integer> enchantments) imple
 		@Override
 		public Builder add(Enchantment enchantment, @IntRange(from = 1L, to = 255L) int level)
 		{
-			Preconditions.checkArgument(
-					level >= 1 && level <= MAX_LEVEL,
-					"level must be between %s and %s, was %s",
-					1, MAX_LEVEL,
-					level
-			);
+			Preconditions.checkArgument(level >= 1 && level <= MAX_LEVEL, "level must be between %s and %s, was %s", 1,
+					MAX_LEVEL, level);
 			this.enchantments.put(enchantment, level);
 			return this;
 		}

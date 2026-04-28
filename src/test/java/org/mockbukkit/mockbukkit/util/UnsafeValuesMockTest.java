@@ -23,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class UnsafeValuesMockTest
 {
@@ -52,10 +54,8 @@ class UnsafeValuesMockTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-			"APPLE, minecraft:apple",
-			"BEEF, minecraft:beef",
-		})
+		@CsvSource(
+		{"APPLE, minecraft:apple", "BEEF, minecraft:beef",})
 		void givenSimpleValue(Material material, String expected)
 		{
 			ItemStack itemStack = new ItemStack(material);
@@ -96,10 +96,8 @@ class UnsafeValuesMockTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-				"APPLE, minecraft:apple",
-				"BEEF, minecraft:beef",
-		})
+		@CsvSource(
+		{"APPLE, minecraft:apple", "BEEF, minecraft:beef",})
 		void givenSimpleValue(Material expectedMaterial, String input)
 		{
 			Map<String, Object> args = new HashMap<>();
@@ -129,10 +127,7 @@ class UnsafeValuesMockTest
 			itemStack.addEnchantment(Enchantment.SHARPNESS, 5);
 			itemStack.addEnchantment(Enchantment.UNBREAKING, 3);
 
-			itemStack.lore(List.of(
-					Component.text("This is line 1"),
-					Component.text("This is line 2")
-			));
+			itemStack.lore(List.of(Component.text("This is line 1"), Component.text("This is line 2")));
 
 			itemStack.editMeta(meta ->
 			{

@@ -1,23 +1,23 @@
 package org.mockbukkit.mockbukkit.attribute;
 
 import com.google.gson.JsonObject;
-import net.kyori.adventure.key.Key;
 import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
-public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attribute
+public class AttributeMock extends OldKeyedEnumMock<Attribute>
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.attribute.AttributeBaseMock
 {
 
-	private final NamespacedKey key;
 	private final String translationKey;
+
 	private final Sentiment sentiment;
 
 	public AttributeMock(String name, int ordinal, NamespacedKey key, String translationKey, Sentiment sentiment)
 	{
 		super(name, ordinal, key);
-		this.key = key;
 		this.translationKey = translationKey;
 		this.sentiment = sentiment;
 	}
@@ -29,33 +29,38 @@ public class AttributeMock extends OldKeyedEnumMock<Attribute> implements Attrib
 		int ordinal = jsonObject.get("ordinal").getAsInt();
 		String translationKey = jsonObject.get("translationKey").getAsString();
 		Sentiment sentiment = Sentiment.valueOf(jsonObject.get("sentiment").getAsString());
-
 		return new AttributeMock(name, ordinal, key, translationKey, sentiment);
 	}
 
 	@Override
-	public @NotNull String translationKey()
+	@NotNull
+	public String translationKey()
 	{
 		return this.translationKey;
 	}
 
+	/**
+	 * @deprecated Use {@link #translationKey()} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21.3")
-	public @NotNull String getTranslationKey()
+	@NotNull
+	public String getTranslationKey()
 	{
 		return this.translationKey;
 	}
 
 	@Override
-	public @NotNull Key key()
+	@NotNull
+	public net.kyori.adventure.key.Key key()
 	{
-		return this.key;
+		return this.getKey();
 	}
 
 	@Override
-	public @NotNull Sentiment getSentiment()
+	@NotNull
+	public Sentiment getSentiment()
 	{
 		return sentiment;
 	}
-
 }

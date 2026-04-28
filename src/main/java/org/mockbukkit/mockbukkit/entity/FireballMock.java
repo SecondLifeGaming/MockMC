@@ -5,7 +5,6 @@ import org.bukkit.entity.Fireball;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,19 +12,32 @@ import java.util.UUID;
  *
  * @see ProjectileMock
  */
-public class FireballMock extends ProjectileMock implements Fireball
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class FireballMock extends ProjectileMock
+		implements
+			Fireball,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FireballBaseMock
 {
 
 	private boolean isIncendiary;
-	private @NotNull Vector direction = new Vector();
+
+	@NotNull
+	private Vector direction = new Vector();
+
 	private float blastYield = 1.0f;
-	private @NotNull Vector acceleration = new Vector();
+
+	@NotNull
+	private Vector acceleration = new Vector();
 
 	/**
-	 * Constructs a new {@link FireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FireballMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public FireballMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -40,7 +52,8 @@ public class FireballMock extends ProjectileMock implements Fireball
 	}
 
 	@Override
-	public @NotNull Vector getDirection()
+	@NotNull
+	public Vector getDirection()
 	{
 		return this.direction;
 	}
@@ -53,7 +66,8 @@ public class FireballMock extends ProjectileMock implements Fireball
 	}
 
 	@Override
-	public @NotNull Vector getAcceleration()
+	@NotNull
+	public Vector getAcceleration()
 	{
 		return this.acceleration;
 	}
@@ -67,7 +81,8 @@ public class FireballMock extends ProjectileMock implements Fireball
 
 	@Override
 	@Deprecated(since = "1.20.6")
-	public @NotNull Vector getPower()
+	@NotNull
+	public Vector getPower()
 	{
 		return this.getAcceleration();
 	}
@@ -95,5 +110,4 @@ public class FireballMock extends ProjectileMock implements Fireball
 	{
 		return this.isIncendiary;
 	}
-
 }

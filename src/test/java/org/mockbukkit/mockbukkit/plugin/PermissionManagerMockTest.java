@@ -127,7 +127,8 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void subscribeToDefaultPerms(boolean op)
 	{
 		BatMock bat = new BatMock(serverMock, UUID.randomUUID());
@@ -158,8 +159,9 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "permission.op", "permission.op.inherited", "permission.false", "permission.false.inherited",
-			"permission.false.inside" })
+	@ValueSource(strings =
+	{"permission.op", "permission.op.inherited", "permission.false", "permission.false.inherited",
+			"permission.false.inside"})
 	void testPermissionsLoadedFromPlugin_defaultFalse(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -170,7 +172,8 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "permission.true", "permission.true.inherited" })
+	@ValueSource(strings =
+	{"permission.true", "permission.true.inherited"})
 	void testPermissionsLoadedFromPlugin_defaultTrue(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -181,7 +184,8 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "permission.op", "permission.op.inherited" })
+	@ValueSource(strings =
+	{"permission.op", "permission.op.inherited"})
 	void testPermissionsLoadedFromPlugin_defaultOp(String node)
 	{
 		JavaPlugin plugin = getTestPlugin();
@@ -193,7 +197,8 @@ class PermissionManagerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "permission.notop", "permission.notop.inside" })
+	@ValueSource(strings =
+	{"permission.notop", "permission.notop.inside"})
 	void testPermissionsLoadedFromPlugin_defaultNotOp(String node)
 	{
 		getTestPlugin();

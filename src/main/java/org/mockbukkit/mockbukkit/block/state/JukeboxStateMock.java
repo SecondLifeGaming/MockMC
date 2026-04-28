@@ -4,10 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Jukebox;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.JukeboxInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 
 /**
@@ -15,17 +13,22 @@ import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
  *
  * @see TileStateMock
  */
-public class JukeboxStateMock extends TileStateMock implements Jukebox
+public class JukeboxStateMock extends TileStateMock
+		implements
+			Jukebox,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.JukeboxBaseMock
 {
 
 	private ItemStack recordItem;
+
 	private boolean playing;
 
 	/**
 	 * Constructs a new {@link JukeboxStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#JUKEBOX}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public JukeboxStateMock(@NotNull Material material)
 	{
@@ -38,7 +41,8 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	 * Constructs a new {@link JukeboxStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#JUKEBOX}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected JukeboxStateMock(@NotNull Block block)
 	{
@@ -48,9 +52,11 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	}
 
 	/**
-	 * Constructs a new {@link JukeboxStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link JukeboxStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected JukeboxStateMock(@NotNull JukeboxStateMock state)
 	{
@@ -60,19 +66,22 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
-	public @NotNull JukeboxStateMock getSnapshot()
+	@NotNull
+	public JukeboxStateMock getSnapshot()
 	{
 		return new JukeboxStateMock(this);
 	}
 
 	@Override
-	public @NotNull JukeboxStateMock copy()
+	@NotNull
+	public JukeboxStateMock copy()
 	{
 		return new JukeboxStateMock(this);
 	}
 
 	@Override
-	public @NotNull Material getPlaying()
+	@NotNull
+	public Material getPlaying()
 	{
 		return this.recordItem.getType();
 	}
@@ -84,14 +93,8 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	}
 
 	@Override
-	public boolean hasRecord()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack getRecord()
+	@NotNull
+	public ItemStack getRecord()
 	{
 		return this.recordItem;
 	}
@@ -107,13 +110,6 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 	public boolean isPlaying()
 	{
 		return this.playing;
-	}
-
-	@Override
-	public boolean startPlaying()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -133,33 +129,14 @@ public class JukeboxStateMock extends TileStateMock implements Jukebox
 		{
 			return false;
 		}
-
 		getWorld().dropItem(getLocation().add(0, 1, 0), getRecord());
-
 		setRecord(null);
 		return true;
 	}
 
 	@Override
-	public @NotNull JukeboxInventory getInventory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull JukeboxInventory getSnapshotInventory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", playing=" + playing +
-				", recordItem=" + recordItem;
+		return super.toStringInternal() + ", playing=" + playing + ", recordItem=" + recordItem;
 	}
-
 }

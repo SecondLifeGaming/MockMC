@@ -30,7 +30,8 @@ class BeehiveDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5})
 		void givenPossibleLineWidthValues(int expected)
 		{
 			beehive.setHoneyLevel(expected);
@@ -57,9 +58,8 @@ class BeehiveDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			beehive.setFacing(face);
@@ -67,9 +67,8 @@ class BeehiveDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> beehive.setFacing(face));

@@ -9,8 +9,6 @@ import org.bukkit.block.data.type.Campfire;
 import org.bukkit.entity.Bee;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +17,27 @@ import java.util.List;
  *
  * @see TileStateMock
  */
-public class BeehiveStateMock extends TileStateMock implements Beehive
+public class BeehiveStateMock extends TileStateMock
+		implements
+			Beehive,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BeehiveBaseMock
 {
 
-	private @Nullable Location flowerLocation;
+	@Nullable
+	private Location flowerLocation;
+
 	private int maxBees = 3;
+
 	private boolean sedated;
+
 	private final List<Bee> bees = new ArrayList<>();
 
 	/**
 	 * Constructs a new {@link BeehiveStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#BEEHIVE}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BeehiveStateMock(@NotNull Material material)
 	{
@@ -43,7 +49,8 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	 * Constructs a new {@link BeehiveStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#BEEHIVE}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BeehiveStateMock(@NotNull Block block)
 	{
@@ -52,14 +59,15 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	/**
-	 * Constructs a new {@link BeehiveStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BeehiveStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BeehiveStateMock(@NotNull BeehiveStateMock state)
 	{
 		super(state);
-
 		this.flowerLocation = state.flowerLocation;
 		this.maxBees = state.maxBees;
 		this.sedated = state.sedated;
@@ -67,19 +75,22 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	@Override
-	public @NotNull BeehiveStateMock getSnapshot()
+	@NotNull
+	public BeehiveStateMock getSnapshot()
 	{
 		return new BeehiveStateMock(this);
 	}
 
 	@Override
-	public @NotNull BeehiveStateMock copy()
+	@NotNull
+	public BeehiveStateMock copy()
 	{
 		return new BeehiveStateMock(this);
 	}
 
 	@Override
-	public @Nullable Location getFlower()
+	@Nullable
+	public Location getFlower()
 	{
 		return this.flowerLocation;
 	}
@@ -87,14 +98,16 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	@Override
 	public void setFlower(@Nullable Location location)
 	{
-		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()), "Flower must be in the same world");
+		Preconditions.checkArgument(location == null || this.getWorld().equals(location.getWorld()),
+				"Flower must be in the same world");
 		this.flowerLocation = location;
 	}
 
 	/**
 	 * Sets the return value of {@link #isSedated()}
 	 *
-	 * @param sedated Whether the beehive is sedated.
+	 * @param sedated
+	 *            Whether the beehive is sedated.
 	 */
 	public void setSedated(boolean sedated)
 	{
@@ -102,8 +115,8 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	}
 
 	/**
-	 * Updates the return value of {@link #isSedated()} based on whether there
-	 * is a lit campfire no more than 5 blocks below the beehive.
+	 * Updates the return value of {@link #isSedated()} based on whether there is a
+	 * lit campfire no more than 5 blocks below the beehive.
 	 */
 	public void updateSedated()
 	{
@@ -153,23 +166,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	public void setMaxEntities(int max)
 	{
 		Preconditions.checkArgument(max > 0, "Max bees must be more than 0");
-
 		this.maxBees = max;
-	}
-
-	@Override
-	public @NotNull List<Bee> releaseEntities()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void addEntity(@NotNull Bee entity)
-	{
-		Preconditions.checkNotNull(entity, "Bee cannot be null");
-		// TODO: We currently don't have a way to serialize entities so until that's done this can't be implemented.
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -181,11 +178,7 @@ public class BeehiveStateMock extends TileStateMock implements Beehive
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", bees=" + bees +
-				", flowerLocation=" + flowerLocation +
-				", maxBees=" + maxBees +
-				", sedated=" + sedated;
+		return super.toStringInternal() + ", bees=" + bees + ", flowerLocation=" + flowerLocation + ", maxBees="
+				+ maxBees + ", sedated=" + sedated;
 	}
-
 }

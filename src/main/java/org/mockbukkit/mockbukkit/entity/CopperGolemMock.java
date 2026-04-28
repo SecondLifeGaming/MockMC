@@ -10,8 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -19,16 +17,24 @@ import java.util.UUID;
  *
  * @see GolemMock
  */
-public class CopperGolemMock extends GolemMock implements CopperGolem
+public class CopperGolemMock extends GolemMock
+		implements
+			CopperGolem,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CopperGolemBaseMock
 {
+
 	private Oxidizing oxidizing = Oxidizing.unset();
+
 	private WeatheringCopperState weatheringCopperState = WeatheringCopperState.UNAFFECTED;
 
 	/**
-	 * Constructs a new {@link GolemMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link GolemMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CopperGolemMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -43,7 +49,8 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	}
 
 	@Override
-	public @NonNull WeatheringCopperState getWeatheringState()
+	@NonNull
+	public WeatheringCopperState getWeatheringState()
 	{
 		return this.weatheringCopperState;
 	}
@@ -56,21 +63,8 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	}
 
 	@Override
-	public @NonNull State getGolemState()
-	{
-		// TODO
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setGolemState(@NonNull State state)
-	{
-		// TODO
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NonNull Oxidizing getOxidizing()
+	@NonNull
+	public Oxidizing getOxidizing()
 	{
 		return this.oxidizing;
 	}
@@ -78,13 +72,7 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	@Override
 	public void shear(Sound.Source source)
 	{
-		playSound(Sound.sound(
-				org.bukkit.Sound.ENTITY_COPPER_GOLEM_SHEAR,
-				source,
-				1.0f,
-				1.0f
-		));
-
+		playSound(Sound.sound(org.bukkit.Sound.ENTITY_COPPER_GOLEM_SHEAR, source, 1.0f, 1.0f));
 		var drop = ItemStack.empty();
 		var equipment = getEquipment();
 		if (equipment != null)
@@ -92,7 +80,6 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 			drop = equipment.getItem(EquipmentSlot.SADDLE);
 			equipment.setItem(EquipmentSlot.SADDLE, ItemStack.empty());
 		}
-
 		if (isInWorld())
 		{
 			getWorld().dropItemNaturally(getLocation(), drop);
@@ -106,9 +93,9 @@ public class CopperGolemMock extends GolemMock implements CopperGolem
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.COPPER_GOLEM;
 	}
-
 }

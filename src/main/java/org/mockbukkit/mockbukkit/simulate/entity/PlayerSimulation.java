@@ -31,6 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PlayerSimulation
 {
 
@@ -44,27 +46,27 @@ public class PlayerSimulation
 	/**
 	 * Simulates a Player consuming an Edible Item
 	 *
-	 * @param consumable The Item to consume
-	 * @return <p>The consumed item</p>
+	 * @param consumable
+	 *            The Item to consume
+	 * @return
+	 *         <p>
+	 *         The consumed item
+	 *         </p>
 	 */
 	public @NotNull ItemStack simulateConsumeItem(@NotNull ItemStack consumable)
 	{
 		Preconditions.checkNotNull(consumable, "Consumed Item can't be null");
 		Preconditions.checkArgument(consumable.getType().isEdible(), "Item is not Consumable");
 
-		//Since we have no Bukkit way of differentiating between drinks and food, here is a rough estimation of
-		//how it would sound like
+		// Since we have no Bukkit way of differentiating between drinks and food, here
+		// is a rough estimation of
+		// how it would sound like
 
-		//Drinks:Slurp Slurp Slurp
-		//Food: Yum Yum Yum
+		// Drinks:Slurp Slurp Slurp
+		// Food: Yum Yum Yum
 
-		GenericGameEvent consumeStartEvent =
-				new GenericGameEvent(
-						GameEvent.ITEM_INTERACT_START,
-						playerMock.getLocation(),
-						playerMock,
-						16,
-						!Bukkit.isPrimaryThread());
+		GenericGameEvent consumeStartEvent = new GenericGameEvent(GameEvent.ITEM_INTERACT_START,
+				playerMock.getLocation(), playerMock, 16, !Bukkit.isPrimaryThread());
 
 		Bukkit.getPluginManager().callEvent(consumeStartEvent);
 
@@ -73,24 +75,22 @@ public class PlayerSimulation
 
 		if (event.isCancelled())
 		{
-			GenericGameEvent stopConsumeEvent =
-					new GenericGameEvent(
-							GameEvent.ITEM_INTERACT_FINISH,
-							playerMock.getLocation(),
-							playerMock,
-							16,
-							!Bukkit.isPrimaryThread());
+			GenericGameEvent stopConsumeEvent = new GenericGameEvent(GameEvent.ITEM_INTERACT_FINISH,
+					playerMock.getLocation(), playerMock, 16, !Bukkit.isPrimaryThread());
 			Bukkit.getPluginManager().callEvent(stopConsumeEvent);
 		}
 		return consumable;
 	}
 
 	/**
-	 * Simulates the player damaging a block just like {@link #simulateBlockDamage(Block)}. However, if
-	 * {@code InstaBreak} is enabled, it will not automatically fire a {@link BlockBreakEvent}. It will also still fire
-	 * a {@link BlockDamageEvent} even if the player is not in survival mode.
+	 * Simulates the player damaging a block just like
+	 * {@link #simulateBlockDamage(Block)}. However, if {@code InstaBreak} is
+	 * enabled, it will not automatically fire a {@link BlockBreakEvent}. It will
+	 * also still fire a {@link BlockDamageEvent} even if the player is not in
+	 * survival mode.
 	 *
-	 * @param block The block to damage.
+	 * @param block
+	 *            The block to damage.
 	 * @return The event that has been fired.
 	 */
 	private @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
@@ -102,14 +102,16 @@ public class PlayerSimulation
 	}
 
 	/**
-	 * Simulates the player damaging a block. Note that this method does not anything unless the player is in survival
-	 * mode. If {@code InstaBreak} is set to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
-	 * The result will then still be whether the {@link BlockDamageEvent} was cancelled or not, not the later
-	 * {@link BlockBreakEvent}.
+	 * Simulates the player damaging a block. Note that this method does not
+	 * anything unless the player is in survival mode. If {@code InstaBreak} is set
+	 * to true by an event handler, a {@link BlockBreakEvent} is immediately fired.
+	 * The result will then still be whether the {@link BlockDamageEvent} was
+	 * cancelled or not, not the later {@link BlockBreakEvent}.
 	 *
-	 * @param block The block to damage.
+	 * @param block
+	 *            The block to damage.
 	 * @return the event that was fired, {@code null} if the player was not in
-	 * survival game mode.
+	 *         survival game mode.
 	 */
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
@@ -134,12 +136,14 @@ public class PlayerSimulation
 	}
 
 	/**
-	 * Simulates the player breaking a block. This method will not break the block if the player is in adventure or
-	 * spectator mode. If the player is in survival mode, the player will first damage the block.
+	 * Simulates the player breaking a block. This method will not break the block
+	 * if the player is in adventure or spectator mode. If the player is in survival
+	 * mode, the player will first damage the block.
 	 *
-	 * @param block The block to break.
-	 * @return The event that was fired, {@code null} if it wasn't or if the player was in adventure mode
-	 * or in spectator mode.
+	 * @param block
+	 *            The block to break.
+	 * @return The event that was fired, {@code null} if it wasn't or if the player
+	 *         was in adventure mode or in spectator mode.
 	 */
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
@@ -160,13 +164,15 @@ public class PlayerSimulation
 	}
 
 	/**
-	 * Simulates the player placing a block. This method will not place the block if the player is in adventure or
-	 * spectator mode.
+	 * Simulates the player placing a block. This method will not place the block if
+	 * the player is in adventure or spectator mode.
 	 *
-	 * @param material The material of the location to set to
-	 * @param location The location of the material to set to
-	 * @return The event that was fired. {@code null} if it wasn't or the player was in adventure
-	 * mode.
+	 * @param material
+	 *            The material of the location to set to
+	 * @param location
+	 *            The location of the material to set to
+	 * @return The event that was fired. {@code null} if it wasn't or the player was
+	 *         in adventure mode.
 	 */
 	public @Nullable BlockPlaceEvent simulateBlockPlace(@NotNull Material material, @NotNull Location location)
 	{
@@ -179,8 +185,8 @@ public class PlayerSimulation
 		Block block = location.getBlock();
 		BlockState blockState = block.getState();
 		block.setType(material);
-		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, playerMock.getItemInHand(),
-				playerMock, true, EquipmentSlot.HAND);
+		BlockPlaceEvent event = new BlockPlaceEvent(block, blockState, null, playerMock.getItemInHand(), playerMock,
+				true, EquipmentSlot.HAND);
 		Bukkit.getPluginManager().callEvent(event);
 		if (event.isCancelled() || !event.canBuild())
 		{
@@ -192,7 +198,8 @@ public class PlayerSimulation
 	/**
 	 * Simulates the player clicking an Inventory.
 	 *
-	 * @param slot The slot in the player's open inventory
+	 * @param slot
+	 *            The slot in the player's open inventory
 	 * @return The event that was fired.
 	 */
 	public @NotNull InventoryClickEvent simulateInventoryClick(int slot)
@@ -203,8 +210,10 @@ public class PlayerSimulation
 	/**
 	 * Simulates the player clicking an Inventory.
 	 *
-	 * @param inventoryView The inventory view we want to click
-	 * @param slot          The slot in the provided Inventory
+	 * @param inventoryView
+	 *            The inventory view we want to click
+	 * @param slot
+	 *            The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
 	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, int slot)
@@ -215,27 +224,37 @@ public class PlayerSimulation
 	/**
 	 * Simulates the player clicking an Inventory.
 	 *
-	 * @param inventoryView The inventory view we want to click
-	 * @param clickType     The click type we want to fire
-	 * @param slot          The slot in the provided Inventory
+	 * @param inventoryView
+	 *            The inventory view we want to click
+	 * @param clickType
+	 *            The click type we want to fire
+	 * @param slot
+	 *            The slot in the provided Inventory
 	 * @return The event that was fired.
 	 */
-	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView, @NotNull ClickType clickType, int slot)
+	public @NotNull InventoryClickEvent simulateInventoryClick(@NotNull InventoryView inventoryView,
+			@NotNull ClickType clickType, int slot)
 	{
 		Preconditions.checkNotNull(inventoryView, "InventoryView cannot be null");
-		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView, InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
+		InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(inventoryView,
+				InventoryType.SlotType.CONTAINER, slot, clickType, InventoryAction.UNKNOWN);
 		Bukkit.getPluginManager().callEvent(inventoryClickEvent);
 		return inventoryClickEvent;
 	}
 
 	/**
-	 * This method simulates the {@link Player} respawning and also calls a {@link PlayerRespawnEvent}. Should the
-	 * {@link Player} not be dead (when {@link Player#isDead()} returns false) then this will throw an
-	 * {@link UnsupportedOperationException}. Otherwise, the {@link Location} will be set to
-	 * {@link Player#getBedSpawnLocation()} or {@link World#getSpawnLocation()}. Lastly the health of this
-	 * {@link Player} will be restored and set to the max health.
+	 * This method simulates the {@link Player} respawning and also calls a
+	 * {@link PlayerRespawnEvent}. Should the {@link Player} not be dead (when
+	 * {@link Player#isDead()} returns false) then this will throw an
+	 * {@link UnsupportedOperationException}. Otherwise, the {@link Location} will
+	 * be set to {@link Player#getBedSpawnLocation()} or
+	 * {@link World#getSpawnLocation()}. Lastly the health of this {@link Player}
+	 * will be restored and set to the max health.
 	 *
-	 * @return <p>The respawn event</p>
+	 * @return
+	 *         <p>
+	 *         The respawn event
+	 *         </p>
 	 */
 	public PlayerRespawnEvent respawn()
 	{
@@ -245,7 +264,8 @@ public class PlayerSimulation
 	/**
 	 * This method moves player instantly with respect to PlayerMoveEvent
 	 *
-	 * @param moveLocation Location to move player to
+	 * @param moveLocation
+	 *            Location to move player to
 	 * @return The event that is fired
 	 */
 	public @NotNull PlayerMoveEvent simulatePlayerMove(@NotNull Location moveLocation)
@@ -264,7 +284,8 @@ public class PlayerSimulation
 	/**
 	 * Simulates sneaking.
 	 *
-	 * @param sneak Whether the player is beginning to sneak.
+	 * @param sneak
+	 *            Whether the player is beginning to sneak.
 	 * @return The event.
 	 */
 	public @NotNull PlayerToggleSneakEvent simulateSneak(boolean sneak)
@@ -281,7 +302,8 @@ public class PlayerSimulation
 	/**
 	 * Simulates sprinting.
 	 *
-	 * @param sprint Whether the player is beginning to sprint.
+	 * @param sprint
+	 *            Whether the player is beginning to sprint.
 	 * @return The event.
 	 */
 	public @NotNull PlayerToggleSprintEvent simulateSprint(boolean sprint)
@@ -298,7 +320,8 @@ public class PlayerSimulation
 	/**
 	 * Simulates toggling flight.
 	 *
-	 * @param fly Whether the player is starting to fly.
+	 * @param fly
+	 *            Whether the player is starting to fly.
 	 * @return The event.
 	 */
 	public @NotNull PlayerToggleFlightEvent simulateToggleFlight(boolean fly)

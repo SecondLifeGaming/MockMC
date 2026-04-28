@@ -12,34 +12,43 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of an {@link Allay}.
  *
  * @see CreatureMock
  */
-public class AllayMock extends CreatureMock implements Allay
+public class AllayMock extends CreatureMock
+		implements
+			Allay,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AllayBaseMock
 {
 
-	private final @NotNull Inventory inventory;
+	@NotNull
+	private final Inventory inventory;
+
 	private Material currentItem;
+
 	private boolean canDuplicate = true;
+
 	private long duplicationCoolDown = 0;
+
 	private boolean isDancing = false;
+
 	private Location jukebox = null;
 
 	/**
-	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public AllayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,9 +57,11 @@ public class AllayMock extends CreatureMock implements Allay
 	}
 
 	/**
-	 * Simulates the Interaction of a Player with the Allay to set it's current item.
+	 * Simulates the Interaction of a Player with the Allay to set it's current
+	 * item.
 	 *
-	 * @param material The {@link Material} of the Item the Allay should collect
+	 * @param material
+	 *            The {@link Material} of the Item the Allay should collect
 	 */
 	public void simulatePlayerInteract(@NotNull Material material)
 	{
@@ -63,44 +74,43 @@ public class AllayMock extends CreatureMock implements Allay
 	 *
 	 * @return A {@link List} of {@link ItemStack}s that the Allay is holding
 	 */
-	public @Nullable ItemStack simulateItemRetrieval()
+	@Nullable
+	public ItemStack simulateItemRetrieval()
 	{
 		ItemStack item = this.inventory.getContents()[0];
 		this.inventory.clear();
-
 		return item;
 	}
 
 	/**
-	 * Simulate the Allay picking up an {@link ItemStack} from the ground.
-	 * If the Itemstack is not of the current Type, this will throw a {@link IllegalArgumentException}.
-	 * If the Inventory is full, this will throw a {@link IllegalStateException}.
+	 * Simulate the Allay picking up an {@link ItemStack} from the ground. If the
+	 * Itemstack is not of the current Type, this will throw a
+	 * {@link IllegalArgumentException}. If the Inventory is full, this will throw a
+	 * {@link IllegalStateException}.
 	 *
-	 * @param item The {@link ItemStack} to pick up
+	 * @param item
+	 *            The {@link ItemStack} to pick up
 	 */
 	public void simulateItemPickup(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "ItemStack cannot be null");
-
 		if (item.getType() != this.currentItem)
 		{
 			throw new IllegalArgumentException("Item is not the same type as the Allay is currently holding");
 		}
-
 		inventory.addItem(item);
-
-		if (Arrays.stream(inventory.getContents())
-				.filter(Objects::nonNull)
-				.count() > 1)
+		if (Arrays.stream(inventory.getContents()).filter(Objects::nonNull).count() > 1)
 		{
 			throw new IllegalStateException("Allay cannot hold more than 1 ItemStack");
 		}
 	}
 
 	/**
-	 * Asserts that the Allay uses the given {@link Material} to pick up an {@link ItemStack} from the ground.
+	 * Asserts that the Allay uses the given {@link Material} to pick up an
+	 * {@link ItemStack} from the ground.
 	 *
-	 * @param item The {@link Material} to pick up
+	 * @param item
+	 *            The {@link Material} to pick up
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item)
@@ -109,22 +119,26 @@ public class AllayMock extends CreatureMock implements Allay
 	}
 
 	/**
-	 * Asserts that the Allay uses the given {@link Material} to pick up an {@link ItemStack} from the ground.
+	 * Asserts that the Allay uses the given {@link Material} to pick up an
+	 * {@link ItemStack} from the ground.
 	 *
-	 * @param item    The {@link Material} to pick up
-	 * @param message The message to display if the assertion fails
+	 * @param item
+	 *            The {@link Material} to pick up
+	 * @param message
+	 *            The message to display if the assertion fails
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item, @Nullable String message)
 	{
 		if (item != this.currentItem)
 		{
-			fail(message);
+			throw new AssertionError(message);
 		}
 	}
 
 	@Override
-	public @NotNull Inventory getInventory()
+	@NotNull
+	public Inventory getInventory()
 	{
 		return this.inventory;
 	}
@@ -132,7 +146,8 @@ public class AllayMock extends CreatureMock implements Allay
 	/**
 	 * Asserts that the Allay's inventory contains an item.
 	 *
-	 * @param item The item to check.
+	 * @param item
+	 *            The item to check.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item)
@@ -143,15 +158,17 @@ public class AllayMock extends CreatureMock implements Allay
 	/**
 	 * Asserts that the Allay's inventory contains an item.
 	 *
-	 * @param item The item to check.
-	 * @param s    The message to fail with.
+	 * @param item
+	 *            The item to check.
+	 * @param s
+	 *            The message to fail with.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item, String s)
 	{
 		if (!inventory.contains(item))
 		{
-			fail(s);
+			throw new AssertionError(s);
 		}
 	}
 
@@ -196,9 +213,7 @@ public class AllayMock extends CreatureMock implements Allay
 	public void startDancing(@NotNull Location location)
 	{
 		Preconditions.checkArgument(location != null, "Location cannot be null");
-		Preconditions.checkArgument(location.getBlock().getType() == Material.JUKEBOX,
-				"Location must be a Jukebox");
-
+		Preconditions.checkArgument(location.getBlock().getType() == Material.JUKEBOX, "Location must be a Jukebox");
 		this.isDancing = true;
 		this.jukebox = location.clone();
 	}
@@ -217,18 +232,19 @@ public class AllayMock extends CreatureMock implements Allay
 	}
 
 	@Override
-	public @Nullable Allay duplicateAllay()
+	@Nullable
+	public Allay duplicateAllay()
 	{
 		Allay allay = this.getWorld().spawn(this.getLocation(), Allay.class, null,
 				CreatureSpawnEvent.SpawnReason.DUPLICATION);
 		allay.resetDuplicationCooldown();
 		this.resetDuplicationCooldown();
-
 		return allay;
 	}
 
 	@Override
-	public @Nullable Location getJukebox()
+	@Nullable
+	public Location getJukebox()
 	{
 		return this.jukebox != null ? jukebox.clone() : null;
 	}
@@ -242,9 +258,9 @@ public class AllayMock extends CreatureMock implements Allay
 	/**
 	 * @return The material of the current item held by the allay
 	 */
-	public @Nullable Material getCurrentItem()
+	@Nullable
+	public Material getCurrentItem()
 	{
 		return currentItem;
 	}
-
 }

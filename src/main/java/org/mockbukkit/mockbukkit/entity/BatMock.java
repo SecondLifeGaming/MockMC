@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,17 +13,24 @@ import java.util.UUID;
  *
  * @see AmbientMock
  */
-public class BatMock extends AmbientMock implements Bat
+public class BatMock extends AmbientMock
+		implements
+			Bat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BatBaseMock
 {
 
 	private boolean awake = true;
+
 	private Location targetPosition;
 
 	/**
-	 * Constructs a new {@link BatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link BatMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -44,7 +50,8 @@ public class BatMock extends AmbientMock implements Bat
 	}
 
 	@Override
-	public @Nullable Location getTargetLocation()
+	@Nullable
+	public Location getTargetLocation()
 	{
 		return this.targetPosition;
 	}
@@ -56,9 +63,9 @@ public class BatMock extends AmbientMock implements Bat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.BAT;
 	}
-
 }

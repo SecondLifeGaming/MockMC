@@ -13,6 +13,8 @@ import java.util.AbstractMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Command>
 {
 
@@ -90,9 +92,7 @@ public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Comman
 	@Override
 	public Set<Entry<String, Command>> entrySet()
 	{
-		return getDispatcher().getRoot().getChildren().stream()
-				.map(this::nodeToEntry)
-				.collect(Collectors.toSet());
+		return getDispatcher().getRoot().getChildren().stream().map(this::nodeToEntry).collect(Collectors.toSet());
 	}
 
 	private Entry<String, Command> nodeToEntry(CommandNode<?> node)

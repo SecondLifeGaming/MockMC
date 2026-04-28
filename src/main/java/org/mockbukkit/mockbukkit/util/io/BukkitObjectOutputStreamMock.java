@@ -5,7 +5,6 @@ import org.bukkit.util.io.BukkitObjectOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
 /**
  * @deprecated Use {@link BukkitObjectOutputStream} instead.
  */

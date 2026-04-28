@@ -37,11 +37,8 @@ class ShieldMetaMockTest
 	private Server server;
 	@MockBukkitInject
 	private ShieldMetaMock meta;
-	private final List<Pattern> patterns = List.of(
-			new Pattern(DyeColor.GRAY, PatternType.GRADIENT),
-			new Pattern(DyeColor.GRAY, PatternType.GRADIENT_UP),
-			new Pattern(DyeColor.BLACK, PatternType.BRICKS)
-	);
+	private final List<Pattern> patterns = List.of(new Pattern(DyeColor.GRAY, PatternType.GRADIENT),
+			new Pattern(DyeColor.GRAY, PatternType.GRADIENT_UP), new Pattern(DyeColor.BLACK, PatternType.BRICKS));
 
 	@Test
 	void testGetBaseColorDefault()
@@ -86,10 +83,8 @@ class ShieldMetaMockTest
 		assertNotSame(meta.getPatterns(), meta.getPatterns());
 		assertDoesNotThrow(() -> meta.getPatterns().add(new Pattern(DyeColor.MAGENTA, PatternType.CIRCLE)));
 
-		final List<Pattern> patterns2 = List.of(
-				new Pattern(DyeColor.YELLOW, PatternType.GRADIENT),
-				new Pattern(DyeColor.ORANGE, PatternType.BRICKS)
-		);
+		final List<Pattern> patterns2 = List.of(new Pattern(DyeColor.YELLOW, PatternType.GRADIENT),
+				new Pattern(DyeColor.ORANGE, PatternType.BRICKS));
 		meta.setPatterns(patterns2);
 		assertEquals(patterns2, meta.getPatterns());
 	}

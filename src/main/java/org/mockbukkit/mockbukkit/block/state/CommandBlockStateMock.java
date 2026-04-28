@@ -14,17 +14,26 @@ import org.mockbukkit.mockbukkit.command.CommandBlockHolderMock;
  *
  * @see TileStateMock
  */
-public class CommandBlockStateMock extends TileStateMock implements CommandBlock, CommandBlockHolderMock
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class CommandBlockStateMock extends TileStateMock
+		implements
+			CommandBlock,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.CommandBlockBaseMock,
+			CommandBlockHolderMock
 {
 
 	private Component name;
 	private String command;
 
 	/**
-	 * Constructs a new {@link CommandBlockStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#COMMAND_BLOCK}, {@link Material#REPEATING_COMMAND_BLOCK}, and {@link Material#CHAIN_COMMAND_BLOCK}.
+	 * Constructs a new {@link CommandBlockStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#COMMAND_BLOCK},
+	 * {@link Material#REPEATING_COMMAND_BLOCK}, and
+	 * {@link Material#CHAIN_COMMAND_BLOCK}.
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public CommandBlockStateMock(@NotNull Material material)
 	{
@@ -33,10 +42,13 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	}
 
 	/**
-	 * Constructs a new {@link CommandBlockStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#COMMAND_BLOCK}, {@link Material#REPEATING_COMMAND_BLOCK}, and {@link Material#CHAIN_COMMAND_BLOCK}.
+	 * Constructs a new {@link CommandBlockStateMock} for the provided
+	 * {@link Block}. Only supports {@link Material#COMMAND_BLOCK},
+	 * {@link Material#REPEATING_COMMAND_BLOCK}, and
+	 * {@link Material#CHAIN_COMMAND_BLOCK}.
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected CommandBlockStateMock(@NotNull Block block)
 	{
@@ -45,9 +57,11 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	}
 
 	/**
-	 * Constructs a new {@link CommandBlockStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link CommandBlockStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected CommandBlockStateMock(@NotNull CommandBlockStateMock state)
 	{
@@ -107,9 +121,7 @@ public class CommandBlockStateMock extends TileStateMock implements CommandBlock
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", command='" + command + '\'' +
-				", name=" + name;
+		return super.toStringInternal() + ", command='" + command + '\'' + ", name=" + name;
 	}
 
 }

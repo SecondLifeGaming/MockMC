@@ -7,22 +7,26 @@ import org.mockbukkit.mockbukkit.AsyncCatcher;
 /**
  * Mock implementation of a {@link ScoreboardManager}.
  */
-public class ScoreboardManagerMock implements ScoreboardManager
+public class ScoreboardManagerMock
+		implements
+			ScoreboardManager,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.scoreboard.ScoreboardManagerBaseMock
 {
 
 	private final ScoreboardMock mainScoreboard = new ScoreboardMock();
 
 	@Override
-	public @NotNull ScoreboardMock getMainScoreboard()
+	@NotNull
+	public ScoreboardMock getMainScoreboard()
 	{
 		return mainScoreboard;
 	}
 
 	@Override
-	public @NotNull ScoreboardMock getNewScoreboard()
+	@NotNull
+	public ScoreboardMock getNewScoreboard()
 	{
 		AsyncCatcher.catchOp("scoreboard registration");
 		return new ScoreboardMock();
 	}
-
 }

@@ -37,9 +37,8 @@ class RedstoneWireDataMockTest
 	class SetFace
 	{
 
-		private static final Set<BlockFace> VALID_FACES = Set.of(
-				BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST
-		);
+		private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH,
+				BlockFace.WEST);
 
 		@ParameterizedTest
 		@MethodSource("getValidFaces")
@@ -68,7 +67,8 @@ class RedstoneWireDataMockTest
 		@MethodSource("getInvalidFaces")
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> wire.setFace(face, RedstoneWire.Connection.SIDE));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> wire.setFace(face, RedstoneWire.Connection.SIDE));
 			assertEquals(String.format("Cannot have face %s", face), e.getMessage());
 		}
 
@@ -85,9 +85,7 @@ class RedstoneWireDataMockTest
 
 		public static Stream<Arguments> getInvalidFaces()
 		{
-			return Stream.of(BlockFace.values())
-					.filter(p -> !VALID_FACES.contains(p))
-					.map(Arguments::of);
+			return Stream.of(BlockFace.values()).filter(p -> !VALID_FACES.contains(p)).map(Arguments::of);
 		}
 
 	}
@@ -103,7 +101,8 @@ class RedstoneWireDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 		void givenLevelChange(int level)
 		{
 			wire.setPower(level);
@@ -111,7 +110,8 @@ class RedstoneWireDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 16, 17 })
+		@ValueSource(ints =
+		{-2, -1, 16, 17})
 		void givenInvalidValues(int level)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> wire.setPower(level));
@@ -135,7 +135,8 @@ class RedstoneWireDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull RedstoneWireDataMock cloned = wire.clone();
+		@NotNull
+		RedstoneWireDataMock cloned = wire.clone();
 
 		assertEquals(wire, cloned);
 		assertEquals(wire.getPower(), cloned.getPower());

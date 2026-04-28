@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record BannerPatternLayersMock(@Unmodifiable List<Pattern> patterns) implements BannerPatternLayers
 {
 

@@ -41,7 +41,8 @@ class FenceGateDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			gate.setInWall(inWall);
@@ -61,9 +62,8 @@ class FenceGateDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			gate.setFacing(face);
@@ -71,9 +71,8 @@ class FenceGateDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> gate.setFacing(face));
@@ -93,7 +92,8 @@ class FenceGateDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			gate.setOpen(inWall);
@@ -113,7 +113,8 @@ class FenceGateDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			gate.setPowered(inWall);
@@ -125,7 +126,8 @@ class FenceGateDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull FenceGateDataMock cloned = gate.clone();
+		@NotNull
+		FenceGateDataMock cloned = gate.clone();
 
 		assertEquals(gate, cloned);
 		assertEquals(gate.isPowered(), cloned.isPowered());

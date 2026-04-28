@@ -19,9 +19,8 @@ public class BrainMock
 
 	private static final String MEMORY_KEY_CANNOT_BE_NULL = "Memory key cannot be null";
 
-	private static final Set<Class<?>> SUPPORTED_MEMORY_TYPES = Set.of(
-			Location.class, Boolean.class, Integer.class, Long.class, UUID.class
-	);
+	private static final Set<Class<?>> SUPPORTED_MEMORY_TYPES = Set.of(Location.class, Boolean.class, Integer.class,
+			Long.class, UUID.class);
 
 	static void assertIsSupportedValue(Object value)
 	{
@@ -66,9 +65,7 @@ public class BrainMock
 
 		Class<T> typeClass = memoryKey.getMemoryClass();
 		Object optional = this.memories.get(memoryKey);
-		return Optional.ofNullable(optional)
-				.filter(typeClass::isInstance)
-				.map(typeClass::cast);
+		return Optional.ofNullable(optional).filter(typeClass::isInstance).map(typeClass::cast);
 	}
 
 	public <T> void setMemory(@NotNull MemoryKey<T> memoryKey, @Nullable T value)

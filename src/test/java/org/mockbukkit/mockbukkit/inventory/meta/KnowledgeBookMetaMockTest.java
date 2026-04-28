@@ -1,6 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.NamespacedKey;
+import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,14 +31,14 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testRecipesDefaultFalse()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		assertFalse(meta.hasRecipes());
 	}
 
 	@Test
 	void testAddRecipe()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		NamespacedKey key = getRandomKey();
 
 		assertFalse(meta.hasRecipes());
@@ -48,7 +49,7 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testAddNullRecipeAndFail()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = Arrays.asList(null, null, null);
 
 		assertFalse(meta.hasRecipes());
@@ -59,7 +60,7 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testSetRecipes()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = List.of(getRandomKey(), getRandomKey());
 
 		assertFalse(meta.hasRecipes());
@@ -70,7 +71,7 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testGetRecipes()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		List<NamespacedKey> recipes = List.of(getRandomKey(), getRandomKey());
 		meta.setRecipes(recipes);
 
@@ -80,7 +81,7 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testTooManyRecipes()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 
 		for (int i = 0; i < MAX_RECIPES + 50; i++)
 		{
@@ -93,13 +94,12 @@ class KnowledgeBookMetaMockTest
 	@Test
 	void testEquals()
 	{
-		KnowledgeBookMetaMock meta = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta);
-		// TODO: Strange behaviour --> Accurate?
-		assertEquals(new ItemMetaMock(), meta);
+		assertNotEquals(new ItemMetaMock(), meta);
 		assertNotEquals(meta, new ItemMetaMock());
 
-		KnowledgeBookMetaMock meta2 = new KnowledgeBookMetaMock();
+		KnowledgeBookMeta meta2 = new KnowledgeBookMetaMock();
 		assertEquals(meta, meta2);
 
 		NamespacedKey recipe = getRandomKey();

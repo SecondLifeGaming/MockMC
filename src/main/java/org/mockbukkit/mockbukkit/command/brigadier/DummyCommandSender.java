@@ -14,31 +14,33 @@ import org.mockbukkit.mockbukkit.MockBukkit;
 import java.util.Set;
 import java.util.UUID;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class DummyCommandSender implements CommandSender
 {
 
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		//NO-OP, doesn't matter
+		// NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@NotNull String... messages)
 	{
-		//NO-OP, doesn't matter
+		// NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String message)
 	{
-		//NO-OP, doesn't matter
+		// NO-OP, doesn't matter
 	}
 
 	@Override
 	public void sendMessage(@Nullable UUID sender, @NotNull String... messages)
 	{
-		//NO-OP, doesn't matter
+		// NO-OP, doesn't matter
 	}
 
 	@Override
@@ -103,7 +105,8 @@ public class DummyCommandSender implements CommandSender
 	}
 
 	@Override
-	public @Nullable PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value, int ticks)
+	public @Nullable PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value,
+			int ticks)
 	{
 		throw new UnsupportedOperationException();
 	}

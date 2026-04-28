@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public record ApiCommandMetaMock(@Nullable PluginMeta pluginMeta, @Nullable String description, List<String> aliases,
-								 @Nullable String helpCommandNamespace, boolean serverSideOnly)
+		@Nullable String helpCommandNamespace, boolean serverSideOnly)
 {
 
 	public ApiCommandMetaMock
@@ -20,12 +20,15 @@ public record ApiCommandMetaMock(@Nullable PluginMeta pluginMeta, @Nullable Stri
 	@Nullable
 	public Plugin plugin()
 	{
-		return this.pluginMeta == null ? null : Objects.requireNonNull(Bukkit.getPluginManager().getPlugin(this.pluginMeta.getName()));
+		return this.pluginMeta == null
+				? null
+				: Objects.requireNonNull(Bukkit.getPluginManager().getPlugin(this.pluginMeta.getName()));
 	}
 
 	public ApiCommandMetaMock withAliases(List<String> registeredAliases)
 	{
-		return new ApiCommandMetaMock(this.pluginMeta, this.description, List.copyOf(registeredAliases), this.helpCommandNamespace, this.serverSideOnly);
+		return new ApiCommandMetaMock(this.pluginMeta, this.description, List.copyOf(registeredAliases),
+				this.helpCommandNamespace, this.serverSideOnly);
 	}
 
 }

@@ -20,9 +20,10 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
-									@Unmodifiable Collection<ProfileProperty> properties) implements ResolvableProfile
+		@Unmodifiable Collection<ProfileProperty> properties) implements ResolvableProfile
 {
 
 	@Override
@@ -63,8 +64,10 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		{
 			if (name != null)
 			{
-				Preconditions.checkArgument(name.length() <= 16, "name cannot be more than 16 characters, was %s", name.length());
-				Preconditions.checkArgument(isValidPlayerName(name), "name cannot include invalid characters, was %s", name);
+				Preconditions.checkArgument(name.length() <= 16, "name cannot be more than 16 characters, was %s",
+						name.length());
+				Preconditions.checkArgument(isValidPlayerName(name), "name cannot include invalid characters, was %s",
+						name);
 			}
 			this.name = name;
 			return this;
@@ -113,9 +116,9 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		@Override
 		public ResolvableProfile build()
 		{
-			return new ResolvableProfileMock(uuid, name, new ImmutableSet.Builder<ProfileProperty>().addAll(properties).build());
+			return new ResolvableProfileMock(uuid, name,
+					new ImmutableSet.Builder<ProfileProperty>().addAll(properties).build());
 		}
-
 
 		private static boolean isValidPlayerName(String playerName)
 		{

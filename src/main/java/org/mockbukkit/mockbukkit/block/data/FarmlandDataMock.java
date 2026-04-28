@@ -16,7 +16,8 @@ public class FarmlandDataMock extends BlockDataMock implements Farmland
 	/**
 	 * Constructs a new {@link Farmland} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public FarmlandDataMock(@NotNull Material material)
 	{
@@ -26,7 +27,8 @@ public class FarmlandDataMock extends BlockDataMock implements Farmland
 	/**
 	 * Create a new {@link Farmland} based on an existing {@link Farmland}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected FarmlandDataMock(@NotNull FarmlandDataMock other)
 	{
@@ -43,7 +45,8 @@ public class FarmlandDataMock extends BlockDataMock implements Farmland
 	public void setMoisture(int moisture)
 	{
 		int maximumMoisture = this.getMaximumMoisture();
-		Preconditions.checkArgument(0 <= moisture && moisture <= maximumMoisture, "Moisture must be between 0 and %s", maximumMoisture);
+		Preconditions.checkArgument(0 <= moisture && moisture <= maximumMoisture, "Moisture must be between 0 and %s",
+				maximumMoisture);
 		this.set(BlockDataKey.MOISTURE, moisture);
 	}
 

@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.world;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.HeightMap;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -9,30 +8,39 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.generator.ChunkGenerator;
 import org.bukkit.material.MaterialData;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Range;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Mock implementation of a {@link ChunkGenerator.ChunkData}.
  */
-public class ChunkDataMock implements ChunkGenerator.ChunkData
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ChunkDataMock
+		implements
+			ChunkGenerator.ChunkData,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.generator.ChunkGenerator_ChunkDataBaseMock
 {
 
-	private final @NotNull Map<Coordinate, BlockData> blocks;
-	private final @NotNull Map<Coordinate, Biome> biomes;
+	@NotNull
+	private final Map<Coordinate, BlockData> blocks;
+
+	@NotNull
+	private final Map<Coordinate, Biome> biomes;
 
 	private final Biome defaultBiome;
 
 	private final int minHeight;
+
 	private final int maxHeight;
 
 	/**
 	 * Constructs a new {@link ChunkDataMock} for the provided {@link World}.
 	 *
-	 * @param world The world the chunk is in.
+	 * @param world
+	 *            The world the chunk is in.
 	 */
 	public ChunkDataMock(@NotNull World world)
 	{
@@ -43,8 +51,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 		{
 			biomes = mockWorld.getBiomeMap();
 			defaultBiome = mockWorld.getDefaultBiome();
-		}
-		else
+		} else
 		{
 			biomes = new HashMap<>(0);
 			defaultBiome = Biome.PLAINS;
@@ -74,7 +81,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setBlock(int x, int y, int z, @NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		this.setBlock(x, y, z, BlockDataMock.mock(material));
+		this.setBlock(x, y, z, BlockDataMockFactory.mock(material));
 	}
 
 	@Override
@@ -82,7 +89,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setBlock(int x, int y, int z, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		this.setBlock(x, y, z, BlockDataMock.mock(material.getItemType()));
+		this.setBlock(x, y, z, BlockDataMockFactory.mock(material.getItemType()));
 	}
 
 	@Override
@@ -96,7 +103,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material));
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMockFactory.mock(material));
 	}
 
 	@Override
@@ -104,7 +111,7 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public void setRegion(int xMin, int yMin, int zMin, int xMax, int yMax, int zMax, @NotNull MaterialData material)
 	{
 		Preconditions.checkNotNull(material, "MaterialData cannot be null");
-		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMock.mock(material.getItemType()));
+		this.setRegion(xMin, yMin, zMin, xMax, yMax, zMax, BlockDataMockFactory.mock(material.getItemType()));
 	}
 
 	@Override
@@ -127,9 +134,9 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public Material getType(int x, int y, int z)
 	{
 		checkCoords(x, y, z);
-
 		BlockData data = blocks.get(new Coordinate(x, y, z));
-		// shortcut to return air directly instead of creating air block data then unpacking material
+		// shortcut to return air directly instead of creating air block data then
+		// unpacking material
 		return data == null ? Material.AIR : data.getMaterial();
 	}
 
@@ -146,7 +153,6 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 	public BlockData getBlockData(int x, int y, int z)
 	{
 		checkCoords(x, y, z);
-
 		BlockData data = blocks.get(new Coordinate(x, y, z));
 		return data == null ? new BlockDataMock(Material.AIR) : data;
 	}
@@ -158,26 +164,20 @@ public class ChunkDataMock implements ChunkGenerator.ChunkData
 		return this.getTypeAndData(x, y, z).getData();
 	}
 
-	@Override
-	public int getHeight(@NotNull HeightMap heightMap, @Range(from = 0L, to = 15L) int x, @Range(from = 0L, to = 15L) int z)
-	{
-		Preconditions.checkArgument(heightMap != null, "HeightMap cannot be null");
-		Preconditions.checkArgument(x >= 0 && x <= 15 && z >= 0 && z <= 15, "Cannot get height outside of a chunks bounds, must be between 0 and 15, got x: %s, z: %s", x, z);
-
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
-	}
-
 	/**
-	 * Ensures that the X and Y coordinates are within the chunks 0-15 range, and the height is withing the min and max height.
+	 * Ensures that the X and Y coordinates are within the chunks 0-15 range, and
+	 * the height is withing the min and max height.
 	 *
-	 * @param x The X coordinate.
-	 * @param y The Y coordinate.
-	 * @param z The Z coordinate.
+	 * @param x
+	 *            The X coordinate.
+	 * @param y
+	 *            The Y coordinate.
+	 * @param z
+	 *            The Z coordinate.
 	 */
 	private void checkCoords(int x, int y, int z)
 	{
-		Preconditions.checkArgument(x == (x & 0xf) && y >= this.minHeight && y < this.maxHeight && z == (z & 0xf), "Coordinates are out-of-bounds");
+		Preconditions.checkArgument(x == (x & 0xf) && y >= this.minHeight && y < this.maxHeight && z == (z & 0xf),
+				"Coordinates are out-of-bounds");
 	}
-
 }

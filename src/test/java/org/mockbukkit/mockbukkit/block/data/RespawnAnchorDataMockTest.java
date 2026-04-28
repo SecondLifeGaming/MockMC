@@ -11,7 +11,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@ExtendWith({ MockBukkitExtension.class})
+@ExtendWith(
+{MockBukkitExtension.class})
 class RespawnAnchorDataMockTest
 {
 
@@ -34,7 +35,8 @@ class RespawnAnchorDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4})
 		void givenPossibleValues(int charge)
 		{
 			respawnAnchor.setCharges(charge);
@@ -42,14 +44,15 @@ class RespawnAnchorDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {-1, 5})
+		@ValueSource(ints =
+		{-1, 5})
 		void givenInvalidValues(int charge)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> respawnAnchor.setCharges(charge));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> respawnAnchor.setCharges(charge));
 			assertEquals("Charges must be between 0 and 4", e.getMessage());
 		}
 
 	}
-
 
 }

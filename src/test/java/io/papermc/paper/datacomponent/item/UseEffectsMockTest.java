@@ -15,10 +15,7 @@ class UseEffectsMockTest
 	@Test
 	void givenBasicCreation()
 	{
-		UseEffects component = UseEffects.useEffects()
-				.canSprint(true)
-				.interactVibrations(true)
-				.speedMultiplier(0.5F)
+		UseEffects component = UseEffects.useEffects().canSprint(true).interactVibrations(true).speedMultiplier(0.5F)
 				.build();
 
 		assertTrue(component.canSprint());

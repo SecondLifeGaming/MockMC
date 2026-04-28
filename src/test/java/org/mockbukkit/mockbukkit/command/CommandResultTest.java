@@ -18,6 +18,8 @@ import static org.mockbukkit.mockbukkit.matcher.command.CommandResultResponseMat
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasFailed;
 import static org.mockbukkit.mockbukkit.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class CommandResultTest
 {

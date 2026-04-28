@@ -8,5 +8,8 @@
 			"particles": true,
 			"type": "minecraft:slow_falling"
 		}
-	]
+	],
+	"extendable": false,
+	"maxLevel": 1,
+	"upgradeable": false
 }

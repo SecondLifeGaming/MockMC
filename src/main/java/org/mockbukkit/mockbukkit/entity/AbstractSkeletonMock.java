@@ -7,31 +7,40 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Skeleton;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of an {@link AbstractSkeleton}.
  *
  * @see MonsterMock
  */
-public abstract class AbstractSkeletonMock extends MonsterMock implements AbstractSkeleton, MockRangedEntity<AbstractSkeletonMock>
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public abstract class AbstractSkeletonMock extends MonsterMock
+		implements
+			AbstractSkeleton,
+			MockRangedEntity<AbstractSkeletonMock>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AbstractSkeletonBaseMock
 {
 
 	private boolean shouldBurnInDay = true;
+
 	private boolean isChargingAttack = false;
+
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
+
 	private static final String ENTITY_NOT_NULL = "Entity cannot be null";
 
 	/**
-	 * Constructs a new {@link AbstractSkeletonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AbstractSkeletonMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected AbstractSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -68,7 +77,6 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	{
 		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge < 1F && charge > 0F, "Charge needs to be between 0 and 1");
-
 		this.attackedMobs.put(target, Pair.of(charge, this.isChargingAttack));
 	}
 
@@ -79,20 +87,22 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	}
 
 	/**
-	 * Asserts that the given entity was attacked by this Skeleton with the given charge.
+	 * Asserts that the given entity was attacked by this Skeleton with the given
+	 * charge.
 	 *
-	 * @param entity The {@link LivingEntity} to check.
-	 * @param charge The charge of the attack.
+	 * @param entity
+	 *            The {@link LivingEntity} to check.
+	 * @param charge
+	 *            The charge of the attack.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
 		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge >= 0F && charge <= 1F, "Charge must be between 0 and 1");
-
 		if (!attackedMobs.containsKey(entity) || attackedMobs.get(entity).getLeft() != charge)
 		{
-			fail();
+			throw new AssertionError();
 		}
 	}
 
@@ -112,10 +122,13 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 	}
 
 	/**
-	 * Asserts that the given entity was attacked by this Skeleton with the given charge and is agressive.
+	 * Asserts that the given entity was attacked by this Skeleton with the given
+	 * charge and is agressive.
 	 *
-	 * @param entity The {@link LivingEntity} to check.
-	 * @param charge The charge of the attack.
+	 * @param entity
+	 *            The {@link LivingEntity} to check.
+	 * @param charge
+	 *            The charge of the attack.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAggressiveAttack(LivingEntity entity, float charge)
@@ -123,8 +136,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock implements Abstra
 		assertAttacked(entity, charge);
 		if (!attackedMobs.get(entity).getRight())
 		{
-			fail();
+			throw new AssertionError();
 		}
 	}
-
 }

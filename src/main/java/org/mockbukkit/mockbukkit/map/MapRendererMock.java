@@ -16,7 +16,6 @@ public class MapRendererMock extends MapRenderer
 	@Override
 	public void render(@NotNull MapView map, @NotNull MapCanvas canvas, @NotNull Player player)
 	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 

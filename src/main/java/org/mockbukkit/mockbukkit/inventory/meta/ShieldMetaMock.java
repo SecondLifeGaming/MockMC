@@ -9,19 +9,21 @@ import org.bukkit.block.banner.Pattern;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.ShieldMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.state.BannerStateMock;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 @DelegateDeserialization(SerializableMeta.class)
-public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockStateMeta
+@SuppressWarnings("unchecked")
+public class ShieldMetaMock extends ItemMetaMock
+		implements
+			BlockStateMeta,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.ShieldMetaBaseMock
 {
 
 	private Banner banner;
@@ -37,29 +39,27 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	/**
 	 * Constructs a new {@link ShieldMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public ShieldMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
-		if (meta instanceof BlockStateMeta bsMeta && bsMeta.hasBlockState())
+		if (meta instanceof BlockStateMeta bsMeta && bsMeta.hasBlockState()
+				&& bsMeta.getBlockState() instanceof Banner bannerState)
 		{
-			if (bsMeta.getBlockState() instanceof Banner banner)
-			{
-				this.banner = (Banner) banner.copy();
-			}
+			this.banner = (Banner) bannerState.copy();
 		}
 	}
 
 	@Override
-	public @NotNull List<Pattern> getPatterns()
+	@NotNull
+	public List<Pattern> getPatterns()
 	{
 		if (banner == null)
 		{
 			return new ArrayList<>();
 		}
-
 		return banner.getPatterns();
 	}
 
@@ -72,10 +72,8 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 			{
 				return;
 			}
-
 			banner = getBlockState(null);
 		}
-
 		banner.setPatterns(patterns);
 	}
 
@@ -86,29 +84,28 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		{
 			banner = getBlockState(null);
 		}
-
 		banner.addPattern(pattern);
 	}
 
 	@Override
-	public @NotNull Pattern getPattern(int i)
+	@NotNull
+	public Pattern getPattern(int i)
 	{
 		if (banner == null)
 		{
 			throw new IndexOutOfBoundsException(i);
 		}
-
 		return banner.getPattern(i);
 	}
 
 	@Override
-	public @NotNull Pattern removePattern(int i)
+	@NotNull
+	public Pattern removePattern(int i)
 	{
 		if (banner == null)
 		{
 			throw new IndexOutOfBoundsException(i);
 		}
-
 		return banner.removePattern(i);
 	}
 
@@ -119,7 +116,6 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		{
 			throw new IndexOutOfBoundsException(i);
 		}
-
 		banner.setPattern(i, pattern);
 	}
 
@@ -130,18 +126,17 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		{
 			return 0;
 		}
-
 		return banner.numberOfPatterns();
 	}
 
 	@Override
-	public @Nullable DyeColor getBaseColor()
+	@Nullable
+	public DyeColor getBaseColor()
 	{
 		if (banner == null)
 		{
 			return null;
 		}
-
 		return banner.getBaseColor();
 	}
 
@@ -153,19 +148,16 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 			if (banner != null && banner.numberOfPatterns() > 0)
 			{
 				banner.setBaseColor(DyeColor.WHITE);
-			}
-			else
+			} else
 			{
 				banner = null;
 			}
-		}
-		else
+		} else
 		{
 			if (banner == null)
 			{
 				banner = new BannerStateMock(dyeColorToMaterial(baseColor));
 			}
-
 			banner.setBaseColor(baseColor);
 		}
 	}
@@ -174,48 +166,44 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	protected void deserializeInternal(Map<String, Object> serialized)
 	{
 		super.deserializeInternal(serialized);
-
 		String baseColor = (String) serialized.get("base-color");
 		if (baseColor != null)
 		{
 			banner = getBlockState(DyeColor.valueOf(baseColor));
 		}
-
 		Iterable<?> rawPatternList = (Iterable<?>) serialized.get("patterns");
 		if (rawPatternList == null)
 		{
 			return;
 		}
-
 		for (Object obj : rawPatternList)
 		{
-			Preconditions.checkArgument(obj instanceof Map<?,?>, "Object (%s) in pattern list is not valid", obj.getClass());
+			Preconditions.checkArgument(obj instanceof Map<?, ?>, "Object (%s) in pattern list is not valid",
+					obj.getClass());
 			addPattern(new Pattern((Map<String, Object>) obj));
 		}
 	}
 
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
 		if (banner != null)
 		{
 			serialized.put("base-color", banner.getBaseColor().toString());
-
 			if (banner.numberOfPatterns() > 0)
 			{
-				List<@NotNull Map<String, Object>> patterns = banner.getPatterns().stream()
-						.map(Pattern::serialize)
+				List<@NotNull Map<String, Object>> patterns = banner.getPatterns().stream().map(Pattern::serialize)
 						.toList();
-
 				serialized.put("patterns", patterns);
 			}
 		}
-
 		return serialized;
 	}
 
-	public static @NotNull ShieldMetaMock deserialize(@NotNull Map<String, Object> serialized)
+	@NotNull
+	public static ShieldMetaMock deserialize(@NotNull Map<String, Object> serialized)
 	{
 		ShieldMetaMock shieldMetaMock = new ShieldMetaMock();
 		shieldMetaMock.deserializeInternal(serialized);
@@ -241,7 +229,8 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
-	public @NotNull BlockState getBlockState()
+	@NotNull
+	public BlockState getBlockState()
 	{
 		if (banner != null)
 		{
@@ -259,7 +248,8 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public ShieldMetaMock clone()
 	{
 		return new ShieldMetaMock(this);
@@ -276,7 +266,6 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 		{
 			return Material.WHITE_BANNER;
 		}
-
 		return switch (color)
 		{
 			case WHITE -> Material.WHITE_BANNER;
@@ -300,17 +289,18 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	}
 
 	@Override
-	public boolean equals(Object o)
+	public boolean equals(Object obj)
 	{
-		if (this == o)
+		if (this == obj)
 		{
 			return true;
 		}
-		if (!(o instanceof ShieldMetaMock that))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		if (!super.equals(o))
+		ShieldMetaMock that = (ShieldMetaMock) obj;
+		if (!super.equals(obj))
 		{
 			return false;
 		}
@@ -322,5 +312,4 @@ public class ShieldMetaMock extends ItemMetaMock implements ShieldMeta, BlockSta
 	{
 		return Objects.hash(super.hashCode(), banner);
 	}
-
 }

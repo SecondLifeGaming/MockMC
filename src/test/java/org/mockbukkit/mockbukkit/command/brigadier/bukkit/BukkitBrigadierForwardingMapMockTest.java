@@ -65,7 +65,8 @@ class BukkitBrigadierForwardingMapMockTest
 		assertTrue(map.keySet().iterator().hasNext());
 		assertTrue(map.values().stream().anyMatch(command::equals));
 		assertTrue(map.keySet().stream().anyMatch("other_command"::equals));
-		assertTrue(map.entrySet().stream().anyMatch(entry -> entry.getValue().equals(command) && entry.getKey().equals("other_command")));
+		assertTrue(map.entrySet().stream()
+				.anyMatch(entry -> entry.getValue().equals(command) && entry.getKey().equals("other_command")));
 		assertEquals(command, map.remove("other_command"));
 		assertFalse(map.containsKey("other_command"));
 		assertFalse(map.containsValue(command));
@@ -125,13 +126,17 @@ class BukkitBrigadierForwardingMapMockTest
 	void put_brigadier()
 	{
 		int initial = map.size();
-		PluginMock.builder().withOnEnable((pluginMock) ->
-				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-						event.registrar().register(Commands.literal("other_command").executes(context ->
-								com.mojang.brigadier.Command.SINGLE_SUCCESS).build(), "some bukkit help description string", List.of("an_alias")
-						)
-				)
-		).build();
+		PluginMock.builder()
+				.withOnEnable(
+						(pluginMock) -> pluginMock.getLifecycleManager()
+								.registerEventHandler(LifecycleEvents.COMMANDS,
+										event -> event.registrar().register(
+												Commands.literal("other_command")
+														.executes(
+																context -> com.mojang.brigadier.Command.SINGLE_SUCCESS)
+														.build(),
+												"some bukkit help description string", List.of("an_alias"))))
+				.build();
 		// Current implementation initializes before the first command is dispatched
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), "ignored");
 		// plugin prefix and alias mutates on this, therefore 4

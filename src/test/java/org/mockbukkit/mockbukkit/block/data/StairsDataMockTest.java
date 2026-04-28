@@ -23,16 +23,14 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class StairsDataMockTest
 {
 
-	private static final Set<BlockFace> VALID_FACES = Set.of(
-			BlockFace.NORTH,
-			BlockFace.SOUTH,
-			BlockFace.EAST,
-			BlockFace.WEST
-	);
+	private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.SOUTH, BlockFace.EAST,
+			BlockFace.WEST);
 
 	private StairsDataMock stairs;
 
@@ -103,8 +101,7 @@ class StairsDataMockTest
 	void setFacing_Invalid_ThrowsException()
 	{
 		final Set<BlockFace> invalidFaces = Arrays.stream(BlockFace.values())
-				.filter(face -> !VALID_FACES.contains(face))
-				.collect(Collectors.toSet());
+				.filter(face -> !VALID_FACES.contains(face)).collect(Collectors.toSet());
 		for (BlockFace face : invalidFaces)
 		{
 			assertThrowsExactly(IllegalArgumentException.class, () -> stairs.setFacing(face));
@@ -142,7 +139,8 @@ class StairsDataMockTest
 	@Test
 	void deserialize()
 	{
-		StairsDataMock stairsDataMock = (StairsDataMock) BlockDataMock.newData(null, "minecraft:oak_stairs[facing=east, half=top, shape=inner_left, waterlogged=true]");
+		StairsDataMock stairsDataMock = (StairsDataMock) BlockDataMock.newData(null,
+				"minecraft:oak_stairs[facing=east, half=top, shape=inner_left, waterlogged=true]");
 		assertEquals(BlockFace.EAST, stairsDataMock.getFacing());
 		assertEquals(Bisected.Half.TOP, stairsDataMock.getHalf());
 		assertEquals(Stairs.Shape.INNER_LEFT, stairsDataMock.getShape());
@@ -152,7 +150,8 @@ class StairsDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull StairsDataMock cloned = stairs.clone();
+		@NotNull
+		StairsDataMock cloned = stairs.clone();
 
 		assertEquals(stairs, cloned);
 		assertEquals(stairs.isWaterlogged(), cloned.isWaterlogged());

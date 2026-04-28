@@ -4,19 +4,24 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PigZombie;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class PigZombieMock extends ZombieMock implements PigZombie
+public class PigZombieMock extends ZombieMock
+		implements
+			PigZombie,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PigZombieBaseMock
 {
 
 	private int anger = 0;
 
 	/**
-	 * Constructs a new {@link PigZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PigZombieMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PigZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -66,9 +71,9 @@ public class PigZombieMock extends ZombieMock implements PigZombie
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ZOMBIFIED_PIGLIN;
 	}
-
 }

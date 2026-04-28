@@ -5,7 +5,6 @@ import org.bukkit.entity.Parched;
 import org.bukkit.entity.Skeleton;
 import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,14 +13,22 @@ import java.util.UUID;
  * @see AbstractSkeletonMock
  */
 @NullMarked
-public class ParchedMock extends AbstractSkeletonMock implements Parched
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ParchedMock extends AbstractSkeletonMock
+		implements
+			Parched,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ParchedBaseMock
 {
 
 	/**
-	 * Constructs a new {@link Parched} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link Parched} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ParchedMock(ServerMock server, UUID uuid)
 	{
@@ -40,5 +47,4 @@ public class ParchedMock extends AbstractSkeletonMock implements Parched
 	{
 		return EntityType.PARCHED;
 	}
-
 }

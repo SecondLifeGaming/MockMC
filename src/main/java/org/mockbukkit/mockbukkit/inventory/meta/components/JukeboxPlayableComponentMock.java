@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,12 +20,17 @@ import java.util.Map;
 @EqualsAndHashCode
 @SerializableAs("JukeboxPlayable")
 @SuppressWarnings("UnstableApiUsage")
-public class JukeboxPlayableComponentMock implements JukeboxPlayableComponent
+public class JukeboxPlayableComponentMock
+		implements
+			JukeboxPlayableComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.JukeboxPlayableComponentBaseMock
 {
+
 	private NamespacedKey soundKey;
 
 	@Override
-	public @Nullable JukeboxSong getSong()
+	@Nullable
+	public JukeboxSong getSong()
 	{
 		return RegistryAccess.registryAccess().getRegistry(RegistryKey.JUKEBOX_SONG).get(this.getSongKey());
 	}
@@ -63,18 +67,13 @@ public class JukeboxPlayableComponentMock implements JukeboxPlayableComponent
 	{
 		String song = SerializableMeta.getObject(String.class, map, "song", false);
 		Preconditions.checkNotNull(song, "song can't be null!");
-
 		NamespacedKey songKey = NamespacedKey.fromString(song);
 		Preconditions.checkNotNull(songKey, "Invalid song key!");
-
-		return JukeboxPlayableComponentMock.builder()
-				.soundKey(songKey)
-				.build();
+		return JukeboxPlayableComponentMock.builder().soundKey(songKey).build();
 	}
 
 	public static JukeboxPlayableComponent useDefault()
 	{
 		return builder().build();
 	}
-
 }

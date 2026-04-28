@@ -24,7 +24,8 @@ class FoodComponentMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3, 4, 5})
+		@ValueSource(ints =
+		{1, 2, 3, 4, 5})
 		void givenNutritionSerialization(int nutrition)
 		{
 			component.setNutrition(nutrition);
@@ -36,7 +37,8 @@ class FoodComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = {1.0F, 1.5F, 3F, 4.12F, 5.7F})
+		@ValueSource(floats =
+		{1.0F, 1.5F, 3F, 4.12F, 5.7F})
 		void givenSaturationSerialization(float saturation)
 		{
 			component.setSaturation(saturation);
@@ -48,7 +50,8 @@ class FoodComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenSaturationSerialization(boolean canAlwaysEat)
 		{
 			component.setCanAlwaysEat(canAlwaysEat);
@@ -66,7 +69,8 @@ class FoodComponentMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = {1, 2, 3, 4, 5})
+		@ValueSource(ints =
+		{1, 2, 3, 4, 5})
 		void givenNutritionDeserialization(int nutrition)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -80,7 +84,8 @@ class FoodComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = {1.0F, 1.5F, 3F, 4.12F, 5.7F})
+		@ValueSource(floats =
+		{1.0F, 1.5F, 3F, 4.12F, 5.7F})
 		void givenSaturationDeserialization(float saturation)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();
@@ -94,7 +99,8 @@ class FoodComponentMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenCanAlwaysEatDeserialization(boolean canAlwaysEat)
 		{
 			Map<String, Object> input = new LinkedHashMap<>();

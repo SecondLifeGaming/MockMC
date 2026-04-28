@@ -59,7 +59,8 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglinBrute.setImmuneToZombification(expectedValue);
@@ -88,10 +89,12 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 		void givenPossibleConversionTime_ShouldSetConversionTime(int value, @MockBukkitInject WorldMock world)
 		{
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setConversionTime(value);
 
@@ -99,10 +102,12 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1})
 		void givenImpossibleConversionTime_ShouldResetConversion(int value, @MockBukkitInject WorldMock world)
 		{
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 
 			spawnedEntity.setImmuneToZombification(true);
 
@@ -136,7 +141,8 @@ class PiglinBruteMockTest
 		void givenPiglinSafeWorld_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
 			world.setEnvironment(World.Environment.NETHER);
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 
 			assertFalse(spawnedEntity.isConverting());
 		}
@@ -145,17 +151,20 @@ class PiglinBruteMockTest
 		void givenNonPiglinSafeWorldAndImmuneToZombification_ShouldReturnFalse(@MockBukkitInject WorldMock world)
 		{
 			world.setEnvironment(World.Environment.NORMAL);
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(true);
 
 			assertFalse(spawnedEntity.isConverting());
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse(@MockBukkitInject WorldMock world)
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndNoAi_ShouldReturnFalse(
+				@MockBukkitInject WorldMock world)
 		{
 			world.setEnvironment(World.Environment.NORMAL);
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);
 			spawnedEntity.setAI(false);
 
@@ -163,10 +172,12 @@ class PiglinBruteMockTest
 		}
 
 		@Test
-		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue(@MockBukkitInject WorldMock world)
+		void givenNonPiglinSafeWorldAndNotImmuneToZombificationAndWithAi_ShouldReturnTrue(
+				@MockBukkitInject WorldMock world)
 		{
 			world.setEnvironment(World.Environment.NORMAL);
-			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.PIGLIN_BRUTE);
+			PiglinBrute spawnedEntity = (PiglinBrute) world.spawnEntity(new Location(world, 0, 0, 0),
+					EntityType.PIGLIN_BRUTE);
 			spawnedEntity.setImmuneToZombification(false);
 			spawnedEntity.setAI(true);
 
@@ -187,7 +198,8 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglinBrute.setBaby(expectedValue);
@@ -230,7 +242,8 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -3, -2, -1 })
+		@ValueSource(ints =
+		{-3, -2, -1})
 		void givenPossibleBabyValues(int expectedValue)
 		{
 			piglinBrute.setAge(expectedValue);
@@ -241,7 +254,8 @@ class PiglinBruteMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2 })
+		@ValueSource(ints =
+		{0, 1, 2})
 		void givenPossibleAdultValues(int expectedValue)
 		{
 			piglinBrute.setAge(expectedValue);

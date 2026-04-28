@@ -23,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class CampfireStateMockTest
 {
@@ -63,7 +65,8 @@ class CampfireStateMockTest
 	@Test
 	void constructor_Block_NotCampfire_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new CampfireStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new CampfireStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

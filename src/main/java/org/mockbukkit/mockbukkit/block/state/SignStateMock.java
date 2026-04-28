@@ -10,31 +10,31 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.block.sign.Side;
 import org.bukkit.block.sign.SignSide;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
+import java.util.Objects;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Mock implementation of a {@link Sign}.
  *
  * @see TileStateMock
  */
-public class SignStateMock extends TileStateMock implements Sign
+public class SignStateMock extends TileStateMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.SignBaseMock
 {
 
 	private final SignSideMock front;
+
 	private final SignSideMock back;
 
 	/**
 	 * Constructs a new {@link SignStateMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#SIGNS}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public SignStateMock(@NotNull Material material)
 	{
@@ -45,10 +45,11 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	/**
-	 * Constructs a new {@link SignStateMock} for the provided {@link Block}.
-	 * Only supports materials in {@link Tag#SIGNS}
+	 * Constructs a new {@link SignStateMock} for the provided {@link Block}. Only
+	 * supports materials in {@link Tag#SIGNS}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected SignStateMock(@NotNull Block block)
 	{
@@ -59,9 +60,11 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	/**
-	 * Constructs a new {@link SignStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SignStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected SignStateMock(@NotNull SignStateMock state)
 	{
@@ -71,13 +74,15 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public @NotNull List<Component> lines()
+	@NotNull
+	public List<Component> lines()
 	{
 		return front.lines();
 	}
 
 	@Override
-	public @NotNull Component line(int index) throws IndexOutOfBoundsException
+	@NotNull
+	public Component line(int index) throws IndexOutOfBoundsException
 	{
 		return front.line(index);
 	}
@@ -88,6 +93,9 @@ public class SignStateMock extends TileStateMock implements Sign
 		front.line(index, line);
 	}
 
+	/**
+	 * @deprecated since 1.16. Use {@link #lines()} instead.
+	 */
 	@Override
 	@NotNull
 	@Deprecated(since = "1.16")
@@ -96,32 +104,25 @@ public class SignStateMock extends TileStateMock implements Sign
 		return front.getLines();
 	}
 
+	/**
+	 * @deprecated since 1.16. Use {@link #line(int)} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
-	public @NotNull String getLine(int index) throws IndexOutOfBoundsException
+	@NotNull
+	public String getLine(int index) throws IndexOutOfBoundsException
 	{
 		return front.getLine(index);
 	}
 
+	/**
+	 * @deprecated since 1.16. Use {@link #line(int, Component)} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
 	public void setLine(int index, String line) throws IndexOutOfBoundsException
 	{
 		front.setLine(index, line);
-	}
-
-	@Override
-	public boolean isEditable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setEditable(boolean editable)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -137,7 +138,8 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public @NotNull DyeColor getColor()
+	@NotNull
+	public DyeColor getColor()
 	{
 		return front.getColor();
 	}
@@ -149,21 +151,8 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public boolean isWaxed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setWaxed(boolean waxed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull SignSide getSide(@NotNull Side side)
+	@NotNull
+	public SignSide getSide(@NotNull Side side)
 	{
 		return switch (side)
 		{
@@ -173,57 +162,28 @@ public class SignStateMock extends TileStateMock implements Sign
 	}
 
 	@Override
-	public @NotNull SignSide getTargetSide(@NotNull Player player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Player getAllowedEditor()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable UUID getAllowedEditorUniqueId()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setAllowedEditorUniqueId(@Nullable UUID uuid)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Side getInteractableSideFor(double x, double z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull SignStateMock getSnapshot()
+	@NotNull
+	public SignStateMock getSnapshot()
 	{
 		return new SignStateMock(this);
 	}
 
 	@Override
-	public @NotNull SignStateMock copy()
+	@NotNull
+	public SignStateMock copy()
 	{
 		return new SignStateMock(this);
 	}
 
-	private static class SignSideMock implements SignSide
+	private static class SignSideMock
+			implements
+				org.mockbukkit.mockbukkit.generated.org.bukkit.block.sign.SignSideBaseMock
 	{
 
 		private final Component[] lines;
+
 		private boolean glowing = false;
+
 		private DyeColor color = DyeColor.BLACK;
 
 		private SignSideMock()
@@ -240,13 +200,15 @@ public class SignStateMock extends TileStateMock implements Sign
 		}
 
 		@Override
-		public @NotNull List<Component> lines()
+		@NotNull
+		public List<Component> lines()
 		{
 			return List.of(lines);
 		}
 
 		@Override
-		public @NotNull Component line(int index) throws IndexOutOfBoundsException
+		@NotNull
+		public Component line(int index) throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
 			{
@@ -267,15 +229,16 @@ public class SignStateMock extends TileStateMock implements Sign
 		}
 
 		@Override
-		public @NotNull String[] getLines()
+		@NotNull
+		public String[] getLines()
 		{
-			return Arrays.stream(lines)
-					.map(LegacyComponentSerializer.legacySection()::serialize)
+			return Arrays.stream(lines).map(LegacyComponentSerializer.legacySection()::serialize)
 					.toArray(String[]::new);
 		}
 
 		@Override
-		public @NotNull String getLine(int index) throws IndexOutOfBoundsException
+		@NotNull
+		public String getLine(int index) throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
 			{
@@ -284,10 +247,12 @@ public class SignStateMock extends TileStateMock implements Sign
 			return LegacyComponentSerializer.legacySection().serialize(lines[index]);
 		}
 
-		// Please note: NullableProblems is suppressed because the method signature requires a non-null String but
+		// Please note: NullableProblems is suppressed because the method signature
+		// requires a non-null String but
 		// the implementation allows null values to be set.
 		@Override
-		public void setLine(int index, @SuppressWarnings("NullableProblems") String line) throws IndexOutOfBoundsException
+		public void setLine(int index, @SuppressWarnings("NullableProblems") String line)
+				throws IndexOutOfBoundsException
 		{
 			if (index < 0 || index >= lines.length)
 			{
@@ -296,8 +261,7 @@ public class SignStateMock extends TileStateMock implements Sign
 			if (line == null)
 			{
 				lines[index] = Component.empty();
-			}
-			else
+			} else
 			{
 				lines[index] = LegacyComponentSerializer.legacySection().deserialize(line);
 			}
@@ -316,7 +280,8 @@ public class SignStateMock extends TileStateMock implements Sign
 		}
 
 		@Override
-		public @NotNull DyeColor getColor()
+		@NotNull
+		public DyeColor getColor()
 		{
 			return color;
 		}
@@ -331,21 +296,60 @@ public class SignStateMock extends TileStateMock implements Sign
 		@Override
 		public String toString()
 		{
-			return "SignSideMock{" +
-					"color=" + color +
-					", lines=" + Arrays.toString(lines) +
-					", glowing=" + glowing +
-					'}';
+			return "SignSideMock{" + "color=" + color + ", lines=" + Arrays.toString(lines) + ", glowing=" + glowing
+					+ '}';
 		}
 
+		@Override
+		public boolean equals(Object o)
+		{
+			if (this == o)
+			{
+				return true;
+			}
+			if (!(o instanceof SignSideMock that))
+			{
+				return false;
+			}
+			return glowing == that.glowing && Arrays.equals(lines, that.lines) && color == that.color;
+		}
+
+		@Override
+		public int hashCode()
+		{
+			int result = Objects.hash(glowing, color);
+			result = 31 * result + Arrays.hashCode(lines);
+			return result;
+		}
 	}
 
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", back=" + back +
-				", front=" + front;
+		return super.toStringInternal() + ", back=" + back + ", front=" + front;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof SignStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return Objects.equals(front, that.front) && Objects.equals(back, that.back);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), front, back);
+	}
 }

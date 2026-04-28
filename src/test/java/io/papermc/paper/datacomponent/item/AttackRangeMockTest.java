@@ -14,14 +14,8 @@ class AttackRangeMockTest
 	@Test
 	void givenBasicCreation()
 	{
-		AttackRange component = AttackRange.attackRange()
-				.hitboxMargin(0.5F)
-				.minReach(10)
-				.maxReach(20)
-				.minCreativeReach(30)
-				.maxCreativeReach(40)
-				.mobFactor(2)
-				.build();
+		AttackRange component = AttackRange.attackRange().hitboxMargin(0.5F).minReach(10).maxReach(20)
+				.minCreativeReach(30).maxCreativeReach(40).mobFactor(2).build();
 
 		assertEquals(0.5F, component.hitboxMargin());
 		assertEquals(10, component.minReach());

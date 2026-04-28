@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -17,17 +16,25 @@ import java.util.UUID;
  *
  * @see AgeableMock
  */
-public class AnimalsMock extends AgeableMock implements Animals
+public class AnimalsMock extends AgeableMock
+		implements
+			Animals,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AnimalsBaseMock
 {
 
-	private @Nullable UUID breedCause;
+	@Nullable
+	private UUID breedCause;
+
 	private int isInLoveTicks;
 
 	/**
-	 * Constructs a new {@link Animals} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link Animals} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public AnimalsMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -87,9 +94,9 @@ public class AnimalsMock extends AgeableMock implements Animals
 	}
 
 	@Override
-	public @NotNull String toString()
+	@NotNull
+	public String toString()
 	{
 		return "AnimalsMock";
 	}
-
 }

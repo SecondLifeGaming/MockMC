@@ -62,7 +62,8 @@ class VaultDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean ominous)
 		{
 			vault.setOminous(ominous);
@@ -82,9 +83,8 @@ class VaultDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			vault.setFacing(face);
@@ -92,9 +92,8 @@ class VaultDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> vault.setFacing(face));
@@ -106,7 +105,8 @@ class VaultDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull VaultDataMock cloned = vault.clone();
+		@NotNull
+		VaultDataMock cloned = vault.clone();
 
 		assertEquals(vault, cloned);
 		assertEquals(vault.isOminous(), cloned.isOminous());

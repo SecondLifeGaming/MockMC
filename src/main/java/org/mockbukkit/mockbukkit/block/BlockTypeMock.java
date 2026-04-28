@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.World;
 import org.bukkit.block.BlockType;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.inventory.ItemType;
@@ -14,33 +13,51 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.function.Consumer;
 
-public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class BlockTypeMock<B extends BlockData>
+		implements
+			BlockType.Typed<B>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlockTypeBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final NamespacedKey itemType;
+
 	private final boolean solid;
+
 	private final boolean flammable;
+
 	private final boolean burnable;
+
 	private final boolean occluding;
+
 	private final boolean gravity;
+
 	private final float hardness;
+
 	private final float blastResistance;
+
 	private final float slipperiness;
+
 	private final boolean air;
+
 	private final boolean interactable;
+
 	private final boolean collision;
+
 	private final String translationKey;
 
 	@ApiStatus.Internal
-	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable, boolean burnable,
-						  boolean occluding, boolean gravity, float hardness, float blastResistance, float slipperiness,
-						  boolean air, boolean interactable, boolean collision, String translationKey)
+	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable,
+			boolean burnable, boolean occluding, boolean gravity, float hardness, float blastResistance,
+			float slipperiness, boolean air, boolean interactable, boolean collision, String translationKey)
 	{
 		this.key = key;
 		this.itemType = itemType;
@@ -59,10 +76,13 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@ApiStatus.Internal
-	public static BlockTypeMock from(JsonObject jsonObject)
+	@NotNull
+	public static BlockTypeMock<BlockData> from(@NotNull JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
-		NamespacedKey itemType = jsonObject.has("itemType") ? NamespacedKey.fromString(jsonObject.get("itemType").getAsString()) : null;
+		NamespacedKey itemType = jsonObject.has("itemType")
+				? NamespacedKey.fromString(jsonObject.get("itemType").getAsString())
+				: null;
 		boolean solid = jsonObject.get("solid").getAsBoolean();
 		boolean flammable = jsonObject.get("flammable").getAsBoolean();
 		boolean burnable = jsonObject.get("burnable").getAsBoolean();
@@ -75,8 +95,8 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 		boolean interactable = jsonObject.get("interactable").getAsBoolean();
 		boolean collision = jsonObject.get("collision").getAsBoolean();
 		String translationKey = jsonObject.get("translationKey").getAsString();
-
-		return new BlockTypeMock(key, itemType, solid, flammable, burnable, occluding, gravity, hardness, blastResistance, slipperiness, air, interactable, collision, translationKey);
+		return new BlockTypeMock<>(key, itemType, solid, flammable, burnable, occluding, gravity, hardness,
+				blastResistance, slipperiness, air, interactable, collision, translationKey);
 	}
 
 	@NotNull
@@ -88,9 +108,10 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 
 	@NotNull
 	@Override
+	@SuppressWarnings("unchecked")
 	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
-		throw new UnimplementedOperationException();
+		return (Typed<O>) this;
 	}
 
 	@Override
@@ -100,26 +121,32 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
-	public @NotNull ItemType getItemType()
+	@NotNull
+	public ItemType getItemType()
 	{
 		if (this == AIR)
 		{
 			return ItemType.AIR;
 		}
-		Preconditions.checkArgument(this.itemType != null, "The block type %s has no corresponding item type", this.getKey());
+		Preconditions.checkArgument(this.itemType != null, "The block type %s has no corresponding item type",
+				this.getKey());
 		ItemType item = Registry.ITEM.get(this.itemType);
-		Preconditions.checkState(item != null && item != ItemType.AIR, "The block type %s has no corresponding item type", this.getKey());
+		Preconditions.checkState(item != null && item != ItemType.AIR,
+				"The block type %s has no corresponding item type", this.getKey());
 		return item;
 	}
 
 	@Override
-	public @NotNull Class<B> getBlockDataClass()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public Class<B> getBlockDataClass()
 	{
-		throw new UnimplementedOperationException();
+		return (Class<B>) createBlockData().getClass();
 	}
 
 	@Override
-	public @NotNull B createBlockData(@Nullable Consumer<? super B> consumer)
+	@NotNull
+	public B createBlockData(@Nullable Consumer<? super B> consumer)
 	{
 		B blockData = createBlockData();
 		if (consumer != null)
@@ -130,20 +157,27 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
-	public @NotNull B createBlockData()
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public B createBlockData()
 	{
-		return (B) BlockDataMock.mock(this.asMaterial());
+		return (B) BlockDataMockFactory.mock(Registry.MATERIAL.get(this.key));
 	}
 
 	@Override
-	public @Unmodifiable @NotNull Collection<B> createBlockDataStates()
+	@Unmodifiable
+	@NotNull
+	public Collection<B> createBlockDataStates()
 	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
+		// TODO: This should probably enumerate all possible states.
+		// For now, we just return a collection with the default state.
+		return Collections.singleton(createBlockData());
 	}
 
 	@Override
-	public @NotNull B createBlockData(@Nullable String data)
+	@SuppressWarnings("unchecked")
+	@NotNull
+	public B createBlockData(@Nullable String data)
 	{
 		return (B) BlockDataMock.newData(this, data);
 	}
@@ -215,35 +249,31 @@ public class BlockTypeMock<B extends BlockData> implements BlockType.Typed<B>
 	}
 
 	@Override
-	@Deprecated(forRemoval = true, since = "1.21.1")
-	public boolean isEnabledByFeature(@NotNull World world)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Material asMaterial()
+	@Nullable
+	public Material asMaterial()
 	{
 		return Registry.MATERIAL.get(this.key);
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return this.key;
 	}
 
 	@Deprecated(forRemoval = true)
 	@Override
-	public @NotNull String getTranslationKey()
+	@NotNull
+	public String getTranslationKey()
 	{
 		return translationKey();
 	}
 
 	@Override
-	public @NotNull String translationKey()
+	@NotNull
+	public String translationKey()
 	{
 		return this.translationKey;
 	}
-
 }

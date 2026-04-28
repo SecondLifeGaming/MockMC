@@ -8,17 +8,23 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Mock implementation of a {@link Criteria}.
  */
-public class CriteriaMock implements Criteria
+public class CriteriaMock
+		implements
+			Criteria,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.scoreboard.CriteriaBaseMock
 {
 
 	private final String name;
+
 	private final boolean readOnly;
+
 	private final RenderType defaultRenderType;
 
 	/**
 	 * Constructs a new {@link CriteriaMock} with the provided name.
 	 *
-	 * @param name The name of the criteria.
+	 * @param name
+	 *            The name of the criteria.
 	 */
 	public CriteriaMock(@NotNull String name)
 	{
@@ -33,7 +39,8 @@ public class CriteriaMock implements Criteria
 	}
 
 	@Override
-	public @NotNull String getName()
+	@NotNull
+	public String getName()
 	{
 		return this.name;
 	}
@@ -45,7 +52,8 @@ public class CriteriaMock implements Criteria
 	}
 
 	@Override
-	public @NotNull RenderType getDefaultRenderType()
+	@NotNull
+	public RenderType getDefaultRenderType()
 	{
 		return this.defaultRenderType;
 	}
@@ -70,5 +78,4 @@ public class CriteriaMock implements Criteria
 	{
 		return this.name.hashCode();
 	}
-
 }

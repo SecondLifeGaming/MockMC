@@ -8,6 +8,7 @@ import org.bukkit.plugin.SimpleServicesManager;
  * @see SimpleServicesManager
  */
 public class ServicesManagerMock extends SimpleServicesManager
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.plugin.ServicesManagerBaseMock
 {
-
 }

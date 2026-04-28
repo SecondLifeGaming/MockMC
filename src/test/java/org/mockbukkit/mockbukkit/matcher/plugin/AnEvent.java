@@ -7,7 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockbukkit.mockbukkit.MockBukkitExtension;
 
 /**
- * An event constructor can always change, let's instead have a custom event that does not change constructor.
+ * An event constructor can always change, let's instead have a custom event
+ * that does not change constructor.
  */
 @ExtendWith(MockBukkitExtension.class)
 class AnEvent extends Event

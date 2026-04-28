@@ -5,7 +5,6 @@ import org.bukkit.World;
 import org.bukkit.entity.PiglinAbstract;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,18 +12,28 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAbstract
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public abstract class PiglinAbstractMock extends MonsterMock
+		implements
+			PiglinAbstract,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PiglinAbstractBaseMock
 {
 
 	private boolean isImmuneToZombification = false;
+
 	private boolean isBaby = false;
+
 	private int conversionTime = -1;
 
 	/**
-	 * Constructs a new {@link PiglinAbstractMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PiglinAbstractMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected PiglinAbstractMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -57,8 +66,7 @@ public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAb
 		{
 			this.conversionTime = -1;
 			this.setImmuneToZombification(false);
-		}
-		else
+		} else
 		{
 			this.conversionTime = time;
 		}
@@ -139,5 +147,4 @@ public abstract class PiglinAbstractMock extends MonsterMock implements PiglinAb
 	{
 		// Nothing to do here
 	}
-
 }

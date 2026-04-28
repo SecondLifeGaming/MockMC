@@ -6,7 +6,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,18 +13,25 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class OminousItemSpawnerMock extends EntityMock implements OminousItemSpawner
+public class OminousItemSpawnerMock extends EntityMock
+		implements
+			OminousItemSpawner,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.OminousItemSpawnerBaseMock
 {
 
 	private long spawnItemAfterTicks = 60;
 
-	private @NotNull ItemStack item = ItemStack.empty();
+	@NotNull
+	private ItemStack item = ItemStack.empty();
 
 	/**
-	 * Constructs a new {@link OminousItemSpawnerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link OminousItemSpawnerMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public OminousItemSpawnerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,7 +39,8 @@ public class OminousItemSpawnerMock extends EntityMock implements OminousItemSpa
 	}
 
 	@Override
-	public @NotNull ItemStack getItem()
+	@NotNull
+	public ItemStack getItem()
 	{
 		return this.item.clone();
 	}
@@ -57,9 +64,9 @@ public class OminousItemSpawnerMock extends EntityMock implements OminousItemSpa
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.OMINOUS_ITEM_SPAWNER;
 	}
-
 }

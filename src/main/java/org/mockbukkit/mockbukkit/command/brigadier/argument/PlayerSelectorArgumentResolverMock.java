@@ -30,7 +30,8 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 	{
 		if (single && input.equals("@a"))
 		{
-			String message = Languages.getInstance().getOrDefault("command.expected.a_single_player", "Only one player is allowed, but the provided selector allows more than one");
+			String message = Languages.getInstance().getOrDefault("command.expected.a_single_player",
+					"Only one player is allowed, but the provided selector allows more than one");
 			source.getSender().sendMessage(message);
 			return Collections.emptyList();
 		}
@@ -39,15 +40,15 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 		if (input.startsWith("@"))
 		{
 			resolved = resolveSelector(input, source);
-		}
-		else
+		} else
 		{
 			Player player = Bukkit.getPlayer(input);
 			resolved = player != null ? List.of(player) : Collections.emptyList();
 		}
 		if (resolved.isEmpty() && single)
 		{
-			String message = Languages.getInstance().getOrDefault("argument.entity.notfound.player", "No player was found");
+			String message = Languages.getInstance().getOrDefault("argument.entity.notfound.player",
+					"No player was found");
 			source.getSender().sendMessage(message);
 		}
 		return resolved;
@@ -58,8 +59,7 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 		return switch (selector)
 		{
 			case "@a" -> new ArrayList<>(Bukkit.getOnlinePlayers());
-			case "@p" ->
-			{
+			case "@p" -> {
 				org.bukkit.Location sourceLocation = source.getLocation();
 				org.bukkit.World sourceWorld = sourceLocation.getWorld();
 				if (sourceWorld == null)
@@ -83,8 +83,7 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 				}
 				yield nearest != null ? List.of(nearest) : Collections.emptyList();
 			}
-			case "@r" ->
-			{
+			case "@r" -> {
 				List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
 				if (players.isEmpty())
 				{

@@ -25,6 +25,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class EntityEquipmentMockTest
 {
@@ -172,16 +174,14 @@ class EntityEquipmentMockTest
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
 		EntityEquipment equipment = armorStand.getEquipment();
-		assertThrows(IllegalArgumentException.class, () ->
-				equipment.setHelmetDropChance(0.5f));
+		assertThrows(IllegalArgumentException.class, () -> equipment.setHelmetDropChance(0.5f));
 	}
 
 	@Test
 	void testGetArmorContentsDefault()
 	{
 		assertEquals(4, equipment.getArmorContents().length);
-		Arrays.stream(equipment.getArmorContents()).forEach(entry ->
-				assertEquals(Material.AIR, entry.getType()));
+		Arrays.stream(equipment.getArmorContents()).forEach(entry -> assertEquals(Material.AIR, entry.getType()));
 	}
 
 	@Test

@@ -24,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class CreatureSpawnerStateMockTest
 {
@@ -64,7 +66,8 @@ class CreatureSpawnerStateMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new CreatureSpawnerStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new CreatureSpawnerStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

@@ -3,6 +3,8 @@ package org.mockbukkit.mockbukkit.registry;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import io.papermc.paper.registry.TypedKey;
+import io.papermc.paper.registry.tag.Tag;
+import io.papermc.paper.registry.tag.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -26,12 +28,15 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class RegistryMockTest
 {
@@ -47,7 +52,8 @@ class RegistryMockTest
 	void getOrThrow_StructureThrows()
 	{
 		RegistryMock<Structure> structureRegistryMock = new RegistryMock<>(RegistryKey.STRUCTURE);
-		assertThrows(NoSuchElementException.class, () -> structureRegistryMock.getOrThrow(NamespacedKey.minecraft("invalid")));
+		assertThrows(NoSuchElementException.class,
+				() -> structureRegistryMock.getOrThrow(NamespacedKey.minecraft("invalid")));
 	}
 
 	@ParameterizedTest
@@ -83,7 +89,8 @@ class RegistryMockTest
 	void testGetOrThrow(ItemType item)
 	{
 		assertDoesNotThrow(() -> Registry.ITEM.getOrThrow(item.key()));
-		assertThrows(NoSuchElementException.class, () -> Registry.ITEM.getOrThrow(NamespacedKey.fromString("minecraft:yolo")));
+		assertThrows(NoSuchElementException.class,
+				() -> Registry.ITEM.getOrThrow(NamespacedKey.fromString("minecraft:yolo")));
 	}
 
 	@Test
@@ -143,16 +150,33 @@ class RegistryMockTest
 		Registry<?> registry = new RegistryMock<>(RegistryKey.ENTITY_TYPE);
 		long registryCount = registry.stream().count();
 		long enumCount = Arrays.stream(org.bukkit.entity.EntityType.values())
-				.filter(entityType -> entityType != org.bukkit.entity.EntityType.UNKNOWN)
-				.count();
+				.filter(entityType -> entityType != org.bukkit.entity.EntityType.UNKNOWN).count();
 		assertEquals(enumCount, registryCount);
+	}
+
+	@Test
+	void getTag()
+	{
+		Registry<ItemType> registry = Registry.ITEM;
+		Tag<ItemType> tag = registry.getTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes")));
+		assertNotNull(tag);
+		assertTrue(registry.hasTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("axes"))));
+	}
+
+	@Test
+	void getTag_Invalid()
+	{
+		Registry<ItemType> registry = Registry.ITEM;
+		assertNull(registry.getTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
+		assertFalse(registry.hasTag(TagKey.create(RegistryKey.ITEM, NamespacedKey.minecraft("invalid"))));
 	}
 
 	@Test
 	void getKey()
 	{
 		BlockType.Typed<@NonNull BlockData> key = BlockType.STONE;
-		@Nullable NamespacedKey actual = Registry.BLOCK.getKey(key);
+		@Nullable
+		NamespacedKey actual = Registry.BLOCK.getKey(key);
 		assertNotNull(actual);
 		assertEquals("minecraft:stone", actual.asString());
 	}
@@ -168,8 +192,7 @@ class RegistryMockTest
 		try
 		{
 			return (RegistryKey<? extends Keyed>) field.get(null);
-		}
-		catch (IllegalAccessException e)
+		} catch (IllegalAccessException e)
 		{
 			throw new InternalDataLoadException(e);
 		}

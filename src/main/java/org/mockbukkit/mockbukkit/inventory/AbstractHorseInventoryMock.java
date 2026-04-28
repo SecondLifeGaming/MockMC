@@ -11,7 +11,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class AbstractHorseInventoryMock extends InventoryMock implements AbstractHorseInventory
+public class AbstractHorseInventoryMock extends InventoryMock
+		implements
+			AbstractHorseInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.AbstractHorseInventoryBaseMock
 {
 
 	private static final int SADDLE_SLOT = 0;
@@ -19,7 +22,8 @@ public class AbstractHorseInventoryMock extends InventoryMock implements Abstrac
 	/**
 	 * Constructs a new {@link AbstractHorseInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public AbstractHorseInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -27,7 +31,8 @@ public class AbstractHorseInventoryMock extends InventoryMock implements Abstrac
 	}
 
 	@Override
-	public @Nullable ItemStack getSaddle()
+	@Nullable
+	public ItemStack getSaddle()
 	{
 		return getItem(SADDLE_SLOT);
 	}
@@ -37,5 +42,4 @@ public class AbstractHorseInventoryMock extends InventoryMock implements Abstrac
 	{
 		setItem(SADDLE_SLOT, saddle);
 	}
-
 }

@@ -12,9 +12,11 @@ public class WallHangingSignDataMock extends BlockDataMock implements WallHangin
 {
 
 	/**
-	 * Constructs a new {@link WallHangingSignDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link WallHangingSignDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public WallHangingSignDataMock(@NotNull Material material)
 	{
@@ -22,9 +24,11 @@ public class WallHangingSignDataMock extends BlockDataMock implements WallHangin
 	}
 
 	/**
-	 * Create a new {@link WallHangingSignDataMock} based on an existing {@link WallHangingSignDataMock}.
+	 * Create a new {@link WallHangingSignDataMock} based on an existing
+	 * {@link WallHangingSignDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected WallHangingSignDataMock(@NotNull WallHangingSignDataMock other)
 	{
@@ -41,7 +45,8 @@ public class WallHangingSignDataMock extends BlockDataMock implements WallHangin
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -64,7 +69,8 @@ public class WallHangingSignDataMock extends BlockDataMock implements WallHangin
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WallHangingSignDataMock clone()
 	{
 		return new WallHangingSignDataMock(this);

@@ -3,8 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Sets;
 import com.google.gson.JsonElement;
-import io.papermc.paper.datacomponent.DataComponentType;
-import io.papermc.paper.entity.LookAnchor;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.threadedregions.scheduler.EntityScheduler;
 import net.kyori.adventure.text.Component;
@@ -17,10 +15,7 @@ import org.bukkit.Chunk;
 import org.bukkit.EntityEffect;
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -33,11 +28,9 @@ import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityRemoveEvent;
 import org.bukkit.event.entity.EntityTeleportEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.event.vehicle.VehicleExitEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.Permission;
@@ -60,25 +53,19 @@ import org.mockbukkit.mockbukkit.entity.data.EntityDataRegistry;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
 import org.mockbukkit.mockbukkit.event.EventFactoryMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
 import org.mockbukkit.mockbukkit.scheduler.paper.FoliaEntityScheduler;
 import org.mockbukkit.mockbukkit.scoreboard.TeamMock;
 import org.mockbukkit.mockbukkit.world.WorldMock;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Objects;
 
 /**
  * Mock implementation of an {@link Entity}.
@@ -86,80 +73,128 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @see Entity.Spigot
  * @see MessageTarget
  */
-public abstract class EntityMock extends Entity.Spigot implements Entity, MessageTarget
+@SuppressWarnings(
+{"deprecation", "removal"})
+public abstract class EntityMock extends Entity.Spigot
+		implements
+			MessageTarget,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EntityBaseMock
 {
 
+	private static final String METADATA_KEY_CANNOT_BE_NULL = "Metadata key cannot be null";
 	private static final AtomicInteger ENTITY_COUNTER = new AtomicInteger();
 
 	private final Set<String> tags = Sets.newHashSet();
-	protected final @NotNull ServerMock server;
-	private final @NotNull UUID uuid;
+
+	@NotNull
+	protected final ServerMock server;
+
+	@NotNull
+	private final UUID uuid;
+
 	private final int id;
+
 	private Location location;
+
 	private boolean teleported;
+
 	private TeleportCause teleportCause;
-	private @Nullable EntityMock vehicle;
+
+	@Nullable
+	private EntityMock vehicle;
+
 	private final List<Entity> passengers = new ArrayList<>(0);
+
 	private final MetadataTable metadataTable = new MetadataTable();
+
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
-	private @NotNull Component name = Component.text("entity");
-	private @Nullable Component customName = null;
+
+	@NotNull
+	private Component name = Component.text("entity");
+
+	@Nullable
+	private Component customName = null;
+
 	private boolean customNameVisible = false;
+
 	private boolean invulnerable;
+
 	private boolean sneaking = false;
+
 	private boolean invisible;
+
 	private boolean noPhysics;
+
 	private boolean persistent = true;
+
 	private boolean glowingFlag = false;
+
 	private boolean onGround;
+
 	private boolean freezeLocked;
+
 	private boolean inWater;
+
 	protected final PermissibleBase perms;
-	private @NotNull Vector velocity = new Vector(0, 0, 0);
+
+	@NotNull
+	private Vector velocity = new Vector(0, 0, 0);
+
 	private float fallDistance;
+
 	private int fireTicks = -20;
+
 	private int frozenTicks;
+
 	private int ticksLived;
+
 	private int portalCooldown;
-	private final int maxFireTicks = 20;
+
+	private static final int MAX_FIRE_TICKS = 20;
+
 	private boolean removed = false;
-	private @Nullable EntityDamageEvent lastDamageEvent;
+
+	@Nullable
+	private EntityDamageEvent lastDamageEvent;
+
 	private boolean silent;
+
 	private boolean gravity = true;
 
 	private Pose pose = Pose.STANDING;
+
 	private boolean isFixedPose = false;
+
 	private TriState triState = TriState.NOT_SET;
 
 	protected final EntityData entityData;
+
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
 
 	/**
-	 * Constructs a new {@link EntityMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EntityMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected EntityMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
 		Preconditions.checkNotNull(uuid, "UUID cannot be null");
-
 		this.server = server;
 		this.uuid = uuid;
 		this.id = ENTITY_COUNTER.incrementAndGet();
-
 		this.perms = new PermissibleBase(this);
-
 		if (!Bukkit.getWorlds().isEmpty())
 		{
 			location = Bukkit.getWorlds().getFirst().getSpawnLocation();
-		}
-		else
+		} else
 		{
 			location = new Location(null, 0, 0, 0);
 		}
-
 		this.entityData = EntityDataRegistry.loadEntityData(this.getType());
 	}
 
@@ -175,74 +210,75 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return obj instanceof EntityMock entity && uuid.equals(entity.getUniqueId());
 	}
 
-	@Override
-	public boolean hasData(@NotNull DataComponentType type)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> @Nullable T getDataOrDefault(DataComponentType.@NotNull Valued<? extends T> type, @Nullable T fallback)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T> @Nullable T getData(DataComponentType.@NotNull Valued<T> type)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isTrackedBy(@NotNull Player player)
-	{
-		throw new UnimplementedOperationException();
-	}
-
 	/**
-	 * Assert that the actual location of the player is within a certain distance to a given location.
+	 * Assert that the actual location of the player is within a certain distance to
+	 * a given location.
 	 *
-	 * @param expectedLocation The location the player should be at.
-	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
+	 * @param expectedLocation
+	 *            The location the player should be at.
+	 * @param maximumDistance
+	 *            The distance the player may maximumly be separated from the
+	 *            expected location.
+	 * @deprecated Use {@link #getLocation()} and manual assertions instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertLocation(@NotNull Location expectedLocation, double maximumDistance)
 	{
 		double distance = location.distance(expectedLocation);
-		assertEquals(expectedLocation.getWorld(), location.getWorld());
-		assertTrue(distance <= maximumDistance, String.format("Distance was <%.3f> but should be less than or equal to <%.3f>", distance,
-				maximumDistance));
+		if (!Objects.equals(expectedLocation.getWorld(), location.getWorld()))
+		{
+			throw new AssertionError("World mismatch");
+		}
+		if (distance > maximumDistance)
+		{
+			throw new AssertionError(String.format("Distance was <%.3f> but should be less than or equal to <%.3f>",
+					distance, maximumDistance));
+		}
 	}
 
 	/**
-	 * Assert that the player teleported to a certain location within a certain distance to a given location. Also
-	 * clears the teleported flag.
+	 * Assert that the player teleported to a certain location within a certain
+	 * distance to a given location. Also clears the teleported flag.
 	 *
-	 * @param expectedLocation The location the player should be at.
-	 * @param maximumDistance  The distance the player may maximumly be separated from the expected location.
+	 * @param expectedLocation
+	 *            The location the player should be at.
+	 * @param maximumDistance
+	 *            The distance the player may maximumly be separated from the
+	 *            expected location.
+	 * @deprecated Use {@link #hasTeleported()} and manual assertions instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertTeleported(@NotNull Location expectedLocation, double maximumDistance)
 	{
-		assertTrue(teleported, "Player did not teleport");
+		if (!teleported)
+		{
+			throw new AssertionError("Player did not teleport");
+		}
 		assertLocation(expectedLocation, maximumDistance);
 		teleported = false;
 	}
 
 	/**
 	 * Assert that the player hasn't teleported. Also clears the teleported flag.
+	 *
+	 * @deprecated Use {@link #hasTeleported()} and manual assertions instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertNotTeleported()
 	{
-		assertFalse(teleported, "Player was teleported");
+		if (teleported)
+		{
+			throw new AssertionError("Player was teleported");
+		}
 		teleported = false;
 	}
 
 	/**
-	 * Checks if the player has been teleported since the last assert or {@link #clearTeleported}.
+	 * Checks if the player has been teleported since the last assert or
+	 * {@link #clearTeleported}.
 	 *
-	 * @return {@code true} if the player has been teleported, {@code false} if he hasn't been teleported.
+	 * @return {@code true} if the player has been teleported, {@code false} if he
+	 *         hasn't been teleported.
 	 */
 	public boolean hasTeleported()
 	{
@@ -268,22 +304,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull UUID getUniqueId()
+	@NotNull
+	public UUID getUniqueId()
 	{
 		return uuid;
 	}
 
 	@Override
-	public @NotNull Location getLocation()
+	@NotNull
+	public Location getLocation()
 	{
 		return location.clone();
-	}
-
-	@Override
-	public @NotNull Set<Player> getTrackedPlayers()
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -293,7 +324,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			return null;
 		}
-
 		loc.setWorld(location.getWorld());
 		loc.setDirection(location.getDirection());
 		loc.setX(location.getX());
@@ -303,9 +333,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Sets the location of the entity. Note that this will not fire a teleport event.
+	 * Sets the location of the entity. Note that this will not fire a teleport
+	 * event.
 	 *
-	 * @param location The new location of the entity.
+	 * @param location
+	 *            The new location of the entity.
 	 */
 	public void setLocation(@NotNull Location location)
 	{
@@ -320,7 +352,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull WorldMock getWorld()
+	@NotNull
+	public WorldMock getWorld()
 	{
 		return (WorldMock) location.getWorld();
 	}
@@ -328,28 +361,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public void setMetadata(@NotNull String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
-		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
+		Preconditions.checkNotNull(metadataKey, METADATA_KEY_CANNOT_BE_NULL);
 		metadataTable.setMetadata(metadataKey, newMetadataValue);
 	}
 
 	@Override
-	public @NotNull List<MetadataValue> getMetadata(@NotNull String metadataKey)
+	@NotNull
+	public List<MetadataValue> getMetadata(@NotNull String metadataKey)
 	{
-		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
+		Preconditions.checkNotNull(metadataKey, METADATA_KEY_CANNOT_BE_NULL);
 		return metadataTable.getMetadata(metadataKey);
 	}
 
 	@Override
 	public boolean hasMetadata(@NotNull String metadataKey)
 	{
-		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
+		Preconditions.checkNotNull(metadataKey, METADATA_KEY_CANNOT_BE_NULL);
 		return metadataTable.hasMetadata(metadataKey);
 	}
 
 	@Override
 	public void removeMetadata(@NotNull String metadataKey, @NotNull Plugin owningPlugin)
 	{
-		Preconditions.checkNotNull(metadataKey, "Metadata key cannot be null");
+		Preconditions.checkNotNull(metadataKey, METADATA_KEY_CANNOT_BE_NULL);
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
@@ -362,7 +396,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	@NotNull
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
 	}
@@ -381,16 +416,16 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 
 	@Override
 	@SuppressWarnings("UnstableApiUsage")
-	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull ... flags)
+	public boolean teleport(@NotNull Location location, @NotNull TeleportCause cause, TeleportFlag @NotNull... flags)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null"); // The world can be null if it's not a player
+		// The world can be null if it's not a player
+		Preconditions.checkNotNull(location, "Location cannot be null");
 		location.checkFinite();
-
 		Set<TeleportFlag> flagSet = Set.of(flags);
 		boolean dismount = !flagSet.contains(TeleportFlag.EntityState.RETAIN_VEHICLE);
 		boolean ignorePassengers = flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS);
-
-		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers() && location.getWorld().equals(this.getWorld()))
+		if (flagSet.contains(TeleportFlag.EntityState.RETAIN_PASSENGERS) && this.hasPassengers()
+				&& location.getWorld().equals(this.getWorld()))
 		{
 			return false;
 		}
@@ -398,31 +433,27 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		{
 			return false;
 		}
-
 		if (this.removed || (!ignorePassengers && hasPassengers()))
 		{
 			return false;
 		}
-		if (location.getWorld() != getWorld())
+		if (location.getWorld() != getWorld()
+				&& ((ignorePassengers && hasPassengers()) || (!dismount && isInsideVehicle())))
 		{
 			// Don't allow teleporting between worlds while keeping passengers
 			// and if remaining on vehicle.
-			if ((ignorePassengers && hasPassengers())
-					|| (!dismount && isInsideVehicle()))
-			{
-				return false;
-			}
+			return false;
 		}
 		if (dismount)
 		{
 			leaveVehicle();
 		}
-
 		EntityTeleportEvent event = new EntityTeleportEvent(this, getLocation(), location);
 		if (event.callEvent())
 		{
 			// There is actually no non-null check in the CraftBukkit implementation
-			Preconditions.checkNotNull(event.getTo(), "The location where the entity moved to in the event cannot be null");
+			Preconditions.checkNotNull(event.getTo(),
+					"The location where the entity moved to in the event cannot be null");
 			teleportWithoutEvent(event.getTo(), cause);
 			return true;
 		}
@@ -430,11 +461,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	/**
-	 * Handles teleporting an entity without firing an event.
-	 * This will set the entity to the new location, mark teleport as true, and set the teleport cause.
+	 * Handles teleporting an entity without firing an event. This will set the
+	 * entity to the new location, mark teleport as true, and set the teleport
+	 * cause.
 	 *
-	 * @param location The location to teleport to.
-	 * @param cause    The teleport cause.
+	 * @param location
+	 *            The location to teleport to.
+	 * @param cause
+	 *            The teleport cause.
 	 */
 	protected void teleportWithoutEvent(@NotNull Location location, @NotNull TeleportCause cause)
 	{
@@ -471,28 +505,17 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull String getName()
+	@NotNull
+	public String getName()
 	{
 		return LegacyComponentSerializer.legacySection().serialize(this.name);
 	}
 
 	/**
-	 * Gets the scoreboard entry for this entity.
-	 *
-	 * @return The scoreboard entry.
-	 *
-	 * @deprecated Replaced by {@link #getScoreboardEntryName()}
-	 */
-	@Deprecated(forRemoval = true)
-	public @NotNull String getScoreboardEntry()
-	{
-		return this.getScoreboardEntryName();
-	}
-
-	/**
 	 * Sets the name of this entity.
 	 *
-	 * @param name The new name of the entity.
+	 * @param name
+	 *            The new name of the entity.
 	 */
 	public void setName(@NotNull String name)
 	{
@@ -517,13 +540,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
+	public void sendMessage(UUID sender, String... messages)
 	{
 		this.sendMessage(messages);
 	}
 
 	@Override
-	public @Nullable Component nextComponentMessage()
+	@Nullable
+	public Component nextComponentMessage()
 	{
 		return null;
 	}
@@ -553,13 +577,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
+	@NotNull
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
 		return this.perms.addAttachment(plugin, name, value);
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
+	@NotNull
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
 		return this.perms.addAttachment(plugin);
 	}
@@ -589,13 +615,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
+	@NotNull
+	public Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		return this.perms.getEffectivePermissions();
 	}
 
 	@Override
-	public @Nullable Component customName()
+	@Nullable
+	public Component customName()
 	{
 		return this.customName;
 	}
@@ -626,7 +654,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull Vector getVelocity()
+	@NotNull
+	public Vector getVelocity()
 	{
 		return velocity;
 	}
@@ -683,22 +712,25 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	/**
 	 * Sets if the entity is supported by a block.
 	 *
-	 * @param onGround True if entity is on ground.
+	 * @param onGround
+	 *            True if entity is on ground.
 	 */
 	public void setOnGround(boolean onGround)
 	{
 		this.onGround = onGround;
 	}
 
-	public @NotNull List<Entity> getNearbyEntities(double x, double y, double z)
+	@Override
+	@NotNull
+	public List<Entity> getNearbyEntities(double x, double y, double z)
 	{
 		AsyncCatcher.catchOp("getNearbyEntities");
 		List<Entity> nearbyEntities = new ArrayList<>();
 		getWorld().getEntities().forEach(entity ->
 		{
 			Vector distance = entity.getLocation().clone().subtract(getLocation()).toVector();
-			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y
-					&& Math.abs(distance.getZ()) <= z && entity != this)
+			if (Math.abs(distance.getX()) <= x && Math.abs(distance.getY()) <= y && Math.abs(distance.getZ()) <= z
+					&& entity != this)
 			{
 				nearbyEntities.add(entity);
 			}
@@ -712,6 +744,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return this.id;
 	}
 
+	public Object getHandle()
+	{
+		return this;
+	}
+
 	@Override
 	public int getFireTicks()
 	{
@@ -721,7 +758,7 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	@Override
 	public int getMaxFireTicks()
 	{
-		return maxFireTicks;
+		return MAX_FIRE_TICKS;
 	}
 
 	@Override
@@ -750,7 +787,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull TriState getVisualFire()
+	@NotNull
+	public TriState getVisualFire()
 	{
 		return this.triState;
 	}
@@ -801,7 +839,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	protected void remove(EntityRemoveEvent.Cause cause)
 	{
 		EventFactoryMock.callEntityRemoveEvent(this, cause);
-
 		leaveVehicle();
 		if (hasPassengers())
 		{
@@ -824,11 +861,15 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull ServerMock getServer()
+	@NotNull
+	public ServerMock getServer()
 	{
 		return this.server;
 	}
 
+	/**
+	 * @deprecated Use {@link #getPassengers()} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.12")
 	public Entity getPassenger()
@@ -836,33 +877,33 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 		return isEmpty() ? null : this.passengers.get(0);
 	}
 
+	/**
+	 * @deprecated Use {@link #addPassenger(Entity)} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.12")
 	public boolean setPassenger(@NotNull Entity passenger)
 	{
-		eject(); // Make sure there is only one passenger
+		// Make sure there is only one passenger
+		eject();
 		return addPassenger(passenger);
 	}
 
 	@Override
-	public @NotNull List<Entity> getPassengers()
+	@NotNull
+	public List<Entity> getPassengers()
 	{
 		return Collections.unmodifiableList(this.passengers);
 	}
 
-	@Override
-	public @NotNull Set<Player> getTrackedBy()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	/**
-	 * Gets a list of transitive passengers on this vehicle (passengers of passengers).
+	 * Gets a list of transitive passengers on this vehicle (passengers of
+	 * passengers).
 	 *
 	 * @return An immutable list of passengers.
 	 */
-	public @NotNull List<Entity> getTransitivePassengers()
+	@NotNull
+	public List<Entity> getTransitivePassengers()
 	{
 		List<Entity> entities = new ArrayList<>();
 		for (Entity passenger : this.passengers)
@@ -878,13 +919,12 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	{
 		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
 		Preconditions.checkArgument(!equals(passenger), "Entity cannot ride itself.");
-
 		if (passenger.getVehicle() == this)
 		{
 			return false;
 		}
-
-		// Go down into the passenger stack to see if it is already a passenger further down.
+		// Go down into the passenger stack to see if it is already a passenger further
+		// down.
 		// This prevents circular entity riding.
 		for (Entity current = this.getVehicle(); current != null; current = current.getVehicle())
 		{
@@ -893,7 +933,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 				return false;
 			}
 		}
-
 		((EntityMock) passenger).vehicle = this;
 		if (!tryAddingPassenger(passenger))
 		{
@@ -907,7 +946,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public boolean removePassenger(@NotNull Entity passenger)
 	{
 		Preconditions.checkNotNull(passenger, "Passenger cannot be null.");
-		passenger.leaveVehicle(); // Only the passenger is used by the CraftBukkit implementation
+		// Only the passenger is used by the CraftBukkit implementation
+		passenger.leaveVehicle();
 		return true;
 	}
 
@@ -950,9 +990,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setFallDistance(float distance)
 	{
 		this.fallDistance = distance;
-
 	}
 
+	/**
+	 * @deprecated Use
+	 *             {@link org.bukkit.event.entity.EntityDamageEvent#getDamageSource()}
+	 *             instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public void setLastDamageCause(@Nullable EntityDamageEvent event)
@@ -961,7 +1005,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable EntityDamageEvent getLastDamageCause()
+	@Nullable
+	public EntityDamageEvent getLastDamageCause()
 	{
 		return this.lastDamageEvent;
 	}
@@ -986,25 +1031,29 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.UNKNOWN;
 	}
 
 	@Override
-	public @NotNull Sound getSwimSound()
+	@NotNull
+	public Sound getSwimSound()
 	{
 		return Sound.ENTITY_GENERIC_SWIM;
 	}
 
 	@Override
-	public @NotNull Sound getSwimSplashSound()
+	@NotNull
+	public Sound getSwimSplashSound()
 	{
 		return Sound.ENTITY_GENERIC_SPLASH;
 	}
 
 	@Override
-	public @NotNull Sound getSwimHighSpeedSplashSound()
+	@NotNull
+	public Sound getSwimHighSpeedSplashSound()
 	{
 		return Sound.ENTITY_GENERIC_SPLASH;
 	}
@@ -1032,7 +1081,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable Entity getVehicle()
+	@Nullable
+	public Entity getVehicle()
 	{
 		return this.vehicle;
 	}
@@ -1040,11 +1090,13 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	/**
 	 * Adds the entity to the passenger list.
 	 * <p>
-	 * This method only does the logic for the vehicle and could cause illegal states if
-	 * used directly. Use {@link #addPassenger(Entity)}.
+	 * This method only does the logic for the vehicle and could cause illegal
+	 * states if used directly. Use {@link #addPassenger(Entity)}.
 	 *
-	 * @param entity The entity that will be a passenger.
-	 * @return {@code true} if the entity has become a passenger for this vehicle, {@code false} otherwise.
+	 * @param entity
+	 *            The entity that will be a passenger.
+	 * @return {@code true} if the entity has become a passenger for this vehicle,
+	 *         {@code false} otherwise.
 	 */
 	private boolean tryAddingPassenger(@NotNull Entity entity)
 	{
@@ -1053,14 +1105,11 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			// Entity passenger world must match
 			return false;
 		}
-
-		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity)
+		if (this instanceof Vehicle selfVehicle && entity instanceof LivingEntity
+				&& (!new VehicleEnterEvent(selfVehicle, entity).callEvent() || entity.getVehicle() != this))
 		{
 			// If the event is cancelled or the vehicle has since changed, abort
-			if (!new VehicleEnterEvent(selfVehicle, entity).callEvent() || entity.getVehicle() != this)
-			{
-				return false;
-			}
+			return false;
 		}
 		if (!new EntityMountEvent(entity, this).callEvent())
 		{
@@ -1072,11 +1121,14 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	/**
 	 * Removes the entity from the passenger list.
 	 * <p>
-	 * This method only does the logic for the vehicle and could cause illegal states if
-	 * used directly. Use {@link #removePassenger(Entity)} or {@link #leaveVehicle()}.
+	 * This method only does the logic for the vehicle and could cause illegal
+	 * states if used directly. Use {@link #removePassenger(Entity)} or
+	 * {@link #leaveVehicle()}.
 	 *
-	 * @param entity The entity that will leave this vehicle.
-	 * @return {@code true} if the entity is no longer a passenger for this vehicle, {@code false} otherwise.
+	 * @param entity
+	 *            The entity that will leave this vehicle.
+	 * @return {@code true} if the entity is no longer a passenger for this vehicle,
+	 *         {@code false} otherwise.
 	 */
 	private boolean tryRemovingPassenger(@NotNull Entity entity)
 	{
@@ -1100,7 +1152,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public void setCustomNameVisible(boolean flag)
 	{
 		customNameVisible = flag;
-
 	}
 
 	@Override
@@ -1152,13 +1203,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull CompletableFuture<Boolean> teleportAsync(@NotNull Location loc, PlayerTeleportEvent.@NotNull TeleportCause cause, @NotNull TeleportFlag @NotNull ... teleportFlags)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean hasNoPhysics()
 	{
 		return noPhysics;
@@ -1201,7 +1245,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull Set<String> getScoreboardTags()
+	@NotNull
+	public Set<String> getScoreboardTags()
 	{
 		return this.tags;
 	}
@@ -1219,39 +1264,28 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull PistonMoveReaction getPistonMoveReaction()
-	{
-		// TODO Auto-generated constructor stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setRotation(float yaw, float pitch)
 	{
 		NumberConversions.checkFinite(pitch, "pitch not finite");
 		NumberConversions.checkFinite(yaw, "yaw not finite");
-
 		yaw = Location.normalizeYaw(yaw);
 		pitch = Location.normalizePitch(pitch);
-
 		location.setYaw(yaw);
 		location.setPitch(pitch);
 	}
 
 	@Override
-	public @NotNull BoundingBox getBoundingBox()
+	@NotNull
+	public BoundingBox getBoundingBox()
 	{
 		double halfWidth = getWidth() / 2.0D;
 		double height = getHeight();
-
 		double minX = getX() - halfWidth;
 		double minY = getY();
 		double minZ = getZ() - halfWidth;
-
 		double maxX = getX() + halfWidth;
 		double maxY = getY() + height;
 		double maxZ = getZ() + halfWidth;
-
 		return new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 	}
 
@@ -1268,14 +1302,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull BlockFace getFacing()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Pose getPose()
+	@NotNull
+	public Pose getPose()
 	{
 		return this.pose;
 	}
@@ -1289,7 +1317,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	/**
 	 * Set if the entity is in water.
 	 *
-	 * @param inWater true if the entity is in water.
+	 * @param inWater
+	 *            true if the entity is in water.
 	 */
 	public void setInWater(boolean inWater)
 	{
@@ -1297,30 +1326,10 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull SpawnCategory getSpawnCategory()
+	@NotNull
+	public SpawnCategory getSpawnCategory()
 	{
 		return SpawnCategory.MISC;
-	}
-
-	@Override
-	public @NotNull Entity copy(@NotNull Location to)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Entity copy()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable EntitySnapshot createSnapshot()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1336,46 +1345,27 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull Component name()
+	@NotNull
+	public Component name()
 	{
 		return this.name;
 	}
 
 	// Paper start
-
 	@Override
-	public @NotNull Component teamDisplayName()
+	@NotNull
+	public Component teamDisplayName()
 	{
-		Team team = this.getServer().getScoreboardManager().getMainScoreboard().getEntryTeam(this.getScoreboardEntryName());
-		return TeamMock.formatNameForTeam(team, this.name()).style(Style.style()
-				.hoverEvent(HoverEvent.showEntity(this.getType(), this.getUniqueId(), this.name()))
-				.insertion(this.getUniqueId().toString())
-				.build());
+		Team team = this.getServer().getScoreboardManager().getMainScoreboard()
+				.getEntryTeam(this.getScoreboardEntryName());
+		return TeamMock.formatNameForTeam(team, this.name())
+				.style(Style.style().hoverEvent(HoverEvent.showEntity(this.getType(), this.getUniqueId(), this.name()))
+						.insertion(this.getUniqueId().toString()).build());
 	}
 
 	@Override
-	public @NotNull HoverEvent<HoverEvent.ShowEntity> asHoverEvent()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Location getOrigin()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean fromMobSpawner()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Chunk getChunk()
+	@NotNull
+	public Chunk getChunk()
 	{
 		return getLocation().getChunk();
 	}
@@ -1384,83 +1374,6 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	public CreatureSpawnEvent.@NotNull SpawnReason getEntitySpawnReason()
 	{
 		return this.spawnReason;
-	}
-
-	@Override
-	public boolean isUnderWater()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInRain()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInBubbleColumn()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInWaterOrRain()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInWaterOrBubbleColumn()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInWaterOrRainOrBubbleColumn()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInLava()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isTicking()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean spawnAt(@NotNull Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean spawnAt(@NotNull Location location, CreatureSpawnEvent.@NotNull SpawnReason reason)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isInPowderedSnow()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -1476,7 +1389,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull EntityScheduler getScheduler()
+	@NotNull
+	public EntityScheduler getScheduler()
 	{
 		return new FoliaEntityScheduler(this.server.getScheduler(), this);
 	}
@@ -1494,17 +1408,9 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public void setVisibleByDefault(boolean visible)
+	public void setPose(@NotNull Pose pose)
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isVisibleByDefault()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		this.setPose(pose, false);
 	}
 
 	@Override
@@ -1552,7 +1458,8 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @NotNull String getScoreboardEntryName()
+	@NotNull
+	public String getScoreboardEntryName()
 	{
 		return this.getUniqueId().toString();
 	}
@@ -1564,33 +1471,18 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 	}
 
 	@Override
-	public @Nullable String getAsString()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void broadcastHurtAnimation(@NotNull Collection<Player> players)
 	{
 		Preconditions.checkNotNull(players, "Player collection cannot be null");
-		Preconditions.checkArgument(!players.contains(this), "Cannot broadcast hurt animation to self without a yaw");
+		if (this instanceof Player self)
+		{
+			Preconditions.checkArgument(!players.contains(self),
+					"Cannot broadcast hurt animation to self without a yaw");
+		}
 		for (final Player player : players)
 		{
 			player.sendHurtAnimation(0);
 		}
-	}
-
-	@Override
-	public void lookAt(double v, double v1, double v2, @NotNull LookAnchor lookAnchor)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack getPickItemStack()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	public void tick()
@@ -1600,5 +1492,4 @@ public abstract class EntityMock extends Entity.Spigot implements Entity, Messag
 			++ticksLived;
 		}
 	}
-
 }

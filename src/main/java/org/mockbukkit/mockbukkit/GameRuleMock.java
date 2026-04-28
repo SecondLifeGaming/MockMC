@@ -9,7 +9,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.function.Function;
 
 @NullMarked
-@SuppressWarnings("NonExtendableApiUsage")
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class GameRuleMock<T> extends GameRule<T>
 {
 
@@ -52,8 +53,10 @@ public class GameRuleMock<T> extends GameRule<T>
 	/**
 	 * Deserialize {@link GameRule} from the JSON file.
 	 *
-	 * @param json 	The json object to deserialize.
-	 * @param <T>   The {@link GameRule} type.
+	 * @param json
+	 *            The json object to deserialize.
+	 * @param <T>
+	 *            The {@link GameRule} type.
 	 * @return The deserialized rule.
 	 */
 	@SuppressWarnings("unchecked")
@@ -62,26 +65,17 @@ public class GameRuleMock<T> extends GameRule<T>
 		Preconditions.checkNotNull(json, "json can't be null");
 
 		// key
-		String rawKey = Preconditions.checkNotNull(
-				json.getAsJsonPrimitive("key"),
-				"'key' is missing"
-		).getAsString();
-		NamespacedKey key = Preconditions.checkNotNull(
-				NamespacedKey.fromString(rawKey),
-				"'key' is not in a valid format"
-		);
+		String rawKey = Preconditions.checkNotNull(json.getAsJsonPrimitive("key"), "'key' is missing").getAsString();
+		NamespacedKey key = Preconditions.checkNotNull(NamespacedKey.fromString(rawKey),
+				"'key' is not in a valid format");
 
 		// translationKey
-		String translationKey = Preconditions.checkNotNull(
-				json.getAsJsonPrimitive("translationKey"),
-				"'translationKey' is missing"
-		).getAsString();
+		String translationKey = Preconditions
+				.checkNotNull(json.getAsJsonPrimitive("translationKey"), "'translationKey' is missing").getAsString();
 
 		// type
-		String typeName = Preconditions.checkNotNull(
-				json.getAsJsonPrimitive("type"),
-				"'type' is missing"
-		).getAsString();
+		String typeName = Preconditions.checkNotNull(json.getAsJsonPrimitive("type"), "'type' is missing")
+				.getAsString();
 		Class<?> rawClass;
 		try
 		{
@@ -101,11 +95,8 @@ public class GameRuleMock<T> extends GameRule<T>
 		private final Function<LEGACY, MODERN> fromLegacyToModern;
 		private final Function<MODERN, LEGACY> toLegacyFromModern;
 
-		public LegacyGameRuleWrapperMock(Class<LEGACY> typeOverride,
-										 NamespacedKey key,
-										 String translationKey,
-										 Function<LEGACY, MODERN> fromLegacyToModern,
-										 Function<MODERN, LEGACY> toLegacyFromModern)
+		public LegacyGameRuleWrapperMock(Class<LEGACY> typeOverride, NamespacedKey key, String translationKey,
+				Function<LEGACY, MODERN> fromLegacyToModern, Function<MODERN, LEGACY> toLegacyFromModern)
 		{
 			super(typeOverride, key, translationKey);
 			this.fromLegacyToModern = fromLegacyToModern;

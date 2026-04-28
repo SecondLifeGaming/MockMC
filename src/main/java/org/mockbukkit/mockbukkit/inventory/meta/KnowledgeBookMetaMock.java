@@ -6,7 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.KnowledgeBookMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
+import org.mockbukkit.mockbukkit.util.NbtParser;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +18,9 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBookMeta
+public class KnowledgeBookMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.KnowledgeBookMetaBaseMock
 {
 
 	private static final int MAX_RECIPES = 32767;
@@ -34,14 +36,15 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	/**
-	 * Constructs a new {@link KnowledgeBookMetaMock}, cloning the data from another.
+	 * Constructs a new {@link KnowledgeBookMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public KnowledgeBookMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof KnowledgeBookMeta bookMeta)
 		{
 			recipes.addAll(bookMeta.getRecipes());
@@ -63,27 +66,25 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 		{
 			return true;
 		}
-		if (!super.equals(obj))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		if (!(obj instanceof KnowledgeBookMetaMock other))
-		{
-			return false;
-		}
-
-		return recipes.equals(other.recipes);
+		KnowledgeBookMetaMock other = (KnowledgeBookMetaMock) obj;
+		return super.equals(obj) && isEquivalent(this.recipes, other.getRecipes());
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull KnowledgeBookMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public KnowledgeBookMetaMock clone()
 	{
 		return new KnowledgeBookMetaMock(this);
 	}
 
 	@Override
-	public void addRecipe(@NotNull NamespacedKey @NotNull ... recipes)
+	public void addRecipe(@NotNull NamespacedKey @NotNull [] recipes)
 	{
 		for (NamespacedKey recipe : recipes)
 		{
@@ -91,7 +92,6 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 			{
 				return;
 			}
-
 			if (recipe != null)
 			{
 				this.recipes.add(recipe);
@@ -100,7 +100,8 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	}
 
 	@Override
-	public @NotNull List<NamespacedKey> getRecipes()
+	@NotNull
+	public List<NamespacedKey> getRecipes()
 	{
 		return Collections.unmodifiableList(recipes);
 	}
@@ -121,19 +122,22 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized KnowledgeBookMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized KnowledgeBookMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the KnowledgeBookMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
-	public static @NotNull KnowledgeBookMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static KnowledgeBookMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		KnowledgeBookMetaMock serialMock = new KnowledgeBookMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("recipes"))
+		List<NamespacedKey> parsed = NbtParser.parseList(args.get("recipes"),
+				o -> NamespacedKey.fromString((String) o));
+		if (parsed != null)
 		{
-			serialMock.addRecipe(((List<String>) args.get("recipes")).stream().map(NamespacedKey::fromString).toArray(NamespacedKey[]::new));
+			serialMock.recipes.addAll(parsed);
 		}
-
 		return serialMock;
 	}
 
@@ -141,10 +145,12 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	 * Serializes the properties of an KnowledgeBookMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the KnowledgeBookMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         KnowledgeBookMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("recipes", recipes.stream().map(NamespacedKey::toString).toList());
@@ -156,5 +162,4 @@ public class KnowledgeBookMetaMock extends ItemMetaMock implements KnowledgeBook
 	{
 		return "KNOWLEDGE_BOOK";
 	}
-
 }

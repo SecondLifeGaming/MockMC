@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -18,19 +17,27 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class AxolotlMock extends AnimalsMock implements Axolotl
+public class AxolotlMock extends AnimalsMock
+		implements
+			Axolotl,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AxolotlBaseMock
 {
 
 	private boolean isPlayingDead = false;
-	private @NotNull Variant variant = Variant.LUCY;
+
+	@NotNull
+	private Variant variant = Variant.LUCY;
 
 	private boolean fromBucket = false;
 
 	/**
-	 * Constructs a new {@link AxolotlMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AxolotlMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public AxolotlMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -50,7 +57,8 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -75,13 +83,15 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.AXOLOTL_BUCKET);
 	}
 
 	@Override
-	public @NotNull Sound getPickupSound()
+	@NotNull
+	public Sound getPickupSound()
 	{
 		return Sound.ITEM_BUCKET_FILL_AXOLOTL;
 	}
@@ -98,5 +108,4 @@ public class AxolotlMock extends AnimalsMock implements Axolotl
 	{
 		return EntityType.AXOLOTL;
 	}
-
 }

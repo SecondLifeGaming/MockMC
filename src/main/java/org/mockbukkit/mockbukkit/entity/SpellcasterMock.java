@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.entity.Spellcaster;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,16 +11,22 @@ import java.util.UUID;
  *
  * @see IllagerMock
  */
-public abstract class SpellcasterMock extends IllagerMock implements Spellcaster
+public abstract class SpellcasterMock extends IllagerMock
+		implements
+			Spellcaster,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SpellcasterBaseMock
 {
 
 	private Spellcaster.Spell spell = Spell.NONE;
 
 	/**
-	 * Constructs a new {@link SpellcasterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SpellcasterMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected SpellcasterMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -41,5 +46,4 @@ public abstract class SpellcasterMock extends IllagerMock implements Spellcaster
 		Preconditions.checkArgument(spell != null, "Use Spell.NONE");
 		this.spell = spell;
 	}
-
 }

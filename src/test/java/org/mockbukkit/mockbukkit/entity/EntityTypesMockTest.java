@@ -44,28 +44,34 @@ class EntityTypesMockTest
 		@Test
 		void givenNullBukkitClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> builder.register(null, MOCK_CLASS, SIMPLE_FACTORY));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> builder.register(null, MOCK_CLASS, SIMPLE_FACTORY));
 			assertEquals("Cannot register a null bukkit class", e.getMessage());
 		}
 
 		@Test
 		void givenNullMockClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> builder.register(BUKKIT_CLASS, null, SIMPLE_FACTORY));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> builder.register(BUKKIT_CLASS, null, SIMPLE_FACTORY));
 			assertEquals("Cannot register a null mock class", e.getMessage());
 		}
 
 		@Test
 		void givenMockClassThatDoesNotImplementBukkitClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> builder.register(Pig.class, MOCK_CLASS, SIMPLE_FACTORY));
-			assertEquals("The class class org.mockbukkit.mockbukkit.entity.CowMock is not a subclass of interface org.bukkit.entity.Pig", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> builder.register(Pig.class, MOCK_CLASS, SIMPLE_FACTORY));
+			assertEquals(
+					"The class class org.mockbukkit.mockbukkit.entity.CowMock is not a subclass of interface org.bukkit.entity.Pig",
+					e.getMessage());
 		}
 
 		@Test
 		void givenNullFactory()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> builder.register(BUKKIT_CLASS, MOCK_CLASS, null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> builder.register(BUKKIT_CLASS, MOCK_CLASS, null));
 			assertEquals("Cannot register a null mock factory", e.getMessage());
 		}
 
@@ -73,8 +79,10 @@ class EntityTypesMockTest
 		void givenExistingEntry()
 		{
 			builder.register(BUKKIT_CLASS, MOCK_CLASS, SIMPLE_FACTORY);
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> builder.register(BUKKIT_CLASS, MOCK_CLASS, SIMPLE_FACTORY));
-			assertEquals("Cannot register type interface org.bukkit.entity.Cow because it's already registered.", e.getMessage());
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> builder.register(BUKKIT_CLASS, MOCK_CLASS, SIMPLE_FACTORY));
+			assertEquals("Cannot register type interface org.bukkit.entity.Cow because it's already registered.",
+					e.getMessage());
 		}
 
 		@Test
@@ -93,7 +101,8 @@ class EntityTypesMockTest
 			UUID uuid = UUID.randomUUID();
 			EntityTypesMock actual = builder.register(BUKKIT_CLASS, MOCK_CLASS, SIMPLE_FACTORY).build();
 
-			UnimplementedOperationException e = assertThrows(UnimplementedOperationException.class, () -> actual.create(Pig.class, server, uuid));
+			UnimplementedOperationException e = assertThrows(UnimplementedOperationException.class,
+					() -> actual.create(Pig.class, server, uuid));
 			assertEquals("Mock for entity org.bukkit.entity.Pig was not implemented yet.", e.getMessage());
 		}
 
@@ -106,30 +115,30 @@ class EntityTypesMockTest
 		@Test
 		void givenNullBukkitClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> EntityTypesMock.createEntity(null, server));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> EntityTypesMock.createEntity(null, server));
 			assertEquals("bukkitClazz cannot be null", e.getMessage());
 		}
 
 		@Test
 		void givenNullServer()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> EntityTypesMock.createEntity(BUKKIT_CLASS, null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> EntityTypesMock.createEntity(BUKKIT_CLASS, null));
 			assertEquals("server cannot be null", e.getMessage());
 		}
 
 		@Test
 		void givenNullEntityUuid()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> EntityTypesMock.createEntity(BUKKIT_CLASS, server, null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> EntityTypesMock.createEntity(BUKKIT_CLASS, server, null));
 			assertEquals("entityUUID cannot be null", e.getMessage());
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = EntityType.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = {
-						"UNKNOWN", "ITEM", "PLAYER"
-				})
+		@EnumSource(value = EntityType.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"UNKNOWN", "ITEM", "PLAYER"})
 		void givenPossibleValues(EntityType entityType)
 		{
 			EntityMock actual = EntityTypesMock.createEntity(entityType.getEntityClass(), server);
@@ -142,14 +151,16 @@ class EntityTypesMockTest
 		@Test
 		void givenInvalidItemClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> EntityTypesMock.createEntity(Item.class, server));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> EntityTypesMock.createEntity(Item.class, server));
 			assertEquals("Items must be spawned using World#dropItem(...)", e.getMessage());
 		}
 
 		@Test
 		void givenInvalidPlayerClass()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> EntityTypesMock.createEntity(Player.class, server));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> EntityTypesMock.createEntity(Player.class, server));
 			assertEquals("Player Entities cannot be spawned, use ServerMock#addPlayer(...)", e.getMessage());
 		}
 

@@ -24,10 +24,13 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	private boolean sitting;
 
 	/**
-	 * Constructs a new  on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new on the provided {@link ServerMock} with a specified
+	 * {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TameableAnimalMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -37,7 +40,8 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	/**
 	 * Sets the owner of this animal by UUID.
 	 *
-	 * @param uuid The UUID.
+	 * @param uuid
+	 *            The UUID.
 	 * @see #getOwner()
 	 * @see #getOwnerUniqueId()
 	 */
@@ -76,8 +80,7 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 		{
 			this.setTamed(true);
 			this.setOwnerUUID(tamer.getUniqueId());
-		}
-		else
+		} else
 		{
 			this.setTamed(false);
 			this.setOwnerUUID(null);
@@ -104,7 +107,8 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	 * Checks if the animal is sitting.
 	 *
 	 * @return Whether the animal is sitting.
-	 * @throws IllegalStateException If the animal doesn't implement {@link Sittable}.
+	 * @throws IllegalStateException
+	 *             If the animal doesn't implement {@link Sittable}.
 	 * @see Sittable#isSitting
 	 */
 	// Sitting methods implemented here for animals that implement Sittable.
@@ -117,8 +121,10 @@ public class TameableAnimalMock extends AnimalsMock implements Tameable, Creatur
 	/**
 	 * Sets whether the animal is sitting.
 	 *
-	 * @param sitting Whether the animal is sitting.
-	 * @throws IllegalStateException If the animal doesn't implement {@link Sittable}.
+	 * @param sitting
+	 *            Whether the animal is sitting.
+	 * @throws IllegalStateException
+	 *             If the animal doesn't implement {@link Sittable}.
 	 * @see Sittable#setSitting(boolean)
 	 */
 	public void setSitting(boolean sitting)

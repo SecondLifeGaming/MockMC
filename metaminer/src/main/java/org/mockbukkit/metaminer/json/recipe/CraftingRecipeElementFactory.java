@@ -98,7 +98,7 @@ public class CraftingRecipeElementFactory
 			json.add("input", RecipeChoiceElementFactory.toJson(transmuteRecipe.getInput()));
 			json.add("material", RecipeChoiceElementFactory.toJson(transmuteRecipe.getMaterial()));
 		}
-		case ComplexRecipe complexRecipe -> json.addProperty("type", "complex");
+		case ComplexRecipe _ -> json.addProperty("type", "complex");
 		default ->
 				throw new UnsupportedOperationException(String.format("Unknown recipe type: %s", craftingRecipe.getClass().getName()));
 		}

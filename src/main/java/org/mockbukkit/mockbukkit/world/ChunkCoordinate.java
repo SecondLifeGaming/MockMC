@@ -23,8 +23,10 @@ public class ChunkCoordinate
 	/**
 	 * Constructs a new {@link ChunkCoordinate}.
 	 *
-	 * @param x The X coordinate.
-	 * @param z The Z coordinate.
+	 * @param x
+	 *            The X coordinate.
+	 * @param z
+	 *            The Z coordinate.
 	 */
 	public ChunkCoordinate(int x, int z)
 	{

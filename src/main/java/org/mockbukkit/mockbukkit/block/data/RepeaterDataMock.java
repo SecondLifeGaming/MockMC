@@ -14,7 +14,8 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	/**
 	 * Constructs a new {@link RepeaterDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public RepeaterDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	}
 
 	/**
-	 * Create a new {@link RepeaterDataMock} based on an existing {@link RepeaterDataMock}.
+	 * Create a new {@link RepeaterDataMock} based on an existing
+	 * {@link RepeaterDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected RepeaterDataMock(@NotNull RepeaterDataMock other)
 	{
@@ -40,7 +43,8 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	@Override
 	public void setDelay(int delay)
 	{
-		Preconditions.checkArgument(delay >= this.getMinimumDelay() && delay <= this.getMaximumDelay(), "Delay must be between %s and %s", this.getMinimumDelay(), this.getMaximumDelay());
+		Preconditions.checkArgument(delay >= this.getMinimumDelay() && delay <= this.getMaximumDelay(),
+				"Delay must be between %s and %s", this.getMinimumDelay(), this.getMaximumDelay());
 		this.set(BlockDataKey.DELAY, delay);
 	}
 
@@ -100,7 +104,8 @@ public class RepeaterDataMock extends BlockDataMock implements Repeater
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RepeaterDataMock clone()
 	{
 		return new RepeaterDataMock(this);

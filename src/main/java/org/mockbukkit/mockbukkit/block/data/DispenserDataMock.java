@@ -48,7 +48,8 @@ public class DispenserDataMock extends BlockDataMock implements Dispenser
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian(), "Invalid face, only cartesian face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian(),
+				"Invalid face, only cartesian face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -59,7 +60,8 @@ public class DispenserDataMock extends BlockDataMock implements Dispenser
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull DispenserDataMock clone()
 	{
 		return new DispenserDataMock(this);

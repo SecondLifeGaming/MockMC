@@ -15,7 +15,8 @@ public class PluginVanillaCommandWrapperMock extends VanillaCommandWrapperMock i
 	private final Plugin plugin;
 	private final List<String> aliases;
 
-	public PluginVanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases, CommandNode<CommandSourceStack> vanillaCommand, Plugin plugin)
+	public PluginVanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases,
+			CommandNode<CommandSourceStack> vanillaCommand, Plugin plugin)
 	{
 		super(name, description, usageMessage, aliases, vanillaCommand, null);
 		this.plugin = plugin;

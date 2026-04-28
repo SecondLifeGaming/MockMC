@@ -8,11 +8,10 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public record DamageReductionMock(float horizontalBlockingAngle,
-								  @Nullable RegistryKeySet<DamageType> type,
-								  float base,
-								  float factor) implements DamageReduction
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
+public record DamageReductionMock(float horizontalBlockingAngle, @Nullable RegistryKeySet<DamageType> type, float base,
+		float factor) implements DamageReduction
 {
 
 	static class BuilderMock implements Builder
@@ -32,7 +31,8 @@ public record DamageReductionMock(float horizontalBlockingAngle,
 		@Override
 		public Builder horizontalBlockingAngle(@Positive float horizontalBlockingAngle)
 		{
-			Preconditions.checkArgument(horizontalBlockingAngle > 0.0F, "horizontalBlockingAngle must be positive and not zero, was %s", horizontalBlockingAngle);
+			Preconditions.checkArgument(horizontalBlockingAngle > 0.0F,
+					"horizontalBlockingAngle must be positive and not zero, was %s", horizontalBlockingAngle);
 			this.horizontalBlockingAngle = horizontalBlockingAngle;
 			return this;
 		}

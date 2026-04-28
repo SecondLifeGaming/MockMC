@@ -4,7 +4,8 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 
 /**
- * A class used to prevent synchronous-only methods from being run asynchronously.
+ * A class used to prevent synchronous-only methods from being run
+ * asynchronously.
  */
 public class AsyncCatcher
 {
@@ -15,9 +16,11 @@ public class AsyncCatcher
 	}
 
 	/**
-	 * Throws an {@link IllegalStateException} if not called from the primary thread.
+	 * Throws an {@link IllegalStateException} if not called from the primary
+	 * thread.
 	 *
-	 * @param reason The reason for the exception.
+	 * @param reason
+	 *            The reason for the exception.
 	 */
 	public static void catchOp(String reason)
 	{

@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class SculkShriekerStateMockTest
 {
@@ -53,7 +55,8 @@ class SculkShriekerStateMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new SculkShriekerStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new SculkShriekerStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

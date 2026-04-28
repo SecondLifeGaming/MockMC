@@ -4,7 +4,6 @@ import org.bukkit.entity.ElderGuardian;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see GuardianMock
  */
-public class ElderGuardianMock extends GuardianMock implements ElderGuardian
+public class ElderGuardianMock extends GuardianMock
+		implements
+			ElderGuardian,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ElderGuardianBaseMock
 {
 
 	/**
-	 * Constructs a new {@link ElderGuardianMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ElderGuardianMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ElderGuardianMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,7 +32,8 @@ public class ElderGuardianMock extends GuardianMock implements ElderGuardian
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ELDER_GUARDIAN;
 	}
@@ -37,5 +43,4 @@ public class ElderGuardianMock extends GuardianMock implements ElderGuardian
 	{
 		return true;
 	}
-
 }

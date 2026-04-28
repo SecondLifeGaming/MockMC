@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializable>
 {
 
@@ -17,7 +19,8 @@ public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializa
 	public void write(JsonWriter out, ConfigurationSerializable value) throws IOException
 	{
 
-		@NotNull Map<String, Object> data = value.serialize();
+		@NotNull
+		Map<String, Object> data = value.serialize();
 
 		writeMap(out, data);
 	}
@@ -39,28 +42,26 @@ public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializa
 	{
 		switch (val)
 		{
-		case null -> out.name(key).nullValue();
-		case Boolean booleanValue -> out.name(key).value(booleanValue);
-		case Number numberValue -> out.name(key).value(numberValue);
-		case String stringVal -> out.name(key).value(stringVal);
-		case Map<?, ?> mapValue ->
-		{
-			out.name(key);
-			this.writeMap(out, (Map<String, Object>) mapValue);
-		}
-		case Collection<?> collectionValue ->
-		{
-			out.name(key).beginArray();
-			for (Object item : collectionValue)
-			{
-				out.beginObject();
-				this.writeValue(out, item, key);
-				out.endObject();
+			case null -> out.name(key).nullValue();
+			case Boolean booleanValue -> out.name(key).value(booleanValue);
+			case Number numberValue -> out.name(key).value(numberValue);
+			case String stringVal -> out.name(key).value(stringVal);
+			case Map<?, ?> mapValue -> {
+				out.name(key);
+				this.writeMap(out, (Map<String, Object>) mapValue);
 			}
-			out.endArray();
-		}
-		default ->
-				throw new UnsupportedOperationException(String.format("%s is not a valid value for key: %s", val.getClass().getName(), key));
+			case Collection<?> collectionValue -> {
+				out.name(key).beginArray();
+				for (Object item : collectionValue)
+				{
+					out.beginObject();
+					this.writeValue(out, item, key);
+					out.endObject();
+				}
+				out.endArray();
+			}
+			default -> throw new UnsupportedOperationException(
+					String.format("%s is not a valid value for key: %s", val.getClass().getName(), key));
 		}
 	}
 

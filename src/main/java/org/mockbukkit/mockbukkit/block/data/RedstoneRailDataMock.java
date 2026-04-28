@@ -10,9 +10,11 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 {
 
 	/**
-	 * Constructs a new {@link RedstoneRailDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link RedstoneRailDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public RedstoneRailDataMock(@NotNull Material material)
 	{
@@ -20,9 +22,11 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 	}
 
 	/**
-	 * Create a new {@link RedstoneRailDataMock} based on an existing {@link RedstoneRailDataMock}.
+	 * Create a new {@link RedstoneRailDataMock} based on an existing
+	 * {@link RedstoneRailDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected RedstoneRailDataMock(@NotNull RedstoneRailDataMock other)
 	{
@@ -44,14 +48,13 @@ public class RedstoneRailDataMock extends RailDataMock implements RedstoneRail
 	@Override
 	public @NotNull Set<Shape> getShapes()
 	{
-		return Set.of(Shape.NORTH_SOUTH, Shape.EAST_WEST,
-				Shape.ASCENDING_NORTH, Shape.ASCENDING_SOUTH,
-				Shape.ASCENDING_EAST, Shape.ASCENDING_WEST
-		);
+		return Set.of(Shape.NORTH_SOUTH, Shape.EAST_WEST, Shape.ASCENDING_NORTH, Shape.ASCENDING_SOUTH,
+				Shape.ASCENDING_EAST, Shape.ASCENDING_WEST);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RedstoneRailDataMock clone()
 	{
 		return new RedstoneRailDataMock(this);

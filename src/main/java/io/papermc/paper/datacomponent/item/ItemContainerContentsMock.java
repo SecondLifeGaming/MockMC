@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ItemContainerContentsMock(List<ItemStack> contents) implements ItemContainerContents
 {
 	@Override
 	public @Unmodifiable List<ItemStack> contents()
 	{
-		return contents.stream()
-				.map(ItemStack::clone)
-				.toList();
+		return contents.stream().map(ItemStack::clone).toList();
 	}
 
 	static class BuilderMock implements Builder
@@ -52,7 +51,8 @@ public record ItemContainerContentsMock(List<ItemStack> contents) implements Ite
 
 		private void checkSize(int extra)
 		{
-			Preconditions.checkArgument(items.size() + extra <= 256, "Cannot have more than %s items, had %s", 256, items.size() + extra);
+			Preconditions.checkArgument(items.size() + extra <= 256, "Cannot have more than %s items, had %s", 256,
+					items.size() + extra);
 		}
 
 	}

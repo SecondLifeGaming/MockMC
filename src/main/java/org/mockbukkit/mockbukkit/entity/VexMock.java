@@ -8,7 +8,6 @@ import org.bukkit.entity.Vex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.Objects;
 import java.util.UUID;
 
@@ -17,21 +16,32 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class VexMock extends MonsterMock implements Vex
+public class VexMock extends MonsterMock
+		implements
+			Vex,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.VexBaseMock
 {
 
 	private boolean isCharging = false;
+
 	private boolean hasLimitedLife = false;
+
 	private int limitedLifeTicks = -1;
 
-	private @Nullable Location boundLocation = null;
-	private @Nullable Mob summoner = null;
+	@Nullable
+	private Location boundLocation = null;
+
+	@Nullable
+	private Mob summoner = null;
 
 	/**
-	 * Constructs a new {@link VexMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link VexMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public VexMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -51,7 +61,8 @@ public class VexMock extends MonsterMock implements Vex
 	}
 
 	@Override
-	public @Nullable Location getBound()
+	@Nullable
+	public Location getBound()
 	{
 		return this.boundLocation == null ? null : boundLocation.clone();
 	}
@@ -62,10 +73,10 @@ public class VexMock extends MonsterMock implements Vex
 		if (location == null)
 		{
 			this.boundLocation = null;
-		}
-		else
+		} else
 		{
-			Preconditions.checkArgument(Objects.equals(this.getWorld(), location.getWorld()), "The bound world cannot be different to the entity's world.");
+			Preconditions.checkArgument(Objects.equals(this.getWorld(), location.getWorld()),
+					"The bound world cannot be different to the entity's world.");
 			this.boundLocation = location.clone();
 		}
 	}
@@ -93,7 +104,8 @@ public class VexMock extends MonsterMock implements Vex
 	}
 
 	@Override
-	public @Nullable Mob getSummoner()
+	@Nullable
+	public Mob getSummoner()
 	{
 		return this.summoner;
 	}
@@ -129,9 +141,9 @@ public class VexMock extends MonsterMock implements Vex
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.VEX;
 	}
-
 }

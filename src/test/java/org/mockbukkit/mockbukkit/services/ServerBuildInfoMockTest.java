@@ -63,13 +63,15 @@ class ServerBuildInfoMockTest
 	@Test
 	void minecraftVersionName()
 	{
-		assertTrue(buildInfo.minecraftVersionName().matches(VERSION_RE), "Invalid version name: " + buildInfo.minecraftVersionName());
+		assertTrue(buildInfo.minecraftVersionName().matches(VERSION_RE),
+				"Invalid version name: " + buildInfo.minecraftVersionName());
 	}
 
 	@Test
 	void minecraftVersionId()
 	{
-		assertTrue(buildInfo.minecraftVersionId().matches(VERSION_RE), "Invalid version id: " + buildInfo.minecraftVersionId());
+		assertTrue(buildInfo.minecraftVersionId().matches(VERSION_RE),
+				"Invalid version id: " + buildInfo.minecraftVersionId());
 	}
 
 	@Test
@@ -94,8 +96,11 @@ class ServerBuildInfoMockTest
 
 	static Stream<Arguments> expectedVersionInfo()
 	{
-		return Stream.of(Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_SIMPLE, Pattern.compile(VERSION_RE + "-" + BUILD_NUMBER_RE + "-" + COMMIT_RE)),
-				Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_FULL, Pattern.compile(VERSION_RE + "-" + BUILD_NUMBER_RE + "-" + BRANCH_RE + "@" + COMMIT_RE + " \\(" + BUILD_TIME_RE + "\\)")));
+		return Stream.of(
+				Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_SIMPLE,
+						Pattern.compile(VERSION_RE + "-" + BUILD_NUMBER_RE + "-" + COMMIT_RE)),
+				Arguments.of(ServerBuildInfo.StringRepresentation.VERSION_FULL, Pattern.compile(VERSION_RE + "-"
+						+ BUILD_NUMBER_RE + "-" + BRANCH_RE + "@" + COMMIT_RE + " \\(" + BUILD_TIME_RE + "\\)")));
 	}
 
 }

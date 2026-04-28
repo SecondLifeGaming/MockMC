@@ -5,17 +5,22 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.RideableMinecart;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class RideableMinecartMock extends MinecartMock implements RideableMinecart
+public class RideableMinecartMock extends MinecartMock
+		implements
+			RideableMinecart,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.minecart.RideableMinecartBaseMock
 {
 
 	/**
-	 * Constructs a new {@link RideableMinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link RideableMinecartMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public RideableMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -23,15 +28,16 @@ public class RideableMinecartMock extends MinecartMock implements RideableMineca
 	}
 
 	@Override
-	public @NotNull Material getMinecartMaterial()
+	@NotNull
+	public Material getMinecartMaterial()
 	{
 		return Material.MINECART;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.MINECART;
 	}
-
 }

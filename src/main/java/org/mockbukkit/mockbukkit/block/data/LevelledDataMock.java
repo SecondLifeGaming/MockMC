@@ -11,7 +11,8 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	/**
 	 * Constructs a new {@link LevelledDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public LevelledDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	}
 
 	/**
-	 * Create a new {@link LevelledDataMock} based on an existing {@link LevelledDataMock}.
+	 * Create a new {@link LevelledDataMock} based on an existing
+	 * {@link LevelledDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected LevelledDataMock(@NotNull LevelledDataMock other)
 	{
@@ -37,7 +40,8 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	@Override
 	public void setLevel(int level)
 	{
-		Preconditions.checkArgument(level >= this.getMinimumLevel() && level <= this.getMaximumLevel(), "Level should be between %s and %s", this.getMinimumLevel(), this.getMaximumLevel());
+		Preconditions.checkArgument(level >= this.getMinimumLevel() && level <= this.getMaximumLevel(),
+				"Level should be between %s and %s", this.getMinimumLevel(), this.getMaximumLevel());
 		this.set(BlockDataKey.LEVEL, level);
 	}
 
@@ -54,7 +58,8 @@ public class LevelledDataMock extends BlockDataMock implements Levelled
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LevelledDataMock clone()
 	{
 		return new LevelledDataMock(this);

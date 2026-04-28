@@ -5,17 +5,15 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record FoodPropertiesMock(int nutrition, float saturation, boolean canAlwaysEat) implements FoodProperties
 {
 
 	@Override
 	public Builder toBuilder()
 	{
-		return new BuilderMock()
-				.canAlwaysEat(canAlwaysEat)
-				.nutrition(nutrition)
-				.saturation(saturation);
+		return new BuilderMock().canAlwaysEat(canAlwaysEat).nutrition(nutrition).saturation(saturation);
 	}
 
 	static class BuilderMock implements Builder

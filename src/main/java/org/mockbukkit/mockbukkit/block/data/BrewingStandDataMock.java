@@ -15,9 +15,8 @@ import java.util.Set;
 public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 {
 
-	private final BlockDataKey[] bottleSlots = new BlockDataKey[] {
-			BlockDataKey.HAS_BOTTLE_0, BlockDataKey.HAS_BOTTLE_1, BlockDataKey.HAS_BOTTLE_2
-	};
+	private final BlockDataKey[] bottleSlots = new BlockDataKey[]
+	{BlockDataKey.HAS_BOTTLE_0, BlockDataKey.HAS_BOTTLE_1, BlockDataKey.HAS_BOTTLE_2};
 
 	public BrewingStandDataMock(@NotNull Material material)
 	{
@@ -47,7 +46,7 @@ public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 		ImmutableSet.Builder<Integer> bottles = ImmutableSet.builder();
 		for (int index = 0, len = bottleSlots.length; index < len; index++)
 		{
-			if (this.get(bottleSlots[index]))
+			if (hasBottle(index))
 			{
 				bottles.add(index);
 			}
@@ -62,7 +61,8 @@ public class BrewingStandDataMock extends BlockDataMock implements BrewingStand
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BrewingStandDataMock clone()
 	{
 		return new BrewingStandDataMock(this);

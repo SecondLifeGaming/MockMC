@@ -35,24 +35,31 @@ public class PluginManagerFiredEventClassMatcher extends TypeSafeMatcher<PluginM
 	@Override
 	public void describeMismatchSafely(PluginManagerMock pluginManagerMock, Description description)
 	{
-		description.appendText("has fired events ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
+		description.appendText("has fired events ").appendValueList("[", ",", "]",
+				pluginManagerMock.getFiredEvents().toList());
 	}
 
 	/**
-	 * @param targetEvent The required event class to have been fired
-	 * @return A matcher which matches with any plugin manager that has fired the specified event
+	 * @param targetEvent
+	 *            The required event class to have been fired
+	 * @return A matcher which matches with any plugin manager that has fired the
+	 *         specified event
 	 */
-	public static @NotNull PluginManagerFiredEventClassMatcher hasFiredEventInstance(@NotNull Class<? extends Event> targetEvent)
+	public static @NotNull PluginManagerFiredEventClassMatcher hasFiredEventInstance(
+			@NotNull Class<? extends Event> targetEvent)
 	{
 		Preconditions.checkNotNull(targetEvent);
 		return new PluginManagerFiredEventClassMatcher(targetEvent);
 	}
 
 	/**
-	 * @param targetEvent The required event class to not have been fired
-	 * @return A matcher which matches with any plugin manager that has not fired the specified event
+	 * @param targetEvent
+	 *            The required event class to not have been fired
+	 * @return A matcher which matches with any plugin manager that has not fired
+	 *         the specified event
 	 */
-	public static @NotNull Matcher<PluginManagerMock> hasNotFiredEventInstance(@NotNull Class<? extends Event> targetEvent)
+	public static @NotNull Matcher<PluginManagerMock> hasNotFiredEventInstance(
+			@NotNull Class<? extends Event> targetEvent)
 	{
 		return not(hasFiredEventInstance(targetEvent));
 	}

@@ -65,7 +65,8 @@ public class ChiseledBookshelfDataMock extends BlockDataMock implements Chiseled
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -84,11 +85,13 @@ public class ChiseledBookshelfDataMock extends BlockDataMock implements Chiseled
 	/**
 	 * Converts the given slot into a key.
 	 *
-	 * @param slot The slot to convert.
+	 * @param slot
+	 *            The slot to convert.
 	 *
 	 * @return The key for the given slot.
 	 *
-	 * @throws IndexOutOfBoundsException If the slot is not between 0 and 5.
+	 * @throws IndexOutOfBoundsException
+	 *             If the slot is not between 0 and 5.
 	 */
 	private static BlockDataKey getKeyForSlot(int slot)
 	{

@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,16 +13,25 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class CowMock extends AbstractCowMock implements Cow
+public class CowMock extends AbstractCowMock
+		implements
+			Cow,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CowBaseMock
 {
+
 	private SoundVariant soundVariant = SoundVariant.CLASSIC;
-	private @NotNull Variant variant = Variant.TEMPERATE;
+
+	@NotNull
+	private Variant variant = Variant.TEMPERATE;
 
 	/**
-	 * Constructs a new {@link CowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CowMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -31,13 +39,15 @@ public class CowMock extends AbstractCowMock implements Cow
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.COW;
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -61,5 +71,4 @@ public class CowMock extends AbstractCowMock implements Cow
 		Preconditions.checkArgument(variant != null, "variant cannot be null");
 		this.soundVariant = variant;
 	}
-
 }

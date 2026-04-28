@@ -40,7 +40,8 @@ class CrafterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isCrafting)
 		{
 			crafter.setCrafting(isCrafting);
@@ -60,7 +61,8 @@ class CrafterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isTriggered)
 		{
 			crafter.setTriggered(isTriggered);
@@ -92,7 +94,8 @@ class CrafterDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull CrafterDataMock cloned = crafter.clone();
+		@NotNull
+		CrafterDataMock cloned = crafter.clone();
 
 		assertEquals(crafter, cloned);
 		assertEquals(crafter.isTriggered(), cloned.isTriggered());

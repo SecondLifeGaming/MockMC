@@ -4,7 +4,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Fish;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,16 +11,22 @@ import java.util.UUID;
  *
  * @see CreatureMock
  */
-public abstract class FishMock extends CreatureMock implements Fish
+public abstract class FishMock extends CreatureMock
+		implements
+			Fish,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FishBaseMock
 {
 
 	private boolean isFromBucket = false;
 
 	/**
-	 * Constructs a new {@link FishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FishMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected FishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -41,9 +46,9 @@ public abstract class FishMock extends CreatureMock implements Fish
 	}
 
 	@Override
-	public @NotNull Sound getPickupSound()
+	@NotNull
+	public Sound getPickupSound()
 	{
 		return Sound.ITEM_BUCKET_FILL_FISH;
 	}
-
 }

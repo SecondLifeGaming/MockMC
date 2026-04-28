@@ -76,7 +76,8 @@ class VillagerMockTest
 		@Test
 		void givenNullValue()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.setProfession(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.setProfession(null));
 			assertEquals("Profession cannot be null", e.getMessage());
 		}
 
@@ -114,7 +115,8 @@ class VillagerMockTest
 		@Test
 		void givenNullValue()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.setVillagerType(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.setVillagerType(null));
 
 			assertEquals("Type cannot be null", e.getMessage());
 		}
@@ -136,7 +138,8 @@ class VillagerMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3, 4, 5 })
+		@ValueSource(ints =
+		{1, 2, 3, 4, 5})
 		void givenPossibleValues(int level)
 		{
 			assertDoesNotThrow(() -> villager.setVillagerLevel(level));
@@ -144,10 +147,12 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 0, 6, 7 })
+		@ValueSource(ints =
+		{-2, -1, 0, 6, 7})
 		void givenInvalidValues(int level)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.setVillagerLevel(level));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.setVillagerLevel(level));
 
 			String expectedMessage = String.format("level (%s) must be between [1, 5]", level);
 			assertEquals(expectedMessage, e.getMessage());
@@ -160,7 +165,8 @@ class VillagerMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 		void givenPossibleValues(int level)
 		{
 			assertDoesNotThrow(() -> villager.setVillagerExperience(level));
@@ -168,10 +174,12 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+		@ValueSource(ints =
+		{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 		void givenInvalidValues(int level)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.setVillagerExperience(level));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.setVillagerExperience(level));
 
 			String expectedMessage = String.format("Experience (%s) must be positive", level);
 			assertEquals(expectedMessage, e.getMessage());
@@ -184,7 +192,8 @@ class VillagerMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3, 4 })
+		@ValueSource(ints =
+		{1, 2, 3, 4})
 		void givenPossibleValuesWithoutStart(int level)
 		{
 			assertDoesNotThrow(() -> villager.increaseLevel(level));
@@ -192,16 +201,20 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 5, 6, 7, 8 })
+		@ValueSource(ints =
+		{5, 6, 7, 8})
 		void givenNotPossibleValuesWithoutStart(int level)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.increaseLevel(level));
-			String expectedMessage = String.format("Final level reached after the donation (%s) must be between [1, 5]", 1 + level);
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.increaseLevel(level));
+			String expectedMessage = String.format("Final level reached after the donation (%s) must be between [1, 5]",
+					1 + level);
 			assertEquals(expectedMessage, e.getMessage());
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3 })
+		@ValueSource(ints =
+		{1, 2, 3})
 		void givenPossibleValuesWithInitialStart(int level)
 		{
 			villager.setVillagerLevel(2);
@@ -210,20 +223,25 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 4, 5, 6, 7 })
+		@ValueSource(ints =
+		{4, 5, 6, 7})
 		void givenNotPossibleValuesWithInitialStart(int level)
 		{
 			villager.setVillagerLevel(2);
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.increaseLevel(level));
-			String expectedMessage = String.format("Final level reached after the donation (%d) must be between [1, 5]", 2 + level);
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.increaseLevel(level));
+			String expectedMessage = String.format("Final level reached after the donation (%d) must be between [1, 5]",
+					2 + level);
 			assertEquals(expectedMessage, e.getMessage());
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0 })
+		@ValueSource(ints =
+		{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0})
 		void givenInvalidValues(int level)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> villager.increaseLevel(level));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> villager.increaseLevel(level));
 			assertEquals("Level earned must be positive", e.getMessage());
 		}
 
@@ -240,7 +258,8 @@ class VillagerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 		void givenPossibleValues(int restocksToday)
 		{
 			villager.setRestocksToday(restocksToday);
@@ -495,7 +514,8 @@ class VillagerMockTest
 		assertEquals(EntityType.VILLAGER, villager.getType());
 	}
 
-	public static void assertIdentical(@Nullable Reputation expected, @Nullable Reputation actual, @Nullable String message)
+	public static void assertIdentical(@Nullable Reputation expected, @Nullable Reputation actual,
+			@Nullable String message)
 	{
 		if (expected == null && actual == null)
 		{

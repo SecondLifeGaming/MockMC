@@ -1,13 +1,12 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.meta.components.FoodComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,13 +15,17 @@ import java.util.Map;
 @EqualsAndHashCode
 @SerializableAs("Food")
 @SuppressWarnings("UnstableApiUsage")
-public class FoodComponentMock implements FoodComponent
+public class FoodComponentMock
+		implements
+			FoodComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.FoodComponentBaseMock
 {
+
 	private int nutrition;
+
 	private float saturation;
 
 	boolean canAlwaysEat;
-
 
 	@Override
 	public int getNutrition()
@@ -75,20 +78,14 @@ public class FoodComponentMock implements FoodComponent
 		Integer nutrition = SerializableMeta.getObject(Integer.class, map, "nutrition", false);
 		Float saturationModifier = SerializableMeta.getObject(Float.class, map, "saturation", false);
 		boolean canAlwaysEat = SerializableMeta.getBoolean(map, "can-always-eat");
-
 		Preconditions.checkNotNull(nutrition, "nutrition can't be null!");
 		Preconditions.checkNotNull(saturationModifier, "saturation can't be null!");
-
-		return FoodComponentMock.builder()
-				.nutrition(nutrition)
-				.saturation(saturationModifier)
-				.canAlwaysEat(canAlwaysEat)
-				.build();
+		return FoodComponentMock.builder().nutrition(nutrition).saturation(saturationModifier)
+				.canAlwaysEat(canAlwaysEat).build();
 	}
 
 	public static FoodComponent useDefault()
 	{
 		return builder().build();
 	}
-
 }

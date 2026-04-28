@@ -10,7 +10,8 @@ public class SnowableDataMock extends BlockDataMock implements Snowable
 	/**
 	 * Constructs a new {@link SnowableDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	protected SnowableDataMock(@NotNull Material material)
 	{
@@ -18,9 +19,11 @@ public class SnowableDataMock extends BlockDataMock implements Snowable
 	}
 
 	/**
-	 * Create a new {@link SnowableDataMock} based on an existing {@link SnowableDataMock}.
+	 * Create a new {@link SnowableDataMock} based on an existing
+	 * {@link SnowableDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected SnowableDataMock(@NotNull SnowableDataMock other)
 	{
@@ -40,7 +43,8 @@ public class SnowableDataMock extends BlockDataMock implements Snowable
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SnowableDataMock clone()
 	{
 		return new SnowableDataMock(this);

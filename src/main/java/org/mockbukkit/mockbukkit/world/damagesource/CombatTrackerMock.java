@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.world.damagesource;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.CombatTracker;
 import io.papermc.paper.world.damagesource.FallLocationType;
-import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.event.HoverEvent;
@@ -27,9 +26,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Implementation of {@link CombatTracker} base on <i>PaperCombatTrackerWrapper</i>.
+ * Implementation of {@link CombatTracker} base on
+ * <i>PaperCombatTrackerWrapper</i>.
  */
-@RequiredArgsConstructor
 public class CombatTrackerMock implements CombatTracker
 {
 	private static final Style INTENTIONAL_GAME_DESIGN_STYLE = Style.empty()
@@ -37,6 +36,11 @@ public class CombatTrackerMock implements CombatTracker
 			.hoverEvent(HoverEvent.showText(Component.text("MCPE-28723")));
 
 	private final LivingEntityMock entity;
+
+	public CombatTrackerMock(LivingEntityMock entity)
+	{
+		this.entity = entity;
+	}
 	private final List<CombatEntry> combatEntries = new LinkedList<>();
 
 	private boolean inCombat = false;
@@ -78,7 +82,8 @@ public class CombatTrackerMock implements CombatTracker
 			CombatEntry currentEntry = this.combatEntries.get(i);
 			CombatEntry previousEntry = i > 0 ? this.combatEntries.get(i - 1) : null;
 			DamageSource damageSource = currentEntry.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType());
+			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
+					.isTagged(damageSource.getDamageType());
 			float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
 
 			if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
@@ -95,7 +100,8 @@ public class CombatTrackerMock implements CombatTracker
 				maxFallDistance = fallDistance;
 			}
 
-			if (currentEntry.getFallLocationType() != null && (combatEntry1 == null || currentEntry.getDamage() > maxDamage))
+			if (currentEntry.getFallLocationType() != null
+					&& (combatEntry1 == null || currentEntry.getDamage() > maxDamage))
 			{
 				combatEntry1 = currentEntry;
 				maxDamage = currentEntry.getDamage();
@@ -126,7 +132,9 @@ public class CombatTrackerMock implements CombatTracker
 	@Override
 	public int getCombatDuration()
 	{
-		return this.inCombat ? this.entity.getTicksLived() - this.combatStartTime : this.combatEndTime - this.combatStartTime;
+		return this.inCombat
+				? this.entity.getTicksLived() - this.combatStartTime
+				: this.combatEndTime - this.combatStartTime;
 	}
 
 	@Override
@@ -163,7 +171,8 @@ public class CombatTrackerMock implements CombatTracker
 		} else if (deathMessageType == DeathMessageType.INTENTIONAL_GAME_DESIGN)
 		{
 			String string = "death.attack." + damageSource.getDamageType().getTranslationKey();
-			Component component = wrapInSquareBrackets(Component.translatable(string + ".link")).style(INTENTIONAL_GAME_DESIGN_STYLE);
+			Component component = wrapInSquareBrackets(Component.translatable(string + ".link"))
+					.style(INTENTIONAL_GAME_DESIGN_STYLE);
 			return Component.translatable(string + ".message", this.entity.teamDisplayName(), component);
 		} else
 		{
@@ -183,15 +192,16 @@ public class CombatTrackerMock implements CombatTracker
 			CombatEntry combatEntry2 = this.combatEntries.get(i);
 			CombatEntry combatEntry3 = i > 0 ? this.combatEntries.get(i - 1) : null;
 			DamageSource damageSource = combatEntry2.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType());
+			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
+					.isTagged(damageSource.getDamageType());
 			float f2 = isAlwaysMostSignificantFall ? Float.MAX_VALUE : combatEntry2.getFallDistance();
-			if ((damageSource.getDamageType() == DamageType.FALL || isAlwaysMostSignificantFall) && f2 > 0.0F && (combatEntry == null || f2 > f1))
+			if ((damageSource.getDamageType() == DamageType.FALL || isAlwaysMostSignificantFall) && f2 > 0.0F
+					&& (combatEntry == null || f2 > f1))
 			{
 				if (i > 0)
 				{
 					combatEntry = combatEntry3;
-				}
-				else
+				} else
 				{
 					combatEntry = combatEntry2;
 				}
@@ -218,26 +228,33 @@ public class CombatTrackerMock implements CombatTracker
 	private Component getFallMessage(CombatEntry combatEntry, @Nullable Entity entity)
 	{
 		DamageSource damageSource = combatEntry.getDamageSource();
-		if (!DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) && !DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType()))
+		if (!DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType())
+				&& !DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.isTagged(damageSource.getDamageType()))
 		{
 			Component displayName = getDisplayName(entity);
 			Entity entity1 = damageSource.getCausingEntity();
 			Component displayName1 = getDisplayName(entity1);
 			if (displayName1 != null && !displayName1.equals(displayName))
 			{
-				return this.getMessageForAssistedFall(entity1, displayName1, "death.fell.assist.item", "death.fell.assist");
+				return this.getMessageForAssistedFall(entity1, displayName1, "death.fell.assist.item",
+						"death.fell.assist");
 			} else
 			{
-				return (displayName != null ? this.getMessageForAssistedFall(entity, displayName, "death.fell.finish.item", "death.fell.finish") : Component.translatable("death.fell.killer", this.entity.teamDisplayName()));
+				return (displayName != null
+						? this.getMessageForAssistedFall(entity, displayName, "death.fell.finish.item",
+								"death.fell.finish")
+						: Component.translatable("death.fell.killer", this.entity.teamDisplayName()));
 			}
 		} else
 		{
-			FallLocationType fallLocation = Objects.requireNonNullElse(combatEntry.getFallLocationType(), FallLocationType.GENERIC);
+			FallLocationType fallLocation = Objects.requireNonNullElse(combatEntry.getFallLocationType(),
+					FallLocationType.GENERIC);
 			return Component.translatable(fallLocation.translationKey(), this.entity.teamDisplayName());
 		}
 	}
 
-	private Component getMessageForAssistedFall(Entity entity, Component entityDisplayName, String hasWeaponTranslationKey, String noWeaponTranslationKey)
+	private Component getMessageForAssistedFall(Entity entity, Component entityDisplayName,
+			String hasWeaponTranslationKey, String noWeaponTranslationKey)
 	{
 		ItemStack itemInHand;
 		if (entity instanceof LivingEntity livingEntity)
@@ -249,7 +266,10 @@ public class CombatTrackerMock implements CombatTracker
 		}
 
 		ItemStack itemStack = itemInHand;
-		return !itemStack.isEmpty() && itemStack.getItemMeta().hasCustomName() ? Component.translatable(hasWeaponTranslationKey, getDisplayName(this.entity), entityDisplayName, itemStack.displayName()) : Component.translatable(noWeaponTranslationKey, getDisplayName(this.entity), entityDisplayName);
+		return !itemStack.isEmpty() && itemStack.getItemMeta().hasCustomName()
+				? Component.translatable(hasWeaponTranslationKey, getDisplayName(this.entity), entityDisplayName,
+						itemStack.displayName())
+				: Component.translatable(noWeaponTranslationKey, getDisplayName(this.entity), entityDisplayName);
 	}
 
 	@Override
@@ -272,24 +292,19 @@ public class CombatTrackerMock implements CombatTracker
 			if (Material.LADDER.equals(material) || Tag.TRAPDOORS.isTagged(material))
 			{
 				return FallLocationType.LADDER;
-			}
-			else if (Material.VINE.equals(material))
+			} else if (Material.VINE.equals(material))
 			{
 				return FallLocationType.VINES;
-			}
-			else if (Material.WEEPING_VINES.equals(material) || Material.WEEPING_VINES_PLANT.equals(material))
+			} else if (Material.WEEPING_VINES.equals(material) || Material.WEEPING_VINES_PLANT.equals(material))
 			{
 				return FallLocationType.WEEPING_VINES;
-			}
-			else if (Material.TWISTING_VINES.equals(material) || Material.TWISTING_VINES_PLANT.equals(material))
+			} else if (Material.TWISTING_VINES.equals(material) || Material.TWISTING_VINES_PLANT.equals(material))
 			{
 				return FallLocationType.TWISTING_VINES;
-			}
-			else if (Material.SCAFFOLDING.equals(material))
+			} else if (Material.SCAFFOLDING.equals(material))
 			{
 				return FallLocationType.SCAFFOLDING;
-			}
-			else
+			} else
 			{
 				return FallLocationType.OTHER_CLIMBABLE;
 			}
@@ -326,10 +341,15 @@ public class CombatTrackerMock implements CombatTracker
 					: Component.translatable(string, livingEntity.teamDisplayName());
 		} else
 		{
-			Component component = damageSource.getCausingEntity() == null ? damageSource.getDirectEntity().teamDisplayName() : damageSource.getCausingEntity().teamDisplayName();
-			ItemStack itemStack = damageSource.getCausingEntity() instanceof LivingEntity livingEntity1 ? livingEntity1.getEquipment().getItemInMainHand() : ItemStack.empty();
+			Component component = damageSource.getCausingEntity() == null
+					? damageSource.getDirectEntity().teamDisplayName()
+					: damageSource.getCausingEntity().teamDisplayName();
+			ItemStack itemStack = damageSource.getCausingEntity() instanceof LivingEntity livingEntity1
+					? livingEntity1.getEquipment().getItemInMainHand()
+					: ItemStack.empty();
 			return !itemStack.isEmpty() && itemStack.getItemMeta().hasCustomName()
-					? Component.translatable(string + ".item", livingEntity.teamDisplayName(), component, itemStack.displayName())
+					? Component.translatable(string + ".item", livingEntity.teamDisplayName(), component,
+							itemStack.displayName())
 					: Component.translatable(string, livingEntity.teamDisplayName(), component);
 		}
 	}

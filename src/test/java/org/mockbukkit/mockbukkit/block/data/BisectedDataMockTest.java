@@ -57,7 +57,8 @@ class BisectedDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull BisectedDataMock cloned = bisected.clone();
+		@NotNull
+		BisectedDataMock cloned = bisected.clone();
 
 		assertEquals(bisected, cloned);
 		assertEquals(bisected.getHalf(), cloned.getHalf());
@@ -137,12 +138,8 @@ class BisectedDataMockTest
 			}
 
 			@ParameterizedTest
-			@CsvSource({
-				"SMALL_DRIPLEAF",
-				"TALL_GRASS",
-				"TALL_SEAGRASS",
-				"SUNFLOWER",
-			})
+			@CsvSource(
+			{"SMALL_DRIPLEAF", "TALL_GRASS", "TALL_SEAGRASS", "SUNFLOWER",})
 			void givenOther(Material input)
 			{
 				BlockDataMock data = BlockDataMockFactory.mock(input);
@@ -150,9 +147,7 @@ class BisectedDataMockTest
 				assertFalse(actual);
 			}
 
-
 		}
-
 
 	}
 

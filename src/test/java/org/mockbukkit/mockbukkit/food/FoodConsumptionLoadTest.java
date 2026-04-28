@@ -55,21 +55,16 @@ public class FoodConsumptionLoadTest
 	private static Stream<Arguments> foodPropertyProvider()
 	{
 		return Stream.of(
-				Arguments.of(Material.ENCHANTED_GOLDEN_APPLE, List.of(
-								new PotionEffect(PotionEffectType.REGENERATION, 400, 1, false, true, true),
+				Arguments.of(Material.ENCHANTED_GOLDEN_APPLE,
+						List.of(new PotionEffect(PotionEffectType.REGENERATION, 400, 1, false, true, true),
 								new PotionEffect(PotionEffectType.RESISTANCE, 6000, 0, false, true, true),
 								new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 6000, 0, false, true, true),
-								new PotionEffect(PotionEffectType.ABSORPTION, 2400, 3, false, true, true)
-						)
-				),
-				Arguments.of(Material.POISONOUS_POTATO, List.of(
-						new PotionEffect(PotionEffectType.POISON, 100, 0, false, true, true)
-				)),
-				Arguments.of(Material.ROTTEN_FLESH, List.of(
-						new PotionEffect(PotionEffectType.HUNGER, 600, 0, false, true, true)
-				)),
-				Arguments.of(Material.SALMON, List.of())
-		);
+								new PotionEffect(PotionEffectType.ABSORPTION, 2400, 3, false, true, true))),
+				Arguments.of(Material.POISONOUS_POTATO,
+						List.of(new PotionEffect(PotionEffectType.POISON, 100, 0, false, true, true))),
+				Arguments.of(Material.ROTTEN_FLESH,
+						List.of(new PotionEffect(PotionEffectType.HUNGER, 600, 0, false, true, true))),
+				Arguments.of(Material.SALMON, List.of()));
 	}
 
 }

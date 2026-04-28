@@ -18,10 +18,11 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 {
 
 	/**
-	 * Constructs a new {@link AmethystClusterDataMock} for the provided {@link Material}.
-	 * Only supports {@link Material#AMETHYST_CLUSTER}
+	 * Constructs a new {@link AmethystClusterDataMock} for the provided
+	 * {@link Material}. Only supports {@link Material#AMETHYST_CLUSTER}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public AmethystClusterDataMock(@NotNull Material type)
 	{
@@ -30,9 +31,11 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	}
 
 	/**
-	 * Create a new {@link AmethystClusterDataMock} based on an existing {@link AmethystClusterDataMock}.
+	 * Create a new {@link AmethystClusterDataMock} based on an existing
+	 * {@link AmethystClusterDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected AmethystClusterDataMock(AmethystClusterDataMock other)
 	{
@@ -72,7 +75,8 @@ public class AmethystClusterDataMock extends BlockDataMock implements AmethystCl
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AmethystClusterDataMock clone()
 	{
 		return new AmethystClusterDataMock(this);

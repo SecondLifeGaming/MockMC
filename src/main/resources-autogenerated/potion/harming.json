@@ -8,5 +8,8 @@
 			"particles": true,
 			"type": "minecraft:instant_damage"
 		}
-	]
+	],
+	"extendable": false,
+	"maxLevel": 2,
+	"upgradeable": true
 }

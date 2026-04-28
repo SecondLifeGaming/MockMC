@@ -8,8 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,22 +16,31 @@ import java.util.Map;
 /**
  * Mock implementation of a {@link MapView}.
  */
-public class MapViewMock implements MapView
+public class MapViewMock implements MapView, org.mockbukkit.mockbukkit.generated.org.bukkit.map.MapViewBaseMock
 {
 
 	private World world;
+
 	private final int id;
-	private final @NotNull List<MapRenderer> renderers;
+
+	@NotNull
+	private final List<MapRenderer> renderers;
+
 	private final Map<MapRenderer, Map<PlayerMock, MapCanvasMock>> canvases = new HashMap<>();
+
 	private Scale scale;
+
 	private boolean locked;
 
 	/**
-	 * Constructs a new {@link MapViewMock} for the given world with the specified ID.
-	 * This is for internal use only, please use {@link ServerMock#createMap(World)} for creating maps.
+	 * Constructs a new {@link MapViewMock} for the given world with the specified
+	 * ID. This is for internal use only, please use
+	 * {@link ServerMock#createMap(World)} for creating maps.
 	 *
-	 * @param world The world this map is for.
-	 * @param id    The ID of the mop.
+	 * @param world
+	 *            The world this map is for.
+	 * @param id
+	 *            The ID of the mop.
 	 * @see ServerMock#createMap(World)
 	 */
 	@ApiStatus.Internal
@@ -59,7 +66,8 @@ public class MapViewMock implements MapView
 	}
 
 	@Override
-	public @NotNull Scale getScale()
+	@NotNull
+	public Scale getScale()
 	{
 		return scale;
 	}
@@ -71,35 +79,8 @@ public class MapViewMock implements MapView
 	}
 
 	@Override
-	public int getCenterX()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getCenterZ()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCenterX(int x)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCenterZ(int z)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable World getWorld()
+	@Nullable
+	public World getWorld()
 	{
 		return this.world;
 	}
@@ -111,7 +92,8 @@ public class MapViewMock implements MapView
 	}
 
 	@Override
-	public @NotNull List<MapRenderer> getRenderers()
+	@NotNull
+	public List<MapRenderer> getRenderers()
 	{
 		return new ArrayList<>(this.renderers);
 	}
@@ -134,15 +116,12 @@ public class MapViewMock implements MapView
 		{
 			return false;
 		}
-
 		this.renderers.remove(renderer);
-
 		// canvases should always be in sync with renderers.
 		for (MapCanvasMock canvas : this.canvases.get(renderer).values())
 		{
 			MapCanvasMock.executeForAllPixels((x, y) -> canvas.setPixel(x, y, (byte) -1));
 		}
-
 		this.canvases.remove(renderer);
 		return true;
 	}
@@ -150,7 +129,8 @@ public class MapViewMock implements MapView
 	/**
 	 * Renders the map for the given player.
 	 *
-	 * @param player Player to render for.
+	 * @param player
+	 *            Player to render for.
 	 */
 	public void render(@NotNull PlayerMock player)
 	{
@@ -162,43 +142,13 @@ public class MapViewMock implements MapView
 				canvas = new MapCanvasMock(this);
 				this.canvases.get(renderer).put(renderer.isContextual() ? player : null, canvas);
 			}
-
 			try
 			{
 				renderer.render(this, canvas, player);
-			}
-			catch (Throwable ignored)
+			} catch (Throwable ignored)
 			{
 			}
 		}
-	}
-
-	@Override
-	public boolean isTrackingPosition()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setTrackingPosition(boolean trackingPosition)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isUnlimitedTracking()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setUnlimitedTracking(boolean unlimited)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -212,5 +162,4 @@ public class MapViewMock implements MapView
 	{
 		this.locked = locked;
 	}
-
 }

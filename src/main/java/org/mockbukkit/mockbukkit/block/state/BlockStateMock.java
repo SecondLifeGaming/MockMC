@@ -9,50 +9,58 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.Entity;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.block.BlockMock;
-import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * Mock implementation of a {@link BlockState}.
- * Also manages the creation of new BlockStates with the appropriate mock class.
+ * Mock implementation of a {@link BlockState}. Also manages the creation of new
+ * BlockStates with the appropriate mock class.
  */
-public class BlockStateMock implements BlockState
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class BlockStateMock
+		implements
+			BlockState,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlockStateBaseMock
 {
 
-	private final @NotNull MetadataTable metadataTable;
+	@NotNull
+	private final MetadataTable metadataTable;
+
 	private BlockData blockData;
-	private @Nullable Block block;
+
+	@Nullable
+	private Block block;
+
 	private Material material;
 
 	/**
 	 * Constructs a new {@link BlockStateMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BlockStateMock(@NotNull Material material)
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		this.metadataTable = new MetadataTable();
 		this.material = material;
-		this.blockData = BlockDataMock.mock(material);
+		this.blockData = BlockDataMockFactory.mock(material);
 	}
 
 	/**
 	 * Constructs a new {@link BlockStateMock} for the provided {@link Block}.
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BlockStateMock(@NotNull Block block)
 	{
@@ -60,13 +68,15 @@ public class BlockStateMock implements BlockState
 		this.metadataTable = new MetadataTable();
 		this.block = block;
 		this.material = block.getType();
-		this.blockData = BlockDataMock.mock(material);
+		this.blockData = BlockDataMockFactory.mock(material);
 	}
 
 	/**
-	 * Constructs a new {@link BlockStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BlockStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BlockStateMock(@NotNull BlockStateMock state)
 	{
@@ -78,23 +88,27 @@ public class BlockStateMock implements BlockState
 	}
 
 	// region Type Checking
-
 	/**
 	 * Ensures the provided material is one of the expected materials provided.
 	 *
-	 * @param material The material to test.
-	 * @param expected The expected materials.
+	 * @param material
+	 *            The material to test.
+	 * @param expected
+	 *            The expected materials.
 	 */
-	protected void checkType(@NotNull Material material, @NotNull Material @NotNull ... expected)
+	protected void checkType(@NotNull Material material, @NotNull Material @NotNull... expected)
 	{
-		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(Arrays.stream(expected).anyMatch(m -> material == m),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
 	 * Ensures the provided block type is one of the expected materials provided.
 	 *
-	 * @param block    The block to test.
-	 * @param expected The expected materials.
+	 * @param block
+	 *            The block to test.
+	 * @param expected
+	 *            The expected materials.
 	 */
 	protected void checkType(@NotNull Block block, @NotNull Material... expected)
 	{
@@ -104,26 +118,31 @@ public class BlockStateMock implements BlockState
 	/**
 	 * Ensures the provided material is contained in the {@link Tag}.
 	 *
-	 * @param material The material to test.
-	 * @param expected The expected tag.
+	 * @param material
+	 *            The material to test.
+	 * @param expected
+	 *            The expected tag.
 	 */
 	protected void checkType(@NotNull Material material, @NotNull Tag<Material> expected)
 	{
-		Preconditions.checkArgument(expected.isTagged(material), "Cannot create a " + getClass().getSimpleName() + " from " + material);
+		Preconditions.checkArgument(expected.isTagged(material),
+				"Cannot create a " + getClass().getSimpleName() + " from " + material);
 	}
 
 	/**
 	 * Ensures the provided block type is contained in the {@link Tag}.
 	 *
-	 * @param block    The material to test.
-	 * @param expected The expected tag.
+	 * @param block
+	 *            The material to test.
+	 * @param expected
+	 *            The expected tag.
 	 */
 	protected void checkType(@NotNull Block block, @NotNull Tag<Material> expected)
 	{
 		checkType(block.getType(), expected);
 	}
-	// endregion
 
+	// endregion
 	@Override
 	public void setMetadata(String metadataKey, @NotNull MetadataValue newMetadataValue)
 	{
@@ -131,7 +150,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
+	@NotNull
+	public List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -149,13 +169,13 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull Block getBlock()
+	@NotNull
+	public Block getBlock()
 	{
 		if (block == null)
 		{
 			throw new IllegalStateException("This BlockState has not been placed!");
-		}
-		else
+		} else
 		{
 			return block;
 		}
@@ -169,7 +189,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull Material getType()
+	@NotNull
+	public Material getType()
 	{
 		return material;
 	}
@@ -181,7 +202,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull World getWorld()
+	@NotNull
+	public World getWorld()
 	{
 		return getBlock().getWorld();
 	}
@@ -205,7 +227,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull Location getLocation()
+	@NotNull
+	public Location getLocation()
 	{
 		return getBlock().getLocation();
 	}
@@ -217,7 +240,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public @NotNull Chunk getChunk()
+	@NotNull
+	public Chunk getChunk()
 	{
 		return getBlock().getChunk();
 	}
@@ -227,14 +251,14 @@ public class BlockStateMock implements BlockState
 	public void setData(@NotNull org.bukkit.material.MaterialData data)
 	{
 		this.material = data.getItemType();
-		this.blockData = BlockDataMock.mock(this.material);
+		this.blockData = BlockDataMockFactory.mock(this.material);
 	}
 
 	@Override
 	public void setType(Material type)
 	{
 		this.material = type;
-		this.blockData = BlockDataMock.mock(type);
+		this.blockData = BlockDataMockFactory.mock(type);
 	}
 
 	@Override
@@ -256,38 +280,17 @@ public class BlockStateMock implements BlockState
 		{
 			return true;
 		}
-
 		Block b = getBlock();
-
 		if (b.getType() != this.getType() && !force)
 		{
 			return false;
 		}
-
 		b.setBlockData(blockData);
-
 		if (b instanceof BlockMock bm)
 		{
 			bm.setState(this);
 		}
-
 		return true;
-	}
-
-	@Override
-	@Deprecated(since = "1.6.2")
-	public byte getRawData()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(since = "1.6.2")
-	public void setRawData(byte data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -297,66 +300,28 @@ public class BlockStateMock implements BlockState
 	}
 
 	@Override
-	public boolean isCollidable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<ItemStack> getDrops()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<ItemStack> getDrops(@NotNull ItemStack tool, @Nullable Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isSuffocating()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull BlockData getBlockData()
+	@NotNull
+	public BlockData getBlockData()
 	{
 		return this.blockData.clone();
 	}
 
 	/**
-	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class
+	 * must override this method!
 	 *
 	 * @return A copy of this {@link BlockStateMock}.
 	 */
 	@Override
-	public @NotNull BlockStateMock copy()
+	@NotNull
+	public BlockStateMock copy()
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
-					" does not provide a .copy() implementation! This is a bug.");
+			throw new UnimplementedOperationException(
+					this.getClass().getSimpleName() + " does not provide a .copy() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);
-	}
-
-	@Override
-	public @NotNull BlockState copy(@NotNull Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -367,7 +332,8 @@ public class BlockStateMock implements BlockState
 	}
 
 	/**
-	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class must override this method!
+	 * This returns a copy of this {@link BlockStateMock}. Inheriters of this class
+	 * must override this method!
 	 *
 	 * @return A snapshot of this {@link BlockStateMock}.
 	 */
@@ -376,8 +342,8 @@ public class BlockStateMock implements BlockState
 	{
 		if (this.getClass() != BlockStateMock.class)
 		{
-			throw new UnimplementedOperationException(this.getClass().getSimpleName() +
-					" does not provide a .getSnapshot() implementation! This is a bug.");
+			throw new UnimplementedOperationException(this.getClass().getSimpleName()
+					+ " does not provide a .getSnapshot() implementation! This is a bug.");
 		}
 		return new BlockStateMock(this);
 	}
@@ -400,12 +366,13 @@ public class BlockStateMock implements BlockState
 		{
 			return false;
 		}
-		if (this.getBlockData() != other.getBlockData() && (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
+		if (this.getBlockData() != other.getBlockData()
+				&& (this.getBlockData() == null || !this.getBlockData().equals(other.getBlockData())))
 		{
 			return false;
 		}
-		return !this.isPlaced() || this.getLocation() == other.getLocation() || (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
-
+		return !this.isPlaced() || this.getLocation() == other.getLocation()
+				|| (this.getLocation() != null && this.getLocation().equals(other.getLocation()));
 	}
 
 	// Implement toStringInternal() instead of overriding toString()
@@ -417,33 +384,32 @@ public class BlockStateMock implements BlockState
 
 	/**
 	 * Provides the contents of {@link #toString()} .
-	 * <p>Implementors must call super as in the following example.</p>
+	 * <p>
+	 * Implementors must call super as in the following example.
+	 * </p>
 	 *
 	 * <pre>{@code
-	 *    @Override
-	 *    protected String toStringInternal()
-	 *    {
-	 * 		return super.toStringInternal() +
-	 * 				", member1=" + member1 +
-	 * 				", member2=" + member2;
-	 *    }
+	 * @Override
+	 * protected String toStringInternal()
+	 * {
+	 * 	return super.toStringInternal() + ", member1=" + member1 + ", member2=" + member2;
+	 * }
 	 * }</pre>
 	 *
 	 * @return Comma separated list of properties and values.
 	 */
 	protected String toStringInternal()
 	{
-		return "block=" + block +
-				", blockData=" + blockData +
-				", material=" + material +
-				", metadataTable=" + metadataTable;
+		return "block=" + block + ", blockData=" + blockData + ", material=" + material + ", metadataTable="
+				+ metadataTable;
 	}
 
 	/**
-	 * Attempts to construct a BlockStateMock by the provided block.
-	 * Will return a basic {@link BlockStateMock} if no implementation is found.
+	 * Attempts to construct a BlockStateMock by the provided block. Will return a
+	 * basic {@link BlockStateMock} if no implementation is found.
 	 *
-	 * @param block The block to create the BlockState from.
+	 * @param block
+	 *            The block to create the BlockState from.
 	 * @return The BlockState.
 	 * @deprecated Use {@link BlockStateMockFactory#mock(Block)} instead.
 	 */
@@ -463,5 +429,4 @@ public class BlockStateMock implements BlockState
 	{
 		return BlockStateMockFactory.mock(material);
 	}
-
 }

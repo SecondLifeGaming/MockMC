@@ -32,7 +32,8 @@ public class RespawnAnchorDataMock extends BlockDataMock implements RespawnAncho
 	@Override
 	public void setCharges(int charges)
 	{
-		Preconditions.checkArgument(0 <= charges && charges <= this.getMaximumCharges(), "Charges must be between 0 and %s", this.getMaximumCharges());
+		Preconditions.checkArgument(0 <= charges && charges <= this.getMaximumCharges(),
+				"Charges must be between 0 and %s", this.getMaximumCharges());
 		this.set(BlockDataKey.CHARGES, charges);
 	}
 
@@ -43,7 +44,8 @@ public class RespawnAnchorDataMock extends BlockDataMock implements RespawnAncho
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RespawnAnchorDataMock clone()
 	{
 		return new RespawnAnchorDataMock(this);

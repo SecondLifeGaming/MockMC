@@ -210,7 +210,8 @@ class ItemComponentTypesBridgeMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(ints = {0, 1, 2, 3, 4})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4})
 		void givenAmplifierInRangeReturnsInstance(int amplifier)
 		{
 			OminousBottleAmplifier actual = bridge.ominousBottleAmplifier(amplifier);
@@ -252,7 +253,8 @@ class ItemComponentTypesBridgeMockTest
 		{
 			TypedKey<@NonNull BlockType> stoneKey = TypedKey.create(RegistryKey.BLOCK, Key.key("minecraft", "stone"));
 			TypedKey<@NonNull BlockType> dirtKey = TypedKey.create(RegistryKey.BLOCK, Key.key("minecraft", "dirt"));
-			RegistryKeySet<@NonNull BlockType> blocks = RegistrySet.keySet(RegistryKey.BLOCK, List.of(stoneKey, dirtKey));
+			RegistryKeySet<@NonNull BlockType> blocks = RegistrySet.keySet(RegistryKey.BLOCK,
+					List.of(stoneKey, dirtKey));
 
 			Tool.Rule actual = bridge.rule(blocks, 1.0f, TriState.TRUE);
 
@@ -270,10 +272,8 @@ class ItemComponentTypesBridgeMockTest
 		@Test
 		void givenDamageResistantType()
 		{
-			RegistryKeySet<@NonNull DamageType> type = RegistrySet.keySet(
-					RegistryKey.DAMAGE_TYPE,
-					TypedKey.create(RegistryKey.DAMAGE_TYPE, DamageType.ARROW.key())
-			);
+			RegistryKeySet<@NonNull DamageType> type = RegistrySet.keySet(RegistryKey.DAMAGE_TYPE,
+					TypedKey.create(RegistryKey.DAMAGE_TYPE, DamageType.ARROW.key()));
 
 			DamageResistant actual = bridge.damageResistant(type);
 
@@ -295,7 +295,8 @@ class ItemComponentTypesBridgeMockTest
 		@Test
 		void givenDamageResistantType()
 		{
-			TypedKey<@NonNull ItemType> diamondPickaxe = TypedKey.create(RegistryKey.ITEM, ItemType.DIAMOND_PICKAXE.key());
+			TypedKey<@NonNull ItemType> diamondPickaxe = TypedKey.create(RegistryKey.ITEM,
+					ItemType.DIAMOND_PICKAXE.key());
 			RegistryKeySet<@NonNull ItemType> type = RegistrySet.keySet(RegistryKey.ITEM, diamondPickaxe);
 
 			Repairable actual = bridge.repairable(type);

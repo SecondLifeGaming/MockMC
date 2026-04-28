@@ -5,7 +5,6 @@ import org.bukkit.entity.boat.CherryBoat;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.BoatMock;
-
 import java.util.UUID;
 
 /**
@@ -13,7 +12,10 @@ import java.util.UUID;
  *
  * @see BoatMock
  */
-public class CherryBoatMock extends BoatMock implements CherryBoat
+public class CherryBoatMock extends BoatMock
+		implements
+			CherryBoat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.boat.CherryBoatBaseMock
 {
 
 	public CherryBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -22,9 +24,9 @@ public class CherryBoatMock extends BoatMock implements CherryBoat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.CHERRY_BOAT;
 	}
-
 }

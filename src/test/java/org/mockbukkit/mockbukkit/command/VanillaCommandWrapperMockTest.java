@@ -28,10 +28,8 @@ class VanillaCommandWrapperMockTest
 	@BeforeEach
 	void setUp()
 	{
-		CommandNode<CommandSourceStack> commandNode = Commands.literal("a_command")
-				.then(Commands.literal("1next"))
-				.then(Commands.literal("2next"))
-				.build();
+		CommandNode<CommandSourceStack> commandNode = Commands.literal("a_command").then(Commands.literal("1next"))
+				.then(Commands.literal("2next")).build();
 		this.command = new VanillaCommandWrapperMock(commandNode);
 		PaperCommandsMock.INSTANCE.getDispatcher().getRoot().addChild(commandNode);
 	}
@@ -40,13 +38,16 @@ class VanillaCommandWrapperMockTest
 	void tabComplete()
 	{
 		Player player = serverMock.addPlayer();
-		List<String> completions = command.tabComplete(player, "a_command", new String[]{ "2" }, null);
+		List<String> completions = command.tabComplete(player, "a_command", new String[]
+		{"2"}, null);
 		assertEquals(1, completions.size());
 		assertEquals("2next", completions.getFirst());
-		List<String> completions2 = command.tabComplete(player, "a_command", new String[]{ "1" }, null);
+		List<String> completions2 = command.tabComplete(player, "a_command", new String[]
+		{"1"}, null);
 		assertEquals(1, completions2.size());
 		assertEquals("1next", completions2.getFirst());
-		List<String> completions3 = command.tabComplete(player, "a_command", new String[]{ "" }, null);
+		List<String> completions3 = command.tabComplete(player, "a_command", new String[]
+		{""}, null);
 		assertEquals(2, completions3.size());
 	}
 

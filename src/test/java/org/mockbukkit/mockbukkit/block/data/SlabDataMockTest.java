@@ -18,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class SlabDataMockTest
 {
@@ -87,7 +89,8 @@ class SlabDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull SlabDataMock cloned = slab.clone();
+		@NotNull
+		SlabDataMock cloned = slab.clone();
 
 		assertEquals(slab, cloned);
 		assertEquals(slab.isWaterlogged(), cloned.isWaterlogged());

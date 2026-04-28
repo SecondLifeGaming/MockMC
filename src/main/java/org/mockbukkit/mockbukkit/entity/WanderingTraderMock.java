@@ -6,7 +6,6 @@ import org.bukkit.entity.WanderingTrader;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,20 +13,29 @@ import java.util.UUID;
  *
  * @see AbstractVillagerMock
  */
-public class WanderingTraderMock extends AbstractVillagerMock implements WanderingTrader
+public class WanderingTraderMock extends AbstractVillagerMock
+		implements
+			WanderingTrader,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WanderingTraderBaseMock
 {
 
 	private int despawnDelay = 0;
+
 	private boolean canDrinkPotion = true;
+
 	private boolean canDrinkMilk = true;
 
-	private @Nullable Location wanderTarget = null;
+	@Nullable
+	private Location wanderTarget = null;
 
 	/**
-	 * Constructs a new {@link AbstractVillagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AbstractVillagerMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WanderingTraderMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -71,7 +79,8 @@ public class WanderingTraderMock extends AbstractVillagerMock implements Wanderi
 	}
 
 	@Override
-	public @Nullable Location getWanderingTowards()
+	@Nullable
+	public Location getWanderingTowards()
 	{
 		return (this.wanderTarget == null) ? null : this.wanderTarget.clone();
 	}
@@ -82,8 +91,7 @@ public class WanderingTraderMock extends AbstractVillagerMock implements Wanderi
 		if (location == null)
 		{
 			this.wanderTarget = null;
-		}
-		else
+		} else
 		{
 			this.wanderTarget = location.toBlockLocation();
 		}
@@ -92,13 +100,14 @@ public class WanderingTraderMock extends AbstractVillagerMock implements Wanderi
 	@Override
 	protected void updateTrades()
 	{
-		// TODO: Villager trades at net.minecraft.world.entity.npc.WanderingTrader#updateTrades()
+		// TODO: Villager trades at
+		// net.minecraft.world.entity.npc.WanderingTrader#updateTrades()
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.WANDERING_TRADER;
 	}
-
 }

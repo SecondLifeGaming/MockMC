@@ -5,22 +5,27 @@ import com.google.common.net.InetAddresses;
 import org.bukkit.BanEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.net.InetAddress;
 import java.util.Date;
 
-public class IpBanEntryMock implements BanEntry<InetAddress>
+public class IpBanEntryMock
+		implements
+			BanEntry<InetAddress>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.BanEntryBaseMock<InetAddress>
 {
 
 	private final String target;
+
 	private String source;
+
 	private String reason;
+
 	private Date created;
+
 	private Date expires;
 
-	public IpBanEntryMock
-			(@NotNull String target, @Nullable String reason, @Nullable Date expires, @Nullable String source)
+	public IpBanEntryMock(@NotNull String target, @Nullable String reason, @Nullable Date expires,
+			@Nullable String source)
 	{
 		this.target = target;
 		this.source = source;
@@ -31,19 +36,22 @@ public class IpBanEntryMock implements BanEntry<InetAddress>
 
 	@Override
 	@Deprecated(since = "1.20")
-	public @NotNull String getTarget()
+	@NotNull
+	public String getTarget()
 	{
 		return this.target;
 	}
 
 	@Override
-	public @NotNull InetAddress getBanTarget()
+	@NotNull
+	public InetAddress getBanTarget()
 	{
 		return InetAddresses.forString(this.target);
 	}
 
 	@Override
-	public @NotNull Date getCreated()
+	@NotNull
+	public Date getCreated()
 	{
 		return this.created;
 	}
@@ -56,7 +64,8 @@ public class IpBanEntryMock implements BanEntry<InetAddress>
 	}
 
 	@Override
-	public @NotNull String getSource()
+	@NotNull
+	public String getSource()
 	{
 		return this.source;
 	}
@@ -69,7 +78,8 @@ public class IpBanEntryMock implements BanEntry<InetAddress>
 	}
 
 	@Override
-	public @Nullable Date getExpiration()
+	@Nullable
+	public Date getExpiration()
 	{
 		return this.expires;
 	}
@@ -81,7 +91,8 @@ public class IpBanEntryMock implements BanEntry<InetAddress>
 	}
 
 	@Override
-	public @Nullable String getReason()
+	@Nullable
+	public String getReason()
 	{
 		return this.reason;
 	}
@@ -90,20 +101,6 @@ public class IpBanEntryMock implements BanEntry<InetAddress>
 	public void setReason(@Nullable String reason)
 	{
 		this.reason = reason;
-	}
-
-	@Override
-	public void save()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void remove()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }

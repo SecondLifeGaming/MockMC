@@ -19,10 +19,11 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 {
 
 	/**
-	 * Constructs a new {@link WallSignDataMock} for the provided {@link Material}. Only
-	 * supports materials in {@link Tag#WALL_SIGNS}
+	 * Constructs a new {@link WallSignDataMock} for the provided {@link Material}.
+	 * Only supports materials in {@link Tag#WALL_SIGNS}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public WallSignDataMock(@NotNull Material type)
 	{
@@ -33,9 +34,11 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 	}
 
 	/**
-	 * Create a new {@link WallSignDataMock} based on an existing {@link WallSignDataMock}.
+	 * Create a new {@link WallSignDataMock} based on an existing
+	 * {@link WallSignDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected WallSignDataMock(WallSignDataMock other)
 	{
@@ -75,7 +78,8 @@ public class WallSignDataMock extends BlockDataMock implements WallSign
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WallSignDataMock clone()
 	{
 		return new WallSignDataMock(this);

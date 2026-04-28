@@ -1,4 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
+import java.util.Objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -8,7 +9,6 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.Map;
 
 /**
@@ -17,10 +17,13 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMeta
+public class LeatherArmorMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.LeatherArmorMetaBaseMock
 {
 
-	private @Nullable Color color;
+	@Nullable
+	private Color color;
 
 	/**
 	 * Constructs a new {@link LeatherArmorMetaMock}.
@@ -33,12 +36,12 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	/**
 	 * Constructs a new {@link LeatherArmorMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public LeatherArmorMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof LeatherArmorMeta leatherArmorMeta)
 		{
 			this.color = leatherArmorMeta.isDyed() ? leatherArmorMeta.getColor() : null;
@@ -46,8 +49,10 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull LeatherArmorMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public LeatherArmorMetaMock clone()
 	{
 		return new LeatherArmorMetaMock(this);
 	}
@@ -77,16 +82,17 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 		{
 			return false;
 		}
-		if (!(obj instanceof LeatherArmorMeta other))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-
-		return this.isDyed() ? this.getColor().equals(other.getColor()) : !other.isDyed();
+		LeatherArmorMetaMock other = (LeatherArmorMetaMock) obj;
+		return Objects.equals(getColor(), other.getColor());
 	}
 
 	@Override
-	public @NotNull Color getColor()
+	@NotNull
+	public Color getColor()
 	{
 		return color == null ? Bukkit.getItemFactory().getDefaultLeatherColor() : color;
 	}
@@ -100,10 +106,13 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized LeatherArmorMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized LeatherArmorMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the LeatherArmorMetaMock class.
 	 */
-	public static @NotNull LeatherArmorMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static LeatherArmorMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		LeatherArmorMetaMock serialMock = new LeatherArmorMetaMock();
 		serialMock.deserializeInternal(args);
@@ -118,10 +127,12 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	 * Serializes the properties of an LeatherArmorMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the LeatherArmorMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         LeatherArmorMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (isDyed())
@@ -136,5 +147,4 @@ public class LeatherArmorMetaMock extends ItemMetaMock implements LeatherArmorMe
 	{
 		return "LEATHER_ARMOR";
 	}
-
 }

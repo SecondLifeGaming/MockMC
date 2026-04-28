@@ -11,7 +11,8 @@ public class WallDataMock extends BlockDataMock implements Wall
 	/**
 	 * Constructs a new {@link WallDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public WallDataMock(@NotNull Material material)
 	{
@@ -21,7 +22,8 @@ public class WallDataMock extends BlockDataMock implements Wall
 	/**
 	 * Create a new {@link WallDataMock} based on an existing {@link WallDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected WallDataMock(WallDataMock other)
 	{
@@ -66,7 +68,8 @@ public class WallDataMock extends BlockDataMock implements Wall
 	/**
 	 * Sets the value of the 'waterlogged' property.
 	 *
-	 * @param waterlogged the new 'waterlogged' value
+	 * @param waterlogged
+	 *            the new 'waterlogged' value
 	 */
 	@Override
 	public void setWaterlogged(boolean waterlogged)
@@ -75,7 +78,8 @@ public class WallDataMock extends BlockDataMock implements Wall
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WallDataMock clone()
 	{
 		return new WallDataMock(this);

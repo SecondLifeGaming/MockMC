@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.PiglinBrute;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see PiglinAbstractMock
  */
-public class PiglinBruteMock extends PiglinAbstractMock implements PiglinBrute
+public class PiglinBruteMock extends PiglinAbstractMock
+		implements
+			PiglinBrute,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PiglinBruteBaseMock
 {
 
 	/**
-	 * Constructs a new {@link PiglinBruteMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PiglinBruteMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PiglinBruteMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class PiglinBruteMock extends PiglinAbstractMock implements PiglinBrute
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PIGLIN_BRUTE;
 	}
-
 }

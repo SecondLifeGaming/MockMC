@@ -8,7 +8,6 @@ import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -18,29 +17,43 @@ import java.util.Set;
 /**
  * Mock implementation of {@link BossBar}.
  */
-public class BossBarMock implements BossBar
+public class BossBarMock implements org.mockbukkit.mockbukkit.generated.org.bukkit.boss.BossBarBaseMock
+
 {
 
+	private static final String FLAG_NULL = "Flag cannot be null";
 	private String title;
+
 	private BarColor color;
+
 	private BarStyle style;
+
 	private final Set<Player> players = new HashSet<>();
+
 	private final Set<BarFlag> barFlags = EnumSet.noneOf(BarFlag.class);
+
 	private boolean visible = true;
+
 	private double progress = 1.0;
 
 	/**
 	 * Constructs a new {@link BossBarMock} with the provided parameters.
 	 *
-	 * @param title The title of the bossbar.
-	 * @param color The color of the bossbar.
-	 * @param style The style of the bossbar.
-	 * @param flags The flags to set on the bossbar.
+	 * @param title
+	 *            The title of the bossbar.
+	 * @param color
+	 *            The color of the bossbar.
+	 * @param style
+	 *            The style of the bossbar.
+	 * @param flags
+	 *            The flags to set on the bossbar.
 	 */
-	public BossBarMock(@NotNull String title, @NotNull BarColor color, @NotNull BarStyle style, BarFlag @NotNull ... flags)
+	public BossBarMock(@Nullable String title, @NotNull BarColor color, @NotNull BarStyle style,
+			BarFlag @NotNull... flags)
 	{
-		this.title = title;
+		this.title = title == null ? "" : title;
 		this.color = color;
+
 		this.style = style;
 		for (BarFlag flag : flags)
 		{
@@ -49,7 +62,8 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public @NotNull String getTitle()
+	@NotNull
+	public String getTitle()
 	{
 		return title;
 	}
@@ -61,7 +75,8 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public @NotNull BarColor getColor()
+	@NotNull
+	public BarColor getColor()
 	{
 		return color;
 	}
@@ -73,7 +88,8 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public @NotNull BarStyle getStyle()
+	@NotNull
+	public BarStyle getStyle()
 	{
 		return style;
 	}
@@ -88,21 +104,21 @@ public class BossBarMock implements BossBar
 	@Override
 	public void removeFlag(@NotNull BarFlag flag)
 	{
-		Preconditions.checkNotNull(flag, "Flag cannot be null");
+		Preconditions.checkNotNull(flag, FLAG_NULL);
 		barFlags.remove(flag);
 	}
 
 	@Override
 	public void addFlag(@NotNull BarFlag flag)
 	{
-		Preconditions.checkNotNull(flag, "Flag cannot be null");
+		Preconditions.checkNotNull(flag, FLAG_NULL);
 		barFlags.add(flag);
 	}
 
 	@Override
 	public boolean hasFlag(@NotNull BarFlag flag)
 	{
-		Preconditions.checkNotNull(flag, "Flag cannot be null");
+		Preconditions.checkNotNull(flag, FLAG_NULL);
 		return barFlags.contains(flag);
 	}
 
@@ -143,7 +159,8 @@ public class BossBarMock implements BossBar
 	}
 
 	@Override
-	public @NotNull List<Player> getPlayers()
+	@NotNull
+	public List<Player> getPlayers()
 	{
 		return new ArrayList<>(players);
 	}
@@ -160,6 +177,9 @@ public class BossBarMock implements BossBar
 		return visible;
 	}
 
+	/**
+	 * @deprecated Use {@link #setVisible(boolean)} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.9")
 	public void show()
@@ -167,11 +187,13 @@ public class BossBarMock implements BossBar
 		setVisible(true);
 	}
 
+	/**
+	 * @deprecated Use {@link #setVisible(boolean)} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.9")
 	public void hide()
 	{
 		setVisible(false);
 	}
-
 }

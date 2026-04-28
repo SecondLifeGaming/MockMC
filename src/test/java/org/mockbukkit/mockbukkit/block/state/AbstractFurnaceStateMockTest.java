@@ -72,7 +72,8 @@ class AbstractFurnaceStateMockTest extends ContainerStateMockTest
 	@Test
 	void constructor_Block_NotFurnace_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new TestFurnaceState(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new TestFurnaceState(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

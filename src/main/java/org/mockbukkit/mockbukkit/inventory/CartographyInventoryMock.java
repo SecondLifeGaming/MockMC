@@ -11,13 +11,17 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class CartographyInventoryMock extends InventoryMock implements CartographyInventory
+public class CartographyInventoryMock extends InventoryMock
+		implements
+			CartographyInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.CartographyInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link CartographyInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public CartographyInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -30,9 +34,9 @@ public class CartographyInventoryMock extends InventoryMock implements Cartograp
 	}
 
 	@Override
-	public @NotNull InventoryMock getSnapshot()
+	@NotNull
+	public InventoryMock getSnapshot()
 	{
 		return new CartographyInventoryMock(this);
 	}
-
 }

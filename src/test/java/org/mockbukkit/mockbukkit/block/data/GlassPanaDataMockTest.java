@@ -88,7 +88,8 @@ class GlassPanaDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull GlassPaneDataMock cloned = glassPaneData.clone();
+		@NotNull
+		GlassPaneDataMock cloned = glassPaneData.clone();
 
 		assertEquals(glassPaneData, cloned);
 		assertEquals(glassPaneData.isWaterlogged(), cloned.isWaterlogged());
@@ -102,8 +103,7 @@ class GlassPanaDataMockTest
 
 	static Stream<Arguments> allowedFaces()
 	{
-		return Stream.of(BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH)
-				.map(Arguments::of);
+		return Stream.of(BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH).map(Arguments::of);
 	}
 
 }

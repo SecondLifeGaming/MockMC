@@ -10,7 +10,6 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -19,17 +18,26 @@ import java.util.UUID;
  * @see MonsterMock
  */
 @ApiStatus.Experimental
-public class CreakingMock extends MonsterMock implements Creaking
+public class CreakingMock extends MonsterMock
+		implements
+			Creaking,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CreakingBaseMock
 {
 
-	private @Nullable Player activatedBy = null;
-	private @Nullable Location homeLocation = null;
+	@Nullable
+	private Player activatedBy = null;
+
+	@Nullable
+	private Location homeLocation = null;
 
 	/**
-	 * Constructs a new {@link Creaking} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link Creaking} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CreakingMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -37,7 +45,8 @@ public class CreakingMock extends MonsterMock implements Creaking
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.CREAKING;
 	}
@@ -47,19 +56,15 @@ public class CreakingMock extends MonsterMock implements Creaking
 	{
 		Preconditions.checkArgument(player != null, "player cannot be null");
 		this.activatedBy = player;
-
-		playSound(Sound.sound(
-				org.bukkit.Sound.ENTITY_CREAKING_ACTIVATE,
-				Sound.Source.HOSTILE,
-				1.0f,
-				1.0f
-		));
+		playSound(Sound.sound(org.bukkit.Sound.ENTITY_CREAKING_ACTIVATE, Sound.Source.HOSTILE, 1.0f, 1.0f));
 	}
 
 	/**
-	 * Sets the home location for this creaking (where its {@link org.bukkit.block.CreakingHeart} could be found).
+	 * Sets the home location for this creaking (where its
+	 * {@link org.bukkit.block.CreakingHeart} could be found).
 	 *
-	 * @param homeLocation the location of the home if available, or null otherwise
+	 * @param homeLocation
+	 *            the location of the home if available, or null otherwise
 	 */
 	public void setHomeLocation(@Nullable Location homeLocation)
 	{
@@ -67,7 +72,8 @@ public class CreakingMock extends MonsterMock implements Creaking
 	}
 
 	@Override
-	public @Nullable Location getHome()
+	@Nullable
+	public Location getHome()
 	{
 		return this.homeLocation != null ? this.homeLocation.clone() : null;
 	}
@@ -76,13 +82,7 @@ public class CreakingMock extends MonsterMock implements Creaking
 	public void deactivate()
 	{
 		this.activatedBy = null;
-
-		playSound(Sound.sound(
-				org.bukkit.Sound.ENTITY_CREAKING_DEACTIVATE,
-				Sound.Source.HOSTILE,
-				1.0f,
-				1.0f
-		));
+		playSound(Sound.sound(org.bukkit.Sound.ENTITY_CREAKING_DEACTIVATE, Sound.Source.HOSTILE, 1.0f, 1.0f));
 	}
 
 	@Override
@@ -90,5 +90,4 @@ public class CreakingMock extends MonsterMock implements Creaking
 	{
 		return this.activatedBy != null;
 	}
-
 }

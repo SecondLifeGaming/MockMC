@@ -28,18 +28,24 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	private volatile boolean running;
 	private final @Nullable Runnable runnable;
 	private final @Nullable Consumer<? super BukkitTask> consumer;
-	private final List<Runnable> cancelListeners = new CopyOnWriteArrayList<>(); // Needed to not hold any lock when calling cancellation listeners
+	private final List<Runnable> cancelListeners = new CopyOnWriteArrayList<>(); // Needed to not hold any lock when
+																					// calling cancellation listeners
 	private volatile Thread thread;
 	private volatile boolean submitted = false;
 
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
 	 *
-	 * @param id            The task ID.
-	 * @param plugin        The plugin owning the task.
-	 * @param isSync        Whether the task is synchronous.
-	 * @param scheduledTick The tick the task is scheduled to run at.
-	 * @param runnable      The runnable to run.
+	 * @param id
+	 *            The task ID.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param isSync
+	 *            Whether the task is synchronous.
+	 * @param scheduledTick
+	 *            The tick the task is scheduled to run at.
+	 * @param runnable
+	 *            The runnable to run.
 	 */
 	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Runnable runnable)
 	{
@@ -50,13 +56,19 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
 	 *
-	 * @param id            The task ID.
-	 * @param plugin        The plugin owning the task.
-	 * @param isSync        Whether the task is synchronous.
-	 * @param scheduledTick The tick the task is scheduled to run at.
-	 * @param consumer      The consumer to run.
+	 * @param id
+	 *            The task ID.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param isSync
+	 *            Whether the task is synchronous.
+	 * @param scheduledTick
+	 *            The tick the task is scheduled to run at.
+	 * @param consumer
+	 *            The consumer to run.
 	 */
-	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @NotNull Consumer<? super BukkitTask> consumer)
+	public ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick,
+			@NotNull Consumer<? super BukkitTask> consumer)
 	{
 		this(id, plugin, isSync, scheduledTick, null, consumer);
 		Preconditions.checkNotNull(consumer, "Consumer cannot be null");
@@ -65,14 +77,21 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	/**
 	 * Constructs a new {@link ScheduledTask} with the provided parameters.
 	 *
-	 * @param id            The task ID.
-	 * @param plugin        The plugin owning the task.
-	 * @param isSync        Whether the task is synchronous.
-	 * @param scheduledTick The tick the task is scheduled to run at.
-	 * @param runnable      The runnable to run.
-	 * @param consumer      The consumer to run.
+	 * @param id
+	 *            The task ID.
+	 * @param plugin
+	 *            The plugin owning the task.
+	 * @param isSync
+	 *            Whether the task is synchronous.
+	 * @param scheduledTick
+	 *            The tick the task is scheduled to run at.
+	 * @param runnable
+	 *            The runnable to run.
+	 * @param consumer
+	 *            The consumer to run.
 	 */
-	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable, @Nullable Consumer<? super BukkitTask> consumer)
+	private ScheduledTask(int id, Plugin plugin, boolean isSync, long scheduledTick, @Nullable Runnable runnable,
+			@Nullable Consumer<? super BukkitTask> consumer)
 	{
 		this.id = id;
 		this.plugin = plugin;
@@ -92,10 +111,11 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	}
 
 	/**
-	 * Sets whether the task is running.
-	 * Should not be used outside of {@link BukkitSchedulerMock}.
+	 * Sets whether the task is running. Should not be used outside of
+	 * {@link BukkitSchedulerMock}.
 	 *
-	 * @param running Whether the task is running.
+	 * @param running
+	 *            Whether the task is running.
 	 */
 	@ApiStatus.Internal
 	protected void setRunning(boolean running)
@@ -116,7 +136,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	/**
 	 * Sets the tick at which the task is scheduled to run at.
 	 *
-	 * @param scheduledTick The tick at which the task is scheduled to run at.
+	 * @param scheduledTick
+	 *            The tick at which the task is scheduled to run at.
 	 */
 	@ApiStatus.Internal
 	protected void setScheduledTick(long scheduledTick)
@@ -145,8 +166,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	}
 
 	/**
-	 * Marks the task as being submitted to the async thread pool.
-	 * This is used to bypass the #isCancelled check if it gets updated before the task is run.
+	 * Marks the task as being submitted to the async thread pool. This is used to
+	 * bypass the #isCancelled check if it gets updated before the task is run.
 	 */
 	@ApiStatus.Internal
 	protected void submitted()
@@ -171,8 +192,7 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 			{
 				this.consumer.accept(this);
 			}
-		}
-		else
+		} else
 		{
 			throw new CancellationException("Task is cancelled");
 		}
@@ -221,7 +241,8 @@ public class ScheduledTask implements BukkitTask, BukkitWorker
 	/**
 	 * Adds a callback which is executed when the task is cancelled.
 	 *
-	 * @param callback The callback which gets executed when the task is cancelled.
+	 * @param callback
+	 *            The callback which gets executed when the task is cancelled.
 	 */
 	public void addOnCancelled(@NotNull Runnable callback)
 	{

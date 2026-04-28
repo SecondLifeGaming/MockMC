@@ -1,0 +1,7 @@
+{
+  "org.bukkit.entity.Pillager": {
+    "excludeInterfaces": [],
+    "excludeMethods": [],
+    "manualPatches": []
+  }
+}

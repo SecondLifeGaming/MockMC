@@ -4,7 +4,6 @@ import org.bukkit.entity.Breeze;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class BreezeMock extends MonsterMock implements Breeze
+public class BreezeMock extends MonsterMock
+		implements
+			Breeze,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BreezeBaseMock
 {
 
 	/**
-	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link MonsterMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BreezeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class BreezeMock extends MonsterMock implements Breeze
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.BREEZE;
 	}
-
 }

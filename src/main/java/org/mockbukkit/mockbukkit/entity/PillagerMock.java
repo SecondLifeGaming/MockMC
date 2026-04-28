@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.InventoryMock;
-
+import org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PillagerBaseMock;
 import java.util.UUID;
 
 /**
@@ -19,16 +19,19 @@ import java.util.UUID;
  *
  * @see IllagerMock
  */
-public class PillagerMock extends IllagerMock implements Pillager, MockRangedEntity<PillagerMock>
+public class PillagerMock extends IllagerMock implements Pillager, MockRangedEntity<PillagerMock>, PillagerBaseMock
 {
 
 	private final Inventory inventory = new InventoryMock(this, 5, InventoryType.CHEST);
 
 	/**
-	 * Constructs a new {@link PillagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PillagerMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -39,24 +42,26 @@ public class PillagerMock extends IllagerMock implements Pillager, MockRangedEnt
 	public void finalizeSpawn()
 	{
 		super.finalizeSpawn();
-
 		inventory.setItem(EquipmentSlot.HAND.ordinal(), ItemStack.of(Material.CROSSBOW));
 	}
 
 	@Override
-	public @NotNull Sound getCelebrationSound()
+	@NotNull
+	public Sound getCelebrationSound()
 	{
 		return Sound.ENTITY_PILLAGER_CELEBRATE;
 	}
 
 	@Override
-	public @NotNull Inventory getInventory()
+	@NotNull
+	public Inventory getInventory()
 	{
 		return this.inventory;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PILLAGER;
 	}

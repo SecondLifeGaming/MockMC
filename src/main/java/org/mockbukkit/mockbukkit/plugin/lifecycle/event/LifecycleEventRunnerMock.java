@@ -21,12 +21,17 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class LifecycleEventRunnerMock
 {
 
-	private static final Supplier<Set<LifecycleEventType<?, ?, ?>>> BLOCKS_RELOADING = Suppliers.memoize(() -> Set.of( // lazy due to cyclic initialization
-			LifecycleEvents.COMMANDS
-	));
+	private static final Supplier<Set<LifecycleEventType<?, ?, ?>>> BLOCKS_RELOADING = Suppliers.memoize(() -> Set.of( // lazy
+																														// due
+																														// to
+																														// cyclic
+																														// initialization
+			LifecycleEvents.COMMANDS));
 	public static final LifecycleEventRunnerMock INSTANCE = new LifecycleEventRunnerMock();
 
 	private final List<LifecycleEventType<?, ?, ?>> lifecycleEventTypes = new ArrayList<>();
@@ -34,11 +39,13 @@ public class LifecycleEventRunnerMock
 
 	public void checkRegisteredHandler(final LifecycleEventOwner owner, final LifecycleEventType<?, ?, ?> eventType)
 	{
-        /*
-        Lifecycle event handlers for reloadable events that are registered from the BootstrapContext prevent
-        the server from reloading plugins. This is because reloading plugins requires disabling all the plugins,
-        running the reload logic (which would include places where these events should fire) and then re-enabling plugins.
-         */
+		/*
+		 * Lifecycle event handlers for reloadable events that are registered from the
+		 * BootstrapContext prevent the server from reloading plugins. This is because
+		 * reloading plugins requires disabling all the plugins, running the reload
+		 * logic (which would include places where these events should fire) and then
+		 * re-enabling plugins.
+		 */
 		if (owner instanceof BootstrapContext && BLOCKS_RELOADING.get().contains(eventType))
 		{
 			this.blockPluginReloading = true;
@@ -50,7 +57,8 @@ public class LifecycleEventRunnerMock
 		return this.blockPluginReloading;
 	}
 
-	public <O extends LifecycleEventOwner, E extends LifecycleEvent, ET extends LifecycleEventType<O, E, ?>> ET addEventType(final ET eventType)
+	public <O extends LifecycleEventOwner, E extends LifecycleEvent, ET extends LifecycleEventType<O, E, ?>> ET addEventType(
+			final ET eventType)
 	{
 		this.lifecycleEventTypes.add(eventType);
 		return eventType;
@@ -64,18 +72,24 @@ public class LifecycleEventRunnerMock
 		}
 	}
 
-	private <O extends LifecycleEventOwner> void removeEventHandlersOwnedBy(final LifecycleEventType<O, ?, ?> eventType, final Plugin possibleOwner)
+	private <O extends LifecycleEventOwner> void removeEventHandlersOwnedBy(final LifecycleEventType<O, ?, ?> eventType,
+			final Plugin possibleOwner)
 	{
 		final AbstractLifecycleEventTypeMock<O, ?, ?> lifecycleEventType = (AbstractLifecycleEventTypeMock<O, ?, ?>) eventType;
-		lifecycleEventType.removeMatching(registeredHandler -> registeredHandler.owner().getPluginMeta().getName().equals(possibleOwner.getPluginMeta().getName()));
+		lifecycleEventType.removeMatching(registeredHandler -> registeredHandler.owner().getPluginMeta().getName()
+				.equals(possibleOwner.getPluginMeta().getName()));
 	}
 
-	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType, final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause)
+	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(
+			final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType,
+			final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause)
 	{
-		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType, new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), ownerClass::isInstance);
+		this.callEvent((LifecycleEventType<O, ReloadableRegistrarEvent<? super R>, ?>) lifecycleEventType,
+				new RegistrarEventMock.ReloadableMock<>(registrar, ownerClass, cause), ownerClass::isInstance);
 	}
 
-	public <O extends LifecycleEventOwner, E extends PaperLifecycleEventMock> void callEvent(LifecycleEventType<O, ? super E, ?> eventType, E event, Predicate<? super O> ownerPredicate)
+	public <O extends LifecycleEventOwner, E extends PaperLifecycleEventMock> void callEvent(
+			LifecycleEventType<O, ? super E, ?> eventType, E event, Predicate<? super O> ownerPredicate)
 	{
 		AbstractLifecycleEventTypeMock<O, ? super E, ?> lifecycleEventType = (AbstractLifecycleEventTypeMock<O, ? super E, ?>) eventType;
 		lifecycleEventType.forEachHandler(event, registeredHandler ->
@@ -87,12 +101,11 @@ public class LifecycleEventRunnerMock
 					ownerAwareGenericHelper(ownerAwareEvent, registeredHandler.owner());
 				}
 				registeredHandler.lifecycleEventHandler().run(event);
-			}
-			catch (final Throwable ex)
+			} catch (final Throwable ex)
 			{
-				throw new RuntimeException("Could not run '%s' lifecycle event handler from %s".formatted(lifecycleEventType.name(), registeredHandler.owner().getPluginMeta().getDisplayName()), ex);
-			}
-			finally
+				throw new RuntimeException("Could not run '%s' lifecycle event handler from %s".formatted(
+						lifecycleEventType.name(), registeredHandler.owner().getPluginMeta().getDisplayName()), ex);
+			} finally
 			{
 				if (event instanceof final OwnerAwareLifecycleEventMock<?> ownerAwareEvent)
 				{
@@ -103,14 +116,14 @@ public class LifecycleEventRunnerMock
 		event.invalidate();
 	}
 
-	private static <O extends LifecycleEventOwner> void ownerAwareGenericHelper(final OwnerAwareLifecycleEventMock<@NotNull O> event, final LifecycleEventOwner possibleOwner)
+	private static <O extends LifecycleEventOwner> void ownerAwareGenericHelper(
+			final OwnerAwareLifecycleEventMock<@NotNull O> event, final LifecycleEventOwner possibleOwner)
 	{
 		final @Nullable O owner = event.castOwner(possibleOwner);
 		if (owner != null)
 		{
 			event.setOwner(owner);
-		}
-		else
+		} else
 		{
 			throw new IllegalStateException("Found invalid owner " + possibleOwner + " for event " + event);
 		}

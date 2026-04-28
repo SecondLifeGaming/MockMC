@@ -16,6 +16,8 @@ import java.util.Objects;
 /**
  * Mock implementation of a {@link Metadatable}.
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class MetadataTable implements Metadatable
 {
 
@@ -31,9 +33,11 @@ public class MetadataTable implements Metadatable
 	}
 
 	/**
-	 * Constructs a new empty {@link MetadataTable} with the contents cloned from another.
+	 * Constructs a new empty {@link MetadataTable} with the contents cloned from
+	 * another.
 	 *
-	 * @param table The table to clone.
+	 * @param table
+	 *            The table to clone.
 	 */
 	@ApiStatus.Internal
 	public MetadataTable(@NotNull MetadataTable table)
@@ -73,12 +77,13 @@ public class MetadataTable implements Metadatable
 	/**
 	 * Clears all metadata belonging to a plugin.
 	 *
-	 * @param plugin The plugin to clear metadata for.
+	 * @param plugin
+	 *            The plugin to clear metadata for.
 	 */
 	public void clearMetadata(@NotNull Plugin plugin)
 	{
 		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
-		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext(); )
+		for (Iterator<Map<Plugin, MetadataValue>> iterator = metadata.values().iterator(); iterator.hasNext();)
 		{
 			Map<Plugin, MetadataValue> values = iterator.next();
 			values.remove(plugin);

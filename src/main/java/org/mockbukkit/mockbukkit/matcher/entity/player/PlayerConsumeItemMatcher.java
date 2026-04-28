@@ -38,16 +38,17 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 		if (playerMock.hasConsumed(itemStack))
 		{
 			description.appendText("had consumed the item");
-		}
-		else
+		} else
 		{
 			description.appendText("had not consumed the item");
 		}
 	}
 
 	/**
-	 * @param itemStack The required item to have been consumed
-	 * @return A matcher which matches with any player that has consumed the specified item
+	 * @param itemStack
+	 *            The required item to have been consumed
+	 * @return A matcher which matches with any player that has consumed the
+	 *         specified item
 	 */
 	public static @NotNull PlayerConsumeItemMatcher hasConsumed(@NotNull ItemStack itemStack)
 	{
@@ -56,8 +57,10 @@ public class PlayerConsumeItemMatcher extends TypeSafeMatcher<PlayerMock>
 	}
 
 	/**
-	 * @param itemStack The required item to not have been consumed
-	 * @return A matcher which matches with any player that has not consumed the specified item
+	 * @param itemStack
+	 *            The required item to not have been consumed
+	 * @return A matcher which matches with any player that has not consumed the
+	 *         specified item
 	 */
 	public static @NotNull Matcher<PlayerMock> hasNotConsumed(@NotNull ItemStack itemStack)
 	{

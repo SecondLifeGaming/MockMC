@@ -29,8 +29,9 @@ public class RecipeManager
 {
 
 	/**
-	 * This field is used as cache. The values are lazy loaded with method {@link #getRecipes()}.
-	 * This field should not be accessed directly, it's preferred to use the method {@link #getRecipes()} instead.
+	 * This field is used as cache. The values are lazy loaded with method
+	 * {@link #getRecipes()}. This field should not be accessed directly, it's
+	 * preferred to use the method {@link #getRecipes()} instead.
 	 */
 	private @Nullable Map<RecipeType, List<Recipe>> recipes = null;
 
@@ -45,7 +46,8 @@ public class RecipeManager
 	/**
 	 * Resets the list of recipes to the default for a given recipe type.
 	 *
-	 * @param recipeType The recipe type to reset.
+	 * @param recipeType
+	 *            The recipe type to reset.
 	 */
 	public void reset(@NotNull RecipeType recipeType)
 	{
@@ -73,7 +75,8 @@ public class RecipeManager
 	/**
 	 * Get the list of recipes available for that recipe type.
 	 *
-	 * @param recipeType The recipe type.
+	 * @param recipeType
+	 *            The recipe type.
 	 * @return The list of recipes available.
 	 */
 	@NotNull
@@ -86,8 +89,10 @@ public class RecipeManager
 	/**
 	 * Helper function to lazy load the recipes.
 	 *
-	 * @param recipeType The recipe type to get the recipes.
-	 * @param recipeKey  The recipe key to get the recipes.
+	 * @param recipeType
+	 *            The recipe type to get the recipes.
+	 * @param recipeKey
+	 *            The recipe key to get the recipes.
 	 * @return The server recipes.
 	 */
 	@Nullable
@@ -111,8 +116,10 @@ public class RecipeManager
 	/**
 	 * Get the list of recipes available to create a desired item.
 	 *
-	 * @param recipeType The recipe type.
-	 * @param itemStack  The desired item.
+	 * @param recipeType
+	 *            The recipe type.
+	 * @param itemStack
+	 *            The desired item.
 	 * @return The list of recipes available to create.
 	 */
 	@NotNull
@@ -121,9 +128,7 @@ public class RecipeManager
 		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
 		Preconditions.checkArgument(itemStack != null, "Item stack cannot be null");
 
-		return getRecipes(recipeType).stream()
-				.filter(recipe -> itemStack.isSimilar(recipe.getResult()))
-				.toList();
+		return getRecipes(recipeType).stream().filter(recipe -> itemStack.isSimilar(recipe.getResult())).toList();
 	}
 
 	@Nullable
@@ -137,28 +142,26 @@ public class RecipeManager
 		{
 			switch (recipe)
 			{
-			case ShapelessRecipe shapelessRecipe ->
-			{
-				if (matches(shapelessRecipe, craftingMatrix))
-				{
-					return recipe;
+				case ShapelessRecipe shapelessRecipe -> {
+					if (matches(shapelessRecipe, craftingMatrix))
+					{
+						return recipe;
+					}
 				}
-			}
-			case ShapedRecipe shapedRecipe ->
-			{
-				if (matches(shapedRecipe, craftingMatrix))
-				{
-					return recipe;
+				case ShapedRecipe shapedRecipe -> {
+					if (matches(shapedRecipe, craftingMatrix))
+					{
+						return recipe;
+					}
 				}
-			}
-			case ComplexRecipe complexRecipe ->
-			{
-				if (matches(complexRecipe, craftingMatrix))
-				{
-					return recipe;
+				case ComplexRecipe complexRecipe -> {
+					if (matches(complexRecipe, craftingMatrix))
+					{
+						return recipe;
+					}
 				}
-			}
-			default -> throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
+				default ->
+					throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
 			}
 		}
 
@@ -168,8 +171,10 @@ public class RecipeManager
 	/**
 	 * Add a recipe to the list of recipes.
 	 *
-	 * @param recipeType The recipe type.
-	 * @param recipe     The recipe to be added.
+	 * @param recipeType
+	 *            The recipe type.
+	 * @param recipe
+	 *            The recipe to be added.
 	 * @return {@code true} if added, otherwise {@code false}.
 	 */
 	public boolean addRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
@@ -182,8 +187,10 @@ public class RecipeManager
 	/**
 	 * Remove a recipe to the list of recipes.
 	 *
-	 * @param recipeType The recipe type.
-	 * @param recipe     The recipe to be removed.
+	 * @param recipeType
+	 *            The recipe type.
+	 * @param recipe
+	 *            The recipe to be removed.
 	 * @return {@code true} if removed, otherwise {@code false}.
 	 */
 	public boolean removeRecipe(@NotNull RecipeType recipeType, @NotNull Recipe recipe)
@@ -208,7 +215,8 @@ public class RecipeManager
 		return switch (recipeType)
 		{
 			case RecipeType.BLASTING, RecipeType.CAMPFIRE_COOKING, RecipeType.SMELTING, RecipeType.SMITHING,
-				 RecipeType.SMOKING, RecipeType.STONECUTTING -> Collections.emptyList();
+					RecipeType.SMOKING, RecipeType.STONECUTTING ->
+				Collections.emptyList();
 			case RecipeType.CRAFTING -> loadCraftingRecipes();
 		};
 	}
@@ -226,9 +234,7 @@ public class RecipeManager
 
 	public static List<Recipe> loadDefaultRecipesAsLists()
 	{
-		return loadDefaultRecipes().values().stream()
-				.flatMap(Collection::stream)
-				.toList();
+		return loadDefaultRecipes().values().stream().flatMap(Collection::stream).toList();
 	}
 
 	private static @NotNull List<Recipe> loadCraftingRecipes()
@@ -244,20 +250,16 @@ public class RecipeManager
 			if (CraftingRecipeFactory.SHAPED_TYPE.equalsIgnoreCase(recipeTypeString))
 			{
 				recipesList.add(CraftingRecipeFactory.createShapedRecipe(recipe));
-			}
-			else if (CraftingRecipeFactory.SHAPELESS_TYPE.equalsIgnoreCase(recipeTypeString))
+			} else if (CraftingRecipeFactory.SHAPELESS_TYPE.equalsIgnoreCase(recipeTypeString))
 			{
 				recipesList.add(CraftingRecipeFactory.createShapelessRecipe(recipe));
-			}
-			else if (CraftingRecipeFactory.TRANSMUTE_TYPE.equalsIgnoreCase(recipeTypeString))
+			} else if (CraftingRecipeFactory.TRANSMUTE_TYPE.equalsIgnoreCase(recipeTypeString))
 			{
 				recipesList.add(CraftingRecipeFactory.createTransmuteRecipe(recipe));
-			}
-			else if (CraftingRecipeFactory.COMPLEX_TYPE.equalsIgnoreCase(recipeTypeString))
+			} else if (CraftingRecipeFactory.COMPLEX_TYPE.equalsIgnoreCase(recipeTypeString))
 			{
 				recipesList.add(CraftingRecipeFactory.createComplexRecipe(recipe));
-			}
-			else
+			} else
 			{
 				throw new IllegalArgumentException("Unknown recipe type: " + recipeTypeString);
 			}
@@ -273,10 +275,12 @@ public class RecipeManager
 
 		long itemCount = Stream.of(craftingMatrix).filter(item -> !item.isEmpty()).count();
 
-		@NotNull List<RecipeChoice> choices = shapelessRecipe.getChoiceList();
+		@NotNull
+		List<RecipeChoice> choices = shapelessRecipe.getChoiceList();
 		if (choices.size() != itemCount)
 		{
-			// If number of items in the recipe does not match the amount of items required, we skip
+			// If number of items in the recipe does not match the amount of items required,
+			// we skip
 			return false;
 		}
 
@@ -322,7 +326,8 @@ public class RecipeManager
 				}
 
 				// Validate the recipe mirrored
-				if (mirroredShape != null && matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
+				if (mirroredShape != null
+						&& matchesAtPosition(mirroredShape, ingredientMap, craftingMatrix, startRow, startCol))
 				{
 					return true;
 				}
@@ -337,7 +342,8 @@ public class RecipeManager
 	 * <p>
 	 * Example: ["abc","def"] will become ["cba", "fed"].
 	 *
-	 * @param shape The recipe to be mirrored.
+	 * @param shape
+	 *            The recipe to be mirrored.
 	 * @return The mirrored recipe.
 	 */
 	private static @NotNull String @NotNull [] mirrorRecipeHorizontally(@NotNull String @NotNull [] shape)
@@ -356,7 +362,7 @@ public class RecipeManager
 	}
 
 	private static boolean matchesAtPosition(String[] shape, Map<Character, RecipeChoice> ingredientMap,
-											 ItemStack[] craftingMatrix, int startRow, int startCol)
+			ItemStack[] craftingMatrix, int startRow, int startCol)
 	{
 		for (int row = 0; row < 3; row++)
 		{
@@ -372,11 +378,11 @@ public class RecipeManager
 	}
 
 	private static boolean matchesSlot(String[] shape, Map<Character, RecipeChoice> ingredientMap,
-									   ItemStack[] craftingMatrix, int startRow, int startCol, int row, int col)
+			ItemStack[] craftingMatrix, int startRow, int startCol, int row, int col)
 	{
 		int index = row * 3 + col;
-		boolean isInRecipe = (row >= startRow && row < startRow + shape.length) &&
-				(col >= startCol && col < startCol + shape[0].length());
+		boolean isInRecipe = (row >= startRow && row < startRow + shape.length)
+				&& (col >= startCol && col < startCol + shape[0].length());
 
 		ItemStack itemInSlot = craftingMatrix[index];
 		if (!isInRecipe)
@@ -393,13 +399,14 @@ public class RecipeManager
 			return itemInSlot.isEmpty();
 		}
 
-		// A choice can be null when there's no item in that position. An example of this is minecraft:acacia_boat at position "b"
-		@Nullable RecipeChoice choice = ingredientMap.get(recipeChar);
+		// A choice can be null when there's no item in that position. An example of
+		// this is minecraft:acacia_boat at position "b"
+		@Nullable
+		RecipeChoice choice = ingredientMap.get(recipeChar);
 		if (choice == null)
 		{
 			return itemInSlot.isEmpty();
-		}
-		else
+		} else
 		{
 			return choice.test(itemInSlot);
 		}

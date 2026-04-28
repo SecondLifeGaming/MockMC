@@ -39,7 +39,8 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	}
 
 	/**
-	 * @param itemStack The item stack required for there to be a match
+	 * @param itemStack
+	 *            The item stack required for there to be a match
 	 * @return A matcher which matches with any inventory of specified item stack
 	 */
 	public static @NotNull InventoryHolderContainsMatcher hasItemInInventory(@NotNull ItemStack itemStack)
@@ -49,8 +50,10 @@ public class InventoryHolderContainsMatcher extends TypeSafeMatcher<InventoryHol
 	}
 
 	/**
-	 * @param itemStack The item stack required for there to be no match
-	 * @return A matcher which matches with any inventory without the specified item stack
+	 * @param itemStack
+	 *            The item stack required for there to be no match
+	 * @return A matcher which matches with any inventory without the specified item
+	 *         stack
 	 */
 	public static @NotNull Matcher<InventoryHolder> doesNotHaveItemInInventory(@NotNull ItemStack itemStack)
 	{

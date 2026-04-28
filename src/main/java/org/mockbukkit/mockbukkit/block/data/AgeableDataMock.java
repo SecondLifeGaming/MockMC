@@ -11,7 +11,8 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	/**
 	 * Constructs a new {@link AgeableDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public AgeableDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	}
 
 	/**
-	 * Create a new {@link AgeableDataMock} based on an existing {@link AgeableDataMock}.
+	 * Create a new {@link AgeableDataMock} based on an existing
+	 * {@link AgeableDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected AgeableDataMock(@NotNull AgeableDataMock other)
 	{
@@ -48,7 +51,8 @@ public class AgeableDataMock extends BlockDataMock implements Ageable
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AgeableDataMock clone()
 	{
 		return new AgeableDataMock(this);

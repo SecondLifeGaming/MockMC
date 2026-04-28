@@ -7,7 +7,6 @@ import org.bukkit.entity.Painting;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
-
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,16 +15,23 @@ import java.util.UUID;
  *
  * @see HangingMock
  */
-public class PaintingMock extends HangingMock implements Painting
+public class PaintingMock extends HangingMock
+		implements
+			Painting,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PaintingBaseMock
 {
 
-	private @NotNull Art art;
+	@NotNull
+	private Art art;
 
 	/**
-	 * Constructs a new {@link PaintingMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PaintingMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PaintingMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,11 +39,15 @@ public class PaintingMock extends HangingMock implements Painting
 	}
 
 	/**
-	 * Constructs a new {@link PaintingMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PaintingMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
-	 * @param art    The art to be used in the painting.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 * @param art
+	 *            The art to be used in the painting.
 	 */
 	public PaintingMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull Art art)
 	{
@@ -46,7 +56,8 @@ public class PaintingMock extends HangingMock implements Painting
 	}
 
 	@Override
-	public @NotNull Art getArt()
+	@NotNull
+	public Art getArt()
 	{
 		return this.art;
 	}
@@ -61,12 +72,10 @@ public class PaintingMock extends HangingMock implements Painting
 	public boolean setArt(@NotNull Art art, boolean force)
 	{
 		Preconditions.checkArgument(art != null, "Art cannot be null");
-
 		if (!force)
 		{
 			// TODO: Check if the painting fits the current location, if not return false.
 		}
-
 		this.art = art;
 		return true;
 	}
@@ -84,9 +93,9 @@ public class PaintingMock extends HangingMock implements Painting
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PAINTING;
 	}
-
 }

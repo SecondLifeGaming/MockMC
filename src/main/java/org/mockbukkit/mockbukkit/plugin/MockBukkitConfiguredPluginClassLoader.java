@@ -16,8 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.exception.PluginClassNotFoundException;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,22 +24,26 @@ import java.net.URLClassLoader;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implements ConfiguredPluginClassLoader
+public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader
+		implements
+			ConfiguredPluginClassLoader,
+			org.mockbukkit.mockbukkit.generated.io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoaderBaseMock
 {
 
 	private final ServerMock server;
+
 	private final PluginDescriptionFile description;
+
 	private final File dataFolder;
+
 	private final File pluginFile;
+
 	private JarFile jarFile = null;
+
 	private final PluginClassLoaderGroup classLoaderGroup = new MockBukkitPluginClassLoaderGroup();
 
-	public MockBukkitConfiguredPluginClassLoader(
-			ServerMock server,
-			PluginDescriptionFile description,
-			File dataFolder,
-			File pluginFile
-	)
+	public MockBukkitConfiguredPluginClassLoader(ServerMock server, PluginDescriptionFile description, File dataFolder,
+			File pluginFile)
 	{
 		super(new URL[0]);
 		this.server = server;
@@ -68,15 +70,15 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 		if (groupLoadedClass == null)
 		{
 			return super.loadClass(name, resolve);
-		}
-		else
+		} else
 		{
 			return groupLoadedClass;
 		}
 	}
 
 	@Override
-	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries) throws ClassNotFoundException
+	public Class<?> loadClass(@NotNull String name, boolean resolve, boolean checkGlobal, boolean checkLibraries)
+			throws ClassNotFoundException
 	{
 		return loadClass(name, resolve);
 	}
@@ -91,8 +93,7 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 			InputStream inputStream = jarFile.getInputStream(entry);
 			byte[] array = inputStream.readAllBytes();
 			return defineClass(name, array, 0, array.length);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			throw new PluginClassNotFoundException(e);
 		}
@@ -102,37 +103,22 @@ public class MockBukkitConfiguredPluginClassLoader extends URLClassLoader implem
 	{
 		DynamicType.Unloaded<? extends Plugin> dynamicType = new ByteBuddy()
 				.subclass(target, ConstructorStrategy.Default.IMITATE_SUPER_CLASS)
-				.name(target.getSimpleName() + "Proxy")
-				.make();
-		return dynamicType
-				.load(this, ClassLoadingStrategy.Default.INJECTION)
-				.getLoaded();
+				.name(target.getSimpleName() + "Proxy").make();
+		return dynamicType.load(this, ClassLoadingStrategy.Default.INJECTION).getLoaded();
 	}
 
 	@Override
 	public void init(JavaPlugin plugin)
 	{
-		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(), PaperPluginLogger.getLogger(getConfiguration()));
+		plugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(),
+				PaperPluginLogger.getLogger(getConfiguration()));
 	}
 
 	@Override
-	public @Nullable JavaPlugin getPlugin()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable PluginClassLoaderGroup getGroup()
+	@Nullable
+	public PluginClassLoaderGroup getGroup()
 	{
 		return classLoaderGroup;
-	}
-
-	@Override
-	public void close()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }

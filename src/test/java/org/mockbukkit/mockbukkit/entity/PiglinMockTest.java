@@ -38,7 +38,8 @@ class PiglinMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglin.setIsAbleToHunt(expectedValue);
@@ -82,14 +83,16 @@ class PiglinMockTest
 		@Test
 		void givenAddWithNull_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> piglin.addBarterMaterial(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> piglin.addBarterMaterial(null));
 			assertEquals("material cannot be null", e.getMessage());
 		}
 
 		@Test
 		void givenRemoveWithNull_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> piglin.removeBarterMaterial(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> piglin.removeBarterMaterial(null));
 			assertEquals("material cannot be null", e.getMessage());
 		}
 
@@ -129,14 +132,16 @@ class PiglinMockTest
 		@Test
 		void givenAddWithNull_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> piglin.addMaterialOfInterest(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> piglin.addMaterialOfInterest(null));
 			assertEquals("material cannot be null", e.getMessage());
 		}
 
 		@Test
 		void givenRemoveWithNull_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> piglin.removeMaterialOfInterest(null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> piglin.removeMaterialOfInterest(null));
 			assertEquals("material cannot be null", e.getMessage());
 		}
 
@@ -153,7 +158,8 @@ class PiglinMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean expectedValue)
 		{
 			piglin.setChargingCrossbow(expectedValue);

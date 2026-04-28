@@ -60,41 +60,47 @@ public class BlockDataLimitation<T, U>
 	public static class Type<T, U>
 	{
 
-		public static final Type<Integer, Integer> MAX_AGE = new Type<>("maxAge", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_CHARGES = new Type<>("maxCharges", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_POWER = new Type<>("maxPower", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_STAGE = new Type<>("maxStage", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_LEVEL = new Type<>("maxLevel", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_DUSTED = new Type<>("maxDusted", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MIN_LEVEL = new Type<>("minLevel", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MIN_EGGS = new Type<>("minEggs", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_EGGS = new Type<>("maxEggs", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_HATCH = new Type<>("maxHatch", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_MOISTURE = new Type<>("maxMoisture", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_OCCUPIED_SLOTS = new Type<>("maxOccupiedSlots", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_HONEY_LEVEL = new Type<>("maxHoneyLevel", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MAX_BITES = new Type<>("maxBites", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Set<BlockFace>, BlockFace> FACES = new Type<>("faces", jsonElement -> BlockDataLimitation.fromSet(
-				jsonElement.getAsJsonArray()
-						.asList()
-						.stream()
-						.map(JsonElement::getAsString)
-						.map(string -> string.toUpperCase(Locale.ROOT))
-						.map(BlockFace::valueOf)
-						.collect(Collectors.toUnmodifiableSet())
-		));
-		public static final Type<Set<Axis>, Axis> AXES = new Type<>("axes", jsonElement -> BlockDataLimitation.fromSet(
-				jsonElement.getAsJsonArray()
-						.asList()
-						.stream()
-						.map(JsonElement::getAsString)
-						.map(string -> string.toUpperCase(Locale.ROOT))
-						.map(Axis::valueOf)
-						.collect(Collectors.toUnmodifiableSet())
-		));
+		public static final Type<Integer, Integer> MAX_AGE = new Type<>("maxAge",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_CHARGES = new Type<>("maxCharges",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_POWER = new Type<>("maxPower",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_STAGE = new Type<>("maxStage",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_LEVEL = new Type<>("maxLevel",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_DUSTED = new Type<>("maxDusted",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MIN_LEVEL = new Type<>("minLevel",
+				jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MIN_EGGS = new Type<>("minEggs",
+				jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_EGGS = new Type<>("maxEggs",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_HATCH = new Type<>("maxHatch",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_MOISTURE = new Type<>("maxMoisture",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_OCCUPIED_SLOTS = new Type<>("maxOccupiedSlots",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_HONEY_LEVEL = new Type<>("maxHoneyLevel",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_BITES = new Type<>("maxBites",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Set<BlockFace>, BlockFace> FACES = new Type<>("faces",
+				jsonElement -> BlockDataLimitation.fromSet(jsonElement.getAsJsonArray().asList().stream()
+						.map(JsonElement::getAsString).map(string -> string.toUpperCase(Locale.ROOT))
+						.map(BlockFace::valueOf).collect(Collectors.toUnmodifiableSet())));
+		public static final Type<Set<Axis>, Axis> AXES = new Type<>("axes",
+				jsonElement -> BlockDataLimitation.fromSet(jsonElement.getAsJsonArray().asList().stream()
+						.map(JsonElement::getAsString).map(string -> string.toUpperCase(Locale.ROOT)).map(Axis::valueOf)
+						.collect(Collectors.toUnmodifiableSet())));
 
-		public static final Type<Integer, Integer> MAX_DISTANCE = new Type<>("maxDistance", jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
-		public static final Type<Integer, Integer> MIN_DISTANCE = new Type<>("minDistance", jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MAX_DISTANCE = new Type<>("maxDistance",
+				jsonElement -> BlockDataLimitation.fromValueLesserThan(jsonElement.getAsInt()));
+		public static final Type<Integer, Integer> MIN_DISTANCE = new Type<>("minDistance",
+				jsonElement -> BlockDataLimitation.fromValueGreaterThan(jsonElement.getAsInt()));
 
 		private final String key;
 		private final Function<JsonElement, BlockDataLimitation<T, U>> constructor;
@@ -104,20 +110,16 @@ public class BlockDataLimitation<T, U>
 		{
 			return Arrays.stream(Type.class.getDeclaredFields())
 					.filter(field -> field.getType().isAssignableFrom(Type.class))
-					.filter(field -> Modifier.isStatic(field.getModifiers()))
-					.map(field ->
+					.filter(field -> Modifier.isStatic(field.getModifiers())).map(field ->
 					{
 						try
 						{
 							return field.get(null);
-						}
-						catch (IllegalAccessException e)
+						} catch (IllegalAccessException e)
 						{
 							throw new RuntimeException(e);
 						}
-					})
-					.map(object -> (Type<?, ?>) object)
-					.collect(Collectors.toMap(Type::getKey, type -> type));
+					}).map(object -> (Type<?, ?>) object).collect(Collectors.toMap(Type::getKey, type -> type));
 		}
 
 		Type(String key, Function<JsonElement, BlockDataLimitation<T, U>> constructor)

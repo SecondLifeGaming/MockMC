@@ -8,15 +8,12 @@ import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Pose;
 import org.bukkit.entity.Villager;
-import org.bukkit.entity.ZombieVillager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
@@ -29,26 +26,38 @@ import java.util.stream.Collectors;
  *
  * @see AbstractVillagerMock
  */
-public class VillagerMock extends AbstractVillagerMock implements Villager
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class VillagerMock extends AbstractVillagerMock
+		implements
+			Villager,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.VillagerBaseMock
 {
 
 	private static final int MIN_VILLAGER_LEVEL = 1;
+
 	private static final int MAX_VILLAGER_LEVEL = 5;
 
 	private final Map<UUID, Reputation> gossips = new HashMap<>();
 
 	private Villager.Profession profession = Profession.NONE;
+
 	private Villager.Type type = Type.PLAINS;
 
 	private int level = 1;
+
 	private int experienceLevel = 0;
+
 	private int numberOfRestocksToday = 0;
 
 	/**
-	 * Constructs a new {@link VillagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link VillagerMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public VillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -56,7 +65,8 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	}
 
 	@Override
-	public @NotNull Profession getProfession()
+	@NotNull
+	public Profession getProfession()
 	{
 		return this.profession;
 	}
@@ -69,7 +79,8 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	}
 
 	@Override
-	public @NotNull Type getVillagerType()
+	@NotNull
+	public Type getVillagerType()
 	{
 		return this.type;
 	}
@@ -90,7 +101,8 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	@Override
 	public void setVillagerLevel(int level)
 	{
-		Preconditions.checkArgument(MIN_VILLAGER_LEVEL <= level && level <= MAX_VILLAGER_LEVEL, "level (%s) must be between [%s, %s]", level, MIN_VILLAGER_LEVEL, MAX_VILLAGER_LEVEL);
+		Preconditions.checkArgument(MIN_VILLAGER_LEVEL <= level && level <= MAX_VILLAGER_LEVEL,
+				"level (%s) must be between [%s, %s]", level, MIN_VILLAGER_LEVEL, MAX_VILLAGER_LEVEL);
 		this.level = level;
 	}
 
@@ -112,16 +124,16 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	{
 		Preconditions.checkArgument(amount > 0, "Level earned must be positive");
 		int supposedFinalLevel = this.getVillagerLevel() + amount;
-		Preconditions.checkArgument(MIN_VILLAGER_LEVEL <= supposedFinalLevel && supposedFinalLevel <= MAX_VILLAGER_LEVEL,
-				"Final level reached after the donation (%d) must be between [%d, %d]".formatted(supposedFinalLevel, MIN_VILLAGER_LEVEL, MAX_VILLAGER_LEVEL));
-
+		Preconditions.checkArgument(
+				MIN_VILLAGER_LEVEL <= supposedFinalLevel && supposedFinalLevel <= MAX_VILLAGER_LEVEL,
+				"Final level reached after the donation (%d) must be between [%d, %d]".formatted(supposedFinalLevel,
+						MIN_VILLAGER_LEVEL, MAX_VILLAGER_LEVEL));
 		List<MerchantRecipe> trades = getRecipes();
 		if (trades.isEmpty())
 		{
 			setVillagerLevel(supposedFinalLevel);
 			return false;
 		}
-
 		while (amount > 0)
 		{
 			setVillagerLevel(getVillagerLevel() + 1);
@@ -156,19 +168,14 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 		Preconditions.checkArgument(location != null, "Location cannot be null");
 		Preconditions.checkArgument(location.getWorld() != null, "Location needs to be in a world");
 		Preconditions.checkArgument(location.getWorld().equals(this.getWorld()), "Cannot sleep across worlds");
-
 		if (!MaterialTags.BEDS.isTagged(location.getBlock()))
 		{
 			return false;
 		}
-
 		setSleeping(true);
-
 		leaveVehicle();
-
 		setPose(Pose.SLEEPING);
 		setLocation(location);
-
 		setMemory(MemoryKey.LAST_SLEPT, getWorld().getGameTime());
 		return true;
 	}
@@ -178,46 +185,29 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	{
 		Preconditions.checkState(this.isSleeping(), "Cannot wakeup if not sleeping");
 		Preconditions.checkState(getWorld() != null, "Villager needs to be in a world");
-
 		setSleeping(false);
-
 		setPose(Pose.STANDING);
 		// TODO: Set the wakeup location
-
 		setMemory(MemoryKey.LAST_WOKEN, getWorld().getGameTime());
 	}
 
 	@Override
-	public void shakeHead()
-	{
-		// TODO:
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable ZombieVillager zombify()
-	{
-		// TODO:
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Reputation getReputation(@NotNull UUID uniqueId)
+	@NotNull
+	public Reputation getReputation(@NotNull UUID uniqueId)
 	{
 		Reputation value = this.gossips.get(uniqueId);
 		if (value == null)
 		{
 			return new Reputation(new EnumMap<>(ReputationType.class));
 		}
-
 		return clone(value);
 	}
 
 	@Override
-	public @NotNull Map<UUID, Reputation> getReputations()
+	@NotNull
+	public Map<UUID, Reputation> getReputations()
 	{
-		return this.gossips.entrySet().stream()
-				.collect(Collectors.toMap(Map.Entry::getKey, e -> clone(e.getValue())));
+		return this.gossips.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e -> clone(e.getValue())));
 	}
 
 	@Override
@@ -225,7 +215,6 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	{
 		Preconditions.checkNotNull(uniqueId, "UniqueId cannot be null");
 		Preconditions.checkNotNull(reputation, "Reputation cannot be null");
-
 		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
 		for (ReputationType reputationType : ReputationType.values())
 		{
@@ -233,8 +222,7 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 			if (value == 0)
 			{
 				map.remove(reputationType);
-			}
-			else
+			} else
 			{
 				map.put(reputationType, value);
 			}
@@ -259,32 +247,22 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 	}
 
 	@Override
-	public void updateDemand()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void restock()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected void updateTrades()
 	{
 		updateTrades(2);
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.VILLAGER;
 	}
 
 	protected boolean updateTrades(int tradesPerLevel)
 	{
-		// TODO: Villager trades at net.minecraft.world.entity.npc.Villager#updateTrades(int)
+		// TODO: Villager trades at
+		// net.minecraft.world.entity.npc.Villager#updateTrades(int)
 		return false;
 	}
 
@@ -295,7 +273,6 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 		{
 			return null;
 		}
-
 		Map<ReputationType, Integer> map = new EnumMap<>(ReputationType.class);
 		for (ReputationType reputationType : ReputationType.values())
 		{
@@ -303,5 +280,4 @@ public class VillagerMock extends AbstractVillagerMock implements Villager
 		}
 		return new Reputation(map);
 	}
-
 }

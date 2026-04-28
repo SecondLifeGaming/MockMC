@@ -41,9 +41,8 @@ class RedstoneWallTorchDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			torch.setFacing(face);
@@ -51,9 +50,8 @@ class RedstoneWallTorchDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> torch.setFacing(face));
@@ -73,7 +71,8 @@ class RedstoneWallTorchDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			torch.setLit(isLit);
@@ -85,7 +84,8 @@ class RedstoneWallTorchDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull RedstoneWallTorchDataMock cloned = torch.clone();
+		@NotNull
+		RedstoneWallTorchDataMock cloned = torch.clone();
 
 		assertEquals(torch, cloned);
 		assertEquals(torch.isLit(), cloned.isLit());

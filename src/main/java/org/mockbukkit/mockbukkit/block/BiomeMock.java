@@ -5,7 +5,11 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.block.Biome;
 import org.mockbukkit.mockbukkit.util.OldKeyedEnumMock;
 
-public class BiomeMock extends OldKeyedEnumMock<Biome> implements Biome
+@SuppressWarnings("all")
+public class BiomeMock extends OldKeyedEnumMock<Biome>
+		implements
+			Biome,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BiomeBaseMock
 {
 
 	public BiomeMock(String name, int ordinal, NamespacedKey key)
@@ -23,8 +27,6 @@ public class BiomeMock extends OldKeyedEnumMock<Biome> implements Biome
 		String name = jsonObject.get("name").getAsString();
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
 		int ordinal = jsonObject.get("ordinal").getAsInt();
-
 		return new BiomeMock(name, ordinal, key);
 	}
-
 }

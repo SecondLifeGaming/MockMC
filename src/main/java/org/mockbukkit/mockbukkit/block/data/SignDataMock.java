@@ -12,7 +12,8 @@ public class SignDataMock extends BlockDataMock implements Sign
 	/**
 	 * Constructs a new {@link SignDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public SignDataMock(@NotNull Material material)
 	{
@@ -22,7 +23,8 @@ public class SignDataMock extends BlockDataMock implements Sign
 	/**
 	 * Create a new {@link SignDataMock} based on an existing {@link SignDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected SignDataMock(@NotNull SignDataMock other)
 	{
@@ -40,7 +42,8 @@ public class SignDataMock extends BlockDataMock implements Sign
 	public void setRotation(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0, "Invalid face, only horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0,
+				"Invalid face, only horizontal face are allowed for this property!");
 		int id = RotatableDataMock.getIdFromBlockFace(blockFace);
 		this.set(BlockDataKey.ROTATION, id);
 	}
@@ -58,7 +61,8 @@ public class SignDataMock extends BlockDataMock implements Sign
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SignDataMock clone()
 	{
 		return new SignDataMock(this);

@@ -33,7 +33,8 @@ class EnderCrystalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isShowingBottom_GivenUpdateInValue(boolean expectedValue)
 	{
 		crystal.setShowingBottom(expectedValue);
@@ -57,7 +58,8 @@ class EnderCrystalMockTest
 		Location target = new Location(world, 10.25, 5, 23.75);
 		crystal.setBeamTarget(target);
 
-		@Nullable Location actual = crystal.getBeamTarget();
+		@Nullable
+		Location actual = crystal.getBeamTarget();
 		assertNotNull(actual);
 		assertEquals(10, actual.getX());
 		assertEquals(5, actual.getY());

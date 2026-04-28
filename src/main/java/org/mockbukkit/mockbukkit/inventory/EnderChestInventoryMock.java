@@ -15,7 +15,8 @@ public class EnderChestInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link EnderChestInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public EnderChestInventoryMock(InventoryHolder holder)
 	{

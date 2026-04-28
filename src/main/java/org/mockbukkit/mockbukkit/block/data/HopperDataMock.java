@@ -14,7 +14,8 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	/**
 	 * Constructs a new {@link HopperDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public HopperDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	}
 
 	/**
-	 * Create a new {@link HopperDataMock} based on an existing {@link HopperDataMock}.
+	 * Create a new {@link HopperDataMock} based on an existing
+	 * {@link HopperDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected HopperDataMock(@NotNull HopperDataMock other)
 	{
@@ -53,7 +56,8 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing != BlockFace.UP, "Invalid face, only cartesian face (excluding UP) are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing != BlockFace.UP,
+				"Invalid face, only cartesian face (excluding UP) are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -64,7 +68,8 @@ public class HopperDataMock extends BlockDataMock implements Hopper
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull HopperDataMock clone()
 	{
 		return new HopperDataMock(this);

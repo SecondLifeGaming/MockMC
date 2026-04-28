@@ -10,7 +10,8 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	/**
 	 * Constructs a new {@link LightableDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	protected LightableDataMock(@NotNull Material material)
 	{
@@ -18,9 +19,11 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	}
 
 	/**
-	 * Create a new {@link LightableDataMock} based on an existing {@link LightableDataMock}.
+	 * Create a new {@link LightableDataMock} based on an existing
+	 * {@link LightableDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected LightableDataMock(@NotNull LightableDataMock other)
 	{
@@ -40,7 +43,8 @@ public class LightableDataMock extends BlockDataMock implements Lightable
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LightableDataMock clone()
 	{
 		return new LightableDataMock(this);

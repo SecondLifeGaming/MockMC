@@ -4,7 +4,6 @@ import org.bukkit.entity.DragonFireball;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see FireballMock
  */
-public class DragonFireballMock extends FireballMock implements DragonFireball
+public class DragonFireballMock extends FireballMock
+		implements
+			DragonFireball,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.DragonFireballBaseMock
 {
 
 	/**
-	 * Constructs a new {@link DragonFireballMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link DragonFireballMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public DragonFireballMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class DragonFireballMock extends FireballMock implements DragonFireball
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.DRAGON_FIREBALL;
 	}
-
 }

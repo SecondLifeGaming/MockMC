@@ -11,16 +11,21 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class EnchantingInventoryMock extends InventoryMock implements EnchantingInventory
+public class EnchantingInventoryMock extends InventoryMock
+		implements
+			EnchantingInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.EnchantingInventoryBaseMock
 {
 
 	private static final int ITEM_SLOT = 0;
+
 	private static final int SECONDARY_SLOT = 1;
 
 	/**
 	 * Constructs a new {@link EnchantingInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public EnchantingInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -34,7 +39,8 @@ public class EnchantingInventoryMock extends InventoryMock implements Enchanting
 	}
 
 	@Override
-	public @Nullable ItemStack getItem()
+	@Nullable
+	public ItemStack getItem()
 	{
 		return getItem(ITEM_SLOT);
 	}
@@ -46,9 +52,9 @@ public class EnchantingInventoryMock extends InventoryMock implements Enchanting
 	}
 
 	@Override
-	public @Nullable ItemStack getSecondary()
+	@Nullable
+	public ItemStack getSecondary()
 	{
 		return getItem(SECONDARY_SLOT);
 	}
-
 }

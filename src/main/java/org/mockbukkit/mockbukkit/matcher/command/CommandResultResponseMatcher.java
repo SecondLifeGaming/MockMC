@@ -30,7 +30,8 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have the following message be the last message sent to receiver ").appendValue(response);
+		description.appendText("to have the following message be the last message sent to receiver ")
+				.appendValue(response);
 	}
 
 	@Override
@@ -40,8 +41,10 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	/**
-	 * @param response The response the command result should have
-	 * @return A matcher which matches with any command result with specified response
+	 * @param response
+	 *            The response the command result should have
+	 * @return A matcher which matches with any command result with specified
+	 *         response
 	 */
 	public static @NotNull CommandResultResponseMatcher hasResponse(@NotNull String response)
 	{
@@ -50,8 +53,10 @@ public class CommandResultResponseMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	/**
-	 * @param response The response the command result should not have
-	 * @return A matcher which matches with any command result without specified response
+	 * @param response
+	 *            The response the command result should not have
+	 * @return A matcher which matches with any command result without specified
+	 *         response
 	 */
 	public static @NotNull Matcher<CommandResult> doesNotHaveResponse(@NotNull String response)
 	{

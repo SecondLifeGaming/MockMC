@@ -7,7 +7,6 @@ import org.bukkit.entity.Pig;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NonNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -16,20 +15,32 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see AnimalsMock
  */
-public class PigMock extends AnimalsMock implements Pig
+public class PigMock extends AnimalsMock
+		implements
+			Pig,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PigBaseMock
 {
-	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
-	private @NotNull Variant variant = Variant.TEMPERATE;
+
+	@NotNull
+	private SoundVariant soundVariant = SoundVariant.CLASSIC;
+
+	@NotNull
+	private Variant variant = Variant.TEMPERATE;
 
 	private boolean hasSaddle = false;
+
 	private int boostTicks = 0;
+
 	private int currentBoostTicks = 0;
 
 	/**
-	 * Constructs a new {@link PigMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PigMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PigMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -75,12 +86,14 @@ public class PigMock extends AnimalsMock implements Pig
 		{
 			return;
 		}
-		Preconditions.checkArgument(ticks >= 0 && ticks <= this.boostTicks, "Current Boost Ticks must be less than Boost Ticks (#getBoostTicks)");
+		Preconditions.checkArgument(ticks >= 0 && ticks <= this.boostTicks,
+				"Current Boost Ticks must be less than Boost Ticks (#getBoostTicks)");
 		this.currentBoostTicks = ticks;
 	}
 
 	@Override
-	public @NotNull Material getSteerMaterial()
+	@NotNull
+	public Material getSteerMaterial()
 	{
 		return Material.CARROT_ON_A_STICK;
 	}
@@ -92,7 +105,8 @@ public class PigMock extends AnimalsMock implements Pig
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -116,5 +130,4 @@ public class PigMock extends AnimalsMock implements Pig
 		Preconditions.checkArgument(variant != null, "variant cannot be null");
 		this.soundVariant = variant;
 	}
-
 }

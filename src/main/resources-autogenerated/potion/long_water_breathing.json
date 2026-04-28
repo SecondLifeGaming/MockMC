@@ -8,5 +8,8 @@
 			"particles": true,
 			"type": "minecraft:water_breathing"
 		}
-	]
+	],
+	"extendable": false,
+	"maxLevel": 1,
+	"upgradeable": false
 }

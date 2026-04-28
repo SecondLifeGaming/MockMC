@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class AbstractProjectileMockTest
 {
@@ -65,7 +67,8 @@ class AbstractProjectileMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			abstractProjectile.setHasLeftShooter(value);
@@ -86,7 +89,8 @@ class AbstractProjectileMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			abstractProjectile.setHasBeenShot(value);

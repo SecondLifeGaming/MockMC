@@ -36,21 +36,24 @@ class BrainMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenBooleanValues(boolean value)
 		{
 			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 10, 200, 3000, 40000 })
+		@ValueSource(ints =
+		{0, 10, 200, 3000, 40000})
 		void givenIntegerValues(int value)
 		{
 			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = { 0, 10, 200, 3000, 40000 })
+		@ValueSource(longs =
+		{0, 10, 200, 3000, 40000})
 		void givenLongValues(long value)
 		{
 			assertDoesNotThrow(() -> BrainMock.assertIsSupportedValue(value));
@@ -71,7 +74,8 @@ class BrainMockTest
 		@Test
 		void giveUnsupportedValue()
 		{
-			UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class, () -> BrainMock.assertIsSupportedValue("This is a string"));
+			UnsupportedOperationException e = assertThrows(UnsupportedOperationException.class,
+					() -> BrainMock.assertIsSupportedValue("This is a string"));
 			assertEquals("Do not know how to map This is a string", e.getMessage());
 		}
 
@@ -84,7 +88,8 @@ class BrainMockTest
 		@Test
 		void givenNullMemoryKey()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> brain.setMemory(null, 1000L));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> brain.setMemory(null, 1000L));
 			assertEquals("Memory key cannot be null", e.getMessage());
 		}
 
@@ -154,7 +159,8 @@ class BrainMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenExistingMemoryKey(boolean initialValue)
 		{
 			brain.setMemory(MemoryKey.GOLEM_DETECTED_RECENTLY, initialValue);

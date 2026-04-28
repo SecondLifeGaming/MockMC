@@ -9,7 +9,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
-@ExtendWith({ MockBukkitExtension.class})
+@ExtendWith(
+{MockBukkitExtension.class})
 class ShelfStateMockTest
 {
 

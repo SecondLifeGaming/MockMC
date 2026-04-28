@@ -14,12 +14,8 @@ class KineticWeaponMockTest
 	@Test
 	void givenBasicCreation()
 	{
-		KineticWeapon component = KineticWeapon.kineticWeapon()
-				.contactCooldownTicks(10)
-				.damageMultiplier(20)
-				.delayTicks(30)
-				.forwardMovement(40)
-				.build();
+		KineticWeapon component = KineticWeapon.kineticWeapon().contactCooldownTicks(10).damageMultiplier(20)
+				.delayTicks(30).forwardMovement(40).build();
 
 		assertEquals(10, component.contactCooldownTicks());
 		assertEquals(20, component.damageMultiplier());

@@ -4,12 +4,9 @@ import com.google.common.base.Preconditions;
 import org.bukkit.entity.AbstractHorse;
 import org.bukkit.entity.AnimalTamer;
 import org.bukkit.entity.Horse;
-import org.bukkit.inventory.AbstractHorseInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -17,23 +14,39 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public abstract class AbstractHorseMock extends AnimalsMock implements AbstractHorse
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public abstract class AbstractHorseMock extends AnimalsMock
+		implements
+			AbstractHorse,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AbstractHorseBaseMock
 {
 
-	private @Nullable UUID owner;
+	@Nullable
+	private UUID owner;
+
 	private int maxDomestication = 100;
+
 	private int domestication;
+
 	private double jumpStrength = 0.7;
+
 	private boolean tamed;
+
 	private boolean isEating;
+
 	private boolean isMouthOpen;
+
 	private boolean rearing;
 
 	/**
-	 * Constructs a new {@link AbstractHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AbstractHorseMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected AbstractHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -57,7 +70,8 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	public void setDomestication(int value)
 	{
 		Preconditions.checkArgument(value >= 0, "Domestication cannot be less than zero");
-		Preconditions.checkArgument(value <= this.getMaxDomestication(), "Domestication cannot be greater than the max domestication");
+		Preconditions.checkArgument(value <= this.getMaxDomestication(),
+				"Domestication cannot be greater than the max domestication");
 		this.domestication = value;
 	}
 
@@ -100,7 +114,8 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	}
 
 	@Override
-	public @Nullable UUID getOwnerUniqueId()
+	@Nullable
+	public UUID getOwnerUniqueId()
 	{
 		return this.owner;
 	}
@@ -122,8 +137,7 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 		{
 			this.setTamed(true);
 			this.setOwnerUUID(owner.getUniqueId());
-		}
-		else
+		} else
 		{
 			this.setTamed(false);
 			this.setOwnerUUID(null);
@@ -133,7 +147,8 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	/**
 	 * Sets the return value of {@link #getOwner()} and {@link #getOwnerUniqueId()}.
 	 *
-	 * @param uuid The UUID to set.
+	 * @param uuid
+	 *            The UUID to set.
 	 */
 	public void setOwnerUUID(@Nullable UUID uuid)
 	{
@@ -152,13 +167,6 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	public void setEatingHaystack(boolean eatingHaystack)
 	{
 		this.isEating = eatingHaystack;
-	}
-
-	@Override
-	public @NotNull AbstractHorseInventory getInventory()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -196,5 +204,4 @@ public abstract class AbstractHorseMock extends AnimalsMock implements AbstractH
 	{
 		this.isMouthOpen = eating;
 	}
-
 }

@@ -5,9 +5,11 @@ import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.LivingEntity;
@@ -30,6 +32,7 @@ import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -37,12 +40,14 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-
+@SuppressWarnings(
+{"deprecation", "unchecked", "java:S1135"})
 @DelegateDeserialization(ItemStack.class)
 public class ItemStackMock extends ItemStack
 {
 
 	private static final String FIELD_AMOUNT = "amount";
+	private static final String FIELD_COUNT = "count";
 	private static final String FIELD_MATERIAL = "type";
 
 	@NonNull
@@ -67,7 +72,7 @@ public class ItemStackMock extends ItemStack
 
 	private final Map<DataComponentType, Object> components = new HashMap<>();
 
-	private ItemType type = ItemTypeMock.AIR;
+	private ItemType type = ItemType.AIR;
 	private int amount = 1;
 	private ItemMeta itemMeta;
 	private short durability = -1;
@@ -75,7 +80,7 @@ public class ItemStackMock extends ItemStack
 	private static final ItemStackMock EMPTY = new ItemStackMock((Void) null);
 	private static final String ITEM_META_INITIALIZATION_ERROR = "Failed to instanciate item meta class ";
 
-	//Utility
+	// Utility
 	protected ItemStackMock()
 	{
 	}
@@ -101,23 +106,18 @@ public class ItemStackMock extends ItemStack
 		this.itemMeta = findItemMeta(type);
 	}
 
-	private ItemStackMock(@Nullable Void v)
+	@SuppressWarnings("java:S1172")
+	private ItemStackMock(@Nullable Void unused)
 	{
-		this.type = ItemTypeMock.AIR;
+		this.type = ItemType.AIR;
 		this.durability = initDurability(type);
 		this.amount = 0;
 		this.itemMeta = null;
 	}
 
-	private ItemStackMock(@NotNull ItemType type)
-	{
-		this.type = type;
-		this.durability = initDurability(type);
-		this.itemMeta = findItemMeta(type.asMaterial());
-	}
-
 	/**
-	 * By some reason paper differentiates between an item with durability set and one without durability set
+	 * By some reason paper differentiates between an item with durability set and
+	 * one without durability set
 	 */
 	private short initDurability(ItemType type)
 	{
@@ -138,33 +138,37 @@ public class ItemStackMock extends ItemStack
 			this.durability = initDurability(this.type);
 			return;
 		}
-		if (type != this.type.asMaterial())
+		if (type != Registry.MATERIAL.get(this.type.getKey()))
 		{
+			short oldDefault = initDurability(this.type);
 			this.type = type.asItemType();
 			if (this.itemMeta == null)
 			{
 				this.itemMeta = findItemMeta(type);
-			}
-			else
+			} else
 			{
 				this.itemMeta = Bukkit.getItemFactory().asMetaFor(this.itemMeta, type);
 			}
-			if (this.durability == 0)
+			short newDefault = initDurability(this.type);
+			if (this.durability == oldDefault || newDefault == -1)
 			{
-				this.durability = initDurability(this.type);
-				((Damageable) this.itemMeta).resetDamage();
-			}
-			else
+				this.durability = newDefault;
+				if (this.itemMeta instanceof Damageable damageable)
+				{
+					damageable.resetDamage();
+				}
+			} else
 			{
 				setDurability(this.durability);
 			}
 		}
 	}
 
+	@Override
 	@NotNull
 	public Material getType()
 	{
-		return this.type.asMaterial();
+		return Objects.requireNonNull(Registry.MATERIAL.get(this.type.getKey()));
 	}
 
 	@Override
@@ -182,7 +186,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public boolean isEmpty()
 	{
-		return this == EMPTY || this.type == ItemTypeMock.AIR || this.amount <= 0;
+		return this == EMPTY || this.type == ItemType.AIR || this.amount <= 0;
 	}
 
 	@Override
@@ -212,8 +216,7 @@ public class ItemStackMock extends ItemStack
 			if (!damageable.hasDamageValue())
 			{
 				durability = defaultDurability;
-			}
-			else
+			} else
 			{
 				short value = (short) Math.min(Short.MAX_VALUE, damageable.getDamage());
 				setDurability(value);
@@ -241,8 +244,12 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public @NotNull Component effectiveName()
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		ItemMeta meta = getItemMeta();
+		if (meta != null && meta.hasDisplayName())
+		{
+			return Objects.requireNonNull(meta.displayName());
+		}
+		return Component.translatable(getType().translationKey());
 	}
 
 	@Override
@@ -271,7 +278,7 @@ public class ItemStackMock extends ItemStack
 	public void setDurability(short durability)
 	{
 		short oldDurability = this.durability;
-		this.durability = (short) Math.min(Math.max(durability, 0), this.type.getMaxDurability());
+		this.durability = (short) Math.clamp(durability, 0, this.type.getMaxDurability());
 		if ((this.itemMeta instanceof Damageable damageable) && this.durability != oldDurability)
 		{
 			damageable.setDamage(this.durability);
@@ -327,7 +334,8 @@ public class ItemStackMock extends ItemStack
 	/**
 	 * Validate that the item meta is equal for both items.
 	 *
-	 * @param itemMeta The item meta to be validated.
+	 * @param itemMeta
+	 *            The item meta to be validated.
 	 *
 	 * @return {@code true} if equal, or {@code false} otherwise.
 	 */
@@ -375,6 +383,14 @@ public class ItemStackMock extends ItemStack
 
 			return itemMeta.getPersistentDataContainer().getSize();
 		}
+
+		@Override
+		public byte @NotNull [] serializeToBytes()
+		{
+			// TODO: Auto-generated method stub
+			throw new UnimplementedOperationException();
+		}
+
 	};
 
 	@Override
@@ -446,8 +462,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public int getMaxItemUseDuration(@NotNull LivingEntity entity)
 	{
-		//TODO
-		throw new UnimplementedOperationException();
+		return 0;
 	}
 
 	public static ItemStack empty()
@@ -455,7 +470,8 @@ public class ItemStackMock extends ItemStack
 		return EMPTY.clone();
 	}
 
-	@SuppressWarnings("MethodDoesntCallSuperMethod")
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	@Override
 	public @NotNull ItemStack clone()
 	{
@@ -501,8 +517,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public void resetData(@NotNull DataComponentType type)
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		unsetData(type);
 	}
 
 	@Override
@@ -516,8 +531,28 @@ public class ItemStackMock extends ItemStack
 			return;
 		}
 
-		// TODO:
-		throw new UnimplementedOperationException();
+		for (DataComponentType dataType : source.getDataTypes())
+		{
+			if (filter.test(dataType))
+			{
+				if (dataType instanceof DataComponentType.Valued<?> valuedType)
+				{
+					copyValuedData(source, valuedType);
+				} else if (dataType instanceof DataComponentType.NonValued nonValuedType)
+				{
+					this.setData(nonValuedType);
+				}
+			}
+		}
+	}
+
+	private <T> void copyValuedData(@NotNull ItemStack source, DataComponentType.Valued<T> valuedType)
+	{
+		T value = source.getData(valuedType);
+		if (value != null)
+		{
+			this.setData(valuedType, value);
+		}
 	}
 
 	@Override
@@ -527,10 +562,44 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@Override
-	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes, boolean ignoreCount)
+	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes,
+			boolean ignoreCount)
 	{
-		// TODO:
-		throw new UnimplementedOperationException();
+		if (this.getType() != item.getType())
+		{
+			return false;
+		}
+		if (!ignoreCount && this.getAmount() != item.getAmount())
+		{
+			return false;
+		}
+
+		for (DataComponentType componentType : this.getDataTypes())
+		{
+			if (excludeTypes.contains(componentType))
+			{
+				continue;
+			}
+			if (!item.hasData(componentType))
+			{
+				return false;
+			}
+			if (componentType instanceof DataComponentType.Valued<?> valuedType
+					&& !Objects.equals(this.getData(valuedType), item.getData(valuedType)))
+			{
+				return false;
+			}
+		}
+
+		for (DataComponentType componentType : item.getDataTypes())
+		{
+			if (!excludeTypes.contains(componentType) && !this.hasData(componentType))
+			{
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	@Override
@@ -546,11 +615,13 @@ public class ItemStackMock extends ItemStack
 		}
 		if (stack instanceof ItemStackMock bukkit)
 		{
-			return isSimilar(bukkit) && this.getAmount() == bukkit.getAmount() && this.getDurability() == bukkit.getDurability() && Objects.equals(this.getItemMeta(), bukkit.getItemMeta());
-		}
-		else
+			return isSimilar(bukkit) && this.getAmount() == bukkit.getAmount()
+					&& this.getDurability() == bukkit.getDurability()
+					&& Objects.equals(this.getItemMeta(), bukkit.getItemMeta());
+		} else
 		{
-			// will delegate back to this method / no stack overflow as obj then will be item stack mock instance
+			// will delegate back to this method / no stack overflow as obj then will be
+			// item stack mock instance
 			return stack.equals(this);
 		}
 	}
@@ -561,8 +632,7 @@ public class ItemStackMock extends ItemStack
 		if (type == ItemType.AIR && this != EMPTY)
 		{
 			return EMPTY.hashCode();
-		}
-		else
+		} else
 		{
 			int hash = Objects.hash(type, durability, lore(), getEnchantments());
 			hash = hash * 31 + this.getAmount();
@@ -576,7 +646,8 @@ public class ItemStackMock extends ItemStack
 		{
 			return null;
 		}
-		final Class<? extends ItemMeta> itemMetaClass = material.asItemType().getItemMetaClass();
+		final Class<? extends ItemMeta> itemMetaClass = Objects.requireNonNull(Registry.ITEM.get(material.getKey()))
+				.getItemMetaClass();
 		if (ItemMetaMock.class.isAssignableFrom(itemMetaClass))
 		{
 			try
@@ -589,9 +660,8 @@ public class ItemStackMock extends ItemStack
 					}
 				}
 				return itemMetaClass.getConstructor().newInstance();
-			}
-			catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-				   NoSuchMethodException e)
+			} catch (InstantiationException | IllegalAccessException | InvocationTargetException
+					| NoSuchMethodException e)
 			{
 				throw new ItemMetaInitException(ITEM_META_INITIALIZATION_ERROR + itemMetaClass, e);
 			}
@@ -600,9 +670,52 @@ public class ItemStackMock extends ItemStack
 	}
 
 	@NotNull
+	@Override
+	public Map<String, Object> serialize()
+	{
+		Map<String, Object> result = new LinkedHashMap<>();
+		result.put(FIELD_MATERIAL, this.getType().name());
+		result.put("id", this.getType().getKey().toString());
+		result.put(FIELD_AMOUNT, this.getAmount());
+		result.put(FIELD_COUNT, this.getAmount());
+		Map<String, Object> componentsMap = new LinkedHashMap<>();
+		if (this.hasItemMeta())
+		{
+			componentsMap.putAll(this.getItemMeta().serialize());
+		}
+
+		if (!this.components.isEmpty())
+		{
+			for (Map.Entry<DataComponentType, Object> entry : this.components.entrySet())
+			{
+				Object value = entry.getValue();
+				if (value instanceof Component component)
+				{
+					value = GsonComponentSerializer.gson().serialize(component);
+				}
+				componentsMap.put(entry.getKey().getKey().toString(), value);
+			}
+		}
+
+		if (!componentsMap.isEmpty())
+		{
+			result.put("components", componentsMap);
+			result.put("meta", componentsMap);
+		}
+
+		return result;
+	}
+
+	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
 		return Bukkit.getUnsafe().deserializeStack(args);
+	}
+
+	@Override
+	public byte @NotNull [] serializeAsBytes()
+	{
+		return Bukkit.getUnsafe().serializeItem(this);
 	}
 
 }

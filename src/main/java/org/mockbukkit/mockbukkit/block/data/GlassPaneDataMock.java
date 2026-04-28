@@ -15,7 +15,8 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	/**
 	 * Constructs a new {@link GlassPaneDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public GlassPaneDataMock(@NotNull Material material)
 	{
@@ -31,10 +32,7 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	public boolean hasFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		return MultipleFacingDataMock.toKey(face)
-				.map(super::get)
-				.map(Boolean.class::cast)
-				.orElse(false);
+		return MultipleFacingDataMock.toKey(face).map(super::get).map(Boolean.class::cast).orElse(false);
 	}
 
 	@Override
@@ -47,9 +45,7 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return getAllowedFaces().stream()
-				.filter(this::hasFace)
-				.collect(Collectors.toSet());
+		return getAllowedFaces().stream().filter(this::hasFace).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -67,11 +63,12 @@ public class GlassPaneDataMock extends BlockDataMock implements GlassPane
 	@Override
 	public void setWaterlogged(boolean waterlogged)
 	{
-		super.set(BlockDataKey.WATERLOGGED,waterlogged);
+		super.set(BlockDataKey.WATERLOGGED, waterlogged);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull GlassPaneDataMock clone()
 	{
 		return new GlassPaneDataMock(this);

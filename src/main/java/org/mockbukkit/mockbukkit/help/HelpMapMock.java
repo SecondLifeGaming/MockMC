@@ -8,36 +8,36 @@ import org.bukkit.help.HelpTopic;
 import org.bukkit.help.HelpTopicComparator;
 import org.bukkit.help.HelpTopicFactory;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 /**
  * Mock implementation of a {@link HelpMap}.
  */
-public class HelpMapMock implements HelpMap
+public class HelpMapMock implements org.mockbukkit.mockbukkit.generated.org.bukkit.help.HelpMapBaseMock
 {
 
 	private HelpTopic defaultTopic;
+
 	private final Map<String, HelpTopic> topics = new TreeMap<>(HelpTopicComparator.topicNameComparatorInstance());
+
 	private final Map<Class<?>, HelpTopicFactory<?>> factories = new HashMap<>();
+
 	private static final String FACTORY_NOT_NULL = "Factory cannot be null";
 
 	@Override
-	public HelpTopic getHelpTopic(final @NotNull String topicName)
+	public HelpTopic getHelpTopic(@NotNull final String topicName)
 	{
 		Preconditions.checkNotNull(topicName, "TopicName cannot be null");
 		return topicName.isEmpty() ? this.defaultTopic : this.topics.get(topicName);
 	}
 
 	@Override
-	public @NotNull Collection<HelpTopic> getHelpTopics()
+	@NotNull
+	public Collection<HelpTopic> getHelpTopics()
 	{
 		return topics.values();
 	}
@@ -50,8 +50,7 @@ public class HelpMapMock implements HelpMap
 		if (topic.getName().isEmpty())
 		{
 			this.defaultTopic = topic;
-		}
-		else
+		} else
 		{
 			this.topics.put(topic.getName(), topic);
 		}
@@ -64,9 +63,10 @@ public class HelpMapMock implements HelpMap
 	}
 
 	@Override
-	public @NotNull List<String> getIgnoredPlugins()
+	@NotNull
+	public List<String> getIgnoredPlugins()
 	{
-		throw new UnimplementedOperationException();
+		return List.of();
 	}
 
 	@Override
@@ -78,26 +78,30 @@ public class HelpMapMock implements HelpMap
 		{
 			throw new IllegalArgumentException("CommandClass must inherit from types Command or CommandExecutor");
 		}
-
 		factories.put(commandClass, factory);
 	}
 
 	/**
 	 * Asserts that a {@link HelpTopicFactory} is registered.
 	 *
-	 * @param factory The factory to check.
+	 * @param factory
+	 *            The factory to check.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertRegistered(@NotNull HelpTopicFactory<?> factory)
 	{
 		Preconditions.checkNotNull(factory, FACTORY_NOT_NULL);
-		assertTrue(factories.containsValue(factory));
+		if (!factories.containsValue(factory))
+		{
+			throw new AssertionError();
+		}
 	}
 
 	/**
 	 * Whether the specified factory has been registered to this instance
 	 *
-	 * @param factory The factory that should have been registered
+	 * @param factory
+	 *            The factory that should have been registered
 	 * @return True if the specified factory has been registered to this instance
 	 */
 	public boolean hasRegistered(@NotNull HelpTopicFactory<?> factory)
@@ -105,5 +109,4 @@ public class HelpMapMock implements HelpMap
 		Preconditions.checkNotNull(factory, FACTORY_NOT_NULL);
 		return factories.containsValue(factory);
 	}
-
 }

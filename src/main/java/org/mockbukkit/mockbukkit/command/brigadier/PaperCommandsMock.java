@@ -34,6 +34,8 @@ import java.util.Set;
 import static java.util.Objects.requireNonNull;
 
 @ApiStatus.Internal
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PaperCommandsMock implements Commands, PaperRegistrarMock<LifecycleEventOwner>
 {
 
@@ -71,31 +73,43 @@ public class PaperCommandsMock implements Commands, PaperRegistrarMock<Lifecycle
 	@Override
 	public CommandDispatcher<CommandSourceStack> getDispatcher()
 	{
-		Preconditions.checkState(!this.invalid && this.dispatcher != null, "cannot access the dispatcher in this context");
+		Preconditions.checkState(!this.invalid && this.dispatcher != null,
+				"cannot access the dispatcher in this context");
 		return this.dispatcher;
 	}
 
 	@Override
-	public @Unmodifiable Set<String> register(final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description, final Collection<String> aliases)
+	public @Unmodifiable Set<String> register(final LiteralCommandNode<CommandSourceStack> node,
+			final @Nullable String description, final Collection<String> aliases)
 	{
-		return this.register(requireNonNull(this.currentContext, "No lifecycle owner context is set").getPluginMeta(), node, description, aliases);
+		return this.register(requireNonNull(this.currentContext, "No lifecycle owner context is set").getPluginMeta(),
+				node, description, aliases);
 	}
 
 	@Override
-	public @Unmodifiable Set<String> register(final PluginMeta pluginMeta, final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description, final Collection<String> aliases)
+	public @Unmodifiable Set<String> register(final PluginMeta pluginMeta,
+			final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description,
+			final Collection<String> aliases)
 	{
 		return this.registerWithFlags(pluginMeta, node, description, aliases, Set.of());
 	}
 
 	@Override
-	public @Unmodifiable Set<String> registerWithFlags(final PluginMeta pluginMeta, final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description, final Collection<String> aliases, final Set<CommandRegistrationFlag> flags)
+	public @Unmodifiable Set<String> registerWithFlags(final PluginMeta pluginMeta,
+			final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description,
+			final Collection<String> aliases, final Set<CommandRegistrationFlag> flags)
 	{
-		return registerWithFlagsInternal(pluginMeta, pluginMeta.getName().toLowerCase(Locale.ROOT), null, node, description, aliases, flags);
+		return registerWithFlagsInternal(pluginMeta, pluginMeta.getName().toLowerCase(Locale.ROOT), null, node,
+				description, aliases, flags);
 	}
 
-	public @Unmodifiable Set<String> registerWithFlagsInternal(final @Nullable PluginMeta pluginMeta, final String namespace, final @Nullable String helpNamespaceOverride, final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description, final Collection<String> aliases, final Set<CommandRegistrationFlag> flags)
+	public @Unmodifiable Set<String> registerWithFlagsInternal(final @Nullable PluginMeta pluginMeta,
+			final String namespace, final @Nullable String helpNamespaceOverride,
+			final LiteralCommandNode<CommandSourceStack> node, final @Nullable String description,
+			final Collection<String> aliases, final Set<CommandRegistrationFlag> flags)
 	{
-		ApiCommandMetaMock meta = new ApiCommandMetaMock(pluginMeta, description, List.of(), helpNamespaceOverride, flags.contains(CommandRegistrationFlag.SERVER_ONLY));
+		ApiCommandMetaMock meta = new ApiCommandMetaMock(pluginMeta, description, List.of(), helpNamespaceOverride,
+				flags.contains(CommandRegistrationFlag.SERVER_ONLY));
 		String literal = node.getLiteral();
 		WrappedLiteralCommandNode pluginLiteral = BrigadierUtils.copyLiteral(namespace + ":" + literal, node);
 		WrappedLiteralCommandNode newNode = BrigadierUtils.copyLiteral(node.getLiteral(), node);
@@ -130,7 +144,8 @@ public class PaperCommandsMock implements Commands, PaperRegistrarMock<Lifecycle
 		return registeredLabels.isEmpty() ? Collections.emptySet() : Collections.unmodifiableSet(registeredLabels);
 	}
 
-	private boolean registerCopy(final String aliasLiteral, final LiteralCommandNode<CommandSourceStack> redirectTo, final ApiCommandMetaMock meta)
+	private boolean registerCopy(final String aliasLiteral, final LiteralCommandNode<CommandSourceStack> redirectTo,
+			final ApiCommandMetaMock meta)
 	{
 		WrappedLiteralCommandNode node = BrigadierUtils.copyLiteral(aliasLiteral, redirectTo);
 		node.setCommandMeta(meta);
@@ -139,7 +154,8 @@ public class PaperCommandsMock implements Commands, PaperRegistrarMock<Lifecycle
 
 	private boolean registerIntoDispatcher(final LiteralCommandNode<CommandSourceStack> node, boolean override)
 	{
-		final CommandNode<CommandSourceStack> existingChild = this.getDispatcher().getRoot().getChild(node.getLiteral());
+		final CommandNode<CommandSourceStack> existingChild = this.getDispatcher().getRoot()
+				.getChild(node.getLiteral());
 		if (existingChild != null && !(existingChild instanceof BukkitCommandNode))
 		{
 			override = true; // override vanilla commands
@@ -158,39 +174,40 @@ public class PaperCommandsMock implements Commands, PaperRegistrarMock<Lifecycle
 	}
 
 	@Override
-	public @Unmodifiable Set<String> register(final String label, final @Nullable String description, final Collection<String> aliases, final BasicCommand basicCommand)
+	public @Unmodifiable Set<String> register(final String label, final @Nullable String description,
+			final Collection<String> aliases, final BasicCommand basicCommand)
 	{
-		return this.register(requireNonNull(this.currentContext, "No lifecycle owner context is set").getPluginMeta(), label, description, aliases, basicCommand);
+		return this.register(requireNonNull(this.currentContext, "No lifecycle owner context is set").getPluginMeta(),
+				label, description, aliases, basicCommand);
 	}
 
 	@Override
-	public @Unmodifiable Set<String> register(final PluginMeta pluginMeta, final String label, final @Nullable String description, final Collection<String> aliases, final BasicCommand basicCommand)
+	public @Unmodifiable Set<String> register(final PluginMeta pluginMeta, final String label,
+			final @Nullable String description, final Collection<String> aliases, final BasicCommand basicCommand)
 	{
 		final LiteralArgumentBuilder<CommandSourceStack> builder = Commands.literal(label)
-				.requires(stack -> basicCommand.canUse(stack.getSender()))
-				.then(
-						Commands.argument("args", StringArgumentType.greedyString())
-								.suggests((context, suggestionsBuilder) ->
-								{
-									String[] args = StringUtils.split(suggestionsBuilder.getRemaining());
-									if (suggestionsBuilder.getRemaining().endsWith(" "))
-									{
-										// if there is trailing whitespace, we should add an empty argument to signify
-										// that there may be more, but no characters have been typed yet
-										args = ArrayUtils.add(args, "");
-									}
-									final SuggestionsBuilder offsetSuggestionsBuilder = suggestionsBuilder.createOffset(suggestionsBuilder.getInput().lastIndexOf(' ') + 1);
+				.requires(stack -> basicCommand.canUse(stack.getSender())).then(Commands
+						.argument("args", StringArgumentType.greedyString()).suggests((context, suggestionsBuilder) ->
+						{
+							String[] args = StringUtils.split(suggestionsBuilder.getRemaining());
+							if (suggestionsBuilder.getRemaining().endsWith(" "))
+							{
+								// if there is trailing whitespace, we should add an empty argument to signify
+								// that there may be more, but no characters have been typed yet
+								args = ArrayUtils.add(args, "");
+							}
+							final SuggestionsBuilder offsetSuggestionsBuilder = suggestionsBuilder
+									.createOffset(suggestionsBuilder.getInput().lastIndexOf(' ') + 1);
 
-									final Collection<String> suggestions = basicCommand.suggest(context.getSource(), args);
-									suggestions.forEach(offsetSuggestionsBuilder::suggest);
-									return offsetSuggestionsBuilder.buildFuture();
-								})
-								.executes((stack) ->
-								{
-									basicCommand.execute(stack.getSource(), StringUtils.split(stack.getArgument("args", String.class), ' '));
-									return com.mojang.brigadier.Command.SINGLE_SUCCESS;
-								})
-				)
+							final Collection<String> suggestions = basicCommand.suggest(context.getSource(), args);
+							suggestions.forEach(offsetSuggestionsBuilder::suggest);
+							return offsetSuggestionsBuilder.buildFuture();
+						}).executes((stack) ->
+						{
+							basicCommand.execute(stack.getSource(),
+									StringUtils.split(stack.getArgument("args", String.class), ' '));
+							return com.mojang.brigadier.Command.SINGLE_SUCCESS;
+						}))
 				.executes((stack) ->
 				{
 					basicCommand.execute(stack.getSource(), new String[0]);

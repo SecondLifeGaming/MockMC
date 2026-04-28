@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LingeringPotion;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see ThrownPotionMock
  */
-public class LingeringPotionMock extends ThrownPotionMock implements LingeringPotion
+public class LingeringPotionMock extends ThrownPotionMock
+		implements
+			LingeringPotion,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.LingeringPotionBaseMock
 {
 
 	/**
-	 * Constructs a new {@link LingeringPotion} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link LingeringPotion} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public LingeringPotionMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class LingeringPotionMock extends ThrownPotionMock implements LingeringPo
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.LINGERING_POTION;
 	}
-
 }

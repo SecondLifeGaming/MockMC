@@ -6,15 +6,26 @@ import org.bukkit.GameEvent;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 public class GameEventMock extends GameEvent
 {
 
+	@Override
+	public int getRange()
+	{
+		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+	}
+	@Override
+	public int getVibrationLevel()
+	{
+		throw new org.mockbukkit.mockbukkit.exception.UnimplementedOperationException();
+	}
+
 	private final NamespacedKey key;
 
 	/**
-	 * @param key A namespaced key
+	 * @param key
+	 *            A namespaced key
 	 */
 	public GameEventMock(NamespacedKey key)
 	{
@@ -22,7 +33,8 @@ public class GameEventMock extends GameEvent
 	}
 
 	/**
-	 * @param data Json data
+	 * @param data
+	 *            Json data
 	 * @deprecated Use {@link #GameEventMock(NamespacedKey)} instead.
 	 */
 	@Deprecated(forRemoval = true)
@@ -32,7 +44,8 @@ public class GameEventMock extends GameEvent
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return key;
 	}
@@ -45,19 +58,4 @@ public class GameEventMock extends GameEvent
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
 		return new GameEventMock(key);
 	}
-
-	@Override
-	public int getRange()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getVibrationLevel()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

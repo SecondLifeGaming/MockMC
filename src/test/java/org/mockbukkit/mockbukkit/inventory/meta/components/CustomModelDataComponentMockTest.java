@@ -12,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class CustomModelDataComponentMockTest
 {
 
-	private final CustomModelDataComponentMock component = CustomModelDataComponentMock.builder()
-			.build();
+	private final CustomModelDataComponentMock component = CustomModelDataComponentMock.builder().build();
 
 	@Nested
 	class Serialize

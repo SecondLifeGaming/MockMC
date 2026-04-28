@@ -17,7 +17,8 @@ public class ShulkerBoxInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link ShulkerBoxInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public ShulkerBoxInventoryMock(InventoryHolder holder)
 	{

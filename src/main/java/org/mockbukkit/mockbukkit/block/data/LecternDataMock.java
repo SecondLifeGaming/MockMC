@@ -14,7 +14,8 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	/**
 	 * Constructs a new {@link LecternDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public LecternDataMock(@NotNull Material material)
 	{
@@ -23,9 +24,11 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	}
 
 	/**
-	 * Create a new {@link LecternDataMock} based on an existing {@link LecternDataMock}.
+	 * Create a new {@link LecternDataMock} based on an existing
+	 * {@link LecternDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected LecternDataMock(@NotNull LecternDataMock other)
 	{
@@ -54,7 +57,8 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -77,7 +81,8 @@ public class LecternDataMock extends BlockDataMock implements Lectern
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull LecternDataMock clone()
 	{
 		return new LecternDataMock(this);

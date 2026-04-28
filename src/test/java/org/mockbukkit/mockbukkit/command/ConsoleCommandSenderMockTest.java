@@ -26,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class ConsoleCommandSenderMockTest
 {
@@ -245,7 +247,8 @@ class ConsoleCommandSenderMockTest
 	@Test
 	void spigot_sendMessage_MultipleComponents()
 	{
-		sender.spigot().sendMessage(new net.md_5.bungee.api.chat.TextComponent("Hello,"), new net.md_5.bungee.api.chat.TextComponent("world!"));
+		sender.spigot().sendMessage(new net.md_5.bungee.api.chat.TextComponent("Hello,"),
+				new net.md_5.bungee.api.chat.TextComponent("world!"));
 		sender.assertSaid("Hello,world!");
 		sender.assertNoMoreSaid();
 	}
@@ -263,7 +266,8 @@ class ConsoleCommandSenderMockTest
 		@Test
 		void sendMessage_GivenSimpleMessage()
 		{
-			net.md_5.bungee.api.chat.TextComponent previousButton = new net.md_5.bungee.api.chat.TextComponent("Hello world!");
+			net.md_5.bungee.api.chat.TextComponent previousButton = new net.md_5.bungee.api.chat.TextComponent(
+					"Hello world!");
 			sender.spigot().sendMessage(previousButton);
 			sender.assertSaid("Hello world!");
 		}
@@ -271,13 +275,8 @@ class ConsoleCommandSenderMockTest
 		@Test
 		void sendMessage_GivenColoredMessage()
 		{
-			BaseComponent message = new ComponentBuilder()
-					.append("Hello ")
-					.color(ChatColor.RED)
-					.append("world!")
-					.color(ChatColor.DARK_AQUA)
-					.bold(true)
-					.build();
+			BaseComponent message = new ComponentBuilder().append("Hello ").color(ChatColor.RED).append("world!")
+					.color(ChatColor.DARK_AQUA).bold(true).build();
 			sender.spigot().sendMessage(message);
 			sender.assertSaid("\u00A7cHello \u00A73\u00A7lworld!");
 		}
@@ -285,7 +284,8 @@ class ConsoleCommandSenderMockTest
 		@Test
 		void sendMessage_issue550()
 		{
-			net.md_5.bungee.api.chat.TextComponent message = new net.md_5.bungee.api.chat.TextComponent(ChatColor.translateAlternateColorCodes('&', "&c<<"));
+			net.md_5.bungee.api.chat.TextComponent message = new net.md_5.bungee.api.chat.TextComponent(
+					ChatColor.translateAlternateColorCodes('&', "&c<<"));
 			sender.spigot().sendMessage(message);
 			sender.assertSaid(ChatColor.translateAlternateColorCodes('&', "&c<<"));
 		}

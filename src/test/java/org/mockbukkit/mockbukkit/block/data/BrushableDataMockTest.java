@@ -28,7 +28,8 @@ class BrushableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3 })
+		@ValueSource(ints =
+		{0, 1, 2, 3})
 		void givenLevelChange(int level)
 		{
 			brushable.setDusted(level);
@@ -36,7 +37,8 @@ class BrushableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 4, 5 })
+		@ValueSource(ints =
+		{-2, -1, 4, 5})
 		void givenInvalidValues(int level)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> brushable.setDusted(level));

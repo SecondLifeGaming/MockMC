@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class AmethystClusterDataMockTest
 {
@@ -76,7 +78,8 @@ class AmethystClusterDataMockTest
 	@Test
 	void getFaces()
 	{
-		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
+		Set<BlockFace> validFaces = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST,
+				BlockFace.UP, BlockFace.DOWN);
 		assertEquals(validFaces, cluster.getFaces());
 	}
 

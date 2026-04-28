@@ -1,8 +1,6 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
-import lombok.EqualsAndHashCode;
 import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.entity.Player;
@@ -13,11 +11,9 @@ import org.codehaus.plexus.util.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.OfflinePlayerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
-
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,14 +22,17 @@ import java.util.UUID;
  *
  * @see ItemMetaMock
  */
-@EqualsAndHashCode(callSuper = true)
 @DelegateDeserialization(SerializableMeta.class)
-public class SkullMetaMock extends ItemMetaMock implements SkullMeta
+@SuppressWarnings("unchecked")
+public class SkullMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.SkullMetaBaseMock
 {
 
 	private static final int MAX_OWNER_LENGTH = 16;
 
-	private @Nullable com.destroystokyo.paper.profile.PlayerProfile playerProfile;
+	@Nullable
+	private com.destroystokyo.paper.profile.PlayerProfile playerProfile;
 
 	/**
 	 * Constructs a new {@link SkullMetaMock}.
@@ -46,12 +45,12 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	/**
 	 * Constructs a new {@link SkullMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public SkullMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof SkullMeta skullMeta)
 		{
 			this.playerProfile = skullMeta.getPlayerProfile();
@@ -59,8 +58,10 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull SkullMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public SkullMetaMock clone()
 	{
 		return new SkullMetaMock(this);
 	}
@@ -86,24 +87,20 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		{
 			return false;
 		}
-
 		if (name == null)
 		{
 			setPlayerProfile(null);
-		}
-		else
+		} else
 		{
 			Player player = Bukkit.getPlayer(name);
 			if (player != null)
 			{
 				setPlayerProfile(player.getPlayerProfile());
-			}
-			else
+			} else
 			{
 				setPlayerProfile(new PlayerProfileMock(name, new UUID(0L, 0L)));
 			}
 		}
-
 		return true;
 	}
 
@@ -126,7 +123,6 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		{
 			return new OfflinePlayerMock(playerProfile.getName());
 		}
-
 		return null;
 	}
 
@@ -136,12 +132,10 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		if (owner == null)
 		{
 			setPlayerProfile(null);
-		}
-		else
+		} else
 		{
 			setPlayerProfile(new PlayerProfileMock(owner.getName(), owner.getUniqueId()));
 		}
-
 		return true;
 	}
 
@@ -163,34 +157,22 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		if (profile == null)
 		{
 			setPlayerProfile(null);
-		}
-		else
+		} else
 		{
 			setPlayerProfile(new PlayerProfileMock(profile.getName(), profile.getUniqueId()));
 		}
 	}
 
-	@Override
-	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable NamespacedKey getNoteBlockSound()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized SkullMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized SkullMetaMock object in a Map&lt;String, Object&gt;
+	 *            format.
 	 * @return A new instance of the SkullMetaMock class.
 	 */
-	public static @NotNull SkullMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static SkullMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		SkullMetaMock serialMock = new SkullMetaMock();
 		serialMock.deserializeInternal(args);
@@ -199,13 +181,14 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 	}
 
 	/**
-	 * Serializes the properties of an SkullMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an SkullMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the SkullMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (playerProfile != null)
@@ -221,4 +204,28 @@ public class SkullMetaMock extends ItemMetaMock implements SkullMeta
 		return "SKULL";
 	}
 
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass())
+		{
+			return false;
+		}
+		SkullMetaMock that = (SkullMetaMock) obj;
+		if (!super.equals(obj))
+		{
+			return false;
+		}
+		return java.util.Objects.equals(playerProfile, that.playerProfile);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(super.hashCode(), playerProfile);
+	}
 }

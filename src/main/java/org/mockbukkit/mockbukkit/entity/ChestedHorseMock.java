@@ -3,7 +3,6 @@ package org.mockbukkit.mockbukkit.entity;
 import org.bukkit.entity.ChestedHorse;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -11,16 +10,22 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-public abstract class ChestedHorseMock extends AbstractHorseMock implements ChestedHorse
+public abstract class ChestedHorseMock extends AbstractHorseMock
+		implements
+			ChestedHorse,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ChestedHorseBaseMock
 {
 
 	private boolean hasChest;
 
 	/**
-	 * Constructs a new {@link ChestedHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ChestedHorseMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected ChestedHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -42,5 +47,4 @@ public abstract class ChestedHorseMock extends AbstractHorseMock implements Ches
 		}
 		this.hasChest = chest;
 	}
-
 }

@@ -7,7 +7,6 @@ import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,17 +14,24 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class EvokerFangsMock extends EntityMock implements EvokerFangs
+public class EvokerFangsMock extends EntityMock
+		implements
+			EvokerFangs,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EvokerFangsBaseMock
 {
 
 	private LivingEntity livingEntity;
+
 	private int attackDelay;
 
 	/**
-	 * Constructs a new {@link EvokerFangsMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EvokerFangsMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public EvokerFangsMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,7 +39,8 @@ public class EvokerFangsMock extends EntityMock implements EvokerFangs
 	}
 
 	@Override
-	public @Nullable LivingEntity getOwner()
+	@Nullable
+	public LivingEntity getOwner()
 	{
 		return this.livingEntity;
 	}
@@ -58,9 +65,9 @@ public class EvokerFangsMock extends EntityMock implements EvokerFangs
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.EVOKER_FANGS;
 	}
-
 }

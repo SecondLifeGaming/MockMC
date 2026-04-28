@@ -13,9 +13,10 @@ import java.util.Collection;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ToolMock(float defaultMiningSpeed, @NonNegative int damagePerBlock, List<Rule> rules,
-					   boolean canDestroyBlocksInCreative) implements Tool
+		boolean canDestroyBlocksInCreative) implements Tool
 {
 
 	record RuleMock(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops) implements Rule
@@ -30,7 +31,6 @@ public record ToolMock(float defaultMiningSpeed, @NonNegative int damagePerBlock
 		private int damage = 1;
 		private float miningSpeed = 1.0F;
 		private boolean canDestroyBlocksInCreative = true;
-
 
 		@Override
 		public Builder damagePerBlock(@NonNegative int damage)

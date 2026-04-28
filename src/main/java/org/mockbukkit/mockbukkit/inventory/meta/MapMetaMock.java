@@ -2,17 +2,15 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import java.util.Objects;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.MapMeta;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link MapMeta}.
@@ -20,16 +18,25 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class MapMetaMock extends ItemMetaMock implements MapMeta
+public class MapMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.MapMetaBaseMock
 {
 
 	private static final byte SCALING_EMPTY = (byte) 0;
+
 	private static final byte SCALING_TRUE = (byte) 1;
+
 	private static final byte SCALING_FALSE = (byte) 2;
 
 	private Integer mapId;
-	private @Nullable MapView mapView;
-	private @Nullable Color color;
+
+	@Nullable
+	private MapView mapView;
+
+	@Nullable
+	private Color color;
+
 	private byte scaling = SCALING_EMPTY;
 
 	/**
@@ -43,12 +50,12 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	/**
 	 * Constructs a new {@link MapMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public MapMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof MapMeta mapMeta)
 		{
 			if (mapMeta.hasMapId())
@@ -60,14 +67,12 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 			if (mapMeta instanceof MapMetaMock metaMock)
 			{
 				this.scaling = metaMock.scaling;
-			}
-			else
+			} else
 			{
 				if (mapMeta.isScaling())
 				{
 					this.scaling = SCALING_TRUE;
-				}
-				else
+				} else
 				{
 					this.scaling = SCALING_FALSE;
 				}
@@ -104,7 +109,8 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	@Override
-	public @Nullable MapView getMapView()
+	@Nullable
+	public MapView getMapView()
 	{
 		return mapView;
 	}
@@ -128,34 +134,14 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	@Override
-	public boolean hasLocationName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable String getLocationName()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLocationName(@Nullable String name)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean hasColor()
 	{
 		return this.color != null;
 	}
 
 	@Override
-	public @Nullable Color getColor()
+	@Nullable
+	public Color getColor()
 	{
 		return this.color;
 	}
@@ -181,27 +167,21 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof MapMeta meta))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		if (!super.equals(obj) ||
-				((this.hasMapId() || meta.hasMapId()) && !Objects.equals(this.mapId, meta.getMapId())) ||
-				!Objects.equals(this.mapView, meta.getMapView()) ||
-				!Objects.equals(this.color, meta.getColor()))
-		{
-			return false;
-		}
-		if (meta instanceof MapMetaMock mapMeta)
-		{
-			return this.scaling == mapMeta.scaling;
-		}
-		return meta.isScaling() ? this.scaling == 1 : this.scaling == 2;
+		MapMetaMock other = (MapMetaMock) obj;
+		return super.equals(obj) && Objects.equals(this.mapId, other.mapId)
+				&& Objects.equals(this.mapView, other.mapView) && Objects.equals(this.color, other.color)
+				&& this.scaling == other.scaling;
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull MapMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public MapMetaMock clone()
 	{
 		return new MapMetaMock(this);
 	}
@@ -209,10 +189,13 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized MapMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized MapMetaMock object in a Map&lt;String, Object&gt;
+	 *            format.
 	 * @return A new instance of the MapMetaMock class.
 	 */
-	public static @NotNull MapMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static MapMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		MapMetaMock serialMock = new MapMetaMock();
 		serialMock.deserializeInternal(args);
@@ -227,13 +210,14 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	}
 
 	/**
-	 * Serializes the properties of an MapMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an MapMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the MapMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (this.mapId != null)
@@ -249,7 +233,6 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 			serialized.put("color", this.color.asARGB());
 		}
 		serialized.put("scaling", this.scaling);
-
 		return serialized;
 	}
 
@@ -258,5 +241,4 @@ public class MapMetaMock extends ItemMetaMock implements MapMeta
 	{
 		return "MAP";
 	}
-
 }

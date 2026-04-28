@@ -16,10 +16,11 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record CustomModelDataMock(@Unmodifiable List<Float> floats, @Unmodifiable List<Boolean> flags,
-								  @Unmodifiable List<String> strings,
-								  @Unmodifiable @ApiStatus.Internal List<Integer> internalColors) implements CustomModelData
+		@Unmodifiable List<String> strings,
+		@Unmodifiable @ApiStatus.Internal List<Integer> internalColors) implements CustomModelData
 {
 
 	@Override
@@ -105,7 +106,8 @@ public record CustomModelDataMock(@Unmodifiable List<Float> floats, @Unmodifiabl
 		@Override
 		public CustomModelData build()
 		{
-			return new CustomModelDataMock(List.copyOf(floats), List.copyOf(flags), List.copyOf(strings), List.copyOf(colors));
+			return new CustomModelDataMock(List.copyOf(floats), List.copyOf(flags), List.copyOf(strings),
+					List.copyOf(colors));
 		}
 
 	}

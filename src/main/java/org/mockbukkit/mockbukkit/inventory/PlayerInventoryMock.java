@@ -11,51 +11,66 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.HumanEntityMock;
-
 import java.util.Arrays;
+
+import org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.PlayerInventoryBaseMock;
 
 /**
  * Mock implementation of a {@link PlayerInventory}.
  *
  * @see InventoryMock
  */
-public class PlayerInventoryMock extends InventoryMock implements PlayerInventory, EntityEquipment
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class PlayerInventoryMock extends InventoryMock
+		implements
+			PlayerInventory,
+			EntityEquipment,
+			PlayerInventoryBaseMock
 {
 
 	/**
 	 * The starting slot of the hotbar.
 	 */
 	protected static final int HOTBAR = 0;
+
 	/**
 	 * The ending slot of the hotbar.
 	 */
 	protected static final int SLOT_BAR = 9;
+
 	/**
 	 * The slot boots are in.
 	 */
 	protected static final int BOOTS = 36;
+
 	/**
 	 * The slot leggings are in.
 	 */
 	protected static final int LEGGINGS = 37;
+
 	/**
 	 * The slot the chestplate is in.
 	 */
 	protected static final int CHESTPLATE = 38;
+
 	/**
 	 * The slot the helmet is in.
 	 */
 	protected static final int HELMET = 39;
+
 	/**
 	 * The slot of the offhand.
 	 */
 	protected static final int OFF_HAND = 40;
+
 	private int mainHandSlot = 0;
 
 	/**
 	 * Constructs a new {@link PlayerInventoryMock}.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public PlayerInventoryMock(HumanEntity holder)
 	{
@@ -78,14 +93,14 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	public void setStorageContents(ItemStack[] items) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(items, "ItemStack was null");
-		Preconditions.checkArgument(items.length <= 36, "ItemStack array too large (max: 36, was: " + items.length + ")");
+		Preconditions.checkArgument(items.length <= 36,
+				"ItemStack array too large (max: 36, was: " + items.length + ")");
 		for (int i = 0; i < 36; i++)
 		{
 			if (i < items.length && items[i] != null)
 			{
 				setItem(i, items[i]);
-			}
-			else
+			} else
 			{
 				setItem(i, null);
 			}
@@ -105,25 +120,29 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public @Nullable ItemStack getHelmet()
+	@NotNull
+	public ItemStack getHelmet()
 	{
 		return getItem(HELMET);
 	}
 
 	@Override
-	public @Nullable ItemStack getChestplate()
+	@NotNull
+	public ItemStack getChestplate()
 	{
 		return getItem(CHESTPLATE);
 	}
 
 	@Override
-	public @Nullable ItemStack getLeggings()
+	@NotNull
+	public ItemStack getLeggings()
 	{
 		return getItem(LEGGINGS);
 	}
 
 	@Override
-	public @Nullable ItemStack getBoots()
+	@NotNull
+	public ItemStack getBoots()
 	{
 		return getItem(BOOTS);
 	}
@@ -134,8 +153,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		if (items == null)
 		{
 			throw new NullPointerException("ItemStack was null");
-		}
-		else if (items.length > 4)
+		} else if (items.length > 4)
 		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
 		}
@@ -236,8 +254,7 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		if (items == null)
 		{
 			throw new NullPointerException("ItemStack was null");
-		}
-		else if (items.length > 1)
+		} else if (items.length > 1)
 		{
 			throw new IllegalArgumentException("ItemStack array too large (max: 4, was: " + items.length + ")");
 		}
@@ -298,7 +315,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public @NotNull ItemStack getItemInMainHand()
+	@NotNull
+	public ItemStack getItemInMainHand()
 	{
 		return notNull(getItem(HOTBAR + mainHandSlot));
 	}
@@ -321,7 +339,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public @NotNull ItemStack getItemInOffHand()
+	@NotNull
+	public ItemStack getItemInOffHand()
 	{
 		return notNull(getItem(OFF_HAND));
 	}
@@ -343,14 +362,21 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 		setItem(OFF_HAND, item);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated Use {@link #getItemInMainHand()} instead.
+	 */
+	@Deprecated(since = "1.9")
 	@Override
-	public @NotNull ItemStack getItemInHand()
+	@NotNull
+	public ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated Use {@link #setItemInMainHand(ItemStack)} instead.
+	 */
+	@Deprecated(since = "1.9")
 	@Override
 	public void setItemInHand(ItemStack stack)
 	{
@@ -358,7 +384,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	@Override
-	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	@NotNull
+	public ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		return switch (slot)
 		{
@@ -369,8 +396,8 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 			case LEGS -> notNull(getLeggings());
 			case OFF_HAND -> getItemInOffHand();
 			case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
-			default ->
-					throw new IllegalArgumentException("Could not get slot " + slot + " - not a valid slot for PlayerInventory");
+			default -> throw new IllegalArgumentException(
+					"Could not get slot " + slot + " - not a valid slot for PlayerInventory");
 		};
 	}
 
@@ -385,15 +412,15 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	{
 		switch (slot)
 		{
-		case CHEST -> setChestplate(item);
-		case FEET -> setBoots(item);
-		case HAND -> setItemInMainHand(item);
-		case HEAD -> setHelmet(item);
-		case LEGS -> setLeggings(item);
-		case OFF_HAND -> setItemInOffHand(item);
-		case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
-		default ->
-				throw new IllegalArgumentException("Could not set slot " + slot + " - not a valid slot for PlayerInventory");
+			case CHEST -> setChestplate(item);
+			case FEET -> setBoots(item);
+			case HAND -> setItemInMainHand(item);
+			case HEAD -> setHelmet(item);
+			case LEGS -> setLeggings(item);
+			case OFF_HAND -> setItemInOffHand(item);
+			case BODY -> throw new IllegalArgumentException("BODY is not valid for players!");
+			default -> throw new IllegalArgumentException(
+					"Could not set slot " + slot + " - not a valid slot for PlayerInventory");
 		}
 		// Sounds are not implemented here
 	}
@@ -427,10 +454,13 @@ public class PlayerInventoryMock extends InventoryMock implements PlayerInventor
 	}
 
 	/**
-	 * @param itemStack The item.
-	 * @return A new ItemStack of AIR if the provided item is null, otherwise the provided item.
+	 * @param itemStack
+	 *            The item.
+	 * @return A new ItemStack of AIR if the provided item is null, otherwise the
+	 *         provided item.
 	 */
-	private static @NotNull ItemStack notNull(@Nullable ItemStack itemStack)
+	@NotNull
+	private static ItemStack notNull(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStackMock(Material.AIR) : itemStack;
 	}

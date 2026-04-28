@@ -15,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitProfileBanEntryTest
 {
@@ -28,12 +30,7 @@ class MockBukkitProfileBanEntryTest
 	@BeforeEach
 	void setUp()
 	{
-		entry = new MockBukkitProfileBanEntry(
-				new PlayerProfileMock(player),
-				"source",
-				null,
-				"reason"
-		);
+		entry = new MockBukkitProfileBanEntry(new PlayerProfileMock(player), "source", null, "reason");
 	}
 
 	@Test
@@ -59,8 +56,8 @@ class MockBukkitProfileBanEntryTest
 	@Test
 	void testSetCreated_Null()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				entry.setCreated(null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> entry.setCreated(null));
 
 		assertEquals("Creation Date cannot be null", nullPointerException.getMessage());
 	}

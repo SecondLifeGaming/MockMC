@@ -9,6 +9,7 @@ import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.block.structure.UsageMode;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.util.BlockVector;
+import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -20,11 +21,12 @@ public class StructureStateMock extends TileStateMock implements Structure
 {
 
 	private static final int MAX_SIZE = 48;
+	private static final String BETWEEN_AND = " and ";
 
 	private String structureName = "";
 	private String author = "";
-	private BlockVector relativePosition;
-	private BlockVector structureSize;
+	private BlockVector relativePosition = new BlockVector(0, 0, 0);
+	private BlockVector structureSize = new BlockVector(0, 0, 0);
 	private Mirror mirror = Mirror.NONE;
 	private StructureRotation rotation = StructureRotation.NONE;
 	private UsageMode usageMode = UsageMode.DATA;
@@ -36,10 +38,11 @@ public class StructureStateMock extends TileStateMock implements Structure
 	private String metadata = "";
 
 	/**
-	 * Constructs a new {@link StructureStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#STRUCTURE_BLOCK}
+	 * Constructs a new {@link StructureStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#STRUCTURE_BLOCK}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public StructureStateMock(@NotNull Material material)
 	{
@@ -51,7 +54,8 @@ public class StructureStateMock extends TileStateMock implements Structure
 	 * Constructs a new {@link StructureStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#STRUCTURE_BLOCK}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected StructureStateMock(@NotNull Block block)
 	{
@@ -60,9 +64,11 @@ public class StructureStateMock extends TileStateMock implements Structure
 	}
 
 	/**
-	 * Constructs a new {@link StructureStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link StructureStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected StructureStateMock(@NotNull StructureStateMock state)
 	{
@@ -116,7 +122,8 @@ public class StructureStateMock extends TileStateMock implements Structure
 	@Override
 	public void setAuthor(@NotNull String author)
 	{
-		Preconditions.checkArgument(author != null && !author.isEmpty(), "Author cannot be null or empty");
+		Preconditions.checkNotNull(author, "Author cannot be null");
+		Preconditions.checkArgument(!author.isEmpty(), "Author cannot be empty");
 		this.author = author;
 	}
 
@@ -137,9 +144,21 @@ public class StructureStateMock extends TileStateMock implements Structure
 	public void setRelativePosition(@NotNull BlockVector vector)
 	{
 		Preconditions.checkNotNull(vector, "Vector cannot be null");
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockX(), -StructureStateMock.MAX_SIZE, StructureStateMock.MAX_SIZE), "Structure Size (X) must be between -" + StructureStateMock.MAX_SIZE + " and " + StructureStateMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockY(), -StructureStateMock.MAX_SIZE, StructureStateMock.MAX_SIZE), "Structure Size (Y) must be between -" + StructureStateMock.MAX_SIZE + " and " + StructureStateMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockZ(), -StructureStateMock.MAX_SIZE, StructureStateMock.MAX_SIZE), "Structure Size (Z) must be between -" + StructureStateMock.MAX_SIZE + " and " + StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureStateMock.isBetween(vector.getBlockX(), -StructureStateMock.MAX_SIZE,
+						StructureStateMock.MAX_SIZE),
+				"Structure Size (X) must be between -" + StructureStateMock.MAX_SIZE + BETWEEN_AND
+						+ StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureStateMock.isBetween(vector.getBlockY(), -StructureStateMock.MAX_SIZE,
+						StructureStateMock.MAX_SIZE),
+				"Structure Size (Y) must be between -" + StructureStateMock.MAX_SIZE + BETWEEN_AND
+						+ StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(
+				StructureStateMock.isBetween(vector.getBlockZ(), -StructureStateMock.MAX_SIZE,
+						StructureStateMock.MAX_SIZE),
+				"Structure Size (Z) must be between -" + StructureStateMock.MAX_SIZE + BETWEEN_AND
+						+ StructureStateMock.MAX_SIZE);
 		this.relativePosition = new BlockVector(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
 	}
 
@@ -153,9 +172,12 @@ public class StructureStateMock extends TileStateMock implements Structure
 	public void setStructureSize(@NotNull BlockVector vector)
 	{
 		Preconditions.checkNotNull(vector, "Vector cannot be null");
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockX(), 0, StructureStateMock.MAX_SIZE), "Structure Size (X) must be between 0 and " + StructureStateMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockY(), 0, StructureStateMock.MAX_SIZE), "Structure Size (Y) must be between 0 and " + StructureStateMock.MAX_SIZE);
-		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockZ(), 0, StructureStateMock.MAX_SIZE), "Structure Size (Z) must be between 0 and " + StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockX(), 0, StructureStateMock.MAX_SIZE),
+				"Structure Size (X) must be between 0" + BETWEEN_AND + StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockY(), 0, StructureStateMock.MAX_SIZE),
+				"Structure Size (Y) must be between 0" + BETWEEN_AND + StructureStateMock.MAX_SIZE);
+		Preconditions.checkArgument(StructureStateMock.isBetween(vector.getBlockZ(), 0, StructureStateMock.MAX_SIZE),
+				"Structure Size (Z) must be between 0" + BETWEEN_AND + StructureStateMock.MAX_SIZE);
 		this.structureSize = new BlockVector(vector.getBlockX(), vector.getBlockY(), vector.getBlockZ());
 	}
 
@@ -237,7 +259,8 @@ public class StructureStateMock extends TileStateMock implements Structure
 	@Override
 	public void setIntegrity(float integrity)
 	{
-		Preconditions.checkArgument(StructureStateMock.isBetween(integrity, 0.0f, 1.0f), "Integrity must be between 0 and 1");
+		Preconditions.checkArgument(StructureStateMock.isBetween(integrity, 0.0f, 1.0f),
+				"Integrity must be between 0 and 1");
 		this.integrity = integrity;
 	}
 
@@ -275,7 +298,6 @@ public class StructureStateMock extends TileStateMock implements Structure
 		return this.metadata;
 	}
 
-	//todo: create a math util class
 	private static boolean isBetween(float num, float min, float max)
 	{
 		return num >= min && num <= max;
@@ -284,20 +306,41 @@ public class StructureStateMock extends TileStateMock implements Structure
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", author='" + author + '\'' +
-				", structureName='" + structureName + '\'' +
-				", relativePosition=" + relativePosition +
-				", structureSize=" + structureSize +
-				", mirror=" + mirror +
-				", rotation=" + rotation +
-				", usageMode=" + usageMode +
-				", ignoreEntities=" + ignoreEntities +
-				", showAir=" + showAir +
-				", showBoundingBox=" + showBoundingBox +
-				", integrity=" + integrity +
-				", seed=" + seed +
-				", metadata='" + metadata + '\'';
+		return super.toStringInternal() + ", author='" + author + '\'' + ", structureName='" + structureName + '\''
+				+ ", relativePosition=" + relativePosition + ", structureSize=" + structureSize + ", mirror=" + mirror
+				+ ", rotation=" + rotation + ", usageMode=" + usageMode + ", ignoreEntities=" + ignoreEntities
+				+ ", showAir=" + showAir + ", showBoundingBox=" + showBoundingBox + ", integrity=" + integrity
+				+ ", seed=" + seed + ", metadata='" + metadata + '\'';
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof StructureStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return ignoreEntities == that.ignoreEntities && showAir == that.showAir
+				&& showBoundingBox == that.showBoundingBox && Float.compare(integrity, that.integrity) == 0
+				&& seed == that.seed && Objects.equals(structureName, that.structureName)
+				&& Objects.equals(author, that.author) && Objects.equals(relativePosition, that.relativePosition)
+				&& Objects.equals(structureSize, that.structureSize) && mirror == that.mirror
+				&& rotation == that.rotation && usageMode == that.usageMode && Objects.equals(metadata, that.metadata);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), structureName, author, relativePosition, structureSize, mirror, rotation,
+				usageMode, ignoreEntities, showAir, showBoundingBox, integrity, seed, metadata);
 	}
 
 }

@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -17,26 +15,39 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class LightningStrikeMock extends EntityMock implements LightningStrike
+@SuppressWarnings(
+{"removal"})
+public class LightningStrikeMock extends EntityMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.LightningStrikeBaseMock
 {
 
 	private boolean isEffect = false;
+
 	private int numberOfFlashes = 3;
+
 	private int ticksLived = 0;
 
-	private @Nullable Player causingPlayer = null;
+	@Nullable
+	private Player causingPlayer = null;
 
 	/**
-	 * Constructs a new {@link LightningStrikeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link LightningStrikeMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public LightningStrikeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
 	public boolean isEffect()
 	{
@@ -46,13 +57,17 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 	/**
 	 * Set whether the strike is an effect that does no damage.
 	 *
-	 * @param effect {@code true} if the strike is an effect, otherwise {@code false}
+	 * @param effect
+	 *            {@code true} if the strike is an effect, otherwise {@code false}
 	 */
 	public void setEffect(boolean effect)
 	{
 		this.isEffect = effect;
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public int getFlashes()
@@ -60,6 +75,9 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 		return this.getFlashCount();
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public void setFlashes(int flashes)
@@ -67,6 +85,9 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 		this.setFlashCount(flashes);
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
 	public int getLifeTicks()
 	{
@@ -80,11 +101,15 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 	}
 
 	@Override
-	public @Nullable Player getCausingPlayer()
+	@Nullable
+	public Player getCausingPlayer()
 	{
 		return this.causingPlayer;
 	}
 
+	/**
+	 * @mockbukkit.version 1.21-1.0.0
+	 */
 	@Override
 	public void setCausingPlayer(@Nullable Player player)
 	{
@@ -105,22 +130,27 @@ public class LightningStrikeMock extends EntityMock implements LightningStrike
 	}
 
 	@Override
-	public @Nullable Entity getCausingEntity()
+	@Nullable
+	public Entity getCausingEntity()
 	{
 		return this.getCausingPlayer();
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.LIGHTNING_BOLT;
 	}
 
+	/**
+	 * @deprecated Use modern API instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
-	public @NotNull LightningStrike.Spigot spigot()
+	@NotNull
+	public LightningStrike.Spigot spigot()
 	{
-		throw new UnimplementedOperationException("spigot() method is not implemented in LightningStrikeMock");
+		return org.mockbukkit.mockbukkit.generated.org.bukkit.entity.LightningStrikeBaseMock.super.spigot();
 	}
-
 }

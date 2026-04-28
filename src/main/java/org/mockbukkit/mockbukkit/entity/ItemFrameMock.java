@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -17,22 +16,30 @@ import java.util.UUID;
  *
  * @see HangingMock
  */
-public class ItemFrameMock extends HangingMock implements ItemFrame
+public class ItemFrameMock extends HangingMock
+		implements
+			ItemFrame,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ItemFrameBaseMock
 {
 
 	private ItemStack itemStack = ItemStack.empty();
+
 	private Rotation rotation = Rotation.NONE;
 
 	private float dropChance = 1.0F;
 
 	private boolean visible = true;
+
 	private boolean fixed = false;
 
 	/**
-	 * Constructs a new {@link ItemFrame} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ItemFrame} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ItemFrameMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -40,7 +47,8 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	}
 
 	@Override
-	public @NotNull ItemStack getItem()
+	@NotNull
+	public ItemStack getItem()
 	{
 		return this.itemStack;
 	}
@@ -55,7 +63,6 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	public void setItem(@Nullable ItemStack item, boolean playSound)
 	{
 		this.itemStack = item == null || item.isEmpty() ? ItemStack.empty() : item.clone();
-
 		if (!itemStack.isEmpty() && playSound && isInWorld())
 		{
 			getWorld().playSound(this, Sound.ENTITY_ITEM_FRAME_ADD_ITEM, 1, 1);
@@ -76,7 +83,8 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	}
 
 	@Override
-	public @NotNull Rotation getRotation()
+	@NotNull
+	public Rotation getRotation()
 	{
 		return this.rotation;
 	}
@@ -113,9 +121,9 @@ public class ItemFrameMock extends HangingMock implements ItemFrame
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ITEM_FRAME;
 	}
-
 }

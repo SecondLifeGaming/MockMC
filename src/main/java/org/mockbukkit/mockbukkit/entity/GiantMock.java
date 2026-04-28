@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Giant;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class GiantMock extends MonsterMock implements Giant
+public class GiantMock extends MonsterMock
+		implements
+			Giant,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.GiantBaseMock
 {
 
 	/**
-	 * Constructs a new {@link GiantMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link GiantMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public GiantMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class GiantMock extends MonsterMock implements Giant
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.GIANT;
 	}
-
 }

@@ -19,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BeehiveStateMockTest
 {
@@ -65,7 +67,8 @@ class BeehiveStateMockTest
 	@Test
 	void constructor_Block_NotBeehive_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BeehiveStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BeehiveStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test

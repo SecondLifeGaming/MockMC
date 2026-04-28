@@ -2,37 +2,45 @@ package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
-import org.bukkit.block.Block;
 import org.bukkit.entity.AbstractArrow;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
-import java.util.List;
 import java.util.UUID;
 
-public class AbstractArrowMock extends AbstractProjectileMock implements AbstractArrow
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class AbstractArrowMock extends AbstractProjectileMock
+		implements
+			AbstractArrow,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AbstractArrowBaseMock
 {
 
 	private int knockbackStrength = 0;
+
 	private double damage = -1;
+
 	private int pierceLevel = 0;
+
 	private boolean critical = false;
+
 	private PickupStatus pickupStatus = PickupStatus.DISALLOWED;
+
 	private boolean shotFromCrossbow = false;
+
 	private int lifetime = 0;
+
 	private Sound hitSound = Sound.ENTITY_ARROW_HIT;
+
 	private boolean noPhysics = false;
 
 	/**
-	 * Constructs a new {@link AbstractArrowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AbstractArrowMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected AbstractArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,7 +56,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public void setKnockbackStrength(int knockbackStrength)
 	{
-		Preconditions.checkArgument(knockbackStrength >= 0, "Knockback value (%s) cannot be negative", knockbackStrength);
+		Preconditions.checkArgument(knockbackStrength >= 0, "Knockback value (%s) cannot be negative",
+				knockbackStrength);
 		this.knockbackStrength = knockbackStrength;
 	}
 
@@ -78,7 +87,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	@Override
 	public void setPierceLevel(int pierceLevel)
 	{
-		Preconditions.checkArgument(0 <= pierceLevel && pierceLevel <= Byte.MAX_VALUE, "Pierce level (%s) out of range, expected 0 < level < 127", pierceLevel);
+		Preconditions.checkArgument(0 <= pierceLevel && pierceLevel <= Byte.MAX_VALUE,
+				"Pierce level (%s) out of range, expected 0 < level < 127", pierceLevel);
 		this.pierceLevel = pierceLevel;
 	}
 
@@ -95,28 +105,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	}
 
 	@Override
-	public boolean isInBlock()
-	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Block getAttachedBlock()
-	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull @Unmodifiable List<Block> getAttachedBlocks()
-	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull PickupStatus getPickupStatus()
+	@NotNull
+	public PickupStatus getPickupStatus()
 	{
 		return this.pickupStatus;
 	}
@@ -141,47 +131,6 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	}
 
 	@Override
-	public @NotNull ItemStack getItem()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItem(@NotNull ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable ItemStack getWeapon()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setWeapon(@NotNull ItemStack item)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack getItemStack()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItemStack(@NotNull ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setLifetimeTicks(int ticks)
 	{
 		this.lifetime = ticks;
@@ -194,7 +143,8 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	}
 
 	@Override
-	public @NotNull Sound getHitSound()
+	@NotNull
+	public Sound getHitSound()
 	{
 		return this.hitSound;
 	}
@@ -204,13 +154,6 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	{
 		Preconditions.checkArgument(sound != null, "Sound can not be null");
 		this.hitSound = sound;
-	}
-
-	@Override
-	public void setShooter(@Nullable ProjectileSource projectileSource, boolean b)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -224,5 +167,4 @@ public class AbstractArrowMock extends AbstractProjectileMock implements Abstrac
 	{
 		return noPhysics;
 	}
-
 }

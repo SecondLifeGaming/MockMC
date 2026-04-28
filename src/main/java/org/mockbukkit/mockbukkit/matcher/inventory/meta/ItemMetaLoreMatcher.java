@@ -54,7 +54,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param legacyLoreItems The lore required for there to be a match
+	 * @param legacyLoreItems
+	 *            The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
 	public static ItemMetaLoreMatcher hasLore(String... legacyLoreItems)
@@ -64,7 +65,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param legacyLoreItems The lore required for there to be no match
+	 * @param legacyLoreItems
+	 *            The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */
 	public static Matcher<ItemMetaMock> doesNotHaveLore(String... legacyLoreItems)
@@ -73,7 +75,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param loreItems The lore required for there to be a match
+	 * @param loreItems
+	 *            The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
 	public static ItemMetaLoreMatcher hasLore(Component... loreItems)
@@ -82,7 +85,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param loreItems The lore required for there to be no match
+	 * @param loreItems
+	 *            The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */
 	public static Matcher<ItemMetaMock> doesNotHaveLore(Component... loreItems)
@@ -91,7 +95,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param lore The lore required for there to be a match
+	 * @param lore
+	 *            The lore required for there to be a match
 	 * @return A matcher which matches with any item meta with the specified lore
 	 */
 	public static @NotNull ItemMetaLoreMatcher hasLore(List<Component> lore)
@@ -100,7 +105,8 @@ public class ItemMetaLoreMatcher extends TypeSafeMatcher<ItemMetaMock>
 	}
 
 	/**
-	 * @param lore The lore required for there to be no match
+	 * @param lore
+	 *            The lore required for there to be no match
 	 * @return A matcher which matches with any item meta without the specified lore
 	 */
 	public static @NotNull Matcher<ItemMetaMock> doesNotHaveLore(List<Component> lore)

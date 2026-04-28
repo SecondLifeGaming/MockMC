@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class CampfireDataMockTest
 {
@@ -79,7 +81,8 @@ class CampfireDataMockTest
 	@Test
 	void getAsString()
 	{
-		assertEquals("minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]", campfire.getAsString());
+		assertEquals("minecraft:campfire[facing=north,lit=true,signal_fire=false,waterlogged=false]",
+				campfire.getAsString());
 	}
 
 	@Test

@@ -16,5 +16,8 @@
 			"particles": true,
 			"type": "minecraft:slowness"
 		}
-	]
+	],
+	"extendable": true,
+	"maxLevel": 2,
+	"upgradeable": true
 }

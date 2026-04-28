@@ -14,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class ScoreMockTest
 {
@@ -55,8 +56,7 @@ class ScoreMockTest
 	void getScore_ObjectiveUnregistered_ThrowsError()
 	{
 		objective.unregister();
-		assertThrows(IllegalStateException.class, () ->
-				score.getScore());
+		assertThrows(IllegalStateException.class, () -> score.getScore());
 	}
 
 	@Test

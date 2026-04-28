@@ -52,8 +52,7 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 		if (hasTeleported)
 		{
 			description.appendText(" and has teleported");
-		}
-		else
+		} else
 		{
 			description.appendText(" and has not teleported");
 		}
@@ -68,8 +67,10 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 * @param location The location required for there to be a match
-	 * @return A matcher which matches if the entity has teleported to the specified location
+	 * @param location
+	 *            The location required for there to be a match
+	 * @return A matcher which matches if the entity has teleported to the specified
+	 *         location
 	 */
 	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location)
 	{
@@ -77,9 +78,12 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 * @param location        The location required for there to be a match
-	 * @param maximumDistance The distance around the location considered a valid match
-	 * @return A matcher which matches if the entity has teleported to the specified location within a radius
+	 * @param location
+	 *            The location required for there to be a match
+	 * @param maximumDistance
+	 *            The distance around the location considered a valid match
+	 * @return A matcher which matches if the entity has teleported to the specified
+	 *         location within a radius
 	 */
 	public static @NotNull EntityTeleportationMatcher hasTeleported(@NotNull Location location, double maximumDistance)
 	{
@@ -95,8 +99,10 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 * @param location The location required for there to be no match
-	 * @return A matcher which matches if the entity has not teleported to the specified location
+	 * @param location
+	 *            The location required for there to be no match
+	 * @return A matcher which matches if the entity has not teleported to the
+	 *         specified location
 	 */
 	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location)
 	{
@@ -104,9 +110,12 @@ public class EntityTeleportationMatcher extends TypeSafeMatcher<EntityMock>
 	}
 
 	/**
-	 * @param location        The location required for there to be no match
-	 * @param maximumDistance The distance around the location considered no valid match
-	 * @return A matcher which matches if the entity has teleported outside a radius of the specified location
+	 * @param location
+	 *            The location required for there to be no match
+	 * @param maximumDistance
+	 *            The distance around the location considered no valid match
+	 * @return A matcher which matches if the entity has teleported outside a radius
+	 *         of the specified location
 	 */
 	public static @NotNull Matcher<EntityMock> hasNotTeleported(@NotNull Location location, double maximumDistance)
 	{

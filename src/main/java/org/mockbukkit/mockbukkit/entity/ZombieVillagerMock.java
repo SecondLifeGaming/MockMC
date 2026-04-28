@@ -8,22 +8,28 @@ import org.bukkit.entity.ZombieVillager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
+public class ZombieVillagerMock extends ZombieMock
+		implements
+			ZombieVillager,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ZombieVillagerBaseMock
 {
 
 	private Villager.Type type = Villager.Type.PLAINS;
+
 	private Villager.Profession profession = Villager.Profession.NONE;
+
 	private OfflinePlayer conversionStarter = null;
 
 	/**
-	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ZombieVillagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -45,7 +51,8 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	}
 
 	@Override
-	public @Nullable OfflinePlayer getConversionPlayer()
+	@Nullable
+	public OfflinePlayer getConversionPlayer()
 	{
 		return conversionStarter;
 	}
@@ -58,13 +65,8 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	}
 
 	@Override
-	public void setConversionTime(int i, boolean b)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ZOMBIE_VILLAGER;
 	}
@@ -77,9 +79,9 @@ public class ZombieVillagerMock extends ZombieMock implements ZombieVillager
 	}
 
 	@Override
-	public @NotNull Villager.Profession getVillagerProfession()
+	@NotNull
+	public Villager.Profession getVillagerProfession()
 	{
 		return profession;
 	}
-
 }

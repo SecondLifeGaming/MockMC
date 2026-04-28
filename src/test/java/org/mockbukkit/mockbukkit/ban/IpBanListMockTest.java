@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class IpBanListMockTest
 {
@@ -34,14 +36,10 @@ class IpBanListMockTest
 	@Test
 	void testAddBan() throws UnknownHostException
 	{
-		banList.addBan(
-				InetAddress.getByName("127.0.0.1"),
-				"reason",
-				(Date) null,
-				"source"
-		);
+		banList.addBan(InetAddress.getByName("127.0.0.1"), "reason", (Date) null, "source");
 
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -49,7 +47,8 @@ class IpBanListMockTest
 	{
 		banList.addBan("127.0.0.1", "reason", null, "source");
 
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -58,7 +57,8 @@ class IpBanListMockTest
 		assertTrue(banList.getEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getEntries().size());
-		assertTrue(banList.getEntries().stream().anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getEntries().stream()
+				.anyMatch(banEntry -> banEntry.getBanTarget().getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -68,7 +68,8 @@ class IpBanListMockTest
 		assertTrue(banList.getBanEntries().isEmpty());
 		banList.addBan("127.0.0.1", "reason", null, "source");
 		assertEquals(1, banList.getBanEntries().size());
-		assertTrue(banList.getBanEntries().stream().anyMatch(banEntry -> ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1")));
+		assertTrue(banList.getBanEntries().stream()
+				.anyMatch(banEntry -> ((InetAddress) banEntry.getBanTarget()).getHostAddress().equals("127.0.0.1")));
 	}
 
 	@Test
@@ -88,8 +89,8 @@ class IpBanListMockTest
 	@Test
 	void testGetBanEntryStringNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				banList.getBanEntry((String) null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> banList.getBanEntry((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -97,8 +98,8 @@ class IpBanListMockTest
 	@Test
 	void testGetBanEntryInetAddressNullThrows()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				banList.getBanEntry((InetAddress) null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> banList.getBanEntry((InetAddress) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}
@@ -136,8 +137,8 @@ class IpBanListMockTest
 	@Test
 	void testPardonStringNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				banList.pardon((String) null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> banList.pardon((String) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 
@@ -146,8 +147,8 @@ class IpBanListMockTest
 	@Test
 	void testPardonInetAddressNull()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				banList.pardon((InetAddress) null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> banList.pardon((InetAddress) null));
 
 		assertEquals("Target cannot be null", nullPointerException.getMessage());
 	}

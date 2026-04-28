@@ -11,13 +11,17 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class StonecutterInventoryMock extends InventoryMock implements StonecutterInventory
+public class StonecutterInventoryMock extends InventoryMock
+		implements
+			StonecutterInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.StonecutterInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link StonecutterInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public StonecutterInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -30,9 +34,9 @@ public class StonecutterInventoryMock extends InventoryMock implements Stonecutt
 	}
 
 	@Override
-	public @NotNull InventoryMock getSnapshot()
+	@NotNull
+	public InventoryMock getSnapshot()
 	{
 		return new StonecutterInventoryMock(this);
 	}
-
 }

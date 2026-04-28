@@ -10,13 +10,17 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see InventoryMock
  */
-public class GrindstoneInventoryMock extends InventoryMock implements GrindstoneInventory
+public class GrindstoneInventoryMock extends InventoryMock
+		implements
+			GrindstoneInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.GrindstoneInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link GrindstoneInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public GrindstoneInventoryMock(InventoryHolder holder)
 	{
@@ -29,9 +33,9 @@ public class GrindstoneInventoryMock extends InventoryMock implements Grindstone
 	}
 
 	@Override
-	public @NotNull InventoryMock getSnapshot()
+	@NotNull
+	public InventoryMock getSnapshot()
 	{
 		return new GrindstoneInventoryMock(this);
 	}
-
 }

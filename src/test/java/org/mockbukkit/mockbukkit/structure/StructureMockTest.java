@@ -64,15 +64,8 @@ class StructureMockTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-			"0, 0, 0",
-			"1, 0, 0",
-			"0, 1, 0",
-			"0, 0, 1",
-			"0, 0, -1",
-			"0, -1, 0",
-			"-1, 0, 0",
-		})
+		@CsvSource(
+		{"0, 0, 0", "1, 0, 0", "0, 1, 0", "0, 0, 1", "0, 0, -1", "0, -1, 0", "-1, 0, 0",})
 		void givenNewSizes(double x, double y, double z)
 		{
 			BlockVector blockVector = new BlockVector(x, y, z);
@@ -88,7 +81,7 @@ class StructureMockTest
 		@Test
 		void givenNullBlockSize()
 		{
-			//noinspection DataFlowIssue
+			// noinspection DataFlowIssue
 			assertThrows(NullPointerException.class, () -> structure.setSize(null));
 		}
 
@@ -134,14 +127,14 @@ class StructureMockTest
 		@Test
 		void givenAddWitnNull()
 		{
-			//noinspection DataFlowIssue
+			// noinspection DataFlowIssue
 			assertThrows(NullPointerException.class, () -> structure.addPalette(null));
 		}
 
 		@Test
 		void givenRemoveWitnNull()
 		{
-			//noinspection DataFlowIssue
+			// noinspection DataFlowIssue
 			assertThrows(NullPointerException.class, () -> structure.removePalette(null));
 		}
 
@@ -187,14 +180,14 @@ class StructureMockTest
 		@Test
 		void givenAddWitnNull()
 		{
-			//noinspection DataFlowIssue
+			// noinspection DataFlowIssue
 			assertThrows(NullPointerException.class, () -> structure.addEntity(null));
 		}
 
 		@Test
 		void givenRemoveWitnNull()
 		{
-			//noinspection DataFlowIssue
+			// noinspection DataFlowIssue
 			assertThrows(NullPointerException.class, () -> structure.removeEntity(null));
 		}
 

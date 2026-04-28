@@ -1,24 +1,28 @@
 package org.mockbukkit.mockbukkit.inventory;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.view.builder.LocationInventoryViewBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 /**
  * Mock implementation of {@link LocationInventoryViewBuilder}.
  *
- * @param <V> The type of {@link InventoryView} this builder creates.
+ * @param <V>
+ *            The type of {@link InventoryView} this builder creates.
  */
-public class LocationInventoryViewBuilderMock<V extends InventoryView> implements LocationInventoryViewBuilder<V>
+public class LocationInventoryViewBuilderMock<V extends InventoryView>
+		implements
+			LocationInventoryViewBuilder<V>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.view.builder.LocationInventoryViewBuilderBaseMock<V>
 {
 
 	private final MenuTypeMock<V, ?> menuType;
-	private @Nullable Component title;
+
+	@Nullable
+	private Component title;
 
 	LocationInventoryViewBuilderMock(@NotNull MenuTypeMock<V, ?> menuType)
 	{
@@ -32,37 +36,25 @@ public class LocationInventoryViewBuilderMock<V extends InventoryView> implement
 	}
 
 	@Override
-	public @NotNull LocationInventoryViewBuilder<V> copy()
+	@NotNull
+	public LocationInventoryViewBuilder<V> copy()
 	{
 		return new LocationInventoryViewBuilderMock<>(menuType, title);
 	}
 
 	@Override
-	public @NotNull LocationInventoryViewBuilder<V> title(@Nullable Component title)
+	@NotNull
+	public LocationInventoryViewBuilder<V> title(@Nullable Component title)
 	{
 		this.title = title;
 		return this;
 	}
 
 	@Override
-	public @NotNull LocationInventoryViewBuilder<V> checkReachable(boolean checkReachable)
-	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull LocationInventoryViewBuilder<V> location(@Nullable Location location)
-	{
-		// TODO: Auto generated stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull V build(@NotNull HumanEntity player)
+	@NotNull
+	public V build(@NotNull HumanEntity player)
 	{
 		Component effectiveTitle = title != null ? title : menuType.getMenuTypeData().inventoryType().defaultTitle();
 		return menuType.create(player, effectiveTitle);
 	}
-
 }

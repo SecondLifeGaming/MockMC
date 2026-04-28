@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Skeleton;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,18 +12,28 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SkeletonMock extends AbstractSkeletonMock
+		implements
+			Skeleton,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SkeletonBaseMock
 {
 
 	private boolean isConverting = false;
+
 	private int conversionTime = 0;
+
 	private int inPowderedSnow = 0;
 
 	/**
-	 * Constructs a new {@link SkeletonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SkeletonMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -40,7 +49,8 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 	/**
 	 * Sets if the Skeleton is converting
 	 *
-	 * @param state If the skeleton is converting
+	 * @param state
+	 *            If the skeleton is converting
 	 */
 	public void setConverting(boolean state)
 	{
@@ -62,7 +72,6 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 			this.conversionTime = -1;
 			return;
 		}
-
 		this.conversionTime = time;
 	}
 
@@ -75,7 +84,8 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 	/**
 	 * Sets the Time the Entity is in powdered Snow
 	 *
-	 * @param time The Time in ticks
+	 * @param time
+	 *            The Time in ticks
 	 */
 	public void setInPowderedSnowTime(int time)
 	{
@@ -85,15 +95,16 @@ public class SkeletonMock extends AbstractSkeletonMock implements Skeleton
 
 	@Override
 	@Deprecated(since = "1.17")
-	public @NotNull SkeletonType getSkeletonType()
+	@NotNull
+	public SkeletonType getSkeletonType()
 	{
 		return SkeletonType.NORMAL;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SKELETON;
 	}
-
 }

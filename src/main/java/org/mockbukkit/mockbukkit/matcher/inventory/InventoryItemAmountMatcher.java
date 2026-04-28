@@ -40,7 +40,8 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to have more than the target amount ").appendValue(targetAmount).appendText(" of item ").appendValue(targetItem);
+		description.appendText("to have more than the target amount ").appendValue(targetAmount).appendText(" of item ")
+				.appendValue(targetItem);
 	}
 
 	@Override
@@ -50,9 +51,12 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 * @param material The material of the items
-	 * @param amount   The amount of the items required for a match
-	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 * @param material
+	 *            The material of the items
+	 * @param amount
+	 *            The amount of the items required for a match
+	 * @return A matcher which matches with any inventory with more than the
+	 *         required amount of items
 	 */
 	public static @NotNull InventoryItemAmountMatcher containsAtLeast(Material material, int amount)
 	{
@@ -60,9 +64,12 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 * @param material The material of the items
-	 * @param amount   The amount of the items required for no match
-	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 * @param material
+	 *            The material of the items
+	 * @param amount
+	 *            The amount of the items required for no match
+	 * @return A matcher which matches with any inventory with more than the
+	 *         required amount of items
 	 */
 	public static @NotNull Matcher<InventoryMock> containsLessThan(Material material, int amount)
 	{
@@ -70,9 +77,12 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 * @param targetItem The target item
-	 * @param amount     The amount of the items required for a match
-	 * @return A matcher which matches with any inventory with more than the required amount of items
+	 * @param targetItem
+	 *            The target item
+	 * @param amount
+	 *            The amount of the items required for a match
+	 * @return A matcher which matches with any inventory with more than the
+	 *         required amount of items
 	 */
 	public static @NotNull InventoryItemAmountMatcher containsAtLeast(@NotNull ItemStack targetItem, int amount)
 	{
@@ -81,9 +91,12 @@ public class InventoryItemAmountMatcher extends TypeSafeMatcher<InventoryMock>
 	}
 
 	/**
-	 * @param targetItem The target item
-	 * @param amount     The amount of the items required for no match
-	 * @return A matcher which matches with any inventory with lower than the given amount of items
+	 * @param targetItem
+	 *            The target item
+	 * @param amount
+	 *            The amount of the items required for no match
+	 * @return A matcher which matches with any inventory with lower than the given
+	 *         amount of items
 	 */
 	public static @NotNull Matcher<InventoryMock> containsLessThan(@NotNull ItemStack targetItem, int amount)
 	{

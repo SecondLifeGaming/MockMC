@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.sound;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -26,15 +27,20 @@ public final class AudioExperience
 	/**
 	 * Constructs a new {@link AudioExperience} with the provided parameters.
 	 *
-	 * @param sound    The sound name that was heard.
-	 * @param category The category of the sound.
-	 * @param loc      The location the sound was played at.
-	 * @param volume   The volume of the sound.
-	 * @param pitch    The pitch of the sound.
+	 * @param sound
+	 *            The sound name that was heard.
+	 * @param category
+	 *            The category of the sound.
+	 * @param loc
+	 *            The location the sound was played at.
+	 * @param volume
+	 *            The volume of the sound.
+	 * @param pitch
+	 *            The pitch of the sound.
 	 */
 	@ApiStatus.Internal
 	public AudioExperience(@NotNull String sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-						   float pitch)
+			float pitch)
 	{
 		Preconditions.checkNotNull(sound, "The played sound cannot be null!");
 		Preconditions.checkNotNull(category, "The category cannot be null!");
@@ -50,34 +56,43 @@ public final class AudioExperience
 	/**
 	 * Constructs a new {@link AudioExperience} with the provided parameters.
 	 *
-	 * @param sound    The sound name that was heard.
-	 * @param category The category of the sound.
-	 * @param loc      The location the sound was played at.
-	 * @param volume   The volume of the sound.
-	 * @param pitch    The pitch of the sound.
+	 * @param sound
+	 *            The sound name that was heard.
+	 * @param category
+	 *            The category of the sound.
+	 * @param loc
+	 *            The location the sound was played at.
+	 * @param volume
+	 *            The volume of the sound.
+	 * @param pitch
+	 *            The pitch of the sound.
 	 */
 	@ApiStatus.Internal
 	public AudioExperience(@NotNull Sound sound, @NotNull SoundCategory category, @NotNull Location loc, float volume,
-						   float pitch)
+			float pitch)
 	{
-		this(sound.getKey().getKey(), category, loc, volume, pitch);
+		this(Registry.SOUNDS.getKey(sound).getKey(), category, loc, volume, pitch);
 	}
 
 	/**
-	 * Constructs a new {@link AudioExperience} with the provided sound and location.
+	 * Constructs a new {@link AudioExperience} with the provided sound and
+	 * location.
 	 *
-	 * @param sound The sound name that was heard.
-	 * @param loc   The location the sound was played at.
+	 * @param sound
+	 *            The sound name that was heard.
+	 * @param loc
+	 *            The location the sound was played at.
 	 */
 	@ApiStatus.Internal
 	public AudioExperience(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Location loc)
 	{
-		this(sound.name().asString(), AdventureConverters.soundSourceToCategory(sound.source()), loc, sound.volume(), sound.pitch());
+		this(sound.name().asString(), AdventureConverters.soundSourceToCategory(sound.source()), loc, sound.volume(),
+				sound.pitch());
 	}
 
 	/**
-	 * This returns the {@link Sound} that was played. We return the {@link String} representation of the actual sound,
-	 * not the sound itself.
+	 * This returns the {@link Sound} that was played. We return the {@link String}
+	 * representation of the actual sound, not the sound itself.
 	 *
 	 * @return The {@link String} of the heard {@link Sound}.
 	 */
@@ -88,7 +103,8 @@ public final class AudioExperience
 	}
 
 	/**
-	 * This method returns the {@link SoundCategory} with which the {@link Sound} was played.
+	 * This method returns the {@link SoundCategory} with which the {@link Sound}
+	 * was played.
 	 *
 	 * @return The {@link SoundCategory}
 	 */
@@ -99,7 +115,8 @@ public final class AudioExperience
 	}
 
 	/**
-	 * This method returns the {@link net.kyori.adventure.sound.Sound.Source} with which the {@link Sound} was played.
+	 * This method returns the {@link net.kyori.adventure.sound.Sound.Source} with
+	 * which the {@link Sound} was played.
 	 *
 	 * @return The {@link net.kyori.adventure.sound.Sound.Source}
 	 */

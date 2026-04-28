@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Zoglin;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,16 +11,24 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class ZoglinMock extends MonsterMock implements Zoglin
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ZoglinMock extends MonsterMock
+		implements
+			Zoglin,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ZoglinBaseMock
 {
 
 	private boolean isAdult = true;
 
 	/**
-	 * Constructs a new {@link ZoglinMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ZoglinMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ZoglinMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -40,8 +47,7 @@ public class ZoglinMock extends MonsterMock implements Zoglin
 		if (isBaby)
 		{
 			this.setBaby();
-		}
-		else
+		} else
 		{
 			this.setAdult();
 		}
@@ -59,8 +65,7 @@ public class ZoglinMock extends MonsterMock implements Zoglin
 		if (age < 0)
 		{
 			this.setBaby();
-		}
-		else
+		} else
 		{
 			this.setAdult();
 		}
@@ -111,9 +116,9 @@ public class ZoglinMock extends MonsterMock implements Zoglin
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ZOGLIN;
 	}
-
 }

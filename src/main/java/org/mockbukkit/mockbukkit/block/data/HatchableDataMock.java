@@ -11,7 +11,8 @@ public class HatchableDataMock extends BlockDataMock implements Hatchable
 	/**
 	 * Constructs a new {@link Hatchable} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public HatchableDataMock(@NotNull Material material)
 	{
@@ -21,7 +22,8 @@ public class HatchableDataMock extends BlockDataMock implements Hatchable
 	/**
 	 * Create a new {@link Hatchable} based on an existing {@link Hatchable}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected HatchableDataMock(@NotNull HatchableDataMock other)
 	{

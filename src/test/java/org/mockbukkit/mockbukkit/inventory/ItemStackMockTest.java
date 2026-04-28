@@ -36,7 +36,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
+
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -50,11 +50,10 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("deprecation")
 @ExtendWith(MockBukkitExtension.class)
 class ItemStackMockTest
 {
-
-	private static final Pattern CLASS_NAME_RE = Pattern.compile("([a-zA-Z\\d_]*$)");
 
 	@ParameterizedTest
 	@MethodSource("getSetTypeStream")
@@ -75,14 +74,12 @@ class ItemStackMockTest
 			if (actualHasMeta)
 			{
 				List<? extends Class<?>> itemMetas = expected.get("meta").getAsJsonArray().asList().stream()
-						.map(JsonElement::getAsString)
-						.map(className ->
+						.map(JsonElement::getAsString).map(className ->
 						{
 							try
 							{
 								return Class.forName(className);
-							}
-							catch (ClassNotFoundException e)
+							} catch (ClassNotFoundException e)
 							{
 								throw new RuntimeException(e);
 							}
@@ -90,18 +87,19 @@ class ItemStackMockTest
 						.filter(clazz -> !clazz.equals(BlockDataMeta.class) && !clazz.equals(MusicInstrumentMeta.class))
 						.toList();
 				ItemMeta itemMeta = itemStack.getItemMeta();
-				List<? extends Class<?>> classOptional = itemMetas.stream().filter(clazz -> !clazz.isAssignableFrom(itemMeta.getClass())).toList();
+				List<? extends Class<?>> classOptional = itemMetas.stream()
+						.filter(clazz -> !clazz.isAssignableFrom(itemMeta.getClass())).toList();
 				assertTrue(classOptional.isEmpty(), "Could not find meta for classes: " + classOptional);
 
 				ItemMeta factoryMeta = Bukkit.getItemFactory().getItemMeta(material);
-				List<? extends Class<?>> classOptionalFactory = itemMetas.stream().filter(clazz -> !clazz.isAssignableFrom(factoryMeta.getClass())).toList();
+				List<? extends Class<?>> classOptionalFactory = itemMetas.stream()
+						.filter(clazz -> !clazz.isAssignableFrom(factoryMeta.getClass())).toList();
 				assertTrue(classOptionalFactory.isEmpty(), "Could not find meta for classes: " + classOptionalFactory);
 			}
-		}
-		catch (UnimplementedOperationException ignored)
+		} catch (UnimplementedOperationException _)
 		{
-		}
-		catch (Exception e)
+			// Ignored
+		} catch (Exception e)
 		{
 			if (!expected.has("throws"))
 			{
@@ -320,19 +318,6 @@ class ItemStackMockTest
 	{
 		ItemStack stack = new ItemStack(Material.STICK, 64);
 		assertEquals(64, stack.getMaxStackSize());
-	}
-
-	private Class<? extends ItemMeta> getMetaInterface(Class<?> aClass)
-	{
-		Class<?>[] interfaces = aClass.getInterfaces();
-		for (Class<?> anInterface : interfaces)
-		{
-			if (ItemMeta.class.isAssignableFrom(anInterface))
-			{
-				return (Class<? extends ItemMeta>) anInterface;
-			}
-		}
-		throw new IllegalArgumentException("Expected a class extending the item meta interface");
 	}
 
 	static Stream<JsonElement> getSetTypeStream() throws IOException
@@ -674,14 +659,14 @@ class ItemStackMockTest
 		PersistentDataContainerView view = item.getPersistentDataContainer();
 
 		final NamespacedKey key = NamespacedKey.fromString("key");
-		assertTrue(item.editPersistentDataContainer((container) ->
+		assertTrue(item.editPersistentDataContainer(container ->
 		{
 			container.set(key, PersistentDataType.STRING, "value");
 		}));
 		assertSame(view, item.getPersistentDataContainer());
 		assertEquals("value", view.get(key, PersistentDataType.STRING));
 
-		assertTrue(item.editPersistentDataContainer((container) ->
+		assertTrue(item.editPersistentDataContainer(container ->
 		{
 			container.remove(key);
 		}));
@@ -694,7 +679,7 @@ class ItemStackMockTest
 	{
 		ItemStackMock item = new ItemStackMock(Material.AIR);
 		final NamespacedKey key = NamespacedKey.fromString("key");
-		assertFalse(item.editPersistentDataContainer((container) ->
+		assertFalse(item.editPersistentDataContainer(container ->
 		{
 			container.set(key, PersistentDataType.STRING, "value");
 		}));

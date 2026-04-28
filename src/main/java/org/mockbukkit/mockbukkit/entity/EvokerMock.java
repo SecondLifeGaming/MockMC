@@ -8,7 +8,6 @@ import org.bukkit.entity.Spellcaster;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -16,16 +15,24 @@ import java.util.UUID;
  *
  * @see SpellcasterMock
  */
-public class EvokerMock extends SpellcasterMock implements Evoker
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class EvokerMock extends SpellcasterMock
+		implements
+			Evoker,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EvokerBaseMock
 {
 
 	private Sheep wololoTarget;
 
 	/**
-	 * Constructs a new {@link EvokerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link EvokerMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public EvokerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -46,7 +53,8 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	}
 
 	@Override
-	public @Nullable Sheep getWololoTarget()
+	@Nullable
+	public Sheep getWololoTarget()
 	{
 		return this.wololoTarget;
 	}
@@ -58,13 +66,15 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	}
 
 	@Override
-	public @NotNull Sound getCelebrationSound()
+	@NotNull
+	public Sound getCelebrationSound()
 	{
 		return Sound.ENTITY_EVOKER_CELEBRATE;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.EVOKER;
 	}
@@ -72,7 +82,8 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 	/**
 	 * Convert a {@link Evoker.Spell} into a {@link Spellcaster.Spell}.
 	 *
-	 * @param spell The spell to be converted.
+	 * @param spell
+	 *            The spell to be converted.
 	 * @return The converted spell.
 	 */
 	@NotNull
@@ -82,14 +93,14 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 		{
 			return Spellcaster.Spell.NONE;
 		}
-
 		return Spellcaster.Spell.values()[spell.ordinal()];
 	}
 
 	/**
 	 * Convert a {@link Spellcaster.Spell} into a {@link Evoker.Spell}.
 	 *
-	 * @param spell The spell to be converted.
+	 * @param spell
+	 *            The spell to be converted.
 	 * @return The converted spell.
 	 */
 	@NotNull
@@ -99,8 +110,6 @@ public class EvokerMock extends SpellcasterMock implements Evoker
 		{
 			return Evoker.Spell.NONE;
 		}
-
 		return Evoker.Spell.values()[spell.ordinal()];
 	}
-
 }

@@ -26,7 +26,8 @@ public class SchedulerOverdueTasksMatcher extends TypeSafeMatcher<BukkitSchedule
 	@Override
 	protected void describeMismatchSafely(BukkitSchedulerMock schedulerMock, Description description)
 	{
-		description.appendText("was with the following overdue tasks ").appendValueList("[", ",", "]", schedulerMock.getOverdueTasks());
+		description.appendText("was with the following overdue tasks ").appendValueList("[", ",", "]",
+				schedulerMock.getOverdueTasks());
 	}
 
 	/**

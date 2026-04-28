@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class PotionContentsMock implements PotionContents
 {
 
@@ -22,7 +23,8 @@ public class PotionContentsMock implements PotionContents
 	private final List<PotionEffect> customEffects;
 	private final @Nullable String customName;
 
-	private PotionContentsMock(@Nullable PotionType potion, @Nullable Color customColor, List<PotionEffect> customEffects, @Nullable String customName)
+	private PotionContentsMock(@Nullable PotionType potion, @Nullable Color customColor,
+			List<PotionEffect> customEffects, @Nullable String customName)
 	{
 		this.potion = potion;
 		this.customColor = customColor;
@@ -91,7 +93,8 @@ public class PotionContentsMock implements PotionContents
 		@Override
 		public Builder customName(@Nullable String name)
 		{
-			Preconditions.checkArgument(name == null || name.length() <= Short.MAX_VALUE, "Custom name is longer than %s characters", Short.MAX_VALUE);
+			Preconditions.checkArgument(name == null || name.length() <= Short.MAX_VALUE,
+					"Custom name is longer than %s characters", Short.MAX_VALUE);
 			this.customName = name;
 			return this;
 		}

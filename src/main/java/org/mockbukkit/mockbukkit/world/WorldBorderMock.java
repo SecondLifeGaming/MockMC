@@ -17,46 +17,66 @@ import org.jetbrains.annotations.Range;
 /**
  * Mock implementation of a {@link WorldBorder}.
  */
-public class WorldBorderMock implements WorldBorder
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class WorldBorderMock implements WorldBorder, org.mockbukkit.mockbukkit.generated.org.bukkit.WorldBorderBaseMock
 {
 
 	private static final double DEFAULT_BORDER_SIZE = 6.0E7D;
+
 	private static final double DEFAULT_DAMAGE_AMOUNT = 0.2D;
+
 	private static final double DEFAULT_DAMAGE_BUFFER = 5.0D;
+
 	private static final int DEFAULT_WARNING_DISTANCE = 5;
+
 	private static final int DEFAULT_WARNING_TIME = 15;
+
 	private static final double DEFAULT_CENTER_X = 0;
+
 	private static final double DEFAULT_CENTER_Z = 0;
+
 	private static final double MAX_CENTER_VALUE = 3E7D;
+
 	private static final long MAX_MOVEMENT_TIME = 9223372036854775L;
+
 	private static final double MAX_BORDER_SIZE = 6E7D;
+
 	private static final double MIN_BORDER_SIZE = 1.0D;
 
-	private final @NotNull World world;
+	@NotNull
+	private final World world;
+
 	private double size;
+
 	private double damageAmount;
+
 	private double damageBuffer;
+
 	private int warningDistance;
+
 	private int warningTimeTicks;
+
 	private double centerX;
+
 	private double centerZ;
 
 	/**
 	 * Creates a new world border mock
 	 *
-	 * @param world The world it is the border of
+	 * @param world
+	 *            The world it is the border of
 	 */
 	public WorldBorderMock(@NotNull World world)
 	{
 		Preconditions.checkNotNull(world, "World cannot be null");
-
 		this.world = world;
-
 		reset();
 	}
 
 	@Override
-	public @Nullable World getWorld()
+	@Nullable
+	public World getWorld()
 	{
 		return this.world;
 	}
@@ -89,14 +109,15 @@ public class WorldBorderMock implements WorldBorder
 	{
 		newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSize));
 		ticks = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, ticks));
-
-		WorldBorderBoundsChangeEvent.Type moveType = ticks <= 0 ? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE : WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
-		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size, newSize, ticks);
+		WorldBorderBoundsChangeEvent.Type moveType = ticks <= 0
+				? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE
+				: WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
+		WorldBorderBoundsChangeEvent event = new WorldBorderBoundsChangeEvent(this.world, this, moveType, this.size,
+				newSize, ticks);
 		if (!event.callEvent())
 		{
 			return;
 		}
-
 		double durationTicks = event.getDurationTicks();
 		newSize = event.getNewSize();
 		if (durationTicks <= 0)
@@ -104,7 +125,6 @@ public class WorldBorderMock implements WorldBorder
 			this.size = newSize;
 			return;
 		}
-
 		double distance = newSize - this.size;
 		moveBorderOverTime(distance, durationTicks, newSize);
 	}
@@ -113,17 +133,19 @@ public class WorldBorderMock implements WorldBorder
 	{
 		double distancePerTick = distance / ticks;
 		final double oldSize = this.size;
-		WorldBorderMock thisBorder = this; // We can't use 'this' in the anonymous class below, so we need to store it in a variable.
+		// We can't use 'this' in the anonymous class below, so we need to store it in a
+		// variable.
+		WorldBorderMock thisBorder = this;
 		new BukkitRunnable()
 		{
+
 			@Override
 			public void run()
 			{
 				if ((size < newSize && distance > 0.001) || (size > newSize && distance < -0.001))
 				{
 					size += distancePerTick;
-				}
-				else
+				} else
 				{
 					size = newSize;
 					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, ticks).callEvent();
@@ -134,7 +156,8 @@ public class WorldBorderMock implements WorldBorder
 	}
 
 	@Override
-	public @NotNull Location getCenter()
+	@NotNull
+	public Location getCenter()
 	{
 		return new Location(this.world, this.centerX, 0, this.centerZ);
 	}
@@ -143,7 +166,6 @@ public class WorldBorderMock implements WorldBorder
 	public void setCenter(@NotNull Location location)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-
 		setCenter(location.getX(), location.getZ());
 	}
 
@@ -152,13 +174,12 @@ public class WorldBorderMock implements WorldBorder
 	{
 		x = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, x));
 		z = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, z));
-
-		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this, new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
+		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this,
+				new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
 		if (!event.callEvent())
 		{
 			return;
 		}
-
 		this.centerX = event.getNewCenter().getX();
 		this.centerZ = event.getNewCenter().getZ();
 	}
@@ -188,7 +209,8 @@ public class WorldBorderMock implements WorldBorder
 	}
 
 	@Override
-	public @NonNegative int getWarningTimeTicks()
+	@NonNegative
+	public int getWarningTimeTicks()
 	{
 		return this.warningTimeTicks;
 	}
@@ -216,10 +238,8 @@ public class WorldBorderMock implements WorldBorder
 	public boolean isInside(@NotNull Location location)
 	{
 		Preconditions.checkNotNull(location, "Location cannot be null");
-
-		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE, this.centerZ - this.size,
-				this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
-
+		BoundingBox worldBorderBoundingBox = new BoundingBox(this.centerX - this.size, Double.MAX_VALUE,
+				this.centerZ - this.size, this.centerX + this.size, Double.MAX_VALUE * -1, this.centerZ + size);
 		return worldBorderBoundingBox.contains(location.toVector()) && location.getWorld() == this.world;
 	}
 
@@ -234,5 +254,4 @@ public class WorldBorderMock implements WorldBorder
 	{
 		return MAX_CENTER_VALUE;
 	}
-
 }

@@ -2,6 +2,7 @@ plugins {
 	id("java")
 	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
 	id("xyz.jpenilla.run-paper") version "3.0.2"
+	id("com.gradleup.shadow") version "9.4.1"
 }
 
 group = "org.mockbukkit"
@@ -15,6 +16,11 @@ repositories {
 dependencies {
 	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
+	// implementation(project(":"))
+	implementation("com.squareup:javapoet:1.13.0")
+	implementation("io.leangen.geantyref:geantyref:1.3.16")
+	implementation("com.google.code.gson:gson:2.11.0")
+
 
 	// Dependencies for Unit Tests
 	testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
@@ -28,15 +34,37 @@ tasks {
 	}
 
 	processResources {
-		filesMatching("**/plugin.yml") { expand(project.properties) }
+		val props = mapOf("version" to project.version)
+		inputs.properties(props)
+		filesMatching("**/plugin.yml") {
+			expand(props)
+		}
 	}
 
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
-		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
-		systemProperty("junit.jupiter.execution.parallel.enabled", "true")
-		systemProperty("junit.jupiter.execution.parallel.mode.default", "concurrent")
-		systemProperty("junit.jupiter.execution.parallel.mode.classes.default", "concurrent")
+		maxParallelForks = 1
+		jvmArgs("-Xint")
+		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+	}
+
+	shadowJar {
+		relocate("com.squareup.javapoet", "org.mockbukkit.metaminer.javapoet")
+	}
+
+	build {
+		dependsOn(shadowJar)
+	}
+
+	runServer {
+		pluginJars.setFrom(shadowJar.flatMap { it.archiveFile })
+	}
+
+	register<JavaExec>("runGenerator") {
+		group = "application"
+		mainClass.set("org.mockbukkit.metaminer.StandaloneRunner")
+		classpath = sourceSets.main.get().runtimeClasspath
+		args(rootProject.projectDir.absolutePath)
 	}
 }

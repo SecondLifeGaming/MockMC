@@ -5,7 +5,6 @@ import org.bukkit.entity.Horse;
 import org.bukkit.entity.SkeletonHorse;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,17 +12,26 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHorse
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SkeletonHorseMock extends AbstractHorseMock
+		implements
+			SkeletonHorse,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SkeletonHorseBaseMock
 {
 
 	private boolean isTrapped = false;
+
 	private int trapTime = 0;
 
 	/**
-	 * Constructs a new {@link SkeletonHorseMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SkeletonHorseMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SkeletonHorseMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -76,9 +84,9 @@ public class SkeletonHorseMock extends AbstractHorseMock implements SkeletonHors
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SKELETON_HORSE;
 	}
-
 }

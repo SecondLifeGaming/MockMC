@@ -5,7 +5,8 @@ import org.bukkit.block.data.BlockData;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record BlockItemDataPropertiesMock() implements BlockItemDataProperties
 {
 

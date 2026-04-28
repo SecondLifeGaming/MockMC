@@ -89,7 +89,8 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = { 0.0F, 0.25F, 0.5F, 0.75F, 1.0F })
+	@ValueSource(floats =
+	{0.0F, 0.25F, 0.5F, 0.75F, 1.0F})
 	void getItemDropChance_GivenValidValues(float value)
 	{
 		itemFrame.setItemDropChance(value);
@@ -97,10 +98,12 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(floats = { -1, -0.01F, 1.01F, 2F })
+	@ValueSource(floats =
+	{-1, -0.01F, 1.01F, 2F})
 	void setItemDropChance_GivenIllegalValues(float value)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> itemFrame.setItemDropChance(value));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> itemFrame.setItemDropChance(value));
 		assertEquals(String.format("Chance (%s) outside range [0, 1]", value), e.getMessage());
 	}
 
@@ -132,7 +135,8 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isVisible_GivenPossibleValues(boolean visible)
 	{
 		itemFrame.setVisible(visible);
@@ -146,7 +150,8 @@ class ItemFrameMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isFixed_GivenPossibleValues(boolean visible)
 	{
 		itemFrame.setFixed(visible);

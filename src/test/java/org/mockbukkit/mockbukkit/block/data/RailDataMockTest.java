@@ -74,7 +74,8 @@ class RailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			rail.setWaterlogged(isWaterLogged);
@@ -86,7 +87,8 @@ class RailDataMockTest
 	@Test
 	void deserialize()
 	{
-		RailDataMock blockDataMock = (RailDataMock) BlockDataMock.newData(null, "minecraft:rail[shape=south_east, waterlogged=true]");
+		RailDataMock blockDataMock = (RailDataMock) BlockDataMock.newData(null,
+				"minecraft:rail[shape=south_east, waterlogged=true]");
 		assertEquals(Rail.Shape.SOUTH_EAST, blockDataMock.getShape());
 		assertTrue(blockDataMock.isWaterlogged());
 	}
@@ -94,7 +96,8 @@ class RailDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull RailDataMock cloned = rail.clone();
+		@NotNull
+		RailDataMock cloned = rail.clone();
 
 		assertEquals(rail, cloned);
 		assertEquals(rail.isWaterlogged(), cloned.isWaterlogged());

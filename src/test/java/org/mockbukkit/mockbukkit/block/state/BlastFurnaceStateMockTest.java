@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BlastFurnaceStateMockTest
 {
@@ -52,7 +54,8 @@ class BlastFurnaceStateMockTest
 	@Test
 	void constructor_Block_NotBlastFurnace_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BlastFurnaceStateMock(new BlockMock(Material.FURNACE)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BlastFurnaceStateMock(new BlockMock(Material.FURNACE)));
 	}
 
 	@Test

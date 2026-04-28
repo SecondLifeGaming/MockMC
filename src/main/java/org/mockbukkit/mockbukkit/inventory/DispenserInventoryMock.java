@@ -17,7 +17,8 @@ public class DispenserInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link DispenserInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public DispenserInventoryMock(InventoryHolder holder)
 	{

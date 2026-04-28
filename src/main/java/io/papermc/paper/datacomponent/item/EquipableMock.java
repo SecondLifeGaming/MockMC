@@ -10,27 +10,19 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public record EquipableMock(EquipmentSlot slot, Key equipSound, @Nullable Key assetId,
-							@Nullable Key cameraOverlay, @Nullable RegistryKeySet<EntityType> allowedEntities,
-							boolean dispensable, boolean swappable, boolean damageOnHurt,
-							boolean equipOnInteract, boolean canBeSheared, Key shearSound
-) implements Equippable
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
+public record EquipableMock(EquipmentSlot slot, Key equipSound, @Nullable Key assetId, @Nullable Key cameraOverlay,
+		@Nullable RegistryKeySet<EntityType> allowedEntities, boolean dispensable, boolean swappable,
+		boolean damageOnHurt, boolean equipOnInteract, boolean canBeSheared, Key shearSound) implements Equippable
 {
 
 	@Override
 	public Builder toBuilder()
 	{
-		return new BuilderMock(slot)
-				.equipSound(equipSound)
-				.assetId(assetId)
-				.cameraOverlay(this.cameraOverlay)
-				.allowedEntities(this.allowedEntities)
-				.dispensable(dispensable)
-				.swappable(swappable)
-				.damageOnHurt(damageOnHurt)
-				.equipOnInteract(equipOnInteract)
-				.shearSound(shearSound)
+		return new BuilderMock(slot).equipSound(equipSound).assetId(assetId).cameraOverlay(this.cameraOverlay)
+				.allowedEntities(this.allowedEntities).dispensable(dispensable).swappable(swappable)
+				.damageOnHurt(damageOnHurt).equipOnInteract(equipOnInteract).shearSound(shearSound)
 				.canBeSheared(canBeSheared);
 	}
 

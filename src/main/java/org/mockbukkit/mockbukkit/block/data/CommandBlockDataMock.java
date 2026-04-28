@@ -19,7 +19,8 @@ public class CommandBlockDataMock extends BlockDataMock implements CommandBlock
 	/**
 	 * Constructs a new {@link CommandBlock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public CommandBlockDataMock(@NotNull Material material)
 	{
@@ -29,7 +30,8 @@ public class CommandBlockDataMock extends BlockDataMock implements CommandBlock
 	/**
 	 * Create a new {@link CommandBlock} based on an existing {@link CommandBlock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected CommandBlockDataMock(@NotNull CommandBlockDataMock other)
 	{
@@ -58,7 +60,8 @@ public class CommandBlockDataMock extends BlockDataMock implements CommandBlock
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian(), "Invalid face, only cartesian face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian(),
+				"Invalid face, only cartesian face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 

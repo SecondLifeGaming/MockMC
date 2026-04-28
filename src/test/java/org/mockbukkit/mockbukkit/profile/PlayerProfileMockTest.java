@@ -28,6 +28,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class PlayerProfileMockTest
 {
@@ -185,7 +187,9 @@ class PlayerProfileMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test,!?", ",Test,!?", "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,,!?", "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test," })
+	@CsvSource(
+	{"a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test,!?", ",Test,!?", "a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,,!?",
+			"a4a7d8f6-c2df-4a0a-b12d-f0181dc85f61,Test,"})
 	void serialize(String uuid, String name, String signature)
 	{
 		PlayerProfileMock profile = new PlayerProfileMock(name, uuid == null ? null : UUID.fromString(uuid));
@@ -198,8 +202,7 @@ class PlayerProfileMockTest
 		if (signature == null)
 		{
 			assertEquals("[{name=Key, value=Value}]", ser.get("properties").toString());
-		}
-		else
+		} else
 		{
 			assertEquals("[{name=Key, value=Value, signature=" + signature + "}]", ser.get("properties").toString());
 		}
@@ -256,11 +259,7 @@ class PlayerProfileMockTest
 			data.put("name", "4ever");
 
 			List<Map<String, Object>> properties = new ArrayList<>();
-			properties.add(Map.of(
-				"name", "name-value",
-				"value", "value-value",
-				"signature", "signature-value"
-			));
+			properties.add(Map.of("name", "name-value", "value", "value-value", "signature", "signature-value"));
 
 			data.put("properties", properties);
 

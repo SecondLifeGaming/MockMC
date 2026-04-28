@@ -35,6 +35,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class SignStateMockTest
 {
@@ -196,8 +198,8 @@ class SignStateMockTest
 	@MethodSource("sidesAndLineNumbers")
 	void setNumberedLineAsComponentOnSide(Side side, int line)
 	{
-		Component component = Component.join(JoinConfiguration.spaces(),
-				Component.text("Hello"), Component.text("World", NamedTextColor.GREEN));
+		Component component = Component.join(JoinConfiguration.spaces(), Component.text("Hello"),
+				Component.text("World", NamedTextColor.GREEN));
 		sign.getSide(side).line(line, component);
 		assertEquals(component, sign.getSide(side).line(line));
 		assertEquals("Hello \u00A7aWorld", sign.getSide(side).getLine(line));
@@ -225,48 +227,32 @@ class SignStateMockTest
 	@EnumSource(Side.class)
 	void testGetLinesAsComponents(Side side)
 	{
-		assertEquals(List.of(
-				Component.empty(),
-				Component.empty(),
-				Component.empty(),
-				Component.empty()
-		), sign.getSide(side).lines());
+		assertEquals(List.of(Component.empty(), Component.empty(), Component.empty(), Component.empty()),
+				sign.getSide(side).lines());
 
 		sign.getSide(side).line(0, Component.text("Line 1"));
 		sign.getSide(side).line(1, Component.text("Line 2"));
 		sign.getSide(side).line(2, Component.text("Line 3"));
 		sign.getSide(side).line(3, Component.text("Line 4"));
 
-		assertEquals(List.of(
-				Component.text("Line 1"),
-				Component.text("Line 2"),
-				Component.text("Line 3"),
-				Component.text("Line 4")
-		), sign.getSide(side).lines());
+		assertEquals(List.of(Component.text("Line 1"), Component.text("Line 2"), Component.text("Line 3"),
+				Component.text("Line 4")), sign.getSide(side).lines());
 	}
 
 	@ParameterizedTest
 	@EnumSource(Side.class)
 	void testGetLinesAsStrings(Side side)
 	{
-		assertArrayEquals(new String[]{
-				"",
-				"",
-				"",
-				""
-		}, sign.getSide(side).getLines());
+		assertArrayEquals(new String[]
+		{"", "", "", ""}, sign.getSide(side).getLines());
 
 		sign.getSide(side).line(0, Component.text("Line 1"));
 		sign.getSide(side).line(1, Component.text("Line 2"));
 		sign.getSide(side).line(2, Component.text("Line 3"));
 		sign.getSide(side).line(3, Component.text("Line 4"));
 
-		assertArrayEquals(new String[]{
-				"Line 1",
-				"Line 2",
-				"Line 3",
-				"Line 4"
-		}, sign.getSide(side).getLines());
+		assertArrayEquals(new String[]
+		{"Line 1", "Line 2", "Line 3", "Line 4"}, sign.getSide(side).getLines());
 	}
 
 	@ParameterizedTest

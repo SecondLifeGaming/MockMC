@@ -97,6 +97,8 @@ import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaAnyLoreMa
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.doesNotHaveLore;
 import static org.mockbukkit.mockbukkit.matcher.inventory.meta.ItemMetaLoreMatcher.hasLore;
 
+@SuppressWarnings(
+{"deprecation", "removal"})
 @ExtendWith(MockBukkitExtension.class)
 class ItemMetaMockTest
 {
@@ -398,11 +400,9 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
-		meta.addAttributeModifier(
-				Attribute.MAX_HEALTH,
+		meta.addAttributeModifier(Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
-		meta2.addAttributeModifier(
-				Attribute.MAX_HEALTH,
+		meta2.addAttributeModifier(Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
 		assertEquals(meta, meta2);
 		assertEquals(meta2, meta);
@@ -414,11 +414,9 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
-		meta.addAttributeModifier(
-				Attribute.MAX_HEALTH,
+		meta.addAttributeModifier(Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 1000, AttributeModifier.Operation.ADD_NUMBER));
-		meta2.addAttributeModifier(
-				Attribute.MAX_HEALTH,
+		meta2.addAttributeModifier(Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
@@ -430,8 +428,7 @@ class ItemMetaMockTest
 	{
 		ItemMetaMock meta2 = new ItemMetaMock();
 		final NamespacedKey key = NamespacedKey.randomKey();
-		meta2.addAttributeModifier(
-				Attribute.MAX_HEALTH,
+		meta2.addAttributeModifier(Attribute.MAX_HEALTH,
 				new AttributeModifier(key, 100, AttributeModifier.Operation.ADD_NUMBER));
 		assertNotEquals(meta, meta2);
 		assertNotEquals(meta2, meta);
@@ -675,12 +672,12 @@ class ItemMetaMockTest
 	}
 
 	@Test
-	void setLocalizedName_DoesNothing()
+	void setLocalizedName_SetsDisplayName()
 	{
 		meta.setDisplayName("Pointy Object");
 		meta.setLocalizedName("Some name");
-		assertFalse(meta.hasLocalizedName());
-		assertEquals("Pointy Object", meta.getLocalizedName());
+		assertTrue(meta.hasLocalizedName());
+		assertEquals("Some name", meta.getLocalizedName());
 	}
 
 	@Test
@@ -864,8 +861,7 @@ class ItemMetaMockTest
 		{
 			meta.setDamage(-1);
 			fail("Negative damage could be set");
-		}
-		catch (IllegalStateException e)
+		} catch (IllegalStateException _)
 		{
 			// Good scenario
 		}
@@ -982,213 +978,224 @@ class ItemMetaMockTest
 	@Test
 	void hasAttributeModifiers_Constructor_Empty()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertFalse(meta.hasAttributeModifiers());
+		assertFalse(itemMeta.hasAttributeModifiers());
 	}
 
 	@Test
 	void getAttributeModifiers_Constructor_Null()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertNull(meta.getAttributeModifiers());
+		assertNull(itemMeta.getAttributeModifiers());
 	}
 
 	@Test
 	void setAttributeModifiers_NullMap()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		meta.setAttributeModifiers(null);
+		itemMeta.setAttributeModifiers(null);
 
-		assertFalse(meta.hasAttributeModifiers());
+		assertFalse(itemMeta.hasAttributeModifiers());
 	}
 
 	@Test
 	void setAttributeModifiers_AddsEntries()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 		modifiers.put(Attribute.ARMOR, modifier);
 
-		meta.setAttributeModifiers(modifiers);
+		itemMeta.setAttributeModifiers(modifiers);
 
-		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, itemMeta.getAttributeModifiers().size());
+		assertEquals(1, itemMeta.getAttributeModifiers().get(Attribute.ARMOR).size());
+		assertEquals(modifier, itemMeta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
 	void setAttributeModifiers_RemovesAndAddsEntries()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		Multimap<Attribute, AttributeModifier> oldModifiers = LinkedHashMultimap.create();
 		oldModifiers.put(Attribute.ARMOR, new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER));
-		meta.setAttributeModifiers(oldModifiers);
+		itemMeta.setAttributeModifiers(oldModifiers);
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
 		AttributeModifier modifier = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
 		modifiers.put(Attribute.ARMOR_TOUGHNESS, modifier);
 
-		meta.setAttributeModifiers(modifiers);
+		itemMeta.setAttributeModifiers(modifiers);
 
-		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
+		assertEquals(1, itemMeta.getAttributeModifiers().size());
+		assertEquals(1, itemMeta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).size());
+		assertEquals(modifier,
+				itemMeta.getAttributeModifiers().get(Attribute.ARMOR_TOUGHNESS).stream().findFirst().orElse(null));
 	}
 
 	@Test
 	void getAttributeModifiers_Slot()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		Multimap<Attribute, AttributeModifier> modifiers = LinkedHashMultimap.create();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
 		modifiers.put(Attribute.ARMOR, modifier1);
 		modifiers.put(Attribute.ARMOR, modifier2);
 
-		meta.setAttributeModifiers(modifiers);
+		itemMeta.setAttributeModifiers(modifiers);
 
-		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).size());
-		assertEquals(1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).size());
-		assertEquals(modifier1, meta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, itemMeta.getAttributeModifiers(EquipmentSlot.HEAD).size());
+		assertEquals(1, itemMeta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).size());
+		assertEquals(modifier1, itemMeta.getAttributeModifiers(EquipmentSlot.HEAD).get(Attribute.ARMOR).stream()
+				.findFirst().orElse(null));
 	}
 
 	@Test
 	void getAttributeModifiers_NullAttribute_ThrowException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.getAttributeModifiers((Attribute) null));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.getAttributeModifiers((Attribute) null));
 	}
 
 	@Test
 	void addAttributeModifier_AddsOne()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 
-		meta.addAttributeModifier(Attribute.ARMOR, modifier);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier);
 
-		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(1, meta.getAttributeModifiers().get(Attribute.ARMOR).size());
-		assertEquals(modifier, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, itemMeta.getAttributeModifiers().size());
+		assertEquals(1, itemMeta.getAttributeModifiers().get(Attribute.ARMOR).size());
+		assertEquals(modifier, itemMeta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
 	void addAttributeModifier_Duplicate_ThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 
-		meta.addAttributeModifier(Attribute.ARMOR, modifier);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier);
 
-		assertThrowsExactly(IllegalArgumentException.class, () -> meta.addAttributeModifier(Attribute.ARMOR, modifier));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> itemMeta.addAttributeModifier(Attribute.ARMOR, modifier));
 	}
 
 	@Test
 	void addAttributeModifier_NullAttribute_ThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(null, modifier));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.addAttributeModifier(null, modifier));
 	}
 
 	@Test
 	void addAttributeModifier_NullModifier_ThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.addAttributeModifier(Attribute.ARMOR, null));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.addAttributeModifier(Attribute.ARMOR, null));
 	}
 
 	@Test
 	void removeAttribute_Attribute()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier);
 
-		assertTrue(meta.hasAttributeModifiers());
+		assertTrue(itemMeta.hasAttributeModifiers());
 
-		meta.removeAttributeModifier(Attribute.ARMOR);
+		itemMeta.removeAttributeModifier(Attribute.ARMOR);
 
-		assertFalse(meta.hasAttributeModifiers());
+		assertFalse(itemMeta.hasAttributeModifiers());
 	}
 
 	@Test
 	void removeAttribute_Attribute_NullThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier((Attribute) null));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.removeAttributeModifier((Attribute) null));
 	}
 
 	@Test
 	void removeAttribute_Slot_RemovesCorrectSlot()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
+		ItemMetaMock itemMeta = new ItemMetaMock();
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
-		assertEquals(2, meta.getAttributeModifiers().size());
-		meta.removeAttributeModifier(EquipmentSlot.HEAD);
-		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
+		assertEquals(2, itemMeta.getAttributeModifiers().size());
+		itemMeta.removeAttributeModifier(EquipmentSlot.HEAD);
+		assertEquals(1, itemMeta.getAttributeModifiers().size());
+		assertEquals(modifier2,
+				itemMeta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
-		// May seem a little weird, but this is what Spigot does
-		// (https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java#1019)
+	// May seem a little weird, but this is what Spigot does
+	// (https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/inventory/CraftMetaItem.java#1019)
 	void removeAttribute_Slot_RemovesAllNoSlots()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier1 = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
 		AttributeModifier modifier2 = new AttributeModifier("test_2", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
-		meta.removeAttributeModifier(EquipmentSlot.HEAD);
+		itemMeta.removeAttributeModifier(EquipmentSlot.HEAD);
 
-		assertFalse(meta.hasAttributeModifiers());
+		assertFalse(itemMeta.hasAttributeModifiers());
 	}
 
 	@Test
 	void removeAttribute_SpecificModifier_Removes()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
-		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
-		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1, AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier1);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier2);
+		ItemMetaMock itemMeta = new ItemMetaMock();
+		AttributeModifier modifier1 = new AttributeModifier(UUID.randomUUID(), "test_1", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.HEAD);
+		AttributeModifier modifier2 = new AttributeModifier(UUID.randomUUID(), "test_2", 1,
+				AttributeModifier.Operation.ADD_NUMBER, EquipmentSlot.CHEST);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier1);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier2);
 
-		meta.removeAttributeModifier(Attribute.ARMOR, modifier1);
+		itemMeta.removeAttributeModifier(Attribute.ARMOR, modifier1);
 
-		assertEquals(1, meta.getAttributeModifiers().size());
-		assertEquals(modifier2, meta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
+		assertEquals(1, itemMeta.getAttributeModifiers().size());
+		assertEquals(modifier2,
+				itemMeta.getAttributeModifiers().get(Attribute.ARMOR).stream().findFirst().orElse(null));
 	}
 
 	@Test
 	void removeAttribute_SpecificModifier_NullAttribute_ThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 		AttributeModifier modifier = new AttributeModifier("test_1", 1, AttributeModifier.Operation.ADD_NUMBER);
-		meta.addAttributeModifier(Attribute.ARMOR, modifier);
+		itemMeta.addAttributeModifier(Attribute.ARMOR, modifier);
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(null, modifier));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.removeAttributeModifier(null, modifier));
 	}
 
 	@Test
 	void removeAttribute_SpecificModifier_NullModifier_ThrowsException()
 	{
-		ItemMetaMock meta = new ItemMetaMock();
+		ItemMetaMock itemMeta = new ItemMetaMock();
 
-		assertThrowsExactly(NullPointerException.class, () -> meta.removeAttributeModifier(Attribute.ARMOR, null));
+		assertThrowsExactly(NullPointerException.class, () -> itemMeta.removeAttributeModifier(Attribute.ARMOR, null));
 	}
 
 	@Test
@@ -1261,8 +1268,7 @@ class ItemMetaMockTest
 
 		meta.setEnchantable(null);
 		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, meta::getEnchantable);
-		assertEquals("We don't have Enchantable! Check hasEnchantable first!",
-				illegalStateException.getMessage());
+		assertEquals("We don't have Enchantable! Check hasEnchantable first!", illegalStateException.getMessage());
 	}
 
 	@Test
@@ -1274,8 +1280,8 @@ class ItemMetaMockTest
 		meta.setEnchantable(null);
 		assertFalse(meta.hasEnchantable());
 
-		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, () ->
-				meta.setEnchantable(-1));
+		IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class,
+				() -> meta.setEnchantable(-1));
 
 		assertEquals("Enchantability must be positive", illegalArgumentException.getMessage());
 	}
@@ -1396,18 +1402,18 @@ class ItemMetaMockTest
 			try
 			{
 				invokeSetter(parameterType, method, object);
-			}
-			catch (InvocationTargetException ignored)
+			} catch (InvocationTargetException _)
 			{
-			}
-			catch (IllegalAccessException e)
+				// Ignored
+			} catch (IllegalAccessException e)
 			{
 				e.printStackTrace();
 			}
 		}
 	}
 
-	private void invokeSetter(Class<?> parameterType, Method method, ItemMeta object) throws InvocationTargetException, IllegalAccessException
+	private void invokeSetter(Class<?> parameterType, Method method, ItemMeta object)
+			throws InvocationTargetException, IllegalAccessException
 	{
 		if (boolean.class.isAssignableFrom(parameterType))
 		{
@@ -1443,49 +1449,51 @@ class ItemMetaMockTest
 		}
 		if (Enum.class.isAssignableFrom(parameterType))
 		{
-			Enum[] enums = (Enum[]) parameterType.getEnumConstants();
+			Enum<?>[] enums = (Enum<?>[]) parameterType.getEnumConstants();
 			method.invoke(object, enums[enums.length - 1]);
 		}
 	}
 
-	// Copied from org.mockbukkit.mockbukkit.inventory.ItemFactory#testGetItemMetaCorrectClass and similar
-	// Only replace "factory.getItemMeta" with "new ItemStackMock" followed by a .getItemMeta()
-	@Test
-	void testGetItemMetaCorrectClass()
+	// Copied from
+	// org.mockbukkit.mockbukkit.inventory.ItemFactory#testGetItemMetaCorrectClass
+	// and similar
+	// Only replace "factory.getItemMeta" with "new ItemStackMock" followed by a
+	// .getItemMeta()
+	@ParameterizedTest
+	@MethodSource("getItemMetaClasses")
+	void testGetItemMetaCorrectClass(Material material, Class<? extends ItemMeta> expectedClass)
 	{
-		assertInstanceOf(ItemMetaMock.class, new ItemStackMock(Material.DIRT).getItemMeta());
-		assertInstanceOf(SkullMetaMock.class, new ItemStackMock(Material.PLAYER_HEAD).getItemMeta());
+		assertInstanceOf(expectedClass, new ItemStackMock(material).getItemMeta());
+	}
 
-		assertInstanceOf(BookMetaMock.class, new ItemStackMock(Material.WRITABLE_BOOK).getItemMeta());
-		assertInstanceOf(BookMetaMock.class, new ItemStackMock(Material.WRITTEN_BOOK).getItemMeta());
-		assertInstanceOf(EnchantmentStorageMetaMock.class, new ItemStackMock(Material.ENCHANTED_BOOK).getItemMeta());
-		assertInstanceOf(KnowledgeBookMetaMock.class, new ItemStackMock(Material.KNOWLEDGE_BOOK).getItemMeta());
-
-		assertInstanceOf(FireworkEffectMetaMock.class, new ItemStackMock(Material.FIREWORK_STAR).getItemMeta());
-		assertInstanceOf(FireworkMetaMock.class, new ItemStackMock(Material.FIREWORK_ROCKET).getItemMeta());
-
-		assertInstanceOf(SuspiciousStewMetaMock.class, new ItemStackMock(Material.SUSPICIOUS_STEW).getItemMeta());
-		assertInstanceOf(PotionMetaMock.class, new ItemStackMock(Material.POTION).getItemMeta());
-		assertInstanceOf(PotionMetaMock.class, new ItemStackMock(Material.TIPPED_ARROW).getItemMeta());
-
-		assertInstanceOf(ColorableArmorMetaMock.class, new ItemStackMock(Material.LEATHER_HELMET).getItemMeta());
-		assertInstanceOf(ColorableArmorMetaMock.class, new ItemStackMock(Material.LEATHER_CHESTPLATE).getItemMeta());
-		assertInstanceOf(ColorableArmorMetaMock.class, new ItemStackMock(Material.LEATHER_LEGGINGS).getItemMeta());
-		assertInstanceOf(ColorableArmorMetaMock.class, new ItemStackMock(Material.LEATHER_BOOTS).getItemMeta());
-		assertInstanceOf(ColorableArmorMetaMock.class, new ItemStackMock(Material.WOLF_ARMOR).getItemMeta());
-		assertInstanceOf(LeatherArmorMetaMock.class, new ItemStackMock(Material.LEATHER_HORSE_ARMOR).getItemMeta());
-
-		assertInstanceOf(ShieldMetaMock.class, new ItemStackMock(Material.SHIELD).getItemMeta());
-
-		assertInstanceOf(AxolotlBucketMetaMock.class, new ItemStackMock(Material.AXOLOTL_BUCKET).getItemMeta());
-		assertInstanceOf(BundleMetaMock.class, new ItemStackMock(Material.BUNDLE).getItemMeta());
-		assertInstanceOf(MapMetaMock.class, new ItemStackMock(Material.FILLED_MAP).getItemMeta());
-		assertInstanceOf(CompassMetaMock.class, new ItemStackMock(Material.COMPASS).getItemMeta());
-		assertInstanceOf(CrossbowMetaMock.class, new ItemStackMock(Material.CROSSBOW).getItemMeta());
-		assertInstanceOf(ArmorStandMetaMock.class, new ItemStackMock(Material.ARMOR_STAND).getItemMeta());
-		assertInstanceOf(TropicalFishBucketMetaMock.class, new ItemStackMock(Material.TROPICAL_FISH_BUCKET).getItemMeta());
-		assertInstanceOf(OminousBottleMetaMock.class, new ItemStackMock(Material.OMINOUS_BOTTLE).getItemMeta());
-
+	static Stream<Arguments> getItemMetaClasses()
+	{
+		return Stream.of(Arguments.of(Material.DIRT, ItemMetaMock.class),
+				Arguments.of(Material.PLAYER_HEAD, SkullMetaMock.class),
+				Arguments.of(Material.WRITABLE_BOOK, BookMetaMock.class),
+				Arguments.of(Material.WRITTEN_BOOK, BookMetaMock.class),
+				Arguments.of(Material.ENCHANTED_BOOK, EnchantmentStorageMetaMock.class),
+				Arguments.of(Material.KNOWLEDGE_BOOK, KnowledgeBookMetaMock.class),
+				Arguments.of(Material.FIREWORK_STAR, FireworkEffectMetaMock.class),
+				Arguments.of(Material.FIREWORK_ROCKET, FireworkMetaMock.class),
+				Arguments.of(Material.SUSPICIOUS_STEW, SuspiciousStewMetaMock.class),
+				Arguments.of(Material.POTION, PotionMetaMock.class),
+				Arguments.of(Material.TIPPED_ARROW, PotionMetaMock.class),
+				Arguments.of(Material.LEATHER_HELMET, ColorableArmorMetaMock.class),
+				Arguments.of(Material.LEATHER_CHESTPLATE, ColorableArmorMetaMock.class),
+				Arguments.of(Material.LEATHER_LEGGINGS, ColorableArmorMetaMock.class),
+				Arguments.of(Material.LEATHER_BOOTS, ColorableArmorMetaMock.class),
+				Arguments.of(Material.WOLF_ARMOR, ColorableArmorMetaMock.class),
+				Arguments.of(Material.LEATHER_HORSE_ARMOR, LeatherArmorMetaMock.class),
+				Arguments.of(Material.SHIELD, ShieldMetaMock.class),
+				Arguments.of(Material.AXOLOTL_BUCKET, AxolotlBucketMetaMock.class),
+				Arguments.of(Material.BUNDLE, BundleMetaMock.class),
+				Arguments.of(Material.FILLED_MAP, MapMetaMock.class),
+				Arguments.of(Material.COMPASS, CompassMetaMock.class),
+				Arguments.of(Material.CROSSBOW, CrossbowMetaMock.class),
+				Arguments.of(Material.ARMOR_STAND, ArmorStandMetaMock.class),
+				Arguments.of(Material.TROPICAL_FISH_BUCKET, TropicalFishBucketMetaMock.class),
+				Arguments.of(Material.OMINOUS_BOTTLE, OminousBottleMetaMock.class));
 	}
 
 	@Test
@@ -1580,8 +1588,10 @@ class ItemMetaMockTest
 		void givenDefault()
 		{
 			assertFalse(meta.hasEnchantmentGlintOverride());
-			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getEnchantmentGlintOverride());
-			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!", e.getMessage());
+			IllegalStateException e = assertThrows(IllegalStateException.class,
+					() -> meta.getEnchantmentGlintOverride());
+			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!",
+					e.getMessage());
 		}
 
 		@Test
@@ -1590,12 +1600,15 @@ class ItemMetaMockTest
 			meta.setEnchantmentGlintOverride(null);
 
 			assertFalse(meta.hasEnchantmentGlintOverride());
-			IllegalStateException e = assertThrows(IllegalStateException.class, () -> meta.getEnchantmentGlintOverride());
-			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!", e.getMessage());
+			IllegalStateException e = assertThrows(IllegalStateException.class,
+					() -> meta.getEnchantmentGlintOverride());
+			assertEquals("We don't have enchantment_glint_override! Check hasEnchantmentGlintOverride first!",
+					e.getMessage());
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			meta.setEnchantmentGlintOverride(value);
@@ -1736,11 +1749,11 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "lore":["\\"Line 1\\"","\\"Line 2\\""]
-            }
-            """;
+					{
+					    "meta-type":"UNSPECIFIC",
+					    "lore":["\\"Line 1\\"","\\"Line 2\\""]
+					}
+					""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1785,11 +1798,11 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "enchantments":{"minecraft:unbreaking":3}
-            }
-            """;
+					{
+					    "meta-type":"UNSPECIFIC",
+					    "enchantments":{"minecraft:unbreaking":3}
+					}
+					""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1824,11 +1837,11 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "ItemFlags":["HIDE_ATTRIBUTES", "HIDE_UNBREAKABLE"]
-            }
-            """;
+					{
+					    "meta-type":"UNSPECIFIC",
+					    "ItemFlags":["HIDE_ATTRIBUTES", "HIDE_UNBREAKABLE"]
+					}
+					""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -1927,68 +1940,26 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"count\":1,\"id\":\"minecraft:diamond\",\"DataVersion\":1,\"schema_version\":1}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"type\":\"DIAMOND\",\"id\":\"minecraft:diamond\",\"amount\":1,\"count\":1,\"components\":{\"meta-type\":\"UNSPECIFIC\"},\"meta\":{\"meta-type\":\"UNSPECIFIC\"}}}";
 			assertJsonEqual(expected, actual);
 		}
 
-		@Test
-		@Disabled("UseCooldownComponent is not implemented yet.")
-		void givenUseCooldown()
+		@ParameterizedTest(name = "given{0}")
+		@MethodSource("getUnimplementedComponents")
+		@Disabled("Component serialization is not implemented yet.")
+		void givenUnimplementedComponent(String name, String expectedJson)
 		{
-			// TODO: meta.setUseCooldown(...);
-
 			Map<String, Object> actual = meta.serialize();
-
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-cooldown\":{}}";
-			assertJsonEqual(expected, actual);
+			assertJsonEqual(expectedJson, actual);
 		}
 
-		@Test
-		@Disabled("FoodComponent is not implemented yet.")
-		void givenFood()
+		static Stream<Arguments> getUnimplementedComponents()
 		{
-			// TODO: meta.setFood(...);
-
-			Map<String, Object> actual = meta.serialize();
-
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"food\":{}}}";
-			assertJsonEqual(expected, actual);
-		}
-
-		@Test
-		@Disabled("ToolComponent is not implemented yet.")
-		void givenTool()
-		{
-			// TODO: meta.setTool(...);
-
-			Map<String, Object> actual = meta.serialize();
-
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"tool\":{}}}";
-			assertJsonEqual(expected, actual);
-		}
-
-		@Test
-		@Disabled("EquippableComponent is not implemented yet")
-		void givenEquippable()
-		{
-			// TODO: meta.setEquippable(...);
-
-			Map<String, Object> actual = meta.serialize();
-
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"equippable\":{}}}";
-			assertJsonEqual(expected, actual);
-		}
-
-		@Test
-		@Disabled("JukeboxPlayableComponent is not implemented yet.")
-		void givenJukeboxPlayable()
-		{
-			// TODO: meta.setJukeboxPlayable(...);
-
-			Map<String, Object> actual = meta.serialize();
-
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}}";
-			assertJsonEqual(expected, actual);
+			return Stream.of(Arguments.of("UseCooldown", "{\"meta-type\":\"UNSPECIFIC\",\"use-cooldown\":{}}"),
+					Arguments.of("Food", "{\"meta-type\":\"UNSPECIFIC\",\"food\":{}}}"),
+					Arguments.of("Tool", "{\"meta-type\":\"UNSPECIFIC\",\"tool\":{}}}"),
+					Arguments.of("Equippable", "{\"meta-type\":\"UNSPECIFIC\",\"equippable\":{}}}"),
+					Arguments.of("JukeboxPlayable", "{\"meta-type\":\"UNSPECIFIC\",\"jukebox-playable\":{}}"));
 		}
 
 		@Test
@@ -1998,7 +1969,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2009,7 +1980,7 @@ class ItemMetaMockTest
 
 			Map<String, Object> actual = meta.serialize();
 
-			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}}";
+			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2022,13 +1993,13 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "PublicBukkitValues": {
-					"minecraft:test-key": "value"
-				}
-            }
-            """;
+					        {
+					            "meta-type":"UNSPECIFIC",
+					            "PublicBukkitValues": {
+						"minecraft:test-key": "value"
+					}
+					        }
+					        """;
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2044,15 +2015,15 @@ class ItemMetaMockTest
 			Map<String, Object> actual = meta.serialize();
 
 			String expected = """
-            {
-                "meta-type":"UNSPECIFIC",
-                "display-name":"\\"Pickaxe\\"",
-                "Unbreakable":true,
-                "custom-model-data":99,
-                "ItemFlags":["HIDE_ENCHANTS"],
-                "enchantments":{"minecraft:unbreaking":1}
-            }
-            """;
+					{
+					    "meta-type":"UNSPECIFIC",
+					    "display-name":"\\"Pickaxe\\"",
+					    "Unbreakable":true,
+					    "custom-model-data":99,
+					    "ItemFlags":["HIDE_ENCHANTS"],
+					    "enchantments":{"minecraft:unbreaking":1}
+					}
+					""";
 			assertJsonEqual(expected, actual);
 		}
 
@@ -2066,8 +2037,7 @@ class ItemMetaMockTest
 			try
 			{
 				JSONAssert.assertEquals(expected, asJsonString(actual), true);
-			}
-			catch (JSONException e)
+			} catch (JSONException e)
 			{
 				Assertions.fail(e);
 			}
@@ -2263,12 +2233,12 @@ class ItemMetaMockTest
 		ItemMeta itemMeta = assertInstanceOf(ItemMeta.class, instance);
 
 		ItemMeta cloned = itemMeta.clone();
-		assertEquals(instance, cloned);
-		assertNotSame(instance, cloned);
+		assertEquals(itemMeta, cloned);
+		assertNotSame(itemMeta, cloned);
 
 		itemMeta.displayName(Component.text("Test name"));
-		assertNotEquals(instance, cloned);
-		assertNotSame(instance, cloned);
+		assertNotEquals(itemMeta, cloned);
+		assertNotSame(itemMeta, cloned);
 	}
 
 	/**
@@ -2276,17 +2246,14 @@ class ItemMetaMockTest
 	 *
 	 * @return The list of possible item metas
 	 *
-	 * @throws IOException If and IOException occurs while loading the class.
+	 * @throws IOException
+	 *             If and IOException occurs while loading the class.
 	 */
 	public static Stream<Arguments> getPossibleItemMetas() throws IOException
 	{
-		return ClassPath.from(ClassLoader.getSystemClassLoader())
-				.getAllClasses()
-				.parallelStream()
+		return ClassPath.from(ClassLoader.getSystemClassLoader()).getAllClasses().parallelStream()
 				.filter(c -> c.getPackageName().startsWith("org.mockbukkit.mockbukkit.inventory.meta"))
-				.map(ClassPath.ClassInfo::load)
-				.filter(ItemMeta.class::isAssignableFrom)
-				.map(Arguments::of);
+				.map(ClassPath.ClassInfo::load).filter(ItemMeta.class::isAssignableFrom).map(Arguments::of);
 	}
 
 	public static Stream<Arguments> spawnEgg_Materials()

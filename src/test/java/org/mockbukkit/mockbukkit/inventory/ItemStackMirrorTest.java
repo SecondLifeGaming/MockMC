@@ -90,7 +90,8 @@ class ItemStackMirrorTest
 		Object deserialized = loadedConfig.get("item");
 
 		assertNotNull(deserialized, "Deserialized object should not be null");
-		ItemStack loadedItem = assertInstanceOf(ItemStack.class, deserialized, "Deserialized object should be of type ItemStack");
+		ItemStack loadedItem = assertInstanceOf(ItemStack.class, deserialized,
+				"Deserialized object should be of type ItemStack");
 
 		assertEquals(5, loadedItem.getAmount());
 		assertEquals(Material.STONE_BRICKS, loadedItem.getType());

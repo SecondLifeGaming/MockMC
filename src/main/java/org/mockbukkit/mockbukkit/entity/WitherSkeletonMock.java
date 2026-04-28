@@ -5,7 +5,6 @@ import org.bukkit.entity.Skeleton;
 import org.bukkit.entity.WitherSkeleton;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,14 +12,22 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSkeleton
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class WitherSkeletonMock extends AbstractSkeletonMock
+		implements
+			WitherSkeleton,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WitherSkeletonBaseMock
 {
 
 	/**
-	 * Constructs a new {@link WitherSkeletonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WitherSkeletonMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WitherSkeletonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -39,5 +46,4 @@ public class WitherSkeletonMock extends AbstractSkeletonMock implements WitherSk
 	{
 		return EntityType.WITHER_SKELETON;
 	}
-
 }

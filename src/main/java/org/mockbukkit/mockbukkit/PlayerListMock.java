@@ -2,6 +2,8 @@ package org.mockbukkit.mockbukkit;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterators;
+import io.papermc.paper.ban.BanListType;
+import org.bukkit.BanList;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.ApiStatus;
@@ -30,17 +32,23 @@ import java.util.stream.Collectors;
 public class PlayerListMock
 {
 
-	// Remember to properly synchronize accesses to this field when this setting will be enforced
+	// Remember to properly synchronize accesses to this field when this setting
+	// will be enforced
 	private int maxPlayers = Integer.MAX_VALUE;
 
 	// These fields must be accessed while synchronizing on PlayerListMock.this
-	private final Set<PlayerMock> onlinePlayers = new CopyOnWriteArraySet<>(); // Iterator safety in getOnlinePlayers() (from Spigot implementation)
-	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>(); // CopyOnWriteArraySet is not needed here, since getOfflinePlayers() already returns a copy
+	private final Set<PlayerMock> onlinePlayers = new CopyOnWriteArraySet<>(); // Iterator safety in getOnlinePlayers()
+																				// (from Spigot implementation)
+	private final Set<OfflinePlayer> offlinePlayers = new HashSet<>(); // CopyOnWriteArraySet is not needed here, since
+																		// getOfflinePlayers() already returns a copy
 	private final Map<UUID, Long> lastLogins = new HashMap<>();
 	private final Map<UUID, Long> lastSeen = new HashMap<>();
 	private final Map<UUID, Long> firstPlayed = new HashMap<>();
 	private final Map<UUID, Boolean> hasPlayedBefore = new HashMap<>();
 	private final Set<UUID> operators = new HashSet<>();
+	private final Set<OfflinePlayer> whitelistedPlayers = new HashSet<>();
+	private boolean isWhitelistEnabled = false;
+	private boolean isWhitelistEnforced = false;
 
 	private final @NotNull IpBanListMock ipBans = new IpBanListMock();
 	private final @NotNull ProfileBanListMock profileBans = new ProfileBanListMock();
@@ -48,7 +56,8 @@ public class PlayerListMock
 	/**
 	 * Sets the maximum number of online players.
 	 *
-	 * @param maxPlayers The maximum amount of players.
+	 * @param maxPlayers
+	 *            The maximum amount of players.
 	 */
 	public void setMaxPlayers(int maxPlayers)
 	{
@@ -82,9 +91,57 @@ public class PlayerListMock
 	}
 
 	/**
-	 * Marks a player as on the server, and sets related data like hasPlayedBefore and lastLogin.
+	 * Gets a ban list by type.
 	 *
-	 * @param player The player to add.
+	 * @param type
+	 *            The type of ban list.
+	 * @param <T>
+	 *            The type of ban list.
+	 * @return The ban list.
+	 */
+	@SuppressWarnings(
+	{"unchecked", "deprecation"})
+	public <T extends BanList<?>> T getBanList(@NotNull BanList.Type type)
+	{
+		Preconditions.checkNotNull(type, "type cannot be null");
+		return switch (type)
+		{
+			case IP -> (T) this.ipBans;
+			case PROFILE, NAME -> (T) this.profileBans;
+		};
+	}
+
+	/**
+	 * Gets a ban list by type.
+	 *
+	 * @param type
+	 *            The type of ban list.
+	 * @param <B>
+	 *            The type of ban list.
+	 * @param <E>
+	 *            The type of ban target.
+	 * @return The ban list.
+	 */
+	@SuppressWarnings("unchecked")
+	public <B extends BanList<E>, E> B getBanList(@NotNull BanListType<B> type)
+	{
+		Preconditions.checkNotNull(type, "type cannot be null");
+		if (type == BanListType.IP)
+		{
+			return (B) this.ipBans;
+		} else if (type == BanListType.PROFILE)
+		{
+			return (B) this.profileBans;
+		}
+		throw new UnsupportedOperationException("Unknown BanListType: " + type);
+	}
+
+	/**
+	 * Marks a player as on the server, and sets related data like hasPlayedBefore
+	 * and lastLogin.
+	 *
+	 * @param player
+	 *            The player to add.
 	 * @return Whether the player was added.
 	 */
 	@ApiStatus.Internal
@@ -107,7 +164,8 @@ public class PlayerListMock
 	/**
 	 * Marks a player as disconnected, and sets related data like lastSeen.
 	 *
-	 * @param player The player to disconnect.
+	 * @param player
+	 *            The player to disconnect.
 	 */
 	@ApiStatus.Internal
 	public synchronized void disconnectPlayer(@NotNull PlayerMock player)
@@ -120,7 +178,8 @@ public class PlayerListMock
 	/**
 	 * Checks if a player has played before.
 	 *
-	 * @param uuid The UUID of the player.
+	 * @param uuid
+	 *            The UUID of the player.
 	 * @return Whether the player has played before.
 	 * @see Player#hasPlayedBefore()
 	 */
@@ -133,7 +192,8 @@ public class PlayerListMock
 	/**
 	 * Adds an offline player to the offline players set.
 	 *
-	 * @param player The player.
+	 * @param player
+	 *            The player.
 	 */
 	@ApiStatus.Internal
 	public synchronized void addOfflinePlayer(@NotNull OfflinePlayer player)
@@ -144,7 +204,8 @@ public class PlayerListMock
 	/**
 	 * Gets the first time that this player was seen on the server.
 	 *
-	 * @param uuid The UUID of the player.
+	 * @param uuid
+	 *            The UUID of the player.
 	 * @return The time of first log-in, or 0.
 	 * @see OfflinePlayer#getFirstPlayed()
 	 */
@@ -156,8 +217,10 @@ public class PlayerListMock
 	/**
 	 * Sets the return value of {@link #getFirstPlayed(UUID)}.
 	 *
-	 * @param uuid        UUID of the player to set first played time for.
-	 * @param firstPlayed The first played time. Must be non-negative.
+	 * @param uuid
+	 *            UUID of the player to set first played time for.
+	 * @param firstPlayed
+	 *            The first played time. Must be non-negative.
 	 */
 	public synchronized void setFirstPlayed(UUID uuid, long firstPlayed)
 	{
@@ -169,7 +232,8 @@ public class PlayerListMock
 	/**
 	 * Gets the last time a player was seen online.
 	 *
-	 * @param uuid The UUID of the player.
+	 * @param uuid
+	 *            The UUID of the player.
 	 * @return The last time the player was seen online.
 	 * @see OfflinePlayer#getLastSeen()
 	 */
@@ -184,11 +248,13 @@ public class PlayerListMock
 	}
 
 	/**
-	 * Sets the return value of {@link #getLastLogin(UUID)} <i>while the player is offline</i>.
-	 * If the player is online, this will not have an effect.
+	 * Sets the return value of {@link #getLastLogin(UUID)} <i>while the player is
+	 * offline</i>. If the player is online, this will not have an effect.
 	 *
-	 * @param uuid     UUID of the player to set last seen time for.
-	 * @param lastSeen The last seen time. Must be non-negative.
+	 * @param uuid
+	 *            UUID of the player to set last seen time for.
+	 * @param lastSeen
+	 *            The last seen time. Must be non-negative.
 	 */
 	public synchronized void setLastSeen(UUID uuid, long lastSeen)
 	{
@@ -200,7 +266,8 @@ public class PlayerListMock
 	/**
 	 * Gets the last time a player was seen online.
 	 *
-	 * @param uuid The UUID of the player.
+	 * @param uuid
+	 *            The UUID of the player.
 	 * @return The last time the player was seen online.
 	 * @see OfflinePlayer#getLastLogin()
 	 */
@@ -212,8 +279,10 @@ public class PlayerListMock
 	/**
 	 * Sets the return value of {@link #getLastLogin(UUID)}.
 	 *
-	 * @param uuid      UUID of the player to set last login time for.
-	 * @param lastLogin The last login time. Must be non-negative.
+	 * @param uuid
+	 *            UUID of the player to set last login time for.
+	 * @param lastLogin
+	 *            The last login time. Must be non-negative.
 	 */
 	public synchronized void setLastLogin(UUID uuid, long lastLogin)
 	{
@@ -262,7 +331,8 @@ public class PlayerListMock
 	/**
 	 * Matches a player by partial name.
 	 *
-	 * @param name The name to match by.
+	 * @param name
+	 *            The name to match by.
 	 * @return All online players whose names start with the provided name.
 	 */
 	@NotNull
@@ -271,14 +341,14 @@ public class PlayerListMock
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
 				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).startsWith(nameLower))
-				.map(player -> (Player) player)
-				.toList();
+				.map(Player.class::cast).toList();
 	}
 
 	/**
 	 * Matches a player by their exact name.
 	 *
-	 * @param name The name to match by.
+	 * @param name
+	 *            The name to match by.
 	 * @return The player with the exact name provided, or null.
 	 */
 	@Nullable
@@ -286,14 +356,15 @@ public class PlayerListMock
 	{
 		String nameLower = name.toLowerCase(Locale.ENGLISH);
 		return this.onlinePlayers.stream()
-				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(nameLower))
-				.findFirst().orElse(null);
+				.filter(player -> player.getName().toLowerCase(Locale.ENGLISH).equals(nameLower)).findFirst()
+				.orElse(null);
 	}
 
 	/**
 	 * Finds the player with the closest matching name.
 	 *
-	 * @param name The name to search with.
+	 * @param name
+	 *            The name to search with.
 	 * @return The closest matching player.
 	 */
 	@Nullable
@@ -327,7 +398,8 @@ public class PlayerListMock
 	}
 
 	/**
-	 * @param id The UUID of the player.
+	 * @param id
+	 *            The UUID of the player.
 	 * @return The player with the provided UUID, or null.
 	 */
 	@Nullable
@@ -345,9 +417,11 @@ public class PlayerListMock
 	}
 
 	/**
-	 * Gets a player at the provided index. Note player indexes will change whenever they join/leave.
+	 * Gets a player at the provided index. Note player indexes will change whenever
+	 * they join/leave.
 	 *
-	 * @param index The index.
+	 * @param index
+	 *            The index.
 	 * @return The player at the provided index.
 	 */
 	@NotNull
@@ -359,7 +433,8 @@ public class PlayerListMock
 	/**
 	 * Gets an offline, or online player by name.
 	 *
-	 * @param name The name to match.
+	 * @param name
+	 *            The name to match.
 	 * @return The player, or offline player with the provided name.
 	 * @see #getPlayer(String)
 	 */
@@ -377,7 +452,8 @@ public class PlayerListMock
 	/**
 	 * Gets an offline, or online player by UUID.
 	 *
-	 * @param id The UUID to match.
+	 * @param id
+	 *            The UUID to match.
 	 * @return The player, or offline player with the provided UUID.
 	 * @see #getPlayer(UUID)
 	 */
@@ -421,7 +497,8 @@ public class PlayerListMock
 	/**
 	 * Adds a Player to the list of known Operators.
 	 *
-	 * @param operator The {@link UUID} of the Operator to add.
+	 * @param operator
+	 *            The {@link UUID} of the Operator to add.
 	 */
 	public synchronized void addOperator(UUID operator)
 	{
@@ -431,7 +508,8 @@ public class PlayerListMock
 	/**
 	 * Removes a Player from the list of known Operators.
 	 *
-	 * @param operator The {@link UUID} of the Operator to remove.
+	 * @param operator
+	 *            The {@link UUID} of the Operator to remove.
 	 */
 	public synchronized void removeOperator(UUID operator)
 	{
@@ -455,6 +533,46 @@ public class PlayerListMock
 			}
 		}
 		return null;
+	}
+
+	public synchronized boolean isWhitelistEnabled()
+	{
+		return this.isWhitelistEnabled;
+	}
+
+	public synchronized void setWhitelist(boolean enabled)
+	{
+		this.isWhitelistEnabled = enabled;
+	}
+
+	public synchronized boolean isWhitelistEnforced()
+	{
+		return this.isWhitelistEnforced;
+	}
+
+	public synchronized void setWhitelistEnforced(boolean enforced)
+	{
+		this.isWhitelistEnforced = enforced;
+	}
+
+	public synchronized @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
+	{
+		return new HashSet<>(this.whitelistedPlayers);
+	}
+
+	public synchronized void reloadWhitelist()
+	{
+		// No-op in mock
+	}
+
+	public synchronized void addWhitelistedPlayer(@NotNull OfflinePlayer player)
+	{
+		this.whitelistedPlayers.add(player);
+	}
+
+	public synchronized void removeWhitelistedPlayer(@NotNull OfflinePlayer player)
+	{
+		this.whitelistedPlayers.remove(player);
 	}
 
 }

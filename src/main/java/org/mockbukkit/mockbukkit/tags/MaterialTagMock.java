@@ -48,10 +48,13 @@ public class MaterialTagMock extends BaseTagMock<Material>
 	}
 
 	/**
-	 * Constructs a new {@link MaterialTagMock} with the provided {@link NamespacedKey} and items.
+	 * Constructs a new {@link MaterialTagMock} with the provided
+	 * {@link NamespacedKey} and items.
 	 *
-	 * @param key   The key for the tag.
-	 * @param items The items included in the tag.
+	 * @param key
+	 *            The key for the tag.
+	 * @param items
+	 *            The items included in the tag.
 	 */
 	public MaterialTagMock(@NotNull NamespacedKey key, @NotNull Collection<Material> items)
 	{
@@ -59,10 +62,13 @@ public class MaterialTagMock extends BaseTagMock<Material>
 	}
 
 	/**
-	 * Constructs a new {@link MaterialTagMock} with the provided {@link NamespacedKey} and items.
+	 * Constructs a new {@link MaterialTagMock} with the provided
+	 * {@link NamespacedKey} and items.
 	 *
-	 * @param key   The key for the tag.
-	 * @param items The items included in the tag.
+	 * @param key
+	 *            The key for the tag.
+	 * @param items
+	 *            The items included in the tag.
 	 */
 	public MaterialTagMock(@NotNull NamespacedKey key, @NotNull Material... items)
 	{

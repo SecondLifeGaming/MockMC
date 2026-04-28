@@ -30,15 +30,15 @@ class MerchantInventoryMockTest
 	@BeforeEach
 	void setUp()
 	{
-		merchant.setRecipes(List.of(
-				new MerchantRecipe(ItemStack.of(Material.WOODEN_PICKAXE), 1),
+		merchant.setRecipes(List.of(new MerchantRecipe(ItemStack.of(Material.WOODEN_PICKAXE), 1),
 				new MerchantRecipe(ItemStack.of(Material.STONE_PICKAXE), 1)));
 
 		inventory = new MerchantInventoryMock(null, merchant);
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2 })
+	@ValueSource(ints =
+	{0, 1, 2})
 	void setSelectedRecipeIndex_GivenPossibleValues(int index)
 	{
 		assertDoesNotThrow(() -> inventory.setSelectedRecipeIndex(index));
@@ -46,10 +46,12 @@ class MerchantInventoryMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -3, -2, -1, 3, 4, 5 })
+	@ValueSource(ints =
+	{-3, -2, -1, 3, 4, 5})
 	void setSelectedRecipeIndex_GivenInvalidValues(int index)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setSelectedRecipeIndex(index));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> inventory.setSelectedRecipeIndex(index));
 		assertEquals("Recipe index out of range, value should be between 0 <= index <= 2", e.getMessage());
 	}
 

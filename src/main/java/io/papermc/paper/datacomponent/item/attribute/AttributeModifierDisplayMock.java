@@ -1,14 +1,18 @@
 package io.papermc.paper.datacomponent.item.attribute;
 
-import lombok.experimental.UtilityClass;
 import net.kyori.adventure.text.Component;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@UtilityClass
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public class AttributeModifierDisplayMock implements AttributeModifierDisplay
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
+public final class AttributeModifierDisplayMock implements AttributeModifierDisplay
 {
+
+	private AttributeModifierDisplayMock()
+	{
+		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+	}
 
 	record HiddenMock() implements Hidden
 	{

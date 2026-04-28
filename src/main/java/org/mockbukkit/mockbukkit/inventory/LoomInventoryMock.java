@@ -11,13 +11,17 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class LoomInventoryMock extends InventoryMock implements LoomInventory
+public class LoomInventoryMock extends InventoryMock
+		implements
+			LoomInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.LoomInventoryBaseMock
 {
 
 	/**
 	 * Constructs a new {@link LoomInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public LoomInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -30,9 +34,9 @@ public class LoomInventoryMock extends InventoryMock implements LoomInventory
 	}
 
 	@Override
-	public @NotNull InventoryMock getSnapshot()
+	@NotNull
+	public InventoryMock getSnapshot()
 	{
 		return new LoomInventoryMock(this);
 	}
-
 }

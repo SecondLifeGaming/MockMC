@@ -49,8 +49,7 @@ class EnderPearlMockTest
 	@Test
 	void testSetItem_Null()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				pearl.setItem(null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () -> pearl.setItem(null));
 
 		assertEquals("Item cannot be null", nullPointerException.getMessage());
 	}

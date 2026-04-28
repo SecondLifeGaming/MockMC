@@ -45,7 +45,8 @@ public class WallSkullDataMock extends BlockDataMock implements WallSkull
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(FACING, blockFace);
 	}
 
@@ -56,7 +57,8 @@ public class WallSkullDataMock extends BlockDataMock implements WallSkull
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WallSkullDataMock clone()
 	{
 		return new WallSkullDataMock(this);

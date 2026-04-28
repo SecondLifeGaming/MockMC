@@ -69,6 +69,8 @@ import static org.mockbukkit.mockbukkit.matcher.entity.EntityTeleportationMatche
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class EntityMockTest
 {
@@ -92,7 +94,8 @@ class EntityMockTest
 	@Test
 	void getLocation_IntoLocation_LocationCopied()
 	{
-		// This is different from injecting! When injecting, it's already placed inside the world.
+		// This is different from injecting! When injecting, it's already placed inside
+		// the world.
 		SimpleEntityMock entity1 = new SimpleEntityMock(server);
 
 		Location location = new Location(world, 0, 0, 0);
@@ -345,10 +348,8 @@ class EntityMockTest
 	@Test
 	void sendMessage_GivenEntitySendingComponentMessage_NoMessageShouldBeSent()
 	{
-		TextComponent comp = Component.text()
-				.content("hi")
-				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
-				.build();
+		TextComponent comp = Component.text().content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
 		entity.sendMessage(comp);
 
 		entity.assertNoMoreSaid();
@@ -591,7 +592,8 @@ class EntityMockTest
 	void entityDamage_Event_Triggered()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
 		assertThat(server.getPluginManager(), hasFiredEventInstance(EntityDamageByEntityEvent.class));
@@ -692,8 +694,7 @@ class EntityMockTest
 	void arrowsInBody_NegativeValue_Fails()
 	{
 		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
-		assertThrows(IllegalArgumentException.class, () ->
-				zombie.setArrowsInBody(-1));
+		assertThrows(IllegalArgumentException.class, () -> zombie.setArrowsInBody(-1));
 	}
 
 	@Test
@@ -761,7 +762,8 @@ class EntityMockTest
 	void lastDamageCause()
 	{
 		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+				EntityType.ZOMBIE);
 		assertNull(zombie.getLastDamageCause());
 		zombie.simulateDamage(1, (Entity) null);
 		assertNotNull(zombie.getLastDamageCause());
@@ -791,7 +793,8 @@ class EntityMockTest
 	{
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		assertTrue(entity.addPassenger(mock));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityMountEvent.class, event -> event.getMount() == entity && event.getEntity() == mock));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityMountEvent.class,
+				event -> event.getMount() == entity && event.getEntity() == mock));
 
 		assertFalse(entity.addPassenger(mock), "The passenger should not be added a second time");
 		assertEquals(List.of(mock), entity.getPassengers(), "There should be only one passenger");
@@ -814,7 +817,8 @@ class EntityMockTest
 	@Test
 	void addPassenger_Self()
 	{
-		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity), "The entity should not be able to ride itself");
+		assertThrows(IllegalArgumentException.class, () -> entity.addPassenger(entity),
+				"The entity should not be able to ride itself");
 	}
 
 	@Test
@@ -890,9 +894,11 @@ class EntityMockTest
 		SimpleEntityMock mock = new SimpleEntityMock(server);
 		entity.addPassenger(mock);
 		assertTrue(entity.removePassenger(mock));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == entity && event.getEntity() == mock));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class,
+				event -> event.getDismounted() == entity && event.getEntity() == mock));
 
-		assertTrue(entity.removePassenger(mock), "The method should always return true, even if it was not a passenger");
+		assertTrue(entity.removePassenger(mock),
+				"The method should always return true, even if it was not a passenger");
 		assertEquals(List.of(), entity.getPassengers());
 		assertNull(mock.getVehicle(), "The vehicle should no longer be referenced");
 		assertTrue(entity.isEmpty());
@@ -905,7 +911,8 @@ class EntityMockTest
 		SimpleEntityMock b = new SimpleEntityMock(server);
 		a.addPassenger(b);
 		entity.removePassenger(b);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class, event -> event.getDismounted() == a && event.getEntity() == b));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(EntityDismountEvent.class,
+				event -> event.getDismounted() == a && event.getEntity() == b));
 		assertNull(b.getVehicle(), "b should not longer have a vehicle");
 		assertTrue(a.isEmpty(), "a should not longer have a passenger");
 	}
@@ -1265,14 +1272,16 @@ class EntityMockTest
 	@Test
 	void setRotation_GivenInfiniteYaw()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(Float.POSITIVE_INFINITY, 0));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> entity.setRotation(Float.POSITIVE_INFINITY, 0));
 		assertEquals("yaw not finite", e.getMessage());
 	}
 
 	@Test
 	void setRotation_GivenInfinitePitch()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setRotation(0, Float.POSITIVE_INFINITY));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> entity.setRotation(0, Float.POSITIVE_INFINITY));
 		assertEquals("pitch not finite", e.getMessage());
 	}
 
@@ -1301,7 +1310,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
+	@ValueSource(ints =
+	{1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
 	void getTicksLived_GivenValidValue(int validValue)
 	{
 		entity.setTicksLived(validValue);
@@ -1309,10 +1319,12 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -100, -10, -5, -4, -3, -2, -1, 0 })
+	@ValueSource(ints =
+	{-100, -10, -5, -4, -3, -2, -1, 0})
 	void setTicksLived_GivenValidValue(int invalidValue)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setTicksLived(invalidValue));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> entity.setTicksLived(invalidValue));
 		String expectedMessage = String.format("Age value (%s) must be greater than 0", invalidValue);
 		assertEquals(expectedMessage, e.getMessage());
 	}
@@ -1342,7 +1354,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
 	void getPortalCooldown_GivenValidValue(int validValue)
 	{
 		entity.setPortalCooldown(validValue);
@@ -1407,7 +1420,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isOnGround_GivenValidValue(boolean validValue)
 	{
 		entity.setOnGround(validValue);
@@ -1421,7 +1435,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60})
 	void getFreezeTicks_GivenValidValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1429,16 +1444,19 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+	@ValueSource(ints =
+	{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 	void setFreezeTicks_GivenInvalidValue(int invalidValue)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> entity.setFreezeTicks(invalidValue));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> entity.setFreezeTicks(invalidValue));
 		String expectedMessage = String.format("Ticks (%s) cannot be less than 0", invalidValue);
 		assertEquals(expectedMessage, e.getMessage());
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150 })
+	@ValueSource(ints =
+	{140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150})
 	void isFrozen_GivenFrozenValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1446,7 +1464,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 5, 10, 100, 115, 139 })
+	@ValueSource(ints =
+	{0, 5, 10, 100, 115, 139})
 	void isFrozen_GivenNotFrozenValue(int validValue)
 	{
 		entity.setFreezeTicks(validValue);
@@ -1460,7 +1479,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isFreezeTickingLocked_GivenValidValue(boolean validValue)
 	{
 		entity.lockFreezeTicks(validValue);
@@ -1480,7 +1500,8 @@ class EntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isInWater_GivenValidValue(boolean validValue)
 	{
 		entity.setInWater(validValue);
@@ -1496,9 +1517,7 @@ class EntityMockTest
 	@Test
 	void isInWorld_GivenLocationWithoutWorld()
 	{
-		server.getWorlds().stream()
-				.filter(WorldMock.class::isInstance)
-				.map(WorldMock.class::cast)
+		server.getWorlds().stream().filter(WorldMock.class::isInstance).map(WorldMock.class::cast)
 				.forEach(server::removeWorld);
 		assertTrue(server.getWorlds().isEmpty());
 

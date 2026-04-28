@@ -7,7 +7,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootTable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
 import java.util.Objects;
 
@@ -16,7 +15,10 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
-public class BrushableBlockStateMock extends TileStateMock implements BrushableBlock
+public class BrushableBlockStateMock extends TileStateMock
+		implements
+			BrushableBlock,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.loot.LootableBaseMock
 {
 
 	private @NotNull ItemStack item = ItemStack.empty();
@@ -53,30 +55,6 @@ public class BrushableBlockStateMock extends TileStateMock implements BrushableB
 	public void setLootTable(@Nullable LootTable table)
 	{
 		this.setLootTable(table, this.getSeed());
-	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table, long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LootTable getLootTable()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override

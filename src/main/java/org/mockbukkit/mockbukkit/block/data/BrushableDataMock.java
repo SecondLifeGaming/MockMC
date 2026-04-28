@@ -16,7 +16,8 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	/**
 	 * Constructs a new {@link BrushableDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public BrushableDataMock(@NotNull Material material)
 	{
@@ -24,9 +25,11 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	}
 
 	/**
-	 * Create a new {@link BrushableDataMock} based on an existing {@link BrushableDataMock}.
+	 * Create a new {@link BrushableDataMock} based on an existing
+	 * {@link BrushableDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected BrushableDataMock(BrushableDataMock other)
 	{
@@ -42,7 +45,8 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	@Override
 	public void setDusted(int dusted)
 	{
-		Preconditions.checkArgument(0 <= dusted && dusted <= this.getMaximumDusted(), "Dusted level should be between 0 and %s", this.getMaximumDusted());
+		Preconditions.checkArgument(0 <= dusted && dusted <= this.getMaximumDusted(),
+				"Dusted level should be between 0 and %s", this.getMaximumDusted());
 		this.set(BlockDataKey.DUSTED, dusted);
 	}
 
@@ -53,7 +57,8 @@ public class BrushableDataMock extends BlockDataMock implements Brushable
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BrushableDataMock clone()
 	{
 		return new BrushableDataMock(this);

@@ -6,7 +6,6 @@ import org.bukkit.entity.IronGolem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,16 +13,22 @@ import java.util.UUID;
  *
  * @see GolemMock
  */
-public class IronGolemMock extends GolemMock implements IronGolem
+public class IronGolemMock extends GolemMock
+		implements
+			IronGolem,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.IronGolemBaseMock
 {
 
 	private boolean playerCreated;
 
 	/**
-	 * Constructs a new {@link IronGolemMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link IronGolemMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public IronGolemMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -43,21 +48,23 @@ public class IronGolemMock extends GolemMock implements IronGolem
 	}
 
 	@Override
-	public @Nullable Sound getDeathSound()
+	@Nullable
+	public Sound getDeathSound()
 	{
 		return Sound.ENTITY_IRON_GOLEM_DEATH;
 	}
 
 	@Override
-	public @Nullable Sound getHurtSound()
+	@Nullable
+	public Sound getHurtSound()
 	{
 		return Sound.ENTITY_IRON_GOLEM_HURT;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.IRON_GOLEM;
 	}
-
 }

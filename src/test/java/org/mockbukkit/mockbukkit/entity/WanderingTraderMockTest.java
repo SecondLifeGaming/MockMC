@@ -31,7 +31,8 @@ class WanderingTraderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		void givenPossibleValues_ShouldReturnCorrectValue(int delay)
 		{
 			wanderingTrader.setDespawnDelay(delay);
@@ -51,7 +52,8 @@ class WanderingTraderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues_ShouldReturnCorrectValue(boolean canDrink)
 		{
 			wanderingTrader.setCanDrinkPotion(canDrink);
@@ -71,7 +73,8 @@ class WanderingTraderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues_ShouldReturnCorrectValue(boolean canDrink)
 		{
 			wanderingTrader.setCanDrinkMilk(canDrink);

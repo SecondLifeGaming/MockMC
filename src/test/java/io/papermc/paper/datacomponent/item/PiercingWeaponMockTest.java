@@ -21,13 +21,9 @@ class PiercingWeaponMockTest
 		Key hitSound = NamespacedKey.fromString("test:hitSound");
 		Key sound = NamespacedKey.fromString("test:sound");
 
-		PiercingWeapon piercing = PiercingWeapon.piercingWeapon()
-				.dealsKnockback(true)
-				.dismounts(false)
-				.hitSound(hitSound)
-				.sound(sound)
-				.build();
-		
+		PiercingWeapon piercing = PiercingWeapon.piercingWeapon().dealsKnockback(true).dismounts(false)
+				.hitSound(hitSound).sound(sound).build();
+
 		assertTrue(piercing.dealsKnockback());
 		assertFalse(piercing.dismounts());
 		assertEquals(hitSound, piercing.hitSound());

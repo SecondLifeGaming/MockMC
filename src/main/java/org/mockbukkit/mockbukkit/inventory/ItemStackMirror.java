@@ -9,6 +9,7 @@ import io.papermc.paper.persistence.PersistentDataContainerView;
 import io.papermc.paper.registry.set.RegistryKeySet;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.UndefinedNullability;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
@@ -37,22 +38,27 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 /**
- * Helper class that emulates the Bukkit mirror behaviour at CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original).
+ * Helper class that emulates the Bukkit mirror behaviour at
+ * CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original).
  *
  * @see ItemStack
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ApiStatus.Internal
 @DelegateDeserialization(ItemStack.class)
 public final class ItemStackMirror extends ItemStack
 {
 
 	/**
-	 * Creates a mirror of the {@link ItemStack}. Any change applied to this {@link ItemStack} will also
-	 * affect the original {@link ItemStack}.
+	 * Creates a mirror of the {@link ItemStack}. Any change applied to this
+	 * {@link ItemStack} will also affect the original {@link ItemStack}.
 	 * <p>
-	 * This emulates the behaviour from <code>CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original)</code>.
+	 * This emulates the behaviour from
+	 * <code>CraftItemStack#asCraftMirror(net.minecraft.world.item.ItemStack original)</code>.
 	 *
-	 * @param item The original item.
+	 * @param item
+	 *            The original item.
 	 * @return The mirror item.
 	 */
 	@NotNull
@@ -142,14 +148,16 @@ public final class ItemStackMirror extends ItemStack
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull ItemStack clone()
 	{
 		return itemStack.clone();
 	}
 
 	@Override
-	public @NotNull @Unmodifiable List<Component> computeTooltipLines(@NotNull TooltipContext tooltipContext, @Nullable Player player)
+	public @NotNull @Unmodifiable List<Component> computeTooltipLines(@NotNull TooltipContext tooltipContext,
+			@Nullable Player player)
 	{
 		return itemStack.computeTooltipLines(tooltipContext, player);
 	}
@@ -175,7 +183,7 @@ public final class ItemStackMirror extends ItemStack
 
 	public static @NotNull ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		return ItemStack.deserialize(args);
+		return Bukkit.getUnsafe().deserializeStack(args);
 	}
 
 	public static @NotNull ItemStack deserializeBytes(byte @NotNull [] bytes)
@@ -230,7 +238,8 @@ public final class ItemStackMirror extends ItemStack
 	}
 
 	@Override
-	public @NotNull ItemStack enchantWithLevels(int levels, @NotNull RegistryKeySet<@NotNull Enchantment> keySet, @NotNull Random random)
+	public @NotNull ItemStack enchantWithLevels(int levels, @NotNull RegistryKeySet<@NotNull Enchantment> keySet,
+			@NotNull Random random)
 	{
 		return itemStack.enchantWithLevels(levels, keySet, random);
 	}
@@ -447,7 +456,8 @@ public final class ItemStackMirror extends ItemStack
 
 	@ApiStatus.Experimental
 	@Override
-	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes, boolean ignoreCount)
+	public boolean matchesWithoutData(@NotNull ItemStack item, @NotNull Set<@NotNull DataComponentType> excludeTypes,
+			boolean ignoreCount)
 	{
 		return itemStack.matchesWithoutData(item, excludeTypes, ignoreCount);
 	}

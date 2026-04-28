@@ -83,9 +83,8 @@ class DoorDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			door.setFacing(face);
@@ -93,9 +92,8 @@ class DoorDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> door.setFacing(face));
@@ -115,7 +113,8 @@ class DoorDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isOpen)
 		{
 			door.setOpen(isOpen);
@@ -135,7 +134,8 @@ class DoorDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isPowered)
 		{
 			door.setPowered(isPowered);
@@ -147,7 +147,8 @@ class DoorDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull DoorDataMock cloned = door.clone();
+		@NotNull
+		DoorDataMock cloned = door.clone();
 
 		assertEquals(door, cloned);
 		assertEquals(door.isPowered(), cloned.isPowered());

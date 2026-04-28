@@ -57,10 +57,8 @@ class HumanEntityMockTest
 {
 
 	private static final int[] REQUIRED_EXP =
-			{
-					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-			};
+	{7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193};
 
 	@MockBukkitInject
 	private ServerMock server;
@@ -96,13 +94,14 @@ class HumanEntityMockTest
 	void setGameMode_GameModeChanged_CallsEvent()
 	{
 		human.setGameMode(GameMode.CREATIVE);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(PlayerGameModeChangeEvent.class, (e) -> e.getNewGameMode() == GameMode.CREATIVE));
 	}
 
 	@Test
 	void setGameMode_GameModeNotChanged_DoesntCallsEvent()
 	{
-		//todo: replace with PluginManagerMock#assertEventNotFired once implemented
+		// todo: replace with PluginManagerMock#assertEventNotFired once implemented
 		AtomicBoolean bool = new AtomicBoolean(false);
 		server.getPluginManager().registerEvents(new Listener()
 		{
@@ -261,14 +260,17 @@ class HumanEntityMockTest
 				human.openInventory(inv2);
 
 				assertTrue(human.getItemOnCursor().getType().isAir());
-				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv1));
-				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv2));
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv1));
+				assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryOpenEvent.class,
+						e -> e.getPlayer() == human && e.getInventory() == inv2));
 			}
 
 			@Test
 			void givenCustomInventory()
 			{
-				InventoryMock inventory = server.createInventory(human, InventoryType.PLAYER, Component.text("Custom name"));
+				InventoryMock inventory = server.createInventory(human, InventoryType.PLAYER,
+						Component.text("Custom name"));
 
 				InventoryView view = human.openInventory(inventory);
 
@@ -303,7 +305,8 @@ class HumanEntityMockTest
 
 		human.closeInventory();
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class, e -> e.getPlayer() == human && e.getInventory() == inv));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class,
+				e -> e.getPlayer() == human && e.getInventory() == inv));
 	}
 
 	@Test
@@ -370,7 +373,8 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+	@ValueSource(ints =
+	{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 	void isDeeplySleeping_GivenNonDeepSleepLevelIsSleeping(int sleepTicks)
 	{
 		human.setSleeping(true);
@@ -380,7 +384,8 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 101, 110, 120, 130, 140, 150 })
+	@ValueSource(ints =
+	{101, 110, 120, 130, 140, 150})
 	void isDeeplySleeping_GivenDeepSleepLevelAndIsSleeping(int sleepTicks)
 	{
 		human.setSleeping(true);
@@ -390,7 +395,8 @@ class HumanEntityMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150 })
+	@ValueSource(ints =
+	{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 101, 110, 120, 130, 140, 150})
 	void isDeeplySleeping_GivenIsNotSleeping(int sleepTicks)
 	{
 		human.setSleeping(false);
@@ -410,7 +416,8 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		@ValueSource(ints =
+		{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 		void givenPossibleValues(int value)
 		{
 			human.setSaturatedRegenRate(value);
@@ -431,7 +438,8 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		@ValueSource(ints =
+		{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 		void givenPossibleValues(int value)
 		{
 			human.setUnsaturatedRegenRate(value);
@@ -452,7 +460,8 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		@ValueSource(ints =
+		{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 		void givenPossibleValues(int value)
 		{
 			human.setStarvationRate(value);
@@ -494,7 +503,8 @@ class HumanEntityMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 })
+		@ValueSource(ints =
+		{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100})
 		void givenPossibleValues(int value)
 		{
 			human.setEnchantmentSeed(value);

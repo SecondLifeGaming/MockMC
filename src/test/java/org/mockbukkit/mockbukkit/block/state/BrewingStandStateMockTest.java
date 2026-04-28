@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BrewingStandStateMockTest extends ContainerStateMockTest
 {
@@ -61,7 +63,8 @@ class BrewingStandStateMockTest extends ContainerStateMockTest
 	@Test
 	void constructor_Block_NotBrewingStand_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new BrewingStandStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BrewingStandStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
@@ -99,7 +102,8 @@ class BrewingStandStateMockTest extends ContainerStateMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 1, 10, 50, 100 })
+	@ValueSource(ints =
+	{1, 10, 50, 100})
 	void setRecipeBrewTime(int value)
 	{
 		brewingStand.setRecipeBrewTime(value);

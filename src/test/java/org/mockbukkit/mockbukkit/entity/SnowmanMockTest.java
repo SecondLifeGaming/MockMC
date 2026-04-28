@@ -28,7 +28,8 @@ class SnowmanMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isDerp_GivenChangesInValue(boolean isPlayerCreated)
 	{
 		snowman.setDerp(isPlayerCreated);
@@ -44,12 +45,8 @@ class SnowmanMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"true,  false, true",
-			"true,  true,  false",
-			"false, true,  false",
-			"false, false, false",
-	})
+	@CsvSource(
+	{"true,  false, true", "true,  true,  false", "false, true,  false", "false, false, false",})
 	void readyToBeSheared(boolean isAlive, boolean isDerp, boolean expectedValue)
 	{
 		snowman.setDerp(isDerp);

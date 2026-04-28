@@ -16,6 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class AbstractHorseMockTest
 {
@@ -28,8 +30,7 @@ class AbstractHorseMockTest
 	@Test
 	void testSetVariant()
 	{
-		assertThrows(UnsupportedOperationException.class, () -> horse.
-				setVariant(Horse.Variant.HORSE));
+		assertThrows(UnsupportedOperationException.class, () -> horse.setVariant(Horse.Variant.HORSE));
 	}
 
 	@Test

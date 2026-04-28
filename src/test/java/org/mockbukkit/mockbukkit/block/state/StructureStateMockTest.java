@@ -25,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings("removal")
 @ExtendWith(MockBukkitExtension.class)
 class StructureStateMockTest
 {
@@ -63,7 +64,8 @@ class StructureStateMockTest
 	@Test
 	void constructor_Block_WrongType_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> new StructureStateMock(new BlockMock(Material.BEDROCK)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new StructureStateMock(new BlockMock(Material.BEDROCK)));
 	}
 
 	@Test
@@ -125,7 +127,7 @@ class StructureStateMockTest
 	@Test
 	void setAuthor_Null_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () -> structure.setAuthor((String) null));
+		assertThrowsExactly(NullPointerException.class, () -> structure.setAuthor((String) null));
 	}
 
 	@Test

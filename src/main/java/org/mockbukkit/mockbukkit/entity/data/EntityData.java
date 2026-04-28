@@ -21,10 +21,13 @@ public class EntityData
 	private final @NotNull String data;
 
 	/**
-	 * Constructs a new {@link EntityData} with a specified {@link EntityType} and provided entity data.
+	 * Constructs a new {@link EntityData} with a specified {@link EntityType} and
+	 * provided entity data.
 	 *
-	 * @param type The type of entity to create on
-	 * @param data The data of the entity
+	 * @param type
+	 *            The type of entity to create on
+	 * @param data
+	 *            The data of the entity
 	 */
 	protected EntityData(@NotNull EntityType type, @NotNull String data)
 	{
@@ -37,8 +40,10 @@ public class EntityData
 	/**
 	 * Shortcut method to get the width of a entity
 	 *
-	 * @param subType Subtype of entity
-	 * @param state   State of entity
+	 * @param subType
+	 *            Subtype of entity
+	 * @param state
+	 *            State of entity
 	 * @return the width of the entity
 	 */
 	public double getWidth(EntitySubType subType, EntityState state)
@@ -49,8 +54,10 @@ public class EntityData
 	/**
 	 * Shortcut method to get the height of a entity
 	 *
-	 * @param subType Subtype of entity
-	 * @param state   State of entity
+	 * @param subType
+	 *            Subtype of entity
+	 * @param state
+	 *            State of entity
 	 * @return The height of the entity
 	 */
 	public double getHeight(EntitySubType subType, EntityState state)
@@ -61,8 +68,10 @@ public class EntityData
 	/**
 	 * Shortcut method to get the eye height of a entity
 	 *
-	 * @param subType Subtype of entity
-	 * @param state   State of entity
+	 * @param subType
+	 *            Subtype of entity
+	 * @param state
+	 *            State of entity
 	 * @return The eye height of the entity
 	 */
 	public double getEyeHeight(EntitySubType subType, EntityState state)
@@ -73,8 +82,10 @@ public class EntityData
 	/**
 	 * Gets data of a state given a entity subtype
 	 *
-	 * @param subType Subtype of entity
-	 * @param state   State of entity
+	 * @param subType
+	 *            Subtype of entity
+	 * @param state
+	 *            State of entity
 	 * @return A json mapping with the data of the state
 	 */
 	private JsonObject getStateMapping(EntitySubType subType, EntityState state)
@@ -86,14 +97,12 @@ public class EntityData
 			if (state == EntityState.DEFAULT)
 			{
 				return subTypeData.getAsJsonObject();
-			}
-			else
+			} else
 			{
 				JsonObject statesData = subTypeData.getAsJsonObject().get(STATES).getAsJsonObject();
 				return statesData.get(state.getName()).getAsJsonObject();
 			}
-		}
-		catch (NullPointerException | IllegalStateException e)
+		} catch (NullPointerException | IllegalStateException e)
 		{
 			throw new UnimplementedOperationException(
 					"state " + state + " for entitytype " + type + ", " + subType + " is not implemented");
@@ -104,9 +113,12 @@ public class EntityData
 	 * Gets entity data for a specific key. Defaults to a default state, if the
 	 * state does not provide a value for the key.
 	 *
-	 * @param key     The specific key
-	 * @param subType Subtype of entity
-	 * @param state   State of entity
+	 * @param key
+	 *            The specific key
+	 * @param subType
+	 *            Subtype of entity
+	 * @param state
+	 *            State of entity
 	 * @return The value matching the specified key
 	 */
 	public JsonElement getValueFromKey(String key, EntitySubType subType, EntityState state)

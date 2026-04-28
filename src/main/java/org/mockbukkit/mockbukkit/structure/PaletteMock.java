@@ -6,25 +6,24 @@ import org.bukkit.block.BlockState;
 import org.bukkit.structure.Palette;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PaletteMock implements Palette
+public class PaletteMock implements Palette, org.mockbukkit.mockbukkit.generated.org.bukkit.structure.PaletteBaseMock
 {
 
 	/**
 	 * Helper function to create a palette based on the materials.
 	 *
-	 * @param materials The materials.
+	 * @param materials
+	 *            The materials.
 	 *
 	 * @return The palette.
 	 */
 	public static PaletteMock of(@NotNull Material... materials)
 	{
 		Preconditions.checkNotNull(materials, "materials must not be null");
-
 		List<BlockState> blockStates = new ArrayList<>(materials.length);
 		for (Material material : materials)
 		{
@@ -43,7 +42,8 @@ public class PaletteMock implements Palette
 	}
 
 	@Override
-	public @NotNull List<BlockState> getBlocks()
+	@NotNull
+	public List<BlockState> getBlocks()
 	{
 		return Collections.unmodifiableList(blockStates);
 	}
@@ -53,5 +53,4 @@ public class PaletteMock implements Palette
 	{
 		return this.blockStates.size();
 	}
-
 }

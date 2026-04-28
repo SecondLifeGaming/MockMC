@@ -4,25 +4,31 @@ import org.bukkit.entity.Ageable;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-
 import java.util.UUID;
+import org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AgeableBaseMock;
 
 /**
  * Mock implementation of an {@link Ageable}.
  *
  * @see CreatureMock
  */
-public class AgeableMock extends CreatureMock implements Ageable
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class AgeableMock extends CreatureMock implements Ageable, AgeableBaseMock
 {
 
 	private int age;
+
 	private boolean ageLocked;
 
 	/**
-	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AgeableMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public AgeableMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -89,15 +95,15 @@ public class AgeableMock extends CreatureMock implements Ageable
 		if (breed)
 		{
 			this.setAge(0);
-		}
-		else if (this.isAdult())
+		} else if (this.isAdult())
 		{
 			this.setAge(6000);
 		}
 	}
 
 	@Override
-	public @NotNull String toString()
+	@NotNull
+	public String toString()
 	{
 		return "AgeableMock";
 	}
@@ -111,5 +117,4 @@ public class AgeableMock extends CreatureMock implements Ageable
 		}
 		return super.getSubType();
 	}
-
 }

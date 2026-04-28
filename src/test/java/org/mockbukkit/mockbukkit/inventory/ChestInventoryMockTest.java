@@ -30,7 +30,8 @@ class ChestInventoryMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
+	@ValueSource(ints =
+	{9, 18, 27, 36, 45, 54})
 	void constructor_SetsSize(int size)
 	{
 		assertEquals(size, new ChestInventoryMock(null, size).getSize());
@@ -39,22 +40,27 @@ class ChestInventoryMockTest
 	@Test
 	void constructor_SetsSizeTooSmall()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new ChestInventoryMock(null, -1));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> new ChestInventoryMock(null, -1));
 		assertEquals("Inventory size has to be > 0", e.getMessage());
 	}
 
 	@Test
 	void constructor_SetsSizeTooBig()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new ChestInventoryMock(null, 63));
-		assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 63)", e.getMessage());
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> new ChestInventoryMock(null, 63));
+		assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 63)",
+				e.getMessage());
 	}
 
 	@Test
 	void constructor_SetsSizeTooNotDivisibleByNine()
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> new ChestInventoryMock(null, 10));
-		assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 10)", e.getMessage());
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> new ChestInventoryMock(null, 10));
+		assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 10)",
+				e.getMessage());
 	}
 
 	@Test

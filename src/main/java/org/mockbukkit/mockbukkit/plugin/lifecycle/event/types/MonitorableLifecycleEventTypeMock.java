@@ -13,7 +13,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E extends LifecycleEvent> extends AbstractLifecycleEventTypeMock<O, E, MonitorLifecycleEventHandlerConfiguration<O>> implements LifecycleEventType.Monitorable<O, E>
+public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E extends LifecycleEvent>
+		extends
+			AbstractLifecycleEventTypeMock<O, E, MonitorLifecycleEventHandlerConfiguration<O>>
+		implements
+			LifecycleEventType.Monitorable<O, E>
 {
 
 	final List<RegisteredHandler<O, E>> handlers = new ArrayList<>();
@@ -25,7 +29,8 @@ public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E 
 	}
 
 	@Override
-	public MonitorLifecycleEventHandlerConfigurationMock<O, E> newHandler(final LifecycleEventHandler<? super E> handler)
+	public MonitorLifecycleEventHandlerConfigurationMock<O, E> newHandler(
+			final LifecycleEventHandler<? super E> handler)
 	{
 		return new MonitorLifecycleEventHandlerConfigurationMock<>(handler, this);
 	}
@@ -42,8 +47,7 @@ public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E 
 		{
 			this.handlers.add(this.nonMonitorIdx, registeredHandler);
 			this.nonMonitorIdx++;
-		}
-		else
+		} else
 		{
 			this.handlers.add(registeredHandler);
 		}
@@ -56,7 +60,8 @@ public class MonitorableLifecycleEventTypeMock<O extends LifecycleEventOwner, E 
 	}
 
 	@Override
-	public void forEachHandler(final E event, final Consumer<RegisteredHandler<O, E>> consumer, final Predicate<RegisteredHandler<O, E>> predicate)
+	public void forEachHandler(final E event, final Consumer<RegisteredHandler<O, E>> consumer,
+			final Predicate<RegisteredHandler<O, E>> predicate)
 	{
 		for (final RegisteredHandler<O, E> handler : this.handlers)
 		{

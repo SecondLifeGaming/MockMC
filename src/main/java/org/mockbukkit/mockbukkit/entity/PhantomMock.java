@@ -7,7 +7,6 @@ import org.bukkit.entity.Phantom;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,20 +14,30 @@ import java.util.UUID;
  *
  * @see FlyingMock
  */
-public class PhantomMock extends FlyingMock implements Phantom
+public class PhantomMock extends FlyingMock
+		implements
+			Phantom,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PhantomBaseMock
 {
 
 	private int size = 0;
+
 	private boolean shouldBurnInDay = true;
 
-	private @Nullable UUID spawningEntity = null;
-	private @NotNull Location anchorLocation = new Location(null, 0, 0, 0);
+	@Nullable
+	private UUID spawningEntity = null;
+
+	@NotNull
+	private Location anchorLocation = new Location(null, 0, 0, 0);
 
 	/**
-	 * Constructs a new {@link PhantomMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PhantomMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PhantomMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,7 +57,8 @@ public class PhantomMock extends FlyingMock implements Phantom
 	}
 
 	@Override
-	public @Nullable UUID getSpawningEntity()
+	@Nullable
+	public UUID getSpawningEntity()
 	{
 		return this.spawningEntity;
 	}
@@ -56,7 +66,8 @@ public class PhantomMock extends FlyingMock implements Phantom
 	/**
 	 * Set the UUID of the entity that caused this phantom to spawn.
 	 *
-	 * @param spawningEntity The UUID of the spawning entity.
+	 * @param spawningEntity
+	 *            The UUID of the spawning entity.
 	 */
 	public void setSpawningEntity(@Nullable UUID spawningEntity)
 	{
@@ -76,7 +87,8 @@ public class PhantomMock extends FlyingMock implements Phantom
 	}
 
 	@Override
-	public @NotNull Location getAnchorLocation()
+	@NotNull
+	public Location getAnchorLocation()
 	{
 		return this.anchorLocation.clone();
 	}
@@ -89,9 +101,9 @@ public class PhantomMock extends FlyingMock implements Phantom
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PHANTOM;
 	}
-
 }

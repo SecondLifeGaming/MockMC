@@ -4,7 +4,8 @@ import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ItemArmorTrimMock(ArmorTrim armorTrim) implements ItemArmorTrim
 {
 

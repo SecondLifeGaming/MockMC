@@ -10,30 +10,44 @@ import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class DisplayMock extends EntityMock implements Display
+public class DisplayMock extends EntityMock
+		implements
+			Display,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.DisplayBaseMock
 {
 
 	private Matrix4f transformationMatrix;
+
 	private int interpolationDuration = 0;
+
 	private int teleportDuration = 0;
+
 	private float viewRange = 1.0f;
+
 	private float shadowRadius = 0.0f;
+
 	private float shadowStrength = 1.0f;
+
 	private float width = 0.0f;
+
 	private float height = 0.0f;
+
 	private int interpolationDelay = 0;
+
 	private int color = -1;
+
 	private Brightness brightness = null;
 
 	/**
-	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected DisplayMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -43,7 +57,8 @@ public class DisplayMock extends EntityMock implements Display
 	}
 
 	@Override
-	public @NotNull Transformation getTransformation()
+	@NotNull
+	public Transformation getTransformation()
 	{
 		float f = 1.0F / this.transformationMatrix.m33();
 		Vector3f translation = this.transformationMatrix.getTranslation(new Vector3f()).mul(f);
@@ -72,8 +87,7 @@ public class DisplayMock extends EntityMock implements Display
 		try
 		{
 			this.transformationMatrix = (Matrix4f) transformationMatrix.clone();
-		}
-		catch (CloneNotSupportedException e)
+		} catch (CloneNotSupportedException e)
 		{
 			throw new IllegalStateException("Could not clone transformation matrix");
 		}
@@ -100,7 +114,8 @@ public class DisplayMock extends EntityMock implements Display
 	@Override
 	public void setTeleportDuration(int duration)
 	{
-		Preconditions.checkArgument(duration >= 0 && duration <= 59, "duration (%s) cannot be lower than 0 or higher than 59", duration);
+		Preconditions.checkArgument(duration >= 0 && duration <= 59,
+				"duration (%s) cannot be lower than 0 or higher than 59", duration);
 		this.teleportDuration = duration;
 	}
 
@@ -177,19 +192,8 @@ public class DisplayMock extends EntityMock implements Display
 	}
 
 	@Override
-	public @NotNull Billboard getBillboard()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setBillboard(@NotNull Billboard billboard)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Color getGlowColorOverride()
+	@Nullable
+	public Color getGlowColorOverride()
 	{
 		return (this.color == -1) ? null : Color.fromARGB(color);
 	}
@@ -200,15 +204,15 @@ public class DisplayMock extends EntityMock implements Display
 		if (color == null)
 		{
 			this.color = -1;
-		}
-		else
+		} else
 		{
 			this.color = color.asARGB();
 		}
 	}
 
 	@Override
-	public @Nullable Brightness getBrightness()
+	@Nullable
+	public Brightness getBrightness()
 	{
 		return cloneBrightness(this.brightness);
 	}
@@ -219,7 +223,8 @@ public class DisplayMock extends EntityMock implements Display
 		this.brightness = cloneBrightness(brightness);
 	}
 
-	private @Nullable Brightness cloneBrightness(@Nullable Brightness inputBrightness)
+	@Nullable
+	private Brightness cloneBrightness(@Nullable Brightness inputBrightness)
 	{
 		if (inputBrightness == null)
 		{
@@ -227,5 +232,4 @@ public class DisplayMock extends EntityMock implements Display
 		}
 		return new Brightness(inputBrightness.getBlockLight(), inputBrightness.getSkyLight());
 	}
-
 }

@@ -24,7 +24,8 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	/**
 	 * Constructs a new {@link WorkbenchInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public WorkbenchInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -53,7 +54,8 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	public void setMatrix(@Nullable ItemStack @NotNull [] contents)
 	{
 		Preconditions.checkNotNull(contents);
-		Preconditions.checkArgument(contents.length <= super.getSize(), "Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
+		Preconditions.checkArgument(contents.length <= super.getSize(),
+				"Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
 		for (int i = 0; i < this.getSize(); i++)
 		{
 			if (i < contents.length)
@@ -62,13 +64,11 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 				if (content == null)
 				{
 					this.setItem(i, ItemStack.empty());
-				}
-				else
+				} else
 				{
 					this.setItem(i, contents[i]);
 				}
-			}
-			else
+			} else
 			{
 				this.setItem(i, ItemStack.empty());
 			}
@@ -82,17 +82,9 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 		Preconditions.checkState(location != null, "The location can't be null!");
 		Preconditions.checkState(location.getWorld() != null, "The world can't be null!");
 
-		ItemStack[] craftingItems = new ItemStack[]{
-				this.getItem(0),
-				this.getItem(1),
-				this.getItem(2),
-				this.getItem(3),
-				this.getItem(4),
-				this.getItem(5),
-				this.getItem(6),
-				this.getItem(7),
-				this.getItem(8),
-		};
+		ItemStack[] craftingItems = new ItemStack[]
+		{this.getItem(0), this.getItem(1), this.getItem(2), this.getItem(3), this.getItem(4), this.getItem(5),
+				this.getItem(6), this.getItem(7), this.getItem(8),};
 		return Bukkit.getCraftingRecipe(craftingItems, location.getWorld());
 	}
 

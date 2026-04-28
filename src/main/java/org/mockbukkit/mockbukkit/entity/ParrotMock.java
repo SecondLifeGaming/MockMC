@@ -7,23 +7,31 @@ import org.bukkit.entity.Parrot;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class ParrotMock extends AnimalsMock implements Parrot
+public class ParrotMock extends AnimalsMock
+		implements
+			Parrot,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ParrotBaseMock
 {
 
-	private @NotNull Parrot.Variant variant = Variant.RED;
+	@NotNull
+	private Parrot.Variant variant = Variant.RED;
+
 	private boolean isSitting = false;
+
 	private boolean isTamed = false;
+
 	private AnimalTamer animalTamer = null;
 
 	/**
-	 * Constructs a new {@link ParrotMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ParrotMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ParrotMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -31,7 +39,8 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -41,13 +50,6 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	{
 		Preconditions.checkNotNull(variant, "Variant cannot be null");
 		this.variant = variant;
-	}
-
-	@Override
-	public boolean isDancing()
-	{
-		// TODO Implement when startPlaying in jukebox is implemented
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -63,13 +65,15 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	}
 
 	@Override
-	public @Nullable UUID getOwnerUniqueId()
+	@Nullable
+	public UUID getOwnerUniqueId()
 	{
 		return this.animalTamer.getUniqueId();
 	}
 
 	@Override
-	public @Nullable AnimalTamer getOwner()
+	@Nullable
+	public AnimalTamer getOwner()
 	{
 		return this.animalTamer;
 	}
@@ -93,9 +97,9 @@ public class ParrotMock extends AnimalsMock implements Parrot
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PARROT;
 	}
-
 }

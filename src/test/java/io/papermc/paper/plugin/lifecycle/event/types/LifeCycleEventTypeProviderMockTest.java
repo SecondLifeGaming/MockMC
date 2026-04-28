@@ -18,13 +18,15 @@ class LifeCycleEventTypeProviderMockTest
 	@Test
 	void monitor()
 	{
-		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().monitor("test", PluginMock.class));
+		assertDoesNotThrow(
+				() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().monitor("test", PluginMock.class));
 	}
 
 	@Test
 	void prioritized()
 	{
-		assertDoesNotThrow(() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().prioritized("test", PluginMock.class));
+		assertDoesNotThrow(
+				() -> LifecycleEventTypeProviderMock.INSTANCE.orElseThrow().prioritized("test", PluginMock.class));
 	}
 
 }

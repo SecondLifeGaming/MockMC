@@ -7,8 +7,6 @@ import org.bukkit.entity.ZombieVillager;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntitySubType;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -16,20 +14,30 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class ZombieMock extends MonsterMock implements Zombie
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ZombieMock extends MonsterMock
+		implements
+			Zombie,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ZombieBaseMock
 {
 
 	private static final String VILLAGER_OPERATION_NOT_SUPPORTED = "Not supported. Please spawn a new Zombie Villager instead.";
 
 	private boolean baby;
+
 	private boolean converting;
+
 	private int conversionTime;
 
 	/**
-	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -37,7 +45,8 @@ public class ZombieMock extends MonsterMock implements Zombie
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ZOMBIE;
 	}
@@ -49,7 +58,6 @@ public class ZombieMock extends MonsterMock implements Zombie
 		{
 			return EntitySubType.BABY;
 		}
-
 		return super.getSubType();
 	}
 
@@ -74,7 +82,8 @@ public class ZombieMock extends MonsterMock implements Zombie
 	@Override
 	public Villager.Profession getVillagerProfession()
 	{
-		// The CraftBukkit implementation returns null here, but throwing an exception is more fitting.
+		// The CraftBukkit implementation returns null here, but throwing an exception
+		// is more fitting.
 		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
 	}
 
@@ -94,76 +103,6 @@ public class ZombieMock extends MonsterMock implements Zombie
 	public void setConversionTime(int conversionTime)
 	{
 		this.conversionTime = conversionTime;
-	}
-
-	@Override
-	public boolean isDrowning()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void startDrowning(int drownedConversionTime)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void stopDrowning()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setArmsRaised(boolean raised)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isArmsRaised()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean shouldBurnInDay()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setShouldBurnInDay(boolean shouldBurnInDay)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canBreakDoors()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCanBreakDoors(boolean canBreakDoors)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean supportsBreakingDoors()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -231,5 +170,4 @@ public class ZombieMock extends MonsterMock implements Zombie
 	{
 		// Does nothing in CraftBukkit.
 	}
-
 }

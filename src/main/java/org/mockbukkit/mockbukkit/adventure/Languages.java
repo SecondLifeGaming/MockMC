@@ -10,7 +10,8 @@ public class Languages
 	private static Language instance = loadLanguage(Language.LanguageType.ENGLISH);
 
 	/**
-	 * @return The language translation instance used when processing translatable components
+	 * @return The language translation instance used when processing translatable
+	 *         components
 	 */
 	public static Language getInstance()
 	{
@@ -20,7 +21,8 @@ public class Languages
 	/**
 	 * Modify the language translation instance used
 	 *
-	 * @param instance The new language instance to use
+	 * @param instance
+	 *            The new language instance to use
 	 */
 	public static void setInstance(Language instance)
 	{
@@ -31,12 +33,13 @@ public class Languages
 	/**
 	 * Load language
 	 *
-	 * @param language Language type to load
+	 * @param language
+	 *            Language type to load
 	 * @return A language instance
 	 */
 	public static Language loadLanguage(Language.LanguageType language)
 	{
-		String resourceName = "/translations/" + language.getResourceName();
+		String resourceName = String.format("/translations/%s", language.getResourceName());
 		JsonElement jsonElement = ResourceLoader.loadResource(resourceName);
 		return new JsonBackedLanguage(jsonElement.getAsJsonObject());
 	}

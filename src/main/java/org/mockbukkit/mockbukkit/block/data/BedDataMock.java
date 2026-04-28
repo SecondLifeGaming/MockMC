@@ -19,10 +19,11 @@ public class BedDataMock extends BlockDataMock implements Bed
 {
 
 	/**
-	 * Constructs a new {@link BedDataMock} for the provided {@link Material}.
-	 * Only supports materials in {@link Tag#BEDS}
+	 * Constructs a new {@link BedDataMock} for the provided {@link Material}. Only
+	 * supports materials in {@link Tag#BEDS}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public BedDataMock(@NotNull Material type)
 	{
@@ -36,7 +37,8 @@ public class BedDataMock extends BlockDataMock implements Bed
 	/**
 	 * Create a new {@link BedDataMock} based on an existing {@link BedDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected BedDataMock(BedDataMock other)
 	{
@@ -90,7 +92,8 @@ public class BedDataMock extends BlockDataMock implements Bed
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BedDataMock clone()
 	{
 		return new BedDataMock(this);

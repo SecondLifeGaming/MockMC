@@ -35,7 +35,8 @@ class WaterloggedDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			waterlogged.setWaterlogged(isWaterLogged);

@@ -6,10 +6,14 @@ import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class ComplexRecipeMock implements ComplexRecipe
+public class ComplexRecipeMock
+		implements
+			ComplexRecipe,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.ComplexRecipeBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final ItemStack result;
 
 	public ComplexRecipeMock(@NotNull NamespacedKey key, @NotNull ItemStack result)
@@ -19,15 +23,16 @@ public class ComplexRecipeMock implements ComplexRecipe
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return this.key;
 	}
 
 	@Override
-	public @NotNull ItemStack getResult()
+	@NotNull
+	public ItemStack getResult()
 	{
 		return this.result;
 	}
-
 }

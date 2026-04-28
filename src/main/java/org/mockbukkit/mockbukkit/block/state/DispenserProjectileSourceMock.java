@@ -1,32 +1,30 @@
 package org.mockbukkit.mockbukkit.block.state;
 
 import org.bukkit.block.Block;
-import org.bukkit.entity.Projectile;
 import org.bukkit.projectiles.BlockProjectileSource;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
-import java.util.function.Consumer;
 
 /**
- * Mock implementation of a {@link BlockProjectileSource}, specifically for the {@link DispenserStateMock}.
+ * Mock implementation of a {@link BlockProjectileSource}, specifically for the
+ * {@link DispenserStateMock}.
  *
  * @see DispenserStateMock
  */
-@ExtendWith(MockBukkitExtension.class)
-class DispenserProjectileSourceMock implements BlockProjectileSource
+class DispenserProjectileSourceMock
+		implements
+			BlockProjectileSource,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.projectiles.BlockProjectileSourceBaseMock
 {
 
-	private final @NotNull DispenserStateMock dispenser;
+	@NotNull
+	private final DispenserStateMock dispenser;
 
 	/**
-	 * Constructs a new {@link DispenserProjectileSourceMock} for the provided {@link DispenserStateMock}.
+	 * Constructs a new {@link DispenserProjectileSourceMock} for the provided
+	 * {@link DispenserStateMock}.
 	 *
-	 * @param dispenser The dispenser this projectile source is for.
+	 * @param dispenser
+	 *            The dispenser this projectile source is for.
 	 */
 	DispenserProjectileSourceMock(@NotNull DispenserStateMock dispenser)
 	{
@@ -34,30 +32,9 @@ class DispenserProjectileSourceMock implements BlockProjectileSource
 	}
 
 	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, Vector velocity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public <T extends Projectile> @NotNull T launchProjectile(@NotNull Class<? extends T> projectile, @Nullable Vector velocity, @Nullable Consumer<? super T> function)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Block getBlock()
+	@NotNull
+	public Block getBlock()
 	{
 		return dispenser.getBlock();
 	}
-
 }

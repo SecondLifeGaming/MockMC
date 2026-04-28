@@ -11,18 +11,28 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class AnvilInventoryMock extends InventoryMock
+		implements
+			AnvilInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.AnvilInventoryBaseMock
 {
 
-	private @Nullable String renameText;
+	@Nullable
+	private String renameText;
+
 	private int repairCostAmount = 0;
+
 	private int repairCost = 0;
+
 	private int maxRepairCost = 40;
 
 	/**
 	 * Constructs a new {@link AnvilInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public AnvilInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -30,7 +40,8 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	}
 
 	@Override
-	public @Nullable String getRenameText()
+	@Nullable
+	public String getRenameText()
 	{
 		return this.renameText;
 	}
@@ -77,11 +88,11 @@ public class AnvilInventoryMock extends InventoryMock implements AnvilInventory
 	/**
 	 * Sets the result of {@link #getRenameText()}.
 	 *
-	 * @param text The text to set.
+	 * @param text
+	 *            The text to set.
 	 */
 	public void setRenameText(@Nullable String text)
 	{
 		this.renameText = text;
 	}
-
 }

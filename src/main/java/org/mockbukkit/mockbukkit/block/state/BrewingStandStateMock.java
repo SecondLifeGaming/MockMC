@@ -17,7 +17,10 @@ import java.util.Objects;
  *
  * @see ContainerStateMock
  */
-public class BrewingStandStateMock extends ContainerStateMock implements BrewingStand
+public class BrewingStandStateMock extends ContainerStateMock
+		implements
+			BrewingStand,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.LockableBaseMock
 {
 
 	private int recipeBrewingTime = 400;
@@ -25,10 +28,11 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	private int fuelLevel;
 
 	/**
-	 * Constructs a new {@link BrewingStandStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#BREWING_STAND}
+	 * Constructs a new {@link BrewingStandStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#BREWING_STAND}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BrewingStandStateMock(@NotNull Material material)
 	{
@@ -37,10 +41,11 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	}
 
 	/**
-	 * Constructs a new {@link BrewingStandStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#BREWING_STAND}
+	 * Constructs a new {@link BrewingStandStateMock} for the provided
+	 * {@link Block}. Only supports {@link Material#BREWING_STAND}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BrewingStandStateMock(@NotNull Block block)
 	{
@@ -49,9 +54,11 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	}
 
 	/**
-	 * Constructs a new {@link BrewingStandStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BrewingStandStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BrewingStandStateMock(@NotNull BrewingStandStateMock state)
 	{
@@ -142,7 +149,8 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 		{
 			return false;
 		}
-		return recipeBrewingTime == that.recipeBrewingTime && brewingTime == that.brewingTime && fuelLevel == that.fuelLevel;
+		return recipeBrewingTime == that.recipeBrewingTime && brewingTime == that.brewingTime
+				&& fuelLevel == that.fuelLevel;
 	}
 
 	@Override
@@ -154,10 +162,8 @@ public class BrewingStandStateMock extends ContainerStateMock implements Brewing
 	@Override
 	protected String toStringInternal()
 	{
-		return super.toStringInternal() +
-				", brewingTime=" + brewingTime +
-				", recipeBrewingTime=" + recipeBrewingTime +
-				", fuelLevel=" + fuelLevel;
+		return super.toStringInternal() + ", brewingTime=" + brewingTime + ", recipeBrewingTime=" + recipeBrewingTime
+				+ ", fuelLevel=" + fuelLevel;
 	}
 
 }

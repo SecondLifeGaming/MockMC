@@ -12,9 +12,11 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 {
 
 	/**
-	 * Constructs a new {@link RedstoneWallTorchDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link RedstoneWallTorchDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public RedstoneWallTorchDataMock(@NotNull Material material)
 	{
@@ -22,9 +24,11 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 	}
 
 	/**
-	 * Create a new {@link RedstoneWallTorchDataMock} based on an existing {@link RedstoneWallTorchDataMock}.
+	 * Create a new {@link RedstoneWallTorchDataMock} based on an existing
+	 * {@link RedstoneWallTorchDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected RedstoneWallTorchDataMock(@NotNull RedstoneWallTorchDataMock other)
 	{
@@ -63,7 +67,8 @@ public class RedstoneWallTorchDataMock extends BlockDataMock implements Redstone
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RedstoneWallTorchDataMock clone()
 	{
 		return new RedstoneWallTorchDataMock(this);

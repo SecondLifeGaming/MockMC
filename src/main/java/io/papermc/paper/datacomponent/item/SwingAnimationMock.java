@@ -5,7 +5,8 @@ import org.checkerframework.checker.index.qual.Positive;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class SwingAnimationMock implements SwingAnimation
 {
 

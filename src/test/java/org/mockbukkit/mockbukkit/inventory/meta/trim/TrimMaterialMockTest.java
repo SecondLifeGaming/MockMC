@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class TrimMaterialMockTest
 {
@@ -27,6 +29,7 @@ class TrimMaterialMockTest
 	}
 
 	@Test
+	@SuppressWarnings("removal")
 	void translationKey()
 	{
 		assertEquals("trim_material.minecraft.amethyst", TrimMaterial.AMETHYST.getTranslationKey());

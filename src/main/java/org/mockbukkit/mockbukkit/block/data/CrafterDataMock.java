@@ -11,7 +11,8 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public CrafterDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 	}
 
 	/**
-	 * Create a new {@link CrafterDataMock} based on an existing {@link CrafterDataMock}.
+	 * Create a new {@link CrafterDataMock} based on an existing
+	 * {@link CrafterDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected CrafterDataMock(@NotNull CrafterDataMock other)
 	{
@@ -66,7 +69,8 @@ public class CrafterDataMock extends BlockDataMock implements Crafter
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CrafterDataMock clone()
 	{
 		return new CrafterDataMock(this);

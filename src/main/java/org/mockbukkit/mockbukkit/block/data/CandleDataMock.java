@@ -11,7 +11,8 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	/**
 	 * Constructs a new {@link CandleDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	protected CandleDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	}
 
 	/**
-	 * Create a new {@link CandleDataMock} based on an existing {@link CandleDataMock}.
+	 * Create a new {@link CandleDataMock} based on an existing
+	 * {@link CandleDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected CandleDataMock(@NotNull CandleDataMock other)
 	{
@@ -37,7 +40,8 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	@Override
 	public void setCandles(int candles)
 	{
-		Preconditions.checkArgument(candles >= this.getMinimumCandles() && candles <= this.getMaximumCandles(), "Candles must be between %s and %s", this.getMinimumCandles(), this.getMaximumCandles());
+		Preconditions.checkArgument(candles >= this.getMinimumCandles() && candles <= this.getMaximumCandles(),
+				"Candles must be between %s and %s", this.getMinimumCandles(), this.getMaximumCandles());
 		this.set(BlockDataKey.CANDLES, candles);
 	}
 
@@ -78,7 +82,8 @@ public class CandleDataMock extends BlockDataMock implements Candle
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CandleDataMock clone()
 	{
 		return new CandleDataMock(this);

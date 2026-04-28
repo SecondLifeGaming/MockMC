@@ -34,7 +34,8 @@ class PowerableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			powerable.setPowered(inWall);

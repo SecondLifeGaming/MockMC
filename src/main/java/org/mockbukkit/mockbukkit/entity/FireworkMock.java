@@ -3,15 +3,10 @@ package org.mockbukkit.mockbukkit.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.meta.FireworkMetaMock;
-
 import java.util.UUID;
 
 /**
@@ -19,17 +14,26 @@ import java.util.UUID;
  *
  * @see ProjectileMock
  */
-public class FireworkMock extends ProjectileMock implements Firework
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class FireworkMock extends ProjectileMock
+		implements
+			Firework,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FireworkBaseMock
 {
 
 	private FireworkMeta meta;
+
 	private boolean shotAtAngle = false;
 
 	/**
-	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -37,27 +41,32 @@ public class FireworkMock extends ProjectileMock implements Firework
 	}
 
 	/**
-	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with a specified {@link UUID} and {@link FireworkMeta}.
+	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID} and {@link FireworkMeta}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
-	 * @param meta   The FireworkMeta to apply.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 * @param meta
+	 *            The FireworkMeta to apply.
 	 */
 	public FireworkMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull FireworkMeta meta)
 	{
 		super(server, uuid);
-
 		this.meta = meta.clone();
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FIREWORK_ROCKET;
 	}
 
 	@Override
-	public @NotNull FireworkMeta getFireworkMeta()
+	@NotNull
+	public FireworkMeta getFireworkMeta()
 	{
 		return meta;
 	}
@@ -67,66 +76,6 @@ public class FireworkMock extends ProjectileMock implements Firework
 	{
 		Preconditions.checkNotNull(meta, "FireworkMeta cannot be null!");
 		this.meta = meta.clone();
-	}
-
-	@Override
-	public boolean setAttachedTo(@Nullable LivingEntity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LivingEntity getAttachedTo()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public boolean setLife(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public int getLife()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public boolean setMaxLife(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public int getMaxLife()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void detonate()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isDetonated()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -140,61 +89,4 @@ public class FireworkMock extends ProjectileMock implements Firework
 	{
 		this.shotAtAngle = shotAtAngle;
 	}
-
-	@Override
-	public @Nullable UUID getSpawningEntity()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LivingEntity getBoostedEntity()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ItemStack getItem()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setItem(@Nullable ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getTicksFlown()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setTicksFlown(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getTicksToDetonate()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setTicksToDetonate(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

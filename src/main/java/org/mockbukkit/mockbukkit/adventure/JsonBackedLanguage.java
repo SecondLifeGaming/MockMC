@@ -23,7 +23,9 @@ public class JsonBackedLanguage implements Language
 	 * }
 	 * </pre>
 	 *
-	 * @param jsonObject A json object containing all the necessary data and in the right format
+	 * @param jsonObject
+	 *            A json object containing all the necessary data and in the right
+	 *            format
 	 */
 	public JsonBackedLanguage(JsonObject jsonObject)
 	{

@@ -39,7 +39,8 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	}
 
 	/**
-	 * @param material The material that the block should have
+	 * @param material
+	 *            The material that the block should have
 	 * @return A matcher which matches blocks with the specified material
 	 */
 	public static @NotNull BlockMaterialTypeMatcher hasMaterial(@NotNull Material material)
@@ -49,7 +50,8 @@ public class BlockMaterialTypeMatcher extends TypeSafeMatcher<BlockMock>
 	}
 
 	/**
-	 * @param material The material that the block should not have
+	 * @param material
+	 *            The material that the block should not have
 	 * @return A matcher which matches blocks without the specified material
 	 */
 	public static @NotNull Matcher<BlockMock> doesNotHaveMaterial(@NotNull Material material)

@@ -2,6 +2,7 @@ package org.mockbukkit.mockbukkit.sound;
 
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.util.ShadyPines;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.entity.PlayerMock;
@@ -9,11 +10,10 @@ import org.mockbukkit.mockbukkit.entity.PlayerMock;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 /**
- * This interface provides methods to assert sounds that were heard. This is implemented by {@link PlayerMock}, however
- * the sheer amount of assertion methods did warrant a separate a file at some point.
+ * This interface provides methods to assert sounds that were heard. This is
+ * implemented by {@link PlayerMock}, however the sheer amount of assertion
+ * methods did warrant a separate a file at some point.
  *
  * @author TheBusyBiscuit
  * @see PlayerMock
@@ -22,7 +22,8 @@ public interface SoundReceiver
 {
 
 	/**
-	 * This returns a {@link List} of every {@link AudioExperience} this receiver has received.
+	 * This returns a {@link List} of every {@link AudioExperience} this receiver
+	 * has received.
 	 *
 	 * @return A mutable {@link List} containing every heard sound.
 	 */
@@ -32,7 +33,8 @@ public interface SoundReceiver
 	/**
 	 * Adds a heard sound.
 	 *
-	 * @param audioExperience An {@link AudioExperience} representing the heard sound.
+	 * @param audioExperience
+	 *            An {@link AudioExperience} representing the heard sound.
 	 */
 	default void addHeardSound(@NotNull AudioExperience audioExperience)
 	{
@@ -51,9 +53,11 @@ public interface SoundReceiver
 	/**
 	 * Assert that a sound type has been played for this sound receiver.
 	 * <p>
-	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure method} also checks the source of the sound, the volume and the pitch.
+	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure
+	 * method} also checks the source of the sound, the volume and the pitch.
 	 *
-	 * @param sound The sound type to check.
+	 * @param sound
+	 *            The sound type to check.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull Sound sound)
@@ -62,9 +66,11 @@ public interface SoundReceiver
 	}
 
 	/**
-	 * Assert that a sound with a given source, volume and pitch have been played for this sound receiver.
+	 * Assert that a sound with a given source, volume and pitch have been played
+	 * for this sound receiver.
 	 *
-	 * @param sound The sound to check.
+	 * @param sound
+	 *            The sound to check.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound)
@@ -75,9 +81,11 @@ public interface SoundReceiver
 	/**
 	 * Assert that a sound key has been played for this sound receiver.
 	 * <p>
-	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure method} also checks the source of the sound, the volume and the pitch.
+	 * The {@link #assertSoundHeard(net.kyori.adventure.sound.Sound) adventure
+	 * method} also checks the source of the sound, the volume and the pitch.
 	 *
-	 * @param sound The sound key to check.
+	 * @param sound
+	 *            The sound key to check.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String sound)
@@ -88,8 +96,10 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param sound     The sound that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param sound
+	 *            The sound that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
@@ -100,11 +110,14 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param sound     The sound that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param sound
+	 *            The sound that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
-	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound, @NotNull Predicate<AudioExperience> predicate)
+	default void assertSoundHeard(net.kyori.adventure.sound.@NotNull Sound sound,
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		assertSoundHeard("Sound Heard Assertion failed", sound, predicate);
 	}
@@ -112,8 +125,10 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param sound     The sound name that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param sound
+	 *            The sound name that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String sound, @NotNull Predicate<AudioExperience> predicate)
@@ -124,8 +139,10 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message The message to fail with.
-	 * @param sound   The sound that should've been heard.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound that should've been heard.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound)
@@ -136,8 +153,10 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message The message to fail with.
-	 * @param sound   The sound that should've been heard.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound that should've been heard.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound)
@@ -148,8 +167,10 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message The message to fail with.
-	 * @param sound   The sound name that should've been heard.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound name that should've been heard.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound)
@@ -160,44 +181,52 @@ public interface SoundReceiver
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message   The message to fail with.
-	 * @param sound     The sound that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull Sound sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
-		assertSoundHeard(message, sound.getKey().getKey(), predicate);
+		assertSoundHeard(message, Registry.SOUNDS.getKey(sound).getKey(), predicate);
 	}
 
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message   The message to fail with.
-	 * @param sound     The sound that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, net.kyori.adventure.sound.@NotNull Sound sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		Predicate<AudioExperience> test = e -> e.getSource() == sound.source()
-				&& ShadyPines.equals(sound.volume(), e.getVolume())
-				&& ShadyPines.equals(sound.pitch(), e.getPitch());
+				&& ShadyPines.equals(sound.volume(), e.getVolume()) && ShadyPines.equals(sound.pitch(), e.getPitch());
 		assertSoundHeard(message, sound.name().asString(), test.and(predicate));
 	}
 
 	/**
 	 * Asserts that a sound was heard.
 	 *
-	 * @param message   The message to fail with.
-	 * @param sound     The sound name that should've been heard.
-	 * @param predicate A predicate to test the {@link AudioExperience} against.
+	 * @param message
+	 *            The message to fail with.
+	 * @param sound
+	 *            The sound name that should've been heard.
+	 * @param predicate
+	 *            A predicate to test the {@link AudioExperience} against.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSoundHeard(@NotNull String message, @NotNull String sound,
-								  @NotNull Predicate<AudioExperience> predicate)
+			@NotNull Predicate<AudioExperience> predicate)
 	{
 		for (AudioExperience audio : getHeardSounds())
 		{
@@ -207,7 +236,7 @@ public interface SoundReceiver
 			}
 		}
 
-		fail(message);
+		throw new AssertionError(message);
 	}
 
 }

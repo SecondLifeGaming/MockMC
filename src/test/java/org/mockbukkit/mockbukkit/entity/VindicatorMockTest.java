@@ -26,7 +26,8 @@ class VindicatorMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void getSpell_GivenValidValues(boolean isJohnny)
 	{
 		vindicator.setJohnny(isJohnny);

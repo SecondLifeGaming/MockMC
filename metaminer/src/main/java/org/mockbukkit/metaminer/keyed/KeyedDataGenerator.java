@@ -9,16 +9,15 @@ import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.GameRule;
 import org.bukkit.Keyed;
-import org.bukkit.Material;
 import org.bukkit.Registry;
 import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.generator.structure.Structure;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.metaminer.DataGenerator;
+import org.mockbukkit.metaminer.json.ElementFactory;
 import org.mockbukkit.metaminer.util.JsonUtil;
 
 import java.io.File;
@@ -26,6 +25,8 @@ import java.io.IOException;
 
 public class KeyedDataGenerator implements DataGenerator
 {
+
+	private static final String LEVEL_KEY = "level";
 
 	private final File dataFolder;
 
@@ -42,7 +43,7 @@ public class KeyedDataGenerator implements DataGenerator
 			throw new IOException("Could not make directory: " + this.dataFolder);
 		}
 
-		for (RegistryKey<? extends Keyed> registryKey : KeyedClassTracker.CLASS_REGISTRY_KEY_RELATION.keySet())
+		for (RegistryKey<? extends Keyed> registryKey : KeyedClassTracker.getClassRegistryKeyRelation().keySet())
 		{
 			Registry<? extends Keyed> registry = RegistryAccess.registryAccess().getRegistry(registryKey);
 			JsonArray array = new JsonArray();
@@ -100,13 +101,34 @@ public class KeyedDataGenerator implements DataGenerator
 		if (itemType != ItemType.AIR)
 		{
 			jsonObject.add("metaClass", new JsonPrimitive(itemType.getItemMetaClass().getSimpleName()));
+			JsonObject defaultData = new JsonObject();
+			for (DataComponentType type : itemType.getDefaultDataTypes())
+			{
+				if (type instanceof DataComponentType.Valued<?> valued)
+				{
+					Object value = itemType.getDefaultData(valued);
+					com.google.gson.JsonElement element = ElementFactory.toJson(value);
+					if (element != null)
+					{
+						defaultData.add(type.getKey().toString(), element);
+					}
+				}
+			}
+			if (!defaultData.isEmpty())
+			{
+				jsonObject.add("defaultData", defaultData);
+			}
 		}
 	}
 
 	private void addDamageTypeProperties(JsonObject jsonObject, DamageType damageType)
 	{
 		jsonObject.add("damageScaling", new JsonPrimitive(damageType.getDamageScaling().toString()));
-		jsonObject.add("sound", new JsonPrimitive(damageType.getDamageEffect().getSound().getKey().toString()));
+		org.bukkit.NamespacedKey soundKey = Registry.SOUNDS.getKey(damageType.getDamageEffect().getSound());
+		if (soundKey != null)
+		{
+			jsonObject.add("sound", new JsonPrimitive(soundKey.toString()));
+		}
 		jsonObject.add("deathMessageType", new JsonPrimitive(damageType.getDeathMessageType().toString()));
 	}
 
@@ -131,17 +153,17 @@ public class KeyedDataGenerator implements DataGenerator
 		{
 			GsonComponentSerializer serializer = GsonComponentSerializer.builder().build();
 			JsonObject displayName = new JsonObject();
-			displayName.add("level", new JsonPrimitive(i));
+			displayName.add(LEVEL_KEY, new JsonPrimitive(i));
 			displayName.add("text", serializer.serializeToTree(enchantment.displayName(i)));
 			displayNames.add(displayName);
 
 			JsonObject minModifiedCost = new JsonObject();
-			minModifiedCost.add("level", new JsonPrimitive(i));
+			minModifiedCost.add(LEVEL_KEY, new JsonPrimitive(i));
 			minModifiedCost.add("cost", new JsonPrimitive(enchantment.getMinModifiedCost(i)));
 			minModifiedCosts.add(minModifiedCost);
 
 			JsonObject maxModifiedCost = new JsonObject();
-			maxModifiedCost.add("level", new JsonPrimitive(i));
+			maxModifiedCost.add(LEVEL_KEY, new JsonPrimitive(i));
 			maxModifiedCost.add("cost", new JsonPrimitive(enchantment.getMaxModifiedCost(i)));
 			maxModifiedCosts.add(maxModifiedCost);
 		}
@@ -150,7 +172,7 @@ public class KeyedDataGenerator implements DataGenerator
 		jsonObject.add("maxModifiedCosts", maxModifiedCosts);
 
 		JsonArray conflicts = new JsonArray();
-		for (Enchantment otherEnchantment : Enchantment.values())
+		for (Enchantment otherEnchantment : RegistryAccess.registryAccess().getRegistry(RegistryKey.ENCHANTMENT))
 		{
 			if (enchantment.conflictsWith(otherEnchantment))
 			{
@@ -158,19 +180,11 @@ public class KeyedDataGenerator implements DataGenerator
 			}
 		}
 		jsonObject.add("conflicts", conflicts);
-		JsonArray enchantables = new JsonArray();
-		for (Material material : Material.values())
-		{
-			if (material.isItem())
-			{
-				ItemStack itemStack = new ItemStack(material);
-				if (enchantment.canEnchantItem(itemStack))
-				{
-					enchantables.add(material.getKey().toString());
-				}
-			}
-		}
-		jsonObject.add("enchantables", enchantables);
+		jsonObject.add("exclusiveWith", ElementFactory.toJson(enchantment.getExclusiveWith()));
+		jsonObject.add("supportedItems", ElementFactory.toJson(enchantment.getSupportedItems()));
+		jsonObject.add("primaryItems", ElementFactory.toJson(enchantment.getPrimaryItems()));
+		jsonObject.add("weight", new JsonPrimitive(enchantment.getWeight()));
+		jsonObject.add("description", ElementFactory.toJson(enchantment.description()));
 	}
 
 }

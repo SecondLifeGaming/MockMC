@@ -39,7 +39,8 @@ class MockBukkitURLClassLoaderTest
 		{
 			pluginDescriptionFile = new PluginDescriptionFile(inputStream);
 		}
-		this.urlClassLoader = new MockBukkitURLClassLoader(TEST_PLUGIN_FILE, getClass().getClassLoader(), serverMock, pluginDescriptionFile, new File(serverMock.getPluginsFolder(), "TestPlugin"));
+		this.urlClassLoader = new MockBukkitURLClassLoader(TEST_PLUGIN_FILE, getClass().getClassLoader(), serverMock,
+				pluginDescriptionFile, new File(serverMock.getPluginsFolder(), "TestPlugin"));
 	}
 
 	@Test

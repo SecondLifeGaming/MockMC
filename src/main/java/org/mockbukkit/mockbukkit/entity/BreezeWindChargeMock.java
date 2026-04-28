@@ -4,7 +4,6 @@ import org.bukkit.entity.BreezeWindCharge;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see AbstractWindChargeMock
  */
-public class BreezeWindChargeMock extends AbstractWindChargeMock implements BreezeWindCharge
+public class BreezeWindChargeMock extends AbstractWindChargeMock
+		implements
+			BreezeWindCharge,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BreezeWindChargeBaseMock
 {
 
 	/**
-	 * Constructs a new {@link BreezeWindChargeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link BreezeWindChargeMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BreezeWindChargeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,15 +38,14 @@ public class BreezeWindChargeMock extends AbstractWindChargeMock implements Bree
 		{
 			return;
 		}
-
 		getWorld().createExplosion(this, getLocation(), 3.0F, false);
 		remove();
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.BREEZE_WIND_CHARGE;
 	}
-
 }

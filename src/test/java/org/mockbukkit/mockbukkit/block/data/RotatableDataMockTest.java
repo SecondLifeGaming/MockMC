@@ -36,9 +36,8 @@ class RotatableDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenValidValues(BlockFace face)
 		{
 			rotatable.setRotation(face);
@@ -46,12 +45,12 @@ class RotatableDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "UP", "DOWN", "SELF" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"UP", "DOWN", "SELF"})
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> rotatable.setRotation(face));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> rotatable.setRotation(face));
 			assertEquals(String.format("Illegal rotation %s", face), e.getMessage());
 		}
 

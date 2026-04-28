@@ -10,9 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 
 /**
- * Represents all configuration options that can be retrieved from a {@link Server}.
- * This class is used internally, and should not be considered public API.
- * As such, breaking changes may occur here at any time.
+ * Represents all configuration options that can be retrieved from a
+ * {@link Server}. This class is used internally, and should not be considered
+ * public API. As such, breaking changes may occur here at any time.
  *
  * @see ServerMock
  */
@@ -38,9 +38,9 @@ public class ServerConfiguration
 	private String serverIp = "";
 	private int serverPort = 25565;
 	private boolean pvpEnabled = true;
+	private boolean loggingIPs = true;
 	private final Object2LongOpenHashMap<SpawnCategory> ticksPerSpawn = new Object2LongOpenHashMap<>();
 	private final Object2IntOpenHashMap<SpawnCategory> spawnLimits = new Object2IntOpenHashMap<>();
-	private boolean sendChatPreviews = false;
 
 	public ServerConfiguration()
 	{
@@ -70,7 +70,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param viewDistance The view distance.
+	 * @param viewDistance
+	 *            The view distance.
 	 * @see ServerMock#setViewDistance(int)
 	 */
 	public void setViewDistance(int viewDistance)
@@ -88,7 +89,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param levelType The level type.
+	 * @param levelType
+	 *            The level type.
 	 * @see ServerMock#setWorldType(LevelType)
 	 */
 	public void setLevelType(LevelType levelType)
@@ -106,7 +108,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param generateStructures Generate structures.
+	 * @param generateStructures
+	 *            Generate structures.
 	 * @see ServerMock#setGenerateStructures(boolean)
 	 */
 	public void setGenerateStructures(boolean generateStructures)
@@ -124,7 +127,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param allowEnd Allow end.
+	 * @param allowEnd
+	 *            Allow end.
 	 * @see ServerMock#setAllowEnd(boolean)
 	 */
 	public void setAllowEnd(boolean allowEnd)
@@ -142,7 +146,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param allowNether Allow end.
+	 * @param allowNether
+	 *            Allow end.
 	 * @see ServerMock#setAllowNether(boolean)
 	 */
 	public void setAllowNether(boolean allowNether)
@@ -159,30 +164,13 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param updateFolder Update folder.
+	 * @param updateFolder
+	 *            Update folder.
 	 * @see ServerMock#setUpdateFolder(String)
 	 */
 	public void setUpdateFolder(String updateFolder)
 	{
 		this.updateFolder = updateFolder;
-	}
-
-	/**
-	 * @return Send chat previews.
-	 * @see ServerMock#setShouldSendChatPreviews(boolean)
-	 */
-	public boolean shouldSendChatPreviews()
-	{
-		return this.sendChatPreviews;
-	}
-
-	/**
-	 * @param shouldSendChatPreviews Send chat previews.
-	 * @see ServerMock#setShouldSendChatPreviews(boolean)
-	 */
-	public void setShouldSendChatPreviews(boolean shouldSendChatPreviews)
-	{
-		this.sendChatPreviews = shouldSendChatPreviews;
 	}
 
 	/**
@@ -195,7 +183,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param enforceSecureProfiles Enforce secure profiles.
+	 * @param enforceSecureProfiles
+	 *            Enforce secure profiles.
 	 * @see ServerMock#setEnforcingSecureProfiles(boolean)
 	 */
 	public void setEnforceSecureProfiles(boolean enforceSecureProfiles)
@@ -213,7 +202,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param onlineMode Online mode.
+	 * @param onlineMode
+	 *            Online mode.
 	 * @see ServerMock#setOnlineMode(boolean)
 	 */
 	public void setOnlineMode(boolean onlineMode)
@@ -231,7 +221,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param allowFlight Allow flight.
+	 * @param allowFlight
+	 *            Allow flight.
 	 * @see ServerMock#setAllowFlight(boolean)
 	 */
 	public void setAllowFlight(boolean allowFlight)
@@ -249,7 +240,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param hardcore Hardcore mode.
+	 * @param hardcore
+	 *            Hardcore mode.
 	 * @see ServerMock#setHardcore(boolean)
 	 */
 	public void setHardcore(boolean hardcore)
@@ -267,7 +259,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param maxChainedNeighbourUpdates Max chained neighbour updates.
+	 * @param maxChainedNeighbourUpdates
+	 *            Max chained neighbour updates.
 	 * @see ServerMock#setMaxChainedNeighborUpdates(int)
 	 */
 	public void setMaxChainedNeighbourUpdates(int maxChainedNeighbourUpdates)
@@ -285,7 +278,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param shutdownMessage Shutdown message.
+	 * @param shutdownMessage
+	 *            Shutdown message.
 	 * @see ServerMock#setShutdownMessage(Component)
 	 */
 	public void setShutdownMessage(@NotNull Component shutdownMessage)
@@ -303,7 +297,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param maxWorldSize Max world size.
+	 * @param maxWorldSize
+	 *            Max world size.
 	 * @see ServerMock#setMaxWorldSize(int)
 	 */
 	public void setMaxWorldSize(int maxWorldSize)
@@ -321,7 +316,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param simulationDistance Simulation distance.
+	 * @param simulationDistance
+	 *            Simulation distance.
 	 * @see ServerMock#setSimulationDistance(int)
 	 */
 	public void setSimulationDistance(int simulationDistance)
@@ -339,7 +335,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param hideOnlinePlayers Hide online players
+	 * @param hideOnlinePlayers
+	 *            Hide online players
 	 * @see ServerMock#setHideOnlinePlayers(boolean)
 	 */
 	public void setHideOnlinePlayers(boolean hideOnlinePlayers)
@@ -357,7 +354,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param serverIp The server listen IP
+	 * @param serverIp
+	 *            The server listen IP
 	 * @see ServerMock#setIp
 	 */
 	public void setServerIp(String serverIp)
@@ -375,7 +373,8 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param serverPort The server listen port
+	 * @param serverPort
+	 *            The server listen port
 	 * @see ServerMock#setPort
 	 */
 	public void setServerPort(int serverPort)
@@ -392,11 +391,30 @@ public class ServerConfiguration
 	}
 
 	/**
-	 * @param pvpEnabled PVP enabled
+	 * @param pvpEnabled
+	 *            PVP enabled
 	 */
 	public void setPvpEnabled(boolean pvpEnabled)
 	{
 		this.pvpEnabled = pvpEnabled;
+	}
+
+	/**
+	 * @return Whether IPs are logged.
+	 * @see ServerMock#isLoggingIPs()
+	 */
+	public boolean isLoggingIPs()
+	{
+		return this.loggingIPs;
+	}
+
+	/**
+	 * @param loggingIPs
+	 *            Whether IPs should be logged.
+	 */
+	public void setLoggingIPs(boolean loggingIPs)
+	{
+		this.loggingIPs = loggingIPs;
 	}
 
 	/**

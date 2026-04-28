@@ -10,14 +10,18 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see AbstractFurnaceStateMock
  */
-public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnace
+public class FurnaceStateMock extends AbstractFurnaceStateMock
+		implements
+			Furnace,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.FurnaceBaseMock
 {
 
 	/**
 	 * Constructs a new {@link FurnaceStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#FURNACE}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public FurnaceStateMock(@NotNull Material material)
 	{
@@ -29,7 +33,8 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 	 * Constructs a new {@link FurnaceStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#FURNACE}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected FurnaceStateMock(@NotNull Block block)
 	{
@@ -38,9 +43,11 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 	}
 
 	/**
-	 * Constructs a new {@link FurnaceStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link FurnaceStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected FurnaceStateMock(@NotNull FurnaceStateMock state)
 	{
@@ -71,6 +78,12 @@ public class FurnaceStateMock extends AbstractFurnaceStateMock implements Furnac
 			return false;
 		}
 		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 }

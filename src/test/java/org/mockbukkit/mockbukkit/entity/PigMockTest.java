@@ -141,10 +141,7 @@ class PigMockTest
 
 		public static Stream<Arguments> getPigVariants()
 		{
-			return RegistryAccess.registryAccess()
-					.getRegistry(RegistryKey.PIG_VARIANT)
-					.stream()
-					.map(Arguments::of);
+			return RegistryAccess.registryAccess().getRegistry(RegistryKey.PIG_VARIANT).stream().map(Arguments::of);
 		}
 
 	}

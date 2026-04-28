@@ -26,11 +26,11 @@ public class BlockStateMockFactory
 			.put(Tag.SIGNS, with(SignStateMock::new, SignStateMock::new))
 			.put(Tag.SHULKER_BOXES, with(ShulkerBoxStateMock::new, ShulkerBoxStateMock::new))
 			.put(MaterialTags.SKULLS, with(SkullStateMock::new, SkullStateMock::new))
-			.put(Tag.WOODEN_SHELVES, with(ShelfStateMock::new, ShelfStateMock::new))
-			.build();
+			.put(Tag.WOODEN_SHELVES, with(ShelfStateMock::new, ShelfStateMock::new)).build();
 
 	/**
-	 * This factory tries to create the block state from the {@link org.bukkit.block.BlockState} class.
+	 * This factory tries to create the block state from the
+	 * {@link org.bukkit.block.BlockState} class.
 	 */
 	private static final Map<Material, Factory> FACTORIES_BY_BLOCK_MATERIAL = ImmutableMap.<Material, Factory>builder()
 			.put(Material.BARREL, with(BarrelStateMock::new, BarrelStateMock::new))
@@ -40,7 +40,8 @@ public class BlockStateMockFactory
 			.put(Material.BELL, with(BellStateMock::new, BellStateMock::new))
 			.put(Material.BLAST_FURNACE, with(BlastFurnaceStateMock::new, BlastFurnaceStateMock::new))
 			.put(Material.BREWING_STAND, with(BrewingStandStateMock::new, BrewingStandStateMock::new))
-			.put(Material.CALIBRATED_SCULK_SENSOR, with(CalibratedSculkSensorStateMock::new, CalibratedSculkSensorStateMock::new))
+			.put(Material.CALIBRATED_SCULK_SENSOR,
+					with(CalibratedSculkSensorStateMock::new, CalibratedSculkSensorStateMock::new))
 			.put(Material.CAMPFIRE, with(CampfireStateMock::new, CampfireStateMock::new))
 			.put(Material.CHAIN_COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.CHISELED_BOOKSHELF, with(ChiseledBookshelfStateMock::new, ChiseledBookshelfStateMock::new))
@@ -48,6 +49,7 @@ public class BlockStateMockFactory
 			.put(Material.COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.COMPARATOR, with(ComparatorStateMock::new, ComparatorStateMock::new))
 			.put(Material.CONDUIT, with(ConduitStateMock::new, ConduitStateMock::new))
+			.put(Material.CRAFTER, with(CrafterStateMock::new, CrafterStateMock::new))
 			.put(Material.CREAKING_HEART, with(CreakingHeartStateMock::new, CreakingHeartStateMock::new))
 			.put(Material.DAYLIGHT_DETECTOR, with(DaylightDetectorStateMock::new, DaylightDetectorStateMock::new))
 			.put(Material.DECORATED_POT, with(DecoratedPotStateMock::new, DecoratedPotStateMock::new))
@@ -61,6 +63,7 @@ public class BlockStateMockFactory
 			.put(Material.JIGSAW, with(JigsawStateMock::new, JigsawStateMock::new))
 			.put(Material.JUKEBOX, with(JukeboxStateMock::new, JukeboxStateMock::new))
 			.put(Material.LECTERN, with(LecternStateMock::new, LecternStateMock::new))
+			.put(Material.MOVING_PISTON, with(MovingPistonStateMock::new, MovingPistonStateMock::new))
 			.put(Material.REPEATING_COMMAND_BLOCK, with(CommandBlockStateMock::new, CommandBlockStateMock::new))
 			.put(Material.SCULK_CATALYST, with(SculkCatalystStateMock::new, SculkCatalystStateMock::new))
 			.put(Material.SCULK_SENSOR, with(SculkSensorStateMock::new, SculkSensorStateMock::new))
@@ -73,14 +76,16 @@ public class BlockStateMockFactory
 			.put(Material.SUSPICIOUS_SAND, with(BrushableBlockStateMock::new, BrushableBlockStateMock::new))
 			.put(Material.TEST_BLOCK, with(TestBlockStateMock::new, TestBlockStateMock::new))
 			.put(Material.TEST_INSTANCE_BLOCK, with(TestInstanceBlockStateMock::new, TestInstanceBlockStateMock::new))
-			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new))
-			.build();
+			.put(Material.TRIAL_SPAWNER, with(TrialSpawnerStateMock::new, TrialSpawnerStateMock::new))
+			.put(Material.VAULT, with(VaultStateMock::new, VaultStateMock::new))
+			.put(Material.TRAPPED_CHEST, with(ChestStateMock::new, ChestStateMock::new)).build();
 
 	/**
-	 * Attempts to construct a BlockStateMock by the provided material.
-	 * Will return a basic {@link BlockStateMock} if no implementation is found.
+	 * Attempts to construct a BlockStateMock by the provided material. Will return
+	 * a basic {@link BlockStateMock} if no implementation is found.
 	 *
-	 * @param material The material to create the BlockState from.
+	 * @param material
+	 *            The material to create the BlockState from.
 	 * @return The BlockState.
 	 */
 	public static @NotNull BlockStateMock mock(@NotNull Material material)
@@ -139,13 +144,13 @@ public class BlockStateMockFactory
 	}
 
 	private static Factory with(@NotNull Function<Material, BlockStateMock> materialFactory,
-								@NotNull Function<Block, BlockStateMock> blockFactory)
+			@NotNull Function<Block, BlockStateMock> blockFactory)
 	{
 		return new Factory(materialFactory, blockFactory);
 	}
 
 	record Factory(@NotNull Function<Material, BlockStateMock> materialFactory,
-				   @NotNull Function<Block, BlockStateMock> blockFactory)
+			@NotNull Function<Block, BlockStateMock> blockFactory)
 	{
 
 	}

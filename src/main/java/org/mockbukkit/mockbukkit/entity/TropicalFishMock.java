@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,36 +17,48 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see SchoolableFishMock
  */
-public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
+public class TropicalFishMock extends SchoolableFishMock
+		implements
+			TropicalFish,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TropicalFishBaseMock
 {
 
-	private @NotNull DyeColor patternColor;
-	private @NotNull DyeColor bodyColor;
-	private @NotNull Pattern pattern;
+	@NotNull
+	private DyeColor patternColor;
+
+	@NotNull
+	private DyeColor bodyColor;
+
+	@NotNull
+	private Pattern pattern;
 
 	/**
-	 * Constructs a new {@link TropicalFishMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link TropicalFishMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TropicalFishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-
 		patternColor = DyeColor.values()[ThreadLocalRandom.current().nextInt(DyeColor.values().length)];
 		bodyColor = DyeColor.values()[ThreadLocalRandom.current().nextInt(DyeColor.values().length)];
 		pattern = Pattern.values()[ThreadLocalRandom.current().nextInt(Pattern.values().length)];
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.TROPICAL_FISH_BUCKET);
 	}
 
 	@Override
-	public @NotNull DyeColor getPatternColor()
+	@NotNull
+	public DyeColor getPatternColor()
 	{
 		return this.patternColor;
 	}
@@ -60,7 +71,8 @@ public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
 	}
 
 	@Override
-	public @NotNull DyeColor getBodyColor()
+	@NotNull
+	public DyeColor getBodyColor()
 	{
 		return this.bodyColor;
 	}
@@ -73,7 +85,8 @@ public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
 	}
 
 	@Override
-	public @NotNull Pattern getPattern()
+	@NotNull
+	public Pattern getPattern()
 	{
 		return this.pattern;
 	}
@@ -86,9 +99,9 @@ public class TropicalFishMock extends SchoolableFishMock implements TropicalFish
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TROPICAL_FISH;
 	}
-
 }

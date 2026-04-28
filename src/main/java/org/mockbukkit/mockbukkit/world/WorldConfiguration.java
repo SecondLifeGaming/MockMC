@@ -3,9 +3,6 @@ package org.mockbukkit.mockbukkit.world;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.bukkit.GameRule;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.Nullable;
@@ -15,14 +12,49 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Data
 @NullMarked
-@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public class WorldConfiguration
 {
 
 	private final String name;
 	private final Map<String, JsonElement> gameRules;
+
+	private WorldConfiguration(String name, Map<String, JsonElement> gameRules)
+	{
+		this.name = name;
+		this.gameRules = gameRules;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "WorldConfiguration(name=" + name + ", gameRules=" + gameRules + ")";
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof WorldConfiguration that))
+		{
+			return false;
+		}
+		return java.util.Objects.equals(name, that.name) && java.util.Objects.equals(gameRules, that.gameRules);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(name, gameRules);
+	}
 
 	@Nullable
 	public <T> T getDefaultValue(String key, Class<T> type)
@@ -32,14 +64,13 @@ public class WorldConfiguration
 		if (Boolean.class.isAssignableFrom(type))
 		{
 			return type.cast(value.getAsBoolean());
-		}
-		else if (Integer.class.isAssignableFrom(type))
+		} else if (Integer.class.isAssignableFrom(type))
 		{
 			return type.cast(value.getAsInt());
-		}
-		else
+		} else
 		{
-			throw new IllegalArgumentException(String.format("The key '%s' is not a instance of %s", key, type.getSimpleName()));
+			throw new IllegalArgumentException(
+					String.format("The key '%s' is not a instance of %s", key, type.getSimpleName()));
 		}
 	}
 

@@ -11,7 +11,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class ChiseledBookshelfInventoryMock extends InventoryMock implements ChiseledBookshelfInventory
+public class ChiseledBookshelfInventoryMock extends InventoryMock
+		implements
+			ChiseledBookshelfInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.ChiseledBookshelfInventoryBaseMock
 {
 
 	public ChiseledBookshelfInventoryMock(@Nullable ChiseledBookshelf holder)
@@ -25,15 +28,16 @@ public class ChiseledBookshelfInventoryMock extends InventoryMock implements Chi
 	}
 
 	@Override
-	public @Nullable ChiseledBookshelf getHolder()
+	@Nullable
+	public ChiseledBookshelf getHolder()
 	{
 		return (ChiseledBookshelf) super.getHolder();
 	}
 
 	@Override
-	public @NotNull ChiseledBookshelfInventoryMock getSnapshot()
+	@NotNull
+	public ChiseledBookshelfInventoryMock getSnapshot()
 	{
 		return new ChiseledBookshelfInventoryMock(this);
 	}
-
 }

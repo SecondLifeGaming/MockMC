@@ -4,7 +4,8 @@ import com.google.common.base.Preconditions;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record WeaponMock(int itemDamagePerAttack, float disableBlockingForSeconds) implements Weapon
 {
 	static class BuilderMock implements Weapon.Builder

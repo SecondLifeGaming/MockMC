@@ -38,7 +38,8 @@ public class CommandResultSucceedMatcher extends TypeSafeMatcher<CommandResult>
 	}
 
 	/**
-	 * @return A matcher which matches with any command result without a success code
+	 * @return A matcher which matches with any command result without a success
+	 *         code
 	 */
 	public static @NotNull Matcher<CommandResult> hasFailed()
 	{

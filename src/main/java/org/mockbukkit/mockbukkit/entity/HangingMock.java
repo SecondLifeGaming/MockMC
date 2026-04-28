@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hanging;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,16 +13,22 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class HangingMock extends EntityMock implements Hanging
+public class HangingMock extends EntityMock
+		implements
+			Hanging,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.HangingBaseMock
 {
 
 	private BlockFace facing;
 
 	/**
-	 * Constructs a new {@link HangingMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link HangingMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public HangingMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -31,7 +36,8 @@ public class HangingMock extends EntityMock implements Hanging
 	}
 
 	@Override
-	public @NotNull BlockFace getAttachedFace()
+	@NotNull
+	public BlockFace getAttachedFace()
 	{
 		return this.getFacing().getOppositeFace();
 	}
@@ -52,21 +58,23 @@ public class HangingMock extends EntityMock implements Hanging
 	}
 
 	@Override
-	public @NotNull BlockFace getFacing()
+	@NotNull
+	public BlockFace getFacing()
 	{
 		return facing;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.UNKNOWN;
 	}
 
 	@Override
-	public @NotNull String toString()
+	@NotNull
+	public String toString()
 	{
 		return "HangingMock";
 	}
-
 }

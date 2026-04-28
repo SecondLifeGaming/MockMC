@@ -10,7 +10,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class HorseInventoryMock extends AbstractHorseInventoryMock implements HorseInventory
+public class HorseInventoryMock extends AbstractHorseInventoryMock
+		implements
+			HorseInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.HorseInventoryBaseMock
 {
 
 	private static final int ARMOR_SLOT = 1;
@@ -18,7 +21,8 @@ public class HorseInventoryMock extends AbstractHorseInventoryMock implements Ho
 	/**
 	 * Constructs a new {@link HorseInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public HorseInventoryMock(InventoryHolder holder)
 	{
@@ -36,5 +40,4 @@ public class HorseInventoryMock extends AbstractHorseInventoryMock implements Ho
 	{
 		this.setItem(ARMOR_SLOT, stack);
 	}
-
 }

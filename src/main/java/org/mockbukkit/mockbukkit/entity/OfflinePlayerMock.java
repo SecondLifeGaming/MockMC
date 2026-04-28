@@ -2,25 +2,19 @@ package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
-import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.BanEntry;
 import org.bukkit.BanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.Statistic;
 import org.bukkit.ban.ProfileBanList;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.ban.ProfileBanListMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
-
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
@@ -28,23 +22,30 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Mock implementation of an {@link OfflinePlayer}.
- * Not interchangeable with {@link PlayerMock}.
+ * Mock implementation of an {@link OfflinePlayer}. Not interchangeable with
+ * {@link PlayerMock}.
  *
  * @see PlayerMock
  */
-public class OfflinePlayerMock implements OfflinePlayer
+@SuppressWarnings(
+{"deprecation", "unchecked"})
+public class OfflinePlayerMock implements org.mockbukkit.mockbukkit.generated.org.bukkit.OfflinePlayerBaseMock
 {
 
-	private final @NotNull UUID uuid;
-	private final @Nullable String name;
-	private final @Nullable Location respawnLocation = null;
+	@NotNull
+	private final UUID uuid;
+
+	@Nullable
+	private final String name;
 
 	/**
-	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a specified {@link UUID} and name.
+	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID} and name.
 	 *
-	 * @param uuid The UUID of the player.
-	 * @param name The name of the player.
+	 * @param uuid
+	 *            The UUID of the player.
+	 * @param name
+	 *            The name of the player.
 	 */
 	public OfflinePlayerMock(@NotNull UUID uuid, @Nullable String name)
 	{
@@ -54,9 +55,11 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	/**
-	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock} with a random {@link UUID} and specified name.
+	 * Constructs a new {@link OfflinePlayerMock} on the provided {@link ServerMock}
+	 * with a random {@link UUID} and specified name.
 	 *
-	 * @param name The name of the player.
+	 * @param name
+	 *            The name of the player.
 	 */
 	public OfflinePlayerMock(@Nullable String name)
 	{
@@ -64,14 +67,16 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	/**
-	 * Makes this offline player join the server.
-	 * A new PlayerMock will be constructed, and added to the server.
-	 * Will throw an {@link IllegalStateException} if the player is already online.
+	 * Makes this offline player join the server. A new PlayerMock will be
+	 * constructed, and added to the server. Will throw an
+	 * {@link IllegalStateException} if the player is already online.
 	 *
-	 * @param server The server to join.
+	 * @param server
+	 *            The server to join.
 	 * @return The created PlayerMock.
 	 */
-	public @NotNull PlayerMock join(@NotNull ServerMock server)
+	@NotNull
+	public PlayerMock join(@NotNull ServerMock server)
 	{
 		Preconditions.checkNotNull(server, "Server cannot be null");
 		Preconditions.checkState(!isOnline(), "Player already online");
@@ -87,20 +92,15 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public boolean isConnected()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable String getName()
+	@Nullable
+	public String getName()
 	{
 		return this.name;
 	}
 
 	@Override
-	public @NotNull UUID getUniqueId()
+	@NotNull
+	public UUID getUniqueId()
 	{
 		return this.uuid;
 	}
@@ -117,15 +117,15 @@ public class OfflinePlayerMock implements OfflinePlayer
 		if (value)
 		{
 			MockBukkit.getMock().getPlayerList().addOperator(this.uuid);
-		}
-		else
+		} else
 		{
 			MockBukkit.getMock().getPlayerList().removeOperator(this.uuid);
 		}
 	}
 
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		return Map.of("UUID", this.uuid.toString());
 	}
@@ -138,27 +138,33 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
+	// Paper does it too ¯\_(ツ)_/¯
+	@Nullable
+	public BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				expires, source);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
+	// Paper does it too ¯\_(ツ)_/¯
+	@Nullable
+	public BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Instant expires, @Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, expires, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				expires, source);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked") // Paper does it too ¯\_(ツ)_/¯
-	public @Nullable BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
+	// Paper does it too ¯\_(ツ)_/¯
+	@Nullable
+	public BanEntry<PlayerProfile> ban(@Nullable String reason, @Nullable Duration duration, @Nullable String source)
 	{
 		MockBukkit.ensureMocking();
-		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason, duration, source);
+		return ((ProfileBanList) Bukkit.getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(), reason,
+				duration, source);
 	}
 
 	@Override
@@ -176,7 +182,8 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public @Nullable Player getPlayer()
+	@Nullable
+	public Player getPlayer()
 	{
 		MockBukkit.ensureMocking();
 		return Bukkit.getPlayer(this.getUniqueId());
@@ -189,6 +196,9 @@ public class OfflinePlayerMock implements OfflinePlayer
 		return MockBukkit.getMock().getPlayerList().getFirstPlayed(getUniqueId());
 	}
 
+	/**
+	 * @deprecated Use {@link #getLastLogin()} or {@link #getLastSeen()} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.13")
 	public long getLastPlayed()
@@ -204,20 +214,8 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public @Nullable Location getRespawnLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @org.jspecify.annotations.Nullable Location getRespawnLocation(boolean loadLocationAndValidate)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Location getBedSpawnLocation()
+	@Nullable
+	public Location getBedSpawnLocation()
 	{
 		return getRespawnLocation();
 	}
@@ -237,156 +235,10 @@ public class OfflinePlayerMock implements OfflinePlayer
 	}
 
 	@Override
-	public void incrementStatistic(@NotNull Statistic statistic)
+	@NotNull
+	public PlayerProfile getPlayerProfile()
 	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		// Paper does not cache this.
+		return new PlayerProfileMock(this);
 	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setStatistic(@NotNull Statistic statistic, int newValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getStatistic(@NotNull Statistic statistic)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getStatistic(@NotNull Statistic statistic, @NotNull Material material)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull Material material, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setStatistic(@NotNull Statistic statistic, @NotNull Material material, int newValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void incrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void decrementStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int amount)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setStatistic(@NotNull Statistic statistic, @NotNull EntityType entityType, int newValue)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Location getLastDeathLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Location getLocation()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull PersistentDataContainerView getPersistentDataContainer()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull PlayerProfile getPlayerProfile()
-	{
-		return new PlayerProfileMock(this); // Paper does not cache this.
-	}
-
 }

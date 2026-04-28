@@ -46,8 +46,6 @@ import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,13 +67,13 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"deprecation", "removal"})
 @ExtendWith(MockBukkitExtension.class)
 class UnsafeValuesTest
 {
 
 	private static final String PLUGIN_INFO_FORMAT = "name: VersionTest\nversion: 1.0\nmain: not.exists\napi-version: %s";
-	private static final Logger log = LoggerFactory.getLogger(UnsafeValuesTest.class);
 
 	@MockBukkitInject
 	private ServerMock server;
@@ -95,8 +93,7 @@ class UnsafeValuesTest
 		{
 			PluginDescriptionFile pluginDescriptionFile = new PluginDescriptionFile(stringReader);
 			unsafeValuesMock.checkSupported(pluginDescriptionFile);
-		}
-		catch (InvalidDescriptionException ex)
+		} catch (InvalidDescriptionException ex)
 		{
 			// exception shouldn't ever be thrown
 			ex.printStackTrace();
@@ -129,7 +126,7 @@ class UnsafeValuesTest
 				{
 					continue;
 				}
-				if (material.asItemType() == null) //We dont have a way to serialize these properly right now
+				if (material.asItemType() == null) // We dont have a way to serialize these properly right now
 				{
 					continue;
 				}
@@ -158,7 +155,8 @@ class UnsafeValuesTest
 	void serializeItemAsJson(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		@NotNull JsonObject serialized = unsafeValuesMock.serializeItemAsJson(expected);
+		@NotNull
+		JsonObject serialized = unsafeValuesMock.serializeItemAsJson(expected);
 		ItemStack actual = unsafeValuesMock.deserializeItemFromJson(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
@@ -185,15 +183,15 @@ class UnsafeValuesTest
 			JsonObject serialized = unsafeValuesMock.serializeItemAsJson(item);
 
 			String expectedString = """
-				{
-					       "id": "minecraft:diamond_pickaxe",
-					       "count": 1,
-					       "components": {
-					           "minecraft:repair_cost": 321
-					       },
-					       "DataVersion": 1
-					   }
-			""";
+						{
+							       "id": "minecraft:diamond_pickaxe",
+							       "count": 1,
+							       "components": {
+							           "minecraft:repair_cost": 321
+							       },
+							       "DataVersion": 1
+							   }
+					""";
 			JSONAssert.assertEquals(expectedString, serialized.toString(), JSONCompareMode.LENIENT);
 		}
 
@@ -215,16 +213,16 @@ class UnsafeValuesTest
 			JsonObject serialized = unsafeValuesMock.serializeItemAsJson(item);
 
 			String expectedString = """
-				{
-					       "id": "minecraft:diamond_pickaxe",
-					       "count": 1,
-					       "components": {
-					           "minecraft:damage": 100,
-					           "minecraft:max_damage": 1000
-					       },
-					       "DataVersion": 1
-					   }
-			""";
+						{
+							       "id": "minecraft:diamond_pickaxe",
+							       "count": 1,
+							       "components": {
+							           "minecraft:damage": 100,
+							           "minecraft:max_damage": 1000
+							       },
+							       "DataVersion": 1
+							   }
+					""";
 			JSONAssert.assertEquals(expectedString, serialized.toString(), JSONCompareMode.LENIENT);
 		}
 
@@ -235,7 +233,8 @@ class UnsafeValuesTest
 	void serializeStack(ItemStack expected)
 	{
 		populateItemMeta(expected);
-		@NotNull Map<String, Object> serialized = unsafeValuesMock.serializeStack(expected);
+		@NotNull
+		Map<String, Object> serialized = unsafeValuesMock.serializeStack(expected);
 		ItemStack actual = unsafeValuesMock.deserializeStack(serialized);
 		assertEquals(expected, actual);
 		assertEquals(expected.getItemMeta(), actual.getItemMeta());
@@ -277,11 +276,10 @@ class UnsafeValuesTest
 		try
 		{
 			insertTrivialData(meta);
-		}
-		catch (InvocationTargetException ignored)
+		} catch (InvocationTargetException _)
 		{
-		}
-		catch (IllegalAccessException e)
+			// Trivial data insertion might fail for some methods, ignoring.
+		} catch (IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -315,8 +313,7 @@ class UnsafeValuesTest
 			try
 			{
 				insertTrivialData(meta, method);
-			}
-			catch (InvocationTargetException exception)
+			} catch (InvocationTargetException exception)
 			{
 				Throwable cause = exception.getTargetException();
 				if (cause instanceof UnimplementedOperationException)
@@ -328,7 +325,8 @@ class UnsafeValuesTest
 					continue;
 				}
 
-				throw new RuntimeException("Exception thrown while trying to set trivial value for method " + method.getName(), cause);
+				throw new RuntimeException(
+						"Exception thrown while trying to set trivial value for method " + method.getName(), cause);
 
 			}
 		}
@@ -483,7 +481,8 @@ class UnsafeValuesTest
 
 	@ParameterizedTest
 	@MethodSource("materialAndBlockTranslationKeyProvider")
-	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey, Material material)
+	void testMaterialThatIsItemAndBlockTranslationKey(String expectedBlockKey, String expectedItemKey,
+			Material material)
 	{
 		assertEquals(expectedBlockKey, unsafeValuesMock.getBlockTranslationKey(material));
 		assertEquals(expectedItemKey, unsafeValuesMock.getItemTranslationKey(material));
@@ -491,12 +490,10 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> materialAndBlockTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
+		return Stream.of(Arguments.of("block.minecraft.stone", "block.minecraft.stone", Material.STONE),
 				Arguments.of("block.minecraft.dirt", "block.minecraft.dirt", Material.DIRT),
 				Arguments.of("item.minecraft.wheat", "item.minecraft.wheat", Material.WHEAT),
-				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART)
-		);
+				Arguments.of("item.minecraft.nether_wart", "item.minecraft.nether_wart", Material.NETHER_WART));
 	}
 
 	@ParameterizedTest
@@ -508,8 +505,7 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> wallMaterialTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_SIGN),
+		return Stream.of(Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_SIGN),
 				Arguments.of("block.minecraft.acacia_sign", Material.ACACIA_WALL_SIGN),
 				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_HANGING_SIGN),
 				Arguments.of("block.minecraft.acacia_hanging_sign", Material.ACACIA_WALL_HANGING_SIGN),
@@ -520,8 +516,7 @@ class UnsafeValuesTest
 				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_SKULL),
 				Arguments.of("block.minecraft.skeleton_skull", Material.SKELETON_WALL_SKULL),
 				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_HEAD),
-				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD)
-		);
+				Arguments.of("block.minecraft.creeper_head", Material.CREEPER_WALL_HEAD));
 	}
 
 	@Test
@@ -540,22 +535,16 @@ class UnsafeValuesTest
 
 	static Stream<Arguments> itemStackTranslationKeyProvider()
 	{
-		return Stream.of(
-				Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
+		return Stream.of(Arguments.of("item.minecraft.saddle", new ItemStackMock(Material.SADDLE)),
 				Arguments.of("block.minecraft.stone", new ItemStackMock(Material.STONE)),
 				Arguments.of("item.minecraft.wheat", new ItemStackMock(Material.WHEAT)),
-				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART))
-		);
+				Arguments.of("item.minecraft.nether_wart", new ItemStackMock(Material.NETHER_WART)));
 	}
 
 	@ParameterizedTest
 	@MethodSource("itemStackEmptyEffectTranslationKeyProvider")
-	void testItemStackEmptyEffectTranslationKey(
-			String expectedMaterialKey,
-			Material material,
-			String expectedItemStackKey,
-			ItemStack itemStack
-	)
+	void testItemStackEmptyEffectTranslationKey(String expectedMaterialKey, Material material,
+			String expectedItemStackKey, ItemStack itemStack)
 	{
 		assertEquals(expectedMaterialKey, material.getItemTranslationKey());
 		assertEquals(expectedItemStackKey, itemStack.translationKey());
@@ -564,31 +553,14 @@ class UnsafeValuesTest
 	static Stream<Arguments> itemStackEmptyEffectTranslationKeyProvider()
 	{
 		return Stream.of(
-				Arguments.of(
-						"item.minecraft.potion",
-						Material.POTION,
-						"item.minecraft.potion.effect.empty",
-						new ItemStackMock(Material.POTION)
-				),
-				Arguments.of(
-						"item.minecraft.splash_potion",
-						Material.SPLASH_POTION,
-						"item.minecraft.splash_potion.effect.empty",
-						new ItemStackMock(Material.SPLASH_POTION)
-				),
-				Arguments.of(
-						"item.minecraft.tipped_arrow",
-						Material.TIPPED_ARROW,
-						"item.minecraft.tipped_arrow.effect.empty",
-						new ItemStackMock(Material.TIPPED_ARROW)
-				),
-				Arguments.of(
-						"item.minecraft.lingering_potion",
-						Material.LINGERING_POTION,
-						"item.minecraft.lingering_potion.effect.empty",
-						new ItemStackMock(Material.LINGERING_POTION)
-				)
-		);
+				Arguments.of("item.minecraft.potion", Material.POTION, "item.minecraft.potion.effect.empty",
+						new ItemStackMock(Material.POTION)),
+				Arguments.of("item.minecraft.splash_potion", Material.SPLASH_POTION,
+						"item.minecraft.splash_potion.effect.empty", new ItemStackMock(Material.SPLASH_POTION)),
+				Arguments.of("item.minecraft.tipped_arrow", Material.TIPPED_ARROW,
+						"item.minecraft.tipped_arrow.effect.empty", new ItemStackMock(Material.TIPPED_ARROW)),
+				Arguments.of("item.minecraft.lingering_potion", Material.LINGERING_POTION,
+						"item.minecraft.lingering_potion.effect.empty", new ItemStackMock(Material.LINGERING_POTION)));
 	}
 
 }

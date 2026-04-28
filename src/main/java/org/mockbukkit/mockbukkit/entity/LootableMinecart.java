@@ -1,13 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.destroystokyo.paper.loottable.LootableInventory;
-import org.bukkit.loot.LootTable;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
+import org.mockbukkit.mockbukkit.scheduler.BukkitSchedulerMock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,15 +14,21 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 {
 
 	private long nextRefill = -1;
+
 	private long lastFilled = -1;
+
 	private Map<UUID, Long> lootedPlayers;
+
 	private boolean refillEnabled;
 
 	/**
-	 * Constructs a new {@link LootableMinecart} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link LootableMinecart} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected LootableMinecart(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -55,7 +59,8 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 	}
 
 	@Override
-	public @Nullable Long getLastLooted(@NotNull UUID player)
+	@Nullable
+	public Long getLastLooted(@NotNull UUID player)
 	{
 		return this.lootedPlayers != null ? this.lootedPlayers.get(player) : null;
 	}
@@ -64,19 +69,16 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 	public boolean setHasPlayerLooted(@NotNull UUID player, boolean looted)
 	{
 		final boolean hasLooted = hasPlayerLooted(player);
-
 		if (this.lootedPlayers == null)
 		{
 			this.lootedPlayers = new HashMap<>();
 		}
-
 		if (hasLooted != looted)
 		{
 			if (looted)
 			{
 				this.lootedPlayers.computeIfAbsent(player, p -> System.currentTimeMillis());
-			}
-			else
+			} else
 			{
 				this.lootedPlayers.remove(player);
 			}
@@ -107,50 +109,20 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 	{
 		final long oldRefill = this.nextRefill;
 		this.nextRefill = refillAt;
-
+		final ServerMock serverMock = (ServerMock) server;
 		new BukkitRunnable()
 		{
+
 			@Override
 			public void run()
 			{
-				if (nextRefill == server.getScheduler().getCurrentTick())
+				if (nextRefill == ((BukkitSchedulerMock) serverMock.getScheduler()).getCurrentTick())
 				{
 					nextRefill = -1;
-					lastFilled = server.getScheduler().getCurrentTick();
+					lastFilled = ((BukkitSchedulerMock) serverMock.getScheduler()).getCurrentTick();
 				}
-
 			}
 		}.runTaskTimer(null, 1, 1);
-
 		return oldRefill;
 	}
-
-	@Override
-	public void setLootTable(@Nullable LootTable table)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LootTable getLootTable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setSeed(long seed)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getSeed()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

@@ -35,10 +35,8 @@ class ResourceLoaderTest
 	@DisplayName("Test loading a non-existent resource")
 	void loadResource_InvalidPath_ThrowsIllegalArgumentException()
 	{
-		IllegalArgumentException exception = assertThrows(
-				IllegalArgumentException.class,
-				() -> ResourceLoader.loadResource(INVALID_RESOURCE_PATH)
-		);
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+				() -> ResourceLoader.loadResource(INVALID_RESOURCE_PATH));
 
 		assertTrue(exception.getMessage().contains("Resource not found"));
 	}
@@ -47,30 +45,21 @@ class ResourceLoaderTest
 	@DisplayName("Test loading a corrupted resource")
 	void loadResource_CorruptedJson_ThrowsInternalDataLoadException()
 	{
-		assertThrows(
-				InternalDataLoadException.class,
-				() -> ResourceLoader.loadResource(CORRUPTED_RESOURCE_PATH)
-		);
+		assertThrows(InternalDataLoadException.class, () -> ResourceLoader.loadResource(CORRUPTED_RESOURCE_PATH));
 	}
 
 	@Test
 	@DisplayName("Test loading a null value")
 	void loadResource_NullPath_ThrowsNullPointerException()
 	{
-		assertThrows(
-				NullPointerException.class,
-				() -> ResourceLoader.loadResource(null)
-		);
+		assertThrows(NullPointerException.class, () -> ResourceLoader.loadResource(null));
 	}
 
 	@Test
 	@DisplayName("Test that the private constructor cannot be instantiated")
 	void constructor_CreateInstance_ThrowsException()
 	{
-		assertThrows(
-				IllegalAccessException.class,
-				() -> ResourceLoader.class.getDeclaredConstructor().newInstance()
-		);
+		assertThrows(IllegalAccessException.class, () -> ResourceLoader.class.getDeclaredConstructor().newInstance());
 	}
 
 }

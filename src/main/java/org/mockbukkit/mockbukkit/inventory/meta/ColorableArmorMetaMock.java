@@ -8,16 +8,18 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Map;
 
 @DelegateDeserialization(SerializableMeta.class)
-public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableArmorMeta
+public class ColorableArmorMetaMock extends ArmorMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.ColorableArmorMetaBaseMock
 {
 
 	static final int DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540).asARGB();
 
-	private @Nullable Integer color;
+	@Nullable
+	private Integer color;
 
 	/**
 	 * Constructs a new {@link ColorableArmorMetaMock}.
@@ -28,14 +30,15 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	/**
-	 * Constructs a new {@link ColorableArmorMetaMock}, cloning the data from another.
+	 * Constructs a new {@link ColorableArmorMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public ColorableArmorMetaMock(ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof ColorableArmorMeta colorableArmorMeta)
 		{
 			this.color = colorableArmorMeta.isDyed() ? colorableArmorMeta.getColor().asARGB() : null;
@@ -43,7 +46,8 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 	}
 
 	@Override
-	public @NotNull Color getColor()
+	@NotNull
+	public Color getColor()
 	{
 		return this.color == null ? Color.fromARGB(DEFAULT_LEATHER_COLOR) : Color.fromARGB(this.color);
 	}
@@ -79,23 +83,26 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		{
 			return false;
 		}
-		if (!(obj instanceof ColorableArmorMeta other))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-
+		ColorableArmorMetaMock other = (ColorableArmorMetaMock) obj;
 		return this.isDyed() ? this.getColor().equals(other.getColor()) : !other.isDyed();
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull ColorableArmorMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public ColorableArmorMetaMock clone()
 	{
 		return new ColorableArmorMetaMock(this);
 	}
 
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		Map<String, Object> serialized = super.serialize();
 		if (this.isDyed())
@@ -127,5 +134,4 @@ public class ColorableArmorMetaMock extends ArmorMetaMock implements ColorableAr
 		colorableArmorMetaMock.deserializeInternal(serialized);
 		return colorableArmorMetaMock;
 	}
-
 }

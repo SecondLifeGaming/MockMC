@@ -43,7 +43,8 @@ class SaplingDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1 })
+		@ValueSource(ints =
+		{0, 1})
 		void givenChangeWithValidValues(int age)
 		{
 			sapling.setStage(age);
@@ -51,7 +52,8 @@ class SaplingDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 2, 3 })
+		@ValueSource(ints =
+		{-2, -1, 2, 3})
 		void givenChangeWithInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sapling.setStage(age));
@@ -63,7 +65,8 @@ class SaplingDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull SaplingDataMock cloned = sapling.clone();
+		@NotNull
+		SaplingDataMock cloned = sapling.clone();
 
 		assertEquals(sapling, cloned);
 		assertEquals(sapling.getStage(), cloned.getStage());

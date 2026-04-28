@@ -5,7 +5,6 @@ import org.bukkit.entity.boat.MangroveChestBoat;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.ChestBoatMock;
-
 import java.util.UUID;
 
 /**
@@ -13,7 +12,10 @@ import java.util.UUID;
  *
  * @see ChestBoatMock
  */
-public class MangroveChestBoatMock extends ChestBoatMock implements MangroveChestBoat
+public class MangroveChestBoatMock extends ChestBoatMock
+		implements
+			MangroveChestBoat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.boat.MangroveChestBoatBaseMock
 {
 
 	public MangroveChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -22,9 +24,9 @@ public class MangroveChestBoatMock extends ChestBoatMock implements MangroveChes
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.MANGROVE_CHEST_BOAT;
 	}
-
 }

@@ -32,7 +32,8 @@ class WitchMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isDrinkingPotion_GivenPossibleValues(boolean isDrinkingPotion)
 	{
 		witch.setDrinkingPotion(isDrinkingPotion);
@@ -47,7 +48,8 @@ class WitchMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 31, 32 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 30, 31, 32})
 	void getPotionUseTimeLeft_GivenPossibleValues(int useTimeLeft)
 	{
 		witch.setPotionUseTimeLeft(useTimeLeft);
@@ -111,17 +113,14 @@ class WitchMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {
-			"ARMOR_STAND",
-			"DIAMOND_HORSE_ARMOR",
-			"GRASS_BLOCK",
-			"WOODEN_SHOVEL"
-	})
+	@ValueSource(strings =
+	{"ARMOR_STAND", "DIAMOND_HORSE_ARMOR", "GRASS_BLOCK", "WOODEN_SHOVEL"})
 	void setDrinkingPotion_GivenIllegalMaterials(Material material)
 	{
 		ItemStack itemStack = ItemStack.of(material);
 
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> witch.setDrinkingPotion(itemStack));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> witch.setDrinkingPotion(itemStack));
 		assertEquals("must be potion, air, or null", e.getMessage());
 	}
 

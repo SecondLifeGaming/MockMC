@@ -10,36 +10,52 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.LlamaInventoryMock;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of a {@link Llama}.
  *
  * @see ChestedHorseMock
  */
-public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEntity<LlamaMock>
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class LlamaMock extends ChestedHorseMock
+		implements
+			Llama,
+			MockRangedEntity<LlamaMock>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TraderLlamaBaseMock
 {
 
-	private @NotNull Color color = Color.BROWN;
+	@NotNull
+	private Color color = Color.BROWN;
+
 	private int strength = 1;
+
 	private final Map<LivingEntity, Pair<Float, Boolean>> attackedMobs = new HashMap<>();
+
 	private boolean isAgressive = false;
-	private final @NotNull LlamaInventoryMock inventory;
+
+	@NotNull
+	private final LlamaInventoryMock inventory;
+
 	private LlamaMock caravanaHead;
+
 	private LlamaMock caravanaTail;
+
 	private static final String CHARGE_BETWEEN_LIMITS = "Charge must be between 0 and 1";
+
 	private static final String ENTITY_NOT_NULL = "Entity cannot be null";
 
 	/**
-	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link LlamaMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public LlamaMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,7 +64,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public @NotNull Color getColor()
+	@NotNull
+	public Color getColor()
 	{
 		return this.color;
 	}
@@ -88,28 +105,33 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	/**
-	 * Asserts that the given entity was attacked by this llama with the given charge.
+	 * Asserts that the given entity was attacked by this llama with the given
+	 * charge.
 	 *
-	 * @param entity The {@link LivingEntity} to check.
-	 * @param charge The charge of the attack.
+	 * @param entity
+	 *            The {@link LivingEntity} to check.
+	 * @param charge
+	 *            The charge of the attack.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
 	{
 		Preconditions.checkNotNull(entity, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge >= 0 && charge <= 1, CHARGE_BETWEEN_LIMITS);
-
 		if (!attackedMobs.containsKey(entity) || attackedMobs.get(entity).getLeft() != charge)
 		{
-			fail();
+			throw new AssertionError();
 		}
 	}
 
 	/**
-	 * Asserts that the given entity was attacked by this llama with the given charge and is agressive.
+	 * Asserts that the given entity was attacked by this llama with the given
+	 * charge and is agressive.
 	 *
-	 * @param entity The {@link LivingEntity} to check.
-	 * @param charge The charge of the attack.
+	 * @param entity
+	 *            The {@link LivingEntity} to check.
+	 * @param charge
+	 *            The charge of the attack.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAgressiveAttack(LivingEntity entity, float charge)
@@ -117,7 +139,7 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 		assertAttacked(entity, charge);
 		if (!attackedMobs.get(entity).getRight())
 		{
-			fail();
+			throw new AssertionError();
 		}
 	}
 
@@ -126,7 +148,6 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	{
 		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
 		Preconditions.checkArgument(charge >= 0 && charge <= 1, CHARGE_BETWEEN_LIMITS);
-
 		return attackedMobs.containsKey(target) && attackedMobs.get(target).getLeft() == charge;
 	}
 
@@ -134,7 +155,6 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	public boolean hasAttackedWhileAggressive(LivingEntity target)
 	{
 		Preconditions.checkNotNull(target, ENTITY_NOT_NULL);
-
 		return attackedMobs.containsKey(target) && attackedMobs.get(target).getRight();
 	}
 
@@ -146,7 +166,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public @NotNull LlamaInventoryMock getInventory()
+	@NotNull
+	public LlamaInventoryMock getInventory()
 	{
 		return this.inventory;
 	}
@@ -176,7 +197,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public @Nullable Llama getCaravanHead()
+	@Nullable
+	public Llama getCaravanHead()
 	{
 		return this.caravanaHead;
 	}
@@ -188,7 +210,8 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public @Nullable Llama getCaravanTail()
+	@Nullable
+	public Llama getCaravanTail()
 	{
 		return this.caravanaTail;
 	}
@@ -200,9 +223,9 @@ public class LlamaMock extends ChestedHorseMock implements Llama, MockRangedEnti
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.LLAMA;
 	}
-
 }

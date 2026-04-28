@@ -198,7 +198,8 @@ class BeeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		void givenValidValues(int time)
 		{
 			bee.setTimeSinceSting(time);
@@ -206,10 +207,12 @@ class BeeMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1})
 		void givenNonvalidValues(int time)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bee.setTimeSinceSting(time));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> bee.setTimeSinceSting(time));
 			assertEquals("Time since sting cannot be negative", e.getMessage());
 		}
 

@@ -8,7 +8,8 @@ import java.util.Arrays;
 import java.util.Set;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record TooltipDisplayMock(boolean hideTooltip, Set<DataComponentType> hiddenComponents) implements TooltipDisplay
 {
 

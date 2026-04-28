@@ -4,9 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.ChiseledBookshelf;
 import org.bukkit.inventory.ChiseledBookshelfInventory;
-import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.ChiseledBookshelfInventoryMock;
 
 /**
@@ -14,7 +12,10 @@ import org.mockbukkit.mockbukkit.inventory.ChiseledBookshelfInventoryMock;
  *
  * @see TileStateMock
  */
-public class ChiseledBookshelfStateMock extends TileStateMock implements ChiseledBookshelf
+public class ChiseledBookshelfStateMock extends TileStateMock
+		implements
+			ChiseledBookshelf,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.ChiseledBookshelfBaseMock
 {
 	private final ChiseledBookshelfInventoryMock inventory = new ChiseledBookshelfInventoryMock(this);
 
@@ -57,12 +58,6 @@ public class ChiseledBookshelfStateMock extends TileStateMock implements Chisele
 	public @NotNull ChiseledBookshelfInventory getSnapshotInventory()
 	{
 		return this.inventory.getSnapshot();
-	}
-
-	@Override
-	public int getSlot(@NotNull Vector position)
-	{
-		throw new UnimplementedOperationException("Not supported yet.");
 	}
 
 	@Override

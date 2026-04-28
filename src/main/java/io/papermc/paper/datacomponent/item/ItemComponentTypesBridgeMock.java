@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
 
 @NullMarked
 @ApiStatus.Internal
-@SuppressWarnings({ "UnstableApiUsage" })
+@SuppressWarnings(
+{"UnstableApiUsage"})
 public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 {
 
@@ -163,7 +164,8 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public ResolvableProfile resolvableProfile(PlayerProfile profile)
 	{
-		return new ResolvableProfileMock(profile.getId(), profile.getName(), profile.getProperties().stream().collect(Collectors.toUnmodifiableSet()));
+		return new ResolvableProfileMock(profile.getId(), profile.getName(),
+				profile.getProperties().stream().collect(Collectors.toUnmodifiableSet()));
 	}
 
 	@Override
@@ -277,9 +279,8 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	@Override
 	public OminousBottleAmplifier ominousBottleAmplifier(int amplifier)
 	{
-		Preconditions.checkArgument(0 <= amplifier && amplifier <= 4,
-				"amplifier must be between %s-%s, was %s", 0, 4, amplifier
-		);
+		Preconditions.checkArgument(0 <= amplifier && amplifier <= 4, "amplifier must be between %s-%s, was %s", 0, 4,
+				amplifier);
 		return new OminousBottleAmplifierMock(amplifier);
 	}
 
@@ -332,7 +333,8 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public KineticWeapon.Condition kineticWeaponCondition(@NonNegative int maxDurationTicks, float minSpeed, float minRelativeSpeed)
+	public KineticWeapon.Condition kineticWeaponCondition(@NonNegative int maxDurationTicks, float minSpeed,
+			float minRelativeSpeed)
 	{
 		Preconditions.checkArgument(maxDurationTicks >= 0, "maxDurationTicks must be non-negative");
 		return new KineticWeaponMock.ConditionMock(maxDurationTicks, minSpeed, minRelativeSpeed);

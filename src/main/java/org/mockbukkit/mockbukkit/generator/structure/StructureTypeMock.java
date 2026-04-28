@@ -13,7 +13,8 @@ public class StructureTypeMock extends StructureType
 	private final NamespacedKey key;
 
 	/**
-	 * @param key The namespaced key representing this structure type
+	 * @param key
+	 *            The namespaced key representing this structure type
 	 */
 	public StructureTypeMock(NamespacedKey key)
 	{
@@ -21,7 +22,8 @@ public class StructureTypeMock extends StructureType
 	}
 
 	/**
-	 * @param data Json data
+	 * @param data
+	 *            Json data
 	 * @deprecated Use {@link #StructureTypeMock(NamespacedKey)} instead
 	 */
 	@Deprecated(forRemoval = true)

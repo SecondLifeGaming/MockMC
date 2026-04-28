@@ -33,8 +33,7 @@ class EntityDataTest
 			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.DEFAULT));
 			assertEquals(3, entityData.getHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
 			assertEquals(4, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.DEFAULT));
-		}
-		catch (UnimplementedOperationException e)
+		} catch (UnimplementedOperationException e)
 		{
 			throw new AssertionFailedError("");
 		}
@@ -48,8 +47,7 @@ class EntityDataTest
 			assertEquals(1, entityData.getWidth(EntitySubType.BABY, EntityState.DEFAULT));
 			assertEquals(0.5, entityData.getHeight(EntitySubType.BABY, EntityState.DEFAULT));
 			assertEquals(0.1, entityData.getEyeHeight(EntitySubType.BABY, EntityState.DEFAULT));
-		}
-		catch (UnimplementedOperationException e)
+		} catch (UnimplementedOperationException e)
 		{
 			throw new AssertionFailedError("");
 		}
@@ -63,8 +61,7 @@ class EntityDataTest
 			assertEquals(2, entityData.getWidth(EntitySubType.DEFAULT, EntityState.SLEEPING));
 			assertEquals(0.2, entityData.getHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
 			assertEquals(0.3, entityData.getEyeHeight(EntitySubType.DEFAULT, EntityState.SLEEPING));
-		}
-		catch (UnimplementedOperationException e)
+		} catch (UnimplementedOperationException e)
 		{
 			throw new AssertionFailedError("");
 		}
@@ -80,7 +77,8 @@ class EntityDataTest
 	@Test
 	void invalidStateTest()
 	{
-		assertThrows(UnimplementedOperationException.class, () -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
+		assertThrows(UnimplementedOperationException.class,
+				() -> entityData.getWidth(EntitySubType.DEFAULT, EntityState.SNEAKING));
 	}
 
 }

@@ -14,7 +14,8 @@ public class DoorDataMock extends BlockDataMock implements Door
 	/**
 	 * Constructs a new {@link DoorDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public DoorDataMock(@NotNull Material material)
 	{
@@ -24,7 +25,8 @@ public class DoorDataMock extends BlockDataMock implements Door
 	/**
 	 * Create a new {@link DoorDataMock} based on an existing {@link DoorDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected DoorDataMock(@NotNull DoorDataMock other)
 	{
@@ -65,7 +67,8 @@ public class DoorDataMock extends BlockDataMock implements Door
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -100,7 +103,8 @@ public class DoorDataMock extends BlockDataMock implements Door
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull DoorDataMock clone()
 	{
 		return new DoorDataMock(this);

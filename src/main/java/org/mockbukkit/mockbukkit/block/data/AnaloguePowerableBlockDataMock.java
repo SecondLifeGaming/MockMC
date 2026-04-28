@@ -9,9 +9,11 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 {
 
 	/**
-	 * Constructs a new {@link AnaloguePowerableBlockDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link AnaloguePowerableBlockDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public AnaloguePowerableBlockDataMock(@NotNull Material material)
 	{
@@ -19,9 +21,11 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	}
 
 	/**
-	 * Create a new {@link AnaloguePowerableBlockDataMock} based on an existing {@link AnaloguePowerableBlockDataMock}.
+	 * Create a new {@link AnaloguePowerableBlockDataMock} based on an existing
+	 * {@link AnaloguePowerableBlockDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected AnaloguePowerableBlockDataMock(AnaloguePowerableBlockDataMock other)
 	{
@@ -37,7 +41,8 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	@Override
 	public void setPower(int power)
 	{
-		Preconditions.checkArgument(power >= 0 && power <= this.getMaximumPower(), "Power must be between 0 and %s", this.getMaximumPower());
+		Preconditions.checkArgument(power >= 0 && power <= this.getMaximumPower(), "Power must be between 0 and %s",
+				this.getMaximumPower());
 		this.set(BlockDataKey.POWER, power);
 	}
 
@@ -48,7 +53,8 @@ public class AnaloguePowerableBlockDataMock extends BlockDataMock implements Ana
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull AnaloguePowerableBlockDataMock clone()
 	{
 		return new AnaloguePowerableBlockDataMock(this);

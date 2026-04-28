@@ -54,8 +54,7 @@ public abstract class AbstractMatcherTest
 		try
 		{
 			matcher.matches(null);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			fail("Matcher was not null safe");
 		}
@@ -66,8 +65,7 @@ public abstract class AbstractMatcherTest
 		try
 		{
 			matcher.matches(new UnknownType());
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			fail("Matcher was not unknown type safe, because: " + e);
 		}

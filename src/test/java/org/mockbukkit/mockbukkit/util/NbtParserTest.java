@@ -31,7 +31,8 @@ class NbtParserTest
 
 		@ParameterizedTest
 		@NullSource
-		@ValueSource(booleans = {true, false})
+		@ValueSource(booleans =
+		{true, false})
 		void givenBoolean(Boolean expected)
 		{
 			Boolean actual = NbtParser.parseBoolean(expected);
@@ -39,14 +40,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-			"-2, false",
-			"-1, false",
-			"0, false",
-			"1, true",
-			"2, false",
-			"3, false",
-		})
+		@CsvSource(
+		{"-2, false", "-1, false", "0, false", "1, true", "2, false", "3, false",})
 		void givenInteger(Integer input, Boolean expected)
 		{
 			Boolean actual = NbtParser.parseBoolean(input);
@@ -54,15 +49,9 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-			"false, false",
-			"False, false",
-			"FALSE, false",
-			"true, true",
-			"True, true",
-			"TRUE, true",
-			"non-existing, false",
-		})
+		@CsvSource(
+		{"false, false", "False, false", "FALSE, false", "true, true", "True, true", "TRUE, true",
+				"non-existing, false",})
 		void givenString(String input, Boolean expected)
 		{
 			Boolean actual = NbtParser.parseBoolean(input);
@@ -73,7 +62,8 @@ class NbtParserTest
 		void givenUnknown()
 		{
 			A input = new A();
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseBoolean(input));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> NbtParser.parseBoolean(input));
 			assertEquals("Cannot parse double: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -91,9 +81,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(doubles = {
-			-1.123D, 0.0D, 1.123D
-		})
+		@ValueSource(doubles =
+		{-1.123D, 0.0D, 1.123D})
 		void givenDouble(Double expected)
 		{
 			Double actual = NbtParser.parseDouble(expected);
@@ -101,9 +90,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(doubles = {
-				-1.123D, 0.0D, 1.123D
-		})
+		@ValueSource(doubles =
+		{-1.123D, 0.0D, 1.123D})
 		void givenString(Double expected)
 		{
 			Double actual = NbtParser.parseDouble(String.valueOf(expected));
@@ -114,7 +102,8 @@ class NbtParserTest
 		void givenUnknown()
 		{
 			A input = new A();
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseDouble(input));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> NbtParser.parseDouble(input));
 			assertEquals("Cannot parse double: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -132,9 +121,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {
-			-1, 0, 1
-		})
+		@ValueSource(ints =
+		{-1, 0, 1})
 		void givenDouble(Integer expected)
 		{
 			Integer actual = NbtParser.parseInteger(expected);
@@ -142,9 +130,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {
-			-1, 0, 1
-		})
+		@ValueSource(ints =
+		{-1, 0, 1})
 		void givenString(Integer expected)
 		{
 			Integer actual = NbtParser.parseInteger(String.valueOf(expected));
@@ -155,7 +142,8 @@ class NbtParserTest
 		void givenUnknown()
 		{
 			A input = new A();
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseInteger(input));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> NbtParser.parseInteger(input));
 			assertEquals("Cannot parse integer: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -173,9 +161,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(bytes = {
-			-1, 0, 1
-		})
+		@ValueSource(bytes =
+		{-1, 0, 1})
 		void givenDouble(Byte expected)
 		{
 			Byte actual = NbtParser.parseByte(expected);
@@ -183,9 +170,8 @@ class NbtParserTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(bytes = {
-			-1, 0, 1
-		})
+		@ValueSource(bytes =
+		{-1, 0, 1})
 		void givenString(Byte expected)
 		{
 			Byte actual = NbtParser.parseByte(String.valueOf(expected));
@@ -215,10 +201,8 @@ class NbtParserTest
 
 		@ParameterizedTest
 		@EmptySource
-		@ValueSource(strings = {
-			"Hello world!",
-			"MockBukkit"
-		})
+		@ValueSource(strings =
+		{"Hello world!", "MockBukkit"})
 		void givenString(String expected)
 		{
 			String actual = NbtParser.parseString(expected);
@@ -229,7 +213,8 @@ class NbtParserTest
 		void givenUnknown()
 		{
 			A input = new A();
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> NbtParser.parseString(input));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> NbtParser.parseString(input));
 			assertEquals("Cannot parse string: org.mockbukkit.mockbukkit.util.NbtParserTest$A", e.getMessage());
 		}
 
@@ -294,9 +279,11 @@ class NbtParserTest
 	}
 
 	/**
-	 * This test class is used to validate that an error is thrown
-	 * when an unknown type is provided.
+	 * This test class is used to validate that an error is thrown when an unknown
+	 * type is provided.
 	 */
-	record A() {}
+	record A()
+	{
+	}
 
 }

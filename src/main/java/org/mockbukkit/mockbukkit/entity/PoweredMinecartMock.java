@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.minecart.PoweredMinecart;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,18 +13,26 @@ import java.util.UUID;
  *
  * @see MinecartMock
  */
-public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
+public class PoweredMinecartMock extends MinecartMock
+		implements
+			PoweredMinecart,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.minecart.PoweredMinecartBaseMock
 {
 
 	private double zPush;
+
 	private double xPush;
+
 	private int fuel;
 
 	/**
-	 * Constructs a new {@link PoweredMinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link PoweredMinecartMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PoweredMinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -36,7 +43,8 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	}
 
 	@Override
-	public @NotNull Material getMinecartMaterial()
+	@NotNull
+	public Material getMinecartMaterial()
 	{
 		return Material.FURNACE_MINECART;
 	}
@@ -79,9 +87,9 @@ public class PoweredMinecartMock extends MinecartMock implements PoweredMinecart
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FURNACE_MINECART;
 	}
-
 }

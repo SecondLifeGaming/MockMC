@@ -6,21 +6,28 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Turtle;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class TurtleMock extends AnimalsMock implements Turtle
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class TurtleMock extends AnimalsMock
+		implements
+			Turtle,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TurtleBaseMock
 {
 
 	private Location home = new Location(null, 0, 0, 0);
+
 	private boolean hasEgg = false;
 
 	/**
-	 * Constructs a new @{{@link TurtleMock}} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new @{{@link TurtleMock}} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TurtleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -34,14 +41,8 @@ public class TurtleMock extends AnimalsMock implements Turtle
 	}
 
 	@Override
-	public boolean isLayingEgg()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Location getHome()
+	@NotNull
+	public Location getHome()
 	{
 		return this.home;
 	}
@@ -54,29 +55,15 @@ public class TurtleMock extends AnimalsMock implements Turtle
 	}
 
 	@Override
-	public boolean isGoingHome()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isDigging()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setHasEgg(boolean hasEgg)
 	{
 		this.hasEgg = hasEgg;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TURTLE;
 	}
-
 }

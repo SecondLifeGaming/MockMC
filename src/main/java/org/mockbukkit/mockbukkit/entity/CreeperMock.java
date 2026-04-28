@@ -3,15 +3,11 @@ package org.mockbukkit.mockbukkit.entity;
 import com.destroystokyo.paper.event.entity.CreeperIgniteEvent;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -19,20 +15,30 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class CreeperMock extends MonsterMock implements Creeper
+public class CreeperMock extends MonsterMock
+		implements
+			Creeper,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CreeperBaseMock
 {
 
 	private boolean powered = false;
+
 	private int maxFuseTicks = 30;
+
 	private int fuseTicks = 0;
+
 	private int explosionRadius = 3;
+
 	private boolean ignited = false;
 
 	/**
-	 * Constructs a new {@link CreeperMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CreeperMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CreeperMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,8 +54,9 @@ public class CreeperMock extends MonsterMock implements Creeper
 	@Override
 	public void setPowered(boolean value)
 	{
-		CreeperPowerEvent.PowerCause cause = powered ? CreeperPowerEvent.PowerCause.SET_ON : CreeperPowerEvent.PowerCause.SET_OFF;
-
+		CreeperPowerEvent.PowerCause cause = powered
+				? CreeperPowerEvent.PowerCause.SET_ON
+				: CreeperPowerEvent.PowerCause.SET_OFF;
 		if (new CreeperPowerEvent(this, cause).callEvent())
 		{
 			this.powered = value;
@@ -112,27 +119,12 @@ public class CreeperMock extends MonsterMock implements Creeper
 	}
 
 	@Override
-	public void ignite(@NotNull Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable Entity getIgniter()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void setIgnited(boolean ignited)
 	{
 		if (isIgnited() == ignited)
 		{
 			return;
 		}
-
 		CreeperIgniteEvent event = new CreeperIgniteEvent(this, ignited);
 		if (event.callEvent())
 		{
@@ -147,9 +139,9 @@ public class CreeperMock extends MonsterMock implements Creeper
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.CREEPER;
 	}
-
 }

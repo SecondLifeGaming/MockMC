@@ -19,80 +19,81 @@ import static org.junit.jupiter.api.Assertions.*;
 class FoliaRegionSchedulerTest
 {
 
-    @MockBukkitInject
-    private ServerMock server;
+	@MockBukkitInject
+	private ServerMock server;
 
-    @MockBukkitInject
-    private BukkitSchedulerMock bukkitScheduler;
+	@MockBukkitInject
+	private BukkitSchedulerMock bukkitScheduler;
 
-    private FoliaRegionScheduler scheduler;
-    private PluginMock plugin;
-    private World world;
+	private FoliaRegionScheduler scheduler;
+	private PluginMock plugin;
+	private World world;
 
-    @BeforeEach
-    void setUp()
-    {
-        scheduler = new FoliaRegionScheduler(bukkitScheduler);
-        plugin = MockBukkit.createMockPlugin();
-        world = server.addSimpleWorld("world");
-    }
+	@BeforeEach
+	void setUp()
+	{
+		scheduler = new FoliaRegionScheduler(bukkitScheduler);
+		plugin = MockBukkit.createMockPlugin();
+		world = server.addSimpleWorld("world");
+	}
 
-    @Test
-    void run_RunsTask()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.run(plugin, world, 0, 0, task -> latch.countDown());
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void run_RunsTask()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.run(plugin, world, 0, 0, task -> latch.countDown());
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void execute_RunsTask()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.execute(plugin, world, 0, 0, latch::countDown);
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void execute_RunsTask()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.execute(plugin, world, 0, 0, latch::countDown);
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void runDelayed_RunsLater()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.runDelayed(plugin, world, 0, 0, task -> latch.countDown(), 2);
-        bukkitScheduler.performOneTick();
-        assertEquals(1, latch.getCount());
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void runDelayed_RunsLater()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.runDelayed(plugin, world, 0, 0, task -> latch.countDown(), 2);
+		bukkitScheduler.performOneTick();
+		assertEquals(1, latch.getCount());
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void runAtFixedRate_RunsRepeatedly()
-    {
-        CountDownLatch latch = new CountDownLatch(3);
-        scheduler.runAtFixedRate(plugin, world, 0, 0, task -> latch.countDown(), 1, 1);
-        bukkitScheduler.performTicks(3);
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void runAtFixedRate_RunsRepeatedly()
+	{
+		CountDownLatch latch = new CountDownLatch(3);
+		scheduler.runAtFixedRate(plugin, world, 0, 0, task -> latch.countDown(), 1, 1);
+		bukkitScheduler.performTicks(3);
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void nullPlugin_Throws()
-    {
-        assertThrows(NullPointerException.class,
-                () -> scheduler.run(null, world, 0, 0, task -> {}));
-    }
+	@Test
+	void nullPlugin_Throws()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.run(null, world, 0, 0, task ->
+		{
+		}));
+	}
 
-    @Test
-    void nullWorld_Throws()
-    {
-        assertThrows(NullPointerException.class,
-                () -> scheduler.run(plugin, null, 0, 0, task -> {}));
-    }
+	@Test
+	void nullWorld_Throws()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.run(plugin, null, 0, 0, task ->
+		{
+		}));
+	}
 
-    @Test
-    void nullTask_Throws()
-    {
-        assertThrows(NullPointerException.class,
-                () -> scheduler.run(plugin, world, 0, 0, null));
-    }
+	@Test
+	void nullTask_Throws()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.run(plugin, world, 0, 0, null));
+	}
 }

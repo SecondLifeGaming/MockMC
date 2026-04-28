@@ -14,16 +14,21 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class BrewerInventoryMock extends InventoryMock implements BrewerInventory
+public class BrewerInventoryMock extends InventoryMock
+		implements
+			BrewerInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.BrewerInventoryBaseMock
 {
 
 	private static final int INGREDIENT_SLOT = 3;
+
 	private static final int FUEL_SLOT = 4;
 
 	/**
 	 * Constructs a new {@link BrewerInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public BrewerInventoryMock(InventoryHolder holder)
 	{
@@ -36,7 +41,8 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	}
 
 	@Override
-	public @Nullable ItemStack getIngredient()
+	@Nullable
+	public ItemStack getIngredient()
 	{
 		checkHasIngredient();
 		return getItem(INGREDIENT_SLOT);
@@ -50,7 +56,8 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	}
 
 	@Override
-	public @Nullable ItemStack getFuel()
+	@Nullable
+	public ItemStack getFuel()
 	{
 		checkHasFuel();
 		return getItem(FUEL_SLOT);
@@ -70,7 +77,8 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	}
 
 	@Override
-	public @NotNull BrewerInventoryMock getSnapshot()
+	@NotNull
+	public BrewerInventoryMock getSnapshot()
 	{
 		return new BrewerInventoryMock(this);
 	}
@@ -84,5 +92,4 @@ public class BrewerInventoryMock extends InventoryMock implements BrewerInventor
 	{
 		Preconditions.checkState(getItem(INGREDIENT_SLOT) != null, "No ingredient has been set");
 	}
-
 }

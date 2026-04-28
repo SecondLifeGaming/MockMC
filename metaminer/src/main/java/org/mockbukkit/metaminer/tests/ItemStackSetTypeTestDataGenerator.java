@@ -36,8 +36,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 			JsonObject outputData = new JsonObject();
 			try
 			{
-				ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE);
-				itemStack.setType(material);
+				ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE).withType(material);
 				outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
 				if (itemStack.getItemMeta() != null)
 				{
@@ -69,7 +68,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 		{
 			if (ItemMeta.class.isAssignableFrom(anInterface))
 			{
-				output.add((Class<? extends ItemMeta>) anInterface);
+				output.add(anInterface.asSubclass(ItemMeta.class));
 			}
 		}
 		Class<?> superClass = aClass.getSuperclass();

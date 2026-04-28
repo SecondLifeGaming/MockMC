@@ -11,7 +11,9 @@ public class MessageComponentSerializerMock implements MessageComponentSerialize
 	@Override
 	public @NotNull Component deserialize(@NotNull Message input)
 	{
-		return (input instanceof AdventureMessageWrapper adventure ? adventure.getComponent() : Component.text(input.getString()));
+		return (input instanceof AdventureMessageWrapper adventure
+				? adventure.getComponent()
+				: Component.text(input.getString()));
 	}
 
 	@Override

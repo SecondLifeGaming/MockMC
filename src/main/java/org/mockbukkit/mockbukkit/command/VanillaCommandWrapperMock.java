@@ -22,7 +22,8 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 	public final CommandNode<CommandSourceStack> vanillaCommand;
 	public final String helpCommandNamespace;
 
-	public VanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases, CommandNode<CommandSourceStack> vanillaCommand, String helpCommandNamespace)
+	public VanillaCommandWrapperMock(String name, String description, String usageMessage, List<String> aliases,
+			CommandNode<CommandSourceStack> vanillaCommand, String helpCommandNamespace)
 	{
 		super(name, description, usageMessage, aliases);
 		this.vanillaCommand = vanillaCommand;
@@ -31,7 +32,8 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 
 	public VanillaCommandWrapperMock(CommandNode<CommandSourceStack> vanillaCommand)
 	{
-		super(vanillaCommand.getName(), "A Mojang provided command.", vanillaCommand.getUsageText(), Collections.emptyList());
+		super(vanillaCommand.getName(), "A Mojang provided command.", vanillaCommand.getUsageText(),
+				Collections.emptyList());
 		this.vanillaCommand = vanillaCommand;
 		this.setPermission(VanillaCommandWrapperMock.getPermission(vanillaCommand));
 		this.helpCommandNamespace = "Minecraft";
@@ -46,12 +48,12 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 		}
 
 		CommandSourceStack source = CommandSourceStackMock.from(sender);
-		ParseResults<CommandSourceStack> parseResults = PaperCommandsMock.INSTANCE.getDispatcherInternal().parse(commandLabel + (args.length == 0 ? "" : " " + String.join(" ", args)), source);
+		ParseResults<CommandSourceStack> parseResults = PaperCommandsMock.INSTANCE.getDispatcherInternal()
+				.parse(commandLabel + (args.length == 0 ? "" : " " + String.join(" ", args)), source);
 		try
 		{
 			PaperCommandsMock.INSTANCE.getDispatcherInternal().execute(parseResults);
-		}
-		catch (CommandSyntaxException e)
+		} catch (CommandSyntaxException e)
 		{
 			sender.sendMessage(MessageComponentSerializer.message().deserialize(e.getRawMessage()));
 		}
@@ -59,14 +61,16 @@ public class VanillaCommandWrapperMock extends BukkitCommand
 	}
 
 	@Override
-	public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location) throws IllegalArgumentException
+	public List<String> tabComplete(CommandSender sender, String alias, String[] args, Location location)
+			throws IllegalArgumentException
 	{
 		Preconditions.checkArgument(sender != null, "Sender cannot be null");
 		Preconditions.checkArgument(args != null, "Arguments cannot be null");
 		Preconditions.checkArgument(alias != null, "Alias cannot be null");
 
 		CommandSourceStack source = CommandSourceStackMock.from(sender);
-		ParseResults<CommandSourceStack> parsed = PaperCommandsMock.INSTANCE.getDispatcherInternal().parse(this.toDispatcher(args, this.getName()), source); // Paper
+		ParseResults<CommandSourceStack> parsed = PaperCommandsMock.INSTANCE.getDispatcherInternal()
+				.parse(this.toDispatcher(args, this.getName()), source); // Paper
 
 		List<String> results = new ArrayList<>();
 		PaperCommandsMock.INSTANCE.getDispatcherInternal().getCompletionSuggestions(parsed).thenAccept((suggestions) ->

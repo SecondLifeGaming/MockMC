@@ -14,10 +14,13 @@ public class PlayerInventoryViewMock extends InventoryViewMock
 {
 
 	/**
-	 * Constructs a new {@link PlayerInventoryViewMock} for the provided player, with the specified top inventory.
+	 * Constructs a new {@link PlayerInventoryViewMock} for the provided player,
+	 * with the specified top inventory.
 	 *
-	 * @param player The player to create the view for.
-	 * @param top    The top inventory.
+	 * @param player
+	 *            The player to create the view for.
+	 * @param top
+	 *            The top inventory.
 	 */
 	public PlayerInventoryViewMock(@NotNull HumanEntity player, @NotNull Inventory top)
 	{

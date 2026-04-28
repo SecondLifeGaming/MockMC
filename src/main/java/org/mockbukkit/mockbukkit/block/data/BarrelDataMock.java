@@ -14,7 +14,8 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	/**
 	 * Constructs a new {@link BarrelDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public BarrelDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	}
 
 	/**
-	 * Create a new {@link BarrelDataMock} based on an existing {@link BarrelDataMock}.
+	 * Create a new {@link BarrelDataMock} based on an existing
+	 * {@link BarrelDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected BarrelDataMock(BarrelDataMock other)
 	{
@@ -63,7 +66,8 @@ public class BarrelDataMock extends BlockDataMock implements Barrel
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BarrelDataMock clone()
 	{
 		return new BarrelDataMock(this);

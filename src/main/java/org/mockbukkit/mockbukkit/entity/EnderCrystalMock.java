@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,7 +13,10 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class EnderCrystalMock extends EntityMock implements EnderCrystal
+public class EnderCrystalMock extends EntityMock
+		implements
+			EnderCrystal,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.EnderCrystalBaseMock
 {
 
 	private boolean showBottom = false;
@@ -22,10 +24,13 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 	private Location beamTarget = null;
 
 	/**
-	 * Constructs a new EntityMock on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new EntityMock on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public EnderCrystalMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -45,7 +50,8 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 	}
 
 	@Override
-	public @Nullable Location getBeamTarget()
+	@Nullable
+	public Location getBeamTarget()
 	{
 		return this.beamTarget;
 	}
@@ -56,21 +62,19 @@ public class EnderCrystalMock extends EntityMock implements EnderCrystal
 		if (location == null)
 		{
 			this.beamTarget = null;
-		}
-		else if (location.getWorld() != this.getWorld())
+		} else if (location.getWorld() != this.getWorld())
 		{
 			throw new IllegalArgumentException("Cannot set beam target location to different world");
-		}
-		else
+		} else
 		{
 			this.beamTarget = location.toBlockLocation();
 		}
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.END_CRYSTAL;
 	}
-
 }

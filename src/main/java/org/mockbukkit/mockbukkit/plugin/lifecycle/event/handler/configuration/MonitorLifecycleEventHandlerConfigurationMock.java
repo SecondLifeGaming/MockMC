@@ -6,12 +6,17 @@ import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;
 import io.papermc.paper.plugin.lifecycle.event.handler.configuration.MonitorLifecycleEventHandlerConfiguration;
 import org.mockbukkit.mockbukkit.plugin.lifecycle.event.types.AbstractLifecycleEventTypeMock;
 
-public class MonitorLifecycleEventHandlerConfigurationMock<O extends LifecycleEventOwner, E extends LifecycleEvent> extends AbstractLifecycleEventHandlerConfigurationMock<O, E> implements MonitorLifecycleEventHandlerConfiguration<O>
+public class MonitorLifecycleEventHandlerConfigurationMock<O extends LifecycleEventOwner, E extends LifecycleEvent>
+		extends
+			AbstractLifecycleEventHandlerConfigurationMock<O, E>
+		implements
+			MonitorLifecycleEventHandlerConfiguration<O>
 {
 
 	private boolean monitor = false;
 
-	public MonitorLifecycleEventHandlerConfigurationMock(LifecycleEventHandler<? super E> handler, AbstractLifecycleEventTypeMock<O, E, ?> eventType)
+	public MonitorLifecycleEventHandlerConfigurationMock(LifecycleEventHandler<? super E> handler,
+			AbstractLifecycleEventTypeMock<O, E, ?> eventType)
 	{
 		super(handler, eventType);
 	}

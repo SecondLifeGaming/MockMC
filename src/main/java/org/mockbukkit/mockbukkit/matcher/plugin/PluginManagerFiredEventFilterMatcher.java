@@ -12,6 +12,8 @@ import java.util.function.Predicate;
 
 import static org.hamcrest.Matchers.not;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeSafeMatcher<PluginManagerMock>
 {
 
@@ -27,28 +29,36 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	@Override
 	protected boolean matchesSafely(PluginManagerMock pluginManagerMock)
 	{
-		return pluginManagerMock.getFiredEvents().filter(eventClass::isInstance).map(event -> (T) event).anyMatch(filter);
+		return pluginManagerMock.getFiredEvents().filter(eventClass::isInstance).map(event -> (T) event)
+				.anyMatch(filter);
 	}
 
 	@Override
 	public void describeTo(Description description)
 	{
-		description.appendText("to match any event with specified filter and the following event class").appendValue(eventClass);
+		description.appendText("to match any event with specified filter and the following event class")
+				.appendValue(eventClass);
 	}
 
 	@Override
 	public void describeMismatchSafely(PluginManagerMock pluginManagerMock, Description description)
 	{
-		description.appendText("has fired events ").appendValueList("[", ",", "]", pluginManagerMock.getFiredEvents().toList());
+		description.appendText("has fired events ").appendValueList("[", ",", "]",
+				pluginManagerMock.getFiredEvents().toList());
 	}
 
 	/**
-	 * @param eventClass The required type of the event for a match
-	 * @param filter     A custom filter
-	 * @param <G>        The event type to check for
-	 * @return A matcher which matches with any plugin manager that has fired the specified event type with filter
+	 * @param eventClass
+	 *            The required type of the event for a match
+	 * @param filter
+	 *            A custom filter
+	 * @param <G>
+	 *            The event type to check for
+	 * @return A matcher which matches with any plugin manager that has fired the
+	 *         specified event type with filter
 	 */
-	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
+	public static <G extends Event> @NotNull PluginManagerFiredEventFilterMatcher<G> hasFiredFilteredEvent(
+			@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
 	{
 		Preconditions.checkNotNull(eventClass);
 		Preconditions.checkNotNull(filter);
@@ -56,12 +66,17 @@ public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeS
 	}
 
 	/**
-	 * @param eventClass The required type of the event for no match
-	 * @param filter     A custom filter
-	 * @param <G>        The event type to check for
-	 * @return A matcher which matches with any plugin manager that has not fired the specified event type without filter
+	 * @param eventClass
+	 *            The required type of the event for no match
+	 * @param filter
+	 *            A custom filter
+	 * @param <G>
+	 *            The event type to check for
+	 * @return A matcher which matches with any plugin manager that has not fired
+	 *         the specified event type without filter
 	 */
-	public static <G extends Event> @NotNull Matcher<PluginManagerMock> hasNotFiredFilteredEvent(@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
+	public static <G extends Event> @NotNull Matcher<PluginManagerMock> hasNotFiredFilteredEvent(
+			@NotNull Class<G> eventClass, @NotNull Predicate<G> filter)
 	{
 		return not(hasFiredFilteredEvent(eventClass, filter));
 	}

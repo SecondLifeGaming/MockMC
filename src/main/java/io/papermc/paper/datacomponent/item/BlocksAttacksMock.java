@@ -14,7 +14,8 @@ import java.util.Collections;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class BlocksAttacksMock implements BlocksAttacks
 {
 	private final float blockDelaySeconds;
@@ -84,8 +85,8 @@ public class BlocksAttacksMock implements BlocksAttacks
 		private float blockDelaySeconds;
 		private float disableCooldownScale = 1.0F;
 		private List<DamageReduction> damageReductions = new ObjectArrayList<>();
-		private ItemDamageFunction itemDamage = ItemDamageFunction.itemDamageFunction()
-				.threshold(1.0F).base(0.0F).factor(1.0F).build();
+		private ItemDamageFunction itemDamage = ItemDamageFunction.itemDamageFunction().threshold(1.0F).base(0.0F)
+				.factor(1.0F).build();
 		private @Nullable RegistryKeySet<DamageType> bypassedBy;
 		private @Nullable Key blockSound;
 		private @Nullable Key disableSound;

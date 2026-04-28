@@ -1,10 +1,10 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.registry.RegistryAccess;
 import io.papermc.paper.registry.RegistryKey;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
 import org.bukkit.Sound;
@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,33 +33,43 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode
 @SerializableAs("Equippable")
 @SuppressWarnings("UnstableApiUsage")
-public class EquippableComponentMock implements EquippableComponent
+public class EquippableComponentMock
+		implements
+			EquippableComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.EquippableComponentBaseMock
 {
 
-	private @Nullable NamespacedKey model;
-	private @Nullable NamespacedKey cameraOverlay;
-	private @Nullable Set<EntityType> allowedEntities;
-	private @Nullable Sound sound;
-	private @Nullable Sound shearingSound;
+	@Nullable
+	private NamespacedKey model;
+
+	@Nullable
+	private NamespacedKey cameraOverlay;
+
+	@Nullable
+	private Set<EntityType> allowedEntities;
+
+	@Nullable
+	private Sound sound;
+
+	@Nullable
+	private Sound shearingSound;
 
 	private EquipmentSlot equipmentSlot;
+
 	private boolean isDispensable;
+
 	private boolean isSwappable;
+
 	private boolean isDamageOnHurt;
+
 	private boolean isEquipOnInteract;
+
 	private boolean isShearable;
 
-	private EquippableComponentMock(@Nullable NamespacedKey model,
-								   @Nullable NamespacedKey cameraOverlay,
-								   @Nullable Set<EntityType> allowedEntities,
-								   @Nullable Sound sound,
-								   @Nullable Sound shearingSound,
-								   EquipmentSlot equipmentSlot,
-								   boolean isDispensable,
-								   boolean isSwappable,
-								   boolean isDamageOnHurt,
-								   boolean isEquipOnInteract,
-								   boolean isShearable)
+	private EquippableComponentMock(@Nullable NamespacedKey model, @Nullable NamespacedKey cameraOverlay,
+			@Nullable Set<EntityType> allowedEntities, @Nullable Sound sound, @Nullable Sound shearingSound,
+			EquipmentSlot equipmentSlot, boolean isDispensable, boolean isSwappable, boolean isDamageOnHurt,
+			boolean isEquipOnInteract, boolean isShearable)
 	{
 		this.model = model;
 		this.cameraOverlay = cameraOverlay;
@@ -100,7 +109,8 @@ public class EquippableComponentMock implements EquippableComponent
 	}
 
 	@Override
-	public @Nullable NamespacedKey getModel()
+	@Nullable
+	public NamespacedKey getModel()
 	{
 		return this.model;
 	}
@@ -112,7 +122,8 @@ public class EquippableComponentMock implements EquippableComponent
 	}
 
 	@Override
-	public @Nullable NamespacedKey getCameraOverlay()
+	@Nullable
+	public NamespacedKey getCameraOverlay()
 	{
 		return this.cameraOverlay;
 	}
@@ -124,13 +135,13 @@ public class EquippableComponentMock implements EquippableComponent
 	}
 
 	@Override
-	public @Nullable Collection<EntityType> getAllowedEntities()
+	@Nullable
+	public Collection<EntityType> getAllowedEntities()
 	{
 		if (this.allowedEntities == null)
 		{
 			return null;
-		}
-		else
+		} else
 		{
 			return Collections.unmodifiableSet(this.allowedEntities);
 		}
@@ -215,7 +226,8 @@ public class EquippableComponentMock implements EquippableComponent
 	}
 
 	@Override
-	public @Nullable Sound getShearingSound()
+	@Nullable
+	public Sound getShearingSound()
 	{
 		return this.shearingSound;
 	}
@@ -237,16 +249,15 @@ public class EquippableComponentMock implements EquippableComponent
 		{
 			result.put("model", model.asString());
 		}
-
 		NamespacedKey cameraOverlay = this.getCameraOverlay();
 		if (cameraOverlay != null)
 		{
 			result.put("camera-overlay", cameraOverlay.asString());
 		}
-
 		Optional.ofNullable(this.getAllowedEntities()).ifPresent(entities ->
 		{
-			var rawEntities = entities.stream().map(EntityType::getKey).map(NamespacedKey::asString).collect(Collectors.toSet());
+			var rawEntities = entities.stream().map(EntityType::getKey).map(NamespacedKey::asString)
+					.collect(Collectors.toSet());
 			result.put("allowed-entities", rawEntities);
 		});
 		result.put("dispensable", this.isDispensable());
@@ -254,10 +265,8 @@ public class EquippableComponentMock implements EquippableComponent
 		result.put("damage-on-hurt", this.isDamageOnHurt());
 		result.put("equip-on-interact", this.isEquipOnInteract());
 		result.put("can-be-sheared", this.canBeSheared());
-
-		Optional.ofNullable(this.getShearingSound()).ifPresent(s ->
-				result.put("shearing-sound", Registry.SOUND_EVENT.getKeyOrThrow(s).toString()));
-
+		Optional.ofNullable(this.getShearingSound())
+				.ifPresent(s -> result.put("shearing-sound", Registry.SOUND_EVENT.getKeyOrThrow(s).toString()));
 		return result;
 	}
 
@@ -280,7 +289,6 @@ public class EquippableComponentMock implements EquippableComponent
 			Preconditions.checkNotNull(soundKey, "The sound key `shearing-sound` is not valid!");
 			shearingSound = Registry.SOUNDS.get(soundKey);
 		}
-
 		String model = SerializableMeta.getString(map, "model", true);
 		String cameraOverlay = SerializableMeta.getString(map, "camera-overlay", true);
 		Set<EntityType> allowedEntities = null;
@@ -289,37 +297,30 @@ public class EquippableComponentMock implements EquippableComponent
 		{
 			allowedEntities = new LinkedHashSet<>(NbtParser.parseList(allowed, o ->
 			{
-				Preconditions.checkArgument(o instanceof String, "The entity type `allowed-entities` should be a string!");
+				Preconditions.checkArgument(o instanceof String,
+						"The entity type `allowed-entities` should be a string!");
 				NamespacedKey key = NamespacedKey.fromString((String) o);
 				return RegistryAccess.registryAccess().getRegistry(RegistryKey.ENTITY_TYPE).get(key);
 			}));
 		}
-
 		Boolean dispensable = SerializableMeta.getObject(Boolean.class, map, "dispensable", true);
 		Boolean swappable = SerializableMeta.getObject(Boolean.class, map, "swappable", true);
 		Boolean damageOnHurt = SerializableMeta.getObject(Boolean.class, map, "damage-on-hurt", true);
 		Boolean equipOnInteract = SerializableMeta.getObject(Boolean.class, map, "equip-on-interact", true);
 		Boolean canBeSheared = SerializableMeta.getObject(Boolean.class, map, "can-be-sheared", true);
-
-		return EquippableComponentMock.builder()
-				.equipmentSlot(slot)
-				.sound(equipSound != null ? equipSound : Sound.ITEM_ARMOR_EQUIP_GENERIC)
-				.shearingSound(shearingSound)
+		return EquippableComponentMock.builder().equipmentSlot(slot)
+				.sound(equipSound != null ? equipSound : Sound.ITEM_ARMOR_EQUIP_GENERIC).shearingSound(shearingSound)
 				.model(Optional.ofNullable(model).map(NamespacedKey::fromString).orElse(null))
 				.cameraOverlay(Optional.ofNullable(cameraOverlay).map(NamespacedKey::fromString).orElse(null))
-				.allowedEntities(allowedEntities)
-				.isDispensable(dispensable != null ? dispensable : true)
+				.allowedEntities(allowedEntities).isDispensable(dispensable != null ? dispensable : true)
 				.isSwappable(swappable != null ? swappable : true)
 				.isDamageOnHurt(damageOnHurt != null ? damageOnHurt : true)
 				.isEquipOnInteract(equipOnInteract != null ? equipOnInteract : false)
-				.isShearable(canBeSheared != null ? canBeSheared : false)
-				.build();
+				.isShearable(canBeSheared != null ? canBeSheared : false).build();
 	}
 
 	public static EquippableComponent useDefault()
 	{
 		return builder().build();
 	}
-
-
 }

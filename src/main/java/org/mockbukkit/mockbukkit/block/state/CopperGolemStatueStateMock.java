@@ -13,10 +13,11 @@ import org.jetbrains.annotations.NotNull;
 public class CopperGolemStatueStateMock extends TileStateMock implements CopperGolemStatue
 {
 	/**
-	 * Constructs a new {@link CopperGolemStatueStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#CONDUIT}
+	 * Constructs a new {@link CopperGolemStatueStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#CONDUIT}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public CopperGolemStatueStateMock(@NotNull Material material)
 	{

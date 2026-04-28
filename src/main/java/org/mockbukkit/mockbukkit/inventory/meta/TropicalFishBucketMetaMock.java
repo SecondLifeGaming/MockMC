@@ -9,7 +9,6 @@ import org.bukkit.inventory.meta.TropicalFishBucketMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Map;
 
 /**
@@ -18,11 +17,15 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class TropicalFishBucketMetaMock extends ItemMetaMock implements TropicalFishBucketMeta
+public class TropicalFishBucketMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.TropicalFishBucketMetaBaseMock
 {
 
 	private DyeColor patternColor;
+
 	private DyeColor bodyColor;
+
 	private TropicalFish.Pattern pattern;
 
 	/**
@@ -34,14 +37,15 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	/**
-	 * Constructs a new {@link TropicalFishBucketMetaMock}, cloning the data from another.
+	 * Constructs a new {@link TropicalFishBucketMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public TropicalFishBucketMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof TropicalFishBucketMeta bucketMeta)
 		{
 			if (meta instanceof TropicalFishBucketMetaMock mock)
@@ -74,7 +78,8 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
-	public @NotNull DyeColor getPatternColor()
+	@NotNull
+	public DyeColor getPatternColor()
 	{
 		Validate.notNull(patternColor, "Pattern color is not set");
 		return patternColor;
@@ -88,7 +93,8 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
-	public @NotNull DyeColor getBodyColor()
+	@NotNull
+	public DyeColor getBodyColor()
 	{
 		Validate.notNull(bodyColor, "Body color is not set");
 		return bodyColor;
@@ -102,7 +108,8 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	}
 
 	@Override
-	public @NotNull TropicalFish.Pattern getPattern()
+	@NotNull
+	public TropicalFish.Pattern getPattern()
 	{
 		Validate.notNull(pattern, "Pattern is not set");
 		return pattern;
@@ -135,16 +142,20 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof TropicalFishBucketMetaMock meta))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		return super.equals(obj) && patternColor == meta.patternColor && bodyColor == meta.bodyColor && pattern == meta.pattern;
+		TropicalFishBucketMetaMock other = (TropicalFishBucketMetaMock) obj;
+		return super.equals(obj) && this.patternColor == other.patternColor && this.bodyColor == other.bodyColor
+				&& this.pattern == other.pattern;
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull TropicalFishBucketMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public TropicalFishBucketMetaMock clone()
 	{
 		return new TropicalFishBucketMetaMock(this);
 	}
@@ -152,10 +163,13 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized TropicalFishBucketMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized TropicalFishBucketMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the TropicalFishBucketMetaMock class.
 	 */
-	public static @NotNull TropicalFishBucketMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static TropicalFishBucketMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		TropicalFishBucketMetaMock serialMock = new TropicalFishBucketMetaMock();
 		serialMock.deserializeInternal(args);
@@ -169,10 +183,12 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	 * Serializes the properties of an TropicalFishBucketMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the TropicalFishBucketMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         TropicalFishBucketMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		checkVars();
@@ -187,5 +203,4 @@ public class TropicalFishBucketMetaMock extends ItemMetaMock implements Tropical
 	{
 		return "TROPICAL_FISH_BUCKET";
 	}
-
 }

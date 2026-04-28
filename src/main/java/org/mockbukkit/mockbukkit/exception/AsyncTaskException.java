@@ -12,9 +12,11 @@ public class AsyncTaskException extends RuntimeException
 	private static final long serialVersionUID = -4501059063243851677L;
 
 	/**
-	 * Constructs a new {@link AsyncTaskException} with the specified cause and a detail message of (cause==null ? null : cause.toString())
+	 * Constructs a new {@link AsyncTaskException} with the specified cause and a
+	 * detail message of (cause==null ? null : cause.toString())
 	 *
-	 * @param cause The exception thrown in the asynchronous task.
+	 * @param cause
+	 *            The exception thrown in the asynchronous task.
 	 */
 	public AsyncTaskException(Exception cause)
 	{

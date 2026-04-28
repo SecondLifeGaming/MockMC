@@ -61,9 +61,7 @@ public class CraftingRecipeFactory
 		// Shape
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_SHAPE), "jsonRecipe has no shape");
 		JsonArray shapes = jsonRecipe.get(FIELD_SHAPE).getAsJsonArray();
-		List<String> shapesList = shapes.asList().stream()
-				.map(JsonElement::getAsString)
-				.toList();
+		List<String> shapesList = shapes.asList().stream().map(JsonElement::getAsString).toList();
 
 		// Create the shaped recipe
 		ShapedRecipe shapedRecipe = createRecipe(jsonRecipe, ShapedRecipe::new);
@@ -90,7 +88,8 @@ public class CraftingRecipeFactory
 		// Validate type
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
-		Preconditions.checkArgument(SHAPELESS_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)", type);
+		Preconditions.checkArgument(SHAPELESS_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)",
+				type);
 
 		// Create the shaped recipe
 		ShapelessRecipe shapelessRecipe = createRecipe(jsonRecipe, ShapelessRecipe::new);
@@ -112,7 +111,8 @@ public class CraftingRecipeFactory
 		// Validate type
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
-		Preconditions.checkArgument(TRANSMUTE_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)", type);
+		Preconditions.checkArgument(TRANSMUTE_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a shapeless recipe (%s)",
+				type);
 
 		// Input
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_INPUT), "jsonRecipe has no input");
@@ -125,7 +125,8 @@ public class CraftingRecipeFactory
 		RecipeChoice material = createRecipeChoice(materialJson);
 
 		// Create the shaped recipe
-		TransmuteRecipe transmuteRecipe = createRecipe(jsonRecipe, (key, result) -> new TransmuteRecipe(key, result.getType(), input, material));
+		TransmuteRecipe transmuteRecipe = createRecipe(jsonRecipe,
+				(key, result) -> new TransmuteRecipe(key, result.getType(), input, material));
 		populateCraftingRecipe(jsonRecipe, transmuteRecipe);
 
 		return transmuteRecipe;
@@ -137,12 +138,14 @@ public class CraftingRecipeFactory
 		// Validate type
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_TYPE), JSON_RECIPE_HAS_NO_TYPE);
 		String type = jsonRecipe.get(FIELD_TYPE).getAsString();
-		Preconditions.checkArgument(COMPLEX_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a complex recipe (%s)", type);
+		Preconditions.checkArgument(COMPLEX_TYPE.equalsIgnoreCase(type), "jsonRecipe is not a complex recipe (%s)",
+				type);
 
 		return createRecipe(jsonRecipe, ComplexRecipeMock::new);
 	}
 
-	private static <T> T createRecipe(@NotNull JsonObject jsonRecipe, @NonNull BiFunction<NamespacedKey, ItemStack, T> factory)
+	private static <T> T createRecipe(@NotNull JsonObject jsonRecipe,
+			@NonNull BiFunction<NamespacedKey, ItemStack, T> factory)
 	{
 		// Validate key
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_KEY), "jsonRecipe has no key");
@@ -163,15 +166,9 @@ public class CraftingRecipeFactory
 
 		if (FIELD_MATERIAL.equalsIgnoreCase(choiceType))
 		{
-			List<Material> materials = value.get(FIELD_CHOICES).getAsJsonArray()
-					.asList().stream()
-					.map(JsonElement::getAsString)
-					.map(NamespacedKey::fromString)
-					.filter(Objects::nonNull)
-					.map(NamespacedKey::getKey)
-					.map(String::toUpperCase)
-					.map(Material::valueOf)
-					.toList();
+			List<Material> materials = value.get(FIELD_CHOICES).getAsJsonArray().asList().stream()
+					.map(JsonElement::getAsString).map(NamespacedKey::fromString).filter(Objects::nonNull)
+					.map(NamespacedKey::getKey).map(String::toUpperCase).map(Material::valueOf).toList();
 			return new RecipeChoice.MaterialChoice(materials);
 		}
 
@@ -199,7 +196,8 @@ public class CraftingRecipeFactory
 
 		// category
 		Preconditions.checkArgument(jsonRecipe.has(FIELD_CATEGORY), "jsonRecipe has no category");
-		CraftingBookCategory category = CraftingBookCategory.valueOf(jsonRecipe.get(FIELD_CATEGORY).getAsString().toUpperCase());
+		CraftingBookCategory category = CraftingBookCategory
+				.valueOf(jsonRecipe.get(FIELD_CATEGORY).getAsString().toUpperCase());
 
 		craftingRecipe.setGroup(group);
 		craftingRecipe.setCategory(category);

@@ -25,11 +25,11 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	private final PluginClassLoaderGroup classLoaderGroup = new MockBukkitPluginClassLoaderGroup();
 	private final File dataFolder;
 
-	public MockBukkitURLClassLoader(File file, ClassLoader parent, ServerMock server,
-									PluginDescriptionFile description,
-									File dataFolder) throws MalformedURLException
+	public MockBukkitURLClassLoader(File file, ClassLoader parent, ServerMock server, PluginDescriptionFile description,
+			File dataFolder) throws MalformedURLException
 	{
-		super(new URL[]{ file.toURI().toURL() }, parent);
+		super(new URL[]
+		{file.toURI().toURL()}, parent);
 		this.pluginFile = file;
 		this.server = server;
 		this.description = description;
@@ -51,12 +51,14 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 	@Override
 	public void init(JavaPlugin javaPlugin)
 	{
-		javaPlugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(), PaperPluginLogger.getLogger(getConfiguration()));
+		javaPlugin.init(server, description, dataFolder, pluginFile, this, getConfiguration(),
+				PaperPluginLogger.getLogger(getConfiguration()));
 	}
 
 	@Override
 	public @Nullable JavaPlugin getPlugin()
 	{
+		// TODO: Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -66,7 +68,8 @@ public class MockBukkitURLClassLoader extends URLClassLoader implements Configur
 		return classLoaderGroup;
 	}
 
-	// This method is override to make sure that the plugin's resources are loaded before the resources of parent classloader
+	// This method is override to make sure that the plugin's resources are loaded
+	// before the resources of parent classloader
 	@Nullable
 	@Override
 	public URL getResource(String name)

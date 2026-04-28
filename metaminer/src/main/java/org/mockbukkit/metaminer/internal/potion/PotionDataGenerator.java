@@ -49,6 +49,9 @@ public class PotionDataGenerator implements DataGenerator
 		File destinationFile = new File(dataFolder, potionType.getKey().getKey() + ".json");
 		JsonObject rootObject = new JsonObject();
 		rootObject.add("effects", effects);
+		rootObject.add("upgradeable", new JsonPrimitive(potionType.isUpgradeable()));
+		rootObject.add("extendable", new JsonPrimitive(potionType.isExtendable()));
+		rootObject.add("maxLevel", new JsonPrimitive(potionType.getMaxLevel()));
 		JsonUtil.dump(rootObject, destinationFile);
 	}
 

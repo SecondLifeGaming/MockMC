@@ -4,7 +4,8 @@ import net.kyori.adventure.text.ComponentLike;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "UnstableApiUsage" })
+@SuppressWarnings(
+{"UnstableApiUsage"})
 public class AttributeModifierDisplayBridgeMock implements AttributeModifierDisplayBridge
 {
 

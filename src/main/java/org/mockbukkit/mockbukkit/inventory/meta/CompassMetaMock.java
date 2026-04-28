@@ -3,16 +3,15 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import java.util.Objects;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
+import org.mockbukkit.mockbukkit.util.NbtParser;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
-
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of a {@link CompassMeta}.
@@ -20,10 +19,17 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class CompassMetaMock extends ItemMetaMock implements CompassMeta
+@SuppressWarnings("unchecked")
+public class CompassMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.CompassMetaBaseMock
 {
 
-	private @Nullable Location lodestone;
+	public static final String LODESTONE_KEY = "lodestone";
+
+	@Nullable
+	private Location lodestone;
+
 	private boolean tracked;
 
 	/**
@@ -37,12 +43,12 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	/**
 	 * Constructs a new {@link CompassMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public CompassMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof CompassMeta compass)
 		{
 			this.lodestone = (compass.getLodestone() != null ? compass.getLodestone() : null);
@@ -57,7 +63,8 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	}
 
 	@Override
-	public @Nullable Location getLodestone()
+	@Nullable
+	public Location getLodestone()
 	{
 		return this.lodestone;
 	}
@@ -82,20 +89,6 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	}
 
 	@Override
-	public boolean isLodestoneCompass()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void clearLodestone()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public int hashCode()
 	{
 		final int prime = 31;
@@ -108,16 +101,20 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof CompassMeta meta))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		return super.equals(obj) && Objects.equals(this.lodestone, meta.getLodestone()) && this.tracked == meta.isLodestoneTracked();
+		CompassMetaMock other = (CompassMetaMock) obj;
+		return super.equals(obj) && Objects.equals(this.lodestone, other.getLodestone())
+				&& this.tracked == other.isLodestoneTracked();
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull CompassMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public CompassMetaMock clone()
 	{
 		return new CompassMetaMock(this);
 	}
@@ -125,31 +122,38 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized CompassMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized CompassMetaMock object in a Map&lt;String, Object&gt;
+	 *            format.
 	 * @return A new instance of the CompassMetaMock class.
 	 */
-	public static @NotNull CompassMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static CompassMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		CompassMetaMock serialMock = new CompassMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.lodestone = Location.deserialize((Map<String, Object>) args.get("lodestone"));
-		serialMock.tracked = (boolean) args.get("tracked");
+		if (args.containsKey(LODESTONE_KEY))
+		{
+			serialMock.lodestone = Location.deserialize((Map<String, Object>) args.get(LODESTONE_KEY));
+		}
+		serialMock.tracked = NbtParser.parseBoolean(args.get("tracked"), false);
 		return serialMock;
 	}
 
 	/**
-	 * Serializes the properties of an CompassMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an CompassMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the CompassMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (this.lodestone != null)
 		{
-			serialized.put("lodestone", SerializationUtils.serialize(this.lodestone));
+			serialized.put(LODESTONE_KEY, SerializationUtils.serialize(this.lodestone));
 		}
 		serialized.put("tracked", this.tracked);
 		return serialized;
@@ -160,5 +164,4 @@ public class CompassMetaMock extends ItemMetaMock implements CompassMeta
 	{
 		return "COMPASS";
 	}
-
 }

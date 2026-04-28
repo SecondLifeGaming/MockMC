@@ -25,6 +25,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class RegistryAccessMock implements RegistryAccess
 {
 
@@ -74,8 +76,7 @@ public class RegistryAccessMock implements RegistryAccess
 		try
 		{
 			return Class.forName(className);
-		}
-		catch (ClassNotFoundException e)
+		} catch (ClassNotFoundException e)
 		{
 			throw new InternalDataLoadException(e);
 		}
@@ -92,49 +93,18 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
 	{
-		return List.of(
-				RegistryKey.COW_SOUND_VARIANT,
-				RegistryKey.CHICKEN_SOUND_VARIANT,
-				RegistryKey.DIALOG,
-				RegistryKey.STRUCTURE,
-				RegistryKey.STRUCTURE_TYPE,
-				RegistryKey.TRIM_MATERIAL,
-				RegistryKey.TRIM_PATTERN,
-				RegistryKey.INSTRUMENT,
-				RegistryKey.GAME_EVENT,
-				RegistryKey.ENCHANTMENT,
-				RegistryKey.MOB_EFFECT,
-				RegistryKey.DAMAGE_TYPE,
-				RegistryKey.ITEM,
-				RegistryKey.BLOCK,
-				RegistryKey.WOLF_VARIANT,
-				RegistryKey.JUKEBOX_SONG,
-				RegistryKey.CAT_VARIANT,
-				RegistryKey.CAT_SOUND_VARIANT,
-				RegistryKey.VILLAGER_PROFESSION,
-				RegistryKey.VILLAGER_TYPE,
-				RegistryKey.FROG_VARIANT,
-				RegistryKey.CHICKEN_VARIANT,
-				RegistryKey.COW_VARIANT,
-				RegistryKey.PIG_VARIANT,
-				RegistryKey.PIG_SOUND_VARIANT,
-				RegistryKey.WOLF_SOUND_VARIANT,
-				RegistryKey.MAP_DECORATION_TYPE,
-				RegistryKey.BANNER_PATTERN,
-				RegistryKey.MENU,
-				RegistryKey.PAINTING_VARIANT,
-				RegistryKey.ATTRIBUTE,
-				RegistryKey.BIOME,
-				RegistryKey.SOUND_EVENT,
-				RegistryKey.FLUID,
-				RegistryKey.ENTITY_TYPE,
-				RegistryKey.PARTICLE_TYPE,
-				RegistryKey.POTION,
-				RegistryKey.DATA_COMPONENT_TYPE,
-				RegistryKey.MEMORY_MODULE_TYPE,
-				RegistryKey.GAME_RULE,
-				RegistryKey.ZOMBIE_NAUTILUS_VARIANT
-		);
+		return List.of(RegistryKey.COW_SOUND_VARIANT, RegistryKey.CHICKEN_SOUND_VARIANT, RegistryKey.DIALOG,
+				RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL, RegistryKey.TRIM_PATTERN,
+				RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT, RegistryKey.MOB_EFFECT,
+				RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT,
+				RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.CAT_SOUND_VARIANT,
+				RegistryKey.VILLAGER_PROFESSION, RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT,
+				RegistryKey.CHICKEN_VARIANT, RegistryKey.COW_VARIANT, RegistryKey.PIG_VARIANT,
+				RegistryKey.PIG_SOUND_VARIANT, RegistryKey.WOLF_SOUND_VARIANT, RegistryKey.MAP_DECORATION_TYPE,
+				RegistryKey.BANNER_PATTERN, RegistryKey.MENU, RegistryKey.PAINTING_VARIANT, RegistryKey.ATTRIBUTE,
+				RegistryKey.BIOME, RegistryKey.SOUND_EVENT, RegistryKey.FLUID, RegistryKey.ENTITY_TYPE,
+				RegistryKey.PARTICLE_TYPE, RegistryKey.POTION, RegistryKey.DATA_COMPONENT_TYPE,
+				RegistryKey.MEMORY_MODULE_TYPE, RegistryKey.GAME_RULE, RegistryKey.ZOMBIE_NAUTILUS_VARIANT);
 	}
 
 	private static Registry<?> getValue(Field a)
@@ -142,10 +112,10 @@ public class RegistryAccessMock implements RegistryAccess
 		try
 		{
 			return (Registry<?>) a.get(null);
-		}
-		catch (IllegalAccessException e)
+		} catch (IllegalAccessException e)
 		{
-			throw new ReflectionAccessException("Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
+			throw new ReflectionAccessException(
+					"Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
 		}
 	}
 
@@ -162,10 +132,10 @@ public class RegistryAccessMock implements RegistryAccess
 			{
 				String className = element.getAsString();
 				output.put(registryKey, className);
-			}
-			else
+			} else
 			{
-				throw new InternalDataLoadException("Null JSON element while retrieving `" + registryKey.key().asString() + "` - MockBukkit / MC version mismatch?");
+				throw new InternalDataLoadException("Null JSON element while retrieving `"
+						+ registryKey.key().asString() + "` - MockBukkit / MC version mismatch?");
 			}
 		}
 		return output;
@@ -181,8 +151,7 @@ public class RegistryAccessMock implements RegistryAccess
 				try
 				{
 					output.add((RegistryKey<?>) field.get(null));
-				}
-				catch (IllegalAccessException e)
+				} catch (IllegalAccessException e)
 				{
 					throw new InternalDataLoadException(e);
 				}
@@ -195,11 +164,8 @@ public class RegistryAccessMock implements RegistryAccess
 	{
 		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
 				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers()))
-				.filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass))
-				.map(RegistryAccessMock::getValue)
-				.filter(Objects::nonNull)
+				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
+				.filter(a -> genericTypeMatches(a, tClass)).map(RegistryAccessMock::getValue).filter(Objects::nonNull)
 				.findAny()
 				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass));
 	}

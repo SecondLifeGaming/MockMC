@@ -17,6 +17,8 @@ import java.util.Collections;
 
 import static org.mockbukkit.mockbukkit.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class HelpMapFactoryRegisteredMatcherTest extends AbstractMatcherTest
 {

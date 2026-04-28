@@ -15,6 +15,8 @@ import org.mockbukkit.mockbukkit.util.ResourceLoader;
  * Utility class copied from CraftPotionUtil.
  * https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java#14
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class PotionUtils
 {
 
@@ -60,12 +62,10 @@ public class PotionUtils
 		if (data.isUpgraded())
 		{
 			type = upgradeable.get(data.getType());
-		}
-		else if (data.isExtended())
+		} else if (data.isExtended())
 		{
 			type = extendable.get(data.getType());
-		}
-		else
+		} else
 		{
 			type = data.getType();
 		}

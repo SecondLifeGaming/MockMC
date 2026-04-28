@@ -12,37 +12,56 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.entity.LivingEntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note that not every {@link LivingEntity} has
- * {@link EntityEquipment}, so only implement this where necessary.
+ * This mocks the {@link EntityEquipment} of a {@link LivingEntityMock}. Note
+ * that not every {@link LivingEntity} has {@link EntityEquipment}, so only
+ * implement this where necessary.
  *
  * @author TheBusyBiscuit
  */
-public class EntityEquipmentMock implements EntityEquipment
+public class EntityEquipmentMock
+		implements
+			EntityEquipment,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.EntityEquipmentBaseMock
 {
 
-	private final @NotNull LivingEntityMock holder;
+	@NotNull
+	private final LivingEntityMock holder;
 
 	private final Map<EquipmentSlot, Float> dropChances = new EnumMap<>(EquipmentSlot.class);
 
-	private @NotNull ItemStack itemInMainHand = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack itemInOffHand = new ItemStackMock(Material.AIR);
+	@NotNull
+	private ItemStack itemInMainHand = new ItemStackMock(Material.AIR);
 
-	private @NotNull ItemStack helmet = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack chestPlate = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack leggings = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack boots = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack bodyItem = new ItemStackMock(Material.AIR);
-	private @NotNull ItemStack saddleItem = new ItemStackMock(Material.AIR);
+	@NotNull
+	private ItemStack itemInOffHand = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack helmet = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack chestPlate = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack leggings = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack boots = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack bodyItem = new ItemStackMock(Material.AIR);
+
+	@NotNull
+	private ItemStack saddleItem = new ItemStackMock(Material.AIR);
 
 	/**
 	 * Constructs a new {@link EntityEquipmentMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public EntityEquipmentMock(@NotNull LivingEntityMock holder)
 	{
@@ -63,16 +82,16 @@ public class EntityEquipmentMock implements EntityEquipment
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		switch (slot)
 		{
-		case HEAD -> setHelmet(item, silent);
-		case CHEST -> setChestplate(item, silent);
-		case LEGS -> setLeggings(item, silent);
-		case FEET -> setBoots(item, silent);
-		case HAND -> setItemInMainHand(item, silent);
-		case OFF_HAND -> setItemInOffHand(item, silent);
-		case BODY -> setItemInBody(item, silent);
-		case SADDLE -> setSaddleItem(item, silent);
-		default ->
-				throw new UnimplementedOperationException("EquipmentSlot " + slot + " is not implemented for EntityEquipmentMock");
+			case HEAD -> setHelmet(item, silent);
+			case CHEST -> setChestplate(item, silent);
+			case LEGS -> setLeggings(item, silent);
+			case FEET -> setBoots(item, silent);
+			case HAND -> setItemInMainHand(item, silent);
+			case OFF_HAND -> setItemInOffHand(item, silent);
+			case BODY -> setItemInBody(item, silent);
+			case SADDLE -> setSaddleItem(item, silent);
+			default -> throw new UnimplementedOperationException(
+					"EquipmentSlot " + slot + " is not implemented for EntityEquipmentMock");
 		}
 	}
 
@@ -88,13 +107,15 @@ public class EntityEquipmentMock implements EntityEquipment
 		// Sounds are not implemented here
 	}
 
-	private @NotNull ItemStack getSaddleItem()
+	@NotNull
+	private ItemStack getSaddleItem()
 	{
 		return this.saddleItem.clone();
 	}
 
 	@Override
-	public @NotNull ItemStack getItem(@NotNull EquipmentSlot slot)
+	@NotNull
+	public ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		return switch (slot)
@@ -116,7 +137,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getItemInMainHand()
+	@NotNull
+	public ItemStack getItemInMainHand()
 	{
 		return this.itemInMainHand.clone();
 	}
@@ -135,7 +157,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getItemInOffHand()
+	@NotNull
+	public ItemStack getItemInOffHand()
 	{
 		return this.itemInOffHand.clone();
 	}
@@ -155,7 +178,8 @@ public class EntityEquipmentMock implements EntityEquipment
 
 	@Override
 	@Deprecated
-	public @NotNull ItemStack getItemInHand()
+	@NotNull
+	public ItemStack getItemInHand()
 	{
 		return getItemInMainHand();
 	}
@@ -168,7 +192,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getHelmet()
+	@NotNull
+	public ItemStack getHelmet()
 	{
 		return this.helmet.clone();
 	}
@@ -187,7 +212,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getChestplate()
+	@NotNull
+	public ItemStack getChestplate()
 	{
 		return this.chestPlate.clone();
 	}
@@ -206,7 +232,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getLeggings()
+	@NotNull
+	public ItemStack getLeggings()
 	{
 		return this.leggings.clone();
 	}
@@ -225,7 +252,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull ItemStack getBoots()
+	@NotNull
+	public ItemStack getBoots()
 	{
 		return this.boots.clone();
 	}
@@ -246,14 +274,14 @@ public class EntityEquipmentMock implements EntityEquipment
 	@Override
 	public ItemStack @NotNull [] getArmorContents()
 	{
-		return new ItemStack[]{ getBoots(), getLeggings(), getChestplate(), getHelmet() };
+		return new ItemStack[]
+		{getBoots(), getLeggings(), getChestplate(), getHelmet()};
 	}
 
 	@Override
 	public void setArmorContents(@NotNull ItemStack @NotNull [] items)
 	{
 		Preconditions.checkNotNull(items, "Items cannot be null");
-
 		setBoots((items.length >= 1) ? items[0] : null);
 		setLeggings((items.length >= 2) ? items[1] : null);
 		setChestplate((items.length >= 3) ? items[2] : null);
@@ -265,7 +293,6 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		setItemInMainHand(null);
 		setItemInOffHand(null);
-
 		setHelmet(null);
 		setChestplate(null);
 		setLeggings(null);
@@ -359,7 +386,8 @@ public class EntityEquipmentMock implements EntityEquipment
 	}
 
 	@Override
-	public @NotNull Entity getHolder()
+	@NotNull
+	public Entity getHolder()
 	{
 		return holder;
 	}
@@ -369,7 +397,6 @@ public class EntityEquipmentMock implements EntityEquipment
 	{
 		Preconditions.checkNotNull(slot, "Slot cannot be null");
 		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
-
 		this.dropChances.put(slot, chance);
 	}
 
@@ -380,9 +407,9 @@ public class EntityEquipmentMock implements EntityEquipment
 		return this.dropChances.get(slot);
 	}
 
-	static @NotNull ItemStack nonNullClone(@Nullable ItemStack itemStack)
+	@NotNull
+	static ItemStack nonNullClone(@Nullable ItemStack itemStack)
 	{
 		return itemStack == null ? new ItemStackMock(Material.AIR) : itemStack.clone();
 	}
-
 }

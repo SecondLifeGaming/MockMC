@@ -36,7 +36,8 @@ public class DirectionalDataMock extends BlockDataMock implements Directional
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(this.getFaces().contains(blockFace), "Invalid face: %s. Possible values are: %s", blockFace, this.getFaces());
+		Preconditions.checkArgument(this.getFaces().contains(blockFace), "Invalid face: %s. Possible values are: %s",
+				blockFace, this.getFaces());
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -47,7 +48,8 @@ public class DirectionalDataMock extends BlockDataMock implements Directional
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull DirectionalDataMock clone()
 	{
 		return new DirectionalDataMock(this);

@@ -13,21 +13,17 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
-public record ConsumableMock(@NonNegative float consumeSeconds, ItemUseAnimation animation,
-							 Key sound, boolean hasConsumeParticles,
-							 @Unmodifiable List<ConsumeEffect> consumeEffects) implements Consumable
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
+public record ConsumableMock(@NonNegative float consumeSeconds, ItemUseAnimation animation, Key sound,
+		boolean hasConsumeParticles, @Unmodifiable List<ConsumeEffect> consumeEffects) implements Consumable
 {
 
 	@Override
 	public Builder toBuilder()
 	{
-		return new BuilderMock()
-				.consumeSeconds(consumeSeconds)
-				.animation(animation)
-				.sound(sound)
-				.hasConsumeParticles(hasConsumeParticles)
-				.addEffects(consumeEffects);
+		return new BuilderMock().consumeSeconds(consumeSeconds).animation(animation).sound(sound)
+				.hasConsumeParticles(hasConsumeParticles).addEffects(consumeEffects);
 	}
 
 	static class BuilderMock implements Builder
@@ -42,7 +38,8 @@ public record ConsumableMock(@NonNegative float consumeSeconds, ItemUseAnimation
 		@Override
 		public Builder consumeSeconds(@NonNegative float consumeSeconds)
 		{
-			Preconditions.checkArgument(consumeSeconds >= 0, "consumeSeconds must be non-negative, was %s", consumeSeconds);
+			Preconditions.checkArgument(consumeSeconds >= 0, "consumeSeconds must be non-negative, was %s",
+					consumeSeconds);
 			this.consumeSeconds = consumeSeconds;
 			return this;
 		}
@@ -93,7 +90,8 @@ public record ConsumableMock(@NonNegative float consumeSeconds, ItemUseAnimation
 		@Override
 		public Consumable build()
 		{
-			return new ConsumableMock(consumeSeconds, consumeAnimation, eatSound, hasConsumeParticles, new ObjectArrayList<>(effects));
+			return new ConsumableMock(consumeSeconds, consumeAnimation, eatSound, hasConsumeParticles,
+					new ObjectArrayList<>(effects));
 		}
 
 	}

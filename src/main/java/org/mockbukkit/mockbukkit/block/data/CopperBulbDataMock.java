@@ -42,7 +42,8 @@ public class CopperBulbDataMock extends BlockDataMock implements CopperBulb
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CopperBulbDataMock clone()
 	{
 		return new CopperBulbDataMock(this);

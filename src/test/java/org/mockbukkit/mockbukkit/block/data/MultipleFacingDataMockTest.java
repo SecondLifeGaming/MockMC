@@ -29,9 +29,8 @@ class MultipleFacingDataMockTest
 	class SetFace
 	{
 
-		private static final Set<BlockFace> VALID_FACES = Set.of(
-				BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP, BlockFace.DOWN
-		);
+		private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH,
+				BlockFace.WEST, BlockFace.UP, BlockFace.DOWN);
 
 		@ParameterizedTest
 		@MethodSource("getValidFaces")
@@ -44,7 +43,8 @@ class MultipleFacingDataMockTest
 		@MethodSource("getInvalidFaces")
 		void givenGetWithInvalidValue(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> multipleFacing.hasFace(face));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> multipleFacing.hasFace(face));
 			assertEquals(String.format("Illegal facing: %s", face), e.getMessage());
 		}
 
@@ -68,7 +68,8 @@ class MultipleFacingDataMockTest
 		@MethodSource("getInvalidFaces")
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> multipleFacing.setFace(face, true));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> multipleFacing.setFace(face, true));
 			assertEquals(String.format("Illegal facing: %s", face), e.getMessage());
 		}
 
@@ -85,9 +86,7 @@ class MultipleFacingDataMockTest
 
 		public static Stream<Arguments> getInvalidFaces()
 		{
-			return Stream.of(BlockFace.values())
-					.filter(p -> !VALID_FACES.contains(p))
-					.map(Arguments::of);
+			return Stream.of(BlockFace.values()).filter(p -> !VALID_FACES.contains(p)).map(Arguments::of);
 		}
 
 	}

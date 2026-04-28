@@ -37,7 +37,8 @@ class LevelledDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 		void givenLevelChange(int level)
 		{
 			levelled.setLevel(level);
@@ -45,7 +46,8 @@ class LevelledDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 16, 17 })
+		@ValueSource(ints =
+		{-2, -1, 16, 17})
 		void givenInvalidValues(int level)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> levelled.setLevel(level));
@@ -81,7 +83,8 @@ class LevelledDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull LevelledDataMock cloned = levelled.clone();
+		@NotNull
+		LevelledDataMock cloned = levelled.clone();
 
 		assertEquals(levelled, cloned);
 		assertEquals(levelled.getLevel(), cloned.getLevel());

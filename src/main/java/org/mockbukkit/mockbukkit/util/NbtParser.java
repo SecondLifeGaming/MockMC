@@ -2,7 +2,6 @@ package org.mockbukkit.mockbukkit.util;
 
 import com.google.common.base.Preconditions;
 import lombok.experimental.UtilityClass;
-import lombok.val;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.NamespacedKey;
@@ -50,7 +49,8 @@ public class NbtParser
 
 	public static boolean parseBoolean(@Nullable Object object, boolean defaultValue)
 	{
-		@Nullable Boolean integer = parseBoolean(object);
+		@Nullable
+		Boolean integer = parseBoolean(object);
 		return integer == null ? defaultValue : integer;
 	}
 
@@ -98,7 +98,8 @@ public class NbtParser
 
 	public static int parseInteger(@Nullable Object object, int defaultValue)
 	{
-		@Nullable Integer integer = parseInteger(object);
+		@Nullable
+		Integer integer = parseInteger(object);
 		return integer == null ? defaultValue : integer;
 	}
 
@@ -140,9 +141,8 @@ public class NbtParser
 	}
 
 	@Nullable
-	public static <K, V> Map<K, V> parseMap(@Nullable Object object,
-											@NotNull Function<Object, K> keyFunction,
-											@NotNull Function<Object, V> valueFunction)
+	public static <K, V> Map<K, V> parseMap(@Nullable Object object, @NotNull Function<Object, K> keyFunction,
+			@NotNull Function<Object, V> valueFunction)
 	{
 		Preconditions.checkNotNull(keyFunction, "The key function cannot be null");
 		Preconditions.checkNotNull(keyFunction, "The value function cannot be null");
@@ -155,7 +155,7 @@ public class NbtParser
 		if (object instanceof Map<?, ?> map)
 		{
 			Map<K, V> returnMap = new LinkedHashMap<>();
-			for (val entry : map.entrySet())
+			for (Map.Entry<?, ?> entry : map.entrySet())
 			{
 				K key = keyFunction.apply(entry.getKey());
 				V value = valueFunction.apply(entry.getValue());
@@ -184,7 +184,7 @@ public class NbtParser
 		if (object instanceof Collection<?> list)
 		{
 			List<V> returnMap = new LinkedList<>();
-			for (val entry : list)
+			for (Object entry : list)
 			{
 				V value = function.apply(entry);
 				returnMap.add(value);
@@ -206,7 +206,7 @@ public class NbtParser
 		if (object instanceof Collection<?> list)
 		{
 			Set<V> returnMap = new HashSet<>();
-			for (val entry : list)
+			for (Object entry : list)
 			{
 				V value = function.apply(entry);
 				returnMap.add(value);
@@ -257,7 +257,8 @@ public class NbtParser
 
 			}
 
-			throw new IllegalArgumentException(String.format("Cannot parse enum '%s' in class '%s'", object, clazz.getName()));
+			throw new IllegalArgumentException(
+					String.format("Cannot parse enum '%s' in class '%s'", object, clazz.getName()));
 		});
 	}
 

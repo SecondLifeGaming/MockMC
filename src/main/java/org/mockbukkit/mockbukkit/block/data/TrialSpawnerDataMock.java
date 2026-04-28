@@ -9,9 +9,11 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 {
 
 	/**
-	 * Constructs a new {@link TrialSpawnerDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link TrialSpawnerDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public TrialSpawnerDataMock(@NotNull Material material)
 	{
@@ -19,9 +21,11 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 	}
 
 	/**
-	 * Create a new {@link TrialSpawnerDataMock} based on an existing {@link TrialSpawnerDataMock}.
+	 * Create a new {@link TrialSpawnerDataMock} based on an existing
+	 * {@link TrialSpawnerDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected TrialSpawnerDataMock(@NotNull TrialSpawnerDataMock other)
 	{
@@ -54,7 +58,8 @@ public class TrialSpawnerDataMock extends BlockDataMock implements TrialSpawner
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TrialSpawnerDataMock clone()
 	{
 		return new TrialSpawnerDataMock(this);

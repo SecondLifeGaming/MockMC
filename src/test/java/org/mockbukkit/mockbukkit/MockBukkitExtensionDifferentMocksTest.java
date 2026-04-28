@@ -1,8 +1,5 @@
 package org.mockbukkit.mockbukkit;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Cow;
@@ -33,12 +30,13 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitExtensionDifferentMocksTest
 {
 
 	// Test classes
-	@Getter
 	@Nested
 	class MixinClassTest
 	{
@@ -252,16 +250,11 @@ class MockBukkitExtensionDifferentMocksTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "dummy" })
-	void shouldInjectMocksViaMethodParameters(
-			String value,
-			@MockBukkitInject ServerMock server,
-			@MockBukkitInject Player player,
-			@MockBukkitInject World world,
-			@MockBukkitInject Plugin plugin,
-			@MockBukkitInject Location location,
-			@MockBukkitInject Cow cowMock
-	)
+	@CsvSource(
+	{"dummy"})
+	void shouldInjectMocksViaMethodParameters(String value, @MockBukkitInject ServerMock server,
+			@MockBukkitInject Player player, @MockBukkitInject World world, @MockBukkitInject Plugin plugin,
+			@MockBukkitInject Location location, @MockBukkitInject Cow cowMock)
 	{
 		assertEquals("dummy", value);
 
@@ -279,18 +272,27 @@ class MockBukkitExtensionDifferentMocksTest
 		assertInstanceOf(Cow.class, cowMock);
 	}
 
-	@SuppressWarnings({ "java:S1144", "java:S1172" })
+	@SuppressWarnings(
+	{"java:S1144", "java:S1172"})
 	private void testMethodWithInteger(@MockBukkitInject Integer param)
 	{
 		// I just need the methods signature. It doesn't have to do anything.
 	}
 
-	@RequiredArgsConstructor
 	private static class TestParameterContext implements ParameterContext
 	{
 
-		@Getter
 		private final Parameter parameter;
+
+		public TestParameterContext(Parameter parameter)
+		{
+			this.parameter = parameter;
+		}
+
+		public Parameter getParameter()
+		{
+			return parameter;
+		}
 
 		@Override
 		public int getIndex()
@@ -307,10 +309,10 @@ class MockBukkitExtensionDifferentMocksTest
 	}
 
 	@Test
-	@SneakyThrows
-	void checkForInvalidSupportedAnnotation()
+	void checkForInvalidSupportedAnnotation() throws NoSuchMethodException
 	{
-		// I can't do this via a normal way, because it will crash before I reach the correct point inside the code.
+		// I can't do this via a normal way, because it will crash before I reach the
+		// correct point inside the code.
 		var extension = new MockBukkitExtension();
 		Method testMethod = getClass().getDeclaredMethod("testMethodWithInteger", Integer.class);
 		Parameter parameter = testMethod.getParameters()[0];

@@ -151,7 +151,8 @@ class ItemMetaLoreMatcherTest extends AbstractMatcherTest
 			}
 
 			@Override
-			public Description appendList(String start, String separator, String end, Iterable<? extends org.hamcrest.SelfDescribing> values)
+			public Description appendList(String start, String separator, String end,
+					Iterable<? extends org.hamcrest.SelfDescribing> values)
 			{
 				return this;
 			}

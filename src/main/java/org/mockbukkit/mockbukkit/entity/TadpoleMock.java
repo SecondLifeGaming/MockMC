@@ -9,7 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -17,17 +16,24 @@ import java.util.UUID;
  *
  * @see FishMock
  */
-public class TadpoleMock extends FishMock implements Tadpole
+public class TadpoleMock extends FishMock
+		implements
+			Tadpole,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.TadpoleBaseMock
 {
 
 	private int age = 0;
+
 	private boolean agelock;
 
 	/**
-	 * Constructs a new {@link TadpoleMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link TadpoleMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public TadpoleMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -35,13 +41,15 @@ public class TadpoleMock extends FishMock implements Tadpole
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.TADPOLE_BUCKET);
 	}
 
 	@Override
-	public @NotNull Sound getPickupSound()
+	@NotNull
+	public Sound getPickupSound()
 	{
 		return Sound.ITEM_BUCKET_FILL_TADPOLE;
 	}
@@ -72,9 +80,9 @@ public class TadpoleMock extends FishMock implements Tadpole
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.TADPOLE;
 	}
-
 }

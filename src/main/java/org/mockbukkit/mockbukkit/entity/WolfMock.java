@@ -6,7 +6,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Wolf;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -14,21 +13,35 @@ import java.util.UUID;
  *
  * @see TameableAnimalMock
  */
-public class WolfMock extends TameableAnimalMock implements Wolf
+public class WolfMock extends TameableAnimalMock
+		implements
+			Wolf,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WolfBaseMock
 {
 
-	private @NotNull Variant variant = Variant.PALE;
-	private @NotNull SoundVariant soundVariant = SoundVariant.CLASSIC;
+	@NotNull
+	private Variant variant = Variant.PALE;
+
+	@NotNull
+	private SoundVariant soundVariant = SoundVariant.CLASSIC;
+
 	private boolean isAngry = false;
-	private @NotNull DyeColor collarColor = DyeColor.RED;
+
+	@NotNull
+	private DyeColor collarColor = DyeColor.RED;
+
 	private boolean isWet = false;
+
 	private boolean interested = false;
 
 	/**
-	 * Constructs a new {@link WolfMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WolfMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WolfMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -48,7 +61,8 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	}
 
 	@Override
-	public @NotNull DyeColor getCollarColor()
+	@NotNull
+	public DyeColor getCollarColor()
 	{
 		return this.collarColor;
 	}
@@ -69,7 +83,8 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	/**
 	 * Sets whether the wolf is wet or not.
 	 *
-	 * @param wet Whether the wolf is wet or not.
+	 * @param wet
+	 *            Whether the wolf is wet or not.
 	 */
 	public void setWet(boolean wet)
 	{
@@ -95,7 +110,8 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -108,7 +124,8 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	}
 
 	@Override
-	public @NotNull SoundVariant getSoundVariant()
+	@NotNull
+	public SoundVariant getSoundVariant()
 	{
 		return this.soundVariant;
 	}
@@ -117,19 +134,20 @@ public class WolfMock extends TameableAnimalMock implements Wolf
 	public void setSoundVariant(@NotNull SoundVariant soundVariant)
 	{
 		Preconditions.checkArgument(soundVariant != null, "soundVariant cannot be null");
-
 		this.soundVariant = soundVariant;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.WOLF;
 	}
 
 	private float calculateNonAngryTailAngle()
 	{
-		return this.isTamed() ? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * 3.1415927F) : 0.62831855F;
+		return this.isTamed()
+				? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * 3.1415927F)
+				: 0.62831855F;
 	}
-
 }

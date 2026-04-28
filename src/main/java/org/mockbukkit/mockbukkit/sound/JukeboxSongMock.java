@@ -1,18 +1,18 @@
 package org.mockbukkit.mockbukkit.sound;
 
 import com.google.gson.JsonObject;
-import net.kyori.adventure.text.Component;
 import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Sound;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 
-public class JukeboxSongMock implements JukeboxSong
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class JukeboxSongMock implements JukeboxSong, org.mockbukkit.mockbukkit.generated.org.bukkit.JukeboxSongBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final String translationKey;
 
 	public JukeboxSongMock(NamespacedKey key, String translationKey)
@@ -31,39 +31,16 @@ public class JukeboxSongMock implements JukeboxSong
 
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21")
-	public @NotNull String getTranslationKey()
+	@NotNull
+	public String getTranslationKey()
 	{
 		return this.translationKey;
 	}
 
 	@Override
-	public Sound getSound()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Component getDescription()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public float getLengthInSeconds()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getComparatorOutput()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return this.key;
 	}
-
 }

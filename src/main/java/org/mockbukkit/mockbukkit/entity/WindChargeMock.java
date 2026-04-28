@@ -5,7 +5,6 @@ import org.bukkit.entity.WindCharge;
 import org.bukkit.event.entity.EntityRemoveEvent;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,14 +12,20 @@ import java.util.UUID;
  *
  * @see AbstractWindChargeMock
  */
-public class WindChargeMock extends AbstractWindChargeMock implements WindCharge
+public class WindChargeMock extends AbstractWindChargeMock
+		implements
+			WindCharge,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WindChargeBaseMock
 {
 
 	/**
-	 * Constructs a new {@link WindChargeMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WindChargeMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WindChargeMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -34,15 +39,14 @@ public class WindChargeMock extends AbstractWindChargeMock implements WindCharge
 		{
 			return;
 		}
-
 		getWorld().createExplosion(this, getLocation(), 1.2F, false);
 		remove(EntityRemoveEvent.Cause.EXPLODE);
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.WIND_CHARGE;
 	}
-
 }

@@ -33,7 +33,8 @@ class BrushableBlockStateMockTest
 		{
 			state.setItem(null);
 
-			@NotNull ItemStack actual = state.getItem();
+			@NotNull
+			ItemStack actual = state.getItem();
 
 			assertEquals(ItemStack.empty(), actual);
 		}
@@ -44,7 +45,8 @@ class BrushableBlockStateMockTest
 			ItemStack item = ItemStack.of(Material.DIAMOND, 5);
 			state.setItem(item);
 
-			@NotNull ItemStack actual = state.getItem();
+			@NotNull
+			ItemStack actual = state.getItem();
 
 			assertEquals(item, actual);
 			assertNotSame(item, actual);
@@ -63,7 +65,8 @@ class BrushableBlockStateMockTest
 
 			state.setItem(item);
 
-			@NotNull BrushableBlockStateMock newState = state.getSnapshot();
+			@NotNull
+			BrushableBlockStateMock newState = state.getSnapshot();
 
 			assertEquals(item, newState.getItem());
 			assertEquals(state, newState);
@@ -74,7 +77,8 @@ class BrushableBlockStateMockTest
 		{
 			ItemStack item = ItemStack.of(Material.DIAMOND, 5);
 
-			@NotNull BrushableBlockStateMock newState = state.getSnapshot();
+			@NotNull
+			BrushableBlockStateMock newState = state.getSnapshot();
 			newState.setItem(item);
 
 			assertNotEquals(state, newState);

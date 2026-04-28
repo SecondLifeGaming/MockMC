@@ -4,18 +4,22 @@ import org.bukkit.entity.Armadillo;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
-public class ArmadilloMock extends AnimalsMock implements Armadillo
+public class ArmadilloMock extends AnimalsMock
+		implements
+			Armadillo,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ArmadilloBaseMock
 {
 
 	/**
-	 * Constructs a new Animal on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new Animal on the provided {@link ServerMock} with a specified
+	 * {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ArmadilloMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -23,27 +27,10 @@ public class ArmadilloMock extends AnimalsMock implements Armadillo
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ARMADILLO;
-	}
-
-	@Override
-	public State getState()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void rollUp()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void rollOut()
-	{
-		throw new UnimplementedOperationException();
 	}
 
 }

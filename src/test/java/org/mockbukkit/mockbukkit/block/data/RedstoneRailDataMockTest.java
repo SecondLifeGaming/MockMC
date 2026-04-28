@@ -41,7 +41,8 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isPowered)
 		{
 			rail.setPowered(isPowered);
@@ -61,11 +62,8 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = Rail.Shape.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = {
-						"NORTH_SOUTH", "EAST_WEST", "ASCENDING_NORTH", "ASCENDING_SOUTH", "ASCENDING_EAST", "ASCENDING_WEST"
-				})
+		@EnumSource(value = Rail.Shape.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH_SOUTH", "EAST_WEST", "ASCENDING_NORTH", "ASCENDING_SOUTH", "ASCENDING_EAST", "ASCENDING_WEST"})
 		void givenValidValues(Rail.Shape shape)
 		{
 			rail.setShape(shape);
@@ -73,15 +71,14 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = Rail.Shape.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = {
-						"NORTH_SOUTH", "EAST_WEST", "ASCENDING_NORTH", "ASCENDING_SOUTH", "ASCENDING_EAST", "ASCENDING_WEST"
-				})
+		@EnumSource(value = Rail.Shape.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH_SOUTH", "EAST_WEST", "ASCENDING_NORTH", "ASCENDING_SOUTH", "ASCENDING_EAST", "ASCENDING_WEST"})
 		void givenInvalidValues(Rail.Shape shape)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> rail.setShape(shape));
-			assertEquals("Invalid shape. Allowed values are: [NORTH_SOUTH, EAST_WEST, ASCENDING_EAST, ASCENDING_WEST, ASCENDING_NORTH, ASCENDING_SOUTH]", e.getMessage());
+			assertEquals(
+					"Invalid shape. Allowed values are: [NORTH_SOUTH, EAST_WEST, ASCENDING_EAST, ASCENDING_WEST, ASCENDING_NORTH, ASCENDING_SOUTH]",
+					e.getMessage());
 		}
 
 	}
@@ -97,7 +94,8 @@ class RedstoneRailDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			rail.setWaterlogged(isWaterLogged);
@@ -109,7 +107,8 @@ class RedstoneRailDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull RedstoneRailDataMock cloned = rail.clone();
+		@NotNull
+		RedstoneRailDataMock cloned = rail.clone();
 
 		assertEquals(rail, cloned);
 		assertEquals(rail.isWaterlogged(), cloned.isWaterlogged());

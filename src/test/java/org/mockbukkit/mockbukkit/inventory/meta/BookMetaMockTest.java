@@ -17,6 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BookMetaMockTest
 {
@@ -232,7 +234,7 @@ class BookMetaMockTest
 	@Test
 	void test_equals_DifferentObject()
 	{
-		//noinspection AssertBetweenInconvertibleTypes
+		// noinspection AssertBetweenInconvertibleTypes
 		assertNotEquals(meta, Material.DIAMOND);
 
 		BookMetaMock meta2 = meta.clone();
@@ -344,8 +346,10 @@ class BookMetaMockTest
 		assertEquals(pages, meta.getPages());
 
 		pages.set(0, "Dummy");
-		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
-		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the book.
+		assertNotSame(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in the
+												// book.
+		assertNotEquals(pages, meta.getPages()); // testing that the `pages`' array modifications is not reflected in
+													// the book.
 	}
 
 }

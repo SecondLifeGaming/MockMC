@@ -13,16 +13,19 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see TileStateMock
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class EnchantingTableStateMock extends TileStateMock implements EnchantingTable
 {
 
 	private Component customName;
 
 	/**
-	 * Constructs a new {@link EnchantingTableStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#ENCHANTING_TABLE}
+	 * Constructs a new {@link EnchantingTableStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#ENCHANTING_TABLE}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public EnchantingTableStateMock(@NotNull Material material)
 	{
@@ -31,10 +34,11 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	}
 
 	/**
-	 * Constructs a new {@link EnchantingTableStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#ENCHANTING_TABLE}
+	 * Constructs a new {@link EnchantingTableStateMock} for the provided
+	 * {@link Block}. Only supports {@link Material#ENCHANTING_TABLE}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected EnchantingTableStateMock(@NotNull Block block)
 	{
@@ -43,9 +47,11 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	}
 
 	/**
-	 * Constructs a new {@link EnchantingTableStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link EnchantingTableStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected EnchantingTableStateMock(@NotNull EnchantingTableStateMock state)
 	{
@@ -86,7 +92,9 @@ public class EnchantingTableStateMock extends TileStateMock implements Enchantin
 	@Override
 	public void setCustomName(@Nullable String name)
 	{
-		this.customName = name == null ? Component.text("") : LegacyComponentSerializer.legacySection().deserialize(name);
+		this.customName = name == null
+				? Component.text("")
+				: LegacyComponentSerializer.legacySection().deserialize(name);
 	}
 
 	@Override

@@ -10,14 +10,17 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see AbstractFurnaceStateMock
  */
-public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements BlastFurnace
+public class BlastFurnaceStateMock extends AbstractFurnaceStateMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlastFurnaceBaseMock
 {
 
 	/**
-	 * Constructs a new {@link BlastFurnaceStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#BLAST_FURNACE}
+	 * Constructs a new {@link BlastFurnaceStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#BLAST_FURNACE}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BlastFurnaceStateMock(@NotNull Material material)
 	{
@@ -26,10 +29,11 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 	}
 
 	/**
-	 * Constructs a new {@link BlastFurnaceStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#BLAST_FURNACE}
+	 * Constructs a new {@link BlastFurnaceStateMock} for the provided
+	 * {@link Block}. Only supports {@link Material#BLAST_FURNACE}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BlastFurnaceStateMock(@NotNull Block block)
 	{
@@ -38,9 +42,11 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 	}
 
 	/**
-	 * Constructs a new {@link BlastFurnaceStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BlastFurnaceStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BlastFurnaceStateMock(@NotNull BlastFurnaceStateMock state)
 	{
@@ -66,11 +72,17 @@ public class BlastFurnaceStateMock extends AbstractFurnaceStateMock implements B
 		{
 			return true;
 		}
-		if (!(o instanceof BlastFurnaceStateMock))
+		if (!(o instanceof BlastFurnace))
 		{
 			return false;
 		}
 		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 }

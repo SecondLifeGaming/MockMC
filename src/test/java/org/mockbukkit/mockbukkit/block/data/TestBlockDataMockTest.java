@@ -50,7 +50,8 @@ class TestBlockDataMockTest
 	void validateClone()
 	{
 
-		@NotNull TestBlockDataMock cloned = testBlock.clone();
+		@NotNull
+		TestBlockDataMock cloned = testBlock.clone();
 
 		assertEquals(testBlock, cloned);
 		assertEquals(testBlock.getMode(), cloned.getMode());

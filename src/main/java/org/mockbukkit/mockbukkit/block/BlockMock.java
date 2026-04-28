@@ -1,29 +1,20 @@
 package org.mockbukkit.mockbukkit.block;
 
-import com.destroystokyo.paper.block.BlockSoundGroup;
 import com.google.common.base.Preconditions;
 import org.bukkit.Chunk;
-import org.bukkit.FluidCollisionMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.SoundGroup;
 import org.bukkit.Tag;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
-import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.util.BoundingBox;
-import org.bukkit.util.RayTraceResult;
-import org.bukkit.util.Vector;
-import org.bukkit.util.VoxelShape;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,34 +22,39 @@ import org.jetbrains.annotations.Unmodifiable;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMockFactory;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.metadata.MetadataTable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.fail;
-
 /**
  * Mock implementation of a {@link Block}.
  */
-public class BlockMock implements Block
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class BlockMock implements Block, org.mockbukkit.mockbukkit.generated.org.bukkit.block.BlockBaseMock
 {
 
 	private final MetadataTable metadataTable = new MetadataTable();
 
 	private final Location location;
+
 	private BlockStateMock state;
+
 	private Material material;
+
 	private byte data;
+
 	private BlockData blockData;
 
 	private byte lightFromSky = 15;
+
 	private byte lightFromBlocks = 0;
-	private @Unmodifiable List<ItemStack> drops;
+
+	@Unmodifiable
+	private List<ItemStack> drops;
 
 	/**
 	 * Creates a basic block made of air.
@@ -71,7 +67,8 @@ public class BlockMock implements Block
 	/**
 	 * Creates a basic block made of air at a certain location.
 	 *
-	 * @param location The location of the block.
+	 * @param location
+	 *            The location of the block.
 	 */
 	public BlockMock(@NotNull Location location)
 	{
@@ -82,7 +79,8 @@ public class BlockMock implements Block
 	/**
 	 * Creates a basic block with a given material.
 	 *
-	 * @param material The material to give the block.
+	 * @param material
+	 *            The material to give the block.
 	 */
 	public BlockMock(@NotNull Material material)
 	{
@@ -90,10 +88,13 @@ public class BlockMock implements Block
 	}
 
 	/**
-	 * Creates a basic block with a given material that is also linked to a specific location.
+	 * Creates a basic block with a given material that is also linked to a specific
+	 * location.
 	 *
-	 * @param material The material of the block.
-	 * @param location The location of the block. Can be {@code null} if not needed.
+	 * @param material
+	 *            The material of the block.
+	 * @param location
+	 *            The location of the block. Can be {@code null} if not needed.
 	 */
 	public BlockMock(@NotNull Material material, @Nullable Location location)
 	{
@@ -113,7 +114,8 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull List<MetadataValue> getMetadata(String metadataKey)
+	@NotNull
+	public List<MetadataValue> getMetadata(String metadataKey)
 	{
 		return metadataTable.getMetadata(metadataKey);
 	}
@@ -138,7 +140,8 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull Block getRelative(int modX, int modY, int modZ)
+	@NotNull
+	public Block getRelative(int modX, int modY, int modZ)
 	{
 		int x = location.getBlockX() + modX;
 		int y = location.getBlockY() + modY;
@@ -147,13 +150,15 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull Block getRelative(@NotNull BlockFace face)
+	@NotNull
+	public Block getRelative(@NotNull BlockFace face)
 	{
 		return getRelative(face, 1);
 	}
 
 	@Override
-	public @NotNull Block getRelative(@NotNull BlockFace face, int distance)
+	@NotNull
+	public Block getRelative(@NotNull BlockFace face, int distance)
 	{
 		Preconditions.checkNotNull(face, "Face cannot be null");
 		return getRelative(face.getModX() * distance, face.getModY() * distance, face.getModZ() * distance);
@@ -162,20 +167,25 @@ public class BlockMock implements Block
 	/**
 	 * Asserts that the material type of the block is equal to a given type.
 	 *
-	 * @param material The material type that the block should have.
-	 * @throws AssertionError Thrown if the material type of the block does not equal the given material type.
+	 * @param material
+	 *            The material type that the block should have.
+	 * @throws AssertionError
+	 *             Thrown if the material type of the block does not equal the given
+	 *             material type.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertType(@NotNull Material material)
 	{
 		if (this.material != material)
 		{
-			fail(String.format("Block material type is <%s>, but <%s> was expected.", this.material, material));
+			throw new AssertionError(
+					String.format("Block material type is <%s>, but <%s> was expected.", this.material, material));
 		}
 	}
 
 	@Override
-	public @NotNull Material getType()
+	@NotNull
+	public Material getType()
 	{
 		return material;
 	}
@@ -195,12 +205,12 @@ public class BlockMock implements Block
 	/**
 	 * Sets the light level received from sky.
 	 *
-	 * @param lightFromSky Value between 0 and 15.
+	 * @param lightFromSky
+	 *            Value between 0 and 15.
 	 */
 	public void setLightFromSky(byte lightFromSky)
 	{
 		Preconditions.checkArgument(lightFromSky >= 0 && lightFromSky <= 15, "Light level should be between 0 and 15.");
-
 		this.lightFromSky = lightFromSky;
 	}
 
@@ -213,17 +223,19 @@ public class BlockMock implements Block
 	/**
 	 * Sets the light level received from other blocks.
 	 *
-	 * @param lightFromBlocks Value between 0 and 15.
+	 * @param lightFromBlocks
+	 *            Value between 0 and 15.
 	 */
 	public void setLightFromBlocks(byte lightFromBlocks)
 	{
-		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15, "Light level should be between 0 and 15.");
-
+		Preconditions.checkArgument(lightFromBlocks >= 0 && lightFromBlocks <= 15,
+				"Light level should be between 0 and 15.");
 		this.lightFromBlocks = lightFromBlocks;
 	}
 
 	@Override
-	public @NotNull World getWorld()
+	@NotNull
+	public World getWorld()
 	{
 		return location.getWorld();
 	}
@@ -247,7 +259,8 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public @NotNull Location getLocation()
+	@NotNull
+	public Location getLocation()
 	{
 		return location;
 	}
@@ -264,12 +277,12 @@ public class BlockMock implements Block
 			loc.setYaw(0);
 			loc.setPitch(0);
 		}
-
 		return loc;
 	}
 
 	@Override
-	public @NotNull Chunk getChunk()
+	@NotNull
+	public Chunk getChunk()
 	{
 		return location.getWorld().getChunkAt(this);
 	}
@@ -293,48 +306,36 @@ public class BlockMock implements Block
 	public BlockFace getFace(@NotNull Block block)
 	{
 		Preconditions.checkNotNull(block, "Block cannot be null");
-
 		for (BlockFace face : BlockFace.values())
 		{
-			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY()) && (this.getZ() + face.getModZ() == block.getZ()))
+			if ((this.getX() + face.getModX() == block.getX()) && (this.getY() + face.getModY() == block.getY())
+					&& (this.getZ() + face.getModZ() == block.getZ()))
 			{
 				return face;
 			}
 		}
-
 		return null;
 	}
 
 	@Override
-	public @NotNull BlockState getState()
+	@NotNull
+	public BlockState getState()
 	{
 		return this.state;
 	}
 
 	@Override
-	public @NotNull Biome getBiome()
+	@NotNull
+	public Biome getBiome()
 	{
 		return getWorld().getBiome(getLocation());
 	}
 
-	public @NotNull Biome getComputedBiome()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	@Override
-	public @NotNull BlockState getState(boolean useSnapshot)
+	@NotNull
+	public BlockState getState(boolean useSnapshot)
 	{
 		return state.getSnapshot();
-	}
-
-	@Override
-	@Deprecated(since = "1.21", forRemoval = true)
-	public boolean isValidTool(@NotNull ItemStack itemStack)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -342,41 +343,6 @@ public class BlockMock implements Block
 	{
 		Preconditions.checkNotNull(bio, "Biome cannot be null");
 		getWorld().setBiome(getLocation(), bio);
-	}
-
-	@Override
-	public boolean isBlockPowered()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isBlockIndirectlyPowered()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isBlockFacePowered(@NotNull BlockFace face)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isBlockFaceIndirectlyPowered(@NotNull BlockFace face)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getBlockPower(@NotNull BlockFace face)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -418,68 +384,13 @@ public class BlockMock implements Block
 	@Override
 	public boolean isLiquid()
 	{
-		return material == Material.LAVA
-				|| material == Material.WATER
-				|| material == Material.BUBBLE_COLUMN;
-	}
-
-	@Override
-	public boolean isBuildable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public @NotNull BlockSoundGroup getSoundGroup()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-
-	}
-
-	@Override
-	public @NotNull SoundGroup getBlockSoundGroup()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true)
-	public @NotNull String getTranslationKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return material == Material.LAVA || material == Material.WATER || material == Material.BUBBLE_COLUMN;
 	}
 
 	@Override
 	public boolean isSuffocating()
 	{
 		return state.isSuffocating();
-	}
-
-	@Override
-	public void tick()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void fluidTick()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void randomTick()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -508,7 +419,8 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience, boolean forceEffect)
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect, boolean dropExperience,
+			boolean forceEffect)
 	{
 		if (this.isEmpty())
 		{
@@ -519,40 +431,22 @@ public class BlockMock implements Block
 	}
 
 	@Override
-	public double getTemperature()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public double getHumidity()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull PistonMoveReaction getPistonMoveReaction()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<ItemStack> getDrops()
+	@NotNull
+	public Collection<ItemStack> getDrops()
 	{
 		return this.getDrops(null);
 	}
 
 	@Override
-	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool)
+	@NotNull
+	public Collection<ItemStack> getDrops(@Nullable ItemStack tool)
 	{
 		return this.getDrops(tool, null);
 	}
 
 	@Override
-	public @NotNull Collection<ItemStack> getDrops(@Nullable ItemStack tool, @Nullable Entity entity)
+	@NotNull
+	public Collection<ItemStack> getDrops(@Nullable ItemStack tool, @Nullable Entity entity)
 	{
 		return new ArrayList<>(drops);
 	}
@@ -560,22 +454,23 @@ public class BlockMock implements Block
 	/**
 	 * Sets the drops of this block.
 	 *
-	 * @param items the items for this block to drop.
+	 * @param items
+	 *            the items for this block to drop.
 	 */
 	public void setDrops(@Nullable Collection<ItemStack> items)
 	{
 		if (items == null)
 		{
 			this.drops = Collections.emptyList();
-		}
-		else
+		} else
 		{
 			this.drops = items.stream().map(ItemStack::clone).toList();
 		}
 	}
 
 	@Override
-	public @NotNull BlockData getBlockData()
+	@NotNull
+	public BlockData getBlockData()
 	{
 		return blockData;
 	}
@@ -594,40 +489,13 @@ public class BlockMock implements Block
 		this.blockData = data.clone();
 	}
 
-	@Override
-	public boolean isPassable()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public RayTraceResult rayTrace(@NotNull Location start, @NotNull Vector direction, double maxDistance, @NotNull FluidCollisionMode fluidCollisionMode)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull BoundingBox getBoundingBox()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@NotNull
-	@Override
-	public VoxelShape getCollisionShape()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 	/**
-	 * This method sets the current {@link BlockState} to the provided {@link BlockStateMock}.
-	 * <strong>Do not call this method directly, use {@link BlockState#update()} instead.</strong>
+	 * This method sets the current {@link BlockState} to the provided
+	 * {@link BlockStateMock}. <strong>Do not call this method directly, use
+	 * {@link BlockState#update()} instead.</strong>
 	 *
-	 * @param state The {@link BlockState} that should be set.
+	 * @param state
+	 *            The {@link BlockState} that should be set.
 	 */
 	@ApiStatus.Internal
 	public void setState(@NotNull BlockStateMock state)
@@ -635,40 +503,4 @@ public class BlockMock implements Block
 		Preconditions.checkNotNull(state, "The BlockState cannot be null");
 		this.state = state;
 	}
-
-	@Override
-	public boolean applyBoneMeal(@NotNull BlockFace face)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean isPreferredTool(@NotNull ItemStack tool)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public float getBreakSpeed(@NotNull Player player)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean canPlace(@NotNull BlockData data)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull String translationKey()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
 }

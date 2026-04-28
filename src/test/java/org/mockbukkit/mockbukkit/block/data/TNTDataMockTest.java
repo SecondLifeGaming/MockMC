@@ -38,7 +38,8 @@ class TNTDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isUnstable)
 		{
 			tnt.setUnstable(isUnstable);
@@ -50,7 +51,8 @@ class TNTDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull TNTDataMock cloned = tnt.clone();
+		@NotNull
+		TNTDataMock cloned = tnt.clone();
 
 		assertEquals(tnt, cloned);
 		assertEquals(tnt.isUnstable(), cloned.isUnstable());
@@ -61,6 +63,5 @@ class TNTDataMockTest
 		assertTrue(tnt.isUnstable());
 		assertFalse(cloned.isUnstable());
 	}
-
 
 }

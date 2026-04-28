@@ -87,7 +87,8 @@ class StriderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 		void withValidBoostValue(int value)
 		{
 			assertDoesNotThrow(() -> strider.setBoostTicks(value));
@@ -95,10 +96,12 @@ class StriderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+		@ValueSource(ints =
+		{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 		void withInvalidBoostValue(int value)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> strider.setBoostTicks(value));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> strider.setBoostTicks(value));
 			assertEquals("ticks must be >= 0", e.getMessage());
 		}
 
@@ -117,7 +120,8 @@ class StriderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 		void withValidBoostValue(int value)
 		{
 			strider.setBoostTicks(MAX_TICKS);
@@ -126,11 +130,13 @@ class StriderMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 11, 12, 13, 14, 15 })
+		@ValueSource(ints =
+		{-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 11, 12, 13, 14, 15})
 		void withInvalidBoostValue(int value)
 		{
 			strider.setBoostTicks(MAX_TICKS);
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> strider.setCurrentBoostTicks(value));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> strider.setCurrentBoostTicks(value));
 			assertEquals("boost ticks must not exceed 0 or 10 (inclusive)", e.getMessage());
 		}
 

@@ -39,7 +39,8 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	}
 
 	/**
-	 * @param currentItem The material of the item to be held for there to be a match
+	 * @param currentItem
+	 *            The material of the item to be held for there to be a match
 	 * @return A matcher which matches with any allay holding the specified item
 	 */
 	public static @NotNull AllayCurrentItemMatcher hasCurrentItem(@NotNull Material currentItem)
@@ -49,7 +50,8 @@ public class AllayCurrentItemMatcher extends TypeSafeMatcher<AllayMock>
 	}
 
 	/**
-	 * @param currentItem The material of the item to be held for there to be no match
+	 * @param currentItem
+	 *            The material of the item to be held for there to be no match
 	 * @return A matcher which matches with any allay not holding the specified item
 	 */
 	public static @NotNull Matcher<AllayMock> doesNotHaveCurrentItem(@NotNull Material currentItem)

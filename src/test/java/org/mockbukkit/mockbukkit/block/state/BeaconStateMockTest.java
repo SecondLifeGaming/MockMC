@@ -31,6 +31,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BeaconStateMockTest
 {
@@ -127,13 +129,8 @@ class BeaconStateMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"1, 1",
-			"2, 2",
-			"3, 3",
-			"4, 4",
-			"5, 4",
-	})
+	@CsvSource(
+	{"1, 1", "2, 2", "3, 3", "4, 4", "5, 4",})
 	void updateTier(int level, int expected)
 	{
 		createBase(level);
@@ -338,10 +335,10 @@ class BeaconStateMockTest
 	void testGetEntitiesInRangeNotPlaced()
 	{
 		Beacon beacon1 = new BeaconStateMock(Material.BEACON);
-		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class, beacon1::getEntitiesInRange);
+		IllegalStateException illegalStateException = assertThrows(IllegalStateException.class,
+				beacon1::getEntitiesInRange);
 
-		assertEquals("Cannot get entities in range of a beacon that is not placed",
-				illegalStateException.getMessage());
+		assertEquals("Cannot get entities in range of a beacon that is not placed", illegalStateException.getMessage());
 	}
 
 	@Test
@@ -360,7 +357,8 @@ class BeaconStateMockTest
 	/**
 	 * Creates a diamond base for a certain tier beacon.
 	 *
-	 * @param level The level to set the beacon to.
+	 * @param level
+	 *            The level to set the beacon to.
 	 */
 	private void createBase(int level)
 	{

@@ -11,6 +11,8 @@ import org.mockbukkit.mockbukkit.MockBukkitExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MusicInstrumentMockTest
 {
@@ -22,9 +24,8 @@ class MusicInstrumentMockTest
 	void setUp()
 	{
 		this.key = new NamespacedKey("mock_bukkit", "custom_music_instrument");
-		this.musicInstrument = new MusicInstrumentMock(key, "instrument.custom.custom_music_instrument",
-				7, 256, Component.translatable("instrument.custom.custom_music_instrument"),
-				SoundMock.ENTITY_PLAYER_BIG_FALL);
+		this.musicInstrument = new MusicInstrumentMock(key, "instrument.custom.custom_music_instrument", 7, 256,
+				Component.translatable("instrument.custom.custom_music_instrument"), SoundMock.ENTITY_PLAYER_BIG_FALL);
 	}
 
 	@Test

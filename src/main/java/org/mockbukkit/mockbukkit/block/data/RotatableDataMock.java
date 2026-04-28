@@ -11,7 +11,8 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 	/**
 	 * Constructs a new {@link RotatableDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public RotatableDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 	}
 
 	/**
-	 * Create a new {@link RotatableDataMock} based on an existing {@link RotatableDataMock}.
+	 * Create a new {@link RotatableDataMock} based on an existing
+	 * {@link RotatableDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected RotatableDataMock(@NotNull RotatableDataMock other)
 	{
@@ -43,7 +46,8 @@ public class RotatableDataMock extends BlockDataMock implements Rotatable
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RotatableDataMock clone()
 	{
 		return new RotatableDataMock(this);

@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Horse;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,17 +12,26 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-public class CamelMock extends AbstractHorseMock implements Camel
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class CamelMock extends AbstractHorseMock
+		implements
+			Camel,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.CamelBaseMock
 {
 
 	private boolean isDashing = false;
+
 	private boolean isSitting = false;
 
 	/**
-	 * Constructs a new {@link CamelMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link CamelMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public CamelMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -62,9 +70,9 @@ public class CamelMock extends AbstractHorseMock implements Camel
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.CAMEL;
 	}
-
 }

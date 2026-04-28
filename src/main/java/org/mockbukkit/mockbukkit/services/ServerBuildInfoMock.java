@@ -51,7 +51,9 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 	@Override
 	public @NotNull OptionalInt buildNumber()
 	{
-		return BuildParameters.BUILD_NUMBER_STRING.isEmpty() ? OptionalInt.empty() : OptionalInt.of(Integer.parseInt(BuildParameters.BUILD_NUMBER_STRING));
+		return BuildParameters.BUILD_NUMBER_STRING.isEmpty()
+				? OptionalInt.empty()
+				: OptionalInt.of(Integer.parseInt(BuildParameters.BUILD_NUMBER_STRING));
 	}
 
 	@Override
@@ -81,8 +83,7 @@ public class ServerBuildInfoMock implements ServerBuildInfo
 		if (this.buildNumber().isPresent())
 		{
 			sb.append(this.buildNumber().getAsInt());
-		}
-		else
+		} else
 		{
 			sb.append(BUILD_DEV);
 		}

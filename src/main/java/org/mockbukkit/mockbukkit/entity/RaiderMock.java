@@ -7,7 +7,6 @@ import org.bukkit.entity.Raider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -15,22 +14,34 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public abstract class RaiderMock extends MonsterMock implements Raider
+public abstract class RaiderMock extends MonsterMock
+		implements
+			Raider,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.RaiderBaseMock
 {
 
 	private boolean canJoinRaid;
+
 	private boolean celebrating;
+
 	private boolean patrolLeader;
+
 	private int wave;
+
 	private int ticksOutsideRaid;
+
 	private Block patrolTarget;
+
 	private Raid raid;
 
 	/**
-	 * Constructs a new {@link RaiderMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link RaiderMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected RaiderMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -44,7 +55,8 @@ public abstract class RaiderMock extends MonsterMock implements Raider
 	}
 
 	@Override
-	public @Nullable Raid getRaid()
+	@Nullable
+	public Raid getRaid()
 	{
 		return this.raid;
 	}
@@ -63,7 +75,8 @@ public abstract class RaiderMock extends MonsterMock implements Raider
 	}
 
 	@Override
-	public @Nullable Block getPatrolTarget()
+	@Nullable
+	public Block getPatrolTarget()
 	{
 		return this.patrolTarget;
 	}
@@ -122,5 +135,4 @@ public abstract class RaiderMock extends MonsterMock implements Raider
 	{
 		this.celebrating = celebrating;
 	}
-
 }

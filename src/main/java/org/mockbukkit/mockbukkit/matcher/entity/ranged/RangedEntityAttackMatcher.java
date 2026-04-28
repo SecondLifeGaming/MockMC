@@ -46,20 +46,23 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	@Override
 	protected void describeMismatchSafely(MockRangedEntity<? extends MobMock> mockRangedEntity, Description description)
 	{
-		if (mockRangedEntity.hasAttackedWithCharge(target, charge) && (!aggressive || mockRangedEntity.hasAttackedWhileAggressive(target)))
+		if (mockRangedEntity.hasAttackedWithCharge(target, charge)
+				&& (!aggressive || mockRangedEntity.hasAttackedWhileAggressive(target)))
 		{
 			description.appendText("has attacked the target");
-		}
-		else
+		} else
 		{
 			description.appendText("has not attacked the target");
 		}
 	}
 
 	/**
-	 * @param target The required target
-	 * @param charge The required charge
-	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the specified charge
+	 * @param target
+	 *            The required target
+	 * @param charge
+	 *            The required charge
+	 * @return A matcher which matches with any ranged entity that has attacked the
+	 *         specified target with the specified charge
 	 */
 	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge)
 	{
@@ -68,36 +71,48 @@ public class RangedEntityAttackMatcher extends TypeSafeMatcher<MockRangedEntity<
 	}
 
 	/**
-	 * @param target     The required target
-	 * @param charge     The required charge
-	 * @param aggressive Whether a check for aggressiveness should be done
-	 * @return A matcher which matches with any ranged entity that has attacked the specified target with the
-	 * specified charge while being aggressive
+	 * @param target
+	 *            The required target
+	 * @param charge
+	 *            The required charge
+	 * @param aggressive
+	 *            Whether a check for aggressiveness should be done
+	 * @return A matcher which matches with any ranged entity that has attacked the
+	 *         specified target with the specified charge while being aggressive
 	 */
-	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
+	public static @NotNull RangedEntityAttackMatcher hasAttacked(@NotNull LivingEntity target, float charge,
+			boolean aggressive)
 	{
 		Preconditions.checkNotNull(target);
 		return new RangedEntityAttackMatcher(target, charge, aggressive);
 	}
 
 	/**
-	 * @param target The required target for no match
-	 * @param charge The required charge for no match
-	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the specified charge
+	 * @param target
+	 *            The required target for no match
+	 * @param charge
+	 *            The required charge for no match
+	 * @return A matcher which matches with any ranged entity that has not attacked
+	 *         the specified target with the specified charge
 	 */
-	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge)
+	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target,
+			float charge)
 	{
 		return not(hasAttacked(target, charge));
 	}
 
 	/**
-	 * @param target     The required target for no match
-	 * @param charge     The required charge for no match
-	 * @param aggressive Whether a check for aggressiveness should be done
-	 * @return A matcher which matches with any ranged entity that has not attacked the specified target with the
-	 * specified charge while being aggressive
+	 * @param target
+	 *            The required target for no match
+	 * @param charge
+	 *            The required charge for no match
+	 * @param aggressive
+	 *            Whether a check for aggressiveness should be done
+	 * @return A matcher which matches with any ranged entity that has not attacked
+	 *         the specified target with the specified charge while being aggressive
 	 */
-	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target, float charge, boolean aggressive)
+	public static @NotNull Matcher<MockRangedEntity<? extends MobMock>> hasNotAttacked(@NotNull LivingEntity target,
+			float charge, boolean aggressive)
 	{
 		return not(hasAttacked(target, charge, aggressive));
 	}

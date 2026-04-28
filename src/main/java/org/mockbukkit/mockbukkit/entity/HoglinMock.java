@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Hoglin;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,18 +12,26 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class HoglinMock extends AnimalsMock implements Hoglin
+public class HoglinMock extends AnimalsMock
+		implements
+			Hoglin,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.HoglinBaseMock
 {
 
 	private boolean immuneToZombification = false;
+
 	private boolean huntable = false;
+
 	private int conversionTime = -1;
 
 	/**
-	 * Constructs a new Animal on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new Animal on the provided {@link ServerMock} with a specified
+	 * {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public HoglinMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -32,7 +39,8 @@ public class HoglinMock extends AnimalsMock implements Hoglin
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.HOGLIN;
 	}
@@ -75,8 +83,7 @@ public class HoglinMock extends AnimalsMock implements Hoglin
 		{
 			this.conversionTime = -1;
 			this.setImmuneToZombification(false);
-		}
-		else
+		} else
 		{
 			this.conversionTime = time;
 		}
@@ -87,5 +94,4 @@ public class HoglinMock extends AnimalsMock implements Hoglin
 	{
 		return !this.isImmuneToZombification() && this.hasAI();
 	}
-
 }

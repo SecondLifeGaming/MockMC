@@ -2,14 +2,13 @@ package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.FireworkEffect;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import java.util.Objects;
 import org.bukkit.inventory.meta.FireworkEffectMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link FireworkEffectMeta}.
@@ -17,10 +16,13 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffectMeta
+public class FireworkEffectMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.FireworkEffectMetaBaseMock
 {
 
-	private @Nullable FireworkEffect effect;
+	@Nullable
+	private FireworkEffect effect;
 
 	/**
 	 * Constructs a new {@link FireworkEffectMetaMock}.
@@ -31,14 +33,15 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	}
 
 	/**
-	 * Constructs a new {@link FireworkEffectMetaMock}, cloning the data from another.
+	 * Constructs a new {@link FireworkEffectMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public FireworkEffectMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof FireworkEffectMeta fireworkEffectMeta)
 		{
 			this.effect = fireworkEffectMeta.getEffect();
@@ -64,17 +67,19 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 		{
 			return false;
 		}
-		if (!(obj instanceof FireworkEffectMetaMock other))
+		if (obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-
+		FireworkEffectMetaMock other = (FireworkEffectMetaMock) obj;
 		return Objects.equals(effect, other.effect);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull FireworkEffectMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public FireworkEffectMetaMock clone()
 	{
 		return new FireworkEffectMetaMock(this);
 	}
@@ -92,7 +97,8 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	}
 
 	@Override
-	public @Nullable FireworkEffect getEffect()
+	@Nullable
+	public FireworkEffect getEffect()
 	{
 		return effect;
 	}
@@ -100,11 +106,14 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized FireworkEffectMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized FireworkEffectMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the FireworkEffectMetaMock class.
 	 */
 	@SuppressWarnings("unchecked")
-	public static @NotNull FireworkEffectMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static FireworkEffectMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		FireworkEffectMetaMock serialMock = new FireworkEffectMetaMock();
 		serialMock.deserializeInternal(args);
@@ -119,10 +128,12 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	 * Serializes the properties of an FireworkEffectMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the FireworkEffectMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         FireworkEffectMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (effect != null)
@@ -137,5 +148,4 @@ public class FireworkEffectMetaMock extends ItemMetaMock implements FireworkEffe
 	{
 		return "FIREWORK_EFFECT";
 	}
-
 }

@@ -1,15 +1,11 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import org.bukkit.configuration.serialization.DelegateDeserialization;
-import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.Map;
 
 /**
@@ -18,7 +14,11 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SpawnEggMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.SpawnEggMetaBaseMock
 {
 
 	/**
@@ -32,7 +32,8 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	/**
 	 * Constructs a new {@link SpawnEggMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public SpawnEggMetaMock(@NotNull ItemMeta meta)
 	{
@@ -56,42 +57,16 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	}
 
 	@Override
-	public void setSpawnedEntity(@NotNull EntitySnapshot snapshot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable EntitySnapshot getSpawnedEntity()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable EntityType getCustomSpawnedType()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setCustomSpawnedType(@Nullable EntityType type)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull SpawnEggMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public SpawnEggMetaMock clone()
 	{
 		return new SpawnEggMetaMock(this);
 	}
@@ -99,10 +74,13 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized SpawnEggMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized SpawnEggMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the SpawnEggMetaMock class.
 	 */
-	public static @NotNull SpawnEggMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static SpawnEggMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		SpawnEggMetaMock serialMock = new SpawnEggMetaMock();
 		serialMock.deserializeInternal(args);
@@ -114,5 +92,4 @@ public class SpawnEggMetaMock extends ItemMetaMock implements SpawnEggMeta
 	{
 		return "SPAWN_EGG";
 	}
-
 }

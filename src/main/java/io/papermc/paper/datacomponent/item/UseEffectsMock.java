@@ -4,7 +4,8 @@ import com.google.common.base.Preconditions;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class UseEffectsMock implements UseEffects
 {
 
@@ -61,7 +62,8 @@ public class UseEffectsMock implements UseEffects
 		@Override
 		public Builder speedMultiplier(float speedMultiplier)
 		{
-			Preconditions.checkArgument(speedMultiplier >= 0.0F && speedMultiplier <= 1.0F, "speedMultiplier must be between 0.0 and 1.0 (inclusive)");
+			Preconditions.checkArgument(speedMultiplier >= 0.0F && speedMultiplier <= 1.0F,
+					"speedMultiplier must be between 0.0 and 1.0 (inclusive)");
 			this.speedMultiplier = speedMultiplier;
 			return this;
 		}

@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SplashPotion;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see ThrownPotionMock
  */
-public class SplashPotionMock extends ThrownPotionMock implements SplashPotion
+public class SplashPotionMock extends ThrownPotionMock
+		implements
+			SplashPotion,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SplashPotionBaseMock
 {
 
 	/**
-	 * Constructs a new {@link SplashPotion} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SplashPotion} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SplashPotionMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class SplashPotionMock extends ThrownPotionMock implements SplashPotion
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SPLASH_POTION;
 	}
-
 }

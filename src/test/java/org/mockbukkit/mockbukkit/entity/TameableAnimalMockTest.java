@@ -65,7 +65,8 @@ class TameableAnimalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void setSitting_GivenEntityWithSittableInterface(boolean value)
 	{
 		WolfMock wolf = new WolfMock(server, UUID.randomUUID());
@@ -77,7 +78,8 @@ class TameableAnimalMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void setSitting_GivenEntityWithoutSittableInterface(boolean value)
 	{
 		IllegalStateException e = assertThrows(IllegalStateException.class, () -> tameable.setSitting(value));

@@ -105,9 +105,8 @@ class ChiseledBookshelfDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			bookshelf.setFacing(face);
@@ -115,9 +114,8 @@ class ChiseledBookshelfDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> bookshelf.setFacing(face));
@@ -136,7 +134,8 @@ class ChiseledBookshelfDataMockTest
 	/**
 	 * Generates all possible combinations of boolean values for the given size.
 	 *
-	 * @param size The size of the boolean array to generate.
+	 * @param size
+	 *            The size of the boolean array to generate.
 	 *
 	 * @return A list of all possible combinations of boolean values.
 	 */

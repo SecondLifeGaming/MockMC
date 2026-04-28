@@ -50,7 +50,8 @@ public class PermissionManagerMock implements PermissionManager
 	{
 		Preconditions.checkNotNull(perm, PERMISSION_CANNOT_BE_NULL);
 		String name = perm.getName().toLowerCase(Locale.ENGLISH);
-		Preconditions.checkArgument(!this.permissions.containsKey(name), "The permission " + name + " is already defined!");
+		Preconditions.checkArgument(!this.permissions.containsKey(name),
+				"The permission " + name + " is already defined!");
 		this.permissions.put(name, perm);
 		this.calculatePermissionDefault(perm);
 		if (dirtyPermissibles)
@@ -106,7 +107,7 @@ public class PermissionManagerMock implements PermissionManager
 	{
 		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(permissible, PERMISSIBLE_CANNOT_BE_NULL);
-		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
+		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
 		if (map != null)
@@ -124,14 +125,13 @@ public class PermissionManagerMock implements PermissionManager
 	public @NotNull Set<Permissible> getPermissionSubscriptions(@NotNull String permission)
 	{
 		Preconditions.checkNotNull(permission, PERMISSION_CANNOT_BE_NULL);
-		String name = permission.toLowerCase(java.util.Locale.ENGLISH);
+		String name = permission.toLowerCase(Locale.ENGLISH);
 		Map<Permissible, Boolean> map = this.permissionSubscriptions.get(name);
 
 		if (map == null)
 		{
 			return Set.of();
-		}
-		else
+		} else
 		{
 			return Set.copyOf(map.keySet());
 		}
@@ -168,8 +168,7 @@ public class PermissionManagerMock implements PermissionManager
 		if (map == null)
 		{
 			return Set.of();
-		}
-		else
+		} else
 		{
 			return Set.copyOf(map.keySet());
 		}

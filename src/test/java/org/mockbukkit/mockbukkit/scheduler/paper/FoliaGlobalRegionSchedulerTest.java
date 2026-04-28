@@ -18,71 +18,71 @@ import static org.junit.jupiter.api.Assertions.*;
 class FoliaGlobalRegionSchedulerTest
 {
 
-    @MockBukkitInject
-    private ServerMock server;
+	@MockBukkitInject
+	private ServerMock server;
 
-    @MockBukkitInject
-    private BukkitSchedulerMock bukkitScheduler;
+	@MockBukkitInject
+	private BukkitSchedulerMock bukkitScheduler;
 
-    private FoliaGlobalRegionScheduler scheduler;
-    private PluginMock plugin;
+	private FoliaGlobalRegionScheduler scheduler;
+	private PluginMock plugin;
 
-    @BeforeEach
-    void setUp()
-    {
-        scheduler = new FoliaGlobalRegionScheduler(bukkitScheduler);
-        plugin = MockBukkit.createMockPlugin();
-    }
+	@BeforeEach
+	void setUp()
+	{
+		scheduler = new FoliaGlobalRegionScheduler(bukkitScheduler);
+		plugin = MockBukkit.createMockPlugin();
+	}
 
-    @Test
-    void run_RunsTask()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.run(plugin, task -> latch.countDown());
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void run_RunsTask()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.run(plugin, task -> latch.countDown());
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void execute_RunsTask()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.execute(plugin, latch::countDown);
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void execute_RunsTask()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.execute(plugin, latch::countDown);
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void runDelayed_RunsLater()
-    {
-        CountDownLatch latch = new CountDownLatch(1);
-        scheduler.runDelayed(plugin, task -> latch.countDown(), 2);
-        bukkitScheduler.performOneTick();
-        assertEquals(1, latch.getCount());
-        bukkitScheduler.performOneTick();
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void runDelayed_RunsLater()
+	{
+		CountDownLatch latch = new CountDownLatch(1);
+		scheduler.runDelayed(plugin, task -> latch.countDown(), 2);
+		bukkitScheduler.performOneTick();
+		assertEquals(1, latch.getCount());
+		bukkitScheduler.performOneTick();
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void runAtFixedRate_RunsRepeatedly()
-    {
-        CountDownLatch latch = new CountDownLatch(3);
-        scheduler.runAtFixedRate(plugin, task -> latch.countDown(), 1, 1);
-        bukkitScheduler.performTicks(3);
-        assertEquals(0, latch.getCount());
-    }
+	@Test
+	void runAtFixedRate_RunsRepeatedly()
+	{
+		CountDownLatch latch = new CountDownLatch(3);
+		scheduler.runAtFixedRate(plugin, task -> latch.countDown(), 1, 1);
+		bukkitScheduler.performTicks(3);
+		assertEquals(0, latch.getCount());
+	}
 
-    @Test
-    void nullPlugin_Throws()
-    {
-        assertThrows(NullPointerException.class,
-                () -> scheduler.run(null, task -> {}));
-    }
+	@Test
+	void nullPlugin_Throws()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.run(null, task ->
+		{
+		}));
+	}
 
-    @Test
-    void nullTask_Throws()
-    {
-        assertThrows(NullPointerException.class,
-                () -> scheduler.run(plugin, null));
-    }
+	@Test
+	void nullTask_Throws()
+	{
+		assertThrows(NullPointerException.class, () -> scheduler.run(plugin, null));
+	}
 }

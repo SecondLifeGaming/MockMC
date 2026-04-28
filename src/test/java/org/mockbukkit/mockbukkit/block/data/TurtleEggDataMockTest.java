@@ -35,7 +35,8 @@ class TurtleEggDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3, 4 })
+		@ValueSource(ints =
+		{1, 2, 3, 4})
 		void givenValidValues(int age)
 		{
 			egg.setEggs(age);
@@ -43,7 +44,8 @@ class TurtleEggDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1, 0, 5, 6, 7 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1, 0, 5, 6, 7})
 		void giveInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> egg.setEggs(age));
@@ -63,7 +65,8 @@ class TurtleEggDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2 })
+		@ValueSource(ints =
+		{0, 1, 2})
 		void givenValidValues(int age)
 		{
 			egg.setHatch(age);
@@ -71,7 +74,8 @@ class TurtleEggDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1, 3, 4, 5 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1, 3, 4, 5})
 		void giveInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> egg.setHatch(age));

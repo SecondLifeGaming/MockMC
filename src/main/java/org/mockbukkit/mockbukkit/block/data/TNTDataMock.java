@@ -10,7 +10,8 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	/**
 	 * Constructs a new {@link TNTDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public TNTDataMock(@NotNull Material material)
 	{
@@ -20,7 +21,8 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	/**
 	 * Create a new {@link TNTDataMock} based on an existing {@link TNTDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected TNTDataMock(@NotNull TNTDataMock other)
 	{
@@ -40,7 +42,8 @@ public class TNTDataMock extends BlockDataMock implements TNT
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TNTDataMock clone()
 	{
 		return new TNTDataMock(this);

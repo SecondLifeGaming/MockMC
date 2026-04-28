@@ -126,17 +126,20 @@ class BlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	@ValueSource(bytes =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 	void setLightFromSky_GivenValidValues(byte lightLevel)
 	{
 		assertDoesNotThrow(() -> block.setLightFromSky(lightLevel));
 	}
 
 	@ParameterizedTest
-	@ValueSource(bytes = { -1, 16 })
+	@ValueSource(bytes =
+	{-1, 16})
 	void setLightFromSky_GivenInvalidValues(byte invalidLightLevel)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromSky(invalidLightLevel));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> block.setLightFromSky(invalidLightLevel));
 
 		assertEquals("Light level should be between 0 and 15.", e.getMessage());
 	}
@@ -150,17 +153,20 @@ class BlockMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(bytes = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+	@ValueSource(bytes =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 	void setLightFromBlocks_GivenValidValues(byte lightLevel)
 	{
 		assertDoesNotThrow(() -> block.setLightFromBlocks(lightLevel));
 	}
 
 	@ParameterizedTest
-	@ValueSource(bytes = { -1, 16 })
+	@ValueSource(bytes =
+	{-1, 16})
 	void setLightFromBlocks_GivenInvalidValues(byte invalidLightLevel)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> block.setLightFromBlocks(invalidLightLevel));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> block.setLightFromBlocks(invalidLightLevel));
 
 		assertEquals("Light level should be between 0 and 15.", e.getMessage());
 	}
@@ -467,9 +473,8 @@ class BlockMockTest
 	{
 
 		@ParameterizedTest
-		@EnumSource(value = Material.class, mode = EnumSource.Mode.INCLUDE, names = {
-			"WATER", "LAVA", "BUBBLE_COLUMN"
-		})
+		@EnumSource(value = Material.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"WATER", "LAVA", "BUBBLE_COLUMN"})
 		void givenLiquidMaterial(Material liquidMaterial)
 		{
 			Block b = new BlockMock(liquidMaterial);

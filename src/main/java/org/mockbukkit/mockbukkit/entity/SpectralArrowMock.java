@@ -4,19 +4,24 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.SpectralArrow;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class SpectralArrowMock extends AbstractArrowMock implements SpectralArrow
+public class SpectralArrowMock extends AbstractArrowMock
+		implements
+			SpectralArrow,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SpectralArrowBaseMock
 {
 
 	private int glowingTicks = 200;
 
 	/**
-	 * Constructs a new {@link SpectralArrowMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SpectralArrowMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SpectralArrowMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -36,9 +41,9 @@ public class SpectralArrowMock extends AbstractArrowMock implements SpectralArro
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SPECTRAL_ARROW;
 	}
-
 }

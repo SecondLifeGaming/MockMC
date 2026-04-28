@@ -18,15 +18,18 @@ public class ChestInventoryMock extends InventoryMock
 	/**
 	 * Constructs a new {@link ChestInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
-	 * @param size   The size of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
+	 * @param size
+	 *            The size of the inventory.
 	 * @see InventoryMock#InventoryMock(InventoryHolder, int, InventoryType)
 	 */
 	public ChestInventoryMock(InventoryHolder holder, int size)
 	{
-		super(holder, size, InventoryType.CHEST);
-		Preconditions.checkArgument(9 <= size && size <= 54 && size % 9 == 0,
+		Preconditions.checkArgument(size > 0, "Inventory size has to be > 0");
+		Preconditions.checkArgument(size <= 54 && size % 9 == 0,
 				"Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got " + size + ")");
+		super(holder, size, InventoryType.CHEST);
 	}
 
 	protected ChestInventoryMock(ChestInventoryMock inventory)
@@ -40,5 +43,4 @@ public class ChestInventoryMock extends InventoryMock
 	{
 		return new ChestInventoryMock(this);
 	}
-
 }

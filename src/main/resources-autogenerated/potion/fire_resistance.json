@@ -8,5 +8,8 @@
 			"particles": true,
 			"type": "minecraft:fire_resistance"
 		}
-	]
+	],
+	"extendable": true,
+	"maxLevel": 1,
+	"upgradeable": false
 }

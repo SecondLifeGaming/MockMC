@@ -9,7 +9,6 @@ import org.bukkit.entity.FallingBlock;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.state.BlockStateMock;
-
 import java.util.UUID;
 
 /**
@@ -17,24 +16,36 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class FallingBlockMock extends EntityMock implements FallingBlock
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class FallingBlockMock extends EntityMock
+		implements
+			FallingBlock,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.FallingBlockBaseMock
 {
 
 	private BlockState blockState = new BlockStateMock(Material.SAND);
 
 	private boolean dropItem = true;
+
 	private boolean canHurtEntities;
+
 	private boolean autoExpire;
+
 	private boolean cancelDrop;
 
 	private float damagePerBlock;
+
 	private int maximumDamage;
 
 	/**
-	 * Constructs a new {@link FallingBlock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link FallingBlock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public FallingBlockMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -42,13 +53,15 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	}
 
 	@Override
-	public @NotNull Material getMaterial()
+	@NotNull
+	public Material getMaterial()
 	{
 		return getBlockData().getMaterial();
 	}
 
 	@Override
-	public @NotNull BlockData getBlockData()
+	@NotNull
+	public BlockData getBlockData()
 	{
 		return getBlockState().getBlockData();
 	}
@@ -61,7 +74,8 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	}
 
 	@Override
-	public @NotNull BlockState getBlockState()
+	@NotNull
+	public BlockState getBlockState()
 	{
 		return this.blockState;
 	}
@@ -119,7 +133,6 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	public void setDamagePerBlock(float damage)
 	{
 		Preconditions.checkArgument(damage >= 0.0, "damage must be >= 0.0, given %s", damage);
-
 		this.damagePerBlock = damage;
 		if (damage > 0.0)
 		{
@@ -137,7 +150,6 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	public void setMaxDamage(int damage)
 	{
 		Preconditions.checkArgument(damage >= 0, "damage must be >= 0, given %s", damage);
-
 		this.maximumDamage = damage;
 		if (damage > 0)
 		{
@@ -158,9 +170,9 @@ public class FallingBlockMock extends EntityMock implements FallingBlock
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.FALLING_BLOCK;
 	}
-
 }

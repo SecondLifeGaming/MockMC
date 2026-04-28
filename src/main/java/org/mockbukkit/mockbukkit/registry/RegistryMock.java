@@ -5,11 +5,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
 import io.papermc.paper.registry.tag.Tag;
 import io.papermc.paper.registry.tag.TagKey;
 import org.bukkit.Keyed;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
+import org.bukkit.Particle;
+import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.GameRuleMock;
@@ -49,37 +51,52 @@ import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimMaterialMock;
 import org.mockbukkit.mockbukkit.inventory.meta.trim.TrimPatternMock;
 import org.mockbukkit.mockbukkit.map.MapCursorTypeMock;
 import org.mockbukkit.mockbukkit.potion.PotionEffectTypeMock;
+import org.bukkit.potion.PotionType;
 import org.mockbukkit.mockbukkit.sound.JukeboxSongMock;
 import org.mockbukkit.mockbukkit.sound.MusicInstrumentMock;
 import org.mockbukkit.mockbukkit.sound.SoundMock;
 import org.mockbukkit.mockbukkit.util.ResourceLoader;
-
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RegistryMock<T extends Keyed> implements Registry<T>
+public class RegistryMock<T extends Keyed> implements org.mockbukkit.mockbukkit.generated.org.bukkit.RegistryBaseMock<T>
 {
+	private static final String KEY_CANNOT_BE_NULL = "key cannot be null";
 
 	/**
-	 * These classes have registries that are an exception to the others, as they are wrappers to minecraft internals
+	 * These classes have registries that are an exception to the others, as they
+	 * are wrappers to minecraft internals
 	 */
 	private final Map<NamespacedKey, T> keyedMap = new HashMap<>();
+
+	private final Map<TagKey<T>, Tag<T>> tagCache = new HashMap<>();
+
+	private final RegistryKey<T> registryKey;
+
 	private JsonArray keyedData;
+
 	private Function<JsonObject, T> constructor;
 
 	public RegistryMock(RegistryKey<T> key)
 	{
+		this.registryKey = key;
 		loadKeyedToRegistry(key);
 	}
 
 	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
 	{
-		String fileName = "/keyed/" + key.key().value() + ".json";
-		this.constructor = (Function<JsonObject, T>) getConstructorFunction(key);
+		String fileName = String.format("/keyed/%s.json", key.key().value());
+		@SuppressWarnings("unchecked")
+		Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(key);
+		this.constructor = constructorFunction;
 		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
 	}
 
@@ -126,51 +143,46 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
-
 		// Add special handling for enum-based registry types
 		if (isEnumBasedRegistry(key))
 		{
 			return jsonObject -> createEnumWrapper(jsonObject, key);
 		}
-
 		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
 		if (constructorFunction == null)
 		{
+			// TODO: Auto-generated method stub
 			throw new UnimplementedOperationException();
 		}
-
 		return constructorFunction;
 	}
 
 	private boolean isEnumBasedRegistry(RegistryKey<?> key)
 	{
-		return key == RegistryKey.ENTITY_TYPE
-				|| key == RegistryKey.PARTICLE_TYPE
-				|| key == RegistryKey.POTION;
+		return key == RegistryKey.ENTITY_TYPE || key == RegistryKey.PARTICLE_TYPE || key == RegistryKey.POTION;
 	}
 
+	@SuppressWarnings(
+	{"unchecked", "rawtypes"})
 	private T createEnumWrapper(JsonObject jsonObject, RegistryKey<T> key)
 	{
 		// Extract the key from the JSON object
 		String id = jsonObject.get("key").getAsString();
 		NamespacedKey namespacedKey = NamespacedKey.fromString(id);
-
 		// Get the enum class from the registry key's type parameter
 		Class<?> enumClass = getEnumClassForRegistryKey(key);
 		if (enumClass == null || !enumClass.isEnum())
 		{
 			throw new IllegalStateException("Registry key " + key + " is marked as enum but has no enum class");
 		}
-
 		// Find the enum constant by name
 		String enumName = namespacedKey.getKey().toUpperCase();
 		try
 		{
 			// Convert the enum name to the corresponding enum constant
-			Enum<?> enumValue = Enum.valueOf((Class<? extends Enum>) enumClass, enumName);
+			Enum<?> enumValue = Enum.valueOf((Class) enumClass, enumName);
 			return (T) enumValue;
-		}
-		catch (IllegalArgumentException | ClassCastException e)
+		} catch (IllegalArgumentException | ClassCastException e)
 		{
 			throw new IllegalStateException("Could not find enum constant " + enumName + " in " + enumClass, e);
 		}
@@ -179,15 +191,15 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	private Class<?> getEnumClassForRegistryKey(RegistryKey<?> key)
 	{
 		Map<RegistryKey<?>, Class<?>> enumMap = new HashMap<>();
-		enumMap.put(RegistryKey.ENTITY_TYPE, org.bukkit.entity.EntityType.class);
-		enumMap.put(RegistryKey.PARTICLE_TYPE, org.bukkit.Particle.class);
-		enumMap.put(RegistryKey.POTION, org.bukkit.potion.PotionType.class);
-
+		enumMap.put(RegistryKey.ENTITY_TYPE, EntityType.class);
+		enumMap.put(RegistryKey.PARTICLE_TYPE, Particle.class);
+		enumMap.put(RegistryKey.POTION, PotionType.class);
 		return enumMap.get(key);
 	}
 
 	@Override
-	public @Nullable T get(@NotNull NamespacedKey key)
+	@Nullable
+	public T get(@NotNull NamespacedKey key)
 	{
 		Preconditions.checkNotNull(key);
 		loadIfEmpty();
@@ -195,51 +207,143 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 	}
 
 	@Override
-	public @Nullable NamespacedKey getKey(T value)
+	@Nullable
+	public T get(@NotNull net.kyori.adventure.key.Key key)
 	{
-		return value.getKey();
+		Preconditions.checkArgument(key != null, KEY_CANNOT_BE_NULL);
+		return get(new NamespacedKey(key.namespace(), key.value()));
 	}
 
 	@Override
-	public boolean hasTag(TagKey<T> tagKey)
+	@Nullable
+	public T get(@NotNull TypedKey<T> key)
 	{
-		throw new UnimplementedOperationException();
+		Preconditions.checkArgument(key != null, KEY_CANNOT_BE_NULL);
+		return get(key.key());
 	}
 
 	@Override
-	public Tag<T> getTag(TagKey<T> tagKey)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public Collection<Tag<T>> getTags()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)
+	@NotNull
+	public T getOrThrow(@NotNull NamespacedKey namespacedKey)
 	{
 		Preconditions.checkNotNull(namespacedKey);
 		loadIfEmpty();
 		T value = this.keyedMap.get(namespacedKey);
 		if (value == null)
 		{
-			throw new java.util.NoSuchElementException("No value for " + namespacedKey + " in " + this);
+			throw new NoSuchElementException("No value for " + namespacedKey + " in " + this);
 		}
 		return value;
 	}
 
 	@Override
-	public @NotNull Stream<T> stream()
+	@NotNull
+	public T getOrThrow(@NotNull net.kyori.adventure.key.Key key)
+	{
+		Preconditions.checkArgument(key != null, KEY_CANNOT_BE_NULL);
+		return getOrThrow(new NamespacedKey(key.namespace(), key.value()));
+	}
+
+	@Override
+	@NotNull
+	public T getOrThrow(@NotNull TypedKey<T> key)
+	{
+		Preconditions.checkNotNull(key, KEY_CANNOT_BE_NULL);
+		return getOrThrow(key.key());
+	}
+
+	@Override
+	@Nullable
+	public NamespacedKey getKey(@NotNull T value)
+	{
+		return value.getKey();
+	}
+
+	@Override
+	@NotNull
+	public NamespacedKey getKeyOrThrow(@NotNull T value)
+	{
+		return value.getKey();
+	}
+
+	@Override
+	public boolean hasTag(@NotNull TagKey<T> tagKey)
+	{
+		return getTag(tagKey) != null;
+	}
+
+	@Override
+	public Tag<T> getTag(TagKey<T> tagKey)
+	{
+		Preconditions.checkNotNull(tagKey, "tagKey cannot be null");
+		if (tagCache.containsKey(tagKey))
+		{
+			return tagCache.get(tagKey);
+		}
+		Tag<T> tag = loadTag(tagKey);
+		if (tag != null)
+		{
+			tagCache.put(tagKey, tag);
+		}
+		return tag;
+	}
+
+	@Override
+	public Collection<Tag<T>> getTags()
+	{
+		String plural = getPlural(registryKey);
+		if (plural == null)
+		{
+			return Collections.emptyList();
+		}
+		// Use the resource loader or filesystem to find all tags
+		// Since we don't have a list of all tags, we might need to scan the resources.
+		// For now, return the cached tags as a fallback, but ideally we should load
+		// them all.
+		return tagCache.values();
+	}
+
+	@Nullable
+	private Tag<T> loadTag(TagKey<T> tagKey)
+	{
+		String plural = getPlural(registryKey);
+		if (plural == null)
+		{
+			return null;
+		}
+		String fileName = String.format("/tags/%s/%s.json", plural, tagKey.key().value());
+		try
+		{
+			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
+			JsonArray values = json.getAsJsonArray("values");
+			List<T> tagValues = new ArrayList<>();
+			for (JsonElement element : values)
+			{
+				NamespacedKey key = NamespacedKey.fromString(element.getAsString());
+				T value = get(key);
+				if (value != null)
+				{
+					tagValues.add(value);
+				}
+			}
+			return new TagMock<>(tagKey, tagValues);
+		} catch (Exception e)
+		{
+			return null;
+		}
+	}
+
+	@Override
+	@NotNull
+	public Stream<T> stream()
 	{
 		loadIfEmpty();
 		return keyedMap.values().stream();
 	}
 
 	@Override
-	public @NotNull Stream<NamespacedKey> keyStream()
+	@NotNull
+	public Stream<NamespacedKey> keyStream()
 	{
 		return keyedMap.keySet().stream();
 	}
@@ -269,12 +373,12 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 				{
 					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
 					T tObject = constructor.apply(structureJSONObject);
-
 					/*
-					 * putIfAbsent fixes the edge case scenario where the constructor initializes class loading of the keyed object.
-					 * During this initialization, the loadIfEmpty method might be triggered again, leading to potential duplicate
-					 * instances of each keyed object. By using putIfAbsent, we ensure that only one instance of each keyed object
-					 * is added to the map, preventing duplicates.
+					 * putIfAbsent fixes the edge case scenario where the constructor initializes
+					 * class loading of the keyed object. During this initialization, the
+					 * loadIfEmpty method might be triggered again, leading to potential duplicate
+					 * instances of each keyed object. By using putIfAbsent, we ensure that only one
+					 * instance of each keyed object is added to the map, preventing duplicates.
 					 */
 					keyedMap.putIfAbsent(tObject.getKey(), tObject);
 				}
@@ -285,4 +389,13 @@ public class RegistryMock<T extends Keyed> implements Registry<T>
 		}
 	}
 
+	@Nullable
+	private static String getPlural(RegistryKey<?> key)
+	{
+		if (key == null)
+		{
+			return null;
+		}
+		return key.key().value() + "s";
+	}
 }

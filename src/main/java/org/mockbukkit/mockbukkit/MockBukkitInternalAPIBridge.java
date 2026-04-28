@@ -21,20 +21,23 @@ import org.jspecify.annotations.NullMarked;
 import org.mockbukkit.mockbukkit.block.BiomeMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.world.damagesource.CombatEntryMock;
-
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+@SuppressWarnings(
+{"UnstableApiUsage", "deprecation", "removal", "unchecked"})
 @NullMarked
 @ApiStatus.Internal
 @ApiStatus.Experimental
-@SuppressWarnings("UnstableApiUsage")
 public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 {
-	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component.translatable("entity.minecraft.mannequin.label");
 
-	private @Nullable BiomeMock customBiome = null;
+	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component
+			.translatable("entity.minecraft.mannequin.label");
+
+	@Nullable
+	private BiomeMock customBiome = null;
 
 	@Override
 	@ApiStatus.Experimental
@@ -52,7 +55,6 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 		{
 			customBiome = new BiomeMock(NamespacedKey.fromString("mockbukkit:custom"));
 		}
-
 		return customBiome;
 	}
 
@@ -63,33 +65,16 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public CombatEntry createCombatEntry(DamageSource damageSource, float damage, @Nullable FallLocationType fallLocationType, float fallDistance)
+	public CombatEntry createCombatEntry(DamageSource damageSource, float damage,
+			@Nullable FallLocationType fallLocationType, float fallDistance)
 	{
-		return CombatEntryMock.builder()
-				.damageSource(damageSource)
-				.damage(damage)
-				.fallLocationType(fallLocationType)
-				.fallDistance(fallDistance)
-				.build();
+		return CombatEntryMock.builder().damageSource(damageSource).damage(damage).fallLocationType(fallLocationType)
+				.fallDistance(fallDistance).build();
 	}
 
 	@Override
 	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
 	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public ResolvableProfile defaultMannequinProfile()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public SkinParts.Mutable allSkinParts()
-	{
-		// TODO Auto-generated method stub
 		throw new UnimplementedOperationException();
 	}
 
@@ -101,12 +86,12 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 
 	@Override
 	public <MODERN, LEGACY> GameRule<LEGACY> legacyGameRuleBridge(GameRule<MODERN> rule,
-																  Function<LEGACY, MODERN> fromLegacyToModern,
-																  Function<MODERN, LEGACY> toLegacyFromModern,
-																  Class<LEGACY> legacyClass)
+			Function<LEGACY, MODERN> fromLegacyToModern, Function<MODERN, LEGACY> toLegacyFromModern,
+			Class<LEGACY> legacyClass)
 	{
 		Preconditions.checkNotNull(rule, "The rule can't be null!");
-		return new GameRuleMock.LegacyGameRuleWrapperMock<>(legacyClass, rule.getKey(), rule.translationKey(), fromLegacyToModern, toLegacyFromModern);
+		return new GameRuleMock.LegacyGameRuleWrapperMock<>(legacyClass, rule.getKey(), rule.translationKey(),
+				fromLegacyToModern, toLegacyFromModern);
 	}
 
 	@Override
@@ -115,4 +100,15 @@ public class MockBukkitInternalAPIBridge implements InternalAPIBridge
 		return Set.of(Pose.STANDING, Pose.SNEAKING, Pose.SWIMMING, Pose.FALL_FLYING, Pose.SLEEPING);
 	}
 
+	@Override
+	public SkinParts.Mutable allSkinParts()
+	{
+		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public ResolvableProfile defaultMannequinProfile()
+	{
+		throw new UnimplementedOperationException();
+	}
 }

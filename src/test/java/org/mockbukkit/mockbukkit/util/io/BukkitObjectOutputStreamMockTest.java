@@ -12,7 +12,8 @@ class BukkitObjectOutputStreamMockTest
 {
 
 	@Test
-	@SuppressWarnings({ "removal", "deprecation" })
+	@SuppressWarnings(
+	{"removal", "deprecation"})
 	void isBukkitObjectOutputStream() throws IOException
 	{
 		ByteArrayOutputStream out = new ByteArrayOutputStream();

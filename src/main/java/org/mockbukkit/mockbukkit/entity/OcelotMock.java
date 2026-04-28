@@ -4,19 +4,24 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ocelot;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class OcelotMock extends AnimalsMock implements Ocelot
+public class OcelotMock extends AnimalsMock
+		implements
+			Ocelot,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.OcelotBaseMock
 {
 
 	private boolean isTrusting = false;
 
 	/**
-	 * Constructs a new {@link OcelotMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link OcelotMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public OcelotMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -37,7 +42,8 @@ public class OcelotMock extends AnimalsMock implements Ocelot
 
 	@Override
 	@Deprecated(since = "1.19")
-	public @NotNull Type getCatType()
+	@NotNull
+	public Type getCatType()
 	{
 		return Type.WILD_OCELOT;
 	}
@@ -55,5 +61,4 @@ public class OcelotMock extends AnimalsMock implements Ocelot
 	{
 		return EntityType.OCELOT;
 	}
-
 }

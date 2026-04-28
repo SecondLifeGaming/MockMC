@@ -8,7 +8,6 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,10 +16,14 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-public class EnchantmentStorageMetaMock extends ItemMetaMock implements EnchantmentStorageMeta
+@SuppressWarnings("deprecation")
+public class EnchantmentStorageMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.EnchantmentStorageMetaBaseMock
 {
 
-	private @NotNull Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
+	private Map<Enchantment, Integer> storedEnchantments = new HashMap<>();
+	private static final String STORED_ENCHANTMENTS = "stored-enchantments";
 
 	/**
 	 * Constructs a new {@link EnchantmentStorageMetaMock}.
@@ -31,14 +34,15 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	}
 
 	/**
-	 * Constructs a new {@link EnchantmentStorageMetaMock}, cloning the data from another.
+	 * Constructs a new {@link EnchantmentStorageMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public EnchantmentStorageMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof EnchantmentStorageMeta enchantMeta)
 		{
 			this.storedEnchantments = new HashMap<>(enchantMeta.getStoredEnchants());
@@ -64,16 +68,19 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 		{
 			return false;
 		}
-		if (!(obj instanceof EnchantmentStorageMetaMock other))
+		if (obj.getClass() != this.getClass())
 		{
 			return false;
 		}
+		EnchantmentStorageMetaMock other = (EnchantmentStorageMetaMock) obj;
 		return storedEnchantments.equals(other.storedEnchantments);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull EnchantmentStorageMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public EnchantmentStorageMetaMock clone()
 	{
 		return new EnchantmentStorageMetaMock(this);
 	}
@@ -85,12 +92,10 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 		{
 			return false;
 		}
-
 		if (!ignoreLevelRestriction && level > ench.getMaxLevel())
 		{
 			return false;
 		}
-
 		Integer prev = storedEnchantments.put(ench, level);
 		return prev == null || prev.intValue() != level;
 	}
@@ -102,7 +107,8 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	}
 
 	@Override
-	public @NotNull Map<Enchantment, Integer> getStoredEnchants()
+	@NotNull
+	public Map<Enchantment, Integer> getStoredEnchants()
 	{
 		// This is inline with CraftBukkit's default implementation, it only returns an
 		// immutable copy, never the original.
@@ -119,7 +125,6 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 				return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -144,17 +149,20 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized EnchantmentStorageMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized EnchantmentStorageMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the EnchantmentStorageMetaMock class.
 	 */
-	public static @NotNull EnchantmentStorageMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static EnchantmentStorageMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		EnchantmentStorageMetaMock serialMock = new EnchantmentStorageMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("stored-enchantments"))
+		if (args.containsKey(STORED_ENCHANTMENTS))
 		{
-			//noinspection unchecked
-			serialMock.storedEnchantments = NbtParser.parseMap(args.get("stored-enchantments"),
+			// noinspection unchecked
+			serialMock.storedEnchantments = NbtParser.parseMap(args.get(STORED_ENCHANTMENTS),
 					k -> NbtParser.parseWithCast(k, EnchantmentStorageMetaMock::getEnchantment),
 					NbtParser::parseInteger);
 		}
@@ -165,13 +173,15 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	 * Serializes the properties of an EnchantmentStorageMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the EnchantmentStorageMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         EnchantmentStorageMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("stored-enchantments", this.storedEnchantments.entrySet().stream()
+		serialized.put(STORED_ENCHANTMENTS, this.storedEnchantments.entrySet().stream()
 				.collect(ImmutableMap.toImmutableMap(entry -> getEnchantmentKey(entry.getKey()), Map.Entry::getValue)));
 		return serialized;
 	}
@@ -192,5 +202,4 @@ public class EnchantmentStorageMetaMock extends ItemMetaMock implements Enchantm
 	{
 		return "ENCHANTED";
 	}
-
 }

@@ -4,8 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Guardian;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.UUID;
 
 /**
@@ -13,16 +11,24 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class GuardianMock extends MonsterMock implements Guardian
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class GuardianMock extends MonsterMock
+		implements
+			Guardian,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.GuardianBaseMock
 {
 
 	private boolean laser = false;
 
 	/**
-	 * Constructs a new  on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new on the provided {@link ServerMock} with a specified
+	 * {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public GuardianMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -36,7 +42,6 @@ public class GuardianMock extends MonsterMock implements Guardian
 		{
 			return false;
 		}
-
 		this.laser = activated;
 		return activated;
 	}
@@ -48,49 +53,15 @@ public class GuardianMock extends MonsterMock implements Guardian
 	}
 
 	@Override
-	public int getLaserDuration()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setLaserTicks(int ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getLaserTicks()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean isElder()
 	{
 		return false;
 	}
 
 	@Override
-	public void setElder(boolean shouldBeElder)
-	{
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public boolean isMoving()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.GUARDIAN;
 	}
-
 }

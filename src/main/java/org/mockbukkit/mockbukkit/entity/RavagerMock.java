@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Ravager;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,18 +12,26 @@ import java.util.UUID;
  *
  * @see RaiderMock
  */
-public class RavagerMock extends RaiderMock implements Ravager
+public class RavagerMock extends RaiderMock
+		implements
+			Ravager,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.RavagerBaseMock
 {
 
 	private int attackTicks;
+
 	private int stunnedTicks;
+
 	private int roarTicks;
 
 	/**
-	 * Constructs a new {@link RavagerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link RavagerMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public RavagerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -68,15 +75,16 @@ public class RavagerMock extends RaiderMock implements Ravager
 	}
 
 	@Override
-	public @NotNull Sound getCelebrationSound()
+	@NotNull
+	public Sound getCelebrationSound()
 	{
 		return Sound.ENTITY_RAVAGER_CELEBRATE;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.RAVAGER;
 	}
-
 }

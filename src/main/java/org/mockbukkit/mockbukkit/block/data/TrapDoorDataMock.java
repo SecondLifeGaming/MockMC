@@ -25,7 +25,8 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	 * Constructs a new {@link TrapDoorDataMock} for the provided {@link Material}.
 	 * Only supports materials in {@link Tag#TRAPDOORS}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public TrapDoorDataMock(@NotNull Material type)
 	{
@@ -39,9 +40,11 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	}
 
 	/**
-	 * Create a new {@link TrapDoorDataMock} based on an existing {@link TrapDoorDataMock}.
+	 * Create a new {@link TrapDoorDataMock} based on an existing
+	 * {@link TrapDoorDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected TrapDoorDataMock(@NotNull TrapDoorDataMock other)
 	{
@@ -118,7 +121,8 @@ public class TrapDoorDataMock extends BlockDataMock implements TrapDoor
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TrapDoorDataMock clone()
 	{
 		return new TrapDoorDataMock(this);

@@ -1,9 +1,9 @@
 package org.mockbukkit.mockbukkit.inventory.meta.components;
 
+import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
@@ -13,7 +13,6 @@ import org.bukkit.inventory.meta.components.ToolComponent;
 import org.jetbrains.annotations.NotNullByDefault;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,11 +26,16 @@ import java.util.Objects;
 @EqualsAndHashCode
 @SerializableAs("Tool")
 @SuppressWarnings("UnstableApiUsage")
-public class ToolComponentMock implements ToolComponent
+public class ToolComponentMock
+		implements
+			ToolComponent,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.ToolComponentBaseMock
 {
+
 	private final List<ToolRule> toolRules = new ArrayList<>();
 
 	private float defaultMiningSpeed;
+
 	private int damagePerBlock;
 
 	@Override
@@ -79,7 +83,6 @@ public class ToolComponentMock implements ToolComponent
 		Preconditions.checkArgument(block != null, "block must not be null");
 		Preconditions.checkArgument(block.isBlock(), "block must be a block type, given %s", block.getKey());
 		Preconditions.checkArgument(speed == null || speed > 0.0F, "speed must be positive");
-
 		return this.addRule(List.of(block), speed, correctForDrops);
 	}
 
@@ -87,16 +90,11 @@ public class ToolComponentMock implements ToolComponent
 	public ToolRule addRule(Collection<Material> blocks, @Nullable Float speed, @Nullable Boolean correctForDrops)
 	{
 		Preconditions.checkArgument(speed == null || speed > 0.0F, "speed must be positive");
-
-		for(Material material : blocks)
+		for (Material material : blocks)
 		{
 			Preconditions.checkArgument(material.isBlock(), "blocks contains non-block type: %s", material.getKey());
 		}
-
-		ToolRule tool = ToolRuleMock.builder()
-				.speed(speed)
-				.isCorrectForDrops(correctForDrops)
-				.build();
+		ToolRule tool = ToolRuleMock.builder().speed(speed).isCorrectForDrops(correctForDrops).build();
 		tool.setBlocks(blocks);
 		return tool;
 	}
@@ -127,23 +125,18 @@ public class ToolComponentMock implements ToolComponent
 	{
 		Float speed = SerializableMeta.getObject(Float.class, map, "default-mining-speed", false);
 		Integer damage = SerializableMeta.getObject(Integer.class, map, "damage-per-block", false);
-
 		Preconditions.checkNotNull(speed, "speed can't be null!");
 		Preconditions.checkNotNull(damage, "damage can't be null!");
-
 		ImmutableList.Builder<ToolComponent.ToolRule> rules = ImmutableList.builder();
 		List<ToolRule> rawRuleList = SerializableMeta.getList(ToolRule.class, map, "rules");
-		for(ToolRule rule : rawRuleList)
+		for (ToolRule rule : rawRuleList)
 		{
 			if (!rule.getBlocks().isEmpty())
 			{
 				rules.add(rule);
 			}
 		}
-		var tool = ToolComponentMock.builder()
-				.defaultMiningSpeed(speed)
-				.damagePerBlock(damage)
-				.build();
+		var tool = ToolComponentMock.builder().defaultMiningSpeed(speed).damagePerBlock(damage).build();
 		tool.setRules(rules.build());
 		return tool;
 	}
@@ -158,12 +151,19 @@ public class ToolComponentMock implements ToolComponent
 	@EqualsAndHashCode
 	@SerializableAs("ToolRule")
 	@SuppressWarnings("UnstableApiUsage")
-	public static class ToolRuleMock implements ToolComponent.ToolRule
+	public static class ToolRuleMock
+			implements
+				ToolComponent.ToolRule,
+				org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.components.ToolComponent_ToolRuleBaseMock
 	{
+
 		private final Collection<Material> blocks = new ArrayList<>();
 
-		private @Nullable Float speed;
-		private @Nullable Boolean isCorrectForDrops;
+		@Nullable
+		private Float speed;
+
+		@Nullable
+		private Boolean isCorrectForDrops;
 
 		@Override
 		public Collection<Material> getBlocks()
@@ -176,7 +176,6 @@ public class ToolComponentMock implements ToolComponent
 		{
 			Preconditions.checkArgument(block != null, "block must not be null");
 			Preconditions.checkArgument(block.isBlock(), "block must be a block type, given %s", block.getKey());
-
 			this.blocks.clear();
 			this.blocks.add(block);
 		}
@@ -185,12 +184,11 @@ public class ToolComponentMock implements ToolComponent
 		public void setBlocks(Collection<Material> blocks)
 		{
 			Preconditions.checkArgument(blocks != null, "blocks must not be null");
-
-			for(Material material : blocks)
+			for (Material material : blocks)
 			{
-				Preconditions.checkArgument(material.isBlock(), "blocks contains non-block type: %s", material.getKey());
+				Preconditions.checkArgument(material.isBlock(), "blocks contains non-block type: %s",
+						material.getKey());
 			}
-
 			this.blocks.clear();
 			this.blocks.addAll(blocks);
 		}
@@ -202,7 +200,8 @@ public class ToolComponentMock implements ToolComponent
 		}
 
 		@Override
-		public @Nullable Float getSpeed()
+		@Nullable
+		public Float getSpeed()
 		{
 			return this.speed;
 		}
@@ -214,7 +213,8 @@ public class ToolComponentMock implements ToolComponent
 		}
 
 		@Override
-		public @Nullable Boolean isCorrectForDrops()
+		@Nullable
+		public Boolean isCorrectForDrops()
 		{
 			return this.isCorrectForDrops;
 		}
@@ -229,24 +229,18 @@ public class ToolComponentMock implements ToolComponent
 		public Map<String, Object> serialize()
 		{
 			Map<String, Object> result = new LinkedHashMap<>();
-
-			var blockKeys = this.blocks.stream()
-					.map(Material::getKey)
-					.map(NamespacedKey::asString)
-					.toList();
+			var blockKeys = this.blocks.stream().map(Material::getKey).map(NamespacedKey::asString).toList();
 			result.put("blocks", blockKeys);
 			Float speed = this.getSpeed();
 			if (speed != null)
 			{
 				result.put("speed", speed);
 			}
-
 			Boolean correct = this.isCorrectForDrops();
 			if (correct != null)
 			{
 				result.put("correct-for-drops", correct);
 			}
-
 			return result;
 		}
 
@@ -255,22 +249,12 @@ public class ToolComponentMock implements ToolComponent
 			Float speed = SerializableMeta.getObject(Float.class, map, "speed", true);
 			Boolean correct = SerializableMeta.getObject(Boolean.class, map, "correct-for-drops", true);
 			List<String> blocksString = SerializableMeta.getList(String.class, map, "blocks");
-			List<Material> blocks = blocksString.stream()
-					.map(NamespacedKey::fromString)
-					.filter(Objects::nonNull)
-					.map(Registry.MATERIAL::get)
-					.filter(Objects::nonNull)
-					.toList();
+			List<Material> blocks = blocksString.stream().map(NamespacedKey::fromString).filter(Objects::nonNull)
+					.map(Registry.MATERIAL::get).filter(Objects::nonNull).toList();
 			Preconditions.checkArgument(!blocks.isEmpty(), "The block list is null or empty");
-
-			ToolRuleMock tool = ToolRuleMock.builder()
-					.speed(speed)
-					.isCorrectForDrops(correct)
-					.build();
+			ToolRuleMock tool = ToolRuleMock.builder().speed(speed).isCorrectForDrops(correct).build();
 			tool.setBlocks(blocks);
 			return tool;
 		}
-
 	}
-
 }

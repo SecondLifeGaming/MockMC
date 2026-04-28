@@ -26,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class ScoreboardMockTest
 {
@@ -130,11 +132,8 @@ class ScoreboardMockTest
 	@Test
 	void getTeams()
 	{
-		Set<Team> excepted = Set.of(
-				this.scoreboard.registerNewTeam("red"),
-				this.scoreboard.registerNewTeam("green"),
-				this.scoreboard.registerNewTeam("yellow")
-		);
+		Set<Team> excepted = Set.of(this.scoreboard.registerNewTeam("red"), this.scoreboard.registerNewTeam("green"),
+				this.scoreboard.registerNewTeam("yellow"));
 		assertEquals(excepted, this.scoreboard.getTeams());
 	}
 

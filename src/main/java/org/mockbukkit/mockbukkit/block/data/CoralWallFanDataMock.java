@@ -33,7 +33,8 @@ public class CoralWallFanDataMock extends BlockDataMock implements CoralWallFan
 	public void setFacing(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian() && blockFace.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		set(FACING, blockFace);
 	}
 
@@ -56,7 +57,8 @@ public class CoralWallFanDataMock extends BlockDataMock implements CoralWallFan
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CoralWallFanDataMock clone()
 	{
 		return new CoralWallFanDataMock(this);

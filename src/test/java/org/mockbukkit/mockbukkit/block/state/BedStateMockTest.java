@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BedStateMockTest
 {
@@ -72,7 +74,8 @@ class BedStateMockTest
 	@Test
 	void setColor_ThrowsException()
 	{
-		assertThrowsExactly(UnsupportedOperationException.class, () -> new BedStateMock(Material.RED_BED).setColor(DyeColor.BLACK));
+		assertThrowsExactly(UnsupportedOperationException.class,
+				() -> new BedStateMock(Material.RED_BED).setColor(DyeColor.BLACK));
 	}
 
 	@Test

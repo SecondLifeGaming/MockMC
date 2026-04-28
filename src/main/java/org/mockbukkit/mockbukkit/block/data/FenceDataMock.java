@@ -15,7 +15,8 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	/**
 	 * Constructs a new {@link FenceDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public FenceDataMock(@NotNull Material material)
 	{
@@ -23,9 +24,11 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	}
 
 	/**
-	 * Create a new {@link FenceDataMock} based on an existing {@link FenceDataMock}.
+	 * Create a new {@link FenceDataMock} based on an existing
+	 * {@link FenceDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected FenceDataMock(@NotNull FenceDataMock other)
 	{
@@ -36,10 +39,7 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	public boolean hasFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkArgument(getAllowedFaces().contains(face), "Illegal facing: " + face);
-		return MultipleFacingDataMock.toKey(face)
-				.map(super::get)
-				.map(Boolean.class::cast)
-				.orElse(false);
+		return MultipleFacingDataMock.toKey(face).map(super::get).map(Boolean.class::cast).orElse(false);
 	}
 
 	@Override
@@ -52,9 +52,7 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	@Override
 	public @NotNull Set<BlockFace> getFaces()
 	{
-		return getAllowedFaces().stream()
-				.filter(this::hasFace)
-				.collect(Collectors.toSet());
+		return getAllowedFaces().stream().filter(this::hasFace).collect(Collectors.toSet());
 	}
 
 	@Override
@@ -76,7 +74,8 @@ public class FenceDataMock extends BlockDataMock implements Fence
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull FenceDataMock clone()
 	{
 		return new FenceDataMock(this);

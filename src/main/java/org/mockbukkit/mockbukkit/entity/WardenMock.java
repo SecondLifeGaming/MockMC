@@ -1,16 +1,11 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Warden;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -20,27 +15,26 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class WardenMock extends MonsterMock implements Warden
+public class WardenMock extends MonsterMock
+		implements
+			Warden,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.WardenBaseMock
 {
 
 	private final Map<Entity, Integer> angerPerEntity = new HashMap<>();
 
 	/**
-	 * Constructs a new {@link WardenMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link WardenMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public WardenMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
 		super(server, uuid);
-	}
-
-	@Override
-	public int getAnger()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -51,26 +45,15 @@ public class WardenMock extends MonsterMock implements Warden
 	}
 
 	@Override
-	public int getHighestAnger()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public void increaseAnger(@NotNull Entity entity, int increase)
 	{
 		Preconditions.checkNotNull(entity, "Entity cannot be null");
-
 		if (angerPerEntity.containsKey(entity))
 		{
 			int newAnger = angerPerEntity.get(entity) + increase;
-
 			Preconditions.checkState(newAnger <= 150, "Anger can't be higher than 150");
-
 			angerPerEntity.put(entity, newAnger);
-		}
-		else
+		} else
 		{
 			Preconditions.checkState(increase <= 150, "Anger can't be higher than 150");
 			angerPerEntity.put(entity, increase);
@@ -86,38 +69,16 @@ public class WardenMock extends MonsterMock implements Warden
 	}
 
 	@Override
-	public void clearAnger(@NotNull Entity entity)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable LivingEntity getEntityAngryAt()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setDisturbanceLocation(@NotNull Location location)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull AngerLevel getAngerLevel()
+	@NotNull
+	public AngerLevel getAngerLevel()
 	{
 		if (getAnger() <= 39)
 		{
 			return AngerLevel.CALM;
-		}
-		else if (getAnger() <= 79)
+		} else if (getAnger() <= 79)
 		{
 			return AngerLevel.AGITATED;
-		}
-		else
+		} else
 		{
 			return AngerLevel.ANGRY;
 		}
@@ -128,5 +89,4 @@ public class WardenMock extends MonsterMock implements Warden
 	{
 		return EntityType.WARDEN;
 	}
-
 }

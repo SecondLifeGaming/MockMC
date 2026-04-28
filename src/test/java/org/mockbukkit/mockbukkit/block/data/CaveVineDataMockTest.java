@@ -41,7 +41,8 @@ class CaveVineDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull CaveVineDataMock cloned = caveVineData.clone();
+		@NotNull
+		CaveVineDataMock cloned = caveVineData.clone();
 
 		assertEquals(caveVineData, cloned);
 		assertEquals(caveVineData.hasBerries(), cloned.hasBerries());
@@ -52,7 +53,5 @@ class CaveVineDataMockTest
 		assertTrue(caveVineData.hasBerries());
 		assertFalse(cloned.hasBerries());
 	}
-
-
 
 }

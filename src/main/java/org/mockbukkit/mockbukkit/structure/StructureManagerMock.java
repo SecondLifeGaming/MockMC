@@ -7,7 +7,6 @@ import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,52 +18,57 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StructureManagerMock implements StructureManager
+public class StructureManagerMock
+		implements
+			StructureManager,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.structure.StructureManagerBaseMock
 {
 
 	private final Map<NamespacedKey, Structure> structures = new HashMap<>();
 
 	@Override
-	public @NotNull Map<NamespacedKey, Structure> getStructures()
+	@NotNull
+	public Map<NamespacedKey, Structure> getStructures()
 	{
 		return Collections.unmodifiableMap(structures);
 	}
 
 	@Override
-	public @Nullable Structure getStructure(@NotNull NamespacedKey structureKey)
+	@Nullable
+	public Structure getStructure(@NotNull NamespacedKey structureKey)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		return structures.get(structureKey);
 	}
 
 	@Override
-	public @Nullable Structure registerStructure(@NotNull NamespacedKey structureKey, @NotNull Structure structure)
+	@Nullable
+	public Structure registerStructure(@NotNull NamespacedKey structureKey, @NotNull Structure structure)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
 		Preconditions.checkArgument(structure != null, "Structure structure cannot be null");
-
 		return structures.put(structureKey, structure);
 	}
 
 	@Override
-	public @Nullable Structure unregisterStructure(@NotNull NamespacedKey structureKey)
+	@Nullable
+	public Structure unregisterStructure(@NotNull NamespacedKey structureKey)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		return structures.remove(structureKey);
 	}
 
 	@Override
-	public @Nullable Structure loadStructure(@NotNull NamespacedKey structureKey, boolean register)
+	@Nullable
+	public Structure loadStructure(@NotNull NamespacedKey structureKey, boolean register)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		throw new UnimplementedOperationException("Load structure was not implemented yet.");
 	}
 
 	@Override
-	public @Nullable Structure loadStructure(@NotNull NamespacedKey structureKey)
+	@Nullable
+	public Structure loadStructure(@NotNull NamespacedKey structureKey)
 	{
 		return this.loadStructure(structureKey, true);
 	}
@@ -73,7 +77,6 @@ public class StructureManagerMock implements StructureManager
 	public void saveStructure(@NotNull NamespacedKey structureKey)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		throw new UnimplementedOperationException("Save structure was not implemented yet.");
 	}
 
@@ -82,7 +85,6 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structure cannot be null");
 		Preconditions.checkArgument(structure != null, "Structure cannot be null");
-
 		File structureFile = this.getStructureFile(structureKey);
 		Files.createDirectories(structureFile.toPath().getParent());
 		this.saveStructure(structureFile, structure);
@@ -98,32 +100,31 @@ public class StructureManagerMock implements StructureManager
 	public void deleteStructure(@NotNull NamespacedKey structureKey, boolean unregister)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		throw new UnimplementedOperationException("Delete structure was not implemented yet.");
 	}
 
 	@Override
-	public @NotNull File getStructureFile(@NotNull NamespacedKey structureKey)
+	@NotNull
+	public File getStructureFile(@NotNull NamespacedKey structureKey)
 	{
 		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
-
 		throw new UnimplementedOperationException("Get structure file was not implemented yet.");
 	}
 
 	@Override
-	public @NotNull Structure loadStructure(@NotNull File file) throws IOException
+	@NotNull
+	public Structure loadStructure(@NotNull File file) throws IOException
 	{
 		Preconditions.checkArgument(file != null, "File cannot be null");
-
 		FileInputStream fileinputstream = new FileInputStream(file);
 		return this.loadStructure(fileinputstream);
 	}
 
 	@Override
-	public @NotNull Structure loadStructure(@NotNull InputStream inputStream)
+	@NotNull
+	public Structure loadStructure(@NotNull InputStream inputStream)
 	{
 		Preconditions.checkArgument(inputStream != null, "inputStream cannot be null");
-
 		throw new UnimplementedOperationException("Load structure was not implemented yet.");
 	}
 
@@ -132,7 +133,6 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(file != null, "file cannot be null");
 		Preconditions.checkArgument(structure != null, "structure cannot be null");
-
 		FileOutputStream fileoutputstream = new FileOutputStream(file);
 		this.saveStructure(fileoutputstream, structure);
 	}
@@ -142,21 +142,21 @@ public class StructureManagerMock implements StructureManager
 	{
 		Preconditions.checkArgument(outputStream != null, "outputStream cannot be null");
 		Preconditions.checkArgument(structure != null, "structure cannot be null");
-
 		throw new UnimplementedOperationException("Save structure was not implemented yet.");
 	}
 
 	@Override
-	public @NotNull Structure createStructure()
+	@NotNull
+	public Structure createStructure()
 	{
 		return new StructureMock();
 	}
 
 	@Override
-	public @NotNull Structure copy(@NotNull Structure structure)
+	@NotNull
+	public Structure copy(@NotNull Structure structure)
 	{
 		Preconditions.checkArgument(structure != null, "Structure cannot be null");
 		return new StructureMock(structure);
 	}
-
 }

@@ -11,17 +11,10 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.entity.EntityCategory;
-import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.EquipmentSlotGroup;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,64 +22,114 @@ import java.util.Set;
 /**
  * Mock implementation of an {@link Enchantment}.
  */
+@SuppressWarnings("all")
 public class EnchantmentMock extends Enchantment
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.enchantments.EnchantmentBaseMock
 {
 
 	private static final String LEVEL = "level";
+
 	private static final String COST = "cost";
+
 	private static final String TREASURE_KEY = "treasure";
+
 	private static final String CURSED_KEY = "cursed";
+
 	private static final String MAX_LEVEL_KEY = "maxLevel";
+
 	private static final String START_LEVEL_KEY = "startLevel";
+
 	private static final String NAME_KEY = "name";
+
 	private static final String DISPLAY_NAMES_KEY = "displayNames";
+
 	private static final String MIN_MODIFIED_COSTS_KEY = "minModifiedCosts";
+
 	private static final String MAX_MODIFIED_COSTS_KEY = "maxModifiedCosts";
+
 	private static final String TRADEABLE_KEY = "tradeable";
+
 	private static final String DISCOVERABLE_KEY = "discoverable";
+
 	private static final String CONFLICTS_KEY = "conflicts";
+
 	private static final String ENCHANTABLE_KEY = "enchantable";
+
 	private static final String TRANSLATION_KEY = "translationKey";
+
 	private static final String ANVIL_COST_KEY = "anvilCost";
+
 	private static final String KEY = "key";
+
 	private static final String ENCHANTABLES_KEY = "enchantables";
 
-	private final @NotNull String name;
+	@NotNull
+	private final String name;
+
 	private final NamespacedKey namespacedKey;
+
 	private final boolean tradeable;
+
 	private final boolean discoverable;
+
 	private final Set<NamespacedKey> conflicts;
+
 	private final Set<NamespacedKey> enchantables;
+
 	private boolean treasure;
+
 	private final Component[] displayNames;
+
 	private final int[] maxModifiedCosts;
+
 	private boolean cursed;
+
 	private final int[] minModifiedCosts;
+
 	private int maxLevel;
+
 	private int startLevel;
+
 	private final String translationKey;
+
 	private final int anvilCost;
 
 	/**
-	 * @param namespacedKey   The key representing this enchantment
-	 * @param treasure        Whether this enchantment can be found in a treasure
-	 * @param cursed          Whether this enchantment is a curse
-	 * @param maxLevel        The max level of this enchantment
-	 * @param startLevel      The min level of this enchantment
-	 * @param name            The name of the enchantment
-	 * @param displayNames    The display name of the enchantment dependent on level
-	 * @param minModifiedCost The minimal modified cost for this enchantment dependent on level
-	 * @param maxModifiedCost The maximal modified cost for this enchantment dependent on level
-	 * @param tradeable       Whether this enchantment can be obtained from trades
-	 * @param discoverable    Whether this enchantment is in a loot table
-	 * @param conflicts       Namespaced-keys of enchantments that are conflicting with this enchantment
-	 * @param enchantables    Namespaced-keys of items which can be enchanted by this enchantment
+	 * @param namespacedKey
+	 *            The key representing this enchantment
+	 * @param treasure
+	 *            Whether this enchantment can be found in a treasure
+	 * @param cursed
+	 *            Whether this enchantment is a curse
+	 * @param maxLevel
+	 *            The max level of this enchantment
+	 * @param startLevel
+	 *            The min level of this enchantment
+	 * @param name
+	 *            The name of the enchantment
+	 * @param displayNames
+	 *            The display name of the enchantment dependent on level
+	 * @param minModifiedCost
+	 *            The minimal modified cost for this enchantment dependent on level
+	 * @param maxModifiedCost
+	 *            The maximal modified cost for this enchantment dependent on level
+	 * @param tradeable
+	 *            Whether this enchantment can be obtained from trades
+	 * @param discoverable
+	 *            Whether this enchantment is in a loot table
+	 * @param conflicts
+	 *            Namespaced-keys of enchantments that are conflicting with this
+	 *            enchantment
+	 * @param enchantables
+	 *            Namespaced-keys of items which can be enchanted by this
+	 *            enchantment
 	 */
-	public EnchantmentMock(NamespacedKey namespacedKey, boolean treasure, boolean cursed, int maxLevel,
-						   int startLevel, String name, Component[] displayNames, int[] minModifiedCost,
-						   int[] maxModifiedCost, boolean tradeable, boolean discoverable,
-						   Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
-						   int anvilCost)
+	@SuppressWarnings("java:S107")
+	public EnchantmentMock(NamespacedKey namespacedKey, boolean treasure, boolean cursed, int maxLevel, int startLevel,
+			String name, Component[] displayNames, int[] minModifiedCost, int[] maxModifiedCost, boolean tradeable,
+			boolean discoverable, Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
+			int anvilCost)
 	{
 		this.namespacedKey = namespacedKey;
 		this.treasure = treasure;
@@ -106,12 +149,15 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	/**
-	 * @param data Json data
-	 * @deprecated Use {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[],
-	 * int[], boolean, boolean, Set, Set, String, int)}
-	 * instead.
+	 * @param data
+	 *            Json data
+	 * @deprecated Use
+	 *             {@link #EnchantmentMock(NamespacedKey, boolean, boolean, int, int, String, Component[], int[], int[], boolean, boolean, Set, Set, String, int)}
+	 *             instead.
 	 */
 	@Deprecated(forRemoval = true, since = "v3.82.0")
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
 	public EnchantmentMock(JsonObject data)
 	{
 		this.namespacedKey = NamespacedKey.fromString(data.get(KEY).getAsString());
@@ -132,7 +178,8 @@ public class EnchantmentMock extends Enchantment
 	}
 
 	@Override
-	public @NotNull Component displayName(int level)
+	@NotNull
+	public Component displayName(int level)
 	{
 		return displayNames[level - 1];
 	}
@@ -167,89 +214,36 @@ public class EnchantmentMock extends Enchantment
 		return minModifiedCosts[level - 1];
 	}
 
+	/**
+	 * @deprecated Enchantments don't have a rarity anymore in 1.20.5+.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.5")
-	public @NotNull EnchantmentRarity getRarity()
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
+	@NotNull
+	public EnchantmentRarity getRarity()
 	{
 		throw new UnsupportedOperationException("Enchantments don't have a rarity anymore in 1.20.5+.");
 	}
 
+	/**
+	 * @deprecated Assumes that the enchantments description will always be a
+	 *             translatable component which is not guaranteed.
+	 */
 	@Override
-	@Deprecated(forRemoval = true, since = "1.20.5")
-	public float getDamageIncrease(int level, @NotNull EntityCategory entityCategory)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.21")
-	public float getDamageIncrease(int level, @NotNull EntityType entityType)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true, since = "1.21")
-	public @NotNull Set<EquipmentSlot> getActiveSlots()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Set<EquipmentSlotGroup> getActiveSlotGroups()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Component description()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull RegistryKeySet<ItemType> getSupportedItems()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @Nullable RegistryKeySet<ItemType> getPrimaryItems()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public int getWeight()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull RegistryKeySet<Enchantment> getExclusiveWith()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	@Deprecated(forRemoval = true) //Mark as deprecated as this method assumes that the enchantments description always
-	// be a translatable component which is not guaranteed.
-	public @NotNull String translationKey()
+	@Deprecated(forRemoval = true)
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
+	@NotNull
+	public String translationKey()
 	{
 		return translationKey;
 	}
 
 	@Override
-	public @NotNull String getName()
+	@NotNull
+	public String getName()
 	{
 		return name;
 	}
@@ -263,7 +257,8 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * Sets the return value of {@link #getMaxLevel()}.
 	 *
-	 * @param maxLevel The max level.
+	 * @param maxLevel
+	 *            The max level.
 	 * @see #getMaxLevel()
 	 */
 	public void setMaxLevel(int maxLevel)
@@ -280,7 +275,8 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * Sets the return value of {@link #getStartLevel()}.
 	 *
-	 * @param startLevel The start level.
+	 * @param startLevel
+	 *            The start level.
 	 * @see #getStartLevel()
 	 */
 	public void setStartLevel(int startLevel)
@@ -288,9 +284,15 @@ public class EnchantmentMock extends Enchantment
 		this.startLevel = startLevel;
 	}
 
+	/**
+	 * @deprecated Method no longer applicable. Use Tags instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.5")
-	public @NotNull EnchantmentTarget getItemTarget()
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
+	@NotNull
+	public EnchantmentTarget getItemTarget()
 	{
 		throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
 	}
@@ -298,10 +300,14 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * Sets the return value of {@link #getItemTarget()}.
 	 *
-	 * @param itemTarget The item target.
+	 * @param itemTarget
+	 *            The item target.
 	 * @see #getItemTarget()
+	 * @deprecated Method no longer applicable. Use Tags instead.
 	 */
 	@Deprecated(forRemoval = true)
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
 	public void setItemTarget(@NotNull EnchantmentTarget itemTarget)
 	{
 		throw new UnsupportedOperationException("Method no longer applicable. Use Tags instead.");
@@ -316,7 +322,8 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * Sets the return value of {@link #isTreasure()}.
 	 *
-	 * @param isTreasure Whether the enchantment is treasure.
+	 * @param isTreasure
+	 *            Whether the enchantment is treasure.
 	 * @see #isTreasure()
 	 */
 	public void setTreasure(boolean isTreasure)
@@ -333,7 +340,8 @@ public class EnchantmentMock extends Enchantment
 	/**
 	 * Sets the return value of {@link #isCursed()}.
 	 *
-	 * @param isCursed Whether the enchantment is cursed.
+	 * @param isCursed
+	 *            Whether the enchantment is cursed.
 	 * @see #isCursed()
 	 */
 	public void setCursed(boolean isCursed)
@@ -352,21 +360,101 @@ public class EnchantmentMock extends Enchantment
 	public boolean canEnchantItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
-		NamespacedKey namespacedKey = item.getType().getKey();
-		return enchantables.contains(namespacedKey);
+		NamespacedKey itemKey = item.getType().getKey();
+		return enchantables.contains(itemKey);
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return this.namespacedKey;
 	}
 
+	/**
+	 * @deprecated Assumes that the enchantments description will always be a
+	 *             translatable component which is not guaranteed.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
-	public @NotNull String getTranslationKey()
+	@SuppressWarnings(
+	{"java:S1133", "deprecation"})
+	@NotNull
+	public String getTranslationKey()
 	{
 		return translationKey;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public @NotNull RegistryKeySet<Enchantment> getExclusiveWith()
+	{
+		return null;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public @NotNull RegistryKeySet<ItemType> getSupportedItems()
+	{
+		return null;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public @NotNull RegistryKeySet<ItemType> getPrimaryItems()
+	{
+		return null;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public int getWeight()
+	{
+		return 0;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public @NotNull java.util.Set<org.bukkit.inventory.EquipmentSlotGroup> getActiveSlotGroups()
+	{
+		return java.util.Collections.emptySet();
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public float getDamageIncrease(int level, @NotNull org.bukkit.entity.EntityCategory category)
+	{
+		return 0.0f;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public float getDamageIncrease(int level, @NotNull org.bukkit.entity.EntityType entityType)
+	{
+		return 0.0f;
+	}
+
+	/**
+	 * @mockbukkit.version 26.1-2.1.4
+	 */
+	@Override
+	public @NotNull Component description()
+	{
+		return Component.empty();
 	}
 
 	@ApiStatus.Internal
@@ -374,11 +462,10 @@ public class EnchantmentMock extends Enchantment
 	{
 		Preconditions.checkNotNull(data);
 		List<String> expectedArguments = List.of(KEY, TREASURE_KEY, CURSED_KEY, MAX_LEVEL_KEY, START_LEVEL_KEY,
-				NAME_KEY, DISPLAY_NAMES_KEY, MIN_MODIFIED_COSTS_KEY, MAX_MODIFIED_COSTS_KEY, TRADEABLE_KEY, DISCOVERABLE_KEY,
-				CONFLICTS_KEY, ENCHANTABLES_KEY);
-		expectedArguments.forEach(expectedKey ->
-				Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
-
+				NAME_KEY, DISPLAY_NAMES_KEY, MIN_MODIFIED_COSTS_KEY, MAX_MODIFIED_COSTS_KEY, TRADEABLE_KEY,
+				DISCOVERABLE_KEY, CONFLICTS_KEY, ENCHANTABLES_KEY);
+		expectedArguments.forEach(
+				expectedKey -> Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 		NamespacedKey key = NamespacedKey.fromString(data.get(KEY).getAsString());
 		boolean treasure = data.get(TREASURE_KEY).getAsBoolean();
 		boolean cursed = data.get(CURSED_KEY).getAsBoolean();
@@ -394,7 +481,6 @@ public class EnchantmentMock extends Enchantment
 		Set<NamespacedKey> enchantables = getEnchantables(data.get(ENCHANTABLES_KEY).getAsJsonArray());
 		String translationKey = data.get(TRANSLATION_KEY).getAsString();
 		int anvilCost = data.get(ANVIL_COST_KEY).getAsInt();
-
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
 				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost);
 	}
@@ -443,5 +529,4 @@ public class EnchantmentMock extends Enchantment
 		}
 		return output;
 	}
-
 }

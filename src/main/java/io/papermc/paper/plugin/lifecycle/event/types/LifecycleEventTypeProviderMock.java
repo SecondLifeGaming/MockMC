@@ -13,15 +13,18 @@ public class LifecycleEventTypeProviderMock implements LifecycleEventTypeProvide
 	private final TagEventTypeProviderMock tagEventProvider = new TagEventTypeProviderMock();
 
 	@Override
-	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Monitorable<O, E> monitor(String name, Class<? extends O> ownerType)
+	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Monitorable<O, E> monitor(
+			String name, Class<? extends O> ownerType)
 	{
 		return LifecycleEventRunnerMock.INSTANCE.addEventType(new MonitorableLifecycleEventTypeMock<>(name, ownerType));
 	}
 
 	@Override
-	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Prioritizable<O, E> prioritized(final String name, final Class<? extends O> ownerType)
+	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Prioritizable<O, E> prioritized(
+			final String name, final Class<? extends O> ownerType)
 	{
-		return LifecycleEventRunnerMock.INSTANCE.addEventType(new PrioritizableLifecycleEventTypeMock.Simple<>(name, ownerType));
+		return LifecycleEventRunnerMock.INSTANCE
+				.addEventType(new PrioritizableLifecycleEventTypeMock.Simple<>(name, ownerType));
 	}
 
 	@Override

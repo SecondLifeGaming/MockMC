@@ -34,8 +34,7 @@ public class ResourceLoader
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)))
 		{
 			return JsonParser.parseReader(reader);
-		}
-		catch (JsonSyntaxException | IOException e)
+		} catch (JsonSyntaxException | IOException e)
 		{
 			throw new InternalDataLoadException(e);
 		}

@@ -38,7 +38,8 @@ class LightableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			lightable.setLit(isLit);
@@ -50,7 +51,8 @@ class LightableDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull LightableDataMock cloned = lightable.clone();
+		@NotNull
+		LightableDataMock cloned = lightable.clone();
 
 		assertEquals(lightable, cloned);
 		assertEquals(lightable.isLit(), cloned.isLit());

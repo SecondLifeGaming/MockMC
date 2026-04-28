@@ -9,15 +9,22 @@ import org.bukkit.generator.structure.StructureType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class StructureMock extends Structure
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.generator.structure.GeneratedStructureBaseMock
 {
 
 	private final NamespacedKey key;
+
 	private final StructureType type;
 
 	/**
-	 * @param key  The namespaced key representing this structure
-	 * @param type The type of structure
+	 * @param key
+	 *            The namespaced key representing this structure
+	 * @param type
+	 *            The type of structure
 	 */
 	public StructureMock(NamespacedKey key, StructureType type)
 	{
@@ -26,15 +33,18 @@ public class StructureMock extends Structure
 	}
 
 	/**
-	 * @param data Json data
-	 * @deprecated Will use {@link #StructureMock(NamespacedKey, StructureType)} instead.
+	 * @param data
+	 *            Json data
+	 * @deprecated Will use {@link #StructureMock(NamespacedKey, StructureType)}
+	 *             instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public StructureMock(JsonObject data)
 	{
 		Preconditions.checkNotNull(data);
 		this.key = NamespacedKey.fromString(data.get("key").getAsString());
-		this.type = Registry.STRUCTURE_TYPE.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
+		this.type = Registry.STRUCTURE_TYPE
+				.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
 	}
 
 	@ApiStatus.Internal
@@ -44,20 +54,22 @@ public class StructureMock extends Structure
 		Preconditions.checkArgument(data.has("key"), "Missing json key");
 		Preconditions.checkArgument(data.has("type"), "Missing json key");
 		NamespacedKey key = NamespacedKey.fromString(data.get("key").getAsString());
-		StructureType type = Registry.STRUCTURE_TYPE.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
+		StructureType type = Registry.STRUCTURE_TYPE
+				.get(Preconditions.checkNotNull(NamespacedKey.fromString(data.get("type").getAsString())));
 		return new StructureMock(key, type);
 	}
 
 	@Override
-	public @NotNull StructureType getStructureType()
+	@NotNull
+	public StructureType getStructureType()
 	{
 		return type;
 	}
 
 	@Override
-	public @NotNull NamespacedKey getKey()
+	@NotNull
+	public NamespacedKey getKey()
 	{
 		return key;
 	}
-
 }

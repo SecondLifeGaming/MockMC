@@ -4,7 +4,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HappyGhast;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -12,14 +11,20 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class HappyGhastMock extends AnimalsMock implements HappyGhast
+public class HappyGhastMock extends AnimalsMock
+		implements
+			HappyGhast,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.HappyGhastBaseMock
 {
 
 	/**
-	 * Constructs a new {@link HappyGhast} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link HappyGhast} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public HappyGhastMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -27,9 +32,9 @@ public class HappyGhastMock extends AnimalsMock implements HappyGhast
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.HAPPY_GHAST;
 	}
-
 }

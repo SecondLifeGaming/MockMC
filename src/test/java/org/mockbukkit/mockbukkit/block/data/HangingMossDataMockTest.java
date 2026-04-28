@@ -17,7 +17,6 @@ class HangingMossDataMockTest
 
 	private final HangingMossDataMock moss = new HangingMossDataMock(Material.PALE_HANGING_MOSS);
 
-
 	@Nested
 	class SetTip
 	{
@@ -29,7 +28,8 @@ class HangingMossDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			moss.setTip(isLit);

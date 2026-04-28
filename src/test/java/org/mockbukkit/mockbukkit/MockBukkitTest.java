@@ -34,6 +34,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MockBukkitTest
 {
@@ -124,7 +126,8 @@ class MockBukkitTest
 	{
 		ServerMock server = MockBukkit.mock();
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin)));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(PluginEnableEvent.class, event -> event.getPlugin().equals(plugin)));
 		assertTrue(plugin.isEnabled(), "Plugin not enabled");
 		assertTrue(plugin.onEnableExecuted, "Plugin's onEnable method not executed");
 	}
@@ -318,8 +321,7 @@ class MockBukkitTest
 			FileConfiguration config = plugin.getConfig();
 			String value = config.getString("foo");
 			assertEquals("notbar", value);
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			fail("Couldn't read config input stream", e);
 		}
@@ -332,11 +334,10 @@ class MockBukkitTest
 		try (InputStream inputStream = new ByteArrayInputStream("test data".getBytes()))
 		{
 			MockBukkit.mock();
-			PluginLoadException runtimeException = assertThrows(PluginLoadException.class, () ->
-					MockBukkit.loadWithConfig(TestPlugin.class, inputStream));
+			PluginLoadException runtimeException = assertThrows(PluginLoadException.class,
+					() -> MockBukkit.loadWithConfig(TestPlugin.class, inputStream));
 			assertEquals("Couldn't read config input stream", runtimeException.getMessage());
-		}
-		catch (IOException e)
+		} catch (IOException e)
 		{
 			fail("Couldn't read config input stream", e);
 		}

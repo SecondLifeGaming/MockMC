@@ -10,8 +10,6 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,17 +18,25 @@ import java.util.Set;
  *
  * @see InventoryMock
  */
-public class FurnaceInventoryMock extends InventoryMock implements FurnaceInventory
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class FurnaceInventoryMock extends InventoryMock
+		implements
+			FurnaceInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.FurnaceInventoryBaseMock
 {
 
 	private static final int SMELTING_SLOT = 0;
+
 	private static final int FUEL_SLOT = 1;
+
 	private static final int RESULT_SLOT = 2;
 
 	/**
 	 * Constructs a new {@link FurnaceInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public FurnaceInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -43,19 +49,22 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	}
 
 	@Override
-	public @Nullable ItemStack getResult()
+	@Nullable
+	public ItemStack getResult()
 	{
 		return getItem(RESULT_SLOT);
 	}
 
 	@Override
-	public @Nullable ItemStack getFuel()
+	@Nullable
+	public ItemStack getFuel()
 	{
 		return getItem(FUEL_SLOT);
 	}
 
 	@Override
-	public @Nullable ItemStack getSmelting()
+	@Nullable
+	public ItemStack getSmelting()
 	{
 		return getItem(SMELTING_SLOT);
 	}
@@ -85,20 +94,14 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	}
 
 	@Override
-	public boolean canSmelt(@Nullable ItemStack item)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public Furnace getHolder()
 	{
 		return (Furnace) super.getHolder();
 	}
 
 	@Override
-	public @NotNull FurnaceInventoryMock getSnapshot()
+	@NotNull
+	public FurnaceInventoryMock getSnapshot()
 	{
 		return new FurnaceInventoryMock(this);
 	}
@@ -106,7 +109,8 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 	private static class FurnaceFuelProvider
 	{
 
-		static @NotNull Set<Material> getFuels()
+		@NotNull
+		static Set<Material> getFuels()
 		{
 			Set<Material> fuels = new HashSet<>(Tag.LOGS.getValues());
 			fuels.addAll(Tag.PLANKS.getValues());
@@ -160,10 +164,7 @@ public class FurnaceInventoryMock extends InventoryMock implements FurnaceInvent
 			fuels.add(Material.AZALEA);
 			fuels.add(Material.FLOWERING_AZALEA);
 			fuels.add(Material.MANGROVE_ROOTS);
-
 			return fuels;
 		}
-
 	}
-
 }

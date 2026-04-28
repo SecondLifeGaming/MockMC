@@ -1,17 +1,14 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
 import com.google.common.collect.ImmutableList;
-import io.papermc.paper.potion.SuspiciousEffectEntry;
-import lombok.EqualsAndHashCode;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SuspiciousStewMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
-
+import org.mockbukkit.mockbukkit.util.NbtParser;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -22,12 +19,16 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-@EqualsAndHashCode(callSuper = true)
 @DelegateDeserialization(SerializableMeta.class)
-public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousStewMeta
+@SuppressWarnings(
+{"unchecked"})
+public class SuspiciousStewMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.SuspiciousStewMetaBaseMock
 {
 
-	private @NotNull List<PotionEffect> effects = new ArrayList<>();
+	@NotNull
+	private List<PotionEffect> effects = new ArrayList<>();
 
 	/**
 	 * Constructs a new {@link SuspiciousStewMetaMock}.
@@ -38,14 +39,15 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	/**
-	 * Constructs a new {@link SuspiciousStewMetaMock}, cloning the data from another.
+	 * Constructs a new {@link SuspiciousStewMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public SuspiciousStewMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof SuspiciousStewMeta stewMeta)
 		{
 			this.effects = new ArrayList<>(stewMeta.getCustomEffects());
@@ -53,8 +55,10 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull SuspiciousStewMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public SuspiciousStewMetaMock clone()
 	{
 		return new SuspiciousStewMetaMock(this);
 	}
@@ -63,32 +67,22 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
 	{
 		int index = indexOf(effect.getType());
-
 		if (index == -1)
 		{
 			effects.add(effect);
 			return true;
 		}
-
 		if (!overwrite)
 		{
 			return false;
 		}
-
 		PotionEffect prev = effects.get(index);
 		if (prev.getDuration() == effect.getDuration())
 		{
 			return false;
 		}
-
 		effects.set(index, effect);
 		return true;
-	}
-
-	@Override
-	public boolean addCustomEffect(@NotNull SuspiciousEffectEntry suspiciousEffectEntry, boolean overwrite)
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -100,7 +94,8 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	}
 
 	@Override
-	public @NotNull List<PotionEffect> getCustomEffects()
+	@NotNull
+	public List<PotionEffect> getCustomEffects()
 	{
 		return ImmutableList.copyOf(effects);
 	}
@@ -122,18 +117,15 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	{
 		Iterator<PotionEffect> iterator = effects.iterator();
 		boolean changed = false;
-
 		while (iterator.hasNext())
 		{
 			PotionEffect effect = iterator.next();
-
 			if (type.equals(effect.getType()))
 			{
 				iterator.remove();
 				changed = true;
 			}
 		}
-
 		return changed;
 	}
 
@@ -146,23 +138,27 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized SuspiciousStewMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized SuspiciousStewMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the SuspiciousStewMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
-	public static @NotNull SuspiciousStewMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static SuspiciousStewMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		SuspiciousStewMetaMock serialMock = new SuspiciousStewMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.effects = ((List<Map<String, Object>>) args.get("effects")).stream()
-				.map(PotionEffect::new).toList();
+		serialMock.effects = NbtParser.parseList(args.get("effects"), o -> new PotionEffect((Map<String, Object>) o));
+		if (serialMock.effects == null)
+		{
+			serialMock.effects = new ArrayList<>();
+		}
 		return serialMock;
 	}
 
@@ -170,10 +166,12 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 	 * Serializes the properties of an SuspiciousStewMetaMock to a HashMap.
 	 * Unimplemented properties are not present in the map.
 	 *
-	 * @return A HashMap of String, Object pairs representing the SuspiciousStewMetaMock.
+	 * @return A HashMap of String, Object pairs representing the
+	 *         SuspiciousStewMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("effects", this.effects.stream().map(PotionEffect::serialize).toList());
@@ -186,4 +184,27 @@ public class SuspiciousStewMetaMock extends ItemMetaMock implements SuspiciousSt
 		return "SUSPICIOUS_STEW";
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof SuspiciousStewMetaMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return isEquivalent(effects, that.effects);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(super.hashCode(), effects);
+	}
 }

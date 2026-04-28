@@ -3,11 +3,8 @@ package org.mockbukkit.mockbukkit.block.state;
 import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.base.Preconditions;
-import io.papermc.paper.datacomponent.item.ResolvableProfile;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.SkullType;
 import org.bukkit.block.Block;
@@ -18,7 +15,6 @@ import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Rotatable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
 
 /**
@@ -26,18 +22,25 @@ import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
  *
  * @see TileStateMock
  */
-public class SkullStateMock extends TileStateMock implements Skull
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SkullStateMock extends TileStateMock
+		implements
+			Skull,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.SkullBaseMock
 {
 
 	private static final int MAX_OWNER_LENGTH = 16;
 
-	private @Nullable PlayerProfileMock profile;
+	@Nullable
+	private PlayerProfileMock profile;
 
 	/**
 	 * Constructs a new {@link SkullStateMock} for the provided {@link Material}.
 	 * Only supports materials in {@link MaterialTags#SKULLS}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public SkullStateMock(@NotNull Material material)
 	{
@@ -46,10 +49,11 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	/**
-	 * Constructs a new {@link SkullStateMock} for the provided {@link Block}.
-	 * Only supports materials in {@link MaterialTags#SKULLS}
+	 * Constructs a new {@link SkullStateMock} for the provided {@link Block}. Only
+	 * supports materials in {@link MaterialTags#SKULLS}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected SkullStateMock(@NotNull Block block)
 	{
@@ -58,9 +62,11 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	/**
-	 * Constructs a new {@link SkullStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SkullStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected SkullStateMock(@NotNull SkullStateMock state)
 	{
@@ -69,29 +75,17 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @NotNull SkullStateMock getSnapshot()
+	@NotNull
+	public SkullStateMock getSnapshot()
 	{
 		return new SkullStateMock(this);
 	}
 
 	@Override
-	public @NotNull SkullStateMock copy()
+	@NotNull
+	public SkullStateMock copy()
 	{
 		return new SkullStateMock(this);
-	}
-
-	@Override
-	public @Nullable ResolvableProfile getProfile()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setProfile(@Nullable ResolvableProfile resolvableProfile)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -101,7 +95,8 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @Nullable String getOwner()
+	@Nullable
+	public String getOwner()
 	{
 		return this.hasOwner() ? this.profile.getName() : null;
 	}
@@ -113,29 +108,28 @@ public class SkullStateMock extends TileStateMock implements Skull
 		{
 			return false;
 		}
-		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH, "Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
+		Preconditions.checkArgument(name.length() <= MAX_OWNER_LENGTH,
+				"Name cannot be longer than " + MAX_OWNER_LENGTH + " characters.");
 		this.profile = new PlayerProfileMock(name, null);
 		return true;
 	}
 
 	@Override
-	public @Nullable OfflinePlayer getOwningPlayer()
+	@Nullable
+	public OfflinePlayer getOwningPlayer()
 	{
 		if (!this.hasOwner())
 		{
 			return null;
 		}
-
 		if (this.profile.getId() != null)
 		{
 			return Bukkit.getOfflinePlayer(this.profile.getId());
 		}
-
 		if (this.profile.getName() != null)
 		{
 			return Bukkit.getOfflinePlayer(this.profile.getName());
 		}
-
 		return null;
 	}
 
@@ -143,24 +137,25 @@ public class SkullStateMock extends TileStateMock implements Skull
 	public void setOwningPlayer(@NotNull OfflinePlayer player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
-
 		// PlayerMock#getPlayerProfile isn't implemented yet
-//		if (player instanceof PlayerMock playerMock) {
-//			this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
-//		} else {
+		// if (player instanceof PlayerMock playerMock) {
+		// this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
+		// } else {
 		this.profile = new PlayerProfileMock(player);
-//		}
+		// }
 	}
 
 	@Override
 	public void setPlayerProfile(@NotNull PlayerProfile profile)
 	{
-		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!"); // Implicit null check
+		// Implicit null check
+		Preconditions.checkArgument(profile instanceof PlayerProfileMock, "Profile must be a PlayerProfileMock!");
 		this.profile = (PlayerProfileMock) profile;
 	}
 
 	@Override
-	public @Nullable PlayerProfile getPlayerProfile()
+	@Nullable
+	public PlayerProfile getPlayerProfile()
 	{
 		return this.profile;
 	}
@@ -187,24 +182,13 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @Nullable NamespacedKey getNoteBlockSound()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setNoteBlockSound(@Nullable NamespacedKey noteBlockSound)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull BlockFace getRotation()
+	@NotNull
+	public BlockFace getRotation()
 	{
 		BlockData blockData = getBlockData();
-		return (blockData instanceof Rotatable) ? ((Rotatable) blockData).getRotation() : ((Directional) blockData).getFacing();
+		return (blockData instanceof Rotatable)
+				? ((Rotatable) blockData).getRotation()
+				: ((Directional) blockData).getFacing();
 	}
 
 	@Override
@@ -214,8 +198,7 @@ public class SkullStateMock extends TileStateMock implements Skull
 		if (blockData instanceof Rotatable rotatable)
 		{
 			rotatable.setRotation(rotation);
-		}
-		else if (blockData instanceof Directional directional)
+		} else if (blockData instanceof Directional directional)
 		{
 			directional.setFacing(rotation);
 		}
@@ -224,7 +207,8 @@ public class SkullStateMock extends TileStateMock implements Skull
 
 	@Override
 	@Deprecated(since = "1.13")
-	public @NotNull SkullType getSkullType()
+	@NotNull
+	public SkullType getSkullType()
 	{
 		return switch (getType())
 		{
@@ -246,21 +230,8 @@ public class SkullStateMock extends TileStateMock implements Skull
 	}
 
 	@Override
-	public @Nullable Component customName()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void customName(@Nullable Component component)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	protected String toStringInternal()
 	{
 		return super.toStringInternal() + ", profile=" + profile;
 	}
-
 }

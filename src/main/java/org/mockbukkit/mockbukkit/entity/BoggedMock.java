@@ -8,7 +8,6 @@ import org.bukkit.entity.Skeleton;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.util.AdventureConverters;
-
 import java.util.UUID;
 
 /**
@@ -16,16 +15,24 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-public class BoggedMock extends AbstractSkeletonMock implements Bogged
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class BoggedMock extends AbstractSkeletonMock
+		implements
+			Bogged,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.BoggedBaseMock
 {
 
 	private boolean sheared;
 
 	/**
-	 * Constructs a new {@link BoggedMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link BoggedMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public BoggedMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -36,10 +43,10 @@ public class BoggedMock extends AbstractSkeletonMock implements Bogged
 	public void shear(@NotNull Sound.Source source)
 	{
 		Preconditions.checkNotNull(source, "The source cannot be null");
-
 		if (this.isInWorld())
 		{
-			this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_BOGGED_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
+			this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_BOGGED_SHEAR,
+					AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
 		}
 		this.setSheared(true);
 	}
@@ -51,7 +58,8 @@ public class BoggedMock extends AbstractSkeletonMock implements Bogged
 	}
 
 	@Override
-	public @NotNull Skeleton.SkeletonType getSkeletonType()
+	@NotNull
+	public Skeleton.SkeletonType getSkeletonType()
 	{
 		return Skeleton.SkeletonType.BOGGED;
 	}
@@ -69,9 +77,9 @@ public class BoggedMock extends AbstractSkeletonMock implements Bogged
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.BOGGED;
 	}
-
 }

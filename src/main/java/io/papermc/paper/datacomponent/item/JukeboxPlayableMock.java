@@ -7,7 +7,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public class JukeboxPlayableMock implements JukeboxPlayable
 {
 

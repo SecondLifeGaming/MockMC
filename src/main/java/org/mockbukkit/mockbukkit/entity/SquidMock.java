@@ -4,17 +4,22 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Squid;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class SquidMock extends AgeableMock implements Squid
+public class SquidMock extends AgeableMock
+		implements
+			Squid,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SquidBaseMock
 {
 
 	/**
-	 * Constructs a new {@link SquidMock}  on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SquidMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SquidMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -22,9 +27,9 @@ public class SquidMock extends AgeableMock implements Squid
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SQUID;
 	}
-
 }

@@ -5,19 +5,24 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.GlowSquid;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
-public class GlowSquidMock extends SquidMock implements GlowSquid
+public class GlowSquidMock extends SquidMock
+		implements
+			GlowSquid,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.GlowSquidBaseMock
 {
 
 	private int darkTicksRemaining = 0;
 
 	/**
-	 * Constructs a new {@link GlowSquidMock}  on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link GlowSquidMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public GlowSquidMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -38,9 +43,9 @@ public class GlowSquidMock extends SquidMock implements GlowSquid
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.GLOW_SQUID;
 	}
-
 }

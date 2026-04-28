@@ -32,7 +32,8 @@ public class CaveVinesPlantDataMock extends AgeableDataMock implements CaveVines
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull CaveVinesPlantDataMock clone()
 	{
 		return new CaveVinesPlantDataMock(this);

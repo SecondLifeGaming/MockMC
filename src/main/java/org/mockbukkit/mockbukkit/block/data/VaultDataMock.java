@@ -14,7 +14,8 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	/**
 	 * Constructs a new {@link VaultDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public VaultDataMock(@NotNull Material material)
 	{
@@ -22,9 +23,11 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	}
 
 	/**
-	 * Create a new {@link VaultDataMock} based on an existing {@link VaultDataMock}.
+	 * Create a new {@link VaultDataMock} based on an existing
+	 * {@link VaultDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected VaultDataMock(@NotNull VaultDataMock other)
 	{
@@ -66,7 +69,8 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	public void setFacing(@NotNull BlockFace facing)
 	{
 		Preconditions.checkArgument(facing != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0, "Invalid face, only cartesian horizontal face are allowed for this property!");
+		Preconditions.checkArgument(facing.isCartesian() && facing.getModY() == 0,
+				"Invalid face, only cartesian horizontal face are allowed for this property!");
 		this.set(BlockDataKey.FACING, facing);
 	}
 
@@ -77,7 +81,8 @@ public class VaultDataMock extends BlockDataMock implements Vault
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull VaultDataMock clone()
 	{
 		return new VaultDataMock(this);

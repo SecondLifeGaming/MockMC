@@ -3,6 +3,7 @@ package org.mockbukkit.mockbukkit.command;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -21,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.conversations.ConversationTracker;
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
@@ -30,22 +30,45 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link ConsoleCommandSender}.
  */
-public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTarget
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ConsoleCommandSenderMock
+		implements
+			ConsoleCommandSender,
+			MessageTarget,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.command.RemoteConsoleCommandSenderBaseMock
 {
 
 	private final Spigot spigot = new Spigot();
+
 	private final PermissibleBase perm = new PermissibleBase(this);
+
 	private final Queue<Component> messages = new LinkedList<>();
+
 	private final ConversationTracker conversationTracker = new ConversationTracker();
+
+	@Override
+	public void sendMessage(@NotNull Component message)
+	{
+		Preconditions.checkNotNull(message, "message cannot be null");
+		this.messages.add(message);
+	}
+
+	@Override
+	public void sendMessage(@NotNull ComponentLike message)
+	{
+		Preconditions.checkNotNull(message, "message cannot be null");
+		this.sendMessage(message.asComponent());
+	}
 
 	@Override
 	public void sendMessage(@NotNull String message)
 	{
-		sendRawMessage(message);
+		this.sendMessage(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
 	@Override
-	public void sendMessage(String @NotNull ... messages)
+	public void sendMessage(String @NotNull... messages)
 	{
 		for (String message : messages)
 		{
@@ -60,13 +83,14 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public void sendMessage(UUID sender, String @NotNull ... messages)
+	public void sendMessage(UUID sender, String @NotNull... messages)
 	{
 		sendMessage(messages);
 	}
 
 	@Override
-	public @Nullable Component nextComponentMessage()
+	@Nullable
+	public Component nextComponentMessage()
 	{
 		return this.messages.poll();
 	}
@@ -96,13 +120,15 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
+	@NotNull
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin, @NotNull String name, boolean value)
 	{
 		return this.perm.addAttachment(plugin, name, value);
 	}
 
 	@Override
-	public @NotNull PermissionAttachment addAttachment(@NotNull Plugin plugin)
+	@NotNull
+	public PermissionAttachment addAttachment(@NotNull Plugin plugin)
 	{
 		return this.perm.addAttachment(plugin);
 	}
@@ -132,7 +158,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @NotNull Set<PermissionAttachmentInfo> getEffectivePermissions()
+	@NotNull
+	public Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		return this.perm.getEffectivePermissions();
 	}
@@ -151,14 +178,16 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @NotNull Server getServer()
+	@NotNull
+	public Server getServer()
 	{
 		MockBukkit.ensureMocking();
 		return MockBukkit.getMock();
 	}
 
 	@Override
-	public @NotNull String getName()
+	@NotNull
+	public String getName()
 	{
 		return "CONSOLE";
 	}
@@ -184,7 +213,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	@Override
 	public void abandonConversation(@NotNull Conversation conversation)
 	{
-		this.conversationTracker.abandonConversation(conversation, new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
+		this.conversationTracker.abandonConversation(conversation,
+				new ConversationAbandonedEvent(conversation, new ManuallyAbandonedConversationCanceller()));
 	}
 
 	@Override
@@ -207,13 +237,15 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 	}
 
 	@Override
-	public @NotNull Spigot spigot()
+	@NotNull
+	public Spigot spigot()
 	{
 		return this.spigot;
 	}
 
 	@Override
-	public @NotNull Component name()
+	@NotNull
+	public Component name()
 	{
 		return Component.text(getName());
 	}
@@ -238,7 +270,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
 			Preconditions.checkNotNull(component, "Component must not be null");
-			sendMessage(sender, new BaseComponent[]{ component });
+			sendMessage(sender, new BaseComponent[]
+			{component});
 		}
 
 		@Override
@@ -246,9 +279,8 @@ public class ConsoleCommandSenderMock implements ConsoleCommandSender, MessageTa
 		{
 			Preconditions.checkNotNull(components, "Components must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender),
+					comp);
 		}
-
 	}
-
 }

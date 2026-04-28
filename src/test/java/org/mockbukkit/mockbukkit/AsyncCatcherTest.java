@@ -37,8 +37,7 @@ class AsyncCatcherTest
 			try
 			{
 				AsyncCatcher.catchOp("test");
-			}
-			catch (IllegalStateException e)
+			} catch (IllegalStateException e)
 			{
 				exceptionThrown.set(e);
 			}

@@ -10,7 +10,6 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
 import org.mockbukkit.mockbukkit.util.AdventureConverters;
-
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,17 +18,26 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see AnimalsMock
  */
-public class SheepMock extends AnimalsMock implements Sheep
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class SheepMock extends AnimalsMock
+		implements
+			Sheep,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SheepBaseMock
 {
 
 	private boolean sheared = false;
+
 	private DyeColor color = DyeColor.WHITE;
 
 	/**
-	 * Constructs a new {@link SheepMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SheepMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SheepMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -49,7 +57,8 @@ public class SheepMock extends AnimalsMock implements Sheep
 	}
 
 	@Override
-	public @Nullable DyeColor getColor()
+	@Nullable
+	public DyeColor getColor()
 	{
 		return this.color;
 	}
@@ -69,13 +78,14 @@ public class SheepMock extends AnimalsMock implements Sheep
 	@Override
 	public void shear(Sound.@NotNull Source source)
 	{
-		this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_SHEEP_SHEAR, AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
+		this.getWorld().playSound(this, org.bukkit.Sound.ENTITY_SHEEP_SHEAR,
+				AdventureConverters.soundSourceToCategory(source), 1.0F, 1.0F);
 		this.setSheared(true);
 		int i = ThreadLocalRandom.current().nextInt(1, 4);
-
 		for (int j = 0; j < i; ++j)
 		{
-			this.getWorld().dropItem(this.getLocation(), new ItemStackMock(Material.valueOf(this.color.name() + "_WOOL")));
+			this.getWorld().dropItem(this.getLocation(),
+					new ItemStackMock(Material.valueOf(this.color.name() + "_WOOL")));
 		}
 	}
 
@@ -84,5 +94,4 @@ public class SheepMock extends AnimalsMock implements Sheep
 	{
 		return !this.isDead() && !this.isSheared() && this.isAdult();
 	}
-
 }

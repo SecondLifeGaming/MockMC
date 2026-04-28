@@ -15,7 +15,8 @@ public class RailDataMock extends BlockDataMock implements Rail
 	/**
 	 * Constructs a new {@link RailDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	protected RailDataMock(@NotNull Material material)
 	{
@@ -25,7 +26,8 @@ public class RailDataMock extends BlockDataMock implements Rail
 	/**
 	 * Create a new {@link RailDataMock} based on an existing {@link RailDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected RailDataMock(@NotNull RailDataMock other)
 	{
@@ -41,7 +43,8 @@ public class RailDataMock extends BlockDataMock implements Rail
 	@Override
 	public void setShape(@NotNull Shape shape)
 	{
-		Preconditions.checkArgument(this.getShapes().contains(shape), "Invalid shape. Allowed values are: %s", this.getShapes().stream().sorted().toList());
+		Preconditions.checkArgument(this.getShapes().contains(shape), "Invalid shape. Allowed values are: %s",
+				this.getShapes().stream().sorted().toList());
 		this.set(BlockDataKey.RAIL_SHAPE, shape);
 	}
 
@@ -64,7 +67,8 @@ public class RailDataMock extends BlockDataMock implements Rail
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull RailDataMock clone()
 	{
 		return new RailDataMock(this);

@@ -9,8 +9,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.Collection;
 import java.util.UUID;
 
@@ -21,16 +19,23 @@ import java.util.UUID;
  * @see LingeringPotionMock
  * @see ThrowableProjectileMock
  */
-public abstract class ThrownPotionMock extends ThrowableProjectileMock implements ThrownPotion
+public abstract class ThrownPotionMock extends ThrowableProjectileMock
+		implements
+			ThrownPotion,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ThrownPotionBaseMock
 {
 
-	private @NotNull ItemStack potionItem = new ItemStack(Material.SPLASH_POTION);
+	@NotNull
+	private ItemStack potionItem = new ItemStack(Material.SPLASH_POTION);
 
 	/**
-	 * Constructs a new {@link ThrownPotionMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ThrownPotionMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected ThrownPotionMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -38,13 +43,15 @@ public abstract class ThrownPotionMock extends ThrowableProjectileMock implement
 	}
 
 	@Override
-	public @NotNull Collection<PotionEffect> getEffects()
+	@NotNull
+	public Collection<PotionEffect> getEffects()
 	{
 		return getPotionMeta().getCustomEffects();
 	}
 
 	@Override
-	public @NotNull PotionMeta getPotionMeta()
+	@NotNull
+	public PotionMeta getPotionMeta()
 	{
 		return (PotionMeta) this.potionItem.getItemMeta();
 	}
@@ -57,13 +64,8 @@ public abstract class ThrownPotionMock extends ThrowableProjectileMock implement
 	}
 
 	@Override
-	public void splash()
-	{
-		throw new UnimplementedOperationException("Splash function was not implemented yet!");
-	}
-
-	@Override
-	public @NotNull ItemStack getItem()
+	@NotNull
+	public ItemStack getItem()
 	{
 		return this.potionItem.clone();
 	}
@@ -72,8 +74,8 @@ public abstract class ThrownPotionMock extends ThrowableProjectileMock implement
 	public void setItem(@NotNull ItemStack item)
 	{
 		Preconditions.checkArgument(item != null, "ItemStack cannot be null");
-
-		PotionMeta meta = (Material.LINGERING_POTION.equals(item.getType()) || Material.SPLASH_POTION.equals(item.getType())) ? null : this.getPotionMeta();
+		PotionMeta meta = (Material.LINGERING_POTION.equals(item.getType())
+				|| Material.SPLASH_POTION.equals(item.getType())) ? null : this.getPotionMeta();
 		this.potionItem = item.clone();
 		if (meta != null)
 		{
@@ -82,6 +84,6 @@ public abstract class ThrownPotionMock extends ThrowableProjectileMock implement
 	}
 
 	@Override
-	public abstract @NotNull EntityType getType();
-
+	@NotNull
+	public abstract EntityType getType();
 }

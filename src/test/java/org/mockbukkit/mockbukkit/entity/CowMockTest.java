@@ -77,10 +77,7 @@ class CowMockTest
 
 		public static Stream<Arguments> getCowVariants()
 		{
-			return RegistryAccess.registryAccess()
-					.getRegistry(RegistryKey.COW_VARIANT)
-					.stream()
-					.map(Arguments::of);
+			return RegistryAccess.registryAccess().getRegistry(RegistryKey.COW_VARIANT).stream().map(Arguments::of);
 		}
 
 	}
@@ -111,7 +108,8 @@ class CowMockTest
 		@Test
 		void withTeamInformation()
 		{
-			@NotNull Team team = cow.getServer().getScoreboardManager().getMainScoreboard().registerNewTeam("test");
+			@NotNull
+			Team team = cow.getServer().getScoreboardManager().getMainScoreboard().registerNewTeam("test");
 			team.color(NamedTextColor.GREEN);
 			team.prefix(Component.text("["));
 			team.suffix(Component.text("]"));

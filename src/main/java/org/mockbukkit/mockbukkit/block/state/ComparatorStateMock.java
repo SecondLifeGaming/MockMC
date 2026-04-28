@@ -14,10 +14,11 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 {
 
 	/**
-	 * Constructs a new {@link ComparatorStateMock} for the provided {@link Material}.
-	 * Only supports {@link Material#COMPARATOR}
+	 * Constructs a new {@link ComparatorStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#COMPARATOR}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public ComparatorStateMock(@NotNull Material material)
 	{
@@ -29,7 +30,8 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 	 * Constructs a new {@link ComparatorStateMock} for the provided {@link Block}.
 	 * Only supports {@link Material#COMPARATOR}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected ComparatorStateMock(@NotNull Block block)
 	{
@@ -38,9 +40,11 @@ public class ComparatorStateMock extends TileStateMock implements Comparator
 	}
 
 	/**
-	 * Constructs a new {@link ComparatorStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link ComparatorStateMock} by cloning the data from an
+	 * existing one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected ComparatorStateMock(@NotNull ComparatorStateMock state)
 	{

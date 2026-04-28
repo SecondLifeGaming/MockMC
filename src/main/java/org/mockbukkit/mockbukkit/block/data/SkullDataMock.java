@@ -42,14 +42,16 @@ public class SkullDataMock extends BlockDataMock implements Skull
 	public void setRotation(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0, "Invalid face, only horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0,
+				"Invalid face, only horizontal face are allowed for this property!");
 
 		int id = RotatableDataMock.getIdFromBlockFace(blockFace);
 		this.set(BlockDataKey.ROTATION, id);
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SkullDataMock clone()
 	{
 		return new SkullDataMock(this);

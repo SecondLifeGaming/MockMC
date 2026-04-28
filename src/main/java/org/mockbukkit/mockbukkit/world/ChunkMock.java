@@ -7,44 +7,44 @@ import org.bukkit.ChunkSnapshot;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.generator.structure.GeneratedStructure;
-import org.bukkit.generator.structure.Structure;
 import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
 import org.mockbukkit.mockbukkit.persistence.PersistentDataContainerMock;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Mock implementation of a {@link Chunk}.
  */
-public class ChunkMock implements Chunk
+public class ChunkMock implements Chunk, org.mockbukkit.mockbukkit.generated.org.bukkit.ChunkBaseMock
 {
 
 	private final World world;
+
 	private final int x;
+
 	private final int z;
+
 	private final PersistentDataContainer persistentDataContainer = new PersistentDataContainerMock();
+
 	private boolean isSlimeChunk;
+
 	private boolean isForceLoaded = false;
 
 	/**
-	 * Constructs a new {@link ChunkMock} for the provided world, at the specified coordinates.
+	 * Constructs a new {@link ChunkMock} for the provided world, at the specified
+	 * coordinates.
 	 *
-	 * @param world The world the chunk is in.
-	 * @param x     The X coordinate of the chunk.
-	 * @param z     The Y coordinate of the chunk.
+	 * @param world
+	 *            The world the chunk is in.
+	 * @param x
+	 *            The X coordinate of the chunk.
+	 * @param z
+	 *            The Y coordinate of the chunk.
 	 */
 	protected ChunkMock(final World world, final int x, final int z)
 	{
@@ -72,30 +72,19 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull BlockState[] getTileEntities(boolean useSnapshot)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<BlockState> getTileEntities(@NotNull Predicate<? super Block> blockPredicate, boolean useSnapshot)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull World getWorld()
+	@NotNull
+	public World getWorld()
 	{
 		return world;
 	}
 
 	@Override
-	public @NotNull Block getBlock(int x, int y, int z)
+	@NotNull
+	public Block getBlock(int x, int y, int z)
 	{
 		Preconditions.checkArgument(0 <= x && x <= 15, "x out of range (expected 0-15, got %s)", x);
-		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(), "y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
+		Preconditions.checkArgument(world.getMinHeight() <= y && y <= world.getMaxHeight(),
+				"y out of range (expected %s-%s, got %s)", world.getMinHeight(), world.getMaxHeight(), y);
 		Preconditions.checkArgument(0 <= z && z <= 15, "z out of range (expected 0-15, got %s)", z);
 		return world.getBlockAt((this.x << 4) + x, y, (this.z << 4) + z);
 	}
@@ -103,10 +92,12 @@ public class ChunkMock implements Chunk
 	/**
 	 * Gets a block at a {@link Coordinate}.
 	 *
-	 * @param coordinate The coordinate at which to get the block.
+	 * @param coordinate
+	 *            The coordinate at which to get the block.
 	 * @return The block at the provided coordinate.
 	 */
-	public @NotNull Block getBlock(@NotNull Coordinate coordinate)
+	@NotNull
+	public Block getBlock(@NotNull Coordinate coordinate)
 	{
 		return getBlock(coordinate.x, coordinate.y, coordinate.z);
 	}
@@ -116,7 +107,8 @@ public class ChunkMock implements Chunk
 	 *
 	 * @return A list of all blocks in this chunk.
 	 */
-	public @NotNull List<Block> getBlocks()
+	@NotNull
+	public List<Block> getBlocks()
 	{
 		List<Block> blocks = new ArrayList<>(getCubicSize());
 		for (int blockX = 0; blockX < 16; blockX++)
@@ -133,14 +125,16 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull ChunkSnapshot getChunkSnapshot()
+	@NotNull
+	public ChunkSnapshot getChunkSnapshot()
 	{
 		return getChunkSnapshot(true, false, false);
 	}
 
 	@Override
 	// ImmutableMap#builderWithExpectedSize
-	public @NotNull ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
+	@NotNull
+	public ChunkSnapshot getChunkSnapshot(boolean includeMaxblocky, boolean includeBiome, boolean includeBiomeTempRain)
 	{
 		ImmutableMap.Builder<Coordinate, BlockData> blockData = ImmutableMap.builderWithExpectedSize(getCubicSize());
 		ImmutableMap.Builder<Coordinate, Biome> biomes = ImmutableMap.builderWithExpectedSize(getCubicSize());
@@ -153,14 +147,8 @@ public class ChunkMock implements Chunk
 				biomes.put(chunkLocalCoordinate, block.getBiome());
 			}
 		}
-		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(), world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
-	}
-
-	@Override
-	public @NotNull ChunkSnapshot getChunkSnapshot(boolean b, boolean b1, boolean b2, boolean b3)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
+		return new ChunkSnapshotMock(x, z, world.getMinHeight(), world.getMaxHeight(), world.getName(),
+				world.getFullTime(), blockData.build(), (includeBiome || includeBiomeTempRain) ? biomes.build() : null);
 	}
 
 	@Override
@@ -172,20 +160,9 @@ public class ChunkMock implements Chunk
 	@Override
 	public Entity[] getEntities()
 	{
-		BoundingBox boundingBox = new BoundingBox(x << 4,
-				world.getMinHeight(),
-				z << 4,
-				(x << 4) + 16,
-				world.getMaxHeight(),
-				(z << 4) + 16);
+		BoundingBox boundingBox = new BoundingBox(x << 4, world.getMinHeight(), z << 4, (x << 4) + 16,
+				world.getMaxHeight(), (z << 4) + 16);
 		return world.getNearbyEntities(boundingBox).toArray(Entity[]::new);
-	}
-
-	@Override
-	public BlockState[] getTileEntities()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -222,7 +199,8 @@ public class ChunkMock implements Chunk
 	/**
 	 * Sets the return value of {@link #isSlimeChunk()}.
 	 *
-	 * @param isSlimeChunk Whether this is a slime chunk.
+	 * @param isSlimeChunk
+	 *            Whether this is a slime chunk.
 	 */
 	public void setSlimeChunk(boolean isSlimeChunk)
 	{
@@ -247,12 +225,10 @@ public class ChunkMock implements Chunk
 		if (obj == null)
 		{
 			return false;
-		}
-		else if (obj instanceof ChunkMock chunk)
+		} else if (obj instanceof ChunkMock chunk)
 		{
 			return x == chunk.x && z == chunk.z && world.equals(chunk.world);
-		}
-		else
+		} else
 		{
 			return false;
 		}
@@ -271,41 +247,6 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public boolean addPluginChunkTicket(@NotNull Plugin plugin)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public boolean removePluginChunkTicket(@NotNull Plugin plugin)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<Plugin> getPluginChunkTickets()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public long getInhabitedTime()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setInhabitedTime(long ticks)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
 	public boolean contains(@NotNull BlockData block)
 	{
 		return getBlocks().stream().anyMatch(b -> b.getBlockData().equals(block));
@@ -318,28 +259,10 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull LoadLevel getLoadLevel()
+	@NotNull
+	public LoadLevel getLoadLevel()
 	{
 		return isLoaded() ? LoadLevel.ENTITY_TICKING : LoadLevel.UNLOADED;
-	}
-
-	@Override
-	public @NotNull Collection<GeneratedStructure> getStructures()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<GeneratedStructure> getStructures(@NotNull Structure structure)
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull Collection<Player> getPlayersSeeingChunk()
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -349,14 +272,15 @@ public class ChunkMock implements Chunk
 	}
 
 	@Override
-	public @NotNull PersistentDataContainer getPersistentDataContainer()
+	@NotNull
+	public PersistentDataContainer getPersistentDataContainer()
 	{
 		return persistentDataContainer;
 	}
 
 	private int getCubicSize()
 	{
-		return (16 * 16) * Math.abs(world.getMaxHeight() - world.getMinHeight()); // (w * w * h)
+		// (w * w * h)
+		return (16 * 16) * Math.abs(world.getMaxHeight() - world.getMinHeight());
 	}
-
 }

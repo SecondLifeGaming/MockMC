@@ -11,7 +11,8 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	/**
 	 * Constructs a new {@link BlockDataMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public SaplingDataMock(@NotNull Material material)
 	{
@@ -19,9 +20,11 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	}
 
 	/**
-	 * Create a new {@link SaplingDataMock} based on an existing {@link SaplingDataMock}.
+	 * Create a new {@link SaplingDataMock} based on an existing
+	 * {@link SaplingDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected SaplingDataMock(@NotNull SaplingDataMock other)
 	{
@@ -37,7 +40,8 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	@Override
 	public void setStage(int stage)
 	{
-		Preconditions.checkArgument(stage >= 0 && stage <= this.getMaximumStage(), "The stage must be between 0 and %s", this.getMaximumStage());
+		Preconditions.checkArgument(stage >= 0 && stage <= this.getMaximumStage(), "The stage must be between 0 and %s",
+				this.getMaximumStage());
 		this.set(BlockDataKey.STAGE_KEY, stage);
 	}
 
@@ -48,7 +52,8 @@ public class SaplingDataMock extends BlockDataMock implements Sapling
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SaplingDataMock clone()
 	{
 		return new SaplingDataMock(this);

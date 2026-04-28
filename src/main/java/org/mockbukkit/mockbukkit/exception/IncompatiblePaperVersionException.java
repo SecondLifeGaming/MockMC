@@ -3,14 +3,15 @@ package org.mockbukkit.mockbukkit.exception;
 import org.mockbukkit.mockbukkit.BuildParameters;
 
 /**
- * This exception provides a detailed diagnostic message to help developers identify
- * and resolve compatibility issues during test execution.
+ * This exception provides a detailed diagnostic message to help developers
+ * identify and resolve compatibility issues during test execution.
  * <p>
  * The message includes:
  * <ul>
- *   <li>The version of MockBukkit currently in use</li>
- *   <li>The Paper API version MockBukkit was built against</li>
- *   <li>A recommendation to align the plugin's Paper API version with MockBukkit</li>
+ * <li>The version of MockBukkit currently in use</li>
+ * <li>The Paper API version MockBukkit was built against</li>
+ * <li>A recommendation to align the plugin's Paper API version with
+ * MockBukkit</li>
  * </ul>
  *
  * @see BuildParameters#MOCK_BUKKIT_VERSION
@@ -34,13 +35,15 @@ public class IncompatiblePaperVersionException extends RuntimeException
 			""";
 
 	/**
-	 * Constructs a new {@code IncompatiblePaperVersionException} with a formatted message
-	 * indicating the detected version mismatch, and includes the original cause of failure.
+	 * Constructs a new {@code IncompatiblePaperVersionException} with a formatted
+	 * message indicating the detected version mismatch, and includes the original
+	 * cause of failure.
 	 *
 	 */
 	public IncompatiblePaperVersionException(Throwable cause)
 	{
-		super(String.format(TEMPLATE_MESSAGE, BuildParameters.MOCK_BUKKIT_VERSION, BuildParameters.BUILD_NUMBER_STRING, BuildParameters.PAPER_API_FULL_VERSION), cause);
+		super(String.format(TEMPLATE_MESSAGE, BuildParameters.MOCK_BUKKIT_VERSION, BuildParameters.BUILD_NUMBER_STRING,
+				BuildParameters.PAPER_API_FULL_VERSION), cause);
 	}
 
 }

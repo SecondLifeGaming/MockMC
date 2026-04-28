@@ -43,17 +43,19 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 		if (humanEntityMock.getOpenInventory().getTopInventory() != null)
 		{
 			mismatchDescription.appendText("had items ");
-			mismatchDescription.appendValueList("[", ",", "]", humanEntityMock.getOpenInventory().getTopInventory().getContents());
-		}
-		else
+			mismatchDescription.appendValueList("[", ",", "]",
+					humanEntityMock.getOpenInventory().getTopInventory().getContents());
+		} else
 		{
 			mismatchDescription.appendText("did not have an open top inventory");
 		}
 	}
 
 	/**
-	 * @param material The material of the item required for a match
-	 * @return A matcher which matches with any human entity with the specified item in inventory
+	 * @param material
+	 *            The material of the item required for a match
+	 * @return A matcher which matches with any human entity with the specified item
+	 *         in inventory
 	 */
 	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(Material material)
 	{
@@ -61,8 +63,10 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 * @param item The item required for a match
-	 * @return A matcher which matches with any human entity with the specified item in inventory
+	 * @param item
+	 *            The item required for a match
+	 * @return A matcher which matches with any human entity with the specified item
+	 *         in inventory
 	 */
 	public static @NotNull HumanEntityInventoryViewItemMatcher hasItemInInventoryView(@NotNull ItemStack item)
 	{
@@ -71,8 +75,10 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 * @param item The item required for no match
-	 * @return A matcher which matches with any human entity without the specified item in inventory
+	 * @param item
+	 *            The item required for no match
+	 * @return A matcher which matches with any human entity without the specified
+	 *         item in inventory
 	 */
 	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(@NotNull ItemStack item)
 	{
@@ -80,8 +86,10 @@ public class HumanEntityInventoryViewItemMatcher extends TypeSafeMatcher<HumanEn
 	}
 
 	/**
-	 * @param material The material of the item required for no match
-	 * @return A matcher which matches with any human entity without the specified item in inventory
+	 * @param material
+	 *            The material of the item required for no match
+	 * @return A matcher which matches with any human entity without the specified
+	 *         item in inventory
 	 */
 	public static @NotNull Matcher<HumanEntityMock> doesNotHaveItemInInventoryView(Material material)
 	{

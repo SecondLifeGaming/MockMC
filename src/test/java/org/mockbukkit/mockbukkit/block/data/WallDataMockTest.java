@@ -28,7 +28,8 @@ class WallDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isUp)
 		{
 			wall.setUp(isUp);
@@ -48,7 +49,8 @@ class WallDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			wall.setWaterlogged(isWaterLogged);

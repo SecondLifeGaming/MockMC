@@ -40,7 +40,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 1, 2, 3, 4 })
+		@ValueSource(ints =
+		{1, 2, 3, 4})
 		void givenLevelChange(int level)
 		{
 			repeater.setDelay(level);
@@ -48,7 +49,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 0, 5, 6, 7 })
+		@ValueSource(ints =
+		{-2, -1, 0, 5, 6, 7})
 		void givenInvalidValues(int level)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> repeater.setDelay(level));
@@ -68,7 +70,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLocked)
 		{
 			repeater.setLocked(isLocked);
@@ -88,9 +91,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			repeater.setFacing(face);
@@ -98,9 +100,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> repeater.setFacing(face));
@@ -120,7 +121,8 @@ class RepeaterDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLocked)
 		{
 			repeater.setPowered(isLocked);
@@ -132,7 +134,8 @@ class RepeaterDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull RepeaterDataMock cloned = repeater.clone();
+		@NotNull
+		RepeaterDataMock cloned = repeater.clone();
 
 		assertEquals(repeater, cloned);
 		assertEquals(repeater.getDelay(), cloned.getDelay());

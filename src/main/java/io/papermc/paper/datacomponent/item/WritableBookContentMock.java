@@ -10,7 +10,8 @@ import java.util.Collections;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record WritableBookContentMock(List<Filtered<String>> pages) implements WritableBookContent
 {
 
@@ -24,7 +25,8 @@ public record WritableBookContentMock(List<Filtered<String>> pages) implements W
 	{
 		private static void validatePageLength(String page)
 		{
-			Preconditions.checkArgument(page.length() <= 1024, "Cannot have page length more than %s, had %s", 1024, page.length());
+			Preconditions.checkArgument(page.length() <= 1024, "Cannot have page length more than %s, had %s", 1024,
+					page.length());
 		}
 
 		private static void validatePageCount(int current, int add)
@@ -49,7 +51,7 @@ public record WritableBookContentMock(List<Filtered<String>> pages) implements W
 		{
 			validatePageCount(this.pages.size(), pages.size());
 
-			for(String page : pages)
+			for (String page : pages)
 			{
 				validatePageLength(page);
 				this.pages.add(Filtered.of(page, null));
@@ -77,7 +79,7 @@ public record WritableBookContentMock(List<Filtered<String>> pages) implements W
 		{
 			validatePageCount(this.pages.size(), pages.size());
 
-			for(Filtered<String> page : pages)
+			for (Filtered<String> page : pages)
 			{
 				validatePageLength(page.raw());
 				if (page.filtered() != null)

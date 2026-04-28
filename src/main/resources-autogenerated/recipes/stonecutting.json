@@ -1,6 +1,5 @@
 [
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -10,11 +9,20 @@
 		"key": "minecraft:andesite_slab_from_andesite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:andesite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.andesite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:andesite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -24,11 +32,20 @@
 		"key": "minecraft:andesite_stairs_from_andesite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:andesite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.andesite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:andesite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -38,11 +55,20 @@
 		"key": "minecraft:andesite_wall_from_andesite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:andesite_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.andesite_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:andesite_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -52,11 +78,20 @@
 		"key": "minecraft:blackstone_slab_from_blackstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:blackstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.blackstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:blackstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -66,11 +101,20 @@
 		"key": "minecraft:blackstone_stairs_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:blackstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.blackstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:blackstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -80,11 +124,20 @@
 		"key": "minecraft:blackstone_wall_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:blackstone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.blackstone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:blackstone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:bricks"
@@ -94,11 +147,20 @@
 		"key": "minecraft:brick_slab_from_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:bricks"
@@ -108,11 +170,20 @@
 		"key": "minecraft:brick_stairs_from_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:bricks"
@@ -122,11 +193,20 @@
 		"key": "minecraft:brick_wall_from_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:copper_block"
@@ -136,11 +216,20 @@
 		"key": "minecraft:chiseled_copper_from_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cut_copper"
@@ -150,11 +239,20 @@
 		"key": "minecraft:chiseled_copper_from_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -164,11 +262,20 @@
 		"key": "minecraft:chiseled_deepslate_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_deepslate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -178,11 +285,20 @@
 		"key": "minecraft:chiseled_deepslate_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_deepslate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:nether_bricks"
@@ -192,11 +308,20 @@
 		"key": "minecraft:chiseled_nether_bricks_from_nether_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_nether_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_nether_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_nether_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -206,11 +331,20 @@
 		"key": "minecraft:chiseled_polished_blackstone_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_polished_blackstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_polished_blackstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_polished_blackstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -220,11 +354,20 @@
 		"key": "minecraft:chiseled_polished_blackstone_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_polished_blackstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_polished_blackstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_polished_blackstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:quartz_block"
@@ -234,11 +377,20 @@
 		"key": "minecraft:chiseled_quartz_block_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_quartz_block",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_quartz_block"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_quartz_block"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -248,11 +400,20 @@
 		"key": "minecraft:chiseled_red_sandstone_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_red_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_red_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_red_sandstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:resin_bricks"
@@ -262,11 +423,20 @@
 		"key": "minecraft:chiseled_resin_bricks_from_resin_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_resin_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_resin_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_resin_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -276,11 +446,20 @@
 		"key": "minecraft:chiseled_sandstone_from_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_sandstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone_bricks"
@@ -290,11 +469,20 @@
 		"key": "minecraft:chiseled_stone_bricks_from_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_stone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_stone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_stone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -304,11 +492,20 @@
 		"key": "minecraft:chiseled_stone_bricks_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_stone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_stone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_stone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -318,11 +515,20 @@
 		"key": "minecraft:chiseled_tuff_bricks_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_tuff_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_tuff_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_tuff_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff_bricks"
@@ -332,11 +538,20 @@
 		"key": "minecraft:chiseled_tuff_bricks_from_tuff_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_tuff_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_tuff_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_tuff_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -346,11 +561,20 @@
 		"key": "minecraft:chiseled_tuff_bricks_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_tuff_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_tuff_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_tuff_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -360,11 +584,20 @@
 		"key": "minecraft:chiseled_tuff_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_tuff",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_tuff"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:chiseled_tuff"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -374,11 +607,20 @@
 		"key": "minecraft:cobbled_deepslate_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -388,11 +630,20 @@
 		"key": "minecraft:cobbled_deepslate_slab_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -402,11 +653,20 @@
 		"key": "minecraft:cobbled_deepslate_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -416,11 +676,20 @@
 		"key": "minecraft:cobbled_deepslate_stairs_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -430,11 +699,20 @@
 		"key": "minecraft:cobbled_deepslate_stairs_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -444,11 +722,20 @@
 		"key": "minecraft:cobbled_deepslate_wall_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -458,11 +745,20 @@
 		"key": "minecraft:cobbled_deepslate_wall_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobbled_deepslate_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobbled_deepslate_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobbled_deepslate_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -472,11 +768,20 @@
 		"key": "minecraft:cobblestone_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobblestone"
@@ -486,11 +791,20 @@
 		"key": "minecraft:cobblestone_slab_from_cobblestone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -500,11 +814,20 @@
 		"key": "minecraft:cobblestone_slab_from_stone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobblestone"
@@ -514,11 +837,20 @@
 		"key": "minecraft:cobblestone_stairs_from_cobblestone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -528,11 +860,20 @@
 		"key": "minecraft:cobblestone_stairs_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobblestone"
@@ -542,11 +883,20 @@
 		"key": "minecraft:cobblestone_wall_from_cobblestone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -556,11 +906,20 @@
 		"key": "minecraft:cobblestone_wall_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cobblestone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cobblestone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cobblestone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:copper_block"
@@ -570,11 +929,20 @@
 		"key": "minecraft:copper_grate_from_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:copper_block"
@@ -584,11 +952,20 @@
 		"key": "minecraft:cut_copper_from_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:copper_block"
@@ -598,11 +975,20 @@
 		"key": "minecraft:cut_copper_slab_from_copper_block_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cut_copper"
@@ -612,11 +998,20 @@
 		"key": "minecraft:cut_copper_slab_from_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:copper_block"
@@ -626,11 +1021,20 @@
 		"key": "minecraft:cut_copper_stairs_from_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cut_copper"
@@ -640,11 +1044,20 @@
 		"key": "minecraft:cut_copper_stairs_from_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -654,11 +1067,20 @@
 		"key": "minecraft:cut_red_sandstone_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_red_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_red_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_red_sandstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cut_red_sandstone"
@@ -668,11 +1090,20 @@
 		"key": "minecraft:cut_red_sandstone_slab_from_cut_red_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_red_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_red_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_red_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -682,11 +1113,20 @@
 		"key": "minecraft:cut_red_sandstone_slab_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_red_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_red_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_red_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -696,11 +1136,20 @@
 		"key": "minecraft:cut_sandstone_from_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_sandstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_sandstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_sandstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cut_sandstone"
@@ -710,11 +1159,20 @@
 		"key": "minecraft:cut_sandstone_slab_from_cut_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -724,11 +1182,20 @@
 		"key": "minecraft:cut_sandstone_slab_from_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cut_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cut_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:cut_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:dark_prismarine"
@@ -738,11 +1205,20 @@
 		"key": "minecraft:dark_prismarine_slab_from_dark_prismarine_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:dark_prismarine_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.dark_prismarine_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:dark_prismarine_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:dark_prismarine"
@@ -752,11 +1228,20 @@
 		"key": "minecraft:dark_prismarine_stairs_from_dark_prismarine_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:dark_prismarine_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.dark_prismarine_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:dark_prismarine_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -766,11 +1251,20 @@
 		"key": "minecraft:deepslate_brick_slab_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -780,11 +1274,20 @@
 		"key": "minecraft:deepslate_brick_slab_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -794,11 +1297,20 @@
 		"key": "minecraft:deepslate_brick_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -808,11 +1320,20 @@
 		"key": "minecraft:deepslate_brick_slab_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -822,11 +1343,20 @@
 		"key": "minecraft:deepslate_brick_stairs_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -836,11 +1366,20 @@
 		"key": "minecraft:deepslate_brick_stairs_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -850,11 +1389,20 @@
 		"key": "minecraft:deepslate_brick_stairs_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -864,11 +1412,20 @@
 		"key": "minecraft:deepslate_brick_stairs_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -878,11 +1435,20 @@
 		"key": "minecraft:deepslate_brick_wall_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -892,11 +1458,20 @@
 		"key": "minecraft:deepslate_brick_wall_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -906,11 +1481,20 @@
 		"key": "minecraft:deepslate_brick_wall_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -920,11 +1504,20 @@
 		"key": "minecraft:deepslate_brick_wall_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -934,11 +1527,20 @@
 		"key": "minecraft:deepslate_bricks_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -948,11 +1550,20 @@
 		"key": "minecraft:deepslate_bricks_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -962,11 +1573,20 @@
 		"key": "minecraft:deepslate_bricks_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -976,11 +1596,20 @@
 		"key": "minecraft:deepslate_tile_slab_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -990,11 +1619,20 @@
 		"key": "minecraft:deepslate_tile_slab_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -1004,11 +1642,20 @@
 		"key": "minecraft:deepslate_tile_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_tiles"
@@ -1018,11 +1665,20 @@
 		"key": "minecraft:deepslate_tile_slab_from_deepslate_tiles_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -1032,11 +1688,20 @@
 		"key": "minecraft:deepslate_tile_slab_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -1046,11 +1711,20 @@
 		"key": "minecraft:deepslate_tile_stairs_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -1060,11 +1734,20 @@
 		"key": "minecraft:deepslate_tile_stairs_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -1074,11 +1757,20 @@
 		"key": "minecraft:deepslate_tile_stairs_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_tiles"
@@ -1088,11 +1780,20 @@
 		"key": "minecraft:deepslate_tile_stairs_from_deepslate_tiles_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -1102,11 +1803,20 @@
 		"key": "minecraft:deepslate_tile_stairs_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -1116,11 +1826,20 @@
 		"key": "minecraft:deepslate_tile_wall_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -1130,11 +1849,20 @@
 		"key": "minecraft:deepslate_tile_wall_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -1144,11 +1872,20 @@
 		"key": "minecraft:deepslate_tile_wall_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_tiles"
@@ -1158,11 +1895,20 @@
 		"key": "minecraft:deepslate_tile_wall_from_deepslate_tiles_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -1172,11 +1918,20 @@
 		"key": "minecraft:deepslate_tile_wall_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tile_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tile_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tile_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -1186,11 +1941,20 @@
 		"key": "minecraft:deepslate_tiles_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tiles",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tiles"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tiles"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate_bricks"
@@ -1200,11 +1964,20 @@
 		"key": "minecraft:deepslate_tiles_from_deepslate_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tiles",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tiles"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tiles"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -1214,11 +1987,20 @@
 		"key": "minecraft:deepslate_tiles_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tiles",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tiles"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tiles"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -1228,11 +2010,20 @@
 		"key": "minecraft:deepslate_tiles_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:deepslate_tiles",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.deepslate_tiles"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:deepslate_tiles"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -1242,11 +2033,20 @@
 		"key": "minecraft:diorite_slab_from_diorite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diorite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.diorite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diorite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -1256,11 +2056,20 @@
 		"key": "minecraft:diorite_stairs_from_diorite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diorite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.diorite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diorite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -1270,11 +2079,20 @@
 		"key": "minecraft:diorite_wall_from_diorite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:diorite_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.diorite_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:diorite_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone_bricks"
@@ -1284,11 +2102,20 @@
 		"key": "minecraft:end_stone_brick_slab_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone"
@@ -1298,11 +2125,20 @@
 		"key": "minecraft:end_stone_brick_slab_from_end_stone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone_bricks"
@@ -1312,11 +2148,20 @@
 		"key": "minecraft:end_stone_brick_stairs_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone"
@@ -1326,11 +2171,20 @@
 		"key": "minecraft:end_stone_brick_stairs_from_end_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone_bricks"
@@ -1340,11 +2194,20 @@
 		"key": "minecraft:end_stone_brick_wall_from_end_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone"
@@ -1354,11 +2217,20 @@
 		"key": "minecraft:end_stone_brick_wall_from_end_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:end_stone"
@@ -1368,11 +2240,20 @@
 		"key": "minecraft:end_stone_bricks_from_end_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:end_stone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.end_stone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:end_stone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_copper"
@@ -1382,11 +2263,20 @@
 		"key": "minecraft:exposed_chiseled_copper_from_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_cut_copper"
@@ -1396,11 +2286,20 @@
 		"key": "minecraft:exposed_chiseled_copper_from_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_copper"
@@ -1410,11 +2309,20 @@
 		"key": "minecraft:exposed_copper_grate_from_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_copper"
@@ -1424,11 +2332,20 @@
 		"key": "minecraft:exposed_cut_copper_from_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_copper"
@@ -1438,11 +2355,20 @@
 		"key": "minecraft:exposed_cut_copper_slab_from_exposed_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_cut_copper"
@@ -1452,11 +2378,20 @@
 		"key": "minecraft:exposed_cut_copper_slab_from_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_copper"
@@ -1466,11 +2401,20 @@
 		"key": "minecraft:exposed_cut_copper_stairs_from_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:exposed_cut_copper"
@@ -1480,11 +2424,20 @@
 		"key": "minecraft:exposed_cut_copper_stairs_from_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:exposed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.exposed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:exposed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -1494,11 +2447,20 @@
 		"key": "minecraft:granite_slab_from_granite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:granite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.granite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:granite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -1508,11 +2470,20 @@
 		"key": "minecraft:granite_stairs_from_granite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:granite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.granite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:granite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -1522,11 +2493,20 @@
 		"key": "minecraft:granite_wall_from_granite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:granite_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.granite_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:granite_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_cobblestone"
@@ -1536,11 +2516,20 @@
 		"key": "minecraft:mossy_cobblestone_slab_from_mossy_cobblestone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_cobblestone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_cobblestone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_cobblestone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_cobblestone"
@@ -1550,11 +2539,20 @@
 		"key": "minecraft:mossy_cobblestone_stairs_from_mossy_cobblestone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_cobblestone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_cobblestone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_cobblestone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_cobblestone"
@@ -1564,11 +2562,20 @@
 		"key": "minecraft:mossy_cobblestone_wall_from_mossy_cobblestone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_cobblestone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_cobblestone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_cobblestone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_stone_bricks"
@@ -1578,11 +2585,20 @@
 		"key": "minecraft:mossy_stone_brick_slab_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_stone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_stone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_stone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_stone_bricks"
@@ -1592,11 +2608,20 @@
 		"key": "minecraft:mossy_stone_brick_stairs_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_stone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_stone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_stone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mossy_stone_bricks"
@@ -1606,11 +2631,20 @@
 		"key": "minecraft:mossy_stone_brick_wall_from_mossy_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mossy_stone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mossy_stone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mossy_stone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mud_bricks"
@@ -1620,11 +2654,20 @@
 		"key": "minecraft:mud_brick_slab_from_mud_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mud_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mud_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mud_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mud_bricks"
@@ -1634,11 +2677,20 @@
 		"key": "minecraft:mud_brick_stairs_from_mud_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mud_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mud_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mud_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:mud_bricks"
@@ -1648,11 +2700,20 @@
 		"key": "minecraft:mud_brick_wall_from_mud_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:mud_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.mud_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:mud_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:nether_bricks"
@@ -1662,11 +2723,20 @@
 		"key": "minecraft:nether_brick_slab_from_nether_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:nether_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.nether_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:nether_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:nether_bricks"
@@ -1676,11 +2746,20 @@
 		"key": "minecraft:nether_brick_stairs_from_nether_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:nether_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.nether_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:nether_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:nether_bricks"
@@ -1690,11 +2769,20 @@
 		"key": "minecraft:nether_brick_wall_from_nether_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:nether_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.nether_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:nether_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_copper"
@@ -1704,11 +2792,20 @@
 		"key": "minecraft:oxidized_chiseled_copper_from_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_cut_copper"
@@ -1718,11 +2815,20 @@
 		"key": "minecraft:oxidized_chiseled_copper_from_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_copper"
@@ -1732,11 +2838,20 @@
 		"key": "minecraft:oxidized_copper_grate_from_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_copper"
@@ -1746,11 +2861,20 @@
 		"key": "minecraft:oxidized_cut_copper_from_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_copper"
@@ -1760,11 +2884,20 @@
 		"key": "minecraft:oxidized_cut_copper_slab_from_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_cut_copper"
@@ -1774,11 +2907,20 @@
 		"key": "minecraft:oxidized_cut_copper_slab_from_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_copper"
@@ -1788,11 +2930,20 @@
 		"key": "minecraft:oxidized_cut_copper_stairs_from_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:oxidized_cut_copper"
@@ -1802,11 +2953,20 @@
 		"key": "minecraft:oxidized_cut_copper_stairs_from_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:oxidized_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.oxidized_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:oxidized_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -1816,11 +2976,20 @@
 		"key": "minecraft:polished_andesite_from_andesite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_andesite",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_andesite"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_andesite"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -1830,11 +2999,20 @@
 		"key": "minecraft:polished_andesite_slab_from_andesite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_andesite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_andesite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_andesite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_andesite"
@@ -1844,11 +3022,20 @@
 		"key": "minecraft:polished_andesite_slab_from_polished_andesite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_andesite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_andesite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_andesite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:andesite"
@@ -1858,11 +3045,20 @@
 		"key": "minecraft:polished_andesite_stairs_from_andesite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_andesite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_andesite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_andesite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_andesite"
@@ -1872,11 +3068,20 @@
 		"key": "minecraft:polished_andesite_stairs_from_polished_andesite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_andesite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_andesite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_andesite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:basalt"
@@ -1886,11 +3091,20 @@
 		"key": "minecraft:polished_basalt_from_basalt_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_basalt",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_basalt"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_basalt"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -1900,11 +3114,20 @@
 		"key": "minecraft:polished_blackstone_brick_slab_from_blackstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone_bricks"
@@ -1914,11 +3137,20 @@
 		"key": "minecraft:polished_blackstone_brick_slab_from_polished_blackstone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -1928,11 +3160,20 @@
 		"key": "minecraft:polished_blackstone_brick_slab_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -1942,11 +3183,20 @@
 		"key": "minecraft:polished_blackstone_brick_stairs_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone_bricks"
@@ -1956,11 +3206,20 @@
 		"key": "minecraft:polished_blackstone_brick_stairs_from_polished_blackstone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -1970,11 +3229,20 @@
 		"key": "minecraft:polished_blackstone_brick_stairs_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -1984,11 +3252,20 @@
 		"key": "minecraft:polished_blackstone_brick_wall_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone_bricks"
@@ -1998,11 +3275,20 @@
 		"key": "minecraft:polished_blackstone_brick_wall_from_polished_blackstone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -2012,11 +3298,20 @@
 		"key": "minecraft:polished_blackstone_brick_wall_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -2026,11 +3321,20 @@
 		"key": "minecraft:polished_blackstone_bricks_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -2040,11 +3344,20 @@
 		"key": "minecraft:polished_blackstone_bricks_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -2054,11 +3367,20 @@
 		"key": "minecraft:polished_blackstone_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -2068,11 +3390,20 @@
 		"key": "minecraft:polished_blackstone_slab_from_blackstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -2082,11 +3413,20 @@
 		"key": "minecraft:polished_blackstone_slab_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -2096,11 +3436,20 @@
 		"key": "minecraft:polished_blackstone_stairs_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -2110,11 +3459,20 @@
 		"key": "minecraft:polished_blackstone_stairs_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:blackstone"
@@ -2124,11 +3482,20 @@
 		"key": "minecraft:polished_blackstone_wall_from_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_blackstone"
@@ -2138,11 +3505,20 @@
 		"key": "minecraft:polished_blackstone_wall_from_polished_blackstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_blackstone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_blackstone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_blackstone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -2152,11 +3528,20 @@
 		"key": "minecraft:polished_deepslate_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -2166,11 +3551,20 @@
 		"key": "minecraft:polished_deepslate_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -2180,11 +3574,20 @@
 		"key": "minecraft:polished_deepslate_slab_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -2194,11 +3597,20 @@
 		"key": "minecraft:polished_deepslate_slab_from_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -2208,11 +3620,20 @@
 		"key": "minecraft:polished_deepslate_slab_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -2222,11 +3643,20 @@
 		"key": "minecraft:polished_deepslate_stairs_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -2236,11 +3666,20 @@
 		"key": "minecraft:polished_deepslate_stairs_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -2250,11 +3689,20 @@
 		"key": "minecraft:polished_deepslate_stairs_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:cobbled_deepslate"
@@ -2264,11 +3712,20 @@
 		"key": "minecraft:polished_deepslate_wall_from_cobbled_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:deepslate"
@@ -2278,11 +3735,20 @@
 		"key": "minecraft:polished_deepslate_wall_from_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_deepslate"
@@ -2292,11 +3758,20 @@
 		"key": "minecraft:polished_deepslate_wall_from_polished_deepslate_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_deepslate_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_deepslate_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_deepslate_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -2306,11 +3781,20 @@
 		"key": "minecraft:polished_diorite_from_diorite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_diorite",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_diorite"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_diorite"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -2320,11 +3804,20 @@
 		"key": "minecraft:polished_diorite_slab_from_diorite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_diorite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_diorite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_diorite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_diorite"
@@ -2334,11 +3827,20 @@
 		"key": "minecraft:polished_diorite_slab_from_polished_diorite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_diorite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_diorite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_diorite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:diorite"
@@ -2348,11 +3850,20 @@
 		"key": "minecraft:polished_diorite_stairs_from_diorite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_diorite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_diorite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_diorite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_diorite"
@@ -2362,11 +3873,20 @@
 		"key": "minecraft:polished_diorite_stairs_from_polished_diorite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_diorite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_diorite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_diorite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -2376,11 +3896,20 @@
 		"key": "minecraft:polished_granite_from_granite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_granite",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_granite"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_granite"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -2390,11 +3919,20 @@
 		"key": "minecraft:polished_granite_slab_from_granite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_granite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_granite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_granite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_granite"
@@ -2404,11 +3942,20 @@
 		"key": "minecraft:polished_granite_slab_from_polished_granite_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_granite_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_granite_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_granite_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:granite"
@@ -2418,11 +3965,20 @@
 		"key": "minecraft:polished_granite_stairs_from_granite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_granite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_granite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_granite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_granite"
@@ -2432,11 +3988,20 @@
 		"key": "minecraft:polished_granite_stairs_from_polished_granite_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_granite_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_granite_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_granite_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -2446,11 +4011,20 @@
 		"key": "minecraft:polished_tuff_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -2460,11 +4034,20 @@
 		"key": "minecraft:polished_tuff_slab_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -2474,11 +4057,20 @@
 		"key": "minecraft:polished_tuff_slab_from_tuff_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -2488,11 +4080,20 @@
 		"key": "minecraft:polished_tuff_stairs_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -2502,11 +4103,20 @@
 		"key": "minecraft:polished_tuff_stairs_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -2516,11 +4126,20 @@
 		"key": "minecraft:polished_tuff_wall_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -2530,11 +4149,20 @@
 		"key": "minecraft:polished_tuff_wall_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_tuff_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_tuff_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:polished_tuff_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:prismarine_bricks"
@@ -2544,11 +4172,20 @@
 		"key": "minecraft:prismarine_brick_slab_from_prismarine_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:prismarine_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.prismarine_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:prismarine_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:prismarine_bricks"
@@ -2558,11 +4195,20 @@
 		"key": "minecraft:prismarine_brick_stairs_from_prismarine_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:prismarine_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.prismarine_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:prismarine_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:prismarine"
@@ -2572,11 +4218,20 @@
 		"key": "minecraft:prismarine_slab_from_prismarine_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:prismarine_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.prismarine_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:prismarine_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:prismarine"
@@ -2586,11 +4241,20 @@
 		"key": "minecraft:prismarine_stairs_from_prismarine_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:prismarine_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.prismarine_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:prismarine_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:prismarine"
@@ -2600,11 +4264,20 @@
 		"key": "minecraft:prismarine_wall_from_prismarine_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:prismarine_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.prismarine_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:prismarine_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:purpur_block"
@@ -2614,11 +4287,20 @@
 		"key": "minecraft:purpur_pillar_from_purpur_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:purpur_pillar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.purpur_pillar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:purpur_pillar"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:purpur_block"
@@ -2628,11 +4310,20 @@
 		"key": "minecraft:purpur_slab_from_purpur_block_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:purpur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.purpur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:purpur_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:purpur_block"
@@ -2642,11 +4333,20 @@
 		"key": "minecraft:purpur_stairs_from_purpur_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:purpur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.purpur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:purpur_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:quartz_block"
@@ -2656,11 +4356,20 @@
 		"key": "minecraft:quartz_bricks_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.quartz_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:quartz_block"
@@ -2670,11 +4379,20 @@
 		"key": "minecraft:quartz_pillar_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz_pillar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.quartz_pillar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz_pillar"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:quartz_block"
@@ -2684,11 +4402,20 @@
 		"key": "minecraft:quartz_slab_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.quartz_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:quartz_block"
@@ -2698,11 +4425,20 @@
 		"key": "minecraft:quartz_stairs_from_quartz_block_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:quartz_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.quartz_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:quartz_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_nether_bricks"
@@ -2712,11 +4448,20 @@
 		"key": "minecraft:red_nether_brick_slab_from_red_nether_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_nether_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_nether_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_nether_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_nether_bricks"
@@ -2726,11 +4471,20 @@
 		"key": "minecraft:red_nether_brick_stairs_from_red_nether_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_nether_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_nether_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_nether_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_nether_bricks"
@@ -2740,11 +4494,20 @@
 		"key": "minecraft:red_nether_brick_wall_from_red_nether_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_nether_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_nether_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_nether_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -2754,11 +4517,20 @@
 		"key": "minecraft:red_sandstone_slab_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -2768,11 +4540,20 @@
 		"key": "minecraft:red_sandstone_stairs_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_sandstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_sandstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_sandstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:red_sandstone"
@@ -2782,11 +4563,20 @@
 		"key": "minecraft:red_sandstone_wall_from_red_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:red_sandstone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.red_sandstone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:red_sandstone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:resin_bricks"
@@ -2796,11 +4586,20 @@
 		"key": "minecraft:resin_brick_slab_from_resin_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:resin_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.resin_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:resin_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:resin_bricks"
@@ -2810,11 +4609,20 @@
 		"key": "minecraft:resin_brick_stairs_from_resin_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:resin_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.resin_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:resin_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:resin_bricks"
@@ -2824,11 +4632,20 @@
 		"key": "minecraft:resin_brick_wall_from_resin_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:resin_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.resin_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:resin_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -2838,11 +4655,20 @@
 		"key": "minecraft:sandstone_slab_from_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -2852,11 +4678,20 @@
 		"key": "minecraft:sandstone_stairs_from_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sandstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sandstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:sandstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:sandstone"
@@ -2866,11 +4701,20 @@
 		"key": "minecraft:sandstone_wall_from_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sandstone_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sandstone_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:sandstone_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_quartz"
@@ -2880,11 +4724,20 @@
 		"key": "minecraft:smooth_quartz_slab_from_smooth_quartz_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_quartz_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_quartz_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_quartz_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_quartz"
@@ -2894,11 +4747,20 @@
 		"key": "minecraft:smooth_quartz_stairs_from_smooth_quartz_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_quartz_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_quartz_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_quartz_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_red_sandstone"
@@ -2908,11 +4770,20 @@
 		"key": "minecraft:smooth_red_sandstone_slab_from_smooth_red_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_red_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_red_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_red_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_red_sandstone"
@@ -2922,11 +4793,20 @@
 		"key": "minecraft:smooth_red_sandstone_stairs_from_smooth_red_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_red_sandstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_red_sandstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_red_sandstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_sandstone"
@@ -2936,11 +4816,20 @@
 		"key": "minecraft:smooth_sandstone_slab_from_smooth_sandstone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_sandstone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_sandstone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_sandstone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_sandstone"
@@ -2950,11 +4839,20 @@
 		"key": "minecraft:smooth_sandstone_stairs_from_smooth_sandstone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_sandstone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_sandstone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_sandstone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:smooth_stone"
@@ -2964,11 +4862,20 @@
 		"key": "minecraft:smooth_stone_slab_from_smooth_stone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:smooth_stone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.smooth_stone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:smooth_stone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone_bricks"
@@ -2978,11 +4885,20 @@
 		"key": "minecraft:stone_brick_slab_from_stone_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -2992,11 +4908,20 @@
 		"key": "minecraft:stone_brick_slab_from_stone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone_bricks"
@@ -3006,11 +4931,20 @@
 		"key": "minecraft:stone_brick_stairs_from_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -3020,11 +4954,20 @@
 		"key": "minecraft:stone_brick_stairs_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone_bricks"
@@ -3034,11 +4977,20 @@
 		"key": "minecraft:stone_brick_wall_from_stone_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -3048,11 +5000,20 @@
 		"key": "minecraft:stone_brick_wall_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -3062,11 +5023,20 @@
 		"key": "minecraft:stone_bricks_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -3076,11 +5046,20 @@
 		"key": "minecraft:stone_slab_from_stone_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:stone"
@@ -3090,11 +5069,20 @@
 		"key": "minecraft:stone_stairs_from_stone_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:stone_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.stone_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:stone_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -3104,11 +5092,20 @@
 		"key": "minecraft:tuff_brick_slab_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff_bricks"
@@ -3118,11 +5115,20 @@
 		"key": "minecraft:tuff_brick_slab_from_tuff_bricks_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3132,11 +5138,20 @@
 		"key": "minecraft:tuff_brick_slab_from_tuff_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -3146,11 +5161,20 @@
 		"key": "minecraft:tuff_brick_stairs_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff_bricks"
@@ -3160,11 +5184,20 @@
 		"key": "minecraft:tuff_brick_stairs_from_tuff_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3174,11 +5207,20 @@
 		"key": "minecraft:tuff_brick_stairs_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -3188,11 +5230,20 @@
 		"key": "minecraft:tuff_brick_wall_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff_bricks"
@@ -3202,11 +5253,20 @@
 		"key": "minecraft:tuff_brick_wall_from_tuff_bricks_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3216,11 +5276,20 @@
 		"key": "minecraft:tuff_brick_wall_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_brick_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:polished_tuff"
@@ -3230,11 +5299,20 @@
 		"key": "minecraft:tuff_bricks_from_polished_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3244,11 +5322,20 @@
 		"key": "minecraft:tuff_bricks_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_bricks"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3258,11 +5345,20 @@
 		"key": "minecraft:tuff_slab_from_tuff_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3272,11 +5368,20 @@
 		"key": "minecraft:tuff_stairs_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:tuff"
@@ -3286,11 +5391,20 @@
 		"key": "minecraft:tuff_wall_from_tuff_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:tuff_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.tuff_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:tuff_wall"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_copper_block"
@@ -3300,11 +5414,20 @@
 		"key": "minecraft:waxed_chiseled_copper_from_waxed_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_cut_copper"
@@ -3314,11 +5437,20 @@
 		"key": "minecraft:waxed_chiseled_copper_from_waxed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_copper_block"
@@ -3328,11 +5460,20 @@
 		"key": "minecraft:waxed_copper_grate_from_waxed_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_copper_block"
@@ -3342,11 +5483,20 @@
 		"key": "minecraft:waxed_cut_copper_from_waxed_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_copper_block"
@@ -3356,11 +5506,20 @@
 		"key": "minecraft:waxed_cut_copper_slab_from_waxed_copper_block_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_cut_copper"
@@ -3370,11 +5529,20 @@
 		"key": "minecraft:waxed_cut_copper_slab_from_waxed_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_copper_block"
@@ -3384,11 +5552,20 @@
 		"key": "minecraft:waxed_cut_copper_stairs_from_waxed_copper_block_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_cut_copper"
@@ -3398,11 +5575,20 @@
 		"key": "minecraft:waxed_cut_copper_stairs_from_waxed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_copper"
@@ -3412,11 +5598,20 @@
 		"key": "minecraft:waxed_exposed_chiseled_copper_from_waxed_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_cut_copper"
@@ -3426,11 +5621,20 @@
 		"key": "minecraft:waxed_exposed_chiseled_copper_from_waxed_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_copper"
@@ -3440,11 +5644,20 @@
 		"key": "minecraft:waxed_exposed_copper_grate_from_waxed_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_copper"
@@ -3454,11 +5667,20 @@
 		"key": "minecraft:waxed_exposed_cut_copper_from_waxed_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_copper"
@@ -3468,11 +5690,20 @@
 		"key": "minecraft:waxed_exposed_cut_copper_slab_from_waxed_exposed_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_cut_copper"
@@ -3482,11 +5713,20 @@
 		"key": "minecraft:waxed_exposed_cut_copper_slab_from_waxed_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_copper"
@@ -3496,11 +5736,20 @@
 		"key": "minecraft:waxed_exposed_cut_copper_stairs_from_waxed_exposed_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_exposed_cut_copper"
@@ -3510,11 +5759,20 @@
 		"key": "minecraft:waxed_exposed_cut_copper_stairs_from_waxed_exposed_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_exposed_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_exposed_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_exposed_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_copper"
@@ -3524,11 +5782,20 @@
 		"key": "minecraft:waxed_oxidized_chiseled_copper_from_waxed_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_cut_copper"
@@ -3538,11 +5805,20 @@
 		"key": "minecraft:waxed_oxidized_chiseled_copper_from_waxed_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_copper"
@@ -3552,11 +5828,20 @@
 		"key": "minecraft:waxed_oxidized_copper_grate_from_waxed_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_copper"
@@ -3566,11 +5851,20 @@
 		"key": "minecraft:waxed_oxidized_cut_copper_from_waxed_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_copper"
@@ -3580,11 +5874,20 @@
 		"key": "minecraft:waxed_oxidized_cut_copper_slab_from_waxed_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_cut_copper"
@@ -3594,11 +5897,20 @@
 		"key": "minecraft:waxed_oxidized_cut_copper_slab_from_waxed_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_copper"
@@ -3608,11 +5920,20 @@
 		"key": "minecraft:waxed_oxidized_cut_copper_stairs_from_waxed_oxidized_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_oxidized_cut_copper"
@@ -3622,11 +5943,20 @@
 		"key": "minecraft:waxed_oxidized_cut_copper_stairs_from_waxed_oxidized_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_oxidized_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_oxidized_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_oxidized_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_copper"
@@ -3636,11 +5966,20 @@
 		"key": "minecraft:waxed_weathered_chiseled_copper_from_waxed_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_cut_copper"
@@ -3650,11 +5989,20 @@
 		"key": "minecraft:waxed_weathered_chiseled_copper_from_waxed_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_copper"
@@ -3664,11 +6012,20 @@
 		"key": "minecraft:waxed_weathered_copper_grate_from_waxed_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_copper"
@@ -3678,11 +6035,20 @@
 		"key": "minecraft:waxed_weathered_cut_copper_from_waxed_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_copper"
@@ -3692,11 +6058,20 @@
 		"key": "minecraft:waxed_weathered_cut_copper_slab_from_waxed_weathered_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_cut_copper"
@@ -3706,11 +6081,20 @@
 		"key": "minecraft:waxed_weathered_cut_copper_slab_from_waxed_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_copper"
@@ -3720,11 +6104,20 @@
 		"key": "minecraft:waxed_weathered_cut_copper_stairs_from_waxed_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:waxed_weathered_cut_copper"
@@ -3734,11 +6127,20 @@
 		"key": "minecraft:waxed_weathered_cut_copper_stairs_from_waxed_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:waxed_weathered_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.waxed_weathered_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:waxed_weathered_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_copper"
@@ -3748,11 +6150,20 @@
 		"key": "minecraft:weathered_chiseled_copper_from_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_cut_copper"
@@ -3762,11 +6173,20 @@
 		"key": "minecraft:weathered_chiseled_copper_from_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_chiseled_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_chiseled_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_chiseled_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_copper"
@@ -3776,11 +6196,20 @@
 		"key": "minecraft:weathered_copper_grate_from_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_copper_grate",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_copper_grate"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_copper_grate"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_copper"
@@ -3790,11 +6219,20 @@
 		"key": "minecraft:weathered_cut_copper_from_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_cut_copper",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_cut_copper"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_cut_copper"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_copper"
@@ -3804,11 +6242,20 @@
 		"key": "minecraft:weathered_cut_copper_slab_from_weathered_copper_stonecutting",
 		"result": {
 			"amount": 8,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_cut_copper"
@@ -3818,11 +6265,20 @@
 		"key": "minecraft:weathered_cut_copper_slab_from_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_cut_copper_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_cut_copper_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_cut_copper_slab"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_copper"
@@ -3832,11 +6288,20 @@
 		"key": "minecraft:weathered_cut_copper_stairs_from_weathered_copper_stonecutting",
 		"result": {
 			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_cut_copper_stairs"
 		}
 	},
 	{
-		"group": "",
 		"input": {
 			"choices": [
 				"minecraft:weathered_cut_copper"
@@ -3846,6 +6311,16 @@
 		"key": "minecraft:weathered_cut_copper_stairs_from_weathered_cut_copper_stonecutting",
 		"result": {
 			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:weathered_cut_copper_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.weathered_cut_copper_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
 			"type": "minecraft:weathered_cut_copper_stairs"
 		}
 	}

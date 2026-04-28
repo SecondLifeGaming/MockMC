@@ -5,7 +5,6 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Illusioner;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -13,14 +12,21 @@ import java.util.UUID;
  *
  * @see SpellcasterMock
  */
-public class IllusionerMock extends SpellcasterMock implements Illusioner, MockRangedEntity<IllusionerMock>
+public class IllusionerMock extends SpellcasterMock
+		implements
+			Illusioner,
+			MockRangedEntity<IllusionerMock>,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.IllusionerBaseMock
 {
 
 	/**
-	 * Constructs a new {@link IllusionerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link IllusionerMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public IllusionerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -28,15 +34,16 @@ public class IllusionerMock extends SpellcasterMock implements Illusioner, MockR
 	}
 
 	@Override
-	public @NotNull Sound getCelebrationSound()
+	@NotNull
+	public Sound getCelebrationSound()
 	{
 		return Sound.ENTITY_ILLUSIONER_AMBIENT;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.ILLUSIONER;
 	}
-
 }

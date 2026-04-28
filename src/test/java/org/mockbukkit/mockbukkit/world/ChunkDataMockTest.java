@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class ChunkDataMockTest
 {
@@ -123,8 +125,7 @@ class ChunkDataMockTest
 	@Test
 	void setRegion_NullMaterial_ThrowsException()
 	{
-		assertThrowsExactly(NullPointerException.class,
-				() -> chunkData.setRegion(0, 0, 0, 1, 1, 1, (Material) null));
+		assertThrowsExactly(NullPointerException.class, () -> chunkData.setRegion(0, 0, 0, 1, 1, 1, (Material) null));
 	}
 
 	@Test

@@ -14,6 +14,8 @@ import org.mockbukkit.testutils.matcher.AbstractMatcherTest;
 
 import static org.mockbukkit.mockbukkit.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class PlayerConsumeItemMatcherTest extends AbstractMatcherTest
 {

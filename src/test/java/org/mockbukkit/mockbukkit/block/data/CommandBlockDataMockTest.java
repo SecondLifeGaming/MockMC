@@ -38,7 +38,8 @@ class CommandBlockDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isConditional)
 		{
 			commandBlock.setConditional(isConditional);
@@ -58,9 +59,8 @@ class CommandBlockDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"})
 		void givenValidValues(BlockFace face)
 		{
 			commandBlock.setFacing(face);
@@ -68,12 +68,12 @@ class CommandBlockDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST", "UP", "DOWN"})
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> commandBlock.setFacing(face));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> commandBlock.setFacing(face));
 			assertEquals("Invalid face, only cartesian face are allowed for this property!", e.getMessage());
 		}
 

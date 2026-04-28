@@ -10,7 +10,10 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-public class LlamaInventoryMock extends AbstractHorseInventoryMock implements LlamaInventory
+public class LlamaInventoryMock extends AbstractHorseInventoryMock
+		implements
+			LlamaInventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.LlamaInventoryBaseMock
 {
 
 	private static final int DECOR_SLOT = 1;
@@ -18,7 +21,8 @@ public class LlamaInventoryMock extends AbstractHorseInventoryMock implements Ll
 	/**
 	 * Constructs a new {@link LlamaInventoryMock} for the given holder.
 	 *
-	 * @param holder The holder of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
 	 */
 	public LlamaInventoryMock(@Nullable InventoryHolder holder)
 	{
@@ -26,7 +30,8 @@ public class LlamaInventoryMock extends AbstractHorseInventoryMock implements Ll
 	}
 
 	@Override
-	public @Nullable ItemStack getDecor()
+	@Nullable
+	public ItemStack getDecor()
 	{
 		return getItem(DECOR_SLOT);
 	}
@@ -36,5 +41,4 @@ public class LlamaInventoryMock extends AbstractHorseInventoryMock implements Ll
 	{
 		setItem(DECOR_SLOT, stack);
 	}
-
 }

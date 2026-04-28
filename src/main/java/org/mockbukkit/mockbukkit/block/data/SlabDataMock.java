@@ -16,10 +16,11 @@ public class SlabDataMock extends BlockDataMock implements Slab
 {
 
 	/**
-	 * Constructs a new {@link SlabDataMock} for the provided {@link Material}.
-	 * Only supports materials in {@link Tag#SLABS}
+	 * Constructs a new {@link SlabDataMock} for the provided {@link Material}. Only
+	 * supports materials in {@link Tag#SLABS}
 	 *
-	 * @param type The material this data is for.
+	 * @param type
+	 *            The material this data is for.
 	 */
 	public SlabDataMock(@NotNull Material type)
 	{
@@ -32,7 +33,8 @@ public class SlabDataMock extends BlockDataMock implements Slab
 	/**
 	 * Create a new {@link SlabDataMock} based on an existing {@link SlabDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected SlabDataMock(@NotNull SlabDataMock other)
 	{
@@ -65,7 +67,8 @@ public class SlabDataMock extends BlockDataMock implements Slab
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SlabDataMock clone()
 	{
 		return new SlabDataMock(this);

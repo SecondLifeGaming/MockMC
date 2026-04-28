@@ -35,7 +35,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4})
 		void setAge(int age)
 		{
 			mangrove.setAge(age);
@@ -43,7 +44,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1, 5, 6, 7, 8 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1, 5, 6, 7, 8})
 		void givenInvalid(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> mangrove.setAge(age));
@@ -62,7 +64,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isHanging)
 		{
 			mangrove.setHanging(isHanging);
@@ -81,7 +84,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isWaterLogged)
 		{
 			mangrove.setWaterlogged(isWaterLogged);
@@ -107,7 +111,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1 })
+		@ValueSource(ints =
+		{0, 1})
 		void givenChangeWithValidValues(int age)
 		{
 			mangrove.setStage(age);
@@ -115,7 +120,8 @@ class MangrovePropaguleDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -2, -1, 2, 3 })
+		@ValueSource(ints =
+		{-2, -1, 2, 3})
 		void givenChangeWithInvalidValues(int age)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> mangrove.setStage(age));

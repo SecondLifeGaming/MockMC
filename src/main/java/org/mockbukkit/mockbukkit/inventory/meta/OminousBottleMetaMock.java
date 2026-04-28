@@ -1,5 +1,7 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
 
+import java.util.Objects;
+
 import com.google.common.base.Preconditions;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -7,14 +9,16 @@ import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.Map;
 
 @DelegateDeserialization(SerializableMeta.class)
-public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottleMeta
+public class OminousBottleMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.OminousBottleMetaBaseMock
 {
 
 	private Integer amplifier;
+
 	private static final String AMPLIFIER_KEY = "amplifier";
 
 	/**
@@ -26,14 +30,15 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	}
 
 	/**
-	 * Constructs a new {@link OminousBottleMetaMock}, cloning the data from another.
+	 * Constructs a new {@link OminousBottleMetaMock}, cloning the data from
+	 * another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public OminousBottleMetaMock(ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof OminousBottleMeta bottleMeta)
 		{
 			this.amplifier = bottleMeta.hasAmplifier() ? bottleMeta.getAmplifier() : null;
@@ -62,8 +67,35 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull OminousBottleMetaMock clone()
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+		{
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass())
+		{
+			return false;
+		}
+		if (!super.equals(obj))
+		{
+			return false;
+		}
+		OminousBottleMetaMock other = (OminousBottleMetaMock) obj;
+		return Objects.equals(this.amplifier, other.amplifier);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(super.hashCode(), amplifier);
+	}
+
+	@Override
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public OminousBottleMetaMock clone()
 	{
 		return new OminousBottleMetaMock(this);
 	}
@@ -78,7 +110,8 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 		}
 	}
 
-	public static @NotNull OminousBottleMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static OminousBottleMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		OminousBottleMetaMock serialMock = new OminousBottleMetaMock();
 		serialMock.deserializeInternal(args);
@@ -86,7 +119,8 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	}
 
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (this.hasAmplifier())
@@ -101,5 +135,4 @@ public class OminousBottleMetaMock extends ItemMetaMock implements OminousBottle
 	{
 		return "OMINOUS_BOTTLE";
 	}
-
 }

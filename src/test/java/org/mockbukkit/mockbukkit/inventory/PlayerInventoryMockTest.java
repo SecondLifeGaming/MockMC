@@ -149,7 +149,8 @@ class PlayerInventoryMockTest
 		void givenBodyEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.BODY, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> inventory.setItem(EquipmentSlot.BODY, item));
 			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
@@ -157,7 +158,8 @@ class PlayerInventoryMockTest
 		void givenSaddleEquipmentSlot_ShouldThrowIllegalArgumentException()
 		{
 			ItemStack item = new ItemStackMock(Material.STONE);
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.setItem(EquipmentSlot.SADDLE, item));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> inventory.setItem(EquipmentSlot.SADDLE, item));
 			assertEquals("Could not set slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 
@@ -276,7 +278,8 @@ class PlayerInventoryMockTest
 		ItemStack leggings = new ItemStackMock(Material.DIAMOND_LEGGINGS);
 		ItemStack chestplate = new ItemStackMock(Material.DIAMOND_CHESTPLATE);
 		ItemStack helmet = new ItemStackMock(Material.DIAMOND_HELMET);
-		ItemStack[] contents = { boots, leggings, chestplate, helmet };
+		ItemStack[] contents =
+		{boots, leggings, chestplate, helmet};
 		inventory.setArmorContents(contents);
 		assertEquals(boots, inventory.getBoots());
 		assertEquals(leggings, inventory.getLeggings());
@@ -297,7 +300,8 @@ class PlayerInventoryMockTest
 	void setExtraContents_NewItem_OffHandSet()
 	{
 		ItemStack item = new ItemStackMock(Material.STONE);
-		inventory.setExtraContents(new ItemStack[]{ item });
+		inventory.setExtraContents(new ItemStack[]
+		{item});
 		ItemStack[] contents = inventory.getExtraContents();
 		assertEquals(item, contents[0]);
 		assertEquals(item, inventory.getItemInOffHand());
@@ -332,7 +336,8 @@ class PlayerInventoryMockTest
 	{
 
 		@ParameterizedTest
-		@EnumSource(value = EquipmentSlot.class, mode = EnumSource.Mode.EXCLUDE, names = { "BODY", "SADDLE" })
+		@EnumSource(value = EquipmentSlot.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"BODY", "SADDLE"})
 		void getItem_Mirror(EquipmentSlot slot)
 		{
 			// This will throw an exception otherwise as per paper behavior
@@ -350,14 +355,16 @@ class PlayerInventoryMockTest
 		@Test
 		void getItemWithBody_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.BODY));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> inventory.getItem(EquipmentSlot.BODY));
 			assertEquals("BODY is not valid for players!", e.getMessage());
 		}
 
 		@Test
 		void getItemWithSaddle_ShouldThrowIllegalArgumentException()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> inventory.getItem(EquipmentSlot.SADDLE));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> inventory.getItem(EquipmentSlot.SADDLE));
 			assertEquals("Could not get slot SADDLE - not a valid slot for PlayerInventory", e.getMessage());
 		}
 

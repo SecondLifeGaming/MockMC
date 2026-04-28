@@ -128,6 +128,8 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class BlockTypeMockTest
 {
@@ -1341,7 +1343,8 @@ class BlockTypeMockTest
 		@Test
 		void givenNullConsumer()
 		{
-			BlockData data = assertDoesNotThrow(() -> BlockType.DECORATED_POT.createBlockData((Consumer<? super DecoratedPot>) null));
+			BlockData data = assertDoesNotThrow(
+					() -> BlockType.DECORATED_POT.createBlockData((Consumer<? super DecoratedPot>) null));
 			assertNotNull(data);
 		}
 
@@ -1350,7 +1353,8 @@ class BlockTypeMockTest
 		{
 			AtomicBoolean wasCalled = new AtomicBoolean(false);
 
-			BlockData data = assertDoesNotThrow(() -> BlockType.DECORATED_POT.createBlockData((o) -> wasCalled.set(true)));
+			BlockData data = assertDoesNotThrow(
+					() -> BlockType.DECORATED_POT.createBlockData((o) -> wasCalled.set(true)));
 			assertNotNull(data);
 			assertTrue(wasCalled.get());
 		}

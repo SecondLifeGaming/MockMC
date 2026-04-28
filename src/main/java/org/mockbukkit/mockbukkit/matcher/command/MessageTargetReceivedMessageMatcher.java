@@ -42,8 +42,10 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	}
 
 	/**
-	 * @param expected The message required for a match
-	 * @return A matcher which matches with any message target that has received the specified message
+	 * @param expected
+	 *            The message required for a match
+	 * @return A matcher which matches with any message target that has received the
+	 *         specified message
 	 */
 	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(@NotNull Component expected)
 	{
@@ -52,8 +54,10 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	}
 
 	/**
-	 * @param expected The message required for a match
-	 * @return A matcher which matches with any message target that has received the specified message
+	 * @param expected
+	 *            The message required for a match
+	 * @return A matcher which matches with any message target that has received the
+	 *         specified message
 	 */
 	public static @NotNull MessageTargetReceivedMessageMatcher hasReceived(@NotNull String expected)
 	{
@@ -62,8 +66,10 @@ public class MessageTargetReceivedMessageMatcher extends TypeSafeMatcher<Message
 	}
 
 	/**
-	 * @param expected The message required for a match
-	 * @return A matcher which matches with any message target that has not received the specified message
+	 * @param expected
+	 *            The message required for a match
+	 * @return A matcher which matches with any message target that has not received
+	 *         the specified message
 	 */
 	public static @NotNull Matcher<MessageTarget> hasNotReceived(@NotNull String expected)
 	{

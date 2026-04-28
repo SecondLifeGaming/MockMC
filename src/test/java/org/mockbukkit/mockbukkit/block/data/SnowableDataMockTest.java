@@ -38,7 +38,8 @@ class SnowableDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			snowable.setSnowy(isLit);
@@ -50,7 +51,8 @@ class SnowableDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull SnowableDataMock cloned = snowable.clone();
+		@NotNull
+		SnowableDataMock cloned = snowable.clone();
 
 		assertEquals(snowable, cloned);
 		assertEquals(snowable.isSnowy(), cloned.isSnowy());

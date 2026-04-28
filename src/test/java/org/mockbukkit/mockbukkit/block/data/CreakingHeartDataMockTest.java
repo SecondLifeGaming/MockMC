@@ -53,7 +53,8 @@ class CreakingHeartDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean isLit)
 		{
 			creakingHeart.setNatural(isLit);

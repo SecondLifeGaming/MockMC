@@ -39,7 +39,8 @@ public class SculkSensorDataMock extends BlockDataMock implements SculkSensor
 	@Override
 	public void setPower(int power)
 	{
-		Preconditions.checkArgument(0 <= power && power <= getMaximumPower(), "Power must be between 0 and %s", getMaximumPower());
+		Preconditions.checkArgument(0 <= power && power <= getMaximumPower(), "Power must be between 0 and %s",
+				getMaximumPower());
 		this.set(BlockDataKey.POWER, power);
 	}
 
@@ -62,7 +63,8 @@ public class SculkSensorDataMock extends BlockDataMock implements SculkSensor
 	}
 
 	@Override
-	@SuppressWarnings({ "MethodDoesntCallSuperMethod", "java:S2975", "java:S1182" })
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull SculkSensorDataMock clone()
 	{
 		return new SculkSensorDataMock(this);

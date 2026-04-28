@@ -8,9 +8,11 @@ public class WaterloggedDataMock extends BlockDataMock implements Waterlogged
 {
 
 	/**
-	 * Constructs a new {@link WaterloggedDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link WaterloggedDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public WaterloggedDataMock(@NotNull Material material)
 	{
@@ -18,9 +20,11 @@ public class WaterloggedDataMock extends BlockDataMock implements Waterlogged
 	}
 
 	/**
-	 * Create a new {@link WaterloggedDataMock} based on an existing {@link WaterloggedDataMock}.
+	 * Create a new {@link WaterloggedDataMock} based on an existing
+	 * {@link WaterloggedDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected WaterloggedDataMock(WaterloggedDataMock other)
 	{
@@ -40,7 +44,8 @@ public class WaterloggedDataMock extends BlockDataMock implements Waterlogged
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull WaterloggedDataMock clone()
 	{
 		return new WaterloggedDataMock(this);

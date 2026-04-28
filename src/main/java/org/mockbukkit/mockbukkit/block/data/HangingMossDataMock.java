@@ -30,7 +30,8 @@ public class HangingMossDataMock extends BlockDataMock implements HangingMoss
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull HangingMossDataMock clone()
 	{
 		return new HangingMossDataMock(this);

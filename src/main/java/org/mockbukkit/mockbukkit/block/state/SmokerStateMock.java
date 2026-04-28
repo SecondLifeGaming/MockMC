@@ -10,14 +10,17 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see AbstractFurnaceStateMock
  */
-public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
+public class SmokerStateMock extends AbstractFurnaceStateMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.block.SmokerBaseMock
 {
 
 	/**
 	 * Constructs a new {@link SmokerStateMock} for the provided {@link Material}.
 	 * Only supports {@link Material#SMOKER}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public SmokerStateMock(@NotNull Material material)
 	{
@@ -26,10 +29,11 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 	}
 
 	/**
-	 * Constructs a new {@link SmokerStateMock} for the provided {@link Block}.
-	 * Only supports {@link Material#SMOKER}
+	 * Constructs a new {@link SmokerStateMock} for the provided {@link Block}. Only
+	 * supports {@link Material#SMOKER}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected SmokerStateMock(@NotNull Block block)
 	{
@@ -38,9 +42,11 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 	}
 
 	/**
-	 * Constructs a new {@link SmokerStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link SmokerStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected SmokerStateMock(@NotNull SmokerStateMock state)
 	{
@@ -71,6 +77,12 @@ public class SmokerStateMock extends AbstractFurnaceStateMock implements Smoker
 			return false;
 		}
 		return super.equals(o);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
 	}
 
 }

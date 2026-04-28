@@ -10,9 +10,11 @@ public class HangingSignDataMock extends BlockDataMock implements HangingSign
 {
 
 	/**
-	 * Constructs a new {@link HangingSignDataMock} for the provided {@link Material}.
+	 * Constructs a new {@link HangingSignDataMock} for the provided
+	 * {@link Material}.
 	 *
-	 * @param material The material this data is for.
+	 * @param material
+	 *            The material this data is for.
 	 */
 	public HangingSignDataMock(@NotNull Material material)
 	{
@@ -20,9 +22,11 @@ public class HangingSignDataMock extends BlockDataMock implements HangingSign
 	}
 
 	/**
-	 * Create a new {@link HangingSignDataMock} based on an existing {@link HangingSignDataMock}.
+	 * Create a new {@link HangingSignDataMock} based on an existing
+	 * {@link HangingSignDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected HangingSignDataMock(@NotNull HangingSignDataMock other)
 	{
@@ -52,7 +56,8 @@ public class HangingSignDataMock extends BlockDataMock implements HangingSign
 	public void setRotation(@NotNull BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0, "Invalid face, only horizontal face are allowed for this property!");
+		Preconditions.checkArgument(blockFace != BlockFace.SELF && blockFace.getModY() == 0,
+				"Invalid face, only horizontal face are allowed for this property!");
 
 		int id = RotatableDataMock.getIdFromBlockFace(blockFace);
 		this.set(BlockDataKey.ROTATION, id);
@@ -71,7 +76,8 @@ public class HangingSignDataMock extends BlockDataMock implements HangingSign
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull HangingSignDataMock clone()
 	{
 		return new HangingSignDataMock(this);

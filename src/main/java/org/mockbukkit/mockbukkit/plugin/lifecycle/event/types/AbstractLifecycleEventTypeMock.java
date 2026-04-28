@@ -11,7 +11,9 @@ import org.mockbukkit.mockbukkit.plugin.lifecycle.event.handler.configuration.Ab
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public abstract class AbstractLifecycleEventTypeMock<O extends LifecycleEventOwner, E extends LifecycleEvent, C extends LifecycleEventHandlerConfiguration<O>> implements LifecycleEventType<O, E, C>
+public abstract class AbstractLifecycleEventTypeMock<O extends LifecycleEventOwner, E extends LifecycleEvent, C extends LifecycleEventHandlerConfiguration<O>>
+		implements
+			LifecycleEventType<O, E, C>
 {
 
 	private final String name;
@@ -33,11 +35,13 @@ public abstract class AbstractLifecycleEventTypeMock<O extends LifecycleEventOwn
 	{
 		if (!this.ownerType.isInstance(owner))
 		{
-			throw new IllegalArgumentException("You cannot register the lifecycle event '" + this.name + "' on " + owner);
+			throw new IllegalArgumentException(
+					"You cannot register the lifecycle event '" + this.name + "' on " + owner);
 		}
 	}
 
-	public abstract void forEachHandler(E event, Consumer<RegisteredHandler<O, E>> consumer, Predicate<RegisteredHandler<O, E>> predicate);
+	public abstract void forEachHandler(E event, Consumer<RegisteredHandler<O, E>> consumer,
+			Predicate<RegisteredHandler<O, E>> predicate);
 
 	public abstract void removeMatching(Predicate<RegisteredHandler<O, E>> predicate);
 
@@ -53,7 +57,7 @@ public abstract class AbstractLifecycleEventTypeMock<O extends LifecycleEventOwn
 	public abstract void clear();
 
 	public record RegisteredHandler<O extends LifecycleEventOwner, E extends LifecycleEvent>(O owner,
-																							 AbstractLifecycleEventHandlerConfigurationMock<O, E> config)
+			AbstractLifecycleEventHandlerConfigurationMock<O, E> config)
 	{
 
 		public LifecycleEventHandler<? super E> lifecycleEventHandler()

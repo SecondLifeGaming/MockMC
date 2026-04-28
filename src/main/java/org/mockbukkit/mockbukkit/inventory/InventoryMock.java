@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.MockBukkit;
 import org.mockbukkit.mockbukkit.entity.EntityMock;
 import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,58 +28,69 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
 /**
  * Mock implementation of an {@link Inventory}.
  */
-public class InventoryMock implements Inventory
+public class InventoryMock
+		implements
+			Inventory,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.InventoryBaseMock
 {
 
 	private static final int MAX_STACK_SIZE = 64;
 
 	private final ItemStack @NotNull [] items;
-	private final @Nullable InventoryHolder holder;
-	private final @NotNull InventoryType type;
 
-	private final @NotNull List<HumanEntity> viewers = new ArrayList<>();
+	@Nullable
+	private final InventoryHolder holder;
+
+	@NotNull
+	private final InventoryType type;
+
+	@NotNull
+	private final List<HumanEntity> viewers = new ArrayList<>();
+
 	private int maxStackSize = MAX_STACK_SIZE;
 
-	private @Nullable Component customTitle;
+	@Nullable
+	private Component customTitle;
 
 	/**
-	 * Constructs a new {@link InventoryMock} for the given holder, with a specific size and {@link InventoryType}.
+	 * Constructs a new {@link InventoryMock} for the given holder, with a specific
+	 * size and {@link InventoryType}.
 	 *
-	 * @param holder The holder of the inventory.
-	 * @param size   The size of the inventory. Must be 2, or a multiple of 9 between 9 and 54.
-	 * @param type   The type of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
+	 * @param size
+	 *            The size of the inventory. Must be 2, or a multiple of 9 between 9
+	 *            and 54.
+	 * @param type
+	 *            The type of the inventory.
 	 */
 	public InventoryMock(@Nullable InventoryHolder holder, int size, @NotNull InventoryType type)
 	{
 		Preconditions.checkArgument(size > 0, "Inventory size has to be > 0");
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
-
 		this.holder = holder;
 		this.type = type;
-
 		items = new ItemStack[size];
 	}
 
 	/**
-	 * Constructs a new {@link InventoryMock} for the given holder with a specific {@link InventoryType}.
-	 * The size will be {@link InventoryType#getDefaultSize()}.
+	 * Constructs a new {@link InventoryMock} for the given holder with a specific
+	 * {@link InventoryType}. The size will be
+	 * {@link InventoryType#getDefaultSize()}.
 	 *
-	 * @param holder The holder of the inventory.
-	 * @param type   The type of the inventory.
+	 * @param holder
+	 *            The holder of the inventory.
+	 * @param type
+	 *            The type of the inventory.
 	 */
 	public InventoryMock(@Nullable InventoryHolder holder, @NotNull InventoryType type)
 	{
 		Preconditions.checkNotNull(type, "The InventoryType must not be null!");
-
 		this.holder = holder;
 		this.type = type;
-
 		items = new ItemStack[type.getDefaultSize()];
 	}
 
@@ -89,16 +99,17 @@ public class InventoryMock implements Inventory
 		this.holder = inventory.getHolder();
 		this.type = inventory.getType();
 		this.items = new ItemStack[inventory.getSize()];
-
 		setMaxStackSize(inventory.getMaxStackSize());
 		setContents(inventory.getContents());
 		setCustomTitle(inventory.getCustomTitle());
 	}
 
 	/**
-	 * Copy constructor. Holder is copied by reference, inventory contents are cloned.
+	 * Copy constructor. Holder is copied by reference, inventory contents are
+	 * cloned.
 	 *
-	 * @param other Inventory to copy.
+	 * @param other
+	 *            Inventory to copy.
 	 */
 	public InventoryMock(@NotNull Inventory other)
 	{
@@ -109,23 +120,30 @@ public class InventoryMock implements Inventory
 	}
 
 	/**
-	 * Asserts that a certain condition is true for all items, even {@code nulls}, in this inventory.
+	 * Asserts that a certain condition is true for all items, even {@code nulls},
+	 * in this inventory.
 	 *
-	 * @param condition The condition to check for.
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertTrueForAll(@NotNull Predicate<ItemStack> condition)
 	{
 		for (ItemStack item : items)
 		{
-			assertTrue(condition.test(item));
+			if (!condition.test(item))
+			{
+				throw new AssertionError();
+			}
 		}
 	}
 
 	/**
-	 * Assets that a certain condition is true for all items in this inventory that aren't null.
+	 * Assets that a certain condition is true for all items in this inventory that
+	 * aren't null.
 	 *
-	 * @param condition The condition to check for.
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertTrueForNonNulls(@NotNull Predicate<ItemStack> condition)
@@ -134,9 +152,11 @@ public class InventoryMock implements Inventory
 	}
 
 	/**
-	 * Asserts that a certain condition is true for at least one item in this inventory. It will skip any null items.
+	 * Asserts that a certain condition is true for at least one item in this
+	 * inventory. It will skip any null items.
 	 *
-	 * @param condition The condition to check for.
+	 * @param condition
+	 *            The condition to check for.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertTrueForSome(@NotNull Predicate<ItemStack> condition)
@@ -148,13 +168,15 @@ public class InventoryMock implements Inventory
 				return;
 			}
 		}
-		fail("Condition was not met for any items");
+		throw new AssertionError("Condition was not met for any items");
 	}
 
 	/**
-	 * Asserts that the inventory contains at least one itemstack that is compatible with the given itemstack.
+	 * Asserts that the inventory contains at least one itemstack that is compatible
+	 * with the given itemstack.
 	 *
-	 * @param item The itemstack to compare everything to.
+	 * @param item
+	 *            The itemstack to compare everything to.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertContainsAny(@NotNull ItemStack item)
@@ -163,24 +185,30 @@ public class InventoryMock implements Inventory
 	}
 
 	/**
-	 * Asserts that the inventory contains at least a specific amount of items that are compatible with the given
-	 * itemstack.
+	 * Asserts that the inventory contains at least a specific amount of items that
+	 * are compatible with the given itemstack.
 	 *
-	 * @param item   The itemstack to search for.
-	 * @param amount The minimum amount of items that one should have.
+	 * @param item
+	 *            The itemstack to search for.
+	 * @param amount
+	 *            The minimum amount of items that one should have.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertContainsAtLeast(@NotNull ItemStack item, int amount)
 	{
 		int n = getNumberOfItems(item);
-		String message = String.format("Inventory contains only <%d> but expected at least <%d>", n, amount);
-		assertTrue(n >= amount, message);
+		if (n < amount)
+		{
+			String message = String.format("Inventory contains only <%d> but expected at least <%d>", n, amount);
+			throw new AssertionError(message);
+		}
 	}
 
 	/**
 	 * Get the number of times a certain item is in the inventory.
 	 *
-	 * @param item The item to check for.
+	 * @param item
+	 *            The item to check for.
 	 * @return The number of times the item is present in this inventory.
 	 */
 	public int getNumberOfItems(@NotNull ItemStack item)
@@ -199,7 +227,8 @@ public class InventoryMock implements Inventory
 	/**
 	 * Adds a viewer to this inventory.
 	 *
-	 * @param viewer The viewer to add.
+	 * @param viewer
+	 *            The viewer to add.
 	 */
 	public void addViewer(@NotNull HumanEntity viewer)
 	{
@@ -210,7 +239,8 @@ public class InventoryMock implements Inventory
 	/**
 	 * Adds the given viewers to this inventory.
 	 *
-	 * @param viewers The viewers to add.
+	 * @param viewers
+	 *            The viewers to add.
 	 */
 	public void addViewers(@NotNull HumanEntity... viewers)
 	{
@@ -220,7 +250,8 @@ public class InventoryMock implements Inventory
 	/**
 	 * Adds the given viewers to this inventory.
 	 *
-	 * @param viewers The {@link List} of viewers to add.
+	 * @param viewers
+	 *            The {@link List} of viewers to add.
 	 */
 	public void addViewers(@NotNull List<HumanEntity> viewers)
 	{
@@ -234,7 +265,8 @@ public class InventoryMock implements Inventory
 	/**
 	 * Removes a viewer from this inventory.
 	 *
-	 * @param viewer The viewer to remove.
+	 * @param viewer
+	 *            The viewer to remove.
 	 */
 	public void removeViewer(@NotNull HumanEntity viewer)
 	{
@@ -263,8 +295,10 @@ public class InventoryMock implements Inventory
 	/**
 	 * Adds a single item to the inventory. Returns whatever item it couldn't add.
 	 *
-	 * @param item The item to add.
-	 * @return The remaining stack that couldn't be added. If it's empty it just returns {@code null}.
+	 * @param item
+	 *            The item to add.
+	 * @return The remaining stack that couldn't be added. If it's empty it just
+	 *         returns {@code null}.
 	 */
 	@Nullable
 	public ItemStack addItem(@NotNull ItemStack item)
@@ -280,8 +314,7 @@ public class InventoryMock implements Inventory
 				items[i] = item.clone();
 				items[i].setAmount(toAdd);
 				item.setAmount(item.getAmount() - toAdd);
-			}
-			else
+			} else
 			{
 				final int oItemMaxStackSize = Math.min(oItem.getMaxStackSize(), this.maxStackSize);
 				if (item.isSimilar(oItem) && oItem.getAmount() < oItemMaxStackSize)
@@ -291,18 +324,17 @@ public class InventoryMock implements Inventory
 					item.setAmount(item.getAmount() - toAdd);
 				}
 			}
-
 			if (item.getAmount() == 0)
 			{
 				return null;
 			}
 		}
-
 		return item;
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ItemStack> addItem(ItemStack @NotNull ... items) throws IllegalArgumentException
+	@NotNull
+	public HashMap<Integer, ItemStack> addItem(ItemStack @NotNull... items) throws IllegalArgumentException
 	{
 		HashMap<Integer, ItemStack> notSaved = new HashMap<>();
 		for (int i = 0; i < items.length; i++)
@@ -320,8 +352,7 @@ public class InventoryMock implements Inventory
 	@Override
 	public ItemStack @NotNull [] getContents()
 	{
-		return Arrays.stream(items)
-				.map(item -> (item == null || item.isEmpty()) ? null : ItemStackMirror.create(item))
+		return Arrays.stream(items).map(item -> (item == null || item.isEmpty()) ? null : ItemStackMirror.create(item))
 				.toArray(ItemStack[]::new);
 	}
 
@@ -333,8 +364,7 @@ public class InventoryMock implements Inventory
 			if (i < items.length && items[i] != null)
 			{
 				this.items[i] = items[i].clone();
-			}
-			else
+			} else
 			{
 				this.items[i] = null;
 			}
@@ -342,32 +372,29 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @Nullable InventoryHolder getHolder()
+	@Nullable
+	public InventoryHolder getHolder()
 	{
 		return holder;
 	}
 
 	@Override
-	public @Nullable InventoryHolder getHolder(boolean useSnapshot)
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public @NotNull ListIterator<ItemStack> iterator()
+	@NotNull
+	public ListIterator<ItemStack> iterator()
 	{
 		List<ItemStack> list = stream().collect(Collectors.toList());
 		return list.listIterator();
 	}
 
-	public @NotNull Stream<ItemStack> stream()
+	@NotNull
+	public Stream<ItemStack> stream()
 	{
 		return Arrays.stream(items).filter(Objects::nonNull);
 	}
 
 	@Override
-	public @NotNull InventoryType getType()
+	@NotNull
+	public InventoryType getType()
 	{
 		return type;
 	}
@@ -394,20 +421,18 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
+	@NotNull
+	public HashMap<Integer, ItemStack> removeItem(ItemStack... items) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(items, "Items cannot be null");
 		HashMap<Integer, ItemStack> leftover = new HashMap<>();
-
 		for (int i = 0; i < items.length; i++)
 		{
 			ItemStack item = items[i];
 			int toDelete = item.getAmount();
-
 			while (toDelete > 0)
 			{
 				int first = first(item, false);
-
 				// Drat! we don't have this type in the inventory
 				if (first == -1)
 				{
@@ -415,7 +440,6 @@ public class InventoryMock implements Inventory
 					leftover.put(i, item);
 					break;
 				}
-
 				ItemStack itemStack = getItem(first);
 				int amount = itemStack.getAmount();
 				if (amount <= toDelete)
@@ -423,8 +447,7 @@ public class InventoryMock implements Inventory
 					toDelete -= amount;
 					// clear the slot, all used up
 					clear(first);
-				}
-				else
+				} else
 				{
 					// split the stack and store
 					itemStack.setAmount(amount - toDelete);
@@ -434,13 +457,6 @@ public class InventoryMock implements Inventory
 			}
 		}
 		return leftover;
-	}
-
-	@Override
-	public @NotNull HashMap<Integer, ItemStack> removeItemAnySlot(@NotNull ItemStack... items) throws IllegalArgumentException
-	{
-		//TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -501,11 +517,11 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
+	@NotNull
+	public HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(material, "Material cannot be null");
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
-
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
 		{
@@ -518,7 +534,8 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull HashMap<Integer, ? extends ItemStack> all(@Nullable ItemStack item)
+	@NotNull
+	public HashMap<Integer, ? extends ItemStack> all(@Nullable ItemStack item)
 	{
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 		if (item != null)
@@ -571,7 +588,6 @@ public class InventoryMock implements Inventory
 	private int first(@NotNull ItemStack item, boolean withAmount)
 	{
 		Preconditions.checkNotNull(item, "ItemStack cannot be null");
-
 		ItemStack[] inventory = this.getStorageContents();
 		for (int i = 0; i < inventory.length; i++)
 		{
@@ -579,7 +595,6 @@ public class InventoryMock implements Inventory
 			{
 				continue;
 			}
-
 			if (withAmount ? item.equals(inventory[i]) : item.isSimilar(inventory[i]))
 			{
 				return i;
@@ -598,7 +613,6 @@ public class InventoryMock implements Inventory
 				return i;
 			}
 		}
-
 		return -1;
 	}
 
@@ -650,16 +664,10 @@ public class InventoryMock implements Inventory
 	}
 
 	@Override
-	public @NotNull List<HumanEntity> getViewers()
+	@NotNull
+	public List<HumanEntity> getViewers()
 	{
 		return this.viewers;
-	}
-
-	@Override
-	public @NotNull ListIterator<ItemStack> iterator(int index)
-	{
-		// TODO Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 	@Override
@@ -669,18 +677,15 @@ public class InventoryMock implements Inventory
 		{
 			return entity.getLocation();
 		}
-
 		var worlds = Bukkit.getWorlds();
 		World world;
 		if (worlds.isEmpty())
 		{
 			world = MockBukkit.getMock().addSimpleWorld("world");
-		}
-		else
+		} else
 		{
 			world = worlds.getFirst();
 		}
-
 		return world.getSpawnLocation();
 	}
 
@@ -694,7 +699,6 @@ public class InventoryMock implements Inventory
 				return false;
 			}
 		}
-
 		return true;
 	}
 
@@ -710,24 +714,24 @@ public class InventoryMock implements Inventory
 		if (InventoryMock.class.equals(getClass()))
 		{
 			return new InventoryMock(this);
-		}
-		else
+		} else
 		{
-			throw new UnimplementedOperationException(String.format("%s does not implement method getSnapshot", this.getClass().getSimpleName()));
+			throw new UnimplementedOperationException(
+					String.format("%s does not implement method getSnapshot", this.getClass().getSimpleName()));
 		}
 	}
 
 	/**
-	 * Get the name for this inventory.
-	 * Uses the value in {@link #getCustomTitle()} if set, otherwise
-	 * uses the default name for the inventory type.
+	 * Get the name for this inventory. Uses the value in {@link #getCustomTitle()}
+	 * if set, otherwise uses the default name for the inventory type.
 	 *
 	 * @return The inventory name.
 	 * @see InventoryMock#getCustomTitle()
 	 * @see InventoryType#defaultTitle()
 	 */
 	@ApiStatus.Internal
-	public @NotNull Component getTitle()
+	@NotNull
+	public Component getTitle()
 	{
 		Component custom = getCustomTitle();
 		if (custom != null)
@@ -743,7 +747,8 @@ public class InventoryMock implements Inventory
 	 * @return The title to be used, or {@code null}.
 	 */
 	@ApiStatus.Internal
-	public @Nullable Component getCustomTitle()
+	@Nullable
+	public Component getCustomTitle()
 	{
 		return customTitle;
 	}
@@ -751,7 +756,8 @@ public class InventoryMock implements Inventory
 	/**
 	 * Set the custom title to be used in this inventory.
 	 *
-	 * @param customTitle The title to be used, or {@code null}.
+	 * @param customTitle
+	 *            The title to be used, or {@code null}.
 	 */
 	@ApiStatus.Internal
 	public void setCustomTitle(@Nullable Component customTitle)
@@ -764,14 +770,15 @@ public class InventoryMock implements Inventory
 	 * <p>
 	 * An inventory is considered as identical if the following properties match:
 	 * <ul>
-	 *     <li>Has the same inventory type.</li>
-	 *     <li>Has the same inventory holder.</li>
-	 *     <li>Has the same items and quantities.</li>
-	 *     <li>Has the same maximum stack size.</li>
-	 *     <li>Has the same custom title</li>
+	 * <li>Has the same inventory type.</li>
+	 * <li>Has the same inventory holder.</li>
+	 * <li>Has the same items and quantities.</li>
+	 * <li>Has the same maximum stack size.</li>
+	 * <li>Has the same custom title</li>
 	 * </ul>
 	 *
-	 * @param inventory The other inventory to compare.
+	 * @param inventory
+	 *            The other inventory to compare.
 	 * @return {@code true} when identical, otherwise {@code false}
 	 */
 	@ApiStatus.Internal
@@ -781,24 +788,16 @@ public class InventoryMock implements Inventory
 		{
 			return false;
 		}
-
-		return maxStackSize == that.maxStackSize
-				&& Objects.deepEquals(items, that.items)
-				&& Objects.equals(holder, that.holder)
-				&& type == that.type
+		return maxStackSize == that.maxStackSize && Objects.deepEquals(items, that.items)
+				&& Objects.equals(holder, that.holder) && type == that.type
 				&& Objects.equals(customTitle, that.customTitle);
 	}
 
 	@Override
 	public String toString()
 	{
-		return "InventoryMock{" +
-				"type=" + type +
-				", maxStackSize=" + maxStackSize +
-				", holder=" + (holder != null ? Objects.toIdentityString(holder) : null) +
-				", viewers=" + viewers.size() +
-				", items=" + Arrays.toString(items) +
-				'}';
+		return "InventoryMock{" + "type=" + type + ", maxStackSize=" + maxStackSize + ", holder="
+				+ (holder != null ? Objects.toIdentityString(holder) : null) + ", viewers=" + viewers.size()
+				+ ", items=" + Arrays.toString(items) + '}';
 	}
-
 }

@@ -30,9 +30,11 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 	}
 
 	/**
-	 * Create a new {@link BambooDataMock} based on an existing {@link BambooDataMock}.
+	 * Create a new {@link BambooDataMock} based on an existing
+	 * {@link BambooDataMock}.
 	 *
-	 * @param other the other block data.
+	 * @param other
+	 *            the other block data.
 	 */
 	protected BambooDataMock(BambooDataMock other)
 	{
@@ -89,7 +91,8 @@ public class BambooDataMock extends BlockDataMock implements Bamboo
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull BambooDataMock clone()
 	{
 		return new BambooDataMock(this);

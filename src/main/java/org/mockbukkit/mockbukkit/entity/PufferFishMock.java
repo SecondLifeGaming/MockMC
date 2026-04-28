@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.data.EntityState;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -17,7 +16,10 @@ import java.util.UUID;
  *
  * @see FishMock
  */
-public class PufferFishMock extends FishMock implements PufferFish
+public class PufferFishMock extends FishMock
+		implements
+			PufferFish,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.PufferFishBaseMock
 {
 
 	private int puffState = 0;
@@ -26,8 +28,10 @@ public class PufferFishMock extends FishMock implements PufferFish
 	 * Constructs a new {@link PufferFishMock} on the provided {@link ServerMock}
 	 * with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public PufferFishMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -35,7 +39,8 @@ public class PufferFishMock extends FishMock implements PufferFish
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.PUFFERFISH_BUCKET);
 	}
@@ -54,7 +59,8 @@ public class PufferFishMock extends FishMock implements PufferFish
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.PUFFERFISH;
 	}
@@ -69,5 +75,4 @@ public class PufferFishMock extends FishMock implements PufferFish
 			default -> super.getEntityState();
 		};
 	}
-
 }

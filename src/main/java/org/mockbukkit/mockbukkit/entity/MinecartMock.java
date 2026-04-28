@@ -1,7 +1,6 @@
 package org.mockbukkit.mockbukkit.entity;
 
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.util.TriState;
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.EntityType;
@@ -12,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.block.data.BlockDataMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-
+import org.mockbukkit.mockbukkit.block.data.BlockDataMockFactory;
 import java.util.UUID;
 
 /**
@@ -21,22 +19,38 @@ import java.util.UUID;
  *
  * @see VehicleMock
  */
-public abstract class MinecartMock extends VehicleMock implements Minecart
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public abstract class MinecartMock extends VehicleMock
+		implements
+			Minecart,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.MinecartBaseMock
 {
 
 	private double damage = 0;
+
 	private double maxSpeed = 0.4;
+
 	private boolean slowWhenEmpty = true;
-	private @NotNull Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
-	private @NotNull Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
+
+	@NotNull
+	private Vector flyingVelocityMod = new Vector(0.949999988079071, 0.949999988079071, 0.949999988079071);
+
+	@NotNull
+	private Vector derailedVelocityMod = new Vector(0.5, 0.5, 0.5);
+
 	private BlockData displayBlock;
+
 	private int displayBlockOffset;
 
 	/**
-	 * Constructs a new {@link MinecartMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link MinecartMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	protected MinecartMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -80,7 +94,8 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	}
 
 	@Override
-	public @NotNull Vector getFlyingVelocityMod()
+	@NotNull
+	public Vector getFlyingVelocityMod()
 	{
 		return flyingVelocityMod.clone();
 	}
@@ -93,7 +108,8 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	}
 
 	@Override
-	public @NotNull Vector getDerailedVelocityMod()
+	@NotNull
+	public Vector getDerailedVelocityMod()
 	{
 		return this.derailedVelocityMod.clone();
 	}
@@ -109,12 +125,15 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	@Deprecated(since = "1.18")
 	public void setDisplayBlock(@Nullable MaterialData material)
 	{
-		this.displayBlock = material == null ? new BlockDataMock(Material.AIR) : BlockDataMock.mock(material.getItemType());
+		this.displayBlock = material == null
+				? new BlockDataMock(Material.AIR)
+				: BlockDataMockFactory.mock(material.getItemType());
 	}
 
 	@Override
 	@Deprecated(since = "1.18")
-	public @NotNull MaterialData getDisplayBlock()
+	@NotNull
+	public MaterialData getDisplayBlock()
 	{
 		return new MaterialData(this.displayBlock.getMaterial());
 	}
@@ -126,7 +145,8 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	}
 
 	@Override
-	public @NotNull BlockData getDisplayBlockData()
+	@NotNull
+	public BlockData getDisplayBlockData()
 	{
 		return this.displayBlock;
 	}
@@ -144,23 +164,10 @@ public abstract class MinecartMock extends VehicleMock implements Minecart
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.MINECART;
-	}
-
-	@Override
-	public TriState getFrictionState()
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void setFrictionState(TriState triState)
-	{
-		//TODO: Auto-generated method stub
-		throw new UnimplementedOperationException();
 	}
 
 }

@@ -6,32 +6,37 @@ import org.bukkit.entity.Goat;
 import org.bukkit.entity.LivingEntity;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Mock implementation of a {@link Goat}.
  *
  * @see AnimalsMock
  */
-public class GoatMock extends AnimalsMock implements Goat
+public class GoatMock extends AnimalsMock
+		implements
+			Goat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.GoatBaseMock
 {
 
 	private boolean hasLeftHorn = true;
+
 	private boolean hasRightHorn = true;
+
 	private boolean isScreaming = false;
 
 	private final List<LivingEntity> attackedMobs = new LinkedList<>();
 
 	/**
-	 * Constructs a new {@link GoatMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link GoatMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public GoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -84,21 +89,23 @@ public class GoatMock extends AnimalsMock implements Goat
 	/**
 	 * Asserts that the goat attacked the given entity.
 	 *
-	 * @param entity The entity to assert.
+	 * @param entity
+	 *            The entity to assert.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertEntityRammed(@NotNull LivingEntity entity)
 	{
 		if (!hasRammedEntity(entity))
 		{
-			fail("Expected Goat to have rammed " + entity.getName() + " but it did not!");
+			throw new AssertionError("Expected Goat to have rammed " + entity.getName() + " but it did not!");
 		}
 	}
 
 	/**
 	 * Whether this goat has rammed the specified entity
 	 *
-	 * @param entity The entity that the goat should have rammed
+	 * @param entity
+	 *            The entity that the goat should have rammed
 	 * @return True if the goat has rammed the entity
 	 */
 	public boolean hasRammedEntity(@NotNull LivingEntity entity)
@@ -108,9 +115,9 @@ public class GoatMock extends AnimalsMock implements Goat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.GOAT;
 	}
-
 }

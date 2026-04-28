@@ -40,15 +40,9 @@ class BrewingStandDataMockTest
 		}
 
 		@ParameterizedTest
-		@CsvSource({
-			"false, false,	false",
-			"true, 	false,	false",
-			"false, true, 	false",
-			"false, false, 	true",
-			"true, 	false, 	true",
-			"true, 	true, 	true",
-			"false,	true, 	true",
-		})
+		@CsvSource(
+		{"false, false,	false", "true, 	false,	false", "false, true, 	false", "false, false, 	true",
+				"true, 	false, 	true", "true, 	true, 	true", "false,	true, 	true",})
 		void givenIndexCombination(boolean expected0, boolean expected1, boolean expected2)
 		{
 			brewingStand.setBottle(0, expected0);

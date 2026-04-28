@@ -13,14 +13,17 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see TileStateMock
  */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class BedStateMock extends TileStateMock implements Bed
 {
 
 	/**
-	 * Constructs a new {@link BedStateMock} for the provided {@link Material}.
-	 * Only supports materials in {@link MaterialTags#BEDS}
+	 * Constructs a new {@link BedStateMock} for the provided {@link Material}. Only
+	 * supports materials in {@link MaterialTags#BEDS}
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public BedStateMock(@NotNull Material material)
 	{
@@ -29,10 +32,11 @@ public class BedStateMock extends TileStateMock implements Bed
 	}
 
 	/**
-	 * Constructs a new {@link BedStateMock} for the provided {@link Block}.
-	 * Only supports materials in {@link MaterialTags#BEDS}
+	 * Constructs a new {@link BedStateMock} for the provided {@link Block}. Only
+	 * supports materials in {@link MaterialTags#BEDS}
 	 *
-	 * @param block The block this state is for.
+	 * @param block
+	 *            The block this state is for.
 	 */
 	protected BedStateMock(@NotNull Block block)
 	{
@@ -41,9 +45,11 @@ public class BedStateMock extends TileStateMock implements Bed
 	}
 
 	/**
-	 * Constructs a new {@link BedStateMock} by cloning the data from an existing one.
+	 * Constructs a new {@link BedStateMock} by cloning the data from an existing
+	 * one.
 	 *
-	 * @param state The state to clone.
+	 * @param state
+	 *            The state to clone.
 	 */
 	protected BedStateMock(@NotNull BedStateMock state)
 	{

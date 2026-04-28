@@ -5,12 +5,18 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.util.OldEnum;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+@SuppressWarnings(
+{"deprecation", "removal"})
 public abstract class OldKeyedEnumMock<T extends OldEnum<T>> extends OldEnumMock<T> implements Keyed
 {
 
-	private final NamespacedKey key;
+	private transient NamespacedKey key;
 
-	public OldKeyedEnumMock(String name, int ordinal, NamespacedKey key)
+	protected OldKeyedEnumMock(String name, int ordinal, NamespacedKey key)
 	{
 		super(name, ordinal);
 		this.key = key;
@@ -20,6 +26,18 @@ public abstract class OldKeyedEnumMock<T extends OldEnum<T>> extends OldEnumMock
 	public @NotNull NamespacedKey getKey()
 	{
 		return key;
+	}
+
+	private void writeObject(ObjectOutputStream out) throws IOException
+	{
+		out.defaultWriteObject();
+		out.writeUTF(key.asString());
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException
+	{
+		in.defaultReadObject();
+		this.key = NamespacedKey.fromString(in.readUTF());
 	}
 
 }

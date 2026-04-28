@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class IpBanEntryMockTest
 {
@@ -55,8 +57,8 @@ class IpBanEntryMockTest
 	@Test
 	void testSetCreated_Null()
 	{
-		NullPointerException nullPointerException = assertThrows(NullPointerException.class, () ->
-				entry.setCreated(null));
+		NullPointerException nullPointerException = assertThrows(NullPointerException.class,
+				() -> entry.setCreated(null));
 
 		assertEquals("Created date cannot be null", nullPointerException.getMessage());
 	}

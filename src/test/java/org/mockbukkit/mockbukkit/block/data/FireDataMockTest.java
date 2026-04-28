@@ -36,7 +36,8 @@ class FireDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
 		void setAge(int age)
 		{
 			fire.setAge(age);
@@ -55,9 +56,8 @@ class FireDataMockTest
 	class SetFace
 	{
 
-		private static final Set<BlockFace> VALID_FACES = Set.of(
-				BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.UP
-		);
+		private static final Set<BlockFace> VALID_FACES = Set.of(BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH,
+				BlockFace.WEST, BlockFace.UP);
 
 		@ParameterizedTest
 		@MethodSource("getValidFaces")
@@ -109,9 +109,7 @@ class FireDataMockTest
 
 		public static Stream<Arguments> getInvalidFaces()
 		{
-			return Stream.of(BlockFace.values())
-					.filter(p -> !VALID_FACES.contains(p))
-					.map(Arguments::of);
+			return Stream.of(BlockFace.values()).filter(p -> !VALID_FACES.contains(p)).map(Arguments::of);
 		}
 
 	}

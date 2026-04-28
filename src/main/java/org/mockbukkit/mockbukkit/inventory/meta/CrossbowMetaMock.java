@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
+import java.util.Objects;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -11,12 +12,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.inventory.serializer.SerializationUtils;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of a {@link CrossbowMeta}.
@@ -24,7 +23,9 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
+public class CrossbowMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.CrossbowMetaBaseMock
 {
 
 	private List<ItemStack> projectiles;
@@ -35,26 +36,24 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public CrossbowMetaMock()
 	{
 		super();
-
 		this.projectiles = new ArrayList<>();
 	}
 
 	/**
 	 * Constructs a new {@link CrossbowMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public CrossbowMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof CrossbowMeta crossbowMeta)
 		{
-			this.projectiles = crossbowMeta.hasChargedProjectiles() ?
-					new ArrayList<>(crossbowMeta.getChargedProjectiles().stream().map(ItemStack::clone).toList()) :
-					new ArrayList<>();
-		}
-		else
+			this.projectiles = crossbowMeta.hasChargedProjectiles()
+					? new ArrayList<>(crossbowMeta.getChargedProjectiles().stream().map(ItemStack::clone).toList())
+					: new ArrayList<>();
+		} else
 		{
 			this.projectiles = new ArrayList<>();
 		}
@@ -67,7 +66,8 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	}
 
 	@Override
-	public @NotNull List<ItemStack> getChargedProjectiles()
+	@NotNull
+	public List<ItemStack> getChargedProjectiles()
 	{
 		return ImmutableList.copyOf(this.projectiles);
 	}
@@ -76,12 +76,10 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public void setChargedProjectiles(@Nullable List<ItemStack> projectiles)
 	{
 		this.projectiles.clear();
-
 		if (projectiles == null)
 		{
 			return;
 		}
-
 		for (ItemStack i : projectiles)
 		{
 			this.addChargedProjectile(i);
@@ -92,8 +90,9 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	public void addChargedProjectile(@NotNull ItemStack item)
 	{
 		Preconditions.checkArgument(item != null, "item");
-		Preconditions.checkArgument(item.getType() == Material.FIREWORK_ROCKET || item.getType().name().contains("ARROW"), "Item %s is not an arrow or firework rocket", item);
-
+		Preconditions.checkArgument(
+				item.getType() == Material.FIREWORK_ROCKET || item.getType().name().contains("ARROW"),
+				"Item %s is not an arrow or firework rocket", item);
 		this.projectiles.add(item);
 	}
 
@@ -109,16 +108,19 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	@Override
 	public boolean equals(Object obj)
 	{
-		if (!(obj instanceof CrossbowMeta meta))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		return super.equals(obj) && Objects.equals(this.getChargedProjectiles(), meta.getChargedProjectiles());
+		CrossbowMetaMock other = (CrossbowMetaMock) obj;
+		return super.equals(obj) && Objects.equals(this.getChargedProjectiles(), other.getChargedProjectiles());
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull CrossbowMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public CrossbowMetaMock clone()
 	{
 		return new CrossbowMetaMock(this);
 	}
@@ -126,11 +128,14 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized CrossbowMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized CrossbowMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the CrossbowMetaMock class.
 	 */
 	@SuppressWarnings("unchecked")
-	public static @NotNull CrossbowMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static CrossbowMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		CrossbowMetaMock serialMock = new CrossbowMetaMock();
 		serialMock.deserializeInternal(args);
@@ -139,13 +144,14 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	}
 
 	/**
-	 * Serializes the properties of an CrossbowMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an CrossbowMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the CrossbowMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		serialized.put("projectiles", SerializationUtils.serialize(this.projectiles));
@@ -157,5 +163,4 @@ public class CrossbowMetaMock extends ItemMetaMock implements CrossbowMeta
 	{
 		return "CROSSBOW";
 	}
-
 }

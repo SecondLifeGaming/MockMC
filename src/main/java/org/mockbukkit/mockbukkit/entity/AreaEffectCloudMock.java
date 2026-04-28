@@ -14,33 +14,52 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.potion.PotionUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class AreaEffectCloudMock extends EntityMock
+		implements
+			AreaEffectCloud,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.AreaEffectCloudBaseMock
 {
 
 	private int duration = 600;
+
 	private int waitTime = 20;
+
 	private int reapplicationDelay = 20;
+
 	private int durationOnUse = 0;
+
 	private float radius = 3.0f;
+
 	private float radiusOnUse = 0.0f;
+
 	private float radiusPerTick = 0.0f;
+
 	private PotionType potionType;
+
 	private Particle particle = Particle.ENTITY_EFFECT;
+
 	private final List<PotionEffect> customEffects = new ArrayList<>();
+
 	private int color = 0;
+
 	private ProjectileSource source = null;
+
 	private UUID ownerId = null;
 
 	/**
-	 * Constructs a new {@link AreaEffectCloudMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link AreaEffectCloudMock} on the provided
+	 * {@link ServerMock} with a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public AreaEffectCloudMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -132,7 +151,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @NotNull Particle getParticle()
+	@NotNull
+	public Particle getParticle()
 	{
 		return this.particle;
 	}
@@ -147,7 +167,7 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	public <T> void setParticle(@NotNull Particle particle, @Nullable T data)
 	{
 		Preconditions.checkNotNull(particle, "Particle cannot be null");
-		//We ignore the data for now since we don't have a way to process it
+		// We ignore the data for now since we don't have a way to process it
 		this.particle = particle;
 	}
 
@@ -158,7 +178,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @Nullable PotionData getBasePotionData()
+	@Nullable
+	public PotionData getBasePotionData()
 	{
 		return PotionUtils.toBukkit(getBasePotionType());
 	}
@@ -170,7 +191,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @Nullable PotionType getBasePotionType()
+	@Nullable
+	public PotionType getBasePotionType()
 	{
 		return potionType;
 	}
@@ -182,7 +204,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @NotNull List<PotionEffect> getCustomEffects()
+	@NotNull
+	public List<PotionEffect> getCustomEffects()
 	{
 		return this.customEffects;
 	}
@@ -190,11 +213,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	@Override
 	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
 	{
-		PotionEffect existingEffect = this.customEffects.stream()
-				.filter(e -> e.getType().equals(effect.getType()))
-				.findFirst()
-				.orElse(null);
-
+		PotionEffect existingEffect = this.customEffects.stream().filter(e -> e.getType().equals(effect.getType()))
+				.findFirst().orElse(null);
 		if (existingEffect != null)
 		{
 			if (overwrite)
@@ -202,26 +222,20 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 				this.customEffects.remove(existingEffect);
 				this.customEffects.add(effect);
 				return true;
-			}
-			else
+			} else
 			{
 				return false;
 			}
 		}
-
 		this.customEffects.add(effect);
 		return true;
-
 	}
 
 	@Override
 	public boolean removeCustomEffect(@NotNull PotionEffectType type)
 	{
-		PotionEffect existingEffect = this.customEffects.stream()
-				.filter(e -> e.getType().equals(type))
-				.findFirst()
+		PotionEffect existingEffect = this.customEffects.stream().filter(e -> e.getType().equals(type)).findFirst()
 				.orElse(null);
-
 		if (existingEffect != null)
 		{
 			this.customEffects.remove(existingEffect);
@@ -243,7 +257,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @NotNull Color getColor()
+	@NotNull
+	public Color getColor()
 	{
 		return Color.fromRGB(this.color);
 	}
@@ -256,7 +271,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @Nullable ProjectileSource getSource()
+	@Nullable
+	public ProjectileSource getSource()
 	{
 		return this.source;
 	}
@@ -268,7 +284,8 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @Nullable UUID getOwnerUniqueId()
+	@Nullable
+	public UUID getOwnerUniqueId()
 	{
 		return this.ownerId;
 	}
@@ -280,9 +297,9 @@ public class AreaEffectCloudMock extends EntityMock implements AreaEffectCloud
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.AREA_EFFECT_CLOUD;
 	}
-
 }

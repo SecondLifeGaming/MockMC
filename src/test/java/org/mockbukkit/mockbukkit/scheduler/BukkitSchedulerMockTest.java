@@ -150,7 +150,8 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void runTaskAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	void runTaskAsynchronously_TaskExecutedOnSeperateThread()
+			throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
 
@@ -161,8 +162,7 @@ class BukkitSchedulerMockTest
 			try
 			{
 				barrier.await(3L, TimeUnit.SECONDS);
-			}
-			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			} catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
 				throw new TaskCancelledException(e);
 			}
@@ -171,7 +171,8 @@ class BukkitSchedulerMockTest
 	}
 
 	@Test
-	void runTaskTimerAsynchronously_TaskExecutedOnSeperateThread() throws InterruptedException, BrokenBarrierException, TimeoutException
+	void runTaskTimerAsynchronously_TaskExecutedOnSeperateThread()
+			throws InterruptedException, BrokenBarrierException, TimeoutException
 	{
 		final Thread mainThread = Thread.currentThread();
 
@@ -188,8 +189,7 @@ class BukkitSchedulerMockTest
 					testTask.cancel();
 				}
 				barrier.await(3L, TimeUnit.SECONDS);
-			}
-			catch (InterruptedException | BrokenBarrierException | TimeoutException e)
+			} catch (InterruptedException | BrokenBarrierException | TimeoutException e)
 			{
 				testTask.cancel();
 				throw new TaskCancelledException(e);
@@ -260,14 +260,13 @@ class BukkitSchedulerMockTest
 		PluginMock pluginMock = MockBukkit.createMockPlugin();
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
-			//noinspection InfiniteLoopStatement
+			// noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
 				{
 					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
+				} catch (InterruptedException e)
 				{
 					throw new TaskCancelledException(e);
 				}
@@ -275,14 +274,13 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
-			//noinspection InfiniteLoopStatement
+			// noinspection InfiniteLoopStatement
 			while (true)
 			{
 				try
 				{
 					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
+				} catch (InterruptedException e)
 				{
 					throw new TaskCancelledException(e);
 				}
@@ -296,8 +294,7 @@ class BukkitSchedulerMockTest
 		scheduler.performOneTick();
 		assertEquals(2, scheduler.getActiveRunningCount());
 		scheduler.setShutdownTimeout(300);
-		assertThrows(TaskCancelledException.class, () ->
-				scheduler.shutdown());
+		assertThrows(TaskCancelledException.class, () -> scheduler.shutdown());
 	}
 
 	@Test
@@ -320,8 +317,7 @@ class BukkitSchedulerMockTest
 				try
 				{
 					Thread.sleep(SLEEP_TIME);
-				}
-				catch (InterruptedException e)
+				} catch (InterruptedException e)
 				{
 					alive.set(false);
 					String message = "Interrupted";
@@ -356,8 +352,7 @@ class BukkitSchedulerMockTest
 			{
 				taskStarted.countDown();
 				tasksSaved.await();
-			}
-			catch (InterruptedException ignored)
+			} catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -385,8 +380,7 @@ class BukkitSchedulerMockTest
 			{
 				taskStarted.countDown();
 				tasksSaved.await();
-			}
-			catch (InterruptedException ignored)
+			} catch (InterruptedException ignored)
 			{
 			}
 		});
@@ -635,8 +629,7 @@ class BukkitSchedulerMockTest
 					}
 					executed.set(true);
 				}, 1);
-			}
-			finally
+			} finally
 			{
 				completed.set(true);
 			}
@@ -687,8 +680,7 @@ class BukkitSchedulerMockTest
 						executed.incrementAndGet();
 					}, 1);
 				}
-			}
-			finally
+			} finally
 			{
 				completed.set(true);
 			}
@@ -747,8 +739,7 @@ class BukkitSchedulerMockTest
 						}
 					}
 				}, 0, 1);
-			}
-			finally
+			} finally
 			{
 				completed.set(true);
 			}
@@ -810,8 +801,7 @@ class BukkitSchedulerMockTest
 						}
 					}, 0, 1);
 				}
-			}
-			finally
+			} finally
 			{
 				completed.set(true);
 			}
@@ -863,8 +853,10 @@ class BukkitSchedulerMockTest
 		PandaMock invalidPanda = (PandaMock) world.spawn(loc, Panda.class);
 		PandaMock goodPanda = (PandaMock) world.spawn(loc, Panda.class);
 
-		// We have to use reflection here to cover this particular branch because there is no way this an be naturally
-		//    true. However, we need to keep the check in order to accomodate future improvements on the isValid() method
+		// We have to use reflection here to cover this particular branch because there
+		// is no way this an be naturally
+		// true. However, we need to keep the check in order to accomodate future
+		// improvements on the isValid() method
 		Field removedField = EntityMock.class.getDeclaredField("removed");
 		removedField.setAccessible(true);
 		removedField.set(invalidPanda, true);

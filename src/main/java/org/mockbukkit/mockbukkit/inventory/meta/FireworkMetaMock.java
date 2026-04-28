@@ -1,4 +1,5 @@
 package org.mockbukkit.mockbukkit.inventory.meta;
+import java.util.Objects;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
@@ -9,11 +10,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.inventory.SerializableMeta;
 import org.mockbukkit.mockbukkit.util.NbtParser;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Mock implementation of an {@link FireworkMeta}.
@@ -21,10 +20,16 @@ import java.util.Objects;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
+public class FireworkMetaMock extends ItemMetaMock
+		implements
+			org.mockbukkit.mockbukkit.generated.org.bukkit.inventory.meta.FireworkMetaBaseMock
 {
 
-	private @NotNull List<FireworkEffect> effects = new ArrayList<>();
+	static final String POWER_KEY = "power";
+
+	@NotNull
+	private List<FireworkEffect> effects = new ArrayList<>();
+
 	private Integer power;
 
 	/**
@@ -38,12 +43,12 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	/**
 	 * Constructs a new {@link FireworkMetaMock}, cloning the data from another.
 	 *
-	 * @param meta The meta to clone.
+	 * @param meta
+	 *            The meta to clone.
 	 */
 	public FireworkMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-
 		if (meta instanceof FireworkMeta fireworkMeta)
 		{
 			if (fireworkMeta.hasEffects())
@@ -70,21 +75,19 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 		{
 			return true;
 		}
-		if (!super.equals(obj))
+		if (obj == null || obj.getClass() != this.getClass())
 		{
 			return false;
 		}
-		if (!(obj instanceof FireworkMetaMock other))
-		{
-			return false;
-		}
-
-		return Objects.equals(effects, other.effects) && Objects.equals(power, other.power);
+		FireworkMetaMock other = (FireworkMetaMock) obj;
+		return super.equals(obj) && Objects.equals(this.effects, other.effects) && this.power == other.power;
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	public @NotNull FireworkMetaMock clone()
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@NotNull
+	public FireworkMetaMock clone()
 	{
 		return new FireworkMetaMock(this);
 	}
@@ -97,10 +100,9 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
-	public void addEffects(@NotNull FireworkEffect @NotNull ... effects)
+	public void addEffects(@NotNull FireworkEffect @NotNull [] effects)
 	{
 		Preconditions.checkNotNull(effects, "effects must never be null");
-
 		for (FireworkEffect effect : effects)
 		{
 			addEffect(effect);
@@ -111,7 +113,6 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	public void addEffects(@NotNull Iterable<FireworkEffect> effects)
 	{
 		Preconditions.checkNotNull(effects, "effects must never be null");
-
 		for (FireworkEffect effect : effects)
 		{
 			addEffect(effect);
@@ -119,7 +120,8 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	}
 
 	@Override
-	public @NotNull List<FireworkEffect> getEffects()
+	@NotNull
+	public List<FireworkEffect> getEffects()
 	{
 		return ImmutableList.copyOf(effects);
 	}
@@ -165,44 +167,50 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	{
 		Preconditions.checkArgument(power >= 0, "power cannot be less than zero: %s", power);
 		Preconditions.checkArgument(power <= 255, "power cannot be more than 255: %s", power);
-
 		this.power = power;
 	}
 
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args A serialized FireworkMetaMock object in a Map&lt;String, Object&gt; format.
+	 * @param args
+	 *            A serialized FireworkMetaMock object in a Map&lt;String,
+	 *            Object&gt; format.
 	 * @return A new instance of the FireworkMetaMock class.
 	 */
 	@SuppressWarnings("unchecked")
-	public static @NotNull FireworkMetaMock deserialize(@NotNull Map<String, Object> args)
+	@NotNull
+	public static FireworkMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		FireworkMetaMock serialMock = new FireworkMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.addEffects(((List<?>) args.get("effects")).stream()
-				.map(e -> (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) e))
-				.toList());
-		if (args.containsKey("power"))
+		List<FireworkEffect> effects = NbtParser.parseList(args.get("effects"),
+				e -> (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) e));
+		if (effects != null)
 		{
-			serialMock.power = NbtParser.parseInteger(args.get("power"));
+			serialMock.addEffects(effects.toArray(new FireworkEffect[0]));
+		}
+		if (args.containsKey(POWER_KEY))
+		{
+			serialMock.power = NbtParser.parseInteger(args.get(POWER_KEY));
 		}
 		return serialMock;
 	}
 
 	/**
-	 * Serializes the properties of an FireworkMetaMock to a HashMap.
-	 * Unimplemented properties are not present in the map.
+	 * Serializes the properties of an FireworkMetaMock to a HashMap. Unimplemented
+	 * properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the FireworkMetaMock.
 	 */
 	@Override
-	public @NotNull Map<String, Object> serialize()
+	@NotNull
+	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
 		if (hasPower())
 		{
-			serialized.put("power", power);
+			serialized.put(POWER_KEY, power);
 		}
 		serialized.put("effects", effects.stream().map(FireworkEffect::serialize).toList());
 		return serialized;
@@ -213,5 +221,4 @@ public class FireworkMetaMock extends ItemMetaMock implements FireworkMeta
 	{
 		return "FIREWORK";
 	}
-
 }

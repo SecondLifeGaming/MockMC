@@ -21,7 +21,8 @@ public class ShelfStateMock extends TileStateMock implements Shelf
 	/**
 	 * Constructs a new {@link ShelfStateMock} for the provided {@link Material}.
 	 *
-	 * @param material The material this state is for.
+	 * @param material
+	 *            The material this state is for.
 	 */
 	public ShelfStateMock(@NotNull Material material)
 	{

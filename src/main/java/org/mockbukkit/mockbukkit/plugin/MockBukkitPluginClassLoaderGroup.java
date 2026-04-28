@@ -21,8 +21,7 @@ public class MockBukkitPluginClassLoaderGroup implements PluginClassLoaderGroup
 			try
 			{
 				return cl.loadClass(name, resolve, true, true);
-			}
-			catch (ClassNotFoundException ignored)
+			} catch (ClassNotFoundException ignored)
 			{
 			}
 		}

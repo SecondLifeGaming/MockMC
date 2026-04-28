@@ -16,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class CalibaretedSculkSensorDataMockTest
 {
 
-	private final CalibratedSculkSensorDataMock sculkSensor = new CalibratedSculkSensorDataMock(Material.CALIBRATED_SCULK_SENSOR);
+	private final CalibratedSculkSensorDataMock sculkSensor = new CalibratedSculkSensorDataMock(
+			Material.CALIBRATED_SCULK_SENSOR);
 
 	@Nested
 	class SetFacing
@@ -29,9 +30,8 @@ class CalibaretedSculkSensorDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.INCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.INCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenValidValues(BlockFace face)
 		{
 			sculkSensor.setFacing(face);
@@ -39,12 +39,12 @@ class CalibaretedSculkSensorDataMockTest
 		}
 
 		@ParameterizedTest
-		@EnumSource(value = BlockFace.class,
-				mode = EnumSource.Mode.EXCLUDE,
-				names = { "NORTH", "SOUTH", "EAST", "WEST" })
+		@EnumSource(value = BlockFace.class, mode = EnumSource.Mode.EXCLUDE, names =
+		{"NORTH", "SOUTH", "EAST", "WEST"})
 		void givenInvalidValues(BlockFace face)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> sculkSensor.setFacing(face));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> sculkSensor.setFacing(face));
 			assertEquals("Invalid face, only cartesian horizontal face are allowed for this property!", e.getMessage());
 		}
 

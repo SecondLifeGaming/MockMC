@@ -30,12 +30,15 @@ class PaperCommandsMockTest
 	List<Object> arguments = List.of();
 
 	@ParameterizedTest
-	@ValueSource(strings = { "new_command", "an_alias", "pluginmock:new_command", "pluginmock:an_alias" })
+	@ValueSource(strings =
+	{"new_command", "an_alias", "pluginmock:new_command", "pluginmock:an_alias"})
 	void commandWithArgumentsTest(String alias)
 	{
-		PluginMock.builder().withOnEnable((pluginMock) ->
-				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-						event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias")))).build();
+		PluginMock.builder()
+				.withOnEnable((pluginMock) -> pluginMock.getLifecycleManager().registerEventHandler(
+						LifecycleEvents.COMMANDS, event -> event.registrar().register(argumentBuilderGreedy().build(),
+								"some bukkit help description string", List.of("an_alias"))))
+				.build();
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), alias + " Hello world!");
 		assertEquals(1, arguments.size());
 		assertEquals("Hello world!", arguments.getFirst());
@@ -44,9 +47,11 @@ class PaperCommandsMockTest
 	@Test
 	void commandWithArgumentsTest_doesNotExist()
 	{
-		PluginMock.builder().withOnEnable((pluginMock) ->
-				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-						event.registrar().register(argumentBuilderGreedy().build(), "some bukkit help description string", List.of("an_alias")))).build();
+		PluginMock.builder()
+				.withOnEnable((pluginMock) -> pluginMock.getLifecycleManager().registerEventHandler(
+						LifecycleEvents.COMMANDS, event -> event.registrar().register(argumentBuilderGreedy().build(),
+								"some bukkit help description string", List.of("an_alias"))))
+				.build();
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), "this_does Not exist!");
 		assertEquals(0, arguments.size());
 	}
@@ -54,10 +59,11 @@ class PaperCommandsMockTest
 	@Test
 	void basicCommand()
 	{
-		PluginMock.builder().withOnEnable((pluginMock) ->
-				pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event ->
-						event.registrar().register("basic", createBasicCommand()))
-		).build();
+		PluginMock.builder()
+				.withOnEnable(
+						(pluginMock) -> pluginMock.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
+								event -> event.registrar().register("basic", createBasicCommand())))
+				.build();
 		serverMock.dispatchCommand(serverMock.getConsoleSender(), "basic Not exist!");
 		assertEquals(List.of("Not", "exist!"), arguments);
 	}
@@ -66,11 +72,10 @@ class PaperCommandsMockTest
 	{
 		return Commands.literal("new_command")
 				.then(Commands.argument("my_argument", StringArgumentType.greedyString()).executes(context ->
-						{
-							arguments = List.of(context.getArgument("my_argument", String.class));
-							return Command.SINGLE_SUCCESS;
-						})
-				);
+				{
+					arguments = List.of(context.getArgument("my_argument", String.class));
+					return Command.SINGLE_SUCCESS;
+				}));
 	}
 
 	BasicCommand createBasicCommand()

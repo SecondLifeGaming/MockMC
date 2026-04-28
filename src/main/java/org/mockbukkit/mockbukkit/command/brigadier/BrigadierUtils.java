@@ -15,17 +15,21 @@ import org.mockbukkit.mockbukkit.command.WrappedLiteralCommandNode;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 public class BrigadierUtils
 {
 
-	private static final CommandSourceStack DUMMY = new CommandSourceStackMock(new Location(null, 0, 0, 0), new DummyCommandSender(), null);
+	private static final CommandSourceStack DUMMY = new CommandSourceStackMock(new Location(null, 0, 0, 0),
+			new DummyCommandSender(), null);
 
 	private BrigadierUtils()
 	{
 		throw new IllegalStateException("Utility class");
 	}
 
-	public static WrappedLiteralCommandNode copyLiteral(final String newLiteral, final LiteralCommandNode<CommandSourceStack> source)
+	public static WrappedLiteralCommandNode copyLiteral(final String newLiteral,
+			final LiteralCommandNode<CommandSourceStack> source)
 	{
 		return new WrappedLiteralCommandNode(source, newLiteral);
 	}
@@ -38,8 +42,7 @@ public class BrigadierUtils
 			getRootNodeMapFields("children", rootNode).remove(name);
 			getRootNodeMapFields("literals", rootNode).remove(name);
 			getRootNodeMapFields("arguments", rootNode).remove(name);
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
+		} catch (NoSuchFieldException | IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
@@ -53,14 +56,14 @@ public class BrigadierUtils
 			getRootNodeMapFields("children", rootNode).clear();
 			getRootNodeMapFields("literals", rootNode).clear();
 			getRootNodeMapFields("arguments", rootNode).clear();
-		}
-		catch (NoSuchFieldException | IllegalAccessException e)
+		} catch (NoSuchFieldException | IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
 
-	private static Map<String, ?> getRootNodeMapFields(String fieldName, RootCommandNode<CommandSourceStack> rootNode) throws IllegalAccessException, NoSuchFieldException
+	private static Map<String, ?> getRootNodeMapFields(String fieldName, RootCommandNode<CommandSourceStack> rootNode)
+			throws IllegalAccessException, NoSuchFieldException
 	{
 		Field field = CommandNode.class.getDeclaredField(fieldName);
 		field.setAccessible(true);
@@ -84,16 +87,21 @@ public class BrigadierUtils
 			argumentCommandNode = argumentCommandNode.getRedirect();
 		}
 
-		Map<CommandNode<CommandSourceStack>, String> map = PaperCommandsMock.INSTANCE.getDispatcherInternal().getSmartUsage(argumentCommandNode, DUMMY);
-		String usage = map.isEmpty() ? node.getUsageText() : node.getUsageText() + " " + String.join("\n" + node.getUsageText() + " ", map.values());
+		Map<CommandNode<CommandSourceStack>, String> map = PaperCommandsMock.INSTANCE.getDispatcherInternal()
+				.getSmartUsage(argumentCommandNode, DUMMY);
+		String usage = map.isEmpty()
+				? node.getUsageText()
+				: node.getUsageText() + " " + String.join("\n" + node.getUsageText() + " ", map.values());
 
 		// Internal command
 		if (meta.pluginMeta() == null)
 		{
-			return new VanillaCommandWrapperMock(node.getName(), meta.description(), usage, meta.aliases(), node, meta.helpCommandNamespace());
+			return new VanillaCommandWrapperMock(node.getName(), meta.description(), usage, meta.aliases(), node,
+					meta.helpCommandNamespace());
 		}
 
-		return new PluginVanillaCommandWrapperMock(node.getName(), meta.description(), usage, meta.aliases(), node, meta.plugin());
+		return new PluginVanillaCommandWrapperMock(node.getName(), meta.description(), usage, meta.aliases(), node,
+				meta.plugin());
 	}
 
 }

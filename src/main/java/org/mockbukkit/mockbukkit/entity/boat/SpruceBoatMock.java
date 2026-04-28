@@ -5,7 +5,6 @@ import org.bukkit.entity.boat.SpruceBoat;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.entity.BoatMock;
-
 import java.util.UUID;
 
 /**
@@ -13,7 +12,10 @@ import java.util.UUID;
  *
  * @see BoatMock
  */
-public class SpruceBoatMock extends BoatMock implements SpruceBoat
+public class SpruceBoatMock extends BoatMock
+		implements
+			SpruceBoat,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.boat.SpruceBoatBaseMock
 {
 
 	public SpruceBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)
@@ -22,9 +24,9 @@ public class SpruceBoatMock extends BoatMock implements SpruceBoat
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SPRUCE_BOAT;
 	}
-
 }

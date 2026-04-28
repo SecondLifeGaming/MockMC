@@ -28,7 +28,8 @@ class BubbleColumnDataMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean inWall)
 		{
 			bubbleColumn.setDrag(inWall);

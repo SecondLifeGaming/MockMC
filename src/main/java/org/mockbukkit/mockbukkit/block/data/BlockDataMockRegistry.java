@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Material;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.exception.InternalDataLoadException;
@@ -19,6 +20,7 @@ import org.mockbukkit.mockbukkit.util.ResourceLoader;
 import javax.annotation.Nullable;
 import java.lang.reflect.Type;
 import java.util.Map;
+import java.util.logging.Level;
 
 @ApiStatus.Internal
 public class BlockDataMockRegistry
@@ -45,7 +47,8 @@ public class BlockDataMockRegistry
 	{
 
 		@Override
-		public MaterialData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException
+		public MaterialData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException
 		{
 			if (!(json instanceof JsonObject jsonObject))
 			{
@@ -58,15 +61,16 @@ public class BlockDataMockRegistry
 				defaultStates = gson.fromJson(jsonObject.get("defaultStates"), new TypeToken<Map<String, Object>>()
 				{
 				}.getType());
-			}
-			else
+			} else
 			{
 				defaultStates = Map.of();
 			}
-			ImmutableMap.Builder<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> allowedStates = ImmutableMap.builder();
+			ImmutableMap.Builder<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> allowedStates = ImmutableMap
+					.builder();
 			if (jsonObject.has("allowedStates"))
 			{
-				for (Map.Entry<String, JsonElement> entry : jsonObject.get("allowedStates").getAsJsonObject().entrySet())
+				for (Map.Entry<String, JsonElement> entry : jsonObject.get("allowedStates").getAsJsonObject()
+						.entrySet())
 				{
 					// No error handling, should just fail if the input is wrong
 					BlockDataLimitation.Type<?, ?> limitation = BlockDataLimitation.Type.fromKey(entry.getKey());
@@ -86,10 +90,9 @@ public class BlockDataMockRegistry
 		try
 		{
 			loadBlockData();
-		}
-		catch (InternalDataLoadException ex)
+		} catch (InternalDataLoadException ex)
 		{
-			ex.printStackTrace();
+			Bukkit.getLogger().log(Level.SEVERE, "Failed to load block data from internal registry", ex);
 		}
 	}
 
@@ -148,7 +151,7 @@ public class BlockDataMockRegistry
 	}
 
 	private record MaterialData(Map<String, Object> defaultValues,
-								Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations)
+			Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> limitations)
 	{
 
 	}

@@ -89,7 +89,8 @@ class FenceDataMockTest
 	@Test
 	void validateClone()
 	{
-		@NotNull FenceDataMock cloned = fenceData.clone();
+		@NotNull
+		FenceDataMock cloned = fenceData.clone();
 
 		assertEquals(fenceData, cloned);
 		assertEquals(fenceData.isWaterlogged(), cloned.isWaterlogged());
@@ -103,8 +104,7 @@ class FenceDataMockTest
 
 	static Stream<Arguments> allowedFaces()
 	{
-		return Stream.of(BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH)
-				.map(Arguments::of);
+		return Stream.of(BlockFace.EAST, BlockFace.WEST, BlockFace.NORTH, BlockFace.SOUTH).map(Arguments::of);
 	}
 
 }

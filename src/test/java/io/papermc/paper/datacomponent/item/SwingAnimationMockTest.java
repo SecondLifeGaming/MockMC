@@ -14,9 +14,7 @@ class SwingAnimationMockTest
 	@Test
 	void givenBasicCreation()
 	{
-		SwingAnimation component = SwingAnimation.swingAnimation()
-				.duration(10)
-				.type(SwingAnimation.Animation.STAB)
+		SwingAnimation component = SwingAnimation.swingAnimation().duration(10).type(SwingAnimation.Animation.STAB)
 				.build();
 
 		assertEquals(10, component.duration());

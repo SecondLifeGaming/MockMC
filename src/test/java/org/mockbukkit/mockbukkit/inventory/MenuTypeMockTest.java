@@ -27,6 +27,8 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class MenuTypeMockTest
 {
@@ -211,9 +213,7 @@ class MenuTypeMockTest
 		void buildWithTitle()
 		{
 			HumanEntity player = server.addPlayer();
-			InventoryView view = MenuType.GENERIC_9X3.builder()
-					.title(Component.text("Builder Title"))
-					.build(player);
+			InventoryView view = MenuType.GENERIC_9X3.builder().title(Component.text("Builder Title")).build(player);
 			assertNotNull(view);
 			assertEquals("Builder Title", view.getTitle());
 			assertEquals(InventoryType.CHEST, view.getTopInventory().getType());
@@ -223,8 +223,7 @@ class MenuTypeMockTest
 		void buildWithoutTitle()
 		{
 			HumanEntity player = server.addPlayer();
-			InventoryView view = MenuType.GENERIC_9X3.builder()
-					.build(player);
+			InventoryView view = MenuType.GENERIC_9X3.builder().build(player);
 			assertNotNull(view);
 		}
 
@@ -258,9 +257,7 @@ class MenuTypeMockTest
 		void buildWithTitle()
 		{
 			HumanEntity player = server.addPlayer();
-			InventoryView view = MenuType.GENERIC_9X1.builder()
-					.title(Component.text("Base Title"))
-					.build(player);
+			InventoryView view = MenuType.GENERIC_9X1.builder().title(Component.text("Base Title")).build(player);
 			assertNotNull(view);
 			assertEquals("Base Title", view.getTitle());
 		}
@@ -269,8 +266,7 @@ class MenuTypeMockTest
 		void buildWithoutTitle()
 		{
 			HumanEntity player = server.addPlayer();
-			InventoryView view = MenuType.GENERIC_9X1.builder()
-					.build(player);
+			InventoryView view = MenuType.GENERIC_9X1.builder().build(player);
 			assertNotNull(view);
 		}
 
@@ -291,9 +287,7 @@ class MenuTypeMockTest
 		void buildCorrectTypeAndSize()
 		{
 			HumanEntity player = server.addPlayer();
-			InventoryView view = MenuType.GENERIC_9X1.builder()
-					.title(Component.text("Size Test"))
-					.build(player);
+			InventoryView view = MenuType.GENERIC_9X1.builder().title(Component.text("Size Test")).build(player);
 			assertEquals(InventoryType.CHEST, view.getTopInventory().getType());
 			assertEquals(9, view.getTopInventory().getSize());
 		}

@@ -147,16 +147,16 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 import static org.mockbukkit.mockbukkit.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 
 class PlayerMockTest
 {
 
 	// Taken from https://minecraft.wiki/w/Experience#Leveling_up
 	private static final int[] expRequired =
-			{
-					7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
-					107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193
-			};
+	{7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 42, 47, 52, 57, 62, 67, 72, 77, 82, 87, 92, 97, 102,
+			107, 112, 121, 130, 139, 148, 157, 166, 175, 184, 193};
 	private ServerMock server;
 	private UUID uuid;
 	private PlayerMock player;
@@ -172,9 +172,8 @@ class PlayerMockTest
 			protected long getCurrentServerTime()
 			{
 				/*
-				 *  This will force the current server time to always be different to
-				 *  any prior invocations, this is much more elegant than simply doing
-				 *  Thread.sleep!
+				 * This will force the current server time to always be different to any prior
+				 * invocations, this is much more elegant than simply doing Thread.sleep!
 				 */
 				ticks++;
 				return super.getCurrentServerTime() + ticks;
@@ -423,8 +422,8 @@ class PlayerMockTest
 		plugin.commandReturns = true;
 		String message = "mockcommand argA argB";
 		assertTrue(player.performCommand(message));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
-				message.equalsIgnoreCase(event.getMessage())));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class,
+				event -> message.equalsIgnoreCase(event.getMessage())));
 	}
 
 	@Test
@@ -442,8 +441,8 @@ class PlayerMockTest
 		}, plugin);
 		plugin.commandReturns = true;
 		assertTrue(player.performCommand("mockcommand argA argB"));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
-				alteredMessage.equalsIgnoreCase(event.getMessage())));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class,
+				event -> alteredMessage.equalsIgnoreCase(event.getMessage())));
 	}
 
 	@Test
@@ -632,12 +631,14 @@ class PlayerMockTest
 	}
 
 	@ParameterizedTest
-	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names = { "SURVIVAL" })
+	@EnumSource(value = GameMode.class, mode = EnumSource.Mode.EXCLUDE, names =
+	{"SURVIVAL"})
 	void simulateBlockDamage_NotSurvival_BlockNotDamaged(@NotNull GameMode nonSurvivalGameMode)
 	{
 		player.setGameMode(nonSurvivalGameMode);
 		Block block = server.addSimpleWorld("world").getBlockAt(0, 0, 0);
-		assertNull(player.simulateBlockDamage(block), "Block was damaged while in gamemode " + nonSurvivalGameMode.name());
+		assertNull(player.simulateBlockDamage(block),
+				"Block was damaged while in gamemode " + nonSurvivalGameMode.name());
 	}
 
 	@Test
@@ -771,11 +772,9 @@ class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		}
-		catch (InterruptedException | BrokenBarrierException ignored)
+		} catch (InterruptedException | BrokenBarrierException ignored)
 		{
-		}
-		catch (TimeoutException e)
+		} catch (TimeoutException e)
 		{
 			fail("Async event was not fired");
 		}
@@ -1161,9 +1160,10 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player.getLocation(), sound, SoundCategory.AMBIENT, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-				player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-						&& audio.getVolume() == volume && audio.getPitch() == pitch);
+		player.assertSoundHeard(sound,
+				audio -> player.getLocation().equals(audio.getLocation())
+						&& audio.getCategory() == SoundCategory.AMBIENT && audio.getVolume() == volume
+						&& audio.getPitch() == pitch);
 	}
 
 	@Test
@@ -1173,47 +1173,38 @@ class PlayerMockTest
 		float volume = 0.25F;
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, SoundCategory.RECORDS, volume, pitch);
-		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio ->
-				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-						&& audio.getVolume() == volume && audio.getPitch() == pitch)
-		);
+		assertThat(player,
+				SoundReceiverSoundHeardMatcher.hasHeard(sound,
+						audio -> player.getEyeLocation().equals(audio.getLocation())
+								&& audio.getCategory() == SoundCategory.RECORDS && audio.getVolume() == volume
+								&& audio.getPitch() == pitch));
 	}
 
 	@Test
 	void testPlaySound_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.BLOCK_ANVIL_FALL,
-				net.kyori.adventure.sound.Sound.Source.BLOCK,
-				0.9f,
-				0.8f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.BLOCK_ANVIL_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK, 0.9f, 0.8f);
 		player.playSound(sound);
-		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> player.getLocation().equals(audio.getLocation())));
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound,
+				audio -> player.getLocation().equals(audio.getLocation())));
 	}
 
 	@Test
 	void testPlaySoundSelfEmitter_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.ENTITY_CREEPER_PRIMED,
-				net.kyori.adventure.sound.Sound.Source.HOSTILE,
-				0.9f,
-				0.8f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.ENTITY_CREEPER_PRIMED,
+				net.kyori.adventure.sound.Sound.Source.HOSTILE, 0.9f, 0.8f);
 		player.playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self());
-		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> player.getLocation().equals(audio.getLocation())));
+		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound,
+				audio -> player.getLocation().equals(audio.getLocation())));
 	}
 
 	@Test
 	void testPlaySoundLocation_Adventure()
 	{
-		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(
-				Sound.AMBIENT_CAVE,
-				net.kyori.adventure.sound.Sound.Source.AMBIENT,
-				0.5f,
-				1f
-		);
+		net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound(Sound.AMBIENT_CAVE,
+				net.kyori.adventure.sound.Sound.Source.AMBIENT, 0.5f, 1f);
 		Location loc = new Location(player.getWorld(), 80D, 30D, 50D);
 		player.playSound(sound, loc.getX(), loc.getY(), loc.getZ());
 		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio -> loc.equals(audio.getLocation())));
@@ -1222,18 +1213,10 @@ class PlayerMockTest
 	@Test
 	void testAssertSoundHeard_Adventure()
 	{
-		net.kyori.adventure.sound.Sound soundA = net.kyori.adventure.sound.Sound.sound(
-				Sound.BLOCK_DEEPSLATE_FALL,
-				net.kyori.adventure.sound.Sound.Source.BLOCK,
-				1f,
-				1f
-		);
-		net.kyori.adventure.sound.Sound soundB = net.kyori.adventure.sound.Sound.sound(
-				soundA.name(),
-				net.kyori.adventure.sound.Sound.Source.MASTER,
-				soundA.volume(),
-				soundA.pitch()
-		);
+		net.kyori.adventure.sound.Sound soundA = net.kyori.adventure.sound.Sound.sound(Sound.BLOCK_DEEPSLATE_FALL,
+				net.kyori.adventure.sound.Sound.Source.BLOCK, 1f, 1f);
+		net.kyori.adventure.sound.Sound soundB = net.kyori.adventure.sound.Sound.sound(soundA.name(),
+				net.kyori.adventure.sound.Sound.Source.MASTER, soundA.volume(), soundA.pitch());
 		player.playSound(soundA);
 		assertThat(player, hasHeard(soundA));
 		assertThat(player, hasNotHeard(soundB));
@@ -1244,10 +1227,11 @@ class PlayerMockTest
 	{
 		int note = 10;
 		player.playNote(player.getEyeLocation(), (byte) 0, (byte) note);
-		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(Sound.BLOCK_NOTE_BLOCK_HARP, audio ->
-				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-						&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01
-		));
+		assertThat(player,
+				SoundReceiverSoundHeardMatcher.hasHeard(Sound.BLOCK_NOTE_BLOCK_HARP,
+						audio -> player.getEyeLocation().equals(audio.getLocation())
+								&& audio.getCategory() == SoundCategory.RECORDS && audio.getVolume() == 3.0f
+								&& Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01));
 	}
 
 	@Test
@@ -1554,7 +1538,8 @@ class PlayerMockTest
 		Location to = player.getLocation().add(10, 10, 10);
 		player.teleport(to, PlayerTeleportEvent.TeleportCause.CHORUS_FRUIT);
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerTeleportEvent.class, event -> from.equals(event.getFrom()) && to.equals(event.getTo())));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerTeleportEvent.class,
+				event -> from.equals(event.getFrom()) && to.equals(event.getTo())));
 		assertThat(server.getPluginManager(), hasNotFiredEventInstance(EntityTeleportEvent.class));
 	}
 
@@ -1572,17 +1557,19 @@ class PlayerMockTest
 	{
 		TestPlugin plugin = MockBukkit.load(TestPlugin.class);
 		World from = player.getWorld();
-		Location to = new Location(new WorldMock(), 0, 80, 0);
+		Location to = new Location(server.addSimpleWorld("to"), 0, 80, 0);
 		server.getPluginManager().registerEvents(new Listener()
 		{
 			@EventHandler
 			public void onChangedWorld(@NotNull PlayerChangedWorldEvent event)
 			{
-				assertEquals(to, event.getPlayer().getLocation(), "The location should already have changed when the PlayerChangedWorldEvent is fired");
+				assertEquals(to, event.getPlayer().getLocation(),
+						"The location should already have changed when the PlayerChangedWorldEvent is fired");
 			}
 		}, plugin);
 		player.teleport(to);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerChangedWorldEvent.class, event -> event.getFrom() == from));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(PlayerChangedWorldEvent.class, event -> event.getFrom() == from));
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerTeleportEvent.class));
 	}
 
@@ -1641,7 +1628,8 @@ class PlayerMockTest
 		player.openInventory(inventory);
 		assertTrue(player.teleport(player.getLocation().add(8, 9, 10)));
 		assertEquals(InventoryType.CRAFTING, player.getOpenInventory().getType());
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class, e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryCloseEvent.class,
+				e -> e.getReason() == InventoryCloseEvent.Reason.TELEPORT));
 	}
 
 	@Test
@@ -1657,16 +1645,14 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendSignChange_Valid()
 	{
-		assertDoesNotThrow(() ->
-				player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true));
+		assertDoesNotThrow(() -> player.sendSignChange(player.getLocation(), new String[4], DyeColor.CYAN, true));
 	}
 
 	@Test
 	void testPlayerSendSignChange_Invalid()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-				player.sendSignChange(loc, new String[2]));
+		assertThrows(IllegalArgumentException.class, () -> player.sendSignChange(loc, new String[2]));
 	}
 
 	@Test
@@ -1681,30 +1667,26 @@ class PlayerMockTest
 	void testPlayerPlayEffect_NullData()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-				player.playEffect(loc, Effect.STEP_SOUND, null));
+		assertThrows(IllegalArgumentException.class, () -> player.playEffect(loc, Effect.STEP_SOUND, null));
 	}
 
 	@Test
 	void testPlayerSendExperienceChange()
 	{
-		assertDoesNotThrow(() ->
-				player.sendExperienceChange(0.5f));
+		assertDoesNotThrow(() -> player.sendExperienceChange(0.5f));
 	}
 
 	@Test
 	void testPlayerSendBlockDamage()
 	{
 		Location loc = player.getLocation();
-		assertDoesNotThrow(() ->
-				player.sendBlockDamage(loc, 0.5f));
+		assertDoesNotThrow(() -> player.sendBlockDamage(loc, 0.5f));
 	}
 
 	@Test
 	void testPlayerSendBlockChange()
 	{
-		assertDoesNotThrow(() ->
-				player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST)));
+		assertDoesNotThrow(() -> player.sendBlockUpdate(player.getLocation(), new ChestStateMock(Material.CHEST)));
 	}
 
 	@Test
@@ -1719,16 +1701,15 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendEquipmentChange()
 	{
-		assertDoesNotThrow(() ->
-				player.sendEquipmentChange(player, EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player, EquipmentSlot.CHEST,
+				new ItemStackMock(Material.DIAMOND_CHESTPLATE)));
 	}
 
 	@Test
 	void testPlayerSendEquipmentChange_Map()
 	{
-		assertDoesNotThrow(() ->
-				player.sendEquipmentChange(player, Map.of(EquipmentSlot.CHEST,
-						new ItemStackMock(Material.DIAMOND_CHESTPLATE))));
+		assertDoesNotThrow(() -> player.sendEquipmentChange(player,
+				Map.of(EquipmentSlot.CHEST, new ItemStackMock(Material.DIAMOND_CHESTPLATE))));
 	}
 
 	@Test
@@ -1740,37 +1721,32 @@ class PlayerMockTest
 	@Test
 	void testPlayerSendActionBar()
 	{
-		assertDoesNotThrow(() ->
-				player.sendActionBar("Action!"));
+		assertDoesNotThrow(() -> player.sendActionBar("Action!"));
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate()
 	{
-		assertDoesNotThrow(() ->
-				player.sendHealthUpdate());
+		assertDoesNotThrow(() -> player.sendHealthUpdate());
 	}
 
 	@Test
 	void testPlayerSendHealthUpdate_Params()
 	{
-		assertDoesNotThrow(() ->
-				player.sendHealthUpdate(20, 10, 0.0f));
+		assertDoesNotThrow(() -> player.sendHealthUpdate(20, 10, 0.0f));
 	}
 
 	@Test
 	void testPlayerSendMultiBlockChange()
 	{
-		assertDoesNotThrow(() ->
-				player.sendMultiBlockChange(new HashMap<>(0)));
+		assertDoesNotThrow(() -> player.sendMultiBlockChange(new HashMap<>(0)));
 	}
 
 	@Test
 	void testPlayerPlayEffect_IncorrectData()
 	{
 		Location loc = player.getLocation();
-		assertThrows(IllegalArgumentException.class, () ->
-				player.playEffect(loc, Effect.STEP_SOUND, 1.0f));
+		assertThrows(IllegalArgumentException.class, () -> player.playEffect(loc, Effect.STEP_SOUND, 1.0f));
 	}
 
 	void testPlayerSendPluginMessage()
@@ -1794,7 +1770,8 @@ class PlayerMockTest
 	@Test
 	void testPlayerSpawnParticle_Correct_DataType()
 	{
-		assertDoesNotThrow(() -> player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE)));
+		assertDoesNotThrow(
+				() -> player.spawnParticle(Particle.ITEM, player.getLocation(), 1, new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
@@ -1802,8 +1779,7 @@ class PlayerMockTest
 	{
 		Location loc = player.getLocation();
 		Object wrongObj = new Object();
-		assertThrows(IllegalArgumentException.class, () ->
-				player.spawnParticle(Particle.ITEM, loc, 1, wrongObj));
+		assertThrows(IllegalArgumentException.class, () -> player.spawnParticle(Particle.ITEM, loc, 1, wrongObj));
 	}
 
 	@Test
@@ -1847,8 +1823,9 @@ class PlayerMockTest
 		Inventory inventory = Bukkit.createInventory(null, 9);
 		player.openInventory(inventory);
 		player.simulateInventoryClick(0);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(InventoryClickEvent.class, event ->
-				event.getSlot() == 0 && event.getClickedInventory() == inventory && event.getClick() == ClickType.LEFT));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(InventoryClickEvent.class, event -> event.getSlot() == 0
+						&& event.getClickedInventory() == inventory && event.getClick() == ClickType.LEFT));
 	}
 
 	@Test
@@ -1925,8 +1902,7 @@ class PlayerMockTest
 	@Test
 	void testPlayerLastDeathLocation_Set()
 	{
-		assertTrue(player.getLastDeathLocation().getX() == 0.0
-				&& player.getLastDeathLocation().getY() == 0.0
+		assertTrue(player.getLastDeathLocation().getX() == 0.0 && player.getLastDeathLocation().getY() == 0.0
 				&& player.getLastDeathLocation().getZ() == 0.0);
 
 		Location loc = new Location(new WorldMock(), 69, 69, 69);
@@ -1996,7 +1972,8 @@ class PlayerMockTest
 	void testKickWithNullMessage()
 	{
 		player.kick(null, PlayerKickEvent.Cause.KICK_COMMAND);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty()));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(PlayerKickEvent.class, event -> event.leaveMessage() == Component.empty()));
 	}
 
 	@Test
@@ -2038,47 +2015,44 @@ class PlayerMockTest
 	}
 
 	/*
-	Commented out so there are no skipped tests for now.
-
-	@Disabled("PotionMetaMock#{get,set}BasePotionType is not yet implemented, which is used in this test.")
-	@ParameterizedTest
-	@MethodSource("potionItemProvider")
-	void testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack> potionSupplier, PotionEffect inflictedEffect) {
-		ItemStack potion = potionSupplier.get();
-		player.simulateConsumeItem(potion);
-		assertEquals(inflictedEffect, player.getPotionEffect(inflictedEffect.getType()));
-	}
-
-	private static Stream<Arguments> potionItemProvider() {
-		return Stream.of(
-				Arguments.of(
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION), new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
-						(Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null
-				)
-		);
-	}
-
-	private static ItemStack potionItemStack(PotionType potionType) {
-		ItemStack itemStack = new ItemStack(Material.POTION);
-		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-		potionMeta.setBasePotionType(potionType);
-		itemStack.setItemMeta(potionMeta);
-		return itemStack;
-	}
-
-	@Test
-	void testSimulateConsumePotionItemWithCustomEffectIsApplies()
-	{
-		ItemStack itemStack = new ItemStack(Material.POTION);
-		PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-		PotionEffect customEffect = new PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
-		potionMeta.addCustomEffect(customEffect, true);
-		itemStack.setItemMeta(potionMeta);
-		player.simulateConsumeItem(itemStack);
-		assertEquals(customEffect, player.getPotionEffect(PotionEffectType.JUMP_BOOST));
-	}
+	 * Commented out so there are no skipped tests for now.
+	 *
+	 * @Disabled("PotionMetaMock#{get,set}BasePotionType is not yet implemented, which is used in this test."
+	 * )
+	 *
+	 * @ParameterizedTest
+	 *
+	 * @MethodSource("potionItemProvider") void
+	 * testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack>
+	 * potionSupplier, PotionEffect inflictedEffect) { ItemStack potion =
+	 * potionSupplier.get(); player.simulateConsumeItem(potion);
+	 * assertEquals(inflictedEffect,
+	 * player.getPotionEffect(inflictedEffect.getType())); }
+	 *
+	 * private static Stream<Arguments> potionItemProvider() { return Stream.of(
+	 * Arguments.of( (Supplier<ItemStack>) () ->
+	 * potionItemStack(PotionType.REGENERATION), new
+	 * PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
+	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION),
+	 * new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
+	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION),
+	 * new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
+	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null ) ); }
+	 *
+	 * private static ItemStack potionItemStack(PotionType potionType) { ItemStack
+	 * itemStack = new ItemStack(Material.POTION); PotionMeta potionMeta =
+	 * (PotionMeta) itemStack.getItemMeta();
+	 * potionMeta.setBasePotionType(potionType); itemStack.setItemMeta(potionMeta);
+	 * return itemStack; }
+	 *
+	 * @Test void testSimulateConsumePotionItemWithCustomEffectIsApplies() {
+	 * ItemStack itemStack = new ItemStack(Material.POTION); PotionMeta potionMeta =
+	 * (PotionMeta) itemStack.getItemMeta(); PotionEffect customEffect = new
+	 * PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
+	 * potionMeta.addCustomEffect(customEffect, true);
+	 * itemStack.setItemMeta(potionMeta); player.simulateConsumeItem(itemStack);
+	 * assertEquals(customEffect,
+	 * player.getPotionEffect(PotionEffectType.JUMP_BOOST)); }
 	 */
 
 	@Test
@@ -2196,9 +2170,8 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player.getLocation(), sound, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-				player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
-						&& audio.getPitch() == pitch);
+		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation())
+				&& audio.getVolume() == volume && audio.getPitch() == pitch);
 	}
 
 	@Test
@@ -2208,9 +2181,10 @@ class PlayerMockTest
 		float volume = 0.25F;
 		float pitch = 0.75F;
 		player.playSound(player.getEyeLocation(), sound, volume, pitch);
-		assertThat(player, SoundReceiverSoundHeardMatcher.hasHeard(sound, audio ->
-				player.getEyeLocation().equals(audio.getLocation()) && audio.getVolume() == volume && audio.getPitch() == pitch
-		));
+		assertThat(player,
+				SoundReceiverSoundHeardMatcher.hasHeard(sound,
+						audio -> player.getEyeLocation().equals(audio.getLocation()) && audio.getVolume() == volume
+								&& audio.getPitch() == pitch));
 	}
 
 	@Test
@@ -2221,9 +2195,10 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player, sound, SoundCategory.AMBIENT, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-				player.getLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.AMBIENT
-						&& audio.getVolume() == volume && audio.getPitch() == pitch);
+		player.assertSoundHeard(sound,
+				audio -> player.getLocation().equals(audio.getLocation())
+						&& audio.getCategory() == SoundCategory.AMBIENT && audio.getVolume() == volume
+						&& audio.getPitch() == pitch);
 
 	}
 
@@ -2235,9 +2210,8 @@ class PlayerMockTest
 		float pitch = 1;
 		player.playSound(player, sound, volume, pitch);
 
-		player.assertSoundHeard(sound, audio ->
-				player.getLocation().equals(audio.getLocation()) && audio.getVolume() == volume
-						&& audio.getPitch() == pitch);
+		player.assertSoundHeard(sound, audio -> player.getLocation().equals(audio.getLocation())
+				&& audio.getVolume() == volume && audio.getPitch() == pitch);
 
 	}
 
@@ -2374,9 +2348,10 @@ class PlayerMockTest
 	{
 		int note = 10;
 		player.playNote(player.getEyeLocation(), instrument, new Note(note));
-		player.assertSoundHeard(sound, audio ->
-				player.getEyeLocation().equals(audio.getLocation()) && audio.getCategory() == SoundCategory.RECORDS
-						&& audio.getVolume() == 3.0f && Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01);
+		player.assertSoundHeard(sound,
+				audio -> player.getEyeLocation().equals(audio.getLocation())
+						&& audio.getCategory() == SoundCategory.RECORDS && audio.getVolume() == 3.0f
+						&& Math.abs(audio.getPitch() - Math.pow(2.0D, (note - 12.0D) / 12.0D)) < 0.01);
 	}
 
 	@Test
@@ -2389,8 +2364,7 @@ class PlayerMockTest
 
 	public static Stream<Arguments> provideInstrument()
 	{
-		return Stream.of(
-				Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
+		return Stream.of(Arguments.of(Instrument.CUSTOM_HEAD, Sound.UI_BUTTON_CLICK),
 				Arguments.of(Instrument.PIGLIN, Sound.BLOCK_NOTE_BLOCK_IMITATE_PIGLIN),
 				Arguments.of(Instrument.WITHER_SKELETON, Sound.BLOCK_NOTE_BLOCK_IMITATE_WITHER_SKELETON),
 				Arguments.of(Instrument.DRAGON, Sound.BLOCK_NOTE_BLOCK_IMITATE_ENDER_DRAGON),
@@ -2411,8 +2385,7 @@ class PlayerMockTest
 				Arguments.of(Instrument.IRON_XYLOPHONE, Sound.BLOCK_NOTE_BLOCK_IRON_XYLOPHONE),
 				Arguments.of(Instrument.PLING, Sound.BLOCK_NOTE_BLOCK_PLING),
 				Arguments.of(Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE),
-				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT)
-		);
+				Arguments.of(Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT));
 	}
 
 	@Test
@@ -2501,7 +2474,8 @@ class PlayerMockTest
 	@Test
 	void updateViewedBossBar()
 	{
-		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS, Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
+		BossBar bar = BossBar.bossBar(Component.text("Test"), 1, BossBar.Color.BLUE, BossBar.Overlay.PROGRESS,
+				Collections.singleton(BossBar.Flag.PLAY_BOSS_MUSIC));
 		player.showBossBar(bar);
 
 		assertEquals(1, player.getBossBars().size());
@@ -2604,10 +2578,8 @@ class PlayerMockTest
 	@Test
 	void sendMessage_StoredAsComponent()
 	{
-		net.kyori.adventure.text.TextComponent comp = Component.text()
-				.content("hi")
-				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
-				.build();
+		net.kyori.adventure.text.TextComponent comp = Component.text().content("hi")
+				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
 		player.sendMessage(comp);
 		player.assertSaid(comp);
 	}
@@ -2616,7 +2588,8 @@ class PlayerMockTest
 	void sendMessage_GivenNullComponentMessage()
 	{
 		Identity identity = Identity.nil();
-		NullPointerException e = assertThrows(NullPointerException.class, () -> player.sendMessage(identity, null, MessageType.CHAT));
+		NullPointerException e = assertThrows(NullPointerException.class,
+				() -> player.sendMessage(identity, null, MessageType.CHAT));
 		assertEquals("input", e.getMessage());
 	}
 
@@ -2667,13 +2640,8 @@ class PlayerMockTest
 		@Test
 		void sendMessage_GivenColoredMessage()
 		{
-			BaseComponent message = new ComponentBuilder()
-					.append("Hello ")
-					.color(ChatColor.RED)
-					.append("world!")
-					.color(ChatColor.DARK_AQUA)
-					.bold(true)
-					.build();
+			BaseComponent message = new ComponentBuilder().append("Hello ").color(ChatColor.RED).append("world!")
+					.color(ChatColor.DARK_AQUA).bold(true).build();
 			player.spigot().sendMessage(message);
 			player.assertSaid("\u00A7cHello \u00A73\u00A7lworld!");
 		}
@@ -2697,7 +2665,8 @@ class PlayerMockTest
 	@Test
 	void bossBar_updatesViewers()
 	{
-		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+		BossBar bossBar = BossBar.bossBar(Component.text("hello world"), 1, BossBar.Color.RED,
+				BossBar.Overlay.PROGRESS);
 		player.showBossBar(bossBar);
 		assertEquals(bossBar, player.activeBossBars().iterator().next());
 		assertEquals(player, bossBar.viewers().iterator().next());
@@ -2751,7 +2720,8 @@ class PlayerMockTest
 	{
 		player.setLocale(Locale.CHINESE);
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerLocaleChangeEvent.class, event -> event.locale().equals(Locale.CHINESE)));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(PlayerLocaleChangeEvent.class, event -> event.locale().equals(Locale.CHINESE)));
 		assertEquals(Locale.CHINESE, player.locale());
 		assertEquals("zh", player.getLocale());
 	}
@@ -2806,9 +2776,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {
-				0, 1, 2, 3, 4, 5, 10, 200, 3000
-		})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 10, 200, 3000})
 		void givenPossibleValues(int value)
 		{
 			player.setDeathScreenScore(value);
@@ -2828,7 +2797,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			player.setAllowServerListings(value);
@@ -2849,7 +2819,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 9})
 		void givenPossibleValues(int value)
 		{
 			player.setPlayerListOrder(value);
@@ -2858,10 +2829,12 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = { -5, -4, -3, -2, -1 })
+		@ValueSource(ints =
+		{-5, -4, -3, -2, -1})
 		void givenNegativeValues(int value)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setPlayerListOrder(value));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> player.setPlayerListOrder(value));
 			assertEquals("order cannot be negative", e.getMessage());
 		}
 
@@ -3152,7 +3125,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			player.setSleepingIgnored(value);
@@ -3174,7 +3148,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = { -5000, -2500, 0, 2500, 5000 })
+		@ValueSource(longs =
+		{-5000, -2500, 0, 2500, 5000})
 		void givenPossibleValuesWithRelativeTime(long offsetTime)
 		{
 			WorldMock world = server.addSimpleWorld("world");
@@ -3188,7 +3163,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(longs = { -5000, -2500, 0, 2500, 5000 })
+		@ValueSource(longs =
+		{-5000, -2500, 0, 2500, 5000})
 		void givenPossibleValuesWithoutRelativeTime(long offsetTime)
 		{
 			WorldMock world = server.addSimpleWorld("world");
@@ -3275,7 +3251,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValues(boolean value)
 		{
 			player.setHasSeenWinScreen(value);
@@ -3312,7 +3289,8 @@ class PlayerMockTest
 			Entity entity = new CowMock(server, UUID.randomUUID());
 			player.setGameMode(GameMode.SURVIVAL);
 
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setSpectatorTarget(entity));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> player.setSpectatorTarget(entity));
 			assertEquals("Player must be in spectator mode", e.getMessage());
 		}
 
@@ -3329,7 +3307,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = { -1.0F, -0.5F, 0.0F, 0.5F, 1.0F })
+		@ValueSource(floats =
+		{-1.0F, -0.5F, 0.0F, 0.5F, 1.0F})
 		void givenPossibleValue(float value)
 		{
 			player.setFlySpeed(value);
@@ -3338,7 +3317,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(floats = { -1.001F, 1.001F })
+		@ValueSource(floats =
+		{-1.001F, 1.001F})
 		void givenNonPossibleValue(float value)
 		{
 			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> player.setFlySpeed(value));
@@ -3358,7 +3338,8 @@ class PlayerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(booleans = { true, false })
+		@ValueSource(booleans =
+		{true, false})
 		void givenPossibleValue(boolean value)
 		{
 			player.setAffectsSpawning(value);

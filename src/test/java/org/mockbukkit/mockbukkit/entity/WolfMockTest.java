@@ -132,10 +132,7 @@ class WolfMockTest
 
 		public static Stream<Arguments> getWolfVariants()
 		{
-			return RegistryAccess.registryAccess()
-					.getRegistry(RegistryKey.WOLF_VARIANT)
-					.stream()
-					.map(Arguments::of);
+			return RegistryAccess.registryAccess().getRegistry(RegistryKey.WOLF_VARIANT).stream().map(Arguments::of);
 		}
 
 	}
@@ -160,9 +157,7 @@ class WolfMockTest
 
 		public static Stream<Arguments> getWolfSoundVariants()
 		{
-			return RegistryAccess.registryAccess()
-					.getRegistry(RegistryKey.WOLF_SOUND_VARIANT)
-					.stream()
+			return RegistryAccess.registryAccess().getRegistry(RegistryKey.WOLF_SOUND_VARIANT).stream()
 					.map(Arguments::of);
 		}
 

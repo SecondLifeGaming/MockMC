@@ -8,7 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockbukkit.mockbukkit.ServerMock;
 import org.mockbukkit.mockbukkit.inventory.ItemStackMock;
-
 import java.util.UUID;
 
 /**
@@ -16,16 +15,23 @@ import java.util.UUID;
  *
  * @see SchoolableFishMock
  */
-public class SalmonMock extends SchoolableFishMock implements Salmon
+public class SalmonMock extends SchoolableFishMock
+		implements
+			Salmon,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.SalmonBaseMock
 {
 
-	private @NotNull Variant variant = Variant.SMALL;
+	@NotNull
+	private Variant variant = Variant.SMALL;
 
 	/**
-	 * Constructs a new {@link SalmonMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link SalmonMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public SalmonMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -33,19 +39,22 @@ public class SalmonMock extends SchoolableFishMock implements Salmon
 	}
 
 	@Override
-	public @NotNull ItemStack getBaseBucketItem()
+	@NotNull
+	public ItemStack getBaseBucketItem()
 	{
 		return new ItemStackMock(Material.SALMON_BUCKET);
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SALMON;
 	}
 
 	@Override
-	public @NotNull Variant getVariant()
+	@NotNull
+	public Variant getVariant()
 	{
 		return this.variant;
 	}
@@ -56,5 +65,4 @@ public class SalmonMock extends SchoolableFishMock implements Salmon
 		Preconditions.checkArgument(variant != null, "Variant cannot be null");
 		this.variant = variant;
 	}
-
 }

@@ -75,7 +75,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	void getWave_GivenValidUserValue(int expectedValue)
 	{
 		raider.setWave(expectedValue);
@@ -83,7 +84,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+	@ValueSource(ints =
+	{-100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 	void setWave_GivenIllegalUserValue(int expectedValue)
 	{
 		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raider.setWave(expectedValue));
@@ -114,7 +116,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isPatrolLeader_GivenUserValue(boolean expectedValue)
 	{
 		raider.setPatrolLeader(expectedValue);
@@ -129,7 +132,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isCanJoinRaid_GivenUserValue(boolean expectedValue)
 	{
 		raider.setCanJoinRaid(expectedValue);
@@ -144,7 +148,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 })
+	@ValueSource(ints =
+	{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10})
 	void getTicksOutsideRaid_GivenValidUserValue(int expectedValue)
 	{
 		raider.setTicksOutsideRaid(expectedValue);
@@ -152,10 +157,12 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(ints = { -100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1 })
+	@ValueSource(ints =
+	{-100, -10, -9, -8, -7, -6, -5, -4, -3, -2, -1})
 	void setTicksOutsideRaid_GivenIllegalUserValue(int expectedValue)
 	{
-		IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> raider.setTicksOutsideRaid(expectedValue));
+		IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+				() -> raider.setTicksOutsideRaid(expectedValue));
 		assertEquals("ticks must be >= 0", e.getMessage());
 	}
 
@@ -166,7 +173,8 @@ class RaiderMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(booleans = { true, false })
+	@ValueSource(booleans =
+	{true, false})
 	void isCelebrating_GivenUserValue(boolean expectedValue)
 	{
 		raider.setCelebrating(expectedValue);

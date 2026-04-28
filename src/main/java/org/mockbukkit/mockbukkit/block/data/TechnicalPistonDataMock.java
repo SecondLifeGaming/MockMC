@@ -50,7 +50,8 @@ public class TechnicalPistonDataMock extends BlockDataMock implements TechnicalP
 	public void setFacing(final BlockFace blockFace)
 	{
 		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian(), "Invalid face, only cartesian face are allowed for this property!");
+		Preconditions.checkArgument(blockFace.isCartesian(),
+				"Invalid face, only cartesian face are allowed for this property!");
 		this.set(BlockDataKey.FACING, blockFace);
 	}
 
@@ -61,7 +62,8 @@ public class TechnicalPistonDataMock extends BlockDataMock implements TechnicalP
 	}
 
 	@Override
-	@SuppressWarnings({"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
+	@SuppressWarnings(
+	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
 	public @NotNull TechnicalPistonDataMock clone()
 	{
 		return new TechnicalPistonDataMock(this);

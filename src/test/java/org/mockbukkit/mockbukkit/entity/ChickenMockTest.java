@@ -138,10 +138,7 @@ class ChickenMockTest
 
 		public static Stream<Arguments> getChickenVariants()
 		{
-			return RegistryAccess.registryAccess()
-					.getRegistry(RegistryKey.CHICKEN_VARIANT)
-					.stream()
-					.map(Arguments::of);
+			return RegistryAccess.registryAccess().getRegistry(RegistryKey.CHICKEN_VARIANT).stream().map(Arguments::of);
 		}
 
 	}

@@ -11,6 +11,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Art;
 import org.bukkit.BanList;
+import org.bukkit.ban.IpBanList;
 import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
 import org.bukkit.GameEvent;
@@ -142,6 +143,8 @@ import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventCl
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventClassMatcher.hasNotFiredEventInstance;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal"})
 @ExtendWith(MockBukkitExtension.class)
 class ServerMockTest
 {
@@ -158,11 +161,8 @@ class ServerMockTest
 	@Test
 	void createWorld_WorldCreator_unloadWorld()
 	{
-		WorldCreator worldCreator = new WorldCreator("test")
-				.seed(12345)
-				.type(WorldType.FLAT)
-				.environment(World.Environment.NORMAL)
-				.generateStructures(false);
+		WorldCreator worldCreator = new WorldCreator("test").seed(12345).type(WorldType.FLAT)
+				.environment(World.Environment.NORMAL).generateStructures(false);
 		World world = server.createWorld(worldCreator);
 
 		assertEquals(1, server.getWorlds().size());
@@ -335,7 +335,8 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "testcommand", "tc", "othercommand" })
+	@ValueSource(strings =
+	{"testcommand", "tc", "othercommand"})
 	void testPluginCommand(@NotNull String cmd)
 	{
 		MockBukkit.load(TestPlugin.class);
@@ -460,8 +461,8 @@ class ServerMockTest
 	void resetRecipes()
 	{
 		int initialSize = Iterators.size(server.recipeIterator());
-		ShapelessRecipe shapelessRecipe = new ShapelessRecipe(
-				NamespacedKey.fromString("mockbukkit:test_recipe"), ItemStack.of(Material.DIAMOND));
+		ShapelessRecipe shapelessRecipe = new ShapelessRecipe(NamespacedKey.fromString("mockbukkit:test_recipe"),
+				ItemStack.of(Material.DIAMOND));
 		server.addRecipe(shapelessRecipe);
 		int newSize = Iterators.size(server.recipeIterator());
 		assertEquals(initialSize + 1, newSize);
@@ -477,18 +478,15 @@ class ServerMockTest
 	{
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-				"minecraft:bamboo_block",
-				"minecraft:bamboo_door",
-				"minecraft:decorated_pot",
-				"minecraft:gray_bundle"
-		})
+		@ValueSource(strings =
+		{"minecraft:bamboo_block", "minecraft:bamboo_door", "minecraft:decorated_pot", "minecraft:gray_bundle"})
 		void givenValidValues(String expectedKey)
 		{
 			NamespacedKey key = NamespacedKey.fromString(expectedKey);
 			assertNotNull(key);
 
-			@Nullable Recipe actual = server.getRecipe(key);
+			@Nullable
+			Recipe actual = server.getRecipe(key);
 
 			assertNotNull(actual);
 			Keyed actualKeyed = assertInstanceOf(Keyed.class, actual);
@@ -496,16 +494,15 @@ class ServerMockTest
 		}
 
 		@ParameterizedTest
-		@ValueSource(strings = {
-				"minecraft:non_existing_recipe",
-				"other_namespace:bamboo_door"
-		})
+		@ValueSource(strings =
+		{"minecraft:non_existing_recipe", "other_namespace:bamboo_door"})
 		void givenInvalidValues(String expectedKey)
 		{
 			NamespacedKey key = NamespacedKey.fromString(expectedKey);
 			assertNotNull(key);
 
-			@Nullable Recipe actual = server.getRecipe(key);
+			@Nullable
+			Recipe actual = server.getRecipe(key);
 			assertNull(actual);
 		}
 
@@ -520,36 +517,37 @@ class ServerMockTest
 		@Test
 		void givenNullCraftMatrix()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(null, world));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.getCraftingRecipe(null, world));
 			assertEquals("craftingMatrix must not be null", e.getMessage());
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {
-				0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
-		})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15})
 		void givenCraftMatrixWithout9Slots(int itemsAmount)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(new ItemStack[itemsAmount], world));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.getCraftingRecipe(new ItemStack[itemsAmount], world));
 			assertEquals("craftingMatrix must be an array of length 9", e.getMessage());
 		}
 
 		@Test
 		void givenNullWorld()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getCraftingRecipe(new ItemStack[9], null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.getCraftingRecipe(new ItemStack[9], null));
 			assertEquals("world must not be null", e.getMessage());
 		}
 
 		@Test
 		void givenNonExistingRecipe()
 		{
-			ItemStack[] craftingItems = new ItemStack[]{
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),
-			};
-			@Nullable Recipe recipe = server.getCraftingRecipe(craftingItems, world);
+			ItemStack[] craftingItems = new ItemStack[]
+			{ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),};
+			@Nullable
+			Recipe recipe = server.getCraftingRecipe(craftingItems, world);
 
 			assertNull(recipe);
 		}
@@ -557,12 +555,11 @@ class ServerMockTest
 		@Test
 		void givenShapelessRecipe()
 		{
-			ItemStack[] craftingItems = new ItemStack[]{
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
-			};
-			@Nullable Recipe recipe = server.getCraftingRecipe(craftingItems, world);
+			ItemStack[] craftingItems = new ItemStack[]
+			{ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),};
+			@Nullable
+			Recipe recipe = server.getCraftingRecipe(craftingItems, world);
 
 			assertNotNull(recipe);
 			assertEquals(Material.OAK_BUTTON, recipe.getResult().getType());
@@ -579,35 +576,35 @@ class ServerMockTest
 		@Test
 		void givenNullCraftMatrix()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(null, world));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.craftItem(null, world));
 			assertEquals("craftingMatrix must not be null", e.getMessage());
 		}
 
 		@ParameterizedTest
-		@ValueSource(ints = {
-				0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15
-		})
+		@ValueSource(ints =
+		{0, 1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15})
 		void givenCraftMatrixWithout9Slots(int itemsAmount)
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(new ItemStack[itemsAmount], world));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.craftItem(new ItemStack[itemsAmount], world));
 			assertEquals("craftingMatrix must be an array of length 9", e.getMessage());
 		}
 
 		@Test
 		void givenNullWorld()
 		{
-			IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.craftItem(new ItemStack[9], null));
+			IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+					() -> server.craftItem(new ItemStack[9], null));
 			assertEquals("world must not be null", e.getMessage());
 		}
 
 		@Test
 		void givenNonExistingRecipe()
 		{
-			ItemStack[] craftingItems = new ItemStack[]{
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),
-			};
+			ItemStack[] craftingItems = new ItemStack[]
+			{ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.STONE), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.DIAMOND),};
 			ItemStack output = server.craftItem(craftingItems, world);
 
 			assertNotNull(output);
@@ -617,11 +614,9 @@ class ServerMockTest
 		@Test
 		void givenShapelessRecipe()
 		{
-			ItemStack[] craftingItems = new ItemStack[]{
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
-					ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),
-			};
+			ItemStack[] craftingItems = new ItemStack[]
+			{ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.empty(),
+					ItemStack.empty(), ItemStack.empty(), ItemStack.empty(), ItemStack.of(Material.OAK_PLANKS),};
 			ItemStack output = server.craftItem(craftingItems, world);
 
 			assertNotNull(output);
@@ -705,8 +700,8 @@ class ServerMockTest
 		Player player = server.addPlayer();
 		String message = "mockcommand argA argB";
 		assertTrue(server.dispatchCommand(player, message));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
-				message.equalsIgnoreCase(event.getMessage())));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class,
+				event -> message.equalsIgnoreCase(event.getMessage())));
 	}
 
 	@Test
@@ -725,8 +720,8 @@ class ServerMockTest
 		plugin.commandReturns = true;
 		Player player = server.addPlayer();
 		assertTrue(server.dispatchCommand(player, "mockcommand argA argB"));
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class, event ->
-				alteredMessage.equalsIgnoreCase(event.getMessage())));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(PlayerCommandPreprocessEvent.class,
+				event -> alteredMessage.equalsIgnoreCase(event.getMessage())));
 	}
 
 	@Test
@@ -776,11 +771,8 @@ class ServerMockTest
 	}
 
 	@ParameterizedTest
-	@CsvSource({
-			"player, player",
-			"player, PLAYER",
-			"player_other, player",
-	})
+	@CsvSource(
+	{"player, player", "player, PLAYER", "player_other, player",})
 	void getPlayer_NameAndPlayerExists_PlayerFound(@NotNull String actual, @NotNull String expected)
 	{
 		PlayerMock player = new PlayerMock(server, actual);
@@ -884,7 +876,8 @@ class ServerMockTest
 		assertTrue(offlinePlayer.isOnline());
 		assertTrue(onlinePlayer.isOnline());
 
-		// Assert that this is still the same Player (as far as name and uuid are concerned)
+		// Assert that this is still the same Player (as far as name and uuid are
+		// concerned)
 		assertEquals(offlinePlayer.getName(), onlinePlayer.getName());
 		assertEquals(offlinePlayer.getUniqueId(), onlinePlayer.getUniqueId());
 
@@ -989,7 +982,8 @@ class ServerMockTest
 	void reload_ServerLoadEvent_IsCalled()
 	{
 		server.reload();
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ServerLoadEvent.class, event -> event.getType() == ServerLoadEvent.LoadType.RELOAD));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(ServerLoadEvent.class,
+				event -> event.getType() == ServerLoadEvent.LoadType.RELOAD));
 	}
 
 	@Test
@@ -1089,7 +1083,8 @@ class ServerMockTest
 	{
 		MapView mapView = server.createMap(new WorldMock());
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(MapInitializeEvent.class, event -> event.getMap().equals(mapView)));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(MapInitializeEvent.class, event -> event.getMap().equals(mapView)));
 	}
 
 	@Test
@@ -1112,7 +1107,8 @@ class ServerMockTest
 	{
 		server.setWhitelist(true);
 		assertTrue(server.hasWhitelist());
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(WhitelistToggleEvent.class, WhitelistToggleEvent::isEnabled));
 	}
 
 	@Test
@@ -1299,7 +1295,8 @@ class ServerMockTest
 		g.dispose();
 
 		CachedServerIconMock icon = server.loadServerIcon(image);
-		byte[] decodedBase64 = Base64.getDecoder().decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
+		byte[] decodedBase64 = Base64.getDecoder()
+				.decode(icon.getData().replace(CachedServerIconMock.PNG_BASE64_PREFIX, ""));
 		BufferedImage decodedImage = ImageIO.read(new ByteArrayInputStream(decodedBase64));
 
 		for (int x = 0; x < 64; x++)
@@ -1639,13 +1636,15 @@ class ServerMockTest
 	@Test
 	void testCreateStonecutterInventory()
 	{
-		assertInstanceOf(StonecutterInventoryMock.class, server.createInventory(null, InventoryType.STONECUTTER, "", 9));
+		assertInstanceOf(StonecutterInventoryMock.class,
+				server.createInventory(null, InventoryType.STONECUTTER, "", 9));
 	}
 
 	@Test
 	void testCreateCartographyInventory()
 	{
-		assertInstanceOf(CartographyInventoryMock.class, server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
+		assertInstanceOf(CartographyInventoryMock.class,
+				server.createInventory(null, InventoryType.CARTOGRAPHY, "", 9));
 	}
 
 	@Test
@@ -1721,14 +1720,16 @@ class ServerMockTest
 			@Test
 			void givenNullInventoryType()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, null));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, null));
 				assertEquals("InventoryType cannot be null", e.getMessage());
 			}
 
 			@Test
 			void givenNonCreatableInventory()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, InventoryType.CRAFTING));
 				assertEquals("InventoryType.CRAFTING cannot be used to create a inventory", e.getMessage());
 			}
 
@@ -1754,7 +1755,8 @@ class ServerMockTest
 			void givenNonCreatableInventory()
 			{
 				Component title = Component.text("My inventory");
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, title));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, InventoryType.CRAFTING, title));
 				assertEquals("Cannot open an inventory of type  [CRAFTING]", e.getMessage());
 			}
 
@@ -1779,21 +1781,24 @@ class ServerMockTest
 			@Test
 			void givenNullInventoryType()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, null, "My inventory"));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, null, "My inventory"));
 				assertEquals("InventoryType cannot be null", e.getMessage());
 			}
 
 			@Test
 			void givenNullTitle()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CHEST, (String) null));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, InventoryType.CHEST, (String) null));
 				assertEquals("title cannot be null", e.getMessage());
 			}
 
 			@Test
 			void givenNonCreatableInventory()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, InventoryType.CRAFTING, "My inventory"));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, InventoryType.CRAFTING, "My inventory"));
 				assertEquals("InventoryType.CRAFTING cannot be used to create a inventory", e.getMessage());
 			}
 
@@ -1804,7 +1809,8 @@ class ServerMockTest
 		{
 
 			@ParameterizedTest
-			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
+			@ValueSource(ints =
+			{9, 18, 27, 36, 45, 54})
 			void shouldSucceed(int size)
 			{
 				InventoryMock inventory = server.createInventory(null, size);
@@ -1816,8 +1822,10 @@ class ServerMockTest
 			@Test
 			void givenInvalidSize()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15));
-				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, 15));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)",
+						e.getMessage());
 			}
 
 		}
@@ -1827,7 +1835,8 @@ class ServerMockTest
 		{
 
 			@ParameterizedTest
-			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
+			@ValueSource(ints =
+			{9, 18, 27, 36, 45, 54})
 			void shouldSucceed(int size)
 			{
 				InventoryMock inventory = server.createInventory(null, size, Component.text("My inventory"));
@@ -1840,8 +1849,10 @@ class ServerMockTest
 			void givenInvalidSize()
 			{
 				Component title = Component.text("My inventory");
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, title));
-				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, 15, title));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)",
+						e.getMessage());
 			}
 
 		}
@@ -1851,7 +1862,8 @@ class ServerMockTest
 		{
 
 			@ParameterizedTest
-			@ValueSource(ints = { 9, 18, 27, 36, 45, 54 })
+			@ValueSource(ints =
+			{9, 18, 27, 36, 45, 54})
 			void shouldSucceed(int size)
 			{
 				InventoryMock inventory = server.createInventory(null, size, "My inventory");
@@ -1863,8 +1875,10 @@ class ServerMockTest
 			@Test
 			void givenInvalidSize()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.createInventory(null, 15, "My inventory"));
-				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)", e.getMessage());
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.createInventory(null, 15, "My inventory"));
+				assertEquals("Size for custom inventory must be a multiple of 9 between 9 and 54 slots (got 15)",
+						e.getMessage());
 			}
 
 		}
@@ -1875,10 +1889,8 @@ class ServerMockTest
 			@Override
 			public Stream<? extends Arguments> provideArguments(ExtensionContext context)
 			{
-				return Stream.of(InventoryType.values())
-						.filter(InventoryType::isCreatable)
-						.filter(type -> !InventoryType.SMITHING_NEW.equals(type))
-						.map(Arguments::of);
+				return Stream.of(InventoryType.values()).filter(InventoryType::isCreatable)
+						.filter(type -> !InventoryType.SMITHING_NEW.equals(type)).map(Arguments::of);
 			}
 
 		}
@@ -1911,24 +1923,10 @@ class ServerMockTest
 		assertEquals("Test", server.getMotd());
 	}
 
-	@ValueSource(classes = {
-			Art.class,
-			Attribute.class,
-			Biome.class,
-			Enchantment.class,
-			EntityType.class,
-			Fluid.class,
-			Frog.Variant.class,
-			KeyedBossBar.class,
-			LootTables.class,
-			Material.class,
-			MemoryKey.class,
-			PotionEffectType.class,
-			Sound.class,
-			Statistic.class,
-			Villager.Profession.class,
-			Villager.Type.class,
-	})
+	@ValueSource(classes =
+	{Art.class, Attribute.class, Biome.class, Enchantment.class, EntityType.class, Fluid.class, Frog.Variant.class,
+			KeyedBossBar.class, LootTables.class, Material.class, MemoryKey.class, PotionEffectType.class, Sound.class,
+			Statistic.class, Villager.Profession.class, Villager.Type.class,})
 	@ParameterizedTest
 	void getRegistry_ValidType_HasValues(Class<? extends Keyed> clazz)
 	{
@@ -1956,14 +1954,9 @@ class ServerMockTest
 
 	public static Stream<Arguments> testGetTicksPerSpawnsArguments()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 1),
-				Arguments.of(SpawnCategory.ANIMAL, 400),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
-				Arguments.of(SpawnCategory.AMBIENT, 1),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1)
-		);
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 1), Arguments.of(SpawnCategory.ANIMAL, 400),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 1), Arguments.of(SpawnCategory.WATER_ANIMAL, 1),
+				Arguments.of(SpawnCategory.AMBIENT, 1), Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 1));
 	}
 
 	@Test
@@ -2023,14 +2016,9 @@ class ServerMockTest
 
 	public static Stream<Arguments> getSpawnLimitArguments()
 	{
-		return Stream.of(
-				Arguments.of(SpawnCategory.MONSTER, 70),
-				Arguments.of(SpawnCategory.ANIMAL, 10),
-				Arguments.of(SpawnCategory.WATER_AMBIENT, 20),
-				Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
-				Arguments.of(SpawnCategory.AMBIENT, 15),
-				Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5)
-		);
+		return Stream.of(Arguments.of(SpawnCategory.MONSTER, 70), Arguments.of(SpawnCategory.ANIMAL, 10),
+				Arguments.of(SpawnCategory.WATER_AMBIENT, 20), Arguments.of(SpawnCategory.WATER_ANIMAL, 5),
+				Arguments.of(SpawnCategory.AMBIENT, 15), Arguments.of(SpawnCategory.WATER_UNDERGROUND_CREATURE, 5));
 	}
 
 	@Test
@@ -2085,9 +2073,9 @@ class ServerMockTest
 	void testBanIP()
 	{
 		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
-		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+		assertFalse(((IpBanList) server.getBanList(BanList.Type.IP)).isBanned(address));
 		server.banIP(address);
-		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+		assertTrue(((IpBanList) server.getBanList(BanList.Type.IP)).isBanned(address));
 	}
 
 	@Test
@@ -2101,10 +2089,10 @@ class ServerMockTest
 	{
 		InetAddress address = InetAddresses.fromInteger(ThreadLocalRandom.current().nextInt());
 		server.banIP(address);
-		assertTrue(server.getBanList(BanList.Type.IP).isBanned(address));
+		assertTrue(((IpBanList) server.getBanList(BanList.Type.IP)).isBanned(address));
 
 		server.unbanIP(address);
-		assertFalse(server.getBanList(BanList.Type.IP).isBanned(address));
+		assertFalse(((IpBanList) server.getBanList(BanList.Type.IP)).isBanned(address));
 	}
 
 	@Test
@@ -2199,8 +2187,7 @@ class ServerMockTest
 	void getPauseWhenEmptyTime_default()
 	{
 		assertThat("World pause time when no players are online should be 60 ticks (3 seconds)",
-				server.getPauseWhenEmptyTime(),
-				is(60));
+				server.getPauseWhenEmptyTime(), is(60));
 	}
 
 	@Test
@@ -2208,8 +2195,7 @@ class ServerMockTest
 	{
 		assertDoesNotThrow(() -> server.setPauseWhenEmptyTime(100));
 		assertThat("getPauseWhenEmptyTime should return the set value of 100 ticks (5 seconds)",
-				getPauseWhenEmptyTime(),
-				is(100));
+				getPauseWhenEmptyTime(), is(100));
 
 	}
 
@@ -2224,7 +2210,8 @@ class ServerMockTest
 			@Test
 			void givenValidBlockTag()
 			{
-				Tag<Material> stoneBrickTag = server.getTag(Tag.REGISTRY_BLOCKS, Tag.STONE_BRICKS.getKey(), Material.class);
+				Tag<Material> stoneBrickTag = server.getTag(Tag.REGISTRY_BLOCKS, Tag.STONE_BRICKS.getKey(),
+						Material.class);
 
 				assertNotNull(stoneBrickTag);
 				assertTrue(stoneBrickTag.isTagged(Material.CHISELED_STONE_BRICKS));
@@ -2238,8 +2225,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_BLOCKS,
-						Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_BLOCKS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Block namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
 			}
 
@@ -2265,7 +2252,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ITEMS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_ITEMS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Item namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
 			}
 
@@ -2290,7 +2278,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_FLUIDS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_FLUIDS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Fluid namespace (org.bukkit.entity.EntityType) must have fluid type", e.getMessage());
 			}
 
@@ -2303,7 +2292,8 @@ class ServerMockTest
 			@Test
 			void givenValidItem()
 			{
-				Tag<EntityType> entityTypeTag = server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.ENTITY_TYPES_ARROWS.getKey(), EntityType.class);
+				Tag<EntityType> entityTypeTag = server.getTag(Tag.REGISTRY_ENTITY_TYPES,
+						Tag.ENTITY_TYPES_ARROWS.getKey(), EntityType.class);
 
 				assertNotNull(entityTypeTag);
 				assertTrue(entityTypeTag.isTagged(EntityType.ARROW));
@@ -2315,7 +2305,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
 				assertEquals("Entity type namespace (org.bukkit.Material) must have entity type", e.getMessage());
 			}
 
@@ -2328,7 +2319,8 @@ class ServerMockTest
 			@Test
 			void givenValidItem()
 			{
-				Tag<GameEvent> gameEventTag = server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.GAME_EVENT_ALLAY_CAN_LISTEN.getKey(), GameEvent.class);
+				Tag<GameEvent> gameEventTag = server.getTag(Tag.REGISTRY_GAME_EVENTS,
+						Tag.GAME_EVENT_ALLAY_CAN_LISTEN.getKey(), GameEvent.class);
 
 				assertNotNull(gameEventTag);
 				assertTrue(gameEventTag.isTagged(GameEvent.NOTE_BLOCK_PLAY));
@@ -2339,7 +2331,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
 			}
 
@@ -2352,7 +2345,8 @@ class ServerMockTest
 			@Test
 			void givenValidItem()
 			{
-				Tag<DamageType> tag = server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.getKey(), DamageType.class);
+				Tag<DamageType> tag = server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES,
+						DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL.getKey(), DamageType.class);
 
 				assertNotNull(tag);
 				assertTrue(tag.isTagged(DamageType.OUT_OF_WORLD));
@@ -2363,7 +2357,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server
+						.getTag(DamageTypeTags.REGISTRY_DAMAGE_TYPES, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Damage type namespace must have DamageType type", e.getMessage());
 			}
 
@@ -2391,7 +2386,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_BLOCKS, EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTags(Tag.REGISTRY_BLOCKS, EntityType.class));
 				assertEquals("Block namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
 			}
 
@@ -2413,7 +2409,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_ITEMS, EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTags(Tag.REGISTRY_ITEMS, EntityType.class));
 				assertEquals("Item namespace (org.bukkit.entity.EntityType) must have material type", e.getMessage());
 			}
 
@@ -2435,7 +2432,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTags(Tag.REGISTRY_FLUIDS, EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTags(Tag.REGISTRY_FLUIDS, EntityType.class));
 				assertEquals("Fluid namespace (org.bukkit.entity.EntityType) must have fluid type", e.getMessage());
 			}
 
@@ -2448,7 +2446,8 @@ class ServerMockTest
 			@Test
 			void givenValidItem()
 			{
-				@NotNull Iterable<Tag<EntityType>> entityTypeTag = server.getTags(Tag.REGISTRY_ENTITY_TYPES, EntityType.class);
+				@NotNull
+				Iterable<Tag<EntityType>> entityTypeTag = server.getTags(Tag.REGISTRY_ENTITY_TYPES, EntityType.class);
 
 				assertNotNull(entityTypeTag);
 				assertTrue(35 < Iterables.size(entityTypeTag));
@@ -2457,7 +2456,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_ENTITY_TYPES, Tag.STONE_BRICKS.getKey(), Material.class));
 				assertEquals("Entity type namespace (org.bukkit.Material) must have entity type", e.getMessage());
 			}
 
@@ -2479,7 +2479,8 @@ class ServerMockTest
 			@Test
 			void givenInvalidClass()
 			{
-				IllegalArgumentException e = assertThrows(IllegalArgumentException.class, () -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
+				IllegalArgumentException e = assertThrows(IllegalArgumentException.class,
+						() -> server.getTag(Tag.REGISTRY_GAME_EVENTS, Tag.STONE_BRICKS.getKey(), EntityType.class));
 				assertEquals("Game Event namespace must have GameEvent type", e.getMessage());
 			}
 
@@ -2560,6 +2561,7 @@ class TestRecipe implements Recipe
 
 }
 
+@SuppressWarnings("deprecation")
 @ExtendWith(MockBukkitExtension.class)
 class EventDenier implements Listener
 {

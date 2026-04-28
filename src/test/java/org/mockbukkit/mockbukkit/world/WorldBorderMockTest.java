@@ -24,6 +24,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockbukkit.mockbukkit.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockBukkitExtension.class)
 class WorldBorderMockTest
 {
@@ -120,7 +122,10 @@ class WorldBorderMockTest
 	void setSize_Instant_CallsEvent()
 	{
 		worldBorderMock.setSize(100);
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class, event -> event.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE && event.getNewSize() == 100));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class,
+						event -> event.getType() == WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE
+								&& event.getNewSize() == 100));
 	}
 
 	@Test
@@ -128,7 +133,10 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setSize(100, 5);
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class, (e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100 && e.getDuration() == 5000));
+		assertThat(server.getPluginManager(),
+				hasFiredFilteredEvent(WorldBorderBoundsChangeEvent.class,
+						(e) -> e.getType() == WorldBorderBoundsChangeEvent.Type.STARTED_MOVE && e.getNewSize() == 100
+								&& e.getDuration() == 5000));
 	}
 
 	@Test
@@ -205,7 +213,8 @@ class WorldBorderMockTest
 	{
 		worldBorderMock.setCenter(10, 12);
 
-		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderCenterChangeEvent.class, event -> event.getNewCenter().getX() == 10 && event.getNewCenter().getZ() == 12));
+		assertThat(server.getPluginManager(), hasFiredFilteredEvent(WorldBorderCenterChangeEvent.class,
+				event -> event.getNewCenter().getX() == 10 && event.getNewCenter().getZ() == 12));
 	}
 
 	@Test
@@ -261,8 +270,7 @@ class WorldBorderMockTest
 	@Test
 	void isInside_Null_ExceptionThrown()
 	{
-		assertThrows(NullPointerException.class, () ->
-				worldBorderMock.isInside(null));
+		assertThrows(NullPointerException.class, () -> worldBorderMock.isInside(null));
 	}
 
 	@Test

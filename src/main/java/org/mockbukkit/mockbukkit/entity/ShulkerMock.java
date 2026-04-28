@@ -9,7 +9,6 @@ import org.bukkit.entity.Shulker;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockbukkit.mockbukkit.ServerMock;
-
 import java.util.UUID;
 
 /**
@@ -17,18 +16,26 @@ import java.util.UUID;
  *
  * @see GolemMock
  */
-public class ShulkerMock extends GolemMock implements Shulker
+public class ShulkerMock extends GolemMock
+		implements
+			Shulker,
+			org.mockbukkit.mockbukkit.generated.org.bukkit.entity.ShulkerBaseMock
 {
 
 	private int peekAmount = 0;
+
 	private BlockFace attachedFace = BlockFace.DOWN;
+
 	private DyeColor dyeColor;
 
 	/**
-	 * Constructs a new {@link ShulkerMock} on the provided {@link ServerMock} with a specified {@link UUID}.
+	 * Constructs a new {@link ShulkerMock} on the provided {@link ServerMock} with
+	 * a specified {@link UUID}.
 	 *
-	 * @param server The server to create the entity on.
-	 * @param uuid   The UUID of the entity.
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
 	 */
 	public ShulkerMock(@NotNull ServerMock server, @NotNull UUID uuid)
 	{
@@ -49,7 +56,8 @@ public class ShulkerMock extends GolemMock implements Shulker
 	}
 
 	@Override
-	public @NotNull BlockFace getAttachedFace()
+	@NotNull
+	public BlockFace getAttachedFace()
 	{
 		return this.attachedFace;
 	}
@@ -58,12 +66,14 @@ public class ShulkerMock extends GolemMock implements Shulker
 	public void setAttachedFace(@NotNull BlockFace face)
 	{
 		Preconditions.checkNotNull(face, "face cannot be null");
-		Preconditions.checkArgument(face.isCartesian(), "%s is not a valid block face to attach a shulker to, a cartesian block face is expected", face);
+		Preconditions.checkArgument(face.isCartesian(),
+				"%s is not a valid block face to attach a shulker to, a cartesian block face is expected", face);
 		this.attachedFace = face;
 	}
 
 	@Override
-	public @Nullable DyeColor getColor()
+	@Nullable
+	public DyeColor getColor()
 	{
 		return this.dyeColor;
 	}
@@ -75,27 +85,30 @@ public class ShulkerMock extends GolemMock implements Shulker
 	}
 
 	@Override
-	public @Nullable Sound getAmbientSound()
+	@Nullable
+	public Sound getAmbientSound()
 	{
 		return Sound.ENTITY_SHULKER_AMBIENT;
 	}
 
 	@Override
-	public @Nullable Sound getHurtSound()
+	@Nullable
+	public Sound getHurtSound()
 	{
 		return Sound.ENTITY_SHULKER_HURT;
 	}
 
 	@Override
-	public @Nullable Sound getDeathSound()
+	@Nullable
+	public Sound getDeathSound()
 	{
 		return Sound.ENTITY_SHULKER_DEATH;
 	}
 
 	@Override
-	public @NotNull EntityType getType()
+	@NotNull
+	public EntityType getType()
 	{
 		return EntityType.SHULKER;
 	}
-
 }

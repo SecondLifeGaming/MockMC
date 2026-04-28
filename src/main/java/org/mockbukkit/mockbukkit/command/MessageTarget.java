@@ -5,8 +5,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import java.util.Objects;
 
 /**
  * Represents an object that can receive messages.
@@ -41,7 +40,8 @@ public interface MessageTarget
 	/**
 	 * Asserts that a specific message was not received next by the message target.
 	 *
-	 * @param expected The message that should have been received by the target.
+	 * @param expected
+	 *            The message that should have been received by the target.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull Component expected)
@@ -49,18 +49,21 @@ public interface MessageTarget
 		Component comp = nextComponentMessage();
 		if (comp == null)
 		{
-			fail("No more messages were sent");
-		}
-		else
+			throw new AssertionError("No more messages were sent");
+		} else
 		{
-			assertEquals(expected, comp);
+			if (!Objects.equals(expected, comp))
+			{
+				throw new AssertionError(String.format("Expected: %s but was: %s", expected, comp));
+			}
 		}
 	}
 
 	/**
 	 * Asserts that a specific message was not received next by the message target.
 	 *
-	 * @param expected The message that should have been received by the target.
+	 * @param expected
+	 *            The message that should have been received by the target.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull String expected)
@@ -76,7 +79,7 @@ public interface MessageTarget
 	{
 		if (nextComponentMessage() != null)
 		{
-			fail("More messages were available");
+			throw new AssertionError("More messages were available");
 		}
 	}
 

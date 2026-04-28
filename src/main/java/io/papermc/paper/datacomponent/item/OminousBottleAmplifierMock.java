@@ -3,7 +3,8 @@ package io.papermc.paper.datacomponent.item;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 record OminousBottleAmplifierMock(int amplifier) implements OminousBottleAmplifier
 {
 

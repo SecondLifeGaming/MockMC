@@ -5,7 +5,8 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.jspecify.annotations.NullMarked;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ItemDamageFunctionMock(float threshold, float base, float factor) implements ItemDamageFunction
 {
 

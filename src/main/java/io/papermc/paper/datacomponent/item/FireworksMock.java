@@ -9,7 +9,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @NullMarked
-@SuppressWarnings({ "NonExtendableApiUsage", "UnstableApiUsage" })
+@SuppressWarnings(
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 public record FireworksMock(int flightDuration, List<FireworkEffect> effects) implements Fireworks
 {
 
@@ -23,7 +24,8 @@ public record FireworksMock(int flightDuration, List<FireworkEffect> effects) im
 		@Override
 		public Builder flightDuration(@IntRange(from = 0L, to = 255L) int duration)
 		{
-			Preconditions.checkArgument(duration >= 0 && duration <= 255, "duration must be an unsigned byte ([%s, %s]), was %s", 0, 255, duration);
+			Preconditions.checkArgument(duration >= 0 && duration <= 255,
+					"duration must be an unsigned byte ([%s, %s]), was %s", 0, 255, duration);
 			this.duration = duration;
 			return this;
 		}
@@ -31,12 +33,8 @@ public record FireworksMock(int flightDuration, List<FireworkEffect> effects) im
 		@Override
 		public Builder addEffect(FireworkEffect effect)
 		{
-			Preconditions.checkArgument(
-					this.effects.size() + 1 <= MAX_EXPLOSIONS,
-					"Cannot have more than %s effects, had %s",
-					MAX_EXPLOSIONS,
-					this.effects.size() + 1
-			);
+			Preconditions.checkArgument(this.effects.size() + 1 <= MAX_EXPLOSIONS,
+					"Cannot have more than %s effects, had %s", MAX_EXPLOSIONS, this.effects.size() + 1);
 			this.effects.add(effect);
 			return this;
 		}
@@ -44,12 +42,8 @@ public record FireworksMock(int flightDuration, List<FireworkEffect> effects) im
 		@Override
 		public Builder addEffects(List<FireworkEffect> effects)
 		{
-			Preconditions.checkArgument(
-					this.effects.size() + effects.size() <= MAX_EXPLOSIONS,
-					"Cannot have more than %s effects, had %s",
-					MAX_EXPLOSIONS,
-					this.effects.size() + effects.size()
-			);
+			Preconditions.checkArgument(this.effects.size() + effects.size() <= MAX_EXPLOSIONS,
+					"Cannot have more than %s effects, had %s", MAX_EXPLOSIONS, this.effects.size() + effects.size());
 			this.effects.addAll(effects);
 			return this;
 		}

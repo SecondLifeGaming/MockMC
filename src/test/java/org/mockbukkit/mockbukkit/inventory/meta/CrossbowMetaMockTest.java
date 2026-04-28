@@ -95,7 +95,8 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_SetsList()
 	{
-		meta.setChargedProjectiles(List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
+		meta.setChargedProjectiles(
+				List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
 
 		assertEquals(2, meta.getChargedProjectiles().size());
 	}
@@ -105,7 +106,8 @@ class CrossbowMetaMockTest
 	{
 		meta.addChargedProjectile(new ItemStackMock(Material.FIREWORK_ROCKET));
 
-		meta.setChargedProjectiles(List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
+		meta.setChargedProjectiles(
+				List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.FIREWORK_ROCKET)));
 
 		assertEquals(2, meta.getChargedProjectiles().size());
 	}
@@ -113,27 +115,24 @@ class CrossbowMetaMockTest
 	@Test
 	void setChargedProjectiles_AcceptsAllArrows()
 	{
-		assertDoesNotThrow(() -> meta.setChargedProjectiles(List.of(
-				new ItemStackMock(Material.FIREWORK_ROCKET),
-				new ItemStackMock(Material.ARROW),
-				new ItemStackMock(Material.TIPPED_ARROW),
-				new ItemStackMock(Material.SPECTRAL_ARROW)
-		)));
+		assertDoesNotThrow(() -> meta.setChargedProjectiles(
+				List.of(new ItemStackMock(Material.FIREWORK_ROCKET), new ItemStackMock(Material.ARROW),
+						new ItemStackMock(Material.TIPPED_ARROW), new ItemStackMock(Material.SPECTRAL_ARROW))));
 	}
 
 	@Test
 	void setChargedProjectiles_NullItem_ThrowsException()
 	{
 		// List#of doesn't accept null values.
-		assertThrowsExactly(IllegalArgumentException.class, () ->
-				meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> meta.setChargedProjectiles(Arrays.asList(new ItemStackMock(Material.FIREWORK_ROCKET), null)));
 	}
 
 	@Test
 	void setChargedProjectiles_NotArrow_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () ->
-				meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE))));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> meta.setChargedProjectiles(List.of(new ItemStackMock(Material.STONE))));
 	}
 
 	@Test
@@ -174,8 +173,8 @@ class CrossbowMetaMockTest
 	@Test
 	void addChargedProjectile_NotArrow_ThrowsException()
 	{
-		assertThrowsExactly(IllegalArgumentException.class, () ->
-				meta.addChargedProjectile(new ItemStackMock(Material.STONE)));
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> meta.addChargedProjectile(new ItemStackMock(Material.STONE)));
 	}
 
 	@Test
