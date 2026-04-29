@@ -17,20 +17,20 @@ component_management:
     - component_id: entities  # this is an identifier that should not be changed
       name: entities  # this is a display name, and can be changed freely
       paths:
-        - src/main/java/be/seeseemelk/mockbukkit/entity/**
+        - src/main/java/org/mockmc/mockmc/entity/**
     - component_id: block
       name: block
       paths:
-        - src/main/java/be/seeseemelk/mockbukkit/block/**
+        - src/main/java/org/mockmc/mockmc/block/**
     - component_id: inventory
       name: inventory
       paths:
-        - src/main/java/be/seeseemelk/mockbukkit/inventory/**
+        - src/main/java/org/mockmc/mockmc/inventory/**
     - component_id: world
       name: world
       paths:
-        - src/main/java/be/seeseemelk/mockbukkit/WorldMock.java
+        - src/main/java/org/mockmc/mockmc/WorldMock.java
     - component_id: server
       name: server
       paths:
-        - src/main/java/be/seeseemelk/mockbukkit/ServerMock.java
+        - src/main/java/org/mockmc/mockmc/ServerMock.java

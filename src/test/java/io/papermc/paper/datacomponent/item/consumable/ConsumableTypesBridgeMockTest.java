@@ -5,13 +5,13 @@ import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockmc.mockmc.MockMCExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SuppressWarnings("UnstableApiUsage")
-@ExtendWith(MockBukkitExtension.class)
+@ExtendWith(MockMCExtension.class)
 class ConsumableTypesBridgeMockTest
 {
 

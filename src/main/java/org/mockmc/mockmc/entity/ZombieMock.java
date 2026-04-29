@@ -1,0 +1,173 @@
+package org.mockmc.mockmc.entity;
+
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.Zombie;
+import org.bukkit.entity.ZombieVillager;
+import org.jetbrains.annotations.NotNull;
+import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.entity.data.EntitySubType;
+import java.util.UUID;
+
+/**
+ * Mock implementation of a {@link Zombie}.
+ *
+ * @see MonsterMock
+ */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class ZombieMock extends MonsterMock
+		implements
+			Zombie,
+			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieBaseMock
+{
+
+	private static final String VILLAGER_OPERATION_NOT_SUPPORTED = "Not supported. Please spawn a new Zombie Villager instead.";
+
+	private boolean baby;
+
+	private boolean converting;
+
+	private int conversionTime;
+
+	/**
+	 * Constructs a new {@link ZombieMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
+	 *
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 */
+	public ZombieMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
+		super(server, uuid);
+	}
+
+	@Override
+	@NotNull
+	public EntityType getType()
+	{
+		return EntityType.ZOMBIE;
+	}
+
+	@Override
+	protected EntitySubType getSubType()
+	{
+		if (isBaby())
+		{
+			return EntitySubType.BABY;
+		}
+		return super.getSubType();
+	}
+
+	@Override
+	public boolean isVillager()
+	{
+		return this instanceof ZombieVillager;
+	}
+
+	@Override
+	public void setVillager(boolean villager)
+	{
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
+	}
+
+	@Override
+	public void setVillagerProfession(Villager.Profession profession)
+	{
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
+	}
+
+	@Override
+	public Villager.Profession getVillagerProfession()
+	{
+		// The CraftBukkit implementation returns null here, but throwing an exception
+		// is more fitting.
+		throw new UnsupportedOperationException(VILLAGER_OPERATION_NOT_SUPPORTED);
+	}
+
+	@Override
+	public boolean isConverting()
+	{
+		return this.converting;
+	}
+
+	@Override
+	public int getConversionTime()
+	{
+		return this.conversionTime;
+	}
+
+	@Override
+	public void setConversionTime(int conversionTime)
+	{
+		this.conversionTime = conversionTime;
+	}
+
+	@Override
+	public int getAge()
+	{
+		return this.isBaby() ? -1 : 0;
+	}
+
+	@Override
+	public void setAge(int age)
+	{
+		this.setBaby(age < 0);
+	}
+
+	@Override
+	public void setAgeLock(boolean lock)
+	{
+		// Does nothing in CraftBukkit.
+	}
+
+	@Override
+	public boolean getAgeLock()
+	{
+		return false;
+	}
+
+	@Override
+	public boolean isBaby()
+	{
+		return this.baby;
+	}
+
+	@Override
+	public void setBaby(boolean baby)
+	{
+		this.baby = baby;
+	}
+
+	@Override
+	public void setBaby()
+	{
+		setBaby(true);
+	}
+
+	@Override
+	public void setAdult()
+	{
+		setBaby(false);
+	}
+
+	@Override
+	public boolean isAdult()
+	{
+		return !isBaby();
+	}
+
+	@Override
+	public boolean canBreed()
+	{
+		return false;
+	}
+
+	@Override
+	public void setBreed(boolean breed)
+	{
+		// Does nothing in CraftBukkit.
+	}
+}

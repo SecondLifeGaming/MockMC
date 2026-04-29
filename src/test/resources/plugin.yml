@@ -1,5 +1,5 @@
-name: MockBukkitTestPlugin
-main: org.mockbukkit.mockbukkit.plugin.TestPlugin
+name: MockMCTestPlugin
+main: org.mockmc.mockmc.plugin.TestPlugin
 version: 0.1.0
 permissions:
   permission.op:

@@ -2,7 +2,7 @@ package org.bukkit.command;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockmc.mockmc.MockMCExtension;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@ExtendWith(MockBukkitExtension.class)
+@ExtendWith(MockMCExtension.class)
 class PluginCommandUtilsTest
 {
 

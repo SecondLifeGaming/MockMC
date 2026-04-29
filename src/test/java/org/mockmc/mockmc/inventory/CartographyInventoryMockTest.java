@@ -1,0 +1,33 @@
+package org.mockmc.mockmc.inventory;
+
+import org.bukkit.inventory.InventoryHolder;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockmc.mockmc.MockMCExtension;
+
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
+@ExtendWith(MockMCExtension.class)
+class CartographyInventoryMockTest
+{
+
+	private CartographyInventoryMock inventory;
+
+	@BeforeEach
+	void setUp()
+	{
+		inventory = new CartographyInventoryMock((InventoryHolder) null);
+	}
+
+	@Test
+	void testGetSnapshot()
+	{
+		InventoryMock snapshot = inventory.getSnapshot();
+
+		assertInstanceOf(CartographyInventoryMock.class, snapshot);
+		assertNotSame(inventory, snapshot);
+	}
+
+}

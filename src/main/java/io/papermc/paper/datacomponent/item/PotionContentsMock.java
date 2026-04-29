@@ -7,7 +7,7 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.exception.UnimplementedOperationException;
 
 import java.util.ArrayList;
 import java.util.List;

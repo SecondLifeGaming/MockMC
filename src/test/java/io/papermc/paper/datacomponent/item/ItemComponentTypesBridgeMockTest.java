@@ -22,8 +22,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
+import org.mockmc.mockmc.MockMCExtension;
+import org.mockmc.mockmc.profile.PlayerProfileMock;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("UnstableApiUsage")
-@ExtendWith(MockBukkitExtension.class)
+@ExtendWith(MockMCExtension.class)
 class ItemComponentTypesBridgeMockTest
 {
 

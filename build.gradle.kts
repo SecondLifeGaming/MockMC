@@ -7,18 +7,19 @@ plugins {
 	id("com.vanniktech.maven.publish") version "0.36.0"
 	id("net.kyori.blossom") version "2.2.0"
 	id("com.diffplug.spotless") version "7.0.2"
+	id("signing")
 }
 
-group = "org.mockbukkit.mockbukkit"
+group = "io.github.secondlifegaming"
 version = getFullVersion()
 
 checkstyle {
-	toolVersion = "13.4.0"
+	toolVersion = "13.4.1"
 }
 
 tasks.withType<Checkstyle> {
-	enabled = false
 	exclude("**/generated/**")
+	exclude("io/papermc/**")
 }
 
 spotless {
@@ -78,7 +79,7 @@ dependencies {
 tasks {
 	processResources {
 		val props = mapOf(
-			"mockBukkitVersion" to getFullVersion(),
+			"mockMCVersion" to getFullVersion(),
 			"paperApiFullVersion" to project.property("paper.api.full-version").toString(),
 			"paperApiVersion" to project.property("paper.api.version").toString(),
 			"buildTime" to System.currentTimeMillis().toString(),
@@ -87,17 +88,17 @@ tasks {
 			"buildNumber" to (System.getenv("GITHUB_RUN_NUMBER") ?: "")
 		)
 		inputs.properties(props)
-		filesMatching("mockbukkit-build.properties") {
+		filesMatching("mockmc-build.properties") {
 			expand(props)
 		}
 	}
 	jar {
 		manifest {
 			attributes(
-				"Automatic-Module-Name" to "org.mockbukkit.mockbukkit",
+				"Automatic-Module-Name" to "org.mockmc.mockmc",
 				"Paper-Version" to project.property("paper.api.full-version").toString(),
 				"Paper-API-Version" to project.property("paper.api.version").toString(),
-				"MockBukkit-Version" to getFullVersion()
+				"MockMC-Version" to getFullVersion()
 			)
 		}
 	}
@@ -114,8 +115,8 @@ tasks {
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
 			"-XX:TieredStopAtLevel=1",
-			"-XX:CompileCommand=exclude,org/mockbukkit/mockbukkit/generated/*.*",
-			"-XX:CompileCommand=exclude,org/mockbukkit/mockbukkit/*.*"
+			"-XX:CompileCommand=exclude,org/mockmc/mockmc/generated/*.*",
+			"-XX:CompileCommand=exclude,org/mockmc/mockmc/*.*"
 		)
 	}
 
@@ -133,18 +134,12 @@ tasks {
 				tags(
 					"apiNote:a:API Note:",
 					"implSpec:a:Implementation Requirements:",
-					"implNote:a:Implementation Note:"
+					"implNote:a:Implementation Note:",
+					"mockmc.version:a:MockMC Version:"
 				)
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
-				links("https://jd.papermc.io/paper/${(project.property("paper.api.full-version") as String).split('-')[0]}/")
 			}
-		}
-	}
-
-	publishToMavenLocal {
-		doLast {
-			println("Published to Maven local with version $version")
 		}
 	}
 
@@ -216,52 +211,30 @@ java {
 }
 
 mavenPublishing {
-	coordinates(project.group.toString(), "mockbukkit-v${property("paper.api.version")}", project.version.toString())
+	coordinates(project.group.toString(), "mockmc-v${property("paper.api.version")}", project.version.toString())
 
 	pom {
-		description.set("MockBukkit is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
-		name.set("MockBukkit-v${property("paper.api.version")}")
-		url.set("https://github.com/MockBukkit/MockBukkit")
+		description.set("MockMC is a mocking framework for bukkit to allow the easy unit testing of Bukkit plugins.")
+		name.set("MockMC-v${property("paper.api.version")}")
+		url.set("https://github.com/SecondLifeGaming/MockMC")
 		licenses {
 			license {
 				name.set("MIT License")
-				url.set("https://github.com/MockBukkit/MockBukkit/blob/v${property("paper.api.version")}/LICENSE")
+				url.set("https://github.com/SecondLifeGaming/MockMC/blob/v${property("paper.api.version")}/LICENSE")
 			}
 		}
 		developers {
 			developer {
-				id.set("seeseemelk")
-				name.set("Sebastiaan de Schaetzen")
-				email.set("sebastiaan.de.schaetzen@gmail.com")
-			}
-			developer {
-				id.set("thebusybiscuit")
-				name.set("TheBusyBiscuit")
-			}
-			developer {
-				id.set("insprill")
-				name.set("Pierce Thompson")
-				email.set("pierce@insprill.net")
-			}
-			developer {
-				id.set("thelooter")
-				name.set("Eve Kolb")
-				email.set("me@thelooter.de")
-			}
-			developer {
-				id.set("thorinwasher")
-				name.set("Hjalmar Gunnarsson")
-				email.set("officialhjalmar.gunnarsson@outlook.com")
-			}
-			developer {
-				id.set("4everTheOne")
-				name.set("Afonso Oliveira")
+				id.set("westkevin12")
+				name.set("westkevin12")
+				email.set("west@digitalserverhost.com")
+				url.set("https://github.com/SecondLifeGaming")
 			}
 		}
 		scm {
-			connection.set("scm:git:git://github.com/MockBukkit/MockBukkit.git")
-			developerConnection.set("scm:git:ssh://github.com:MockBukkit/MockBukkit.git")
-			url.set("https://github.com/MockBukkit/MockBukkit/tree/v${property("paper.api.version")}")
+			connection.set("scm:git:git://github.com/SecondLifeGaming/MockMC.git")
+			developerConnection.set("scm:git:ssh://github.com:SecondLifeGaming/MockMC.git")
+			url.set("https://github.com/SecondLifeGaming/MockMC/tree/v${property("paper.api.version")}")
 		}
 	}
 	publishToMavenCentral(true)
@@ -271,13 +244,17 @@ mavenPublishing {
 	}
 }
 
+signing {
+	useGpgCmd()
+}
+
 fun isAction(): Boolean {
-	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "MockBukkit/MockBukkit"
+	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "westkevin12/MockMC"
 }
 
 fun getFullVersion(): String {
 	return if (isAction()) {
-		property("mockbukkit.version") as String
+		property("mockmc.version") as String
 	} else {
 		"dev-${run("git", "rev-parse", "--verify", "--short", "HEAD")}"
 	}
@@ -371,11 +348,11 @@ backendJars.forEach { (name, jarName) ->
 		description = "Runs tests against $name backend"
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
-		
+
 		val defaultClasspath = sourceSets.test.get().runtimeClasspath
 		classpath = defaultClasspath + files("jars/$jarName")
 		testClassesDirs = sourceSets.test.get().output.classesDirs
-		
+
 		doFirst {
 			println("Running tests against backend: $name ($jarName)")
 		}

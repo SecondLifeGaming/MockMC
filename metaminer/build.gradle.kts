@@ -5,7 +5,7 @@ plugins {
 	id("com.gradleup.shadow") version "9.4.1"
 }
 
-group = "org.mockbukkit"
+group = "io.github.secondlifegaming"
 version = "1.2-SNAPSHOT"
 
 repositories {
@@ -50,7 +50,7 @@ tasks {
 	}
 
 	shadowJar {
-		relocate("com.squareup.javapoet", "org.mockbukkit.metaminer.javapoet")
+		relocate("com.squareup.javapoet", "org.mockmc.metaminer.javapoet")
 	}
 
 	build {
@@ -63,7 +63,7 @@ tasks {
 
 	register<JavaExec>("runGenerator") {
 		group = "application"
-		mainClass.set("org.mockbukkit.metaminer.StandaloneRunner")
+		mainClass.set("org.mockmc.metaminer.StandaloneRunner")
 		classpath = sourceSets.main.get().runtimeClasspath
 		args(rootProject.projectDir.absolutePath)
 	}

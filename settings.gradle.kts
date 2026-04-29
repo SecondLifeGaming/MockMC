@@ -1,8 +1,8 @@
 /*
-  This is the name of our MockBukkit artifact, it includes
+  This is the name of our MockMC artifact, it includes
   the API version of Minecraft we are targeting.
 */
-rootProject.name = "MockBukkit-v${extensions.extraProperties.get("paper.api.version")}"
+rootProject.name = "MockMC-v${extensions.extraProperties.get("paper.api.version")}"
 
 include(":extra:TestPlugin")
 include(":metaminer")

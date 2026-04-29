@@ -1,0 +1,133 @@
+package org.mockmc.mockmc.entity;
+
+import com.google.common.base.Preconditions;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Piglin;
+import org.bukkit.event.inventory.InventoryType;
+import org.jetbrains.annotations.NotNull;
+import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.inventory.InventoryMock;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
+
+/**
+ * Mock implementation of a {@link Piglin}.
+ *
+ * @see PiglinAbstractMock
+ */
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class PiglinMock extends PiglinAbstractMock
+		implements
+			Piglin,
+			org.mockmc.mockmc.generated.org.bukkit.entity.PiglinBaseMock
+{
+
+	private final Set<Material> allowedInterestItems = new HashSet<>();
+
+	private final Set<Material> allowedBarteringItems = new HashSet<>();
+
+	private final InventoryMock inventory;
+
+	private boolean canHunt = true;
+
+	private boolean isChargingCrossbow = false;
+
+	/**
+	 * Constructs a new {@link PiglinMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
+	 *
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 */
+	public PiglinMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
+		super(server, uuid);
+		this.inventory = new InventoryMock(null, 8, InventoryType.CHEST);
+	}
+
+	@Override
+	public boolean isAbleToHunt()
+	{
+		return this.canHunt;
+	}
+
+	@Override
+	public void setIsAbleToHunt(boolean flag)
+	{
+		this.canHunt = flag;
+	}
+
+	@Override
+	public boolean addBarterMaterial(@NotNull Material material)
+	{
+		Preconditions.checkArgument(material != null, "material cannot be null");
+		return this.allowedBarteringItems.add(material);
+	}
+
+	@Override
+	public boolean removeBarterMaterial(@NotNull Material material)
+	{
+		Preconditions.checkArgument(material != null, "material cannot be null");
+		return this.allowedBarteringItems.remove(material);
+	}
+
+	@Override
+	public boolean addMaterialOfInterest(@NotNull Material material)
+	{
+		Preconditions.checkArgument(material != null, "material cannot be null");
+		return this.allowedInterestItems.add(material);
+	}
+
+	@Override
+	public boolean removeMaterialOfInterest(@NotNull Material material)
+	{
+		Preconditions.checkArgument(material != null, "material cannot be null");
+		return this.allowedInterestItems.remove(material);
+	}
+
+	@Override
+	@NotNull
+	public Set<Material> getInterestList()
+	{
+		return Collections.unmodifiableSet(this.allowedInterestItems);
+	}
+
+	@Override
+	@NotNull
+	public Set<Material> getBarterList()
+	{
+		return Collections.unmodifiableSet(this.allowedBarteringItems);
+	}
+
+	@Override
+	public void setChargingCrossbow(boolean chargingCrossbow)
+	{
+		this.isChargingCrossbow = chargingCrossbow;
+	}
+
+	@Override
+	public boolean isChargingCrossbow()
+	{
+		return this.isChargingCrossbow;
+	}
+
+	@Override
+	@NotNull
+	public InventoryMock getInventory()
+	{
+		return this.inventory;
+	}
+
+	@Override
+	@NotNull
+	public EntityType getType()
+	{
+		return EntityType.PIGLIN;
+	}
+}

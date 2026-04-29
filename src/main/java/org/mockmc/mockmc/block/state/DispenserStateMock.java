@@ -1,0 +1,106 @@
+package org.mockmc.mockmc.block.state;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.Dispenser;
+import org.bukkit.projectiles.BlockProjectileSource;
+import org.jetbrains.annotations.NotNull;
+import org.mockmc.mockmc.inventory.DispenserInventoryMock;
+import org.mockmc.mockmc.inventory.InventoryMock;
+
+/**
+ * Mock implementation of a {@link Dispenser}.
+ *
+ * @see ContainerStateMock
+ */
+public class DispenserStateMock extends ContainerStateMock
+		implements
+			Dispenser,
+			org.mockmc.mockmc.generated.org.bukkit.block.DispenserBaseMock
+{
+
+	/**
+	 * Constructs a new {@link DispenserStateMock} for the provided
+	 * {@link Material}. Only supports {@link Material#DISPENSER}
+	 *
+	 * @param material
+	 *            The material this state is for.
+	 */
+	public DispenserStateMock(@NotNull Material material)
+	{
+		super(material);
+		checkType(material, Material.DISPENSER);
+	}
+
+	/**
+	 * Constructs a new {@link DispenserStateMock} for the provided {@link Block}.
+	 * Only supports {@link Material#DISPENSER}
+	 *
+	 * @param block
+	 *            The block this state is for.
+	 */
+	protected DispenserStateMock(@NotNull Block block)
+	{
+		super(block);
+		checkType(block, Material.DISPENSER);
+	}
+
+	/**
+	 * Constructs a new {@link DispenserStateMock} by cloning the data from an
+	 * existing one.
+	 *
+	 * @param state
+	 *            The state to clone.
+	 */
+	protected DispenserStateMock(@NotNull DispenserStateMock state)
+	{
+		super(state);
+	}
+
+	@Override
+	@NotNull
+	protected InventoryMock createInventory()
+	{
+		return new DispenserInventoryMock(this);
+	}
+
+	@Override
+	@NotNull
+	public DispenserStateMock getSnapshot()
+	{
+		return new DispenserStateMock(this);
+	}
+
+	@Override
+	@NotNull
+	public DispenserStateMock copy()
+	{
+		return new DispenserStateMock(this);
+	}
+
+	@Override
+	public BlockProjectileSource getBlockProjectileSource()
+	{
+		if (isPlaced())
+		{
+			return new DispenserProjectileSourceMock(this);
+		} else
+		{
+			return null;
+		}
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof DispenserStateMock))
+		{
+			return false;
+		}
+		return super.equals(o);
+	}
+}

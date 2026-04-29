@@ -1,0 +1,137 @@
+package org.mockmc.mockmc.entity;
+
+import org.bukkit.Location;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Wither;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.world.WorldMock;
+import java.util.UUID;
+
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+public class WitherMock extends AbstractBossMock
+		implements
+			Wither,
+			org.mockmc.mockmc.generated.org.bukkit.entity.WitherBaseMock
+{
+
+	// DATA_TARGETS for each head
+	private final LivingEntity[] headsTarget = new LivingEntity[]
+	{null, null, null};
+
+	// DATA_ID_INV
+	private int invulnerableTicks = 0;
+
+	private boolean canPortal = false;
+
+	/**
+	 * Constructs a new {@link WitherMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}.
+	 *
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 */
+	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
+		this(server, uuid, new WorldMock());
+	}
+
+	/**
+	 * Constructs a new {@link WitherMock} on the provided {@link ServerMock} with a
+	 * specified {@link UUID}. Within a {@link WorldMock} in order to determine its
+	 * health with the game difficulty
+	 *
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 * @param worldMock
+	 *            World where the wither is
+	 */
+	public WitherMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull WorldMock worldMock)
+	{
+		super(server, uuid, "Wither");
+		this.setLocation(new Location(worldMock, 0, 0, 0));
+		this.attributes.get(Attribute.MAX_HEALTH).setBaseValue(300.0);
+	}
+
+	@Override
+	public void setTarget(@NotNull Wither.Head head, @Nullable LivingEntity livingEntity)
+	{
+		int index = head.ordinal();
+		headsTarget[index] = livingEntity;
+	}
+
+	@Override
+	@Nullable
+	public LivingEntity getTarget(@NotNull Wither.Head head)
+	{
+		int index = head.ordinal();
+		return headsTarget[index];
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public int getInvulnerabilityTicks()
+	{
+		return this.getInvulnerableTicks();
+	}
+
+	@Override
+	@Deprecated(forRemoval = true)
+	public void setInvulnerabilityTicks(int invulnerabilityTicks)
+	{
+		this.setInvulnerableTicks(invulnerabilityTicks);
+	}
+
+	@Override
+	public boolean isCharged()
+	{
+		return this.getHealth() <= this.getMaxHealth() / 2.0F;
+	}
+
+	@Override
+	public int getInvulnerableTicks()
+	{
+		return invulnerableTicks;
+	}
+
+	@Override
+	public void setInvulnerableTicks(int invulnerableTicks)
+	{
+		this.invulnerableTicks = invulnerableTicks;
+	}
+
+	@Override
+	public boolean canTravelThroughPortals()
+	{
+		return canPortal;
+	}
+
+	@Override
+	public void setCanTravelThroughPortals(boolean canTravelThroughPortals)
+	{
+		canPortal = canTravelThroughPortals;
+	}
+
+	@Override
+	public void enterInvulnerabilityPhase()
+	{
+		this.setInvulnerableTicks(220);
+		this.bossBarMock.setProgress(0.0F);
+		this.setHealth(this.getMaxHealth() / 3.0F);
+	}
+
+	@Override
+	@NotNull
+	public EntityType getType()
+	{
+		return EntityType.WITHER;
+	}
+}

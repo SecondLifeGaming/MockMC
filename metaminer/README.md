@@ -1,6 +1,6 @@
 # MetaMiner
 
-A paper plugin that generate necessary files for MockBukkit.
+A paper plugin that generate necessary files for MockMC.
 
 ## :page_facing_up: Table of contents
 

@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
-import org.mockbukkit.mockbukkit.profile.PlayerProfileMock;
+import org.mockmc.mockmc.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.profile.PlayerProfileMock;
 
 import java.util.Collection;
 import java.util.HashSet;

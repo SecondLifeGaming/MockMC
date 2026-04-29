@@ -1,0 +1,60 @@
+package org.mockmc.mockmc.entity;
+
+import com.google.common.base.Preconditions;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.SizedFireball;
+import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.inventory.ItemStackMock;
+import java.util.UUID;
+
+/**
+ * Mock implementation of a {@link SizedFireball}.
+ *
+ * @see FireballMock
+ */
+public class SizedFireballMock extends FireballMock
+		implements
+			SizedFireball,
+			org.mockmc.mockmc.generated.org.bukkit.entity.SizedFireballBaseMock
+{
+
+	private ItemStack displayItem = new ItemStackMock(Material.FIRE_CHARGE);
+
+	/**
+	 * Constructs a new {@link SizedFireballMock} on the provided {@link ServerMock}
+	 * with a specified {@link UUID}.
+	 *
+	 * @param server
+	 *            The server to create the entity on.
+	 * @param uuid
+	 *            The UUID of the entity.
+	 */
+	public SizedFireballMock(@NotNull ServerMock server, @NotNull UUID uuid)
+	{
+		super(server, uuid);
+	}
+
+	@Override
+	@NotNull
+	public ItemStack getDisplayItem()
+	{
+		return this.displayItem;
+	}
+
+	@Override
+	public void setDisplayItem(@NotNull ItemStack item)
+	{
+		Preconditions.checkNotNull(item, "Item cannot be null");
+		this.displayItem = item;
+	}
+
+	@Override
+	@NotNull
+	public EntityType getType()
+	{
+		return EntityType.FIREBALL;
+	}
+}

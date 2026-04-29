@@ -32,8 +32,8 @@ import org.bukkit.block.structure.StructureRotation;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Criteria;
 import org.bukkit.scoreboard.DisplaySlot;
-import org.mockbukkit.mockbukkit.command.brigadier.argument.PlayerArgumentTypeMock;
-import org.mockbukkit.mockbukkit.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.command.brigadier.argument.PlayerArgumentTypeMock;
+import org.mockmc.mockmc.exception.UnimplementedOperationException;
 
 import java.util.UUID;
 

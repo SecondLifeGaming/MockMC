@@ -1,0 +1,51 @@
+package org.mockmc.mockmc.persistence;
+
+import com.google.common.base.Preconditions;
+import io.papermc.paper.persistence.PersistentDataContainerView;
+import org.bukkit.NamespacedKey;
+import org.bukkit.persistence.PersistentDataAdapterContext;
+import org.bukkit.persistence.PersistentDataType;
+import org.mockmc.mockmc.generated.io.papermc.paper.persistence.PersistentDataContainerViewBaseMock;
+
+public abstract class PersistentDataContainerViewMock
+		implements
+			PersistentDataContainerView,
+			PersistentDataContainerViewBaseMock
+{
+
+	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();
+
+	@Override
+	public <T, Z> boolean has(NamespacedKey key, PersistentDataType<T, Z> type)
+	{
+		Preconditions.checkArgument(key != null, "The NamespacedKey key cannot be null");
+		Preconditions.checkArgument(type != null, "The provided type cannot be null");
+		final Object value = this.get(key, type);
+		return value != null;
+	}
+
+	@Override
+	public boolean has(NamespacedKey key)
+	{
+		return getKeys().contains(key);
+	}
+
+	@Override
+	public <T, Z> Z getOrDefault(NamespacedKey key, PersistentDataType<T, Z> type, Z defaultValue)
+	{
+		Z value = get(key, type);
+		return value != null ? value : defaultValue;
+	}
+
+	@Override
+	public boolean isEmpty()
+	{
+		return getKeys().isEmpty();
+	}
+
+	@Override
+	public PersistentDataAdapterContext getAdapterContext()
+	{
+		return context;
+	}
+}

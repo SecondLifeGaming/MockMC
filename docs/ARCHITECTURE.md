@@ -1,13 +1,13 @@
 # Architecture Baseline
 
 ## Metaminer Engine
-The `metaminer` module is the core engine for generating API stubs and data for MockBukkit.
+The `metaminer` module is the core engine for generating API stubs and data for MockMC.
 - `BaseMockGenerator.java`: The JavaPoet engine that loads the backend and proxy JARs, parses their interfaces, and generates `*BaseMock` classes.
 - `MetaMiner.java`: The Bukkit plugin entry point that orchestrates `DataGenerator` instances, including `BaseMockGenerator`, `MaterialDataGenerator`, `TagDataGenerator`, and others.
 
 ## Generated Mocks
-The generated mocks are placed under `src/main/java/org/mockbukkit/mockbukkit/generated/`. 
-They implement the various upstream interfaces (Paper, Folia, Velocity, Waterfall, Spigot) and provide default implementations for methods to avoid manual stubbing.
+The generated mocks are placed under `src/main/java/org/mockmc/mockmc/generated/`. 
+They implement the various upstream interfaces (Paper, Folia, Velocity, Waterfall, BungeeCord) and provide "Smart Stub" default implementations to ensure 100% API mirror compliance without manual maintenance.
 
 ## Cross-Platform Registration Logic
 Cross-platform APIs are intercepted and registered through `MetaMiner` which uses Java Reflection and ClassLoaders to map types and provide smart-stub behaviors such as:
@@ -16,7 +16,7 @@ Cross-platform APIs are intercepted and registered through `MetaMiner` which use
 - Collections: Return `Collections.emptyList()` or `emptySet()`.
 
 ## Folia Schedulers & Threading
-Folia introduces a unique threading model with its `RegionScheduler`, `GlobalRegionScheduler`, and `AsyncScheduler` under `io.papermc.paper.threadedregions.scheduler`. MockBukkit maps these threading abstractions so tests can seamlessly execute tasks without actual multi-threading overhead:
+Folia introduces a unique threading model with its `RegionScheduler`, `GlobalRegionScheduler`, and `AsyncScheduler` under `io.papermc.paper.threadedregions.scheduler`. MockMC maps these threading abstractions so tests can seamlessly execute tasks without actual multi-threading overhead:
 - Calls to `getServer().getRegionScheduler()` or `getServer().getGlobalRegionScheduler()` are intercepted and routed to mocked implementations.
 - Tasks are typically executed synchronously in the test environment to maintain determinism, bypassing the strict region-locking constraints of Folia while preserving API compatibility.
 

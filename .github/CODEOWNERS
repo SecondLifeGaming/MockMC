@@ -1,22 +1,22 @@
 # Modifications to the source code should be handled by the code review team
-*.java                             @MockBukkit/project-members
-/.readthedocs.yml                  @MockBukkit/project-members
-/jitpack.yml                       @MockBukkit/project-members
-/build.gradle.kts                  @MockBukkit/project-members
-/settings.gradle.kts               @MockBukkit/project-members
-/gradle/                           @MockBukkit/project-members
-/gradlew                           @MockBukkit/project-members
-/gradlew.bat                       @MockBukkit/project-members
-/gradle.properties                 @MockBukkit/project-members
+*.java                             @westkevin12
+/.readthedocs.yml                  @westkevin12
+/jitpack.yml                       @westkevin12
+/build.gradle.kts                  @westkevin12
+/settings.gradle.kts               @westkevin12
+/gradle/                           @westkevin12
+/gradlew                           @westkevin12
+/gradlew.bat                       @westkevin12
+/gradle.properties                 @westkevin12
 
 # Modifications to sensitive files should be reviewed by maintainers
-/.github/                          @MockBukkit/maintainers
-/CONTRIBUTING.md                   @MockBukkit/maintainers
-/README.md                         @MockBukkit/maintainers
-/LICENSE                           @MockBukkit/maintainers
+/.github/                          @westkevin12
+/CONTRIBUTING.md                   @westkevin12
+/README.md                         @westkevin12
+/LICENSE                           @westkevin12
 
 # Modifications to the logo should require be reviewed by maintainers and logo designer.
-/logo.png                          @MockBukkit/maintainers
+/logo.png                          @westkevin12
 
 # This file is handled by Seeseemelk (admins have overwrite access anyway)
-/.github/CODEOWNERS                @seeseemelk
+/.github/CODEOWNERS                @westkevin12

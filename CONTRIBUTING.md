@@ -1,16 +1,16 @@
-Contributing Code to MockBukkit
+Contributing Code to MockMC
 ===============================
 
 ## :toolbox: Software requirements
 
-To get started contributing to MockBukkit, you will need a few things.
+To get started contributing to MockMC, you will need a few things.
 
 - [Git](https://git-scm.com/downloads)
 - [Java 21 or newer](https://adoptium.net/).
 
 ## :wrench: Setting up the project
 
-The first step in contributing to MockBukkit, is to create a fork of it. You can do this by clicking the `Fork` button
+The first step in contributing to MockMC, is to create a fork of it. You can do this by clicking the `Fork` button
 in the top-right of the GitHub repository.
 Once your fork is created, you will need to clone it to your local system.
 
@@ -50,7 +50,7 @@ methods from the Bukkit API.
 
 But documentation does help us review your changes more efficiently and also enables us to maintain these changes in the
 future much more effectively.
-So, when you add new methods or classes - that are specific to MockBukkit - JavaDocs will be mandatory.
+So, when you add new methods or classes - that are specific to MockMC - JavaDocs will be mandatory.
 But adding a short JavaDocs section to any class - including mocks but excluding tests - is also very much appreciated
 ❤️.
 When inside a method, using single-line comments before some statements can also help to improve the readibility of the
@@ -68,7 +68,7 @@ Once you've completed your changes and wrote tests for them, you can test to see
 Gradle `test` task.
 If on Linux, you can run `./gradlew test` from the terminal.
 If on Windows, you can run `gradlew.bat test` from the command prompt.
-If using an IDE like IntelliJ, you can open the Gradle panel, navigate to `MockBukkit-1.xx` -> `Tasks` -> `verification`
+If using an IDE like IntelliJ, you can open the Gradle panel, navigate to `MockMC-1.xx` -> `Tasks` -> `verification`
 , then double click `test`.
 
 ## :hammer_and_wrench: Committing and pushing your changes
@@ -83,9 +83,9 @@ being the name of your branch you created earlier.
 
 To create the pull request, head back to your fork on GitHub, and go to the `Pull Requests` tab, and click
 the `New Pull Request` button.
-On the left, make sure `Base repository` is set to `MockBukkit/MockBukkit` and the branch next to it is set to the
+On the left, make sure `Base repository` is set to `westkevin12/MockMC` and the branch next to it is set to the
 latest version (e.g. `v1.20`).
-On the right, make sure `Head repoitory` is set to `Usename/MockBukkit` with `Username` being your GitHub username and
+On the right, make sure `Head repoitory` is set to `Usename/MockMC` with `Username` being your GitHub username and
 the branch being the new branch you created.
 Now you can click the `Create pull request` button to start creating the pull request.
 
@@ -95,7 +95,7 @@ In the description box, *please* follow the template provided and fill out every
 Make sure `Allow edits and access to secrets by maintainers` is checked, so we can update and make small tweaks to your
 pull request, so you don't have to.
 
-If you scroll down, you will see the diff between MockBukkit's source code, and the code you modified.
+If you scroll down, you will see the diff between MockMC's source code, and the code you modified.
 If everything in their looks alright, you can click the `Create pull request` button to create the pull request!
 
 Initially GitHub will show that the pull request did not pass checks. If you scroll down to the bottom, you will see a

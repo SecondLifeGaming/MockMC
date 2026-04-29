@@ -2,12 +2,12 @@ package io.papermc.paper.datacomponent.item;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockbukkit.mockbukkit.MockBukkitExtension;
+import org.mockmc.mockmc.MockMCExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SuppressWarnings("UnstableApiUsage")
-@ExtendWith(MockBukkitExtension.class)
+@ExtendWith(MockMCExtension.class)
 class AttackRangeMockTest
 {
 

@@ -1,0 +1,113 @@
+package org.mockmc.mockmc.block.state;
+
+import org.bukkit.Material;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.mockmc.mockmc.MockMCExtension;
+import org.mockmc.mockmc.MockMCInject;
+import org.mockmc.mockmc.block.BlockMock;
+import org.mockmc.mockmc.world.WorldMock;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+
+@SuppressWarnings(
+{"deprecation", "removal", "unchecked"})
+@ExtendWith(MockMCExtension.class)
+class BrewingStandStateMockTest extends ContainerStateMockTest
+{
+
+	@MockMCInject
+	private WorldMock world;
+	private BlockMock block;
+	private BrewingStandStateMock brewingStand;
+
+	@Override
+	protected ContainerStateMock instance()
+	{
+		return brewingStand;
+	}
+
+	@BeforeEach
+	void setUp()
+	{
+		this.block = world.getBlockAt(0, 10, 0);
+		this.block.setType(Material.BREWING_STAND);
+		this.brewingStand = new BrewingStandStateMock(this.block);
+	}
+
+	@Test
+	void constructor_Material()
+	{
+		assertDoesNotThrow(() -> new BrewingStandStateMock(Material.BREWING_STAND));
+	}
+
+	@Test
+	void constructor_Material_NotBrewingStand_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class, () -> new BrewingStandStateMock(Material.BEDROCK));
+	}
+
+	@Test
+	void constructor_Block()
+	{
+		assertDoesNotThrow(() -> new BrewingStandStateMock(new BlockMock(Material.BREWING_STAND)));
+	}
+
+	@Test
+	void constructor_Block_NotBrewingStand_ThrowsException()
+	{
+		assertThrowsExactly(IllegalArgumentException.class,
+				() -> new BrewingStandStateMock(new BlockMock(Material.BEDROCK)));
+	}
+
+	@Test
+	void getSnapshot_DifferentInstance()
+	{
+		assertNotSame(brewingStand, brewingStand.getSnapshot());
+	}
+
+	@Test
+	void setBrewingTime()
+	{
+		brewingStand.setBrewingTime(10);
+
+		assertEquals(10, brewingStand.getBrewingTime());
+	}
+
+	@Test
+	void setFuelLevel()
+	{
+		brewingStand.setFuelLevel(10);
+
+		assertEquals(10, brewingStand.getFuelLevel());
+	}
+
+	@Test
+	void blockStateMock_Mock_CorrectType()
+	{
+		assertInstanceOf(BrewingStandStateMock.class, BlockStateMock.mockState(block));
+	}
+
+	@Test
+	void getRecipeBrewTime()
+	{
+		assertEquals(400, brewingStand.getRecipeBrewTime());
+	}
+
+	@ParameterizedTest
+	@ValueSource(ints =
+	{1, 10, 50, 100})
+	void setRecipeBrewTime(int value)
+	{
+		brewingStand.setRecipeBrewTime(value);
+		assertEquals(value, brewingStand.getRecipeBrewTime());
+	}
+
+}
