@@ -9,14 +9,15 @@ import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 import org.mockmc.mockmc.generated.org.bukkit.entity.InteractionBaseMock;
-import org.mockmc.mockmc.generated.org.bukkit.entity.Interaction_PreviousInteractionBaseMock;
+import org.mockmc.mockmc.generated.org.bukkit.entity.InteractionPreviousInteractionBaseMock;
 
 /**
  * Mock implementation of a {@link Interaction}.
  *
  * @see EntityMock
+ * @mockmc.version 1.21-1.0.0
  */
-public class InteractionMock extends EntityMock implements Interaction, InteractionBaseMock
+public class InteractionMock extends EntityMock implements InteractionBaseMock
 {
 
 	private boolean responsive;
@@ -122,7 +123,7 @@ public class InteractionMock extends EntityMock implements Interaction, Interact
 		return EntityType.INTERACTION;
 	}
 
-	public static class PreviousInteractionMock implements PreviousInteraction, Interaction_PreviousInteractionBaseMock
+	public static class PreviousInteractionMock implements InteractionPreviousInteractionBaseMock
 	{
 
 		private final OfflinePlayer player;

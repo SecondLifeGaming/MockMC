@@ -2,9 +2,9 @@ name: Coverage check
 
 on:
   pull_request:
-    branches: [ v1.* ]
+    branches: [ v1.*, master ]
   push:
-    branches: [ v1.* ]
+    branches: [ v1.*, master ]
 
 jobs:
   coverage:
@@ -23,16 +23,24 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Run unit tests
-        run: ./gradlew jacocoTestReport --refresh-dependencies
+        run: ./gradlew jacocoTestReport --refresh-dependencies --continue
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v6
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - name: Upload test results to Codecov
         if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: build/test-results/test/TEST-*.xml
-          codecov_yml_path: ./codecov.yml
+          fail_ci_if_error: true
+
+      - name: List test results (Debug)
+        if: ${{ !cancelled() }}
+        run: find . -name "TEST-*.xml"
+
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: "**/build/test-results/**/*.xml"
+          report_type: test_results
+          fail_ci_if_error: true

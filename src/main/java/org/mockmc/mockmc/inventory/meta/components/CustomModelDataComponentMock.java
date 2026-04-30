@@ -2,6 +2,7 @@ package org.mockmc.mockmc.inventory.meta.components;
 
 import lombok.EqualsAndHashCode;
 import com.google.common.base.Preconditions;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.bukkit.Color;
 import org.bukkit.configuration.serialization.SerializableAs;
@@ -13,15 +14,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Mock implementation of {@link CustomModelDataComponent}.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @Builder
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @NotNullByDefault
 @EqualsAndHashCode
 @SerializableAs("CustomModelData")
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class CustomModelDataComponentMock
 		implements
-			CustomModelDataComponent,
 			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.CustomModelDataComponentBaseMock
 {
 
@@ -36,15 +41,6 @@ public class CustomModelDataComponentMock
 
 	@Builder.Default
 	private List<Color> colors = List.of();
-
-	private CustomModelDataComponentMock(List<Float> floats, List<Boolean> flags, List<String> strings,
-			List<Color> colors)
-	{
-		this.floats = List.copyOf(floats);
-		this.flags = List.copyOf(flags);
-		this.strings = List.copyOf(strings);
-		this.colors = List.copyOf(colors);
-	}
 
 	@Override
 	public List<Float> getFloats()

@@ -41,100 +41,58 @@ public class ElementFactory
 		}
 
 		Class<?> returnType = object.getClass();
-		// Check for primitives
-		if (Boolean.class == returnType)
-		{
-			return PrimitiveElementFactory.toJson((Boolean) object);
-		}
-		if (Number.class.isAssignableFrom(returnType))
-		{
-			return PrimitiveElementFactory.toJson((Number) object);
-		}
-		if (Character.class == returnType)
-		{
-			return PrimitiveElementFactory.toJson((Character) object);
-		}
-		if (String.class == returnType)
-		{
-			return PrimitiveElementFactory.toJson((String) object);
-		}
-		// Check for others
-		if (Component.class.isAssignableFrom(returnType))
-		{
-			return ComponentElementFactory.toJson((Component) object);
-		}
-		// Check for bukkit
-		if (Color.class.isAssignableFrom(returnType))
-		{
-			return ColorElementFactory.toJson((Color) object);
-		}
-		if (ItemStack.class.isAssignableFrom(returnType))
-		{
-			return ItemStackElementFactory.toJson((ItemStack) object);
-		}
-		if (ItemMeta.class.isAssignableFrom(returnType))
-		{
-			return ItemMetaElementFactory.toJson((ItemMeta) object);
-		}
-		if (CustomModelDataComponent.class.isAssignableFrom(returnType))
-		{
-			return CustomModelDataElementFactory.toJson((CustomModelDataComponent) object);
-		}
-		if (RecipeChoice.class.isAssignableFrom(returnType))
-		{
-			return RecipeChoiceElementFactory.toJson((RecipeChoice) object);
-		}
-		if (PotionEffect.class.isAssignableFrom(returnType))
-		{
-			return PotionEffectElementFactory.toJson((PotionEffect) object);
-		}
-		if (EquipmentSlotGroup.class.isAssignableFrom(returnType))
-		{
-			return EquipmentSlotGroupElementFactory.toJson((EquipmentSlotGroup) object);
-		}
-		if (Attributable.class.isAssignableFrom(returnType))
-		{
-			return AttributableElementFactory.toJson((Attributable) object);
-		}
-		if (AttributeInstance.class.isAssignableFrom(returnType))
-		{
-			return AttributeInstanceElementFactory.toJson((AttributeInstance) object);
-		}
-		if (AttributeModifier.class.isAssignableFrom(returnType))
-		{
-			return AttributeModifierElementFactory.toJson((AttributeModifier) object);
-		}
-		if (Keyed.class.isAssignableFrom(returnType))
-		{
-			return KeyedElementFactory.toJson((Keyed) object);
-		}
-		if (ConfigurationSerializable.class.isAssignableFrom(returnType))
-		{
-			return MapElementFactory.toJson(((ConfigurationSerializable) object).serialize());
-		}
-		if (RegistryKeySet.class.isAssignableFrom(returnType))
-		{
-			return RegistryKeySetElementFactory.toJson((RegistryKeySet<?>) object);
-		}
-		// Java variants
-		if (returnType.isEnum())
-		{
-			return EnumElementFactory.toJson((Enum<?>) object);
-		}
-		if (Collection.class.isAssignableFrom(returnType))
-		{
-			return CollectionElementFactory.toJson((Collection<?>) object);
-		}
-		if (Map.class.isAssignableFrom(returnType))
-		{
-			return MapElementFactory.toJson((Map<?, ?>) object);
-		}
-		if (Optional.class.isAssignableFrom(returnType))
-		{
-			return ElementFactory.toJson(((Optional<?>) object).orElse(null));
-		}
+		JsonElement element;
+
+		element = tryPrimitives(returnType, object);
+		if (element != null) return element;
+
+		element = tryBukkitTypes(returnType, object);
+		if (element != null) return element;
+
+		element = tryJavaTypes(returnType, object);
+		if (element != null) return element;
 
 		logUnknownType(returnType);
+		return null;
+	}
+
+	@Nullable
+	private static JsonElement tryPrimitives(Class<?> returnType, Object object)
+	{
+		if (Boolean.class == returnType) return PrimitiveElementFactory.toJson((Boolean) object);
+		if (Number.class.isAssignableFrom(returnType)) return PrimitiveElementFactory.toJson((Number) object);
+		if (Character.class == returnType) return PrimitiveElementFactory.toJson((Character) object);
+		if (String.class == returnType) return PrimitiveElementFactory.toJson((String) object);
+		return null;
+	}
+
+	@Nullable
+	private static JsonElement tryBukkitTypes(Class<?> returnType, Object object)
+	{
+		if (Component.class.isAssignableFrom(returnType)) return ComponentElementFactory.toJson((Component) object);
+		if (Color.class.isAssignableFrom(returnType)) return ColorElementFactory.toJson((Color) object);
+		if (ItemStack.class.isAssignableFrom(returnType)) return ItemStackElementFactory.toJson((ItemStack) object);
+		if (ItemMeta.class.isAssignableFrom(returnType)) return ItemMetaElementFactory.toJson((ItemMeta) object);
+		if (CustomModelDataComponent.class.isAssignableFrom(returnType)) return CustomModelDataElementFactory.toJson((CustomModelDataComponent) object);
+		if (RecipeChoice.class.isAssignableFrom(returnType)) return RecipeChoiceElementFactory.toJson((RecipeChoice) object);
+		if (PotionEffect.class.isAssignableFrom(returnType)) return PotionEffectElementFactory.toJson((PotionEffect) object);
+		if (EquipmentSlotGroup.class.isAssignableFrom(returnType)) return EquipmentSlotGroupElementFactory.toJson((EquipmentSlotGroup) object);
+		if (Attributable.class.isAssignableFrom(returnType)) return AttributableElementFactory.toJson((Attributable) object);
+		if (AttributeInstance.class.isAssignableFrom(returnType)) return AttributeInstanceElementFactory.toJson((AttributeInstance) object);
+		if (AttributeModifier.class.isAssignableFrom(returnType)) return AttributeModifierElementFactory.toJson((AttributeModifier) object);
+		if (Keyed.class.isAssignableFrom(returnType)) return KeyedElementFactory.toJson((Keyed) object);
+		if (ConfigurationSerializable.class.isAssignableFrom(returnType)) return MapElementFactory.toJson(((ConfigurationSerializable) object).serialize());
+		if (RegistryKeySet.class.isAssignableFrom(returnType)) return RegistryKeySetElementFactory.toJson((RegistryKeySet<?>) object);
+		return null;
+	}
+
+	@Nullable
+	private static JsonElement tryJavaTypes(Class<?> returnType, Object object)
+	{
+		if (returnType.isEnum()) return EnumElementFactory.toJson((Enum<?>) object);
+		if (Collection.class.isAssignableFrom(returnType)) return CollectionElementFactory.toJson((Collection<?>) object);
+		if (Map.class.isAssignableFrom(returnType)) return MapElementFactory.toJson((Map<?, ?>) object);
+		if (Optional.class.isAssignableFrom(returnType)) return ElementFactory.toJson(((Optional<?>) object).orElse(null));
 		return null;
 	}
 

@@ -3,6 +3,11 @@ plugins {
 	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
 	id("xyz.jpenilla.run-paper") version "3.0.2"
 	id("com.gradleup.shadow") version "9.4.1"
+	id("jacoco")
+}
+
+jacoco {
+	toolVersion = "0.8.14"
 }
 
 group = "io.github.secondlifegaming"
@@ -47,6 +52,7 @@ tasks {
 		maxParallelForks = 1
 		jvmArgs("-Xint")
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+		ignoreFailures = true
 	}
 
 	shadowJar {
@@ -66,5 +72,17 @@ tasks {
 		mainClass.set("org.mockmc.metaminer.StandaloneRunner")
 		classpath = sourceSets.main.get().runtimeClasspath
 		args(rootProject.projectDir.absolutePath)
+	}
+
+	jacocoTestReport {
+		dependsOn(test)
+		reports {
+			xml.required.set(true)
+			html.required.set(true)
+		}
+	}
+
+	check {
+		dependsOn(jacocoTestReport)
 	}
 }

@@ -18,17 +18,18 @@ import org.mockmc.mockmc.util.AdventureConverters;
 import org.mockmc.mockmc.world.WorldMock;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.UnaryOperator;
+import net.kyori.adventure.text.event.HoverEvent;
 
 /**
  * Mock implementation of a {@link MushroomCow}.
  *
  * @see CowMock
+ * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("java:S110")
 public class MushroomCowMock extends AbstractCowMock
 		implements
-			MushroomCow,
 			org.mockmc.mockmc.generated.org.bukkit.entity.MushroomCowBaseMock
 {
 
@@ -71,6 +72,12 @@ public class MushroomCowMock extends AbstractCowMock
 	}
 
 	@Override
+	public void shear()
+	{
+		this.shear(Sound.Source.PLAYER);
+	}
+
+	@Override
 	public void shear(Sound.@NotNull Source source)
 	{
 		WorldMock world = this.getWorld();
@@ -97,7 +104,7 @@ public class MushroomCowMock extends AbstractCowMock
 		for (int i = 0; i < 5; ++i)
 		{
 			Item item = world.dropItem(location,
-					new ItemStackMock(Material.valueOf(this.getVariant().name() + "_MUSHROOM")));
+					new ItemStackMock(Material.valueOf(this.getVariant().name() + "_MUSHROOM")), null);
 			if (!new EntityDropItemEvent(this, item).callEvent())
 			{
 				item.remove();
@@ -111,4 +118,11 @@ public class MushroomCowMock extends AbstractCowMock
 	{
 		return !this.isDead() && this.isAdult();
 	}
+
+	@Override
+	public HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)
+	{
+		return org.mockmc.mockmc.generated.org.bukkit.entity.MushroomCowBaseMock.super.asHoverEvent(arg0);
+	}
+
 }

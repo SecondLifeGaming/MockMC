@@ -21,6 +21,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Mock implementation of {@link ToolComponent}.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @Builder
 @NotNullByDefault
 @EqualsAndHashCode
@@ -28,7 +33,6 @@ import java.util.Objects;
 @SuppressWarnings("UnstableApiUsage")
 public class ToolComponentMock
 		implements
-			ToolComponent,
 			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.ToolComponentBaseMock
 {
 
@@ -153,8 +157,7 @@ public class ToolComponentMock
 	@SuppressWarnings("UnstableApiUsage")
 	public static class ToolRuleMock
 			implements
-				ToolComponent.ToolRule,
-				org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.ToolComponent_ToolRuleBaseMock
+				org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.ToolComponentToolRuleBaseMock
 	{
 
 		private final Collection<Material> blocks = new ArrayList<>();
@@ -231,10 +234,10 @@ public class ToolComponentMock
 			Map<String, Object> result = new LinkedHashMap<>();
 			var blockKeys = this.blocks.stream().map(Material::getKey).map(NamespacedKey::asString).toList();
 			result.put("blocks", blockKeys);
-			Float speed = this.getSpeed();
-			if (speed != null)
+			Float miningSpeed = this.getSpeed();
+			if (miningSpeed != null)
 			{
-				result.put("speed", speed);
+				result.put("speed", miningSpeed);
 			}
 			Boolean correct = this.isCorrectForDrops();
 			if (correct != null)

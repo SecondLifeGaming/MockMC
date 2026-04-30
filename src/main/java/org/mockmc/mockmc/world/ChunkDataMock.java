@@ -15,13 +15,11 @@ import java.util.Map;
 
 /**
  * Mock implementation of a {@link ChunkGenerator.ChunkData}.
+ *
+ * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class ChunkDataMock
-		implements
-			ChunkGenerator.ChunkData,
-			org.mockmc.mockmc.generated.org.bukkit.generator.ChunkGenerator_ChunkDataBaseMock
+@SuppressWarnings("removal")
+public class ChunkDataMock implements org.mockmc.mockmc.generated.org.bukkit.generator.ChunkGeneratorChunkDataBaseMock
 {
 
 	@NotNull

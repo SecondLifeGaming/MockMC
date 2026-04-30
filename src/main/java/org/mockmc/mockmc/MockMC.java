@@ -16,7 +16,6 @@ import org.mockmc.mockmc.exception.UnmockException;
 import org.mockmc.mockmc.plugin.PluginManagerMock;
 import org.mockmc.mockmc.plugin.PluginMock;
 import org.mockmc.mockmc.plugin.lifecycle.event.LifecycleEventRunnerMock;
-import org.mockmc.mockmc.scheduler.BukkitSchedulerMock;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -415,14 +414,11 @@ public class MockMC
 			// We aren't mocking anyway
 			return;
 		}
-		if (mock.getPluginManager() != null)
-		{
-			mock.getPluginManager().disablePlugins();
-		}
+		mock.getPluginManager().disablePlugins();
 
 		try
 		{
-			((BukkitSchedulerMock) mock.getScheduler()).shutdown();
+			mock.getScheduler().shutdown();
 		} finally
 		{
 			mock.getPluginManager().unload();

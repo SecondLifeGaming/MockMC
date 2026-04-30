@@ -72,7 +72,6 @@ import org.mockmc.mockmc.entity.ItemMock;
 import org.mockmc.mockmc.entity.LivingEntityMock;
 import org.mockmc.mockmc.entity.MobMock;
 import org.mockmc.mockmc.entity.ProjectileMock;
-import org.mockmc.mockmc.exception.UnimplementedOperationException;
 import org.mockmc.mockmc.generator.BiomeProviderMock;
 import org.mockmc.mockmc.metadata.MetadataTable;
 import org.mockmc.mockmc.persistence.PersistentDataContainerMock;
@@ -96,6 +95,8 @@ import java.util.stream.Collectors;
 
 /**
  * Mock implementation of a {@link World}.
+ *
+ * @mockmc.version 1.21-1.0.0
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
@@ -706,15 +707,11 @@ public class WorldMock implements org.mockmc.mockmc.generated.org.bukkit.WorldBa
 		AsyncCatcher.catchOp("chunk unload");
 		ChunkCoordinate chunkCoordinate = new ChunkCoordinate(x, z);
 		ChunkMock chunk = loadedChunks.remove(chunkCoordinate);
-		if (chunk == null)
-		{
-			return true;
-		}
-		if (save)
+		if (chunk != null && save)
 		{
 			savedChunks.put(chunkCoordinate, chunk);
 		}
-		return true;
+		return chunk != null;
 	}
 
 	/**
@@ -795,6 +792,28 @@ public class WorldMock implements org.mockmc.mockmc.generated.org.bukkit.WorldBa
 			boolean randomizeData, @Nullable Consumer<? super T> function) throws IllegalArgumentException
 	{
 		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM, randomizeData, true);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz,
+			@Nullable Consumer<? super T> function) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz,
+			@Nullable CreatureSpawnEvent.SpawnReason reason) throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, null, reason != null ? reason : CreatureSpawnEvent.SpawnReason.CUSTOM);
+	}
+
+	@Override
+	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz,
+			@Nullable CreatureSpawnEvent.SpawnReason reason, @Nullable Consumer<? super T> function)
+			throws IllegalArgumentException
+	{
+		return this.spawn(location, clazz, function, reason != null ? reason : CreatureSpawnEvent.SpawnReason.CUSTOM);
 	}
 
 	@Override
@@ -2082,7 +2101,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.org.bukkit.WorldBa
 		{
 			case NETHER, THE_END -> 256;
 			case NORMAL -> 384;
-			case CUSTOM -> throw new UnimplementedOperationException("We don't have support for Datapacks");
+			case CUSTOM -> throw new IllegalStateException("We don't have support for Datapacks");
 		};
 	}
 
