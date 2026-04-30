@@ -33,11 +33,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+
+/**
+ * Mock implementation of {@link ItemType}.
+ *
+ * @param <M>
+ *            The meta class.
+ * @mockmc.version 1.21-1.0.0
+ */
+@Builder
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@EqualsAndHashCode
 @SuppressWarnings(
 {"UnstableApiUsage", "unchecked"})
 public class ItemTypeMock<M extends ItemMeta>
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.ItemType_TypedBaseMock<M>
+			org.mockmc.mockmc.generated.org.bukkit.inventory.ItemTypeTypedBaseMock<M>
 {
 
 	private final NamespacedKey namespacedKey;
@@ -75,30 +90,6 @@ public class ItemTypeMock<M extends ItemMeta>
 	@NotNull
 	private final Map<DataComponentType, Object> defaultData;
 
-	private ItemTypeMock(NamespacedKey namespacedKey, int maxStackSize, short maxDurability, boolean edible,
-			boolean hasRecord, boolean fuel, @Nullable NamespacedKey blockType, String translationKey,
-			Class<M> metaClass, ItemRarity rarity, CreativeCategory creativeCategory, boolean isCompostable,
-			BigDecimal compostChance, int burnDuration, Set<DataComponentType> defaultDataTypes,
-			Map<DataComponentType, Object> defaultData)
-	{
-		this.namespacedKey = namespacedKey;
-		this.maxStackSize = maxStackSize;
-		this.maxDurability = maxDurability;
-		this.edible = edible;
-		this.hasRecord = hasRecord;
-		this.fuel = fuel;
-		this.blockType = blockType;
-		this.translationKey = translationKey;
-		this.metaClass = metaClass;
-		this.rarity = rarity;
-		this.creativeCategory = creativeCategory;
-		this.isCompostable = isCompostable;
-		this.compostChance = compostChance;
-		this.burnDuration = burnDuration;
-		this.defaultDataTypes = Set.copyOf(defaultDataTypes);
-		this.defaultData = Map.copyOf(defaultData);
-	}
-
 	@ApiStatus.Internal
 	public static ItemType from(JsonObject jsonObject)
 	{
@@ -124,9 +115,12 @@ public class ItemTypeMock<M extends ItemMeta>
 		Class<? extends ItemMeta> metaClass = parseMetaClass(jsonObject);
 		Set<DataComponentType> defaultDataTypes = parseDefaultDataTypes(jsonObject);
 		Map<DataComponentType, Object> defaultData = parseDefaultData(jsonObject);
-		return new ItemTypeMock<>(key, maxStackSize, maxDurability, edible, hasRecord, fuel, blockType, translationKey,
-				metaClass, rarity, creativeCategory, isCompostable, compostChance, burnDuration, defaultDataTypes,
-				defaultData);
+
+		return ItemTypeMock.<ItemMeta>builder().namespacedKey(key).maxStackSize(maxStackSize)
+				.maxDurability(maxDurability).edible(edible).hasRecord(hasRecord).fuel(fuel).blockType(blockType)
+				.translationKey(translationKey).metaClass((Class<ItemMeta>) metaClass).rarity(rarity)
+				.creativeCategory(creativeCategory).isCompostable(isCompostable).compostChance(compostChance)
+				.burnDuration(burnDuration).defaultDataTypes(defaultDataTypes).defaultData(defaultData).build();
 	}
 
 	private static Class<? extends ItemMeta> parseMetaClass(JsonObject jsonObject)
@@ -146,7 +140,7 @@ public class ItemTypeMock<M extends ItemMeta>
 		{
 			String metaClassName = "org.mockmc.mockmc.inventory.meta." + metaClassAsString + "Mock";
 			return (Class<? extends ItemMeta>) Class.forName(metaClassName);
-		} catch (ClassNotFoundException e)
+		} catch (ClassNotFoundException _)
 		{
 			throw new IllegalStateException("Could not find class: " + metaClassAsString);
 		}
@@ -199,45 +193,51 @@ public class ItemTypeMock<M extends ItemMeta>
 	{
 		if (json.isJsonPrimitive())
 		{
-			com.google.gson.JsonPrimitive primitive = json.getAsJsonPrimitive();
-			if (primitive.isNumber())
-			{
-				return primitive.getAsNumber();
-			}
-			if (primitive.isBoolean())
-			{
-				return primitive.getAsBoolean();
-			}
-			if (primitive.isString())
-			{
-				String string = primitive.getAsString();
-				if (string.startsWith("{") && string.endsWith("}"))
-				{
-					try
-					{
-						return GsonComponentSerializer.gson().deserialize(string);
-					} catch (Exception e)
-					{
-						return string;
-					}
-				}
-				return string;
-			}
+			return deserializePrimitiveComponent(json.getAsJsonPrimitive());
 		}
-		// Complex components should use their respective Mock deserialize method if
-		// available
-		// For now, we return the raw map if it's an object
 		if (json.isJsonObject())
 		{
-			// Convert JsonObject to Map
 			return new Gson().fromJson(json, Map.class);
 		}
 		if (json.isJsonArray())
 		{
-			// Convert JsonArray to List
 			return new Gson().fromJson(json, List.class);
 		}
 		return null;
+	}
+
+	@Nullable
+	private static Object deserializePrimitiveComponent(com.google.gson.JsonPrimitive primitive)
+	{
+		if (primitive.isNumber())
+		{
+			return primitive.getAsNumber();
+		}
+		if (primitive.isBoolean())
+		{
+			return primitive.getAsBoolean();
+		}
+		if (primitive.isString())
+		{
+			return deserializeStringComponent(primitive.getAsString());
+		}
+		return null;
+	}
+
+	@NotNull
+	private static Object deserializeStringComponent(String string)
+	{
+		if (string.startsWith("{") && string.endsWith("}"))
+		{
+			try
+			{
+				return GsonComponentSerializer.gson().deserialize(string);
+			} catch (Exception _)
+			{
+				return string;
+			}
+		}
+		return string;
 	}
 
 	@Override
@@ -251,7 +251,7 @@ public class ItemTypeMock<M extends ItemMeta>
 	@NotNull
 	public ItemStack createItemStack(int amount)
 	{
-		return new ItemStackMock(Registry.MATERIAL.get(this.getKey()), amount);
+		return new ItemStackMock(java.util.Objects.requireNonNull(Registry.MATERIAL.get(this.getKey())), amount);
 	}
 
 	@Override

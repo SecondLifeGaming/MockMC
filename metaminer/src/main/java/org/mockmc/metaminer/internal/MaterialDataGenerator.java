@@ -53,144 +53,126 @@ public class MaterialDataGenerator implements DataGenerator
 	private static @NotNull JsonObject createJsonObject()
 	{
 		JsonObject json = new JsonObject();
-
 		Material[] materials = Material.values();
 		Arrays.sort(materials, Comparator.comparing(Enum::name));
 
 		for (Material material : materials)
 		{
-			try
-			{
-				BlockData data = material.createBlockData();
-				String dataString = data.getAsString(false);
-				Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
-				if (!matcher.find())
-				{ // It has no states
-					json.add(material.key().toString(), new JsonObject());
-					continue;
-				}
-				String[] states = matcher.group(1).split(",");
-
-				JsonObject obj = new JsonObject();
-				JsonObject defaultStates = new JsonObject();
-
-				for (String state : states)
-				{
-					String[] state_split = state.split("=");
-					String key = state_split[0].trim();
-					String value = state_split[1].trim();
-					switch (value.toLowerCase())
-					{
-					case "false" -> defaultStates.add(key, new JsonPrimitive(false));
-					case "true" -> defaultStates.add(key, new JsonPrimitive(true));
-					default -> defaultStates.add(key, new JsonPrimitive(value));
-					}
-				}
-
-				JsonObject allowedStates = new JsonObject();
-				extractCustomBlockDataProperties(data, allowedStates);
-				obj.add("allowedStates", allowedStates);
-				obj.add("defaultStates", defaultStates);
-
-				json.add(material.key().toString(), obj);
-			}
-			catch (Exception ignored)
-			{
-			}
+			processMaterial(json, material);
 		}
-
 		return json;
+	}
+
+	private static void processMaterial(JsonObject json, Material material)
+	{
+		try
+		{
+			BlockData data = material.createBlockData();
+			String dataString = data.getAsString(false);
+			Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
+			if (!matcher.find())
+			{
+				json.add(material.key().toString(), new JsonObject());
+				return;
+			}
+
+			JsonObject obj = new JsonObject();
+			obj.add("allowedStates", extractAllowedStates(data));
+			obj.add("defaultStates", parseDefaultStates(matcher.group(1)));
+
+			json.add(material.key().toString(), obj);
+		}
+		catch (Exception _)
+		{
+			// Material does not support BlockData or other extraction error
+		}
+	}
+
+	private static JsonObject extractAllowedStates(BlockData data)
+	{
+		JsonObject allowedStates = new JsonObject();
+		extractCustomBlockDataProperties(data, allowedStates);
+		return allowedStates;
+	}
+
+	private static JsonObject parseDefaultStates(String statesString)
+	{
+		JsonObject defaultStates = new JsonObject();
+		String[] states = statesString.split(",");
+		for (String state : states)
+		{
+			String[] stateSplit = state.split("=");
+			String key = stateSplit[0].trim();
+			String value = stateSplit[1].trim();
+			addStateToResult(defaultStates, key, value);
+		}
+		return defaultStates;
+	}
+
+	private static void addStateToResult(JsonObject obj, String key, String value)
+	{
+		switch (value.toLowerCase())
+		{
+			case "false" -> obj.add(key, new JsonPrimitive(false));
+			case "true" -> obj.add(key, new JsonPrimitive(true));
+			default -> obj.add(key, new JsonPrimitive(value));
+		}
 	}
 
 	private static void extractCustomBlockDataProperties(BlockData data, JsonObject obj)
 	{
-		if (data instanceof Ageable ageable)
-		{
-			obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge()));
-		}
+		extractNumericProperties(data, obj);
+		extractCollectionProperties(data, obj);
+	}
 
-		if (data instanceof AnaloguePowerable analoguePowerable)
-		{
-			obj.addProperty("maxPower", String.valueOf(analoguePowerable.getMaximumPower()));
-		}
-
-		if (data instanceof Sapling sapling)
-		{
-			obj.addProperty("maxStage", String.valueOf(sapling.getMaximumStage()));
-		}
-
+	private static void extractNumericProperties(BlockData data, JsonObject obj)
+	{
+		if (data instanceof Ageable ageable) obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge()));
+		if (data instanceof AnaloguePowerable analoguePowerable) obj.addProperty("maxPower", String.valueOf(analoguePowerable.getMaximumPower()));
+		if (data instanceof Sapling sapling) obj.addProperty("maxStage", String.valueOf(sapling.getMaximumStage()));
 		if (data instanceof Levelled levelled)
 		{
 			obj.addProperty("maxLevel", String.valueOf(levelled.getMaximumLevel()));
 			obj.addProperty("minLevel", String.valueOf(levelled.getMinimumLevel()));
 		}
-
-		if (data instanceof Brushable brushable)
+		if (data instanceof Brushable brushable) obj.addProperty("maxDusted", String.valueOf(brushable.getMaximumDusted()));
+		if (data instanceof Farmland farmland) obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
+		if (data instanceof Hatchable hatchable) obj.addProperty("maxHatch", String.valueOf(hatchable.getMaximumHatch()));
+		if (data instanceof TurtleEgg turtleEgg)
 		{
-			obj.addProperty("maxDusted", String.valueOf(brushable.getMaximumDusted()));
+			obj.addProperty("minEggs", String.valueOf(turtleEgg.getMinimumEggs()));
+			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
 		}
+		if (data instanceof RespawnAnchor respawnAnchor) obj.addProperty("maxCharges", String.valueOf(respawnAnchor.getMaximumCharges()));
+		if (data instanceof ChiseledBookshelf chiseledBookshelf) obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
+		if (data instanceof Leaves leaves)
+		{
+			obj.addProperty("maxDistance", leaves.getMaximumDistance());
+			obj.addProperty("minDistance", leaves.getMinimumDistance());
+		}
+		if (data instanceof Beehive beehive) obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
+		if (data instanceof Cake cake) obj.addProperty("maxBites", cake.getMaximumBites());
+	}
 
+	private static void extractCollectionProperties(BlockData data, JsonObject obj)
+	{
 		if (data instanceof Directional directional)
 		{
 			JsonArray array = new JsonArray();
 			directional.getFaces().stream().map(Enum::name).forEach(array::add);
 			obj.add("faces", array);
 		}
-
 		if (data instanceof MultipleFacing multipleFacing)
 		{
 			JsonArray array = new JsonArray();
 			multipleFacing.getAllowedFaces().stream().map(Enum::name).forEach(array::add);
 			obj.add("faces", array);
 		}
-
-		if (data instanceof Farmland farmland)
-		{
-			obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
-		}
-
-		if (data instanceof Hatchable hatchable)
-		{
-			obj.addProperty("maxHatch", String.valueOf(hatchable.getMaximumHatch()));
-		}
-
-		if (data instanceof TurtleEgg turtleEgg)
-		{
-			obj.addProperty("minEggs", String.valueOf(turtleEgg.getMinimumEggs()));
-			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
-		}
-
-		if (data instanceof RespawnAnchor respawnAnchor)
-		{
-			obj.addProperty("maxCharges", String.valueOf(respawnAnchor.getMaximumCharges()));
-    	}
-
-		if (data instanceof ChiseledBookshelf chiseledBookshelf)
-		{
-			obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
-		}
-
 		if (data instanceof CreakingHeart creakingHeart)
 		{
 			JsonArray array = new JsonArray();
 			creakingHeart.getAxes().stream().map(Enum::name).forEach(array::add);
 			obj.add("axes", array);
-		}
-
-		if (data instanceof Leaves leaves)
-		{
-			obj.addProperty("maxDistance", leaves.getMaximumDistance());
-			obj.addProperty("minDistance", leaves.getMinimumDistance());
-		}
-
-		if (data instanceof Beehive beehive)
-		{
-			obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
-		}
-
-		if (data instanceof Cake cake)
-		{
-			obj.addProperty("maxBites", cake.getMaximumBites());
 		}
 	}
 

@@ -12,13 +12,11 @@ import java.util.Base64;
 
 /**
  * Mock implementation of a {@link PlayerTextures}.
+ *
+ * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class PlayerTexturesMock
-		implements
-			PlayerTextures,
-			org.mockmc.mockmc.generated.org.bukkit.profile.PlayerTexturesBaseMock
+@SuppressWarnings("deprecation")
+public class PlayerTexturesMock implements org.mockmc.mockmc.generated.org.bukkit.profile.PlayerTexturesBaseMock
 {
 
 	private static final String PROPERTY_NAME = "textures";
@@ -89,7 +87,7 @@ public class PlayerTexturesMock
 	public void setSkin(@Nullable URL skinUrl, @Nullable PlayerTextures.SkinModel skinModel)
 	{
 		this.skin = skinUrl;
-		this.skinModel = (skinUrl != null) ? skinModel : SkinModel.CLASSIC;
+		this.skinModel = (skinUrl != null && skinModel != null) ? skinModel : SkinModel.CLASSIC;
 		this.dirty = true;
 		markDirty();
 		setProperty();

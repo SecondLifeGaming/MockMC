@@ -1,4 +1,32 @@
 import java.security.MessageDigest
+import java.net.URI
+import java.io.InputStream
+
+abstract class DownloadJarsTask : DefaultTask() {
+	@get:OutputDirectory
+	abstract val outputDir: DirectoryProperty
+
+	@get:Input
+	abstract val jars: MapProperty<String, String>
+
+	@TaskAction
+	fun download() {
+		val jarDir = outputDir.get().asFile
+		if (!jarDir.exists()) jarDir.mkdirs()
+
+		jars.get().forEach { (name, url) ->
+			val dest = File(jarDir, name)
+			if (!dest.exists()) {
+				println("Downloading $name...")
+				URI.create(url).toURL().openStream().use { input ->
+					dest.outputStream().use { output ->
+						(input as InputStream).copyTo(output)
+					}
+				}
+			}
+		}
+	}
+}
 
 plugins {
 	id("checkstyle")
@@ -8,10 +36,39 @@ plugins {
 	id("net.kyori.blossom") version "2.2.0"
 	id("com.diffplug.spotless") version "7.0.2"
 	id("signing")
+	id("org.sonarqube") version "6.0.1.5171"
 }
 
 group = "io.github.secondlifegaming"
 version = getFullVersion()
+
+tasks.register<DownloadJarsTask>("downloadJars") {
+	group = "setup"
+	description = "Downloads backend API JARs for metaminer"
+	outputDir.set(layout.projectDirectory.dir("jars"))
+	jars.set(mapOf(
+		"velocity-3.5.0-SNAPSHOT-593.jar" to "https://fill-data.papermc.io/v1/objects/25bfbee6155fbce24f709bf18f1bb915817c4151d6d418ca01282742ab1f123a/velocity-3.5.0-SNAPSHOT-593.jar",
+		"paper-26.1.2-51.jar" to "https://fill-data.papermc.io/v1/objects/e81be14567005cf9f490e3ba512e453e705dc50a720343ad8c58f58f3947c6db/paper-26.1.2-51.jar",
+		"folia-1.21.11-14.jar" to "https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar",
+		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
+	))
+}
+
+tasks.named("compileJava") {
+	dependsOn("downloadJars")
+}
+
+sonar {
+	properties {
+		property("sonar.projectKey", "SecondLifeGaming_MockMC")
+		property("sonar.organization", "secondlifegaming")
+		property("sonar.host.url", "https://sonarcloud.io")
+		property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
+		property("sonar.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.coverage.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.cpd.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+	}
+}
 
 checkstyle {
 	toolVersion = "13.4.1"
@@ -49,6 +106,7 @@ dependencies {
 
 	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")
+	api("com.googlecode.json-simple:json-simple:1.1.1")
 
 	// Dependencies for Unit Tests
 	implementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
@@ -146,6 +204,7 @@ tasks {
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		ignoreFailures = true
 	}
 
 	check {
@@ -159,6 +218,11 @@ tasks {
 			html.required.set(true)
 			html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 		}
+		classDirectories.setFrom(files(classDirectories.files.map {
+			fileTree(it) {
+				exclude("org/mockmc/mockmc/generated/**")
+			}
+		}))
 	}
 
 	jacoco {

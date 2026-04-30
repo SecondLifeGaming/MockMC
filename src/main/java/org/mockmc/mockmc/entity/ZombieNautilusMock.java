@@ -9,10 +9,14 @@ import org.jspecify.annotations.NullMarked;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
+/**
+ * Mock implementation of {@link org.bukkit.entity.ZombieNautilus}.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @NullMarked
 public class ZombieNautilusMock extends AbstractNautilusMock
 		implements
-			ZombieNautilus,
 			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieNautilusBaseMock
 {
 
@@ -53,8 +57,7 @@ public class ZombieNautilusMock extends AbstractNautilusMock
 
 	public static class VariantMock
 			implements
-				Variant,
-				org.mockmc.mockmc.generated.org.bukkit.entity.ZombieNautilus_VariantBaseMock
+				org.mockmc.mockmc.generated.org.bukkit.entity.ZombieNautilusVariantBaseMock
 	{
 
 		private final NamespacedKey key;

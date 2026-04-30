@@ -28,14 +28,17 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Builder
+/**
+ * Mock implementation of {@link EquippableComponent}.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @NotNullByDefault
 @EqualsAndHashCode
 @SerializableAs("Equippable")
 @SuppressWarnings("UnstableApiUsage")
 public class EquippableComponentMock
 		implements
-			EquippableComponent,
 			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.EquippableComponentBaseMock
 {
 
@@ -66,6 +69,7 @@ public class EquippableComponentMock
 
 	private boolean isShearable;
 
+	@Builder
 	private EquippableComponentMock(@Nullable NamespacedKey model, @Nullable NamespacedKey cameraOverlay,
 			@Nullable Set<EntityType> allowedEntities, @Nullable Sound sound, @Nullable Sound shearingSound,
 			EquipmentSlot equipmentSlot, boolean isDispensable, boolean isSwappable, boolean isDamageOnHurt,
@@ -244,15 +248,15 @@ public class EquippableComponentMock
 		Map<String, Object> result = new LinkedHashMap<>();
 		result.put("slot", this.getSlot().name());
 		result.put("equip-sound", Registry.SOUND_EVENT.getKeyOrThrow(this.getEquipSound()).asString());
-		NamespacedKey model = this.getModel();
-		if (model != null)
+		NamespacedKey modelKey = this.getModel();
+		if (modelKey != null)
 		{
-			result.put("model", model.asString());
+			result.put("model", modelKey.asString());
 		}
-		NamespacedKey cameraOverlay = this.getCameraOverlay();
-		if (cameraOverlay != null)
+		NamespacedKey overlayKey = this.getCameraOverlay();
+		if (overlayKey != null)
 		{
-			result.put("camera-overlay", cameraOverlay.asString());
+			result.put("camera-overlay", overlayKey.asString());
 		}
 		Optional.ofNullable(this.getAllowedEntities()).ifPresent(entities ->
 		{
@@ -312,11 +316,10 @@ public class EquippableComponentMock
 				.sound(equipSound != null ? equipSound : Sound.ITEM_ARMOR_EQUIP_GENERIC).shearingSound(shearingSound)
 				.model(Optional.ofNullable(model).map(NamespacedKey::fromString).orElse(null))
 				.cameraOverlay(Optional.ofNullable(cameraOverlay).map(NamespacedKey::fromString).orElse(null))
-				.allowedEntities(allowedEntities).isDispensable(dispensable != null ? dispensable : true)
-				.isSwappable(swappable != null ? swappable : true)
-				.isDamageOnHurt(damageOnHurt != null ? damageOnHurt : true)
-				.isEquipOnInteract(equipOnInteract != null ? equipOnInteract : false)
-				.isShearable(canBeSheared != null ? canBeSheared : false).build();
+				.allowedEntities(allowedEntities).isDispensable(!Boolean.FALSE.equals(dispensable))
+				.isSwappable(!Boolean.FALSE.equals(swappable)).isDamageOnHurt(!Boolean.FALSE.equals(damageOnHurt))
+				.isEquipOnInteract(Boolean.TRUE.equals(equipOnInteract)).isShearable(Boolean.TRUE.equals(canBeSheared))
+				.build();
 	}
 
 	public static EquippableComponent useDefault()

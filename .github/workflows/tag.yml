@@ -2,7 +2,7 @@ name: Tag
 
 on:
   push:
-    branches: [ v1.* ]
+    branches: [ master ]
 
 jobs:
   tag:
@@ -37,11 +37,9 @@ jobs:
       - name: Read Paper version from gradle.properties
         id: paper-version
         run: |
-          {
-              echo "paper_details<<EOF"
-              ./gradlew printPaperDetails --quiet --console=plain 2>&1
-              echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+          echo "paper_details<<_EOF_" >> "$GITHUB_OUTPUT"
+          ./gradlew printPaperDetails --quiet --console=plain 2>&1 >> "$GITHUB_OUTPUT"
+          echo "_EOF_" >> "$GITHUB_OUTPUT"
 
       - name: Bump version
         uses: actions-ecosystem/action-bump-semver@v1

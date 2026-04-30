@@ -34,3 +34,13 @@ component_management:
       name: server
       paths:
         - src/main/java/org/mockmc/mockmc/ServerMock.java
+    - component_id: metaminer
+      name: metaminer
+      paths:
+        - metaminer/src/main/java/**
+    - component_id: core
+      name: core
+      paths:
+        - src/main/java/org/mockmc/mockmc/*Mock.java
+        - src/main/java/org/mockmc/mockmc/scheduler/**
+        - src/main/java/org/mockmc/mockmc/world/**

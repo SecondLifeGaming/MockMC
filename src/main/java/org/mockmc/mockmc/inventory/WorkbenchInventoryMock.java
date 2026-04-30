@@ -15,6 +15,7 @@ import org.jetbrains.annotations.Nullable;
  * Mock implementation of a {@link CraftingInventory}.
  *
  * @see InventoryMock
+ * @mockmc.version 1.21-1.0.0
  */
 public class WorkbenchInventoryMock extends InventoryMock implements CraftingInventory
 {
@@ -53,7 +54,10 @@ public class WorkbenchInventoryMock extends InventoryMock implements CraftingInv
 	@Override
 	public void setMatrix(@Nullable ItemStack @NotNull [] contents)
 	{
-		Preconditions.checkNotNull(contents);
+		if (contents == null)
+		{
+			throw new NullPointerException("contents cannot be null");
+		}
 		Preconditions.checkArgument(contents.length <= super.getSize(),
 				"Invalid inventory size. Expected " + super.getSize() + " or less, got " + contents.length);
 		for (int i = 0; i < this.getSize(); i++)

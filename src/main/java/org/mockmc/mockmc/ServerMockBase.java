@@ -67,6 +67,7 @@ public abstract class ServerMockBase extends Server.Spigot
 {
 
 	private static final String NAMESPACED_KEY_NULL = "A NamespacedKey must never be null";
+	private static final String INVENTORY_TYPE_NULL = "InventoryType cannot be null";
 
 	protected final Map<String, TagRegistry> materialTags = new HashMap<>();
 	protected final ScoreboardManagerMock scoreboardManager = new ScoreboardManagerMock();
@@ -91,15 +92,16 @@ public abstract class ServerMockBase extends Server.Spigot
 	}
 
 	@Override
+	@SuppressWarnings(
+	{"deprecation", "unchecked"})
 	public <T extends BanList<?>> T getBanList(@NotNull BanList.Type type)
 	{
-		Preconditions.checkNotNull(type, "type cannot be null");
+		Preconditions.checkNotNull(type, INVENTORY_TYPE_NULL);
 		switch (type)
 		{
 			case IP :
 				return (T) this.playerList.getIPBans();
-			case PROFILE :
-			case NAME :
+			case PROFILE, NAME :
 				return (T) this.playerList.getProfileBans();
 			default :
 				throw new IllegalStateException("Unknown BanList Type: " + type);
@@ -291,7 +293,7 @@ public abstract class ServerMockBase extends Server.Spigot
 	@NotNull
 	public InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type)
 	{
-		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type != null, INVENTORY_TYPE_NULL);
 		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
 		return createInventory(owner, type, type.defaultTitle());
 	}
@@ -314,7 +316,7 @@ public abstract class ServerMockBase extends Server.Spigot
 	public InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type,
 			@NotNull String title)
 	{
-		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type != null, INVENTORY_TYPE_NULL);
 		Preconditions.checkArgument(type.isCreatable(), "InventoryType.%s cannot be used to create a inventory", type);
 		Preconditions.checkArgument(title != null, "title cannot be null");
 		return createInventory(owner, type, Component.text(title));
@@ -347,7 +349,7 @@ public abstract class ServerMockBase extends Server.Spigot
 	public InventoryMock createInventory(@Nullable InventoryHolder owner, @NotNull InventoryType type,
 			@NotNull String title, int size)
 	{
-		Preconditions.checkArgument(type != null, "InventoryType cannot be null");
+		Preconditions.checkArgument(type != null, INVENTORY_TYPE_NULL);
 		Preconditions.checkArgument(title != null, "title cannot be null");
 		return createInventoryInternal(owner, type, Component.text(title), size);
 	}
@@ -375,6 +377,10 @@ public abstract class ServerMockBase extends Server.Spigot
 	@Override
 	public boolean addRecipe(@Nullable Recipe recipe, boolean resendRecipes)
 	{
+		if (recipe == null)
+		{
+			return false;
+		}
 		AsyncCatcher.catchOp("Recipe add");
 		// Pretend we sent the packet if resendRecipes is true
 		return this.recipeManager.addRecipe(RecipeType.CRAFTING, recipe);

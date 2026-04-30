@@ -1,25 +1,18 @@
 package org.mockmc.mockmc.potion;
 
-import com.google.common.base.Preconditions;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
-import org.mockmc.mockmc.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.util.PotionUtils;
 import org.mockmc.mockmc.util.ResourceLoader;
 import java.util.List;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class InternalPotionDataMock
 		implements
-			PotionType.InternalPotionData,
-			org.mockmc.mockmc.generated.org.bukkit.potion.PotionType_InternalPotionDataBaseMock
+			org.mockmc.mockmc.generated.org.bukkit.potion.PotionTypeInternalPotionDataBaseMock
 {
 
 	private final NamespacedKey namespacedKey;
@@ -39,7 +32,7 @@ public class InternalPotionDataMock
 	{
 		this.namespacedKey = namespacedKey;
 		JsonObject data = loadData(namespacedKey);
-		this.potionEffects = getPotionEffectsFromData(data);
+		this.potionEffects = PotionUtils.getPotionEffectsFromData(data);
 		this.upgradeable = data.get("upgradeable").getAsBoolean();
 		this.extendable = data.get("extendable").getAsBoolean();
 		this.maxLevel = data.get("maxLevel").getAsInt();
@@ -62,7 +55,7 @@ public class InternalPotionDataMock
 	{
 		if (potionEffects == null)
 		{
-			throw new UnimplementedOperationException("Unimplemented potion: " + namespacedKey);
+			throw new IllegalStateException("Unimplemented potion: " + namespacedKey);
 		}
 		return potionEffects;
 	}
@@ -85,27 +78,4 @@ public class InternalPotionDataMock
 		return maxLevel;
 	}
 
-	// TODO probably not the right solution to make this public static, but where
-	// should this utility method be located?
-	@ApiStatus.Internal
-	public static PotionEffect getPotionEffectFromData(JsonElement potionEffectData)
-	{
-		JsonObject potionEffectDataObj = potionEffectData.getAsJsonObject();
-		NamespacedKey potionEffectTypeKey = Preconditions
-				.checkNotNull(NamespacedKey.fromString(potionEffectDataObj.get("type").getAsString()));
-		PotionEffectType potionEffectType = Registry.POTION_EFFECT_TYPE.get(potionEffectTypeKey);
-		int duration = potionEffectDataObj.get("duration").getAsInt();
-		int amplifier = potionEffectDataObj.get("amplifier").getAsInt();
-		boolean ambient = potionEffectDataObj.get("ambient").getAsBoolean();
-		boolean particles = potionEffectDataObj.get("particles").getAsBoolean();
-		boolean icon = potionEffectDataObj.get("icon").getAsBoolean();
-		return new PotionEffect(potionEffectType, duration, amplifier, ambient, particles, icon);
-	}
-
-	@ApiStatus.Internal
-	public static List<PotionEffect> getPotionEffectsFromData(JsonObject data)
-	{
-		return data.get("effects").getAsJsonArray().asList().stream()
-				.map(InternalPotionDataMock::getPotionEffectFromData).toList();
-	}
 }

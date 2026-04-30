@@ -1,11 +1,16 @@
 package org.mockmc.metaminer;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 public class StandaloneRunner
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(StandaloneRunner.class);
+
 	public static void main(String[] args) throws IOException
 	{
 		File dataFolder = new File(args[0]);
@@ -17,9 +22,9 @@ public class StandaloneRunner
 
 		for (DataGenerator generator : generators)
 		{
-			System.out.println("Running " + generator.getClass().getSimpleName());
+			LOGGER.info("Running {}", generator.getClass().getSimpleName());
 			generator.generateData();
 		}
-		System.out.println("Generation complete!");
+		LOGGER.info("Generation complete!");
 	}
 }

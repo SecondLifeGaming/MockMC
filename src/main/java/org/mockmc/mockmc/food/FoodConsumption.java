@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import org.bukkit.Material;
 import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.ApiStatus;
-import org.mockmc.mockmc.potion.InternalPotionDataMock;
+import org.mockmc.mockmc.util.PotionUtils;
 import org.mockmc.mockmc.util.ResourceLoader;
 
 import java.util.EnumMap;
@@ -37,7 +37,7 @@ public record FoodConsumption(Material name, int nutrition, float saturationModi
 
 	private static FoodConsumption.FoodEffect loadFoodEffectFrom(JsonObject jsonObject)
 	{
-		return new FoodConsumption.FoodEffect(InternalPotionDataMock.getPotionEffectFromData(jsonObject),
+		return new FoodConsumption.FoodEffect(PotionUtils.getPotionEffectFromData(jsonObject),
 				jsonObject.get("probability").getAsFloat());
 	}
 
