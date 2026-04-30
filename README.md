@@ -27,77 +27,36 @@
     <hr />
 </p>
 
-MockMC is a framework that makes the unit testing of Bukkit plugins a whole lot easier.
-It aims to provide complete mock implementations that can be controlled from a unit test.
+MockMC is a testing framework for Minecraft server software. It provides complete mock implementations of server environments, allowing you to run unit tests for your plugins with speed and precision.
 
-## 🚀 The "Engine First" Mission
+## 🚀 The "Engine First" Strategy
 
-MockMC has evolved from manual stubbing to an **"Engine First"** architecture.
+MockMC moves beyond the maintenance-heavy approach of previous frameworks. While earlier versions utilized a `metaminer` to generate base stubs, they still required significant manual overhead to keep the mock surface in sync with rapidly evolving APIs like Paper and Folia.
 
-Historically, mocking frameworks relied on developers manually adding stubs and throwing `UnimplementedOperationException` for new API methods. This led to a massive maintenance burden every time Paper or Spigot updated their API surface.
+### The Maintenance Bottleneck
 
-To resolve this, we leverage the **`metaminer`** engine:
+In traditional mocking, every upstream update (like a new Minecraft version) forced developers to manually update mock classes to satisfy new interface contracts. If a method wasn't manually implemented or correctly shadowed, it would throw an `UnimplementedOperationException`, causing tests to be skipped and stalling development.
 
-- **100% API Mirroring**: Using JavaPoet, `metaminer` reflects 100% of the API JARs (Paper, Folia, Velocity, etc.) to generate "Smart Stubs".
-- **Zero Manual Boilerplate**: All interface methods are automatically generated with safe defaults (Empty collections, Optionals, default primitives, etc.).
-- **Behavior-Focused Development**: Developers no longer spend time on API compliance. Manual mock classes focus strictly on **behavior**, not on satisfying interface contracts.
+### The Metaminer & JavaPoet Evolution
 
-Whether you are testing for **Paper**, **Folia**, **Velocity**, or **Waterfall**, MockMC's engine ensures you have the full API surface ready for your tests without the `UnimplementedOperationException` headache.
+We have overhauled the `metaminer` engine to act as a direct bridge between the API JARs and your test environment using **JavaPoet**:
 
-## :page_facing_up: Table of contents
+- **Universal JAR Scraping**: Our engine doesn't rely on hardcoded source paths. It scrapes directly from provided JARs, allowing instant support for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
+- **Automated Smart Stubs**: Using JavaPoet, we generate 100% of the API surface. Every method—even those added in a brand-new Paper update—is immediately available with safe, type-specific defaults (Empty collections, Optionals, etc.).
+- **Logic over Boilerplate**: Because the engine handles the thousands of interface methods automatically, our manual implementation efforts are focused strictly on **simulating complex logic**.
 
-1. [Usage](#mag-usage)
-    - [Adding MockMC via gradle](#adding-mockmc-via-gradle)
-    - [Adding MockMC via Maven](#adding-mockmc-via-maven)
-    - [Using MockMC](#using-mockmc)
-2. [Features](#sparkles-features)
-    - [Mock Plugins](#mock-plugins)
-    - [Mock Players](#mock-players)
-    - [Mock Worlds](#mock-worlds)
-3. [Troubleshooting (My tests are being skipped)](#question-my-tests-are-being-skipped-unimplementedoperationexception)
-4. [Discord server](#headphones-discord-server)
-5. [Examples (See MockMC in action)](#tada-examples-see-mockmc-in-action)
+## Usage
 
-## :mag: Usage
-
-MockMC can easily be included in your project using either Maven or gradle.
+MockMC is available via Maven Central.
 
 > [!TIP]
-> Currently, the newest version available is
->
-> [![ALTERNATE-TEXT](https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.1?color=1bcc94&logo=apache-maven)](https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1)
-
-> Note: The Breaking Changes intended for 3.0 were already made in 2.145.1. Due to an Error it didn't get properly
-> tagged
+> **Latest Version:**
+> [![Maven Central](https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.1?color=1bcc94&logo=apache-maven)](<[https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1](https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1)>)
 
 <details>
 <summary><h3>Adding MockMC via Gradle</h3></summary>
 
-MockMC can easily be included in Gradle using the Maven Central and PaperMC repositories.
-Make sure to update the version as necessary.
-
-First add this new variable, this will allow you to pull the right paper api version from the mockmc dependency:
-
-```gradle
-def getMockMCPaperVersion() {
-    def mockmcJar = configurations.testImplementation
-        .resolve()
-        .find { it.name.startsWith('mockmc-') }
-
-    if (mockmcJar) {
-        def jarFile = new java.util.jar.JarFile(mockmcJar)
-        def manifest = jarFile.manifest
-        def paperVersion = manifest.mainAttributes.getValue('Paper-Version')
-        jarFile.close()
-        return paperVersion ?: '1.21-R0.1-SNAPSHOT'
-    }
-    return '1.21-R0.1-SNAPSHOT'
-}
-
-ext.paperVersion = getMockMCPaperVersion()
-```
-
-Now add the dependencies:
+MockMC is available on Maven Central. Since we utilize an **Engine First** approach, we recommend a small helper script to automatically pull the correct Paper-API version directly from the MockMC manifest. This ensures your testing environment always stays in sync with the internal stubs.
 
 ```gradle
 repositories {
@@ -105,79 +64,33 @@ repositories {
     maven { url 'https://repo.papermc.io/repository/maven-public/' }
 }
 
-dependencies {
-    testImplementation 'io.github.secondlifegaming:mockmc-v26.1:${paperVersion}'
-}
-```
-
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always
-use [JitPack](https://jitpack.io/#SecondLifeGaming/MockMC) as your maven repository:
-
-```gradle
-repositories {
-    maven { url 'https://jitpack.io' }
-    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+// Helper to extract the Paper version from the MockMC JAR
+def getMockMCPaperVersion() {
+    def mockmcJar = configurations.testImplementation.resolve().find { it.name.contains('mockmc-') }
+    if (mockmcJar) {
+        def jarFile = new java.util.jar.JarFile(mockmcJar)
+        def paperVersion = jarFile.manifest.mainAttributes.getValue('Paper-Version')
+        jarFile.close()
+        return paperVersion ?: '1.21-R0.1-SNAPSHOT'
+    }
+    return '1.21-R0.1-SNAPSHOT'
 }
 
 dependencies {
-    testImplementation 'com.github.westkevin12:MockMC:v26.1-SNAPSHOT'
-    testImplementation 'io.papermc.paper:paper-api:${paperVersion}'
+    // Replace with the latest version from Maven Central
+    testImplementation 'io.github.secondlifegaming:mockmc-v26.1:dev-2a95b9a32'
+
+    // Dynamically pull the correct Paper API
+    testImplementation "io.papermc.paper:paper-api:${getMockMCPaperVersion()}"
 }
 ```
-
-Note: use `v1.13-SNAPSHOT` to test a Bukkit 1.13 plugin or any other version if
-the [branch](https://github.com/westkevin12/MockMC/branches) exists.
-These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them
-will be accepted.
-This is because back-porting every single patch on every branch is incredibly time-consuming and slows down the
-development of MockMC.
 
 </details>
 
 <details>
 <summary><h3>Adding MockMC via Maven</h3></summary>
 
-MockMC can easily be included in Maven using the default Maven Central and PaperMC repositories.
-
-> Note: Make sure to update the version as necessary and put this dependency above your dependency that provides bukkit.
-
-Also here you can extract the manifest version this way:
-
-```xml
-
-<plugin>
-    <groupId>org.codehaus.gmaven</groupId>
-    <artifactId>groovy-maven-plugin</artifactId>
-    <version>2.1.1</version>
-    <executions>
-        <execution>
-            <phase>initialize</phase>
-            <goals>
-                <goal>execute</goal>
-            </goals>
-            <configuration>
-                <source>
-                    // Extract Paper version from MockMC JAR
-                    def mockmcJar = project.artifacts.find {
-                    it.artifactId.startsWith('mockmc-')
-                    }?.file
-
-                    if (mockmcJar) {
-                    def jar = new java.util.jar.JarFile(mockmcJar)
-                    def manifest = jar.manifest
-                    def paperVersion = manifest.mainAttributes.getValue('Paper-Version')
-                    jar.close()
-
-                    if (paperVersion) {
-                    project.properties['paper.version.from.mockmc'] = paperVersion
-                    }
-                    }
-                </source>
-            </configuration>
-        </execution>
-    </executions>
-</plugin>
-```
+Add the Paper repository and the MockMC dependency to your `pom.xml`. To ensure proper class loading, place the MockMC dependency **above** any other dependencies that might provide the Bukkit or Paper API.
 
 ```xml
 <repositories>
@@ -188,95 +101,47 @@ Also here you can extract the manifest version this way:
 </repositories>
 
 <dependencies>
-  <dependency>
-            <groupId>io.github.secondlifegaming</groupId>
-    <artifactId>mockmc-v26.1</artifactId>
-    <version>[version]</version>
-    <scope>test</scope>
-  </dependency>
-  <dependency>
-      <groupId>io.papermc.paper</groupId>
-      <artifactId>paper-api</artifactId>
-      <version>${paper.version.from.mockmc}</version>
-      <scope>test</scope>
-  </dependency>
+    <dependency>
+        <groupId>io.github.secondlifegaming</groupId>
+        <artifactId>mockmc-v26.1</artifactId>
+        <version>dev-2a95b9a32</version>
+        <scope>test</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>io.papermc.paper</groupId>
+        <artifactId>paper-api</artifactId>
+        <version>1.21-R0.1-SNAPSHOT</version>
+        <scope>test</scope>
+    </dependency>
 </dependencies>
 ```
-
-The `test` scope is important here since you are likely to only be using MockMC during the `test` stage of your
-Maven lifecycle and not in your final product.
-
-If you prefer to always have the latest Git version or need a specific commit/branch, you can always
-use [JitPack](https://jitpack.io/#SecondLifeGaming/MockMC) as your maven repository:
-
-```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-    <repository>
-        <id>papermc</id>
-        <url>https://repo.papermc.io/repository/maven-public/</url>
-    </repository>
-</repositories>
-
-<dependencies>
-  <dependency>
-    <groupId>com.github.SecondLifeGaming</groupId>
-    <artifactId>MockMC</artifactId>
-    <version>v26.1-SNAPSHOT</version>
-    <scope>test</scope>
-  </dependency>
-  <dependency>
-      <groupId>io.papermc.paper</groupId>
-      <artifactId>paper-api</artifactId>
-      <version>${paper.version.from.mockmc}</version>
-      <scope>test</scope>
-  </dependency>
-</dependencies>
-```
-
-Note: use `v26.1-SNAPSHOT` to test against Paper API 26.1, or any other version if
-the [branch](https://github.com/westkevin12/MockMC/branches) exists.
-These branches will not be receiving patches actively, but any issues will be resolved and any pull requests on them
-will be accepted.
-This is because back-porting every single patch on every branch is incredibly time-consuming and slows down the
-development of MockMC.
 
 </details>
 
 ### Using MockMC
 
-A plugin can be loaded in this initialiser block.
+Initialize the mock environment in your test setup:
 
 ```java
 private ServerMock server;
 private MyPlugin plugin;
 
 @BeforeEach
-public void setUp()
-{
+public void setUp() {
     server = MockMC.mock();
     plugin = MockMC.load(MyPlugin.class);
 }
 
 @AfterEach
-public void tearDown()
-{
+public void tearDown() {
     MockMC.unmock();
 }
 ```
 
-## :sparkles: Features
-
 ### Mock Plugins
 
-MockMC contains several functions that make the unit testing of Bukkit plugins a lot easier.
-
-It is possible to create a mock plugin.
-This is useful when the plugin you are testing may be looking at other loaded plugins.
-The following piece of code creates a placeholder plugin that extends JavaPlugin.
+Create lightweight "dummy" plugins to test cross-plugin dependencies or event listeners.
 
 ```java
 PluginMock plugin = MockMC.createMockPlugin();
@@ -284,87 +149,24 @@ PluginMock plugin = MockMC.createMockPlugin();
 
 ### Mock Players
 
-MockMC makes it easy to create several mock players to use in unit testing.
-By running `server.setPlayers(int numberOfPlayers)` one can set the number of online players.
-From then on it's possible to get a certain player using `server.getPlayer(int i)`.
-
-An even easier way to create a player on the fly is by simply using
+Simulate complex player interactions, including inventory movements, chats, and block interactions.
 
 ```java
 PlayerMock player = server.addPlayer();
-```
-
-A mock player also supports several simulated actions, such as damaging a block or even
-breaking it. This will fire all the required events and will remove the block if the
-events weren't cancelled.
-
-```java
-Block block = ...;
-player.simulateBlockBreak(block);
+player.simulateBlockBreak(someBlock); // Fires events and updates world state
 ```
 
 ### Mock Worlds
 
-Another feature is the easy creation of mock worlds.
-One can make a superflat world using one simple command:
+MockMC uses a "Lazy-Loading" world strategy. Blocks are only created in memory when accessed, keeping memory usage low even for large-scale tests.
 
 ```java
-World world = new WorldMock(Material material, int heightUntilAir)
+// Create a superflat world with bedrock at y=0 and dirt up to y=3
+World world = new WorldMock(Material.DIRT, 3);
 ```
 
-Using `Material.DIRT` and 3 as heightUntilAir will create a superflat world with a height of a 128.
-At y=0 everything will be `Material.BEDROCK`, and from 1 until 3 (inclusive) will be `Material.DIRT`
-and everything else will be `Material.AIR`.
-Each block is created the moment it is first accessed, so if only one block is only ever touched only one
-block will ever be created in-memory.
+## :question: UnimplementedOperationException
 
-## :question: My tests are being skipped!? (UnimplementedOperationException)
+While the **Engine First** strategy ensures all methods exist, specific complex logic (like physical entity collisions or advanced lighting updates) might still throw an `UnimplementedOperationException` if the manual behavior hasn't been coded yet.
 
-Sometimes your code may use a method that is not yet implemented in MockMC.
-When this happens MockMC will, instead of returning placeholder values, throw
-an `UnimplementedOperationException`.
-These exception extends `AssumptionException` and will cause the test to be skipped.
-
-These exceptions should just be ignored, though pull requests that add functionality to MockMC are always welcome!
-If you don't want to add the required methods yourself you can also request the method on the issues page.
-
-## :headphones: Discord Server
-
-You can also find us on discord by the way!
-If you need any help with MockMC or have a question regarding this project, feel free to join and connect with other
-members of the community.
-
-<p align="center">
-  <a href="https://discord.gg/s4cWYgsFaV">
-    <img src="https://discordapp.com/api/guilds/792754410576019477/widget.png?style=banner3" alt="Discord Invite"/>
-  </a>
-</p>
-
-## :tada: Examples (See MockMC in action)
-
-Several projects have utilized MockMC for their needs already.
-If you want to see some projects that are using MockMC right now, feel free to take a peak:
-
-- [Slimefun/Slimefun4](https://github.com/Slimefun/Slimefun4/tree/master/src/test/java/io/github/thebusybiscuit/slimefun4)
-  (1700+ Unit Tests)
-- [Insprill/custom-join-messages](https://github.com/Insprill/custom-join-messages/tree/master/src/test/kotlin/net/insprill/cjm)
-  (170+ Unit Tests)
-- [carelesshippo/SpectatorModeRewrite](https://github.com/carelesshippo/SpectatorModeRewrite/tree/dev/src/test/java/me/ohowe12/spectatormode)
-  (80+ Unit Tests)
-- [lluiscamino/MultiverseHardcore](https://github.com/lluiscamino/MultiverseHardcore/tree/master/src/test/java/me/lluiscamino/multiversehardcore)
-  (75+ Unit Tests)
-- [axelrindle/PocketKnife](https://github.com/axelrindle/PocketKnife/tree/main/api/src/test/kotlin)
-  (50+ Unit Tests)
-- [ez-plugins/EzEconomy](https://github.com/ez-plugins/EzEconomy/tree/main/ezeconomy-bukkit/src/test/java/com/skyblockexp/ezeconomy)
-  (50+ Unit Tests)
-- _and more! (If you want to see your plugin here, open up an issue and we'll consider adding it)_
-
-You can also have a look at our documentation where we outline various examples and tricks on how to use MockMC
-already:
-https://docs.mockmc.org
-
-## :gift_heart: Sponsors
-
-Thanks to JetBrains, the creators of IntelliJ IDEA, for providing us with licenses as part of
-their [Open Source program](https://www.jetbrains.com/opensource/).
-[![JetBrains](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)](https://www.jetbrains.com/opensource/)
+Because this extends `AssumptionException`, JUnit will mark the test as **skipped** rather than **failed**, preventing false negatives in your CI/CD pipeline while highlighting areas where MockMC's behavioral logic needs a PR.
