@@ -19,7 +19,7 @@
         <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=bugs">
     </a>
     <a href="https://codecov.io/gh/SecondLifeGaming/MockMC" >
-        <img alt="Coverage" src="https://codecov.io/gh/SecondLifeGaming/MockMC/graph/badge.svg?token=uk4UiHzmkx"/>
+        <img alt="Coverage" src="https://codecov.io/gh/SecondLifeGaming/MockMC/branch/master/graph/badge.svg?token=AFJ9H8R51P"/>
     </a>
     <!-- Logo -->
     <hr />
