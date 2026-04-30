@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.type.CommandBlock;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Set;
 
 /**
@@ -13,68 +12,62 @@ import java.util.Set;
  *
  * @see BlockDataMock
  */
-public class CommandBlockDataMock extends BlockDataMock implements CommandBlock
-{
+public class CommandBlockDataMock extends BlockDataMock implements CommandBlock {
 
-	/**
-	 * Constructs a new {@link CommandBlock} for the provided {@link Material}.
-	 *
-	 * @param material
-	 *            The material this data is for.
-	 */
-	public CommandBlockDataMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    /**
+     * Constructs a new {@link CommandBlock} for the provided {@link Material}.
+     *
+     * @param material
+     * The material this data is for.
+     */
+    public CommandBlockDataMock(@NotNull Material material) {
+        super(material);
+    }
 
-	/**
-	 * Create a new {@link CommandBlock} based on an existing {@link CommandBlock}.
-	 *
-	 * @param other
-	 *            the other block data.
-	 */
-	protected CommandBlockDataMock(@NotNull CommandBlockDataMock other)
-	{
-		super(other);
-	}
+    /**
+     * Create a new {@link CommandBlock} based on an existing {@link CommandBlock}.
+     *
+     * @param other
+     * the other block data.
+     */
+    protected CommandBlockDataMock(@NotNull CommandBlockDataMock other) {
+        super(other);
+    }
 
-	@Override
-	public boolean isConditional()
-	{
-		return this.get(BlockDataKey.CONDITIONAL);
-	}
+    @Override
+    public boolean isConditional() {
+        return this.get(BlockDataKey.CONDITIONAL);
+    }
 
-	@Override
-	public void setConditional(boolean conditional)
-	{
-		this.set(BlockDataKey.CONDITIONAL, conditional);
-	}
+    @Override
+    public void setConditional(boolean conditional) {
+        this.set(BlockDataKey.CONDITIONAL, conditional);
+    }
 
-	@Override
-	public @NotNull BlockFace getFacing()
-	{
-		return this.get(BlockDataKey.FACING);
-	}
+    @Override
+    public @NotNull BlockFace getFacing() {
+        return this.get(BlockDataKey.FACING);
+    }
 
-	@Override
-	public void setFacing(@NotNull BlockFace blockFace)
-	{
-		Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
-		Preconditions.checkArgument(blockFace.isCartesian(),
-				"Invalid face, only cartesian face are allowed for this property!");
-		this.set(BlockDataKey.FACING, blockFace);
-	}
+    @Override
+    public void setFacing(@NotNull BlockFace blockFace) {
+        Preconditions.checkArgument(blockFace != null, "blockFace cannot be null!");
+        Preconditions.checkArgument(blockFace.isCartesian(),
+                "Invalid face, only cartesian face are allowed for this property!");
+        this.set(BlockDataKey.FACING, blockFace);
+    }
 
-	@Override
-	public @NotNull Set<BlockFace> getFaces()
-	{
-		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
-	}
+    @Override
+    public @NotNull Set<BlockFace> getFaces() {
+        return this.getLimitationValue(BlockDataLimitation.Type.FACES);
+    }
 
-	@Override
-	public @NotNull CommandBlockDataMock clone()
-	{
-		return new CommandBlockDataMock(this);
-	}
-
+    /**
+     * Uses the copy constructor to fulfill the Bukkit clone contract safely.
+     */
+    @Override
+    @SuppressWarnings({ "squid:S2975", "java:S1182" })
+    public @NotNull CommandBlockDataMock clone() {
+        return new CommandBlockDataMock(this);
+    }
 }

@@ -10,84 +10,77 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see BlockDataMock
  */
-public class TurtleEggDataMock extends BlockDataMock implements TurtleEgg
-{
+public class TurtleEggDataMock extends BlockDataMock implements TurtleEgg {
 
-	/**
-	 * Constructs a new {@link TurtleEgg} for the provided {@link Material}.
-	 *
-	 * @param material
-	 *            The material this data is for.
-	 */
-	public TurtleEggDataMock(@NotNull Material material)
-	{
-		super(material);
-	}
+    /**
+     * Constructs a new {@link TurtleEgg} for the provided {@link Material}.
+     *
+     * @param material
+     * The material this data is for.
+     */
+    public TurtleEggDataMock(@NotNull Material material) {
+        super(material);
+    }
 
-	/**
-	 * Create a new {@link TurtleEggDataMock} based on an existing
-	 * {@link TurtleEggDataMock}.
-	 *
-	 * @param other
-	 *            the other block data.
-	 */
-	protected TurtleEggDataMock(@NotNull TurtleEggDataMock other)
-	{
-		super(other);
-	}
+    /**
+     * Create a new {@link TurtleEggDataMock} based on an existing
+     * {@link TurtleEggDataMock}.
+     *
+     * @param other
+     * the other block data.
+     */
+    protected TurtleEggDataMock(@NotNull TurtleEggDataMock other) {
+        super(other);
+    }
 
-	@Override
-	public int getEggs()
-	{
-		return this.get(BlockDataKey.EGGS);
-	}
+    @Override
+    public int getEggs() {
+        return this.get(BlockDataKey.EGGS);
+    }
 
-	@Override
-	public void setEggs(int eggs)
-	{
-		int minimum = this.getMinimumEggs();
-		int maximum = this.getMaximumEggs();
-		Preconditions.checkArgument(minimum <= eggs && eggs <= maximum, "Eggs must be between %s and %s", minimum,
-				maximum);
-		this.set(BlockDataKey.EGGS, eggs);
-	}
+    @Override
+    public void setEggs(int eggs) {
+        int minimum = this.getMinimumEggs();
+        int maximum = this.getMaximumEggs();
+        Preconditions.checkArgument(minimum <= eggs && eggs <= maximum, "Eggs must be between %s and %s", minimum,
+                maximum);
+        this.set(BlockDataKey.EGGS, eggs);
+    }
 
-	@Override
-	public int getMinimumEggs()
-	{
-		return this.getLimitationValue(BlockDataLimitation.Type.MIN_EGGS);
-	}
+    @Override
+    public int getMinimumEggs() {
+        return this.getLimitationValue(BlockDataLimitation.Type.MIN_EGGS);
+    }
 
-	@Override
-	public int getMaximumEggs()
-	{
-		return this.getLimitationValue(BlockDataLimitation.Type.MAX_EGGS);
-	}
+    @Override
+    public int getMaximumEggs() {
+        return this.getLimitationValue(BlockDataLimitation.Type.MAX_EGGS);
+    }
 
-	@Override
-	public int getHatch()
-	{
-		return this.get(BlockDataKey.HATCH);
-	}
+    @Override
+    public int getHatch() {
+        return this.get(BlockDataKey.HATCH);
+    }
 
-	@Override
-	public void setHatch(int hatch)
-	{
-		int maximum = this.getMaximumHatch();
-		Preconditions.checkArgument(0 <= hatch && hatch <= maximum, "Hatch must be between 0 and %s", maximum);
-		this.set(BlockDataKey.HATCH, hatch);
-	}
+    @Override
+    public void setHatch(int hatch) {
+        int maximum = this.getMaximumHatch();
+        Preconditions.checkArgument(0 <= hatch && hatch <= maximum, "Hatch must be between 0 and %s", maximum);
+        this.set(BlockDataKey.HATCH, hatch);
+    }
 
-	@Override
-	public int getMaximumHatch()
-	{
-		return this.getLimitationValue(BlockDataLimitation.Type.MAX_HATCH);
-	}
+    @Override
+    public int getMaximumHatch() {
+        return this.getLimitationValue(BlockDataLimitation.Type.MAX_HATCH);
+    }
 
-	@Override
-	public @NotNull TurtleEggDataMock clone()
-	{
-		return new TurtleEggDataMock(this);
-	}
-
+    /**
+     * Fulfills the Bukkit BlockData clone contract using a copy constructor.
+     * This ensures the mock remains isolated and correctly initialized.
+     */
+    @Override
+    @SuppressWarnings({ "squid:S2975", "java:S1182" })
+    public @NotNull TurtleEggDataMock clone() {
+        return new TurtleEggDataMock(this);
+    }
 }
