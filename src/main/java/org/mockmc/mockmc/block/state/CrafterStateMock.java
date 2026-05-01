@@ -11,6 +11,7 @@ import org.mockmc.mockmc.inventory.InventoryMock;
  * Mock implementation of a {@link Crafter}.
  *
  * @see ContainerStateMock
+ * @mockmc.version 1.21-1.0.0
  */
 public class CrafterStateMock extends ContainerStateMock
 		implements
@@ -21,6 +22,8 @@ public class CrafterStateMock extends ContainerStateMock
 	private final boolean[] disabledSlots = new boolean[9];
 
 	private boolean triggered = false;
+
+	private int craftingTicks = 0;
 
 	public CrafterStateMock(@NotNull Material material)
 	{
@@ -37,6 +40,7 @@ public class CrafterStateMock extends ContainerStateMock
 		super(state);
 		System.arraycopy(state.disabledSlots, 0, this.disabledSlots, 0, 9);
 		this.triggered = state.triggered;
+		this.craftingTicks = state.craftingTicks;
 	}
 
 	@Override
@@ -82,5 +86,17 @@ public class CrafterStateMock extends ContainerStateMock
 	public void setTriggered(boolean b)
 	{
 		this.triggered = b;
+	}
+
+	@Override
+	public int getCraftingTicks()
+	{
+		return this.craftingTicks;
+	}
+
+	@Override
+	public void setCraftingTicks(int i)
+	{
+		this.craftingTicks = i;
 	}
 }
