@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class FurnaceStateMock extends AbstractFurnaceStateMock
 		implements
 			Furnace,
-			org.mockmc.mockmc.generated.org.bukkit.block.FurnaceBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.FurnaceBaseMock
 {
 
 	/**

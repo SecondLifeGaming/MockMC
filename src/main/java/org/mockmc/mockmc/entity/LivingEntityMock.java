@@ -65,7 +65,7 @@ import java.util.function.Consumer;
 {"removal"})
 public abstract class LivingEntityMock extends EntityMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.LivingEntityBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LivingEntityBaseMock
 {
 
 	private final BrainMock brain = new BrainMock();

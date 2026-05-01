@@ -13,7 +13,7 @@ import java.util.UUID;
 public abstract class ChestedHorseMock extends AbstractHorseMock
 		implements
 			ChestedHorse,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ChestedHorseBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestedHorseBaseMock
 {
 
 	private boolean hasChest;

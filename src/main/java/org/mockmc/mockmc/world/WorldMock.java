@@ -100,7 +100,7 @@ import java.util.stream.Collectors;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class WorldMock implements org.mockmc.mockmc.generated.org.bukkit.WorldBaseMock
+public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.WorldBaseMock
 {
 
 	private static final int SEA_LEVEL = 63;
@@ -452,7 +452,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.org.bukkit.WorldBa
 	@Override
 	public @NotNull Location getLocationAtKey(long key)
 	{
-		return org.mockmc.mockmc.generated.org.bukkit.WorldBaseMock.super.getLocationAtKey(key);
+		return org.mockmc.mockmc.generated.server.org.bukkit.WorldBaseMock.super.getLocationAtKey(key);
 	}
 
 	@Override

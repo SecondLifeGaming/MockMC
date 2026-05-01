@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ArrowMock extends AbstractArrowMock
 		implements
 			Arrow,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ArrowBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ArrowBaseMock
 {
 
 	private PotionType potionType;

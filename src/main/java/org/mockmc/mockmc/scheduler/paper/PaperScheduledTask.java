@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 public class PaperScheduledTask
 		implements
 			ScheduledTask,
-			org.mockmc.mockmc.generated.io.papermc.paper.threadedregions.scheduler.ScheduledTaskBaseMock
+			org.mockmc.mockmc.generated.server.io.papermc.paper.threadedregions.scheduler.ScheduledTaskBaseMock
 {
 
 	private final Plugin plugin;

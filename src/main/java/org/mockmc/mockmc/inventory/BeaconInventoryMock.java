@@ -15,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
 public class BeaconInventoryMock extends InventoryMock
 		implements
 			BeaconInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.BeaconInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.BeaconInventoryBaseMock
 {
 
 	private static final int ITEM_SLOT = 0;

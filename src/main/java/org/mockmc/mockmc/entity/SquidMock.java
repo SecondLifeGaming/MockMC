@@ -6,7 +6,10 @@ import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class SquidMock extends AgeableMock implements Squid, org.mockmc.mockmc.generated.org.bukkit.entity.SquidBaseMock
+public class SquidMock extends AgeableMock
+		implements
+			Squid,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SquidBaseMock
 {
 
 	/**

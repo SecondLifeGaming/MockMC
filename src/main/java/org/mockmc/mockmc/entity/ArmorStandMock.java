@@ -24,7 +24,7 @@ import java.util.UUID;
  */
 public class ArmorStandMock extends LivingEntityMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.ArmorStandBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ArmorStandBaseMock
 {
 
 	private static final String POSE_NULL = "Pose cannot be null";

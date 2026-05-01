@@ -15,7 +15,7 @@ import java.util.UUID;
 public class NautilusMock extends AbstractNautilusMock
 		implements
 			Nautilus,
-			org.mockmc.mockmc.generated.org.bukkit.entity.NautilusBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.NautilusBaseMock
 {
 
 	/**

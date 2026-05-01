@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class FlyingMock extends MobMock
 		implements
 			Flying,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FlyingBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FlyingBaseMock
 {
 
 	/**

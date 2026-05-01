@@ -15,7 +15,7 @@ import java.util.UUID;
 public class HopperMinecartMock extends LootableMinecart
 		implements
 			HopperMinecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.minecart.HopperMinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.HopperMinecartBaseMock
 {
 
 	private boolean enabled = true;

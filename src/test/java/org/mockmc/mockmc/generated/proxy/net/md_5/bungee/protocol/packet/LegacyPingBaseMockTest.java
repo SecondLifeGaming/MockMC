@@ -1,0 +1,17 @@
+// Auto-generated mechanical sanity test for LegacyPingBaseMock
+package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.protocol.packet;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+public class LegacyPingBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	public void testSafeDefaults()
+	{
+		LegacyPingBaseMock mock = new LegacyPingBaseMock()
+		{
+		};
+		assertSafeDefault(mock.toString());
+	}
+}

@@ -16,7 +16,7 @@ import java.util.UUID;
 public class WitherMock extends AbstractBossMock
 		implements
 			Wither,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WitherBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitherBaseMock
 {
 
 	// DATA_TARGETS for each head

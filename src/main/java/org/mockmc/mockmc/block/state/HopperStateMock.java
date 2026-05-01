@@ -15,7 +15,7 @@ import org.mockmc.mockmc.inventory.InventoryMock;
 public class HopperStateMock extends ContainerStateMock
 		implements
 			Hopper,
-			org.mockmc.mockmc.generated.org.bukkit.block.HopperBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.HopperBaseMock
 {
 
 	/**

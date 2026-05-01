@@ -64,11 +64,15 @@ public class RegistryAccessMock implements RegistryAccess
 
 	private static <T extends Keyed> Registry<T> createRegistry(RegistryKey<T> key)
 	{
-		if (getOutlierKeyedRegistryKeys().contains(key))
+		// Attempt to find the registry in Bukkit's Registry class first
+		try
 		{
+			return findSimpleRegistry((Class<T>) getClass(CLASS_NAME_KEY_MAP.get(key)));
+		} catch (Exception e)
+		{
+			// Fallback to a generic RegistryMock if not found in Bukkit's Registry
 			return new RegistryMock<>(key);
 		}
-		return findSimpleRegistry((Class<T>) getClass(CLASS_NAME_KEY_MAP.get(key)));
 	}
 
 	private static Class<?> getClass(String className)
@@ -89,22 +93,6 @@ public class RegistryAccessMock implements RegistryAccess
 			return type.getActualTypeArguments()[0].equals(tClass);
 		}
 		return false;
-	}
-
-	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
-	{
-		return List.of(RegistryKey.COW_SOUND_VARIANT, RegistryKey.CHICKEN_SOUND_VARIANT, RegistryKey.DIALOG,
-				RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL, RegistryKey.TRIM_PATTERN,
-				RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT, RegistryKey.MOB_EFFECT,
-				RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT,
-				RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.CAT_SOUND_VARIANT,
-				RegistryKey.VILLAGER_PROFESSION, RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT,
-				RegistryKey.CHICKEN_VARIANT, RegistryKey.COW_VARIANT, RegistryKey.PIG_VARIANT,
-				RegistryKey.PIG_SOUND_VARIANT, RegistryKey.WOLF_SOUND_VARIANT, RegistryKey.MAP_DECORATION_TYPE,
-				RegistryKey.BANNER_PATTERN, RegistryKey.MENU, RegistryKey.PAINTING_VARIANT, RegistryKey.ATTRIBUTE,
-				RegistryKey.BIOME, RegistryKey.SOUND_EVENT, RegistryKey.FLUID, RegistryKey.ENTITY_TYPE,
-				RegistryKey.PARTICLE_TYPE, RegistryKey.POTION, RegistryKey.DATA_COMPONENT_TYPE,
-				RegistryKey.MEMORY_MODULE_TYPE, RegistryKey.GAME_RULE, RegistryKey.ZOMBIE_NAUTILUS_VARIANT);
 	}
 
 	private static Registry<?> getValue(Field a)

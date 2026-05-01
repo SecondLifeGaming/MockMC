@@ -22,7 +22,7 @@ import java.util.UUID;
 public class SnifferMock extends AnimalsMock
 		implements
 			Sniffer,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SnifferBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnifferBaseMock
 {
 
 	private final List<Location> exploredLocations = new ArrayList<>();

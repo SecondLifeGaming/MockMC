@@ -15,7 +15,7 @@ import org.mockmc.mockmc.inventory.InventoryMock;
 public class CrafterStateMock extends ContainerStateMock
 		implements
 			Crafter,
-			org.mockmc.mockmc.generated.org.bukkit.block.CrafterBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.CrafterBaseMock
 {
 
 	private final boolean[] disabledSlots = new boolean[9];

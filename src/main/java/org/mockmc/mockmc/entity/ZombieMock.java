@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ZombieMock extends MonsterMock
 		implements
 			Zombie,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieBaseMock
 {
 
 	private static final String VILLAGER_OPERATION_NOT_SUPPORTED = "Not supported. Please spawn a new Zombie Villager instead.";

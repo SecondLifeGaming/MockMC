@@ -19,7 +19,7 @@ import java.util.UUID;
 public abstract class AbstractProjectileMock extends EntityMock
 		implements
 			Projectile,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ProjectileBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ProjectileBaseMock
 {
 
 	@Nullable

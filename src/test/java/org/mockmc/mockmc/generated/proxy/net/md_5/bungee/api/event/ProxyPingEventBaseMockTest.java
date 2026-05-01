@@ -1,0 +1,19 @@
+// Auto-generated mechanical sanity test for ProxyPingEventBaseMock
+package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.event;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+public class ProxyPingEventBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	public void testSafeDefaults()
+	{
+		ProxyPingEventBaseMock mock = new ProxyPingEventBaseMock()
+		{
+		};
+		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.getConnection());
+		assertSafeDefault(mock.getResponse());
+	}
+}

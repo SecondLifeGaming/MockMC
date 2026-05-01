@@ -19,7 +19,7 @@ import java.util.UUID;
 public class AnimalsMock extends AgeableMock
 		implements
 			Animals,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AnimalsBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AnimalsBaseMock
 {
 
 	@Nullable

@@ -17,7 +17,9 @@ public class StandaloneRunner
 		dataFolder.mkdirs();
 
 		List<DataGenerator> generators = List.of(
-				new BaseMockGenerator(dataFolder)
+				new BaseMockGenerator(dataFolder),
+				new BaseTestGenerator(dataFolder),
+				new CoverageReportGenerator(dataFolder)
 		);
 
 		for (DataGenerator generator : generators)

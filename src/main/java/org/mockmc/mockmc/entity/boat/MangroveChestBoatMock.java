@@ -15,7 +15,7 @@ import java.util.UUID;
 public class MangroveChestBoatMock extends ChestBoatMock
 		implements
 			MangroveChestBoat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.boat.MangroveChestBoatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.MangroveChestBoatBaseMock
 {
 
 	public MangroveChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)

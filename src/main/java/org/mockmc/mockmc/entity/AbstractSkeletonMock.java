@@ -22,7 +22,7 @@ public abstract class AbstractSkeletonMock extends MonsterMock
 		implements
 			AbstractSkeleton,
 			MockRangedEntity<AbstractSkeletonMock>,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractSkeletonBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractSkeletonBaseMock
 {
 
 	private boolean shouldBurnInDay = true;

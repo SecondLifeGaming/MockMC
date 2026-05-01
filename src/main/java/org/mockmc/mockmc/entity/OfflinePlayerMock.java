@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 @SuppressWarnings(
 {"deprecation", "unchecked"})
-public class OfflinePlayerMock implements org.mockmc.mockmc.generated.org.bukkit.OfflinePlayerBaseMock
+public class OfflinePlayerMock implements org.mockmc.mockmc.generated.server.org.bukkit.OfflinePlayerBaseMock
 {
 
 	@NotNull

@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class VehicleMock extends EntityMock
 		implements
 			Vehicle,
-			org.mockmc.mockmc.generated.org.bukkit.entity.VehicleBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.VehicleBaseMock
 {
 
 	/**

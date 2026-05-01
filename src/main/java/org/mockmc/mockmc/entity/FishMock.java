@@ -14,7 +14,7 @@ import java.util.UUID;
 public abstract class FishMock extends CreatureMock
 		implements
 			Fish,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FishBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FishBaseMock
 {
 
 	private boolean isFromBucket = false;

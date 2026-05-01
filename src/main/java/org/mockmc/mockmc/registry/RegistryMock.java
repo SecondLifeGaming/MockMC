@@ -67,7 +67,7 @@ import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generated.org.bukkit.RegistryBaseMock<T>
+public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generated.server.org.bukkit.RegistryBaseMock<T>
 {
 	private static final String KEY_CANNOT_BE_NULL = "key cannot be null";
 

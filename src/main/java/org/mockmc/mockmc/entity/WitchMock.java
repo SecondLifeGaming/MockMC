@@ -22,7 +22,7 @@ public class WitchMock extends RaiderMock
 		implements
 			Witch,
 			MockRangedEntity<WitchMock>,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WitchBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitchBaseMock
 {
 
 	private ItemStack drinkingPotion = ItemStack.empty();

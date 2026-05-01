@@ -63,7 +63,7 @@ import java.util.Set;
  */
 public abstract class ServerMockBase extends Server.Spigot
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.ServerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.ServerBaseMock
 {
 
 	private static final String NAMESPACED_KEY_NULL = "A NamespacedKey must never be null";

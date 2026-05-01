@@ -18,7 +18,7 @@ import java.util.UUID;
 public class WardenMock extends MonsterMock
 		implements
 			Warden,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WardenBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WardenBaseMock
 {
 
 	private final Map<Entity, Integer> angerPerEntity = new HashMap<>();

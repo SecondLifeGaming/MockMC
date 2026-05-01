@@ -15,7 +15,7 @@ import java.util.UUID;
 public class ChestBoatMock extends BoatMock
 		implements
 			ChestBoat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ChestBoatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock
 {
 
 	private final Inventory inventory;

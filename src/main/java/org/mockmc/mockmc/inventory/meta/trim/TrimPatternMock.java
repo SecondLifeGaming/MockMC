@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class TrimPatternMock
 		implements
 			TrimPattern,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.trim.TrimPatternBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.trim.TrimPatternBaseMock
 {
 
 	private final NamespacedKey key;

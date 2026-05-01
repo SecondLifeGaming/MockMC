@@ -57,6 +57,7 @@ import org.mockmc.mockmc.metadata.MetadataTable;
 import org.mockmc.mockmc.persistence.PersistentDataContainerMock;
 import org.mockmc.mockmc.scheduler.paper.FoliaEntityScheduler;
 import org.mockmc.mockmc.scoreboard.TeamMock;
+import org.mockmc.mockmc.util.NbtStateMock;
 import org.mockmc.mockmc.world.WorldMock;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,7 +79,7 @@ import java.util.Objects;
 public abstract class EntityMock extends Entity.Spigot
 		implements
 			MessageTarget,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EntityBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EntityBaseMock
 {
 
 	private static final String METADATA_KEY_CANNOT_BE_NULL = "Metadata key cannot be null";
@@ -170,6 +171,8 @@ public abstract class EntityMock extends Entity.Spigot
 	protected final EntityData entityData;
 
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
+
+	private NbtStateMock nbtState = new NbtStateMock();
 
 	/**
 	 * Constructs a new {@link EntityMock} on the provided {@link ServerMock} with a
@@ -1491,5 +1494,28 @@ public abstract class EntityMock extends Entity.Spigot
 		{
 			++ticksLived;
 		}
+	}
+	/**
+	 * Applies a Base64 encoded NBT state to this entity.
+	 *
+	 * @param base64
+	 *            The Base64 encoded NBT string.
+	 * @throws java.io.IOException
+	 *             If the NBT cannot be decoded.
+	 */
+	public void applyNbt(String base64) throws java.io.IOException
+	{
+		this.nbtState = NbtStateMock.fromBase64(base64);
+		// Logic to map NBT fields to internal state would go here
+	}
+
+	/**
+	 * Gets the current NBT state of this entity.
+	 *
+	 * @return The NBT state.
+	 */
+	public NbtStateMock getNbtState()
+	{
+		return nbtState;
 	}
 }

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class HappyGhastMock extends AnimalsMock
 		implements
 			HappyGhast,
-			org.mockmc.mockmc.generated.org.bukkit.entity.HappyGhastBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.HappyGhastBaseMock
 {
 
 	/**

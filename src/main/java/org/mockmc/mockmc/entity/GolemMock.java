@@ -15,7 +15,7 @@ import java.util.UUID;
 public class GolemMock extends CreatureMock
 		implements
 			Golem,
-			org.mockmc.mockmc.generated.org.bukkit.entity.GolemBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GolemBaseMock
 {
 
 	/**

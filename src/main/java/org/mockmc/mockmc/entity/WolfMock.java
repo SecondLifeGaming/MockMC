@@ -16,7 +16,7 @@ import java.util.UUID;
 public class WolfMock extends TameableAnimalMock
 		implements
 			Wolf,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WolfBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WolfBaseMock
 {
 
 	@NotNull

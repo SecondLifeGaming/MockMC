@@ -12,7 +12,7 @@ import java.util.UUID;
 public class AbstractArrowMock extends AbstractProjectileMock
 		implements
 			AbstractArrow,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractArrowBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractArrowBaseMock
 {
 
 	private int knockbackStrength = 0;

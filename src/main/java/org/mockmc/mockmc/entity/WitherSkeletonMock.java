@@ -17,7 +17,7 @@ import java.util.UUID;
 public class WitherSkeletonMock extends AbstractSkeletonMock
 		implements
 			WitherSkeleton,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WitherSkeletonBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitherSkeletonBaseMock
 {
 
 	/**

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class StriderMock extends AnimalsMock
 		implements
 			Strider,
-			org.mockmc.mockmc.generated.org.bukkit.entity.StriderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.StriderBaseMock
 {
 
 	private static final NamespacedKey SUFFOCATING_MODIFIER_ID = NamespacedKey.minecraft("suffocating");

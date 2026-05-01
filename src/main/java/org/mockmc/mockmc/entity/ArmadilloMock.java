@@ -9,7 +9,7 @@ import java.util.UUID;
 public class ArmadilloMock extends AnimalsMock
 		implements
 			Armadillo,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ArmadilloBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ArmadilloBaseMock
 {
 
 	/**

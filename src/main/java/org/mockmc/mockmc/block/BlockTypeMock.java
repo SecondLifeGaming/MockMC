@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 public class BlockTypeMock<B extends BlockData>
 		implements
 			BlockType.Typed<B>,
-			org.mockmc.mockmc.generated.org.bukkit.block.BlockTypeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BlockTypeBaseMock
 {
 
 	private final NamespacedKey key;

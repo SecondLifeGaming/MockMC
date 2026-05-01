@@ -21,7 +21,7 @@ import java.util.UUID;
 public class CreakingMock extends MonsterMock
 		implements
 			Creaking,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CreakingBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CreakingBaseMock
 {
 
 	@Nullable

@@ -25,7 +25,7 @@ import static org.bukkit.attribute.AttributeModifier.Operation.MULTIPLY_SCALAR_1
 public class AttributeInstanceMock
 		implements
 			AttributeInstance,
-			org.mockmc.mockmc.generated.org.bukkit.attribute.AttributeInstanceBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.attribute.AttributeInstanceBaseMock
 {
 
 	@NotNull

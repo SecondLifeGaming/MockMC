@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class LoomInventoryMock extends InventoryMock
 		implements
 			LoomInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.LoomInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.LoomInventoryBaseMock
 {
 
 	/**

@@ -10,7 +10,9 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see TileStateMock
  */
-public class VaultStateMock extends TileStateMock implements org.mockmc.mockmc.generated.org.bukkit.block.VaultBaseMock
+public class VaultStateMock extends TileStateMock
+		implements
+			org.mockmc.mockmc.generated.server.org.bukkit.block.VaultBaseMock
 {
 
 	protected VaultStateMock(@NotNull Block block)

@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class MerchantInventoryViewBuilderMock<V extends InventoryView>
 		implements
 			MerchantInventoryViewBuilder<V>,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.view.builder.MerchantInventoryViewBuilderBaseMock<V>
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.view.builder.MerchantInventoryViewBuilderBaseMock<V>
 {
 
 	private final MenuTypeMock<V, ?> menuType;

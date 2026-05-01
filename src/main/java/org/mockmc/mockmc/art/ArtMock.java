@@ -12,19 +12,23 @@ import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.util.OldKeyedEnumMock;
 import java.util.Objects;
 
+/**
+ * Custom Art implementation for Paper 1.21.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class ArtMock extends OldKeyedEnumMock<Art> implements Art, org.mockmc.mockmc.generated.org.bukkit.ArtBaseMock
+{"deprecation", "removal"})
+public class ArtMock extends OldKeyedEnumMock<Art>
+		implements
+			Art,
+			org.mockmc.mockmc.generated.server.org.bukkit.ArtBaseMock
 {
 
 	private final int blockHeight;
-
 	private final int blockWidth;
-
 	private final int id;
-
 	private final NamespacedKey key;
-
 	private final Key assetId;
 
 	@Nullable
@@ -46,6 +50,9 @@ public class ArtMock extends OldKeyedEnumMock<Art> implements Art, org.mockmc.mo
 		this.title = title;
 	}
 
+	/**
+	 * Static factory to create an ArtMock from a JsonObject.
+	 */
 	public static ArtMock from(JsonObject jsonObject)
 	{
 		String name = jsonObject.get("name").getAsString();
@@ -54,20 +61,19 @@ public class ArtMock extends OldKeyedEnumMock<Art> implements Art, org.mockmc.mo
 		int blockHeight = jsonObject.get("blockHeight").getAsInt();
 		int blockWidth = jsonObject.get("blockWidth").getAsInt();
 		int id = jsonObject.get("id").getAsInt();
-		@Nullable
+
 		NamespacedKey assetIdString = NamespacedKey.fromString(jsonObject.get("assetId").getAsString());
-		@Nullable
+
 		JsonElement authorElement = jsonObject.get("author");
-		@Nullable
-		Component author = (authorElement != null
+		Component author = (authorElement != null && !authorElement.isJsonNull()
 				? GsonComponentSerializer.gson().deserializeFromTree(authorElement)
 				: Component.empty());
-		@Nullable
+
 		JsonElement titleElement = jsonObject.get("title");
-		@Nullable
-		Component title = (titleElement != null
+		Component title = (titleElement != null && !titleElement.isJsonNull()
 				? GsonComponentSerializer.gson().deserializeFromTree(titleElement)
 				: Component.empty());
+
 		return new ArtMock(name, ordinal, key, blockHeight, blockWidth, id, assetIdString, author, title);
 	}
 
@@ -110,9 +116,13 @@ public class ArtMock extends OldKeyedEnumMock<Art> implements Art, org.mockmc.mo
 		return this.assetId;
 	}
 
+	/**
+	 * @deprecated Use {@link #assetId()} instead as per the 1.21 API changes.
+	 */
 	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@NotNull
+	@SuppressWarnings("removal")
 	public Key key()
 	{
 		return this.key;

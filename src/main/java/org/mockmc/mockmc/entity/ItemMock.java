@@ -14,7 +14,10 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class ItemMock extends EntityMock implements Item, org.mockmc.mockmc.generated.org.bukkit.entity.ItemBaseMock
+public class ItemMock extends EntityMock
+		implements
+			Item,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemBaseMock
 {
 
 	private ItemStack item;

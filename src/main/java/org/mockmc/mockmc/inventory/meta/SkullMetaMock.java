@@ -26,7 +26,7 @@ import java.util.UUID;
 @SuppressWarnings("unchecked")
 public class SkullMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.SkullMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.SkullMetaBaseMock
 {
 
 	private static final int MAX_OWNER_LENGTH = 16;

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class RavagerMock extends RaiderMock
 		implements
 			Ravager,
-			org.mockmc.mockmc.generated.org.bukkit.entity.RavagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.RavagerBaseMock
 {
 
 	private int attackTicks;

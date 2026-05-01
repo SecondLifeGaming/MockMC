@@ -14,7 +14,7 @@ import java.util.UUID;
 public class BreezeWindChargeMock extends AbstractWindChargeMock
 		implements
 			BreezeWindCharge,
-			org.mockmc.mockmc.generated.org.bukkit.entity.BreezeWindChargeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BreezeWindChargeBaseMock
 {
 
 	/**

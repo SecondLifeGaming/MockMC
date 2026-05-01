@@ -157,7 +157,7 @@ public class BaseMockGenerator implements DataGenerator {
         if (raw.isSealed()) {
             return TypeName.get(type);
         }
-        String packageName = "org.mockmc.mockmc.generated." + raw.getPackageName();
+        String packageName = getGeneratedPackageName(raw);
         String name = getMockName(raw);
         ClassName mirroredRaw = ClassName.get(packageName, name + "BaseMock");
         if (type instanceof java.lang.reflect.ParameterizedType pt) {
@@ -255,7 +255,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
 
         String bukkitPackage = clazz.getPackageName();
-        String packageName = "org.mockmc.mockmc.generated." + bukkitPackage;
+        String packageName = getGeneratedPackageName(clazz);
         String simpleName = getMockName(clazz);
         String version = getVersionForClass(clazz);
 
@@ -307,7 +307,13 @@ public class BaseMockGenerator implements DataGenerator {
                 builder.addMember("forRemoval", "$L", true);
             }
             typeSpec.addAnnotation(builder.build());
-            typeSpec.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
+            
+            String replacement = getQuirkReplacement(clazz);
+            if (replacement != null) {
+                typeSpec.addJavadoc("@deprecated $L\n", replacement);
+            } else {
+                typeSpec.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
+            }
         }
 
         return typeSpec;
@@ -333,8 +339,8 @@ public class BaseMockGenerator implements DataGenerator {
 
     private Set<String> applyClassSuppressions(Class<?> clazz, TypeSpec.Builder typeSpec) {
         Set<String> classSuppressions = new HashSet<>();
-        classSuppressions.add("deprecation");
-        classSuppressions.add("all");
+        // Removed hardcoded "all" and "deprecation" to allow for more surgical suppression at the method level.
+        // We still collect suppressions based on the class and its interfaces.
         collectSuppressions(clazz, classSuppressions);
 
         Set<java.lang.reflect.Type> allInterfaces = getAllGenericInterfaces(clazz);
@@ -449,6 +455,15 @@ public class BaseMockGenerator implements DataGenerator {
         return false;
     }
 
+    private String getGeneratedPackageName(Class<?> clazz) {
+        String pkg = clazz.getPackageName();
+        String platform = "server";
+        if (pkg.startsWith("com.velocitypowered") || pkg.startsWith("net.md_5.bungee") || pkg.startsWith("io.github.waterfallmc")) {
+            platform = "proxy";
+        }
+        return "org.mockmc.mockmc.generated." + platform + "." + pkg;
+    }
+
     private boolean isNmsType(java.lang.reflect.Type type) {
         if (type == null) return false;
         String name = type.toString();
@@ -553,7 +568,7 @@ public class BaseMockGenerator implements DataGenerator {
             builder.addAnnotation(Override.class);
         }
 
-        applyMethodAnnotations(builder, m, clazz, providers, classSuppressions);
+        applyMethodAnnotations(builder, m, clazz, ourTypeVars, typeMap, providers, classSuppressions);
         if (m.isVarArgs() && isGenericVarargs(m) && (java.lang.reflect.Modifier.isStatic(m.getModifiers()) || java.lang.reflect.Modifier.isFinal(m.getModifiers()) || java.lang.reflect.Modifier.isPrivate(m.getModifiers()))) {
             builder.addAnnotation(SafeVarargs.class);
         }
@@ -697,8 +712,8 @@ public class BaseMockGenerator implements DataGenerator {
         return false;
     }
 
-    private void applyMethodAnnotations(MethodSpec.Builder builder, Method m, Class<?> clazz, List<Method> providers, Set<String> classSuppressions) {
-        Set<String> suppressions = collectMethodSuppressions(m, clazz, providers);
+    private void applyMethodAnnotations(MethodSpec.Builder builder, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers, Set<String> classSuppressions) {
+        Set<String> suppressions = collectMethodSuppressions(m, clazz, ourTypeVars, typeMap, providers);
         suppressions.removeAll(classSuppressions); // Filter out class-level suppressions
         if (!suppressions.isEmpty()) {
             AnnotationSpec.Builder suppressBuilder = AnnotationSpec.builder(SuppressWarnings.class);
@@ -721,7 +736,15 @@ public class BaseMockGenerator implements DataGenerator {
                 depBuilder.addMember("forRemoval", "$L", true);
             }
             builder.addAnnotation(depBuilder.build());
-            builder.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
+
+            // We use a simplified signature for quirks if possible, but must handle generic types
+            String signature = getMethodSignature(m, clazz, ourTypeVars, typeMap);
+            String replacement = getQuirkReplacement(m, clazz, signature);
+            if (replacement != null) {
+                builder.addJavadoc("@deprecated $L\n", replacement);
+            } else {
+                builder.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
+            }
         }
     }
 
@@ -741,7 +764,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private Set<String> collectMethodSuppressions(Method m, Class<?> clazz, List<Method> providers) {
+    private Set<String> collectMethodSuppressions(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers) {
         Set<String> methodSuppressions = new LinkedHashSet<>();
         if (providers != null) {
             for (Method p : providers) {
@@ -750,10 +773,10 @@ public class BaseMockGenerator implements DataGenerator {
         } else {
             collectSuppressions(m, methodSuppressions);
         }
-
+    
         collectSuppressionsFromSignature(m, methodSuppressions);
-        applyMethodQuirks(m, clazz, methodSuppressions);
-
+        applyMethodQuirks(m, clazz, typeVars, typeMap, methodSuppressions);
+    
         return methodSuppressions;
     }
 
@@ -768,11 +791,22 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private void applyMethodQuirks(Method m, Class<?> clazz, Set<String> suppressions) {
+    private void applyMethodQuirks(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> suppressions) {
         if (quirks != null && quirks.has(clazz.getName())) {
             JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
             if (classQuirks.has("methodQuirks")) {
                 JsonObject methodQuirks = classQuirks.getAsJsonObject("methodQuirks");
+                String signature = getMethodSignature(m, clazz, typeVars, typeMap);
+                
+                // Add suppressions from signature-based quirk
+                if (methodQuirks.has(signature)) {
+                    JsonObject mq = methodQuirks.getAsJsonObject(signature);
+                    if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
+                        mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
+                    }
+                }
+                
+                // Add suppressions from name-based quirk
                 if (methodQuirks.has(m.getName())) {
                     JsonObject mq = methodQuirks.getAsJsonObject(m.getName());
                     if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
@@ -837,6 +871,39 @@ public class BaseMockGenerator implements DataGenerator {
             return cl.getComponentType().getTypeParameters().length > 0;
         }
         return false;
+    }
+
+    private String getQuirkReplacement(Class<?> clazz) {
+        if (quirks != null && quirks.has(clazz.getName())) {
+            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+            if (classQuirks.has("replacement")) {
+                return classQuirks.get("replacement").getAsString();
+            }
+        }
+        return null;
+    }
+
+    private String getQuirkReplacement(Method m, Class<?> clazz, String signature) {
+        if (quirks != null && quirks.has(clazz.getName())) {
+            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+            if (classQuirks.has("methodQuirks")) {
+                JsonObject methodQuirks = classQuirks.getAsJsonObject("methodQuirks");
+                // Try full signature first, then simple name
+                if (methodQuirks.has(signature)) {
+                    JsonObject mq = methodQuirks.getAsJsonObject(signature);
+                    if (mq.has("replacement")) {
+                        return mq.get("replacement").getAsString();
+                    }
+                }
+                if (methodQuirks.has(m.getName())) {
+                    JsonObject mq = methodQuirks.getAsJsonObject(m.getName());
+                    if (mq.has("replacement")) {
+                        return mq.get("replacement").getAsString();
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     private boolean isGeneratableType(Class<?> clazz) {

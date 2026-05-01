@@ -33,7 +33,7 @@ import java.util.Map;
 {"removal", "unchecked"})
 public class PotionMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.PotionMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.PotionMetaBaseMock
 {
 
 	public static final String BASE_POTION_TYPE = "base-potion-type";

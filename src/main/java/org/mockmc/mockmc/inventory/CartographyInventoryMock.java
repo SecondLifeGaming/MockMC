@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class CartographyInventoryMock extends InventoryMock
 		implements
 			CartographyInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.CartographyInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.CartographyInventoryBaseMock
 {
 
 	/**

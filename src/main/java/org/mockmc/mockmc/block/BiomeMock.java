@@ -9,7 +9,7 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 public class BiomeMock extends OldKeyedEnumMock<Biome>
 		implements
 			Biome,
-			org.mockmc.mockmc.generated.org.bukkit.block.BiomeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BiomeBaseMock
 {
 
 	public BiomeMock(String name, int ordinal, NamespacedKey key)

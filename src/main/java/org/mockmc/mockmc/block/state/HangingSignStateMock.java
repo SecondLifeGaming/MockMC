@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class HangingSignStateMock extends SignStateMock
 		implements
 			HangingSign,
-			org.mockmc.mockmc.generated.org.bukkit.block.HangingSignBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.HangingSignBaseMock
 {
 
 	public HangingSignStateMock(@NotNull Material material)

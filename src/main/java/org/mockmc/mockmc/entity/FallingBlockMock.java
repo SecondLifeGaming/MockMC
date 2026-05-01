@@ -21,7 +21,7 @@ import java.util.UUID;
 public class FallingBlockMock extends EntityMock
 		implements
 			FallingBlock,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FallingBlockBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FallingBlockBaseMock
 {
 
 	private BlockState blockState = new BlockStateMock(Material.SAND);

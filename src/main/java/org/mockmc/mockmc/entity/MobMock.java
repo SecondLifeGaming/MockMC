@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
-import org.mockmc.mockmc.generated.org.bukkit.entity.MobBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.entity.MobBaseMock;
 
 /**
  * Mock implementation of a {@link Mob}.

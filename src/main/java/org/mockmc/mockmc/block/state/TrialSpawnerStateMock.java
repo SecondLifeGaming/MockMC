@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class TrialSpawnerStateMock extends TileStateMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.block.TrialSpawnerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.TrialSpawnerBaseMock
 {
 
 	protected TrialSpawnerStateMock(@NotNull Block block)

@@ -18,7 +18,7 @@ import java.util.Map;
 public class FoodComponentMock
 		implements
 			FoodComponent,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.FoodComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.FoodComponentBaseMock
 {
 
 	private int nutrition;

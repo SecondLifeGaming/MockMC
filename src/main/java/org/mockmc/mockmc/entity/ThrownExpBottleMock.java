@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ThrownExpBottleMock extends ThrowableProjectileMock
 		implements
 			ThrownExpBottle,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ThrownExpBottleBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ThrownExpBottleBaseMock
 {
 
 	@NotNull

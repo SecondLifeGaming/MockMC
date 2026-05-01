@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 public class DecoratedPotInventoryMock extends InventoryMock
 		implements
 			DecoratedPotInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.DecoratedPotInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.DecoratedPotInventoryBaseMock
 {
 
 	public DecoratedPotInventoryMock(@Nullable InventoryHolder holder)

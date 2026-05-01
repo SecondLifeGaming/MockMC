@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class BlastFurnaceStateMock extends AbstractFurnaceStateMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.block.BlastFurnaceBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BlastFurnaceBaseMock
 {
 
 	/**

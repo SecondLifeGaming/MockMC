@@ -14,7 +14,7 @@ import java.util.UUID;
 public class LingeringPotionMock extends ThrownPotionMock
 		implements
 			LingeringPotion,
-			org.mockmc.mockmc.generated.org.bukkit.entity.LingeringPotionBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LingeringPotionBaseMock
 {
 
 	/**

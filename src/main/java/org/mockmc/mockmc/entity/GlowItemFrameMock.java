@@ -14,7 +14,7 @@ import java.util.UUID;
 public class GlowItemFrameMock extends ItemFrameMock
 		implements
 			GlowItemFrame,
-			org.mockmc.mockmc.generated.org.bukkit.entity.GlowItemFrameBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GlowItemFrameBaseMock
 {
 
 	/**

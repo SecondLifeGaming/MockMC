@@ -9,6 +9,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Base class for legacy Keyed Enums.
+ *
+ * @mockmc.version 1.21-1.0.0
+ */
 @SuppressWarnings(
 {"deprecation", "removal"})
 public abstract class OldKeyedEnumMock<T extends OldEnum<T>> extends OldEnumMock<T> implements Keyed

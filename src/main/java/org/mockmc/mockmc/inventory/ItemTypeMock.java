@@ -52,7 +52,7 @@ import lombok.EqualsAndHashCode;
 {"UnstableApiUsage", "unchecked"})
 public class ItemTypeMock<M extends ItemMeta>
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.ItemTypeTypedBaseMock<M>
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ItemTypeTypedBaseMock<M>
 {
 
 	private final NamespacedKey namespacedKey;

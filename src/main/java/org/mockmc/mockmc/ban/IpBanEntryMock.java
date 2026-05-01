@@ -11,7 +11,7 @@ import java.util.Date;
 public class IpBanEntryMock
 		implements
 			BanEntry<InetAddress>,
-			org.mockmc.mockmc.generated.org.bukkit.BanEntryBaseMock<InetAddress>
+			org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<InetAddress>
 {
 
 	private final String target;

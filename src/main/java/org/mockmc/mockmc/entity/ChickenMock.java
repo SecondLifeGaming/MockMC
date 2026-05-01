@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ChickenMock extends AnimalsMock
 		implements
 			Chicken,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ChickenBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ChickenBaseMock
 {
 
 	@NotNull

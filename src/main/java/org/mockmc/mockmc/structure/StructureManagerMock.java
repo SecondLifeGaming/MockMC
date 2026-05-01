@@ -21,7 +21,7 @@ import java.util.Map;
 public class StructureManagerMock
 		implements
 			StructureManager,
-			org.mockmc.mockmc.generated.org.bukkit.structure.StructureManagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.structure.StructureManagerBaseMock
 {
 
 	private final Map<NamespacedKey, Structure> structures = new HashMap<>();

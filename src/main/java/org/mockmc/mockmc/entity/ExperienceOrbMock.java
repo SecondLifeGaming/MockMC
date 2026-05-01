@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ExperienceOrbMock extends EntityMock
 		implements
 			ExperienceOrb,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ExperienceOrbBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ExperienceOrbBaseMock
 {
 
 	private int experience;

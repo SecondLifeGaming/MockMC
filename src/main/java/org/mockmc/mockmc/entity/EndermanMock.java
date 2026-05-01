@@ -26,7 +26,7 @@ import java.util.UUID;
 public class EndermanMock extends MonsterMock
 		implements
 			Enderman,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EndermanBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EndermanBaseMock
 {
 
 	private static final SplittableRandom random = new SplittableRandom();

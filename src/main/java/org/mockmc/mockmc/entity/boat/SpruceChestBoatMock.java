@@ -15,7 +15,7 @@ import java.util.UUID;
 public class SpruceChestBoatMock extends ChestBoatMock
 		implements
 			SpruceChestBoat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.boat.SpruceChestBoatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.SpruceChestBoatBaseMock
 {
 
 	public SpruceChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)

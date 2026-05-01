@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class ExplosiveMinecartMock extends MinecartMock
 		implements
 			ExplosiveMinecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.minecart.ExplosiveMinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.ExplosiveMinecartBaseMock
 {
 
 	private int fuseTicks = -1;

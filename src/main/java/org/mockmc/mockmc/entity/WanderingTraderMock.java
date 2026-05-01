@@ -16,7 +16,7 @@ import java.util.UUID;
 public class WanderingTraderMock extends AbstractVillagerMock
 		implements
 			WanderingTrader,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WanderingTraderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WanderingTraderBaseMock
 {
 
 	private int despawnDelay = 0;

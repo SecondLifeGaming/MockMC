@@ -9,7 +9,7 @@ import java.util.UUID;
 public class LlamaSpitMock extends ProjectileMock
 		implements
 			LlamaSpit,
-			org.mockmc.mockmc.generated.org.bukkit.entity.LlamaSpitBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LlamaSpitBaseMock
 {
 
 	/**

@@ -14,7 +14,7 @@ import org.mockmc.mockmc.exception.UnimplementedOperationException;
 public interface MockRangedEntity<T extends MobMock>
 		extends
 			RangedEntity,
-			org.mockmc.mockmc.generated.com.destroystokyo.paper.entity.RangedEntityBaseMock
+			org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedEntityBaseMock
 {
 
 	/**

@@ -34,7 +34,7 @@ import java.util.Optional;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class BlockMock implements Block, org.mockmc.mockmc.generated.org.bukkit.block.BlockBaseMock
+public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.bukkit.block.BlockBaseMock
 {
 
 	private final MetadataTable metadataTable = new MetadataTable();

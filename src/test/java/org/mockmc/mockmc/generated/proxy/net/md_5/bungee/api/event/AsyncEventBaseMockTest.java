@@ -1,0 +1,17 @@
+// Auto-generated mechanical sanity test for AsyncEventBaseMock
+package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.event;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+public class AsyncEventBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	public void testSafeDefaults()
+	{
+		AsyncEventBaseMock mock = new AsyncEventBaseMock()
+		{
+		};
+		assertSafeDefault(mock.toString());
+	}
+}

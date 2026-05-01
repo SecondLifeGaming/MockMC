@@ -20,7 +20,10 @@ import java.util.Map;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class ObjectiveMock implements Objective, org.mockmc.mockmc.generated.org.bukkit.scoreboard.ObjectiveBaseMock
+public class ObjectiveMock
+		implements
+			Objective,
+			org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ObjectiveBaseMock
 {
 
 	@Nullable

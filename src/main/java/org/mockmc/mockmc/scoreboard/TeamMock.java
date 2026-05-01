@@ -31,7 +31,7 @@ import java.util.logging.Level;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class TeamMock implements Team, org.mockmc.mockmc.generated.org.bukkit.scoreboard.TeamBaseMock
+public class TeamMock implements Team, org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.TeamBaseMock
 {
 
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
