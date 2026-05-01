@@ -254,7 +254,6 @@ public class BaseMockGenerator implements DataGenerator {
             return;
         }
 
-        String bukkitPackage = clazz.getPackageName();
         String packageName = getGeneratedPackageName(clazz);
         String simpleName = getMockName(clazz);
         String version = getVersionForClass(clazz);

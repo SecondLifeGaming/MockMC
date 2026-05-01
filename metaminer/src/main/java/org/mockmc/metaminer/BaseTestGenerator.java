@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -74,7 +73,6 @@ public class BaseTestGenerator implements DataGenerator {
     }
 
     private void generateTestForClass(Class<?> clazz) throws IOException {
-        String bukkitPackage = clazz.getPackageName();
         String packageName = getGeneratedPackageName(clazz);
         String simpleName = clazz.getSimpleName().replace("$", "");
         String baseMockName = simpleName + "BaseMock";

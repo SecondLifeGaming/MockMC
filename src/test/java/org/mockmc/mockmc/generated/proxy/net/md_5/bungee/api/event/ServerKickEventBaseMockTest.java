@@ -17,9 +17,9 @@ public class ServerKickEventBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getState());
 		assertSafeDefault(mock.getReason());
 		assertSafeDefault(mock.getPlayer());
+		assertSafeDefault(mock.getKickReasonComponent());
 		assertSafeDefault(mock.getKickReason());
 		assertSafeDefault(mock.getCancelServer());
-		assertSafeDefault(mock.getKickReasonComponent());
 		assertSafeDefault(mock.getKickedFrom());
 	}
 }
