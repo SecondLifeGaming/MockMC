@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
@@ -45,9 +43,12 @@ public class RegistryAccessMock implements RegistryAccess
 		return getRegistry(registryKey);
 	}
 
+	private static final java.util.Map<Class<?>, RegistryKey<?>> CLASS_TO_KEY_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
 	{
-		return (RegistryKey<T>) CLASS_NAME_KEY_MAP.inverse().get(type.getName());
+		return (RegistryKey<T>) CLASS_TO_KEY_CACHE.computeIfAbsent(type,
+				t -> (RegistryKey<T>) CLASS_NAME_KEY_MAP.inverse().get(t.getName()));
 	}
 
 	@Override
@@ -159,14 +160,36 @@ public class RegistryAccessMock implements RegistryAccess
 		return output;
 	}
 
+	private static final Map<String, Registry<?>> SIMPLE_REGISTRY_CACHE = new HashMap<>();
+
 	private static <T extends Keyed> Registry<T> findSimpleRegistry(String targetClassName)
 	{
-		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, targetClassName)).map(RegistryAccessMock::getValue)
-				.filter(Objects::nonNull).findAny().orElseThrow(
-						() -> new UnimplementedOperationException("Could not find registry for " + targetClassName));
+		if (SIMPLE_REGISTRY_CACHE.isEmpty())
+		{
+			for (Field field : Registry.class.getDeclaredFields())
+			{
+				if (Registry.class.isAssignableFrom(field.getType()) && Modifier.isPublic(field.getModifiers())
+						&& Modifier.isStatic(field.getModifiers()))
+				{
+					if (field.getGenericType() instanceof ParameterizedType type)
+					{
+						String typeName = type.getActualTypeArguments()[0].getTypeName();
+						Registry<?> registry = getValue(field);
+						if (registry != null)
+						{
+							SIMPLE_REGISTRY_CACHE.put(typeName, registry);
+						}
+					}
+				}
+			}
+		}
+
+		Registry<T> registry = (Registry<T>) SIMPLE_REGISTRY_CACHE.get(targetClassName);
+		if (registry == null)
+		{
+			throw new UnimplementedOperationException("Could not find registry for " + targetClassName);
+		}
+		return registry;
 	}
 
 }

@@ -150,7 +150,7 @@ public class ServerMock extends ServerMockBase
 
 	private final UnsafeValuesMock unsafe = new UnsafeValuesMock();
 
-	private final Set<EntityMock> entities = new HashSet<>();
+	private final Set<EntityMock> entities = java.util.concurrent.ConcurrentHashMap.newKeySet();
 
 	private static final String PLAYER_ADD = "player add";
 	private static final String COMMAND_DISPATCH = "command dispatch";
@@ -222,7 +222,7 @@ public class ServerMock extends ServerMockBase
 	 */
 	public boolean isOnMainThread()
 	{
-		return mainThread.equals(Thread.currentThread());
+		return Thread.currentThread() == mainThread;
 	}
 
 	/**
@@ -262,6 +262,19 @@ public class ServerMock extends ServerMockBase
 	public Set<EntityMock> getEntities()
 	{
 		return Collections.unmodifiableSet(entities);
+	}
+
+	/**
+	 * Returns the internal set of entities. Should only be used internally for
+	 * performance-critical loops.
+	 *
+	 * @return The internal set of entities.
+	 */
+	@org.jetbrains.annotations.ApiStatus.Internal
+	@NotNull
+	public Set<EntityMock> getEntitiesInternal()
+	{
+		return entities;
 	}
 
 	/**

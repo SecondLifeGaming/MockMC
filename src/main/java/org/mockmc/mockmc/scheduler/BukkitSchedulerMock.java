@@ -217,7 +217,7 @@ public class BukkitSchedulerMock
 
 	private void processEntities()
 	{
-		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntities())
+		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntitiesInternal())
 		{
 			if (!entity.isValid())
 			{

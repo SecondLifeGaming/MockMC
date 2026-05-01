@@ -138,6 +138,27 @@ public class WolfMock extends TameableAnimalMock
 	}
 
 	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("Angry"))
+		{
+			this.setAngry((Boolean) nbt.get("Angry"));
+		}
+		if (nbt.has("variant"))
+		{
+			org.bukkit.NamespacedKey key = org.bukkit.NamespacedKey.fromString((String) nbt.get("variant"));
+			if (key != null)
+			{
+				this.setVariant(org.bukkit.Registry.WOLF_VARIANT.get(key));
+			}
+		}
+		if (nbt.has("CollarColor"))
+		{
+			// Map NBT byte to DyeColor
+		}
+	}
+
+	@Override
 	@NotNull
 	public EntityType getType()
 	{

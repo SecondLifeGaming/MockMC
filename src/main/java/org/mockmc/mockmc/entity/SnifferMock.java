@@ -121,6 +121,24 @@ public class SnifferMock extends AnimalsMock
 	}
 
 	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("State"))
+		{
+			try
+			{
+				this.setState(State.valueOf((String) nbt.get("State")));
+			} catch (IllegalArgumentException ignored)
+			{
+			}
+		}
+		if (nbt.has("ExploredLocations"))
+		{
+			// In a real implementation we would parse the list of locations
+		}
+	}
+
+	@Override
 	@NotNull
 	public EntityType getType()
 	{
