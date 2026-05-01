@@ -18,6 +18,7 @@ import java.util.UUID;
  * Mock implementation of an {@link Sniffer}.
  *
  * @see AnimalsMock
+ * @mockmc.version 1.21-1.0.0
  */
 public class SnifferMock extends AnimalsMock
 		implements
@@ -28,6 +29,8 @@ public class SnifferMock extends AnimalsMock
 	private final List<Location> exploredLocations = new ArrayList<>();
 
 	private State state = State.IDLING;
+
+	private boolean canDig = true;
 
 	/**
 	 * Constructs a new {@link Sniffer} on the provided {@link ServerMock} with a
@@ -97,6 +100,24 @@ public class SnifferMock extends AnimalsMock
 				// No sound is emitted
 			}
 		}
+	}
+
+	@Override
+	public boolean canDig()
+	{
+		return this.canDig;
+	}
+
+	public void setCanDig(boolean canDig)
+	{
+		this.canDig = canDig;
+	}
+
+	@Override
+	@NotNull
+	public Location findPossibleDigLocation()
+	{
+		return this.getLocation().add(0, -1, 0);
 	}
 
 	@Override
