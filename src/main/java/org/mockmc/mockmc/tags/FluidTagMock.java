@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Mock implementation of a fluid tag.
+ *
  * @mockmc.version 1.21-1.0.0
  */
 public class FluidTagMock extends BaseTagMock<Fluid>

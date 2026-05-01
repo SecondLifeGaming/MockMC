@@ -164,9 +164,9 @@ public class RegistryAccessMock implements RegistryAccess
 		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
 				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
 				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, targetClassName)).map(RegistryAccessMock::getValue).filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + targetClassName));
+				.filter(a -> genericTypeMatches(a, targetClassName)).map(RegistryAccessMock::getValue)
+				.filter(Objects::nonNull).findAny().orElseThrow(
+						() -> new UnimplementedOperationException("Could not find registry for " + targetClassName));
 	}
 
 }

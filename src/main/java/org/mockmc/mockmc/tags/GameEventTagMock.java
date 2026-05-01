@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Mock implementation of a game event tag.
+ *
  * @mockmc.version 1.21-1.0.0
  */
 public class GameEventTagMock extends BaseTagMock<GameEvent>

@@ -91,10 +91,8 @@ public class WardenMock extends MonsterMock
 	@Nullable
 	public LivingEntity getEntityAngryAt()
 	{
-		return angerPerEntity.entrySet().stream()
-				.filter(entry -> entry.getKey() instanceof LivingEntity)
-				.max(Comparator.comparingInt(Map.Entry::getValue))
-				.map(entry -> (LivingEntity) entry.getKey())
+		return angerPerEntity.entrySet().stream().filter(entry -> entry.getKey() instanceof LivingEntity)
+				.max(Comparator.comparingInt(Map.Entry::getValue)).map(entry -> (LivingEntity) entry.getKey())
 				.orElse(null);
 	}
 
@@ -124,6 +122,7 @@ public class WardenMock extends MonsterMock
 
 	/**
 	 * Gets the last sensed disturbance location.
+	 *
 	 * @return The disturbance location, or null if none.
 	 * @mockmc.version 1.21-1.0.0
 	 */
@@ -135,6 +134,7 @@ public class WardenMock extends MonsterMock
 
 	/**
 	 * Gets the current sonic boom cooldown in ticks.
+	 *
 	 * @return The cooldown.
 	 * @mockmc.version 1.21-1.0.0
 	 */
@@ -145,7 +145,9 @@ public class WardenMock extends MonsterMock
 
 	/**
 	 * Sets the current sonic boom cooldown in ticks.
-	 * @param cooldown The cooldown.
+	 *
+	 * @param cooldown
+	 *            The cooldown.
 	 * @mockmc.version 1.21-1.0.0
 	 */
 	public void setSonicBoomCooldown(int cooldown)
@@ -155,6 +157,7 @@ public class WardenMock extends MonsterMock
 
 	/**
 	 * Gets an unmodifiable view of the anger map.
+	 *
 	 * @return The anger map.
 	 * @mockmc.version 1.21-1.0.0
 	 */
