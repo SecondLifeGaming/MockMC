@@ -40,7 +40,7 @@ public class RegistryAccessMock implements RegistryAccess
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
 		if (registryKey == null)
 		{
-			return findSimpleRegistry(type);
+			return findSimpleRegistry(type.getName());
 		}
 		return getRegistry(registryKey);
 	}
@@ -57,9 +57,19 @@ public class RegistryAccessMock implements RegistryAccess
 		{
 			return (Registry<T>) registries.get(registryKey);
 		}
-		Registry<T> registry = createRegistry(registryKey);
-		registries.put(registryKey, registry);
-		return registry;
+		// Put a placeholder to prevent infinite recursion
+		Registry<T> placeholder = new RegistryMock<>(registryKey);
+		registries.put(registryKey, placeholder);
+
+		try
+		{
+			Registry<T> registry = createRegistry(registryKey);
+			registries.put(registryKey, registry);
+			return registry;
+		} catch (Exception e)
+		{
+			return placeholder;
+		}
 	}
 
 	private static <T extends Keyed> Registry<T> createRegistry(RegistryKey<T> key)
@@ -67,7 +77,8 @@ public class RegistryAccessMock implements RegistryAccess
 		// Attempt to find the registry in Bukkit's Registry class first
 		try
 		{
-			return findSimpleRegistry((Class<T>) getClass(CLASS_NAME_KEY_MAP.get(key)));
+			String className = CLASS_NAME_KEY_MAP.get(key);
+			return findSimpleRegistry(className);
 		} catch (Exception e)
 		{
 			// Fallback to a generic RegistryMock if not found in Bukkit's Registry
@@ -86,11 +97,11 @@ public class RegistryAccessMock implements RegistryAccess
 		}
 	}
 
-	private static boolean genericTypeMatches(Field a, Class<?> tClass)
+	private static boolean genericTypeMatches(Field a, String targetClassName)
 	{
 		if (a.getGenericType() instanceof ParameterizedType type)
 		{
-			return type.getActualTypeArguments()[0].equals(tClass);
+			return type.getActualTypeArguments()[0].getTypeName().equals(targetClassName);
 		}
 		return false;
 	}
@@ -148,14 +159,14 @@ public class RegistryAccessMock implements RegistryAccess
 		return output;
 	}
 
-	private static <T extends Keyed> Registry<T> findSimpleRegistry(Class<T> tClass)
+	private static <T extends Keyed> Registry<T> findSimpleRegistry(String targetClassName)
 	{
 		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
 				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
 				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass)).map(RegistryAccessMock::getValue).filter(Objects::nonNull)
+				.filter(a -> genericTypeMatches(a, targetClassName)).map(RegistryAccessMock::getValue).filter(Objects::nonNull)
 				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass));
+				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + targetClassName));
 	}
 
 }

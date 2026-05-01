@@ -197,6 +197,7 @@ public class ServerMock extends ServerMockBase
 	private ServerMock(BukkitSchedulerMock scheduler)
 	{
 		super(scheduler);
+		Bukkit.setServer(this);
 		org.mockmc.mockmc.configuration.ConfigurationRegistrar.register();
 		TagsMock.loadDefaultTags(this, true);
 		PaperCommandsMock.INSTANCE.newDispatcher();
