@@ -1,9 +1,12 @@
 package org.mockmc.mockmc.util;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.io.*;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,39 +19,41 @@ import java.util.Map;
 public class NbtStateMock
 {
 
+	private static final Gson GSON = new Gson();
+
 	@Getter
 	private final Map<String, Object> data = new HashMap<>();
 
 	/**
-	 * Decodes a Base64 string into NBT state. Note: This is a simplified
-	 * implementation for mocking purposes. In a full implementation, this would use
-	 * a real NBT decoder.
+	 * Decodes a Base64 string into NBT state. In this mock implementation, we
+	 * expect the Base64 to encode a JSON representation of the NBT data.
 	 */
 	public static NbtStateMock fromBase64(String base64) throws IOException
 	{
 		NbtStateMock mock = new NbtStateMock();
-		byte[] bytes = Base64.getDecoder().decode(base64);
-
-		try (DataInputStream in = new DataInputStream(new ByteArrayInputStream(bytes)))
+		if (base64 == null || base64.isEmpty())
 		{
-			// Placeholder for NBT decoding logic
-			// For now, we just log that we received data.
-			// Full implementation would traverse the NBT tree.
+			return mock;
+		}
+		byte[] bytes = Base64.getDecoder().decode(base64);
+		String json = new String(bytes, StandardCharsets.UTF_8);
+		Map<String, Object> decoded = GSON.fromJson(json, new TypeToken<Map<String, Object>>()
+		{
+		}.getType());
+		if (decoded != null)
+		{
+			mock.data.putAll(decoded);
 		}
 		return mock;
 	}
 
 	/**
-	 * Encodes the current state back to a Base64 NBT string.
+	 * Encodes the current state back to a Base64 NBT string (as JSON).
 	 */
 	public String toBase64() throws IOException
 	{
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		try (DataOutputStream out = new DataOutputStream(bos))
-		{
-			// Placeholder for NBT encoding logic
-		}
-		return Base64.getEncoder().encodeToString(bos.toByteArray());
+		String json = GSON.toJson(data);
+		return Base64.getEncoder().encodeToString(json.getBytes(StandardCharsets.UTF_8));
 	}
 
 	public void set(String key, Object value)
@@ -65,4 +70,5 @@ public class NbtStateMock
 	{
 		return data.containsKey(key);
 	}
+
 }

@@ -19,11 +19,14 @@ public final class FoliaEntityScheduler implements EntityScheduler
 	private static final String TASK_CANNOT_BE_NULL = "task cannot be null";
 	private static final String RUNNABLE_CANNOT_BE_NULL = "runnable cannot be null";
 
+	private final org.mockmc.mockmc.ServerMock server;
 	private final BukkitSchedulerMock scheduler;
 	private final Entity entity;
 
-	public FoliaEntityScheduler(@NotNull BukkitSchedulerMock scheduler, @NotNull Entity entity)
+	public FoliaEntityScheduler(@NotNull org.mockmc.mockmc.ServerMock server, @NotNull BukkitSchedulerMock scheduler,
+			@NotNull Entity entity)
 	{
+		this.server = server;
 		this.scheduler = scheduler;
 		this.entity = entity;
 	}
@@ -57,7 +60,10 @@ public final class FoliaEntityScheduler implements EntityScheduler
 		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.ENTITY,
+				entity, null, null, null);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
+		server.registerFoliaTask(scheduledTask);
 
 		scheduler.runTask(plugin, () ->
 		{
@@ -81,7 +87,10 @@ public final class FoliaEntityScheduler implements EntityScheduler
 		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.ENTITY,
+				entity, null, null, null);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
+		server.registerFoliaTask(scheduledTask);
 
 		scheduler.runTaskLater(plugin, () ->
 		{
@@ -105,7 +114,10 @@ public final class FoliaEntityScheduler implements EntityScheduler
 		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.ENTITY,
+				entity, null, null, null);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
+		server.registerFoliaTask(scheduledTask);
 
 		scheduler.runTaskTimer(plugin, () ->
 		{

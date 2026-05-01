@@ -197,6 +197,32 @@ public class BeeMock extends AnimalsMock
 	}
 
 	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("HasNectar"))
+		{
+			this.setHasNectar((Boolean) nbt.get("HasNectar"));
+		}
+		if (nbt.has("HasStung"))
+		{
+			this.setHasStung((Boolean) nbt.get("HasStung"));
+		}
+		if (nbt.has("Anger"))
+		{
+			this.setAnger(((Double) nbt.get("Anger")).intValue());
+		}
+	}
+
+	@Override
+	protected void onTick()
+	{
+		if (nectar && getTicksLived() % 20 == 0)
+		{
+			getWorld().spawnParticle(org.bukkit.Particle.HAPPY_VILLAGER, getLocation(), 1);
+		}
+	}
+
+	@Override
 	@NotNull
 	public EntityType getType()
 	{

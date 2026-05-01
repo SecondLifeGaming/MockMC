@@ -2076,4 +2076,53 @@ public class ServerMock extends ServerMockBase
 	{
 		return this.serverConfiguration;
 	}
+
+	/**
+	 * Asserts that at least one task was scheduled on the given entity's regional
+	 * scheduler.
+	 *
+	 * @param entity
+	 *            The entity whose region to check.
+	 */
+	public void assertScheduledOnEntityRegion(@NotNull Entity entity)
+	{
+		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		if (this.foliaSchedulers.getTasks(entity).isEmpty())
+		{
+			throw new AssertionError("No task was scheduled on the region of entity: " + entity);
+		}
+	}
+
+	/**
+	 * Asserts that at least one task was scheduled on the given region.
+	 *
+	 * @param world
+	 *            The world.
+	 * @param chunkX
+	 *            The chunk X coordinate.
+	 * @param chunkZ
+	 *            The chunk Z coordinate.
+	 */
+	public void assertScheduledOnRegion(@NotNull World world, int chunkX, int chunkZ)
+	{
+		Preconditions.checkNotNull(world, "World cannot be null");
+		if (this.foliaSchedulers.getTasks(world, chunkX, chunkZ).isEmpty())
+		{
+			throw new AssertionError(
+					String.format("No task was scheduled on region [%s, %d, %d]", world.getName(), chunkX, chunkZ));
+		}
+	}
+
+	/**
+	 * Asserts that at least one task was scheduled on the global region scheduler.
+	 */
+	public void assertScheduledOnGlobalRegion()
+	{
+		if (this.foliaSchedulers.getTasks(org.mockmc.mockmc.scheduler.paper.PaperScheduledTask.TaskType.GLOBAL)
+				.isEmpty())
+		{
+			throw new AssertionError("No task was scheduled on the global region");
+		}
+	}
+
 }

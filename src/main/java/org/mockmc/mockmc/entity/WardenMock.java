@@ -167,6 +167,33 @@ public class WardenMock extends MonsterMock
 		return Collections.unmodifiableMap(angerPerEntity);
 	}
 
+	/**
+	 * Simulates the Warden receiving a vibration from a specific entity.
+	 *
+	 * @param source
+	 *            The entity that caused the vibration.
+	 * @param frequency
+	 *            The frequency of the vibration (1-15).
+	 */
+	public void simulateVibration(@NotNull Entity source, int frequency)
+	{
+		Preconditions.checkNotNull(source, "Source cannot be null");
+		Preconditions.checkArgument(1 <= frequency && frequency <= 15, "Frequency must be between 1-15");
+		// High frequency vibrations increase anger more
+		int angerIncrease = (frequency >= 10) ? 10 : 2;
+		this.setAnger(source, this.getAnger(source) + angerIncrease);
+	}
+
+	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("AngerLevel"))
+		{
+			// In a real implementation we would map this to the angerPerEntity map
+			// or a global anger level.
+		}
+	}
+
 	@Override
 	public EntityType getType()
 	{

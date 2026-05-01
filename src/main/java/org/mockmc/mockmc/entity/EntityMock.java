@@ -1395,7 +1395,7 @@ public abstract class EntityMock extends Entity.Spigot
 	@NotNull
 	public EntityScheduler getScheduler()
 	{
-		return new FoliaEntityScheduler(this.server.getScheduler(), this);
+		return new FoliaEntityScheduler(this.server, this.server.getScheduler(), this);
 	}
 
 	@Override
@@ -1493,7 +1493,13 @@ public abstract class EntityMock extends Entity.Spigot
 		if (!isDead())
 		{
 			++ticksLived;
+			onTick();
 		}
+	}
+
+	protected void onTick()
+	{
+		// To be overridden by subclasses
 	}
 	/**
 	 * Applies a Base64 encoded NBT state to this entity.
@@ -1506,7 +1512,35 @@ public abstract class EntityMock extends Entity.Spigot
 	public void applyNbt(String base64) throws java.io.IOException
 	{
 		this.nbtState = NbtStateMock.fromBase64(base64);
-		// Logic to map NBT fields to internal state would go here
+		if (nbtState.has("CustomName"))
+		{
+			this.setCustomName((String) nbtState.get("CustomName"));
+		}
+		if (nbtState.has("Invulnerable"))
+		{
+			this.setInvulnerable((Boolean) nbtState.get("Invulnerable"));
+		}
+		if (nbtState.has("Glowing"))
+		{
+			this.setGlowing((Boolean) nbtState.get("Glowing"));
+		}
+		if (nbtState.has("Invisible"))
+		{
+			this.setInvisible((Boolean) nbtState.get("Invisible"));
+		}
+		this.onApplyNbt(nbtState);
+	}
+
+	/**
+	 * Called when NBT state is applied to this entity. Subclasses should override
+	 * this to map custom NBT fields to their internal state.
+	 *
+	 * @param nbt
+	 *            The NBT state being applied.
+	 */
+	protected void onApplyNbt(@NotNull NbtStateMock nbt)
+	{
+		// To be overridden by subclasses
 	}
 
 	/**
