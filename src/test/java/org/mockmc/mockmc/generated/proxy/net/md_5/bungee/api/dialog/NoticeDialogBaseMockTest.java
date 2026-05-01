@@ -13,6 +13,7 @@ public class NoticeDialogBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.action());
 		assertSafeDefault(mock.getBase());
 	}
 }

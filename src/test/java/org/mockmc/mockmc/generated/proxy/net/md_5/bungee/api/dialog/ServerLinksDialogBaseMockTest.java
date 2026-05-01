@@ -13,8 +13,10 @@ public class ServerLinksDialogBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.action());
 		assertSafeDefault(mock.getBase());
 		assertSafeDefault(mock.columns());
+		assertSafeDefault(mock.buttonWidth());
 		assertSafeDefault(mock.exitAction());
 	}
 }

@@ -13,5 +13,6 @@ public class RunCommandActionBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.template());
 	}
 }

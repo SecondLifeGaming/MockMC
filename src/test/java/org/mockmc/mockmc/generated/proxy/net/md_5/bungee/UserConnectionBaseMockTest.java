@@ -27,6 +27,7 @@ public class UserConnectionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getClientBrand());
 		assertSafeDefault(mock.getChatMode());
+		assertSafeDefault(mock.getSocketAddress());
 		assertSafeDefault(mock.getCh());
 		assertSafeDefault(mock.getForgeClientHandler());
 		assertSafeDefault(mock.getExtraDataInHandshake());
@@ -38,7 +39,6 @@ public class UserConnectionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getServerSentScoreboard());
 		assertSafeDefault(mock.getSentBossBars());
 		assertSafeDefault(mock.getChatSerializer());
-		assertSafeDefault(mock.getSocketAddress());
 		assertSafeDefault(mock.getPendingConnection());
 		assertSafeDefault(mock.getForgeServerHandler());
 		assertSafeDefault(mock.getGroups());

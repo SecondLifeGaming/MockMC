@@ -13,7 +13,9 @@ public class SingleOptionInputBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.options());
 		assertSafeDefault(mock.width());
+		assertSafeDefault(mock.label());
 		assertSafeDefault(mock.labelVisible());
 	}
 }

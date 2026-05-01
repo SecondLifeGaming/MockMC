@@ -36,7 +36,6 @@ public interface SubscribeBaseMock extends Subscribe
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default PostOrder order()
 	{

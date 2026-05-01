@@ -117,7 +117,6 @@ public interface ProxyServerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default int getProtocolVersion()
 	{
@@ -170,7 +169,6 @@ public interface ProxyServerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default Map<String, ServerInfo> getServers()
 	{
@@ -182,7 +180,6 @@ public interface ProxyServerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default String getGameVersion()
 	{
@@ -210,7 +207,6 @@ public interface ProxyServerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void broadcast(String arg0)
 	{

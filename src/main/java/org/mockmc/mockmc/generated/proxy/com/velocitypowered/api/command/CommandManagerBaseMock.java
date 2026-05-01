@@ -48,7 +48,6 @@ public interface CommandManagerBaseMock extends CommandManager
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void register(BrigadierCommand arg0)
 	{
@@ -66,7 +65,6 @@ public interface CommandManagerBaseMock extends CommandManager
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void register(String arg0, Command arg1, String... arg2)
 	{

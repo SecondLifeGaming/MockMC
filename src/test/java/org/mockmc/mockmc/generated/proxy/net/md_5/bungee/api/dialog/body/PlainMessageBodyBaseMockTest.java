@@ -13,5 +13,7 @@ public class PlainMessageBodyBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.width());
+		assertSafeDefault(mock.contents());
 	}
 }

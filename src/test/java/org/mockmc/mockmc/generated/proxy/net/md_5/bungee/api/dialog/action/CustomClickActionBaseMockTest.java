@@ -14,5 +14,6 @@ public class CustomClickActionBaseMockTest extends GeneratedTestBase
 		};
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.id());
+		assertSafeDefault(mock.additions());
 	}
 }

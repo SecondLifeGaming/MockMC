@@ -35,7 +35,6 @@ public interface EventManagerBaseMock extends EventManager
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default <E> void register(Object arg0, Class<E> arg1, PostOrder arg2, EventHandler<E> arg3)
 	{

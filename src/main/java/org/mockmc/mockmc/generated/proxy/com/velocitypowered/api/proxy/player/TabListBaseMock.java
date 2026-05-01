@@ -34,7 +34,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3)
 	{
@@ -47,7 +46,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5)
@@ -61,7 +59,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, IdentifiedKey arg4)
 	{
@@ -74,7 +71,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5, int arg6)
@@ -88,7 +84,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4)
 	{
@@ -115,7 +110,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5, int arg6, boolean arg7)
@@ -129,7 +123,6 @@ public interface TabListBaseMock extends TabList
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setHeaderAndFooter(Component arg0, Component arg1)
 	{

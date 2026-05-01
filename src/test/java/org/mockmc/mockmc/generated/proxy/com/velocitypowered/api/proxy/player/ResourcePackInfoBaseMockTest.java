@@ -17,6 +17,7 @@ public class ResourcePackInfoBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getOrigin());
 		assertSafeDefault(mock.getHash());
 		assertSafeDefault(mock.getPrompt());
+		assertSafeDefault(mock.asBuilder());
 		assertSafeDefault(mock.getOriginalOrigin());
 	}
 }

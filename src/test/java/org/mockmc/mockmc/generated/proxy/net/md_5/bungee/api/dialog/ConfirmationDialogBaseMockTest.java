@@ -15,5 +15,6 @@ public class ConfirmationDialogBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.no());
 		assertSafeDefault(mock.getBase());
+		assertSafeDefault(mock.yes());
 	}
 }

@@ -27,6 +27,20 @@ public class BaseTestGenerator implements DataGenerator {
 
     @Override
     public void generateData() throws IOException {
+        URLClassLoader customLoader = createClassLoader();
+        ClassPath classPath = ClassPath.from(customLoader);
+        Set<Class<?>> toGenerate = scanForClasses(classPath);
+
+        if (LOGGER.isLoggable(java.util.logging.Level.INFO)) {
+            LOGGER.info(String.format("Found %d classes to generate tests for.", toGenerate.size()));
+        }
+
+        for (Class<?> c : toGenerate) {
+            generateTestForClass(c);
+        }
+    }
+
+    private URLClassLoader createClassLoader() throws IOException {
         List<URL> urls = new ArrayList<>();
         File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
         if (jarFiles != null) {
@@ -34,9 +48,10 @@ public class BaseTestGenerator implements DataGenerator {
                 urls.add(jar.toURI().toURL());
             }
         }
+        return new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+    }
 
-        URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-        ClassPath classPath = ClassPath.from(customLoader);
+    private Set<Class<?>> scanForClasses(ClassPath classPath) {
         Set<Class<?>> toGenerate = new HashSet<>();
         String[] packagesToScan = {
                 "org.bukkit",
@@ -48,21 +63,18 @@ public class BaseTestGenerator implements DataGenerator {
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
+                if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
                 try {
-                    if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
                     Class<?> c = classInfo.load();
                     if (isGeneratableType(c)) {
                         toGenerate.add(c);
                     }
                 } catch (Exception | LinkageError _) {
+                    // Ignore loading errors
                 }
             }
         }
-
-        LOGGER.info("Found " + toGenerate.size() + " classes to generate tests for.");
-        for (Class<?> c : toGenerate) {
-            generateTestForClass(c);
-        }
+        return toGenerate;
     }
 
     private boolean isGeneratableType(Class<?> clazz) {
@@ -93,17 +105,14 @@ public class BaseTestGenerator implements DataGenerator {
         Set<String> checkedMethods = new HashSet<>();
         try {
             for (Method m : clazz.getDeclaredMethods()) {
-                if (!java.lang.reflect.Modifier.isPublic(m.getModifiers())) continue;
-                if (java.lang.reflect.Modifier.isStatic(m.getModifiers())) continue;
-                if (checkedMethods.add(m.getName()) && m.getParameterCount() == 0) {
-                    Class<?> rt = m.getReturnType();
-                    if (!rt.isPrimitive() && rt != void.class) {
-                        testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
-                    }
+                if (shouldGenerateSafeDefaultCheck(m, checkedMethods)) {
+                    testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
                 }
             }
-        } catch (Throwable t) {
-            LOGGER.warning("Could not fully inspect methods for " + clazz.getName() + ": " + t.getMessage());
+        } catch (Exception | LinkageError e) {
+            if (LOGGER.isLoggable(java.util.logging.Level.WARNING)) {
+                LOGGER.warning(String.format("Could not fully inspect methods for %s: %s", clazz.getName(), e.getMessage()));
+            }
         }
 
         testClass.addMethod(testMethod.build());
@@ -114,6 +123,17 @@ public class BaseTestGenerator implements DataGenerator {
                 .build()
                 .writeTo(testSourceFolder);
     }
+    private boolean shouldGenerateSafeDefaultCheck(Method m, Set<String> checkedMethods) {
+        if (!java.lang.reflect.Modifier.isPublic(m.getModifiers()) || java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+            return false;
+        }
+        if (m.getParameterCount() != 0 || !checkedMethods.add(m.getName())) {
+            return false;
+        }
+        Class<?> rt = m.getReturnType();
+        return !rt.isPrimitive() && rt != void.class;
+    }
+
     private String getGeneratedPackageName(Class<?> clazz) {
         String pkg = clazz.getPackageName();
         String platform = "server";

@@ -33,7 +33,6 @@ public interface ServerInfoBaseMock extends ServerInfo
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default InetSocketAddress getAddress()
 	{

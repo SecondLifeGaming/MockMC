@@ -23,7 +23,6 @@ public interface PendingConnectionBaseMock extends PendingConnection, Connection
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default String getUUID()
 	{

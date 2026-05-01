@@ -54,7 +54,6 @@ public interface CommandSenderBaseMock extends CommandSender
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void sendMessages(String... arg0)
 	{
@@ -72,7 +71,6 @@ public interface CommandSenderBaseMock extends CommandSender
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void sendMessage(String arg0)
 	{

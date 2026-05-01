@@ -14,6 +14,8 @@ public class ActionButtonBaseMockTest extends GeneratedTestBase
 		};
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.action());
+		assertSafeDefault(mock.width());
+		assertSafeDefault(mock.label());
 		assertSafeDefault(mock.tooltip());
 	}
 }

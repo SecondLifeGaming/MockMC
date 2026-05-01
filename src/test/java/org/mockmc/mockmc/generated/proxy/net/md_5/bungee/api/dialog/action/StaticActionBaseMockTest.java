@@ -13,5 +13,6 @@ public class StaticActionBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.toString());
+		assertSafeDefault(mock.clickEvent());
 	}
 }

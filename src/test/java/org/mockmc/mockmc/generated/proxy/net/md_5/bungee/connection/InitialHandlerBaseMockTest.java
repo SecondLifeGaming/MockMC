@@ -21,13 +21,13 @@ public class InitialHandlerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getListener());
 		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getClientBrand());
+		assertSafeDefault(mock.getSocketAddress());
+		assertSafeDefault(mock.getHandshake());
 		assertSafeDefault(mock.getLoginProfile());
 		assertSafeDefault(mock.getExtraDataInHandshake());
 		assertSafeDefault(mock.getRewriteId());
 		assertSafeDefault(mock.getBrandMessage());
 		assertSafeDefault(mock.getRegisteredChannels());
-		assertSafeDefault(mock.getHandshake());
-		assertSafeDefault(mock.getSocketAddress());
 		assertSafeDefault(mock.getOfflineId());
 		assertSafeDefault(mock.getLoginRequest());
 	}

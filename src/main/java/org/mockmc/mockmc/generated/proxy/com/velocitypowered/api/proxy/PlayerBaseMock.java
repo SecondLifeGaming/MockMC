@@ -85,7 +85,6 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void sendResourcePack(String arg0, byte[] arg1)
 	{
@@ -97,7 +96,6 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void sendResourcePack(String arg0)
 	{
@@ -254,7 +252,6 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ResourcePackInfo getAppliedResourcePack()
 	{
@@ -362,7 +359,6 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void clearHeaderAndFooter()
 	{
@@ -387,7 +383,6 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ResourcePackInfo getPendingResourcePack()
 	{

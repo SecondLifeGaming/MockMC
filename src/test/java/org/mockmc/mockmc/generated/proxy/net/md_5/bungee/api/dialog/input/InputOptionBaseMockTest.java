@@ -15,5 +15,6 @@ public class InputOptionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.id());
 		assertSafeDefault(mock.display());
+		assertSafeDefault(mock.initial());
 	}
 }

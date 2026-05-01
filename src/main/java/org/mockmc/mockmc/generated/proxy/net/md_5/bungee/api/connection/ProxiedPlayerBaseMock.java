@@ -51,7 +51,6 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, CommandSenderBaseM
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default String getUUID()
 	{
@@ -83,7 +82,6 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, CommandSenderBaseM
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default Scoreboard getScoreboard()
 	{

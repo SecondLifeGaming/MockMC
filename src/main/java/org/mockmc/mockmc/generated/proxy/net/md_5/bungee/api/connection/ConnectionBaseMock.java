@@ -22,7 +22,6 @@ public interface ConnectionBaseMock extends Connection
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default InetSocketAddress getAddress()
 	{
@@ -56,7 +55,6 @@ public interface ConnectionBaseMock extends Connection
 	 *             modern build cycles.
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void disconnect(String arg0)
 	{

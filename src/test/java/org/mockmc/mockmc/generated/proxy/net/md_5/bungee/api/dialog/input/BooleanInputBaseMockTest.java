@@ -14,6 +14,7 @@ public class BooleanInputBaseMockTest extends GeneratedTestBase
 		};
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.label());
+		assertSafeDefault(mock.initial());
 		assertSafeDefault(mock.onTrue());
 		assertSafeDefault(mock.onFalse());
 	}

@@ -23,6 +23,8 @@ public class BaseMockGenerator implements DataGenerator {
     private static final String ADDITIONAL_SUPPRESSIONS = "additionalSuppressions";
     private static final String EXCLUDE_INTERFACES = "excludeInterfaces";
     private static final String EXCLUDE_METHODS = "excludeMethods";
+    private static final String METHOD_QUIRKS = "methodQuirks";
+    private static final String REPLACEMENT = "replacement";
 
     private static final String SINCE = "since";
     private static final String RETURN_NULL = "return null";
@@ -765,13 +767,9 @@ public class BaseMockGenerator implements DataGenerator {
 
     private Set<String> collectMethodSuppressions(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers) {
         Set<String> methodSuppressions = new LinkedHashSet<>();
-        if (providers != null) {
-            for (Method p : providers) {
-                collectSuppressions(p, methodSuppressions);
-            }
-        } else {
-            collectSuppressions(m, methodSuppressions);
-        }
+        // NOTE: We do NOT call collectSuppressions(m, ...) or loop over providers here because we don't want to 
+        // suppress "deprecation" just because the method itself is marked @Deprecated. 
+        // We only care about types in the signature.
     
         collectSuppressionsFromSignature(m, methodSuppressions);
         applyMethodQuirks(m, clazz, typeVars, typeMap, methodSuppressions);
@@ -791,27 +789,23 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private void applyMethodQuirks(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> suppressions) {
-        if (quirks != null && quirks.has(clazz.getName())) {
-            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
-            if (classQuirks.has("methodQuirks")) {
-                JsonObject methodQuirks = classQuirks.getAsJsonObject("methodQuirks");
-                String signature = getMethodSignature(m, clazz, typeVars, typeMap);
-                
-                // Add suppressions from signature-based quirk
-                if (methodQuirks.has(signature)) {
-                    JsonObject mq = methodQuirks.getAsJsonObject(signature);
-                    if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
-                        mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
-                    }
-                }
-                
-                // Add suppressions from name-based quirk
-                if (methodQuirks.has(m.getName())) {
-                    JsonObject mq = methodQuirks.getAsJsonObject(m.getName());
-                    if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
-                        mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
-                    }
-                }
+        if (quirks == null || !quirks.has(clazz.getName())) return;
+
+        JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+        if (!classQuirks.has(METHOD_QUIRKS)) return;
+
+        JsonObject methodQuirks = classQuirks.getAsJsonObject(METHOD_QUIRKS);
+        String signature = getMethodSignature(m, clazz, typeVars, typeMap);
+
+        addQuirkSuppressions(methodQuirks, signature, suppressions);
+        addQuirkSuppressions(methodQuirks, m.getName(), suppressions);
+    }
+
+    private void addQuirkSuppressions(JsonObject methodQuirks, String key, Set<String> suppressions) {
+        if (methodQuirks.has(key)) {
+            JsonObject mq = methodQuirks.getAsJsonObject(key);
+            if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
+                mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
             }
         }
     }
@@ -875,31 +869,32 @@ public class BaseMockGenerator implements DataGenerator {
     private String getQuirkReplacement(Class<?> clazz) {
         if (quirks != null && quirks.has(clazz.getName())) {
             JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
-            if (classQuirks.has("replacement")) {
-                return classQuirks.get("replacement").getAsString();
+            if (classQuirks.has(REPLACEMENT)) {
+                return classQuirks.get(REPLACEMENT).getAsString();
             }
         }
         return null;
     }
 
     private String getQuirkReplacement(Method m, Class<?> clazz, String signature) {
-        if (quirks != null && quirks.has(clazz.getName())) {
-            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
-            if (classQuirks.has("methodQuirks")) {
-                JsonObject methodQuirks = classQuirks.getAsJsonObject("methodQuirks");
-                // Try full signature first, then simple name
-                if (methodQuirks.has(signature)) {
-                    JsonObject mq = methodQuirks.getAsJsonObject(signature);
-                    if (mq.has("replacement")) {
-                        return mq.get("replacement").getAsString();
-                    }
-                }
-                if (methodQuirks.has(m.getName())) {
-                    JsonObject mq = methodQuirks.getAsJsonObject(m.getName());
-                    if (mq.has("replacement")) {
-                        return mq.get("replacement").getAsString();
-                    }
-                }
+        if (quirks == null || !quirks.has(clazz.getName())) return null;
+
+        JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+        if (!classQuirks.has(METHOD_QUIRKS)) return null;
+
+        JsonObject methodQuirks = classQuirks.getAsJsonObject(METHOD_QUIRKS);
+        String replacement = getReplacementFromQuirk(methodQuirks, signature);
+        if (replacement == null) {
+            replacement = getReplacementFromQuirk(methodQuirks, m.getName());
+        }
+        return replacement;
+    }
+
+    private String getReplacementFromQuirk(JsonObject methodQuirks, String key) {
+        if (methodQuirks.has(key)) {
+            JsonObject mq = methodQuirks.getAsJsonObject(key);
+            if (mq.has(REPLACEMENT)) {
+                return mq.get(REPLACEMENT).getAsString();
             }
         }
         return null;
