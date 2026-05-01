@@ -15,8 +15,8 @@ public class QueryResultBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getAddress());
 		assertSafeDefault(mock.getVersion());
-		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getWorldName());
+		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getGameType());
 		assertSafeDefault(mock.getGameId());

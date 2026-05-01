@@ -13,7 +13,7 @@ public class ServerLinkBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertSafeDefault(mock.getUrl());
-		assertSafeDefault(mock.getCustomLabel());
 		assertSafeDefault(mock.getBuiltInType());
+		assertSafeDefault(mock.getCustomLabel());
 	}
 }

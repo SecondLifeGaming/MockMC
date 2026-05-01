@@ -71,7 +71,7 @@ public class RegistryAccessMock implements RegistryAccess
 		} catch (Exception e)
 		{
 			// Fallback to a generic RegistryMock if not found in Bukkit's Registry
-			return new RegistryMock<>(key);
+			return new RegistryMock<T>(key);
 		}
 	}
 
