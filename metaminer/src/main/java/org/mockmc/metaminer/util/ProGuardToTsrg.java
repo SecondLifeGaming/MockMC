@@ -8,9 +8,9 @@ import java.util.regex.Pattern;
 
 public class ProGuardToTsrg {
 
-    private static final Pattern CLASS_PATTERN = Pattern.compile("^(\\S+) -> (\\S+):$");
-    private static final Pattern FIELD_PATTERN = Pattern.compile("^ {4}(?:\\d+:\\d+:)?(\\S+) (\\S+) -> (\\S+)$");
-    private static final Pattern METHOD_PATTERN = Pattern.compile("^ {4}(?:\\d+:\\d+:)?(\\S+) (\\S+)\\(([^)]*)\\) -> (\\S+)$");
+    private static final Pattern CLASS_PATTERN = Pattern.compile("^(\\S++) -> ([^:]++):$");
+    private static final Pattern FIELD_PATTERN = Pattern.compile("^ {4}(?:\\d++:\\d++:)?(\\S++) (\\S++) -> (\\S++)$");
+    private static final Pattern METHOD_PATTERN = Pattern.compile("^ {4}(?:\\d++:\\d++:)?(\\S++) ([^ (]++)\\(([^)]*+)\\) -> (\\S++)$");
 
     private ProGuardToTsrg() {
         throw new UnsupportedOperationException("Utility class");
