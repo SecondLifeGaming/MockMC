@@ -69,9 +69,12 @@ public class MaterialDataGenerator implements DataGenerator
 			BlockData data = material.createBlockData();
 			String dataString = data.getAsString(false);
 			Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
-			if (!matcher.find())
+			if (material.key() == null || !matcher.find())
 			{
-				json.add(material.key().toString(), new JsonObject());
+				if (material.key() != null)
+				{
+					json.add(material.key().toString(), new JsonObject());
+				}
 				return;
 			}
 

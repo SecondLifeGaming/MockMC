@@ -14,10 +14,10 @@ public class ProxyConfigBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.getMotd());
-		assertSafeDefault(mock.getForcedHosts());
 		assertSafeDefault(mock.getQueryMap());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getAttemptConnectionOrder());
 		assertSafeDefault(mock.getFavicon());
+		assertSafeDefault(mock.getForcedHosts());
 	}
 }

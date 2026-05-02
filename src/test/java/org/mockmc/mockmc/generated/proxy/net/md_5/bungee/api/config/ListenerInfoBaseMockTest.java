@@ -18,9 +18,9 @@ public class ListenerInfoBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getForcedHosts());
 		assertSafeDefault(mock.getSocketAddress());
-		assertSafeDefault(mock.getServerPriority());
 		assertSafeDefault(mock.getDefaultServer());
 		assertSafeDefault(mock.getFallbackServer());
+		assertSafeDefault(mock.getServerPriority());
 		assertSafeDefault(mock.getTabListType());
 	}
 }

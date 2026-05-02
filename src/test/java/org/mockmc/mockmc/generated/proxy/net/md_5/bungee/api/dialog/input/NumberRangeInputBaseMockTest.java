@@ -17,7 +17,7 @@ public class NumberRangeInputBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.step());
 		assertSafeDefault(mock.width());
 		assertSafeDefault(mock.label());
-		assertSafeDefault(mock.labelFormat());
 		assertSafeDefault(mock.initial());
+		assertSafeDefault(mock.labelFormat());
 	}
 }

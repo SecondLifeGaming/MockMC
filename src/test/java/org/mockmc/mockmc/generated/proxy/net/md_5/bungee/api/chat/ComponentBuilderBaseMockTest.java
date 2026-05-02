@@ -17,7 +17,7 @@ public class ComponentBuilderBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.create());
 		assertSafeDefault(mock.build());
 		assertSafeDefault(mock.getParts());
-		assertSafeDefault(mock.resetCursor());
 		assertSafeDefault(mock.getCurrentComponent());
+		assertSafeDefault(mock.resetCursor());
 	}
 }

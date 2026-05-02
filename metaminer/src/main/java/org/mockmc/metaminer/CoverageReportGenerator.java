@@ -42,7 +42,10 @@ public class CoverageReportGenerator implements DataGenerator {
                     if (isGeneratable(c)) {
                         long classMethods = countPublicMethods(c);
                         totalMethods += classMethods;
-                        mirroredMethods += classMethods;
+                        
+                        if (isMockGenerated(c)) {
+                            mirroredMethods += classMethods;
+                        }
                         
                         String topPkg = c.getPackageName();
                         packageStats.put(topPkg, packageStats.getOrDefault(topPkg, 0L) + classMethods);
@@ -58,6 +61,8 @@ public class CoverageReportGenerator implements DataGenerator {
 
     private static final String[] PACKAGES_TO_SCAN = {
             "org.bukkit",
+            "org.spigotmc",
+            "co.aikar.timings",
             "com.destroystokyo.paper",
             "io.papermc.paper",
             "com.velocitypowered.api",
@@ -77,7 +82,27 @@ public class CoverageReportGenerator implements DataGenerator {
     }
 
     private boolean isGeneratable(Class<?> c) {
-        return java.lang.reflect.Modifier.isPublic(c.getModifiers()) && !c.isSealed();
+        if (!java.lang.reflect.Modifier.isPublic(c.getModifiers()) || c.isSealed()) return false;
+        return c.isInterface() || java.lang.reflect.Modifier.isAbstract(c.getModifiers());
+    }
+
+    private boolean isMockGenerated(Class<?> clazz) {
+        String pkg = clazz.getPackageName();
+        String platform = "server";
+        if (pkg.startsWith("com.velocitypowered") || pkg.startsWith("net.md_5.bungee") || pkg.startsWith("io.github.waterfallmc")) {
+            platform = "proxy";
+        }
+        
+        String simpleName = getMockName(clazz);
+        String path = "src/main/java/org/mockmc/mockmc/generated/" + platform + "/" + pkg.replace('.', '/') + "/" + simpleName + "BaseMock.java";
+        return new File(jarDirectory.getParentFile(), path).exists();
+    }
+
+    private String getMockName(Class<?> raw) {
+        if (raw.getEnclosingClass() != null) {
+            return getMockName(raw.getEnclosingClass()) + raw.getSimpleName();
+        }
+        return raw.getSimpleName().replace("$", "");
     }
 
     private long countPublicMethods(Class<?> c) {

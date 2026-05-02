@@ -212,6 +212,8 @@ public class BaseMockGenerator implements DataGenerator {
         Set<Class<?>> toGenerate = new HashSet<>();
         String[] packagesToScan = {
                 "org.bukkit",
+                "org.spigotmc",
+                "co.aikar.timings",
                 "com.destroystokyo.paper",
                 "io.papermc.paper",
                 "com.velocitypowered.api",
@@ -969,7 +971,7 @@ public class BaseMockGenerator implements DataGenerator {
         if (clazz == null) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
-        return (name.startsWith("org.bukkit.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc."))
+        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc."))
                 && !name.contains(".craftbukkit.");
     }
 }

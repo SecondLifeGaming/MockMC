@@ -18,7 +18,7 @@ public class TextInputBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.label());
 		assertSafeDefault(mock.maxLength());
 		assertSafeDefault(mock.multiline());
-		assertSafeDefault(mock.labelVisible());
 		assertSafeDefault(mock.initial());
+		assertSafeDefault(mock.labelVisible());
 	}
 }

@@ -16,7 +16,7 @@ public class ClientCommandBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getCommand());
 		assertSafeDefault(mock.getSeenMessages());
-		assertSafeDefault(mock.getChain());
 		assertSafeDefault(mock.getSignatures());
+		assertSafeDefault(mock.getChain());
 	}
 }

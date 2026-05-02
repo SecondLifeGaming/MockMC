@@ -22,13 +22,13 @@ public class PlayerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getModInfo());
 		assertSafeDefault(mock.getPlayerSettings());
 		assertSafeDefault(mock.getCurrentServer());
-		assertSafeDefault(mock.getEffectiveLocale());
-		assertSafeDefault(mock.getGameProfileProperties());
 		assertSafeDefault(mock.getTabList());
 		assertSafeDefault(mock.getAppliedResourcePack());
 		assertSafeDefault(mock.getPendingResourcePack());
 		assertSafeDefault(mock.getAppliedResourcePacks());
 		assertSafeDefault(mock.getPendingResourcePacks());
 		assertSafeDefault(mock.getClientBrand());
+		assertSafeDefault(mock.getEffectiveLocale());
+		assertSafeDefault(mock.getGameProfileProperties());
 	}
 }

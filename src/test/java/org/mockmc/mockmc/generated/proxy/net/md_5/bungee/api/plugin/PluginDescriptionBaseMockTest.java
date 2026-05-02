@@ -21,7 +21,7 @@ public class PluginDescriptionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getAuthor());
 		assertSafeDefault(mock.getMain());
 		assertSafeDefault(mock.getLibraries());
-		assertSafeDefault(mock.getDepends());
 		assertSafeDefault(mock.getSoftDepends());
+		assertSafeDefault(mock.getDepends());
 	}
 }
