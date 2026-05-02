@@ -100,6 +100,7 @@ public class BaseTestGenerator implements DataGenerator {
 
         // Instantiate via anonymous class if it's an interface (which BaseMocks are)
         testMethod.addStatement("$T mock = new $T() {}", baseMockClass, baseMockClass);
+        testMethod.addStatement("assertNotNull(mock)");
 
         // Scan methods for safe default checks
         Set<String> checkedMethods = new HashSet<>();
