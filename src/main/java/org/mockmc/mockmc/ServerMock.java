@@ -144,6 +144,14 @@ public class ServerMock extends ServerMockBase
 			"I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error.",
 			NamedTextColor.RED);
 
+	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
+	private static final String WORLD_CANNOT_BE_NULL = "World cannot be null";
+	private static final String MOTD_CANNOT_BE_NULL = "motd cannot be null";
+	private static final String MESSAGE_CANNOT_BE_NULL = "message cannot be null";
+	private static final String KEY_CANNOT_BE_NULL = "key cannot be null";
+	private static final String ADDRESS_CANNOT_BE_NULL = "Address cannot be null";
+	private static final String SPAWN_CATEGORY_CANNOT_BE_NULL = "SpawnCategory cannot be null";
+
 	private final Logger logger = Logger.getLogger("ServerMock");
 
 	private final Thread mainThread = Thread.currentThread();
@@ -234,7 +242,7 @@ public class ServerMock extends ServerMockBase
 	 */
 	public void registerEntity(@NotNull EntityMock entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		AsyncCatcher.catchOp("entity add");
 		entities.add(entity);
 	}
@@ -247,7 +255,7 @@ public class ServerMock extends ServerMockBase
 	 */
 	public void unregisterEntity(@NotNull EntityMock entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		Preconditions.checkArgument(!entity.isValid(), "Entity is not marked for removal");
 		AsyncCatcher.catchOp("entity remove");
 		entities.remove(entity);
@@ -773,14 +781,14 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public void banIP(@NotNull InetAddress address)
 	{
-		Preconditions.checkNotNull(address, "Address cannot be null");
+		Preconditions.checkNotNull(address, ADDRESS_CANNOT_BE_NULL);
 		this.playerList.getIPBans().addBan(address, null, (Date) null, null);
 	}
 
 	@Override
 	public void unbanIP(@NotNull InetAddress address)
 	{
-		Preconditions.checkNotNull(address, "Address cannot be null");
+		Preconditions.checkNotNull(address, ADDRESS_CANNOT_BE_NULL);
 		this.playerList.getIPBans().pardon(address);
 	}
 
@@ -811,7 +819,7 @@ public class ServerMock extends ServerMockBase
 	@Deprecated(since = "1.21")
 	public int broadcastMessage(@NotNull String message)
 	{
-		Preconditions.checkNotNull(message, "message cannot be null");
+		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL);
 		return this.broadcast(LegacyComponentSerializer.legacySection().deserialize(message));
 	}
 
@@ -822,7 +830,7 @@ public class ServerMock extends ServerMockBase
 	@Deprecated(since = "1.21")
 	public int broadcast(@NotNull String message, @NotNull String permission)
 	{
-		Preconditions.checkNotNull(message, "message cannot be null");
+		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(permission, "permission cannot be null");
 		return this.broadcast(LegacyComponentSerializer.legacySection().deserialize(message), permission);
 	}
@@ -925,7 +933,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public Recipe getRecipe(@NotNull NamespacedKey key)
 	{
-		Preconditions.checkNotNull(key, "key cannot be null");
+		Preconditions.checkNotNull(key, KEY_CANNOT_BE_NULL);
 		return this.recipeManager.getRecipeByKey(RecipeType.CRAFTING, key);
 	}
 
@@ -961,7 +969,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public boolean removeRecipe(@NotNull NamespacedKey key, boolean resendRecipes)
 	{
-		Preconditions.checkNotNull(key, "key cannot be null");
+		Preconditions.checkNotNull(key, KEY_CANNOT_BE_NULL);
 		Iterator<Recipe> iterator = recipeIterator();
 		while (iterator.hasNext())
 		{
@@ -1569,7 +1577,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public void motd(@NotNull Component motd)
 	{
-		Preconditions.checkNotNull(motd, "motd cannot be null");
+		Preconditions.checkNotNull(motd, MOTD_CANNOT_BE_NULL);
 		this.motd = motd;
 	}
 
@@ -1587,7 +1595,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public void setMotd(@NotNull String motd)
 	{
-		Preconditions.checkNotNull(motd, "motd cannot be null");
+		Preconditions.checkNotNull(motd, MOTD_CANNOT_BE_NULL);
 		this.motd = LegacyComponentSerializer.legacySection().deserialize(motd);
 	}
 
@@ -1702,7 +1710,7 @@ public class ServerMock extends ServerMockBase
 	@NotNull
 	public ChunkData createChunkData(@NotNull World world)
 	{
-		Preconditions.checkNotNull(world, "World cannot be null");
+		Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
 		return new ChunkDataMock(world);
 	}
 
@@ -1964,7 +1972,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public int getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_CANNOT_BE_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, "SpawnCategory.%s are not supported",
 				spawnCategory);
 		return (int) this.serverConfiguration.getTicksPerSpawn().getLong(spawnCategory);
@@ -2006,7 +2014,7 @@ public class ServerMock extends ServerMockBase
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
-		Preconditions.checkArgument(spawnCategory != null, "SpawnCategory cannot be null");
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_CANNOT_BE_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, "SpawnCategory.%s are not supported",
 				spawnCategory);
 		return this.serverConfiguration.getSpawnLimits().getOrDefault(spawnCategory, -1);
@@ -2099,7 +2107,7 @@ public class ServerMock extends ServerMockBase
 	 */
 	public void assertScheduledOnEntityRegion(@NotNull Entity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		if (this.foliaSchedulers.getTasks(entity).isEmpty())
 		{
 			throw new AssertionError("No task was scheduled on the region of entity: " + entity);
@@ -2118,7 +2126,7 @@ public class ServerMock extends ServerMockBase
 	 */
 	public void assertScheduledOnRegion(@NotNull World world, int chunkX, int chunkZ)
 	{
-		Preconditions.checkNotNull(world, "World cannot be null");
+		Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
 		if (this.foliaSchedulers.getTasks(world, chunkX, chunkZ).isEmpty())
 		{
 			throw new AssertionError(

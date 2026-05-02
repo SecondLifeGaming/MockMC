@@ -16,8 +16,7 @@ import net.md_5.bungee.api.chat.Keybinds;
  * @deprecated Suppressed to prevent legacy API noise from interfering with
  *             modern build cycles.
  */
-@Deprecated
-@SuppressWarnings("deprecation")
+@Deprecated(since = "1.0")
 public interface KeybindsBaseMock extends Keybinds
 {
 }

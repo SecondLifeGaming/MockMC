@@ -19,7 +19,7 @@ public class ConfigurationBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getFavicon());
 		assertSafeDefault(mock.getServersCopy());
 		assertSafeDefault(mock.getDisabledCommands());
-		assertSafeDefault(mock.getFaviconObject());
 		assertSafeDefault(mock.getServersLock());
+		assertSafeDefault(mock.getFaviconObject());
 	}
 }

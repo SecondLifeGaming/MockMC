@@ -25,6 +25,8 @@ public class EntityStateMatcher<T extends Entity> extends TypeSafeMatcher<T>
 
 	public EntityStateMatcher()
 	{
+		// This constructor is intentionally empty as the matcher is configured using
+		// fluent methods.
 	}
 
 	public EntityStateMatcher<T> withTarget(@NotNull Matcher<LivingEntity> targetMatcher)

@@ -10,7 +10,9 @@ import org.hamcrest.TypeSafeMatcher;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 /**
@@ -28,6 +30,8 @@ public class InventoryContentMatcher extends TypeSafeMatcher<Inventory>
 
 	public InventoryContentMatcher()
 	{
+		// This constructor is intentionally empty as the matcher is configured using
+		// fluent methods.
 	}
 
 	public InventoryContentMatcher withMaterial(@NotNull Material material)
@@ -71,34 +75,10 @@ public class InventoryContentMatcher extends TypeSafeMatcher<Inventory>
 	@Override
 	protected boolean matchesSafely(Inventory inventory)
 	{
-		int totalMatchAmount = 0;
-		for (ItemStack item : inventory.getContents())
-		{
-			if (item == null || item.getType() == Material.AIR)
-			{
-				continue;
-			}
-
-			if (material != null && item.getType() != material)
-			{
-				continue;
-			}
-
-			boolean allPredicatesMatch = true;
-			for (Predicate<ItemStack> predicate : predicates)
-			{
-				if (!predicate.test(item))
-				{
-					allPredicatesMatch = false;
-					break;
-				}
-			}
-
-			if (allPredicatesMatch)
-			{
-				totalMatchAmount += item.getAmount();
-			}
-		}
+		int totalMatchAmount = Arrays.stream(inventory.getContents()).filter(Objects::nonNull)
+				.filter(item -> item.getType() != Material.AIR)
+				.filter(item -> material == null || item.getType() == material)
+				.filter(item -> predicates.stream().allMatch(p -> p.test(item))).mapToInt(ItemStack::getAmount).sum();
 
 		if (amountMatcher != null)
 		{

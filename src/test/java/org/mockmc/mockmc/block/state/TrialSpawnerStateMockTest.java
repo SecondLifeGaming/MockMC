@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockmc.mockmc.MockMCExtension;
 import org.mockmc.mockmc.MockMCInject;
-import org.mockmc.mockmc.ServerMock;
-import org.mockmc.mockmc.world.WorldMock;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -41,6 +39,7 @@ class TrialSpawnerStateMockTest
 		@Override
 		public void fillInventory(@NotNull Inventory inventory, @Nullable Random random, @NotNull LootContext context)
 		{
+			// No-op for mock implementation
 		}
 
 		@Override
@@ -51,14 +50,11 @@ class TrialSpawnerStateMockTest
 	}
 
 	@MockMCInject
-	private ServerMock server;
-	private WorldMock world;
 	private TrialSpawnerStateMock trialSpawner;
 
 	@BeforeEach
 	void setUp()
 	{
-		world = server.addSimpleWorld("world");
 		trialSpawner = new TrialSpawnerStateMock(Material.TRIAL_SPAWNER);
 	}
 

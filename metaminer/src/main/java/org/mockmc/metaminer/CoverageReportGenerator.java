@@ -30,33 +30,41 @@ public class CoverageReportGenerator implements DataGenerator {
         URLClassLoader customLoader = createClassLoader();
         ClassPath classPath = ClassPath.from(customLoader);
         
+        ReportStats stats = new ReportStats();
+
+        for (String pkg : PACKAGES_TO_SCAN) {
+            processPackage(classPath, pkg, stats);
+        }
+
+        generateMarkdownReport(stats.totalMethods, stats.mirroredMethods, stats.packageStats);
+    }
+
+    private static class ReportStats {
         long totalMethods = 0;
         long mirroredMethods = 0;
         Map<String, Long> packageStats = new TreeMap<>();
+    }
 
-        for (String pkg : PACKAGES_TO_SCAN) {
-            for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
-                if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
-                try {
-                    Class<?> c = classInfo.load();
-                    if (isGeneratable(c)) {
-                        long classMethods = countPublicMethods(c);
-                        totalMethods += classMethods;
-                        
-                        if (isMockGenerated(c)) {
-                            mirroredMethods += classMethods;
-                        }
-                        
-                        String topPkg = c.getPackageName();
-                        packageStats.put(topPkg, packageStats.getOrDefault(topPkg, 0L) + classMethods);
+    private void processPackage(ClassPath classPath, String pkg, ReportStats stats) {
+        for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
+            if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
+            try {
+                Class<?> c = classInfo.load();
+                if (isGeneratable(c)) {
+                    long classMethods = countPublicMethods(c);
+                    stats.totalMethods += classMethods;
+                    
+                    if (isMockGenerated(c)) {
+                        stats.mirroredMethods += classMethods;
                     }
-                } catch (Exception | LinkageError _) {
-                    // Ignore loading errors
+                    
+                    String topPkg = c.getPackageName();
+                    stats.packageStats.put(topPkg, stats.packageStats.getOrDefault(topPkg, 0L) + classMethods);
                 }
+            } catch (Exception | LinkageError _) {
+                // Ignore loading errors
             }
         }
-
-        generateMarkdownReport(totalMethods, mirroredMethods, packageStats);
     }
 
     private static final String[] PACKAGES_TO_SCAN = {
@@ -94,8 +102,11 @@ public class CoverageReportGenerator implements DataGenerator {
         }
         
         String simpleName = getMockName(clazz);
-        String path = "src/main/java/org/mockmc/mockmc/generated/" + platform + "/" + pkg.replace('.', '/') + "/" + simpleName + "BaseMock.java";
-        return new File(jarDirectory.getParentFile(), path).exists();
+        String relativePath = "src" + File.separator + "main" + File.separator + "java" + File.separator + 
+                             "org" + File.separator + "mockmc" + File.separator + "mockmc" + File.separator + 
+                             "generated" + File.separator + platform + File.separator + 
+                             pkg.replace('.', File.separatorChar) + File.separator + simpleName + "BaseMock.java";
+        return new File(jarDirectory.getParentFile(), relativePath).exists();
     }
 
     private String getMockName(Class<?> raw) {

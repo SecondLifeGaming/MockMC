@@ -15,8 +15,8 @@ public class TabListEntryBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getProfile());
 		assertSafeDefault(mock.getDisplayNameComponent());
-		assertSafeDefault(mock.getTabList());
 		assertSafeDefault(mock.getIdentifiedKey());
+		assertSafeDefault(mock.getTabList());
 		assertSafeDefault(mock.getChatSession());
 	}
 }

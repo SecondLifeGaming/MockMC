@@ -14,7 +14,7 @@ public class ChatChainBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getSeen());
 		assertSafeDefault(mock.getReceived());
+		assertSafeDefault(mock.getSeen());
 	}
 }

@@ -15,12 +15,12 @@ import io.netty.buffer.ByteBuf;
  */
 public interface EntityMapBaseMock
 {
-	default void rewriteClientbound(ByteBuf arg0, int arg1, int arg2)
+	default void rewriteClientbound(ByteBuf arg0, int arg1, int arg2, int arg3)
 	{
 		// MockMC: EntityMap#rewriteClientbound
 	}
 
-	default void rewriteClientbound(ByteBuf arg0, int arg1, int arg2, int arg3)
+	default void rewriteClientbound(ByteBuf arg0, int arg1, int arg2)
 	{
 		// MockMC: EntityMap#rewriteClientbound
 	}

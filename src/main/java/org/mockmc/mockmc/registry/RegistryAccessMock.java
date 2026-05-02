@@ -23,14 +23,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class RegistryAccessMock implements RegistryAccess
 {
 
 	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap<>();
 	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_KEY_MAP = createClassToKeyConversions();
 
+	/**
+	 * @deprecated Use {@link #getRegistry(RegistryKey)} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
@@ -67,7 +69,7 @@ public class RegistryAccessMock implements RegistryAccess
 			Registry<T> registry = createRegistry(registryKey);
 			registries.put(registryKey, registry);
 			return registry;
-		} catch (Exception e)
+		} catch (Exception _)
 		{
 			return placeholder;
 		}
@@ -80,31 +82,11 @@ public class RegistryAccessMock implements RegistryAccess
 		{
 			String className = CLASS_NAME_KEY_MAP.get(key);
 			return findSimpleRegistry(className);
-		} catch (Exception e)
+		} catch (Exception _)
 		{
 			// Fallback to a generic RegistryMock if not found in Bukkit's Registry
-			return new RegistryMock<T>(key);
+			return new RegistryMock<>(key);
 		}
-	}
-
-	private static Class<?> getClass(String className)
-	{
-		try
-		{
-			return Class.forName(className);
-		} catch (ClassNotFoundException e)
-		{
-			throw new InternalDataLoadException(e);
-		}
-	}
-
-	private static boolean genericTypeMatches(Field a, String targetClassName)
-	{
-		if (a.getGenericType() instanceof ParameterizedType type)
-		{
-			return type.getActualTypeArguments()[0].getTypeName().equals(targetClassName);
-		}
-		return false;
 	}
 
 	private static Registry<?> getValue(Field a)
@@ -112,17 +94,18 @@ public class RegistryAccessMock implements RegistryAccess
 		try
 		{
 			return (Registry<?>) a.get(null);
-		} catch (IllegalAccessException e)
+		} catch (IllegalAccessException _)
 		{
 			throw new ReflectionAccessException(
 					"Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
 		}
 	}
 
+	private static final String REGISTRY_RELATION_FILE = "/registries/registry_key_class_relation.json";
+
 	private static @NotNull BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
-		String fileName = "/registries/registry_key_class_relation.json";
-		JsonObject object = ResourceLoader.loadResource(fileName).getAsJsonObject();
+		JsonObject object = ResourceLoader.loadResource(REGISTRY_RELATION_FILE).getAsJsonObject();
 
 		BiMap<RegistryKey<?>, String> output = HashBiMap.create();
 		for (RegistryKey<?> registryKey : getAllKeys())
@@ -151,9 +134,9 @@ public class RegistryAccessMock implements RegistryAccess
 				try
 				{
 					output.add((RegistryKey<?>) field.get(null));
-				} catch (IllegalAccessException e)
+				} catch (IllegalAccessException _)
 				{
-					throw new InternalDataLoadException(e);
+					throw new InternalDataLoadException("Could not access RegistryKey field");
 				}
 			}
 		}
@@ -166,22 +149,7 @@ public class RegistryAccessMock implements RegistryAccess
 	{
 		if (SIMPLE_REGISTRY_CACHE.isEmpty())
 		{
-			for (Field field : Registry.class.getDeclaredFields())
-			{
-				if (Registry.class.isAssignableFrom(field.getType()) && Modifier.isPublic(field.getModifiers())
-						&& Modifier.isStatic(field.getModifiers()))
-				{
-					if (field.getGenericType() instanceof ParameterizedType type)
-					{
-						String typeName = type.getActualTypeArguments()[0].getTypeName();
-						Registry<?> registry = getValue(field);
-						if (registry != null)
-						{
-							SIMPLE_REGISTRY_CACHE.put(typeName, registry);
-						}
-					}
-				}
-			}
+			populateSimpleRegistryCache();
 		}
 
 		Registry<T> registry = (Registry<T>) SIMPLE_REGISTRY_CACHE.get(targetClassName);
@@ -190,6 +158,24 @@ public class RegistryAccessMock implements RegistryAccess
 			throw new UnimplementedOperationException("Could not find registry for " + targetClassName);
 		}
 		return registry;
+	}
+
+	private static void populateSimpleRegistryCache()
+	{
+		for (Field field : Registry.class.getDeclaredFields())
+		{
+			if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers())
+					&& Registry.class.isAssignableFrom(field.getType())
+					&& field.getGenericType() instanceof ParameterizedType type)
+			{
+				String typeName = type.getActualTypeArguments()[0].getTypeName();
+				Registry<?> registry = getValue(field);
+				if (registry != null)
+				{
+					SIMPLE_REGISTRY_CACHE.put(typeName, registry);
+				}
+			}
+		}
 	}
 
 }

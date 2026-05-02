@@ -15,8 +15,8 @@ public class DialogBaseBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.body());
-		assertSafeDefault(mock.inputs());
 		assertSafeDefault(mock.title());
+		assertSafeDefault(mock.inputs());
 		assertSafeDefault(mock.pause());
 		assertSafeDefault(mock.externalTitle());
 		assertSafeDefault(mock.canCloseWithEscape());

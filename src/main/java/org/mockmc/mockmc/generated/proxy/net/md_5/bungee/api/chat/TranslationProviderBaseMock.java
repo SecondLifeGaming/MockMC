@@ -17,8 +17,7 @@ import net.md_5.bungee.api.chat.TranslationProvider;
  * @deprecated Suppressed to prevent legacy API noise from interfering with
  *             modern build cycles.
  */
-@Deprecated
-@SuppressWarnings("deprecation")
+@Deprecated(since = "1.0")
 public interface TranslationProviderBaseMock extends TranslationProvider
 {
 	/**
@@ -38,6 +37,7 @@ public interface TranslationProviderBaseMock extends TranslationProvider
 	 *             modern build cycles.
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TranslatableComponent asTranslatableComponent()
 	{
@@ -50,6 +50,7 @@ public interface TranslationProviderBaseMock extends TranslationProvider
 	 *             modern build cycles.
 	 */
 	@Override
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TranslatableComponent asTranslatableComponent(Object... arg0)
 	{

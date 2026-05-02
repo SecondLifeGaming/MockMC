@@ -24,8 +24,8 @@ public class BungeeCordBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getConfig());
 		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getGameVersion());
-		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getChannels());
+		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getServersCopy());
 		assertSafeDefault(mock.getConsole());
 		assertSafeDefault(mock.getDisabledCommands());

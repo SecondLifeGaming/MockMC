@@ -48,9 +48,9 @@ public interface PlayerBaseMock
 		extends
 			Player,
 			CommandSourceBaseMock,
+			InboundConnectionBaseMock,
 			ChannelMessageSourceBaseMock,
 			KeyIdentifiableBaseMock,
-			InboundConnectionBaseMock,
 			ChannelMessageSinkBaseMock
 {
 	@Override

@@ -23,14 +23,14 @@ import net.md_5.bungee.api.chat.HoverEvent;
  * @deprecated Suppressed to prevent legacy API noise from interfering with
  *             modern build cycles.
  */
-@Deprecated
-@SuppressWarnings("deprecation")
+@Deprecated(since = "1.0")
 public interface BaseComponentBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ComponentStyle getStyle()
 	{
@@ -42,6 +42,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setHoverEvent(HoverEvent arg0)
 	{
@@ -52,6 +53,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default HoverEvent getHoverEvent()
 	{
@@ -74,6 +76,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setStyle(ComponentStyle arg0)
 	{
@@ -84,6 +87,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setClickEvent(ClickEvent arg0)
 	{
@@ -98,7 +102,7 @@ public interface BaseComponentBaseMock
 	default Boolean isBoldRaw()
 	{
 		// MockMC: BaseComponent#isBoldRaw
-		return null;
+		return false;
 	}
 
 	/**
@@ -109,7 +113,7 @@ public interface BaseComponentBaseMock
 	default Boolean isObfuscatedRaw()
 	{
 		// MockMC: BaseComponent#isObfuscatedRaw
-		return null;
+		return false;
 	}
 
 	/**
@@ -127,6 +131,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void retain(ComponentBuilder.FormatRetention arg0)
 	{
@@ -137,6 +142,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void applyStyle(ComponentStyle arg0)
 	{
@@ -167,6 +173,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setColor(ChatColor arg0)
 	{
@@ -213,7 +220,7 @@ public interface BaseComponentBaseMock
 	default Boolean isUnderlinedRaw()
 	{
 		// MockMC: BaseComponent#isUnderlinedRaw
-		return null;
+		return false;
 	}
 
 	/**
@@ -231,6 +238,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ChatColor getColorRaw()
 	{
@@ -242,6 +250,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ChatColor getColor()
 	{
@@ -275,6 +284,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ClickEvent getClickEvent()
 	{
@@ -301,7 +311,7 @@ public interface BaseComponentBaseMock
 	default Boolean isStrikethroughRaw()
 	{
 		// MockMC: BaseComponent#isStrikethroughRaw
-		return null;
+		return false;
 	}
 
 	/**
@@ -323,7 +333,7 @@ public interface BaseComponentBaseMock
 	default Boolean isItalicRaw()
 	{
 		// MockMC: BaseComponent#isItalicRaw
-		return null;
+		return false;
 	}
 
 	/**
@@ -361,6 +371,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void addExtra(BaseComponent arg0)
 	{
@@ -392,6 +403,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default BaseComponent duplicateWithoutFormatting()
 	{
@@ -456,6 +468,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default List<BaseComponent> getExtra()
 	{
@@ -467,6 +480,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setExtra(List<BaseComponent> arg0)
 	{
@@ -488,6 +502,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default BaseComponent duplicate()
 	{
@@ -499,6 +514,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void copyFormatting(BaseComponent arg0, ComponentBuilder.FormatRetention arg1, boolean arg2)
 	{
@@ -509,6 +525,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void copyFormatting(BaseComponent arg0)
 	{
@@ -519,6 +536,7 @@ public interface BaseComponentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void copyFormatting(BaseComponent arg0, boolean arg1)
 	{

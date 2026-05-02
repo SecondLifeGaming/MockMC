@@ -175,32 +175,8 @@ public class BaseMockGenerator implements DataGenerator {
     @Override
     public void generateData() throws Exception {
         File cacheDir = new File(jarDirectory, "cache");
-        List<URL> urls = new ArrayList<>();
-        System.out.println("Scanning JAR directory: " + jarDirectory.getAbsolutePath());
-        File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
-        
-        if (jarFiles != null) {
-            for (File jar : jarFiles) {
-                File processedJar = jar;
-                
-                // 1. Crack Paper/Folia bundler if necessary
-                if (jar.getName().contains("paper") || jar.getName().contains("folia")) {
-                    org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
-                    
-                    // 2. Remap to Mojang names if we have a patched jar
-                    if (result != null) {
-                        File vanillaJar = org.mockmc.metaminer.util.MappingProvider.getVanillaServer(result.mcVersion, cacheDir);
-                        File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
-                        File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
-                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, vanillaJar, remappedJar);
-                    }
-                }
-                
-                urls.add(processedJar.toURI().toURL());
-                extractVersionInfo(jar);
-            }
-        }
-        
+        List<URL> urls = processJars(cacheDir);
+
         // 3. Add unbundled libraries recursively
         File libDir = new File(cacheDir, "libraries");
         if (libDir.exists()) {
@@ -209,6 +185,43 @@ public class BaseMockGenerator implements DataGenerator {
 
         URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
         ClassPath classPath = ClassPath.from(customLoader);
+        Set<Class<?>> toGenerate = scanPackages(classPath);
+
+        for (Class<?> c : toGenerate) {
+            generateForClass(c);
+        }
+    }
+
+    private List<URL> processJars(File cacheDir) throws Exception {
+        List<URL> urls = new ArrayList<>();
+        LOGGER.log(Level.INFO, "Scanning JAR directory: {0}", jarDirectory.getAbsolutePath());
+        File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+
+        if (jarFiles != null) {
+            for (File jar : jarFiles) {
+                File processedJar = jar;
+
+                // 1. Crack Paper/Folia bundler if necessary
+                if (jar.getName().contains("paper") || jar.getName().contains("folia")) {
+                    org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
+
+                    // 2. Remap to Mojang names if we have a patched jar
+                    if (result != null) {
+                        File vanillaJar = org.mockmc.metaminer.util.MappingProvider.getVanillaServer(result.mcVersion, cacheDir);
+                        File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
+                        File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
+                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, vanillaJar, remappedJar);
+                    }
+                }
+
+                urls.add(processedJar.toURI().toURL());
+                extractVersionInfo(jar);
+            }
+        }
+        return urls;
+    }
+
+    private Set<Class<?>> scanPackages(ClassPath classPath) {
         Set<Class<?>> toGenerate = new HashSet<>();
         String[] packagesToScan = {
                 "org.bukkit",
@@ -231,9 +244,7 @@ public class BaseMockGenerator implements DataGenerator {
                 }
             }
         }
-        for (Class<?> c : toGenerate) {
-            generateForClass(c);
-        }
+        return toGenerate;
     }
 
     private void addJarsRecursively(File dir, List<URL> urls) throws Exception {
@@ -341,6 +352,8 @@ public class BaseMockGenerator implements DataGenerator {
             AnnotationSpec.Builder builder = AnnotationSpec.builder(Deprecated.class);
             if (!d.since().isEmpty()) {
                 builder.addMember(SINCE, "$S", d.since());
+            } else {
+                builder.addMember(SINCE, "$S", "1.0");
             }
             if (d.forRemoval()) {
                 builder.addMember("forRemoval", "$L", true);
@@ -381,6 +394,9 @@ public class BaseMockGenerator implements DataGenerator {
         // Removed hardcoded "all" and "deprecation" to allow for more surgical suppression at the method level.
         // We still collect suppressions based on the class and its interfaces.
         collectSuppressions(clazz, classSuppressions);
+        if (clazz.isAnnotationPresent(Deprecated.class)) {
+            classSuppressions.remove("deprecation");
+        }
 
         Set<java.lang.reflect.Type> allInterfaces = getAllGenericInterfaces(clazz);
         for (java.lang.reflect.Type ifaceType : allInterfaces) {
@@ -597,7 +613,7 @@ public class BaseMockGenerator implements DataGenerator {
             if (isMethodGeneratable(m)) {
                 String signature = getMethodSignature(m, clazz, typeVars, typeMap);
                 if (generatedSignatures.add(signature)) {
-                    generateMethodSpec(typeSpec, m, clazz, typeVars, typeMap, methodsBySignature.get(signature), classSuppressions);
+                    generateMethodSpec(typeSpec, m, clazz, typeVars, typeMap, classSuppressions);
                 }
             }
         }
@@ -625,14 +641,14 @@ public class BaseMockGenerator implements DataGenerator {
         return sb.toString();
     }
 
-    private void generateMethodSpec(TypeSpec.Builder typeSpec, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers, Set<String> classSuppressions) {
+    private void generateMethodSpec(TypeSpec.Builder typeSpec, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> classSuppressions) {
         MethodSpec.Builder builder = MethodSpec.methodBuilder(m.getName())
                 .addModifiers(Modifier.PUBLIC, Modifier.DEFAULT);
         if (clazz.isInterface()) {
             builder.addAnnotation(Override.class);
         }
 
-        applyMethodAnnotations(builder, m, clazz, ourTypeVars, typeMap, providers, classSuppressions);
+        applyMethodAnnotations(builder, m, clazz, ourTypeVars, typeMap, classSuppressions);
         if (m.isVarArgs() && isGenericVarargs(m) && (java.lang.reflect.Modifier.isStatic(m.getModifiers()) || java.lang.reflect.Modifier.isFinal(m.getModifiers()) || java.lang.reflect.Modifier.isPrivate(m.getModifiers()))) {
             builder.addAnnotation(SafeVarargs.class);
         }
@@ -670,24 +686,24 @@ public class BaseMockGenerator implements DataGenerator {
     private boolean addPrimitiveReturnValue(MethodSpec.Builder builder, Method m) {
         Class<?> returnType = m.getReturnType();
         if (returnType == void.class) return true;
-        if (returnType == boolean.class) {
+        if (returnType == double.class || returnType == Double.class) {
+            builder.addStatement("return 0.0d");
+            return true;
+        }
+        if (returnType == boolean.class || returnType == Boolean.class) {
             builder.addStatement("return false");
             return true;
         }
-        if (returnType == int.class || returnType == byte.class || returnType == short.class || returnType == char.class) {
+        if (returnType == int.class || returnType == Integer.class || returnType == byte.class || returnType == Byte.class || returnType == short.class || returnType == Short.class || returnType == char.class || returnType == Character.class) {
             builder.addStatement("return 0");
             return true;
         }
-        if (returnType == long.class) {
+        if (returnType == long.class || returnType == Long.class) {
             builder.addStatement("return 0L");
             return true;
         }
-        if (returnType == float.class) {
+        if (returnType == float.class || returnType == Float.class) {
             builder.addStatement("return 0.0f");
-            return true;
-        }
-        if (returnType == double.class) {
-            builder.addStatement("return 0.0d");
             return true;
         }
         if (returnType == String.class) {
@@ -780,8 +796,8 @@ public class BaseMockGenerator implements DataGenerator {
         return false;
     }
 
-    private void applyMethodAnnotations(MethodSpec.Builder builder, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers, Set<String> classSuppressions) {
-        Set<String> suppressions = collectMethodSuppressions(m, clazz, ourTypeVars, typeMap, providers);
+    private void applyMethodAnnotations(MethodSpec.Builder builder, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> classSuppressions) {
+        Set<String> suppressions = collectMethodSuppressions(m, clazz, ourTypeVars, typeMap);
         suppressions.removeAll(classSuppressions); // Filter out class-level suppressions
         if (!suppressions.isEmpty()) {
             AnnotationSpec.Builder suppressBuilder = AnnotationSpec.builder(SuppressWarnings.class);
@@ -832,7 +848,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private Set<String> collectMethodSuppressions(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, List<Method> providers) {
+    private Set<String> collectMethodSuppressions(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
         Set<String> methodSuppressions = new LinkedHashSet<>();
         // NOTE: We do NOT call collectSuppressions(m, ...) or loop over providers here because we don't want to 
         // suppress "deprecation" just because the method itself is marked @Deprecated. 

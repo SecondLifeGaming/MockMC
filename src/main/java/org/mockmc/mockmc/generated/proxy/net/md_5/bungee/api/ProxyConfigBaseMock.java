@@ -20,8 +20,7 @@ import net.md_5.bungee.api.config.ServerInfo;
  * @deprecated Suppressed to prevent legacy API noise from interfering with
  *             modern build cycles.
  */
-@Deprecated
-@SuppressWarnings("deprecation")
+@Deprecated(since = "1.0")
 public interface ProxyConfigBaseMock extends ProxyConfig
 {
 	/**
