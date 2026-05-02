@@ -27,7 +27,7 @@ public class BlockStateGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		World world = Bukkit.getWorlds().get(0);
 		world.setType(0, 63, 0, Material.BEDROCK);

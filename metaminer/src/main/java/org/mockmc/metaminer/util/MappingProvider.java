@@ -18,6 +18,10 @@ public class MappingProvider {
     private static final Logger LOGGER = Logger.getLogger(MappingProvider.class.getName());
     private static final String MANIFEST_URL = "https://launchermeta.mojang.com/mc/game/version_manifest_v2.json";
 
+    private MappingProvider() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
     public static File getVanillaServer(String mcVersion, File cacheDir) throws IOException {
         File vanillaFile = new File(cacheDir, "vanilla-" + mcVersion + ".jar");
         if (vanillaFile.exists()) return vanillaFile;

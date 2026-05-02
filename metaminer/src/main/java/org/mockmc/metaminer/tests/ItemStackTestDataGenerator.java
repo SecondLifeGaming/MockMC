@@ -16,7 +16,7 @@ public class ItemStackTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		getGenerators().forEach(dataGenerator ->
 		{

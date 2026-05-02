@@ -16,14 +16,12 @@ import java.util.Collection;
  */
 public interface CommandMetaBaseMock extends CommandMeta
 {
-	@Override
 	default Collection<String> getAliases()
 	{
 		// MockMC: CommandMeta#getAliases
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Object getPlugin()
 	{
 		// MockMC: CommandMeta#getPlugin

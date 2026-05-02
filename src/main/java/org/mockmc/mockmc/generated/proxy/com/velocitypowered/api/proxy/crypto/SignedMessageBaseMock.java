@@ -16,21 +16,18 @@ import java.util.UUID;
  */
 public interface SignedMessageBaseMock extends SignedMessage, KeySignedBaseMock
 {
-	@Override
 	default UUID getSignerUuid()
 	{
 		// MockMC: SignedMessage#getSignerUuid
 		return null;
 	}
 
-	@Override
 	default boolean isPreviewSigned()
 	{
 		// MockMC: SignedMessage#isPreviewSigned
 		return false;
 	}
 
-	@Override
 	default String getMessage()
 	{
 		// MockMC: SignedMessage#getMessage

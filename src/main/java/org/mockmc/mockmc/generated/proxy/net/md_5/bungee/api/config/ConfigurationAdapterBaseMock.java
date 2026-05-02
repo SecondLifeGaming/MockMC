@@ -18,62 +18,53 @@ import net.md_5.bungee.api.config.ServerInfo;
  */
 public interface ConfigurationAdapterBaseMock extends ConfigurationAdapter
 {
-	@Override
 	default Collection<?> getList(String arg0, Collection<?> arg1)
 	{
 		// MockMC: ConfigurationAdapter#getList
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Collection<String> getPermissions(String arg0)
 	{
 		// MockMC: ConfigurationAdapter#getPermissions
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default void load()
 	{
 		// MockMC: ConfigurationAdapter#load
 	}
 
-	@Override
 	default Collection<ListenerInfo> getListeners()
 	{
 		// MockMC: ConfigurationAdapter#getListeners
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default int getInt(String arg0, int arg1)
 	{
 		// MockMC: ConfigurationAdapter#getInt
 		return 0;
 	}
 
-	@Override
 	default Collection<String> getGroups(String arg0)
 	{
 		// MockMC: ConfigurationAdapter#getGroups
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Map<String, ServerInfo> getServers()
 	{
 		// MockMC: ConfigurationAdapter#getServers
 		return java.util.Collections.emptyMap();
 	}
 
-	@Override
 	default boolean getBoolean(String arg0, boolean arg1)
 	{
 		// MockMC: ConfigurationAdapter#getBoolean
 		return false;
 	}
 
-	@Override
 	default String getString(String arg0, String arg1)
 	{
 		// MockMC: ConfigurationAdapter#getString

@@ -16,6 +16,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  */
 public interface AbstractReconnectHandlerBaseMock extends ReconnectHandlerBaseMock
 {
+	@Override
 	default ServerInfo getServer(ProxiedPlayer arg0)
 	{
 		// MockMC: AbstractReconnectHandler#getServer

@@ -22,21 +22,18 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface CommandManagerBaseMock extends CommandManager
 {
-	@Override
 	default CompletableFuture<Boolean> executeAsync(CommandSource arg0, String arg1)
 	{
 		// MockMC: CommandManager#executeAsync
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default CommandMeta.Builder metaBuilder(BrigadierCommand arg0)
 	{
 		// MockMC: CommandManager#metaBuilder
 		return null;
 	}
 
-	@Override
 	default CommandMeta.Builder metaBuilder(String arg0)
 	{
 		// MockMC: CommandManager#metaBuilder
@@ -47,14 +44,12 @@ public interface CommandManagerBaseMock extends CommandManager
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default void register(BrigadierCommand arg0)
 	{
 		// MockMC: CommandManager#register
 	}
 
-	@Override
 	default void register(CommandMeta arg0, Command arg1)
 	{
 		// MockMC: CommandManager#register
@@ -64,62 +59,53 @@ public interface CommandManagerBaseMock extends CommandManager
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default void register(String arg0, Command arg1, String... arg2)
 	{
 		// MockMC: CommandManager#register
 	}
 
-	@Override
 	default boolean hasCommand(String arg0, CommandSource arg1)
 	{
 		// MockMC: CommandManager#hasCommand
 		return false;
 	}
 
-	@Override
 	default boolean hasCommand(String arg0)
 	{
 		// MockMC: CommandManager#hasCommand
 		return false;
 	}
 
-	@Override
 	default CompletableFuture<Boolean> executeImmediatelyAsync(CommandSource arg0, String arg1)
 	{
 		// MockMC: CommandManager#executeImmediatelyAsync
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default CompletableFuture<List<String>> offerSuggestions(CommandSource arg0, String arg1)
 	{
 		// MockMC: CommandManager#offerSuggestions
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default CommandMeta getCommandMeta(String arg0)
 	{
 		// MockMC: CommandManager#getCommandMeta
 		return null;
 	}
 
-	@Override
 	default Collection<String> getAliases()
 	{
 		// MockMC: CommandManager#getAliases
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default void unregister(String arg0)
 	{
 		// MockMC: CommandManager#unregister
 	}
 
-	@Override
 	default void unregister(CommandMeta arg0)
 	{
 		// MockMC: CommandManager#unregister

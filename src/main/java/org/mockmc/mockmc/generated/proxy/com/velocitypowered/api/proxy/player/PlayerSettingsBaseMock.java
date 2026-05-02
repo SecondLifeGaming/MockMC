@@ -17,63 +17,54 @@ import java.util.Locale;
  */
 public interface PlayerSettingsBaseMock extends PlayerSettings
 {
-	@Override
 	default boolean isTextFilteringEnabled()
 	{
 		// MockMC: PlayerSettings#isTextFilteringEnabled
 		return false;
 	}
 
-	@Override
 	default SkinParts getSkinParts()
 	{
 		// MockMC: PlayerSettings#getSkinParts
 		return null;
 	}
 
-	@Override
 	default Locale getLocale()
 	{
 		// MockMC: PlayerSettings#getLocale
 		return null;
 	}
 
-	@Override
 	default PlayerSettings.MainHand getMainHand()
 	{
 		// MockMC: PlayerSettings#getMainHand
 		return null;
 	}
 
-	@Override
 	default boolean isClientListingAllowed()
 	{
 		// MockMC: PlayerSettings#isClientListingAllowed
 		return false;
 	}
 
-	@Override
 	default PlayerSettings.ParticleStatus getParticleStatus()
 	{
 		// MockMC: PlayerSettings#getParticleStatus
 		return null;
 	}
 
-	@Override
 	default boolean hasChatColors()
 	{
 		// MockMC: PlayerSettings#hasChatColors
 		return false;
 	}
 
-	@Override
 	default byte getViewDistance()
 	{
 		// MockMC: PlayerSettings#getViewDistance
 		return 0;
 	}
 
-	@Override
 	default PlayerSettings.ChatMode getChatMode()
 	{
 		// MockMC: PlayerSettings#getChatMode

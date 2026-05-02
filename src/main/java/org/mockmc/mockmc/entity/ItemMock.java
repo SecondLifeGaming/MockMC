@@ -40,8 +40,8 @@ public class ItemMock extends EntityMock
 	 */
 	public ItemMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull ItemStack item)
 	{
-		super(server, uuid);
 		Preconditions.checkNotNull(item, "Item cannot be null");
+		super(server, uuid);
 		this.item = item.clone();
 	}
 

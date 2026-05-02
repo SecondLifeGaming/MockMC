@@ -15,28 +15,24 @@ import net.md_5.bungee.api.scheduler.ScheduledTask;
  */
 public interface ScheduledTaskBaseMock extends ScheduledTask
 {
-	@Override
 	default int getId()
 	{
 		// MockMC: ScheduledTask#getId
 		return 0;
 	}
 
-	@Override
 	default Plugin getOwner()
 	{
 		// MockMC: ScheduledTask#getOwner
 		return null;
 	}
 
-	@Override
 	default Runnable getTask()
 	{
 		// MockMC: ScheduledTask#getTask
 		return null;
 	}
 
-	@Override
 	default void cancel()
 	{
 		// MockMC: ScheduledTask#cancel

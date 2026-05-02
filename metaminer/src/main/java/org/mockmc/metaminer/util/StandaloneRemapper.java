@@ -12,7 +12,11 @@ import java.util.stream.Collectors;
 public class StandaloneRemapper {
     private static final Logger LOGGER = Logger.getLogger(StandaloneRemapper.class.getName());
 
-    public static File remap(File inputJar, File mappingFile, File vanillaJar, File outputJar) throws Exception {
+    private StandaloneRemapper() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    public static File remap(File inputJar, File mappingFile, File outputJar) throws IOException, InterruptedException {
         if (outputJar.exists()) return outputJar;
 
         LOGGER.log(Level.INFO, "Remapping {0} to Mojang names via isolated process with prioritized ASM 9.7...", inputJar.getName());
@@ -28,7 +32,7 @@ public class StandaloneRemapper {
         // Move all ASM entries to the front
         List<String> asmEntries = cpEntries.stream()
                 .filter(s -> s.contains("asm-"))
-                .collect(Collectors.toList());
+                .toList();
         cpEntries.removeAll(asmEntries);
         
         List<String> finalCp = new ArrayList<>();

@@ -32,172 +32,147 @@ import net.kyori.adventure.text.Component;
  */
 public interface ProxyServerBaseMock extends ProxyServer
 {
-	@Override
 	default InetSocketAddress getBoundAddress()
 	{
 		// MockMC: ProxyServer#getBoundAddress
 		return null;
 	}
 
-	@Override
 	default ProxyConfig getConfiguration()
 	{
 		// MockMC: ProxyServer#getConfiguration
 		return null;
 	}
 
-	@Override
 	default Collection<RegisteredServer> matchServer(String arg0)
 	{
 		// MockMC: ProxyServer#matchServer
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Scheduler getScheduler()
 	{
 		// MockMC: ProxyServer#getScheduler
 		return null;
 	}
 
-	@Override
 	default RegisteredServer registerServer(ServerInfo arg0)
 	{
 		// MockMC: ProxyServer#registerServer
 		return null;
 	}
 
-	@Override
 	default int getPlayerCount()
 	{
 		// MockMC: ProxyServer#getPlayerCount
 		return 0;
 	}
 
-	@Override
 	default Optional<Player> getPlayer(UUID arg0)
 	{
 		// MockMC: ProxyServer#getPlayer
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<Player> getPlayer(String arg0)
 	{
 		// MockMC: ProxyServer#getPlayer
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default ChannelRegistrar getChannelRegistrar()
 	{
 		// MockMC: ProxyServer#getChannelRegistrar
 		return null;
 	}
 
-	@Override
 	default PluginManager getPluginManager()
 	{
 		// MockMC: ProxyServer#getPluginManager
 		return null;
 	}
 
-	@Override
 	default Collection<RegisteredServer> getAllServers()
 	{
 		// MockMC: ProxyServer#getAllServers
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default EventManager getEventManager()
 	{
 		// MockMC: ProxyServer#getEventManager
 		return null;
 	}
 
-	@Override
 	default RegisteredServer createRawRegisteredServer(ServerInfo arg0)
 	{
 		// MockMC: ProxyServer#createRawRegisteredServer
 		return null;
 	}
 
-	@Override
 	default void closeListeners()
 	{
 		// MockMC: ProxyServer#closeListeners
 	}
 
-	@Override
 	default boolean isShuttingDown()
 	{
 		// MockMC: ProxyServer#isShuttingDown
 		return false;
 	}
 
-	@Override
 	default Collection<Player> matchPlayer(String arg0)
 	{
 		// MockMC: ProxyServer#matchPlayer
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default ConsoleCommandSource getConsoleCommandSource()
 	{
 		// MockMC: ProxyServer#getConsoleCommandSource
 		return null;
 	}
 
-	@Override
 	default void shutdown()
 	{
 		// MockMC: ProxyServer#shutdown
 	}
 
-	@Override
 	default void shutdown(Component arg0)
 	{
 		// MockMC: ProxyServer#shutdown
 	}
 
-	@Override
 	default CommandManager getCommandManager()
 	{
 		// MockMC: ProxyServer#getCommandManager
 		return null;
 	}
 
-	@Override
 	default Collection<Player> getAllPlayers()
 	{
 		// MockMC: ProxyServer#getAllPlayers
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default ResourcePackInfo.Builder createResourcePackBuilder(String arg0)
 	{
 		// MockMC: ProxyServer#createResourcePackBuilder
 		return null;
 	}
 
-	@Override
 	default ProxyVersion getVersion()
 	{
 		// MockMC: ProxyServer#getVersion
 		return null;
 	}
 
-	@Override
 	default Optional<RegisteredServer> getServer(String arg0)
 	{
 		// MockMC: ProxyServer#getServer
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default void unregisterServer(ServerInfo arg0)
 	{
 		// MockMC: ProxyServer#unregisterServer

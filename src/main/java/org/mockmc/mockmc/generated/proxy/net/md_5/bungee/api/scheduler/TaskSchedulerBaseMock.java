@@ -17,47 +17,40 @@ import net.md_5.bungee.api.scheduler.TaskScheduler;
  */
 public interface TaskSchedulerBaseMock extends TaskScheduler
 {
-	@Override
 	default ScheduledTask runAsync(Plugin arg0, Runnable arg1)
 	{
 		// MockMC: TaskScheduler#runAsync
 		return null;
 	}
 
-	@Override
 	default TaskScheduler.Unsafe unsafe()
 	{
 		// MockMC: TaskScheduler#unsafe
 		return null;
 	}
 
-	@Override
 	default int cancel(Plugin arg0)
 	{
 		// MockMC: TaskScheduler#cancel
 		return 0;
 	}
 
-	@Override
 	default void cancel(ScheduledTask arg0)
 	{
 		// MockMC: TaskScheduler#cancel
 	}
 
-	@Override
 	default void cancel(int arg0)
 	{
 		// MockMC: TaskScheduler#cancel
 	}
 
-	@Override
 	default ScheduledTask schedule(Plugin arg0, Runnable arg1, long arg2, TimeUnit arg3)
 	{
 		// MockMC: TaskScheduler#schedule
 		return null;
 	}
 
-	@Override
 	default ScheduledTask schedule(Plugin arg0, Runnable arg1, long arg2, long arg3, TimeUnit arg4)
 	{
 		// MockMC: TaskScheduler#schedule

@@ -14,13 +14,11 @@ import net.md_5.bungee.api.plugin.Cancellable;
  */
 public interface CancellableBaseMock extends Cancellable
 {
-	@Override
 	default void setCancelled(boolean arg0)
 	{
 		// MockMC: Cancellable#setCancelled
 	}
 
-	@Override
 	default boolean isCancelled()
 	{
 		// MockMC: Cancellable#isCancelled

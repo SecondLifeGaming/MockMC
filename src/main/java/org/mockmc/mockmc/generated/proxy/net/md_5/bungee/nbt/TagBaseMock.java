@@ -18,13 +18,11 @@ import net.md_5.bungee.nbt.limit.NBTLimiter;
  */
 public interface TagBaseMock extends Tag
 {
-	@Override
 	default void read(DataInput arg0, NBTLimiter arg1) throws IOException
 	{
 		// MockMC: Tag#read
 	}
 
-	@Override
 	default void write(DataOutput arg0) throws IOException
 	{
 		// MockMC: Tag#write

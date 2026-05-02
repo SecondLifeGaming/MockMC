@@ -16,32 +16,38 @@ import net.md_5.bungee.protocol.PacketWrapper;
  */
 public interface PacketHandlerBaseMock
 {
+	@SuppressWarnings("Exception")
 	default void exception(Throwable arg0) throws Exception
 	{
 		// MockMC: PacketHandler#exception
 	}
 
+	@SuppressWarnings("Exception")
 	default void connected(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#connected
 	}
 
+	@SuppressWarnings("Exception")
 	default boolean shouldHandle(PacketWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#shouldHandle
 		return false;
 	}
 
+	@SuppressWarnings("Exception")
 	default void disconnected(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#disconnected
 	}
 
+	@SuppressWarnings("Exception")
 	default void writabilityChanged(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#writabilityChanged
 	}
 
+	@SuppressWarnings("Exception")
 	default void handle(PacketWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#handle

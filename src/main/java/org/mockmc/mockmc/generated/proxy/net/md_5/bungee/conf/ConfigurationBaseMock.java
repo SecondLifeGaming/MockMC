@@ -26,6 +26,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		// MockMC: Configuration#load
 	}
 
+	@Override
 	default int getTimeout()
 	{
 		// MockMC: Configuration#getTimeout
@@ -38,6 +39,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return false;
 	}
 
+	@Override
 	default int getRemotePingCache()
 	{
 		// MockMC: Configuration#getRemotePingCache
@@ -50,6 +52,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return false;
 	}
 
+	@Override
 	default int getPlayerLimit()
 	{
 		// MockMC: Configuration#getPlayerLimit
@@ -62,6 +65,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return false;
 	}
 
+	@Override
 	default Collection<ListenerInfo> getListeners()
 	{
 		// MockMC: Configuration#getListeners
@@ -74,6 +78,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return null;
 	}
 
+	@Override
 	default int getRemotePingTimeout()
 	{
 		// MockMC: Configuration#getRemotePingTimeout
@@ -98,12 +103,14 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return 0;
 	}
 
+	@Override
 	default Map<String, ServerInfo> getServers()
 	{
 		// MockMC: Configuration#getServers
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default Map<String, ServerInfo> getServersCopy()
 	{
 		// MockMC: Configuration#getServersCopy
@@ -116,12 +123,14 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return 0;
 	}
 
+	@Override
 	default String getUuid()
 	{
 		// MockMC: Configuration#getUuid
 		return "";
 	}
 
+	@Override
 	default boolean isIpForward()
 	{
 		// MockMC: Configuration#isIpForward
@@ -134,30 +143,35 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return false;
 	}
 
+	@Override
 	default ServerInfo addServer(ServerInfo arg0)
 	{
 		// MockMC: Configuration#addServer
 		return null;
 	}
 
+	@Override
 	default ServerInfo getServerInfo(String arg0)
 	{
 		// MockMC: Configuration#getServerInfo
 		return null;
 	}
 
+	@Override
 	default boolean removeServersNamed(Collection<String> arg0)
 	{
 		// MockMC: Configuration#removeServersNamed
 		return false;
 	}
 
+	@Override
 	default Collection<String> getDisabledCommands()
 	{
 		// MockMC: Configuration#getDisabledCommands
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isOnlineMode()
 	{
 		// MockMC: Configuration#isOnlineMode
@@ -168,6 +182,7 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getFavicon()
 	{
@@ -175,36 +190,42 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return "";
 	}
 
+	@Override
 	default boolean isLogCommands()
 	{
 		// MockMC: Configuration#isLogCommands
 		return false;
 	}
 
+	@Override
 	default int getServerConnectTimeout()
 	{
 		// MockMC: Configuration#getServerConnectTimeout
 		return 0;
 	}
 
+	@Override
 	default int getThrottle()
 	{
 		// MockMC: Configuration#getThrottle
 		return 0;
 	}
 
+	@Override
 	default Favicon getFaviconObject()
 	{
 		// MockMC: Configuration#getFaviconObject
 		return null;
 	}
 
+	@Override
 	default ServerInfo removeServer(ServerInfo arg0)
 	{
 		// MockMC: Configuration#removeServer
 		return null;
 	}
 
+	@Override
 	default boolean removeServers(Collection<ServerInfo> arg0)
 	{
 		// MockMC: Configuration#removeServers
@@ -217,12 +238,14 @@ public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 		return 0;
 	}
 
+	@Override
 	default ServerInfo removeServerNamed(String arg0)
 	{
 		// MockMC: Configuration#removeServerNamed
 		return null;
 	}
 
+	@Override
 	default boolean addServers(Collection<ServerInfo> arg0)
 	{
 		// MockMC: Configuration#addServers

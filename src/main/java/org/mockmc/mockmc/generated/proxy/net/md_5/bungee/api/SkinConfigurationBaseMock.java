@@ -14,49 +14,42 @@ import net.md_5.bungee.api.SkinConfiguration;
  */
 public interface SkinConfigurationBaseMock extends SkinConfiguration
 {
-	@Override
 	default boolean hasHat()
 	{
 		// MockMC: SkinConfiguration#hasHat
 		return false;
 	}
 
-	@Override
 	default boolean hasLeftPants()
 	{
 		// MockMC: SkinConfiguration#hasLeftPants
 		return false;
 	}
 
-	@Override
 	default boolean hasRightPants()
 	{
 		// MockMC: SkinConfiguration#hasRightPants
 		return false;
 	}
 
-	@Override
 	default boolean hasRightSleeve()
 	{
 		// MockMC: SkinConfiguration#hasRightSleeve
 		return false;
 	}
 
-	@Override
 	default boolean hasCape()
 	{
 		// MockMC: SkinConfiguration#hasCape
 		return false;
 	}
 
-	@Override
 	default boolean hasJacket()
 	{
 		// MockMC: SkinConfiguration#hasJacket
 		return false;
 	}
 
-	@Override
 	default boolean hasLeftSleeve()
 	{
 		// MockMC: SkinConfiguration#hasLeftSleeve

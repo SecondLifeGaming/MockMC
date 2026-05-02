@@ -24,7 +24,6 @@ public interface TranslationProviderBaseMock extends TranslationProvider
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default String getTranslationKey()
 	{
@@ -36,7 +35,6 @@ public interface TranslationProviderBaseMock extends TranslationProvider
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TranslatableComponent asTranslatableComponent()
@@ -49,7 +47,6 @@ public interface TranslationProviderBaseMock extends TranslationProvider
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default TranslatableComponent asTranslatableComponent(Object... arg0)

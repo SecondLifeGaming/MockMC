@@ -19,41 +19,35 @@ import java.util.Optional;
  */
 public interface PluginManagerBaseMock extends PluginManager
 {
-	@Override
 	default boolean isLoaded(String arg0)
 	{
 		// MockMC: PluginManager#isLoaded
 		return false;
 	}
 
-	@Override
 	default void addToClasspath(Object arg0, Path arg1)
 	{
 		// MockMC: PluginManager#addToClasspath
 	}
 
-	@Override
 	default Collection<PluginContainer> getPlugins()
 	{
 		// MockMC: PluginManager#getPlugins
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default PluginContainer ensurePluginContainer(Object arg0)
 	{
 		// MockMC: PluginManager#ensurePluginContainer
 		return null;
 	}
 
-	@Override
 	default Optional<PluginContainer> getPlugin(String arg0)
 	{
 		// MockMC: PluginManager#getPlugin
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<PluginContainer> fromInstance(Object arg0)
 	{
 		// MockMC: PluginManager#fromInstance

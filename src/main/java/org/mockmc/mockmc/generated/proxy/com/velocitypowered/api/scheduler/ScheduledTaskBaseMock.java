@@ -16,20 +16,17 @@ import com.velocitypowered.api.scheduler.TaskStatus;
  */
 public interface ScheduledTaskBaseMock extends ScheduledTask
 {
-	@Override
 	default void cancel()
 	{
 		// MockMC: ScheduledTask#cancel
 	}
 
-	@Override
 	default Object plugin()
 	{
 		// MockMC: ScheduledTask#plugin
 		return null;
 	}
 
-	@Override
 	default TaskStatus status()
 	{
 		// MockMC: ScheduledTask#status

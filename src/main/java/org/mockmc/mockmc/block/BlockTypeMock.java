@@ -55,6 +55,7 @@ public class BlockTypeMock<B extends BlockData>
 	private final String translationKey;
 
 	@ApiStatus.Internal
+	@SuppressWarnings("brain-overload")
 	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable,
 			boolean burnable, boolean occluding, boolean gravity, float hardness, float blastResistance,
 			float slipperiness, boolean air, boolean interactable, boolean collision, String translationKey)

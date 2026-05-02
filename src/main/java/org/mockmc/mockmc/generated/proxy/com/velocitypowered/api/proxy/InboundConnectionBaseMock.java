@@ -20,49 +20,42 @@ import java.util.Optional;
  */
 public interface InboundConnectionBaseMock extends InboundConnection
 {
-	@Override
 	default ProtocolState getProtocolState()
 	{
 		// MockMC: InboundConnection#getProtocolState
 		return null;
 	}
 
-	@Override
 	default HandshakeIntent getHandshakeIntent()
 	{
 		// MockMC: InboundConnection#getHandshakeIntent
 		return null;
 	}
 
-	@Override
 	default ProtocolVersion getProtocolVersion()
 	{
 		// MockMC: InboundConnection#getProtocolVersion
 		return null;
 	}
 
-	@Override
 	default boolean isActive()
 	{
 		// MockMC: InboundConnection#isActive
 		return false;
 	}
 
-	@Override
 	default Optional<String> getRawVirtualHost()
 	{
 		// MockMC: InboundConnection#getRawVirtualHost
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<InetSocketAddress> getVirtualHost()
 	{
 		// MockMC: InboundConnection#getVirtualHost
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default InetSocketAddress getRemoteAddress()
 	{
 		// MockMC: InboundConnection#getRemoteAddress

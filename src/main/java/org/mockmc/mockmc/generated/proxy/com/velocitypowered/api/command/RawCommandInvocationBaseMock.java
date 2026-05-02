@@ -15,7 +15,6 @@ import com.velocitypowered.api.command.RawCommand;
  */
 public interface RawCommandInvocationBaseMock extends RawCommand.Invocation, CommandInvocationBaseMock<String>
 {
-	@Override
 	default String alias()
 	{
 		// MockMC: Invocation#alias

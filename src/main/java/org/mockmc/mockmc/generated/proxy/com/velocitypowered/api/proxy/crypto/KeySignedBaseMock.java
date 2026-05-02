@@ -17,42 +17,36 @@ import java.time.Instant;
  */
 public interface KeySignedBaseMock extends KeySigned
 {
-	@Override
 	default byte[] getSalt()
 	{
 		// MockMC: KeySigned#getSalt
 		return new byte[0];
 	}
 
-	@Override
 	default byte[] getSignature()
 	{
 		// MockMC: KeySigned#getSignature
 		return new byte[0];
 	}
 
-	@Override
 	default PublicKey getSigner()
 	{
 		// MockMC: KeySigned#getSigner
 		return null;
 	}
 
-	@Override
 	default boolean isSignatureValid()
 	{
 		// MockMC: KeySigned#isSignatureValid
 		return false;
 	}
 
-	@Override
 	default boolean hasExpired()
 	{
 		// MockMC: KeySigned#hasExpired
 		return false;
 	}
 
-	@Override
 	default Instant getExpiryTemporal()
 	{
 		// MockMC: KeySigned#getExpiryTemporal

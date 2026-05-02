@@ -16,33 +16,28 @@ import net.md_5.bungee.api.chat.BaseComponent;
  */
 public interface CommandSenderBaseMock extends CommandSender
 {
-	@Override
 	default void removeGroups(String... arg0)
 	{
 		// MockMC: CommandSender#removeGroups
 	}
 
-	@Override
 	default String getName()
 	{
 		// MockMC: CommandSender#getName
 		return "";
 	}
 
-	@Override
 	default void addGroups(String... arg0)
 	{
 		// MockMC: CommandSender#addGroups
 	}
 
-	@Override
 	default Collection<String> getPermissions()
 	{
 		// MockMC: CommandSender#getPermissions
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default boolean hasPermission(String arg0)
 	{
 		// MockMC: CommandSender#hasPermission
@@ -53,14 +48,12 @@ public interface CommandSenderBaseMock extends CommandSender
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default void sendMessages(String... arg0)
 	{
 		// MockMC: CommandSender#sendMessages
 	}
 
-	@Override
 	default void setPermission(String arg0, boolean arg1)
 	{
 		// MockMC: CommandSender#setPermission
@@ -70,27 +63,23 @@ public interface CommandSenderBaseMock extends CommandSender
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default void sendMessage(String arg0)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
-	@Override
 	default void sendMessage(BaseComponent... arg0)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
-	@Override
 	@SuppressWarnings("deprecation")
 	default void sendMessage(BaseComponent arg0)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
-	@Override
 	default Collection<String> getGroups()
 	{
 		// MockMC: CommandSender#getGroups

@@ -22,31 +22,27 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.messages.
 public interface ServerConnectionBaseMock
 		extends
 			ServerConnection,
-			ChannelMessageSourceBaseMock,
-			ChannelMessageSinkBaseMock
+			ChannelMessageSinkBaseMock,
+			ChannelMessageSourceBaseMock
 {
-	@Override
 	default ServerInfo getServerInfo()
 	{
 		// MockMC: ServerConnection#getServerInfo
 		return null;
 	}
 
-	@Override
 	default RegisteredServer getServer()
 	{
 		// MockMC: ServerConnection#getServer
 		return null;
 	}
 
-	@Override
 	default Player getPlayer()
 	{
 		// MockMC: ServerConnection#getPlayer
 		return null;
 	}
 
-	@Override
 	default Optional<RegisteredServer> getPreviousServer()
 	{
 		// MockMC: ServerConnection#getPreviousServer

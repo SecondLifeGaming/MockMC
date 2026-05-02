@@ -25,7 +25,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		JsonArray jsonArray = new JsonArray();
 		for (Material material : Registry.MATERIAL)

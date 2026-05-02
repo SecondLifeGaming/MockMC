@@ -16,13 +16,11 @@ import com.velocitypowered.api.proxy.messages.ChannelRegistrar;
  */
 public interface ChannelRegistrarBaseMock extends ChannelRegistrar
 {
-	@Override
 	default void register(ChannelIdentifier... arg0)
 	{
 		// MockMC: ChannelRegistrar#register
 	}
 
-	@Override
 	default void unregister(ChannelIdentifier... arg0)
 	{
 		// MockMC: ChannelRegistrar#unregister

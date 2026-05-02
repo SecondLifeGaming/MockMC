@@ -15,7 +15,6 @@ import net.md_5.bungee.protocol.channel.ChannelAcceptor;
  */
 public interface ChannelAcceptorBaseMock extends ChannelAcceptor
 {
-	@Override
 	default boolean accept(Channel arg0)
 	{
 		// MockMC: ChannelAcceptor#accept

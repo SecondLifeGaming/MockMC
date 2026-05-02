@@ -15,13 +15,11 @@ import com.velocitypowered.api.event.Continuation;
  */
 public interface ContinuationBaseMock extends Continuation
 {
-	@Override
 	default void resume()
 	{
 		// MockMC: Continuation#resume
 	}
 
-	@Override
 	default void resumeWithException(Throwable arg0)
 	{
 		// MockMC: Continuation#resumeWithException

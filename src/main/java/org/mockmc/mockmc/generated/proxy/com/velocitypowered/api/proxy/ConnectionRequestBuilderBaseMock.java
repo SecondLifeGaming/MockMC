@@ -17,27 +17,23 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface ConnectionRequestBuilderBaseMock extends ConnectionRequestBuilder
 {
-	@Override
 	default CompletableFuture<Boolean> connectWithIndication()
 	{
 		// MockMC: ConnectionRequestBuilder#connectWithIndication
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default CompletableFuture<ConnectionRequestBuilder.Result> connect()
 	{
 		// MockMC: ConnectionRequestBuilder#connect
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default void fireAndForget()
 	{
 		// MockMC: ConnectionRequestBuilder#fireAndForget
 	}
 
-	@Override
 	default RegisteredServer getServer()
 	{
 		// MockMC: ConnectionRequestBuilder#getServer

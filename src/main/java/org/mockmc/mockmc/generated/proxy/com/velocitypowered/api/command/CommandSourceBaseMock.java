@@ -17,19 +17,16 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.permission.Perm
  */
 public interface CommandSourceBaseMock extends CommandSource, PermissionSubjectBaseMock
 {
-	@Override
 	default void sendPlainMessage(String arg0)
 	{
 		// MockMC: CommandSource#sendPlainMessage
 	}
 
-	@Override
 	default void sendRichMessage(String arg0, TagResolver... arg1)
 	{
 		// MockMC: CommandSource#sendRichMessage
 	}
 
-	@Override
 	default void sendRichMessage(String arg0)
 	{
 		// MockMC: CommandSource#sendRichMessage

@@ -16,25 +16,21 @@ import net.md_5.bungee.jni.zlib.BungeeZlib;
  */
 public interface BungeeZlibBaseMock extends BungeeZlib
 {
-	@Override
 	default void process(ByteBuf arg0, ByteBuf arg1) throws DataFormatException
 	{
 		// MockMC: BungeeZlib#process
 	}
 
-	@Override
 	default void init(boolean arg0, int arg1)
 	{
 		// MockMC: BungeeZlib#init
 	}
 
-	@Override
 	default void free()
 	{
 		// MockMC: BungeeZlib#free
 	}
 
-	@Override
 	default boolean allowComposite()
 	{
 		// MockMC: BungeeZlib#allowComposite

@@ -18,49 +18,42 @@ import java.util.concurrent.TimeUnit;
  */
 public interface SchedulerTaskBuilderBaseMock extends Scheduler.TaskBuilder
 {
-	@Override
 	default Scheduler.TaskBuilder clearRepeat()
 	{
 		// MockMC: TaskBuilder#clearRepeat
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder clearDelay()
 	{
 		// MockMC: TaskBuilder#clearDelay
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder repeat(Duration arg0)
 	{
 		// MockMC: TaskBuilder#repeat
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder repeat(long arg0, TimeUnit arg1)
 	{
 		// MockMC: TaskBuilder#repeat
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder delay(long arg0, TimeUnit arg1)
 	{
 		// MockMC: TaskBuilder#delay
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder delay(Duration arg0)
 	{
 		// MockMC: TaskBuilder#delay
 		return null;
 	}
 
-	@Override
 	default ScheduledTask schedule()
 	{
 		// MockMC: TaskBuilder#schedule

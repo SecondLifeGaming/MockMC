@@ -16,14 +16,12 @@ import com.velocitypowered.api.event.EventTask;
  */
 public interface EventHandlerBaseMock<E> extends EventHandler<E>
 {
-	@Override
 	default EventTask executeAsync(E arg0)
 	{
 		// MockMC: EventHandler#executeAsync
 		return null;
 	}
 
-	@Override
 	default void execute(E arg0)
 	{
 		// MockMC: EventHandler#execute

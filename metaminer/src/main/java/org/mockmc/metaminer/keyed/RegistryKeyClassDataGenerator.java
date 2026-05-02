@@ -21,7 +21,7 @@ public class RegistryKeyClassDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		File destinationFile = new File(dataFolder, "registry_key_class_relation.json");
 		JsonObject rootObject = new JsonObject();

@@ -21,7 +21,6 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  */
 public interface ServerInfoBaseMock extends ServerInfo
 {
-	@Override
 	default String getMotd()
 	{
 		// MockMC: ServerInfo#getMotd
@@ -32,7 +31,6 @@ public interface ServerInfoBaseMock extends ServerInfo
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default InetSocketAddress getAddress()
 	{
@@ -40,61 +38,52 @@ public interface ServerInfoBaseMock extends ServerInfo
 		return null;
 	}
 
-	@Override
 	default Collection<ProxiedPlayer> getPlayers()
 	{
 		// MockMC: ServerInfo#getPlayers
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default boolean isRestricted()
 	{
 		// MockMC: ServerInfo#isRestricted
 		return false;
 	}
 
-	@Override
 	default String getName()
 	{
 		// MockMC: ServerInfo#getName
 		return "";
 	}
 
-	@Override
 	default String getPermission()
 	{
 		// MockMC: ServerInfo#getPermission
 		return "";
 	}
 
-	@Override
 	default boolean sendData(String arg0, byte[] arg1, boolean arg2)
 	{
 		// MockMC: ServerInfo#sendData
 		return false;
 	}
 
-	@Override
 	default void sendData(String arg0, byte[] arg1)
 	{
 		// MockMC: ServerInfo#sendData
 	}
 
-	@Override
 	default boolean canAccess(CommandSender arg0)
 	{
 		// MockMC: ServerInfo#canAccess
 		return false;
 	}
 
-	@Override
 	default void ping(Callback<ServerPing> arg0)
 	{
 		// MockMC: ServerInfo#ping
 	}
 
-	@Override
 	default SocketAddress getSocketAddress()
 	{
 		// MockMC: ServerInfo#getSocketAddress

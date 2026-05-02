@@ -14,7 +14,6 @@ import net.md_5.bungee.api.Callback;
  */
 public interface CallbackBaseMock<V> extends Callback<V>
 {
-	@Override
 	default void done(V arg0, Throwable arg1)
 	{
 		// MockMC: Callback#done

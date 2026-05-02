@@ -22,105 +22,90 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.crypto.Ke
  */
 public interface TabListEntryBaseMock extends TabListEntry, KeyIdentifiableBaseMock
 {
-	@Override
 	default boolean isShowHat()
 	{
 		// MockMC: TabListEntry#isShowHat
 		return false;
 	}
 
-	@Override
 	default ChatSession getChatSession()
 	{
 		// MockMC: TabListEntry#getChatSession
 		return null;
 	}
 
-	@Override
 	default TabList getTabList()
 	{
 		// MockMC: TabListEntry#getTabList
 		return null;
 	}
 
-	@Override
 	default boolean isListed()
 	{
 		// MockMC: TabListEntry#isListed
 		return false;
 	}
 
-	@Override
 	default Optional<Component> getDisplayNameComponent()
 	{
 		// MockMC: TabListEntry#getDisplayNameComponent
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default int getLatency()
 	{
 		// MockMC: TabListEntry#getLatency
 		return 0;
 	}
 
-	@Override
 	default int getListOrder()
 	{
 		// MockMC: TabListEntry#getListOrder
 		return 0;
 	}
 
-	@Override
 	default TabListEntry setDisplayName(Component arg0)
 	{
 		// MockMC: TabListEntry#setDisplayName
 		return null;
 	}
 
-	@Override
 	default TabListEntry setListed(boolean arg0)
 	{
 		// MockMC: TabListEntry#setListed
 		return null;
 	}
 
-	@Override
 	default TabListEntry setShowHat(boolean arg0)
 	{
 		// MockMC: TabListEntry#setShowHat
 		return null;
 	}
 
-	@Override
 	default TabListEntry setLatency(int arg0)
 	{
 		// MockMC: TabListEntry#setLatency
 		return null;
 	}
 
-	@Override
 	default TabListEntry setGameMode(int arg0)
 	{
 		// MockMC: TabListEntry#setGameMode
 		return null;
 	}
 
-	@Override
 	default int getGameMode()
 	{
 		// MockMC: TabListEntry#getGameMode
 		return 0;
 	}
 
-	@Override
 	default GameProfile getProfile()
 	{
 		// MockMC: TabListEntry#getProfile
 		return null;
 	}
 
-	@Override
 	default TabListEntry setListOrder(int arg0)
 	{
 		// MockMC: TabListEntry#setListOrder

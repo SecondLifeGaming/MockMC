@@ -18,70 +18,60 @@ import net.kyori.adventure.text.Component;
  */
 public interface ResourcePackInfoBaseMock extends ResourcePackInfo
 {
-	@Override
 	default ResourcePackInfo.Origin getOrigin()
 	{
 		// MockMC: ResourcePackInfo#getOrigin
 		return null;
 	}
 
-	@Override
 	default byte[] getHash()
 	{
 		// MockMC: ResourcePackInfo#getHash
 		return new byte[0];
 	}
 
-	@Override
 	default boolean getShouldForce()
 	{
 		// MockMC: ResourcePackInfo#getShouldForce
 		return false;
 	}
 
-	@Override
 	default ResourcePackRequest asResourcePackRequest()
 	{
 		// MockMC: ResourcePackInfo#asResourcePackRequest
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo.Origin getOriginalOrigin()
 	{
 		// MockMC: ResourcePackInfo#getOriginalOrigin
 		return null;
 	}
 
-	@Override
 	default String getUrl()
 	{
 		// MockMC: ResourcePackInfo#getUrl
 		return "";
 	}
 
-	@Override
 	default ResourcePackInfo.Builder asBuilder()
 	{
 		// MockMC: ResourcePackInfo#asBuilder
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo.Builder asBuilder(String arg0)
 	{
 		// MockMC: ResourcePackInfo#asBuilder
 		return null;
 	}
 
-	@Override
 	default UUID getId()
 	{
 		// MockMC: ResourcePackInfo#getId
 		return null;
 	}
 
-	@Override
 	default Component getPrompt()
 	{
 		// MockMC: ResourcePackInfo#getPrompt

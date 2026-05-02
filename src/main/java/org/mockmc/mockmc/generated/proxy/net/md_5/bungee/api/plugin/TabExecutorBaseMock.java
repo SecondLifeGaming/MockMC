@@ -15,7 +15,6 @@ import net.md_5.bungee.api.plugin.TabExecutor;
  */
 public interface TabExecutorBaseMock extends TabExecutor
 {
-	@Override
 	default Iterable<String> onTabComplete(CommandSender arg0, String[] arg1)
 	{
 		// MockMC: TabExecutor#onTabComplete

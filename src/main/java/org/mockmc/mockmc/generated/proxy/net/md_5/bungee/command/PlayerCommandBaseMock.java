@@ -24,6 +24,7 @@ public interface PlayerCommandBaseMock extends TabExecutorBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Iterable<String> onTabComplete(CommandSender arg0, String[] arg1)
 	{

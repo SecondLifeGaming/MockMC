@@ -18,13 +18,11 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface EventManagerBaseMock extends EventManager
 {
-	@Override
 	default <E> void register(Object arg0, Class<E> arg1, EventHandler<E> arg2)
 	{
 		// MockMC: EventManager#register
 	}
 
-	@Override
 	default <E> void register(Object arg0, Class<E> arg1, short arg2, EventHandler<E> arg3)
 	{
 		// MockMC: EventManager#register
@@ -34,45 +32,38 @@ public interface EventManagerBaseMock extends EventManager
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default <E> void register(Object arg0, Class<E> arg1, PostOrder arg2, EventHandler<E> arg3)
 	{
 		// MockMC: EventManager#register
 	}
 
-	@Override
 	default void register(Object arg0, Object arg1)
 	{
 		// MockMC: EventManager#register
 	}
 
-	@Override
 	default <E> CompletableFuture<E> fire(E arg0)
 	{
 		// MockMC: EventManager#fire
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default <E> void unregister(Object arg0, EventHandler<E> arg1)
 	{
 		// MockMC: EventManager#unregister
 	}
 
-	@Override
 	default void unregisterListeners(Object arg0)
 	{
 		// MockMC: EventManager#unregisterListeners
 	}
 
-	@Override
 	default void fireAndForget(Object arg0)
 	{
 		// MockMC: EventManager#fireAndForget
 	}
 
-	@Override
 	default void unregisterListener(Object arg0, Object arg1)
 	{
 		// MockMC: EventManager#unregisterListener

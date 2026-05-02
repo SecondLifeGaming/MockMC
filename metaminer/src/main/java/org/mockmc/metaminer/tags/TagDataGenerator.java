@@ -26,7 +26,7 @@ public class TagDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation().entrySet())
 		{

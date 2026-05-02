@@ -15,42 +15,36 @@ import com.velocitypowered.api.util.Ordered;
  */
 public interface OrderedBaseMock<T> extends Ordered<T>
 {
-	@Override
 	default int compareTo(T arg0)
 	{
 		// MockMC: Ordered#compareTo
 		return 0;
 	}
 
-	@Override
 	default boolean lessThan(T arg0)
 	{
 		// MockMC: Ordered#lessThan
 		return false;
 	}
 
-	@Override
 	default boolean noGreaterOrLessThan(T arg0)
 	{
 		// MockMC: Ordered#noGreaterOrLessThan
 		return false;
 	}
 
-	@Override
 	default boolean greaterThan(T arg0)
 	{
 		// MockMC: Ordered#greaterThan
 		return false;
 	}
 
-	@Override
 	default boolean noLessThan(T arg0)
 	{
 		// MockMC: Ordered#noLessThan
 		return false;
 	}
 
-	@Override
 	default boolean noGreaterThan(T arg0)
 	{
 		// MockMC: Ordered#noGreaterThan

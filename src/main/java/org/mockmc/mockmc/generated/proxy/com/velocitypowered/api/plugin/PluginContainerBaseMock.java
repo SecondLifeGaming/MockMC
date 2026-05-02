@@ -18,21 +18,18 @@ import java.util.concurrent.ExecutorService;
  */
 public interface PluginContainerBaseMock extends PluginContainer
 {
-	@Override
 	default Optional<?> getInstance()
 	{
 		// MockMC: PluginContainer#getInstance
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default PluginDescription getDescription()
 	{
 		// MockMC: PluginContainer#getDescription
 		return null;
 	}
 
-	@Override
 	default ExecutorService getExecutorService()
 	{
 		// MockMC: PluginContainer#getExecutorService

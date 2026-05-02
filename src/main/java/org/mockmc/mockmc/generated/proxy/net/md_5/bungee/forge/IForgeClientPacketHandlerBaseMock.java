@@ -16,14 +16,12 @@ import net.md_5.bungee.protocol.packet.PluginMessage;
  */
 public interface IForgeClientPacketHandlerBaseMock<S> extends IForgeClientPacketHandler<S>
 {
-	@Override
 	default S handle(PluginMessage arg0, UserConnection arg1)
 	{
 		// MockMC: IForgeClientPacketHandler#handle
 		return null;
 	}
 
-	@Override
 	default S send(PluginMessage arg0, UserConnection arg1)
 	{
 		// MockMC: IForgeClientPacketHandler#send

@@ -15,14 +15,12 @@ import com.velocitypowered.api.event.ResultedEvent;
  */
 public interface ResultedEventBaseMock<R extends ResultedEvent.Result> extends ResultedEvent<R>
 {
-	@Override
 	default R getResult()
 	{
 		// MockMC: ResultedEvent#getResult
 		return null;
 	}
 
-	@Override
 	default void setResult(R arg0)
 	{
 		// MockMC: ResultedEvent#setResult

@@ -16,7 +16,6 @@ import java.lang.annotation.Annotation;
  */
 public interface AwaitingEventBaseMock extends AwaitingEvent
 {
-	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: AwaitingEvent#annotationType

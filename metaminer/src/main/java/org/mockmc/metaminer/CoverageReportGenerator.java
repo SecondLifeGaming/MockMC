@@ -26,7 +26,7 @@ public class CoverageReportGenerator implements DataGenerator {
     }
 
     @Override
-    public void generateData() throws Exception {
+    public void generateData() throws java.io.IOException {
         URLClassLoader customLoader = createClassLoader();
         ClassPath classPath = ClassPath.from(customLoader);
         

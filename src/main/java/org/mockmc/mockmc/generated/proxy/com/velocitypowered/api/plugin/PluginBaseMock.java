@@ -17,56 +17,48 @@ import java.lang.annotation.Annotation;
  */
 public interface PluginBaseMock extends Plugin
 {
-	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Plugin#annotationType
 		return null;
 	}
 
-	@Override
 	default String description()
 	{
 		// MockMC: Plugin#description
 		return "";
 	}
 
-	@Override
 	default String name()
 	{
 		// MockMC: Plugin#name
 		return "";
 	}
 
-	@Override
 	default String id()
 	{
 		// MockMC: Plugin#id
 		return "";
 	}
 
-	@Override
 	default String version()
 	{
 		// MockMC: Plugin#version
 		return "";
 	}
 
-	@Override
 	default Dependency[] dependencies()
 	{
 		// MockMC: Plugin#dependencies
 		return new Dependency[0];
 	}
 
-	@Override
 	default String[] authors()
 	{
 		// MockMC: Plugin#authors
 		return new String[0];
 	}
 
-	@Override
 	default String url()
 	{
 		// MockMC: Plugin#url

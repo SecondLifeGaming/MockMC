@@ -18,6 +18,7 @@ import net.md_5.bungee.protocol.ProtocolConstants;
  */
 public interface DefinedPacketBaseMock
 {
+	@SuppressWarnings("Exception")
 	default void handle(AbstractPacketHandler arg0) throws Exception
 	{
 		// MockMC: DefinedPacket#handle

@@ -17,35 +17,30 @@ import net.kyori.adventure.text.Component;
  */
 public interface ResourcePackInfoBuilderBaseMock extends ResourcePackInfo.Builder
 {
-	@Override
 	default ResourcePackInfo.Builder setHash(byte[] arg0)
 	{
 		// MockMC: Builder#setHash
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo.Builder setId(UUID arg0)
 	{
 		// MockMC: Builder#setId
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo.Builder setPrompt(Component arg0)
 	{
 		// MockMC: Builder#setPrompt
 		return null;
 	}
 
-	@Override
 	default ResourcePackInfo.Builder setShouldForce(boolean arg0)
 	{
 		// MockMC: Builder#setShouldForce

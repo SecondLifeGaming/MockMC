@@ -24,7 +24,7 @@ public class WorldConfigurationGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		JsonArray worlds = new JsonArray();
 		for (World world : Bukkit.getWorlds())

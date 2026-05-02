@@ -23,7 +23,7 @@ public class TranslationDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		try (InputStream inputStream = this.getClass().getResourceAsStream("/assets/minecraft/lang/en_us.json"))
 		{

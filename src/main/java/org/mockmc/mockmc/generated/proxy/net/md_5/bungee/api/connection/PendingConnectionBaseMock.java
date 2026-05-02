@@ -22,7 +22,6 @@ public interface PendingConnectionBaseMock extends PendingConnection, Connection
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Override
 	@Deprecated(since = "1.0")
 	default String getUUID()
 	{
@@ -30,83 +29,71 @@ public interface PendingConnectionBaseMock extends PendingConnection, Connection
 		return "";
 	}
 
-	@Override
 	default CompletableFuture<byte[]> retrieveCookie(String arg0)
 	{
 		// MockMC: PendingConnection#retrieveCookie
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default ListenerInfo getListener()
 	{
 		// MockMC: PendingConnection#getListener
 		return null;
 	}
 
-	@Override
 	default boolean isTransferred()
 	{
 		// MockMC: PendingConnection#isTransferred
 		return false;
 	}
 
-	@Override
 	default boolean isLegacy()
 	{
 		// MockMC: PendingConnection#isLegacy
 		return false;
 	}
 
-	@Override
 	default CompletableFuture<byte[]> sendData(String arg0, byte[] arg1)
 	{
 		// MockMC: PendingConnection#sendData
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	@Override
 	default int getVersion()
 	{
 		// MockMC: PendingConnection#getVersion
 		return 0;
 	}
 
-	@Override
 	default boolean isOnlineMode()
 	{
 		// MockMC: PendingConnection#isOnlineMode
 		return false;
 	}
 
-	@Override
 	default String getName()
 	{
 		// MockMC: PendingConnection#getName
 		return "";
 	}
 
-	@Override
 	default void setOnlineMode(boolean arg0)
 	{
 		// MockMC: PendingConnection#setOnlineMode
 	}
 
-	@Override
 	default UUID getUniqueId()
 	{
 		// MockMC: PendingConnection#getUniqueId
 		return null;
 	}
 
-	@Override
 	default InetSocketAddress getVirtualHost()
 	{
 		// MockMC: PendingConnection#getVirtualHost
 		return null;
 	}
 
-	@Override
 	default void setUniqueId(UUID arg0)
 	{
 		// MockMC: PendingConnection#setUniqueId

@@ -173,26 +173,31 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     @Override
-    public void generateData() throws Exception {
-        File cacheDir = new File(jarDirectory, "cache");
-        List<URL> urls = processJars(cacheDir);
+    public void generateData() throws java.io.IOException {
+        try {
+            File cacheDir = new File(jarDirectory, "cache");
+            List<URL> urls = processJars(cacheDir);
 
-        // 3. Add unbundled libraries recursively
-        File libDir = new File(cacheDir, "libraries");
-        if (libDir.exists()) {
-            addJarsRecursively(libDir, urls);
-        }
+            // 3. Add unbundled libraries recursively
+            File libDir = new File(cacheDir, "libraries");
+            if (libDir.exists()) {
+                addJarsRecursively(libDir, urls);
+            }
 
-        URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-        ClassPath classPath = ClassPath.from(customLoader);
-        Set<Class<?>> toGenerate = scanPackages(classPath);
+            URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+            ClassPath classPath = ClassPath.from(customLoader);
+            Set<Class<?>> toGenerate = scanPackages(classPath);
 
-        for (Class<?> c : toGenerate) {
-            generateForClass(c);
+            for (Class<?> c : toGenerate) {
+                generateForClass(c);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new java.io.IOException("Generation interrupted", e);
         }
     }
 
-    private List<URL> processJars(File cacheDir) throws Exception {
+    private List<URL> processJars(File cacheDir) throws java.io.IOException, InterruptedException {
         List<URL> urls = new ArrayList<>();
         LOGGER.log(Level.INFO, "Scanning JAR directory: {0}", jarDirectory.getAbsolutePath());
         File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
@@ -205,12 +210,10 @@ public class BaseMockGenerator implements DataGenerator {
                 if (jar.getName().contains("paper") || jar.getName().contains("folia")) {
                     org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
 
-                    // 2. Remap to Mojang names if we have a patched jar
                     if (result != null) {
-                        File vanillaJar = org.mockmc.metaminer.util.MappingProvider.getVanillaServer(result.mcVersion, cacheDir);
                         File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
                         File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
-                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, vanillaJar, remappedJar);
+                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, remappedJar);
                     }
                 }
 
@@ -247,7 +250,7 @@ public class BaseMockGenerator implements DataGenerator {
         return toGenerate;
     }
 
-    private void addJarsRecursively(File dir, List<URL> urls) throws Exception {
+    private void addJarsRecursively(File dir, List<URL> urls) throws java.io.IOException {
         File[] files = dir.listFiles();
         if (files == null) return;
         for (File f : files) {
@@ -300,7 +303,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private void generateForClass(Class<?> clazz) throws IOException {
+    private void generateForClass(Class<?> clazz) throws java.io.IOException {
         if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) {
             return;
         }
@@ -319,7 +322,7 @@ public class BaseMockGenerator implements DataGenerator {
         Map<String, List<Method>> methodsBySignature = collectMethodsBySignature(clazz, typeVars, typeMap);
         Set<Method> methodsToGenerate = selectMethodsToGenerate(clazz, methodsBySignature);
 
-        generateMethods(typeSpec, clazz, typeVars, typeMap, methodsToGenerate, methodsBySignature, classSuppressions);
+        generateMethods(typeSpec, clazz, typeVars, typeMap, methodsToGenerate, classSuppressions);
 
         JavaFile javaFile = JavaFile.builder(packageName, typeSpec.build())
                 .addFileComment("MockMC: Unique Stub for $L", simpleName)
@@ -607,7 +610,7 @@ public class BaseMockGenerator implements DataGenerator {
         return current;
     }
 
-    private void generateMethods(TypeSpec.Builder typeSpec, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<Method> methodsToGenerate, Map<String, List<Method>> methodsBySignature, Set<String> classSuppressions) {
+    private void generateMethods(TypeSpec.Builder typeSpec, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<Method> methodsToGenerate, Set<String> classSuppressions) {
         Set<String> generatedSignatures = new HashSet<>();
         for (Method m : methodsToGenerate) {
             if (isMethodGeneratable(m)) {
@@ -644,7 +647,10 @@ public class BaseMockGenerator implements DataGenerator {
     private void generateMethodSpec(TypeSpec.Builder typeSpec, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> classSuppressions) {
         MethodSpec.Builder builder = MethodSpec.methodBuilder(m.getName())
                 .addModifiers(Modifier.PUBLIC, Modifier.DEFAULT);
-        if (clazz.isInterface()) {
+        // Always add @Override for mirrored methods if we are in an interface (which we are)
+        // and the method is actually overriding something. 
+        // For simplicity and to satisfy the linter, we add it if the method exists in any super-interface.
+        if (isOverriding(m, clazz)) {
             builder.addAnnotation(Override.class);
         }
 
@@ -855,6 +861,13 @@ public class BaseMockGenerator implements DataGenerator {
         // We only care about types in the signature.
     
         collectSuppressionsFromSignature(m, methodSuppressions);
+        
+        for (Class<?> exceptionType : m.getExceptionTypes()) {
+            if (exceptionType == Exception.class) {
+                methodSuppressions.add("Exception");
+            }
+        }
+
         applyMethodQuirks(m, clazz, typeVars, typeMap, methodSuppressions);
     
         return methodSuppressions;
@@ -981,6 +994,20 @@ public class BaseMockGenerator implements DataGenerator {
             }
         }
         return null;
+    }
+
+    private boolean isOverriding(Method m, Class<?> clazz) {
+        for (java.lang.reflect.Type iface : getAllGenericInterfaces(clazz)) {
+            Class<?> raw = getRawType(iface);
+            if (raw == null || !isGeneratableType(raw)) continue;
+            try {
+                raw.getMethod(m.getName(), m.getParameterTypes());
+                return true;
+            } catch (NoSuchMethodException _) {
+                // Not in this interface
+            }
+        }
+        return false;
     }
 
     private boolean isGeneratableType(Class<?> clazz) {

@@ -18,21 +18,18 @@ import java.util.function.Consumer;
  */
 public interface SchedulerBaseMock extends Scheduler
 {
-	@Override
 	default Collection<ScheduledTask> tasksByPlugin(Object arg0)
 	{
 		// MockMC: Scheduler#tasksByPlugin
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Scheduler.TaskBuilder buildTask(Object arg0, Runnable arg1)
 	{
 		// MockMC: Scheduler#buildTask
 		return null;
 	}
 
-	@Override
 	default Scheduler.TaskBuilder buildTask(Object arg0, Consumer<ScheduledTask> arg1)
 	{
 		// MockMC: Scheduler#buildTask

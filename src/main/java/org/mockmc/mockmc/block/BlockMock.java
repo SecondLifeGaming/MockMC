@@ -72,8 +72,8 @@ public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.
 	 */
 	public BlockMock(@NotNull Location location)
 	{
-		this(Material.AIR, location);
 		Preconditions.checkNotNull(location, "Location cannot be null");
+		this(Material.AIR, location);
 	}
 
 	/**

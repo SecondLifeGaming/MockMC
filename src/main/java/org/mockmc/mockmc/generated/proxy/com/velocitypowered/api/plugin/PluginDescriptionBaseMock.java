@@ -20,63 +20,54 @@ import java.util.Optional;
  */
 public interface PluginDescriptionBaseMock extends PluginDescription
 {
-	@Override
 	default List<String> getAuthors()
 	{
 		// MockMC: PluginDescription#getAuthors
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Optional<Path> getSource()
 	{
 		// MockMC: PluginDescription#getSource
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Collection<PluginDependency> getDependencies()
 	{
 		// MockMC: PluginDescription#getDependencies
 		return java.util.Collections.emptyList();
 	}
 
-	@Override
 	default Optional<String> getName()
 	{
 		// MockMC: PluginDescription#getName
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<String> getVersion()
 	{
 		// MockMC: PluginDescription#getVersion
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<String> getUrl()
 	{
 		// MockMC: PluginDescription#getUrl
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<PluginDependency> getDependency(String arg0)
 	{
 		// MockMC: PluginDescription#getDependency
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default Optional<String> getDescription()
 	{
 		// MockMC: PluginDescription#getDescription
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default String getId()
 	{
 		// MockMC: PluginDescription#getId

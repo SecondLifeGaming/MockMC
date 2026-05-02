@@ -16,21 +16,18 @@ import java.lang.annotation.Annotation;
  */
 public interface DependencyBaseMock extends Dependency
 {
-	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Dependency#annotationType
 		return null;
 	}
 
-	@Override
 	default boolean optional()
 	{
 		// MockMC: Dependency#optional
 		return false;
 	}
 
-	@Override
 	default String id()
 	{
 		// MockMC: Dependency#id

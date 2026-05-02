@@ -17,21 +17,18 @@ import net.kyori.adventure.permission.PermissionChecker;
  */
 public interface PermissionSubjectBaseMock extends PermissionSubject
 {
-	@Override
 	default PermissionChecker getPermissionChecker()
 	{
 		// MockMC: PermissionSubject#getPermissionChecker
 		return null;
 	}
 
-	@Override
 	default boolean hasPermission(String arg0)
 	{
 		// MockMC: PermissionSubject#hasPermission
 		return false;
 	}
 
-	@Override
 	default Tristate getPermissionValue(String arg0)
 	{
 		// MockMC: PermissionSubject#getPermissionValue

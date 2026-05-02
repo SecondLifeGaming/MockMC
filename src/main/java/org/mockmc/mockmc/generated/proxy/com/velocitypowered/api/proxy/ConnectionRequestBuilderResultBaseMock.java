@@ -19,28 +19,24 @@ import net.kyori.adventure.text.Component;
  */
 public interface ConnectionRequestBuilderResultBaseMock extends ConnectionRequestBuilder.Result
 {
-	@Override
 	default ConnectionRequestBuilder.Status getStatus()
 	{
 		// MockMC: Result#getStatus
 		return null;
 	}
 
-	@Override
 	default Optional<Component> getReasonComponent()
 	{
 		// MockMC: Result#getReasonComponent
 		return java.util.Optional.empty();
 	}
 
-	@Override
 	default RegisteredServer getAttemptedConnection()
 	{
 		// MockMC: Result#getAttemptedConnection
 		return null;
 	}
 
-	@Override
 	default boolean isSuccessful()
 	{
 		// MockMC: Result#isSuccessful

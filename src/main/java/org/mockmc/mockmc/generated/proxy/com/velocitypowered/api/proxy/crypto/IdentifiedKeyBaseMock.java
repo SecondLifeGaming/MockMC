@@ -17,28 +17,24 @@ import java.util.UUID;
  */
 public interface IdentifiedKeyBaseMock extends IdentifiedKey, KeySignedBaseMock
 {
-	@Override
 	default PublicKey getSignedPublicKey()
 	{
 		// MockMC: IdentifiedKey#getSignedPublicKey
 		return null;
 	}
 
-	@Override
 	default boolean verifyDataSignature(byte[] arg0, byte[]... arg1)
 	{
 		// MockMC: IdentifiedKey#verifyDataSignature
 		return false;
 	}
 
-	@Override
 	default IdentifiedKey.Revision getKeyRevision()
 	{
 		// MockMC: IdentifiedKey#getKeyRevision
 		return null;
 	}
 
-	@Override
 	default UUID getSignatureHolder()
 	{
 		// MockMC: IdentifiedKey#getSignatureHolder

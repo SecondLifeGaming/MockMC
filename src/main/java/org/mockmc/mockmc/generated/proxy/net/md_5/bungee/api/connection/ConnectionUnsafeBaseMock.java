@@ -15,13 +15,11 @@ import net.md_5.bungee.protocol.DefinedPacket;
  */
 public interface ConnectionUnsafeBaseMock extends Connection.Unsafe
 {
-	@Override
 	default void sendPacketQueued(DefinedPacket arg0)
 	{
 		// MockMC: Unsafe#sendPacketQueued
 	}
 
-	@Override
 	default void sendPacket(DefinedPacket arg0)
 	{
 		// MockMC: Unsafe#sendPacket

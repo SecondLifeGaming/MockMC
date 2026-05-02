@@ -130,6 +130,7 @@ public class SnifferMock extends AnimalsMock
 				this.setState(State.valueOf((String) nbt.get("State")));
 			} catch (IllegalArgumentException ignored)
 			{
+				// Ignore invalid states in NBT
 			}
 		}
 		if (nbt.has("ExploredLocations"))

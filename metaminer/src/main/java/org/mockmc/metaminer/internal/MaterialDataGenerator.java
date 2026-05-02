@@ -43,7 +43,7 @@ public class MaterialDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws Exception
+	public void generateData() throws java.io.IOException
 	{
 		JsonObject json = createJsonObject();
 		JsonUtil.dump(json, new File(dataFolder, "material_data.json"));

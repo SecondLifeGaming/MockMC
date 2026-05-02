@@ -15,7 +15,6 @@ import com.velocitypowered.api.command.SimpleCommand;
  */
 public interface SimpleCommandInvocationBaseMock extends SimpleCommand.Invocation, CommandInvocationBaseMock<String[]>
 {
-	@Override
 	default String alias()
 	{
 		// MockMC: Invocation#alias

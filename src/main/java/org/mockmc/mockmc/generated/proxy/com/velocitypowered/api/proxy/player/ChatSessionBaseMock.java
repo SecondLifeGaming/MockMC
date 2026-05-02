@@ -17,7 +17,6 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.crypto.Ke
  */
 public interface ChatSessionBaseMock extends ChatSession, KeyIdentifiableBaseMock
 {
-	@Override
 	default UUID getSessionId()
 	{
 		// MockMC: ChatSession#getSessionId
