@@ -5,10 +5,26 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 public class JarCracker {
+
+    private static final Logger LOGGER = Logger.getLogger(JarCracker.class.getName());
+    private static final String DEFAULT_MC_VERSION = "1.21.1";
+    private static final String JAVA_BIN = getExecutable("java");
+    private static final String JAR_BIN = getExecutable("jar");
+
+    private JarCracker() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
+    private static String getExecutable(String name) {
+        String extension = System.getProperty("os.name").toLowerCase().contains("win") ? ".exe" : "";
+        return System.getProperty("java.home") + File.separator + "bin" + File.separator + name + extension;
+    }
 
     public static class CrackResult {
         public final File patchedJar;
@@ -31,14 +47,14 @@ public class JarCracker {
             return new CrackResult(finalJar, mcVersion);
         }
 
-        System.out.println("Autonomous Unbundling " + bundlerJar.getName() + "...");
+        LOGGER.log(Level.INFO, "Autonomous Unbundling {0}...", bundlerJar.getName());
         
         File tempDir = new File(cacheDir, "unbundle_" + System.currentTimeMillis());
         tempDir.mkdirs();
         
         try {
             // Run the bundler to let it self-extract and patch
-            ProcessBuilder pb = new ProcessBuilder("java", "-Xmx512M", "-jar", bundlerJar.getAbsolutePath(), "--help");
+            ProcessBuilder pb = new ProcessBuilder(JAVA_BIN, "-Xmx512M", "-jar", bundlerJar.getAbsolutePath(), "--help");
             pb.directory(tempDir);
             Process process = pb.start();
             process.waitFor();
@@ -72,16 +88,16 @@ public class JarCracker {
             repackDir.mkdirs();
             
             // Extract
-            ProcessBuilder extractPb = new ProcessBuilder("jar", "xf", patchedJar.getAbsolutePath());
+            ProcessBuilder extractPb = new ProcessBuilder(JAR_BIN, "xf", patchedJar.getAbsolutePath());
             extractPb.directory(repackDir);
             extractPb.start().waitFor();
-            
+
             // Re-create
-            ProcessBuilder repackPb = new ProcessBuilder("jar", "cf", finalJar.getAbsolutePath(), ".");
+            ProcessBuilder repackPb = new ProcessBuilder(JAR_BIN, "cf", finalJar.getAbsolutePath(), ".");
             repackPb.directory(repackDir);
             repackPb.start().waitFor();
-            
-            System.out.println("Successfully unbundled and repacked: " + finalJar.getName());
+
+            LOGGER.log(Level.INFO, "Successfully unbundled and repacked: {0}", finalJar.getName());
             
             return new CrackResult(finalJar, mcVersion);
         } catch (InterruptedException e) {
@@ -101,13 +117,13 @@ public class JarCracker {
                     String[] lines = content.split("\n");
                     if (lines.length > 0) {
                         String line = lines[0].trim();
-                        if (line.contains("1.21.1")) return "1.21.1";
+                        if (line.contains(DEFAULT_MC_VERSION)) return DEFAULT_MC_VERSION;
                         if (line.contains("1.21")) return "1.21";
                     }
                 }
             }
         }
-        return "1.21.1"; // Default
+        return DEFAULT_MC_VERSION; // Default
     }
 
     private static File findJarRecursive(File dir) {
