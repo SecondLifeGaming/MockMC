@@ -865,6 +865,7 @@ public class BaseMockGenerator implements DataGenerator {
         for (Class<?> exceptionType : m.getExceptionTypes()) {
             if (exceptionType == Exception.class) {
                 methodSuppressions.add("Exception");
+                methodSuppressions.add("java:S112"); // Sonar rule for generic exceptions
             }
         }
 

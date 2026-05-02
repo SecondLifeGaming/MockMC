@@ -14,7 +14,6 @@ public class ComponentStyleBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.clone());
-		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.isBoldRaw());
 		assertSafeDefault(mock.isItalicRaw());
@@ -22,5 +21,6 @@ public class ComponentStyleBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.isStrikethroughRaw());
 		assertSafeDefault(mock.isObfuscatedRaw());
 		assertSafeDefault(mock.getShadowColor());
+		assertSafeDefault(mock.getFont());
 	}
 }

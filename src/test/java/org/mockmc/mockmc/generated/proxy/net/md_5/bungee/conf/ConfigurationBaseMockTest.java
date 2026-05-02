@@ -13,7 +13,6 @@ public class ConfigurationBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertNotNull(mock);
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getFavicon());
@@ -21,5 +20,6 @@ public class ConfigurationBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
 		assertSafeDefault(mock.getServersLock());
+		assertSafeDefault(mock.getListeners());
 	}
 }

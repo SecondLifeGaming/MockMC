@@ -15,8 +15,8 @@ public class MultiActionDialogBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getBase());
-		assertSafeDefault(mock.actions());
 		assertSafeDefault(mock.exitAction());
 		assertSafeDefault(mock.columns());
+		assertSafeDefault(mock.actions());
 	}
 }

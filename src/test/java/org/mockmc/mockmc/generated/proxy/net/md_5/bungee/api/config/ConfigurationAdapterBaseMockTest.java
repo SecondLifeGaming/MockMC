@@ -13,7 +13,7 @@ public class ConfigurationAdapterBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertNotNull(mock);
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getServers());
+		assertSafeDefault(mock.getListeners());
 	}
 }

@@ -14,7 +14,7 @@ public class PermissionCheckEventBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getSender());
+		assertSafeDefault(mock.getPermission());
 	}
 }
