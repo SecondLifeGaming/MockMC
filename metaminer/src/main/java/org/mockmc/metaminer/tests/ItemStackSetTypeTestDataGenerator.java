@@ -11,7 +11,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		JsonArray jsonArray = new JsonArray();
 		for (Material material : Registry.MATERIAL)

@@ -4,7 +4,6 @@ import com.destroystokyo.paper.SkinParts;
 import com.google.common.base.Preconditions;
 import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
-import io.papermc.paper.datacomponent.item.ResolvableProfile;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
 import net.kyori.adventure.text.Component;
@@ -107,8 +106,15 @@ public class MockMCInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public ResolvableProfile defaultMannequinProfile()
+	public io.papermc.paper.datacomponent.item.ResolvableProfile defaultMannequinProfile()
 	{
 		throw new UnimplementedOperationException();
 	}
+
+	@Override
+	public io.papermc.paper.entity.poi.PoiType.Occupancy createOccupancy(String arg0)
+	{
+		throw new UnimplementedOperationException();
+	}
+
 }

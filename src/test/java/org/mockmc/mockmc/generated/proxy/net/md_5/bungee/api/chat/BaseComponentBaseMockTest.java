@@ -16,6 +16,7 @@ public class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
 		assertSafeDefault(mock.getExtra());
+		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.getStyle());
 		assertSafeDefault(mock.toLegacyText());
@@ -33,6 +34,5 @@ public class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.duplicateWithoutFormatting());
 		assertSafeDefault(mock.toPlainText());
 		assertSafeDefault(mock.getShadowColor());
-		assertSafeDefault(mock.getFont());
 	}
 }

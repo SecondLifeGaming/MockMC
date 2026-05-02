@@ -15,8 +15,8 @@ public class TranslatableComponentBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
+		assertSafeDefault(mock.getWith());
 		assertSafeDefault(mock.getTranslate());
 		assertSafeDefault(mock.getFallback());
-		assertSafeDefault(mock.getWith());
 	}
 }

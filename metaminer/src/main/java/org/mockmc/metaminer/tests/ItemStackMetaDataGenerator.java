@@ -6,7 +6,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 
 public class ItemStackMetaDataGenerator implements DataGenerator
 {
@@ -19,7 +18,7 @@ public class ItemStackMetaDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		JsonArray jsonArray = new JsonArray();
 		for (ItemType itemType : ItemMetaClassFinder.getInduvidualMetaItemTypes())

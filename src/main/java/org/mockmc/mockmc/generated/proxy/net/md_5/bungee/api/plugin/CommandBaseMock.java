@@ -26,12 +26,6 @@ public interface CommandBaseMock
 		return "";
 	}
 
-	default boolean canEqual(Object arg0)
-	{
-		// MockMC: Command#canEqual
-		return false;
-	}
-
 	default String getName()
 	{
 		// MockMC: Command#getName
@@ -42,11 +36,6 @@ public interface CommandBaseMock
 	{
 		// MockMC: Command#getPermission
 		return "";
-	}
-
-	default void setPermissionMessage(String arg0)
-	{
-		// MockMC: Command#setPermissionMessage
 	}
 
 	default String[] getAliases()

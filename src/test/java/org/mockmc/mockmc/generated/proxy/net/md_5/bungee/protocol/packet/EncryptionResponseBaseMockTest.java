@@ -14,8 +14,8 @@ public class EncryptionResponseBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getVerifyToken());
 		assertSafeDefault(mock.getEncryptionData());
 		assertSafeDefault(mock.getSharedSecret());
+		assertSafeDefault(mock.getVerifyToken());
 	}
 }

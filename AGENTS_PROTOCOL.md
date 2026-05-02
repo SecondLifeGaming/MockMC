@@ -1,44 +1,33 @@
 # MockMC Agentic Workflow Protocol
 
-This document defines the autonomous protocol for scaling functional test coverage using AI agents.
+Autonomous protocol for scaling functional test coverage.
 
 ## 🤖 Agent Roles
 
-### 1. The Auditor (Verification Specialist)
+### 1. Auditor (Discovery)
 - **Goal**: Identify gaps in functional testing.
 - **Workflow**:
-    - Scans `src/main/java/org/mockmc/mockmc/` for manual mocks.
-    - Cross-references with `src/test/java/` to see if a corresponding `*MockTest.java` exists.
-    - Reports classes with "Mechanical-Only" coverage (i.e., only `BaseMockTest` exists).
+    - Scan `src/main/java/.../` for manual mocks.
+    - Check `src/test/java/` for corresponding `*MockTest.java`.
+    - Flag "Mechanical-Only" classes (only `BaseMockTest` present).
 
-### 2. The Architect (Contract Analyst)
-- **Goal**: Define what "Functional" means for a specific API.
+### 2. Architect (Contract)
+- **Goal**: Define "Functional" state for target API.
 - **Workflow**:
-    - Reads the Paper/Velocity API JARs or online documentation for a target class.
-    - Identifies "Stateful" methods (setters, getters, logic-heavy methods).
-    - Writes a `TEST_PLAN.md` for the class, outlining specific scenarios (e.g., "Setting health should trigger HealthChangeEvent").
+    - Inspect Paper/Velocity API JARs for stateful methods.
+    - Produce `TEST_PLAN.md` outlining logic scenarios.
 
-### 3. The Coder (Implementation Specialist)
-- **Goal**: Author the functional test suite.
+### 3. Coder (Implementation)
+- **Goal**: Author test suite and behavior logic.
 - **Workflow**:
-    - Reads the `TEST_PLAN.md` provided by the Architect.
-    - Author a JUnit 5 test class using `MockMCExtension`.
-    - Implements logic in the manual mock if the mechanical base is insufficient.
-    - Ensures all tests pass and follow the "Safe Defaults" principles.
+    - Implement JUnit 5 tests based on `TEST_PLAN.md`.
+    - Author behavior in manual mock if mechanical base is insufficient.
+    - Verify via `./gradlew test`.
 
-## 🚀 Autonomous Execution Loop
+## 🚀 Execution Loop
 
-1. **TRIGGER**: A new class is mirrored or a manual mock is updated.
-2. **AUDIT**: Auditor confirms if functional tests are missing.
-3. **DESIGN**: Architect produces a `TEST_PLAN.md`.
-4. **BUILD**: Coder implements the tests and logic.
-5. **VERIFY**: Run `./gradlew test` and update the `COVERAGE.md`.
-
-## 🛠️ Tooling Requirements
-
-- **Class Discovery**: `grep`, `find`, and `ls`.
-- **API Inspection**: `javap` or `BaseMockGenerator` analysis.
-- **Test Execution**: `./gradlew test`.
-
----
-*This protocol is part of the "Engine First" mission to achieve 100% functional fidelity.*
+1. **TRIGGER**: Manual mock updated or class mirrored.
+2. **AUDIT**: Confirm missing functional tests.
+3. **DESIGN**: Produce `TEST_PLAN.md`.
+4. **BUILD**: Implement tests and logic.
+5. **VERIFY**: Run `./gradlew test`.

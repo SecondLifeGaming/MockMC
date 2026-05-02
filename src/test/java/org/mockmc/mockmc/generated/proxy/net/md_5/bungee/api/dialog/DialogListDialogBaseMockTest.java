@@ -15,9 +15,9 @@ public class DialogListDialogBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getBase());
+		assertSafeDefault(mock.exitAction());
 		assertSafeDefault(mock.columns());
 		assertSafeDefault(mock.buttonWidth());
-		assertSafeDefault(mock.exitAction());
 		assertSafeDefault(mock.dialogs());
 	}
 }

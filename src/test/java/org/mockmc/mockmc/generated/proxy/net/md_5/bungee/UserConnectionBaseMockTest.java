@@ -26,6 +26,7 @@ public class UserConnectionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getSkinParts());
 		assertSafeDefault(mock.getScoreboard());
 		assertSafeDefault(mock.getUUID());
+		assertSafeDefault(mock.getGroups());
 		assertSafeDefault(mock.getClientBrand());
 		assertSafeDefault(mock.getChatMode());
 		assertSafeDefault(mock.getCh());
@@ -41,12 +42,11 @@ public class UserConnectionBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getChatSerializer());
 		assertSafeDefault(mock.getSocketAddress());
 		assertSafeDefault(mock.getPendingConnection());
-		assertSafeDefault(mock.getForgeServerHandler());
-		assertSafeDefault(mock.getGroups());
 		assertSafeDefault(mock.getModList());
 		assertSafeDefault(mock.getReconnectServer());
 		assertSafeDefault(mock.getPotions());
 		assertSafeDefault(mock.getLastCommandTabbed());
 		assertSafeDefault(mock.getEntityRewrite());
+		assertSafeDefault(mock.getForgeServerHandler());
 	}
 }

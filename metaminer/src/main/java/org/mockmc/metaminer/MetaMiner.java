@@ -41,7 +41,7 @@ public class MetaMiner extends JavaPlugin
 			{
 				dataGenerator.generateData();
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 				return;

@@ -173,14 +173,38 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     @Override
-    public void generateData() throws IOException {
+    public void generateData() throws Exception {
+        File cacheDir = new File(jarDirectory, "cache");
         List<URL> urls = new ArrayList<>();
+        System.out.println("Scanning JAR directory: " + jarDirectory.getAbsolutePath());
         File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+        
         if (jarFiles != null) {
             for (File jar : jarFiles) {
-                urls.add(jar.toURI().toURL());
+                File processedJar = jar;
+                
+                // 1. Crack Paper/Folia bundler if necessary
+                if (jar.getName().contains("paper") || jar.getName().contains("folia")) {
+                    org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
+                    
+                    // 2. Remap to Mojang names if we have a patched jar
+                    if (result != null) {
+                        File vanillaJar = org.mockmc.metaminer.util.MappingProvider.getVanillaServer(result.mcVersion, cacheDir);
+                        File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
+                        File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
+                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, vanillaJar, remappedJar);
+                    }
+                }
+                
+                urls.add(processedJar.toURI().toURL());
                 extractVersionInfo(jar);
             }
+        }
+        
+        // 3. Add unbundled libraries recursively
+        File libDir = new File(cacheDir, "libraries");
+        if (libDir.exists()) {
+            addJarsRecursively(libDir, urls);
         }
 
         URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
@@ -207,6 +231,18 @@ public class BaseMockGenerator implements DataGenerator {
         }
         for (Class<?> c : toGenerate) {
             generateForClass(c);
+        }
+    }
+
+    private void addJarsRecursively(File dir, List<URL> urls) throws Exception {
+        File[] files = dir.listFiles();
+        if (files == null) return;
+        for (File f : files) {
+            if (f.isDirectory()) {
+                addJarsRecursively(f, urls);
+            } else if (f.getName().endsWith(".jar")) {
+                urls.add(f.toURI().toURL());
+            }
         }
     }
 
@@ -434,9 +470,9 @@ public class BaseMockGenerator implements DataGenerator {
         if (m.getDeclaringClass() == Object.class) return true;
         if (m.isBridge() || m.isSynthetic() || m.getName().contains("$")) return true;
 
-        if (isNmsType(m.getGenericReturnType())) return true;
+        if (isNmsType(m.getGenericReturnType()) || !isAccessible(m.getGenericReturnType())) return true;
         for (java.lang.reflect.Type t : m.getGenericParameterTypes()) {
-            if (isNmsType(t)) return true;
+            if (isNmsType(t) || !isAccessible(t)) return true;
         }
 
         return isQuirkExcluded(m, clazz);
@@ -469,6 +505,30 @@ public class BaseMockGenerator implements DataGenerator {
         if (type == null) return false;
         String name = type.toString();
         return name.contains("net.minecraft.") || name.contains("com.mojang.");
+    }
+
+    private boolean isAccessible(java.lang.reflect.Type type) {
+        if (type == null) return true;
+        if (type instanceof java.lang.reflect.TypeVariable) return true;
+        if (type instanceof java.lang.reflect.WildcardType) return true;
+        
+        Class<?> raw = getRawType(type);
+        if (raw == null) return true;
+        if (raw.isPrimitive()) return true;
+        if (raw.isArray()) return isAccessible(raw.getComponentType());
+        
+        if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
+        
+        // Also check declaring class if it's an inner class
+        Class<?> declaring = raw.getDeclaringClass();
+        if (declaring != null && !isAccessible(declaring)) return false;
+
+        if (type instanceof java.lang.reflect.ParameterizedType pt) {
+            for (java.lang.reflect.Type arg : pt.getActualTypeArguments()) {
+                if (!isAccessible(arg)) return false;
+            }
+        }
+        return true;
     }
 
     private Set<Method> selectMethodsToGenerate(Class<?> clazz, Map<String, List<Method>> methodsBySignature) {
@@ -542,7 +602,8 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private boolean isMethodGeneratable(Method m) {
-        return !java.lang.reflect.Modifier.isStatic(m.getModifiers())
+        return java.lang.reflect.Modifier.isPublic(m.getModifiers())
+                && !java.lang.reflect.Modifier.isStatic(m.getModifiers())
                 && m.getDeclaringClass() != Object.class
                 && !m.getName().equals("equals")
                 && !m.getName().equals("hashCode")
@@ -593,6 +654,10 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private void addDefaultReturnValue(MethodSpec.Builder builder, Method m) {
+        if (m.getGenericReturnType() instanceof java.lang.reflect.TypeVariable) {
+            builder.addStatement(RETURN_NULL);
+            return;
+        }
         if (addPrimitiveReturnValue(builder, m)) return;
         if (addCollectionReturnValue(builder, m)) return;
         if (addOptionalReturnValue(builder, m)) return;

@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: Sat May 02 10:02:00 CDT 2026
+Generated on: Sat May 02 13:24:18 CDT 2026
 
 ## Overall Coverage: 100.00%
 
-- **Total API Methods**: 13733
-- **Mirrored via BaseMocks**: 13733
+- **Total API Methods**: 13755
+- **Mirrored via BaseMocks**: 13755
 - **Manual Implementations**: (TBD - Analysis in progress)
 
 ## Coverage by Package
@@ -64,7 +64,7 @@ Generated on: Sat May 02 10:02:00 CDT 2026
 | io.github.waterfallmc.waterfall.exception | 10 | 100% Mirror |
 | io.github.waterfallmc.waterfall.log4j | 0 | 100% Mirror |
 | io.github.waterfallmc.waterfall.utils | 2 | 100% Mirror |
-| io.papermc.paper | 20 | 100% Mirror |
+| io.papermc.paper | 21 | 100% Mirror |
 | io.papermc.paper.advancement | 9 | 100% Mirror |
 | io.papermc.paper.annotation | 0 | 100% Mirror |
 | io.papermc.paper.ban | 1 | 100% Mirror |
@@ -93,6 +93,7 @@ Generated on: Sat May 02 10:02:00 CDT 2026
 | io.papermc.paper.dialog | 6 | 100% Mirror |
 | io.papermc.paper.enchantments | 1 | 100% Mirror |
 | io.papermc.paper.entity | 21 | 100% Mirror |
+| io.papermc.paper.entity.poi | 4 | 100% Mirror |
 | io.papermc.paper.event.block | 59 | 100% Mirror |
 | io.papermc.paper.event.connection | 6 | 100% Mirror |
 | io.papermc.paper.event.connection.configuration | 6 | 100% Mirror |
@@ -194,7 +195,7 @@ Generated on: Sat May 02 10:02:00 CDT 2026
 | net.md_5.bungee.serializer.dialog | 12 | 100% Mirror |
 | net.md_5.bungee.tab | 14 | 100% Mirror |
 | net.md_5.bungee.util | 9 | 100% Mirror |
-| org.bukkit | 1142 | 100% Mirror |
+| org.bukkit | 1152 | 100% Mirror |
 | org.bukkit.advancement | 27 | 100% Mirror |
 | org.bukkit.attribute | 27 | 100% Mirror |
 | org.bukkit.ban | 8 | 100% Mirror |
@@ -214,7 +215,7 @@ Generated on: Sat May 02 10:02:00 CDT 2026
 | org.bukkit.conversations | 68 | 100% Mirror |
 | org.bukkit.damage | 14 | 100% Mirror |
 | org.bukkit.enchantments | 32 | 100% Mirror |
-| org.bukkit.entity | 1702 | 100% Mirror |
+| org.bukkit.entity | 1704 | 100% Mirror |
 | org.bukkit.entity.boat | 0 | 100% Mirror |
 | org.bukkit.entity.memory | 2 | 100% Mirror |
 | org.bukkit.entity.minecart | 21 | 100% Mirror |
@@ -223,14 +224,14 @@ Generated on: Sat May 02 10:02:00 CDT 2026
 | org.bukkit.event.command | 8 | 100% Mirror |
 | org.bukkit.event.enchantment | 24 | 100% Mirror |
 | org.bukkit.event.entity | 479 | 100% Mirror |
-| org.bukkit.event.hanging | 14 | 100% Mirror |
+| org.bukkit.event.hanging | 15 | 100% Mirror |
 | org.bukkit.event.inventory | 132 | 100% Mirror |
 | org.bukkit.event.player | 417 | 100% Mirror |
 | org.bukkit.event.raid | 12 | 100% Mirror |
 | org.bukkit.event.server | 47 | 100% Mirror |
-| org.bukkit.event.vehicle | 37 | 100% Mirror |
+| org.bukkit.event.vehicle | 39 | 100% Mirror |
 | org.bukkit.event.weather | 16 | 100% Mirror |
-| org.bukkit.event.world | 81 | 100% Mirror |
+| org.bukkit.event.world | 83 | 100% Mirror |
 | org.bukkit.generator | 72 | 100% Mirror |
 | org.bukkit.generator.structure | 7 | 100% Mirror |
 | org.bukkit.help | 19 | 100% Mirror |

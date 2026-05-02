@@ -14,7 +14,7 @@ public class ModuleVersionBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getBuild());
 		assertSafeDefault(mock.getGit());
+		assertSafeDefault(mock.getBuild());
 	}
 }

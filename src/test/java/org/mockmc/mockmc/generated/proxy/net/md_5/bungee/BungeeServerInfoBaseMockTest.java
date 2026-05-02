@@ -16,9 +16,9 @@ public class BungeeServerInfoBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getAddress());
+		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getPlayers());
-		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getPacketQueue());
 		assertSafeDefault(mock.getSocketAddress());
 	}

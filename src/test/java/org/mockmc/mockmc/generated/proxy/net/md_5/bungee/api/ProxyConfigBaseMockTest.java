@@ -13,13 +13,13 @@ public class ProxyConfigBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertNotNull(mock);
+		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getGameVersion());
+		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getFavicon());
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getServersCopy());
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
-		assertSafeDefault(mock.getUuid());
 	}
 }

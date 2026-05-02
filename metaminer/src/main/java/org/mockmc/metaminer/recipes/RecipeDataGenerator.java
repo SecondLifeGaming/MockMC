@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,25 +46,16 @@ public class RecipeDataGenerator implements DataGenerator
 	public static final String STONECUTTING = "stonecutting";
 	public static final String SMITHING = "smithing";
 
-	private static final Map<Class<? extends Recipe>, String> RECIPE_CLASS_MAP = Map.of(
-			CraftingRecipe.class, CRAFTING,
-			FurnaceRecipe.class, SMELTING,
-			BlastingRecipe.class, BLASTING,
-			SmokingRecipe.class, SMOKING,
-			CampfireRecipe.class, CAMPFIRE_COOKING,
-			StonecuttingRecipe.class, STONECUTTING,
-			SmithingRecipe.class, SMITHING
-	);
+	private static final Map<Class<? extends Recipe>, String> RECIPE_CLASS_MAP = Map.of(CraftingRecipe.class, CRAFTING,
+			FurnaceRecipe.class, SMELTING, BlastingRecipe.class, BLASTING, SmokingRecipe.class, SMOKING,
+			CampfireRecipe.class, CAMPFIRE_COOKING, StonecuttingRecipe.class, STONECUTTING, SmithingRecipe.class,
+			SMITHING);
 
-	private static final Map<String, Function<Recipe, JsonElement>> RECIPE_FACTORY_MAP = Map.of(
-			CRAFTING, CraftingRecipeElementFactory::toJson,
-			SMELTING, SmeltingRecipeElementFactory::toJson,
-			BLASTING, BlastingRecipeElementFactory::toJson,
-			SMOKING, SmokingRecipeElementFactory::toJson,
-			CAMPFIRE_COOKING, CampfireRecipeElementFactory::toJson,
-			STONECUTTING, StoneCuttingRecipeElementFactory::toJson,
-			SMITHING, SmithingRecipeElementFactory::toJson
-	);
+	private static final Map<String, Function<Recipe, JsonElement>> RECIPE_FACTORY_MAP = Map.of(CRAFTING,
+			CraftingRecipeElementFactory::toJson, SMELTING, SmeltingRecipeElementFactory::toJson, BLASTING,
+			BlastingRecipeElementFactory::toJson, SMOKING, SmokingRecipeElementFactory::toJson, CAMPFIRE_COOKING,
+			CampfireRecipeElementFactory::toJson, STONECUTTING, StoneCuttingRecipeElementFactory::toJson, SMITHING,
+			SmithingRecipeElementFactory::toJson);
 
 	private final File dataFolder;
 
@@ -75,7 +65,7 @@ public class RecipeDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		Map<String, List<Recipe>> recipes = new HashMap<>();
 
@@ -119,7 +109,8 @@ public class RecipeDataGenerator implements DataGenerator
 		{
 			Class<?> clazz = mapEntry.getKey();
 
-			Preconditions.checkArgument(Recipe.class.isAssignableFrom(clazz), "The class %s is not a Recipe", clazz.getName());
+			Preconditions.checkArgument(Recipe.class.isAssignableFrom(clazz), "The class %s is not a Recipe",
+					clazz.getName());
 			if (clazz.isInstance(recipe))
 			{
 				return mapEntry.getValue();

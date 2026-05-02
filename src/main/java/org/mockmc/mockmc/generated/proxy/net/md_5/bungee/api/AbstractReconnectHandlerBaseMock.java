@@ -21,10 +21,4 @@ public interface AbstractReconnectHandlerBaseMock extends ReconnectHandlerBaseMo
 		// MockMC: AbstractReconnectHandler#getServer
 		return null;
 	}
-
-	default ServerInfo getStoredServer(ProxiedPlayer arg0)
-	{
-		// MockMC: AbstractReconnectHandler#getStoredServer
-		return null;
-	}
 }

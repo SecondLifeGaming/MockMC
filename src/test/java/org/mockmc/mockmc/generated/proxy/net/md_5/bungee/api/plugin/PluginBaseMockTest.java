@@ -18,7 +18,7 @@ public class PluginBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getDescription());
 		assertSafeDefault(mock.getDataFolder());
 		assertSafeDefault(mock.getSLF4JLogger());
-		assertSafeDefault(mock.getExecutorService());
 		assertSafeDefault(mock.getProxy());
+		assertSafeDefault(mock.getExecutorService());
 	}
 }

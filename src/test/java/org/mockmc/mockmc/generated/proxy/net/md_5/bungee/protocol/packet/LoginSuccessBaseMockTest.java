@@ -15,7 +15,7 @@ public class LoginSuccessBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getProperties());
-		assertSafeDefault(mock.getUsername());
 		assertSafeDefault(mock.getUuid());
+		assertSafeDefault(mock.getUsername());
 	}
 }

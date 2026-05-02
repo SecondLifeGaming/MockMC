@@ -15,12 +15,6 @@ import net.md_5.bungee.api.connection.Connection;
  */
 public interface TargetedEventBaseMock
 {
-	default boolean canEqual(Object arg0)
-	{
-		// MockMC: TargetedEvent#canEqual
-		return false;
-	}
-
 	default Connection getReceiver()
 	{
 		// MockMC: TargetedEvent#getReceiver

@@ -15,8 +15,8 @@ public class GameProfileRequestEventBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getConnection());
+		assertSafeDefault(mock.getGameProfile());
 		assertSafeDefault(mock.getUsername());
 		assertSafeDefault(mock.getOriginalProfile());
-		assertSafeDefault(mock.getGameProfile());
 	}
 }

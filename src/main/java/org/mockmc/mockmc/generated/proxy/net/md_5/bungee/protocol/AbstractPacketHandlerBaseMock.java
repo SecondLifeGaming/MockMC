@@ -77,7 +77,7 @@ import net.md_5.bungee.protocol.packet.ViewDistance;
  */
 public interface AbstractPacketHandlerBaseMock
 {
-	default void handle(ClearTitles arg0) throws Exception
+	default void handle(Team arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -92,17 +92,12 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(EntityStatus arg0) throws Exception
+	default void handle(ClearTitles arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(Login arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(CookieResponse arg0) throws Exception
+	default void handle(ServerLinks arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -112,97 +107,12 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(Respawn arg0) throws Exception
+	default void handle(Kick arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(ClientSettings arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(StoreCookie arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(BundleDelimiter arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ShowDialog arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(EncryptionRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(SetCompression arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ShowDialogDirect arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ScoreboardObjective arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(BossBar arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(PluginMessage arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(PingPacket arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(Chat arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(FinishConfiguration arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(UnsignedClientCommand arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(CustomClickAction arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(LegacyHandshake arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(TabCompleteResponse arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(Title arg0) throws Exception
+	default void handle(ScoreboardScoreReset arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -212,7 +122,47 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(EntityRemoveEffect arg0) throws Exception
+	default void handle(Login arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(LegacyHandshake arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(Commands arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ShowDialogDirect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(PluginMessage arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(CookieResponse arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ServerData arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ScoreboardDisplay arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ClientChat arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -222,7 +172,12 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(LoginRequest arg0) throws Exception
+	default void handle(LoginAcknowledged arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(Subtitle arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -232,7 +187,67 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
+	default void handle(Handshake arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ClientChatAcknowledgement arg0)
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(KeepAlive arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(PingPacket arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(EntityRemoveEffect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(TabCompleteRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
 	default void handle(StartConfiguration arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(Chat arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(PlayerListHeaderFooter arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(UnsignedClientCommand arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(StatusRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ClientSettings arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(EncryptionRequest arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -247,137 +262,22 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(Team arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(Commands arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(LoginAcknowledged arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ClientChatAcknowledgement arg0)
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(KnownPacks arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(PlayerListHeaderFooter arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ScoreboardDisplay arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(TitleTimes arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(TabCompleteRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ScoreboardScoreReset arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(EntityEffect arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ServerData arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(LegacyPing arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
 	default void handle(Transfer arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(PlayerListItemRemove arg0) throws Exception
+	default void handle(Respawn arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(Subtitle arg0) throws Exception
+	default void handle(ShowDialog arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(EncryptionResponse arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(GameState arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(Handshake arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(PlayerListItemUpdate arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(SystemChat arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(LoginPayloadRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(KeepAlive arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(StatusRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ClientChat arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(DisconnectReportDetails arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ServerLinks arg0) throws Exception
+	default void handle(TabCompleteResponse arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -387,7 +287,107 @@ public interface AbstractPacketHandlerBaseMock
 		// MockMC: AbstractPacketHandler#handle
 	}
 
-	default void handle(Kick arg0) throws Exception
+	default void handle(EncryptionResponse arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(EntityEffect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(KnownPacks arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(LoginRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(EntityStatus arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(Title arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(StoreCookie arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(SystemChat arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(PlayerListItemUpdate arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(CustomClickAction arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(LoginPayloadRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(PlayerListItemRemove arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ScoreboardObjective arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(BossBar arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(FinishConfiguration arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(GameState arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(DisconnectReportDetails arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(BundleDelimiter arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(LegacyPing arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(SetCompression arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(TitleTimes arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}

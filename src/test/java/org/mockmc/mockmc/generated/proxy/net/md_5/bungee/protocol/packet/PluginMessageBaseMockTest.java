@@ -15,7 +15,7 @@ public class PluginMessageBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getData());
-		assertSafeDefault(mock.getTag());
 		assertSafeDefault(mock.getStream());
+		assertSafeDefault(mock.getTag());
 	}
 }

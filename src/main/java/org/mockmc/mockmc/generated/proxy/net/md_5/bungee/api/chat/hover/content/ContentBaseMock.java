@@ -41,15 +41,4 @@ public interface ContentBaseMock
 		// MockMC: Content#requiredAction
 		return null;
 	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
-	default boolean canEqual(Object arg0)
-	{
-		// MockMC: Content#canEqual
-		return false;
-	}
 }

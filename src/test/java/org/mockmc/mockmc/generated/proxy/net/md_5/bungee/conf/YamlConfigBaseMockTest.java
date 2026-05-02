@@ -13,7 +13,7 @@ public class YamlConfigBaseMockTest extends GeneratedTestBase
 		{
 		};
 		assertNotNull(mock);
-		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getListeners());
+		assertSafeDefault(mock.getServers());
 	}
 }

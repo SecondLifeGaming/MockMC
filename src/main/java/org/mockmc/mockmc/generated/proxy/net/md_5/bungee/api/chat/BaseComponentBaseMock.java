@@ -95,17 +95,6 @@ public interface BaseComponentBaseMock
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.0")
-	default boolean canEqual(Object arg0)
-	{
-		// MockMC: BaseComponent#canEqual
-		return false;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
 	default Boolean isBoldRaw()
 	{
 		// MockMC: BaseComponent#isBoldRaw
@@ -200,16 +189,6 @@ public interface BaseComponentBaseMock
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.0")
-	default void toLegacyText(StringBuilder arg0)
-	{
-		// MockMC: BaseComponent#toLegacyText
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
 	default String toLegacyText()
 	{
 		// MockMC: BaseComponent#toLegacyText
@@ -279,16 +258,6 @@ public interface BaseComponentBaseMock
 	{
 		// MockMC: BaseComponent#isBold
 		return false;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
-	default void addFormat(StringBuilder arg0)
-	{
-		// MockMC: BaseComponent#addFormat
 	}
 
 	/**
@@ -502,16 +471,6 @@ public interface BaseComponentBaseMock
 	default void setExtra(List<BaseComponent> arg0)
 	{
 		// MockMC: BaseComponent#setExtra
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
-	default void toPlainText(StringBuilder arg0)
-	{
-		// MockMC: BaseComponent#toPlainText
 	}
 
 	/**

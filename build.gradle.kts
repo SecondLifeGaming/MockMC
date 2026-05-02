@@ -48,7 +48,7 @@ tasks.register<DownloadJarsTask>("downloadJars") {
 	outputDir.set(layout.projectDirectory.dir("jars"))
 	jars.set(mapOf(
 		"velocity-3.5.0-SNAPSHOT-593.jar" to "https://fill-data.papermc.io/v1/objects/25bfbee6155fbce24f709bf18f1bb915817c4151d6d418ca01282742ab1f123a/velocity-3.5.0-SNAPSHOT-593.jar",
-		"paper-26.1.2-51.jar" to "https://fill-data.papermc.io/v1/objects/e81be14567005cf9f490e3ba512e453e705dc50a720343ad8c58f58f3947c6db/paper-26.1.2-51.jar",
+		"paper-26.1.2-53.jar" to "https://fill-data.papermc.io/v1/objects/6934188878fc351e1be5bfba5f2b8c4591224886e4b34e3de09dbec68a351caf/paper-26.1.2-53.jar",
 		"folia-1.21.11-14.jar" to "https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar",
 		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
 	))
@@ -101,12 +101,28 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	// Backend Jars for metaminer generated code resolution
-	compileOnly(fileTree("jars") { include("*.jar") })
+	// Remapped Server Jars from MetaMiner (Autonomous)
+	compileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
+
+	// Unbundled Libraries (Autonomous)
+	compileOnly(fileTree("jars/cache/libraries") { 
+		include("**/*.jar") 
+		exclude("**/folia-api-*.jar")
+		exclude("**/paper-api-*.jar")
+	})
+
+	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
+	compileOnly(fileTree("jars") {
+		include("*.jar")
+		exclude("paper-*.jar")
+		exclude("folia-*.jar")
+	})
 
 	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")
 	api("com.googlecode.json-simple:json-simple:1.1.1")
+	api("org.checkerframework:checker-qual:3.48.3")
+	api("it.unimi.dsi:fastutil:8.5.15")
 
 	// Dependencies for Unit Tests
 	implementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
@@ -400,7 +416,7 @@ data class DependencyHashResult(
 
 val backendJars = mapOf(
 	"Folia" to "folia-1.21.11-14.jar",
-	"Paper" to "paper-26.1.2-22.jar",
+	"Paper" to "paper-26.1.2-53.jar",
 	"Spigot" to "spigot-26.1.2.jar",
 	"Velocity" to "velocity-3.5.0-SNAPSHOT-593.jar",
 	"Waterfall" to "waterfall-1.21-609.jar"

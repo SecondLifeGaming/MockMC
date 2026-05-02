@@ -13,7 +13,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 
 public class WorldConfigurationGenerator implements DataGenerator
 {
@@ -25,7 +24,7 @@ public class WorldConfigurationGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		JsonArray worlds = new JsonArray();
 		for (World world : Bukkit.getWorlds())
@@ -58,7 +57,8 @@ public class WorldConfigurationGenerator implements DataGenerator
 			case null -> jsonObject.add(gameRuleName, null);
 			case Number number -> jsonObject.addProperty(gameRuleName, number);
 			case Boolean bool -> jsonObject.addProperty(gameRuleName, bool);
-			default -> throw new UnsupportedOperationException(String.format("The type %s is not supported.", value.getClass().getName()));
+			default -> throw new UnsupportedOperationException(
+					String.format("The type %s is not supported.", value.getClass().getName()));
 			}
 		}
 

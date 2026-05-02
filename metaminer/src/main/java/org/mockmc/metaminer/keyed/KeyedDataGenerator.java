@@ -36,7 +36,7 @@ public class KeyedDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		if (!this.dataFolder.exists() && !this.dataFolder.mkdirs())
 		{

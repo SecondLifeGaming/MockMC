@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -28,7 +27,7 @@ public class BlockStateGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws Exception
 	{
 		World world = Bukkit.getWorlds().get(0);
 		world.setType(0, 63, 0, Material.BEDROCK);
@@ -48,8 +47,10 @@ public class BlockStateGenerator implements DataGenerator
 
 				try
 				{
-					@NotNull BlockState state = material.createBlockData().createBlockState();
-					@NotNull Class<?>[] interfaces = state.getClass().getInterfaces();
+					@NotNull
+					BlockState state = material.createBlockData().createBlockState();
+					@NotNull
+					Class<?>[] interfaces = state.getClass().getInterfaces();
 					if (interfaces.length == 0)
 					{
 						continue;

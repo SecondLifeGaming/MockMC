@@ -14,7 +14,7 @@ public class PlayerListItemUpdateBaseMockTest extends GeneratedTestBase
 		};
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getItems());
 		assertSafeDefault(mock.getActions());
+		assertSafeDefault(mock.getItems());
 	}
 }

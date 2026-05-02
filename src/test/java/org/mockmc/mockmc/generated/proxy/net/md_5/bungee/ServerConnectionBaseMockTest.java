@@ -15,9 +15,9 @@ public class ServerConnectionBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.unsafe());
 		assertSafeDefault(mock.getAddress());
+		assertSafeDefault(mock.getInfo());
 		assertSafeDefault(mock.getCh());
 		assertSafeDefault(mock.getKeepAlives());
-		assertSafeDefault(mock.getInfo());
 		assertSafeDefault(mock.getSocketAddress());
 	}
 }

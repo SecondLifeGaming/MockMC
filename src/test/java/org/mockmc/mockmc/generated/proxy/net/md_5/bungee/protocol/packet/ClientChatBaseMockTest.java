@@ -16,7 +16,7 @@ public class ClientChatBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getMessage());
 		assertSafeDefault(mock.getSignature());
-		assertSafeDefault(mock.getChain());
 		assertSafeDefault(mock.getSeenMessages());
+		assertSafeDefault(mock.getChain());
 	}
 }

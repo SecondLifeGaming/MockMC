@@ -18,10 +18,4 @@ public interface DialogBodyBaseMock
 		// MockMC: DialogBody#getType
 		return "";
 	}
-
-	default boolean canEqual(Object arg0)
-	{
-		// MockMC: DialogBody#canEqual
-		return false;
-	}
 }
