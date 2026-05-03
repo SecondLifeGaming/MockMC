@@ -72,8 +72,23 @@ public class CombatTrackerMock implements CombatTracker
 	@Override
 	public @Nullable CombatEntry computeMostSignificantFall()
 	{
-		CombatEntry combatEntry = null;
-		CombatEntry combatEntry1 = null;
+		FallResult result = calculateFallSignificance();
+		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
+		{
+			return result.mostSignificantFall;
+		}
+		else
+		{
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null ? result.mostSignificantDamage : null;
+		}
+	}
+
+	private record FallResult(CombatEntry mostSignificantFall, CombatEntry mostSignificantDamage, float maxFallDistance, float maxDamage) {}
+
+	private FallResult calculateFallSignificance()
+	{
+		CombatEntry mostSignificantFall = null;
+		CombatEntry mostSignificantDamage = null;
 		float maxDamage = 0.0F;
 		float maxFallDistance = 0.0F;
 
@@ -87,34 +102,20 @@ public class CombatTrackerMock implements CombatTracker
 			float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
 
 			if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
-					&& fallDistance > 0.0F && (combatEntry == null || fallDistance > maxFallDistance))
+					&& fallDistance > 0.0F && (mostSignificantFall == null || fallDistance > maxFallDistance))
 			{
-				if (i > 0)
-				{
-					combatEntry = previousEntry;
-				} else
-				{
-					combatEntry = currentEntry;
-				}
-
+				mostSignificantFall = (i > 0) ? previousEntry : currentEntry;
 				maxFallDistance = fallDistance;
 			}
 
 			if (currentEntry.getFallLocationType() != null
-					&& (combatEntry1 == null || currentEntry.getDamage() > maxDamage))
+					&& (mostSignificantDamage == null || currentEntry.getDamage() > maxDamage))
 			{
-				combatEntry1 = currentEntry;
+				mostSignificantDamage = currentEntry;
 				maxDamage = currentEntry.getDamage();
 			}
 		}
-
-		if (maxFallDistance > 5.0F && combatEntry != null)
-		{
-			return combatEntry;
-		} else
-		{
-			return maxDamage > 5.0F && combatEntry1 != null ? combatEntry1 : null;
-		}
+		return new FallResult(mostSignificantFall, mostSignificantDamage, maxFallDistance, maxDamage);
 	}
 
 	@Override
@@ -180,48 +181,16 @@ public class CombatTrackerMock implements CombatTracker
 		}
 	}
 
-	private CombatEntry getMostSignificantFall()
+	private @Nullable CombatEntry getMostSignificantFall()
 	{
-		CombatEntry combatEntry = null;
-		CombatEntry combatEntry1 = null;
-		float f = 0.0F;
-		float f1 = 0.0F;
-
-		for (int i = 0; i < this.combatEntries.size(); i++)
+		FallResult result = calculateFallSignificance();
+		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
 		{
-			CombatEntry combatEntry2 = this.combatEntries.get(i);
-			CombatEntry combatEntry3 = i > 0 ? this.combatEntries.get(i - 1) : null;
-			DamageSource damageSource = combatEntry2.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
-					.isTagged(damageSource.getDamageType());
-			float f2 = isAlwaysMostSignificantFall ? Float.MAX_VALUE : combatEntry2.getFallDistance();
-			if ((damageSource.getDamageType() == DamageType.FALL || isAlwaysMostSignificantFall) && f2 > 0.0F
-					&& (combatEntry == null || f2 > f1))
-			{
-				if (i > 0)
-				{
-					combatEntry = combatEntry3;
-				} else
-				{
-					combatEntry = combatEntry2;
-				}
-
-				f1 = f2;
-			}
-
-			if (combatEntry2.getFallLocationType() != null && (combatEntry1 == null || combatEntry2.getDamage() > f))
-			{
-				combatEntry1 = combatEntry2;
-				f = combatEntry2.getDamage();
-			}
+			return result.mostSignificantFall;
 		}
-
-		if (f1 > 5.0F && combatEntry != null)
+		else
 		{
-			return combatEntry;
-		} else
-		{
-			return f > 5.0F && combatEntry1 != null ? combatEntry1 : null;
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null ? result.mostSignificantDamage : null;
 		}
 	}
 
