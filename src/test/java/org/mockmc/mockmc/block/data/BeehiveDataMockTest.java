@@ -10,8 +10,12 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockmc.mockmc.MockMCExtension;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockMCExtension.class)
 class BeehiveDataMockTest
@@ -73,4 +77,28 @@ class BeehiveDataMockTest
 			assertEquals("Invalid face, only cartesian horizontal face are allowed for this property!", e.getMessage());
 		}
 	}
+
+	@Test
+	void shouldReturnCorrectFaces()
+	{
+		Set<BlockFace> faces = beehive.getFaces();
+		assertEquals(4, faces.size());
+		assertTrue(faces.contains(BlockFace.NORTH));
+		assertTrue(faces.contains(BlockFace.SOUTH));
+		assertTrue(faces.contains(BlockFace.EAST));
+		assertTrue(faces.contains(BlockFace.WEST));
+	}
+
+	@Test
+	void shouldCloneCorrectly()
+	{
+		beehive.setHoneyLevel(3);
+		beehive.setFacing(BlockFace.SOUTH);
+		BeehiveDataMock clone = beehive.clone();
+		assertEquals(beehive.getHoneyLevel(), clone.getHoneyLevel());
+		assertEquals(beehive.getFacing(), clone.getFacing());
+		assertEquals(beehive.getMaximumHoneyLevel(), clone.getMaximumHoneyLevel());
+		assertNotSame(beehive, clone);
+	}
+
 }
