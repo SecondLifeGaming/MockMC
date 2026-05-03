@@ -6,18 +6,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class PendingConnectionBaseMockTest extends GeneratedTestBase
+class PendingConnectionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		PendingConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
-		assertSafeDefault(mock.getListener());
 		assertSafeDefault(mock.getUniqueId());
-		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getVirtualHost());
+		assertSafeDefault(mock.getListener());
+		assertSafeDefault(mock.getUUID());
 	}
 
 	private static class Stub implements PendingConnectionBaseMock

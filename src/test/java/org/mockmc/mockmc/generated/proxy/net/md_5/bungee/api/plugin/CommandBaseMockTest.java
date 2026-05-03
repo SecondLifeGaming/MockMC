@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class CommandBaseMockTest extends GeneratedTestBase
+class CommandBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		CommandBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.toString());
-		assertSafeDefault(mock.getPermissionMessage());
 		assertSafeDefault(mock.getPermission());
+		assertSafeDefault(mock.getPermissionMessage());
 		assertSafeDefault(mock.getAliases());
 	}
 

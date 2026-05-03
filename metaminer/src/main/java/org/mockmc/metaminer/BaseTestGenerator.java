@@ -136,8 +136,7 @@ public class BaseTestGenerator implements DataGenerator {
 
         ClassName baseMockClass = ClassName.get(packageName, baseMockName);
         TypeSpec.Builder testClass = TypeSpec.classBuilder(baseMockName + "Test")
-                .superclass(ClassName.get("org.mockmc.mockmc.generated", "GeneratedTestBase"))
-                .addModifiers(Modifier.PUBLIC);
+                .superclass(ClassName.get("org.mockmc.mockmc.generated", "GeneratedTestBase"));
 
         List<Method> methods = scanMethodsForSanityTests(clazz);
         List<TypeVariableName> typeVars = getTypeVariables(clazz);
@@ -235,7 +234,6 @@ public class BaseTestGenerator implements DataGenerator {
     private MethodSpec buildTestMethod(String name, ClassName baseMockClass, List<Method> methods, List<TypeVariableName> typeVars) {
         MethodSpec.Builder testMethod = MethodSpec.methodBuilder(name)
                 .addAnnotation(ClassName.get(JUNIT_JUPITER_API, "Test"))
-                .addModifiers(Modifier.PUBLIC)
                 .addException(Exception.class);
 
         String diamond = typeVars.isEmpty() ? "" : "<>";

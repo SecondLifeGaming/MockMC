@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class TaskSchedulerBaseMockTest extends GeneratedTestBase
+class TaskSchedulerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		TaskSchedulerBaseMock mock = new Stub();
 		assertNotNull(mock);

@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class AbstractPacketHandlerBaseMockTest extends GeneratedTestBase
+class AbstractPacketHandlerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		AbstractPacketHandlerBaseMock mock = new Stub();
 		assertNotNull(mock);

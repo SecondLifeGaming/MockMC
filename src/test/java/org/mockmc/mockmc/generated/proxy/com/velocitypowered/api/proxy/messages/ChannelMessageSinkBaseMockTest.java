@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class ChannelMessageSinkBaseMockTest extends GeneratedTestBase
+class ChannelMessageSinkBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		ChannelMessageSinkBaseMock mock = new Stub();
 		assertNotNull(mock);

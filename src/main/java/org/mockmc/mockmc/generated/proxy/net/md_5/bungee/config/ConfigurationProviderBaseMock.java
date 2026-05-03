@@ -42,6 +42,12 @@ public interface ConfigurationProviderBaseMock
 		return null;
 	}
 
+	default Configuration load(Reader arg0, Configuration arg1)
+	{
+		// MockMC: ConfigurationProvider#load
+		return null;
+	}
+
 	default Configuration load(File arg0) throws IOException
 	{
 		// MockMC: ConfigurationProvider#load
@@ -49,12 +55,6 @@ public interface ConfigurationProviderBaseMock
 	}
 
 	default Configuration load(String arg0, Configuration arg1)
-	{
-		// MockMC: ConfigurationProvider#load
-		return null;
-	}
-
-	default Configuration load(Reader arg0, Configuration arg1)
 	{
 		// MockMC: ConfigurationProvider#load
 		return null;

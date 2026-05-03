@@ -88,8 +88,12 @@ public class CombatTrackerMock implements CombatTracker
 	{
 	}
 
-	private record FallState(CombatEntry entry, float distance) {}
-	private record DamageState(CombatEntry entry, float amount) {}
+	private record FallState(CombatEntry entry, float distance)
+	{
+	}
+	private record DamageState(CombatEntry entry, float amount)
+	{
+	}
 
 	private FallResult calculateFallSignificance()
 	{

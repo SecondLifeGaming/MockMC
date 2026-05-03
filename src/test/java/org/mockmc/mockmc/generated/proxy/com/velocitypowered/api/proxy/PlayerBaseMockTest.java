@@ -6,19 +6,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class PlayerBaseMockTest extends GeneratedTestBase
+class PlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		PlayerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.key());
 		assertSafeDefault(mock.getUniqueId());
-		assertSafeDefault(mock.getUsername());
-		assertSafeDefault(mock.getGameProfile());
 		assertSafeDefault(mock.getPlayerListHeader());
 		assertSafeDefault(mock.getPlayerListFooter());
+		assertSafeDefault(mock.getGameProfile());
+		assertSafeDefault(mock.getUsername());
 		assertSafeDefault(mock.getModInfo());
 		assertSafeDefault(mock.getPlayerSettings());
 		assertSafeDefault(mock.getCurrentServer());

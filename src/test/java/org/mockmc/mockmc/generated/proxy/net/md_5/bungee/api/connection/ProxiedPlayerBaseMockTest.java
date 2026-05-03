@@ -6,21 +6,21 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class ProxiedPlayerBaseMockTest extends GeneratedTestBase
+class ProxiedPlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		ProxiedPlayerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getDisplayName());
 		assertSafeDefault(mock.getLocale());
-		assertSafeDefault(mock.getUniqueId());
 		assertSafeDefault(mock.getServer());
-		assertSafeDefault(mock.getUUID());
+		assertSafeDefault(mock.getUniqueId());
 		assertSafeDefault(mock.getMainHand());
 		assertSafeDefault(mock.getSkinParts());
 		assertSafeDefault(mock.getScoreboard());
+		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getClientBrand());
 		assertSafeDefault(mock.getChatMode());
 		assertSafeDefault(mock.getPendingConnection());

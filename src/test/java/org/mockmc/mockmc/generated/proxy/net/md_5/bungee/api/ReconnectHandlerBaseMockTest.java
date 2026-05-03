@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class ReconnectHandlerBaseMockTest extends GeneratedTestBase
+class ReconnectHandlerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		ReconnectHandlerBaseMock mock = new Stub();
 		assertNotNull(mock);

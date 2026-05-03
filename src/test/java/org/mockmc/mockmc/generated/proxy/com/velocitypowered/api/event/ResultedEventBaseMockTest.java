@@ -7,10 +7,10 @@ import com.velocitypowered.api.event.ResultedEvent;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class ResultedEventBaseMockTest extends GeneratedTestBase
+class ResultedEventBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		ResultedEventBaseMock mock = new Stub<>();
 		assertNotNull(mock);

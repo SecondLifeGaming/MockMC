@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class PlayerCommandBaseMockTest extends GeneratedTestBase
+class PlayerCommandBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		PlayerCommandBaseMock mock = new Stub();
 		assertNotNull(mock);

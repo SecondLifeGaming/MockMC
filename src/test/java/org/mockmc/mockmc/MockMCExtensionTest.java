@@ -18,7 +18,7 @@ class MockMCExtensionTest
 	private ServerMock fieldServerMock;
 	private final ServerMock constructorParameterServerMock;
 
-	public MockMCExtensionTest(@MockMCInject ServerMock constructorParameterServerMock)
+	MockMCExtensionTest(@MockMCInject ServerMock constructorParameterServerMock)
 	{
 		this.constructorParameterServerMock = constructorParameterServerMock;
 	}

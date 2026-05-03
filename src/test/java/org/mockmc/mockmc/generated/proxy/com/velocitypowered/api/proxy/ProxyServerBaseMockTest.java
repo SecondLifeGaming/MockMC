@@ -6,17 +6,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-public class ProxyServerBaseMockTest extends GeneratedTestBase
+class ProxyServerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults() throws Exception
+	void testSafeDefaults() throws Exception
 	{
 		ProxyServerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getVersion());
-		assertSafeDefault(mock.getConfiguration());
 		assertSafeDefault(mock.getPluginManager());
 		assertSafeDefault(mock.getScheduler());
+		assertSafeDefault(mock.getConfiguration());
 		assertSafeDefault(mock.getAllPlayers());
 		assertSafeDefault(mock.getAllServers());
 		assertSafeDefault(mock.getConsoleCommandSource());

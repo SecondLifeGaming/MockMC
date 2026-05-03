@@ -47,11 +47,11 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.messages.
 public interface PlayerBaseMock
 		extends
 			Player,
-			CommandSourceBaseMock,
 			KeyIdentifiableBaseMock,
+			CommandSourceBaseMock,
 			ChannelMessageSourceBaseMock,
-			ChannelMessageSinkBaseMock,
-			InboundConnectionBaseMock
+			InboundConnectionBaseMock,
+			ChannelMessageSinkBaseMock
 {
 	default void sendResourcePackOffer(ResourcePackInfo arg0)
 	{
