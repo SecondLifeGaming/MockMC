@@ -20,6 +20,7 @@ import java.util.UUID;
  * @see AnimalsMock
  * @mockmc.version 1.21-1.0.0
  */
+@SuppressWarnings("java:S110")
 public class SnifferMock extends AnimalsMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnifferBaseMock

@@ -16,6 +16,7 @@ import java.util.UUID;
  *
  * @see AgeableMock
  */
+@SuppressWarnings("java:S110")
 public class AnimalsMock extends AgeableMock
 		implements
 			Animals,
