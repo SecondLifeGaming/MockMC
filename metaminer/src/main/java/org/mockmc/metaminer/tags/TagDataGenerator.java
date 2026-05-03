@@ -15,8 +15,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import java.util.logging.Logger;
+
 public class TagDataGenerator implements DataGenerator
 {
+
+	private static final Logger LOGGER = Logger.getLogger(TagDataGenerator.class.getName());
 
 	private final File dataFolder;
 
@@ -34,7 +38,7 @@ public class TagDataGenerator implements DataGenerator
 		}
 		catch (IllegalStateException e)
 		{
-			System.err.println("Skipping TagDataGenerator: RegistryAccess not found (not running in a server environment)");
+			LOGGER.warning("Skipping TagDataGenerator: RegistryAccess not found (not running in a server environment)");
 			return;
 		}
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation().entrySet())

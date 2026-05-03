@@ -23,9 +23,12 @@ import org.mockmc.metaminer.util.JsonUtil;
 import java.io.File;
 import java.io.IOException;
 
+import java.util.logging.Logger;
+
 public class KeyedDataGenerator implements DataGenerator
 {
 
+	private static final Logger LOGGER = Logger.getLogger(KeyedDataGenerator.class.getName());
 	private static final String LEVEL_KEY = "level";
 
 	private final File dataFolder;
@@ -44,7 +47,7 @@ public class KeyedDataGenerator implements DataGenerator
 		}
 		catch (IllegalStateException e)
 		{
-			System.err.println("Skipping KeyedDataGenerator: RegistryAccess not found (not running in a server environment)");
+			LOGGER.warning("Skipping KeyedDataGenerator: RegistryAccess not found (not running in a server environment)");
 			return;
 		}
 

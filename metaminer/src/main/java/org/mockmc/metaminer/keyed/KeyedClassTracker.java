@@ -10,8 +10,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.logging.Logger;
+
 public class KeyedClassTracker
 {
+
+	private static final Logger LOGGER = Logger.getLogger(KeyedClassTracker.class.getName());
 
 	private KeyedClassTracker()
 	{
@@ -45,7 +49,7 @@ public class KeyedClassTracker
 					if (registryKey != null) {
 						output.put(registryKey, legacyType);
 					} else {
-						System.err.println("Warning: RegistryKey field " + field.getName() + " is null!");
+						LOGGER.warning(() -> "RegistryKey field " + field.getName() + " is null!");
 					}
 				}
 				catch (IllegalAccessException e)

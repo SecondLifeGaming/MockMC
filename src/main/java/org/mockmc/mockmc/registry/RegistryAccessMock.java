@@ -25,11 +25,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import java.util.logging.Logger;
 import java.util.concurrent.ConcurrentHashMap;
 
 @SuppressWarnings("unchecked")
 public class RegistryAccessMock implements RegistryAccess
 {
+
+	private static final Logger LOGGER = Logger.getLogger(RegistryAccessMock.class.getName());
 
 	private final Map<RegistryKey<?>, Registry<?>> registries = new ConcurrentHashMap<>();
 	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_KEY_MAP = createClassToKeyConversions();
@@ -243,7 +246,7 @@ public class RegistryAccessMock implements RegistryAccess
 				output.put(registryKey, className);
 			} else
 			{
-				System.err.println("Warning: Null JSON element while retrieving `" + registryKey.key().asString()
+				LOGGER.warning(() -> "Null JSON element while retrieving `" + registryKey.key().asString()
 						+ "` (key enum name: " + registryKey.toString() + ") - MockMC / MC version mismatch?");
 			}
 		}
