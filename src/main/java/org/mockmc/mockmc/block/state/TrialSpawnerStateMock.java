@@ -208,13 +208,19 @@ public class TrialSpawnerStateMock extends TileStateMock
 		{
 			return false;
 		}
-		return cooldownEnd == that.cooldownEnd && cooldownLength == that.cooldownLength && nextSpawnAttempt == that.nextSpawnAttempt && requiredPlayerRange == that.requiredPlayerRange && ominous == that.ominous && java.util.Objects.equals(normalConfiguration, that.normalConfiguration) && java.util.Objects.equals(ominousConfiguration, that.ominousConfiguration) && java.util.Objects.equals(trackedPlayers, that.trackedPlayers) && java.util.Objects.equals(trackedEntities, that.trackedEntities);
+		return cooldownEnd == that.cooldownEnd && cooldownLength == that.cooldownLength
+				&& nextSpawnAttempt == that.nextSpawnAttempt && requiredPlayerRange == that.requiredPlayerRange
+				&& ominous == that.ominous && java.util.Objects.equals(normalConfiguration, that.normalConfiguration)
+				&& java.util.Objects.equals(ominousConfiguration, that.ominousConfiguration)
+				&& java.util.Objects.equals(trackedPlayers, that.trackedPlayers)
+				&& java.util.Objects.equals(trackedEntities, that.trackedEntities);
 	}
 
 	@Override
 	public int hashCode()
 	{
-		return java.util.Objects.hash(super.hashCode(), normalConfiguration, ominousConfiguration, cooldownEnd, cooldownLength, nextSpawnAttempt, requiredPlayerRange, ominous, trackedPlayers, trackedEntities);
+		return java.util.Objects.hash(super.hashCode(), normalConfiguration, ominousConfiguration, cooldownEnd,
+				cooldownLength, nextSpawnAttempt, requiredPlayerRange, ominous, trackedPlayers, trackedEntities);
 	}
 
 }
