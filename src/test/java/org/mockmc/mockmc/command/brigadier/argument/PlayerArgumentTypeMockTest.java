@@ -147,7 +147,7 @@ class PlayerArgumentTypeMockTest
 		{
 			var method = type.getClass().getMethod("parse", StringReader.class, Object.class);
 			return (T) method.invoke(type, reader, source);
-		} catch (Exception e)
+		} catch (Exception _)
 		{
 			return type.parse(reader);
 		}

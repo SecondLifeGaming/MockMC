@@ -97,11 +97,8 @@ public class MockMC
 		mock.getLogger().setLevel(Level.WARNING);
 		try
 		{
-			if (Bukkit.getServer() == null)
-			{
-				Bukkit.setServer(mock);
-			}
-		} catch (UnsupportedOperationException e)
+			Bukkit.setServer(mock);
+		} catch (UnsupportedOperationException _)
 		{
 			// Already set, but we might have set it in the constructor
 		}

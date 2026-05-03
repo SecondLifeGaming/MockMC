@@ -192,4 +192,29 @@ public class TrialSpawnerStateMock extends TileStateMock
 	{
 		this.trackedEntities.remove(entity);
 	}
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof TrialSpawnerStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return cooldownEnd == that.cooldownEnd && cooldownLength == that.cooldownLength && nextSpawnAttempt == that.nextSpawnAttempt && requiredPlayerRange == that.requiredPlayerRange && ominous == that.ominous && java.util.Objects.equals(normalConfiguration, that.normalConfiguration) && java.util.Objects.equals(ominousConfiguration, that.ominousConfiguration) && java.util.Objects.equals(trackedPlayers, that.trackedPlayers) && java.util.Objects.equals(trackedEntities, that.trackedEntities);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(super.hashCode(), normalConfiguration, ominousConfiguration, cooldownEnd, cooldownLength, nextSpawnAttempt, requiredPlayerRange, ominous, trackedPlayers, trackedEntities);
+	}
+
 }

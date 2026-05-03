@@ -36,7 +36,7 @@ public class TagDataGenerator implements DataGenerator
 		{
 			RegistryAccess.registryAccess();
 		}
-		catch (IllegalStateException e)
+		catch (IllegalStateException _)
 		{
 			LOGGER.warning("Skipping TagDataGenerator: RegistryAccess not found (not running in a server environment)");
 			return;

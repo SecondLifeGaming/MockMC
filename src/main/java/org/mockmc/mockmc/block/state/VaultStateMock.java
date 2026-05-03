@@ -21,7 +21,6 @@ import java.util.UUID;
  */
 public class VaultStateMock extends TileStateMock
 		implements
-			Vault,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.VaultBaseMock
 {
 
@@ -196,4 +195,28 @@ public class VaultStateMock extends TileStateMock
 	{
 		return new VaultStateMock(this);
 	}
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof VaultStateMock that))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+		return Double.compare(activationRange, that.activationRange) == 0 && Double.compare(deactivationRange, that.deactivationRange) == 0 && nextStateUpdateTime == that.nextStateUpdateTime && java.util.Objects.equals(rewardedPlayers, that.rewardedPlayers) && java.util.Objects.equals(connectedPlayers, that.connectedPlayers) && java.util.Objects.equals(lootTable, that.lootTable) && java.util.Objects.equals(displayedLootTable, that.displayedLootTable) && java.util.Objects.equals(keyItem, that.keyItem) && java.util.Objects.equals(displayedItem, that.displayedItem);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return java.util.Objects.hash(super.hashCode(), rewardedPlayers, connectedPlayers, lootTable, displayedLootTable, keyItem, displayedItem, activationRange, deactivationRange, nextStateUpdateTime);
+	}
+
 }

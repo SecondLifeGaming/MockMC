@@ -22,7 +22,6 @@ import java.util.UUID;
  */
 public class SnifferMock extends AnimalsMock
 		implements
-			Sniffer,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnifferBaseMock
 {
 
@@ -128,7 +127,7 @@ public class SnifferMock extends AnimalsMock
 			try
 			{
 				this.setState(State.valueOf((String) nbt.get("State")));
-			} catch (IllegalArgumentException ignored)
+			} catch (IllegalArgumentException _)
 			{
 				// Ignore invalid states in NBT
 			}

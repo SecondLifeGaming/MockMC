@@ -422,7 +422,7 @@ public final class EntityTypesMock
 				try
 				{
 					return clazz.getDeclaredConstructor(ServerMock.class, UUID.class);
-				} catch (NoSuchMethodException e)
+				} catch (NoSuchMethodException _)
 				{
 					return null;
 				}

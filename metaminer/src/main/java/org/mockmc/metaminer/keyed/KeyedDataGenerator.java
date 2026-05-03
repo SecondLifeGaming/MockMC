@@ -45,7 +45,7 @@ public class KeyedDataGenerator implements DataGenerator
 		{
 			RegistryAccess.registryAccess();
 		}
-		catch (IllegalStateException e)
+		catch (IllegalStateException _)
 		{
 			LOGGER.warning("Skipping KeyedDataGenerator: RegistryAccess not found (not running in a server environment)");
 			return;

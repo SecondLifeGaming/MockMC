@@ -74,7 +74,6 @@ class InventoryContentMatcherTest
 	@Test
 	void testHasItemWithNonValuedData()
 	{
-		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
 		// GLINT is usually a non-valued data component? Wait, let's check.
 		// Actually, let's use something we know.
 		// For now, I'll just skip the non-valued test until I'm sure which one is
