@@ -71,7 +71,10 @@ import java.util.stream.Stream;
 
 public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generated.server.org.bukkit.RegistryBaseMock<T>
 {
+	private static final java.util.logging.Logger LOGGER = java.util.logging.Logger
+			.getLogger(RegistryMock.class.getName());
 	private static final String KEY_CANNOT_BE_NULL = "key cannot be null";
+	private static final String VALUES = "values";
 
 	/**
 	 * These classes have registries that are an exception to the others, as they
@@ -119,14 +122,21 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 			initialized = true;
 			// Load data first, before any class loading can happen
 			String fileName = String.format("/keyed/%s.json", registryKey.key().value());
-			this.keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
+			this.keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get(VALUES).getAsJsonArray();
 
 			// Now we can load the type and constructor, which might trigger recursion
 			this.loadedType = loadType(className);
-			this.constructor = (Function<JsonObject, T>) getConstructorFunction(registryKey);
+			@SuppressWarnings("unchecked")
+			Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(registryKey);
+			this.constructor = constructorFunction;
 		} finally
 		{
-			INITIALIZING.get().remove(registryKey);
+			Set<RegistryKey<?>> initializing = INITIALIZING.get();
+			initializing.remove(registryKey);
+			if (initializing.isEmpty())
+			{
+				INITIALIZING.remove();
+			}
 		}
 	}
 
@@ -138,63 +148,56 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		}
 		try
 		{
-			return (Class<T>) Class.forName(className, false, RegistryMock.class.getClassLoader());
+			@SuppressWarnings("unchecked")
+			Class<T> type = (Class<T>) Class.forName(className, false, RegistryMock.class.getClassLoader());
+			return type;
 		} catch (ClassNotFoundException e)
 		{
 			throw new InternalDataLoadException("Could not load class for registry: " + className, e);
 		}
 	}
 
-	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
-	{
-		String fileName = String.format("/keyed/%s.json", key.key().value());
-		@SuppressWarnings("unchecked")
-		Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(key);
-		this.constructor = constructorFunction;
-		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
-	}
-
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
-		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, json -> ChickenSoundVariantMock.from(json));
-		factoryMap.put(RegistryKey.DIALOG, json -> DialogMock.from(json));
-		factoryMap.put(RegistryKey.STRUCTURE, json -> StructureMock.from(json));
-		factoryMap.put(RegistryKey.STRUCTURE_TYPE, json -> StructureTypeMock.from(json));
-		factoryMap.put(RegistryKey.TRIM_MATERIAL, json -> TrimMaterialMock.from(json));
-		factoryMap.put(RegistryKey.TRIM_PATTERN, json -> TrimPatternMock.from(json));
-		factoryMap.put(RegistryKey.INSTRUMENT, json -> MusicInstrumentMock.from(json));
-		factoryMap.put(RegistryKey.GAME_EVENT, json -> GameEventMock.from(json));
-		factoryMap.put(RegistryKey.ENCHANTMENT, json -> EnchantmentMock.from(json));
-		factoryMap.put(RegistryKey.MOB_EFFECT, json -> PotionEffectTypeMock.from(json));
-		factoryMap.put(RegistryKey.DAMAGE_TYPE, json -> DamageTypeMock.from(json));
-		factoryMap.put(RegistryKey.ITEM, json -> ItemTypeMock.from(json));
-		factoryMap.put(RegistryKey.BLOCK, json -> BlockTypeMock.from(json));
-		factoryMap.put(RegistryKey.WOLF_VARIANT, json -> WolfVariantMock.from(json));
-		factoryMap.put(RegistryKey.JUKEBOX_SONG, json -> JukeboxSongMock.from(json));
-		factoryMap.put(RegistryKey.CAT_VARIANT, json -> CatVariantMock.from(json));
-		factoryMap.put(RegistryKey.CAT_SOUND_VARIANT, json -> CatSoundVariantMock.from(json));
-		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, json -> VillagerProfessionMock.from(json));
-		factoryMap.put(RegistryKey.VILLAGER_TYPE, json -> VillagerTypeMock.from(json));
-		factoryMap.put(RegistryKey.FROG_VARIANT, json -> FrogVariantMock.from(json));
-		factoryMap.put(RegistryKey.CHICKEN_VARIANT, json -> ChickenVariantMock.from(json));
-		factoryMap.put(RegistryKey.COW_VARIANT, json -> CowVariantMock.from(json));
-		factoryMap.put(RegistryKey.COW_SOUND_VARIANT, json -> CowSoundVariantMock.from(json));
-		factoryMap.put(RegistryKey.PIG_VARIANT, json -> PigVariantMock.from(json));
-		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, json -> WolfSoundVariantMock.from(json));
-		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, json -> MapCursorTypeMock.from(json));
-		factoryMap.put(RegistryKey.MENU, json -> MenuTypeMock.from(json));
-		factoryMap.put(RegistryKey.BANNER_PATTERN, json -> PatternTypeMock.from(json));
-		factoryMap.put(RegistryKey.PAINTING_VARIANT, json -> ArtMock.from(json));
-		factoryMap.put(RegistryKey.ATTRIBUTE, json -> AttributeMock.from(json));
-		factoryMap.put(RegistryKey.BIOME, json -> BiomeMock.from(json));
-		factoryMap.put(RegistryKey.SOUND_EVENT, json -> SoundMock.from(json));
-		factoryMap.put(RegistryKey.FLUID, json -> FluidMock.from(json));
-		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, json -> DataComponentTypeMock.from(json));
-		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, json -> MemoryModuleMock.from(json));
-		factoryMap.put(RegistryKey.GAME_RULE, json -> GameRuleMock.from(json));
-		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, json -> PigSoundVariantMock.from(json));
-		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, json -> ZombieNautilusMock.VariantMock.from(json));
+		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, ChickenSoundVariantMock::from);
+		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
+		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
+		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
+		factoryMap.put(RegistryKey.TRIM_MATERIAL, TrimMaterialMock::from);
+		factoryMap.put(RegistryKey.TRIM_PATTERN, TrimPatternMock::from);
+		factoryMap.put(RegistryKey.INSTRUMENT, MusicInstrumentMock::from);
+		factoryMap.put(RegistryKey.GAME_EVENT, GameEventMock::from);
+		factoryMap.put(RegistryKey.ENCHANTMENT, EnchantmentMock::from);
+		factoryMap.put(RegistryKey.MOB_EFFECT, PotionEffectTypeMock::from);
+		factoryMap.put(RegistryKey.DAMAGE_TYPE, DamageTypeMock::from);
+		factoryMap.put(RegistryKey.ITEM, ItemTypeMock::from);
+		factoryMap.put(RegistryKey.BLOCK, BlockTypeMock::from);
+		factoryMap.put(RegistryKey.WOLF_VARIANT, WolfVariantMock::from);
+		factoryMap.put(RegistryKey.JUKEBOX_SONG, JukeboxSongMock::from);
+		factoryMap.put(RegistryKey.CAT_VARIANT, CatVariantMock::from);
+		factoryMap.put(RegistryKey.CAT_SOUND_VARIANT, CatSoundVariantMock::from);
+		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, VillagerProfessionMock::from);
+		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
+		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
+		factoryMap.put(RegistryKey.CHICKEN_VARIANT, ChickenVariantMock::from);
+		factoryMap.put(RegistryKey.COW_VARIANT, CowVariantMock::from);
+		factoryMap.put(RegistryKey.COW_SOUND_VARIANT, CowSoundVariantMock::from);
+		factoryMap.put(RegistryKey.PIG_VARIANT, PigVariantMock::from);
+		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, WolfSoundVariantMock::from);
+		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
+		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
+		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
+		factoryMap.put(RegistryKey.PAINTING_VARIANT, ArtMock::from);
+		factoryMap.put(RegistryKey.ATTRIBUTE, AttributeMock::from);
+		factoryMap.put(RegistryKey.BIOME, BiomeMock::from);
+		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
+		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
+		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
+		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
+		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
+		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, PigSoundVariantMock::from);
+		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 		// Add special handling for enum-based registry types
@@ -205,7 +208,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
 		if (constructorFunction == null)
 		{
-			return jsonObject -> createGenericProxy(jsonObject, (RegistryKey<T>) key);
+			return jsonObject -> createGenericProxy(jsonObject, key);
 		}
 		return constructorFunction;
 	}
@@ -404,7 +407,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		try
 		{
 			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
-			JsonArray values = json.getAsJsonArray("values");
+			JsonArray values = json.getAsJsonArray(VALUES);
 			List<T> tagValues = new ArrayList<>();
 			for (JsonElement element : values)
 			{
@@ -416,7 +419,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 				}
 			}
 			return new TagMock<>(tagKey, tagValues);
-		} catch (Exception e)
+		} catch (Exception _)
 		{
 			return null;
 		}
@@ -457,46 +460,48 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		if (keyedMap.isEmpty())
 		{
 			initialize();
-			try
-			{
-				for (JsonElement structureJSONElement : keyedData)
-				{
-					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-					T tObject;
-					if (constructor != null)
-					{
-						tObject = constructor.apply(structureJSONObject);
-					} else
-					{
-						// Fallback to proxy during recursion
-						tObject = createGenericProxy(structureJSONObject, (RegistryKey<T>) registryKey);
-					}
-					if (tObject == null)
-					{
-						System.err.println("Warning: Constructor returned null for " + structureJSONObject);
-						continue;
-					}
-					NamespacedKey key = tObject.getKey();
-					if (key == null)
-					{
-						System.err.println(
-								"Warning: Key is null for " + tObject + " (json: " + structureJSONObject + ")");
-						continue;
-					}
-					/*
-					 * putIfAbsent fixes the edge case scenario where the constructor initializes
-					 * class loading of the keyed object. During this initialization, the
-					 * loadIfEmpty method might be triggered again, leading to potential duplicate
-					 * instances of each keyed object. By using putIfAbsent, we ensure that only one
-					 * instance of each keyed object is added to the map, preventing duplicates.
-					 */
-					keyedMap.putIfAbsent(key, tObject);
-				}
-			} catch (ExceptionInInitializerError e)
-			{
-				// This can happen during recursion, it's fine
-			}
+			populateData();
 		}
+	}
+
+	private void populateData()
+	{
+		try
+		{
+			for (JsonElement structureJSONElement : keyedData)
+			{
+				processElement(structureJSONElement.getAsJsonObject());
+			}
+		} catch (ExceptionInInitializerError _)
+		{
+			// This can happen during recursion, it's fine
+		}
+	}
+
+	private void processElement(JsonObject structureJSONObject)
+	{
+		T tObject;
+		if (constructor != null)
+		{
+			tObject = constructor.apply(structureJSONObject);
+		} else
+		{
+			// Fallback to proxy during recursion
+			tObject = createGenericProxy(structureJSONObject, registryKey);
+		}
+		if (tObject == null)
+		{
+			LOGGER.log(java.util.logging.Level.WARNING, "Constructor returned null for {0}", structureJSONObject);
+			return;
+		}
+		/*
+		 * putIfAbsent fixes the edge case scenario where the constructor initializes
+		 * class loading of the keyed object. During this initialization, the
+		 * loadIfEmpty method might be triggered again, leading to potential duplicate
+		 * instances of each keyed object. By using putIfAbsent, we ensure that only one
+		 * instance of each keyed object is added to the map, preventing duplicates.
+		 */
+		keyedMap.putIfAbsent(tObject.getKey(), tObject);
 	}
 
 	/**

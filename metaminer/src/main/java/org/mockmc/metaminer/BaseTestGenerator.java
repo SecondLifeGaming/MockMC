@@ -127,22 +127,39 @@ public class BaseTestGenerator implements DataGenerator {
                 && !name.contains(".craftbukkit.");
     }
 
+    private static final String JUNIT_JUPITER_API = "org.junit.jupiter.api";
+
     private void generateTestForClass(Class<?> clazz) throws IOException {
         String packageName = getGeneratedPackageName(clazz);
-        String rawSimpleName = clazz.getSimpleName();
-        if (rawSimpleName.isEmpty()) return;
-        String simpleName = rawSimpleName.replace("$", "");
-        if (simpleName.isEmpty() || !Character.isJavaIdentifierStart(simpleName.charAt(0))) {
-            return;
-        }
-        String baseMockName = simpleName + "BaseMock";
+        String baseMockName = getBaseMockName(clazz);
+        if (baseMockName == null) return;
+
         ClassName baseMockClass = ClassName.get(packageName, baseMockName);
-        
         TypeSpec.Builder testClass = TypeSpec.classBuilder(baseMockName + "Test")
                 .superclass(ClassName.get("org.mockmc.mockmc.generated", "GeneratedTestBase"))
                 .addModifiers(Modifier.PUBLIC);
 
-        // Scan methods for safe default checks
+        List<Method> methods = scanMethodsForSanityTests(clazz);
+        List<TypeVariableName> typeVars = getTypeVariables(clazz);
+        TypeName superInterface = getSuperInterface(baseMockClass, typeVars);
+
+        testClass.addType(buildStubClass(clazz, typeVars, superInterface).build());
+        generateTestMethods(testClass, baseMockClass, methods, typeVars);
+
+        writeJavaFile(packageName, testClass, baseMockName);
+    }
+
+    private String getBaseMockName(Class<?> clazz) {
+        String rawSimpleName = clazz.getSimpleName();
+        if (rawSimpleName.isEmpty()) return null;
+        String simpleName = rawSimpleName.replace("$", "");
+        if (simpleName.isEmpty() || !Character.isJavaIdentifierStart(simpleName.charAt(0))) {
+            return null;
+        }
+        return simpleName + "BaseMock";
+    }
+
+    private List<Method> scanMethodsForSanityTests(Class<?> clazz) {
         List<Method> methods = new ArrayList<>();
         Set<String> checkedMethods = new HashSet<>();
         try {
@@ -156,24 +173,32 @@ public class BaseTestGenerator implements DataGenerator {
                 LOGGER.warning(String.format("Could not fully inspect methods for %s: %s", clazz.getName(), e.getMessage()));
             }
         }
+        return methods;
+    }
 
+    private List<TypeVariableName> getTypeVariables(Class<?> clazz) {
         List<TypeVariableName> typeVars = new ArrayList<>();
-        for (java.lang.reflect.TypeVariable<? extends Class<?>> tv : clazz.getTypeParameters()) {
+        for (java.lang.reflect.TypeVariable<?> tv : clazz.getTypeParameters()) {
             typeVars.add(TypeVariableName.get(tv));
         }
+        return typeVars;
+    }
 
-        TypeName superInterface = baseMockClass;
-        if (!typeVars.isEmpty()) {
-            superInterface = ParameterizedTypeName.get(baseMockClass, typeVars.toArray(new TypeName[0]));
+    private TypeName getSuperInterface(ClassName baseMockClass, List<TypeVariableName> typeVars) {
+        if (typeVars.isEmpty()) {
+            return baseMockClass;
         }
+        return ParameterizedTypeName.get(baseMockClass, typeVars.toArray(new TypeName[0]));
+    }
 
+    private TypeSpec.Builder buildStubClass(Class<?> clazz, List<TypeVariableName> typeVars, TypeName superInterface) {
         TypeSpec.Builder stubBuilder = TypeSpec.classBuilder("Stub")
                 .addTypeVariables(typeVars)
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
                 .addSuperinterface(superInterface);
 
-        // Object.clone() is protected. If an interface makes it public, 
-        // the class must explicitly override it because the protected Object.clone() 
+        // Object.clone() is protected. If an interface makes it public,
+        // the class must explicitly override it because the protected Object.clone()
         // "wins" over the interface default method but doesn't satisfy the public requirement.
         try {
             clazz.getMethod("clone");
@@ -183,48 +208,50 @@ public class BaseTestGenerator implements DataGenerator {
                     .returns(clazz)
                     .addStatement("return null")
                     .build());
-        } catch (NoSuchMethodException ignored) {
+        } catch (NoSuchMethodException _) {
+            // No clone method, ignore.
         }
+        return stubBuilder;
+    }
 
-        testClass.addType(stubBuilder.build());
-
+    private void generateTestMethods(TypeSpec.Builder testClass, ClassName baseMockClass, List<Method> methods, List<TypeVariableName> typeVars) {
         // Split methods into multiple test parts if there are too many (to satisfy linters)
         int partCount = 0;
         int methodsPerPart = 20;
+
+        if (methods.isEmpty()) {
+            testClass.addMethod(buildTestMethod("testSafeDefaults", baseMockClass, Collections.emptyList(), typeVars));
+            return;
+        }
+
         for (int i = 0; i < methods.size(); i += methodsPerPart) {
             partCount++;
             String methodName = partCount == 1 ? "testSafeDefaults" : "testSafeDefaultsPart" + partCount;
-            MethodSpec.Builder testMethod = MethodSpec.methodBuilder(methodName)
-                    .addAnnotation(ClassName.get("org.junit.jupiter.api", "Test"))
-                    .addModifiers(Modifier.PUBLIC)
-                    .addException(Exception.class);
-
-            String diamond = typeVars.isEmpty() ? "" : "<>";
-            testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
-            testMethod.addStatement("assertNotNull(mock)");
-
             int end = Math.min(i + methodsPerPart, methods.size());
-            for (int j = i; j < end; j++) {
-                testMethod.addStatement("assertSafeDefault(mock.$L())", methods.get(j).getName());
-            }
-            testClass.addMethod(testMethod.build());
+            testClass.addMethod(buildTestMethod(methodName, baseMockClass, methods.subList(i, end), typeVars));
         }
+    }
 
-        // Handle case with no methods
-        if (methods.isEmpty()) {
-            MethodSpec.Builder testMethod = MethodSpec.methodBuilder("testSafeDefaults")
-                    .addAnnotation(ClassName.get("org.junit.jupiter.api", "Test"))
-                    .addModifiers(Modifier.PUBLIC)
-                    .addException(Exception.class);
-            String diamond = typeVars.isEmpty() ? "" : "<>";
-            testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
-            testMethod.addStatement("assertNotNull(mock)");
-            testClass.addMethod(testMethod.build());
+    private MethodSpec buildTestMethod(String name, ClassName baseMockClass, List<Method> methods, List<TypeVariableName> typeVars) {
+        MethodSpec.Builder testMethod = MethodSpec.methodBuilder(name)
+                .addAnnotation(ClassName.get(JUNIT_JUPITER_API, "Test"))
+                .addModifiers(Modifier.PUBLIC)
+                .addException(Exception.class);
+
+        String diamond = typeVars.isEmpty() ? "" : "<>";
+        testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
+        testMethod.addStatement("assertNotNull(mock)");
+
+        for (Method m : methods) {
+            testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
         }
+        return testMethod.build();
+    }
 
+    private void writeJavaFile(String packageName, TypeSpec.Builder testClass, String baseMockName) throws IOException {
         JavaFile.builder(packageName, testClass.build())
                 .addFileComment("Auto-generated mechanical sanity test for $L", baseMockName)
-                .addStaticImport(ClassName.get("org.junit.jupiter.api", "Assertions"), "*")
+                .addStaticImport(ClassName.get(JUNIT_JUPITER_API, "Assertions"), "*")
                 .indent("    ")
                 .build()
                 .writeTo(testSourceFolder);

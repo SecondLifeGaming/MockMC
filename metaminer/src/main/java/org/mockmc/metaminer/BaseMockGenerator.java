@@ -28,6 +28,7 @@ public class BaseMockGenerator implements DataGenerator {
 
     private static final String SINCE = "since";
     private static final String RETURN_NULL = "return null";
+    private static final String BRIGADIER_PACKAGE = "com.mojang.brigadier";
 
     private final File dataFolder;
     private final File jarDirectory;
@@ -82,10 +83,8 @@ public class BaseMockGenerator implements DataGenerator {
                 }
             }
         }
-        if (typeMap != null) {
-            if (typeMap.containsKey(tv)) {
-                return mapType(typeMap.get(tv), clazz, ourTypeVars, typeMap);
-            }
+        if (typeMap != null && typeMap.containsKey(tv)) {
+            return mapType(typeMap.get(tv), clazz, ourTypeVars, typeMap);
         }
         
         // Unknown or method-level type variable. Map its bounds recursively to handle class-level substitution.
@@ -159,6 +158,8 @@ public class BaseMockGenerator implements DataGenerator {
             try {
                 interfaces = raw.getGenericInterfaces();
             } catch (Exception _) {
+                // Linkage errors can happen if optional dependencies (like Brigadier) are missing.
+                // We ignore these as we only care about interfaces we can actually load.
             }
             Collections.addAll(queue, interfaces);
             if (raw.getGenericSuperclass() != null) {
@@ -252,7 +253,7 @@ public class BaseMockGenerator implements DataGenerator {
                 "com.velocitypowered.api",
                 "net.md_5.bungee",
                 "io.github.waterfallmc",
-                "com.mojang.brigadier"
+                BRIGADIER_PACKAGE
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
@@ -539,7 +540,7 @@ public class BaseMockGenerator implements DataGenerator {
     private boolean isNmsType(java.lang.reflect.Type type) {
         if (type == null) return false;
         String name = type.toString();
-        if (name.contains("com.mojang.brigadier")) return false;
+        if (name.contains(BRIGADIER_PACKAGE)) return false;
         return name.contains("net.minecraft.") || name.contains("com.mojang.") || name.contains(".craftbukkit.");
     }
 
@@ -547,17 +548,16 @@ public class BaseMockGenerator implements DataGenerator {
         if (type == null) return true;
         if (type instanceof java.lang.reflect.TypeVariable) return true;
         if (type instanceof java.lang.reflect.WildcardType) return true;
-        
+
         Class<?> raw = getRawType(type);
         if (raw == null) return true;
         if (raw.isPrimitive()) return true;
         if (raw.isArray()) return isAccessible(raw.getComponentType());
-        
-        String name = raw.getName();
-        if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("com.google.common.") || name.startsWith("com.mojang.brigadier")) return true;
+
+        if (isStandardPackage(raw.getName())) return true;
 
         if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
-        
+
         // Also check declaring class if it's an inner class
         Class<?> declaring = raw.getDeclaringClass();
         if (declaring != null && !isAccessible(declaring)) return false;
@@ -570,38 +570,45 @@ public class BaseMockGenerator implements DataGenerator {
         return true;
     }
 
+    private boolean isStandardPackage(String name) {
+        return name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("com.google.common.") || name.startsWith(BRIGADIER_PACKAGE);
+    }
+
     private Set<Method> selectMethodsToGenerate(Class<?> clazz, Map<String, List<Method>> methodsBySignature, Set<Class<?>> allGeneratable) {
         Set<Method> methodsToGenerate = new HashSet<>();
         for (List<Method> providers : methodsBySignature.values()) {
             Method bestMethod = selectBestMethod(providers);
-
-            boolean declaredInThis = false;
-            Set<Class<?>> generatableSuperProviders = new HashSet<>();
-            boolean isMissingImplementation = false;
-
-            for (Method m : providers) {
-                if (m.getDeclaringClass() == clazz) {
-                    declaredInThis = true;
-                } else if (allGeneratable.contains(m.getDeclaringClass())) {
-                    generatableSuperProviders.add(m.getDeclaringClass());
-                }
-                
-                if (!m.isDefault() && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
-                    isMissingImplementation = true;
-                }
-            }
-            
-            // Prune redundant super-interfaces
-            generatableSuperProviders.removeIf(a -> generatableSuperProviders.stream().anyMatch(b -> a != b && a.isAssignableFrom(b)));
-
-            boolean inMirroredSuperInterface = !generatableSuperProviders.isEmpty();
-            boolean conflict = generatableSuperProviders.size() > 1;
-
-            if (declaredInThis || (isMissingImplementation && !inMirroredSuperInterface) || conflict) {
+            if (shouldGenerateMethod(clazz, providers, allGeneratable)) {
                 methodsToGenerate.add(bestMethod);
             }
         }
         return methodsToGenerate;
+    }
+
+    private boolean shouldGenerateMethod(Class<?> clazz, List<Method> providers, Set<Class<?>> allGeneratable) {
+        boolean declaredInThis = false;
+        Set<Class<?>> generatableSuperProviders = new HashSet<>();
+        boolean isMissingImplementation = false;
+
+        for (Method m : providers) {
+            if (m.getDeclaringClass() == clazz) {
+                declaredInThis = true;
+            } else if (allGeneratable.contains(m.getDeclaringClass())) {
+                generatableSuperProviders.add(m.getDeclaringClass());
+            }
+
+            if (!m.isDefault() && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+                isMissingImplementation = true;
+            }
+        }
+
+        // Prune redundant super-interfaces
+        generatableSuperProviders.removeIf(a -> generatableSuperProviders.stream().anyMatch(b -> a != b && a.isAssignableFrom(b)));
+
+        boolean inMirroredSuperInterface = !generatableSuperProviders.isEmpty();
+        boolean conflict = generatableSuperProviders.size() > 1;
+
+        return declaredInThis || (isMissingImplementation && !inMirroredSuperInterface) || conflict;
     }
 
     private Method selectBestMethod(List<Method> providers) {
@@ -656,11 +663,9 @@ public class BaseMockGenerator implements DataGenerator {
         String name = m.getName();
         Class<?>[] params = m.getParameterTypes();
         // Skip standard Object methods that interfaces CANNOT override with default implementations
-        if (name.equals("equals") && params.length == 1 && params[0] == Object.class) return false;
-        if (name.equals("hashCode") && params.length == 0) return false;
-        if (name.equals("toString") && params.length == 0) return false;
-
-        return true;
+        return !(name.equals("equals") && params.length == 1 && params[0] == Object.class)
+                && !(name.equals("hashCode") && params.length == 0)
+                && !(name.equals("toString") && params.length == 0);
     }
 
     private String getMethodSignature(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
@@ -1048,7 +1053,7 @@ public class BaseMockGenerator implements DataGenerator {
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
         if (name.equals("co.aikar.timings.Timing")) return false;
-        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier"))
+        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith(BRIGADIER_PACKAGE))
                 && !name.contains(".craftbukkit.");
     }
 }
