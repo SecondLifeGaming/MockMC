@@ -48,7 +48,7 @@ public class BlockDataGenerator implements DataGenerator
 				}
 			}
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			LOG.warn("Skipping BlockDataGenerator: Server environment not available");
 		}

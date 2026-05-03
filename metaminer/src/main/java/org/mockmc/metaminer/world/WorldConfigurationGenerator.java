@@ -41,7 +41,7 @@ public class WorldConfigurationGenerator implements DataGenerator
 
 			JsonUtil.dump(worlds, dataFile);
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			// Skip if world/registry is not available
 		}

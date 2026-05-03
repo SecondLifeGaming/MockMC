@@ -135,7 +135,18 @@ public class SnifferMock extends AnimalsMock
 		}
 		if (nbt.has("ExploredLocations"))
 		{
-			// TODO: In a real implementation we would parse the list of locations
+			Object value = nbt.get("ExploredLocations");
+			if (value instanceof List<?> list)
+			{
+				this.exploredLocations.clear();
+				for (Object obj : list)
+				{
+					if (obj instanceof Location loc)
+					{
+						this.addExploredLocation(loc);
+					}
+				}
+			}
 		}
 	}
 

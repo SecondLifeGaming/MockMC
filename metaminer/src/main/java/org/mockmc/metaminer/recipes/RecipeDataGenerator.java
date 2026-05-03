@@ -103,7 +103,7 @@ public class RecipeDataGenerator implements DataGenerator
 
 			LOGGER.info(" - TOTAL: {}", totalRecipes);
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			// Skip if recipes are not available
 		}

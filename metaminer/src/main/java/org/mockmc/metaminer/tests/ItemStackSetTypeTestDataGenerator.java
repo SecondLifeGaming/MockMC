@@ -37,7 +37,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 			File file = new File(folder, "setType.json");
 			JsonUtil.dump(jsonArray, file);
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			// Skip if registry is not available
 		}

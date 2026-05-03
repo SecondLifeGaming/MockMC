@@ -49,7 +49,7 @@ public class BlockStateGenerator implements DataGenerator
 				}
 			}
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			LOG.warn("Skipping BlockStateGenerator: Server environment not available");
 		}

@@ -30,7 +30,7 @@ public class ItemStackMetaDataGenerator implements DataGenerator
 			File file = new File(folder, "metaItemTypes.json");
 			JsonUtil.dump(jsonArray, file);
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			// Skip if registry is not available
 		}

@@ -88,37 +88,47 @@ public class CombatTrackerMock implements CombatTracker
 	{
 	}
 
+	private record FallState(CombatEntry entry, float distance) {}
+	private record DamageState(CombatEntry entry, float amount) {}
+
 	private FallResult calculateFallSignificance()
 	{
-		CombatEntry mostSignificantFall = null;
-		CombatEntry mostSignificantDamage = null;
-		float maxDamage = 0.0F;
-		float maxFallDistance = 0.0F;
+		FallState fallState = new FallState(null, 0.0F);
+		DamageState damageState = new DamageState(null, 0.0F);
 
 		for (int i = 0; i < this.combatEntries.size(); i++)
 		{
 			CombatEntry currentEntry = this.combatEntries.get(i);
-			CombatEntry previousEntry = i > 0 ? this.combatEntries.get(i - 1) : null;
-			DamageSource damageSource = currentEntry.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
-					.isTagged(damageSource.getDamageType());
-			float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
-
-			if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
-					&& fallDistance > 0.0F && (mostSignificantFall == null || fallDistance > maxFallDistance))
-			{
-				mostSignificantFall = (i > 0) ? previousEntry : currentEntry;
-				maxFallDistance = fallDistance;
-			}
-
-			if (currentEntry.getFallLocationType() != null
-					&& (mostSignificantDamage == null || currentEntry.getDamage() > maxDamage))
-			{
-				mostSignificantDamage = currentEntry;
-				maxDamage = currentEntry.getDamage();
-			}
+			fallState = updateFallState(i, currentEntry, fallState);
+			damageState = updateDamageState(currentEntry, damageState);
 		}
-		return new FallResult(mostSignificantFall, mostSignificantDamage, maxFallDistance, maxDamage);
+		return new FallResult(fallState.entry, damageState.entry, fallState.distance, damageState.amount);
+	}
+
+	private FallState updateFallState(int index, CombatEntry currentEntry, FallState currentState)
+	{
+		DamageSource damageSource = currentEntry.getDamageSource();
+		boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
+				.isTagged(damageSource.getDamageType());
+		float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
+
+		if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
+				&& fallDistance > 0.0F && (currentState.entry == null || fallDistance > currentState.distance))
+		{
+			CombatEntry significantEntry = (index > 0) ? this.combatEntries.get(index - 1) : currentEntry;
+			return new FallState(significantEntry, fallDistance);
+		}
+		return currentState;
+	}
+
+	private DamageState updateDamageState(CombatEntry currentEntry, DamageState currentState)
+	{
+		if (currentEntry.getFallLocationType() != null
+				&& (currentState.entry == null || currentEntry.getDamage() > currentState.amount))
+		{
+			return new DamageState(currentEntry, currentEntry.getDamage());
+		}
+		return currentState;
 	}
 
 	@Override

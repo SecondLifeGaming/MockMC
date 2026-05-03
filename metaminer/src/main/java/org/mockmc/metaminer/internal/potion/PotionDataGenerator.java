@@ -32,7 +32,7 @@ public class PotionDataGenerator implements DataGenerator
 				this.generateIndividualData(potionType);
 			}
 		}
-		catch (Exception | LinkageError e)
+		catch (Exception | LinkageError _)
 		{
 			// Skip if registry is not available
 		}
