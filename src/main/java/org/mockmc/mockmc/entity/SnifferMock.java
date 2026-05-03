@@ -96,7 +96,7 @@ public class SnifferMock extends AnimalsMock
 			case RISING ->
 				playSound(Sound.sound(org.bukkit.Sound.ENTITY_SNIFFER_DIGGING_STOP, Sound.Source.AMBIENT, 1.0f, 1.0f));
 			default -> {
-				// No sound is emitted
+				/* No sound is emitted for other states */
 			}
 		}
 	}
@@ -134,7 +134,7 @@ public class SnifferMock extends AnimalsMock
 		}
 		if (nbt.has("ExploredLocations"))
 		{
-			// In a real implementation we would parse the list of locations
+			// TODO: In a real implementation we would parse the list of locations
 		}
 	}
 

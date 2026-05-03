@@ -11,7 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.damage.DamageSource;
-import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -76,14 +75,18 @@ public class CombatTrackerMock implements CombatTracker
 		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
 		{
 			return result.mostSignificantFall;
-		}
-		else
+		} else
 		{
-			return result.maxDamage > 5.0F && result.mostSignificantDamage != null ? result.mostSignificantDamage : null;
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null
+					? result.mostSignificantDamage
+					: null;
 		}
 	}
 
-	private record FallResult(CombatEntry mostSignificantFall, CombatEntry mostSignificantDamage, float maxFallDistance, float maxDamage) {}
+	private record FallResult(CombatEntry mostSignificantFall, CombatEntry mostSignificantDamage, float maxFallDistance,
+			float maxDamage)
+	{
+	}
 
 	private FallResult calculateFallSignificance()
 	{
@@ -187,10 +190,11 @@ public class CombatTrackerMock implements CombatTracker
 		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
 		{
 			return result.mostSignificantFall;
-		}
-		else
+		} else
 		{
-			return result.maxDamage > 5.0F && result.mostSignificantDamage != null ? result.mostSignificantDamage : null;
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null
+					? result.mostSignificantDamage
+					: null;
 		}
 	}
 
