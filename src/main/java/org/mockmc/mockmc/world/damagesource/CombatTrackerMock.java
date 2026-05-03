@@ -262,25 +262,16 @@ public class CombatTrackerMock implements CombatTracker
 		if (lastClimbableLocation != null)
 		{
 			Material material = entity.getWorld().getType(lastClimbableLocation);
-			if (Material.LADDER.equals(material) || Tag.TRAPDOORS.isTagged(material))
+			return switch (material)
 			{
-				return FallLocationType.LADDER;
-			} else if (Material.VINE.equals(material))
-			{
-				return FallLocationType.VINES;
-			} else if (Material.WEEPING_VINES.equals(material) || Material.WEEPING_VINES_PLANT.equals(material))
-			{
-				return FallLocationType.WEEPING_VINES;
-			} else if (Material.TWISTING_VINES.equals(material) || Material.TWISTING_VINES_PLANT.equals(material))
-			{
-				return FallLocationType.TWISTING_VINES;
-			} else if (Material.SCAFFOLDING.equals(material))
-			{
-				return FallLocationType.SCAFFOLDING;
-			} else
-			{
-				return FallLocationType.OTHER_CLIMBABLE;
-			}
+				case LADDER -> FallLocationType.LADDER;
+				case VINE -> FallLocationType.VINES;
+				case WEEPING_VINES, WEEPING_VINES_PLANT -> FallLocationType.WEEPING_VINES;
+				case TWISTING_VINES, TWISTING_VINES_PLANT -> FallLocationType.TWISTING_VINES;
+				case SCAFFOLDING -> FallLocationType.SCAFFOLDING;
+				default ->
+					Tag.TRAPDOORS.isTagged(material) ? FallLocationType.LADDER : FallLocationType.OTHER_CLIMBABLE;
+			};
 		}
 
 		return entity.isInWater() ? FallLocationType.WATER : null;

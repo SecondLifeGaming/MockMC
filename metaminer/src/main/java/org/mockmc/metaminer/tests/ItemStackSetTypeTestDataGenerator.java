@@ -32,30 +32,7 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 			JsonArray jsonArray = new JsonArray();
 			for (Material material : Registry.MATERIAL)
 			{
-				JsonObject elementData = new JsonObject();
-				elementData.add("key", new JsonPrimitive(material.key().asString()));
-				JsonObject outputData = new JsonObject();
-				try
-				{
-					ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE).withType(material);
-					outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
-					if (itemStack.getItemMeta() != null)
-					{
-						JsonArray itemMeta = new JsonArray();
-						for (Class<? extends ItemMeta> clazz : getMetaInterfaces(itemStack.getItemMeta().getClass()))
-						{
-							itemMeta.add(clazz.getName());
-						}
-						outputData.add("meta", itemMeta);
-					}
-				}
-				catch (Exception e)
-				{
-					outputData.add("throws", new JsonPrimitive(e.getClass().getName()));
-					outputData.add("throwsMsg", new JsonPrimitive(e.getMessage()));
-				}
-				elementData.add("result", outputData);
-				jsonArray.add(elementData);
+				jsonArray.add(processMaterial(material));
 			}
 			File file = new File(folder, "setType.json");
 			JsonUtil.dump(jsonArray, file);
@@ -64,6 +41,34 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 		{
 			// Skip if registry is not available
 		}
+	}
+
+	private JsonObject processMaterial(Material material)
+	{
+		JsonObject elementData = new JsonObject();
+		elementData.add("key", new JsonPrimitive(material.key().asString()));
+		JsonObject outputData = new JsonObject();
+		try
+		{
+			ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE).withType(material);
+			outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
+			if (itemStack.getItemMeta() != null)
+			{
+				JsonArray itemMeta = new JsonArray();
+				for (Class<? extends ItemMeta> clazz : getMetaInterfaces(itemStack.getItemMeta().getClass()))
+				{
+					itemMeta.add(clazz.getName());
+				}
+				outputData.add("meta", itemMeta);
+			}
+		}
+		catch (Exception e)
+		{
+			outputData.add("throws", new JsonPrimitive(e.getClass().getName()));
+			outputData.add("throwsMsg", new JsonPrimitive(e.getMessage() != null ? e.getMessage() : "null"));
+		}
+		elementData.add("result", outputData);
+		return elementData;
 	}
 
 	private Set<Class<? extends ItemMeta>> getMetaInterfaces(Class<?> aClass)

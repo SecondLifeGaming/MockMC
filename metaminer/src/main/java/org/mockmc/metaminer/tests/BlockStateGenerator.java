@@ -42,28 +42,9 @@ public class BlockStateGenerator implements DataGenerator
 			{
 				for (Material material : Registry.MATERIAL)
 				{
-					if (!material.isBlock())
+					if (material.isBlock())
 					{
-						continue;
-					}
-
-					try
-					{
-						@NotNull
-						BlockState state = material.createBlockData().createBlockState();
-						@NotNull
-						Class<?>[] interfaces = state.getClass().getInterfaces();
-						if (interfaces.length == 0)
-						{
-							continue;
-						}
-
-						String className = interfaces[0].getName();
-						writer.println(String.format("%s, %s", material.name(), className));
-					}
-					catch (Exception e)
-					{
-						LOG.error("Error while processing material {}", material.name(), e);
+						processMaterial(writer, material);
 					}
 				}
 			}
@@ -71,6 +52,26 @@ public class BlockStateGenerator implements DataGenerator
 		catch (Exception | LinkageError e)
 		{
 			LOG.warn("Skipping BlockStateGenerator: Server environment not available");
+		}
+	}
+
+	private void processMaterial(PrintWriter writer, Material material)
+	{
+		try
+		{
+			@NotNull
+			BlockState state = material.createBlockData().createBlockState();
+			@NotNull
+			Class<?>[] interfaces = state.getClass().getInterfaces();
+			if (interfaces.length > 0)
+			{
+				String className = interfaces[0].getName();
+				writer.println(String.format("%s, %s", material.name(), className));
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.error("Error while processing material {}", material.name(), e);
 		}
 	}
 

@@ -41,21 +41,9 @@ public class BlockDataGenerator implements DataGenerator
 			{
 				for (Material material : Registry.MATERIAL)
 				{
-					if (!material.isBlock())
+					if (material.isBlock())
 					{
-						continue;
-					}
-
-					try
-					{
-						@NotNull
-						BlockData data = material.createBlockData();
-						String value = data.getAsString(false);
-						writer.println(String.format("%s, \"%s\"", material.name(), value));
-					}
-					catch (Exception e)
-					{
-						LOG.error("Error while processing material {}", material.name(), e);
+						processMaterial(writer, material);
 					}
 				}
 			}
@@ -63,6 +51,21 @@ public class BlockDataGenerator implements DataGenerator
 		catch (Exception | LinkageError e)
 		{
 			LOG.warn("Skipping BlockDataGenerator: Server environment not available");
+		}
+	}
+
+	private void processMaterial(PrintWriter writer, Material material)
+	{
+		try
+		{
+			@NotNull
+			BlockData data = material.createBlockData();
+			String value = data.getAsString(false);
+			writer.println(String.format("%s, \"%s\"", material.name(), value));
+		}
+		catch (Exception e)
+		{
+			LOG.error("Error while processing material {}", material.name(), e);
 		}
 	}
 

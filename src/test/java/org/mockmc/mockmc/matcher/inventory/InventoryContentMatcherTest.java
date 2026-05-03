@@ -72,11 +72,13 @@ class InventoryContentMatcherTest
 	}
 
 	@Test
-	void testHasItemWithNonValuedData()
+	void testHasItemWithDataValue()
 	{
-		// GLINT is usually a non-valued data component? Wait, let's check.
-		// Actually, let's use something we know.
-		// For now, I'll just skip the non-valued test until I'm sure which one is
-		// non-valued.
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+		item.setData(DataComponentTypes.REPAIR_COST, 5);
+		inventory.addItem(item);
+
+		assertTrue(hasItem().withMaterial(Material.DIAMOND_SWORD).withData(DataComponentTypes.REPAIR_COST, is(5))
+				.matches(inventory));
 	}
 }
