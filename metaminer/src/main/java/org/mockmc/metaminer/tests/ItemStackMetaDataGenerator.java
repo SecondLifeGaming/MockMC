@@ -20,13 +20,20 @@ public class ItemStackMetaDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
-		JsonArray jsonArray = new JsonArray();
-		for (ItemType itemType : ItemMetaClassFinder.getInduvidualMetaItemTypes())
+		try
 		{
-			jsonArray.add(itemType.getKey().asString());
+			JsonArray jsonArray = new JsonArray();
+			for (ItemType itemType : ItemMetaClassFinder.getInduvidualMetaItemTypes())
+			{
+				jsonArray.add(itemType.getKey().asString());
+			}
+			File file = new File(folder, "metaItemTypes.json");
+			JsonUtil.dump(jsonArray, file);
 		}
-		File file = new File(folder, "metaItemTypes.json");
-		JsonUtil.dump(jsonArray, file);
+		catch (Exception | LinkageError e)
+		{
+			// Skip if registry is not available
+		}
 	}
 
 }

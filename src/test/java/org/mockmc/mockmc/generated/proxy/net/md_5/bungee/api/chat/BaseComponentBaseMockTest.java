@@ -16,9 +16,9 @@ public class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
 		assertSafeDefault(mock.getExtra());
-		assertSafeDefault(mock.getFont());
-		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.getStyle());
+		assertSafeDefault(mock.getColor());
+		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.toLegacyText());
 		assertSafeDefault(mock.getClickEvent());
 		assertSafeDefault(mock.getHoverEvent());

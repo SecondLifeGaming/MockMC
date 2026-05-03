@@ -26,18 +26,25 @@ public class WorldConfigurationGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
-		JsonArray worlds = new JsonArray();
-		for (World world : Bukkit.getWorlds())
+		try
 		{
-			JsonObject worldData = new JsonObject();
+			JsonArray worlds = new JsonArray();
+			for (World world : Bukkit.getWorlds())
+			{
+				JsonObject worldData = new JsonObject();
 
-			worldData.addProperty("name", world.getName());
-			worldData.add("game_rules", getGameRules(world));
+				worldData.addProperty("name", world.getName());
+				worldData.add("game_rules", getGameRules(world));
 
-			worlds.add(worldData);
+				worlds.add(worldData);
+			}
+
+			JsonUtil.dump(worlds, dataFile);
 		}
-
-		JsonUtil.dump(worlds, dataFile);
+		catch (Exception | LinkageError e)
+		{
+			// Skip if world/registry is not available
+		}
 	}
 
 	private JsonElement getGameRules(World world)

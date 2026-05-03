@@ -29,42 +29,48 @@ public class BlockStateGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
-		World world = Bukkit.getWorlds().get(0);
-		world.setType(0, 63, 0, Material.BEDROCK);
-
-		File blockFolder = new File(folder, "blocks");
-		File output = new File(blockFolder, "block_states.csv");
-		blockFolder.mkdirs();
-
-		try (PrintWriter writer = new PrintWriter(output))
+		try
 		{
-			for (Material material : Registry.MATERIAL)
-			{
-				if (!material.isBlock())
-				{
-					continue;
-				}
+			World world = Bukkit.getWorlds().get(0);
+			world.setType(0, 63, 0, Material.BEDROCK);
 
-				try
+			File blockFolder = new File(folder, "blocks");
+			File output = new File(blockFolder, "block_states.csv");
+			blockFolder.mkdirs();
+
+			try (PrintWriter writer = new PrintWriter(output))
+			{
+				for (Material material : Registry.MATERIAL)
 				{
-					@NotNull
-					BlockState state = material.createBlockData().createBlockState();
-					@NotNull
-					Class<?>[] interfaces = state.getClass().getInterfaces();
-					if (interfaces.length == 0)
+					if (!material.isBlock())
 					{
 						continue;
 					}
 
-					String className = interfaces[0].getName();
-					writer.println(String.format("%s, %s", material.name(), className));
-				}
-				catch (Exception e)
-				{
-					LOG.error("Error while processing material {}", material.name(), e);
+					try
+					{
+						@NotNull
+						BlockState state = material.createBlockData().createBlockState();
+						@NotNull
+						Class<?>[] interfaces = state.getClass().getInterfaces();
+						if (interfaces.length == 0)
+						{
+							continue;
+						}
+
+						String className = interfaces[0].getName();
+						writer.println(String.format("%s, %s", material.name(), className));
+					}
+					catch (Exception e)
+					{
+						LOG.error("Error while processing material {}", material.name(), e);
+					}
 				}
 			}
-
+		}
+		catch (Exception | LinkageError e)
+		{
+			LOG.warn("Skipping BlockStateGenerator: Server environment not available");
 		}
 	}
 

@@ -14,10 +14,10 @@ public class PendingConnectionBaseMockTest extends GeneratedTestBase
 		PendingConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
-		assertSafeDefault(mock.getUniqueId());
-		assertSafeDefault(mock.getVirtualHost());
 		assertSafeDefault(mock.getListener());
+		assertSafeDefault(mock.getUniqueId());
 		assertSafeDefault(mock.getUUID());
+		assertSafeDefault(mock.getVirtualHost());
 	}
 
 	private static class Stub implements PendingConnectionBaseMock

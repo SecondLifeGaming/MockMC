@@ -15,12 +15,12 @@ public class ProxiedPlayerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getDisplayName());
 		assertSafeDefault(mock.getLocale());
-		assertSafeDefault(mock.getServer());
 		assertSafeDefault(mock.getUniqueId());
+		assertSafeDefault(mock.getServer());
+		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getMainHand());
 		assertSafeDefault(mock.getSkinParts());
 		assertSafeDefault(mock.getScoreboard());
-		assertSafeDefault(mock.getUUID());
 		assertSafeDefault(mock.getClientBrand());
 		assertSafeDefault(mock.getChatMode());
 		assertSafeDefault(mock.getPendingConnection());

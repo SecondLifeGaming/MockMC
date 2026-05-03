@@ -17,18 +17,18 @@ public class ProxyServerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.unsafe());
 		assertSafeDefault(mock.getLogger());
 		assertSafeDefault(mock.getVersion());
+		assertSafeDefault(mock.getConsole());
 		assertSafeDefault(mock.getPluginsFolder());
 		assertSafeDefault(mock.getPluginManager());
 		assertSafeDefault(mock.getScheduler());
 		assertSafeDefault(mock.getConfig());
-		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getGameVersion());
+		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getChannels());
+		assertSafeDefault(mock.createTitle());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getServersCopy());
-		assertSafeDefault(mock.getConsole());
 		assertSafeDefault(mock.getDisabledCommands());
-		assertSafeDefault(mock.createTitle());
 		assertSafeDefault(mock.getReconnectHandler());
 		assertSafeDefault(mock.getConfigurationAdapter());
 	}

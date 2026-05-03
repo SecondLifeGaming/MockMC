@@ -15,10 +15,10 @@ public class PlayerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.key());
 		assertSafeDefault(mock.getUniqueId());
+		assertSafeDefault(mock.getUsername());
+		assertSafeDefault(mock.getGameProfile());
 		assertSafeDefault(mock.getPlayerListHeader());
 		assertSafeDefault(mock.getPlayerListFooter());
-		assertSafeDefault(mock.getGameProfile());
-		assertSafeDefault(mock.getUsername());
 		assertSafeDefault(mock.getModInfo());
 		assertSafeDefault(mock.getPlayerSettings());
 		assertSafeDefault(mock.getCurrentServer());

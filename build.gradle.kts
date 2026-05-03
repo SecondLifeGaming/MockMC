@@ -237,11 +237,6 @@ tasks {
 			html.required.set(true)
 			html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 		}
-		classDirectories.setFrom(files(classDirectories.files.map {
-			fileTree(it) {
-				exclude("org/mockmc/mockmc/generated/**")
-			}
-		}))
 	}
 
 	jacoco {

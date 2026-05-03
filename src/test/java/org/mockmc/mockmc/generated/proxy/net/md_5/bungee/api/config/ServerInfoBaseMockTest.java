@@ -15,10 +15,10 @@ public class ServerInfoBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.getAddress());
-		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getSocketAddress());
+		assertSafeDefault(mock.getPermission());
 	}
 
 	private static class Stub implements ServerInfoBaseMock

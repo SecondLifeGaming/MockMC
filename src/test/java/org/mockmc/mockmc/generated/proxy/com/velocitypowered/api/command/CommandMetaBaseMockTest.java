@@ -14,8 +14,8 @@ public class CommandMetaBaseMockTest extends GeneratedTestBase
 		CommandMetaBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getPlugin());
-		assertSafeDefault(mock.getAliases());
 		assertSafeDefault(mock.getHints());
+		assertSafeDefault(mock.getAliases());
 	}
 
 	private static class Stub implements CommandMetaBaseMock

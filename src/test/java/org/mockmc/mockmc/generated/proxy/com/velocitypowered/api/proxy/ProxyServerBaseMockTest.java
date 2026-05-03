@@ -14,9 +14,9 @@ public class ProxyServerBaseMockTest extends GeneratedTestBase
 		ProxyServerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getVersion());
+		assertSafeDefault(mock.getConfiguration());
 		assertSafeDefault(mock.getPluginManager());
 		assertSafeDefault(mock.getScheduler());
-		assertSafeDefault(mock.getConfiguration());
 		assertSafeDefault(mock.getAllPlayers());
 		assertSafeDefault(mock.getAllServers());
 		assertSafeDefault(mock.getConsoleCommandSource());

@@ -6,16 +6,19 @@ import java.io.File;
 
 class GenerateMocksTest {
     @Test
-    void testGenerator() throws Exception {
+    void testFullGenerationCycle() throws Exception {
         File projectRoot = new File(".."); // Assuming we are in metaminer/
         if (!new File(projectRoot, "jars").exists()) {
              projectRoot = new File(".");
         }
         
-        BaseMockGenerator generator = new BaseMockGenerator(projectRoot);
-        generator.generateData();
+        // Run the full standalone cycle to cover all generators
+        StandaloneRunner.main(new String[]{projectRoot.getAbsolutePath()});
 
         File generatedDir = new File(projectRoot, "src/main/java/org/mockmc/mockmc/generated");
         Assertions.assertTrue(generatedDir.exists() && generatedDir.isDirectory(), "Generated directory should exist");
+        
+        File coverageReport = new File(projectRoot, "COVERAGE.md");
+        Assertions.assertTrue(coverageReport.exists(), "Coverage report should be generated");
     }
 }

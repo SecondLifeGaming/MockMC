@@ -67,39 +67,46 @@ public class RecipeDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
-		Map<String, List<Recipe>> recipes = new HashMap<>();
-
-		// Group all the existing recipes into groups
-		Iterator<Recipe> iterator = Bukkit.recipeIterator();
-		while (iterator.hasNext())
+		try
 		{
-			Recipe recipe = iterator.next();
-			String recipeType = getRecipeType(recipe);
+			Map<String, List<Recipe>> recipes = new HashMap<>();
 
-			recipes.computeIfAbsent(recipeType, k -> new ArrayList<>()).add(recipe);
+			// Group all the existing recipes into groups
+			Iterator<Recipe> iterator = Bukkit.recipeIterator();
+			while (iterator.hasNext())
+			{
+				Recipe recipe = iterator.next();
+				String recipeType = getRecipeType(recipe);
+
+				recipes.computeIfAbsent(recipeType, k -> new ArrayList<>()).add(recipe);
+			}
+
+			// Process each groups
+			LOGGER.info("Recipe summary:");
+			int totalRecipes = 0;
+			for (Map.Entry<String, List<Recipe>> entry : recipes.entrySet())
+			{
+				String recipeType = entry.getKey();
+				List<Recipe> recipeList = entry.getValue();
+
+				totalRecipes += recipeList.size();
+
+				LOGGER.info(" - {}: {}", recipeType, recipeList.size());
+
+				Function<Recipe, JsonElement> factory = RECIPE_FACTORY_MAP.get(recipeType);
+				Preconditions.checkNotNull(factory, "Recipe with type '%s' does not have a factory.", recipeType);
+
+				JsonArray recipeListJson = new JsonArray(recipeList.size());
+				recipeList.stream().map(factory).forEach(recipeListJson::add);
+				JsonUtil.dump(recipeListJson, new File(dataFolder, String.format("%s.json", recipeType)));
+			}
+
+			LOGGER.info(" - TOTAL: {}", totalRecipes);
 		}
-
-		// Process each groups
-		LOGGER.info("Recipe summary:");
-		int totalRecipes = 0;
-		for (Map.Entry<String, List<Recipe>> entry : recipes.entrySet())
+		catch (Exception | LinkageError e)
 		{
-			String recipeType = entry.getKey();
-			List<Recipe> recipeList = entry.getValue();
-
-			totalRecipes += recipeList.size();
-
-			LOGGER.info(" - {}: {}", recipeType, recipeList.size());
-
-			Function<Recipe, JsonElement> factory = RECIPE_FACTORY_MAP.get(recipeType);
-			Preconditions.checkNotNull(factory, "Recipe with type '%s' does not have a factory.", recipeType);
-
-			JsonArray recipeListJson = new JsonArray(recipeList.size());
-			recipeList.stream().map(factory).forEach(recipeListJson::add);
-			JsonUtil.dump(recipeListJson, new File(dataFolder, String.format("%s.json", recipeType)));
+			// Skip if recipes are not available
 		}
-
-		LOGGER.info(" - TOTAL: {}", totalRecipes);
 	}
 
 	@Nullable
