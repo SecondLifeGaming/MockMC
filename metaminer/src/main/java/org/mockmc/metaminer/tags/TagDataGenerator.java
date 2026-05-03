@@ -28,6 +28,15 @@ public class TagDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
+		try
+		{
+			RegistryAccess.registryAccess();
+		}
+		catch (IllegalStateException e)
+		{
+			System.err.println("Skipping TagDataGenerator: RegistryAccess not found (not running in a server environment)");
+			return;
+		}
 		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation().entrySet())
 		{
 			@SuppressWarnings("unchecked")

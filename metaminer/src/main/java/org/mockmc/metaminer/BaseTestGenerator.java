@@ -122,6 +122,7 @@ public class BaseTestGenerator implements DataGenerator {
         if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
+        if (name.equals("co.aikar.timings.Timing")) return false;
         return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier."))
                 && !name.contains(".craftbukkit.");
     }

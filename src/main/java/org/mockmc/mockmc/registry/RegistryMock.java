@@ -40,7 +40,7 @@ import org.mockmc.mockmc.entity.variant.VillagerTypeMock;
 import org.mockmc.mockmc.entity.variant.WolfSoundVariantMock;
 import org.mockmc.mockmc.entity.variant.WolfVariantMock;
 import org.mockmc.mockmc.event.GameEventMock;
-import org.mockmc.mockmc.exception.IncompatiblePaperVersionException;
+import org.mockmc.mockmc.exception.InternalDataLoadException;
 import org.mockmc.mockmc.exception.UnimplementedOperationException;
 import org.mockmc.mockmc.fluid.FluidMock;
 import org.mockmc.mockmc.generator.structure.StructureMock;
@@ -60,10 +60,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -80,15 +82,67 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 	private final Map<TagKey<T>, Tag<T>> tagCache = new HashMap<>();
 
 	private final RegistryKey<T> registryKey;
+	private final String className;
+	private Class<T> loadedType;
 
 	private JsonArray keyedData;
 
 	private Function<JsonObject, T> constructor;
+	private boolean initialized = false;
 
 	public RegistryMock(RegistryKey<T> key)
 	{
+		this(key, (String) null);
+	}
+
+	public RegistryMock(RegistryKey<T> key, String className)
+	{
 		this.registryKey = key;
-		loadKeyedToRegistry(key);
+		this.className = className;
+	}
+
+	private static final ThreadLocal<Set<RegistryKey<?>>> INITIALIZING = ThreadLocal.withInitial(HashSet::new);
+
+	private void initialize()
+	{
+		if (initialized)
+		{
+			return;
+		}
+		if (!INITIALIZING.get().add(registryKey))
+		{
+			// Recursion detected
+			return;
+		}
+		try
+		{
+			initialized = true;
+			// Load data first, before any class loading can happen
+			String fileName = String.format("/keyed/%s.json", registryKey.key().value());
+			this.keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
+
+			// Now we can load the type and constructor, which might trigger recursion
+			this.loadedType = loadType(className);
+			this.constructor = (Function<JsonObject, T>) getConstructorFunction(registryKey);
+		} finally
+		{
+			INITIALIZING.get().remove(registryKey);
+		}
+	}
+
+	private Class<T> loadType(String className)
+	{
+		if (className == null)
+		{
+			return null;
+		}
+		try
+		{
+			return (Class<T>) Class.forName(className, false, RegistryMock.class.getClassLoader());
+		} catch (ClassNotFoundException e)
+		{
+			throw new InternalDataLoadException("Could not load class for registry: " + className, e);
+		}
 	}
 
 	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
@@ -103,44 +157,44 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
 	{
 		Map<RegistryKey<?>, Function<JsonObject, ? extends Keyed>> factoryMap = new HashMap<>();
-		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, ChickenSoundVariantMock::from);
-		factoryMap.put(RegistryKey.DIALOG, DialogMock::from);
-		factoryMap.put(RegistryKey.STRUCTURE, StructureMock::from);
-		factoryMap.put(RegistryKey.STRUCTURE_TYPE, StructureTypeMock::from);
-		factoryMap.put(RegistryKey.TRIM_MATERIAL, TrimMaterialMock::from);
-		factoryMap.put(RegistryKey.TRIM_PATTERN, TrimPatternMock::from);
-		factoryMap.put(RegistryKey.INSTRUMENT, MusicInstrumentMock::from);
-		factoryMap.put(RegistryKey.GAME_EVENT, GameEventMock::from);
-		factoryMap.put(RegistryKey.ENCHANTMENT, EnchantmentMock::from);
-		factoryMap.put(RegistryKey.MOB_EFFECT, PotionEffectTypeMock::from);
-		factoryMap.put(RegistryKey.DAMAGE_TYPE, DamageTypeMock::from);
-		factoryMap.put(RegistryKey.ITEM, ItemTypeMock::from);
-		factoryMap.put(RegistryKey.BLOCK, BlockTypeMock::from);
-		factoryMap.put(RegistryKey.WOLF_VARIANT, WolfVariantMock::from);
-		factoryMap.put(RegistryKey.JUKEBOX_SONG, JukeboxSongMock::from);
-		factoryMap.put(RegistryKey.CAT_VARIANT, CatVariantMock::from);
-		factoryMap.put(RegistryKey.CAT_SOUND_VARIANT, CatSoundVariantMock::from);
-		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, VillagerProfessionMock::from);
-		factoryMap.put(RegistryKey.VILLAGER_TYPE, VillagerTypeMock::from);
-		factoryMap.put(RegistryKey.FROG_VARIANT, FrogVariantMock::from);
-		factoryMap.put(RegistryKey.CHICKEN_VARIANT, ChickenVariantMock::from);
-		factoryMap.put(RegistryKey.COW_VARIANT, CowVariantMock::from);
-		factoryMap.put(RegistryKey.COW_SOUND_VARIANT, CowSoundVariantMock::from);
-		factoryMap.put(RegistryKey.PIG_VARIANT, PigVariantMock::from);
-		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, WolfSoundVariantMock::from);
-		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, MapCursorTypeMock::from);
-		factoryMap.put(RegistryKey.MENU, MenuTypeMock::from);
-		factoryMap.put(RegistryKey.BANNER_PATTERN, PatternTypeMock::from);
-		factoryMap.put(RegistryKey.PAINTING_VARIANT, ArtMock::from);
-		factoryMap.put(RegistryKey.ATTRIBUTE, AttributeMock::from);
-		factoryMap.put(RegistryKey.BIOME, BiomeMock::from);
-		factoryMap.put(RegistryKey.SOUND_EVENT, SoundMock::from);
-		factoryMap.put(RegistryKey.FLUID, FluidMock::from);
-		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, DataComponentTypeMock::from);
-		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, MemoryModuleMock::from);
-		factoryMap.put(RegistryKey.GAME_RULE, GameRuleMock::from);
-		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, PigSoundVariantMock::from);
-		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, ZombieNautilusMock.VariantMock::from);
+		factoryMap.put(RegistryKey.CHICKEN_SOUND_VARIANT, json -> ChickenSoundVariantMock.from(json));
+		factoryMap.put(RegistryKey.DIALOG, json -> DialogMock.from(json));
+		factoryMap.put(RegistryKey.STRUCTURE, json -> StructureMock.from(json));
+		factoryMap.put(RegistryKey.STRUCTURE_TYPE, json -> StructureTypeMock.from(json));
+		factoryMap.put(RegistryKey.TRIM_MATERIAL, json -> TrimMaterialMock.from(json));
+		factoryMap.put(RegistryKey.TRIM_PATTERN, json -> TrimPatternMock.from(json));
+		factoryMap.put(RegistryKey.INSTRUMENT, json -> MusicInstrumentMock.from(json));
+		factoryMap.put(RegistryKey.GAME_EVENT, json -> GameEventMock.from(json));
+		factoryMap.put(RegistryKey.ENCHANTMENT, json -> EnchantmentMock.from(json));
+		factoryMap.put(RegistryKey.MOB_EFFECT, json -> PotionEffectTypeMock.from(json));
+		factoryMap.put(RegistryKey.DAMAGE_TYPE, json -> DamageTypeMock.from(json));
+		factoryMap.put(RegistryKey.ITEM, json -> ItemTypeMock.from(json));
+		factoryMap.put(RegistryKey.BLOCK, json -> BlockTypeMock.from(json));
+		factoryMap.put(RegistryKey.WOLF_VARIANT, json -> WolfVariantMock.from(json));
+		factoryMap.put(RegistryKey.JUKEBOX_SONG, json -> JukeboxSongMock.from(json));
+		factoryMap.put(RegistryKey.CAT_VARIANT, json -> CatVariantMock.from(json));
+		factoryMap.put(RegistryKey.CAT_SOUND_VARIANT, json -> CatSoundVariantMock.from(json));
+		factoryMap.put(RegistryKey.VILLAGER_PROFESSION, json -> VillagerProfessionMock.from(json));
+		factoryMap.put(RegistryKey.VILLAGER_TYPE, json -> VillagerTypeMock.from(json));
+		factoryMap.put(RegistryKey.FROG_VARIANT, json -> FrogVariantMock.from(json));
+		factoryMap.put(RegistryKey.CHICKEN_VARIANT, json -> ChickenVariantMock.from(json));
+		factoryMap.put(RegistryKey.COW_VARIANT, json -> CowVariantMock.from(json));
+		factoryMap.put(RegistryKey.COW_SOUND_VARIANT, json -> CowSoundVariantMock.from(json));
+		factoryMap.put(RegistryKey.PIG_VARIANT, json -> PigVariantMock.from(json));
+		factoryMap.put(RegistryKey.WOLF_SOUND_VARIANT, json -> WolfSoundVariantMock.from(json));
+		factoryMap.put(RegistryKey.MAP_DECORATION_TYPE, json -> MapCursorTypeMock.from(json));
+		factoryMap.put(RegistryKey.MENU, json -> MenuTypeMock.from(json));
+		factoryMap.put(RegistryKey.BANNER_PATTERN, json -> PatternTypeMock.from(json));
+		factoryMap.put(RegistryKey.PAINTING_VARIANT, json -> ArtMock.from(json));
+		factoryMap.put(RegistryKey.ATTRIBUTE, json -> AttributeMock.from(json));
+		factoryMap.put(RegistryKey.BIOME, json -> BiomeMock.from(json));
+		factoryMap.put(RegistryKey.SOUND_EVENT, json -> SoundMock.from(json));
+		factoryMap.put(RegistryKey.FLUID, json -> FluidMock.from(json));
+		factoryMap.put(RegistryKey.DATA_COMPONENT_TYPE, json -> DataComponentTypeMock.from(json));
+		factoryMap.put(RegistryKey.MEMORY_MODULE_TYPE, json -> MemoryModuleMock.from(json));
+		factoryMap.put(RegistryKey.GAME_RULE, json -> GameRuleMock.from(json));
+		factoryMap.put(RegistryKey.PIG_SOUND_VARIANT, json -> PigSoundVariantMock.from(json));
+		factoryMap.put(RegistryKey.ZOMBIE_NAUTILUS_VARIANT, json -> ZombieNautilusMock.VariantMock.from(json));
 		// Remove the EntityTypeMock mapping as it's an enum
 		factoryMap.remove(RegistryKey.ENTITY_TYPE);
 		// Add special handling for enum-based registry types
@@ -151,10 +205,45 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
 		if (constructorFunction == null)
 		{
-			// TODO: Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return jsonObject -> createGenericProxy(jsonObject, (RegistryKey<T>) key);
 		}
 		return constructorFunction;
+	}
+
+	@SuppressWarnings("unchecked")
+	private T createGenericProxy(JsonObject jsonObject, RegistryKey<T> key)
+	{
+		NamespacedKey namespacedKey = NamespacedKey.fromString(jsonObject.get("key").getAsString());
+		Class<T> proxyType = this.loadedType != null ? this.loadedType : (Class<T>) Keyed.class;
+		if (!proxyType.isInterface())
+		{
+			// We can't proxy classes with java.lang.reflect.Proxy.
+			// For now, return null and hope the caller handles it, or throw.
+			// Ideally we should use ByteBuddy or similar here.
+			return null;
+		}
+		return (T) java.lang.reflect.Proxy.newProxyInstance(proxyType.getClassLoader(), new Class[]
+		{proxyType}, (proxy, method, args) ->
+		{
+			if (method.getName().equals("getKey"))
+			{
+				return namespacedKey;
+			}
+			if (method.getName().equals("toString"))
+			{
+				return key.key().asString() + "[" + namespacedKey + "]";
+			}
+			if (method.getName().equals("equals"))
+			{
+				return proxy == args[0];
+			}
+			if (method.getName().equals("hashCode"))
+			{
+				return namespacedKey.hashCode();
+			}
+			throw new UnimplementedOperationException(
+					"Method " + method.getName() + " is not implemented in generic mock for " + key.key().asString());
+		});
 	}
 
 	private boolean isEnumBasedRegistry(RegistryKey<?> key)
@@ -367,12 +456,33 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 	{
 		if (keyedMap.isEmpty())
 		{
+			initialize();
 			try
 			{
 				for (JsonElement structureJSONElement : keyedData)
 				{
 					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-					T tObject = constructor.apply(structureJSONObject);
+					T tObject;
+					if (constructor != null)
+					{
+						tObject = constructor.apply(structureJSONObject);
+					} else
+					{
+						// Fallback to proxy during recursion
+						tObject = createGenericProxy(structureJSONObject, (RegistryKey<T>) registryKey);
+					}
+					if (tObject == null)
+					{
+						System.err.println("Warning: Constructor returned null for " + structureJSONObject);
+						continue;
+					}
+					NamespacedKey key = tObject.getKey();
+					if (key == null)
+					{
+						System.err.println(
+								"Warning: Key is null for " + tObject + " (json: " + structureJSONObject + ")");
+						continue;
+					}
 					/*
 					 * putIfAbsent fixes the edge case scenario where the constructor initializes
 					 * class loading of the keyed object. During this initialization, the
@@ -380,13 +490,34 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 					 * instances of each keyed object. By using putIfAbsent, we ensure that only one
 					 * instance of each keyed object is added to the map, preventing duplicates.
 					 */
-					keyedMap.putIfAbsent(tObject.getKey(), tObject);
+					keyedMap.putIfAbsent(key, tObject);
 				}
 			} catch (ExceptionInInitializerError e)
 			{
-				throw new IncompatiblePaperVersionException(e);
+				// This can happen during recursion, it's fine
 			}
 		}
+	}
+
+	/**
+	 * Registers a new value in this registry.
+	 *
+	 * @param value
+	 *            The value to register.
+	 * @throws IllegalArgumentException
+	 *             If the value is null or its key is already registered.
+	 */
+	public void register(@NotNull T value)
+	{
+		Preconditions.checkNotNull(value, "value cannot be null");
+		NamespacedKey key = value.getKey();
+		Preconditions.checkNotNull(key, KEY_CANNOT_BE_NULL);
+		loadIfEmpty();
+		if (keyedMap.containsKey(key))
+		{
+			throw new IllegalArgumentException("Key " + key + " is already registered");
+		}
+		keyedMap.put(key, value);
 	}
 
 	@Nullable

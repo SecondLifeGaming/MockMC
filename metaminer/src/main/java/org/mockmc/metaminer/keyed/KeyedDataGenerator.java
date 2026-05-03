@@ -38,6 +38,16 @@ public class KeyedDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
+		try
+		{
+			RegistryAccess.registryAccess();
+		}
+		catch (IllegalStateException e)
+		{
+			System.err.println("Skipping KeyedDataGenerator: RegistryAccess not found (not running in a server environment)");
+			return;
+		}
+
 		if (!this.dataFolder.exists() && !this.dataFolder.mkdirs())
 		{
 			throw new IOException("Could not make directory: " + this.dataFolder);

@@ -31,7 +31,7 @@ import org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.CommandSenderBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock, CommandSenderBaseMock
+public interface ProxiedPlayerBaseMock extends ProxiedPlayer, CommandSenderBaseMock, ConnectionBaseMock
 {
 	@SuppressWarnings("deprecation")
 	default void setTabHeader(BaseComponent arg0, BaseComponent arg1)
