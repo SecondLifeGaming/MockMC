@@ -25,9 +25,16 @@ public class PotionDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws IOException
 	{
-		for (PotionType potionType : Registry.POTION)
+		try
 		{
-			this.generateIndividualData(potionType);
+			for (PotionType potionType : Registry.POTION)
+			{
+				this.generateIndividualData(potionType);
+			}
+		}
+		catch (Exception | LinkageError _)
+		{
+			// Skip if registry is not available
 		}
 	}
 

@@ -18,7 +18,9 @@ import java.util.function.Consumer;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class PluginMock extends JavaPlugin implements org.mockmc.mockmc.generated.org.bukkit.plugin.PluginBaseMock
+public class PluginMock extends JavaPlugin
+		implements
+			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginBaseMock
 {
 
 	/**

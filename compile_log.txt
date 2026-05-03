@@ -1,0 +1,102 @@
+Reusing configuration cache.
+> Task :downloadJars UP-TO-DATE
+
+> Task :compileJava
+CompileCommand: exclude org/mockmc/mockmc/generated/*.* bool exclude = true
+CompileCommand: exclude org/mockmc/mockmc/*.* bool exclude = true
+
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+
+> Task :compileJava
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntityBaseMock has been deprecated
+	public void setSwimming(boolean swimming)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntity has been deprecated
+	public void setSwimming(boolean swimming)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:264: warning: [deprecation] resetMaxHealth() in DamageableBaseMock has been deprecated
+	public void resetMaxHealth()
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:254: warning: [deprecation] setMaxHealth(double) in DamageableBaseMock has been deprecated
+	public void setMaxHealth(double health)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:248: warning: [deprecation] getMaxHealth() in DamageableBaseMock has been deprecated
+	public double getMaxHealth()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:264: warning: [deprecation] resetMaxHealth() in Damageable has been deprecated
+	public void resetMaxHealth()
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:254: warning: [deprecation] setMaxHealth(double) in Damageable has been deprecated
+	public void setMaxHealth(double health)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:248: warning: [deprecation] getMaxHealth() in Damageable has been deprecated
+	public double getMaxHealth()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/ServerMockBase.java:358: warning: [deprecation] createInventory(InventoryHolder,int,String) in ServerBaseMock has been deprecated
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
+	                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/ServerMockBase.java:358: warning: [deprecation] createInventory(@org.jetbrains.annotations.Nullable InventoryHolder,int,@org.jetbrains.annotations.NotNull String) in Server has been deprecated
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
+	                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:660: warning: [deprecation] runTaskAsynchronously(Plugin,BukkitRunnable) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:689: warning: [deprecation] runTaskLaterAsynchronously(Plugin,BukkitRunnable,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:712: warning: [deprecation] runTaskTimerAsynchronously(Plugin,BukkitRunnable,long,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay,
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:667: warning: [deprecation] runTaskLater(Plugin,BukkitRunnable,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:712: warning: [deprecation] runTaskTimerAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay,
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:689: warning: [deprecation] runTaskLaterAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:667: warning: [deprecation] runTaskLater(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:660: warning: [deprecation] runTaskAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/MockMCExtension.java:286: warning: [deprecation] <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>) in WorldMock has been deprecated
+		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
+		                                   ^
+  where T is a type-variable:
+    T extends Entity declared in method <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/registry/RegistryAccessMock.java:43: error: incompatible types: Class<T> cannot be converted to String
+			return findSimpleRegistry(type);
+			                          ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>)
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
+19 warnings
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///home/west/github.com/westkevin12/MockBukkit/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntityBaseMock has been deprecated
+  	public void setSwimming(boolean swimming)
+  	            ^
+  1 error
+  19 warnings
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 5m 15s
+2 actionable tasks: 1 executed, 1 up-to-date
+Configuration cache entry reused.

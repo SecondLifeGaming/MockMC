@@ -7,9 +7,11 @@ public class CraftServer
 {
 	public CraftServer()
 	{
+		// Empty constructor for reflection
 	}
 	public CraftServer(Object handle)
 	{
+		// Empty constructor for reflection
 	}
 	public Object getServer()
 	{

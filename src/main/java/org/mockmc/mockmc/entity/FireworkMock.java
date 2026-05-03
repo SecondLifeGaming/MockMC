@@ -19,7 +19,7 @@ import java.util.UUID;
 public class FireworkMock extends ProjectileMock
 		implements
 			Firework,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FireworkBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FireworkBaseMock
 {
 
 	private FireworkMeta meta;

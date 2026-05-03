@@ -35,7 +35,7 @@ class FoliaEntitySchedulerTest
 	void setUp()
 	{
 		entity = new ZombieMock(server, UUID.randomUUID());
-		scheduler = new FoliaEntityScheduler(bukkitScheduler, entity);
+		scheduler = new FoliaEntityScheduler(server, bukkitScheduler, entity);
 		plugin = MockMC.createMockPlugin();
 	}
 

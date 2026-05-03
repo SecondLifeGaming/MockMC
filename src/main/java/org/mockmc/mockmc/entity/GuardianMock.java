@@ -16,7 +16,7 @@ import java.util.UUID;
 public class GuardianMock extends MonsterMock
 		implements
 			Guardian,
-			org.mockmc.mockmc.generated.org.bukkit.entity.GuardianBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GuardianBaseMock
 {
 
 	private boolean laser = false;

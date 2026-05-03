@@ -14,7 +14,7 @@ import java.util.UUID;
 public class BreezeMock extends MonsterMock
 		implements
 			Breeze,
-			org.mockmc.mockmc.generated.org.bukkit.entity.BreezeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BreezeBaseMock
 {
 
 	/**

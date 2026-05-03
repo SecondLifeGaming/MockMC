@@ -33,5 +33,10 @@ public class PlayerArgumentTypeMock implements ArgumentType<PlayerSelectorArgume
 		String input = reader.getString().substring(start, reader.getCursor());
 		return new PlayerSelectorArgumentResolverMock(input, single);
 	}
+	@Override
+	public <S> PlayerSelectorArgumentResolver parse(StringReader reader, S source) throws CommandSyntaxException
+	{
+		return parse(reader);
+	}
 
 }

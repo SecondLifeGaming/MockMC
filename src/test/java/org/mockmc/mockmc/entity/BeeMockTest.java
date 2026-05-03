@@ -218,4 +218,30 @@ class BeeMockTest
 
 	}
 
+	@Test
+	void testGetTicksSincePollinationDefault()
+	{
+		assertEquals(0, bee.getTicksSincePollination());
+	}
+
+	@Test
+	void testSetTicksSincePollination()
+	{
+		bee.setTicksSincePollination(100);
+		assertEquals(100, bee.getTicksSincePollination());
+	}
+
+	@Test
+	void testGetCropsGrownSincePollinationDefault()
+	{
+		assertEquals(0, bee.getCropsGrownSincePollination());
+	}
+
+	@Test
+	void testSetCropsGrownSincePollination()
+	{
+		bee.setCropsGrownSincePollination(5);
+		assertEquals(5, bee.getCropsGrownSincePollination());
+	}
+
 }

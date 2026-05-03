@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Mock implementation of a {@link Chunk}.
  */
-public class ChunkMock implements Chunk, org.mockmc.mockmc.generated.org.bukkit.ChunkBaseMock
+public class ChunkMock implements Chunk, org.mockmc.mockmc.generated.server.org.bukkit.ChunkBaseMock
 {
 
 	private final World world;

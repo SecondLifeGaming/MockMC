@@ -14,7 +14,7 @@ import java.util.UUID;
 public class TraderLlamaMock extends LlamaMock
 		implements
 			TraderLlama,
-			org.mockmc.mockmc.generated.org.bukkit.entity.TraderLlamaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.TraderLlamaBaseMock
 {
 
 	/**

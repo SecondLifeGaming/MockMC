@@ -17,7 +17,7 @@ import java.util.UUID;
 public abstract class RaiderMock extends MonsterMock
 		implements
 			Raider,
-			org.mockmc.mockmc.generated.org.bukkit.entity.RaiderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.RaiderBaseMock
 {
 
 	private boolean canJoinRaid;

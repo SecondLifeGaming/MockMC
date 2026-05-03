@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SmokerStateMock extends AbstractFurnaceStateMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.block.SmokerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.SmokerBaseMock
 {
 
 	/**

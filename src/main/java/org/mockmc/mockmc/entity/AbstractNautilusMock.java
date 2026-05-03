@@ -11,7 +11,7 @@ import java.util.UUID;
 public class AbstractNautilusMock extends AnimalsMock
 		implements
 			AbstractNautilus,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractNautilusBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractNautilusBaseMock
 {
 
 	private boolean isTamed = false;

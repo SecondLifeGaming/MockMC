@@ -212,6 +212,9 @@ Temporary Items
 # Ignore server folder
 server/
 
+# Ignore jars cache
+jars/cache/
+
 #Kotlin LSP
 kls_database.db
 

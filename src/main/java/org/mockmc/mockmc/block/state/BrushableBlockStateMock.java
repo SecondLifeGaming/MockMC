@@ -18,7 +18,7 @@ import java.util.Objects;
 public class BrushableBlockStateMock extends TileStateMock
 		implements
 			BrushableBlock,
-			org.mockmc.mockmc.generated.org.bukkit.loot.LootableBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock
 {
 
 	private @NotNull ItemStack item = ItemStack.empty();

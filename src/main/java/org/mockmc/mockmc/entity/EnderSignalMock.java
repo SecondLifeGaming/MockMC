@@ -15,7 +15,7 @@ import java.util.UUID;
 public class EnderSignalMock extends EntityMock
 		implements
 			EnderSignal,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EnderSignalBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderSignalBaseMock
 {
 
 	private static final String TARGET_NOT_SET_ERROR = "Target location has not been set! Mockbukkit requires that the "

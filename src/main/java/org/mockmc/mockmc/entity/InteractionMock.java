@@ -8,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
-import org.mockmc.mockmc.generated.org.bukkit.entity.InteractionBaseMock;
-import org.mockmc.mockmc.generated.org.bukkit.entity.InteractionPreviousInteractionBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.entity.InteractionBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.entity.InteractionPreviousInteractionBaseMock;
 
 /**
  * Mock implementation of a {@link Interaction}.

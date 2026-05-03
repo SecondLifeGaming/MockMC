@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class RaidMock implements Raid, org.mockmc.mockmc.generated.org.bukkit.RaidBaseMock
+public class RaidMock implements Raid, org.mockmc.mockmc.generated.server.org.bukkit.RaidBaseMock
 {
 
 	private static final int MAXIMUM_BAD_OMEN_LEVEL = 5;

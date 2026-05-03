@@ -27,23 +27,21 @@
     <hr />
 </p>
 
-MockMC is a testing framework for Minecraft server software. It provides complete mock implementations of server environments, allowing you to run unit tests for your plugins with speed and precision.
+MockMC is a testing framework for Minecraft server software, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project. It provides complete mock implementations of server environments, allowing you to run unit tests for your plugins with speed and precision.
 
-## 🚀 The "Engine First" Strategy
+## 🛠 Why the Fork?
 
-MockMC moves beyond the maintenance-heavy approach of previous frameworks. While earlier versions utilized a `metaminer` to generate base stubs, they still required significant manual overhead to keep the mock surface in sync with rapidly evolving APIs like Paper and Folia.
+MockBukkit set the standard for Bukkit-based unit testing. However, as server APIs like Paper and Folia have expanded into thousands of methods, maintaining manual stubs became tedious.
 
-### The Maintenance Bottleneck
+While the original MockBukkit utilized a `metaminer` to help generate stubs, it lacked type safety, often skipped inheritance chains, and required significant manual overhead to keep the mock surface in sync. We created MockMC to solve these core architectural challenges.
 
-In traditional mocking, every upstream update (like a new Minecraft version) forced developers to manually update mock classes to satisfy new interface contracts. If a method wasn't manually implemented or correctly shadowed, it would throw an `UnimplementedOperationException`, causing tests to be skipped and stalling development.
+### The JavaPoet Evolution
+We have completely overhauled the metaminer engine using **JavaPoet**. This shift moves MockMC to an **"Engine First"** strategy:
 
-### The Metaminer & JavaPoet Evolution
-
-We have overhauled the `metaminer` engine to act as a direct bridge between the API JARs and your test environment using **JavaPoet**:
-
-- **Universal JAR Scraping**: Our engine doesn't rely on hardcoded source paths. It scrapes directly from provided JARs, allowing instant support for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
-- **Automated Smart Stubs**: Using JavaPoet, we generate 100% of the API surface. Every method—even those added in a brand-new Paper update—is immediately available with safe, type-specific defaults (Empty collections, Optionals, etc.).
-- **Logic over Boilerplate**: Because the engine handles the thousands of interface methods automatically, our manual implementation efforts are focused strictly on **simulating complex logic**.
+* **Type-Safe Inheritance**: Unlike previous miners that generated basic stubs, our JavaPoet-based engine correctly maps inheritance and generic types directly from the API JARs.
+* **Universal JAR Scraping**: The engine scrapes directly from provided JARs, allowing for instant, automated support for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
+* **Zero-Lag Updates**: Every method—even those added in a brand-new Paper update—is immediately available with safe, type-specific defaults (Empty collections, Optionals, etc.).
+* **Focus on Logic**: Because the engine handles the thousands of interface methods automatically, our manual implementation efforts are focused strictly on **simulating complex logic**.
 
 ## Usage
 
@@ -55,8 +53,6 @@ MockMC is available via Maven Central.
 
 <details>
 <summary><h3>Adding MockMC via Gradle</h3></summary>
-
-MockMC is available on Maven Central. Since we utilize an **Engine First** approach, we recommend a small helper script to automatically pull the correct Paper-API version directly from the MockMC manifest. This ensures your testing environment always stays in sync with the internal stubs.
 
 ```gradle
 repositories {
@@ -77,10 +73,7 @@ def getMockMCPaperVersion() {
 }
 
 dependencies {
-    // Replace with the latest version from Maven Central
     testImplementation 'io.github.secondlifegaming:mockmc-v26.1:dev-2a95b9a32'
-
-    // Dynamically pull the correct Paper API
     testImplementation "io.papermc.paper:paper-api:${getMockMCPaperVersion()}"
 }
 ```
@@ -90,7 +83,7 @@ dependencies {
 <details>
 <summary><h3>Adding MockMC via Maven</h3></summary>
 
-Add the Paper repository and the MockMC dependency to your `pom.xml`. To ensure proper class loading, place the MockMC dependency **above** any other dependencies that might provide the Bukkit or Paper API.
+Add the Paper repository and the MockMC dependency to your `pom.xml`.
 
 ```xml
 <repositories>
@@ -119,7 +112,7 @@ Add the Paper repository and the MockMC dependency to your `pom.xml`. To ensure 
 
 </details>
 
-### Using MockMC
+### Quick Start
 
 Initialize the mock environment in your test setup:
 
@@ -139,34 +132,19 @@ public void tearDown() {
 }
 ```
 
-### Mock Plugins
+---
 
-Create lightweight "dummy" plugins to test cross-plugin dependencies or event listeners.
+## 🛡️ Total API Coverage
 
-```java
-PluginMock plugin = MockMC.createMockPlugin();
-```
+Unlike traditional mocking frameworks that throw `UnimplementedOperationException` when encountering an unmapped method, MockMC utilizes a **Total Coverage** model.
 
-### Mock Players
+Because our engine generates the entire API surface using JavaPoet, every single method is guaranteed to exist. If a specific behavioral implementation hasn't been manually coded yet, the engine provides **Safe Defaults**:
 
-Simulate complex player interactions, including inventory movements, chats, and block interactions.
+* **Collections/Arrays**: Returns empty, non-null instances.
+* **Optionals**: Returns `Optional.empty()`.
+* **Objects**: Returns `null` or a basic mock stub where appropriate.
+* **Primitives**: Returns standard defaults (e.g., `false`, `0`).
 
-```java
-PlayerMock player = server.addPlayer();
-player.simulateBlockBreak(someBlock); // Fires events and updates world state
-```
+This ensures your test suites never crash due to upstream API changes, allowing you to focus on testing your plugin's logic rather than fighting the mock environment.
 
-### Mock Worlds
-
-MockMC uses a "Lazy-Loading" world strategy. Blocks are only created in memory when accessed, keeping memory usage low even for large-scale tests.
-
-```java
-// Create a superflat world with bedrock at y=0 and dirt up to y=3
-World world = new WorldMock(Material.DIRT, 3);
-```
-
-## :question: UnimplementedOperationException
-
-While the **Engine First** strategy ensures all methods exist, specific complex logic (like physical entity collisions or advanced lighting updates) might still throw an `UnimplementedOperationException` if the manual behavior hasn't been coded yet.
-
-Because this extends `AssumptionException`, JUnit will mark the test as **skipped** rather than **failed**, preventing false negatives in your CI/CD pipeline while highlighting areas where MockMC's behavioral logic needs a PR.
+---

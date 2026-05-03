@@ -18,16 +18,19 @@ import java.util.UUID;
  * Mock implementation of an {@link Sniffer}.
  *
  * @see AnimalsMock
+ * @mockmc.version 1.21-1.0.0
  */
+@SuppressWarnings("java:S110")
 public class SnifferMock extends AnimalsMock
 		implements
-			Sniffer,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SnifferBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnifferBaseMock
 {
 
 	private final List<Location> exploredLocations = new ArrayList<>();
 
 	private State state = State.IDLING;
+
+	private boolean canDig = true;
 
 	/**
 	 * Constructs a new {@link Sniffer} on the provided {@link ServerMock} with a
@@ -94,7 +97,55 @@ public class SnifferMock extends AnimalsMock
 			case RISING ->
 				playSound(Sound.sound(org.bukkit.Sound.ENTITY_SNIFFER_DIGGING_STOP, Sound.Source.AMBIENT, 1.0f, 1.0f));
 			default -> {
-				// No sound is emitted
+				/* No sound is emitted for other states */
+			}
+		}
+	}
+
+	@Override
+	public boolean canDig()
+	{
+		return this.canDig;
+	}
+
+	public void setCanDig(boolean canDig)
+	{
+		this.canDig = canDig;
+	}
+
+	@Override
+	@NotNull
+	public Location findPossibleDigLocation()
+	{
+		return this.getLocation().add(0, -1, 0);
+	}
+
+	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("State"))
+		{
+			try
+			{
+				this.setState(State.valueOf((String) nbt.get("State")));
+			} catch (IllegalArgumentException _)
+			{
+				// Ignore invalid states in NBT
+			}
+		}
+		if (nbt.has("ExploredLocations"))
+		{
+			Object value = nbt.get("ExploredLocations");
+			if (value instanceof List<?> list)
+			{
+				this.exploredLocations.clear();
+				for (Object obj : list)
+				{
+					if (obj instanceof Location loc)
+					{
+						this.addExploredLocation(loc);
+					}
+				}
 			}
 		}
 	}

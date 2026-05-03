@@ -9,7 +9,7 @@ import java.util.UUID;
 public class SilverfishMock extends MonsterMock
 		implements
 			Silverfish,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SilverfishBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SilverfishBaseMock
 {
 
 	/**

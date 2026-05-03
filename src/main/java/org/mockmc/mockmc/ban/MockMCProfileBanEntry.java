@@ -12,7 +12,7 @@ import java.util.Date;
 public class MockMCProfileBanEntry
 		implements
 			BanEntry<PlayerProfile>,
-			org.mockmc.mockmc.generated.org.bukkit.BanEntryBaseMock<PlayerProfile>
+			org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<PlayerProfile>
 {
 
 	private final PlayerProfile target;

@@ -24,7 +24,7 @@ import java.util.Map;
 {"unchecked"})
 public class SuspiciousStewMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.SuspiciousStewMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.SuspiciousStewMetaBaseMock
 {
 
 	@NotNull

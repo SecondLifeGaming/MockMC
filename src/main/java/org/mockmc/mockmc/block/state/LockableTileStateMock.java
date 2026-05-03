@@ -6,7 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mockmc.mockmc.generated.org.bukkit.block.LockableBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.block.LockableBaseMock;
 
 import java.util.Objects;
 

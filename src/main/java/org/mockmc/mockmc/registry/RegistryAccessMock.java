@@ -13,6 +13,8 @@ import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.exception.InternalDataLoadException;
 import org.mockmc.mockmc.exception.ReflectionAccessException;
 import org.mockmc.mockmc.exception.UnimplementedOperationException;
+import io.papermc.paper.registry.tag.Tag;
+import org.bukkit.NamespacedKey;
 import org.mockmc.mockmc.util.ResourceLoader;
 
 import java.lang.reflect.Field;
@@ -22,17 +24,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Stream;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+import java.util.logging.Logger;
+import java.util.concurrent.ConcurrentHashMap;
+
+@SuppressWarnings("unchecked")
 public class RegistryAccessMock implements RegistryAccess
 {
 
-	private final Map<RegistryKey<?>, Registry<?>> registries = new HashMap<>();
+	private static final Logger LOGGER = Logger.getLogger(RegistryAccessMock.class.getName());
+
+	private final Map<RegistryKey<?>, Registry<?>> registries = new ConcurrentHashMap<>();
 	private static final BiMap<RegistryKey<?>, String> CLASS_NAME_KEY_MAP = createClassToKeyConversions();
 
+	/**
+	 * @deprecated Use {@link #getRegistry(RegistryKey)} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.6")
 	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
@@ -40,71 +47,174 @@ public class RegistryAccessMock implements RegistryAccess
 		RegistryKey<T> registryKey = determineRegistryKeyFromClass(type);
 		if (registryKey == null)
 		{
-			return findSimpleRegistry(type);
+			return findSimpleRegistry(type.getName());
 		}
 		return getRegistry(registryKey);
 	}
 
+	private static final java.util.Map<Class<?>, RegistryKey<?>> CLASS_TO_KEY_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
 	private <T extends Keyed> RegistryKey<T> determineRegistryKeyFromClass(@NotNull Class<T> type)
 	{
-		return (RegistryKey<T>) CLASS_NAME_KEY_MAP.inverse().get(type.getName());
+		return (RegistryKey<T>) CLASS_TO_KEY_CACHE.computeIfAbsent(type,
+				t -> (RegistryKey<T>) CLASS_NAME_KEY_MAP.inverse().get(t.getName()));
 	}
 
 	@Override
 	public @NotNull <T extends Keyed> Registry<T> getRegistry(@NotNull RegistryKey<T> registryKey)
 	{
-		if (registries.containsKey(registryKey))
+		Registry<T> registry = (Registry<T>) registries.get(registryKey);
+		if (registry == null)
 		{
-			return (Registry<T>) registries.get(registryKey);
+			registry = new LazyRegistry<T>(registryKey);
+			registries.put(registryKey, registry);
 		}
-		Registry<T> registry = createRegistry(registryKey);
-		registries.put(registryKey, registry);
 		return registry;
+	}
+
+	private class LazyRegistry<T extends Keyed> implements Registry<T>
+	{
+		private final RegistryKey<T> key;
+		private Registry<T> delegate;
+
+		public LazyRegistry(RegistryKey<T> key)
+		{
+			this.key = key;
+		}
+
+		private Registry<T> getDelegate()
+		{
+			if (delegate == null)
+			{
+				String className = CLASS_NAME_KEY_MAP.get(key);
+				Registry<T> placeholder = new RegistryMock<>(key, className);
+				delegate = placeholder;
+				try
+				{
+					Registry<T> newDelegate = createRegistry(key);
+					if (newDelegate != this)
+					{
+						delegate = newDelegate;
+					}
+				} catch (Exception _)
+				{
+					// keep placeholder
+				}
+			}
+			return delegate;
+		}
+
+		@Override
+		public @Nullable T get(@NotNull NamespacedKey namespacedKey)
+		{
+			return getDelegate().get(namespacedKey);
+		}
+
+		@Override
+		public @Nullable T get(@NotNull net.kyori.adventure.key.Key key)
+		{
+			return getDelegate().get(key);
+		}
+
+		@Override
+		public @Nullable T get(@NotNull io.papermc.paper.registry.TypedKey<T> key)
+		{
+			return getDelegate().get(key);
+		}
+
+		@Override
+		public @NotNull T getOrThrow(@NotNull NamespacedKey namespacedKey)
+		{
+			return getDelegate().getOrThrow(namespacedKey);
+		}
+
+		@Override
+		public @NotNull T getOrThrow(@NotNull net.kyori.adventure.key.Key key)
+		{
+			return getDelegate().getOrThrow(key);
+		}
+
+		@Override
+		public @NotNull T getOrThrow(@NotNull io.papermc.paper.registry.TypedKey<T> key)
+		{
+			return getDelegate().getOrThrow(key);
+		}
+
+		@Override
+		public @Nullable NamespacedKey getKey(@NotNull T t)
+		{
+			return getDelegate().getKey(t);
+		}
+
+		@Override
+		public @NotNull NamespacedKey getKeyOrThrow(@NotNull T t)
+		{
+			return getDelegate().getKeyOrThrow(t);
+		}
+
+		@Override
+		public @NotNull java.util.stream.Stream<T> stream()
+		{
+			return getDelegate().stream();
+		}
+
+		@Override
+		public @NotNull java.util.stream.Stream<NamespacedKey> keyStream()
+		{
+			return getDelegate().keyStream();
+		}
+
+		@Override
+		public @NotNull java.util.Iterator<T> iterator()
+		{
+			return getDelegate().iterator();
+		}
+
+		@Override
+		public int size()
+		{
+			return getDelegate().size();
+		}
+
+		@Override
+		public @Nullable T match(@NotNull String s)
+		{
+			return getDelegate().match(s);
+		}
+
+		@Override
+		public boolean hasTag(@NotNull io.papermc.paper.registry.tag.TagKey<T> tagKey)
+		{
+			return getDelegate().hasTag(tagKey);
+		}
+
+		@Override
+		public @Nullable io.papermc.paper.registry.tag.Tag<T> getTag(
+				@NotNull io.papermc.paper.registry.tag.TagKey<T> tagKey)
+		{
+			return getDelegate().getTag(tagKey);
+		}
+
+		@Override
+		public @NotNull java.util.Collection<Tag<T>> getTags()
+		{
+			return getDelegate().getTags();
+		}
 	}
 
 	private static <T extends Keyed> Registry<T> createRegistry(RegistryKey<T> key)
 	{
-		if (getOutlierKeyedRegistryKeys().contains(key))
-		{
-			return new RegistryMock<>(key);
-		}
-		return findSimpleRegistry((Class<T>) getClass(CLASS_NAME_KEY_MAP.get(key)));
-	}
-
-	private static Class<?> getClass(String className)
-	{
+		// Attempt to find the registry in Bukkit's Registry class first
 		try
 		{
-			return Class.forName(className);
-		} catch (ClassNotFoundException e)
+			String className = CLASS_NAME_KEY_MAP.get(key);
+			return findSimpleRegistry(className);
+		} catch (Exception _)
 		{
-			throw new InternalDataLoadException(e);
+			// Fallback to a generic RegistryMock if not found in Bukkit's Registry
+			String className = CLASS_NAME_KEY_MAP.get(key);
+			return new RegistryMock<>(key, className);
 		}
-	}
-
-	private static boolean genericTypeMatches(Field a, Class<?> tClass)
-	{
-		if (a.getGenericType() instanceof ParameterizedType type)
-		{
-			return type.getActualTypeArguments()[0].equals(tClass);
-		}
-		return false;
-	}
-
-	private static List<RegistryKey<? extends Keyed>> getOutlierKeyedRegistryKeys()
-	{
-		return List.of(RegistryKey.COW_SOUND_VARIANT, RegistryKey.CHICKEN_SOUND_VARIANT, RegistryKey.DIALOG,
-				RegistryKey.STRUCTURE, RegistryKey.STRUCTURE_TYPE, RegistryKey.TRIM_MATERIAL, RegistryKey.TRIM_PATTERN,
-				RegistryKey.INSTRUMENT, RegistryKey.GAME_EVENT, RegistryKey.ENCHANTMENT, RegistryKey.MOB_EFFECT,
-				RegistryKey.DAMAGE_TYPE, RegistryKey.ITEM, RegistryKey.BLOCK, RegistryKey.WOLF_VARIANT,
-				RegistryKey.JUKEBOX_SONG, RegistryKey.CAT_VARIANT, RegistryKey.CAT_SOUND_VARIANT,
-				RegistryKey.VILLAGER_PROFESSION, RegistryKey.VILLAGER_TYPE, RegistryKey.FROG_VARIANT,
-				RegistryKey.CHICKEN_VARIANT, RegistryKey.COW_VARIANT, RegistryKey.PIG_VARIANT,
-				RegistryKey.PIG_SOUND_VARIANT, RegistryKey.WOLF_SOUND_VARIANT, RegistryKey.MAP_DECORATION_TYPE,
-				RegistryKey.BANNER_PATTERN, RegistryKey.MENU, RegistryKey.PAINTING_VARIANT, RegistryKey.ATTRIBUTE,
-				RegistryKey.BIOME, RegistryKey.SOUND_EVENT, RegistryKey.FLUID, RegistryKey.ENTITY_TYPE,
-				RegistryKey.PARTICLE_TYPE, RegistryKey.POTION, RegistryKey.DATA_COMPONENT_TYPE,
-				RegistryKey.MEMORY_MODULE_TYPE, RegistryKey.GAME_RULE, RegistryKey.ZOMBIE_NAUTILUS_VARIANT);
 	}
 
 	private static Registry<?> getValue(Field a)
@@ -112,30 +222,32 @@ public class RegistryAccessMock implements RegistryAccess
 		try
 		{
 			return (Registry<?>) a.get(null);
-		} catch (IllegalAccessException e)
+		} catch (IllegalAccessException _)
 		{
 			throw new ReflectionAccessException(
 					"Could not access field " + a.getDeclaringClass().getSimpleName() + "." + a.getName());
 		}
 	}
 
+	private static final String REGISTRY_RELATION_FILE = "/registries/registry_key_class_relation.json";
+
 	private static @NotNull BiMap<RegistryKey<?>, String> createClassToKeyConversions()
 	{
-		String fileName = "/registries/registry_key_class_relation.json";
-		JsonObject object = ResourceLoader.loadResource(fileName).getAsJsonObject();
+		JsonObject object = ResourceLoader.loadResource(REGISTRY_RELATION_FILE).getAsJsonObject();
 
 		BiMap<RegistryKey<?>, String> output = HashBiMap.create();
 		for (RegistryKey<?> registryKey : getAllKeys())
 		{
-			JsonElement element = object.get(registryKey.key().asString());
+			String keyString = registryKey.key().asString();
+			JsonElement element = object.get(keyString);
 			if (element != null)
 			{
 				String className = element.getAsString();
 				output.put(registryKey, className);
 			} else
 			{
-				throw new InternalDataLoadException("Null JSON element while retrieving `"
-						+ registryKey.key().asString() + "` - MockMC / MC version mismatch?");
+				LOGGER.warning(() -> "Null JSON element while retrieving `" + registryKey.key().asString()
+						+ "` (key enum name: " + registryKey.toString() + ") - MockMC / MC version mismatch?");
 			}
 		}
 		return output;
@@ -151,23 +263,48 @@ public class RegistryAccessMock implements RegistryAccess
 				try
 				{
 					output.add((RegistryKey<?>) field.get(null));
-				} catch (IllegalAccessException e)
+				} catch (IllegalAccessException _)
 				{
-					throw new InternalDataLoadException(e);
+					throw new InternalDataLoadException("Could not access RegistryKey field");
 				}
 			}
 		}
 		return output;
 	}
 
-	private static <T extends Keyed> Registry<T> findSimpleRegistry(Class<T> tClass)
+	private static final Map<String, Registry<?>> SIMPLE_REGISTRY_CACHE = new HashMap<>();
+
+	private static <T extends Keyed> Registry<T> findSimpleRegistry(String targetClassName)
 	{
-		return (Registry<T>) Stream.of(Registry.class.getDeclaredFields())
-				.filter(a -> Registry.class.isAssignableFrom(a.getType()))
-				.filter(a -> Modifier.isPublic(a.getModifiers())).filter(a -> Modifier.isStatic(a.getModifiers()))
-				.filter(a -> genericTypeMatches(a, tClass)).map(RegistryAccessMock::getValue).filter(Objects::nonNull)
-				.findAny()
-				.orElseThrow(() -> new UnimplementedOperationException("Could not find registry for " + tClass));
+		if (SIMPLE_REGISTRY_CACHE.isEmpty())
+		{
+			populateSimpleRegistryCache();
+		}
+
+		Registry<T> registry = (Registry<T>) SIMPLE_REGISTRY_CACHE.get(targetClassName);
+		if (registry == null)
+		{
+			throw new UnimplementedOperationException("Could not find registry for " + targetClassName);
+		}
+		return registry;
+	}
+
+	private static void populateSimpleRegistryCache()
+	{
+		for (Field field : Registry.class.getDeclaredFields())
+		{
+			if (Modifier.isPublic(field.getModifiers()) && Modifier.isStatic(field.getModifiers())
+					&& Registry.class.isAssignableFrom(field.getType())
+					&& field.getGenericType() instanceof ParameterizedType type)
+			{
+				String typeName = type.getActualTypeArguments()[0].getTypeName();
+				Registry<?> registry = getValue(field);
+				if (registry != null)
+				{
+					SIMPLE_REGISTRY_CACHE.put(typeName, registry);
+				}
+			}
+		}
 	}
 
 }

@@ -19,7 +19,7 @@ import java.util.UUID;
 public class HorseMock extends AbstractHorseMock
 		implements
 			Horse,
-			org.mockmc.mockmc.generated.org.bukkit.entity.HorseBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.HorseBaseMock
 {
 
 	private Color color;

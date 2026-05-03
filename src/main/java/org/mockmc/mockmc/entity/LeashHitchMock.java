@@ -11,7 +11,7 @@ import java.util.UUID;
 public class LeashHitchMock extends HangingMock
 		implements
 			LeashHitch,
-			org.mockmc.mockmc.generated.org.bukkit.entity.LeashHitchBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LeashHitchBaseMock
 {
 
 	/**

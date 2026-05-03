@@ -9,7 +9,7 @@ import java.util.UUID;
 public class MagmaCubeMock extends SlimeMock
 		implements
 			MagmaCube,
-			org.mockmc.mockmc.generated.org.bukkit.entity.MagmaCubeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.MagmaCubeBaseMock
 {
 
 	/**

@@ -20,7 +20,9 @@ import java.util.List;
  *
  * @see TileStateMock
  */
-public class SignStateMock extends TileStateMock implements org.mockmc.mockmc.generated.org.bukkit.block.SignBaseMock
+public class SignStateMock extends TileStateMock
+		implements
+			org.mockmc.mockmc.generated.server.org.bukkit.block.SignBaseMock
 {
 
 	private final SignSideMock front;
@@ -173,7 +175,9 @@ public class SignStateMock extends TileStateMock implements org.mockmc.mockmc.ge
 		return new SignStateMock(this);
 	}
 
-	private static class SignSideMock implements org.mockmc.mockmc.generated.org.bukkit.block.sign.SignSideBaseMock
+	private static class SignSideMock
+			implements
+				org.mockmc.mockmc.generated.server.org.bukkit.block.sign.SignSideBaseMock
 	{
 
 		private final Component[] lines;

@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.entity.data.EntitySubType;
 import java.util.UUID;
-import org.mockmc.mockmc.generated.org.bukkit.entity.AgeableBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.entity.AgeableBaseMock;
 
 /**
  * Mock implementation of an {@link Ageable}.

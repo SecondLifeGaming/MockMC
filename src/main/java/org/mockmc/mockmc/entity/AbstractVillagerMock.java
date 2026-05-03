@@ -23,7 +23,7 @@ public abstract class AbstractVillagerMock extends AgeableMock
 			Merchant,
 			AbstractVillager,
 			InventoryHolder,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.MerchantBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.MerchantBaseMock
 {
 
 	private final MerchantInventoryMock inventory = new MerchantInventoryMock(this, this);

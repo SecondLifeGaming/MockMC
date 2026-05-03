@@ -23,7 +23,7 @@ import java.util.Objects;
 public class ShieldMetaMock extends ItemMetaMock
 		implements
 			BlockStateMeta,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.ShieldMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ShieldMetaBaseMock
 {
 
 	private Banner banner;

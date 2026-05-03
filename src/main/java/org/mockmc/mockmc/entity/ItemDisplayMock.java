@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ItemDisplayMock extends DisplayMock
 		implements
 			ItemDisplay,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ItemDisplayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemDisplayBaseMock
 {
 
 	private ItemStack itemStack = ItemStack.empty();

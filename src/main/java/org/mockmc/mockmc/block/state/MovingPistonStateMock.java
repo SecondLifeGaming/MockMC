@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class MovingPistonStateMock extends BlockStateMock
 		implements
-			org.mockmc.mockmc.generated.io.papermc.paper.block.MovingPistonBaseMock
+			org.mockmc.mockmc.generated.server.io.papermc.paper.block.MovingPistonBaseMock
 {
 
 	protected MovingPistonStateMock(@NotNull Block block)

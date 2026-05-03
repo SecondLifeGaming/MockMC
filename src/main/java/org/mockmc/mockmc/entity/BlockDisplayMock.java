@@ -11,7 +11,7 @@ import java.util.UUID;
 public class BlockDisplayMock extends DisplayMock
 		implements
 			BlockDisplay,
-			org.mockmc.mockmc.generated.org.bukkit.entity.BlockDisplayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BlockDisplayBaseMock
 {
 
 	private BlockData blockData = Material.AIR.createBlockData();

@@ -15,7 +15,10 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class GoatMock extends AnimalsMock implements Goat, org.mockmc.mockmc.generated.org.bukkit.entity.GoatBaseMock
+public class GoatMock extends AnimalsMock
+		implements
+			Goat,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GoatBaseMock
 {
 
 	private boolean hasLeftHorn = true;

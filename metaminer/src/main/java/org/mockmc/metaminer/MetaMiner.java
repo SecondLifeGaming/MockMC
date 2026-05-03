@@ -41,7 +41,7 @@ public class MetaMiner extends JavaPlugin
 			{
 				dataGenerator.generateData();
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 				return;
@@ -82,7 +82,9 @@ public class MetaMiner extends JavaPlugin
 				new RegistryKeyClassDataGenerator(mainFolder),
 				new TagDataGenerator(mainFolder),
 				new TranslationDataGenerator(mainFolder),
-				// Test
+				// Automated Tests
+				new BaseTestGenerator(this.getDataFolder()),
+				// Test Data
 				new BlockStateGenerator(testFolder),
 				new BlockDataGenerator(testFolder),
 				new WorldConfigurationGenerator(testFolder),

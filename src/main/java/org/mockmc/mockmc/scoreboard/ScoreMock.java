@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Mock implementation of a {@link Score}.
  */
-public class ScoreMock implements Score, org.mockmc.mockmc.generated.org.bukkit.scoreboard.ScoreBaseMock
+public class ScoreMock implements Score, org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ScoreBaseMock
 {
 
 	private final ObjectiveMock objective;

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class DamageSourceMock
 		implements
 			DamageSource,
-			org.mockmc.mockmc.generated.org.bukkit.damage.DamageSourceBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageSourceBaseMock
 {
 
 	private final DamageType damageType;

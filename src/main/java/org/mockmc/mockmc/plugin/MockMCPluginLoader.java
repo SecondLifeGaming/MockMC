@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class MockMCPluginLoader
 		implements
 			PluginLoader,
-			org.mockmc.mockmc.generated.org.bukkit.plugin.PluginLoaderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginLoaderBaseMock
 {
 	@Override
 	public Pattern[] getPluginFileFilters()

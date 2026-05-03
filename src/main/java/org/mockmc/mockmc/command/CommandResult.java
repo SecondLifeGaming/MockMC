@@ -8,6 +8,8 @@ import java.util.Objects;
 
 /**
  * Represents the result of a command invocation.
+ *
+ * @mockmc.version 1.21-1.0.0
  */
 public class CommandResult
 {

@@ -13,7 +13,7 @@ import java.util.UUID;
 public abstract class CreatureMock extends MobMock
 		implements
 			Creature,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CreatureBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CreatureBaseMock
 {
 
 	/**

@@ -13,7 +13,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class ColorableArmorMetaMock extends ArmorMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.ColorableArmorMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ColorableArmorMetaBaseMock
 {
 
 	static final int DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540).asARGB();

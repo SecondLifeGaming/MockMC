@@ -17,7 +17,7 @@ import java.util.TreeMap;
 /**
  * Mock implementation of a {@link HelpMap}.
  */
-public class HelpMapMock implements org.mockmc.mockmc.generated.org.bukkit.help.HelpMapBaseMock
+public class HelpMapMock implements org.mockmc.mockmc.generated.server.org.bukkit.help.HelpMapBaseMock
 {
 
 	private HelpTopic defaultTopic;

@@ -13,7 +13,7 @@ import java.util.UUID;
 public class TurtleMock extends AnimalsMock
 		implements
 			Turtle,
-			org.mockmc.mockmc.generated.org.bukkit.entity.TurtleBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.TurtleBaseMock
 {
 
 	private Location home = new Location(null, 0, 0, 0);

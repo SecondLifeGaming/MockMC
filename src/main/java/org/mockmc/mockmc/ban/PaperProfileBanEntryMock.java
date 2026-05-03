@@ -10,7 +10,7 @@ import java.util.Date;
 public class PaperProfileBanEntryMock
 		implements
 			BanEntry<PlayerProfile>,
-			org.mockmc.mockmc.generated.org.bukkit.BanEntryBaseMock<PlayerProfile>
+			org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<PlayerProfile>
 {
 
 	private final PlayerProfile target;

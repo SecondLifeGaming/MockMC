@@ -19,7 +19,7 @@ import java.util.UUID;
 public abstract class AbstractHorseMock extends AnimalsMock
 		implements
 			AbstractHorse,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractHorseBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractHorseBaseMock
 {
 
 	@Nullable

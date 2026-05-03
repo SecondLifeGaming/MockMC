@@ -31,4 +31,18 @@ public class InternalDataLoadException extends RuntimeException
 		super(cause);
 	}
 
+	/**
+	 * Constructs a new runtime exception with the specified detail message and
+	 * cause.
+	 *
+	 * @param message
+	 *            The detail message.
+	 * @param cause
+	 *            The cause of the exception.
+	 */
+	public InternalDataLoadException(String message, Throwable cause)
+	{
+		super(message, cause);
+	}
+
 }

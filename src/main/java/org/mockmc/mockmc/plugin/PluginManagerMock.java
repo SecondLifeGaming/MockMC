@@ -70,7 +70,7 @@ import java.util.stream.Stream;
 public class PluginManagerMock extends PermissionManagerMock
 		implements
 			PluginManager,
-			org.mockmc.mockmc.generated.org.bukkit.plugin.PluginManagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginManagerBaseMock
 {
 
 	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");

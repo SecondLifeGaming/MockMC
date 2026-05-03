@@ -23,7 +23,7 @@ import java.util.Map;
 public class JukeboxPlayableComponentMock
 		implements
 			JukeboxPlayableComponent,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.JukeboxPlayableComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.JukeboxPlayableComponentBaseMock
 {
 
 	private NamespacedKey soundKey;

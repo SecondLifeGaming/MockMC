@@ -30,7 +30,7 @@ import java.util.concurrent.CompletableFuture;
 public class PlayerProfileMock
 		implements
 			PlayerProfile,
-			org.mockmc.mockmc.generated.org.bukkit.profile.PlayerProfileBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.profile.PlayerProfileBaseMock
 {
 
 	@Override

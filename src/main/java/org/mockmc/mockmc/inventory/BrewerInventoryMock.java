@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class BrewerInventoryMock extends InventoryMock
 		implements
 			BrewerInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.BrewerInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.BrewerInventoryBaseMock
 {
 
 	private static final int INGREDIENT_SLOT = 3;

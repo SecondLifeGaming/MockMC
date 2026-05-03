@@ -19,7 +19,7 @@ import java.util.Objects;
 {"deprecation", "removal", "unchecked"})
 public class ArmorMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.ArmorMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ArmorMetaBaseMock
 {
 
 	private ArmorTrim trim = null;

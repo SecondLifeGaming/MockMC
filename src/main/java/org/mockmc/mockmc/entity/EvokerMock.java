@@ -20,7 +20,7 @@ import java.util.UUID;
 public class EvokerMock extends SpellcasterMock
 		implements
 			Evoker,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EvokerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EvokerBaseMock
 {
 
 	private Sheep wololoTarget;

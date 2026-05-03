@@ -20,7 +20,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class CreatureSpawnerStateMock extends TileStateMock
 		implements
 			CreatureSpawner,
-			org.mockmc.mockmc.generated.org.bukkit.block.CreatureSpawnerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.CreatureSpawnerBaseMock
 {
 
 	private EntityType spawnedType = EntityType.PIG;

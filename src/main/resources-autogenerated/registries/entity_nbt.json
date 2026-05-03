@@ -1,0 +1,16 @@
+{
+	"values": [
+		{
+			"key": "minecraft:warden",
+			"nbt": "eyJBbmdlckxldmVsIjogMCwgIkludnVsbmVyYWJsZSI6IGZhbHNlLCAiQ3VzdG9tTmFtZSI6ICJNb2NrIFdhcmRlbiJ9"
+		},
+		{
+			"key": "minecraft:bee",
+			"nbt": "eyJIYXNOZWN0YXIiOiBmYWxzZSwgIkhhc1N0dW5nIjogZmFsc2UsICJBbmdlciI6IDB9"
+		},
+		{
+			"key": "minecraft:sniffer",
+			"nbt": "eyJTdGF0ZSI6ICJJRExFIiwgIkV4cGxvcmVkTG9jYXRpb25zIjogW119"
+		}
+	]
+}

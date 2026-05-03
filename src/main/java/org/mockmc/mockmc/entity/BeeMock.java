@@ -15,8 +15,13 @@ import java.util.UUID;
  * Mock implementation of a {@link Bee}.
  *
  * @see AnimalsMock
+ * @mockmc.version 1.21-1.0.0
  */
-public class BeeMock extends AnimalsMock implements Bee, org.mockmc.mockmc.generated.org.bukkit.entity.BeeBaseMock
+@SuppressWarnings("java:S110")
+public class BeeMock extends AnimalsMock
+		implements
+			Bee,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BeeBaseMock
 {
 
 	@Nullable
@@ -35,6 +40,10 @@ public class BeeMock extends AnimalsMock implements Bee, org.mockmc.mockmc.gener
 
 	@NonNegative
 	private int timeSinceSting = 0;
+
+	private int ticksSincePollination = 0;
+
+	private int cropsGrownSincePollination = 0;
 
 	@NotNull
 	private TriState rollingOverride = TriState.NOT_SET;
@@ -162,6 +171,56 @@ public class BeeMock extends AnimalsMock implements Bee, org.mockmc.mockmc.gener
 	public int getTimeSinceSting()
 	{
 		return this.timeSinceSting;
+	}
+
+	@Override
+	public void setTicksSincePollination(int ticks)
+	{
+		this.ticksSincePollination = ticks;
+	}
+
+	@Override
+	public int getTicksSincePollination()
+	{
+		return this.ticksSincePollination;
+	}
+
+	@Override
+	public void setCropsGrownSincePollination(int crops)
+	{
+		this.cropsGrownSincePollination = crops;
+	}
+
+	@Override
+	public int getCropsGrownSincePollination()
+	{
+		return this.cropsGrownSincePollination;
+	}
+
+	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("HasNectar"))
+		{
+			this.setHasNectar((Boolean) nbt.get("HasNectar"));
+		}
+		if (nbt.has("HasStung"))
+		{
+			this.setHasStung((Boolean) nbt.get("HasStung"));
+		}
+		if (nbt.has("Anger"))
+		{
+			this.setAnger(((Double) nbt.get("Anger")).intValue());
+		}
+	}
+
+	@Override
+	protected void onTick()
+	{
+		if (nectar && getTicksLived() % 20 == 0)
+		{
+			getWorld().spawnParticle(org.bukkit.Particle.HAPPY_VILLAGER, getLocation(), 1);
+		}
 	}
 
 	@Override

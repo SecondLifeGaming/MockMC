@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class PersistentDataHolderMock
 		implements
 			PersistentDataHolder,
-			org.mockmc.mockmc.generated.org.bukkit.persistence.PersistentDataHolderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.persistence.PersistentDataHolderBaseMock
 {
 
 	@NotNull

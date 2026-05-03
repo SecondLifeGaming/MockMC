@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 class DispenserProjectileSourceMock
 		implements
 			BlockProjectileSource,
-			org.mockmc.mockmc.generated.org.bukkit.projectiles.BlockProjectileSourceBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.projectiles.BlockProjectileSourceBaseMock
 {
 
 	@NotNull

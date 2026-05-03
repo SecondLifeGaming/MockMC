@@ -40,7 +40,7 @@ import org.mockmc.mockmc.entity.variant.VillagerTypeMock;
 import org.mockmc.mockmc.entity.variant.WolfSoundVariantMock;
 import org.mockmc.mockmc.entity.variant.WolfVariantMock;
 import org.mockmc.mockmc.event.GameEventMock;
-import org.mockmc.mockmc.exception.IncompatiblePaperVersionException;
+import org.mockmc.mockmc.exception.InternalDataLoadException;
 import org.mockmc.mockmc.exception.UnimplementedOperationException;
 import org.mockmc.mockmc.fluid.FluidMock;
 import org.mockmc.mockmc.generator.structure.StructureMock;
@@ -60,16 +60,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
-public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generated.org.bukkit.RegistryBaseMock<T>
+public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generated.server.org.bukkit.RegistryBaseMock<T>
 {
+	private static final java.util.logging.Logger LOGGER = java.util.logging.Logger
+			.getLogger(RegistryMock.class.getName());
 	private static final String KEY_CANNOT_BE_NULL = "key cannot be null";
+	private static final String VALUES = "values";
 
 	/**
 	 * These classes have registries that are an exception to the others, as they
@@ -80,24 +85,76 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 	private final Map<TagKey<T>, Tag<T>> tagCache = new HashMap<>();
 
 	private final RegistryKey<T> registryKey;
+	private final String className;
+	private Class<T> loadedType;
 
 	private JsonArray keyedData;
 
 	private Function<JsonObject, T> constructor;
+	private boolean initialized = false;
 
 	public RegistryMock(RegistryKey<T> key)
 	{
-		this.registryKey = key;
-		loadKeyedToRegistry(key);
+		this(key, (String) null);
 	}
 
-	private void loadKeyedToRegistry(@NotNull RegistryKey<T> key)
+	public RegistryMock(RegistryKey<T> key, String className)
 	{
-		String fileName = String.format("/keyed/%s.json", key.key().value());
-		@SuppressWarnings("unchecked")
-		Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(key);
-		this.constructor = constructorFunction;
-		keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get("values").getAsJsonArray();
+		this.registryKey = key;
+		this.className = className;
+	}
+
+	private static final ThreadLocal<Set<RegistryKey<?>>> INITIALIZING = ThreadLocal.withInitial(HashSet::new);
+
+	private void initialize()
+	{
+		if (initialized)
+		{
+			return;
+		}
+		if (!INITIALIZING.get().add(registryKey))
+		{
+			// Recursion detected
+			return;
+		}
+		try
+		{
+			initialized = true;
+			// Load data first, before any class loading can happen
+			String fileName = String.format("/keyed/%s.json", registryKey.key().value());
+			this.keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get(VALUES).getAsJsonArray();
+
+			// Now we can load the type and constructor, which might trigger recursion
+			this.loadedType = loadType(className);
+			@SuppressWarnings("unchecked")
+			Function<JsonObject, T> constructorFunction = (Function<JsonObject, T>) getConstructorFunction(registryKey);
+			this.constructor = constructorFunction;
+		} finally
+		{
+			Set<RegistryKey<?>> initializing = INITIALIZING.get();
+			initializing.remove(registryKey);
+			if (initializing.isEmpty())
+			{
+				INITIALIZING.remove();
+			}
+		}
+	}
+
+	private Class<T> loadType(String className)
+	{
+		if (className == null)
+		{
+			return null;
+		}
+		try
+		{
+			@SuppressWarnings("unchecked")
+			Class<T> type = (Class<T>) Class.forName(className, false, RegistryMock.class.getClassLoader());
+			return type;
+		} catch (ClassNotFoundException e)
+		{
+			throw new InternalDataLoadException("Could not load class for registry: " + className, e);
+		}
 	}
 
 	private Function<JsonObject, ? extends Keyed> getConstructorFunction(RegistryKey<T> key)
@@ -151,10 +208,45 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		Function<JsonObject, ? extends Keyed> constructorFunction = factoryMap.get(key);
 		if (constructorFunction == null)
 		{
-			// TODO: Auto-generated method stub
-			throw new UnimplementedOperationException();
+			return jsonObject -> createGenericProxy(jsonObject, key);
 		}
 		return constructorFunction;
+	}
+
+	@SuppressWarnings("unchecked")
+	private T createGenericProxy(JsonObject jsonObject, RegistryKey<T> key)
+	{
+		NamespacedKey namespacedKey = NamespacedKey.fromString(jsonObject.get("key").getAsString());
+		Class<T> proxyType = this.loadedType != null ? this.loadedType : (Class<T>) Keyed.class;
+		if (!proxyType.isInterface())
+		{
+			// We can't proxy classes with java.lang.reflect.Proxy.
+			// For now, return null and hope the caller handles it, or throw.
+			// Ideally we should use ByteBuddy or similar here.
+			return null;
+		}
+		return (T) java.lang.reflect.Proxy.newProxyInstance(proxyType.getClassLoader(), new Class[]
+		{proxyType}, (proxy, method, args) ->
+		{
+			if (method.getName().equals("getKey"))
+			{
+				return namespacedKey;
+			}
+			if (method.getName().equals("toString"))
+			{
+				return key.key().asString() + "[" + namespacedKey + "]";
+			}
+			if (method.getName().equals("equals"))
+			{
+				return proxy == args[0];
+			}
+			if (method.getName().equals("hashCode"))
+			{
+				return namespacedKey.hashCode();
+			}
+			throw new UnimplementedOperationException(
+					"Method " + method.getName() + " is not implemented in generic mock for " + key.key().asString());
+		});
 	}
 
 	private boolean isEnumBasedRegistry(RegistryKey<?> key)
@@ -315,7 +407,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		try
 		{
 			JsonObject json = ResourceLoader.loadResource(fileName).getAsJsonObject();
-			JsonArray values = json.getAsJsonArray("values");
+			JsonArray values = json.getAsJsonArray(VALUES);
 			List<T> tagValues = new ArrayList<>();
 			for (JsonElement element : values)
 			{
@@ -327,7 +419,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 				}
 			}
 			return new TagMock<>(tagKey, tagValues);
-		} catch (Exception e)
+		} catch (Exception _)
 		{
 			return null;
 		}
@@ -367,26 +459,70 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 	{
 		if (keyedMap.isEmpty())
 		{
-			try
-			{
-				for (JsonElement structureJSONElement : keyedData)
-				{
-					JsonObject structureJSONObject = structureJSONElement.getAsJsonObject();
-					T tObject = constructor.apply(structureJSONObject);
-					/*
-					 * putIfAbsent fixes the edge case scenario where the constructor initializes
-					 * class loading of the keyed object. During this initialization, the
-					 * loadIfEmpty method might be triggered again, leading to potential duplicate
-					 * instances of each keyed object. By using putIfAbsent, we ensure that only one
-					 * instance of each keyed object is added to the map, preventing duplicates.
-					 */
-					keyedMap.putIfAbsent(tObject.getKey(), tObject);
-				}
-			} catch (ExceptionInInitializerError e)
-			{
-				throw new IncompatiblePaperVersionException(e);
-			}
+			initialize();
+			populateData();
 		}
+	}
+
+	private void populateData()
+	{
+		try
+		{
+			for (JsonElement structureJSONElement : keyedData)
+			{
+				processElement(structureJSONElement.getAsJsonObject());
+			}
+		} catch (ExceptionInInitializerError _)
+		{
+			// This can happen during recursion, it's fine
+		}
+	}
+
+	private void processElement(JsonObject structureJSONObject)
+	{
+		T tObject;
+		if (constructor != null)
+		{
+			tObject = constructor.apply(structureJSONObject);
+		} else
+		{
+			// Fallback to proxy during recursion
+			tObject = createGenericProxy(structureJSONObject, registryKey);
+		}
+		if (tObject == null)
+		{
+			LOGGER.log(java.util.logging.Level.WARNING, "Constructor returned null for {0}", structureJSONObject);
+			return;
+		}
+		/*
+		 * putIfAbsent fixes the edge case scenario where the constructor initializes
+		 * class loading of the keyed object. During this initialization, the
+		 * loadIfEmpty method might be triggered again, leading to potential duplicate
+		 * instances of each keyed object. By using putIfAbsent, we ensure that only one
+		 * instance of each keyed object is added to the map, preventing duplicates.
+		 */
+		keyedMap.putIfAbsent(tObject.getKey(), tObject);
+	}
+
+	/**
+	 * Registers a new value in this registry.
+	 *
+	 * @param value
+	 *            The value to register.
+	 * @throws IllegalArgumentException
+	 *             If the value is null or its key is already registered.
+	 */
+	public void register(@NotNull T value)
+	{
+		Preconditions.checkNotNull(value, "value cannot be null");
+		NamespacedKey key = value.getKey();
+		Preconditions.checkNotNull(key, KEY_CANNOT_BE_NULL);
+		loadIfEmpty();
+		if (keyedMap.containsKey(key))
+		{
+			throw new IllegalArgumentException("Key " + key + " is already registered");
+		}
+		keyedMap.put(key, value);
 	}
 
 	@Nullable

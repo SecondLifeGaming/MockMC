@@ -1,0 +1,816 @@
+Reusing configuration cache.
+> Task :downloadJars UP-TO-DATE
+> Task :extra:TestPlugin:compileJava UP-TO-DATE
+> Task :metaminer:compileJava UP-TO-DATE
+
+> Task :compileJava
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntityBaseMock has been deprecated
+	public void setSwimming(boolean swimming)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntity has been deprecated
+	public void setSwimming(boolean swimming)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:264: warning: [deprecation] resetMaxHealth() in DamageableBaseMock has been deprecated
+	public void resetMaxHealth()
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:254: warning: [deprecation] setMaxHealth(double) in DamageableBaseMock has been deprecated
+	public void setMaxHealth(double health)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:248: warning: [deprecation] getMaxHealth() in DamageableBaseMock has been deprecated
+	public double getMaxHealth()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:264: warning: [deprecation] resetMaxHealth() in Damageable has been deprecated
+	public void resetMaxHealth()
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:254: warning: [deprecation] setMaxHealth(double) in Damageable has been deprecated
+	public void setMaxHealth(double health)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:248: warning: [deprecation] getMaxHealth() in Damageable has been deprecated
+	public double getMaxHealth()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/EntityBaseMock.java:131: warning: [removal] setLastDamageCause(@org.jetbrains.annotations.Nullable EntityDamageEvent) in Entity has been deprecated and marked for removal
+    default void setLastDamageCause(EntityDamageEvent arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/LivingEntityBaseMock.java:70: warning: [removal] getCategory() in LivingEntity has been deprecated and marked for removal
+    default EntityCategory getCategory() {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/LivingEntityBaseMock.java:352: warning: [removal] setItemInUseTicks(int) in LivingEntity has been deprecated and marked for removal
+    default void setItemInUseTicks(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/LivingEntityBaseMock.java:437: warning: [removal] getItemInUseTicks() in LivingEntity has been deprecated and marked for removal
+    default int getItemInUseTicks() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/LivingEntityBaseMock.java:226: warning: [removal] getItemInUse() in LivingEntity has been deprecated and marked for removal
+    default ItemStack getItemInUse() {
+                      ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/LivingEntityBaseMock.java:135: warning: [removal] getTargetBlock(int) in LivingEntity has been deprecated and marked for removal
+    default Block getTargetBlock(int arg0) {
+                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/map/MapCanvasBaseMock.java:85: warning: [removal] getBasePixel(int,int) in MapCanvas has been deprecated and marked for removal
+    default byte getBasePixel(int arg0, int arg1) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/map/MapCanvasBaseMock.java:68: warning: [removal] getPixel(int,int) in MapCanvas has been deprecated and marked for removal
+    default byte getPixel(int arg0, int arg1) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/ServerMockBase.java:364: warning: [deprecation] createInventory(InventoryHolder,int,String) in ServerBaseMock has been deprecated
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
+	                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/ServerMockBase.java:364: warning: [deprecation] createInventory(@org.jetbrains.annotations.Nullable InventoryHolder,int,@org.jetbrains.annotations.NotNull String) in Server has been deprecated
+	public @NotNull InventoryMock createInventory(@Nullable InventoryHolder owner, int size, @NotNull String title)
+	                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/ServerBaseMock.java:634: warning: [removal] spigot() in Server has been deprecated and marked for removal
+    default Server.Spigot spigot() {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/ServerBaseMock.java:380: warning: [removal] shouldSendChatPreviews() in Server has been deprecated and marked for removal
+    default boolean shouldSendChatPreviews() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:660: warning: [deprecation] runTaskAsynchronously(Plugin,BukkitRunnable) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:689: warning: [deprecation] runTaskLaterAsynchronously(Plugin,BukkitRunnable,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:712: warning: [deprecation] runTaskTimerAsynchronously(Plugin,BukkitRunnable,long,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay,
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:667: warning: [deprecation] runTaskLater(Plugin,BukkitRunnable,long) in BukkitSchedulerBaseMock has been deprecated
+	public BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:712: warning: [deprecation] runTaskTimerAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskTimerAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay,
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:689: warning: [deprecation] runTaskLaterAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskLaterAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:667: warning: [deprecation] runTaskLater(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable,long) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskLater(@NotNull Plugin plugin, @NotNull BukkitRunnable task, long delay)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/scheduler/BukkitSchedulerMock.java:660: warning: [deprecation] runTaskAsynchronously(@org.jetbrains.annotations.NotNull Plugin,@org.jetbrains.annotations.NotNull BukkitRunnable) in BukkitScheduler has been deprecated
+	public BukkitTask runTaskAsynchronously(@NotNull Plugin plugin, @NotNull BukkitRunnable task)
+	                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:695: warning: [removal] setBiomeKey(RegionAccessor,int,int,int,NamespacedKey) in UnsafeValues has been deprecated and marked for removal
+    default void setBiomeKey(RegionAccessor arg0, int arg1, int arg2, int arg3,
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:154: warning: [removal] getBiomeKey(RegionAccessor,int,int,int) in UnsafeValues has been deprecated and marked for removal
+    default NamespacedKey getBiomeKey(RegionAccessor arg0, int arg1, int arg2, int arg3) {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:683: warning: [removal] isSupportedApiVersion(String) in UnsafeValues has been deprecated and marked for removal
+    default boolean isSupportedApiVersion(String arg0) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:615: warning: [removal] getTranslationKey(Attribute) in UnsafeValues has been deprecated and marked for removal
+    default String getTranslationKey(Attribute arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:142: warning: [removal] getItemTranslationKey(Material) in UnsafeValues has been deprecated and marked for removal
+    default String getItemTranslationKey(Material arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:505: warning: [removal] getBlockTranslationKey(Material) in UnsafeValues has been deprecated and marked for removal
+    default String getBlockTranslationKey(Material arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:414: warning: [removal] getCreativeCategory(Material) in UnsafeValues has been deprecated and marked for removal
+    default CreativeCategory getCreativeCategory(Material arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:107: warning: [removal] getDefaultAttributeModifiers(Material,EquipmentSlot) in UnsafeValues has been deprecated and marked for removal
+    default Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(Material arg0,
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:660: warning: [removal] legacyComponentSerializer() in UnsafeValues has been deprecated and marked for removal
+    default LegacyComponentSerializer legacyComponentSerializer() {
+                                      ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:336: warning: [removal] colorDownsamplingGsonComponentSerializer() in UnsafeValues has been deprecated and marked for removal
+    default GsonComponentSerializer colorDownsamplingGsonComponentSerializer() {
+                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:177: warning: [removal] gsonComponentSerializer() in UnsafeValues has been deprecated and marked for removal
+    default GsonComponentSerializer gsonComponentSerializer() {
+                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:95: warning: [removal] plainTextSerializer() in UnsafeValues has been deprecated and marked for removal
+    default PlainTextComponentSerializer plainTextSerializer() {
+                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/UnsafeValuesBaseMock.java:201: warning: [removal] plainComponentSerializer() in UnsafeValues has been deprecated and marked for removal
+    default PlainComponentSerializer plainComponentSerializer() {
+                                     ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] registerInterface(@org.jetbrains.annotations.NotNull Class<? extends PluginLoader>) in PluginManager has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] PluginLoader in org.bukkit.plugin has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] PluginLoader in org.bukkit.plugin has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] PluginLoader in org.bukkit.plugin has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] PluginLoader in org.bukkit.plugin has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/plugin/PluginManagerBaseMock.java:77: warning: [removal] PluginLoader in org.bukkit.plugin has been deprecated and marked for removal
+    default void registerInterface(Class<? extends PluginLoader> arg0) throws
+                                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:91: warning: [removal] setGameRuleValue(@org.jetbrains.annotations.NotNull String,@org.jetbrains.annotations.NotNull String) in World has been deprecated and marked for removal
+    default boolean setGameRuleValue(String arg0, String arg1) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:1765: warning: [removal] getGameRuleValue(@org.jetbrains.annotations.Nullable String) in World has been deprecated and marked for removal
+    default String getGameRuleValue(String arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:908: warning: [removal] setKeepSpawnInMemory(boolean) in World has been deprecated and marked for removal
+    default void setKeepSpawnInMemory(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:993: warning: [removal] getKeepSpawnInMemory() in World has been deprecated and marked for removal
+    default boolean getKeepSpawnInMemory() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:1927: warning: [removal] spawnFallingBlock(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Material,byte) in World has been deprecated and marked for removal
+    default FallingBlock spawnFallingBlock(Location arg0, Material arg1, byte arg2) throws
+                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBaseMock.java:1239: warning: [removal] regenerateChunk(int,int) in World has been deprecated and marked for removal
+    default boolean regenerateChunk(int arg0, int arg1) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/profile/PlayerProfileMock.java:182: warning: [removal] setId(@org.jspecify.annotations.Nullable UUID) in PlayerProfile has been deprecated and marked for removal
+	public UUID setId(@Nullable UUID uuid)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/profile/PlayerProfileMock.java:161: warning: [removal] setName(@org.jspecify.annotations.Nullable String) in PlayerProfile has been deprecated and marked for removal
+	public String setName(@Nullable String name)
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBorderBaseMock.java:70: warning: [removal] setWarningTime(int) in WorldBorder has been deprecated and marked for removal
+    default void setWarningTime(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBorderBaseMock.java:81: warning: [removal] getWarningTime() in WorldBorder has been deprecated and marked for removal
+    default int getWarningTime() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBorderBaseMock.java:44: warning: [removal] setSize(double,@org.jetbrains.annotations.NotNull TimeUnit,long) in WorldBorder has been deprecated and marked for removal
+    default void setSize(double arg0, TimeUnit arg1, long arg2) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/WorldBorderBaseMock.java:59: warning: [removal] setSize(double,long) in WorldBorder has been deprecated and marked for removal
+    default void setSize(double arg0, long arg1) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/ChunkSnapshotBaseMock.java:108: warning: [removal] getData(int,int,int) in ChunkSnapshot has been deprecated and marked for removal
+    default int getData(int arg0, int arg1, int arg2) {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/BlockStateBaseMock.java:136: warning: [removal] setRawData(byte) in BlockState has been deprecated and marked for removal
+    default void setRawData(byte arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/BlockStateBaseMock.java:64: warning: [removal] getRawData() in BlockState has been deprecated and marked for removal
+    default byte getRawData() {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/ItemFactoryBaseMock.java:88: warning: [removal] getI18NDisplayName(@org.jetbrains.annotations.Nullable ItemStack) in ItemFactory has been deprecated and marked for removal
+    default String getI18NDisplayName(ItemStack arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/attribute/AttributeInstanceBaseMock.java:80: warning: [removal] removeModifier(@org.jetbrains.annotations.NotNull UUID) in AttributeInstance has been deprecated and marked for removal
+    default void removeModifier(UUID arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/attribute/AttributeInstanceBaseMock.java:27: warning: [removal] getModifier(@org.jetbrains.annotations.NotNull UUID) in AttributeInstance has been deprecated and marked for removal
+    default AttributeModifier getModifier(UUID arg0) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/connection/PaperCommonConnectionBaseMock.java:34: error: name clash: getClientOption(ClientOption<T#1>) in PaperCommonConnectionBaseMock and getClientOption(ClientOption<T#2>) in PlayerCommonConnectionBaseMock have the same erasure, yet neither overrides the other
+    default <T extends ServerCommonPacketListenerImpl> T getClientOption(ClientOption<T> arg0) {
+                                                         ^
+  where T#1,T#2 are type-variables:
+    T#1 extends ServerCommonPacketListenerImpl declared in method <T#1>getClientOption(ClientOption<T#1>)
+    T#2 extends Object declared in method <T#2>getClientOption(ClientOption<T#2>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/connection/PaperCommonConnectionBaseMock.java:33: error: method does not override or implement a method from a supertype
+    @Override
+    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/dialog/DialogBaseMock.java:26: warning: [removal] key() in Dialog has been deprecated and marked for removal
+    default Key key() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/dialog/DialogBaseMock.java:39: warning: [removal] getKey() in Dialog has been deprecated and marked for removal
+    default NamespacedKey getKey() {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/InternalAPIBridgeBaseMock.java:69: warning: [removal] constructLegacyCustomBiome() in InternalAPIBridge has been deprecated and marked for removal
+    default Biome constructLegacyCustomBiome() {
+                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/io/papermc/paper/registry/RegistryAccessBaseMock.java:25: warning: [removal] <T>getRegistry(Class<T>) in RegistryAccess has been deprecated and marked for removal
+    default <T extends Keyed> Registry<T> getRegistry(Class<T> arg0) {
+                                          ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:343: warning: [removal] hasDestroyableKeys() in ItemMeta has been deprecated and marked for removal
+    default boolean hasDestroyableKeys() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:288: warning: [removal] hasPlaceableKeys() in ItemMeta has been deprecated and marked for removal
+    default boolean hasPlaceableKeys() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:524: warning: [removal] setCanPlaceOn(Set<Material>) in ItemMeta has been deprecated and marked for removal
+    default void setCanPlaceOn(Set<Material> arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:470: warning: [removal] getCanPlaceOn() in ItemMeta has been deprecated and marked for removal
+    default Set<Material> getCanPlaceOn() {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:257: warning: [removal] setCanDestroy(Set<Material>) in ItemMeta has been deprecated and marked for removal
+    default void setCanDestroy(Set<Material> arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:540: warning: [removal] getCanDestroy() in ItemMeta has been deprecated and marked for removal
+    default Set<Material> getCanDestroy() {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:149: warning: [removal] setLocalizedName(@org.jetbrains.annotations.Nullable String) in ItemMeta has been deprecated and marked for removal
+    default void setLocalizedName(String arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:642: warning: [removal] getLocalizedName() in ItemMeta has been deprecated and marked for removal
+    default String getLocalizedName() {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/ItemMetaBaseMock.java:591: warning: [removal] hasLocalizedName() in ItemMeta has been deprecated and marked for removal
+    default boolean hasLocalizedName() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/com/destroystokyo/paper/event/server/AsyncTabCompleteEventCompletionBaseMock.java:30: warning: [removal] examinableProperties() in Completion has been deprecated and marked for removal
+    default Stream<? extends ExaminableProperty> examinableProperties() {
+                                                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/com/destroystokyo/paper/profile/PlayerProfileBaseMock.java:72: warning: [removal] setId(@org.jspecify.annotations.Nullable UUID) in PlayerProfile has been deprecated and marked for removal
+    default UUID setId(UUID arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/com/destroystokyo/paper/profile/PlayerProfileBaseMock.java:34: warning: [removal] setName(@org.jspecify.annotations.Nullable String) in PlayerProfile has been deprecated and marked for removal
+    default String setName(String arg0) {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/CreakingHeartBaseMock.java:27: warning: [removal] setActive(boolean) in CreakingHeart has been deprecated and marked for removal
+    default void setActive(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/CreakingHeartBaseMock.java:43: warning: [removal] isActive() in CreakingHeart has been deprecated and marked for removal
+    default boolean isActive() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/VaultBaseMock.java:23: warning: [removal] setTrialSpawnerState(@org.jetbrains.annotations.NotNull State) in Vault has been deprecated and marked for removal
+    default void setTrialSpawnerState(Vault.State arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/VaultBaseMock.java:34: warning: [removal] getTrialSpawnerState() in Vault has been deprecated and marked for removal
+    default Vault.State getTrialSpawnerState() {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/block/BedBaseMock.java:32: warning: [removal] setColor(DyeColor) in Bed has been deprecated and marked for removal
+    default void setColor(DyeColor arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/RegistryBaseMock.java:91: warning: [removal] match(String) in Registry has been deprecated and marked for removal
+    default T match(String arg0) {
+              ^
+  where T is a type-variable:
+    T extends Keyed declared in interface Registry
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/PotionMetaBaseMock.java:160: warning: [removal] setCustomName(@org.jetbrains.annotations.Nullable String) in PotionMeta has been deprecated and marked for removal
+    default void setCustomName(String arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/PotionMetaBaseMock.java:171: warning: [removal] getCustomName() in PotionMeta has been deprecated and marked for removal
+    default String getCustomName() {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/PotionMetaBaseMock.java:29: warning: [removal] hasCustomName() in PotionMeta has been deprecated and marked for removal
+    default boolean hasCustomName() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/components/JukeboxPlayableComponentBaseMock.java:34: warning: [removal] setShowInTooltip(boolean) in JukeboxPlayableComponent has been deprecated and marked for removal
+    default void setShowInTooltip(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/components/JukeboxPlayableComponentBaseMock.java:50: warning: [removal] isShowInTooltip() in JukeboxPlayableComponent has been deprecated and marked for removal
+    default boolean isShowInTooltip() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/SpawnEggMetaBaseMock.java:60: warning: [removal] setSpawnedType(EntityType) in SpawnEggMeta has been deprecated and marked for removal
+    default void setSpawnedType(EntityType arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/meta/SpawnEggMetaBaseMock.java:48: warning: [removal] getSpawnedType() in SpawnEggMeta has been deprecated and marked for removal
+    default EntityType getSpawnedType() {
+                       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:109: warning: [removal] setMaximumRepairCost(int) in AnvilInventory has been deprecated and marked for removal
+    default void setMaximumRepairCost(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:85: warning: [removal] getMaximumRepairCost() in AnvilInventory has been deprecated and marked for removal
+    default int getMaximumRepairCost() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:120: warning: [removal] setRepairCost(int) in AnvilInventory has been deprecated and marked for removal
+    default void setRepairCost(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:68: warning: [removal] getRepairCost() in AnvilInventory has been deprecated and marked for removal
+    default int getRepairCost() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:23: warning: [removal] setRepairCostAmount(int) in AnvilInventory has been deprecated and marked for removal
+    default void setRepairCostAmount(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:97: warning: [removal] getRepairCostAmount() in AnvilInventory has been deprecated and marked for removal
+    default int getRepairCostAmount() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/inventory/AnvilInventoryBaseMock.java:42: warning: [removal] getRenameText() in AnvilInventory has been deprecated and marked for removal
+    default String getRenameText() {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/potion/PotionBrewerBaseMock.java:56: warning: [removal] getEffects(@org.jetbrains.annotations.NotNull PotionType,boolean,boolean) in PotionBrewer has been deprecated and marked for removal
+    default Collection<PotionEffect> getEffects(PotionType arg0, boolean arg1, boolean arg2) {
+                                     ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/potion/PotionBrewerBaseMock.java:44: warning: [removal] getEffectsFromDamage(int) in PotionBrewer has been deprecated and marked for removal
+    default Collection<PotionEffect> getEffectsFromDamage(int arg0) {
+                                     ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/potion/PotionBrewerBaseMock.java:28: warning: [removal] createEffect(@org.jetbrains.annotations.NotNull PotionEffectType,int,int) in PotionBrewer has been deprecated and marked for removal
+    default PotionEffect createEffect(PotionEffectType arg0, int arg1, int arg2) {
+                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/RaidBaseMock.java:78: warning: [removal] getId() in Raid has been deprecated and marked for removal
+    default int getId() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractSkeletonBaseMock.java:65: warning: [removal] setSkeletonType(SkeletonType) in AbstractSkeleton has been deprecated and marked for removal
+    default void setSkeletonType(Skeleton.SkeletonType arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractSkeletonBaseMock.java:32: warning: [removal] getSkeletonType() in AbstractSkeleton has been deprecated and marked for removal
+    default Skeleton.SkeletonType getSkeletonType() {
+                                  ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractArrowBaseMock.java:28: warning: [removal] setItem(@org.jetbrains.annotations.NotNull ItemStack) in AbstractArrow has been deprecated and marked for removal
+    default void setItem(ItemStack arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractArrowBaseMock.java:75: warning: [removal] getItem() in AbstractArrow has been deprecated and marked for removal
+    default ItemStack getItem() {
+                      ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractArrowBaseMock.java:187: warning: [removal] setShotFromCrossbow(boolean) in AbstractArrow has been deprecated and marked for removal
+    default void setShotFromCrossbow(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractArrowBaseMock.java:124: warning: [removal] setKnockbackStrength(int) in AbstractArrow has been deprecated and marked for removal
+    default void setKnockbackStrength(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractArrowBaseMock.java:151: warning: [removal] getKnockbackStrength() in AbstractArrow has been deprecated and marked for removal
+    default int getKnockbackStrength() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ProjectileBaseMock.java:67: warning: [removal] setBounce(boolean) in Projectile has been deprecated and marked for removal
+    default void setBounce(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ProjectileBaseMock.java:78: warning: [removal] doesBounce() in Projectile has been deprecated and marked for removal
+    default boolean doesBounce() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractHorseBaseMock.java:74: warning: [removal] setEatingHaystack(boolean) in AbstractHorse has been deprecated and marked for removal
+    default void setEatingHaystack(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractHorseBaseMock.java:135: warning: [removal] isEatingHaystack() in AbstractHorse has been deprecated and marked for removal
+    default boolean isEatingHaystack() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractHorseBaseMock.java:90: warning: [removal] setVariant(Variant) in AbstractHorse has been deprecated and marked for removal
+    default void setVariant(Horse.Variant arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/AbstractHorseBaseMock.java:52: warning: [removal] getVariant() in AbstractHorse has been deprecated and marked for removal
+    default Horse.Variant getVariant() {
+                          ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/minecart/HopperMinecartBaseMock.java:26: warning: [removal] setPickupCooldown(int) in HopperMinecart has been deprecated and marked for removal
+    default void setPickupCooldown(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/minecart/HopperMinecartBaseMock.java:46: warning: [removal] getPickupCooldown() in HopperMinecart has been deprecated and marked for removal
+    default int getPickupCooldown() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/PandaBaseMock.java:91: warning: [removal] setIsSitting(boolean) in Panda has been deprecated and marked for removal
+    default void setIsSitting(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/PandaBaseMock.java:80: warning: [removal] setIsOnBack(boolean) in Panda has been deprecated and marked for removal
+    default void setIsOnBack(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FireworkBaseMock.java:79: warning: [removal] getMaxLife() in Firework has been deprecated and marked for removal
+    default int getMaxLife() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FireworkBaseMock.java:117: warning: [removal] setMaxLife(int) in Firework has been deprecated and marked for removal
+    default boolean setMaxLife(int arg0) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FireworkBaseMock.java:67: warning: [removal] getLife() in Firework has been deprecated and marked for removal
+    default int getLife() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FireworkBaseMock.java:101: warning: [removal] setLife(int) in Firework has been deprecated and marked for removal
+    default boolean setLife(int arg0) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieBaseMock.java:78: warning: [removal] supportsBreakingDoors() in Zombie has been deprecated and marked for removal
+    default boolean supportsBreakingDoors() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieBaseMock.java:25: warning: [removal] getVillagerProfession() in Zombie has been deprecated and marked for removal
+    default Villager.Profession getVillagerProfession() {
+                                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieBaseMock.java:100: warning: [removal] setVillagerProfession(Profession) in Zombie has been deprecated and marked for removal
+    default void setVillagerProfession(Villager.Profession arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieBaseMock.java:173: warning: [removal] setVillager(boolean) in Zombie has been deprecated and marked for removal
+    default void setVillager(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieBaseMock.java:130: warning: [removal] isVillager() in Zombie has been deprecated and marked for removal
+    default boolean isVillager() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/TridentBaseMock.java:51: warning: [removal] getItem() in AbstractArrowBaseMock has been deprecated and marked for removal
+    default ItemStack getItem() {
+                      ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/TridentBaseMock.java:25: warning: [removal] setItem(ItemStack) in AbstractArrowBaseMock has been deprecated and marked for removal
+    default void setItem(ItemStack arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/TridentBaseMock.java:25: warning: [removal] setItem(@org.jetbrains.annotations.NotNull ItemStack) in AbstractArrow has been deprecated and marked for removal
+    default void setItem(ItemStack arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/TridentBaseMock.java:51: warning: [removal] getItem() in AbstractArrow has been deprecated and marked for removal
+    default ItemStack getItem() {
+                      ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieVillagerBaseMock.java:25: warning: [removal] setVillagerProfession(Profession) in ZombieBaseMock has been deprecated and marked for removal
+    default void setVillagerProfession(Villager.Profession arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieVillagerBaseMock.java:56: warning: [removal] getVillagerProfession() in ZombieBaseMock has been deprecated and marked for removal
+    default Villager.Profession getVillagerProfession() {
+                                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieVillagerBaseMock.java:56: warning: [removal] getVillagerProfession() in Zombie has been deprecated and marked for removal
+    default Villager.Profession getVillagerProfession() {
+                                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/ZombieVillagerBaseMock.java:25: warning: [removal] setVillagerProfession(Profession) in Zombie has been deprecated and marked for removal
+    default void setVillagerProfession(Villager.Profession arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/HorseBaseMock.java:61: warning: [removal] setCarryingChest(boolean) in Horse has been deprecated and marked for removal
+    default void setCarryingChest(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/HorseBaseMock.java:72: warning: [removal] isCarryingChest() in Horse has been deprecated and marked for removal
+    default boolean isCarryingChest() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/MushroomCowBaseMock.java:91: warning: [removal] setStewEffect(@org.jetbrains.annotations.Nullable PotionEffectType) in MushroomCow has been deprecated and marked for removal
+    default void setStewEffect(PotionEffectType arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/MushroomCowBaseMock.java:125: warning: [removal] getStewEffectType() in MushroomCow has been deprecated and marked for removal
+    default PotionEffectType getStewEffectType() {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/MushroomCowBaseMock.java:102: warning: [removal] setStewEffectDuration(int) in MushroomCow has been deprecated and marked for removal
+    default void setStewEffectDuration(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/MushroomCowBaseMock.java:113: warning: [removal] getStewEffectDuration() in MushroomCow has been deprecated and marked for removal
+    default int getStewEffectDuration() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/MushroomCowBaseMock.java:37: warning: [removal] addEffectToNextStew(@org.jetbrains.annotations.NotNull PotionEffect,boolean) in MushroomCow has been deprecated and marked for removal
+    default boolean addEffectToNextStew(PotionEffect arg0, boolean arg1) {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/EndermiteBaseMock.java:42: warning: [removal] setPlayerSpawned(boolean) in Endermite has been deprecated and marked for removal
+    default void setPlayerSpawned(boolean arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/EndermiteBaseMock.java:24: warning: [removal] isPlayerSpawned() in Endermite has been deprecated and marked for removal
+    default boolean isPlayerSpawned() {
+                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/WitherBaseMock.java:52: warning: [removal] setInvulnerabilityTicks(int) in Wither has been deprecated and marked for removal
+    default void setInvulnerabilityTicks(int arg0) {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/WitherBaseMock.java:40: warning: [removal] getInvulnerabilityTicks() in Wither has been deprecated and marked for removal
+    default int getInvulnerabilityTicks() {
+                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FishHookBaseMock.java:71: warning: [removal] setBiteChance(double) in FishHook has been deprecated and marked for removal
+    default void setBiteChance(double arg0) throws IllegalArgumentException {
+                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/org/bukkit/entity/FishHookBaseMock.java:166: warning: [removal] getBiteChance() in FishHook has been deprecated and marked for removal
+    default double getBiteChance() {
+                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/net/kyori/adventure/util/BuildableBaseMock.java:15: warning: [deprecation] Builder in Buildable has been deprecated
+public interface BuildableBaseMock<R, B extends Buildable.Builder<R>> extends Buildable<R, B>
+                                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/net/kyori/adventure/util/BuildableBaseMock.java:15: warning: [deprecation] Builder in Buildable has been deprecated
+public interface BuildableBaseMock<R, B extends Buildable.Builder<R>> extends Buildable<R, B>
+                                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/net/kyori/adventure/util/BuildableBaseMock.java:15: warning: [deprecation] Builder in Buildable has been deprecated
+public interface BuildableBaseMock<R, B extends Buildable.Builder<R>> extends Buildable<R, B>
+                                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/net/kyori/adventure/util/BuildableBaseMock.java:15: warning: [deprecation] Builder in Buildable has been deprecated
+public interface BuildableBaseMock<R, B extends Buildable.Builder<R>> extends Buildable<R, B>
+                                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/server/net/kyori/adventure/util/BuildableBaseMock.java:15: warning: [deprecation] Builder in Buildable has been deprecated
+public interface BuildableBaseMock<R, B extends Buildable.Builder<R>> extends Buildable<R, B>
+                                                         ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ConnectionBaseMock.java:54: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void disconnect(BaseComponent... arg0) {
+                            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ConnectionBaseMock.java:54: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void disconnect(BaseComponent... arg0) {
+                            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ConnectionBaseMock.java:54: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void disconnect(BaseComponent... arg0) {
+                            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ConnectionBaseMock.java:54: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void disconnect(BaseComponent... arg0) {
+                            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ConnectionBaseMock.java:54: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void disconnect(BaseComponent... arg0) {
+                            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:39: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1) {
+                                                    ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:188: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(UUID arg0, BaseComponent... arg1) {
+                                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:188: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(UUID arg0, BaseComponent... arg1) {
+                                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:188: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(UUID arg0, BaseComponent... arg1) {
+                                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:188: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(UUID arg0, BaseComponent... arg1) {
+                                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/connection/ProxiedPlayerBaseMock.java:188: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(UUID arg0, BaseComponent... arg1) {
+                                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/CommandSenderBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(BaseComponent... arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/CommandSenderBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(BaseComponent... arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/CommandSenderBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(BaseComponent... arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/CommandSenderBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(BaseComponent... arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/CommandSenderBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void sendMessage(BaseComponent... arg0) {
+                             ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/ProxyServerBaseMock.java:174: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void broadcast(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/ProxyServerBaseMock.java:174: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void broadcast(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/ProxyServerBaseMock.java:174: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void broadcast(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/ProxyServerBaseMock.java:174: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void broadcast(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/ProxyServerBaseMock.java:174: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default void broadcast(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:27: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title subTitle(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:27: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title subTitle(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:27: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title subTitle(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:27: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title subTitle(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:27: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title subTitle(BaseComponent... arg0) {
+                           ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title title(BaseComponent... arg0) {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title title(BaseComponent... arg0) {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title title(BaseComponent... arg0) {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title title(BaseComponent... arg0) {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/generated/proxy/net/md_5/bungee/api/TitleBaseMock.java:64: warning: [deprecation] BaseComponent in net.md_5.bungee.api.chat has been deprecated
+    default Title title(BaseComponent... arg0) {
+                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LockableTileStateMock.java:41: warning: [deprecation] getLock() in LockableBaseMock has been deprecated
+	public @NotNull String getLock()
+	                       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LockableTileStateMock.java:47: warning: [deprecation] setLock(String) in LockableBaseMock has been deprecated
+	public void setLock(@Nullable String key)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LockableTileStateMock.java:47: warning: [deprecation] setLock(@org.jetbrains.annotations.Nullable String) in Lockable has been deprecated
+	public void setLock(@Nullable String key)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LockableTileStateMock.java:41: warning: [deprecation] getLock() in Lockable has been deprecated
+	public @NotNull String getLock()
+	                       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BeaconStateMock.java:196: warning: [deprecation] getCustomName() in NameableBaseMock has been deprecated
+	public @Nullable String getCustomName()
+	                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BeaconStateMock.java:202: warning: [deprecation] setCustomName(String) in NameableBaseMock has been deprecated
+	public void setCustomName(@Nullable String name)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BeaconStateMock.java:202: warning: [deprecation] setCustomName(@org.jetbrains.annotations.Nullable String) in Nameable has been deprecated
+	public void setCustomName(@Nullable String name)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BeaconStateMock.java:196: warning: [deprecation] getCustomName() in Nameable has been deprecated
+	public @Nullable String getCustomName()
+	                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LecternStateMock.java:21: warning: [deprecation] getLock() in LockableBaseMock has been deprecated
+public class LecternStateMock extends ContainerStateMock
+       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/LecternStateMock.java:21: warning: [deprecation] setLock(String) in LockableBaseMock has been deprecated
+public class LecternStateMock extends ContainerStateMock
+       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/DecoratedPotStateMock.java:104: warning: [deprecation] getShards() in DecoratedPotBaseMock has been deprecated
+	public @NotNull List<Material> getShards()
+	                               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/DecoratedPotStateMock.java:104: warning: [deprecation] getShards() in DecoratedPot has been deprecated
+	public @NotNull List<Material> getShards()
+	                               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BrewingStandStateMock.java:20: warning: [deprecation] getLock() in LockableBaseMock has been deprecated
+public class BrewingStandStateMock extends ContainerStateMock
+       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/BrewingStandStateMock.java:20: warning: [deprecation] setLock(String) in LockableBaseMock has been deprecated
+public class BrewingStandStateMock extends ContainerStateMock
+       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:78: warning: [deprecation] lines() in SignBaseMock has been deprecated
+	public List<Component> lines()
+	                       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:129: warning: [deprecation] isGlowingText() in SignBaseMock has been deprecated
+	public boolean isGlowingText()
+	               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:148: warning: [deprecation] setColor(DyeColor) in SignBaseMock has been deprecated
+	public void setColor(@NotNull DyeColor color)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:135: warning: [deprecation] setGlowingText(boolean) in SignBaseMock has been deprecated
+	public void setGlowingText(boolean glowing)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:142: warning: [deprecation] getColor() in SignBaseMock has been deprecated
+	public DyeColor getColor()
+	                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:85: warning: [deprecation] line(int) in SignBaseMock has been deprecated
+	public Component line(int index) throws IndexOutOfBoundsException
+	                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:91: warning: [deprecation] line(int,Component) in SignBaseMock has been deprecated
+	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:148: warning: [deprecation] setColor(@org.jetbrains.annotations.NotNull DyeColor) in Sign has been deprecated
+	public void setColor(@NotNull DyeColor color)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:142: warning: [deprecation] getColor() in Sign has been deprecated
+	public DyeColor getColor()
+	                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:135: warning: [deprecation] setGlowingText(boolean) in Sign has been deprecated
+	public void setGlowingText(boolean glowing)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:129: warning: [deprecation] isGlowingText() in Sign has been deprecated
+	public boolean isGlowingText()
+	               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:91: warning: [deprecation] line(int,@org.jetbrains.annotations.NotNull Component) in Sign has been deprecated
+	public void line(int index, @NotNull Component line) throws IndexOutOfBoundsException
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:85: warning: [deprecation] line(int) in Sign has been deprecated
+	public Component line(int index) throws IndexOutOfBoundsException
+	                 ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:78: warning: [deprecation] lines() in Sign has been deprecated
+	public List<Component> lines()
+	                       ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:241: warning: [deprecation] getLine(int) in SignSideBaseMock has been deprecated
+		public String getLine(int index) throws IndexOutOfBoundsException
+		              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:233: warning: [deprecation] getLines() in SignSideBaseMock has been deprecated
+		public String[] getLines()
+		                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:254: warning: [deprecation] setLine(int,String) in SignSideBaseMock has been deprecated
+		public void setLine(int index, @SuppressWarnings("NullableProblems") String line)
+		            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:254: warning: [deprecation] setLine(int,@org.jetbrains.annotations.NotNull String) in SignSide has been deprecated
+		public void setLine(int index, @SuppressWarnings("NullableProblems") String line)
+		            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:241: warning: [deprecation] getLine(int) in SignSide has been deprecated
+		public String getLine(int index) throws IndexOutOfBoundsException
+		              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/state/SignStateMock.java:233: warning: [deprecation] getLines() in SignSide has been deprecated
+		public String[] getLines()
+		                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/block/BiomeMock.java:9: warning: [removal] compareTo(T) in OldEnumBaseMock has been deprecated and marked for removal
+public class BiomeMock extends OldKeyedEnumMock<Biome>
+       ^
+  where T is a type-variable:
+    T extends OldEnum<T> declared in interface OldEnumBaseMock
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/MockMCExtension.java:286: warning: [deprecation] <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>) in WorldMock has been deprecated
+		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
+		                                   ^
+  where T is a type-variable:
+    T extends Entity declared in method <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/meta/MapMetaMock.java:100: warning: [deprecation] setMapId(int) in MapMetaBaseMock has been deprecated
+	public void setMapId(int id)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/meta/MapMetaMock.java:100: warning: [deprecation] setMapId(int) in MapMeta has been deprecated
+	public void setMapId(int id)
+	            ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/meta/SuspiciousStewMetaMock.java:67: warning: [deprecation] addCustomEffect(PotionEffect,boolean) in SuspiciousStewMetaBaseMock has been deprecated
+	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
+	               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/meta/SuspiciousStewMetaMock.java:67: warning: [deprecation] addCustomEffect(@org.jetbrains.annotations.NotNull PotionEffect,boolean) in SuspiciousStewMeta has been deprecated
+	public boolean addCustomEffect(@NotNull PotionEffect effect, boolean overwrite)
+	               ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:370: warning: [deprecation] asMaterial() in ItemTypeBaseMock has been deprecated
+	public Material asMaterial()
+	                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:363: warning: [removal] getCreativeCategory() in ItemTypeBaseMock has been deprecated and marked for removal
+	public CreativeCategory getCreativeCategory()
+	                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:384: warning: [removal] getTranslationKey() in ItemTypeBaseMock has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:384: warning: [removal] getTranslationKey() in ItemType has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:370: warning: [deprecation] asMaterial() in ItemType has been deprecated
+	public Material asMaterial()
+	                ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:363: warning: [removal] getCreativeCategory() in ItemType has been deprecated and marked for removal
+	public CreativeCategory getCreativeCategory()
+	                        ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:384: warning: [removal] getTranslationKey() in TranslatableBaseMock has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/inventory/ItemTypeMock.java:384: warning: [removal] getTranslationKey() in Translatable has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/WolfMock.java:152: warning: [deprecation] WOLF_VARIANT in Registry has been deprecated
+				this.setVariant(org.bukkit.Registry.WOLF_VARIANT.get(key));
+				                                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/attribute/AttributeMock.java:9: warning: [removal] compareTo(T) in OldEnumBaseMock has been deprecated and marked for removal
+public class AttributeMock extends OldKeyedEnumMock<Attribute>
+       ^
+  where T is a type-variable:
+    T extends OldEnum<T> declared in interface OldEnumBaseMock
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/attribute/AttributeMock.java:48: warning: [removal] getTranslationKey() in TranslatableBaseMock has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/attribute/AttributeMock.java:48: warning: [removal] getTranslationKey() in Translatable has been deprecated and marked for removal
+	public String getTranslationKey()
+	              ^
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/tags/EntityTypeTagMock.java:35: warning: [deprecation] <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>) in Bukkit has been deprecated
+			entityTypes.add(Bukkit.getRegistry(EntityType.class).get(minecraftKey));
+			                      ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/tags/FluidTagMock.java:35: warning: [deprecation] <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>) in Bukkit has been deprecated
+			Fluid fluid = Bukkit.getRegistry(Fluid.class).get(minecraftKey);
+			                    ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/tags/GameEventTagMock.java:35: warning: [deprecation] <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>) in Bukkit has been deprecated
+			gameEvents.add(Bukkit.getRegistry(GameEvent.class).get(minecraftKey));
+			                     ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/registry/RegistryAccessMock.java:38: warning: [removal] <T>getRegistry(Class<T>) in RegistryAccess has been deprecated and marked for removal
+	public @Nullable <T extends Keyed> Registry<T> getRegistry(@NotNull Class<T> type)
+	                                               ^
+  where T is a type-variable:
+    T extends Keyed declared in method <T>getRegistry(Class<T>)
+2 errors
+253 warnings
+
+> Task :compileJava FAILED
+
+[Incubating] Problems report is available at: file:///home/west/github.com/westkevin12/MockBukkit/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler output below.
+  /home/west/github.com/westkevin12/MockBukkit/src/main/java/org/mockmc/mockmc/entity/LivingEntityMock.java:810: warning: [deprecation] setSwimming(boolean) in LivingEntityBaseMock has been deprecated
+  	public void setSwimming(boolean swimming)
+  	            ^
+  2 errors
+  253 warnings
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 3m 40s
+4 actionable tasks: 1 executed, 3 up-to-date
+Configuration cache entry reused.

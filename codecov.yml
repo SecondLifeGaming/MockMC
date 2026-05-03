@@ -1,5 +1,5 @@
 codecov:
-  branch: "v1.21"
+  branch: "master"
 
 github_checks: true
 
@@ -11,36 +11,74 @@ component_management:
     statuses:
       - type: project # in this case every component that doesn't have a status defined will have a project type one
         target: auto
-        branches:
-          - "!v1.21"
+        threshold: 1%
   individual_components:
-    - component_id: entities  # this is an identifier that should not be changed
-      name: entities  # this is a display name, and can be changed freely
+    - component_id: generated
+      name: generated
+      paths:
+        - src/main/java/org/mockmc/mockmc/generated/**
+    - component_id: core
+      name: core
+      paths:
+        - src/main/java/org/mockmc/mockmc/*.java
+        - src/main/java/org/mockmc/mockmc/scheduler/**
+        - src/main/java/org/mockmc/mockmc/services/**
+        - src/main/java/org/mockmc/mockmc/util/**
+        - src/main/java/org/mockmc/mockmc/exception/**
+        - src/main/java/org/mockmc/mockmc/adventure/**
+    - component_id: entities
+      name: entities
       paths:
         - src/main/java/org/mockmc/mockmc/entity/**
-    - component_id: block
-      name: block
+        - src/main/java/org/mockmc/mockmc/attribute/**
+        - src/main/java/org/mockmc/mockmc/potion/**
+        - src/main/java/org/mockmc/mockmc/boss/**
+        - src/main/java/org/mockmc/mockmc/damage/**
+        - src/main/java/org/mockmc/mockmc/food/**
+        - src/main/java/org/mockmc/mockmc/simulate/**
+        - src/main/java/org/mockmc/mockmc/statistic/**
+    - component_id: world_and_blocks
+      name: world-and-blocks
       paths:
+        - src/main/java/org/mockmc/mockmc/world/**
         - src/main/java/org/mockmc/mockmc/block/**
-    - component_id: inventory
-      name: inventory
+        - src/main/java/org/mockmc/mockmc/fluid/**
+        - src/main/java/org/mockmc/mockmc/generator/**
+        - src/main/java/org/mockmc/mockmc/structure/**
+        - src/main/java/org/mockmc/mockmc/art/**
+        - src/main/java/org/mockmc/mockmc/map/**
+        - src/main/java/org/mockmc/mockmc/sound/**
+        - src/main/java/org/mockmc/mockmc/metadata/**
+    - component_id: inventory_and_items
+      name: inventory-and-items
       paths:
         - src/main/java/org/mockmc/mockmc/inventory/**
-    - component_id: world
-      name: world
+        - src/main/java/org/mockmc/mockmc/datacomponent/**
+        - src/main/java/org/mockmc/mockmc/matcher/**
+        - src/main/java/org/mockmc/mockmc/enchantments/**
+    - component_id: events
+      name: events
       paths:
-        - src/main/java/org/mockmc/mockmc/WorldMock.java
-    - component_id: server
-      name: server
+        - src/main/java/org/mockmc/mockmc/event/**
+    - component_id: plugin_and_commands
+      name: plugin-and-commands
       paths:
-        - src/main/java/org/mockmc/mockmc/ServerMock.java
+        - src/main/java/org/mockmc/mockmc/plugin/**
+        - src/main/java/org/mockmc/mockmc/command/**
+        - src/main/java/org/mockmc/mockmc/configuration/**
+        - src/main/java/org/mockmc/mockmc/conversations/**
+        - src/main/java/org/mockmc/mockmc/help/**
+        - src/main/java/org/mockmc/mockmc/ban/**
+        - src/main/java/org/mockmc/mockmc/profile/**
+    - component_id: registries_and_data
+      name: registries-and-data
+      paths:
+        - src/main/java/org/mockmc/mockmc/registry/**
+        - src/main/java/org/mockmc/mockmc/tags/**
+        - src/main/java/org/mockmc/mockmc/persistence/**
+        - src/main/java/org/mockmc/mockmc/dialog/**
+        - src/main/java/org/mockmc/mockmc/scoreboard/**
     - component_id: metaminer
       name: metaminer
       paths:
         - metaminer/src/main/java/**
-    - component_id: core
-      name: core
-      paths:
-        - src/main/java/org/mockmc/mockmc/*Mock.java
-        - src/main/java/org/mockmc/mockmc/scheduler/**
-        - src/main/java/org/mockmc/mockmc/world/**

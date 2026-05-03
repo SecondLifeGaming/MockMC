@@ -15,7 +15,10 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see AnimalsMock
  */
-public class PigMock extends AnimalsMock implements Pig, org.mockmc.mockmc.generated.org.bukkit.entity.PigBaseMock
+public class PigMock extends AnimalsMock
+		implements
+			Pig,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PigBaseMock
 {
 
 	@NotNull

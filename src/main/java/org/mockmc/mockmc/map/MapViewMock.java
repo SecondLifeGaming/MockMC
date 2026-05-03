@@ -16,7 +16,7 @@ import java.util.Map;
 /**
  * Mock implementation of a {@link MapView}.
  */
-public class MapViewMock implements MapView, org.mockmc.mockmc.generated.org.bukkit.map.MapViewBaseMock
+public class MapViewMock implements MapView, org.mockmc.mockmc.generated.server.org.bukkit.map.MapViewBaseMock
 {
 
 	private World world;

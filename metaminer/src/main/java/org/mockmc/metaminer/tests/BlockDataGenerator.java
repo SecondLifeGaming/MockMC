@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -27,36 +26,46 @@ public class BlockDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
-		World world = Bukkit.getWorlds().get(0);
-		world.setType(0, 63, 0, Material.BEDROCK);
-
-		File blockFolder = new File(folder, "blocks");
-		File output = new File(blockFolder, "block_data_as_string.csv");
-		blockFolder.mkdirs();
-
-		try (PrintWriter writer = new PrintWriter(output))
+		try
 		{
-			for (Material material : Registry.MATERIAL)
-			{
-				if (!material.isBlock())
-				{
-					continue;
-				}
+			World world = Bukkit.getWorlds().get(0);
+			world.setType(0, 63, 0, Material.BEDROCK);
 
-				try
+			File blockFolder = new File(folder, "blocks");
+			File output = new File(blockFolder, "block_data_as_string.csv");
+			blockFolder.mkdirs();
+
+			try (PrintWriter writer = new PrintWriter(output))
+			{
+				for (Material material : Registry.MATERIAL)
 				{
-					@NotNull BlockData data = material.createBlockData();
-					String value = data.getAsString(false);
-					writer.println(String.format("%s, \"%s\"", material.name(), value));
-				}
-				catch (Exception e)
-				{
-					LOG.error("Error while processing material {}", material.name(), e);
+					if (material.isBlock())
+					{
+						processMaterial(writer, material);
+					}
 				}
 			}
+		}
+		catch (Exception | LinkageError _)
+		{
+			LOG.warn("Skipping BlockDataGenerator: Server environment not available");
+		}
+	}
 
+	private void processMaterial(PrintWriter writer, Material material)
+	{
+		try
+		{
+			@NotNull
+			BlockData data = material.createBlockData();
+			String value = data.getAsString(false);
+			writer.println(String.format("%s, \"%s\"", material.name(), value));
+		}
+		catch (Exception e)
+		{
+			LOG.error("Error while processing material {}", material.name(), e);
 		}
 	}
 

@@ -10,7 +10,7 @@ public class DrownedMock extends ZombieMock
 		implements
 			Drowned,
 			MockRangedEntity<DrownedMock>,
-			org.mockmc.mockmc.generated.org.bukkit.entity.DrownedBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.DrownedBaseMock
 {
 
 	/**

@@ -8,7 +8,7 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 
 public class AttributeMock extends OldKeyedEnumMock<Attribute>
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.attribute.AttributeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.attribute.AttributeBaseMock
 {
 
 	private final String translationKey;

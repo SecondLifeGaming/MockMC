@@ -12,7 +12,7 @@ import java.util.UUID;
 public class StorageMinecartMock extends LootableMinecart
 		implements
 			StorageMinecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.minecart.StorageMinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.StorageMinecartBaseMock
 {
 
 	private final Inventory inventory;

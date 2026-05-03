@@ -21,9 +21,10 @@ import java.util.Map;
 public class StructureManagerMock
 		implements
 			StructureManager,
-			org.mockmc.mockmc.generated.org.bukkit.structure.StructureManagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.structure.StructureManagerBaseMock
 {
 
+	private static final String KEY_CANNOT_BE_NULL = "NamespacedKey structureKey cannot be null";
 	private final Map<NamespacedKey, Structure> structures = new HashMap<>();
 
 	@Override
@@ -37,7 +38,7 @@ public class StructureManagerMock
 	@Nullable
 	public Structure getStructure(@NotNull NamespacedKey structureKey)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		return structures.get(structureKey);
 	}
 
@@ -45,7 +46,7 @@ public class StructureManagerMock
 	@Nullable
 	public Structure registerStructure(@NotNull NamespacedKey structureKey, @NotNull Structure structure)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		Preconditions.checkArgument(structure != null, "Structure structure cannot be null");
 		return structures.put(structureKey, structure);
 	}
@@ -54,7 +55,7 @@ public class StructureManagerMock
 	@Nullable
 	public Structure unregisterStructure(@NotNull NamespacedKey structureKey)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		return structures.remove(structureKey);
 	}
 
@@ -62,7 +63,7 @@ public class StructureManagerMock
 	@Nullable
 	public Structure loadStructure(@NotNull NamespacedKey structureKey, boolean register)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		throw new UnimplementedOperationException("Load structure was not implemented yet.");
 	}
 
@@ -76,7 +77,7 @@ public class StructureManagerMock
 	@Override
 	public void saveStructure(@NotNull NamespacedKey structureKey)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		throw new UnimplementedOperationException("Save structure was not implemented yet.");
 	}
 
@@ -99,7 +100,7 @@ public class StructureManagerMock
 	@Override
 	public void deleteStructure(@NotNull NamespacedKey structureKey, boolean unregister)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		throw new UnimplementedOperationException("Delete structure was not implemented yet.");
 	}
 
@@ -107,7 +108,7 @@ public class StructureManagerMock
 	@NotNull
 	public File getStructureFile(@NotNull NamespacedKey structureKey)
 	{
-		Preconditions.checkArgument(structureKey != null, "NamespacedKey structureKey cannot be null");
+		Preconditions.checkArgument(structureKey != null, KEY_CANNOT_BE_NULL);
 		throw new UnimplementedOperationException("Get structure file was not implemented yet.");
 	}
 

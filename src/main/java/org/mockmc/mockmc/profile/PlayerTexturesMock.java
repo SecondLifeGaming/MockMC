@@ -16,7 +16,7 @@ import java.util.Base64;
  * @mockmc.version 1.21-1.0.0
  */
 @SuppressWarnings("deprecation")
-public class PlayerTexturesMock implements org.mockmc.mockmc.generated.org.bukkit.profile.PlayerTexturesBaseMock
+public class PlayerTexturesMock implements org.mockmc.mockmc.generated.server.org.bukkit.profile.PlayerTexturesBaseMock
 {
 
 	private static final String PROPERTY_NAME = "textures";

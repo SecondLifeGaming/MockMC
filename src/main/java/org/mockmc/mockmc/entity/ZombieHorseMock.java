@@ -17,7 +17,7 @@ import java.util.UUID;
 public class ZombieHorseMock extends AbstractHorseMock
 		implements
 			ZombieHorse,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieHorseBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieHorseBaseMock
 {
 
 	/**

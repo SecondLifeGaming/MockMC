@@ -17,12 +17,14 @@ public class GameRuleMock<T> extends GameRule<T>
 	private final Class<T> type;
 	private final NamespacedKey key;
 	private final String translationKey;
+	private final T defaultValue;
 
-	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey)
+	public GameRuleMock(Class<T> type, NamespacedKey key, String translationKey, T defaultValue)
 	{
 		this.type = type;
 		this.key = key;
 		this.translationKey = translationKey;
+		this.defaultValue = defaultValue;
 	}
 
 	@Override
@@ -48,6 +50,12 @@ public class GameRuleMock<T> extends GameRule<T>
 	public NamespacedKey getKey()
 	{
 		return this.key;
+	}
+
+	@Override
+	public T getDefaultValue()
+	{
+		return this.defaultValue;
 	}
 
 	/**
@@ -87,7 +95,10 @@ public class GameRuleMock<T> extends GameRule<T>
 
 		Class<T> type = (Class<T>) rawClass;
 
-		return new GameRuleMock<>(type, key, translationKey);
+		// defaultValue - we just use null for now as it's a mock
+		T defaultValue = null;
+
+		return new GameRuleMock<>(type, key, translationKey, defaultValue);
 	}
 
 	public static class LegacyGameRuleWrapperMock<LEGACY, MODERN> extends GameRuleMock<LEGACY>
@@ -98,7 +109,7 @@ public class GameRuleMock<T> extends GameRule<T>
 		public LegacyGameRuleWrapperMock(Class<LEGACY> typeOverride, NamespacedKey key, String translationKey,
 				Function<LEGACY, MODERN> fromLegacyToModern, Function<MODERN, LEGACY> toLegacyFromModern)
 		{
-			super(typeOverride, key, translationKey);
+			super(typeOverride, key, translationKey, null);
 			this.fromLegacyToModern = fromLegacyToModern;
 			this.toLegacyFromModern = toLegacyFromModern;
 		}

@@ -350,4 +350,13 @@ public class PlayerSimulation
 		}
 	}
 
+	/**
+	 * Asserts that at least one task was scheduled on this player's regional
+	 * scheduler.
+	 */
+	public void assertScheduledOnRegion()
+	{
+		playerMock.getServer().assertScheduledOnEntityRegion(playerMock);
+	}
+
 }

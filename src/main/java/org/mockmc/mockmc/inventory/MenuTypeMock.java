@@ -39,7 +39,7 @@ import java.util.Map;
 public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilder<V>>
 		implements
 			MenuType.Typed<V, B>,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.MenuTypeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.MenuTypeBaseMock
 {
 
 	enum BuilderType

@@ -63,7 +63,7 @@ import java.util.Set;
  */
 public abstract class ServerMockBase extends Server.Spigot
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.ServerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.ServerBaseMock
 {
 
 	private static final String NAMESPACED_KEY_NULL = "A NamespacedKey must never be null";
@@ -88,7 +88,7 @@ public abstract class ServerMockBase extends Server.Spigot
 	protected ServerMockBase(BukkitSchedulerMock scheduler)
 	{
 		this.scheduler = scheduler;
-		this.foliaSchedulers = new FoliaSchedulerManager(scheduler);
+		this.foliaSchedulers = new FoliaSchedulerManager(this, scheduler);
 	}
 
 	@Override
@@ -161,6 +161,12 @@ public abstract class ServerMockBase extends Server.Spigot
 	public @NotNull AsyncScheduler getAsyncScheduler()
 	{
 		return this.foliaSchedulers.getAsyncScheduler();
+	}
+
+	@ApiStatus.Internal
+	public void registerFoliaTask(@NotNull org.mockmc.mockmc.scheduler.paper.PaperScheduledTask task)
+	{
+		this.foliaSchedulers.registerTask(task);
 	}
 
 	@Override

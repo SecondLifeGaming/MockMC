@@ -22,7 +22,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class CompassMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.CompassMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.CompassMetaBaseMock
 {
 
 	public static final String LODESTONE_KEY = "lodestone";

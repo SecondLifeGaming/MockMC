@@ -15,6 +15,7 @@ import java.io.Serial;
  *
  * @author NeumimTo
  */
+@SuppressWarnings("java:S110")
 public class ReflectionAccessException extends TestAbortedException
 {
 

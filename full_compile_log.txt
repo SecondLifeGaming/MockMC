@@ -1,0 +1,77 @@
+Reusing configuration cache.
+> Task :metaminer:processResources UP-TO-DATE
+> Task :extra:TestPlugin:processResources UP-TO-DATE
+> Task :downloadJars UP-TO-DATE
+> Task :extra:TestPlugin:compileJava UP-TO-DATE
+> Task :extra:TestPlugin:classes UP-TO-DATE
+> Task :metaminer:paperweightUserdevSetup UP-TO-DATE
+> Task :extra:TestPlugin:compileTestJava NO-SOURCE
+> Task :metaminer:compileJava UP-TO-DATE
+> Task :metaminer:classes UP-TO-DATE
+> Task :compileJava UP-TO-DATE
+> Task :metaminer:compileTestJava UP-TO-DATE
+> Task :processResources
+> Task :classes
+
+> Task :compileTestJava
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/AllayMockTest.java:209: warning: [deprecation] <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>) in WorldMock has been deprecated
+		Allay allayMock = world.spawn(location, Allay.class);
+		                       ^
+  where T is a type-variable:
+    T extends Entity declared in method <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:52: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:68: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:80: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:93: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:105: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:116: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/ItemMockTest.java:128: warning: [deprecation] dropItem(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull ItemStack) in WorldMock has been deprecated
+		Item entity = world.dropItem(location, item);
+		                   ^
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/matcher/entity/EntityStateMatcherTest.java:32: warning: [deprecation] <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>) in WorldMock has been deprecated
+		warden = (WardenMock) server.addSimpleWorld("world").spawn(server.addSimpleWorld("world").getSpawnLocation(), Warden.class);
+		                                                    ^
+  where T is a type-variable:
+    T extends Entity declared in method <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>)
+/home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/matcher/entity/EntityStateMatcherTest.java:41: error: incompatible types: Matcher<Object> cannot be converted to Matcher<LivingEntity>
+		assertFalse(hasState().withTarget(nullValue()).matches(warden));
+		                                           ^
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+1 error
+9 warnings
+
+> Task :compileTestJava FAILED
+
+[Incubating] Problems report is available at: file:///home/west/github.com/westkevin12/MockBukkit/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileTestJava'.
+> Compilation failed; see the compiler output below.
+  /home/west/github.com/westkevin12/MockBukkit/src/test/java/org/mockmc/mockmc/entity/AllayMockTest.java:209: warning: [deprecation] <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>) in WorldMock has been deprecated
+  		Allay allayMock = world.spawn(location, Allay.class);
+  		                       ^
+    where T is a type-variable:
+      T extends Entity declared in method <T>spawn(@org.jetbrains.annotations.NotNull Location,@org.jetbrains.annotations.NotNull Class<T>)
+  1 error
+  9 warnings
+
+* Try:
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+BUILD FAILED in 4s
+10 actionable tasks: 2 executed, 8 up-to-date
+Configuration cache entry reused.

@@ -23,7 +23,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class BundleMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.BundleMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BundleMetaBaseMock
 {
 
 	private List<ItemStack> items;

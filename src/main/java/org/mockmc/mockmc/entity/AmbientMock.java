@@ -13,7 +13,7 @@ import java.util.UUID;
 public class AmbientMock extends MobMock
 		implements
 			Ambient,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AmbientBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AmbientBaseMock
 {
 
 	/**

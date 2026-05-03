@@ -14,7 +14,7 @@ import java.util.UUID;
 public class PolarBearMock extends AnimalsMock
 		implements
 			PolarBear,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PolarBearBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PolarBearBaseMock
 {
 
 	private boolean isStanding = false;

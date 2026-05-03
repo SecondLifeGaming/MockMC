@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Mock implementation of a {@link Criteria}.
  */
-public class CriteriaMock implements Criteria, org.mockmc.mockmc.generated.org.bukkit.scoreboard.CriteriaBaseMock
+public class CriteriaMock implements Criteria, org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.CriteriaBaseMock
 {
 
 	private final String name;

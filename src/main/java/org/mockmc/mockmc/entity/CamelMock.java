@@ -17,7 +17,7 @@ import java.util.UUID;
 public class CamelMock extends AbstractHorseMock
 		implements
 			Camel,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CamelBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CamelBaseMock
 {
 
 	private boolean isDashing = false;

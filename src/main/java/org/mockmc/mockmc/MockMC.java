@@ -95,7 +95,13 @@ public class MockMC
 		// Hides the startup info message.
 		Level defaultLevel = mock.getLogger().getLevel();
 		mock.getLogger().setLevel(Level.WARNING);
-		Bukkit.setServer(mock);
+		try
+		{
+			Bukkit.setServer(mock);
+		} catch (UnsupportedOperationException _)
+		{
+			// Already set, but we might have set it in the constructor
+		}
 		mock.getLogger().setLevel(defaultLevel);
 
 		return serverMockImplementation;

@@ -11,7 +11,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,38 +25,50 @@ public class ItemStackSetTypeTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
-		JsonArray jsonArray = new JsonArray();
-		for (Material material : Registry.MATERIAL)
+		try
 		{
-			JsonObject elementData = new JsonObject();
-			elementData.add("key", new JsonPrimitive(material.key().asString()));
-			JsonObject outputData = new JsonObject();
-			try
+			JsonArray jsonArray = new JsonArray();
+			for (Material material : Registry.MATERIAL)
 			{
-				ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE).withType(material);
-				outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
-				if (itemStack.getItemMeta() != null)
-				{
-					JsonArray itemMeta = new JsonArray();
-					for (Class<? extends ItemMeta> clazz : getMetaInterfaces(itemStack.getItemMeta().getClass()))
-					{
-						itemMeta.add(clazz.getName());
-					}
-					outputData.add("meta", itemMeta);
-				}
+				jsonArray.add(processMaterial(material));
 			}
-			catch (Exception e)
-			{
-				outputData.add("throws", new JsonPrimitive(e.getClass().getName()));
-				outputData.add("throwsMsg", new JsonPrimitive(e.getMessage()));
-			}
-			elementData.add("result", outputData);
-			jsonArray.add(elementData);
+			File file = new File(folder, "setType.json");
+			JsonUtil.dump(jsonArray, file);
 		}
-		File file = new File(folder, "setType.json");
-		JsonUtil.dump(jsonArray, file);
+		catch (Exception | LinkageError _)
+		{
+			// Skip if registry is not available
+		}
+	}
+
+	private JsonObject processMaterial(Material material)
+	{
+		JsonObject elementData = new JsonObject();
+		elementData.add("key", new JsonPrimitive(material.key().asString()));
+		JsonObject outputData = new JsonObject();
+		try
+		{
+			ItemStack itemStack = new ItemStack(Material.DIAMOND_CHESTPLATE).withType(material);
+			outputData.add("material", new JsonPrimitive(itemStack.getType().key().asString()));
+			if (itemStack.getItemMeta() != null)
+			{
+				JsonArray itemMeta = new JsonArray();
+				for (Class<? extends ItemMeta> clazz : getMetaInterfaces(itemStack.getItemMeta().getClass()))
+				{
+					itemMeta.add(clazz.getName());
+				}
+				outputData.add("meta", itemMeta);
+			}
+		}
+		catch (Exception e)
+		{
+			outputData.add("throws", new JsonPrimitive(e.getClass().getName()));
+			outputData.add("throwsMsg", new JsonPrimitive(e.getMessage() != null ? e.getMessage() : "null"));
+		}
+		elementData.add("result", outputData);
+		return elementData;
 	}
 
 	private Set<Class<? extends ItemMeta>> getMetaInterfaces(Class<?> aClass)

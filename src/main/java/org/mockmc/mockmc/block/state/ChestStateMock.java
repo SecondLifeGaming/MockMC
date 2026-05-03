@@ -20,7 +20,7 @@ import java.util.Set;
 public class ChestStateMock extends ContainerStateMock
 		implements
 			Chest,
-			org.mockmc.mockmc.generated.org.bukkit.block.ChestBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.ChestBaseMock
 {
 
 	private boolean isOpen = false;
