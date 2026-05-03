@@ -27,6 +27,7 @@ public class BaseTestGenerator implements DataGenerator {
 
     @Override
     public void generateData() throws java.io.IOException {
+        generateBaseClass();
         URLClassLoader customLoader = createClassLoader();
         ClassPath classPath = ClassPath.from(customLoader);
         Set<Class<?>> toGenerate = scanForClasses(classPath);
@@ -40,6 +41,23 @@ public class BaseTestGenerator implements DataGenerator {
         }
     }
 
+    private void generateBaseClass() throws IOException {
+        TypeSpec baseClass = TypeSpec.classBuilder("GeneratedTestBase")
+                .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
+                .addMethod(MethodSpec.methodBuilder("assertSafeDefault")
+                        .addModifiers(Modifier.PROTECTED)
+                        .addParameter(Object.class, "value")
+                        .addComment("Sanity check for default values. For stubs, we mostly just care that they don't throw.")
+                        .build())
+                .build();
+
+        JavaFile.builder("org.mockmc.mockmc.generated", baseClass)
+                .addFileComment("Base class for mechanical sanity tests.")
+                .indent("    ")
+                .build()
+                .writeTo(testSourceFolder);
+    }
+
     private URLClassLoader createClassLoader() throws IOException {
         List<URL> urls = new ArrayList<>();
         File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
@@ -48,18 +66,40 @@ public class BaseTestGenerator implements DataGenerator {
                 urls.add(jar.toURI().toURL());
             }
         }
+        
+        File cacheDir = new File(jarDirectory, "cache");
+        File libDir = new File(cacheDir, "libraries");
+        if (libDir.exists()) {
+            addJarsRecursively(libDir, urls);
+        }
+        
         return new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+    }
+
+    private void addJarsRecursively(File dir, List<URL> urls) throws java.io.IOException {
+        File[] files = dir.listFiles();
+        if (files == null) return;
+        for (File file : files) {
+            if (file.isDirectory()) {
+                addJarsRecursively(file, urls);
+            } else if (file.getName().endsWith(".jar")) {
+                urls.add(file.toURI().toURL());
+            }
+        }
     }
 
     private Set<Class<?>> scanForClasses(ClassPath classPath) {
         Set<Class<?>> toGenerate = new HashSet<>();
         String[] packagesToScan = {
                 "org.bukkit",
+                "org.spigotmc",
+                "co.aikar.timings",
                 "com.destroystokyo.paper",
                 "io.papermc.paper",
                 "com.velocitypowered.api",
                 "net.md_5.bungee",
-                "io.github.waterfallmc"
+                "io.github.waterfallmc",
+                "com.mojang.brigadier"
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
@@ -78,15 +118,22 @@ public class BaseTestGenerator implements DataGenerator {
     }
 
     private boolean isGeneratableType(Class<?> clazz) {
-        if (clazz == null || clazz.isSealed() || !java.lang.reflect.Modifier.isPublic(clazz.getModifiers())) return false;
+        if (clazz == null) return false;
+        if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
+        if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
-        return (name.startsWith("org.bukkit.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc."))
+        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier."))
                 && !name.contains(".craftbukkit.");
     }
 
     private void generateTestForClass(Class<?> clazz) throws IOException {
         String packageName = getGeneratedPackageName(clazz);
-        String simpleName = clazz.getSimpleName().replace("$", "");
+        String rawSimpleName = clazz.getSimpleName();
+        if (rawSimpleName.isEmpty()) return;
+        String simpleName = rawSimpleName.replace("$", "");
+        if (simpleName.isEmpty() || !Character.isJavaIdentifierStart(simpleName.charAt(0))) {
+            return;
+        }
         String baseMockName = simpleName + "BaseMock";
         ClassName baseMockClass = ClassName.get(packageName, baseMockName);
         
@@ -94,20 +141,13 @@ public class BaseTestGenerator implements DataGenerator {
                 .superclass(ClassName.get("org.mockmc.mockmc.generated", "GeneratedTestBase"))
                 .addModifiers(Modifier.PUBLIC);
 
-        MethodSpec.Builder testMethod = MethodSpec.methodBuilder("testSafeDefaults")
-                .addAnnotation(ClassName.get("org.junit.jupiter.api", "Test"))
-                .addModifiers(Modifier.PUBLIC);
-
-        // Instantiate via anonymous class if it's an interface (which BaseMocks are)
-        testMethod.addStatement("$T mock = new $T() {}", baseMockClass, baseMockClass);
-        testMethod.addStatement("assertNotNull(mock)");
-
         // Scan methods for safe default checks
+        List<Method> methods = new ArrayList<>();
         Set<String> checkedMethods = new HashSet<>();
         try {
             for (Method m : clazz.getDeclaredMethods()) {
                 if (shouldGenerateSafeDefaultCheck(m, checkedMethods)) {
-                    testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
+                    methods.add(m);
                 }
             }
         } catch (Exception | LinkageError e) {
@@ -116,10 +156,74 @@ public class BaseTestGenerator implements DataGenerator {
             }
         }
 
-        testClass.addMethod(testMethod.build());
+        List<TypeVariableName> typeVars = new ArrayList<>();
+        for (java.lang.reflect.TypeVariable<? extends Class<?>> tv : clazz.getTypeParameters()) {
+            typeVars.add(TypeVariableName.get(tv));
+        }
+
+        TypeName superInterface = baseMockClass;
+        if (!typeVars.isEmpty()) {
+            superInterface = ParameterizedTypeName.get(baseMockClass, typeVars.toArray(new TypeName[0]));
+        }
+
+        TypeSpec.Builder stubBuilder = TypeSpec.classBuilder("Stub")
+                .addTypeVariables(typeVars)
+                .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
+                .addSuperinterface(superInterface);
+
+        // Object.clone() is protected. If an interface makes it public, 
+        // the class must explicitly override it because the protected Object.clone() 
+        // "wins" over the interface default method but doesn't satisfy the public requirement.
+        try {
+            clazz.getMethod("clone");
+            stubBuilder.addMethod(MethodSpec.methodBuilder("clone")
+                    .addModifiers(Modifier.PUBLIC)
+                    .addAnnotation(Override.class)
+                    .returns(clazz)
+                    .addStatement("return null")
+                    .build());
+        } catch (NoSuchMethodException ignored) {
+        }
+
+        testClass.addType(stubBuilder.build());
+
+        // Split methods into multiple test parts if there are too many (to satisfy linters)
+        int partCount = 0;
+        int methodsPerPart = 20;
+        for (int i = 0; i < methods.size(); i += methodsPerPart) {
+            partCount++;
+            String methodName = partCount == 1 ? "testSafeDefaults" : "testSafeDefaultsPart" + partCount;
+            MethodSpec.Builder testMethod = MethodSpec.methodBuilder(methodName)
+                    .addAnnotation(ClassName.get("org.junit.jupiter.api", "Test"))
+                    .addModifiers(Modifier.PUBLIC)
+                    .addException(Exception.class);
+
+            String diamond = typeVars.isEmpty() ? "" : "<>";
+            testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
+            testMethod.addStatement("assertNotNull(mock)");
+
+            int end = Math.min(i + methodsPerPart, methods.size());
+            for (int j = i; j < end; j++) {
+                testMethod.addStatement("assertSafeDefault(mock.$L())", methods.get(j).getName());
+            }
+            testClass.addMethod(testMethod.build());
+        }
+
+        // Handle case with no methods
+        if (methods.isEmpty()) {
+            MethodSpec.Builder testMethod = MethodSpec.methodBuilder("testSafeDefaults")
+                    .addAnnotation(ClassName.get("org.junit.jupiter.api", "Test"))
+                    .addModifiers(Modifier.PUBLIC)
+                    .addException(Exception.class);
+            String diamond = typeVars.isEmpty() ? "" : "<>";
+            testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
+            testMethod.addStatement("assertNotNull(mock)");
+            testClass.addMethod(testMethod.build());
+        }
 
         JavaFile.builder(packageName, testClass.build())
                 .addFileComment("Auto-generated mechanical sanity test for $L", baseMockName)
+                .addStaticImport(ClassName.get("org.junit.jupiter.api", "Assertions"), "*")
                 .indent("    ")
                 .build()
                 .writeTo(testSourceFolder);
@@ -131,8 +235,55 @@ public class BaseTestGenerator implements DataGenerator {
         if (m.getParameterCount() != 0 || !checkedMethods.add(m.getName())) {
             return false;
         }
+        if (isNmsType(m.getGenericReturnType()) || !isAccessible(m.getGenericReturnType())) {
+            return false;
+        }
         Class<?> rt = m.getReturnType();
         return !rt.isPrimitive() && rt != void.class;
+    }
+
+    private boolean isNmsType(java.lang.reflect.Type type) {
+        Class<?> raw = getRawType(type);
+        if (raw == null) return false;
+        String name = raw.getName();
+        return name.contains(".nms.") || name.contains(".internal.");
+    }
+
+    private boolean isAccessible(java.lang.reflect.Type type) {
+        Class<?> raw = getRawType(type);
+        if (raw == null) return true;
+        if (raw.isPrimitive()) return true;
+        if (raw.isArray()) return isAccessible(raw.getComponentType());
+
+        String name = raw.getName();
+        if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("com.google.common.") || name.startsWith("com.mojang.brigadier")) return true;
+
+        if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
+
+        Class<?> declaring = raw.getDeclaringClass();
+        if (declaring != null && !isAccessible(declaring)) return false;
+
+        if (type instanceof java.lang.reflect.ParameterizedType pt) {
+            for (java.lang.reflect.Type arg : pt.getActualTypeArguments()) {
+                if (!isAccessible(arg)) return false;
+            }
+        }
+        return true;
+    }
+
+    private Class<?> getRawType(java.lang.reflect.Type type) {
+        if (type instanceof Class<?> clazz) return clazz;
+        if (type instanceof java.lang.reflect.ParameterizedType pt) return getRawType(pt.getRawType());
+        if (type instanceof java.lang.reflect.GenericArrayType gat) return getRawType(gat.getGenericComponentType());
+        if (type instanceof java.lang.reflect.TypeVariable<?> tv) {
+            if (tv.getBounds().length > 0) return getRawType(tv.getBounds()[0]);
+            return Object.class;
+        }
+        if (type instanceof java.lang.reflect.WildcardType wt) {
+            if (wt.getUpperBounds().length > 0) return getRawType(wt.getUpperBounds()[0]);
+            return Object.class;
+        }
+        return null;
     }
 
     private String getGeneratedPackageName(Class<?> clazz) {

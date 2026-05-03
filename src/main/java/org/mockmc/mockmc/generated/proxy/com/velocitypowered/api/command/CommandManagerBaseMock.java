@@ -1,6 +1,7 @@
 // MockMC: Unique Stub for CommandManager
 package org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.command;
 
+import com.mojang.brigadier.suggestion.Suggestions;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.Command;
 import com.velocitypowered.api.command.CommandManager;
@@ -63,6 +64,12 @@ public interface CommandManagerBaseMock extends CommandManager
 	default void register(String arg0, Command arg1, String... arg2)
 	{
 		// MockMC: CommandManager#register
+	}
+
+	default CompletableFuture<Suggestions> offerBrigadierSuggestions(CommandSource arg0, String arg1)
+	{
+		// MockMC: CommandManager#offerBrigadierSuggestions
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	default boolean hasCommand(String arg0, CommandSource arg1)

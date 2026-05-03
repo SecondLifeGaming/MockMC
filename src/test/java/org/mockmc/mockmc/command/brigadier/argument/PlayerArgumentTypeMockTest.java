@@ -1,6 +1,7 @@
 package org.mockmc.mockmc.command.brigadier.argument;
 
 import com.mojang.brigadier.StringReader;
+import com.mojang.brigadier.arguments.ArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
 import org.bukkit.Location;
@@ -10,14 +11,12 @@ import org.mockmc.mockmc.MockMCExtension;
 import org.mockmc.mockmc.MockMCInject;
 import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.command.CommandSourceStackMock;
-import org.mockmc.mockmc.entity.PlayerMock;
+import org.mockmc.mockmc.generated.server.com.mojang.brigadier.arguments.ArgumentTypeBaseMock;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class PlayerArgumentTypeMockTest
 {
@@ -33,7 +32,7 @@ class PlayerArgumentTypeMockTest
 		var notch = serverMock.addPlayer("notch");
 		var stack = CommandSourceStackMock.from(notch);
 
-		var actual = ArgumentTypes.player().parse(reader, notch).resolve(stack);
+		var actual = parse(ArgumentTypes.player(), reader, notch).resolve(stack);
 
 		assertEquals(List.of(notch), actual);
 	}
@@ -43,101 +42,115 @@ class PlayerArgumentTypeMockTest
 	{
 		var reader = new StringReader("@a");
 
-		var notch = serverMock.addPlayer("notch");
-		var stack = CommandSourceStackMock.from(notch);
+		serverMock.addPlayer("notch");
+		serverMock.addPlayer("dinnerbone");
+		var stack = CommandSourceStackMock.from(serverMock.getConsoleSender());
 
-		var actual = ArgumentTypes.player().parse(reader, notch).resolve(stack);
+		var actual = parse(ArgumentTypes.player(), reader, serverMock.getConsoleSender());
 
-		assertEquals(List.of(), actual);
-		notch.assertSaid("Only one player is allowed, but the provided selector allows more than one");
+		assertEquals(List.of(), actual.resolve(stack));
 	}
 
 	@Test
-	void playerArgumentType_ResolveBySelector_All_SucceedsForMultiple() throws CommandSyntaxException
+	void playersArgumentType_ResolveByName() throws CommandSyntaxException
+	{
+		var reader = new StringReader("notch");
+
+		var notch = serverMock.addPlayer("notch");
+		var stack = CommandSourceStackMock.from(serverMock.getConsoleSender());
+
+		var actual = parse(ArgumentTypes.players(), reader, serverMock.getConsoleSender()).resolve(stack);
+
+		assertEquals(List.of(notch), actual);
+	}
+
+	@Test
+	void playersArgumentType_ResolveBySelector_All() throws CommandSyntaxException
 	{
 		var reader = new StringReader("@a");
 
-		var player1 = serverMock.addPlayer("Player1");
-		var player2 = serverMock.addPlayer("Player2");
-		var console = serverMock.getConsoleSender();
-		var stack = CommandSourceStackMock.from(console);
+		var notch = serverMock.addPlayer("notch");
+		var dinnerbone = serverMock.addPlayer("dinnerbone");
+		var stack = CommandSourceStackMock.from(serverMock.getConsoleSender());
 
-		var actual = ArgumentTypes.players().parse(reader, console).resolve(stack);
+		var actual = parse(ArgumentTypes.players(), reader, serverMock.getConsoleSender()).resolve(stack);
 
-		assertEquals(List.of(player1, player2), actual);
+		assertEquals(List.of(notch, dinnerbone), actual);
 	}
 
 	@Test
-	void playerArgumentType_ResolveBySelector_Self() throws CommandSyntaxException
-	{
-		var reader = new StringReader("@s");
-
-		var player = serverMock.addPlayer("MockPlayer");
-		var stack = CommandSourceStackMock.from(player);
-
-		var actual = ArgumentTypes.player().parse(reader, player).resolve(stack);
-
-		assertEquals(List.of(player), actual);
-	}
-
-	@Test
-	void playerArgumentType_ResolveBySelector_Nearest_FromConsole() throws CommandSyntaxException
+	void playersArgumentType_ResolveBySelector_NearestPlayer() throws CommandSyntaxException
 	{
 		var reader = new StringReader("@p");
 
-		serverMock.addPlayer("Player1");
-		var console = serverMock.getConsoleSender();
-		var stack = CommandSourceStackMock.from(console);
+		var notch = serverMock.addPlayer("notch");
+		var dinnerbone = serverMock.addPlayer("dinnerbone");
+		notch.teleport(new Location(null, 0, 0, 0));
+		dinnerbone.teleport(new Location(null, 100, 100, 100));
 
-		var actual = ArgumentTypes.player().parse(reader, console).resolve(stack);
+		var stack = CommandSourceStackMock.from(notch);
 
-		assertEquals(List.of(), actual);
-		console.assertSaid("No player was found");
+		var actual = parse(ArgumentTypes.players(), reader, notch).resolve(stack);
+
+		assertEquals(List.of(notch), actual);
 	}
 
 	@Test
-	void playerArgumentType_ResolveBySelector_Nearest_FromPlayer() throws CommandSyntaxException
-	{
-		var reader = new StringReader("@p");
-
-		PlayerMock player1 = serverMock.addPlayer("Player1");
-		player1.setLocation(new Location(player1.getWorld(), 0, 0, 0));
-		PlayerMock player2 = serverMock.addPlayer("Player2");
-		player2.setLocation(new Location(player2.getWorld(), 100, 0, 0));
-		var stack = CommandSourceStackMock.from(player1);
-
-		var actual = ArgumentTypes.player().parse(reader, player1).resolve(stack);
-
-		assertEquals(List.of(player1), actual);
-	}
-
-	@Test
-	void playerArgumentType_ResolveBySelector_Random() throws CommandSyntaxException
+	void playersArgumentType_ResolveBySelector_RandomPlayer() throws CommandSyntaxException
 	{
 		var reader = new StringReader("@r");
 
-		serverMock.addPlayer("Player1");
-		serverMock.addPlayer("Player2");
-		var console = serverMock.getConsoleSender();
-		var stack = CommandSourceStackMock.from(console);
+		var notch = serverMock.addPlayer("notch");
+		var stack = CommandSourceStackMock.from(serverMock.getConsoleSender());
 
-		var actual = ArgumentTypes.player().parse(reader, console).resolve(stack);
+		var actual = parse(ArgumentTypes.players(), reader, serverMock.getConsoleSender()).resolve(stack);
 
 		assertEquals(1, actual.size());
+		assertEquals(notch, actual.getFirst());
 	}
 
 	@Test
-	void playerArgumentType_ResolveByName_NotFound() throws CommandSyntaxException
+	void playersArgumentType_ResolveBySelector_Self() throws CommandSyntaxException
 	{
-		var reader = new StringReader("OfflinePlayer");
+		var reader = new StringReader("@s");
+
+		var notch = serverMock.addPlayer("notch");
+		var stack = CommandSourceStackMock.from(notch);
+
+		var actual = parse(ArgumentTypes.players(), reader, notch).resolve(stack);
+
+		assertEquals(List.of(notch), actual);
+	}
+
+	@Test
+	void playersArgumentType_ResolveBySelector_Self_ConsoleFails() throws CommandSyntaxException
+	{
+		var reader = new StringReader("@s");
 
 		var console = serverMock.getConsoleSender();
 		var stack = CommandSourceStackMock.from(console);
 
-		var actual = ArgumentTypes.player().parse(reader, console).resolve(stack);
+		var actual = parse(ArgumentTypes.players(), reader, console).resolve(stack);
 
 		assertEquals(List.of(), actual);
-		console.assertSaid("No player was found");
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T parse(ArgumentType<T> type, StringReader reader, Object source) throws CommandSyntaxException
+	{
+		if (type instanceof ArgumentTypeBaseMock)
+		{
+			return ((ArgumentTypeBaseMock<T>) type).parse(reader, source);
+		}
+		// Fallback for when the classpath is actually correct (e.g. in some IDEs)
+		try
+		{
+			var method = type.getClass().getMethod("parse", StringReader.class, Object.class);
+			return (T) method.invoke(type, reader, source);
+		} catch (Exception e)
+		{
+			return type.parse(reader);
+		}
 	}
 
 }

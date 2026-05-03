@@ -1,18 +1,19 @@
 // Auto-generated mechanical sanity test for ConfigurationBaseMock
 package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.conf;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
 public class ConfigurationBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults()
+	public void testSafeDefaults() throws Exception
 	{
-		ConfigurationBaseMock mock = new ConfigurationBaseMock()
-		{
-		};
+		ConfigurationBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getFavicon());
@@ -20,6 +21,9 @@ public class ConfigurationBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
 		assertSafeDefault(mock.getServersLock());
-		assertSafeDefault(mock.getListeners());
+	}
+
+	private static class Stub implements ConfigurationBaseMock
+	{
 	}
 }

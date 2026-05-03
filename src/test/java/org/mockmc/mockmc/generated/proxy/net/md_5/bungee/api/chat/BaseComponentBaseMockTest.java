@@ -1,21 +1,22 @@
 // Auto-generated mechanical sanity test for BaseComponentBaseMock
 package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.chat;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
 public class BaseComponentBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults()
+	public void testSafeDefaults() throws Exception
 	{
-		BaseComponentBaseMock mock = new BaseComponentBaseMock()
-		{
-		};
+		BaseComponentBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
 		assertSafeDefault(mock.getExtra());
+		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.getStyle());
 		assertSafeDefault(mock.toLegacyText());
@@ -32,7 +33,17 @@ public class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getInsertion());
 		assertSafeDefault(mock.duplicateWithoutFormatting());
 		assertSafeDefault(mock.toPlainText());
+	}
+
+	@Test
+	public void testSafeDefaultsPart2() throws Exception
+	{
+		BaseComponentBaseMock mock = new Stub();
+		assertNotNull(mock);
 		assertSafeDefault(mock.getShadowColor());
-		assertSafeDefault(mock.getFont());
+	}
+
+	private static class Stub implements BaseComponentBaseMock
+	{
 	}
 }

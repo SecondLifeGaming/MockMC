@@ -1,18 +1,22 @@
 // Auto-generated mechanical sanity test for CommandManagerBaseMock
 package org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.command;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
 public class CommandManagerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults()
+	public void testSafeDefaults() throws Exception
 	{
-		CommandManagerBaseMock mock = new CommandManagerBaseMock()
-		{
-		};
+		CommandManagerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getAliases());
+	}
+
+	private static class Stub implements CommandManagerBaseMock
+	{
 	}
 }

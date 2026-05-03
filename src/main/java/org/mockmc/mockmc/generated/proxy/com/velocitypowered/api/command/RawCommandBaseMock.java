@@ -15,4 +15,8 @@ import com.velocitypowered.api.command.RawCommand;
  */
 public interface RawCommandBaseMock extends RawCommand
 {
+	default void execute(RawCommand.Invocation arg0)
+	{
+		// MockMC: RawCommand#execute
+	}
 }

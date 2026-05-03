@@ -15,4 +15,8 @@ import com.velocitypowered.api.command.SimpleCommand;
  */
 public interface SimpleCommandBaseMock extends SimpleCommand
 {
+	default void execute(SimpleCommand.Invocation arg0)
+	{
+		// MockMC: SimpleCommand#execute
+	}
 }

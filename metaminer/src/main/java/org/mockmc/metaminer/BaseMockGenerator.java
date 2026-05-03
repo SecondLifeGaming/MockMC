@@ -77,18 +77,30 @@ public class BaseMockGenerator implements DataGenerator {
         if (clazz != null) {
             TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
             for (int i = 0; i < typeParameters.length; i++) {
-                if (typeParameters[i].getName().equals(tv.getName())) {
+                if (typeParameters[i].equals(tv)) {
                     return ourTypeVars[i];
                 }
             }
         }
-        if (typeMap != null && typeMap.containsKey(tv)) {
-            return mapType(typeMap.get(tv), clazz, ourTypeVars, typeMap);
+        if (typeMap != null) {
+            if (typeMap.containsKey(tv)) {
+                return mapType(typeMap.get(tv), clazz, ourTypeVars, typeMap);
+            }
         }
+        
+        // Unknown or method-level type variable. Map its bounds recursively to handle class-level substitution.
         try {
-            return TypeVariableName.get(tv);
+            java.lang.reflect.Type[] bounds = tv.getBounds();
+            if (bounds == null || bounds.length == 0 || (bounds.length == 1 && bounds[0] == Object.class)) {
+                return TypeVariableName.get(tv.getName());
+            }
+            TypeName[] mappedBounds = new TypeName[bounds.length];
+            for (int i = 0; i < bounds.length; i++) {
+                mappedBounds[i] = mapType(bounds[i], clazz, ourTypeVars, typeMap);
+            }
+            return TypeVariableName.get(tv.getName(), mappedBounds);
         } catch (Exception _) {
-            return TypeName.get(tv.getBounds()[0]);
+            return TypeVariableName.get(tv.getName());
         }
     }
 
@@ -143,7 +155,12 @@ public class BaseMockGenerator implements DataGenerator {
                 }
             }
 
-            Collections.addAll(queue, raw.getGenericInterfaces());
+            java.lang.reflect.Type[] interfaces = new java.lang.reflect.Type[0];
+            try {
+                interfaces = raw.getGenericInterfaces();
+            } catch (Exception _) {
+            }
+            Collections.addAll(queue, interfaces);
             if (raw.getGenericSuperclass() != null) {
                 queue.add(raw.getGenericSuperclass());
             }
@@ -189,7 +206,7 @@ public class BaseMockGenerator implements DataGenerator {
             Set<Class<?>> toGenerate = scanPackages(classPath);
 
             for (Class<?> c : toGenerate) {
-                generateForClass(c);
+                generateForClass(c, toGenerate);
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -234,7 +251,8 @@ public class BaseMockGenerator implements DataGenerator {
                 "io.papermc.paper",
                 "com.velocitypowered.api",
                 "net.md_5.bungee",
-                "io.github.waterfallmc"
+                "io.github.waterfallmc",
+                "com.mojang.brigadier"
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
@@ -303,11 +321,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private void generateForClass(Class<?> clazz) throws java.io.IOException {
-        if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) {
-            return;
-        }
-
+    private void generateForClass(Class<?> clazz, Set<Class<?>> allGeneratable) throws java.io.IOException {
         String packageName = getGeneratedPackageName(clazz);
         String simpleName = getMockName(clazz);
         String version = getVersionForClass(clazz);
@@ -320,7 +334,7 @@ public class BaseMockGenerator implements DataGenerator {
         applySuperInterfaces(clazz, typeSpec, typeVars, typeMap);
 
         Map<String, List<Method>> methodsBySignature = collectMethodsBySignature(clazz, typeVars, typeMap);
-        Set<Method> methodsToGenerate = selectMethodsToGenerate(clazz, methodsBySignature);
+        Set<Method> methodsToGenerate = selectMethodsToGenerate(clazz, methodsBySignature, allGeneratable);
 
         generateMethods(typeSpec, clazz, typeVars, typeMap, methodsToGenerate, classSuppressions);
 
@@ -525,7 +539,8 @@ public class BaseMockGenerator implements DataGenerator {
     private boolean isNmsType(java.lang.reflect.Type type) {
         if (type == null) return false;
         String name = type.toString();
-        return name.contains("net.minecraft.") || name.contains("com.mojang.");
+        if (name.contains("com.mojang.brigadier")) return false;
+        return name.contains("net.minecraft.") || name.contains("com.mojang.") || name.contains(".craftbukkit.");
     }
 
     private boolean isAccessible(java.lang.reflect.Type type) {
@@ -538,6 +553,9 @@ public class BaseMockGenerator implements DataGenerator {
         if (raw.isPrimitive()) return true;
         if (raw.isArray()) return isAccessible(raw.getComponentType());
         
+        String name = raw.getName();
+        if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("com.google.common.") || name.startsWith("com.mojang.brigadier")) return true;
+
         if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
         
         // Also check declaring class if it's an inner class
@@ -552,29 +570,34 @@ public class BaseMockGenerator implements DataGenerator {
         return true;
     }
 
-    private Set<Method> selectMethodsToGenerate(Class<?> clazz, Map<String, List<Method>> methodsBySignature) {
+    private Set<Method> selectMethodsToGenerate(Class<?> clazz, Map<String, List<Method>> methodsBySignature, Set<Class<?>> allGeneratable) {
         Set<Method> methodsToGenerate = new HashSet<>();
         for (List<Method> providers : methodsBySignature.values()) {
             Method bestMethod = selectBestMethod(providers);
 
             boolean declaredInThis = false;
-            Set<Class<?>> minimalProviders = new HashSet<>();
+            Set<Class<?>> generatableSuperProviders = new HashSet<>();
             boolean isMissingImplementation = false;
 
             for (Method m : providers) {
                 if (m.getDeclaringClass() == clazz) {
                     declaredInThis = true;
+                } else if (allGeneratable.contains(m.getDeclaringClass())) {
+                    generatableSuperProviders.add(m.getDeclaringClass());
                 }
-                if (isGeneratableType(m.getDeclaringClass())) {
-                    minimalProviders.add(m.getDeclaringClass());
-                } else if (!m.isDefault() && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+                
+                if (!m.isDefault() && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
                     isMissingImplementation = true;
                 }
             }
+            
+            // Prune redundant super-interfaces
+            generatableSuperProviders.removeIf(a -> generatableSuperProviders.stream().anyMatch(b -> a != b && a.isAssignableFrom(b)));
 
-            minimalProviders.removeIf(a -> minimalProviders.stream().anyMatch(b -> a != b && a.isAssignableFrom(b)));
+            boolean inMirroredSuperInterface = !generatableSuperProviders.isEmpty();
+            boolean conflict = generatableSuperProviders.size() > 1;
 
-            if (declaredInThis || minimalProviders.size() > 1 || isMissingImplementation) {
+            if (declaredInThis || (isMissingImplementation && !inMirroredSuperInterface) || conflict) {
                 methodsToGenerate.add(bestMethod);
             }
         }
@@ -623,13 +646,21 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private boolean isMethodGeneratable(Method m) {
-        return java.lang.reflect.Modifier.isPublic(m.getModifiers())
-                && !java.lang.reflect.Modifier.isStatic(m.getModifiers())
-                && m.getDeclaringClass() != Object.class
-                && !m.getName().equals("equals")
-                && !m.getName().equals("hashCode")
-                && !m.getName().equals("toString")
-                && !m.getName().equals("clone");
+        if (!java.lang.reflect.Modifier.isPublic(m.getModifiers()) || java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+            return false;
+        }
+        if (m.getDeclaringClass() == Object.class) {
+            return false;
+        }
+
+        String name = m.getName();
+        Class<?>[] params = m.getParameterTypes();
+        // Skip standard Object methods that interfaces CANNOT override with default implementations
+        if (name.equals("equals") && params.length == 1 && params[0] == Object.class) return false;
+        if (name.equals("hashCode") && params.length == 0) return false;
+        if (name.equals("toString") && params.length == 0) return false;
+
+        return true;
     }
 
     private String getMethodSignature(Method m, Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
@@ -661,7 +692,7 @@ public class BaseMockGenerator implements DataGenerator {
         builder.returns(mapType(m.getGenericReturnType(), clazz, ourTypeVars, typeMap));
 
         for (TypeVariable<Method> tv : m.getTypeParameters()) {
-            builder.addTypeVariable(TypeVariableName.get(tv));
+            builder.addTypeVariable((TypeVariableName) mapTypeVariable(tv, clazz, ourTypeVars, typeMap));
         }
 
         addMethodParameters(builder, m, clazz, ourTypeVars, typeMap);
@@ -1013,9 +1044,11 @@ public class BaseMockGenerator implements DataGenerator {
 
     private boolean isGeneratableType(Class<?> clazz) {
         if (clazz == null) return false;
+        if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
-        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc."))
+        if (name.equals("co.aikar.timings.Timing")) return false;
+        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier"))
                 && !name.contains(".craftbukkit.");
     }
 }

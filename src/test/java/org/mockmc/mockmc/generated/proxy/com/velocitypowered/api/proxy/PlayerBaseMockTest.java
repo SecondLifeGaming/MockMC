@@ -1,17 +1,17 @@
 // Auto-generated mechanical sanity test for PlayerBaseMock
 package org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
 public class PlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults()
+	public void testSafeDefaults() throws Exception
 	{
-		PlayerBaseMock mock = new PlayerBaseMock()
-		{
-		};
+		PlayerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.key());
 		assertSafeDefault(mock.getUniqueId());
@@ -30,5 +30,9 @@ public class PlayerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getAppliedResourcePacks());
 		assertSafeDefault(mock.getPendingResourcePacks());
 		assertSafeDefault(mock.getClientBrand());
+	}
+
+	private static class Stub implements PlayerBaseMock
+	{
 	}
 }

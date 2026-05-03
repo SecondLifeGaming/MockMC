@@ -1,18 +1,19 @@
 // Auto-generated mechanical sanity test for ProxyConfigBaseMock
 package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
 public class ProxyConfigBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	public void testSafeDefaults()
+	public void testSafeDefaults() throws Exception
 	{
-		ProxyConfigBaseMock mock = new ProxyConfigBaseMock()
-		{
-		};
+		ProxyConfigBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getGameVersion());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
@@ -20,6 +21,9 @@ public class ProxyConfigBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getServersCopy());
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
-		assertSafeDefault(mock.getListeners());
+	}
+
+	private static class Stub implements ProxyConfigBaseMock
+	{
 	}
 }

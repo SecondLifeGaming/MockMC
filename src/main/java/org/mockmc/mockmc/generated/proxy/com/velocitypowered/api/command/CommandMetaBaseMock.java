@@ -1,7 +1,9 @@
 // MockMC: Unique Stub for CommandMeta
 package org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.command;
 
+import com.mojang.brigadier.tree.CommandNode;
 import com.velocitypowered.api.command.CommandMeta;
+import com.velocitypowered.api.command.CommandSource;
 import java.util.Collection;
 
 /**
@@ -26,5 +28,11 @@ public interface CommandMetaBaseMock extends CommandMeta
 	{
 		// MockMC: CommandMeta#getPlugin
 		return null;
+	}
+
+	default Collection<CommandNode<CommandSource>> getHints()
+	{
+		// MockMC: CommandMeta#getHints
+		return java.util.Collections.emptyList();
 	}
 }

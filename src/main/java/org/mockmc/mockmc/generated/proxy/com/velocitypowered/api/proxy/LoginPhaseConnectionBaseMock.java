@@ -18,8 +18,8 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.crypto.Ke
 public interface LoginPhaseConnectionBaseMock
 		extends
 			LoginPhaseConnection,
-			KeyIdentifiableBaseMock,
-			InboundConnectionBaseMock
+			InboundConnectionBaseMock,
+			KeyIdentifiableBaseMock
 {
 	default void sendLoginPluginMessage(ChannelIdentifier arg0, byte[] arg1, LoginPhaseConnection.MessageConsumer arg2)
 	{

@@ -112,11 +112,13 @@ dependencies {
 	})
 
 	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
-	compileOnly(fileTree("jars") {
+	val backendJars = fileTree("jars") {
 		include("*.jar")
 		exclude("paper-*.jar")
 		exclude("folia-*.jar")
-	})
+	}
+	compileOnly(backendJars)
+	testImplementation(backendJars)
 
 	api("org.jetbrains:annotations:26.1.0")
 	api("org.hamcrest:hamcrest:3.0")
@@ -130,6 +132,7 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	testImplementation("org.skyscreamer:jsonassert:1.5.3")
+	testImplementation("com.mojang:brigadier:1.3.10")
 
 	// General utilities for the project
 	implementation("net.kyori:adventure-platform-bungeecord:4.4.1") {
@@ -443,5 +446,11 @@ tasks.register("testAllBackends") {
 	group = "verification"
 	description = "Runs the test suite against all provided backend JARs"
 	dependsOn("testFolia", "testPaper", "testSpigot", "testVelocity", "testWaterfall")
+}
+
+configurations.all {
+	resolutionStrategy {
+		force("com.mojang:brigadier:1.3.10")
+	}
 }
 
