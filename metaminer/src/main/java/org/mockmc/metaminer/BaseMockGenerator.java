@@ -545,27 +545,34 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private boolean isAccessible(java.lang.reflect.Type type) {
-        if (type == null) return true;
-        if (type instanceof java.lang.reflect.TypeVariable) return true;
-        if (type instanceof java.lang.reflect.WildcardType) return true;
+        if (isIgnoredType(type)) return true;
 
         Class<?> raw = getRawType(type);
-        if (raw == null) return true;
-        if (raw.isPrimitive()) return true;
+        if (raw == null || raw.isPrimitive()) return true;
         if (raw.isArray()) return isAccessible(raw.getComponentType());
 
         if (isStandardPackage(raw.getName())) return true;
-
-        if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
-
-        // Also check declaring class if it's an inner class
-        Class<?> declaring = raw.getDeclaringClass();
-        if (declaring != null && !isAccessible(declaring)) return false;
+        if (!isRawClassAccessible(raw)) return false;
 
         if (type instanceof java.lang.reflect.ParameterizedType pt) {
-            for (java.lang.reflect.Type arg : pt.getActualTypeArguments()) {
-                if (!isAccessible(arg)) return false;
-            }
+            return areTypeArgumentsAccessible(pt);
+        }
+        return true;
+    }
+
+    private boolean isIgnoredType(java.lang.reflect.Type type) {
+        return type == null || type instanceof java.lang.reflect.TypeVariable || type instanceof java.lang.reflect.WildcardType;
+    }
+
+    private boolean isRawClassAccessible(Class<?> raw) {
+        if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
+        Class<?> declaring = raw.getDeclaringClass();
+        return declaring == null || isAccessible(declaring);
+    }
+
+    private boolean areTypeArgumentsAccessible(java.lang.reflect.ParameterizedType pt) {
+        for (java.lang.reflect.Type arg : pt.getActualTypeArguments()) {
+            if (!isAccessible(arg)) return false;
         }
         return true;
     }
