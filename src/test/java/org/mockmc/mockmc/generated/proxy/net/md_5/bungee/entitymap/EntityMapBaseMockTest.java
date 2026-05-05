@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class EntityMapBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		EntityMapBaseMock mock = new Stub();
+		EntityMapBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

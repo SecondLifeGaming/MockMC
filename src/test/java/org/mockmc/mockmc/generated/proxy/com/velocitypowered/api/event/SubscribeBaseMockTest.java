@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class SubscribeBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		SubscribeBaseMock mock = new Stub();
+		SubscribeBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.order());
 	}

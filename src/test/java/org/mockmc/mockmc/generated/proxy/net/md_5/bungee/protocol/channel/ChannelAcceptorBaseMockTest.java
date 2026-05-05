@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ChannelAcceptorBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ChannelAcceptorBaseMock mock = new Stub();
+		ChannelAcceptorBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,11 +9,10 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ProxyConfigBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ProxyConfigBaseMock mock = new Stub();
+		ProxyConfigBaseMock mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getGameVersion());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
@@ -21,6 +20,7 @@ class ProxyConfigBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getServersCopy());
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
+		assertSafeDefault(mock.getListeners());
 	}
 
 	private static class Stub implements ProxyConfigBaseMock

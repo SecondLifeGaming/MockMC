@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ConnectionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ConnectionBaseMock mock = new Stub();
+		ConnectionBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.unsafe());
 		assertSafeDefault(mock.getAddress());

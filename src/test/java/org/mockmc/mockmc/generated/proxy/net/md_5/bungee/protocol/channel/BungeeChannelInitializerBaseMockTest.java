@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class BungeeChannelInitializerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		BungeeChannelInitializerBaseMock mock = new Stub();
+		BungeeChannelInitializerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getChannelInitializer());
 		assertSafeDefault(mock.getChannelAcceptor());

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ConnectedPlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ConnectedPlayerBaseMock mock = new Stub();
+		ConnectedPlayerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

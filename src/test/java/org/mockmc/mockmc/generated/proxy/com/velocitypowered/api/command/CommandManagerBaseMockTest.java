@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class CommandManagerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		CommandManagerBaseMock mock = new Stub();
+		CommandManagerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getAliases());
 	}

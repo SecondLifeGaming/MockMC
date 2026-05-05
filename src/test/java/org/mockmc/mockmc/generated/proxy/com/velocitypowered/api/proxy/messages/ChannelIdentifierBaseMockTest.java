@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ChannelIdentifierBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ChannelIdentifierBaseMock mock = new Stub();
+		ChannelIdentifierBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getId());
 	}

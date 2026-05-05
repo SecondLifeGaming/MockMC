@@ -143,7 +143,8 @@ public class BaseTestGenerator implements DataGenerator {
         TypeName superInterface = getSuperInterface(baseMockClass, typeVars);
 
         testClass.addType(buildStubClass(clazz, typeVars, superInterface).build());
-        generateTestMethods(testClass, baseMockClass, methods, typeVars);
+        TypeName testTargetType = getTestTargetType(baseMockClass, typeVars);
+        generateTestMethods(testClass, testTargetType, methods);
 
         writeJavaFile(packageName, testClass, baseMockName);
     }
@@ -190,6 +191,15 @@ public class BaseTestGenerator implements DataGenerator {
         return ParameterizedTypeName.get(baseMockClass, typeVars.toArray(new TypeName[0]));
     }
 
+    private TypeName getTestTargetType(ClassName baseMockClass, List<TypeVariableName> typeVars) {
+        if (typeVars.isEmpty()) {
+            return baseMockClass;
+        }
+        TypeName[] wildcards = new TypeName[typeVars.size()];
+        Arrays.fill(wildcards, WildcardTypeName.subtypeOf(Object.class));
+        return ParameterizedTypeName.get(baseMockClass, wildcards);
+    }
+
     private TypeSpec.Builder buildStubClass(Class<?> clazz, List<TypeVariableName> typeVars, TypeName superInterface) {
         TypeSpec.Builder stubBuilder = TypeSpec.classBuilder("Stub")
                 .addTypeVariables(typeVars)
@@ -213,13 +223,13 @@ public class BaseTestGenerator implements DataGenerator {
         return stubBuilder;
     }
 
-    private void generateTestMethods(TypeSpec.Builder testClass, ClassName baseMockClass, List<Method> methods, List<TypeVariableName> typeVars) {
+    private void generateTestMethods(TypeSpec.Builder testClass, TypeName targetType, List<Method> methods) {
         // Split methods into multiple test parts if there are too many (to satisfy linters)
         int partCount = 0;
         int methodsPerPart = 20;
 
         if (methods.isEmpty()) {
-            testClass.addMethod(buildTestMethod("testSafeDefaults", baseMockClass, Collections.emptyList(), typeVars));
+            testClass.addMethod(buildTestMethod("testSafeDefaults", targetType, Collections.emptyList()));
             return;
         }
 
@@ -227,17 +237,30 @@ public class BaseTestGenerator implements DataGenerator {
             partCount++;
             String methodName = partCount == 1 ? "testSafeDefaults" : "testSafeDefaultsPart" + partCount;
             int end = Math.min(i + methodsPerPart, methods.size());
-            testClass.addMethod(buildTestMethod(methodName, baseMockClass, methods.subList(i, end), typeVars));
+            testClass.addMethod(buildTestMethod(methodName, targetType, methods.subList(i, end)));
         }
     }
 
-    private MethodSpec buildTestMethod(String name, ClassName baseMockClass, List<Method> methods, List<TypeVariableName> typeVars) {
-        MethodSpec.Builder testMethod = MethodSpec.methodBuilder(name)
-                .addAnnotation(ClassName.get(JUNIT_JUPITER_API, "Test"))
-                .addException(Exception.class);
+    private boolean anyMethodThrowsCheckedException(List<Method> methods) {
+        for (Method m : methods) {
+            for (Class<?> exceptionType : m.getExceptionTypes()) {
+                if (!RuntimeException.class.isAssignableFrom(exceptionType) && !Error.class.isAssignableFrom(exceptionType)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-        String diamond = typeVars.isEmpty() ? "" : "<>";
-        testMethod.addStatement("$T mock = new Stub" + diamond + "()", baseMockClass);
+    private MethodSpec buildTestMethod(String name, TypeName targetType, List<Method> methods) {
+        MethodSpec.Builder testMethod = MethodSpec.methodBuilder(name)
+                .addAnnotation(ClassName.get(JUNIT_JUPITER_API, "Test"));
+
+        if (anyMethodThrowsCheckedException(methods)) {
+            testMethod.addException(Exception.class);
+        }
+
+        testMethod.addStatement("$T mock = new Stub<>()", targetType);
         testMethod.addStatement("assertNotNull(mock)");
 
         for (Method m : methods) {

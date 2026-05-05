@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class DependencyBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		DependencyBaseMock mock = new Stub();
+		DependencyBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.id());
 	}

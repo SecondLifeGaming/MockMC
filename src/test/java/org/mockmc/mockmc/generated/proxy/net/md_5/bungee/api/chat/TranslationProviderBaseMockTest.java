@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class TranslationProviderBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		TranslationProviderBaseMock mock = new Stub();
+		TranslationProviderBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getTranslationKey());
 		assertSafeDefault(mock.asTranslatableComponent());

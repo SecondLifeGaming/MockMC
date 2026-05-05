@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class PluginMessageEncoderBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		PluginMessageEncoderBaseMock mock = new Stub();
+		PluginMessageEncoderBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ChatSessionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ChatSessionBaseMock mock = new Stub();
+		ChatSessionBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getSessionId());
 	}

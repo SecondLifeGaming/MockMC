@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class CancellableBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		CancellableBaseMock mock = new Stub();
+		CancellableBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

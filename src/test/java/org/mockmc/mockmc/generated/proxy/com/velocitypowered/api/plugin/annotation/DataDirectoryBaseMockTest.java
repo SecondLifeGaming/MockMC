@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class DataDirectoryBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		DataDirectoryBaseMock mock = new Stub();
+		DataDirectoryBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

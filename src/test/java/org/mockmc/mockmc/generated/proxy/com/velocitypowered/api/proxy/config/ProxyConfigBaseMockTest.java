@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ProxyConfigBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ProxyConfigBaseMock mock = new Stub();
+		ProxyConfigBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getQueryMap());

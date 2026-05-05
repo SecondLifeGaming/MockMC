@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class PluginContainerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		PluginContainerBaseMock mock = new Stub();
+		PluginContainerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getInstance());
 		assertSafeDefault(mock.getDescription());

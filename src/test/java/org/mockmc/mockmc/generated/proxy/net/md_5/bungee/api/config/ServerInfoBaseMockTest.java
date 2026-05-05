@@ -9,16 +9,16 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ServerInfoBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ServerInfoBaseMock mock = new Stub();
+		ServerInfoBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.getAddress());
-		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getPlayers());
 		assertSafeDefault(mock.getSocketAddress());
+		assertSafeDefault(mock.getPermission());
 	}
 
 	private static class Stub implements ServerInfoBaseMock

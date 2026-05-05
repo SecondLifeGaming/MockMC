@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class AwaitingEventExecutorBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		AwaitingEventExecutorBaseMock mock = new Stub<>();
+		AwaitingEventExecutorBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

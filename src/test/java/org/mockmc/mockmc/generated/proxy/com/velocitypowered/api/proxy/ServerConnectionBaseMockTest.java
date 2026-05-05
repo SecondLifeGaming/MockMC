@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ServerConnectionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ServerConnectionBaseMock mock = new Stub();
+		ServerConnectionBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getPlayer());
 		assertSafeDefault(mock.getServer());

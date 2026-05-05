@@ -13,10 +13,6 @@ import org.mockmc.mockmc.MockMCInject;
 import org.mockmc.mockmc.ServerMock;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @ExtendWith(MockMCExtension.class)
 class CrafterStateMockTest
 {

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class IForgeServerPacketHandlerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		IForgeServerPacketHandlerBaseMock mock = new Stub<>();
+		IForgeServerPacketHandlerBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

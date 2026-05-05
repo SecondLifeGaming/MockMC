@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class EventManagerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		EventManagerBaseMock mock = new Stub();
+		EventManagerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

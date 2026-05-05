@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class SkinConfigurationBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		SkinConfigurationBaseMock mock = new Stub();
+		SkinConfigurationBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ResourcePackInfoBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ResourcePackInfoBaseMock mock = new Stub();
+		ResourcePackInfoBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getId());
 		assertSafeDefault(mock.getUrl());

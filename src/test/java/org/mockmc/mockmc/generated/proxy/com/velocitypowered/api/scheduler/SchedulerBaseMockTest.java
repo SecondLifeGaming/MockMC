@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class SchedulerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		SchedulerBaseMock mock = new Stub();
+		SchedulerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

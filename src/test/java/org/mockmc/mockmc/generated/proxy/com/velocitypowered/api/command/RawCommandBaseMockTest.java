@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class RawCommandBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		RawCommandBaseMock mock = new Stub();
+		RawCommandBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

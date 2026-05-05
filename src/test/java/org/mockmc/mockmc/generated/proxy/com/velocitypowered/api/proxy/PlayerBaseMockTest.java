@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class PlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		PlayerBaseMock mock = new Stub();
+		PlayerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.key());
 		assertSafeDefault(mock.getUniqueId());

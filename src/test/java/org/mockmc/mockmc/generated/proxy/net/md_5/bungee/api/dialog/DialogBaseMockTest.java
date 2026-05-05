@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class DialogBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		DialogBaseMock mock = new Stub();
+		DialogBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getBase());
 	}

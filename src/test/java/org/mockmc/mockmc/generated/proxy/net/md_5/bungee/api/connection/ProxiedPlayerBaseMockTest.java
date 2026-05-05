@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ProxiedPlayerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ProxiedPlayerBaseMock mock = new Stub();
+		ProxiedPlayerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getDisplayName());
 		assertSafeDefault(mock.getLocale());

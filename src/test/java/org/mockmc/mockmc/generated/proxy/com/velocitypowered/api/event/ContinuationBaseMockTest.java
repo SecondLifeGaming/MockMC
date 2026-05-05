@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ContinuationBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ContinuationBaseMock mock = new Stub();
+		ContinuationBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

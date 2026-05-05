@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class PermissionFunctionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		PermissionFunctionBaseMock mock = new Stub();
+		PermissionFunctionBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

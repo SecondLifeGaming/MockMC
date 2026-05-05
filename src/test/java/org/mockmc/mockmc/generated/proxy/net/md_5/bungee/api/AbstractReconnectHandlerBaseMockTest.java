@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class AbstractReconnectHandlerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		AbstractReconnectHandlerBaseMock mock = new Stub();
+		AbstractReconnectHandlerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

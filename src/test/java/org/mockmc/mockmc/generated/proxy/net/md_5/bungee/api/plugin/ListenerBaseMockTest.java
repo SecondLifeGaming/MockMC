@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ListenerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ListenerBaseMock mock = new Stub();
+		ListenerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

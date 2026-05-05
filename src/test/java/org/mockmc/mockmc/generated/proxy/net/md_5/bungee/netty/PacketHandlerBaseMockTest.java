@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class PacketHandlerBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		PacketHandlerBaseMock mock = new Stub();
+		PacketHandlerBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 	}

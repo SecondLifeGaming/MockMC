@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class KeyIdentifiableBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		KeyIdentifiableBaseMock mock = new Stub();
+		KeyIdentifiableBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getIdentifiedKey());
 	}

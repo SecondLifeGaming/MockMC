@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class TypedTagBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		TypedTagBaseMock mock = new Stub();
+		TypedTagBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

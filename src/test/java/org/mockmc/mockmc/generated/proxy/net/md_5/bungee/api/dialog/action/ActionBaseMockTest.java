@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ActionBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ActionBaseMock mock = new Stub();
+		ActionBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class SignedMessageBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		SignedMessageBaseMock mock = new Stub();
+		SignedMessageBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getMessage());
 		assertSafeDefault(mock.getSignerUuid());

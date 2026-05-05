@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class BungeeCipherBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		BungeeCipherBaseMock mock = new Stub();
+		BungeeCipherBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

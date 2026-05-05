@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class CommandInvocationBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		CommandInvocationBaseMock mock = new Stub<>();
+		CommandInvocationBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.source());
 		assertSafeDefault(mock.arguments());

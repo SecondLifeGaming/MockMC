@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class KeybindsBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		KeybindsBaseMock mock = new Stub();
+		KeybindsBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

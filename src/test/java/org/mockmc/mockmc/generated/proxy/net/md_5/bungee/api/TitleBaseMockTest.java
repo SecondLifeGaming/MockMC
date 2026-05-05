@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class TitleBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		TitleBaseMock mock = new Stub();
+		TitleBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.reset());
 		assertSafeDefault(mock.clear());

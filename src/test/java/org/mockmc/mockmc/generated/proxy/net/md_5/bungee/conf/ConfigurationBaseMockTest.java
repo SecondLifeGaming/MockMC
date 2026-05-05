@@ -9,11 +9,10 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ConfigurationBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ConfigurationBaseMock mock = new Stub();
+		ConfigurationBaseMock mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getFavicon());
@@ -21,6 +20,7 @@ class ConfigurationBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
 		assertSafeDefault(mock.getServersLock());
+		assertSafeDefault(mock.getListeners());
 	}
 
 	private static class Stub implements ConfigurationBaseMock

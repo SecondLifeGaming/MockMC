@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class BungeeZlibBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		BungeeZlibBaseMock mock = new Stub();
+		BungeeZlibBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class OrderedBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		OrderedBaseMock mock = new Stub<>();
+		OrderedBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ChannelMessageSinkBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ChannelMessageSinkBaseMock mock = new Stub();
+		ChannelMessageSinkBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

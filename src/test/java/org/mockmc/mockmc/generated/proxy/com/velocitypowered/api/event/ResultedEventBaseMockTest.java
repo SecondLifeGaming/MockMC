@@ -10,9 +10,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ResultedEventBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ResultedEventBaseMock mock = new Stub<>();
+		ResultedEventBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getResult());
 	}

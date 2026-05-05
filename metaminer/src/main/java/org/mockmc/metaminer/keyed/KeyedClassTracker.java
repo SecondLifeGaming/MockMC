@@ -45,6 +45,7 @@ public class KeyedClassTracker
 				final Class<?> legacyType = GenericTypeReflector.erase(((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0]);
 				try
 				{
+					@SuppressWarnings("unchecked")
 					RegistryKey<? extends Keyed> registryKey = (RegistryKey<? extends Keyed>) field.get(null);
 					if (registryKey != null) {
 						output.put(registryKey, legacyType);

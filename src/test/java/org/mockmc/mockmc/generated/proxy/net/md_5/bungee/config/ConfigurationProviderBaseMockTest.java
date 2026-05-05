@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ConfigurationProviderBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ConfigurationProviderBaseMock mock = new Stub();
+		ConfigurationProviderBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

@@ -9,14 +9,13 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class BaseComponentBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		BaseComponentBaseMock mock = new Stub();
+		BaseComponentBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
 		assertSafeDefault(mock.getExtra());
-		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.getStyle());
 		assertSafeDefault(mock.toLegacyText());
@@ -33,14 +32,15 @@ class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getInsertion());
 		assertSafeDefault(mock.duplicateWithoutFormatting());
 		assertSafeDefault(mock.toPlainText());
+		assertSafeDefault(mock.getShadowColor());
 	}
 
 	@Test
-	void testSafeDefaultsPart2() throws Exception
+	void testSafeDefaultsPart2()
 	{
-		BaseComponentBaseMock mock = new Stub();
+		BaseComponentBaseMock mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getShadowColor());
+		assertSafeDefault(mock.getFont());
 	}
 
 	private static class Stub implements BaseComponentBaseMock

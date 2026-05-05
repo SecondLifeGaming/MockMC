@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class TabExecutorBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		TabExecutorBaseMock mock = new Stub();
+		TabExecutorBaseMock mock = new Stub<>();
 		assertNotNull(mock);
 	}
 

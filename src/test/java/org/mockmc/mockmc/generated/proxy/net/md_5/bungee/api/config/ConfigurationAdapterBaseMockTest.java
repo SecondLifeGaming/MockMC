@@ -9,12 +9,12 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class ConfigurationAdapterBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		ConfigurationAdapterBaseMock mock = new Stub();
+		ConfigurationAdapterBaseMock mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getServers());
+		assertSafeDefault(mock.getListeners());
 	}
 
 	private static class Stub implements ConfigurationAdapterBaseMock

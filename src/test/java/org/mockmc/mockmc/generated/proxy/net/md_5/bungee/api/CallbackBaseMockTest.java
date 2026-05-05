@@ -9,9 +9,9 @@ import org.mockmc.mockmc.generated.GeneratedTestBase;
 class CallbackBaseMockTest extends GeneratedTestBase
 {
 	@Test
-	void testSafeDefaults() throws Exception
+	void testSafeDefaults()
 	{
-		CallbackBaseMock mock = new Stub<>();
+		CallbackBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
 	}
 
