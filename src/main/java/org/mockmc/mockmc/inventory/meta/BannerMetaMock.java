@@ -21,7 +21,7 @@ import java.util.Objects;
 @SuppressWarnings("unchecked")
 public class BannerMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.BannerMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BannerMetaBaseMock
 {
 	private static final String PATTERNS = "patterns";
 

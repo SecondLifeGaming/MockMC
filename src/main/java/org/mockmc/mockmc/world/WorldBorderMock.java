@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Range;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated.org.bukkit.WorldBorderBaseMock
+public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated.server.org.bukkit.WorldBorderBaseMock
 {
 
 	private static final double DEFAULT_BORDER_SIZE = 6.0E7D;

@@ -36,7 +36,7 @@ public class ConsoleCommandSenderMock
 		implements
 			ConsoleCommandSender,
 			MessageTarget,
-			org.mockmc.mockmc.generated.org.bukkit.command.RemoteConsoleCommandSenderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.command.RemoteConsoleCommandSenderBaseMock
 {
 
 	private final Spigot spigot = new Spigot();

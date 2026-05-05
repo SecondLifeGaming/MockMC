@@ -13,7 +13,7 @@ import java.util.UUID;
 public class AbstractCowMock extends AnimalsMock
 		implements
 			AbstractCow,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractCowBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractCowBaseMock
 {
 
 	/**

@@ -26,7 +26,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,25 +46,16 @@ public class RecipeDataGenerator implements DataGenerator
 	public static final String STONECUTTING = "stonecutting";
 	public static final String SMITHING = "smithing";
 
-	private static final Map<Class<? extends Recipe>, String> RECIPE_CLASS_MAP = Map.of(
-			CraftingRecipe.class, CRAFTING,
-			FurnaceRecipe.class, SMELTING,
-			BlastingRecipe.class, BLASTING,
-			SmokingRecipe.class, SMOKING,
-			CampfireRecipe.class, CAMPFIRE_COOKING,
-			StonecuttingRecipe.class, STONECUTTING,
-			SmithingRecipe.class, SMITHING
-	);
+	private static final Map<Class<? extends Recipe>, String> RECIPE_CLASS_MAP = Map.of(CraftingRecipe.class, CRAFTING,
+			FurnaceRecipe.class, SMELTING, BlastingRecipe.class, BLASTING, SmokingRecipe.class, SMOKING,
+			CampfireRecipe.class, CAMPFIRE_COOKING, StonecuttingRecipe.class, STONECUTTING, SmithingRecipe.class,
+			SMITHING);
 
-	private static final Map<String, Function<Recipe, JsonElement>> RECIPE_FACTORY_MAP = Map.of(
-			CRAFTING, CraftingRecipeElementFactory::toJson,
-			SMELTING, SmeltingRecipeElementFactory::toJson,
-			BLASTING, BlastingRecipeElementFactory::toJson,
-			SMOKING, SmokingRecipeElementFactory::toJson,
-			CAMPFIRE_COOKING, CampfireRecipeElementFactory::toJson,
-			STONECUTTING, StoneCuttingRecipeElementFactory::toJson,
-			SMITHING, SmithingRecipeElementFactory::toJson
-	);
+	private static final Map<String, Function<Recipe, JsonElement>> RECIPE_FACTORY_MAP = Map.of(CRAFTING,
+			CraftingRecipeElementFactory::toJson, SMELTING, SmeltingRecipeElementFactory::toJson, BLASTING,
+			BlastingRecipeElementFactory::toJson, SMOKING, SmokingRecipeElementFactory::toJson, CAMPFIRE_COOKING,
+			CampfireRecipeElementFactory::toJson, STONECUTTING, StoneCuttingRecipeElementFactory::toJson, SMITHING,
+			SmithingRecipeElementFactory::toJson);
 
 	private final File dataFolder;
 
@@ -75,41 +65,48 @@ public class RecipeDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
-		Map<String, List<Recipe>> recipes = new HashMap<>();
-
-		// Group all the existing recipes into groups
-		Iterator<Recipe> iterator = Bukkit.recipeIterator();
-		while (iterator.hasNext())
+		try
 		{
-			Recipe recipe = iterator.next();
-			String recipeType = getRecipeType(recipe);
+			Map<String, List<Recipe>> recipes = new HashMap<>();
 
-			recipes.computeIfAbsent(recipeType, k -> new ArrayList<>()).add(recipe);
+			// Group all the existing recipes into groups
+			Iterator<Recipe> iterator = Bukkit.recipeIterator();
+			while (iterator.hasNext())
+			{
+				Recipe recipe = iterator.next();
+				String recipeType = getRecipeType(recipe);
+
+				recipes.computeIfAbsent(recipeType, k -> new ArrayList<>()).add(recipe);
+			}
+
+			// Process each groups
+			LOGGER.info("Recipe summary:");
+			int totalRecipes = 0;
+			for (Map.Entry<String, List<Recipe>> entry : recipes.entrySet())
+			{
+				String recipeType = entry.getKey();
+				List<Recipe> recipeList = entry.getValue();
+
+				totalRecipes += recipeList.size();
+
+				LOGGER.info(" - {}: {}", recipeType, recipeList.size());
+
+				Function<Recipe, JsonElement> factory = RECIPE_FACTORY_MAP.get(recipeType);
+				Preconditions.checkNotNull(factory, "Recipe with type '%s' does not have a factory.", recipeType);
+
+				JsonArray recipeListJson = new JsonArray(recipeList.size());
+				recipeList.stream().map(factory).forEach(recipeListJson::add);
+				JsonUtil.dump(recipeListJson, new File(dataFolder, String.format("%s.json", recipeType)));
+			}
+
+			LOGGER.info(" - TOTAL: {}", totalRecipes);
 		}
-
-		// Process each groups
-		LOGGER.info("Recipe summary:");
-		int totalRecipes = 0;
-		for (Map.Entry<String, List<Recipe>> entry : recipes.entrySet())
+		catch (Exception | LinkageError _)
 		{
-			String recipeType = entry.getKey();
-			List<Recipe> recipeList = entry.getValue();
-
-			totalRecipes += recipeList.size();
-
-			LOGGER.info(" - {}: {}", recipeType, recipeList.size());
-
-			Function<Recipe, JsonElement> factory = RECIPE_FACTORY_MAP.get(recipeType);
-			Preconditions.checkNotNull(factory, "Recipe with type '%s' does not have a factory.", recipeType);
-
-			JsonArray recipeListJson = new JsonArray(recipeList.size());
-			recipeList.stream().map(factory).forEach(recipeListJson::add);
-			JsonUtil.dump(recipeListJson, new File(dataFolder, String.format("%s.json", recipeType)));
+			// Skip if recipes are not available
 		}
-
-		LOGGER.info(" - TOTAL: {}", totalRecipes);
 	}
 
 	@Nullable
@@ -119,7 +116,8 @@ public class RecipeDataGenerator implements DataGenerator
 		{
 			Class<?> clazz = mapEntry.getKey();
 
-			Preconditions.checkArgument(Recipe.class.isAssignableFrom(clazz), "The class %s is not a Recipe", clazz.getName());
+			Preconditions.checkArgument(Recipe.class.isAssignableFrom(clazz), "The class %s is not a Recipe",
+					clazz.getName());
 			if (clazz.isInstance(recipe))
 			{
 				return mapEntry.getValue();

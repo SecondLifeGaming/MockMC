@@ -61,7 +61,7 @@ import java.util.logging.Logger;
 @SuppressWarnings(
 {"unchecked", "removal", "java:S1133"})
 @Deprecated(since = "1.7.2")
-public class UnsafeValuesMock implements org.mockmc.mockmc.generated.org.bukkit.UnsafeValuesBaseMock
+public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.bukkit.UnsafeValuesBaseMock
 {
 
 	private static final Logger LOGGER = Logger.getLogger(UnsafeValuesMock.class.getName());

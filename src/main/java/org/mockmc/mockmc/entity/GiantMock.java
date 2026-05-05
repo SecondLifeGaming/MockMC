@@ -11,7 +11,10 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class GiantMock extends MonsterMock implements Giant, org.mockmc.mockmc.generated.org.bukkit.entity.GiantBaseMock
+public class GiantMock extends MonsterMock
+		implements
+			Giant,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GiantBaseMock
 {
 
 	/**

@@ -23,7 +23,7 @@ import java.util.Set;
 public class FurnaceInventoryMock extends InventoryMock
 		implements
 			FurnaceInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.FurnaceInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.FurnaceInventoryBaseMock
 {
 
 	private static final int SMELTING_SLOT = 0;

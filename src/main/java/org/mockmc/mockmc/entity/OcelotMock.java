@@ -9,7 +9,7 @@ import java.util.UUID;
 public class OcelotMock extends AnimalsMock
 		implements
 			Ocelot,
-			org.mockmc.mockmc.generated.org.bukkit.entity.OcelotBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.OcelotBaseMock
 {
 
 	private boolean isTrusting = false;

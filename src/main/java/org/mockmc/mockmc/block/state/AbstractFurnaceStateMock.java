@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.inventory.FurnaceInventoryMock;
 import java.util.Objects;
 
-import org.mockmc.mockmc.generated.org.bukkit.block.FurnaceBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.block.FurnaceBaseMock;
 
 /**
  * Mock implementation of a {@link Furnace}.

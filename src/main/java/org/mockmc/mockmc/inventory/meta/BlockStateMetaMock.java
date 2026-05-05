@@ -83,7 +83,7 @@ import java.util.Map;
 {"deprecation", "unchecked"})
 public class BlockStateMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.BlockStateMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BlockStateMetaBaseMock
 {
 
 	private static final String BLOCK_MATERIAL = "blockMaterial";

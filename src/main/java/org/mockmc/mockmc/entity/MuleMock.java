@@ -17,7 +17,7 @@ import java.util.UUID;
 public class MuleMock extends ChestedHorseMock
 		implements
 			Mule,
-			org.mockmc.mockmc.generated.org.bukkit.entity.MuleBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.MuleBaseMock
 {
 
 	/**

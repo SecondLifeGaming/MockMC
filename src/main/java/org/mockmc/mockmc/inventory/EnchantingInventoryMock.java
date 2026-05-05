@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class EnchantingInventoryMock extends InventoryMock
 		implements
 			EnchantingInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.EnchantingInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.EnchantingInventoryBaseMock
 {
 
 	private static final int ITEM_SLOT = 0;

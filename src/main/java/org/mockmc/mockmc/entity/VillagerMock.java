@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 public class VillagerMock extends AbstractVillagerMock
 		implements
 			Villager,
-			org.mockmc.mockmc.generated.org.bukkit.entity.VillagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.VillagerBaseMock
 {
 
 	private static final int MIN_VILLAGER_LEVEL = 1;

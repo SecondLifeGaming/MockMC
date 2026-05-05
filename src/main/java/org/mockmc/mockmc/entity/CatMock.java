@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CatMock extends TameableAnimalMock
 		implements
 			Cat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CatBaseMock
 {
 
 	private SoundVariant soundVariant = SoundVariant.CLASSIC;

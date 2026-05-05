@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ShulkerMock extends GolemMock
 		implements
 			Shulker,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ShulkerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ShulkerBaseMock
 {
 
 	private int peekAmount = 0;

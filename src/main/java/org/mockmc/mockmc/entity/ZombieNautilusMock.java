@@ -17,7 +17,7 @@ import java.util.UUID;
 @NullMarked
 public class ZombieNautilusMock extends AbstractNautilusMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieNautilusBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieNautilusBaseMock
 {
 
 	private Variant variant = Variant.TEMPERATE;
@@ -57,7 +57,7 @@ public class ZombieNautilusMock extends AbstractNautilusMock
 
 	public static class VariantMock
 			implements
-				org.mockmc.mockmc.generated.org.bukkit.entity.ZombieNautilusVariantBaseMock
+				org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieNautilusVariantBaseMock
 	{
 
 		private final NamespacedKey key;

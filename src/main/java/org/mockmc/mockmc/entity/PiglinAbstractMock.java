@@ -17,7 +17,7 @@ import java.util.UUID;
 public abstract class PiglinAbstractMock extends MonsterMock
 		implements
 			PiglinAbstract,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PiglinAbstractBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinAbstractBaseMock
 {
 
 	private boolean isImmuneToZombification = false;

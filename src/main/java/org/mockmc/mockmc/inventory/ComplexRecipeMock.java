@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public class ComplexRecipeMock
 		implements
 			ComplexRecipe,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.ComplexRecipeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ComplexRecipeBaseMock
 {
 
 	private final NamespacedKey key;

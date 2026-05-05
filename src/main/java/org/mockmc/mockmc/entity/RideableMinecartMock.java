@@ -10,7 +10,7 @@ import java.util.UUID;
 public class RideableMinecartMock extends MinecartMock
 		implements
 			RideableMinecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.minecart.RideableMinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.RideableMinecartBaseMock
 {
 
 	/**

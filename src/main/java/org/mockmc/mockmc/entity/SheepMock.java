@@ -20,7 +20,10 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class SheepMock extends AnimalsMock implements Sheep, org.mockmc.mockmc.generated.org.bukkit.entity.SheepBaseMock
+public class SheepMock extends AnimalsMock
+		implements
+			Sheep,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SheepBaseMock
 {
 
 	private boolean sheared = false;

@@ -25,7 +25,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class CrossbowMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.CrossbowMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.CrossbowMetaBaseMock
 {
 
 	private List<ItemStack> projectiles;

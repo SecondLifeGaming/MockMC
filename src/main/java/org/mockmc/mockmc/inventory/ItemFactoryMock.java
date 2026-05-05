@@ -22,7 +22,7 @@ import java.util.Objects;
  * Mock implementation of an {@link ItemFactory}.
  */
 @SuppressWarnings("deprecation")
-public class ItemFactoryMock implements org.mockmc.mockmc.generated.org.bukkit.inventory.ItemFactoryBaseMock
+public class ItemFactoryMock implements org.mockmc.mockmc.generated.server.org.bukkit.inventory.ItemFactoryBaseMock
 {
 
 	private final Color defaultLeatherColor = Color.fromRGB(10511680);

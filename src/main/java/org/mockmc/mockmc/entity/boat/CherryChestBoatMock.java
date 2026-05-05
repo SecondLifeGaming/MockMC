@@ -16,7 +16,7 @@ import java.util.UUID;
 public class CherryChestBoatMock extends ChestBoatMock
 		implements
 			CherryChestBoat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.boat.CherryChestBoatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.CherryChestBoatBaseMock
 {
 
 	public CherryChestBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)

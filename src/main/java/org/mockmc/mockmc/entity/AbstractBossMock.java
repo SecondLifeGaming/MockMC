@@ -12,7 +12,7 @@ import java.util.UUID;
 abstract class AbstractBossMock extends MonsterMock
 		implements
 			Boss,
-			org.mockmc.mockmc.generated.org.bukkit.entity.BossBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BossBaseMock
 {
 
 	protected final BossBarMock bossBarMock;
@@ -42,6 +42,6 @@ abstract class AbstractBossMock extends MonsterMock
 	public @NotNull net.kyori.adventure.text.event.HoverEvent<net.kyori.adventure.text.event.HoverEvent.ShowEntity> asHoverEvent(
 			@NotNull java.util.function.UnaryOperator<net.kyori.adventure.text.event.HoverEvent.ShowEntity> op)
 	{
-		return org.mockmc.mockmc.generated.org.bukkit.entity.BossBaseMock.super.asHoverEvent(op);
+		return org.mockmc.mockmc.generated.server.org.bukkit.entity.BossBaseMock.super.asHoverEvent(op);
 	}
 }

@@ -30,7 +30,7 @@ class FoliaGlobalRegionSchedulerTest
 	@BeforeEach
 	void setUp()
 	{
-		scheduler = new FoliaGlobalRegionScheduler(bukkitScheduler);
+		scheduler = new FoliaGlobalRegionScheduler(server, bukkitScheduler);
 		plugin = MockMC.createMockPlugin();
 	}
 

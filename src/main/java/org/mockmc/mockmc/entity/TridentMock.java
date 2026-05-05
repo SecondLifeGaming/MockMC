@@ -11,7 +11,7 @@ import java.util.UUID;
 public class TridentMock extends AbstractArrowMock
 		implements
 			Trident,
-			org.mockmc.mockmc.generated.org.bukkit.entity.TridentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.TridentBaseMock
 {
 
 	private boolean glint;

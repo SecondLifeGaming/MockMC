@@ -43,7 +43,9 @@ import java.util.logging.Logger;
 /**
  * Mock implementation of a {@link BukkitScheduler}.
  */
-public class BukkitSchedulerMock implements org.mockmc.mockmc.generated.org.bukkit.scheduler.BukkitSchedulerBaseMock
+public class BukkitSchedulerMock
+		implements
+			org.mockmc.mockmc.generated.server.org.bukkit.scheduler.BukkitSchedulerBaseMock
 {
 
 	private static final String LOGGER_NAME = "BukkitSchedulerMock";
@@ -215,7 +217,7 @@ public class BukkitSchedulerMock implements org.mockmc.mockmc.generated.org.bukk
 
 	private void processEntities()
 	{
-		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntities())
+		for (EntityMock entity : ((ServerMock) Bukkit.getServer()).getEntitiesInternal())
 		{
 			if (!entity.isValid())
 			{

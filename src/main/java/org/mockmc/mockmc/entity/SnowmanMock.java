@@ -19,7 +19,7 @@ public class SnowmanMock extends GolemMock
 			Snowman,
 			MockRangedEntity<SnowmanMock>,
 			Shearable,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SnowmanBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnowmanBaseMock
 {
 
 	private boolean derpMode;

@@ -19,7 +19,7 @@ import java.util.UUID;
 {"removal"})
 public class LightningStrikeMock extends EntityMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.LightningStrikeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LightningStrikeBaseMock
 {
 
 	private boolean isEffect = false;
@@ -151,6 +151,6 @@ public class LightningStrikeMock extends EntityMock
 	@NotNull
 	public LightningStrike.Spigot spigot()
 	{
-		return org.mockmc.mockmc.generated.org.bukkit.entity.LightningStrikeBaseMock.super.spigot();
+		return org.mockmc.mockmc.generated.server.org.bukkit.entity.LightningStrikeBaseMock.super.spigot();
 	}
 }

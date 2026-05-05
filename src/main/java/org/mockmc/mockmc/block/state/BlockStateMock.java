@@ -26,7 +26,7 @@ import java.util.List;
  */
 @SuppressWarnings(
 {"deprecation", "removal"})
-public class BlockStateMock implements org.mockmc.mockmc.generated.org.bukkit.block.BlockStateBaseMock
+public class BlockStateMock implements org.mockmc.mockmc.generated.server.org.bukkit.block.BlockStateBaseMock
 {
 
 	@NotNull

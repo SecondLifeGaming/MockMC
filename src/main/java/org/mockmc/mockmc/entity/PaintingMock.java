@@ -18,7 +18,7 @@ import java.util.UUID;
 public class PaintingMock extends HangingMock
 		implements
 			Painting,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PaintingBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PaintingBaseMock
 {
 
 	@NotNull

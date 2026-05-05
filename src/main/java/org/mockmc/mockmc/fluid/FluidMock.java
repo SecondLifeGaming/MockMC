@@ -9,7 +9,7 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 public class FluidMock extends OldKeyedEnumMock<Fluid>
 		implements
 			Fluid,
-			org.mockmc.mockmc.generated.org.bukkit.FluidBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.FluidBaseMock
 {
 
 	public FluidMock(String name, int ordinal, NamespacedKey key)

@@ -23,7 +23,7 @@ import java.util.UUID;
 public class AreaEffectCloudMock extends EntityMock
 		implements
 			AreaEffectCloud,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AreaEffectCloudBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AreaEffectCloudBaseMock
 {
 
 	private int duration = 600;

@@ -25,7 +25,7 @@ import java.util.Map;
 public class EntityEquipmentMock
 		implements
 			EntityEquipment,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.EntityEquipmentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.EntityEquipmentBaseMock
 {
 
 	@NotNull

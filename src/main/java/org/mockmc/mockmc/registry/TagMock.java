@@ -25,7 +25,7 @@ public class TagMock<T extends Keyed>
 		implements
 			Tag<T>,
 			org.bukkit.Tag<T>,
-			org.mockmc.mockmc.generated.org.bukkit.TagBaseMock<T>
+			org.mockmc.mockmc.generated.server.org.bukkit.TagBaseMock<T>
 {
 
 	private final TagKey<T> tagKey;

@@ -16,7 +16,7 @@ import org.mockmc.mockmc.inventory.InventoryMock;
 public class DispenserStateMock extends ContainerStateMock
 		implements
 			Dispenser,
-			org.mockmc.mockmc.generated.org.bukkit.block.DispenserBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.DispenserBaseMock
 {
 
 	/**

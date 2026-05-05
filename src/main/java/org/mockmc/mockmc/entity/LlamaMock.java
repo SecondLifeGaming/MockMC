@@ -25,7 +25,7 @@ public class LlamaMock extends ChestedHorseMock
 		implements
 			Llama,
 			MockRangedEntity<LlamaMock>,
-			org.mockmc.mockmc.generated.org.bukkit.entity.TraderLlamaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.TraderLlamaBaseMock
 {
 
 	@NotNull

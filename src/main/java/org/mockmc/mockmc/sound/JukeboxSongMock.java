@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class JukeboxSongMock implements JukeboxSong, org.mockmc.mockmc.generated.org.bukkit.JukeboxSongBaseMock
+public class JukeboxSongMock implements JukeboxSong, org.mockmc.mockmc.generated.server.org.bukkit.JukeboxSongBaseMock
 {
 
 	private final NamespacedKey key;

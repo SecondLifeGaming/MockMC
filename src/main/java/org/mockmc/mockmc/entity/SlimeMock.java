@@ -7,7 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class SlimeMock extends MobMock implements Slime, org.mockmc.mockmc.generated.org.bukkit.entity.SlimeBaseMock
+public class SlimeMock extends MobMock
+		implements
+			Slime,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SlimeBaseMock
 {
 
 	private int size = 1;

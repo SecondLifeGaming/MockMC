@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 public class HorseInventoryMock extends AbstractHorseInventoryMock
 		implements
 			HorseInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.HorseInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.HorseInventoryBaseMock
 {
 
 	private static final int ARMOR_SLOT = 1;

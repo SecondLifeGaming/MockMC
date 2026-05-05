@@ -15,7 +15,7 @@ import java.util.UUID;
 public class HoglinMock extends AnimalsMock
 		implements
 			Hoglin,
-			org.mockmc.mockmc.generated.org.bukkit.entity.HoglinBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.HoglinBaseMock
 {
 
 	private boolean immuneToZombification = false;

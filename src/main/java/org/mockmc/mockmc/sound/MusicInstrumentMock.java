@@ -86,6 +86,8 @@ public class MusicInstrumentMock extends MusicInstrument
 		return this.translationKey;
 	}
 
+	private static final String SOUND_KEY = "sound";
+
 	@ApiStatus.Internal
 	public static MusicInstrumentMock from(JsonObject data)
 	{
@@ -103,9 +105,9 @@ public class MusicInstrumentMock extends MusicInstrument
 		Preconditions.checkArgument(data.has("range"), "Missing json range");
 		float range = data.get("range").getAsFloat();
 
-		Preconditions.checkArgument(data.has("sound"), "Missing json sound");
-		NamespacedKey soundKey = NamespacedKey.fromString(data.get("sound").getAsString());
-		Preconditions.checkNotNull(soundKey, "Unknown sound with key: " + data.get("sound").getAsString());
+		Preconditions.checkArgument(data.has(SOUND_KEY), "Missing json sound");
+		NamespacedKey soundKey = NamespacedKey.fromString(data.get(SOUND_KEY).getAsString());
+		Preconditions.checkNotNull(soundKey, "Unknown sound with key: " + data.get(SOUND_KEY).getAsString());
 		Sound sound = Registry.SOUNDS.get(soundKey);
 		Preconditions.checkNotNull(sound, "Unknown sound with key: " + soundKey.key().asString());
 

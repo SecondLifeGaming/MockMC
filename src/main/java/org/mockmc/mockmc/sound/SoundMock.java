@@ -10,7 +10,7 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 public class SoundMock extends OldKeyedEnumMock<Sound>
 		implements
 			Sound,
-			org.mockmc.mockmc.generated.org.bukkit.SoundBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.SoundBaseMock
 {
 
 	public SoundMock(String name, int ordinal, NamespacedKey key)

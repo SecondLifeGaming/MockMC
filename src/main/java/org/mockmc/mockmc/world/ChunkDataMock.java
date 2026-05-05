@@ -19,7 +19,9 @@ import java.util.Map;
  * @mockmc.version 1.21-1.0.0
  */
 @SuppressWarnings("removal")
-public class ChunkDataMock implements org.mockmc.mockmc.generated.org.bukkit.generator.ChunkGeneratorChunkDataBaseMock
+public class ChunkDataMock
+		implements
+			org.mockmc.mockmc.generated.server.org.bukkit.generator.ChunkGeneratorChunkDataBaseMock
 {
 
 	@NotNull

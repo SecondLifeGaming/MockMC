@@ -5,7 +5,7 @@ import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
-import org.mockmc.mockmc.generated.io.papermc.paper.persistence.PersistentDataContainerViewBaseMock;
+import org.mockmc.mockmc.generated.server.io.papermc.paper.persistence.PersistentDataContainerViewBaseMock;
 
 public abstract class PersistentDataContainerViewMock
 		implements

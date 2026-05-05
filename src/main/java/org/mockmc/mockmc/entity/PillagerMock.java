@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.inventory.InventoryMock;
-import org.mockmc.mockmc.generated.org.bukkit.entity.PillagerBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.entity.PillagerBaseMock;
 import java.util.UUID;
 
 /**

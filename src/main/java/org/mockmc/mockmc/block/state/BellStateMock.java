@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class BellStateMock extends TileStateMock
 		implements
 			Bell,
-			org.mockmc.mockmc.generated.org.bukkit.block.BellBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BellBaseMock
 {
 
 	/**

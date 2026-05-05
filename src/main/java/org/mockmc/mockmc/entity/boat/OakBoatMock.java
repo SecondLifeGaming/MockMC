@@ -15,7 +15,7 @@ import java.util.UUID;
 public class OakBoatMock extends BoatMock
 		implements
 			OakBoat,
-			org.mockmc.mockmc.generated.org.bukkit.entity.boat.OakBoatBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.OakBoatBaseMock
 {
 
 	public OakBoatMock(@NotNull ServerMock server, @NotNull UUID uuid)

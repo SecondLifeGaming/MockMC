@@ -19,7 +19,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class TropicalFishBucketMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.TropicalFishBucketMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.TropicalFishBucketMetaBaseMock
 {
 
 	private DyeColor patternColor;

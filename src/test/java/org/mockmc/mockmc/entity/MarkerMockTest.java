@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith(MockMCExtension.class)
-public class MarkerMockTest
+class MarkerMockTest
 {
 
 	@MockMCInject

@@ -17,7 +17,7 @@ import java.util.UUID;
 public class StrayMock extends AbstractSkeletonMock
 		implements
 			Stray,
-			org.mockmc.mockmc.generated.org.bukkit.entity.StrayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.StrayBaseMock
 {
 
 	/**

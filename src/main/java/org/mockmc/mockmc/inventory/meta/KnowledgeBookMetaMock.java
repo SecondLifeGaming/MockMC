@@ -20,7 +20,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class KnowledgeBookMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.KnowledgeBookMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.KnowledgeBookMetaBaseMock
 {
 
 	private static final int MAX_RECIPES = 32767;

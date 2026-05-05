@@ -20,7 +20,7 @@ import java.util.Map;
 public class UseCooldownComponentMock
 		implements
 			UseCooldownComponent,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.UseCooldownComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.UseCooldownComponentBaseMock
 {
 
 	@Nullable

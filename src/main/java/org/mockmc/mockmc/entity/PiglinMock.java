@@ -23,7 +23,7 @@ import java.util.UUID;
 public class PiglinMock extends PiglinAbstractMock
 		implements
 			Piglin,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PiglinBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinBaseMock
 {
 
 	private final Set<Material> allowedInterestItems = new HashSet<>();

@@ -12,7 +12,7 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.block.state.BlockStateMockFactory;
-import org.mockmc.mockmc.generated.org.bukkit.block.data.BlockDataBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMock;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

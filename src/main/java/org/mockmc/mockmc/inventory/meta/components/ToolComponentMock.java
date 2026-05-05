@@ -33,7 +33,7 @@ import java.util.Objects;
 @SuppressWarnings("UnstableApiUsage")
 public class ToolComponentMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.ToolComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.ToolComponentBaseMock
 {
 
 	private final List<ToolRule> toolRules = new ArrayList<>();
@@ -157,7 +157,7 @@ public class ToolComponentMock
 	@SuppressWarnings("UnstableApiUsage")
 	public static class ToolRuleMock
 			implements
-				org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.ToolComponentToolRuleBaseMock
+				org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.ToolComponentToolRuleBaseMock
 	{
 
 		private final Collection<Material> blocks = new ArrayList<>();

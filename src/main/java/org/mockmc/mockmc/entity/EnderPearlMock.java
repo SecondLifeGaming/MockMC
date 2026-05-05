@@ -13,7 +13,7 @@ import java.util.UUID;
 public class EnderPearlMock extends ThrowableProjectileMock
 		implements
 			EnderPearl,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EnderPearlBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderPearlBaseMock
 {
 
 	@NotNull

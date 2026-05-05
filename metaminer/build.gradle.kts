@@ -1,6 +1,5 @@
 plugins {
 	id("java")
-	id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
 	id("xyz.jpenilla.run-paper") version "3.0.2"
 	id("com.gradleup.shadow") version "9.4.1"
 	id("jacoco")
@@ -19,17 +18,30 @@ repositories {
 }
 
 dependencies {
-	paperweight.paperDevBundle("${rootProject.property("paper.api.full-version")}")
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
-	// implementation(project(":"))
+	implementation("commons-io:commons-io:2.18.0")
 	implementation("com.squareup:javapoet:1.13.0")
 	implementation("io.leangen.geantyref:geantyref:1.3.16")
 	implementation("com.google.code.gson:gson:2.11.0")
+	implementation("net.md-5:SpecialSource:1.11.0")
+    
+    // Force modern ASM 9.8 for Java 25 support
+    val asmVersion = "9.8"
+    implementation("org.ow2.asm:asm:$asmVersion")
+    implementation("org.ow2.asm:asm-commons:$asmVersion")
+    implementation("org.ow2.asm:asm-tree:$asmVersion")
+    implementation("org.ow2.asm:asm-analysis:$asmVersion")
+    
+	implementation("org.tukaani:xz:1.10")
+	implementation("io.sigpipe:jbsdiff:1.0")
+	implementation("org.apache.commons:commons-compress:1.27.1")
 
-
-	// Dependencies for Unit Tests
 	testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+configurations.all {
+    resolutionStrategy.force("org.ow2.asm:asm:9.8", "org.ow2.asm:asm-commons:9.8", "org.ow2.asm:asm-tree:9.8", "org.ow2.asm:asm-analysis:9.8")
 }
 
 tasks {
@@ -72,6 +84,17 @@ tasks {
 		mainClass.set("org.mockmc.metaminer.StandaloneRunner")
 		classpath = sourceSets.main.get().runtimeClasspath
 		args(rootProject.projectDir.absolutePath)
+		standardOutput = System.out
+		errorOutput = System.err
+		
+		val javaToolchains = project.extensions.getByType<JavaToolchainService>()
+		javaLauncher.set(javaToolchains.launcherFor {
+			languageVersion.set(JavaLanguageVersion.of(25))
+		})
+
+		doFirst {
+			println("Running Generator with Classpath: ${classpath.asPath}")
+		}
 	}
 
 	jacocoTestReport {

@@ -7,18 +7,19 @@ import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-public class GameEventMock extends GameEvent
+public class GameEventMock extends GameEvent implements org.mockmc.mockmc.generated.server.org.bukkit.GameEventBaseMock
 {
 
 	@Override
 	public int getRange()
 	{
-		throw new org.mockmc.mockmc.exception.UnimplementedOperationException();
+		return 0;
 	}
+
 	@Override
 	public int getVibrationLevel()
 	{
-		throw new org.mockmc.mockmc.exception.UnimplementedOperationException();
+		return 0;
 	}
 
 	private final NamespacedKey key;

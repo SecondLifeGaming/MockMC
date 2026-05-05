@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CaveSpiderMock extends SpiderMock
 		implements
 			CaveSpider,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CaveSpiderBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CaveSpiderBaseMock
 {
 
 	/**

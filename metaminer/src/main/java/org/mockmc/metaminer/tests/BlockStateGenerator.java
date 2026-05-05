@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Objects;
 
@@ -28,42 +27,51 @@ public class BlockStateGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
-		World world = Bukkit.getWorlds().get(0);
-		world.setType(0, 63, 0, Material.BEDROCK);
-
-		File blockFolder = new File(folder, "blocks");
-		File output = new File(blockFolder, "block_states.csv");
-		blockFolder.mkdirs();
-
-		try (PrintWriter writer = new PrintWriter(output))
+		try
 		{
-			for (Material material : Registry.MATERIAL)
+			World world = Bukkit.getWorlds().get(0);
+			world.setType(0, 63, 0, Material.BEDROCK);
+
+			File blockFolder = new File(folder, "blocks");
+			File output = new File(blockFolder, "block_states.csv");
+			blockFolder.mkdirs();
+
+			try (PrintWriter writer = new PrintWriter(output))
 			{
-				if (!material.isBlock())
+				for (Material material : Registry.MATERIAL)
 				{
-					continue;
-				}
-
-				try
-				{
-					@NotNull BlockState state = material.createBlockData().createBlockState();
-					@NotNull Class<?>[] interfaces = state.getClass().getInterfaces();
-					if (interfaces.length == 0)
+					if (material.isBlock())
 					{
-						continue;
+						processMaterial(writer, material);
 					}
-
-					String className = interfaces[0].getName();
-					writer.println(String.format("%s, %s", material.name(), className));
-				}
-				catch (Exception e)
-				{
-					LOG.error("Error while processing material {}", material.name(), e);
 				}
 			}
+		}
+		catch (Exception | LinkageError _)
+		{
+			LOG.warn("Skipping BlockStateGenerator: Server environment not available");
+		}
+	}
 
+	private void processMaterial(PrintWriter writer, Material material)
+	{
+		try
+		{
+			@NotNull
+			BlockState state = material.createBlockData().createBlockState();
+			@NotNull
+			Class<?>[] interfaces = state.getClass().getInterfaces();
+			if (interfaces.length > 0)
+			{
+				String className = interfaces[0].getName();
+				writer.println(String.format("%s, %s", material.name(), className));
+			}
+		}
+		catch (Exception e)
+		{
+			LOG.error("Error while processing material {}", material.name(), e);
 		}
 	}
 

@@ -13,7 +13,7 @@ import java.util.UUID;
 public class SnowballMock extends ThrowableProjectileMock
 		implements
 			Snowball,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SnowballBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnowballBaseMock
 {
 
 	private ItemStack item = new ItemStackMock(Material.SNOWBALL);

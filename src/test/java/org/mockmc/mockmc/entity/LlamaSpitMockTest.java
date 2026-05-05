@@ -10,7 +10,7 @@ import org.mockmc.mockmc.MockMCInject;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockMCExtension.class)
-public class LlamaSpitMockTest
+class LlamaSpitMockTest
 {
 
 	@MockMCInject

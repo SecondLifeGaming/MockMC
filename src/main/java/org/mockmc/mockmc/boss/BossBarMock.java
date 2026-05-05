@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * Mock implementation of {@link BossBar}.
  */
-public class BossBarMock implements org.mockmc.mockmc.generated.org.bukkit.boss.BossBarBaseMock
+public class BossBarMock implements org.mockmc.mockmc.generated.server.org.bukkit.boss.BossBarBaseMock
 
 {
 

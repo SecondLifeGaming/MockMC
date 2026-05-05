@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class PersistentDataContainerMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.persistence.PersistentDataContainerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.persistence.PersistentDataContainerBaseMock
 {
 
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();

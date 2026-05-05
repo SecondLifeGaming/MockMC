@@ -14,7 +14,10 @@ import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class DamageTypeMock implements DamageType, org.mockmc.mockmc.generated.org.bukkit.damage.DamageTypeBaseMock
+public class DamageTypeMock
+		implements
+			DamageType,
+			org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageTypeBaseMock
 {
 
 	static final String EXHAUSTION_KEY = "exhaustion";

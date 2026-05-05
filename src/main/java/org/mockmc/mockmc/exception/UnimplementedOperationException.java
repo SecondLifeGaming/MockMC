@@ -18,6 +18,7 @@ import java.io.Serial;
  *
  * @author seeseemelk
  */
+@SuppressWarnings("java:S110")
 public class UnimplementedOperationException extends TestAbortedException
 {
 

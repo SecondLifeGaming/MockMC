@@ -20,7 +20,7 @@ import java.util.List;
 public class BeehiveStateMock extends TileStateMock
 		implements
 			Beehive,
-			org.mockmc.mockmc.generated.org.bukkit.block.BeehiveBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BeehiveBaseMock
 {
 
 	@Nullable

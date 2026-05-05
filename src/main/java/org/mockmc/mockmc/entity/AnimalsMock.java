@@ -16,10 +16,11 @@ import java.util.UUID;
  *
  * @see AgeableMock
  */
+@SuppressWarnings("java:S110")
 public class AnimalsMock extends AgeableMock
 		implements
 			Animals,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AnimalsBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AnimalsBaseMock
 {
 
 	@Nullable

@@ -10,7 +10,7 @@ import java.util.UUID;
 public class GlowSquidMock extends SquidMock
 		implements
 			GlowSquid,
-			org.mockmc.mockmc.generated.org.bukkit.entity.GlowSquidBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GlowSquidBaseMock
 {
 
 	private int darkTicksRemaining = 0;

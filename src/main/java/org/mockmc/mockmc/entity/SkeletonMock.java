@@ -17,7 +17,7 @@ import java.util.UUID;
 public class SkeletonMock extends AbstractSkeletonMock
 		implements
 			Skeleton,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SkeletonBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SkeletonBaseMock
 {
 
 	private boolean isConverting = false;

@@ -14,7 +14,7 @@ import java.util.UUID;
 public class ElderGuardianMock extends GuardianMock
 		implements
 			ElderGuardian,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ElderGuardianBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ElderGuardianBaseMock
 {
 
 	/**

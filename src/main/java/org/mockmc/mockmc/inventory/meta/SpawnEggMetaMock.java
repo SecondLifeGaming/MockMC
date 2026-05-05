@@ -18,7 +18,7 @@ import java.util.Map;
 {"deprecation", "removal", "unchecked"})
 public class SpawnEggMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.SpawnEggMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.SpawnEggMetaBaseMock
 {
 
 	/**

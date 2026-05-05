@@ -27,7 +27,7 @@ import java.util.zip.ZipEntry;
 public class MockMCConfiguredPluginClassLoader extends URLClassLoader
 		implements
 			ConfiguredPluginClassLoader,
-			org.mockmc.mockmc.generated.io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoaderBaseMock
+			org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoaderBaseMock
 {
 
 	private final ServerMock server;

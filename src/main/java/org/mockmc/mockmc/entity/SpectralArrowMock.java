@@ -9,7 +9,7 @@ import java.util.UUID;
 public class SpectralArrowMock extends AbstractArrowMock
 		implements
 			SpectralArrow,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SpectralArrowBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SpectralArrowBaseMock
 {
 
 	private int glowingTicks = 200;

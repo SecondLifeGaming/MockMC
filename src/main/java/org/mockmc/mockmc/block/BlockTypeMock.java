@@ -23,7 +23,7 @@ import java.util.function.Consumer;
 public class BlockTypeMock<B extends BlockData>
 		implements
 			BlockType.Typed<B>,
-			org.mockmc.mockmc.generated.org.bukkit.block.BlockTypeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BlockTypeBaseMock
 {
 
 	private final NamespacedKey key;
@@ -55,6 +55,7 @@ public class BlockTypeMock<B extends BlockData>
 	private final String translationKey;
 
 	@ApiStatus.Internal
+	@SuppressWarnings("brain-overload")
 	private BlockTypeMock(NamespacedKey key, @Nullable NamespacedKey itemType, boolean solid, boolean flammable,
 			boolean burnable, boolean occluding, boolean gravity, float hardness, float blastResistance,
 			float slipperiness, boolean air, boolean interactable, boolean collision, String translationKey)

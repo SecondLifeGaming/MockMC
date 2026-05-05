@@ -17,7 +17,7 @@ import java.util.Objects;
 
 public class DecoratedPotStateMock extends ContainerStateMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.block.DecoratedPotBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.DecoratedPotBaseMock
 {
 
 	private final Map<Side, Material> sherds = new EnumMap<>(Side.class);

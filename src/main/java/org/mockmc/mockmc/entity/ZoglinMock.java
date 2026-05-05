@@ -16,7 +16,7 @@ import java.util.UUID;
 public class ZoglinMock extends MonsterMock
 		implements
 			Zoglin,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ZoglinBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZoglinBaseMock
 {
 
 	private boolean isAdult = true;

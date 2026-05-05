@@ -30,7 +30,7 @@ import net.kyori.adventure.text.event.HoverEvent;
 @SuppressWarnings("java:S110")
 public class MushroomCowMock extends AbstractCowMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.MushroomCowBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.MushroomCowBaseMock
 {
 
 	@NotNull
@@ -122,7 +122,7 @@ public class MushroomCowMock extends AbstractCowMock
 	@Override
 	public HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)
 	{
-		return org.mockmc.mockmc.generated.org.bukkit.entity.MushroomCowBaseMock.super.asHoverEvent(arg0);
+		return org.mockmc.mockmc.generated.server.org.bukkit.entity.MushroomCowBaseMock.super.asHoverEvent(arg0);
 	}
 
 }
