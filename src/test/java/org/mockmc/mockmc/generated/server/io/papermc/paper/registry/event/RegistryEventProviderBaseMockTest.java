@@ -1,0 +1,25 @@
+// Auto-generated mechanical sanity test for RegistryEventProviderBaseMock
+package org.mockmc.mockmc.generated.server.io.papermc.paper.registry.event;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import io.papermc.paper.registry.RegistryBuilder;
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class RegistryEventProviderBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		RegistryEventProviderBaseMock<?, ?> mock = new Stub<>();
+		assertNotNull(mock);
+		assertSafeDefault(mock.compose());
+		assertSafeDefault(mock.registryKey());
+		assertSafeDefault(mock.entryAdd());
+	}
+
+	private static class Stub<T, B extends RegistryBuilder<T>> implements RegistryEventProviderBaseMock<T, B>
+	{
+	}
+}

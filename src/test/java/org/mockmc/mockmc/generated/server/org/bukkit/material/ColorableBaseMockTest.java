@@ -1,0 +1,22 @@
+// Auto-generated mechanical sanity test for ColorableBaseMock
+package org.mockmc.mockmc.generated.server.org.bukkit.material;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class ColorableBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		ColorableBaseMock mock = new Stub();
+		assertNotNull(mock);
+		assertSafeDefault(mock.getColor());
+	}
+
+	private static class Stub implements ColorableBaseMock
+	{
+	}
+}

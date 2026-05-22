@@ -1,0 +1,21 @@
+// Auto-generated mechanical sanity test for StriderBaseMock
+package org.mockmc.mockmc.generated.server.org.bukkit.entity;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class StriderBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		StriderBaseMock mock = new Stub();
+		assertNotNull(mock);
+	}
+
+	private static class Stub implements StriderBaseMock
+	{
+	}
+}

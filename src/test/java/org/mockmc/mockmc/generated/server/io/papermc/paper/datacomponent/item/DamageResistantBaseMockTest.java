@@ -1,0 +1,22 @@
+// Auto-generated mechanical sanity test for DamageResistantBaseMock
+package org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.item;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class DamageResistantBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		DamageResistantBaseMock mock = new Stub();
+		assertNotNull(mock);
+		assertSafeDefault(mock.types());
+	}
+
+	private static class Stub implements DamageResistantBaseMock
+	{
+	}
+}

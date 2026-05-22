@@ -1,0 +1,22 @@
+// Auto-generated mechanical sanity test for PlayerEventBaseMock
+package org.mockmc.mockmc.generated.server.org.bukkit.event.player;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class PlayerEventBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		PlayerEventBaseMock mock = new Stub();
+		assertNotNull(mock);
+		assertSafeDefault(mock.getPlayer());
+	}
+
+	private static class Stub implements PlayerEventBaseMock
+	{
+	}
+}

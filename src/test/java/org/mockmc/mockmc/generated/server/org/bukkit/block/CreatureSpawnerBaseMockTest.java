@@ -1,0 +1,24 @@
+// Auto-generated mechanical sanity test for CreatureSpawnerBaseMock
+package org.mockmc.mockmc.generated.server.org.bukkit.block;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
+class CreatureSpawnerBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		CreatureSpawnerBaseMock mock = new Stub();
+		assertNotNull(mock);
+		assertSafeDefault(mock.getCreatureTypeName());
+	}
+
+	private static class Stub implements CreatureSpawnerBaseMock
+	{
+	}
+}
