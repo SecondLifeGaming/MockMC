@@ -11,7 +11,7 @@ class ConnectedPlayerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ConnectedPlayerBaseMock mock = new Stub<>();
+		ConnectedPlayerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

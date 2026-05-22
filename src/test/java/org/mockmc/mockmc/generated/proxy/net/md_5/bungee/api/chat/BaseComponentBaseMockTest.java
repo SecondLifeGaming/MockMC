@@ -6,16 +6,19 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class BaseComponentBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		BaseComponentBaseMock mock = new Stub<>();
+		BaseComponentBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.duplicate());
 		assertSafeDefault(mock.getExtra());
+		assertSafeDefault(mock.getFont());
 		assertSafeDefault(mock.getColor());
 		assertSafeDefault(mock.getStyle());
 		assertSafeDefault(mock.toLegacyText());
@@ -32,15 +35,14 @@ class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getInsertion());
 		assertSafeDefault(mock.duplicateWithoutFormatting());
 		assertSafeDefault(mock.toPlainText());
-		assertSafeDefault(mock.getShadowColor());
 	}
 
 	@Test
 	void testSafeDefaultsPart2()
 	{
-		BaseComponentBaseMock mock = new Stub<>();
+		BaseComponentBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getFont());
+		assertSafeDefault(mock.getShadowColor());
 	}
 
 	private static class Stub implements BaseComponentBaseMock

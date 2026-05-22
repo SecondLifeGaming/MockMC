@@ -11,10 +11,10 @@ class ConfigurationAdapterBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ConfigurationAdapterBaseMock mock = new Stub<>();
+		ConfigurationAdapterBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getListeners());
+		assertSafeDefault(mock.getServers());
 	}
 
 	private static class Stub implements ConfigurationAdapterBaseMock

@@ -11,7 +11,7 @@ class EventHandlerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		EventHandlerBaseMock mock = new Stub<>();
+		EventHandlerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

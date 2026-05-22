@@ -11,7 +11,7 @@ class ChannelRegistrarBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ChannelRegistrarBaseMock mock = new Stub<>();
+		ChannelRegistrarBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

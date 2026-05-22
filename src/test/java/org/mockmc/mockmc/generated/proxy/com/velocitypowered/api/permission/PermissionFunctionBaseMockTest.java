@@ -11,7 +11,7 @@ class PermissionFunctionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		PermissionFunctionBaseMock mock = new Stub<>();
+		PermissionFunctionBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

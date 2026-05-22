@@ -11,7 +11,7 @@ class RawCommandBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		RawCommandBaseMock mock = new Stub<>();
+		RawCommandBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

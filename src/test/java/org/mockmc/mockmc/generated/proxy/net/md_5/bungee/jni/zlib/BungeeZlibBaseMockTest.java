@@ -11,7 +11,7 @@ class BungeeZlibBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		BungeeZlibBaseMock mock = new Stub<>();
+		BungeeZlibBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

@@ -11,7 +11,7 @@ class BungeeChannelInitializerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		BungeeChannelInitializerBaseMock mock = new Stub<>();
+		BungeeChannelInitializerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getChannelInitializer());
 		assertSafeDefault(mock.getChannelAcceptor());

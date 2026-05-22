@@ -11,7 +11,7 @@ class DefinedPacketBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		DefinedPacketBaseMock mock = new Stub<>();
+		DefinedPacketBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.nextProtocol());

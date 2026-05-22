@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class ContentBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		ContentBaseMock mock = new Stub<>();
+		ContentBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.requiredAction());

@@ -11,7 +11,7 @@ class ChatObjectBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ChatObjectBaseMock mock = new Stub<>();
+		ChatObjectBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

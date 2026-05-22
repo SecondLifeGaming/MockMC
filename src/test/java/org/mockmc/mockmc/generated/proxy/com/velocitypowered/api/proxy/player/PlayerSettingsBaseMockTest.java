@@ -11,7 +11,7 @@ class PlayerSettingsBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		PlayerSettingsBaseMock mock = new Stub<>();
+		PlayerSettingsBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getLocale());
 		assertSafeDefault(mock.getMainHand());

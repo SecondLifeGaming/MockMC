@@ -11,7 +11,7 @@ class BungeeCipherBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		BungeeCipherBaseMock mock = new Stub<>();
+		BungeeCipherBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

@@ -11,7 +11,7 @@ class ResourcePackInfoBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ResourcePackInfoBaseMock mock = new Stub<>();
+		ResourcePackInfoBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getId());
 		assertSafeDefault(mock.getUrl());

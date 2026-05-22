@@ -11,7 +11,7 @@ class ReconnectHandlerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ReconnectHandlerBaseMock mock = new Stub<>();
+		ReconnectHandlerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

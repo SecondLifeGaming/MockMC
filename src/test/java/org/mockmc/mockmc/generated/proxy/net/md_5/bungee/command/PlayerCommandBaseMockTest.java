@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class PlayerCommandBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		PlayerCommandBaseMock mock = new Stub<>();
+		PlayerCommandBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

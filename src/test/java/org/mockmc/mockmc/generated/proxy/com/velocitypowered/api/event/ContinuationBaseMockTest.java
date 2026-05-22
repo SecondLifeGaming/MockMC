@@ -11,7 +11,7 @@ class ContinuationBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ContinuationBaseMock mock = new Stub<>();
+		ContinuationBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

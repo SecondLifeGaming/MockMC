@@ -11,7 +11,7 @@ class ChannelAcceptorBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ChannelAcceptorBaseMock mock = new Stub<>();
+		ChannelAcceptorBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

@@ -11,7 +11,7 @@ class ChannelIdentifierBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ChannelIdentifierBaseMock mock = new Stub<>();
+		ChannelIdentifierBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getId());
 	}

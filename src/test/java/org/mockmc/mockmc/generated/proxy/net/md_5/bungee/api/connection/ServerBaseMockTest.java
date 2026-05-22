@@ -11,7 +11,7 @@ class ServerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ServerBaseMock mock = new Stub<>();
+		ServerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getInfo());
 	}

@@ -11,7 +11,7 @@ class ListenerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ListenerBaseMock mock = new Stub<>();
+		ListenerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

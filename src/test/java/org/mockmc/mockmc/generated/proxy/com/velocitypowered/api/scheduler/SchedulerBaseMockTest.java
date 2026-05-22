@@ -11,7 +11,7 @@ class SchedulerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		SchedulerBaseMock mock = new Stub<>();
+		SchedulerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

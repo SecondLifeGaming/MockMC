@@ -11,7 +11,7 @@ class ChatSessionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ChatSessionBaseMock mock = new Stub<>();
+		ChatSessionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getSessionId());
 	}

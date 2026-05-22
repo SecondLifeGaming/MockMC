@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class ProxyServerBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		ProxyServerBaseMock mock = new Stub<>();
+		ProxyServerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.unsafe());

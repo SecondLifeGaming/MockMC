@@ -11,7 +11,7 @@ class KeySignedBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		KeySignedBaseMock mock = new Stub<>();
+		KeySignedBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getSignature());
 		assertSafeDefault(mock.getSigner());

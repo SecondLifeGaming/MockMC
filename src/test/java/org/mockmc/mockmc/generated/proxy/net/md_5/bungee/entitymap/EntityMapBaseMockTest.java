@@ -11,7 +11,7 @@ class EntityMapBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		EntityMapBaseMock mock = new Stub<>();
+		EntityMapBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

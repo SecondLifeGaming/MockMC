@@ -11,7 +11,7 @@ class AbstractPacketHandlerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		AbstractPacketHandlerBaseMock mock = new Stub<>();
+		AbstractPacketHandlerBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

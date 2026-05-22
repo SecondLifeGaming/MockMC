@@ -11,7 +11,7 @@ class PluginMessageEncoderBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		PluginMessageEncoderBaseMock mock = new Stub<>();
+		PluginMessageEncoderBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

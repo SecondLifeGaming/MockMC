@@ -11,7 +11,7 @@ class LoginPhaseConnectionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		LoginPhaseConnectionBaseMock mock = new Stub<>();
+		LoginPhaseConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

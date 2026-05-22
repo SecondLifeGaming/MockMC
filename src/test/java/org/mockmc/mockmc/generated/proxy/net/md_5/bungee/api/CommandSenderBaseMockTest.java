@@ -11,7 +11,7 @@ class CommandSenderBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		CommandSenderBaseMock mock = new Stub<>();
+		CommandSenderBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.getPermissions());

@@ -11,7 +11,7 @@ class ConfigurationProviderBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ConfigurationProviderBaseMock mock = new Stub<>();
+		ConfigurationProviderBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

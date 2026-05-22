@@ -11,7 +11,7 @@ class ActionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ActionBaseMock mock = new Stub<>();
+		ActionBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

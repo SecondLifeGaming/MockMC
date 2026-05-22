@@ -11,7 +11,7 @@ class TagBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		TagBaseMock mock = new Stub<>();
+		TagBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

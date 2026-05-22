@@ -11,7 +11,7 @@ class ConnectionRequestBuilderBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ConnectionRequestBuilderBaseMock mock = new Stub<>();
+		ConnectionRequestBuilderBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.connect());
 		assertSafeDefault(mock.getServer());

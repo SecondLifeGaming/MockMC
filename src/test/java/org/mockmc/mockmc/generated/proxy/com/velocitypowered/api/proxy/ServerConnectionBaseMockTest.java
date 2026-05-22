@@ -11,7 +11,7 @@ class ServerConnectionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ServerConnectionBaseMock mock = new Stub<>();
+		ServerConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getPlayer());
 		assertSafeDefault(mock.getServer());

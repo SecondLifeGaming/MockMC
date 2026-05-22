@@ -11,7 +11,7 @@ class DependencyBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		DependencyBaseMock mock = new Stub<>();
+		DependencyBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.id());
 	}

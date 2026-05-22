@@ -11,7 +11,7 @@ class CommandManagerBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		CommandManagerBaseMock mock = new Stub<>();
+		CommandManagerBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getAliases());
 	}

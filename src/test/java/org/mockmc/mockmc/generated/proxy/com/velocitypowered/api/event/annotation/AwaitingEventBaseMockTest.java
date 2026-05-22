@@ -11,7 +11,7 @@ class AwaitingEventBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		AwaitingEventBaseMock mock = new Stub<>();
+		AwaitingEventBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

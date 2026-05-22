@@ -38,10 +38,18 @@ dependencies {
 
 	testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.mockito:mockito-core:5.14.2")
 }
 
 configurations.all {
-    resolutionStrategy.force("org.ow2.asm:asm:9.8", "org.ow2.asm:asm-commons:9.8", "org.ow2.asm:asm-tree:9.8", "org.ow2.asm:asm-analysis:9.8")
+    resolutionStrategy.force(
+		"org.ow2.asm:asm:9.8", 
+		"org.ow2.asm:asm-commons:9.8", 
+		"org.ow2.asm:asm-tree:9.8", 
+		"org.ow2.asm:asm-analysis:9.8",
+		"net.bytebuddy:byte-buddy:1.15.11",
+		"net.bytebuddy:byte-buddy-agent:1.15.11"
+	)
 }
 
 tasks {
@@ -64,6 +72,7 @@ tasks {
 		maxParallelForks = 1
 		jvmArgs("-Xint")
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+		systemProperty("net.bytebuddy.experimental", "true")
 		ignoreFailures = true
 	}
 

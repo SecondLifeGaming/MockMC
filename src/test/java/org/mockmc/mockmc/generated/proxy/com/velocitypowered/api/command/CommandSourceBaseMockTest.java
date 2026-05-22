@@ -11,7 +11,7 @@ class CommandSourceBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		CommandSourceBaseMock mock = new Stub<>();
+		CommandSourceBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

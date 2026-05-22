@@ -11,7 +11,7 @@ class InboundConnectionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		InboundConnectionBaseMock mock = new Stub<>();
+		InboundConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getProtocolVersion());
 		assertSafeDefault(mock.getRemoteAddress());

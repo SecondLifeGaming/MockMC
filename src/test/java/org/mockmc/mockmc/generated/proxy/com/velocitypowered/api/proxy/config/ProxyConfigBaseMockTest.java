@@ -11,7 +11,7 @@ class ProxyConfigBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ProxyConfigBaseMock mock = new Stub<>();
+		ProxyConfigBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getMotd());
 		assertSafeDefault(mock.getQueryMap());

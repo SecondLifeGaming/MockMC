@@ -11,7 +11,7 @@ class DataDirectoryBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		DataDirectoryBaseMock mock = new Stub<>();
+		DataDirectoryBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

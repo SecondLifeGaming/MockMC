@@ -11,7 +11,7 @@ class CommandMetaBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		CommandMetaBaseMock mock = new Stub<>();
+		CommandMetaBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getPlugin());
 		assertSafeDefault(mock.getAliases());

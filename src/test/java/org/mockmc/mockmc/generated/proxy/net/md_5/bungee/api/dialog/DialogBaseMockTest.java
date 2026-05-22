@@ -11,7 +11,7 @@ class DialogBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		DialogBaseMock mock = new Stub<>();
+		DialogBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getBase());
 	}

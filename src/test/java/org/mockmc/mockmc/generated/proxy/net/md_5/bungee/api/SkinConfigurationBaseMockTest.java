@@ -11,7 +11,7 @@ class SkinConfigurationBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		SkinConfigurationBaseMock mock = new Stub<>();
+		SkinConfigurationBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

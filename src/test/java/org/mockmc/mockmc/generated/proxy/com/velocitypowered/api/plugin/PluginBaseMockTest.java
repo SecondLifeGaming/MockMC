@@ -11,7 +11,7 @@ class PluginBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		PluginBaseMock mock = new Stub<>();
+		PluginBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.name());
 		assertSafeDefault(mock.version());

@@ -11,7 +11,7 @@ class TargetedEventBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		TargetedEventBaseMock mock = new Stub<>();
+		TargetedEventBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getSender());

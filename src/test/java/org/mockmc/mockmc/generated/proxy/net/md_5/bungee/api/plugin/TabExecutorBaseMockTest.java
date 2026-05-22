@@ -11,7 +11,7 @@ class TabExecutorBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		TabExecutorBaseMock mock = new Stub<>();
+		TabExecutorBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

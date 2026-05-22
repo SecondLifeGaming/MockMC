@@ -11,7 +11,7 @@ class CancellableBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		CancellableBaseMock mock = new Stub<>();
+		CancellableBaseMock mock = new Stub();
 		assertNotNull(mock);
 	}
 

@@ -11,7 +11,7 @@ class PluginDescriptionBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		PluginDescriptionBaseMock mock = new Stub<>();
+		PluginDescriptionBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.getId());

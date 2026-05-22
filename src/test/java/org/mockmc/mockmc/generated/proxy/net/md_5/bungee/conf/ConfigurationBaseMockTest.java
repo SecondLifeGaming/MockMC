@@ -6,13 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class ConfigurationBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		ConfigurationBaseMock mock = new Stub<>();
+		ConfigurationBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.getListeners());
 		assertSafeDefault(mock.getUuid());
 		assertSafeDefault(mock.getServers());
 		assertSafeDefault(mock.getFavicon());
@@ -20,7 +23,6 @@ class ConfigurationBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getDisabledCommands());
 		assertSafeDefault(mock.getFaviconObject());
 		assertSafeDefault(mock.getServersLock());
-		assertSafeDefault(mock.getListeners());
 	}
 
 	private static class Stub implements ConfigurationBaseMock

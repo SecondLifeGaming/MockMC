@@ -11,7 +11,7 @@ class TabListBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		TabListBaseMock mock = new Stub<>();
+		TabListBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getEntries());
 	}

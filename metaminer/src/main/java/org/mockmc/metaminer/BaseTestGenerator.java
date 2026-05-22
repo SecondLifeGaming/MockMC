@@ -139,14 +139,48 @@ public class BaseTestGenerator implements DataGenerator {
                 .superclass(ClassName.get("org.mockmc.mockmc.generated", "GeneratedTestBase"));
 
         List<Method> methods = scanMethodsForSanityTests(clazz);
+
+        applySuppressionIfNecessary(clazz, methods, testClass);
+
         List<TypeVariableName> typeVars = getTypeVariables(clazz);
         TypeName superInterface = getSuperInterface(baseMockClass, typeVars);
 
         testClass.addType(buildStubClass(clazz, typeVars, superInterface).build());
         TypeName testTargetType = getTestTargetType(baseMockClass, typeVars);
-        generateTestMethods(testClass, testTargetType, methods);
+        generateTestMethods(testClass, testTargetType, methods, !typeVars.isEmpty());
 
         writeJavaFile(packageName, testClass, baseMockName);
+    }
+
+    private void applySuppressionIfNecessary(Class<?> clazz, List<Method> methods, TypeSpec.Builder testClass) {
+        boolean needsDeprecation = false;
+        boolean needsRemoval = false;
+
+        Deprecated classDep = clazz.getAnnotation(Deprecated.class);
+        if (classDep != null) {
+            needsDeprecation = true;
+            if (classDep.forRemoval()) needsRemoval = true;
+        }
+
+        for (Method m : methods) {
+            Deprecated mDep = m.getAnnotation(Deprecated.class);
+            if (mDep != null) {
+                needsDeprecation = true;
+                if (mDep.forRemoval()) needsRemoval = true;
+            }
+        }
+
+        if (needsDeprecation) {
+            List<String> suppressions = new ArrayList<>();
+            suppressions.add("deprecation");
+            if (needsRemoval) suppressions.add("removal");
+            suppressions.add("java:S1874");
+
+            String format = "{" + String.join(", ", Collections.nCopies(suppressions.size(), "$S")) + "}";
+            testClass.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
+                    .addMember("value", format, suppressions.toArray())
+                    .build());
+        }
     }
 
     private String getBaseMockName(Class<?> clazz) {
@@ -223,13 +257,13 @@ public class BaseTestGenerator implements DataGenerator {
         return stubBuilder;
     }
 
-    private void generateTestMethods(TypeSpec.Builder testClass, TypeName targetType, List<Method> methods) {
+    private void generateTestMethods(TypeSpec.Builder testClass, TypeName targetType, List<Method> methods, boolean hasTypeVars) {
         // Split methods into multiple test parts if there are too many (to satisfy linters)
         int partCount = 0;
         int methodsPerPart = 20;
 
         if (methods.isEmpty()) {
-            testClass.addMethod(buildTestMethod("testSafeDefaults", targetType, Collections.emptyList()));
+            testClass.addMethod(buildTestMethod("testSafeDefaults", targetType, Collections.emptyList(), hasTypeVars));
             return;
         }
 
@@ -237,7 +271,7 @@ public class BaseTestGenerator implements DataGenerator {
             partCount++;
             String methodName = partCount == 1 ? "testSafeDefaults" : "testSafeDefaultsPart" + partCount;
             int end = Math.min(i + methodsPerPart, methods.size());
-            testClass.addMethod(buildTestMethod(methodName, targetType, methods.subList(i, end)));
+            testClass.addMethod(buildTestMethod(methodName, targetType, methods.subList(i, end), hasTypeVars));
         }
     }
 
@@ -252,7 +286,7 @@ public class BaseTestGenerator implements DataGenerator {
         return false;
     }
 
-    private MethodSpec buildTestMethod(String name, TypeName targetType, List<Method> methods) {
+    private MethodSpec buildTestMethod(String name, TypeName targetType, List<Method> methods, boolean hasTypeVars) {
         MethodSpec.Builder testMethod = MethodSpec.methodBuilder(name)
                 .addAnnotation(ClassName.get(JUNIT_JUPITER_API, "Test"));
 
@@ -260,7 +294,12 @@ public class BaseTestGenerator implements DataGenerator {
             testMethod.addException(Exception.class);
         }
 
-        testMethod.addStatement("$T mock = new Stub<>()", targetType);
+        if (hasTypeVars) {
+            testMethod.addStatement("$T mock = new Stub<>()", targetType);
+        } else {
+            testMethod.addStatement("$T mock = new Stub()", targetType);
+        }
+        
         testMethod.addStatement("assertNotNull(mock)");
 
         for (Method m : methods) {

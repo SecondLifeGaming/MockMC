@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "java:S1874"})
 class TranslationProviderBaseMockTest extends GeneratedTestBase
 {
 	@Test
 	void testSafeDefaults()
 	{
-		TranslationProviderBaseMock mock = new Stub<>();
+		TranslationProviderBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getTranslationKey());
 		assertSafeDefault(mock.asTranslatableComponent());

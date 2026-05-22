@@ -11,7 +11,7 @@ class KeyIdentifiableBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		KeyIdentifiableBaseMock mock = new Stub<>();
+		KeyIdentifiableBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getIdentifiedKey());
 	}

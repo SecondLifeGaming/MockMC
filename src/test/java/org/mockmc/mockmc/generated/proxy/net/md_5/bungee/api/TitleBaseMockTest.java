@@ -11,7 +11,7 @@ class TitleBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		TitleBaseMock mock = new Stub<>();
+		TitleBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.reset());
 		assertSafeDefault(mock.clear());

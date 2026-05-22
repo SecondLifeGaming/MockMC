@@ -11,7 +11,7 @@ class ScheduledTaskBaseMockTest extends GeneratedTestBase
 	@Test
 	void testSafeDefaults()
 	{
-		ScheduledTaskBaseMock mock = new Stub<>();
+		ScheduledTaskBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.status());
 		assertSafeDefault(mock.plugin());
