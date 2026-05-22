@@ -23,7 +23,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Run unit tests
-        run: ./gradlew jacocoTestReport --refresh-dependencies --continue
+        run: |
+          ./gradlew :metaminer:runGenerator
+          ./gradlew spotlessApply
+          ./gradlew jacocoTestReport --refresh-dependencies --continue
         continue-on-error: true
 
       - name: Upload coverage to Codecov

@@ -65,6 +65,7 @@ sonar {
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
 		property("sonar.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.test.exclusions", "**/generated/**,src/test/java/org/mockmc/mockmc/generated/**")
 		property("sonar.coverage.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
 		property("sonar.cpd.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
 	}
@@ -232,11 +233,17 @@ tasks {
 
 	jacocoTestReport {
 		dependsOn(test)
+		dependsOn("compileJava", "processResources")
 		reports {
 			xml.required.set(true)
 			html.required.set(true)
 			html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 		}
+		classDirectories.setFrom(
+			sourceSets.main.get().output.classesDirs.asFileTree.matching {
+				exclude("org/mockmc/mockmc/generated/**")
+			}
+		)
 	}
 
 	jacoco {

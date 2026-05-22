@@ -32,9 +32,8 @@ import java.util.Optional;
 /**
  * Mock implementation of a {@link Block}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.bukkit.block.BlockBaseMock
+@SuppressWarnings("deprecation")
+public class BlockMock implements org.mockmc.mockmc.generated.server.org.bukkit.block.BlockBaseMock
 {
 
 	private final MetadataTable metadataTable = new MetadataTable();
@@ -72,8 +71,7 @@ public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.
 	 */
 	public BlockMock(@NotNull Location location)
 	{
-		Preconditions.checkNotNull(location, "Location cannot be null");
-		this(Material.AIR, location);
+		this(Material.AIR, Preconditions.checkNotNull(location, "Location cannot be null"));
 	}
 
 	/**
@@ -132,6 +130,9 @@ public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.
 		metadataTable.removeMetadata(metadataKey, owningPlugin);
 	}
 
+	/**
+	 * @deprecated Use {@link #getBlockData()} instead.
+	 */
 	@Override
 	@Deprecated(since = "1.6.2")
 	public byte getData()
@@ -172,6 +173,7 @@ public class BlockMock implements Block, org.mockmc.mockmc.generated.server.org.
 	 * @throws AssertionError
 	 *             Thrown if the material type of the block does not equal the given
 	 *             material type.
+	 * @deprecated Use JUnit assertions instead.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertType(@NotNull Material material)

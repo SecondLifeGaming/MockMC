@@ -40,7 +40,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       - name: Build with Gradle
-        run: ./gradlew build -x test --refresh-dependencies
+        run: |
+          ./gradlew :metaminer:runGenerator
+          ./gradlew spotlessApply
+          ./gradlew build -x test --refresh-dependencies
 
       - name: Run unit tests
         run: ./gradlew jacocoTestReport --continue
