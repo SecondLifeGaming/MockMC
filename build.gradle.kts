@@ -327,7 +327,7 @@ signing {
 }
 
 fun isAction(): Boolean {
-	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "westkevin12/MockMC"
+	return System.getenv("GITHUB_ACTIONS") == "true" && System.getenv("GITHUB_REPOSITORY") == "SecondLifeGaming/MockMC"
 }
 
 fun getFullVersion(): String {

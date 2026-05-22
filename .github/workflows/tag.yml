@@ -62,7 +62,7 @@ jobs:
             ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
-    uses: westkevin12/MockMC/.github/workflows/publish.yml@v1.21
+    uses: SecondLifeGaming/MockMC/.github/workflows/publish.yml@master
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:

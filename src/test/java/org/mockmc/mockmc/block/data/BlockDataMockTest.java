@@ -49,8 +49,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 @Slf4j
 @ExtendWith(
 {MockMCExtension.class})
@@ -177,18 +176,6 @@ class BlockDataMockTest
 		@Test
 		void test_getAsString()
 		{
-			// https://jd.papermc.io/paper/1.16/org/bukkit/block/data/BlockData.html#getAsString(boolean)
-			// defaults:
-			// "minecraft:chest": {
-			// "facing": "north",
-			// "type": "single",
-			// "waterlogged": false
-			// },
-			//
-			// getAsString(true) : minecraft:chest[waterlogged=true]
-			// getAsString(false):
-			// minecraft:chest[facing=north,type=single,waterlogged=true]
-			// getAsString() : minecraft:chest[facing=north,type=single,waterlogged=true]
 
 			BlockDataMock data = BlockDataMockFactory.mock(Material.CAMPFIRE);
 			assertEquals("minecraft:campfire", data.getAsString(true));
@@ -199,7 +186,7 @@ class BlockDataMockTest
 		}
 
 		/*
-		 * See: https://github.com/westkevin12/MockMC/issues/1433
+		 * See: https://github.com/SecondLifeGaming/MockMC/issues/1433
 		 */
 		@ParameterizedTest
 		@CsvSource(
@@ -302,20 +289,23 @@ class BlockDataMockTest
 				"'WEATHERED_COPPER_DOOR', 'minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
 				"'WEATHERED_COPPER_TRAPDOOR', 'minecraft:weathered_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
 				"'WEATHERED_CUT_COPPER_STAIRS', 'minecraft:weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",})
-		void givenSamples(Material material, String expectedOutput)
+		void assertBlockDataAsString(Material material, String expectedOutput)
 		{
 			var blockData = material.createBlockData();
 			var actual = blockData.getAsString(false);
 			assertEquals(expectedOutput, actual);
 		}
 
+		void givenSamples(Material material, String expectedOutput)
+		{
+			assertBlockDataAsString(material, expectedOutput);
+		}
+
 		@ParameterizedTest
 		@CsvFileSource(resources = "/blocks/block_data_as_string.csv")
 		void givenPossibleValues(Material material, String expectedOutput)
 		{
-			var blockData = material.createBlockData();
-			var actual = blockData.getAsString(false);
-			assertEquals(expectedOutput, actual);
+			assertBlockDataAsString(material, expectedOutput);
 		}
 	}
 
@@ -424,7 +414,7 @@ class BlockDataMockTest
 					}
 
 					blockDataMocks.add(material);
-				} catch (UnimplementedOperationException e)
+				} catch (UnimplementedOperationException _)
 				{
 					log.warn("Material {} is throwing an UnimplementedOperationException", material);
 				}

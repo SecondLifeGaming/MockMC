@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+{"deprecation", "removal"})
 @ExtendWith(MockMCExtension.class)
 class BlockStateMockTest
 {
@@ -287,8 +287,8 @@ class BlockStateMockTest
 				Arguments.of(Material.BAMBOO_SIGN, org.mockmc.mockmc.block.state.SignStateMock.class),
 				Arguments.of(Material.CRIMSON_SIGN, org.mockmc.mockmc.block.state.SignStateMock.class),
 				Arguments.of(Material.WARPED_SIGN, org.mockmc.mockmc.block.state.SignStateMock.class),
-				// Hanging Sign (TODO: Not implemented yet, see issue
-				// https://github.com/westkevin12/MockMC/issues/1088)
+				// Hanging Sign (Not implemented yet, see issue
+				// https://github.com/SecondLifeGaming/MockMC/issues/1088)
 				// Arguments.of(Material.OAK_HANGING_SIGN,
 				// org.mockmc.mockmc.block.state.HangingSignMock.class),
 				// Arguments.of(Material.SPRUCE_HANGING_SIGN,
@@ -311,8 +311,8 @@ class BlockStateMockTest
 				// org.mockmc.mockmc.block.state.HangingSignMock.class),
 				// Arguments.of(Material.WARPED_HANGING_SIGN,
 				// org.mockmc.mockmc.block.state.HangingSignMock.class),
-				// Wall Sign (TODO: Not implemented yet, see issue
-				// https://github.com/westkevin12/MockMC/issues/1088)
+				// Wall Sign (Not implemented yet, see issue
+				// https://github.com/SecondLifeGaming/MockMC/issues/1088)
 				// Arguments.of(Material.OAK_WALL_SIGN,
 				// org.mockmc.mockmc.block.data.WallSignMock.class),
 				// Arguments.of(Material.SPRUCE_WALL_SIGN,
@@ -331,8 +331,8 @@ class BlockStateMockTest
 				// org.mockmc.mockmc.block.state.WallSignMock.class),
 				// Arguments.of(Material.BAMBOO_WALL_SIGN,
 				// org.mockmc.mockmc.block.state.WallSignMock.class),
-				// Wall Hanging Sign (TODO: Not implemented yet, see issue
-				// https://github.com/westkevin12/MockMC/issues/1088)
+				// Wall Hanging Sign (Not implemented yet, see issue
+				// https://github.com/SecondLifeGaming/MockMC/issues/1088)
 				// Arguments.of(Material.OAK_WALL_HANGING_SIGN,
 				// org.mockmc.mockmc.block.state.WallHangingSignMock.class),
 				// Arguments.of(Material.SPRUCE_WALL_HANGING_SIGN,
