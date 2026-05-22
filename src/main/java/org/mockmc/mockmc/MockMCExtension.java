@@ -268,11 +268,13 @@ public class MockMCExtension
 		return tryDefaultConstructor(type);
 	}
 
+	@SuppressWarnings("java:S3011") // Reflection is required for injection frameworks
 	private @Nullable Object tryDefaultConstructor(@NotNull Class<?> type)
 	{
 		try
 		{
 			var constructor = type.getDeclaredConstructor();
+			constructor.setAccessible(true);
 			return constructor.newInstance();
 		} catch (ReflectiveOperationException _)
 		{
