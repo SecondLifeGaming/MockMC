@@ -49,7 +49,7 @@ import java.util.Objects;
 @SuppressWarnings("deprecation")
 public abstract class HumanEntityMock extends LivingEntityMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.HumanEntityBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.HumanEntityBaseMock
 {
 
 	private final Set<NamespacedKey> discoveredRecipes = new HashSet<>();

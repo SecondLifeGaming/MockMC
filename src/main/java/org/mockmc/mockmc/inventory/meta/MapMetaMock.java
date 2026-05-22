@@ -20,7 +20,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class MapMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.MapMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.MapMetaBaseMock
 {
 
 	private static final byte SCALING_EMPTY = (byte) 0;

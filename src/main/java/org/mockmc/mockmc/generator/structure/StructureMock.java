@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 {"deprecation", "removal", "unchecked"})
 public class StructureMock extends Structure
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.generator.structure.GeneratedStructureBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.generator.structure.GeneratedStructureBaseMock
 {
 
 	private final NamespacedKey key;

@@ -74,7 +74,7 @@ public class ItemMetaMock
 		implements
 			Damageable,
 			Repairable,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.ItemMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ItemMetaBaseMock
 {
 
 	public static final String ATTRIBUTE_MODIFIERS = "attribute-modifiers";

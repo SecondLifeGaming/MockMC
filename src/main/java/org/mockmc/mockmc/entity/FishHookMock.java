@@ -22,7 +22,7 @@ import java.util.UUID;
 public class FishHookMock extends ProjectileMock
 		implements
 			FishHook,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FishHookBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FishHookBaseMock
 {
 
 	private int minWaitTime = 100;

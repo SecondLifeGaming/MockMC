@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PaletteMock implements Palette, org.mockmc.mockmc.generated.org.bukkit.structure.PaletteBaseMock
+public class PaletteMock implements Palette, org.mockmc.mockmc.generated.server.org.bukkit.structure.PaletteBaseMock
 {
 
 	/**

@@ -21,11 +21,14 @@ import java.util.Set;
 
 /**
  * Mock implementation of an {@link Enchantment}.
+ *
+ * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings("all")
+@SuppressWarnings(
+{"deprecation", "removal"})
 public class EnchantmentMock extends Enchantment
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.enchantments.EnchantmentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.enchantments.EnchantmentBaseMock
 {
 
 	private static final String LEVEL = "level";

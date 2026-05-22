@@ -18,7 +18,7 @@ import java.util.UUID;
 public class SizedFireballMock extends FireballMock
 		implements
 			SizedFireball,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SizedFireballBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SizedFireballBaseMock
 {
 
 	private ItemStack displayItem = new ItemStackMock(Material.FIRE_CHARGE);

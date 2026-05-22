@@ -14,7 +14,7 @@ import java.util.UUID;
 public abstract class SpellcasterMock extends IllagerMock
 		implements
 			Spellcaster,
-			org.mockmc.mockmc.generated.org.bukkit.entity.SpellcasterBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.SpellcasterBaseMock
 {
 
 	private Spellcaster.Spell spell = Spell.NONE;

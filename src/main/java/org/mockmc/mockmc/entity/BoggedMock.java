@@ -20,7 +20,7 @@ import java.util.UUID;
 public class BoggedMock extends AbstractSkeletonMock
 		implements
 			Bogged,
-			org.mockmc.mockmc.generated.org.bukkit.entity.BoggedBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.BoggedBaseMock
 {
 
 	private boolean sheared;

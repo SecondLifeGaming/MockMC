@@ -14,7 +14,7 @@ import java.util.UUID;
 public class CommandMinecartMock extends MinecartMock
 		implements
 			CommandMinecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.minecart.CommandMinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.CommandMinecartBaseMock
 {
 
 	private String command = "";

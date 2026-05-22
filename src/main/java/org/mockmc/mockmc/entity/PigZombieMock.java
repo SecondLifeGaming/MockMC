@@ -9,7 +9,7 @@ import java.util.UUID;
 public class PigZombieMock extends ZombieMock
 		implements
 			PigZombie,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PigZombieBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PigZombieBaseMock
 {
 
 	private int anger = 0;

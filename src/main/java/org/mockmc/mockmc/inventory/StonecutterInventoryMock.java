@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class StonecutterInventoryMock extends InventoryMock
 		implements
 			StonecutterInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.StonecutterInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.StonecutterInventoryBaseMock
 {
 
 	/**

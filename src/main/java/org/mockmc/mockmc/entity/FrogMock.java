@@ -14,7 +14,10 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class FrogMock extends AnimalsMock implements Frog, org.mockmc.mockmc.generated.org.bukkit.entity.FrogBaseMock
+public class FrogMock extends AnimalsMock
+		implements
+			Frog,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FrogBaseMock
 {
 
 	@Nullable

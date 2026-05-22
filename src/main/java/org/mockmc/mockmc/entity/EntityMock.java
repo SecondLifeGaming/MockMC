@@ -57,6 +57,7 @@ import org.mockmc.mockmc.metadata.MetadataTable;
 import org.mockmc.mockmc.persistence.PersistentDataContainerMock;
 import org.mockmc.mockmc.scheduler.paper.FoliaEntityScheduler;
 import org.mockmc.mockmc.scoreboard.TeamMock;
+import org.mockmc.mockmc.util.NbtStateMock;
 import org.mockmc.mockmc.world.WorldMock;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,7 +79,7 @@ import java.util.Objects;
 public abstract class EntityMock extends Entity.Spigot
 		implements
 			MessageTarget,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EntityBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EntityBaseMock
 {
 
 	private static final String METADATA_KEY_CANNOT_BE_NULL = "Metadata key cannot be null";
@@ -170,6 +171,8 @@ public abstract class EntityMock extends Entity.Spigot
 	protected final EntityData entityData;
 
 	private CreatureSpawnEvent.SpawnReason spawnReason = CreatureSpawnEvent.SpawnReason.CUSTOM;
+
+	private NbtStateMock nbtState = new NbtStateMock();
 
 	/**
 	 * Constructs a new {@link EntityMock} on the provided {@link ServerMock} with a
@@ -1392,7 +1395,7 @@ public abstract class EntityMock extends Entity.Spigot
 	@NotNull
 	public EntityScheduler getScheduler()
 	{
-		return new FoliaEntityScheduler(this.server.getScheduler(), this);
+		return new FoliaEntityScheduler(this.server, this.server.getScheduler(), this);
 	}
 
 	@Override
@@ -1490,6 +1493,63 @@ public abstract class EntityMock extends Entity.Spigot
 		if (!isDead())
 		{
 			++ticksLived;
+			onTick();
 		}
+	}
+
+	protected void onTick()
+	{
+		// To be overridden by subclasses
+	}
+	/**
+	 * Applies a Base64 encoded NBT state to this entity.
+	 *
+	 * @param base64
+	 *            The Base64 encoded NBT string.
+	 * @throws java.io.IOException
+	 *             If the NBT cannot be decoded.
+	 */
+	public void applyNbt(String base64) throws java.io.IOException
+	{
+		this.nbtState = NbtStateMock.fromBase64(base64);
+		if (nbtState.has("CustomName"))
+		{
+			this.setCustomName((String) nbtState.get("CustomName"));
+		}
+		if (nbtState.has("Invulnerable"))
+		{
+			this.setInvulnerable((Boolean) nbtState.get("Invulnerable"));
+		}
+		if (nbtState.has("Glowing"))
+		{
+			this.setGlowing((Boolean) nbtState.get("Glowing"));
+		}
+		if (nbtState.has("Invisible"))
+		{
+			this.setInvisible((Boolean) nbtState.get("Invisible"));
+		}
+		this.onApplyNbt(nbtState);
+	}
+
+	/**
+	 * Called when NBT state is applied to this entity. Subclasses should override
+	 * this to map custom NBT fields to their internal state.
+	 *
+	 * @param nbt
+	 *            The NBT state being applied.
+	 */
+	protected void onApplyNbt(@NotNull NbtStateMock nbt)
+	{
+		// To be overridden by subclasses
+	}
+
+	/**
+	 * Gets the current NBT state of this entity.
+	 *
+	 * @return The NBT state.
+	 */
+	public NbtStateMock getNbtState()
+	{
+		return nbtState;
 	}
 }

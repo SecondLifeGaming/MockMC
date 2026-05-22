@@ -18,10 +18,12 @@ public final class FoliaRegionScheduler implements RegionScheduler
 	private static final String WORLD_CANNOT_BE_NULL = "world cannot be null";
 	private static final String RUNNABLE_CANNOT_BE_NULL = "runnable cannot be null";
 
+	private final org.mockmc.mockmc.ServerMock server;
 	private final BukkitSchedulerMock scheduler;
 
-	public FoliaRegionScheduler(@NotNull BukkitSchedulerMock scheduler)
+	public FoliaRegionScheduler(@NotNull org.mockmc.mockmc.ServerMock server, @NotNull BukkitSchedulerMock scheduler)
 	{
+		this.server = server;
 		this.scheduler = scheduler;
 	}
 
@@ -33,7 +35,10 @@ public final class FoliaRegionScheduler implements RegionScheduler
 		Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.REGION,
+				null, world, chunkX, chunkZ);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
+		server.registerFoliaTask(scheduledTask);
 		scheduler.runTask(plugin, scheduledTask::run);
 		return scheduledTask;
 	}
@@ -56,7 +61,10 @@ public final class FoliaRegionScheduler implements RegionScheduler
 		Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.REGION,
+				null, world, chunkX, chunkZ);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
+		server.registerFoliaTask(scheduledTask);
 		scheduler.runTaskLater(plugin, scheduledTask::run, delayTicks);
 		return scheduledTask;
 	}
@@ -69,7 +77,9 @@ public final class FoliaRegionScheduler implements RegionScheduler
 		Preconditions.checkNotNull(world, WORLD_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(task, TASK_CANNOT_BE_NULL);
 
-		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task);
+		PaperScheduledTask.TaskContext context = new PaperScheduledTask.TaskContext(PaperScheduledTask.TaskType.REGION,
+				null, world, chunkX, chunkZ);
+		PaperScheduledTask scheduledTask = new PaperScheduledTask(plugin, task, context);
 		scheduler.runTaskTimer(plugin, scheduledTask::run, initialDelayTicks, periodTicks);
 		return scheduledTask;
 	}

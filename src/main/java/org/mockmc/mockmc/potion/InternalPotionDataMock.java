@@ -12,7 +12,7 @@ import java.util.List;
 @SuppressWarnings("removal")
 public class InternalPotionDataMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.potion.PotionTypeInternalPotionDataBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.potion.PotionTypeInternalPotionDataBaseMock
 {
 
 	private final NamespacedKey namespacedKey;

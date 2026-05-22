@@ -16,7 +16,7 @@ import java.util.UUID;
 public class WolfMock extends TameableAnimalMock
 		implements
 			Wolf,
-			org.mockmc.mockmc.generated.org.bukkit.entity.WolfBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.WolfBaseMock
 {
 
 	@NotNull
@@ -135,6 +135,27 @@ public class WolfMock extends TameableAnimalMock
 	{
 		Preconditions.checkArgument(soundVariant != null, "soundVariant cannot be null");
 		this.soundVariant = soundVariant;
+	}
+
+	@Override
+	protected void onApplyNbt(@NotNull org.mockmc.mockmc.util.NbtStateMock nbt)
+	{
+		if (nbt.has("Angry"))
+		{
+			this.setAngry((Boolean) nbt.get("Angry"));
+		}
+		if (nbt.has("variant"))
+		{
+			org.bukkit.NamespacedKey key = org.bukkit.NamespacedKey.fromString((String) nbt.get("variant"));
+			if (key != null)
+			{
+				this.setVariant(org.bukkit.Registry.WOLF_VARIANT.get(key));
+			}
+		}
+		if (nbt.has("CollarColor"))
+		{
+			// Map NBT byte to DyeColor
+		}
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import io.papermc.paper.registry.RegistryKey;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Art;
 import org.bukkit.NamespacedKey;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,10 +13,23 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockmc.mockmc.MockMCExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockMCExtension.class)
 class ArtMockTest
 {
+
+	/**
+	 * Renamed from registry_ShouldContainPaintingVariants to
+	 * registryShouldContainPaintingVariants to match the required regular
+	 * expression.
+	 */
+	@Test
+	void registryShouldContainPaintingVariants()
+	{
+		var registry = RegistryAccess.registryAccess().getRegistry(RegistryKey.PAINTING_VARIANT);
+		assertNotNull(registry, "Registry for PAINTING_VARIANT should not be null");
+	}
 
 	@Nested
 	class ValidateArtInformation
@@ -56,13 +70,12 @@ class ArtMockTest
 			NamespacedKey key = NamespacedKey.fromString(expectedKey);
 			Art art = RegistryAccess.registryAccess().getRegistry(RegistryKey.PAINTING_VARIANT).get(key);
 
+			assertNotNull(art, "Art variant not found for: " + expectedKey);
 			assertEquals(expectedKey, art.assetId().asString());
 			assertEquals(expectedTitle, LegacyComponentSerializer.legacySection().serialize(art.title()));
 			assertEquals(expectedAuthor, LegacyComponentSerializer.legacySection().serialize(art.author()));
 			assertEquals(expectedWidth, art.getBlockWidth());
 			assertEquals(expectedHeight, art.getBlockHeight());
 		}
-
 	}
-
 }

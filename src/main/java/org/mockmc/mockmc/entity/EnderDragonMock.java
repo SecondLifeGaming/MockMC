@@ -12,7 +12,7 @@ import java.util.UUID;
 public class EnderDragonMock extends AbstractBossMock
 		implements
 			EnderDragon,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EnderDragonBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderDragonBaseMock
 {
 
 	private Location podium = new Location(getWorld(), 0, 0, 0);

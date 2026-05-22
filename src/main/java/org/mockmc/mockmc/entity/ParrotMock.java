@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ParrotMock extends AnimalsMock
 		implements
 			Parrot,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ParrotBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ParrotBaseMock
 {
 
 	@NotNull

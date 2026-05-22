@@ -17,7 +17,7 @@ import java.util.UUID;
 public class FireballMock extends ProjectileMock
 		implements
 			Fireball,
-			org.mockmc.mockmc.generated.org.bukkit.entity.FireballBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.FireballBaseMock
 {
 
 	private boolean isIncendiary;

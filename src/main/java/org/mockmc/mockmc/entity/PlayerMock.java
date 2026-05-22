@@ -145,7 +145,7 @@ import java.util.function.Predicate;
 public class PlayerMock extends HumanEntityMock
 		implements
 			SoundReceiver,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PlayerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PlayerBaseMock
 {
 
 	private static final Component DEFAULT_KICK_COMPONENT = Component.text("You are not whitelisted on this server!");

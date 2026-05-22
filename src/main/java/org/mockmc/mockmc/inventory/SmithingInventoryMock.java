@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class SmithingInventoryMock extends InventoryMock
 		implements
 			SmithingInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.SmithingInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.SmithingInventoryBaseMock
 {
 
 	private static final int RESULT_SLOT = 0;

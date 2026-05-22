@@ -7,7 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class PandaMock extends AnimalsMock implements Panda, org.mockmc.mockmc.generated.org.bukkit.entity.PandaBaseMock
+public class PandaMock extends AnimalsMock
+		implements
+			Panda,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PandaBaseMock
 {
 
 	private Gene mainGene = Gene.NORMAL;

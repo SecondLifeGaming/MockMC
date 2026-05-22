@@ -19,7 +19,7 @@ import org.jetbrains.annotations.Nullable;
 public abstract class InventoryViewMock
 		implements
 			InventoryView,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.InventoryViewBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBaseMock
 {
 
 	private Inventory topInventory;

@@ -18,7 +18,7 @@ import java.util.UUID;
 public class ParchedMock extends AbstractSkeletonMock
 		implements
 			Parched,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ParchedBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ParchedBaseMock
 {
 
 	/**

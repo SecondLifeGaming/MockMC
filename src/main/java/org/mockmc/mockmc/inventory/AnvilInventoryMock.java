@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class AnvilInventoryMock extends InventoryMock
 		implements
 			AnvilInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.AnvilInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.AnvilInventoryBaseMock
 {
 
 	@Nullable

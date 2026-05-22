@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.entity.HumanEntityMock;
 import java.util.Arrays;
 
-import org.mockmc.mockmc.generated.org.bukkit.inventory.PlayerInventoryBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.inventory.PlayerInventoryBaseMock;
 
 /**
  * Mock implementation of a {@link PlayerInventory}.

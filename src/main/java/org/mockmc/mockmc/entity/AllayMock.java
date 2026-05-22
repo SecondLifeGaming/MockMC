@@ -25,7 +25,7 @@ import java.util.UUID;
 public class AllayMock extends CreatureMock
 		implements
 			Allay,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AllayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AllayBaseMock
 {
 
 	@NotNull

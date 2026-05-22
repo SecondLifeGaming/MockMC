@@ -27,7 +27,7 @@ import java.util.Map;
 @SuppressWarnings("unchecked")
 public class CustomModelDataComponentMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.CustomModelDataComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.CustomModelDataComponentBaseMock
 {
 
 	@Builder.Default

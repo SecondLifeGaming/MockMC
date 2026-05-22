@@ -11,7 +11,7 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 public class PatternTypeMock extends OldKeyedEnumMock<PatternType>
 		implements
 			PatternType,
-			org.mockmc.mockmc.generated.org.bukkit.block.banner.PatternTypeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.banner.PatternTypeBaseMock
 {
 
 	private final NamespacedKey key;

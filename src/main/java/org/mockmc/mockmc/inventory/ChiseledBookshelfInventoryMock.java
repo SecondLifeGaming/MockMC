@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class ChiseledBookshelfInventoryMock extends InventoryMock
 		implements
 			ChiseledBookshelfInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.ChiseledBookshelfInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ChiseledBookshelfInventoryBaseMock
 {
 
 	public ChiseledBookshelfInventoryMock(@Nullable ChiseledBookshelf holder)

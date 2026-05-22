@@ -27,7 +27,7 @@ import org.mockmc.mockmc.profile.PlayerProfileMock;
 public class SkullStateMock extends TileStateMock
 		implements
 			Skull,
-			org.mockmc.mockmc.generated.org.bukkit.block.SkullBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.SkullBaseMock
 {
 
 	private static final int MAX_OWNER_LENGTH = 16;

@@ -13,7 +13,7 @@ import java.util.UUID;
 public abstract class AbstractWindChargeMock extends FireballMock
 		implements
 			AbstractWindCharge,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AbstractWindChargeBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractWindChargeBaseMock
 {
 
 	/**

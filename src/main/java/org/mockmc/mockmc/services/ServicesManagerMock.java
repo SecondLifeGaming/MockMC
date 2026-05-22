@@ -9,6 +9,6 @@ import org.bukkit.plugin.SimpleServicesManager;
  */
 public class ServicesManagerMock extends SimpleServicesManager
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.plugin.ServicesManagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.plugin.ServicesManagerBaseMock
 {
 }

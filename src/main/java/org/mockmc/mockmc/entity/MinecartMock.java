@@ -24,7 +24,7 @@ import java.util.UUID;
 public abstract class MinecartMock extends VehicleMock
 		implements
 			Minecart,
-			org.mockmc.mockmc.generated.org.bukkit.entity.MinecartBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.MinecartBaseMock
 {
 
 	private double damage = 0;

@@ -16,7 +16,7 @@ import java.util.UUID;
 public class HangingMock extends EntityMock
 		implements
 			Hanging,
-			org.mockmc.mockmc.generated.org.bukkit.entity.HangingBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.HangingBaseMock
 {
 
 	private BlockFace facing;

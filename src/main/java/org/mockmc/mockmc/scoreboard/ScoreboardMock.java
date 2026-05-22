@@ -26,7 +26,10 @@ import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializ
  */
 @SuppressWarnings(
 {"deprecation", "removal", "unchecked"})
-public class ScoreboardMock implements Scoreboard, org.mockmc.mockmc.generated.org.bukkit.scoreboard.ScoreboardBaseMock
+public class ScoreboardMock
+		implements
+			Scoreboard,
+			org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ScoreboardBaseMock
 {
 
 	private static final String OFFLINE_PLAYER_CANNOT_BE_NULL = "OfflinePlayer cannot be null";

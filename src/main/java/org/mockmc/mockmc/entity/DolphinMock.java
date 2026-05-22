@@ -11,7 +11,7 @@ import java.util.UUID;
 public class DolphinMock extends AgeableMock
 		implements
 			Dolphin,
-			org.mockmc.mockmc.generated.org.bukkit.entity.DolphinBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.DolphinBaseMock
 {
 
 	private int moistness = 2400;

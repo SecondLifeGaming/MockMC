@@ -16,7 +16,7 @@ import org.mockmc.mockmc.inventory.ItemStackMock;
 public class JukeboxStateMock extends TileStateMock
 		implements
 			Jukebox,
-			org.mockmc.mockmc.generated.org.bukkit.block.JukeboxBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.JukeboxBaseMock
 {
 
 	private ItemStack recordItem;

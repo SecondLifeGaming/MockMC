@@ -15,7 +15,7 @@ import java.util.UUID;
 public class DisplayMock extends EntityMock
 		implements
 			Display,
-			org.mockmc.mockmc.generated.org.bukkit.entity.DisplayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.DisplayBaseMock
 {
 
 	private Matrix4f transformationMatrix;

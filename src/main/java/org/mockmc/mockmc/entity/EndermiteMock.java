@@ -11,7 +11,7 @@ import java.util.UUID;
 public class EndermiteMock extends MonsterMock
 		implements
 			Endermite,
-			org.mockmc.mockmc.generated.org.bukkit.entity.EndermiteBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.EndermiteBaseMock
 {
 
 	private int life = 0;

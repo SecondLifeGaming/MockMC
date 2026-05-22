@@ -22,7 +22,7 @@ import java.util.Map;
 @DelegateDeserialization(SerializableMeta.class)
 public class FireworkMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.FireworkMetaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.FireworkMetaBaseMock
 {
 
 	static final String POWER_KEY = "power";

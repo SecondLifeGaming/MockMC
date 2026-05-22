@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 public class LecternInventoryMock extends InventoryMock
 		implements
 			LecternInventory,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.LecternInventoryBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.LecternInventoryBaseMock
 {
 
 	/**

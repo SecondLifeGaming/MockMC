@@ -203,6 +203,8 @@ public final class EntityTypesMock
 
 	private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(EntityTypesMock.class);
 
+	private static final java.util.Map<Class<?>, java.lang.reflect.Constructor<?>> CONSTRUCTOR_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
+
 	private static final EntityTypesMock INSTANCE = withDefaults().build();
 
 	private static EntityTypesMock getInstance()
@@ -415,15 +417,25 @@ public final class EntityTypesMock
 		// First try to instantiate it directly
 		try
 		{
-			var myConstructor = bukkitClazz.getDeclaredConstructor(ServerMock.class, UUID.class);
-			return (EntityMock) myConstructor.newInstance(server, entityUUID);
-		} catch (NoSuchMethodException e)
-		{
-			log.debug("Method with signature '{}' does not exist in '{}', falling back to reflection.", e.getMessage(),
-					bukkitClazz.getName());
+			java.lang.reflect.Constructor<?> myConstructor = CONSTRUCTOR_CACHE.computeIfAbsent(bukkitClazz, clazz ->
+			{
+				try
+				{
+					return clazz.getDeclaredConstructor(ServerMock.class, UUID.class);
+				} catch (NoSuchMethodException _)
+				{
+					return null;
+				}
+			});
+
+			if (myConstructor != null)
+			{
+				return (EntityMock) myConstructor.newInstance(server, entityUUID);
+			}
 		} catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
 		{
-			log.warn("Couldn't find: {} for {}. Falling back to reflection.", e.getMessage(), bukkitClazz.getName(), e);
+			log.warn("Couldn't instantiate: {} for {}. Falling back to reflection.", e.getMessage(),
+					bukkitClazz.getName(), e);
 		}
 
 		EntityData<? extends Entity, ? extends EntityMock> data = bukkitToMockData.get(bukkitClazz);

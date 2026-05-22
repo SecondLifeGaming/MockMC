@@ -21,7 +21,7 @@ import java.util.UUID;
 public class TextDisplayMock extends DisplayMock
 		implements
 			TextDisplay,
-			org.mockmc.mockmc.generated.org.bukkit.entity.TextDisplayBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.TextDisplayBaseMock
 {
 
 	@NotNull

@@ -13,7 +13,7 @@ import java.util.UUID;
 public class ZombieVillagerMock extends ZombieMock
 		implements
 			ZombieVillager,
-			org.mockmc.mockmc.generated.org.bukkit.entity.ZombieVillagerBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieVillagerBaseMock
 {
 
 	private Villager.Type type = Villager.Type.PLAINS;

@@ -13,7 +13,10 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class CowMock extends AbstractCowMock implements Cow, org.mockmc.mockmc.generated.org.bukkit.entity.CowBaseMock
+public class CowMock extends AbstractCowMock
+		implements
+			Cow,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CowBaseMock
 {
 
 	private SoundVariant soundVariant = SoundVariant.CLASSIC;

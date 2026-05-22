@@ -25,7 +25,7 @@ import java.util.Objects;
  */
 public class BeaconStateMock extends LockableTileStateMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.block.BeaconBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BeaconBaseMock
 {
 
 	private @Nullable Component customName;

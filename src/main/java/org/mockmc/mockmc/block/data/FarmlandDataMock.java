@@ -10,53 +10,61 @@ import org.jetbrains.annotations.NotNull;
  *
  * @see FarmlandDataMock
  */
-public class FarmlandDataMock extends BlockDataMock implements Farmland {
+public class FarmlandDataMock extends BlockDataMock implements Farmland
+{
 
-    /**
-     * Constructs a new {@link Farmland} for the provided {@link Material}.
-     *
-     * @param material
-     * The material this data is for.
-     */
-    public FarmlandDataMock(@NotNull Material material) {
-        super(material);
-    }
+	/**
+	 * Constructs a new {@link Farmland} for the provided {@link Material}.
+	 *
+	 * @param material
+	 *            The material this data is for.
+	 */
+	public FarmlandDataMock(@NotNull Material material)
+	{
+		super(material);
+	}
 
-    /**
-     * Create a new {@link Farmland} based on an existing {@link Farmland}.
-     *
-     * @param other
-     * the other block data.
-     */
-    protected FarmlandDataMock(@NotNull FarmlandDataMock other) {
-        super(other);
-    }
+	/**
+	 * Create a new {@link Farmland} based on an existing {@link Farmland}.
+	 *
+	 * @param other
+	 *            the other block data.
+	 */
+	protected FarmlandDataMock(@NotNull FarmlandDataMock other)
+	{
+		super(other);
+	}
 
-    @Override
-    public int getMoisture() {
-        return this.get(BlockDataKey.MOISTURE);
-    }
+	@Override
+	public int getMoisture()
+	{
+		return this.get(BlockDataKey.MOISTURE);
+	}
 
-    @Override
-    public void setMoisture(int moisture) {
-        int maximumMoisture = this.getMaximumMoisture();
-        Preconditions.checkArgument(0 <= moisture && moisture <= maximumMoisture, "Moisture must be between 0 and %s",
-                maximumMoisture);
-        this.set(BlockDataKey.MOISTURE, moisture);
-    }
+	@Override
+	public void setMoisture(int moisture)
+	{
+		int maximumMoisture = this.getMaximumMoisture();
+		Preconditions.checkArgument(0 <= moisture && moisture <= maximumMoisture, "Moisture must be between 0 and %s",
+				maximumMoisture);
+		this.set(BlockDataKey.MOISTURE, moisture);
+	}
 
-    @Override
-    public int getMaximumMoisture() {
-        return this.getLimitationValue(BlockDataLimitation.Type.MAX_MOISTURE);
-    }
+	@Override
+	public int getMaximumMoisture()
+	{
+		return this.getLimitationValue(BlockDataLimitation.Type.MAX_MOISTURE);
+	}
 
-    /**
-     * Overrides clone using a copy constructor to ensure all internal
-     * mock state is correctly duplicated.
-     */
-    @Override
-    @SuppressWarnings({ "squid:S2975", "java:S1182" })
-    public @NotNull FarmlandDataMock clone() {
-        return new FarmlandDataMock(this);
-    }
+	/**
+	 * Overrides clone using a copy constructor to ensure all internal mock state is
+	 * correctly duplicated.
+	 */
+	@Override
+	@SuppressWarnings(
+	{"squid:S2975", "java:S1182"})
+	public @NotNull FarmlandDataMock clone()
+	{
+		return new FarmlandDataMock(this);
+	}
 }

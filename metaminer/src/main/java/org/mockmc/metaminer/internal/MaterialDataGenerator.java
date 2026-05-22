@@ -26,7 +26,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.regex.Matcher;
@@ -44,7 +43,7 @@ public class MaterialDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
 		JsonObject json = createJsonObject();
 		JsonUtil.dump(json, new File(dataFolder, "material_data.json"));
@@ -70,9 +69,12 @@ public class MaterialDataGenerator implements DataGenerator
 			BlockData data = material.createBlockData();
 			String dataString = data.getAsString(false);
 			Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
-			if (!matcher.find())
+			if (material.key() == null || !matcher.find())
 			{
-				json.add(material.key().toString(), new JsonObject());
+				if (material.key() != null)
+				{
+					json.add(material.key().toString(), new JsonObject());
+				}
 				return;
 			}
 
@@ -113,9 +115,9 @@ public class MaterialDataGenerator implements DataGenerator
 	{
 		switch (value.toLowerCase())
 		{
-			case "false" -> obj.add(key, new JsonPrimitive(false));
-			case "true" -> obj.add(key, new JsonPrimitive(true));
-			default -> obj.add(key, new JsonPrimitive(value));
+		case "false" -> obj.add(key, new JsonPrimitive(false));
+		case "true" -> obj.add(key, new JsonPrimitive(true));
+		default -> obj.add(key, new JsonPrimitive(value));
 		}
 	}
 
@@ -127,31 +129,41 @@ public class MaterialDataGenerator implements DataGenerator
 
 	private static void extractNumericProperties(BlockData data, JsonObject obj)
 	{
-		if (data instanceof Ageable ageable) obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge()));
-		if (data instanceof AnaloguePowerable analoguePowerable) obj.addProperty("maxPower", String.valueOf(analoguePowerable.getMaximumPower()));
-		if (data instanceof Sapling sapling) obj.addProperty("maxStage", String.valueOf(sapling.getMaximumStage()));
+		if (data instanceof Ageable ageable)
+			obj.addProperty("maxAge", String.valueOf(ageable.getMaximumAge()));
+		if (data instanceof AnaloguePowerable analoguePowerable)
+			obj.addProperty("maxPower", String.valueOf(analoguePowerable.getMaximumPower()));
+		if (data instanceof Sapling sapling)
+			obj.addProperty("maxStage", String.valueOf(sapling.getMaximumStage()));
 		if (data instanceof Levelled levelled)
 		{
 			obj.addProperty("maxLevel", String.valueOf(levelled.getMaximumLevel()));
 			obj.addProperty("minLevel", String.valueOf(levelled.getMinimumLevel()));
 		}
-		if (data instanceof Brushable brushable) obj.addProperty("maxDusted", String.valueOf(brushable.getMaximumDusted()));
-		if (data instanceof Farmland farmland) obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
-		if (data instanceof Hatchable hatchable) obj.addProperty("maxHatch", String.valueOf(hatchable.getMaximumHatch()));
+		if (data instanceof Brushable brushable)
+			obj.addProperty("maxDusted", String.valueOf(brushable.getMaximumDusted()));
+		if (data instanceof Farmland farmland)
+			obj.addProperty("maxMoisture", String.valueOf(farmland.getMaximumMoisture()));
+		if (data instanceof Hatchable hatchable)
+			obj.addProperty("maxHatch", String.valueOf(hatchable.getMaximumHatch()));
 		if (data instanceof TurtleEgg turtleEgg)
 		{
 			obj.addProperty("minEggs", String.valueOf(turtleEgg.getMinimumEggs()));
 			obj.addProperty("maxEggs", String.valueOf(turtleEgg.getMaximumEggs()));
 		}
-		if (data instanceof RespawnAnchor respawnAnchor) obj.addProperty("maxCharges", String.valueOf(respawnAnchor.getMaximumCharges()));
-		if (data instanceof ChiseledBookshelf chiseledBookshelf) obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
+		if (data instanceof RespawnAnchor respawnAnchor)
+			obj.addProperty("maxCharges", String.valueOf(respawnAnchor.getMaximumCharges()));
+		if (data instanceof ChiseledBookshelf chiseledBookshelf)
+			obj.addProperty("maxOccupiedSlots", chiseledBookshelf.getMaximumOccupiedSlots());
 		if (data instanceof Leaves leaves)
 		{
 			obj.addProperty("maxDistance", leaves.getMaximumDistance());
 			obj.addProperty("minDistance", leaves.getMinimumDistance());
 		}
-		if (data instanceof Beehive beehive) obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
-		if (data instanceof Cake cake) obj.addProperty("maxBites", cake.getMaximumBites());
+		if (data instanceof Beehive beehive)
+			obj.addProperty("maxHoneyLevel", beehive.getMaximumHoneyLevel());
+		if (data instanceof Cake cake)
+			obj.addProperty("maxBites", cake.getMaximumBites());
 	}
 
 	private static void extractCollectionProperties(BlockData data, JsonObject obj)

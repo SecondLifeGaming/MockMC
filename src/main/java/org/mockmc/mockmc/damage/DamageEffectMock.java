@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class DamageEffectMock
 		implements
 			DamageEffect,
-			org.mockmc.mockmc.generated.org.bukkit.damage.DamageEffectBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageEffectBaseMock
 {
 
 	private final Sound sound;

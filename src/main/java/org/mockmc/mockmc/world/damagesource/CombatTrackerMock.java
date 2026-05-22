@@ -11,7 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Tag;
 import org.bukkit.damage.DamageSource;
-import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -72,49 +71,68 @@ public class CombatTrackerMock implements CombatTracker
 	@Override
 	public @Nullable CombatEntry computeMostSignificantFall()
 	{
-		CombatEntry combatEntry = null;
-		CombatEntry combatEntry1 = null;
-		float maxDamage = 0.0F;
-		float maxFallDistance = 0.0F;
+		FallResult result = calculateFallSignificance();
+		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
+		{
+			return result.mostSignificantFall;
+		} else
+		{
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null
+					? result.mostSignificantDamage
+					: null;
+		}
+	}
+
+	private record FallResult(CombatEntry mostSignificantFall, CombatEntry mostSignificantDamage, float maxFallDistance,
+			float maxDamage)
+	{
+	}
+
+	private record FallState(CombatEntry entry, float distance)
+	{
+	}
+	private record DamageState(CombatEntry entry, float amount)
+	{
+	}
+
+	private FallResult calculateFallSignificance()
+	{
+		FallState fallState = new FallState(null, 0.0F);
+		DamageState damageState = new DamageState(null, 0.0F);
 
 		for (int i = 0; i < this.combatEntries.size(); i++)
 		{
 			CombatEntry currentEntry = this.combatEntries.get(i);
-			CombatEntry previousEntry = i > 0 ? this.combatEntries.get(i - 1) : null;
-			DamageSource damageSource = currentEntry.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
-					.isTagged(damageSource.getDamageType());
-			float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
-
-			if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
-					&& fallDistance > 0.0F && (combatEntry == null || fallDistance > maxFallDistance))
-			{
-				if (i > 0)
-				{
-					combatEntry = previousEntry;
-				} else
-				{
-					combatEntry = currentEntry;
-				}
-
-				maxFallDistance = fallDistance;
-			}
-
-			if (currentEntry.getFallLocationType() != null
-					&& (combatEntry1 == null || currentEntry.getDamage() > maxDamage))
-			{
-				combatEntry1 = currentEntry;
-				maxDamage = currentEntry.getDamage();
-			}
+			fallState = updateFallState(i, currentEntry, fallState);
+			damageState = updateDamageState(currentEntry, damageState);
 		}
+		return new FallResult(fallState.entry, damageState.entry, fallState.distance, damageState.amount);
+	}
 
-		if (maxFallDistance > 5.0F && combatEntry != null)
+	private FallState updateFallState(int index, CombatEntry currentEntry, FallState currentState)
+	{
+		DamageSource damageSource = currentEntry.getDamageSource();
+		boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
+				.isTagged(damageSource.getDamageType());
+		float fallDistance = isAlwaysMostSignificantFall ? Float.MAX_VALUE : currentEntry.getFallDistance();
+
+		if ((DamageTypeTags.IS_FALL.isTagged(damageSource.getDamageType()) || isAlwaysMostSignificantFall)
+				&& fallDistance > 0.0F && (currentState.entry == null || fallDistance > currentState.distance))
 		{
-			return combatEntry;
-		} else
-		{
-			return maxDamage > 5.0F && combatEntry1 != null ? combatEntry1 : null;
+			CombatEntry significantEntry = (index > 0) ? this.combatEntries.get(index - 1) : currentEntry;
+			return new FallState(significantEntry, fallDistance);
 		}
+		return currentState;
+	}
+
+	private DamageState updateDamageState(CombatEntry currentEntry, DamageState currentState)
+	{
+		if (currentEntry.getFallLocationType() != null
+				&& (currentState.entry == null || currentEntry.getDamage() > currentState.amount))
+		{
+			return new DamageState(currentEntry, currentEntry.getDamage());
+		}
+		return currentState;
 	}
 
 	@Override
@@ -180,48 +198,17 @@ public class CombatTrackerMock implements CombatTracker
 		}
 	}
 
-	private CombatEntry getMostSignificantFall()
+	private @Nullable CombatEntry getMostSignificantFall()
 	{
-		CombatEntry combatEntry = null;
-		CombatEntry combatEntry1 = null;
-		float f = 0.0F;
-		float f1 = 0.0F;
-
-		for (int i = 0; i < this.combatEntries.size(); i++)
+		FallResult result = calculateFallSignificance();
+		if (result.maxFallDistance > 5.0F && result.mostSignificantFall != null)
 		{
-			CombatEntry combatEntry2 = this.combatEntries.get(i);
-			CombatEntry combatEntry3 = i > 0 ? this.combatEntries.get(i - 1) : null;
-			DamageSource damageSource = combatEntry2.getDamageSource();
-			boolean isAlwaysMostSignificantFall = DamageTypeTags.ALWAYS_MOST_SIGNIFICANT_FALL
-					.isTagged(damageSource.getDamageType());
-			float f2 = isAlwaysMostSignificantFall ? Float.MAX_VALUE : combatEntry2.getFallDistance();
-			if ((damageSource.getDamageType() == DamageType.FALL || isAlwaysMostSignificantFall) && f2 > 0.0F
-					&& (combatEntry == null || f2 > f1))
-			{
-				if (i > 0)
-				{
-					combatEntry = combatEntry3;
-				} else
-				{
-					combatEntry = combatEntry2;
-				}
-
-				f1 = f2;
-			}
-
-			if (combatEntry2.getFallLocationType() != null && (combatEntry1 == null || combatEntry2.getDamage() > f))
-			{
-				combatEntry1 = combatEntry2;
-				f = combatEntry2.getDamage();
-			}
-		}
-
-		if (f1 > 5.0F && combatEntry != null)
-		{
-			return combatEntry;
+			return result.mostSignificantFall;
 		} else
 		{
-			return f > 5.0F && combatEntry1 != null ? combatEntry1 : null;
+			return result.maxDamage > 5.0F && result.mostSignificantDamage != null
+					? result.mostSignificantDamage
+					: null;
 		}
 	}
 
@@ -289,25 +276,16 @@ public class CombatTrackerMock implements CombatTracker
 		if (lastClimbableLocation != null)
 		{
 			Material material = entity.getWorld().getType(lastClimbableLocation);
-			if (Material.LADDER.equals(material) || Tag.TRAPDOORS.isTagged(material))
+			return switch (material)
 			{
-				return FallLocationType.LADDER;
-			} else if (Material.VINE.equals(material))
-			{
-				return FallLocationType.VINES;
-			} else if (Material.WEEPING_VINES.equals(material) || Material.WEEPING_VINES_PLANT.equals(material))
-			{
-				return FallLocationType.WEEPING_VINES;
-			} else if (Material.TWISTING_VINES.equals(material) || Material.TWISTING_VINES_PLANT.equals(material))
-			{
-				return FallLocationType.TWISTING_VINES;
-			} else if (Material.SCAFFOLDING.equals(material))
-			{
-				return FallLocationType.SCAFFOLDING;
-			} else
-			{
-				return FallLocationType.OTHER_CLIMBABLE;
-			}
+				case LADDER -> FallLocationType.LADDER;
+				case VINE -> FallLocationType.VINES;
+				case WEEPING_VINES, WEEPING_VINES_PLANT -> FallLocationType.WEEPING_VINES;
+				case TWISTING_VINES, TWISTING_VINES_PLANT -> FallLocationType.TWISTING_VINES;
+				case SCAFFOLDING -> FallLocationType.SCAFFOLDING;
+				default ->
+					Tag.TRAPDOORS.isTagged(material) ? FallLocationType.LADDER : FallLocationType.OTHER_CLIMBABLE;
+			};
 		}
 
 		return entity.isInWater() ? FallLocationType.WATER : null;

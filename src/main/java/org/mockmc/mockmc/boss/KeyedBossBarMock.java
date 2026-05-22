@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class KeyedBossBarMock extends BossBarMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.boss.KeyedBossBarBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.boss.KeyedBossBarBaseMock
 
 {
 

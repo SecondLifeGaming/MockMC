@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class TrimMaterialMock
 		implements
 			TrimMaterial,
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.trim.TrimMaterialBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.trim.TrimMaterialBaseMock
 {
 
 	private final NamespacedKey key;

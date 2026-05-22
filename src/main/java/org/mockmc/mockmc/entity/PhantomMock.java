@@ -17,7 +17,7 @@ import java.util.UUID;
 public class PhantomMock extends FlyingMock
 		implements
 			Phantom,
-			org.mockmc.mockmc.generated.org.bukkit.entity.PhantomBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.PhantomBaseMock
 {
 
 	private int size = 0;

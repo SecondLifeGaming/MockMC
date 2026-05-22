@@ -12,7 +12,10 @@ import java.util.UUID;
  *
  * @see FlyingMock
  */
-public class GhastMock extends FlyingMock implements Ghast, org.mockmc.mockmc.generated.org.bukkit.entity.GhastBaseMock
+public class GhastMock extends FlyingMock
+		implements
+			Ghast,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.GhastBaseMock
 {
 
 	private boolean isCharging = false;

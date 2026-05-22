@@ -8,7 +8,6 @@ import org.mockmc.metaminer.DataGenerator;
 import org.mockmc.metaminer.util.JsonUtil;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
 
 public class RegistryKeyClassDataGenerator implements DataGenerator
@@ -22,12 +21,13 @@ public class RegistryKeyClassDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData() throws IOException
+	public void generateData() throws java.io.IOException
 	{
 		File destinationFile = new File(dataFolder, "registry_key_class_relation.json");
 		JsonObject rootObject = new JsonObject();
 
-		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation().entrySet())
+		for (Map.Entry<RegistryKey<? extends Keyed>, Class<?>> entry : KeyedClassTracker.getClassRegistryKeyRelation()
+				.entrySet())
 		{
 			rootObject.add(entry.getKey().key().asString(), new JsonPrimitive(entry.getValue().getName()));
 		}

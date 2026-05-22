@@ -21,7 +21,7 @@ import java.util.Objects;
 public class LecternStateMock extends ContainerStateMock
 		implements
 			Lectern,
-			org.mockmc.mockmc.generated.org.bukkit.block.LockableBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.LockableBaseMock
 {
 
 	private int currentPage;

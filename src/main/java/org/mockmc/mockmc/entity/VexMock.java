@@ -16,7 +16,10 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class VexMock extends MonsterMock implements Vex, org.mockmc.mockmc.generated.org.bukkit.entity.VexBaseMock
+public class VexMock extends MonsterMock
+		implements
+			Vex,
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.VexBaseMock
 {
 
 	private boolean isCharging = false;

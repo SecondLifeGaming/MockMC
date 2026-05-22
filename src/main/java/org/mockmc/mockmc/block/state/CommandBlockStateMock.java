@@ -19,7 +19,7 @@ import org.mockmc.mockmc.command.CommandBlockHolderMock;
 public class CommandBlockStateMock extends TileStateMock
 		implements
 			CommandBlock,
-			org.mockmc.mockmc.generated.org.bukkit.block.CommandBlockBaseMock,
+			org.mockmc.mockmc.generated.server.org.bukkit.block.CommandBlockBaseMock,
 			CommandBlockHolderMock
 {
 

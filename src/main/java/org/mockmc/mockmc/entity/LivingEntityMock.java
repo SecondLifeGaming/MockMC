@@ -65,7 +65,7 @@ import java.util.function.Consumer;
 {"removal"})
 public abstract class LivingEntityMock extends EntityMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.entity.LivingEntityBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LivingEntityBaseMock
 {
 
 	private final BrainMock brain = new BrainMock();
@@ -771,7 +771,7 @@ public abstract class LivingEntityMock extends EntityMock
 	@Override
 	public boolean isLeashed()
 	{
-		return this.leashHolder instanceof Mob;
+		return this.leashHolder != null;
 	}
 
 	@Override
@@ -786,13 +786,13 @@ public abstract class LivingEntityMock extends EntityMock
 	}
 
 	@Override
-	public boolean setLeashHolder(Entity holder)
+	public boolean setLeashHolder(@Nullable Entity holder)
 	{
-		if (this instanceof Wither || !(this instanceof Mob))
+		if (this instanceof Wither)
 		{
 			return false;
 		}
-		if (holder != null && holder.isDead())
+		if (holder != null && (!holder.isValid() || holder.isDead()))
 		{
 			return false;
 		}

@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class ConduitStateMock extends TileStateMock
 		implements
 			Conduit,
-			org.mockmc.mockmc.generated.org.bukkit.block.ConduitBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.ConduitBaseMock
 {
 
 	/**

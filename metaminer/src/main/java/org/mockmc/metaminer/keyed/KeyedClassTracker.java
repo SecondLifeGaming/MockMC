@@ -10,8 +10,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.logging.Logger;
+
 public class KeyedClassTracker
 {
+
+	private static final Logger LOGGER = Logger.getLogger(KeyedClassTracker.class.getName());
 
 	private KeyedClassTracker()
 	{
@@ -43,7 +47,11 @@ public class KeyedClassTracker
 				{
 					@SuppressWarnings("unchecked")
 					RegistryKey<? extends Keyed> registryKey = (RegistryKey<? extends Keyed>) field.get(null);
-					output.put(registryKey, legacyType);
+					if (registryKey != null) {
+						output.put(registryKey, legacyType);
+					} else {
+						LOGGER.warning(() -> "RegistryKey field " + field.getName() + " is null!");
+					}
 				}
 				catch (IllegalAccessException e)
 				{

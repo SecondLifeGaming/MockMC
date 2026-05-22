@@ -3,7 +3,6 @@ package org.mockmc.metaminer.tests;
 import org.mockmc.metaminer.DataGenerator;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.stream.Stream;
 
 public class ItemStackTestDataGenerator implements DataGenerator
@@ -17,7 +16,7 @@ public class ItemStackTestDataGenerator implements DataGenerator
 	}
 
 	@Override
-	public void generateData()
+	public void generateData() throws java.io.IOException
 	{
 		getGenerators().forEach(dataGenerator ->
 		{
@@ -25,7 +24,7 @@ public class ItemStackTestDataGenerator implements DataGenerator
 			{
 				dataGenerator.generateData();
 			}
-			catch (IOException e)
+			catch (Exception e)
 			{
 				e.printStackTrace();
 			}
@@ -34,8 +33,7 @@ public class ItemStackTestDataGenerator implements DataGenerator
 
 	private Stream<DataGenerator> getGenerators()
 	{
-		return Stream.of(new ItemStackSetTypeTestDataGenerator(folder),
-				new ItemStackMetaDataGenerator(folder));
+		return Stream.of(new ItemStackSetTypeTestDataGenerator(folder), new ItemStackMetaDataGenerator(folder));
 	}
 
 }

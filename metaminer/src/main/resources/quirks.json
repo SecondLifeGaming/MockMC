@@ -1,7 +1,42 @@
 {
-  "org.bukkit.entity.Pillager": {
-    "excludeInterfaces": [],
-    "excludeMethods": [],
-    "manualPatches": []
+  "org.bukkit.Art": {
+    "methodQuirks": {
+      "key()": {
+        "replacement": "Use Registry.ART or assetId() instead."
+      },
+      "getKey()": {
+        "replacement": "Use Registry.ART or assetId() instead."
+      }
+    }
+  },
+  "org.bukkit.entity.LightningStrike": {
+    "methodQuirks": {
+      "spigot()": {
+        "replacement": "Use Adventure API (Component/Audience) for messaging or Paper-specific event methods."
+      }
+    }
+  },
+  "org.bukkit.enchantments.Enchantment": {
+    "methodQuirks": {
+      "getItemTarget()": {
+        "replacement": "Enchantment targets are now defined via 'supported_items' and 'primary_items' tags in the enchantment's JSON data."
+      }
+    }
+  },
+  "org.mockmc.mockmc.command.CommandResult": {
+    "methodQuirks": {
+      "assertSucceeded()": {
+        "replacement": "Use assertThat(result, CommandResultSucceedMatcher.succeeds()) instead."
+      },
+      "assertFailed()": {
+        "replacement": "Use assertThat(result, CommandResultSucceedMatcher.failed()) instead."
+      },
+      "assertResponse(java.lang.String)": {
+        "replacement": "Use assertThat(result, CommandResultResponseMatcher.hasResponse(message)) instead."
+      },
+      "assertNoResponse()": {
+        "replacement": "Use assertThat(result, CommandResultResponseMatcher.hasNoResponse()) instead."
+      }
+    }
   }
 }

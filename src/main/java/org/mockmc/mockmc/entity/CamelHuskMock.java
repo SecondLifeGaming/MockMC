@@ -15,7 +15,7 @@ import java.util.UUID;
 public class CamelHuskMock extends CamelMock
 		implements
 			CamelHusk,
-			org.mockmc.mockmc.generated.org.bukkit.entity.CamelHuskBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.CamelHuskBaseMock
 {
 
 	/**

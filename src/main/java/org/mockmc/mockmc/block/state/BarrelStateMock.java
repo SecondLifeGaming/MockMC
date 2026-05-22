@@ -16,7 +16,7 @@ import java.util.Objects;
 public class BarrelStateMock extends ContainerStateMock
 		implements
 			Barrel,
-			org.mockmc.mockmc.generated.org.bukkit.block.BarrelBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.block.BarrelBaseMock
 {
 
 	private boolean isOpen = false;

@@ -20,7 +20,7 @@ import java.util.UUID;
 public class AxolotlMock extends AnimalsMock
 		implements
 			Axolotl,
-			org.mockmc.mockmc.generated.org.bukkit.entity.AxolotlBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.AxolotlBaseMock
 {
 
 	private boolean isPlayingDead = false;

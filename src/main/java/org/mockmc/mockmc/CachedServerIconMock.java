@@ -15,7 +15,7 @@ import java.util.Base64;
 /**
  * Mock implementation of a {@link CachedServerIcon}.
  */
-public class CachedServerIconMock implements org.mockmc.mockmc.generated.org.bukkit.util.CachedServerIconBaseMock
+public class CachedServerIconMock implements org.mockmc.mockmc.generated.server.org.bukkit.util.CachedServerIconBaseMock
 {
 
 	/**

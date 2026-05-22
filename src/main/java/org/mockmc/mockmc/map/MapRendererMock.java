@@ -5,7 +5,7 @@ import org.bukkit.map.MapCanvas;
 import org.bukkit.map.MapRenderer;
 import org.bukkit.map.MapView;
 import org.jetbrains.annotations.NotNull;
-import org.mockmc.mockmc.generated.org.bukkit.map.MapRendererBaseMock;
+import org.mockmc.mockmc.generated.server.org.bukkit.map.MapRendererBaseMock;
 
 /**
  * Mock implementation of a {@link MapRenderer}.

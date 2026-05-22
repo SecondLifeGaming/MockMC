@@ -39,7 +39,7 @@ import java.util.stream.Collectors;
 @SuppressWarnings("UnstableApiUsage")
 public class EquippableComponentMock
 		implements
-			org.mockmc.mockmc.generated.org.bukkit.inventory.meta.components.EquippableComponentBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.EquippableComponentBaseMock
 {
 
 	@Nullable
