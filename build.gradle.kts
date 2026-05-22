@@ -255,6 +255,7 @@ tasks {
 
 	register("printPaperDetails")
 	{
+		notCompatibleWithConfigurationCache("Requires Project instance at execution time")
 		doLast {
 			val dependency = getDependencyInformation(
 				dependencyGroup = "io.papermc.paper",
