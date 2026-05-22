@@ -1,0 +1,21 @@
+// Auto-generated mechanical sanity test for AbstractCowBaseMock
+package org.mockmc.mockmc.generated.server.org.bukkit.entity;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class AbstractCowBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		AbstractCowBaseMock mock = new Stub();
+		assertNotNull(mock);
+	}
+
+	private static class Stub implements AbstractCowBaseMock
+	{
+	}
+}

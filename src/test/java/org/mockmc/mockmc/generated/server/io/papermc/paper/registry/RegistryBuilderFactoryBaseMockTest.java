@@ -1,0 +1,23 @@
+// Auto-generated mechanical sanity test for RegistryBuilderFactoryBaseMock
+package org.mockmc.mockmc.generated.server.io.papermc.paper.registry;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import io.papermc.paper.registry.RegistryBuilder;
+import org.junit.jupiter.api.Test;
+import org.mockmc.mockmc.generated.GeneratedTestBase;
+
+class RegistryBuilderFactoryBaseMockTest extends GeneratedTestBase
+{
+	@Test
+	void testSafeDefaults()
+	{
+		RegistryBuilderFactoryBaseMock<?, ?> mock = new Stub<>();
+		assertNotNull(mock);
+		assertSafeDefault(mock.empty());
+	}
+
+	private static class Stub<T, B extends RegistryBuilder<T>> implements RegistryBuilderFactoryBaseMock<T, B>
+	{
+	}
+}

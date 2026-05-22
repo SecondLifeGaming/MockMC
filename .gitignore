@@ -210,7 +210,7 @@ Temporary Items
 ### Misc
 
 # Ignore server folder
-server/
+/server/
 
 # Ignore jars cache
 jars/cache/
