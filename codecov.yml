@@ -14,7 +14,7 @@ ignore:
 
 coverage:
   status:
-    project: off # Disable global project thresholds to prevent noise on refactors
+    project: false # Disable global project thresholds to prevent noise on refactors
     patch:
       default:
         target: 60%
