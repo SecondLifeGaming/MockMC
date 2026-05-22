@@ -69,7 +69,7 @@ class ItemStackMirrorTest
 	}
 
 	/*
-	 * See: https://github.com/westkevin12/MockMC/issues/1449
+	 * See: https://github.com/SecondLifeGaming/MockMC/issues/1449
 	 */
 	@Test
 	void fileSerializationAndDeserializationShouldSucceed(@TempDir Path tempDir) throws IOException

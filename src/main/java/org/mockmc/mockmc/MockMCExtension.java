@@ -273,14 +273,14 @@ public class MockMCExtension
 		try
 		{
 			var constructor = type.getDeclaredConstructor();
-			constructor.setAccessible(true);
 			return constructor.newInstance();
-		} catch (ReflectiveOperationException e)
+		} catch (ReflectiveOperationException _)
 		{
 			return null;
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	private @NotNull <T extends Entity> EntityMock getEntityMock(Class<T> clazz)
 	{
 		return (EntityMock) getFirstWorld().spawn(getLocation(), clazz);
@@ -409,7 +409,7 @@ public class MockMCExtension
 			logger.info(HORIZONTAL_DIVIDER);
 			logger.info("");
 			logger.info("To help us out, please open an issue on our GitHub repository with this information at");
-			logger.info("https://github.com/westkevin12/MockMC/issues/new?template=feature_request.yml");
+			logger.info("https://github.com/SecondLifeGaming/MockMC/issues/new?template=feature_request.yml");
 			logger.info("or consider contributing by submitting a pull request. \uD83D\uDCAA");
 			logger.info("");
 			logger.info("Your support and contributions keep the MockMC magic alive.");
