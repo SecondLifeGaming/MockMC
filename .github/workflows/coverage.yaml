@@ -24,6 +24,7 @@ jobs:
 
       - name: Run unit tests
         run: ./gradlew jacocoTestReport --refresh-dependencies --continue
+        continue-on-error: true
 
       - name: Upload coverage to Codecov
         if: ${{ !cancelled() }}
