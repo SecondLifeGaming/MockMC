@@ -49,8 +49,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings("removal") @Slf4j @ExtendWith(
-{ MockMCExtension.class }) @ExtendWith(MockMCExtension.class)
+@SuppressWarnings("removal")
+@Slf4j
+@ExtendWith(
+{MockMCExtension.class})
+@ExtendWith(MockMCExtension.class)
 class BlockDataMockTest
 {
 
@@ -185,8 +188,9 @@ class BlockDataMockTest
 		/*
 		 * See: https://github.com/SecondLifeGaming/MockMC/issues/1433
 		 */
-		@ParameterizedTest @CsvSource(
-		{ "'ACACIA_STAIRS', 'minecraft:acacia_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
+		@ParameterizedTest
+		@CsvSource(
+		{"'ACACIA_STAIRS', 'minecraft:acacia_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
 				"'ACACIA_TRAPDOOR', 'minecraft:acacia_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
 				"'ANDESITE_STAIRS', 'minecraft:andesite_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
 				"'BAMBOO_DOOR', 'minecraft:bamboo_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
@@ -284,7 +288,7 @@ class BlockDataMockTest
 				"'WAXED_WEATHERED_CUT_COPPER_STAIRS', 'minecraft:waxed_weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",
 				"'WEATHERED_COPPER_DOOR', 'minecraft:weathered_copper_door[facing=north,half=lower,hinge=left,open=false,powered=false]'",
 				"'WEATHERED_COPPER_TRAPDOOR', 'minecraft:weathered_copper_trapdoor[facing=north,half=bottom,open=false,powered=false,waterlogged=false]'",
-				"'WEATHERED_CUT_COPPER_STAIRS', 'minecraft:weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'", })
+				"'WEATHERED_CUT_COPPER_STAIRS', 'minecraft:weathered_cut_copper_stairs[facing=north,half=bottom,shape=straight,waterlogged=false]'",})
 		void assertBlockDataAsString(Material material, String expectedOutput)
 		{
 			var blockData = material.createBlockData();
@@ -297,16 +301,18 @@ class BlockDataMockTest
 			assertBlockDataAsString(material, expectedOutput);
 		}
 
-		@ParameterizedTest @CsvFileSource(resources = "/blocks/block_data_as_string.csv")
+		@ParameterizedTest
+		@CsvFileSource(resources = "/blocks/block_data_as_string.csv")
 		void givenPossibleValues(Material material, String expectedOutput)
 		{
 			assertBlockDataAsString(material, expectedOutput);
 		}
 	}
 
-	@ParameterizedTest @ValueSource(strings =
-	{ "WHITE_BED", "ORANGE_BED", "MAGENTA_BED", "LIGHT_BLUE_BED", "YELLOW_BED", "LIME_BED", "PINK_BED", "GRAY_BED",
-			"LIGHT_GRAY_BED", "CYAN_BED", "PURPLE_BED", "BLUE_BED", "BROWN_BED", "GREEN_BED", "RED_BED", "BLACK_BED" })
+	@ParameterizedTest
+	@ValueSource(strings =
+	{"WHITE_BED", "ORANGE_BED", "MAGENTA_BED", "LIGHT_BLUE_BED", "YELLOW_BED", "LIME_BED", "PINK_BED", "GRAY_BED",
+			"LIGHT_GRAY_BED", "CYAN_BED", "PURPLE_BED", "BLUE_BED", "BROWN_BED", "GREEN_BED", "RED_BED", "BLACK_BED"})
 	void createBlockState_GivenBedMaterial(Material bedMaterial)
 	{
 		BedDataMock bed = (BedDataMock) BlockDataMock.mock(bedMaterial);
@@ -348,13 +354,15 @@ class BlockDataMockTest
 		assertInstanceOf(BedDataMock.class, blockDataMock);
 	}
 
-	@ParameterizedTest @MethodSource("getValidSerializations")
+	@ParameterizedTest
+	@MethodSource("getValidSerializations")
 	void deserialize_validInput(String serialized)
 	{
 		assertDoesNotThrow(() -> BlockDataMock.newData(null, serialized));
 	}
 
-	@ParameterizedTest @MethodSource("getInvalidSerializations")
+	@ParameterizedTest
+	@MethodSource("getInvalidSerializations")
 	void deserialize_invalidInput(String serialized)
 	{
 		assertThrows(IllegalArgumentException.class, () -> BlockDataMock.newData(null, serialized));
@@ -373,11 +381,14 @@ class BlockDataMockTest
 	{
 
 		/**
-		 * Unit test to validate that extend {@link BlockDataMock} implement the clone method.
+		 * Unit test to validate that extend {@link BlockDataMock} implement the clone
+		 * method.
 		 *
-		 * @param material The material to be used in the block state
+		 * @param material
+		 *            The material to be used in the block state
 		 */
-		@ParameterizedTest @MethodSource("getPossibleBlockData")
+		@ParameterizedTest
+		@MethodSource("getPossibleBlockData")
 		void givenPossibleBlockData(Material material)
 		{
 			BlockDataMock blockData = BlockDataMockFactory.mock(material);
@@ -403,8 +414,7 @@ class BlockDataMockTest
 					}
 
 					blockDataMocks.add(material);
-				}
-				catch (UnimplementedOperationException _)
+				} catch (UnimplementedOperationException _)
 				{
 					log.warn("Material {} is throwing an UnimplementedOperationException", material);
 				}
