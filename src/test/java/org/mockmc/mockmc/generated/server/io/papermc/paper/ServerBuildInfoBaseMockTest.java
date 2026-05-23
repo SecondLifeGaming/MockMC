@@ -13,14 +13,14 @@ class ServerBuildInfoBaseMockTest extends GeneratedTestBase
 	{
 		ServerBuildInfoBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.minecraftVersionName());
+		assertSafeDefault(mock.buildTime());
 		assertSafeDefault(mock.buildNumber());
 		assertSafeDefault(mock.gitCommit());
 		assertSafeDefault(mock.gitBranch());
 		assertSafeDefault(mock.minecraftVersionId());
 		assertSafeDefault(mock.brandName());
-		assertSafeDefault(mock.minecraftVersionName());
 		assertSafeDefault(mock.brandId());
-		assertSafeDefault(mock.buildTime());
 	}
 
 	private static class Stub implements ServerBuildInfoBaseMock

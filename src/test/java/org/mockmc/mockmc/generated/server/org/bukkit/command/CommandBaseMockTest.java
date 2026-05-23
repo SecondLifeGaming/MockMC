@@ -18,13 +18,13 @@ class CommandBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.toString());
 		assertSafeDefault(mock.getLabel());
-		assertSafeDefault(mock.getPermission());
 		assertSafeDefault(mock.getPermissionMessage());
 		assertSafeDefault(mock.permissionMessage());
 		assertSafeDefault(mock.getDescription());
 		assertSafeDefault(mock.getTimingName());
 		assertSafeDefault(mock.getAliases());
 		assertSafeDefault(mock.getUsage());
+		assertSafeDefault(mock.getPermission());
 	}
 
 	private static class Stub implements CommandBaseMock

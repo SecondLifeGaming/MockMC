@@ -355,6 +355,12 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
+	{
+		// MockMC: Server#isOwnedByCurrentRegion
+		return false;
+	}
+
 	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
@@ -380,12 +386,6 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	}
 
 	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3, int arg4)
-	{
-		// MockMC: Server#isOwnedByCurrentRegion
-		return false;
-	}
-
-	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;

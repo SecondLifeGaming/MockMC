@@ -578,7 +578,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
-	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
+	default Item dropItem(EquipmentSlot arg0)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
@@ -614,7 +614,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
-	default Item dropItem(EquipmentSlot arg0)
+	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;

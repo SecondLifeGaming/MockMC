@@ -13,8 +13,8 @@ class MultiActionTypeBaseMockTest extends GeneratedTestBase
 	{
 		MultiActionTypeBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.actions());
 		assertSafeDefault(mock.exitAction());
+		assertSafeDefault(mock.actions());
 	}
 
 	private static class Stub implements MultiActionTypeBaseMock

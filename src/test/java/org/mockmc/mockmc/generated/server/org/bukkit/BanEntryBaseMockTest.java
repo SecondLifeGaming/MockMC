@@ -17,10 +17,10 @@ class BanEntryBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getTarget());
 		assertSafeDefault(mock.getReason());
-		assertSafeDefault(mock.getExpiration());
 		assertSafeDefault(mock.getCreated());
 		assertSafeDefault(mock.getBanTarget());
 		assertSafeDefault(mock.getSource());
+		assertSafeDefault(mock.getExpiration());
 	}
 
 	private static class Stub<T> implements BanEntryBaseMock<T>

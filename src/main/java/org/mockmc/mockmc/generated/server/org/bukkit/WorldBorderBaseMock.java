@@ -51,17 +51,17 @@ public interface WorldBorderBaseMock extends WorldBorder
 		// MockMC: WorldBorder#setSize
 	}
 
-	default void setSize(double arg0)
-	{
-		// MockMC: WorldBorder#setSize
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default void setSize(double arg0, long arg1)
+	{
+		// MockMC: WorldBorder#setSize
+	}
+
+	default void setSize(double arg0)
 	{
 		// MockMC: WorldBorder#setSize
 	}

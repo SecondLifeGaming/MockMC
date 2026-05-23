@@ -15,10 +15,10 @@ class EquippableComponentBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getSlot());
 		assertSafeDefault(mock.getModel());
+		assertSafeDefault(mock.getEquipSound());
 		assertSafeDefault(mock.getCameraOverlay());
 		assertSafeDefault(mock.getAllowedEntities());
 		assertSafeDefault(mock.getShearingSound());
-		assertSafeDefault(mock.getEquipSound());
 	}
 
 	private static class Stub implements EquippableComponentBaseMock

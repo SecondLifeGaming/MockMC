@@ -108,8 +108,20 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Deprecated(since = "1.0")
+	default Objective registerNewObjective(String arg0, String arg1, Component arg2, RenderType arg3)
+			throws IllegalArgumentException
+	{
+		// MockMC: Scoreboard#registerNewObjective
+		return null;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
 	@Deprecated(since = "1.20.5")
-	default Objective registerNewObjective(String arg0, String arg1, String arg2, RenderType arg3)
+	default Objective registerNewObjective(String arg0, String arg1, String arg2)
 	{
 		// MockMC: Scoreboard#registerNewObjective
 		return null;
@@ -142,8 +154,8 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.20.5")
-	default Objective registerNewObjective(String arg0, String arg1, String arg2)
+	@Deprecated(since = "1.0")
+	default Objective registerNewObjective(String arg0, String arg1, Component arg2)
 	{
 		// MockMC: Scoreboard#registerNewObjective
 		return null;
@@ -153,8 +165,8 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.0")
-	default Objective registerNewObjective(String arg0, String arg1, Component arg2)
+	@Deprecated(since = "1.13")
+	default Objective registerNewObjective(String arg0, String arg1)
 	{
 		// MockMC: Scoreboard#registerNewObjective
 		return null;
@@ -182,20 +194,8 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.13")
-	default Objective registerNewObjective(String arg0, String arg1)
-	{
-		// MockMC: Scoreboard#registerNewObjective
-		return null;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
-	default Objective registerNewObjective(String arg0, String arg1, Component arg2, RenderType arg3)
-			throws IllegalArgumentException
+	@Deprecated(since = "1.20.5")
+	default Objective registerNewObjective(String arg0, String arg1, String arg2, RenderType arg3)
 	{
 		// MockMC: Scoreboard#registerNewObjective
 		return null;

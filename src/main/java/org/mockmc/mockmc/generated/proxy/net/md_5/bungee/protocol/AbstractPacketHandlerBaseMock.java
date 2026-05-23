@@ -79,14 +79,7 @@ public interface AbstractPacketHandlerBaseMock
 {
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(ShowDialogDirect arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ScoreboardScore arg0) throws Exception
+	default void handle(PluginMessage arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -100,14 +93,35 @@ public interface AbstractPacketHandlerBaseMock
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(StatusRequest arg0) throws Exception
+	default void handle(LoginPayloadRequest arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(FinishConfiguration arg0) throws Exception
+	default void handle(TabCompleteResponse arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LegacyHandshake arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(SetCompression arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Commands arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -121,7 +135,327 @@ public interface AbstractPacketHandlerBaseMock
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
+	default void handle(KeepAlive arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ClearDialog arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(UnsignedClientCommand arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Title arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ScoreboardObjective arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LegacyPing arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(SystemChat arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ScoreboardScore arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ClearTitles arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(DisconnectReportDetails arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(CookieRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(PlayerListItem arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(CustomClickAction arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(PlayerListItemRemove arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ShowDialogDirect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ClientCommand arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(StartConfiguration arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LoginPayloadResponse arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ScoreboardScoreReset arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Respawn arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Handshake arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(StatusRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ClientSettings arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(PlayerListItemUpdate arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(EntityRemoveEffect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	default void handle(ClientChatAcknowledgement arg0)
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(EncryptionRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LoginRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ServerLinks arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Team arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(FinishConfiguration arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LoginSuccess arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(TabCompleteRequest arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ClientChat arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ServerData arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(CookieResponse arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(PingPacket arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Chat arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(LoginAcknowledged arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(TitleTimes arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
 	default void handle(PlayerListHeaderFooter arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ScoreboardDisplay arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(ShowDialog arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(Kick arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(EntityEffect arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(BundleDelimiter arg0) throws Exception
+	{
+		// MockMC: AbstractPacketHandler#handle
+	}
+
+	@SuppressWarnings(
+	{"Exception", "java:S112"})
+	default void handle(KnownPacks arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -142,285 +476,7 @@ public interface AbstractPacketHandlerBaseMock
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(ClearTitles arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(PluginMessage arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ClientCommand arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(CookieRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(TabCompleteResponse arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Kick arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Chat arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(StartConfiguration arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	default void handle(ClientChatAcknowledgement arg0)
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LoginRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(PlayerListItem arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ClearDialog arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void handle(BossBar arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(BundleDelimiter arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(StoreCookie arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ScoreboardDisplay arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Title arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(PlayerListItemUpdate arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(EncryptionRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LoginPayloadResponse arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ServerLinks arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LegacyHandshake arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(EntityStatus arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ScoreboardObjective arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ClientSettings arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(KeepAlive arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LegacyPing arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(StatusResponse arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LoginSuccess arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ServerData arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Respawn arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ClientChat arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ScoreboardScoreReset arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(PlayerListItemRemove arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(TabCompleteRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(SetCompression arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Team arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LoginPayloadRequest arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(LoginAcknowledged arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(CustomClickAction arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(EntityEffect arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -434,14 +490,14 @@ public interface AbstractPacketHandlerBaseMock
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(SystemChat arg0) throws Exception
+	default void handle(StoreCookie arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(KnownPacks arg0) throws Exception
+	default void handle(EntityStatus arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
@@ -455,63 +511,7 @@ public interface AbstractPacketHandlerBaseMock
 
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
-	default void handle(PingPacket arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(EntityRemoveEffect arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(DisconnectReportDetails arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Handshake arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(Commands arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(TitleTimes arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(ShowDialog arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(UnsignedClientCommand arg0) throws Exception
-	{
-		// MockMC: AbstractPacketHandler#handle
-	}
-
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
-	default void handle(CookieResponse arg0) throws Exception
+	default void handle(StatusResponse arg0) throws Exception
 	{
 		// MockMC: AbstractPacketHandler#handle
 	}
