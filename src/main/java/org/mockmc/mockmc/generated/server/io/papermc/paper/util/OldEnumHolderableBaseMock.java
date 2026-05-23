@@ -1,7 +1,6 @@
 // MockMC: Unique Stub for OldEnumHolderable
 package org.mockmc.mockmc.generated.server.io.papermc.paper.util;
 
-import org.bukkit.NamespacedKey;
 import org.bukkit.util.OldEnum;
 import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
 import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
@@ -21,24 +20,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  */
 @Deprecated(since = "1.0")
 @SuppressWarnings("removal")
-public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M>
-		extends
-			OldEnumBaseMock<A>,
-			HolderableBaseMock<M>,
-			KeyedBaseMock
+public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M> extends OldEnumBaseMock<A>, KeyedBaseMock
 {
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Override
-	@Deprecated(since = "1.0")
-	default NamespacedKey getKey()
-	{
-		// MockMC: OldEnumHolderable#getKey
-		return org.bukkit.NamespacedKey.minecraft("mock");
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -61,6 +44,17 @@ public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M>
 	{
 		// MockMC: OldEnumHolderable#name
 		return "";
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Deprecated(since = "1.0")
+	default M getHandle()
+	{
+		// MockMC: OldEnumHolderable#getHandle
+		return null;
 	}
 
 	/**

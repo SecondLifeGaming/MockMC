@@ -13,8 +13,8 @@ class EnchantmentViewBaseMockTest extends GeneratedTestBase
 	{
 		EnchantmentViewBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getOffers());
 		assertSafeDefault(mock.getTopInventory());
+		assertSafeDefault(mock.getOffers());
 	}
 
 	private static class Stub implements EnchantmentViewBaseMock

@@ -20,8 +20,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.plugin.messaging.PluginMess
 public interface PlayerCommonConnectionBaseMock
 		extends
 			PlayerCommonConnection,
-			ReadablePlayerCookieConnectionBaseMock,
 			PluginMessageRecipientBaseMock,
+			ReadablePlayerCookieConnectionBaseMock,
 			WritablePlayerCookieConnectionBaseMock
 {
 	default void sendReportDetails(Map<String, String> arg0)

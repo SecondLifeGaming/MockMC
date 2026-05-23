@@ -46,9 +46,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.projectiles.ProjectileSourc
 public interface LivingEntityBaseMock
 		extends
 			LivingEntity,
+			FrictionalBaseMock,
 			ProjectileSourceBaseMock,
 			AttributableBaseMock,
-			FrictionalBaseMock,
 			DamageableBaseMock
 {
 	default double getLastDamage()

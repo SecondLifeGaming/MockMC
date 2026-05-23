@@ -20,10 +20,10 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
 public interface SheepBaseMock
 		extends
 			Sheep,
+			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock,
 			ShearableBaseMock,
 			ColorableBaseMock,
-			AnimalsBaseMock,
-			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock
+			AnimalsBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException

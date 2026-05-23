@@ -21,8 +21,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface DialogRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder,
-			DialogRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Dialog>
+			RegistryBuilderBaseMock<Dialog>,
+			DialogRegistryEntryBaseMock
 {
 	default io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder base(DialogBase arg0)
 	{

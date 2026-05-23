@@ -1,6 +1,8 @@
 // MockMC: Unique Stub for JungleChestBoat
 package org.mockmc.mockmc.generated.server.org.bukkit.entity.boat;
 
+import java.util.UUID;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.boat.JungleChestBoat;
 import org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock;
 
@@ -17,4 +19,80 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock;
 @SuppressWarnings("deprecation")
 public interface JungleChestBoatBaseMock extends JungleChestBoat, ChestBoatBaseMock
 {
+	@Override
+	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
+	{
+		// MockMC: JungleChestBoat#setHasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean hasBeenFilled()
+	{
+		// MockMC: JungleChestBoat#hasBeenFilled
+		return false;
+	}
+
+	@Override
+	default long getLastFilled()
+	{
+		// MockMC: JungleChestBoat#getLastFilled
+		return 0L;
+	}
+
+	@Override
+	default boolean hasPlayerLooted(UUID arg0)
+	{
+		// MockMC: JungleChestBoat#hasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean canPlayerLoot(UUID arg0)
+	{
+		// MockMC: JungleChestBoat#canPlayerLoot
+		return false;
+	}
+
+	@Override
+	default boolean isRefillEnabled()
+	{
+		// MockMC: JungleChestBoat#isRefillEnabled
+		return false;
+	}
+
+	@Override
+	default Entity getEntity()
+	{
+		// MockMC: JungleChestBoat#getEntity
+		return null;
+	}
+
+	@Override
+	default boolean hasPendingRefill()
+	{
+		// MockMC: JungleChestBoat#hasPendingRefill
+		return false;
+	}
+
+	@Override
+	default Long getLastLooted(UUID arg0)
+	{
+		// MockMC: JungleChestBoat#getLastLooted
+		return 0L;
+	}
+
+	@Override
+	default long setNextRefill(long arg0)
+	{
+		// MockMC: JungleChestBoat#setNextRefill
+		return 0L;
+	}
+
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: JungleChestBoat#getNextRefill
+		return 0L;
+	}
 }

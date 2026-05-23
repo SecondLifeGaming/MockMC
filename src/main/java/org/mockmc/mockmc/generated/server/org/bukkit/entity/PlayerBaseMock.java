@@ -92,8 +92,8 @@ public interface PlayerBaseMock
 		extends
 			Player,
 			PluginMessageRecipientBaseMock,
-			HumanEntityBaseMock,
 			NetworkClientBaseMock,
+			HumanEntityBaseMock,
 			ConversableBaseMock,
 			OfflinePlayerBaseMock
 {
@@ -120,12 +120,12 @@ public interface PlayerBaseMock
 		return false;
 	}
 
-	default void setResourcePack(String arg0, String arg1, boolean arg2, Component arg3)
+	default void setResourcePack(String arg0, String arg1, boolean arg2)
 	{
 		// MockMC: Player#setResourcePack
 	}
 
-	default void setResourcePack(String arg0, String arg1, boolean arg2)
+	default void setResourcePack(String arg0, String arg1, boolean arg2, Component arg3)
 	{
 		// MockMC: Player#setResourcePack
 	}
@@ -140,32 +140,17 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.0")
-	default void setResourcePack(String arg0)
-	{
-		// MockMC: Player#setResourcePack
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.0")
 	default void setResourcePack(String arg0, byte[] arg1)
 	{
 		// MockMC: Player#setResourcePack
 	}
 
-	default void setResourcePack(String arg0, byte[] arg1, Component arg2, boolean arg3)
-	{
-		// MockMC: Player#setResourcePack
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.0")
-	default void setResourcePack(UUID arg0, String arg1, byte[] arg2, String arg3, boolean arg4)
+	default void setResourcePack(String arg0)
 	{
 		// MockMC: Player#setResourcePack
 	}
@@ -195,12 +180,17 @@ public interface PlayerBaseMock
 		// MockMC: Player#setResourcePack
 	}
 
-	default void setResourcePack(String arg0, byte[] arg1, Component arg2)
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Deprecated(since = "1.0")
+	default void setResourcePack(String arg0, byte[] arg1, boolean arg2)
 	{
 		// MockMC: Player#setResourcePack
 	}
 
-	default void setResourcePack(UUID arg0, String arg1, String arg2, Component arg3, boolean arg4)
+	default void setResourcePack(String arg0, byte[] arg1, Component arg2)
 	{
 		// MockMC: Player#setResourcePack
 	}
@@ -210,7 +200,17 @@ public interface PlayerBaseMock
 	 *             modern build cycles.
 	 */
 	@Deprecated(since = "1.0")
-	default void setResourcePack(String arg0, byte[] arg1, boolean arg2)
+	default void setResourcePack(UUID arg0, String arg1, byte[] arg2, String arg3, boolean arg4)
+	{
+		// MockMC: Player#setResourcePack
+	}
+
+	default void setResourcePack(UUID arg0, String arg1, String arg2, Component arg3, boolean arg4)
+	{
+		// MockMC: Player#setResourcePack
+	}
+
+	default void setResourcePack(String arg0, byte[] arg1, Component arg2, boolean arg3)
 	{
 		// MockMC: Player#setResourcePack
 	}
@@ -920,12 +920,7 @@ public interface PlayerBaseMock
 	}
 
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			T arg6)
-	{
-		// MockMC: Player#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4)
+			double arg6, T arg7)
 	{
 		// MockMC: Player#spawnParticle
 	}
@@ -942,25 +937,7 @@ public interface PlayerBaseMock
 		// MockMC: Player#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6, T arg7)
-	{
-		// MockMC: Player#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7)
-	{
-		// MockMC: Player#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6)
-	{
-		// MockMC: Player#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, Location arg1, int arg2)
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4)
 	{
 		// MockMC: Player#spawnParticle
 	}
@@ -971,13 +948,41 @@ public interface PlayerBaseMock
 		// MockMC: Player#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6, T arg7, boolean arg8)
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7)
 	{
 		// MockMC: Player#spawnParticle
 	}
 
 	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
+	{
+		// MockMC: Player#spawnParticle
+	}
+
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9)
+	{
+		// MockMC: Player#spawnParticle
+	}
+
+	default void spawnParticle(Particle arg0, Location arg1, int arg2)
+	{
+		// MockMC: Player#spawnParticle
+	}
+
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			T arg6)
+	{
+		// MockMC: Player#spawnParticle
+	}
+
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			double arg6)
+	{
+		// MockMC: Player#spawnParticle
+	}
+
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
 	{
 		// MockMC: Player#spawnParticle
 	}
@@ -988,18 +993,13 @@ public interface PlayerBaseMock
 		// MockMC: Player#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
-	{
-		// MockMC: Player#spawnParticle
-	}
-
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, T arg3)
 	{
 		// MockMC: Player#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9)
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			double arg6, T arg7, boolean arg8)
 	{
 		// MockMC: Player#spawnParticle
 	}
@@ -1951,12 +1951,7 @@ public interface PlayerBaseMock
 		// MockMC: Player#sendMultiBlockChange
 	}
 
-	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
-	{
-		// MockMC: Player#playSound
-	}
-
-	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	default void playSound(Location arg0, String arg1, float arg2, float arg3)
 	{
 		// MockMC: Player#playSound
 	}
@@ -1966,7 +1961,7 @@ public interface PlayerBaseMock
 		// MockMC: Player#playSound
 	}
 
-	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: Player#playSound
 	}
@@ -1976,17 +1971,12 @@ public interface PlayerBaseMock
 		// MockMC: Player#playSound
 	}
 
-	default void playSound(Location arg0, String arg1, float arg2, float arg3)
+	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
 	{
 		// MockMC: Player#playSound
 	}
 
 	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
-	{
-		// MockMC: Player#playSound
-	}
-
-	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: Player#playSound
 	}
@@ -2006,7 +1996,17 @@ public interface PlayerBaseMock
 		// MockMC: Player#playSound
 	}
 
+	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	{
+		// MockMC: Player#playSound
+	}
+
 	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	{
+		// MockMC: Player#playSound
+	}
+
+	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 		// MockMC: Player#playSound
 	}

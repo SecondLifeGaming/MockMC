@@ -566,13 +566,7 @@ public interface HumanEntityBaseMock
 		// MockMC: HumanEntity#setItemInHand
 	}
 
-	default Item dropItem(EquipmentSlot arg0, int arg1)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default Item dropItem(int arg0)
+	default Item dropItem(EquipmentSlot arg0, int arg1, boolean arg2, Consumer<Item> arg3)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
@@ -584,7 +578,13 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
-	default Item dropItem(EquipmentSlot arg0, int arg1, boolean arg2, Consumer<Item> arg3)
+	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
+	default Item dropItem(int arg0)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
@@ -596,25 +596,25 @@ public interface HumanEntityBaseMock
 		return false;
 	}
 
+	default Item dropItem(EquipmentSlot arg0, int arg1)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
 	default Item dropItem(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
 	}
 
-	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
+	default Item dropItem(int arg0, int arg1)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
 	}
 
 	default Item dropItem(EquipmentSlot arg0)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default Item dropItem(int arg0, int arg1)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;

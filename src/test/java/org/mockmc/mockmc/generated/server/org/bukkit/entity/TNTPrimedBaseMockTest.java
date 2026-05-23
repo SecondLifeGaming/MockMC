@@ -15,8 +15,8 @@ class TNTPrimedBaseMockTest extends GeneratedTestBase
 	{
 		TNTPrimedBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getBlockData());
 		assertSafeDefault(mock.getSource());
+		assertSafeDefault(mock.getBlockData());
 		assertSafeDefault(mock.getSourceLoc());
 	}
 

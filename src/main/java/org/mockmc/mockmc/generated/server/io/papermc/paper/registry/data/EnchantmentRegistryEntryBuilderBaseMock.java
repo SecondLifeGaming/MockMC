@@ -22,8 +22,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface EnchantmentRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder,
-			RegistryBuilderBaseMock<Enchantment>,
-			EnchantmentRegistryEntryBaseMock
+			EnchantmentRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<Enchantment>
 {
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder weight(int arg0)
 	{

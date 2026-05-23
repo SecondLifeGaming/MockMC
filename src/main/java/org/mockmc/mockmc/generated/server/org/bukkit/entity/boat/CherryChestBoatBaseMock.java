@@ -1,6 +1,8 @@
 // MockMC: Unique Stub for CherryChestBoat
 package org.mockmc.mockmc.generated.server.org.bukkit.entity.boat;
 
+import java.util.UUID;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.boat.CherryChestBoat;
 import org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock;
 
@@ -17,4 +19,80 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock;
 @SuppressWarnings("deprecation")
 public interface CherryChestBoatBaseMock extends CherryChestBoat, ChestBoatBaseMock
 {
+	@Override
+	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
+	{
+		// MockMC: CherryChestBoat#setHasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean hasBeenFilled()
+	{
+		// MockMC: CherryChestBoat#hasBeenFilled
+		return false;
+	}
+
+	@Override
+	default long getLastFilled()
+	{
+		// MockMC: CherryChestBoat#getLastFilled
+		return 0L;
+	}
+
+	@Override
+	default boolean hasPlayerLooted(UUID arg0)
+	{
+		// MockMC: CherryChestBoat#hasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean canPlayerLoot(UUID arg0)
+	{
+		// MockMC: CherryChestBoat#canPlayerLoot
+		return false;
+	}
+
+	@Override
+	default boolean isRefillEnabled()
+	{
+		// MockMC: CherryChestBoat#isRefillEnabled
+		return false;
+	}
+
+	@Override
+	default Entity getEntity()
+	{
+		// MockMC: CherryChestBoat#getEntity
+		return null;
+	}
+
+	@Override
+	default boolean hasPendingRefill()
+	{
+		// MockMC: CherryChestBoat#hasPendingRefill
+		return false;
+	}
+
+	@Override
+	default Long getLastLooted(UUID arg0)
+	{
+		// MockMC: CherryChestBoat#getLastLooted
+		return 0L;
+	}
+
+	@Override
+	default long setNextRefill(long arg0)
+	{
+		// MockMC: CherryChestBoat#setNextRefill
+		return 0L;
+	}
+
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: CherryChestBoat#getNextRefill
+		return 0L;
+	}
 }

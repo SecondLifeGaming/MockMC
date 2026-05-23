@@ -13,11 +13,11 @@ class DamageSourceBaseMockTest extends GeneratedTestBase
 	{
 		DamageSourceBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getDamageType());
 		assertSafeDefault(mock.getCausingEntity());
 		assertSafeDefault(mock.getDirectEntity());
 		assertSafeDefault(mock.getDamageLocation());
 		assertSafeDefault(mock.getSourceLocation());
+		assertSafeDefault(mock.getDamageType());
 	}
 
 	private static class Stub implements DamageSourceBaseMock

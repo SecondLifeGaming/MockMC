@@ -16,8 +16,8 @@ class InventoryViewBaseMockTest extends GeneratedTestBase
 		InventoryViewBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getType());
-		assertSafeDefault(mock.getPlayer());
 		assertSafeDefault(mock.title());
+		assertSafeDefault(mock.getPlayer());
 		assertSafeDefault(mock.getTitle());
 		assertSafeDefault(mock.getTopInventory());
 		assertSafeDefault(mock.getCursor());

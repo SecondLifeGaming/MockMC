@@ -16,7 +16,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.BucketableBase
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface FishBaseMock extends Fish, BucketableBaseMock, WaterMobBaseMock
+public interface FishBaseMock extends Fish, WaterMobBaseMock, BucketableBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException

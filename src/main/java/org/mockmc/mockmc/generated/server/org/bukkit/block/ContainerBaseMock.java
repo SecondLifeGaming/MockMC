@@ -17,7 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.TileStateInvent
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface ContainerBaseMock extends Container, TileStateInventoryHolderBaseMock, LockableTileStateBaseMock
+public interface ContainerBaseMock extends Container, LockableTileStateBaseMock, TileStateInventoryHolderBaseMock
 {
 	@Override
 	default Block getBlock()

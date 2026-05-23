@@ -19,9 +19,9 @@ import org.bukkit.entity.Entity;
 public interface BoggedBaseMock
 		extends
 			Bogged,
+			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock,
 			ShearableBaseMock,
-			AbstractSkeletonBaseMock,
-			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock
+			AbstractSkeletonBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException

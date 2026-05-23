@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: Sat May 23 14:09:18 CDT 2026
+Generated on: Sat May 23 15:44:21 CDT 2026
 
-## Overall Coverage: 99.90%
+## Overall Coverage: 99.67%
 
 - **Total API Methods**: 6765
-- **Mirrored via BaseMocks**: 6758
+- **Mirrored via BaseMocks**: 6743
 - **Manual Implementations**: (TBD - Analysis in progress)
 
 ## Coverage by Package

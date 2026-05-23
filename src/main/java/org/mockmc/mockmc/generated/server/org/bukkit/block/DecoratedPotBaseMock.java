@@ -21,7 +21,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface DecoratedPotBaseMock extends DecoratedPot, TileStateInventoryHolderBaseMock, LootableBaseMock
+public interface DecoratedPotBaseMock extends DecoratedPot, LootableBaseMock, TileStateInventoryHolderBaseMock
 {
 	@Override
 	default DecoratedPotInventory getSnapshotInventory()

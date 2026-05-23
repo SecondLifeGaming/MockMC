@@ -24,7 +24,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface MobBaseMock extends Mob, LootableBaseMock, LeashableBaseMock, LivingEntityBaseMock
+public interface MobBaseMock extends Mob, LeashableBaseMock, LootableBaseMock, LivingEntityBaseMock
 {
 	default boolean isAggressive()
 	{

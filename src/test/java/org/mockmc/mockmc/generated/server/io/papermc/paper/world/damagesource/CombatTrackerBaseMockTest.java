@@ -15,9 +15,9 @@ class CombatTrackerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getEntity());
 		assertSafeDefault(mock.getDeathMessage());
+		assertSafeDefault(mock.calculateFallLocationType());
 		assertSafeDefault(mock.getCombatEntries());
 		assertSafeDefault(mock.computeMostSignificantFall());
-		assertSafeDefault(mock.calculateFallLocationType());
 	}
 
 	private static class Stub implements CombatTrackerBaseMock

@@ -22,8 +22,8 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.messages.
 public interface ServerConnectionBaseMock
 		extends
 			ServerConnection,
-			ChannelMessageSourceBaseMock,
-			ChannelMessageSinkBaseMock
+			ChannelMessageSinkBaseMock,
+			ChannelMessageSourceBaseMock
 {
 	default ServerInfo getServerInfo()
 	{

@@ -19,8 +19,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface WolfVariantRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder,
-			RegistryBuilderBaseMock<Wolf.Variant>,
-			WolfVariantRegistryEntryBaseMock
+			WolfVariantRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<Wolf.Variant>
 {
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder wildClientTextureAsset(
 			ClientTextureAsset arg0)

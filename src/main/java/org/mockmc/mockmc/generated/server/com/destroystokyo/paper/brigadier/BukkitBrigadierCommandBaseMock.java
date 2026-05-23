@@ -24,8 +24,8 @@ import org.mockmc.mockmc.generated.server.com.mojang.brigadier.suggestion.Sugges
 public interface BukkitBrigadierCommandBaseMock<S extends BukkitBrigadierCommandSource>
 		extends
 			BukkitBrigadierCommand<S>,
-			CommandBaseMock<S>,
-			SuggestionProviderBaseMock<S>
+			SuggestionProviderBaseMock<S>,
+			CommandBaseMock<S>
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

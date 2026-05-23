@@ -19,8 +19,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface ChickenVariantRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Builder,
-			ChickenVariantRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Chicken.Variant>
+			RegistryBuilderBaseMock<Chicken.Variant>,
+			ChickenVariantRegistryEntryBaseMock
 {
 	default io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Builder model(
 			io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Model arg0)

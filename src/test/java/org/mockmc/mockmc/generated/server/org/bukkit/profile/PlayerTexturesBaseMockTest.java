@@ -13,9 +13,9 @@ class PlayerTexturesBaseMockTest extends GeneratedTestBase
 	{
 		PlayerTexturesBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.getCape());
 		assertSafeDefault(mock.getSkin());
 		assertSafeDefault(mock.getSkinModel());
-		assertSafeDefault(mock.getCape());
 	}
 
 	private static class Stub implements PlayerTexturesBaseMock

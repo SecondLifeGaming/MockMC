@@ -25,8 +25,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface InstrumentRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder,
-			InstrumentRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<MusicInstrument>
+			RegistryBuilderBaseMock<MusicInstrument>,
+			InstrumentRegistryEntryBaseMock
 {
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(
 			RegistryHolder<Sound, SoundEventRegistryEntry> arg0)

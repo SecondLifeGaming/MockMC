@@ -17,7 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.LeashableBaseM
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface BoatBaseMock extends Boat, VehicleBaseMock, LeashableBaseMock
+public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

@@ -17,7 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseM
  * build cycles.
  */
 @SuppressWarnings("deprecation")
-public interface SnowmanBaseMock extends Snowman, GolemBaseMock, RangedEntityBaseMock, ShearableBaseMock
+public interface SnowmanBaseMock extends Snowman, GolemBaseMock, ShearableBaseMock, RangedEntityBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
