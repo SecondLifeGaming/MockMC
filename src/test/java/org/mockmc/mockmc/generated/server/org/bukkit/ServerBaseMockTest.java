@@ -21,16 +21,16 @@ class ServerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getVersion());
 		assertSafeDefault(mock.recipeIterator());
 		assertSafeDefault(mock.getWorlds());
-		assertSafeDefault(mock.getPluginsFolder());
 		assertSafeDefault(mock.getBukkitVersion());
 		assertSafeDefault(mock.getMinecraftVersion());
 		assertSafeDefault(mock.getOnlinePlayers());
-		assertSafeDefault(mock.getIp());
 		assertSafeDefault(mock.getWorldType());
 		assertSafeDefault(mock.getInitialEnabledPacks());
 		assertSafeDefault(mock.getInitialDisabledPacks());
 		assertSafeDefault(mock.getServerResourcePack());
 		assertSafeDefault(mock.getServerTickManager());
+		assertSafeDefault(mock.getPluginsFolder());
+		assertSafeDefault(mock.getIp());
 		assertSafeDefault(mock.getResourcePack());
 		assertSafeDefault(mock.getResourcePackHash());
 		assertSafeDefault(mock.getResourcePackPrompt());

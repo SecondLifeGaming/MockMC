@@ -19,11 +19,6 @@ class PlayerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getUniqueId());
 		assertSafeDefault(mock.getPlayerListHeader());
 		assertSafeDefault(mock.getPlayerListFooter());
-		assertSafeDefault(mock.getGameProfile());
-		assertSafeDefault(mock.getUsername());
-		assertSafeDefault(mock.getModInfo());
-		assertSafeDefault(mock.getPlayerSettings());
-		assertSafeDefault(mock.getCurrentServer());
 		assertSafeDefault(mock.getEffectiveLocale());
 		assertSafeDefault(mock.getGameProfileProperties());
 		assertSafeDefault(mock.getTabList());
@@ -32,6 +27,11 @@ class PlayerBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getAppliedResourcePacks());
 		assertSafeDefault(mock.getPendingResourcePacks());
 		assertSafeDefault(mock.getClientBrand());
+		assertSafeDefault(mock.getGameProfile());
+		assertSafeDefault(mock.getUsername());
+		assertSafeDefault(mock.getModInfo());
+		assertSafeDefault(mock.getPlayerSettings());
+		assertSafeDefault(mock.getCurrentServer());
 	}
 
 	private static class Stub implements PlayerBaseMock

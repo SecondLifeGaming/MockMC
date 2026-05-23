@@ -148,7 +148,7 @@ import static org.mockmc.mockmc.matcher.plugin.PluginManagerFiredEventFilterMatc
 import static org.mockmc.mockmc.matcher.sound.SoundReceiverSoundHeardMatcher.hasHeard;
 import static org.mockmc.mockmc.matcher.sound.SoundReceiverSoundHeardMatcher.hasNotHeard;
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+{"deprecation", "removal"})
 
 class PlayerMockTest
 {
@@ -772,9 +772,10 @@ class PlayerMockTest
 		try
 		{
 			plugin.barrier.await(3, TimeUnit.SECONDS);
-		} catch (InterruptedException | BrokenBarrierException ignored)
+		} catch (InterruptedException | BrokenBarrierException _)
 		{
-		} catch (TimeoutException e)
+			// ignore
+		} catch (TimeoutException _)
 		{
 			fail("Async event was not fired");
 		}
@@ -1795,26 +1796,26 @@ class PlayerMockTest
 	@Test
 	void getAddress_Constructor()
 	{
-		PlayerMock player = server.addPlayer();
-		assertNotNull(player.getAddress());
+		PlayerMock playerMock = server.addPlayer();
+		assertNotNull(playerMock.getAddress());
 	}
 
 	@Test
 	void setAddress()
 	{
-		PlayerMock player = server.addPlayer();
+		PlayerMock playerMock = server.addPlayer();
 		InetSocketAddress address = new InetSocketAddress("192.0.2.78", 25565);
-		player.setAddress(address);
-		assertEquals(address, player.getAddress());
+		playerMock.setAddress(address);
+		assertEquals(address, playerMock.getAddress());
 	}
 
 	@Test
 	void getAddress_NullWhenNotOnline()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer");
-		assertNull(player.getAddress());
-		server.addPlayer(player);
-		assertNotNull(player.getAddress());
+		PlayerMock playerMock = new PlayerMock(server, "testPlayer");
+		assertNull(playerMock.getAddress());
+		server.addPlayer(playerMock);
+		assertNotNull(playerMock.getAddress());
 	}
 
 	@Test
@@ -1963,8 +1964,8 @@ class PlayerMockTest
 	@Test
 	void testKickWithOfflinePlayer()
 	{
-		PlayerMock player = new PlayerMock(server, "testPlayer", UUID.randomUUID());
-		player.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
+		PlayerMock playerMock = new PlayerMock(server, "testPlayer", UUID.randomUUID());
+		playerMock.kick(Component.text("test"), PlayerKickEvent.Cause.KICK_COMMAND);
 		assertThat(server.getPluginManager(), hasNotFiredEventInstance(PlayerKickEvent.class));
 	}
 
@@ -2013,47 +2014,6 @@ class PlayerMockTest
 	{
 		assertThrows(NullPointerException.class, () -> player.hasConsumed(null));
 	}
-
-	/*
-	 * Commented out so there are no skipped tests for now.
-	 *
-	 * @Disabled("PotionMetaMock#{get,set}BasePotionType is not yet implemented, which is used in this test."
-	 * )
-	 *
-	 * @ParameterizedTest
-	 *
-	 * @MethodSource("potionItemProvider") void
-	 * testSimulateConsumePotionItemWithBaseEffectIsApplied(Supplier<ItemStack>
-	 * potionSupplier, PotionEffect inflictedEffect) { ItemStack potion =
-	 * potionSupplier.get(); player.simulateConsumeItem(potion);
-	 * assertEquals(inflictedEffect,
-	 * player.getPotionEffect(inflictedEffect.getType())); }
-	 *
-	 * private static Stream<Arguments> potionItemProvider() { return Stream.of(
-	 * Arguments.of( (Supplier<ItemStack>) () ->
-	 * potionItemStack(PotionType.REGENERATION), new
-	 * PotionEffect(PotionEffectType.REGENERATION, 900, 0, false, true, true),
-	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.LONG_REGENERATION),
-	 * new PotionEffect(PotionEffectType.REGENERATION, 1800, 0, false, true, true),
-	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.STRONG_REGENERATION),
-	 * new PotionEffect(PotionEffectType.REGENERATION, 450, 1, false, true, true),
-	 * (Supplier<ItemStack>) () -> potionItemStack(PotionType.AWKWARD), null ) ); }
-	 *
-	 * private static ItemStack potionItemStack(PotionType potionType) { ItemStack
-	 * itemStack = new ItemStack(Material.POTION); PotionMeta potionMeta =
-	 * (PotionMeta) itemStack.getItemMeta();
-	 * potionMeta.setBasePotionType(potionType); itemStack.setItemMeta(potionMeta);
-	 * return itemStack; }
-	 *
-	 * @Test void testSimulateConsumePotionItemWithCustomEffectIsApplies() {
-	 * ItemStack itemStack = new ItemStack(Material.POTION); PotionMeta potionMeta =
-	 * (PotionMeta) itemStack.getItemMeta(); PotionEffect customEffect = new
-	 * PotionEffect(PotionEffectType.JUMP_BOOST, 10, 1, false, true, true);
-	 * potionMeta.addCustomEffect(customEffect, true);
-	 * itemStack.setItemMeta(potionMeta); player.simulateConsumeItem(itemStack);
-	 * assertEquals(customEffect,
-	 * player.getPotionEffect(PotionEffectType.JUMP_BOOST)); }
-	 */
 
 	@Test
 	void assertSaid_Spigot_CorrectMessage_DoesNotAssert()
@@ -2282,64 +2242,64 @@ class PlayerMockTest
 	@Test
 	void hasPlayedBefore_AddedToServer_False()
 	{
-		PlayerMock player = server.addPlayer();
+		PlayerMock playerMock = server.addPlayer();
 
-		assertFalse(player.hasPlayedBefore());
+		assertFalse(playerMock.hasPlayedBefore());
 	}
 
 	@Test
 	void hasPlayedBefore_NotAddedToServer_False()
 	{
-		PlayerMock player = new PlayerMock(server, "player");
+		PlayerMock playerMock = new PlayerMock(server, "player");
 
-		assertFalse(player.hasPlayedBefore());
+		assertFalse(playerMock.hasPlayedBefore());
 	}
 
 	@Test
 	void testSetOpFalse()
 	{
-		PlayerMock player = server.addPlayer();
-		player.setOp(false);
-		assertFalse(player.isOp());
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setOp(false);
+		assertFalse(playerMock.isOp());
 	}
 
 	@Test
 	void testSetOpTrue()
 	{
-		PlayerMock player = server.addPlayer();
-		player.setOp(true);
-		assertTrue(player.isOp());
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setOp(true);
+		assertTrue(playerMock.isOp());
 	}
 
 	@Test
 	void testGetEntityStateDefault()
 	{
-		PlayerMock player = server.addPlayer();
-		assertEquals(EntityState.DEFAULT, player.getEntityState());
+		PlayerMock playerMock = server.addPlayer();
+		assertEquals(EntityState.DEFAULT, playerMock.getEntityState());
 	}
 
 	@Test
 	void testGetEntityStateSneaking()
 	{
-		PlayerMock player = server.addPlayer();
-		player.setSneaking(true);
-		assertEquals(EntityState.SNEAKING, player.getEntityState());
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setSneaking(true);
+		assertEquals(EntityState.SNEAKING, playerMock.getEntityState());
 	}
 
 	@Test
 	void testGetEntityStateSwimming()
 	{
-		PlayerMock player = server.addPlayer();
-		player.setSwimming(true);
-		assertEquals(EntityState.SWIMMING, player.getEntityState());
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setSwimming(true);
+		assertEquals(EntityState.SWIMMING, playerMock.getEntityState());
 	}
 
 	@Test
 	void testGetEntityStateFlying()
 	{
-		PlayerMock player = server.addPlayer();
-		player.setGliding(true);
-		assertEquals(EntityState.GLIDING, player.getEntityState());
+		PlayerMock playerMock = server.addPlayer();
+		playerMock.setGliding(true);
+		assertEquals(EntityState.GLIDING, playerMock.getEntityState());
 	}
 
 	@ParameterizedTest
@@ -2357,8 +2317,8 @@ class PlayerMockTest
 	@Test
 	void testPlayerQuitEventGetFired()
 	{
-		PlayerMock player = server.addPlayer("Player");
-		player.disconnect();
+		PlayerMock playerMock = server.addPlayer("Player");
+		playerMock.disconnect();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerQuitEvent.class));
 	}
 
@@ -2411,6 +2371,7 @@ class PlayerMockTest
 			@EventHandler
 			public void expCooldownChange(@NotNull PlayerExpCooldownChangeEvent event)
 			{
+				// ignore
 			}
 		}, plugin);
 
@@ -2520,8 +2481,8 @@ class PlayerMockTest
 	@Test
 	void testSetPlayerProfile()
 	{
-		UUID uuid = UUID.randomUUID();
-		PlayerProfile profile = Bukkit.createProfile(uuid, "Test");
+		UUID profileUuid = UUID.randomUUID();
+		PlayerProfile profile = Bukkit.createProfile(profileUuid, "Test");
 		player.setPlayerProfile(profile);
 
 		assertEquals(profile, player.getPlayerProfile());

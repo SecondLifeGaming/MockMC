@@ -225,6 +225,7 @@ tasks {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
 		ignoreFailures = true
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 	}
 
 	check {
@@ -434,6 +435,7 @@ backendJars.forEach { (name, jarName) ->
 		description = "Runs tests against $name backend"
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 
 		val defaultClasspath = sourceSets.test.get().runtimeClasspath
 		classpath = defaultClasspath + files("jars/$jarName")

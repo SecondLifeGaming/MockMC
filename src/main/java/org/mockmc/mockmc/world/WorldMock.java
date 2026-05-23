@@ -805,7 +805,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz,
 			@Nullable CreatureSpawnEvent.SpawnReason reason) throws IllegalArgumentException
 	{
-		return this.spawn(location, clazz, null, reason != null ? reason : CreatureSpawnEvent.SpawnReason.CUSTOM);
+		return this.spawn(location, clazz, null, reason);
 	}
 
 	@Override
@@ -813,7 +813,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 			@Nullable CreatureSpawnEvent.SpawnReason reason, @Nullable Consumer<? super T> function)
 			throws IllegalArgumentException
 	{
-		return this.spawn(location, clazz, function, reason != null ? reason : CreatureSpawnEvent.SpawnReason.CUSTOM);
+		return this.spawn(location, clazz, function, reason);
 	}
 
 	@Override
@@ -2305,7 +2305,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public long getTicksPerSpawns(@NotNull SpawnCategory spawnCategory)
 	{
-		Preconditions.checkNotNull(spawnCategory, SPAWN_CATEGORY_NULL);
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, SPAWN_CATEGORY_NOT_SUPPORTED, spawnCategory);
 
 		return this.ticksPerSpawn.getLong(spawnCategory);
@@ -2314,7 +2314,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public void setTicksPerSpawns(@NotNull SpawnCategory spawnCategory, int ticksPerCategorySpawn)
 	{
-		Preconditions.checkNotNull(spawnCategory, SPAWN_CATEGORY_NULL);
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, SPAWN_CATEGORY_NOT_SUPPORTED, spawnCategory);
 
 		this.ticksPerSpawn.put(spawnCategory, ticksPerCategorySpawn);
@@ -2323,7 +2323,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public int getSpawnLimit(@NotNull SpawnCategory spawnCategory)
 	{
-		Preconditions.checkNotNull(spawnCategory, SPAWN_CATEGORY_NULL);
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, SPAWN_CATEGORY_NOT_SUPPORTED, spawnCategory);
 
 		return this.getSpawnLimitUnsafe(spawnCategory);
@@ -2342,7 +2342,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public void setSpawnLimit(@NotNull SpawnCategory spawnCategory, int limit)
 	{
-		Preconditions.checkNotNull(spawnCategory, SPAWN_CATEGORY_NULL);
+		Preconditions.checkArgument(spawnCategory != null, SPAWN_CATEGORY_NULL);
 		Preconditions.checkArgument(spawnCategory != SpawnCategory.MISC, SPAWN_CATEGORY_NOT_SUPPORTED, spawnCategory);
 
 		this.spawnLimits.put(spawnCategory, limit);

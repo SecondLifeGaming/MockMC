@@ -13,13 +13,14 @@ import org.checkerframework.checker.index.qual.NonNegative;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Range;
+import org.bukkit.plugin.Plugin;
 
 /**
  * Mock implementation of a {@link WorldBorder}.
  */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated.server.org.bukkit.WorldBorderBaseMock
+{"removal"})
+public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.bukkit.WorldBorderBaseMock
 {
 
 	private static final double DEFAULT_BORDER_SIZE = 6.0E7D;
@@ -43,6 +44,10 @@ public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated
 	private static final double MAX_BORDER_SIZE = 6E7D;
 
 	private static final double MIN_BORDER_SIZE = 1.0D;
+
+	private static final Plugin DUMMY_PLUGIN = (Plugin) java.lang.reflect.Proxy
+			.newProxyInstance(Plugin.class.getClassLoader(), new Class<?>[]
+			{Plugin.class}, (proxy, method, args) -> null);
 
 	@NotNull
 	private final World world;
@@ -105,10 +110,10 @@ public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated
 	}
 
 	@Override
-	public void changeSize(double newSize, @Range(from = 0, to = Integer.MAX_VALUE) long ticks)
+	public void setSize(double newSize, @Range(from = 0, to = Integer.MAX_VALUE) long ticks)
 	{
-		newSize = Math.min(MAX_BORDER_SIZE, Math.max(MIN_BORDER_SIZE, newSize));
-		ticks = Math.min(MAX_MOVEMENT_TIME, Math.max(0L, ticks));
+		newSize = Math.clamp(newSize, MIN_BORDER_SIZE, MAX_BORDER_SIZE);
+		ticks = Math.clamp(ticks, 0L, MAX_MOVEMENT_TIME);
 		WorldBorderBoundsChangeEvent.Type moveType = ticks <= 0
 				? WorldBorderBoundsChangeEvent.Type.INSTANT_MOVE
 				: WorldBorderBoundsChangeEvent.Type.STARTED_MOVE;
@@ -129,6 +134,7 @@ public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated
 		moveBorderOverTime(distance, durationTicks, newSize);
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	private void moveBorderOverTime(double distance, double ticks, double newSize)
 	{
 		double distancePerTick = distance / ticks;
@@ -152,7 +158,7 @@ public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated
 					this.cancel();
 				}
 			}
-		}.runTaskTimer(null, 1, 1);
+		}.runTaskTimer(DUMMY_PLUGIN, 1, 1);
 	}
 
 	@Override
@@ -172,8 +178,8 @@ public class WorldBorderMock implements WorldBorder, org.mockmc.mockmc.generated
 	@Override
 	public void setCenter(double x, double z)
 	{
-		x = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, x));
-		z = Math.min(MAX_CENTER_VALUE, Math.max(-MAX_CENTER_VALUE, z));
+		x = Math.clamp(x, -MAX_CENTER_VALUE, MAX_CENTER_VALUE);
+		z = Math.clamp(z, -MAX_CENTER_VALUE, MAX_CENTER_VALUE);
 		WorldBorderCenterChangeEvent event = new WorldBorderCenterChangeEvent(this.world, this,
 				new Location(this.world, this.centerX, 0, this.centerZ), new Location(this.world, x, 0, z));
 		if (!event.callEvent())
