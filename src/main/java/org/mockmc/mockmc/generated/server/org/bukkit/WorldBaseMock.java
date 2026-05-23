@@ -290,12 +290,7 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: World#playSound
 	}
@@ -305,15 +300,14 @@ public interface WorldBaseMock
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	default void playSound(Location arg0, String arg1, float arg2, float arg3)
 	{
 		// MockMC: World#playSound
 	}
 
-	default boolean addPluginChunkTicket(int arg0, int arg1, Plugin arg2)
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
-		// MockMC: World#addPluginChunkTicket
-		return false;
+		// MockMC: World#playSound
 	}
 
 	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
@@ -331,12 +325,12 @@ public interface WorldBaseMock
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
 	{
 		// MockMC: World#playSound
 	}
@@ -346,12 +340,18 @@ public interface WorldBaseMock
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Location arg0, String arg1, float arg2, float arg3)
+	default boolean addPluginChunkTicket(int arg0, int arg1, Plugin arg2)
+	{
+		// MockMC: World#addPluginChunkTicket
+		return false;
+	}
+
+	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
 	{
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
+	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 		// MockMC: World#playSound
 	}
@@ -1130,13 +1130,7 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
-	default boolean createExplosion(Entity arg0, float arg1)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3, Entity arg4)
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1148,19 +1142,13 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
 	default boolean createExplosion(Entity arg0, float arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
+	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3, Entity arg4)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1172,19 +1160,7 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1196,13 +1172,37 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3)
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4)
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	default boolean createExplosion(Entity arg0, float arg1, boolean arg2)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	default boolean createExplosion(Entity arg0, float arg1)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1215,7 +1215,7 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default boolean createExplosion(Entity arg0, float arg1, boolean arg2)
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1462,7 +1462,7 @@ public interface WorldBaseMock
 	}
 
 	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
-			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
+			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11)
 	{
 		// MockMC: World#spawnParticle
 	}
@@ -1473,7 +1473,19 @@ public interface WorldBaseMock
 	}
 
 	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
-			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11)
+			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7)
 	{
 		// MockMC: World#spawnParticle
 	}
@@ -1488,14 +1500,14 @@ public interface WorldBaseMock
 		// MockMC: World#spawnParticle
 	}
 
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			double arg6)
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			T arg6)
 	{
 		// MockMC: World#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			T arg6)
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			double arg6)
 	{
 		// MockMC: World#spawnParticle
 	}
@@ -1506,26 +1518,19 @@ public interface WorldBaseMock
 		// MockMC: World#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9)
-	{
-		// MockMC: World#spawnParticle
-	}
-
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			double arg6, T arg7, boolean arg8)
 	{
 		// MockMC: World#spawnParticle
 	}
 
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9, boolean arg10)
+	default void spawnParticle(Particle arg0, Location arg1, int arg2)
 	{
 		// MockMC: World#spawnParticle
 	}
 
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7)
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9, boolean arg10)
 	{
 		// MockMC: World#spawnParticle
 	}
@@ -1543,11 +1548,6 @@ public interface WorldBaseMock
 
 	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
 			double arg7, double arg8)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, Location arg1, int arg2)
 	{
 		// MockMC: World#spawnParticle
 	}
@@ -1823,16 +1823,6 @@ public interface WorldBaseMock
 		return false;
 	}
 
-	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3, Consumer<? super Chunk> arg4)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -1843,19 +1833,17 @@ public interface WorldBaseMock
 		// MockMC: World#getChunkAtAsync
 	}
 
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
+	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
 	{
 		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	default void getChunkAtAsync(Location arg0, boolean arg1, Consumer<? super Chunk> arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3, Consumer<? super Chunk> arg4)
 	{
 		// MockMC: World#getChunkAtAsync
 	}
@@ -1870,19 +1858,7 @@ public interface WorldBaseMock
 		// MockMC: World#getChunkAtAsync
 	}
 
-	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: World#getChunkAtAsync
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
@@ -1903,6 +1879,23 @@ public interface WorldBaseMock
 		// MockMC: World#getChunkAtAsync
 	}
 
+	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
 	default void getChunkAtAsync(int arg0, int arg1, Consumer<? super Chunk> arg2)
 	{
 		// MockMC: World#getChunkAtAsync
@@ -1919,12 +1912,19 @@ public interface WorldBaseMock
 		// MockMC: World#getChunkAtAsync
 	}
 
-	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1)
 	{
 		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0, boolean arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
 	{
 		// MockMC: World#getChunkAtAsync
 		return java.util.concurrent.CompletableFuture.completedFuture(null);

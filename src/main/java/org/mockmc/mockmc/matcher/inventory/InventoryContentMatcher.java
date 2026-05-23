@@ -124,7 +124,9 @@ public class InventoryContentMatcher extends TypeSafeMatcher<Inventory>
 			if (stack != null && stack.getType() != Material.AIR)
 			{
 				if (!first)
+				{
 					mismatchDescription.appendText(", ");
+				}
 				mismatchDescription.appendValue(stack);
 				first = false;
 			}

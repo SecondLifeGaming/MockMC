@@ -16,8 +16,8 @@ class PlayerInventoryBaseMockTest extends GeneratedTestBase
 		PlayerInventoryBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getHolder());
-		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getItemInHand());
+		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getLeggings());
 		assertSafeDefault(mock.getChestplate());
 		assertSafeDefault(mock.getHelmet());

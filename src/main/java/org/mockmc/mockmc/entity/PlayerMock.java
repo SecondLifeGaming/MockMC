@@ -141,7 +141,7 @@ import java.util.function.Predicate;
  * @see HumanEntityMock
  */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked", "java:S110"})
+{"deprecation", "removal", "unchecked", "java:S110", "java:S1133", "java:S2637"})
 public class PlayerMock extends HumanEntityMock
 		implements
 			SoundReceiver,
@@ -293,8 +293,8 @@ public class PlayerMock extends HumanEntityMock
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		super(server, uuid);
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -2835,7 +2835,7 @@ public class PlayerMock extends HumanEntityMock
 	@Override
 	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause,
-			TeleportFlag[] flags)
+			TeleportFlag... flags)
 	{
 		Preconditions.checkNotNull(location, LOCATION_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");

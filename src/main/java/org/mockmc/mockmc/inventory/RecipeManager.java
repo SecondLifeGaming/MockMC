@@ -25,8 +25,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+@SuppressWarnings(
+{"java:S1192", "java:S6204", "java:S1135", "java:S2583"})
 public class RecipeManager
 {
+
+	private static final String RECIPE_TYPE_CANNOT_BE_NULL = "Recipe type cannot be null";
+	private static final String RECIPE_CANNOT_BE_NULL = "The recipe cannot be null";
+	private static final String CRAFTING_MATRIX_CANNOT_BE_NULL = "The craftingMatrix cannot be null";
 
 	/**
 	 * This field is used as cache. The values are lazy loaded with method
@@ -51,7 +57,7 @@ public class RecipeManager
 	 */
 	public void reset(@NotNull RecipeType recipeType)
 	{
-		Preconditions.checkArgument(recipeType != null, "Recipe type cannot be null");
+		Preconditions.checkArgument(recipeType != null, RECIPE_TYPE_CANNOT_BE_NULL);
 		Preconditions.checkState(this.recipes != null, "Recipes has not been initialized yet.");
 		this.recipes.put(recipeType, RecipeManager.loadDefaultRecipes(recipeType));
 	}
@@ -134,7 +140,7 @@ public class RecipeManager
 	@Nullable
 	public Recipe getCraftingRecipe(@NotNull ItemStack @NotNull [] craftingMatrix)
 	{
-		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
+		Preconditions.checkArgument(craftingMatrix != null, CRAFTING_MATRIX_CANNOT_BE_NULL);
 		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
 
 		List<Recipe> possibleRecipes = getRecipes(RecipeType.CRAFTING);
@@ -142,23 +148,23 @@ public class RecipeManager
 		{
 			switch (recipe)
 			{
-				case ShapelessRecipe shapelessRecipe -> {
-					if (matches(shapelessRecipe, craftingMatrix))
-					{
-						return recipe;
-					}
+				case ShapelessRecipe shapelessRecipe when matches(shapelessRecipe, craftingMatrix) -> {
+					return recipe;
 				}
-				case ShapedRecipe shapedRecipe -> {
-					if (matches(shapedRecipe, craftingMatrix))
-					{
-						return recipe;
-					}
+				case ShapedRecipe shapedRecipe when matches(shapedRecipe, craftingMatrix) -> {
+					return recipe;
 				}
-				case ComplexRecipe complexRecipe -> {
-					if (matches(complexRecipe, craftingMatrix))
-					{
-						return recipe;
-					}
+				case ComplexRecipe complexRecipe when matches(complexRecipe, craftingMatrix) -> {
+					return recipe;
+				}
+				case ShapelessRecipe _ -> {
+					// Ignore recipes that do not match the crafting matrix
+				}
+				case ShapedRecipe _ -> {
+					// Ignore recipes that do not match the crafting matrix
+				}
+				case ComplexRecipe _ -> {
+					// Ignore recipes that do not match the crafting matrix
 				}
 				default ->
 					throw new UnsupportedOperationException("Unknown recipe type: " + recipe.getClass().getName());
@@ -270,8 +276,8 @@ public class RecipeManager
 
 	static boolean matches(@NotNull ShapelessRecipe shapelessRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
 	{
-		Preconditions.checkArgument(shapelessRecipe != null, "The recipe cannot be null");
-		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
+		Preconditions.checkArgument(shapelessRecipe != null, RECIPE_CANNOT_BE_NULL);
+		Preconditions.checkArgument(craftingMatrix != null, CRAFTING_MATRIX_CANNOT_BE_NULL);
 
 		long itemCount = Stream.of(craftingMatrix).filter(item -> !item.isEmpty()).count();
 
@@ -299,8 +305,8 @@ public class RecipeManager
 
 	static boolean matches(@NotNull ShapedRecipe shapedRecipe, @NotNull ItemStack @NotNull [] craftingMatrix)
 	{
-		Preconditions.checkArgument(shapedRecipe != null, "The recipe cannot be null");
-		Preconditions.checkArgument(craftingMatrix != null, "The craftingMatrix cannot be null");
+		Preconditions.checkArgument(shapedRecipe != null, RECIPE_CANNOT_BE_NULL);
+		Preconditions.checkArgument(craftingMatrix != null, CRAFTING_MATRIX_CANNOT_BE_NULL);
 
 		String[] shape = shapedRecipe.getShape();
 		String[] mirroredShape = mirrorRecipeHorizontally(shapedRecipe.getShape());
@@ -414,8 +420,8 @@ public class RecipeManager
 
 	static boolean matches(@NotNull ComplexRecipe complexRecipe, @NotNull ItemStack @NotNull [] items)
 	{
-		Preconditions.checkArgument(complexRecipe != null, "The recipe cannot be null");
-		Preconditions.checkArgument(items != null, "The craftingMatrix cannot be null");
+		Preconditions.checkArgument(complexRecipe != null, RECIPE_CANNOT_BE_NULL);
+		Preconditions.checkArgument(items != null, CRAFTING_MATRIX_CANNOT_BE_NULL);
 
 		// TODO: Logic for complex recipes
 

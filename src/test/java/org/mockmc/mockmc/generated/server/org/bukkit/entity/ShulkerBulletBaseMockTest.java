@@ -14,8 +14,8 @@ class ShulkerBulletBaseMockTest extends GeneratedTestBase
 		ShulkerBulletBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getTarget());
-		assertSafeDefault(mock.getCurrentMovementDirection());
 		assertSafeDefault(mock.getTargetDelta());
+		assertSafeDefault(mock.getCurrentMovementDirection());
 	}
 
 	private static class Stub implements ShulkerBulletBaseMock

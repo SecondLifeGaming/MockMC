@@ -16,8 +16,8 @@ class ArmorStandBaseMockTest extends GeneratedTestBase
 		ArmorStandBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getEquipment());
-		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getItemInHand());
+		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getLeggings());
 		assertSafeDefault(mock.getChestplate());
 		assertSafeDefault(mock.getHelmet());

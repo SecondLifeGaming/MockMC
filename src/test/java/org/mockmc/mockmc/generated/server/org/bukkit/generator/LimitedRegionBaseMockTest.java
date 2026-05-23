@@ -13,8 +13,8 @@ class LimitedRegionBaseMockTest extends GeneratedTestBase
 	{
 		LimitedRegionBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getTileEntities());
 		assertSafeDefault(mock.getWorld());
+		assertSafeDefault(mock.getTileEntities());
 	}
 
 	private static class Stub implements LimitedRegionBaseMock

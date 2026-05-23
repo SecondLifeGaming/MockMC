@@ -17,8 +17,8 @@ class OfflinePlayerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		assertSafeDefault(mock.getName());
 		assertSafeDefault(mock.getLocation());
-		assertSafeDefault(mock.getPersistentDataContainer());
 		assertSafeDefault(mock.getPlayer());
+		assertSafeDefault(mock.getPersistentDataContainer());
 		assertSafeDefault(mock.getBedSpawnLocation());
 		assertSafeDefault(mock.getLastDeathLocation());
 		assertSafeDefault(mock.getRespawnLocation());

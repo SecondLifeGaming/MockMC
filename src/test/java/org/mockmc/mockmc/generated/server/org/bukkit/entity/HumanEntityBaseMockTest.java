@@ -21,10 +21,10 @@ class HumanEntityBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getEquipment());
 		assertSafeDefault(mock.getItemInHand());
 		assertSafeDefault(mock.getEnderChest());
+		assertSafeDefault(mock.getItemOnCursor());
 		assertSafeDefault(mock.getOpenInventory());
 		assertSafeDefault(mock.getMainHand());
 		assertSafeDefault(mock.getPotentialRespawnLocation());
-		assertSafeDefault(mock.getItemOnCursor());
 		assertSafeDefault(mock.getPotentialBedLocation());
 		assertSafeDefault(mock.getFishHook());
 		assertSafeDefault(mock.getBedLocation());
