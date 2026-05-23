@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class ConfigurationTypeAdapter extends TypeAdapter<ConfigurationSerializable>
 {
 

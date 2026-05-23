@@ -39,6 +39,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
+      - name: Run generator
+        run: ./gradlew :metaminer:runGenerator
+
+      - name: Apply Spotless formatting
+        run: ./gradlew spotlessApply
+
       - name: Build with Gradle
         run: ./gradlew build -x test --refresh-dependencies
 

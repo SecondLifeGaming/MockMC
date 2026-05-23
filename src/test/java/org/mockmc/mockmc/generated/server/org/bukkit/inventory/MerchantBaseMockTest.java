@@ -13,8 +13,8 @@ class MerchantBaseMockTest extends GeneratedTestBase
 	{
 		MerchantBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getRecipes());
 		assertSafeDefault(mock.getTrader());
+		assertSafeDefault(mock.getRecipes());
 	}
 
 	private static class Stub implements MerchantBaseMock

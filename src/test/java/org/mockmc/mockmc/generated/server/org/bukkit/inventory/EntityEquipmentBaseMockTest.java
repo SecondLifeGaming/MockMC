@@ -16,8 +16,8 @@ class EntityEquipmentBaseMockTest extends GeneratedTestBase
 		EntityEquipmentBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getHolder());
-		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getItemInHand());
+		assertSafeDefault(mock.getBoots());
 		assertSafeDefault(mock.getLeggings());
 		assertSafeDefault(mock.getChestplate());
 		assertSafeDefault(mock.getHelmet());

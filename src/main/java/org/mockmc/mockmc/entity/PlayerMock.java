@@ -141,7 +141,7 @@ import java.util.function.Predicate;
  * @see HumanEntityMock
  */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked", "java:S110"})
+{"deprecation", "removal", "unchecked", "java:S110", "java:S1133", "java:S2637"})
 public class PlayerMock extends HumanEntityMock
 		implements
 			SoundReceiver,
@@ -293,8 +293,8 @@ public class PlayerMock extends HumanEntityMock
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		super(server, uuid);
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -2835,7 +2835,7 @@ public class PlayerMock extends HumanEntityMock
 	@Override
 	@SuppressWarnings("UnstableApiUsage")
 	public boolean teleport(@NotNull Location location, @NotNull PlayerTeleportEvent.TeleportCause cause,
-			TeleportFlag[] flags)
+			TeleportFlag... flags)
 	{
 		Preconditions.checkNotNull(location, LOCATION_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(location.getWorld(), "World cannot be null");
@@ -2964,7 +2964,8 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.SYSTEM, component);
+			this.sendMessage(ChatMessageType.SYSTEM, new BaseComponent[]
+			{component});
 		}
 
 		@Override
@@ -2984,7 +2985,8 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.CHAT, sender, component);
+			this.sendMessage(ChatMessageType.CHAT, sender, new BaseComponent[]
+			{component});
 		}
 
 		@Override
@@ -3004,7 +3006,8 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			this.sendMessage(position, component);
+			this.sendMessage(position, null, new BaseComponent[]
+			{component});
 		}
 
 		@Override
@@ -3025,7 +3028,8 @@ public class PlayerMock extends HumanEntityMock
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender,
 				@NotNull BaseComponent component)
 		{
-			this.sendMessage(position, sender, component);
+			this.sendMessage(position, sender, new BaseComponent[]
+			{component});
 		}
 
 		@Override

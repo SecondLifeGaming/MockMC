@@ -20,8 +20,8 @@ class BlockStateBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getType());
 		assertSafeDefault(mock.getData());
 		assertSafeDefault(mock.getBlockData());
-		assertSafeDefault(mock.getBlock());
 		assertSafeDefault(mock.getWorld());
+		assertSafeDefault(mock.getBlock());
 		assertSafeDefault(mock.getChunk());
 		assertSafeDefault(mock.getDrops());
 	}

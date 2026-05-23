@@ -13,6 +13,7 @@ class ChunkBaseMockTest extends GeneratedTestBase
 	{
 		ChunkBaseMock mock = new Stub();
 		assertNotNull(mock);
+		assertSafeDefault(mock.getWorld());
 		assertSafeDefault(mock.getChunkSnapshot());
 		assertSafeDefault(mock.getTileEntities());
 		assertSafeDefault(mock.getEntities());
@@ -20,7 +21,6 @@ class ChunkBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getLoadLevel());
 		assertSafeDefault(mock.getStructures());
 		assertSafeDefault(mock.getPlayersSeeingChunk());
-		assertSafeDefault(mock.getWorld());
 	}
 
 	private static class Stub implements ChunkBaseMock

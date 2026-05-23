@@ -16,9 +16,9 @@ class MinecartBaseMockTest extends GeneratedTestBase
 		MinecartBaseMock mock = new Stub();
 		assertNotNull(mock);
 		assertSafeDefault(mock.getFlyingVelocityMod());
-		assertSafeDefault(mock.getDerailedVelocityMod());
 		assertSafeDefault(mock.getDisplayBlock());
 		assertSafeDefault(mock.getDisplayBlockData());
+		assertSafeDefault(mock.getDerailedVelocityMod());
 		assertSafeDefault(mock.getMinecartMaterial());
 	}
 

@@ -65,6 +65,7 @@ sonar {
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
 		property("sonar.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.test.exclusions", "**/generated/**,src/test/java/org/mockmc/mockmc/generated/**")
 		property("sonar.coverage.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
 		property("sonar.cpd.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
 	}
@@ -224,6 +225,7 @@ tasks {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
 		ignoreFailures = true
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 	}
 
 	check {
@@ -232,11 +234,17 @@ tasks {
 
 	jacocoTestReport {
 		dependsOn(test)
+		dependsOn("compileJava", "processResources")
 		reports {
 			xml.required.set(true)
 			html.required.set(true)
 			html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
 		}
+		classDirectories.setFrom(
+			sourceSets.main.get().output.classesDirs.asFileTree.matching {
+				exclude("org/mockmc/mockmc/generated/**")
+			}
+		)
 	}
 
 	jacoco {
@@ -427,6 +435,7 @@ backendJars.forEach { (name, jarName) ->
 		description = "Runs tests against $name backend"
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 
 		val defaultClasspath = sourceSets.test.get().runtimeClasspath
 		classpath = defaultClasspath + files("jars/$jarName")

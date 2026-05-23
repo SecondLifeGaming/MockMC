@@ -13,8 +13,8 @@ class InteractionBaseMockTest extends GeneratedTestBase
 	{
 		InteractionBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getLastInteraction());
 		assertSafeDefault(mock.getLastAttack());
+		assertSafeDefault(mock.getLastInteraction());
 	}
 
 	private static class Stub implements InteractionBaseMock

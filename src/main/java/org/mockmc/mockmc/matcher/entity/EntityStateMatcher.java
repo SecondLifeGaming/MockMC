@@ -84,7 +84,9 @@ public class EntityStateMatcher<T extends Entity> extends TypeSafeMatcher<T>
 		for (int i = 0; i < descriptions.size(); i++)
 		{
 			if (i > 0)
+			{
 				description.appendText(" and ");
+			}
 			description.appendText(descriptions.get(i));
 		}
 	}

@@ -1175,7 +1175,7 @@ public interface PlayerBaseMock
 	 */
 	@Override
 	@Deprecated(since = "1.0")
-	default void sendMessage(BaseComponent... arg0)
+	default void sendMessage(BaseComponent arg0)
 	{
 		// MockMC: Player#sendMessage
 	}
@@ -1186,7 +1186,7 @@ public interface PlayerBaseMock
 	 */
 	@Override
 	@Deprecated(since = "1.0")
-	default void sendMessage(BaseComponent arg0)
+	default void sendMessage(BaseComponent... arg0)
 	{
 		// MockMC: Player#sendMessage
 	}

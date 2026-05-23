@@ -19,8 +19,8 @@ class BlockBaseMockTest extends GeneratedTestBase
 		assertSafeDefault(mock.getState());
 		assertSafeDefault(mock.getType());
 		assertSafeDefault(mock.getBlockData());
-		assertSafeDefault(mock.getBiome());
 		assertSafeDefault(mock.getWorld());
+		assertSafeDefault(mock.getBiome());
 		assertSafeDefault(mock.getTranslationKey());
 		assertSafeDefault(mock.getChunk());
 		assertSafeDefault(mock.getComputedBiome());

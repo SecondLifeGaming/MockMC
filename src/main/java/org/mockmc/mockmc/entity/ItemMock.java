@@ -14,10 +14,9 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-public class ItemMock extends EntityMock
-		implements
-			Item,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemBaseMock
+@SuppressWarnings(
+{"java:S2637"})
+public class ItemMock extends EntityMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemBaseMock
 {
 
 	private ItemStack item;
@@ -40,8 +39,8 @@ public class ItemMock extends EntityMock
 	 */
 	public ItemMock(@NotNull ServerMock server, @NotNull UUID uuid, @NotNull ItemStack item)
 	{
-		Preconditions.checkNotNull(item, "Item cannot be null");
 		super(server, uuid);
+		Preconditions.checkNotNull(item, "Item cannot be null");
 		this.item = item.clone();
 	}
 
