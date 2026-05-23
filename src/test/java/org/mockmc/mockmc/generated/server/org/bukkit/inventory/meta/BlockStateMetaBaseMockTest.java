@@ -17,7 +17,7 @@ class BlockStateMetaBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getBlockState());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

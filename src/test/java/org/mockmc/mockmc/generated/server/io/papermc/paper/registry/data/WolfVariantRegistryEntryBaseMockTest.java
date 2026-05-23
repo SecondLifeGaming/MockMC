@@ -16,42 +16,42 @@ class WolfVariantRegistryEntryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.angryClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.wildClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.tameClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.babyAngryClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.babyWildClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.babyTameClientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

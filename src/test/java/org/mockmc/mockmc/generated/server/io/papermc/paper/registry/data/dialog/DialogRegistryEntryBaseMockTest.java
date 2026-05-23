@@ -16,14 +16,14 @@ class DialogRegistryEntryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.base());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.type());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

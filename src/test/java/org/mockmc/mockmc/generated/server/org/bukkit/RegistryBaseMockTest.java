@@ -17,21 +17,21 @@ class RegistryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.stream());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getTags());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.keyStream());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

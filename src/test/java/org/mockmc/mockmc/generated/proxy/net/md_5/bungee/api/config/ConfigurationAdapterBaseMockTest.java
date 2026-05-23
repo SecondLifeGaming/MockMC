@@ -16,14 +16,14 @@ class ConfigurationAdapterBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getListeners());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getServers());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -18,14 +18,14 @@ class ContentBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.toString());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.requiredAction());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

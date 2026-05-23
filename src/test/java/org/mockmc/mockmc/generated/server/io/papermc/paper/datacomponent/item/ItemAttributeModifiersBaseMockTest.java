@@ -16,7 +16,7 @@ class ItemAttributeModifiersBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.modifiers());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

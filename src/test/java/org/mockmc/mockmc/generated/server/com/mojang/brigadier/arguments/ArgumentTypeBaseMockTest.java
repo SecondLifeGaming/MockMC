@@ -16,7 +16,7 @@ class ArgumentTypeBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getExamples());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

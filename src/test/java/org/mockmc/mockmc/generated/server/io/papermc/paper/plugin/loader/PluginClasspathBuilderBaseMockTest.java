@@ -16,7 +16,7 @@ class PluginClasspathBuilderBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getContext());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

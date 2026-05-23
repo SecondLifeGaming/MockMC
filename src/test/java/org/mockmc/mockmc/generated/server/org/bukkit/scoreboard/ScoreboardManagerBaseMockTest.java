@@ -16,14 +16,14 @@ class ScoreboardManagerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getMainScoreboard());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getNewScoreboard());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

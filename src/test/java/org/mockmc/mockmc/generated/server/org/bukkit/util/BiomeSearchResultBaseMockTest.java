@@ -16,14 +16,14 @@ class BiomeSearchResultBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getLocation());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getBiome());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

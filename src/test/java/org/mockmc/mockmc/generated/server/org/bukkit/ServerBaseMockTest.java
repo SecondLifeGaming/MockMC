@@ -18,140 +18,140 @@ class ServerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getName());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getUnsafe());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getLogger());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getVersion());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.recipeIterator());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getWorlds());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getCommandAliases());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getPluginsFolder());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServerConfig());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getBukkitVersion());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getIPBans());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getMinecraftVersion());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getBannedPlayers());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getOnlinePlayers());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getOperators());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getIp());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getDefaultGameMode());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getWorldType());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getConsoleSender());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getInitialEnabledPacks());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getWorldContainer());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getInitialDisabledPacks());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getOfflinePlayers());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServerResourcePack());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getMessenger());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServerTickManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getHelpMap());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getResourcePack());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.createMerchant());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getResourcePackHash());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.motd());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getResourcePackPrompt());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.shutdownMessage());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getWhitelistedPlayers());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
@@ -164,141 +164,141 @@ class ServerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getMotd());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getUpdateFolder());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServerLinks());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getUpdateFolderFile());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getShutdownMessage());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getPluginManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getWarningState());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getScheduler());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getItemFactory());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServicesManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getEntityFactory());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.createWorldBorder());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getScoreboardManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getCommandAliases());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServerIcon());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServerConfig());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getBossBars());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getIPBans());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getTPS());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getBannedPlayers());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getTickTimes());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getOperators());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.advancementIterator());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getDefaultGameMode());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getStructureManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getConsoleSender());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getCommandMap());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getWorldContainer());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getPermissionMessage());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getOfflinePlayers());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.permissionMessage());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getMessenger());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getMobGoals());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getHelpMap());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getDatapackManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.createMerchant());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getPotionBrewer());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.motd());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getRegionScheduler());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.shutdownMessage());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
@@ -311,141 +311,141 @@ class ServerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getAsyncScheduler());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getMotd());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getGlobalRegionScheduler());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServerLinks());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getBukkitVersion());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getShutdownMessage());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getMinecraftVersion());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getWarningState());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getOnlinePlayers());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getItemFactory());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getWorldType());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getEntityFactory());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getInitialEnabledPacks());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getScoreboardManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getInitialDisabledPacks());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getServerIcon());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServerResourcePack());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getBossBars());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServerTickManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getTPS());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getPluginsFolder());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getTickTimes());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getIp());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.advancementIterator());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getResourcePack());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getStructureManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getResourcePackHash());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getCommandMap());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getResourcePackPrompt());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getPermissionMessage());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getWhitelistedPlayers());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.permissionMessage());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getUpdateFolder());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getMobGoals());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getUpdateFolderFile());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getDatapackManager());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getPluginManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getPotionBrewer());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getScheduler());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getRegionScheduler());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
@@ -458,36 +458,36 @@ class ServerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getServicesManager());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getAsyncScheduler());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.createWorldBorder());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getGlobalRegionScheduler());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.spigot());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getRespawnWorld());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getLevelDirectory());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

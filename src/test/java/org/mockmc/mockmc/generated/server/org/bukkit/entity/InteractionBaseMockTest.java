@@ -15,15 +15,15 @@ class InteractionBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getLastInteraction());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getLastAttack());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getLastAttack());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getLastInteraction());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

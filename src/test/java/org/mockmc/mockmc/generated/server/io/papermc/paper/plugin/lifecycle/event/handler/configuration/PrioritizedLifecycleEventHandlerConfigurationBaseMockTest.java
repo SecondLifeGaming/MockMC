@@ -17,7 +17,7 @@ class PrioritizedLifecycleEventHandlerConfigurationBaseMockTest extends Generate
 		try
 		{
 			assertSafeDefault(mock.monitor());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

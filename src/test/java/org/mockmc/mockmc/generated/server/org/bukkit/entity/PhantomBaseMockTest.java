@@ -16,14 +16,14 @@ class PhantomBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSpawningEntity());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getAnchorLocation());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

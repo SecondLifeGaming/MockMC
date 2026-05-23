@@ -16,14 +16,14 @@ class JukeboxPlayableComponentBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSong());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getSongKey());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

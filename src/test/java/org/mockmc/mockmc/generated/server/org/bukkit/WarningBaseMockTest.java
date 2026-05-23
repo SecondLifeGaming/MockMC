@@ -16,7 +16,7 @@ class WarningBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.reason());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

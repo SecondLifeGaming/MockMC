@@ -16,7 +16,7 @@ class WitchBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getDrinkingPotion());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

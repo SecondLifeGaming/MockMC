@@ -18,7 +18,7 @@ class ZombieBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getVillagerProfession());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

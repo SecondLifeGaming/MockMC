@@ -18,7 +18,7 @@ class UndefinedNullabilityBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.value());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -16,14 +16,14 @@ class JukeboxSongRegistryEntryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.description());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.soundEvent());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

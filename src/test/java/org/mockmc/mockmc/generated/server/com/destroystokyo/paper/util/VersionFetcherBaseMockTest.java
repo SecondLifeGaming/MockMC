@@ -16,7 +16,7 @@ class VersionFetcherBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getVersionMessage());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -16,14 +16,14 @@ class ZombieNautilusVariantRegistryEntryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.model());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.clientTextureAsset());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

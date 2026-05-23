@@ -16,14 +16,14 @@ class WardenBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getEntityAngryAt());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getAngerLevel());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

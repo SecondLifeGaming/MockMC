@@ -16,7 +16,7 @@ class LlamaInventoryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getDecor());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

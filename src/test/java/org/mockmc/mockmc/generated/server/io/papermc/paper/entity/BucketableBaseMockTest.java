@@ -16,14 +16,14 @@ class BucketableBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getBaseBucketItem());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getPickupSound());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

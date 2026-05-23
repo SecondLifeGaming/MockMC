@@ -16,14 +16,14 @@ class BungeeChannelInitializerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getChannelInitializer());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getChannelAcceptor());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

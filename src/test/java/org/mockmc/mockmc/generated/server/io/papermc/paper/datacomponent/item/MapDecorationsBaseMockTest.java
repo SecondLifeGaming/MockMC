@@ -16,7 +16,7 @@ class MapDecorationsBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.decorations());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

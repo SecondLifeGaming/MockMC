@@ -17,14 +17,14 @@ class MultipleFacingBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getFaces());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getAllowedFaces());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

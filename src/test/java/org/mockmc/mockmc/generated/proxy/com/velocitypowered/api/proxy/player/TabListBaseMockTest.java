@@ -16,7 +16,7 @@ class TabListBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getEntries());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

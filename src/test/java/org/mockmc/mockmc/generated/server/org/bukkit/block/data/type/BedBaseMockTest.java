@@ -17,7 +17,7 @@ class BedBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPart());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

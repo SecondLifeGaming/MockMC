@@ -16,14 +16,14 @@ class PlayerLoginConnectionBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getAuthenticatedProfile());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getUnsafeProfile());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

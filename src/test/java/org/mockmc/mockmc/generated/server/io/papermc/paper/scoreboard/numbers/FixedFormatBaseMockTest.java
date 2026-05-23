@@ -16,7 +16,7 @@ class FixedFormatBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.component());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -17,7 +17,7 @@ class BellBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getAttachment());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

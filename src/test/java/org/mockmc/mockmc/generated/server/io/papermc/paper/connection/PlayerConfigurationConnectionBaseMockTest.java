@@ -16,14 +16,14 @@ class PlayerConfigurationConnectionBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getProfile());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getAudience());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

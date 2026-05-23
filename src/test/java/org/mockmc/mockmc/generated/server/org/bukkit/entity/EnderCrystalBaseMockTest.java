@@ -16,7 +16,7 @@ class EnderCrystalBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getBeamTarget());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

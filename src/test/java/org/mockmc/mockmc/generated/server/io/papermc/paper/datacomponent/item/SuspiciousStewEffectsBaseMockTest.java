@@ -16,7 +16,7 @@ class SuspiciousStewEffectsBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.effects());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

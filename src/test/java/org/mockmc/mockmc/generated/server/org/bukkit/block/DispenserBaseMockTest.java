@@ -16,7 +16,7 @@ class DispenserBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getBlockProjectileSource());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

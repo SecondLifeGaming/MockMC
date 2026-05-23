@@ -16,7 +16,7 @@ class ChannelIdentifierBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getId());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

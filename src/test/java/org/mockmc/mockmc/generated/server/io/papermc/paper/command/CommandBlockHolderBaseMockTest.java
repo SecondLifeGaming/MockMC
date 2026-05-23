@@ -16,14 +16,14 @@ class CommandBlockHolderBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getCommand());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.lastOutput());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

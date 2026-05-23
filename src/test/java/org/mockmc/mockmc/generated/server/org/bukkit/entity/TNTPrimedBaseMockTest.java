@@ -17,22 +17,22 @@ class TNTPrimedBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getBlockData());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getSource());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getSource());
-		} catch (Exception | LinkageError e)
+			assertSafeDefault(mock.getBlockData());
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getSourceLoc());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

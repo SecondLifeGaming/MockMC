@@ -16,14 +16,14 @@ class DatapackManagerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPacks());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getEnabledPacks());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

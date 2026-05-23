@@ -16,7 +16,7 @@ class ComplexEntityPartBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getParent());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

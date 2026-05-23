@@ -16,7 +16,7 @@ class FeatureFlagSetHolderBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getFeatureFlags());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

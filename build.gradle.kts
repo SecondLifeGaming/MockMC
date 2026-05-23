@@ -1,6 +1,8 @@
 import java.security.MessageDigest
 import java.net.URI
 import java.io.InputStream
+import java.nio.file.FileSystems
+import java.nio.file.Files
 
 abstract class DownloadJarsTask : DefaultTask() {
 	@get:OutputDirectory
@@ -22,6 +24,21 @@ abstract class DownloadJarsTask : DefaultTask() {
 					dest.outputStream().use { output ->
 						(input as InputStream).copyTo(output)
 					}
+				}
+				
+				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
+				val env = mapOf("create" to "false")
+				val jarUri = URI.create("jar:file:${dest.absolutePath}")
+				try {
+					FileSystems.newFileSystem(jarUri, env).use { fs ->
+						val providerPath = fs.getPath("META-INF/services/net.kyori.adventure.bossbar.BossBarImplementation\$Provider")
+						if (Files.exists(providerPath)) {
+							println("Stripping conflicting BossBar provider from $name...")
+							Files.delete(providerPath)
+						}
+					}
+				} catch (e: Exception) {
+					// Ignore if not a valid jar or if it fails
 				}
 			}
 		}

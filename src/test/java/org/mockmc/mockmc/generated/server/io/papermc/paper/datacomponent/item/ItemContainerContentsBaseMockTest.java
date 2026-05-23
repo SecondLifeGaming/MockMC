@@ -16,7 +16,7 @@ class ItemContainerContentsBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.contents());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

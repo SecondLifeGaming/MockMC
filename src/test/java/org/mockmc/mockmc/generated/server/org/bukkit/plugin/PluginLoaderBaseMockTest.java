@@ -18,7 +18,7 @@ class PluginLoaderBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPluginFileFilters());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

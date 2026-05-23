@@ -16,14 +16,14 @@ class TooltipContextBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.asAdvanced());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.asCreative());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

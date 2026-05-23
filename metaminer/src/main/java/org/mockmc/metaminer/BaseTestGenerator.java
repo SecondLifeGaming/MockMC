@@ -307,7 +307,7 @@ public class BaseTestGenerator implements DataGenerator {
         for (Method m : methods) {
             testMethod.beginControlFlow("try");
             testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
-            testMethod.nextControlFlow("catch ($T | $T e)", Exception.class, LinkageError.class);
+            testMethod.nextControlFlow("catch ($T | $T _)", Exception.class, LinkageError.class);
             testMethod.addComment("Ignore NPEs and LinkageErrors from Bukkit singletons");
             testMethod.endControlFlow();
         }

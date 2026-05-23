@@ -17,14 +17,14 @@ class EnchantmentStorageMetaBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.clone());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getStoredEnchants());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

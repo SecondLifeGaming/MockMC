@@ -16,14 +16,14 @@ class MerchantInventoryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getMerchant());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getSelectedRecipe());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

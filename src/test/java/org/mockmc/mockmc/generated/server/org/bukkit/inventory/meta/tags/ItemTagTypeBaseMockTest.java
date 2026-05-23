@@ -18,14 +18,14 @@ class ItemTagTypeBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPrimitiveType());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getComplexType());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -16,7 +16,7 @@ class ZombieNautilusBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getVariant());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

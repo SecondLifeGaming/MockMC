@@ -16,14 +16,14 @@ class HelpMapBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getHelpTopics());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getIgnoredPlugins());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

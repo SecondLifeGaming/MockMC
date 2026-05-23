@@ -17,7 +17,7 @@ class ResultedEventBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getResult());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

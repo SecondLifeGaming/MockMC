@@ -16,7 +16,7 @@ class FrictionalBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getFrictionState());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

@@ -19,14 +19,14 @@ class SculkSensorBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPhase());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.getSculkSensorPhase());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

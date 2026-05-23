@@ -16,7 +16,7 @@ class WritableBookContentBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.pages());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

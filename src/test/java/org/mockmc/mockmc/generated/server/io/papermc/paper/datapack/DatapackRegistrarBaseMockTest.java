@@ -16,7 +16,7 @@ class DatapackRegistrarBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getDiscoveredPacks());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

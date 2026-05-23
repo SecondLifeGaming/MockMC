@@ -18,7 +18,7 @@ class CustomItemTagContainerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getAdapterContext());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

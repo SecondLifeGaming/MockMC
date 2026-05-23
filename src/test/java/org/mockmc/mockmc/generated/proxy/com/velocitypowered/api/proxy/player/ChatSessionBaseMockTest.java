@@ -16,7 +16,7 @@ class ChatSessionBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSessionId());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

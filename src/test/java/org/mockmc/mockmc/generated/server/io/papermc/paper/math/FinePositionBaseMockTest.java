@@ -16,7 +16,7 @@ class FinePositionBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.toBlock());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

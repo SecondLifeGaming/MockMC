@@ -16,7 +16,7 @@ class ItemArmorTrimBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.armorTrim());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

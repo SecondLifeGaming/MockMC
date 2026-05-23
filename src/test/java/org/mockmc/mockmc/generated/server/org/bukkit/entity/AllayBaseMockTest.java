@@ -16,14 +16,14 @@ class AllayBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getJukebox());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
 			assertSafeDefault(mock.duplicateAllay());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

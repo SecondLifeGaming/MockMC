@@ -16,7 +16,7 @@ class ComplexLivingEntityBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getParts());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}

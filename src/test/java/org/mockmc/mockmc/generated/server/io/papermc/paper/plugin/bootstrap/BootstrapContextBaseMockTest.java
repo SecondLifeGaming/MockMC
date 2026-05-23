@@ -16,7 +16,7 @@ class BootstrapContextBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getLifecycleManager());
-		} catch (Exception | LinkageError e)
+		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
