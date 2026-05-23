@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface HopperBaseMock extends Hopper, DirectionalBaseMock
 {
+	@Override
 	default void setEnabled(boolean arg0)
 	{
 		// MockMC: Hopper#setEnabled
 	}
 
+	@Override
 	default boolean isEnabled()
 	{
 		// MockMC: Hopper#isEnabled

@@ -17,6 +17,7 @@ import org.bukkit.block.BlockType;
  */
 public interface BlockPredicateBaseMock extends BlockPredicate
 {
+	@Override
 	default RegistryKeySet<BlockType> blocks()
 	{
 		// MockMC: BlockPredicate#blocks

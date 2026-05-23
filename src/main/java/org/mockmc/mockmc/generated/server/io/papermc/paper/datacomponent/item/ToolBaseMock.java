@@ -16,24 +16,28 @@ import java.util.List;
  */
 public interface ToolBaseMock extends Tool
 {
+	@Override
 	default List<Tool.Rule> rules()
 	{
 		// MockMC: Tool#rules
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean canDestroyBlocksInCreative()
 	{
 		// MockMC: Tool#canDestroyBlocksInCreative
 		return false;
 	}
 
+	@Override
 	default float defaultMiningSpeed()
 	{
 		// MockMC: Tool#defaultMiningSpeed
 		return 0.0f;
 	}
 
+	@Override
 	default int damagePerBlock()
 	{
 		// MockMC: Tool#damagePerBlock

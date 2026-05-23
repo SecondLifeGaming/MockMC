@@ -19,6 +19,7 @@ import net.kyori.examination.ExaminableProperty;
  */
 public interface AsyncTabCompleteEventCompletionBaseMock extends AsyncTabCompleteEvent.Completion
 {
+	@Override
 	default String suggestion()
 	{
 		// MockMC: Completion#suggestion
@@ -29,6 +30,7 @@ public interface AsyncTabCompleteEventCompletionBaseMock extends AsyncTabComplet
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default Stream<? extends ExaminableProperty> examinableProperties()
 	{
@@ -36,6 +38,7 @@ public interface AsyncTabCompleteEventCompletionBaseMock extends AsyncTabComplet
 		return null;
 	}
 
+	@Override
 	default Component tooltip()
 	{
 		// MockMC: Completion#tooltip

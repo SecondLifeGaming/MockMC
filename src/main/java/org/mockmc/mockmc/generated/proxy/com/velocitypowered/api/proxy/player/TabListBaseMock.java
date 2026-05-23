@@ -23,6 +23,7 @@ import net.kyori.adventure.text.Component;
  */
 public interface TabListBaseMock extends TabList
 {
+	@Override
 	default void clearHeaderAndFooter()
 	{
 		// MockMC: TabList#clearHeaderAndFooter
@@ -32,6 +33,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3)
 	{
@@ -43,6 +45,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5)
@@ -55,6 +58,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, IdentifiedKey arg4)
 	{
@@ -66,6 +70,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5, int arg6)
@@ -78,6 +83,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4)
 	{
@@ -85,12 +91,14 @@ public interface TabListBaseMock extends TabList
 		return null;
 	}
 
+	@Override
 	default boolean containsEntry(UUID arg0)
 	{
 		// MockMC: TabList#containsEntry
 		return false;
 	}
 
+	@Override
 	default Optional<TabListEntry> removeEntry(UUID arg0)
 	{
 		// MockMC: TabList#removeEntry
@@ -101,6 +109,7 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default TabListEntry buildEntry(GameProfile arg0, Component arg1, int arg2, int arg3, ChatSession arg4,
 			boolean arg5, int arg6, boolean arg7)
@@ -113,38 +122,45 @@ public interface TabListBaseMock extends TabList
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setHeaderAndFooter(Component arg0, Component arg1)
 	{
 		// MockMC: TabList#setHeaderAndFooter
 	}
 
+	@Override
 	default void clearAll()
 	{
 		// MockMC: TabList#clearAll
 	}
 
+	@Override
 	default void addEntries(TabListEntry... arg0)
 	{
 		// MockMC: TabList#addEntries
 	}
 
+	@Override
 	default void addEntries(Iterable<TabListEntry> arg0)
 	{
 		// MockMC: TabList#addEntries
 	}
 
+	@Override
 	default Collection<TabListEntry> getEntries()
 	{
 		// MockMC: TabList#getEntries
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void addEntry(TabListEntry arg0)
 	{
 		// MockMC: TabList#addEntry
 	}
 
+	@Override
 	default Optional<TabListEntry> getEntry(UUID arg0)
 	{
 		// MockMC: TabList#getEntry

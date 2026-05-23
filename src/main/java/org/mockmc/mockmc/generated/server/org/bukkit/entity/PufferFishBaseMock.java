@@ -14,20 +14,15 @@ import org.bukkit.entity.PufferFish;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PufferFishBaseMock extends PufferFish, FishBaseMock
 {
+	@Override
 	default int getPuffState()
 	{
 		// MockMC: PufferFish#getPuffState
 		return 0;
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: PufferFish#getLeashHolder
-		return null;
 	}
 
 	@Override
@@ -37,15 +32,23 @@ public interface PufferFishBaseMock extends PufferFish, FishBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: PufferFish#isLeashed
+		return false;
+	}
+
+	@Override
 	default void setPuffState(int arg0)
 	{
 		// MockMC: PufferFish#setPuffState
 	}
 
 	@Override
-	default boolean isLeashed()
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: PufferFish#isLeashed
-		return false;
+		// MockMC: PufferFish#getLeashHolder
+		return null;
 	}
 }

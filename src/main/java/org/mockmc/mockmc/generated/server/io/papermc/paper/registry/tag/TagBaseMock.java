@@ -26,6 +26,7 @@ public interface TagBaseMock<T extends Keyed> extends Tag<T>, RegistryKeySetBase
 		return null;
 	}
 
+	@Override
 	default TagKey<T> tagKey()
 	{
 		// MockMC: Tag#tagKey

@@ -15,27 +15,22 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.SchoolableFish
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SalmonBaseMock extends Salmon, SchoolableFishBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Salmon#getLeashHolder
-		return null;
-	}
-
-	default Salmon.Variant getVariant()
-	{
-		// MockMC: Salmon#getVariant
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
 		// MockMC: Salmon#setLeashHolder
 		return false;
+	}
+
+	@Override
+	default Salmon.Variant getVariant()
+	{
+		// MockMC: Salmon#getVariant
+		return null;
 	}
 
 	@Override
@@ -45,6 +40,14 @@ public interface SalmonBaseMock extends Salmon, SchoolableFishBaseMock
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Salmon#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setVariant(Salmon.Variant arg0)
 	{
 		// MockMC: Salmon#setVariant

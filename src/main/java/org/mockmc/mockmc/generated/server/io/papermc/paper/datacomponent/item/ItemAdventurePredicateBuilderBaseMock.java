@@ -22,12 +22,14 @@ public interface ItemAdventurePredicateBuilderBaseMock
 			ItemAdventurePredicate.Builder,
 			DataComponentBuilderBaseMock<ItemAdventurePredicate>
 {
+	@Override
 	default ItemAdventurePredicate.Builder addPredicates(List<BlockPredicate> arg0)
 	{
 		// MockMC: Builder#addPredicates
 		return null;
 	}
 
+	@Override
 	default ItemAdventurePredicate.Builder addPredicate(BlockPredicate arg0)
 	{
 		// MockMC: Builder#addPredicate

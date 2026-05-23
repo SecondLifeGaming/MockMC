@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface PistonBaseMock extends Piston, DirectionalBaseMock
 {
+	@Override
 	default boolean isExtended()
 	{
 		// MockMC: Piston#isExtended
 		return false;
 	}
 
+	@Override
 	default void setExtended(boolean arg0)
 	{
 		// MockMC: Piston#setExtended

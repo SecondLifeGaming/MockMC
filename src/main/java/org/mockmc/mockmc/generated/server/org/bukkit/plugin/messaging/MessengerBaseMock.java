@@ -21,39 +21,46 @@ import org.bukkit.plugin.messaging.PluginMessageListenerRegistration;
  */
 public interface MessengerBaseMock extends Messenger
 {
+	@Override
 	default Set<String> getIncomingChannels()
 	{
 		// MockMC: Messenger#getIncomingChannels
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> getIncomingChannels(Plugin arg0)
 	{
 		// MockMC: Messenger#getIncomingChannels
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void unregisterIncomingPluginChannel(Plugin arg0)
 	{
 		// MockMC: Messenger#unregisterIncomingPluginChannel
 	}
 
+	@Override
 	default void unregisterIncomingPluginChannel(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#unregisterIncomingPluginChannel
 	}
 
+	@Override
 	default void unregisterIncomingPluginChannel(Plugin arg0, String arg1, PluginMessageListener arg2)
 	{
 		// MockMC: Messenger#unregisterIncomingPluginChannel
 	}
 
+	@Override
 	default boolean isReservedChannel(String arg0)
 	{
 		// MockMC: Messenger#isReservedChannel
 		return false;
 	}
 
+	@Override
 	default void dispatchIncomingMessage(PlayerConnection arg0, String arg1, byte[] arg2)
 	{
 		// MockMC: Messenger#dispatchIncomingMessage
@@ -63,51 +70,60 @@ public interface MessengerBaseMock extends Messenger
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void dispatchIncomingMessage(Player arg0, String arg1, byte[] arg2)
 	{
 		// MockMC: Messenger#dispatchIncomingMessage
 	}
 
+	@Override
 	default Set<String> getOutgoingChannels()
 	{
 		// MockMC: Messenger#getOutgoingChannels
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> getOutgoingChannels(Plugin arg0)
 	{
 		// MockMC: Messenger#getOutgoingChannels
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void unregisterOutgoingPluginChannel(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#unregisterOutgoingPluginChannel
 	}
 
+	@Override
 	default void unregisterOutgoingPluginChannel(Plugin arg0)
 	{
 		// MockMC: Messenger#unregisterOutgoingPluginChannel
 	}
 
+	@Override
 	default boolean isOutgoingChannelRegistered(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#isOutgoingChannelRegistered
 		return false;
 	}
 
+	@Override
 	default boolean isRegistrationValid(PluginMessageListenerRegistration arg0)
 	{
 		// MockMC: Messenger#isRegistrationValid
 		return false;
 	}
 
+	@Override
 	default void registerOutgoingPluginChannel(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#registerOutgoingPluginChannel
 	}
 
+	@Override
 	default PluginMessageListenerRegistration registerIncomingPluginChannel(Plugin arg0, String arg1,
 			PluginMessageListener arg2)
 	{
@@ -115,24 +131,28 @@ public interface MessengerBaseMock extends Messenger
 		return null;
 	}
 
+	@Override
 	default boolean isIncomingChannelRegistered(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#isIncomingChannelRegistered
 		return false;
 	}
 
+	@Override
 	default Set<PluginMessageListenerRegistration> getIncomingChannelRegistrations(Plugin arg0, String arg1)
 	{
 		// MockMC: Messenger#getIncomingChannelRegistrations
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<PluginMessageListenerRegistration> getIncomingChannelRegistrations(String arg0)
 	{
 		// MockMC: Messenger#getIncomingChannelRegistrations
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<PluginMessageListenerRegistration> getIncomingChannelRegistrations(Plugin arg0)
 	{
 		// MockMC: Messenger#getIncomingChannelRegistrations

@@ -17,9 +17,11 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.TileStateInvent
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, TileStateInventoryHolderBaseMock
 {
+	@Override
 	default void setLastInteractedSlot(int arg0)
 	{
 		// MockMC: ChiseledBookshelf#setLastInteractedSlot
@@ -39,6 +41,7 @@ public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, TileStateI
 		return null;
 	}
 
+	@Override
 	default int getLastInteractedSlot()
 	{
 		// MockMC: ChiseledBookshelf#getLastInteractedSlot
@@ -52,6 +55,7 @@ public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, TileStateI
 		return null;
 	}
 
+	@Override
 	default int getSlot(Vector arg0)
 	{
 		// MockMC: ChiseledBookshelf#getSlot

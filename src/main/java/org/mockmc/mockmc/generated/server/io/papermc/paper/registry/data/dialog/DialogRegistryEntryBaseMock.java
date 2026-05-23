@@ -17,12 +17,14 @@ import io.papermc.paper.registry.data.dialog.type.DialogType;
  */
 public interface DialogRegistryEntryBaseMock extends DialogRegistryEntry
 {
+	@Override
 	default DialogBase base()
 	{
 		// MockMC: DialogRegistryEntry#base
 		return null;
 	}
 
+	@Override
 	default DialogType type()
 	{
 		// MockMC: DialogRegistryEntry#type

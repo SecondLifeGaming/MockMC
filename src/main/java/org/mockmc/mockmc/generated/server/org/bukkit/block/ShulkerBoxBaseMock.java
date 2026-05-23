@@ -17,9 +17,59 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ShulkerBoxBaseMock extends ShulkerBox, LiddedBaseMock, LootableBaseMock, ContainerBaseMock
 {
+	@Override
+	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
+	{
+		// MockMC: ShulkerBox#setHasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default DyeColor getColor()
+	{
+		// MockMC: ShulkerBox#getColor
+		return null;
+	}
+
+	@Override
+	default boolean hasBeenFilled()
+	{
+		// MockMC: ShulkerBox#hasBeenFilled
+		return false;
+	}
+
+	@Override
+	default long getLastFilled()
+	{
+		// MockMC: ShulkerBox#getLastFilled
+		return 0L;
+	}
+
+	@Override
+	default boolean isRefillEnabled()
+	{
+		// MockMC: ShulkerBox#isRefillEnabled
+		return false;
+	}
+
+	@Override
+	default boolean canPlayerLoot(UUID arg0)
+	{
+		// MockMC: ShulkerBox#canPlayerLoot
+		return false;
+	}
+
+	@Override
+	default boolean hasPlayerLooted(UUID arg0)
+	{
+		// MockMC: ShulkerBox#hasPlayerLooted
+		return false;
+	}
+
 	@Override
 	default Block getBlock()
 	{
@@ -27,66 +77,28 @@ public interface ShulkerBoxBaseMock extends ShulkerBox, LiddedBaseMock, Lootable
 		return null;
 	}
 
-	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
-	{
-		// MockMC: ShulkerBox#setHasPlayerLooted
-		return false;
-	}
-
-	default DyeColor getColor()
-	{
-		// MockMC: ShulkerBox#getColor
-		return null;
-	}
-
-	default boolean hasBeenFilled()
-	{
-		// MockMC: ShulkerBox#hasBeenFilled
-		return false;
-	}
-
-	default long getLastFilled()
-	{
-		// MockMC: ShulkerBox#getLastFilled
-		return 0L;
-	}
-
-	default boolean isRefillEnabled()
-	{
-		// MockMC: ShulkerBox#isRefillEnabled
-		return false;
-	}
-
-	default boolean canPlayerLoot(UUID arg0)
-	{
-		// MockMC: ShulkerBox#canPlayerLoot
-		return false;
-	}
-
-	default boolean hasPlayerLooted(UUID arg0)
-	{
-		// MockMC: ShulkerBox#hasPlayerLooted
-		return false;
-	}
-
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: ShulkerBox#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: ShulkerBox#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: ShulkerBox#getNextRefill
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: ShulkerBox#setNextRefill

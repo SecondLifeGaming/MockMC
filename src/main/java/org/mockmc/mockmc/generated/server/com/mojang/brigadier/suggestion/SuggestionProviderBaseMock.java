@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface SuggestionProviderBaseMock<S> extends SuggestionProvider<S>
 {
+	@Override
 	default CompletableFuture<Suggestions> getSuggestions(CommandContext<S> arg0, SuggestionsBuilder arg1)
 			throws CommandSyntaxException
 	{

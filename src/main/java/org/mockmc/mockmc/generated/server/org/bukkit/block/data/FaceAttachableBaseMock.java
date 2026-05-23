@@ -15,12 +15,14 @@ import org.bukkit.block.data.FaceAttachable;
  */
 public interface FaceAttachableBaseMock extends FaceAttachable, BlockDataBaseMock
 {
+	@Override
 	default FaceAttachable.AttachedFace getAttachedFace()
 	{
 		// MockMC: FaceAttachable#getAttachedFace
 		return null;
 	}
 
+	@Override
 	default void setAttachedFace(FaceAttachable.AttachedFace arg0)
 	{
 		// MockMC: FaceAttachable#setAttachedFace

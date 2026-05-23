@@ -18,7 +18,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface HopperMinecartBaseMock
 		extends
 			HopperMinecart,
@@ -26,6 +27,7 @@ public interface HopperMinecartBaseMock
 			InventoryHolderBaseMock,
 			MinecartBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: HopperMinecart#setHasPlayerLooted
@@ -36,24 +38,28 @@ public interface HopperMinecartBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4", forRemoval = true)
 	default void setPickupCooldown(int arg0)
 	{
 		// MockMC: HopperMinecart#setPickupCooldown
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: HopperMinecart#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: HopperMinecart#canPlayerLoot
 		return false;
 	}
 
+	@Override
 	default Entity getEntity()
 	{
 		// MockMC: HopperMinecart#getEntity
@@ -64,6 +70,7 @@ public interface HopperMinecartBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4", forRemoval = true)
 	default int getPickupCooldown()
 	{
@@ -71,53 +78,62 @@ public interface HopperMinecartBaseMock
 		return 0;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: HopperMinecart#getNextRefill
 		return 0L;
 	}
 
+	@Override
 	default boolean isEnabled()
 	{
 		// MockMC: HopperMinecart#isEnabled
 		return false;
 	}
 
+	@Override
 	default void setEnabled(boolean arg0)
 	{
 		// MockMC: HopperMinecart#setEnabled
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: HopperMinecart#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: HopperMinecart#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: HopperMinecart#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: HopperMinecart#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: HopperMinecart#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: HopperMinecart#setNextRefill

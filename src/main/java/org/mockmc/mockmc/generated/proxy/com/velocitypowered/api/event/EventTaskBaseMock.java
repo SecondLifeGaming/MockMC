@@ -16,11 +16,13 @@ import com.velocitypowered.api.event.EventTask;
  */
 public interface EventTaskBaseMock extends EventTask
 {
+	@Override
 	default void execute(Continuation arg0)
 	{
 		// MockMC: EventTask#execute
 	}
 
+	@Override
 	default boolean requiresAsync()
 	{
 		// MockMC: EventTask#requiresAsync

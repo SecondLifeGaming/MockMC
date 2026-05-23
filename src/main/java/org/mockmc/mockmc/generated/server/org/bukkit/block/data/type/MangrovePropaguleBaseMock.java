@@ -19,9 +19,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
 public interface MangrovePropaguleBaseMock
 		extends
 			MangrovePropagule,
-			WaterloggedBaseMock,
 			SaplingBaseMock,
-			AgeableBaseMock,
-			HangableBaseMock
+			WaterloggedBaseMock,
+			HangableBaseMock,
+			AgeableBaseMock
 {
 }

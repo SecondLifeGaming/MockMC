@@ -16,6 +16,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
  */
 public interface CommandBaseMock<S> extends Command<S>
 {
+	@Override
 	default int run(CommandContext<S> arg0) throws CommandSyntaxException
 	{
 		// MockMC: Command#run

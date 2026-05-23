@@ -17,6 +17,7 @@ import org.bukkit.util.EntityTransformer;
  */
 public interface EntityTransformerBaseMock extends EntityTransformer
 {
+	@Override
 	default boolean transform(LimitedRegion arg0, int arg1, int arg2, int arg3, Entity arg4, boolean arg5)
 	{
 		// MockMC: EntityTransformer#transform

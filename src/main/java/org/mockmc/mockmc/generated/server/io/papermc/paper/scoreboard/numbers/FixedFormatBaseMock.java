@@ -16,12 +16,14 @@ import net.kyori.adventure.text.Component;
  */
 public interface FixedFormatBaseMock extends FixedFormat, NumberFormatBaseMock
 {
+	@Override
 	default Component component()
 	{
 		// MockMC: FixedFormat#component
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Component asComponent()
 	{
 		// MockMC: FixedFormat#asComponent

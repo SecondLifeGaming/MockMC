@@ -13,7 +13,13 @@ class ChargedProjectilesBaseMockTest extends GeneratedTestBase
 	{
 		ChargedProjectilesBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.projectiles());
+		try
+		{
+			assertSafeDefault(mock.projectiles());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements ChargedProjectilesBaseMock

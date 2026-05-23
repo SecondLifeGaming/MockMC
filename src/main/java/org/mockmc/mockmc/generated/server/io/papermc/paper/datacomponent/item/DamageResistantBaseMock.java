@@ -17,6 +17,7 @@ import org.bukkit.damage.DamageType;
  */
 public interface DamageResistantBaseMock extends DamageResistant
 {
+	@Override
 	default RegistryKeySet<DamageType> types()
 	{
 		// MockMC: DamageResistant#types

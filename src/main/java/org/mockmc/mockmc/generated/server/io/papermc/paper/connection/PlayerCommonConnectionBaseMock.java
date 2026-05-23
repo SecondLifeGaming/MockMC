@@ -21,25 +21,29 @@ public interface PlayerCommonConnectionBaseMock
 		extends
 			PlayerCommonConnection,
 			PluginMessageRecipientBaseMock,
-			ReadablePlayerCookieConnectionBaseMock,
-			WritablePlayerCookieConnectionBaseMock
+			WritablePlayerCookieConnectionBaseMock,
+			ReadablePlayerCookieConnectionBaseMock
 {
+	@Override
 	default void sendReportDetails(Map<String, String> arg0)
 	{
 		// MockMC: PlayerCommonConnection#sendReportDetails
 	}
 
+	@Override
 	default void sendLinks(ServerLinks arg0)
 	{
 		// MockMC: PlayerCommonConnection#sendLinks
 	}
 
+	@Override
 	default <T> T getClientOption(ClientOption<T> arg0)
 	{
 		// MockMC: PlayerCommonConnection#getClientOption
 		return null;
 	}
 
+	@Override
 	default void transfer(String arg0, int arg1)
 	{
 		// MockMC: PlayerCommonConnection#transfer

@@ -18,40 +18,47 @@ import org.bukkit.inventory.MerchantRecipe;
  */
 public interface MerchantBaseMock extends Merchant
 {
+	@Override
 	default void setRecipes(List<MerchantRecipe> arg0)
 	{
 		// MockMC: Merchant#setRecipes
 	}
 
+	@Override
 	default void setRecipe(int arg0, MerchantRecipe arg1) throws IndexOutOfBoundsException
 	{
 		// MockMC: Merchant#setRecipe
 	}
 
+	@Override
 	default boolean isTrading()
 	{
 		// MockMC: Merchant#isTrading
 		return false;
 	}
 
+	@Override
 	default HumanEntity getTrader()
 	{
 		// MockMC: Merchant#getTrader
 		return null;
 	}
 
+	@Override
 	default MerchantRecipe getRecipe(int arg0) throws IndexOutOfBoundsException
 	{
 		// MockMC: Merchant#getRecipe
 		return null;
 	}
 
+	@Override
 	default int getRecipeCount()
 	{
 		// MockMC: Merchant#getRecipeCount
 		return 0;
 	}
 
+	@Override
 	default List<MerchantRecipe> getRecipes()
 	{
 		// MockMC: Merchant#getRecipes

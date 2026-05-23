@@ -15,6 +15,7 @@ import com.velocitypowered.api.proxy.messages.ChannelIdentifier;
  */
 public interface ChannelIdentifierBaseMock extends ChannelIdentifier
 {
+	@Override
 	default String getId()
 	{
 		// MockMC: ChannelIdentifier#getId

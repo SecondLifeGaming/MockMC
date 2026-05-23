@@ -17,9 +17,11 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AnimalsBaseMock extends Animals, BreedableBaseMock
 {
+	@Override
 	default int getLoveModeTicks()
 	{
 		// MockMC: Animals#getLoveModeTicks
@@ -33,12 +35,14 @@ public interface AnimalsBaseMock extends Animals, BreedableBaseMock
 		return null;
 	}
 
+	@Override
 	default UUID getBreedCause()
 	{
 		// MockMC: Animals#getBreedCause
 		return null;
 	}
 
+	@Override
 	default void setBreedCause(UUID arg0)
 	{
 		// MockMC: Animals#setBreedCause
@@ -58,24 +62,28 @@ public interface AnimalsBaseMock extends Animals, BreedableBaseMock
 		return false;
 	}
 
+	@Override
 	default boolean isLoveMode()
 	{
 		// MockMC: Animals#isLoveMode
 		return false;
 	}
 
+	@Override
 	default boolean isBreedItem(Material arg0)
 	{
 		// MockMC: Animals#isBreedItem
 		return false;
 	}
 
+	@Override
 	default boolean isBreedItem(ItemStack arg0)
 	{
 		// MockMC: Animals#isBreedItem
 		return false;
 	}
 
+	@Override
 	default void setLoveModeTicks(int arg0)
 	{
 		// MockMC: Animals#setLoveModeTicks

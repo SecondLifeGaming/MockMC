@@ -15,6 +15,7 @@ import com.mojang.brigadier.context.CommandContext;
  */
 public interface ResultConsumerBaseMock<S> extends ResultConsumer<S>
 {
+	@Override
 	default void onCommandComplete(CommandContext<S> arg0, boolean arg1, int arg2)
 	{
 		// MockMC: ResultConsumer#onCommandComplete

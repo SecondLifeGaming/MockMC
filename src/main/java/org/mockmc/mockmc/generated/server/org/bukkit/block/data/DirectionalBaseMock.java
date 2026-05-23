@@ -17,18 +17,21 @@ import org.bukkit.block.data.Directional;
  */
 public interface DirectionalBaseMock extends Directional, BlockDataBaseMock
 {
+	@Override
 	default BlockFace getFacing()
 	{
 		// MockMC: Directional#getFacing
 		return null;
 	}
 
+	@Override
 	default Set<BlockFace> getFaces()
 	{
 		// MockMC: Directional#getFaces
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void setFacing(BlockFace arg0)
 	{
 		// MockMC: Directional#setFacing

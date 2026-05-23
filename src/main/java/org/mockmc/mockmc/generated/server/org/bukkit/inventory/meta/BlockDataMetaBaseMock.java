@@ -17,18 +17,21 @@ import org.bukkit.inventory.meta.BlockDataMeta;
  */
 public interface BlockDataMetaBaseMock extends BlockDataMeta, ItemMetaBaseMock
 {
+	@Override
 	default BlockData getBlockData(Material arg0)
 	{
 		// MockMC: BlockDataMeta#getBlockData
 		return null;
 	}
 
+	@Override
 	default boolean hasBlockData()
 	{
 		// MockMC: BlockDataMeta#hasBlockData
 		return false;
 	}
 
+	@Override
 	default void setBlockData(BlockData arg0)
 	{
 		// MockMC: BlockDataMeta#setBlockData

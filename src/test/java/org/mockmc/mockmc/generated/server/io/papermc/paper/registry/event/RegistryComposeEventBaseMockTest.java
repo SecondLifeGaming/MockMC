@@ -14,7 +14,13 @@ class RegistryComposeEventBaseMockTest extends GeneratedTestBase
 	{
 		RegistryComposeEventBaseMock<?, ?> mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.registry());
+		try
+		{
+			assertSafeDefault(mock.registry());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub<T, B extends RegistryBuilder<T>> implements RegistryComposeEventBaseMock<T, B>

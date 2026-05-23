@@ -15,54 +15,63 @@ import com.destroystokyo.paper.SkinParts;
  */
 public interface SkinPartsBaseMock extends SkinParts
 {
+	@Override
 	default boolean hasRightPantsEnabled()
 	{
 		// MockMC: SkinParts#hasRightPantsEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasRightSleeveEnabled()
 	{
 		// MockMC: SkinParts#hasRightSleeveEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasJacketEnabled()
 	{
 		// MockMC: SkinParts#hasJacketEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasLeftPantsEnabled()
 	{
 		// MockMC: SkinParts#hasLeftPantsEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasLeftSleeveEnabled()
 	{
 		// MockMC: SkinParts#hasLeftSleeveEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasCapeEnabled()
 	{
 		// MockMC: SkinParts#hasCapeEnabled
 		return false;
 	}
 
+	@Override
 	default SkinParts.Mutable mutableCopy()
 	{
 		// MockMC: SkinParts#mutableCopy
 		return null;
 	}
 
+	@Override
 	default boolean hasHatsEnabled()
 	{
 		// MockMC: SkinParts#hasHatsEnabled
 		return false;
 	}
 
+	@Override
 	default int getRaw()
 	{
 		// MockMC: SkinParts#getRaw

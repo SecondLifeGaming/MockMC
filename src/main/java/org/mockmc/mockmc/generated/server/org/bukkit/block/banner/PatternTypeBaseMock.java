@@ -17,7 +17,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface PatternTypeBaseMock extends PatternType, OldEnumBaseMock<PatternType>, KeyedBaseMock
 {
 	/**
@@ -36,6 +37,7 @@ public interface PatternTypeBaseMock extends PatternType, OldEnumBaseMock<Patter
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default String getIdentifier()
 	{

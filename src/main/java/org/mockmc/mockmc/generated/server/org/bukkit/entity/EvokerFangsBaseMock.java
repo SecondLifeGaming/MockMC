@@ -14,26 +14,31 @@ import org.bukkit.entity.LivingEntity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EvokerFangsBaseMock extends EvokerFangs, EntityBaseMock
 {
+	@Override
 	default int getAttackDelay()
 	{
 		// MockMC: EvokerFangs#getAttackDelay
 		return 0;
 	}
 
+	@Override
 	default void setAttackDelay(int arg0)
 	{
 		// MockMC: EvokerFangs#setAttackDelay
 	}
 
+	@Override
 	default LivingEntity getOwner()
 	{
 		// MockMC: EvokerFangs#getOwner
 		return null;
 	}
 
+	@Override
 	default void setOwner(LivingEntity arg0)
 	{
 		// MockMC: EvokerFangs#setOwner

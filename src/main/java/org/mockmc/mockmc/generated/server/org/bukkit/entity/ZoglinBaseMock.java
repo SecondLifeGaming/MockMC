@@ -14,16 +14,10 @@ import org.bukkit.entity.Zoglin;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ZoglinBaseMock extends Zoglin, MonsterBaseMock, AgeableBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Zoglin#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -38,10 +32,18 @@ public interface ZoglinBaseMock extends Zoglin, MonsterBaseMock, AgeableBaseMock
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Zoglin#getLeashHolder
+		return null;
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2")
 	default boolean isBaby()
 	{
@@ -53,6 +55,7 @@ public interface ZoglinBaseMock extends Zoglin, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default void setBaby(boolean arg0)
 	{

@@ -18,7 +18,8 @@ import org.bukkit.material.SimpleAttachableMaterialData;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface SimpleAttachableMaterialDataBaseMock extends AttachableBaseMock
 {
 	/**

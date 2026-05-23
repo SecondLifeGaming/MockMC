@@ -15,12 +15,14 @@ import java.lang.annotation.Annotation;
  */
 public interface NestedSettingBaseMock extends NestedSetting
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: NestedSetting#annotationType
 		return null;
 	}
 
+	@Override
 	default String[] value()
 	{
 		// MockMC: NestedSetting#value

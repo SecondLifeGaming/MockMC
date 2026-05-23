@@ -16,34 +16,39 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedE
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LlamaBaseMock extends Llama, RangedEntityBaseMock, ChestedHorseBaseMock
 {
+	@Override
 	default void setColor(Llama.Color arg0)
 	{
 		// MockMC: Llama#setColor
 	}
 
+	@Override
 	default Llama getCaravanTail()
 	{
 		// MockMC: Llama#getCaravanTail
 		return null;
 	}
 
+	@Override
 	default void setStrength(int arg0)
 	{
 		// MockMC: Llama#setStrength
 	}
 
+	@Override
 	default void joinCaravan(Llama arg0)
 	{
 		// MockMC: Llama#joinCaravan
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Llama#setLeashHolder
+		// MockMC: Llama#isLeashed
 		return false;
 	}
 
@@ -54,23 +59,6 @@ public interface LlamaBaseMock extends Llama, RangedEntityBaseMock, ChestedHorse
 		return null;
 	}
 
-	default boolean inCaravan()
-	{
-		// MockMC: Llama#inCaravan
-		return false;
-	}
-
-	default Llama getCaravanHead()
-	{
-		// MockMC: Llama#getCaravanHead
-		return null;
-	}
-
-	default void leaveCaravan()
-	{
-		// MockMC: Llama#leaveCaravan
-	}
-
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
@@ -78,12 +66,41 @@ public interface LlamaBaseMock extends Llama, RangedEntityBaseMock, ChestedHorse
 		return null;
 	}
 
+	@Override
+	default boolean inCaravan()
+	{
+		// MockMC: Llama#inCaravan
+		return false;
+	}
+
+	@Override
+	default Llama getCaravanHead()
+	{
+		// MockMC: Llama#getCaravanHead
+		return null;
+	}
+
+	@Override
+	default void leaveCaravan()
+	{
+		// MockMC: Llama#leaveCaravan
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Llama#setLeashHolder
+		return false;
+	}
+
+	@Override
 	default int getStrength()
 	{
 		// MockMC: Llama#getStrength
 		return 0;
 	}
 
+	@Override
 	default Llama.Color getColor()
 	{
 		// MockMC: Llama#getColor
@@ -91,12 +108,6 @@ public interface LlamaBaseMock extends Llama, RangedEntityBaseMock, ChestedHorse
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Llama#isLeashed
-		return false;
-	}
-
 	default boolean hasCaravanTail()
 	{
 		// MockMC: Llama#hasCaravanTail

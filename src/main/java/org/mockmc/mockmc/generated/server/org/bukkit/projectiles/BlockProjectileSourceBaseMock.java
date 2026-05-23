@@ -16,6 +16,7 @@ import org.bukkit.projectiles.BlockProjectileSource;
  */
 public interface BlockProjectileSourceBaseMock extends BlockProjectileSource, ProjectileSourceBaseMock
 {
+	@Override
 	default Block getBlock()
 	{
 		// MockMC: BlockProjectileSource#getBlock

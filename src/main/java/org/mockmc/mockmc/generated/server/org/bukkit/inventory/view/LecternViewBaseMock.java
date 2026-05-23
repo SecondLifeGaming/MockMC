@@ -17,11 +17,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface LecternViewBaseMock extends LecternView, InventoryViewBaseMock
 {
+	@Override
 	default void setPage(int arg0)
 	{
 		// MockMC: LecternView#setPage
 	}
 
+	@Override
 	default int getPage()
 	{
 		// MockMC: LecternView#getPage

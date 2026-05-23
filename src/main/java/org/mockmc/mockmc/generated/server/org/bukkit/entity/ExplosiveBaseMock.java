@@ -13,25 +13,30 @@ import org.bukkit.entity.Explosive;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ExplosiveBaseMock extends Explosive, EntityBaseMock
 {
+	@Override
 	default boolean isIncendiary()
 	{
 		// MockMC: Explosive#isIncendiary
 		return false;
 	}
 
+	@Override
 	default void setIsIncendiary(boolean arg0)
 	{
 		// MockMC: Explosive#setIsIncendiary
 	}
 
+	@Override
 	default void setYield(float arg0)
 	{
 		// MockMC: Explosive#setYield
 	}
 
+	@Override
 	default float getYield()
 	{
 		// MockMC: Explosive#getYield

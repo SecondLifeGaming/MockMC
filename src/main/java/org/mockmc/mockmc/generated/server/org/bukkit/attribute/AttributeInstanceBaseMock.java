@@ -24,6 +24,7 @@ public interface AttributeInstanceBaseMock extends AttributeInstance
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default AttributeModifier getModifier(UUID arg0)
 	{
@@ -31,51 +32,60 @@ public interface AttributeInstanceBaseMock extends AttributeInstance
 		return null;
 	}
 
+	@Override
 	default AttributeModifier getModifier(Key arg0)
 	{
 		// MockMC: AttributeInstance#getModifier
 		return null;
 	}
 
+	@Override
 	default void addModifier(AttributeModifier arg0)
 	{
 		// MockMC: AttributeInstance#addModifier
 	}
 
+	@Override
 	default double getDefaultValue()
 	{
 		// MockMC: AttributeInstance#getDefaultValue
 		return 0.0d;
 	}
 
+	@Override
 	default void addTransientModifier(AttributeModifier arg0)
 	{
 		// MockMC: AttributeInstance#addTransientModifier
 	}
 
+	@Override
 	default void setBaseValue(double arg0)
 	{
 		// MockMC: AttributeInstance#setBaseValue
 	}
 
+	@Override
 	default double getBaseValue()
 	{
 		// MockMC: AttributeInstance#getBaseValue
 		return 0.0d;
 	}
 
+	@Override
 	default Attribute getAttribute()
 	{
 		// MockMC: AttributeInstance#getAttribute
 		return null;
 	}
 
+	@Override
 	default double getValue()
 	{
 		// MockMC: AttributeInstance#getValue
 		return 0.0d;
 	}
 
+	@Override
 	default void removeModifier(Key arg0)
 	{
 		// MockMC: AttributeInstance#removeModifier
@@ -85,17 +95,20 @@ public interface AttributeInstanceBaseMock extends AttributeInstance
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void removeModifier(UUID arg0)
 	{
 		// MockMC: AttributeInstance#removeModifier
 	}
 
+	@Override
 	default void removeModifier(AttributeModifier arg0)
 	{
 		// MockMC: AttributeInstance#removeModifier
 	}
 
+	@Override
 	default Collection<AttributeModifier> getModifiers()
 	{
 		// MockMC: AttributeInstance#getModifiers

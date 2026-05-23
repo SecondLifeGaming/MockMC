@@ -22,6 +22,7 @@ public interface ChickenVariantRegistryEntryBuilderBaseMock
 			RegistryBuilderBaseMock<Chicken.Variant>,
 			ChickenVariantRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Builder model(
 			io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Model arg0)
 	{
@@ -29,6 +30,7 @@ public interface ChickenVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Builder clientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -36,6 +38,7 @@ public interface ChickenVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.ChickenVariantRegistryEntry.Builder babyClientTextureAsset(
 			ClientTextureAsset arg0)
 	{

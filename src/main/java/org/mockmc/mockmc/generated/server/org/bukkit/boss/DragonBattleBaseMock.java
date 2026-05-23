@@ -22,92 +22,108 @@ import org.bukkit.entity.EnderDragon;
  */
 public interface DragonBattleBaseMock extends DragonBattle
 {
+	@Override
 	default int getGatewayCount()
 	{
 		// MockMC: DragonBattle#getGatewayCount
 		return 0;
 	}
 
+	@Override
 	default boolean initiateRespawn(Collection<EnderCrystal> arg0)
 	{
 		// MockMC: DragonBattle#initiateRespawn
 		return false;
 	}
 
+	@Override
 	default void initiateRespawn()
 	{
 		// MockMC: DragonBattle#initiateRespawn
 	}
 
+	@Override
 	default void resetCrystals()
 	{
 		// MockMC: DragonBattle#resetCrystals
 	}
 
+	@Override
 	default void spawnNewGateway(Position arg0)
 	{
 		// MockMC: DragonBattle#spawnNewGateway
 	}
 
+	@Override
 	default boolean spawnNewGateway()
 	{
 		// MockMC: DragonBattle#spawnNewGateway
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenPreviouslyKilled()
 	{
 		// MockMC: DragonBattle#hasBeenPreviouslyKilled
 		return false;
 	}
 
+	@Override
 	default List<EnderCrystal> getRespawnCrystals()
 	{
 		// MockMC: DragonBattle#getRespawnCrystals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default EnderDragon getEnderDragon()
 	{
 		// MockMC: DragonBattle#getEnderDragon
 		return null;
 	}
 
+	@Override
 	default boolean setRespawnPhase(DragonBattle.RespawnPhase arg0)
 	{
 		// MockMC: DragonBattle#setRespawnPhase
 		return false;
 	}
 
+	@Override
 	default DragonBattle.RespawnPhase getRespawnPhase()
 	{
 		// MockMC: DragonBattle#getRespawnPhase
 		return null;
 	}
 
+	@Override
 	default Location getEndPortalLocation()
 	{
 		// MockMC: DragonBattle#getEndPortalLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default BossBar getBossBar()
 	{
 		// MockMC: DragonBattle#getBossBar
 		return null;
 	}
 
+	@Override
 	default void setPreviouslyKilled(boolean arg0)
 	{
 		// MockMC: DragonBattle#setPreviouslyKilled
 	}
 
+	@Override
 	default List<EnderCrystal> getHealingCrystals()
 	{
 		// MockMC: DragonBattle#getHealingCrystals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean generateEndPortal(boolean arg0)
 	{
 		// MockMC: DragonBattle#generateEndPortal

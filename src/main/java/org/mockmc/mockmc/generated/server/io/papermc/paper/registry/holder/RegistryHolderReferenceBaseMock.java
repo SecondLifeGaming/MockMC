@@ -16,6 +16,7 @@ import io.papermc.paper.registry.holder.RegistryHolder;
  */
 public interface RegistryHolderReferenceBaseMock<API, ENTRY> extends RegistryHolder.Reference<API, ENTRY>
 {
+	@Override
 	default TypedKey<API> key()
 	{
 		// MockMC: Reference#key

@@ -21,24 +21,28 @@ public interface DamageReductionBuilderBaseMock
 			DamageReduction.Builder,
 			DataComponentBuilderBaseMock<DamageReduction>
 {
+	@Override
 	default DamageReduction.Builder base(float arg0)
 	{
 		// MockMC: Builder#base
 		return null;
 	}
 
+	@Override
 	default DamageReduction.Builder horizontalBlockingAngle(float arg0)
 	{
 		// MockMC: Builder#horizontalBlockingAngle
 		return null;
 	}
 
+	@Override
 	default DamageReduction.Builder factor(float arg0)
 	{
 		// MockMC: Builder#factor
 		return null;
 	}
 
+	@Override
 	default DamageReduction.Builder type(RegistryKeySet<DamageType> arg0)
 	{
 		// MockMC: Builder#type

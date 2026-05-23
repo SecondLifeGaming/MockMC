@@ -20,57 +20,67 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface ToolComponentBaseMock extends ToolComponent, ConfigurationSerializableBaseMock
 {
+	@Override
 	default ToolComponent.ToolRule addRule(Material arg0, Float arg1, Boolean arg2)
 	{
 		// MockMC: ToolComponent#addRule
 		return null;
 	}
 
+	@Override
 	default ToolComponent.ToolRule addRule(Collection<Material> arg0, Float arg1, Boolean arg2)
 	{
 		// MockMC: ToolComponent#addRule
 		return null;
 	}
 
+	@Override
 	default ToolComponent.ToolRule addRule(Tag<Material> arg0, Float arg1, Boolean arg2)
 	{
 		// MockMC: ToolComponent#addRule
 		return null;
 	}
 
+	@Override
 	default boolean removeRule(ToolComponent.ToolRule arg0)
 	{
 		// MockMC: ToolComponent#removeRule
 		return false;
 	}
 
+	@Override
 	default List<ToolComponent.ToolRule> getRules()
 	{
 		// MockMC: ToolComponent#getRules
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setDefaultMiningSpeed(float arg0)
 	{
 		// MockMC: ToolComponent#setDefaultMiningSpeed
 	}
 
+	@Override
 	default float getDefaultMiningSpeed()
 	{
 		// MockMC: ToolComponent#getDefaultMiningSpeed
 		return 0.0f;
 	}
 
+	@Override
 	default void setDamagePerBlock(int arg0)
 	{
 		// MockMC: ToolComponent#setDamagePerBlock
 	}
 
+	@Override
 	default void setRules(List<ToolComponent.ToolRule> arg0)
 	{
 		// MockMC: ToolComponent#setRules
 	}
 
+	@Override
 	default int getDamagePerBlock()
 	{
 		// MockMC: ToolComponent#getDamagePerBlock

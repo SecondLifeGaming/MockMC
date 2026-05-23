@@ -692,8 +692,9 @@ public class BaseMockGenerator implements DataGenerator {
                 .addModifiers(Modifier.PUBLIC, Modifier.DEFAULT);
         // Always add @Override for mirrored methods if we are in an interface (which we are)
         // and the method is actually overriding something. 
-        // For simplicity and to satisfy the linter, we add it if the method exists in any super-interface.
-        if (isOverriding(m, clazz)) {
+        // For simplicity and to satisfy the linter, we add it if the method exists in any super-interface,
+        // or if clazz is an interface (since the generated mock extends it directly).
+        if (clazz.isInterface() || isOverriding(m, clazz)) {
             builder.addAnnotation(Override.class);
         }
 
@@ -977,6 +978,7 @@ public class BaseMockGenerator implements DataGenerator {
             } else {
                 suppressions.add("deprecation");
             }
+            suppressions.add("java:S1133");
         }
     }
 
@@ -1060,24 +1062,8 @@ public class BaseMockGenerator implements DataGenerator {
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
         if (name.equals("co.aikar.timings.Timing")) return false;
-        
-        // Exclude internal classes that exist in the server jar but not in paper-api
-        if (name.startsWith("com.destroystokyo.paper.loottable.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.source.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.type.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.configuration.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.storage.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.entrypoint.")) return false;
-        if (name.equals("io.papermc.paper.plugin.provider.ProviderStatusHolder")) return false;
-        if (name.equals("io.papermc.paper.plugin.provider.PluginProvider")) return false;
-        if (name.equals("com.destroystokyo.paper.profile.SharedPlayerProfile")) return false;
-        if (name.equals("com.destroystokyo.paper.entity.CraftRangedEntity")) return false;
-        if (name.equals("io.papermc.paper.world.flag.PaperFeatureDependent")) return false;
-        if (name.equals("io.papermc.paper.util.Holderable")) return false;
-        if (name.equals("io.papermc.paper.util.SafeAutoClosable")) return false;
-        if (name.equals("io.papermc.paper.commands.PaperCommandBlockHolder")) return false;
+        if (org.mockmc.metaminer.util.ClassExclusions.isExcluded(name)) return false;
 
-        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith(BRIGADIER_PACKAGE))
-                && !name.contains(".craftbukkit.");
+        return org.mockmc.metaminer.util.ClassExclusions.isGeneratablePackage(name);
     }
 }

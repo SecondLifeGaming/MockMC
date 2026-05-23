@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface SuspiciousStewEffectsBaseMock extends SuspiciousStewEffects
 {
+	@Override
 	default List<SuspiciousEffectEntry> effects()
 	{
 		// MockMC: SuspiciousStewEffects#effects

@@ -15,16 +15,18 @@ import org.bukkit.entity.Sheep;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EvokerBaseMock extends Evoker, SpellcasterBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: Evoker#getLeashHolder
-		return null;
+		// MockMC: Evoker#setLeashHolder
+		return false;
 	}
 
+	@Override
 	default void setWololoTarget(Sheep arg0)
 	{
 		// MockMC: Evoker#setWololoTarget
@@ -34,6 +36,7 @@ public interface EvokerBaseMock extends Evoker, SpellcasterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11.2")
 	default Evoker.Spell getCurrentSpell()
 	{
@@ -42,32 +45,34 @@ public interface EvokerBaseMock extends Evoker, SpellcasterBaseMock
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Evoker#setLeashHolder
+		// MockMC: Evoker#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Evoker#getLeashHolder
+		return null;
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11.2")
 	default void setCurrentSpell(Evoker.Spell arg0)
 	{
 		// MockMC: Evoker#setCurrentSpell
 	}
 
+	@Override
 	default Sheep getWololoTarget()
 	{
 		// MockMC: Evoker#getWololoTarget
 		return null;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Evoker#isLeashed
-		return false;
 	}
 }

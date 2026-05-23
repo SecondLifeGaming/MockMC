@@ -28,6 +28,7 @@ public interface JukeboxSongRegistryEntryBuilderBaseMock
 			RegistryBuilderBaseMock<JukeboxSong>,
 			JukeboxSongRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(
 			RegistryHolder<Sound, SoundEventRegistryEntry> arg0)
 	{
@@ -35,6 +36,7 @@ public interface JukeboxSongRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(
 			Consumer<RegistryBuilderFactory<Sound, ? extends SoundEventRegistryEntry.Builder>> arg0)
 	{
@@ -42,24 +44,28 @@ public interface JukeboxSongRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(TypedKey<Sound> arg0)
 	{
 		// MockMC: Builder#soundEvent
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder lengthInSeconds(float arg0)
 	{
 		// MockMC: Builder#lengthInSeconds
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder comparatorOutput(int arg0)
 	{
 		// MockMC: Builder#comparatorOutput
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder description(Component arg0)
 	{
 		// MockMC: Builder#description

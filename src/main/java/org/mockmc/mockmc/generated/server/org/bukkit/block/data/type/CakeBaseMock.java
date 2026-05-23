@@ -16,18 +16,21 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface CakeBaseMock extends Cake, BlockDataBaseMock
 {
+	@Override
 	default int getBites()
 	{
 		// MockMC: Cake#getBites
 		return 0;
 	}
 
+	@Override
 	default int getMaximumBites()
 	{
 		// MockMC: Cake#getMaximumBites
 		return 0;
 	}
 
+	@Override
 	default void setBites(int arg0)
 	{
 		// MockMC: Cake#setBites

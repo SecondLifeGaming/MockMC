@@ -16,12 +16,14 @@ import java.util.Map;
  */
 public interface MapDecorationsBaseMock extends MapDecorations
 {
+	@Override
 	default MapDecorations.DecorationEntry decoration(String arg0)
 	{
 		// MockMC: MapDecorations#decoration
 		return null;
 	}
 
+	@Override
 	default Map<String, MapDecorations.DecorationEntry> decorations()
 	{
 		// MockMC: MapDecorations#decorations

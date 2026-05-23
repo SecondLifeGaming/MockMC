@@ -17,11 +17,13 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
  */
 public interface PluginMessageListenerBaseMock extends PluginMessageListener
 {
+	@Override
 	default void onPluginMessageReceived(String arg0, PlayerConnection arg1, byte[] arg2)
 	{
 		// MockMC: PluginMessageListener#onPluginMessageReceived
 	}
 
+	@Override
 	default void onPluginMessageReceived(String arg0, Player arg1, byte[] arg2)
 	{
 		// MockMC: PluginMessageListener#onPluginMessageReceived

@@ -18,30 +18,35 @@ import org.bukkit.damage.DeathMessageType;
  */
 public interface DamageTypeRegistryEntryBaseMock extends DamageTypeRegistryEntry
 {
+	@Override
 	default DeathMessageType deathMessageType()
 	{
 		// MockMC: DamageTypeRegistryEntry#deathMessageType
 		return null;
 	}
 
+	@Override
 	default String messageId()
 	{
 		// MockMC: DamageTypeRegistryEntry#messageId
 		return "";
 	}
 
+	@Override
 	default DamageEffect damageEffect()
 	{
 		// MockMC: DamageTypeRegistryEntry#damageEffect
 		return null;
 	}
 
+	@Override
 	default DamageScaling damageScaling()
 	{
 		// MockMC: DamageTypeRegistryEntry#damageScaling
 		return null;
 	}
 
+	@Override
 	default float exhaustion()
 	{
 		// MockMC: DamageTypeRegistryEntry#exhaustion

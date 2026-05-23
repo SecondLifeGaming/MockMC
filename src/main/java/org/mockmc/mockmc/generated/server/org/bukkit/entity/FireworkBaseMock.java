@@ -17,32 +17,38 @@ import org.bukkit.inventory.meta.FireworkMeta;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 {
+	@Override
 	default LivingEntity getAttachedTo()
 	{
 		// MockMC: Firework#getAttachedTo
 		return null;
 	}
 
+	@Override
 	default int getTicksToDetonate()
 	{
 		// MockMC: Firework#getTicksToDetonate
 		return 0;
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: Firework#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void detonate()
 	{
 		// MockMC: Firework#detonate
 	}
 
+	@Override
 	default FireworkMeta getFireworkMeta()
 	{
 		// MockMC: Firework#getFireworkMeta
@@ -53,6 +59,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default LivingEntity getBoostedEntity()
 	{
@@ -60,6 +67,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 		return null;
 	}
 
+	@Override
 	default UUID getSpawningEntity()
 	{
 		// MockMC: Firework#getSpawningEntity
@@ -70,6 +78,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default int getLife()
 	{
@@ -81,6 +90,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default int getMaxLife()
 	{
@@ -88,12 +98,14 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getTicksFlown()
 	{
 		// MockMC: Firework#getTicksFlown
 		return 0;
 	}
 
+	@Override
 	default boolean isDetonated()
 	{
 		// MockMC: Firework#isDetonated
@@ -104,6 +116,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean setLife(int arg0)
 	{
@@ -111,6 +124,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 		return false;
 	}
 
+	@Override
 	default void setShotAtAngle(boolean arg0)
 	{
 		// MockMC: Firework#setShotAtAngle
@@ -120,6 +134,7 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean setMaxLife(int arg0)
 	{
@@ -127,33 +142,39 @@ public interface FireworkBaseMock extends Firework, ProjectileBaseMock
 		return false;
 	}
 
+	@Override
 	default boolean isShotAtAngle()
 	{
 		// MockMC: Firework#isShotAtAngle
 		return false;
 	}
 
+	@Override
 	default boolean setAttachedTo(LivingEntity arg0)
 	{
 		// MockMC: Firework#setAttachedTo
 		return false;
 	}
 
+	@Override
 	default void setFireworkMeta(FireworkMeta arg0)
 	{
 		// MockMC: Firework#setFireworkMeta
 	}
 
+	@Override
 	default void setTicksFlown(int arg0)
 	{
 		// MockMC: Firework#setTicksFlown
 	}
 
+	@Override
 	default void setTicksToDetonate(int arg0)
 	{
 		// MockMC: Firework#setTicksToDetonate
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: Firework#setItem

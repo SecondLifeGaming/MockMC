@@ -15,11 +15,13 @@ import io.papermc.paper.plugin.lifecycle.event.registrar.PaperRegistrar;
  */
 public interface PaperRegistrarBaseMock<O extends LifecycleEventOwner> extends PaperRegistrar<O>, RegistrarBaseMock
 {
+	@Override
 	default void invalidate()
 	{
 		// MockMC: PaperRegistrar#invalidate
 	}
 
+	@Override
 	default void setCurrentContext(O arg0)
 	{
 		// MockMC: PaperRegistrar#setCurrentContext

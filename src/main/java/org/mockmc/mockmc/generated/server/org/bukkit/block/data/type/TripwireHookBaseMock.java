@@ -16,6 +16,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface TripwireHookBaseMock extends TripwireHook, AttachableBaseMock, PowerableBaseMock, DirectionalBaseMock
+public interface TripwireHookBaseMock extends TripwireHook, AttachableBaseMock, DirectionalBaseMock, PowerableBaseMock
 {
 }

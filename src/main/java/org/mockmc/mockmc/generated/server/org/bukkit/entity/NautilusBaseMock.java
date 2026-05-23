@@ -14,16 +14,10 @@ import org.bukkit.entity.Nautilus;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface NautilusBaseMock extends Nautilus, AbstractNautilusBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Nautilus#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface NautilusBaseMock extends Nautilus, AbstractNautilusBaseMock
 	{
 		// MockMC: Nautilus#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Nautilus#getLeashHolder
+		return null;
 	}
 }

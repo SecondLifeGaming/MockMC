@@ -16,34 +16,40 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface FoodComponentBaseMock extends FoodComponent, ConfigurationSerializableBaseMock
 {
+	@Override
 	default void setSaturation(float arg0)
 	{
 		// MockMC: FoodComponent#setSaturation
 	}
 
+	@Override
 	default void setNutrition(int arg0)
 	{
 		// MockMC: FoodComponent#setNutrition
 	}
 
+	@Override
 	default float getSaturation()
 	{
 		// MockMC: FoodComponent#getSaturation
 		return 0.0f;
 	}
 
+	@Override
 	default boolean canAlwaysEat()
 	{
 		// MockMC: FoodComponent#canAlwaysEat
 		return false;
 	}
 
+	@Override
 	default int getNutrition()
 	{
 		// MockMC: FoodComponent#getNutrition
 		return 0;
 	}
 
+	@Override
 	default void setCanAlwaysEat(boolean arg0)
 	{
 		// MockMC: FoodComponent#setCanAlwaysEat

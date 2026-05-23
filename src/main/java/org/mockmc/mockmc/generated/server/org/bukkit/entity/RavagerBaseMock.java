@@ -14,30 +14,14 @@ import org.bukkit.entity.Ravager;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface RavagerBaseMock extends Ravager, RaiderBaseMock
 {
+	@Override
 	default void setAttackTicks(int arg0)
 	{
 		// MockMC: Ravager#setAttackTicks
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Ravager#getLeashHolder
-		return null;
-	}
-
-	default int getAttackTicks()
-	{
-		// MockMC: Ravager#getAttackTicks
-		return 0;
-	}
-
-	default void setRoarTicks(int arg0)
-	{
-		// MockMC: Ravager#setRoarTicks
 	}
 
 	@Override
@@ -47,9 +31,17 @@ public interface RavagerBaseMock extends Ravager, RaiderBaseMock
 		return false;
 	}
 
-	default void setStunnedTicks(int arg0)
+	@Override
+	default int getAttackTicks()
 	{
-		// MockMC: Ravager#setStunnedTicks
+		// MockMC: Ravager#getAttackTicks
+		return 0;
+	}
+
+	@Override
+	default void setRoarTicks(int arg0)
+	{
+		// MockMC: Ravager#setRoarTicks
 	}
 
 	@Override
@@ -59,12 +51,27 @@ public interface RavagerBaseMock extends Ravager, RaiderBaseMock
 		return false;
 	}
 
+	@Override
+	default void setStunnedTicks(int arg0)
+	{
+		// MockMC: Ravager#setStunnedTicks
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Ravager#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default int getStunnedTicks()
 	{
 		// MockMC: Ravager#getStunnedTicks
 		return 0;
 	}
 
+	@Override
 	default int getRoarTicks()
 	{
 		// MockMC: Ravager#getRoarTicks

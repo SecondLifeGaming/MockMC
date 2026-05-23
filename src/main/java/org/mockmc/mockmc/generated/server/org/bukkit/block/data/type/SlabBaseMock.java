@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface SlabBaseMock extends Slab, WaterloggedBaseMock
 {
+	@Override
 	default Slab.Type getType()
 	{
 		// MockMC: Slab#getType
 		return null;
 	}
 
+	@Override
 	default void setType(Slab.Type arg0)
 	{
 		// MockMC: Slab#setType

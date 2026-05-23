@@ -14,6 +14,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CalibratedSculkSensorBaseMock extends CalibratedSculkSensor, SculkSensorBaseMock, DirectionalBaseMock
+public interface CalibratedSculkSensorBaseMock extends CalibratedSculkSensor, DirectionalBaseMock, SculkSensorBaseMock
 {
 }

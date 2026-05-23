@@ -15,12 +15,14 @@ import org.bukkit.block.data.Attachable;
  */
 public interface AttachableBaseMock extends Attachable, BlockDataBaseMock
 {
+	@Override
 	default boolean isAttached()
 	{
 		// MockMC: Attachable#isAttached
 		return false;
 	}
 
+	@Override
 	default void setAttached(boolean arg0)
 	{
 		// MockMC: Attachable#setAttached

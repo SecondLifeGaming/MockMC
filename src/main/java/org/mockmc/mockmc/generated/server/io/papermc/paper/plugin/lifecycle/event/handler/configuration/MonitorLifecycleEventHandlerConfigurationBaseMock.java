@@ -20,6 +20,7 @@ public interface MonitorLifecycleEventHandlerConfigurationBaseMock<O extends Lif
 			MonitorLifecycleEventHandlerConfiguration<O>,
 			LifecycleEventHandlerConfigurationBaseMock<O>
 {
+	@Override
 	default MonitorLifecycleEventHandlerConfiguration<O> monitor()
 	{
 		// MockMC: MonitorLifecycleEventHandlerConfiguration#monitor

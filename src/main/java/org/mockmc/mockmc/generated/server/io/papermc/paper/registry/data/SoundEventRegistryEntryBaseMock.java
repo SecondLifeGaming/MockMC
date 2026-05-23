@@ -16,12 +16,14 @@ import net.kyori.adventure.key.Key;
  */
 public interface SoundEventRegistryEntryBaseMock extends SoundEventRegistryEntry
 {
+	@Override
 	default Key location()
 	{
 		// MockMC: SoundEventRegistryEntry#location
 		return null;
 	}
 
+	@Override
 	default Float fixedRange()
 	{
 		// MockMC: SoundEventRegistryEntry#fixedRange

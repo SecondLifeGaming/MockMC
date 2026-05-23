@@ -17,6 +17,7 @@ import org.bukkit.inventory.JukeboxInventory;
  */
 public interface JukeboxInventoryBaseMock extends JukeboxInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getRecord()
 	{
 		// MockMC: JukeboxInventory#getRecord
@@ -30,6 +31,7 @@ public interface JukeboxInventoryBaseMock extends JukeboxInventory, InventoryBas
 		return null;
 	}
 
+	@Override
 	default void setRecord(ItemStack arg0)
 	{
 		// MockMC: JukeboxInventory#setRecord

@@ -21,12 +21,14 @@ public interface ChargedProjectilesBuilderBaseMock
 			ChargedProjectiles.Builder,
 			DataComponentBuilderBaseMock<ChargedProjectiles>
 {
+	@Override
 	default ChargedProjectiles.Builder addAll(List<ItemStack> arg0)
 	{
 		// MockMC: Builder#addAll
 		return null;
 	}
 
+	@Override
 	default ChargedProjectiles.Builder add(ItemStack arg0)
 	{
 		// MockMC: Builder#add

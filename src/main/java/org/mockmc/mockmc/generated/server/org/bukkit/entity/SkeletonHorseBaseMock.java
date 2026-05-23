@@ -14,20 +14,22 @@ import org.bukkit.entity.SkeletonHorse;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SkeletonHorseBaseMock extends SkeletonHorse, AbstractHorseBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: SkeletonHorse#getLeashHolder
-		return null;
+		// MockMC: SkeletonHorse#setLeashHolder
+		return false;
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isTrap()
 	{
@@ -39,29 +41,11 @@ public interface SkeletonHorseBaseMock extends SkeletonHorse, AbstractHorseBaseM
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setTrap(boolean arg0)
 	{
 		// MockMC: SkeletonHorse#setTrap
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: SkeletonHorse#setLeashHolder
-		return false;
-	}
-
-	default boolean isTrapped()
-	{
-		// MockMC: SkeletonHorse#isTrapped
-		return false;
-	}
-
-	default int getTrapTime()
-	{
-		// MockMC: SkeletonHorse#getTrapTime
-		return 0;
 	}
 
 	@Override
@@ -71,11 +55,34 @@ public interface SkeletonHorseBaseMock extends SkeletonHorse, AbstractHorseBaseM
 		return false;
 	}
 
+	@Override
+	default boolean isTrapped()
+	{
+		// MockMC: SkeletonHorse#isTrapped
+		return false;
+	}
+
+	@Override
+	default int getTrapTime()
+	{
+		// MockMC: SkeletonHorse#getTrapTime
+		return 0;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: SkeletonHorse#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setTrapTime(int arg0)
 	{
 		// MockMC: SkeletonHorse#setTrapTime
 	}
 
+	@Override
 	default void setTrapped(boolean arg0)
 	{
 		// MockMC: SkeletonHorse#setTrapped

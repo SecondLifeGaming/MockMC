@@ -16,54 +16,63 @@ import net.kyori.adventure.key.Key;
  */
 public interface KineticWeaponBaseMock extends KineticWeapon
 {
+	@Override
 	default Key hitSound()
 	{
 		// MockMC: KineticWeapon#hitSound
 		return null;
 	}
 
+	@Override
 	default float damageMultiplier()
 	{
 		// MockMC: KineticWeapon#damageMultiplier
 		return 0.0f;
 	}
 
+	@Override
 	default KineticWeapon.Condition damageConditions()
 	{
 		// MockMC: KineticWeapon#damageConditions
 		return null;
 	}
 
+	@Override
 	default int delayTicks()
 	{
 		// MockMC: KineticWeapon#delayTicks
 		return 0;
 	}
 
+	@Override
 	default KineticWeapon.Condition knockbackConditions()
 	{
 		// MockMC: KineticWeapon#knockbackConditions
 		return null;
 	}
 
+	@Override
 	default int contactCooldownTicks()
 	{
 		// MockMC: KineticWeapon#contactCooldownTicks
 		return 0;
 	}
 
+	@Override
 	default Key sound()
 	{
 		// MockMC: KineticWeapon#sound
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Condition dismountConditions()
 	{
 		// MockMC: KineticWeapon#dismountConditions
 		return null;
 	}
 
+	@Override
 	default float forwardMovement()
 	{
 		// MockMC: KineticWeapon#forwardMovement

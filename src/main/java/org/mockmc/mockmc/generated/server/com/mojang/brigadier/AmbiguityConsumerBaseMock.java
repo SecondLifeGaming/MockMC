@@ -16,6 +16,7 @@ import java.util.Collection;
  */
 public interface AmbiguityConsumerBaseMock<S> extends AmbiguityConsumer<S>
 {
+	@Override
 	default void ambiguous(CommandNode<S> arg0, CommandNode<S> arg1, CommandNode<S> arg2, Collection<String> arg3)
 	{
 		// MockMC: AmbiguityConsumer#ambiguous

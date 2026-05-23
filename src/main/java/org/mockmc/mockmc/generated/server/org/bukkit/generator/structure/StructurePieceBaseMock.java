@@ -16,6 +16,7 @@ import org.bukkit.util.BoundingBox;
  */
 public interface StructurePieceBaseMock extends StructurePiece
 {
+	@Override
 	default BoundingBox getBoundingBox()
 	{
 		// MockMC: StructurePiece#getBoundingBox

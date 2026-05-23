@@ -14,25 +14,14 @@ import org.bukkit.entity.Rabbit;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface RabbitBaseMock extends Rabbit, AnimalsBaseMock
 {
+	@Override
 	default void setRabbitType(Rabbit.Type arg0)
 	{
 		// MockMC: Rabbit#setRabbitType
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Rabbit#getLeashHolder
-		return null;
-	}
-
-	default int getMoreCarrotTicks()
-	{
-		// MockMC: Rabbit#getMoreCarrotTicks
-		return 0;
 	}
 
 	@Override
@@ -42,21 +31,37 @@ public interface RabbitBaseMock extends Rabbit, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Rabbit#isLeashed
+		return false;
+	}
+
+	@Override
+	default int getMoreCarrotTicks()
+	{
+		// MockMC: Rabbit#getMoreCarrotTicks
+		return 0;
+	}
+
+	@Override
 	default Rabbit.Type getRabbitType()
 	{
 		// MockMC: Rabbit#getRabbitType
 		return null;
 	}
 
-	default void setMoreCarrotTicks(int arg0)
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: Rabbit#setMoreCarrotTicks
+		// MockMC: Rabbit#getLeashHolder
+		return null;
 	}
 
 	@Override
-	default boolean isLeashed()
+	default void setMoreCarrotTicks(int arg0)
 	{
-		// MockMC: Rabbit#isLeashed
-		return false;
+		// MockMC: Rabbit#setMoreCarrotTicks
 	}
 }

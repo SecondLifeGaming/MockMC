@@ -15,18 +15,21 @@ import io.papermc.paper.datacomponent.item.UseEffects;
  */
 public interface UseEffectsBaseMock extends UseEffects
 {
+	@Override
 	default float speedMultiplier()
 	{
 		// MockMC: UseEffects#speedMultiplier
 		return 0.0f;
 	}
 
+	@Override
 	default boolean canSprint()
 	{
 		// MockMC: UseEffects#canSprint
 		return false;
 	}
 
+	@Override
 	default boolean interactVibrations()
 	{
 		// MockMC: UseEffects#interactVibrations

@@ -21,12 +21,14 @@ public interface ItemEnchantmentsBuilderBaseMock
 			ItemEnchantments.Builder,
 			DataComponentBuilderBaseMock<ItemEnchantments>
 {
+	@Override
 	default ItemEnchantments.Builder add(Enchantment arg0, int arg1)
 	{
 		// MockMC: Builder#add
 		return null;
 	}
 
+	@Override
 	default ItemEnchantments.Builder addAll(Map<Enchantment, Integer> arg0)
 	{
 		// MockMC: Builder#addAll

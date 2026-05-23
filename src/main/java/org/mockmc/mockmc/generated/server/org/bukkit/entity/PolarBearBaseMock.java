@@ -14,16 +14,10 @@ import org.bukkit.entity.PolarBear;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PolarBearBaseMock extends PolarBear, AnimalsBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: PolarBear#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -38,11 +32,20 @@ public interface PolarBearBaseMock extends PolarBear, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: PolarBear#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setStanding(boolean arg0)
 	{
 		// MockMC: PolarBear#setStanding
 	}
 
+	@Override
 	default boolean isStanding()
 	{
 		// MockMC: PolarBear#isStanding

@@ -16,9 +16,11 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface CopperGolemBaseMock extends CopperGolem, GolemBaseMock, ShearableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface CopperGolemBaseMock extends CopperGolem, ShearableBaseMock, GolemBaseMock
 {
+	@Override
 	default void setWeatheringState(WeatheringCopperState arg0)
 	{
 		// MockMC: CopperGolem#setWeatheringState
@@ -31,23 +33,27 @@ public interface CopperGolemBaseMock extends CopperGolem, GolemBaseMock, Shearab
 		return null;
 	}
 
+	@Override
 	default WeatheringCopperState getWeatheringState()
 	{
 		// MockMC: CopperGolem#getWeatheringState
 		return null;
 	}
 
+	@Override
 	default CopperGolem.State getGolemState()
 	{
 		// MockMC: CopperGolem#getGolemState
 		return null;
 	}
 
+	@Override
 	default void setGolemState(CopperGolem.State arg0)
 	{
 		// MockMC: CopperGolem#setGolemState
 	}
 
+	@Override
 	default CopperGolem.Oxidizing getOxidizing()
 	{
 		// MockMC: CopperGolem#getOxidizing
@@ -61,6 +67,7 @@ public interface CopperGolemBaseMock extends CopperGolem, GolemBaseMock, Shearab
 		return false;
 	}
 
+	@Override
 	default void setOxidizing(CopperGolem.Oxidizing arg0)
 	{
 		// MockMC: CopperGolem#setOxidizing

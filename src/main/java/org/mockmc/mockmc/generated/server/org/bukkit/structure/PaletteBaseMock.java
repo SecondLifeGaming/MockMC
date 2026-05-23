@@ -17,12 +17,14 @@ import org.bukkit.structure.Palette;
  */
 public interface PaletteBaseMock extends Palette
 {
+	@Override
 	default List<BlockState> getBlocks()
 	{
 		// MockMC: Palette#getBlocks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getBlockCount()
 	{
 		// MockMC: Palette#getBlockCount

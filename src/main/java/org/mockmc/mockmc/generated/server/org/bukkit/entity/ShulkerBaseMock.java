@@ -16,31 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface ShulkerBaseMock extends Shulker, GolemBaseMock, ColorableBaseMock, EnemyBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface ShulkerBaseMock extends Shulker, ColorableBaseMock, GolemBaseMock, EnemyBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Shulker#getLeashHolder
-		return null;
-	}
-
 	default void setPeek(float arg0)
 	{
 		// MockMC: Shulker#setPeek
-	}
-
-	default float getPeek()
-	{
-		// MockMC: Shulker#getPeek
-		return 0.0f;
-	}
-
-	default BlockFace getAttachedFace()
-	{
-		// MockMC: Shulker#getAttachedFace
-		return null;
 	}
 
 	@Override
@@ -50,9 +33,18 @@ public interface ShulkerBaseMock extends Shulker, GolemBaseMock, ColorableBaseMo
 		return false;
 	}
 
-	default void setAttachedFace(BlockFace arg0)
+	@Override
+	default float getPeek()
 	{
-		// MockMC: Shulker#setAttachedFace
+		// MockMC: Shulker#getPeek
+		return 0.0f;
+	}
+
+	@Override
+	default BlockFace getAttachedFace()
+	{
+		// MockMC: Shulker#getAttachedFace
+		return null;
 	}
 
 	@Override
@@ -60,5 +52,18 @@ public interface ShulkerBaseMock extends Shulker, GolemBaseMock, ColorableBaseMo
 	{
 		// MockMC: Shulker#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setAttachedFace(BlockFace arg0)
+	{
+		// MockMC: Shulker#setAttachedFace
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Shulker#getLeashHolder
+		return null;
 	}
 }

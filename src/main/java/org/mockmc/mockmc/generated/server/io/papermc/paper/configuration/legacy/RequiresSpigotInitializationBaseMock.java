@@ -16,12 +16,14 @@ import org.spongepowered.configurate.objectmapping.meta.NodeResolver;
  */
 public interface RequiresSpigotInitializationBaseMock extends RequiresSpigotInitialization
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: RequiresSpigotInitialization#annotationType
 		return null;
 	}
 
+	@Override
 	default Class<? extends NodeResolver> value()
 	{
 		// MockMC: RequiresSpigotInitialization#value

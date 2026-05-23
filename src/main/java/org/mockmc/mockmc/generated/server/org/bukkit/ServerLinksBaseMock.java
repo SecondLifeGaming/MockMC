@@ -18,36 +18,42 @@ import org.bukkit.ServerLinks;
  */
 public interface ServerLinksBaseMock extends ServerLinks
 {
+	@Override
 	default ServerLinks.ServerLink setLink(ServerLinks.Type arg0, URI arg1)
 	{
 		// MockMC: ServerLinks#setLink
 		return null;
 	}
 
+	@Override
 	default ServerLinks.ServerLink getLink(ServerLinks.Type arg0)
 	{
 		// MockMC: ServerLinks#getLink
 		return null;
 	}
 
+	@Override
 	default List<ServerLinks.ServerLink> getLinks()
 	{
 		// MockMC: ServerLinks#getLinks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean removeLink(ServerLinks.ServerLink arg0)
 	{
 		// MockMC: ServerLinks#removeLink
 		return false;
 	}
 
+	@Override
 	default ServerLinks copy()
 	{
 		// MockMC: ServerLinks#copy
 		return null;
 	}
 
+	@Override
 	default ServerLinks.ServerLink addLink(Component arg0, URI arg1)
 	{
 		// MockMC: ServerLinks#addLink
@@ -58,6 +64,7 @@ public interface ServerLinksBaseMock extends ServerLinks
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ServerLinks.ServerLink addLink(String arg0, URI arg1)
 	{
@@ -65,6 +72,7 @@ public interface ServerLinksBaseMock extends ServerLinks
 		return null;
 	}
 
+	@Override
 	default ServerLinks.ServerLink addLink(ServerLinks.Type arg0, URI arg1)
 	{
 		// MockMC: ServerLinks#addLink

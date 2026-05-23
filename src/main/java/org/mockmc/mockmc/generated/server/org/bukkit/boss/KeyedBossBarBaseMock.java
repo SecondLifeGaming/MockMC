@@ -14,6 +14,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface KeyedBossBarBaseMock extends KeyedBossBar, BossBarBaseMock, KeyedBaseMock
+public interface KeyedBossBarBaseMock extends KeyedBossBar, KeyedBaseMock, BossBarBaseMock
 {
 }

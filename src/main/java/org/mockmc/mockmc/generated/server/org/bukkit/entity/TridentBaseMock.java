@@ -14,47 +14,28 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, ThrowableProjectileBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface TridentBaseMock extends Trident, ThrowableProjectileBaseMock, AbstractArrowBaseMock
 {
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
 	@Override
-	@Deprecated(since = "1.20.4", forRemoval = true)
-	default void setItem(ItemStack arg0)
-	{
-		// MockMC: Trident#setItem
-	}
-
 	default boolean hasGlint()
 	{
 		// MockMC: Trident#hasGlint
 		return false;
 	}
 
+	@Override
 	default int getLoyaltyLevel()
 	{
 		// MockMC: Trident#getLoyaltyLevel
 		return 0;
 	}
 
+	@Override
 	default void setHasDealtDamage(boolean arg0)
 	{
 		// MockMC: Trident#setHasDealtDamage
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Override
-	@Deprecated(since = "1.20.4", forRemoval = true)
-	default ItemStack getItem()
-	{
-		// MockMC: Trident#getItem
-		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
 	@Override
@@ -63,17 +44,27 @@ public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, Throwab
 		// MockMC: Trident#setDamage
 	}
 
+	@Override
+	default ItemStack getItem()
+	{
+		// MockMC: Trident#getItem
+		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
+	}
+
+	@Override
 	default boolean hasDealtDamage()
 	{
 		// MockMC: Trident#hasDealtDamage
 		return false;
 	}
 
+	@Override
 	default void setLoyaltyLevel(int arg0)
 	{
 		// MockMC: Trident#setLoyaltyLevel
 	}
 
+	@Override
 	default void setGlint(boolean arg0)
 	{
 		// MockMC: Trident#setGlint
@@ -84,5 +75,11 @@ public interface TridentBaseMock extends Trident, AbstractArrowBaseMock, Throwab
 	{
 		// MockMC: Trident#getDamage
 		return 0.0d;
+	}
+
+	@Override
+	default void setItem(ItemStack arg0)
+	{
+		// MockMC: Trident#setItem
 	}
 }

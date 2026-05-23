@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface TNTBaseMock extends TNT, BlockDataBaseMock
 {
+	@Override
 	default void setUnstable(boolean arg0)
 	{
 		// MockMC: TNT#setUnstable
 	}
 
+	@Override
 	default boolean isUnstable()
 	{
 		// MockMC: TNT#isUnstable

@@ -14,16 +14,10 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface DonkeyBaseMock extends Donkey, ChestedHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Donkey#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface DonkeyBaseMock extends Donkey, ChestedHorseBaseMock
 	{
 		// MockMC: Donkey#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Donkey#getLeashHolder
+		return null;
 	}
 }

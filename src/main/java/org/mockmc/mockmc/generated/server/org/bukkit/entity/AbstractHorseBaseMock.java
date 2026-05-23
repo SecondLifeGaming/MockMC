@@ -17,15 +17,18 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, InventoryHolderBaseMock, TameableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, TameableBaseMock, InventoryHolderBaseMock
 {
+	@Override
 	default boolean isRearing()
 	{
 		// MockMC: AbstractHorse#isRearing
 		return false;
 	}
 
+	@Override
 	default boolean isEatingGrass()
 	{
 		// MockMC: AbstractHorse#isEatingGrass
@@ -33,27 +36,37 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: AbstractHorse#setLeashHolder
+		// MockMC: AbstractHorse#isLeashed
 		return false;
 	}
 
+	@Override
 	default int getDomestication()
 	{
 		// MockMC: AbstractHorse#getDomestication
 		return 0;
 	}
 
+	@Override
 	default void setDomestication(int arg0)
 	{
 		// MockMC: AbstractHorse#setDomestication
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: AbstractHorse#getLeashHolder
+		return null;
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11", forRemoval = true)
 	default Horse.Variant getVariant()
 	{
@@ -61,12 +74,14 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 		return null;
 	}
 
+	@Override
 	default int getMaxDomestication()
 	{
 		// MockMC: AbstractHorse#getMaxDomestication
 		return 0;
 	}
 
+	@Override
 	default boolean isEating()
 	{
 		// MockMC: AbstractHorse#isEating
@@ -77,12 +92,14 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void setEatingHaystack(boolean arg0)
 	{
 		// MockMC: AbstractHorse#setEatingHaystack
 	}
 
+	@Override
 	default double getJumpStrength()
 	{
 		// MockMC: AbstractHorse#getJumpStrength
@@ -93,6 +110,7 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11", forRemoval = true)
 	default void setVariant(Horse.Variant arg0)
 	{
@@ -100,10 +118,10 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 	}
 
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: AbstractHorse#getLeashHolder
-		return null;
+		// MockMC: AbstractHorse#setLeashHolder
+		return false;
 	}
 
 	@Override
@@ -113,28 +131,25 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 		return null;
 	}
 
+	@Override
 	default void setEatingGrass(boolean arg0)
 	{
 		// MockMC: AbstractHorse#setEatingGrass
 	}
 
+	@Override
 	default void setMaxDomestication(int arg0)
 	{
 		// MockMC: AbstractHorse#setMaxDomestication
 	}
 
+	@Override
 	default void setEating(boolean arg0)
 	{
 		// MockMC: AbstractHorse#setEating
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: AbstractHorse#isLeashed
-		return false;
-	}
-
 	default void setJumpStrength(double arg0)
 	{
 		// MockMC: AbstractHorse#setJumpStrength
@@ -144,6 +159,7 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean isEatingHaystack()
 	{
@@ -151,6 +167,7 @@ public interface AbstractHorseBaseMock extends AbstractHorse, VehicleBaseMock, I
 		return false;
 	}
 
+	@Override
 	default void setRearing(boolean arg0)
 	{
 		// MockMC: AbstractHorse#setRearing

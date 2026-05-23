@@ -20,6 +20,7 @@ public interface ListPersistentDataTypeBaseMock<P, C>
 			ListPersistentDataType<P, C>,
 			PersistentDataTypeBaseMock<List<P>, List<C>>
 {
+	@Override
 	default PersistentDataType<P, C> elementType()
 	{
 		// MockMC: ListPersistentDataType#elementType

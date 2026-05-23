@@ -14,14 +14,17 @@ import org.bukkit.entity.BlockDisplay;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BlockDisplayBaseMock extends BlockDisplay, DisplayBaseMock
 {
+	@Override
 	default void setBlock(BlockData arg0)
 	{
 		// MockMC: BlockDisplay#setBlock
 	}
 
+	@Override
 	default BlockData getBlock()
 	{
 		// MockMC: BlockDisplay#getBlock

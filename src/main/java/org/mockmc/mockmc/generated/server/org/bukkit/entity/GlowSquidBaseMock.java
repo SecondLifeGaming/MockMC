@@ -14,16 +14,10 @@ import org.bukkit.entity.GlowSquid;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface GlowSquidBaseMock extends GlowSquid, SquidBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: GlowSquid#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -38,11 +32,20 @@ public interface GlowSquidBaseMock extends GlowSquid, SquidBaseMock
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: GlowSquid#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setDarkTicksRemaining(int arg0)
 	{
 		// MockMC: GlowSquid#setDarkTicksRemaining
 	}
 
+	@Override
 	default int getDarkTicksRemaining()
 	{
 		// MockMC: GlowSquid#getDarkTicksRemaining

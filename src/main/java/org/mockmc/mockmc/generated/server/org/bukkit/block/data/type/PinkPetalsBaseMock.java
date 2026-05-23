@@ -17,7 +17,8 @@ import org.bukkit.block.data.type.PinkPetals;
  *             modern build cycles.
  */
 @Deprecated(since = "1.21.5", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface PinkPetalsBaseMock extends PinkPetals, FlowerBedBaseMock
 {
 }

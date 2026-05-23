@@ -15,6 +15,7 @@ import com.destroystokyo.paper.network.StatusClient;
  */
 public interface StatusClientBaseMock extends StatusClient, NetworkClientBaseMock
 {
+	@Override
 	default boolean isLegacy()
 	{
 		// MockMC: StatusClient#isLegacy

@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.MultipleFacingBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface FireBaseMock extends Fire, AgeableBaseMock, MultipleFacingBaseMock
+public interface FireBaseMock extends Fire, MultipleFacingBaseMock, AgeableBaseMock
 {
 }

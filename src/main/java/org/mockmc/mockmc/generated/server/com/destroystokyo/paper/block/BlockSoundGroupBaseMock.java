@@ -18,13 +18,15 @@ import org.bukkit.Sound;
  *             modern build cycles.
  */
 @Deprecated(since = "1.18.2", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface BlockSoundGroupBaseMock extends BlockSoundGroup
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default Sound getHitSound()
 	{
@@ -36,6 +38,7 @@ public interface BlockSoundGroupBaseMock extends BlockSoundGroup
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default Sound getFallSound()
 	{
@@ -47,6 +50,7 @@ public interface BlockSoundGroupBaseMock extends BlockSoundGroup
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default Sound getPlaceSound()
 	{
@@ -58,6 +62,7 @@ public interface BlockSoundGroupBaseMock extends BlockSoundGroup
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default Sound getBreakSound()
 	{
@@ -69,6 +74,7 @@ public interface BlockSoundGroupBaseMock extends BlockSoundGroup
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default Sound getStepSound()
 	{

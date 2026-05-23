@@ -16,12 +16,14 @@ import net.kyori.adventure.text.Component;
  */
 public interface PlainMessageDialogBodyBaseMock extends PlainMessageDialogBody
 {
+	@Override
 	default Component contents()
 	{
 		// MockMC: PlainMessageDialogBody#contents
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: PlainMessageDialogBody#width

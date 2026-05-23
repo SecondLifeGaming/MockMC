@@ -15,22 +15,10 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.FishBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SchoolableFishBaseMock extends SchoolableFish, FishBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: SchoolableFish#getLeashHolder
-		return null;
-	}
-
-	default int getSchoolSize()
-	{
-		// MockMC: SchoolableFish#getSchoolSize
-		return 0;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -38,26 +26,11 @@ public interface SchoolableFishBaseMock extends SchoolableFish, FishBaseMock
 		return false;
 	}
 
-	default void stopFollowing()
+	@Override
+	default int getSchoolSize()
 	{
-		// MockMC: SchoolableFish#stopFollowing
-	}
-
-	default SchoolableFish getSchoolLeader()
-	{
-		// MockMC: SchoolableFish#getSchoolLeader
-		return null;
-	}
-
-	default int getMaxSchoolSize()
-	{
-		// MockMC: SchoolableFish#getMaxSchoolSize
+		// MockMC: SchoolableFish#getSchoolSize
 		return 0;
-	}
-
-	default void startFollowing(SchoolableFish arg0)
-	{
-		// MockMC: SchoolableFish#startFollowing
 	}
 
 	@Override
@@ -65,5 +38,38 @@ public interface SchoolableFishBaseMock extends SchoolableFish, FishBaseMock
 	{
 		// MockMC: SchoolableFish#isLeashed
 		return false;
+	}
+
+	@Override
+	default void stopFollowing()
+	{
+		// MockMC: SchoolableFish#stopFollowing
+	}
+
+	@Override
+	default SchoolableFish getSchoolLeader()
+	{
+		// MockMC: SchoolableFish#getSchoolLeader
+		return null;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: SchoolableFish#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default int getMaxSchoolSize()
+	{
+		// MockMC: SchoolableFish#getMaxSchoolSize
+		return 0;
+	}
+
+	@Override
+	default void startFollowing(SchoolableFish arg0)
+	{
+		// MockMC: SchoolableFish#startFollowing
 	}
 }

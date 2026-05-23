@@ -15,6 +15,7 @@ import io.papermc.paper.datacomponent.item.Enchantable;
  */
 public interface EnchantableBaseMock extends Enchantable
 {
+	@Override
 	default int value()
 	{
 		// MockMC: Enchantable#value

@@ -15,24 +15,28 @@ import org.bukkit.block.data.Segmentable;
  */
 public interface SegmentableBaseMock extends Segmentable, BlockDataBaseMock
 {
+	@Override
 	default int getMinimumSegmentAmount()
 	{
 		// MockMC: Segmentable#getMinimumSegmentAmount
 		return 0;
 	}
 
+	@Override
 	default int getMaximumSegmentAmount()
 	{
 		// MockMC: Segmentable#getMaximumSegmentAmount
 		return 0;
 	}
 
+	@Override
 	default int getSegmentAmount()
 	{
 		// MockMC: Segmentable#getSegmentAmount
 		return 0;
 	}
 
+	@Override
 	default void setSegmentAmount(int arg0)
 	{
 		// MockMC: Segmentable#setSegmentAmount

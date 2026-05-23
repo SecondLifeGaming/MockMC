@@ -16,6 +16,7 @@ import org.bukkit.inventory.InventoryHolder;
  */
 public interface InventoryHolderBaseMock extends InventoryHolder
 {
+	@Override
 	default Inventory getInventory()
 	{
 		// MockMC: InventoryHolder#getInventory

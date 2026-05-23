@@ -14,26 +14,15 @@ import org.bukkit.entity.Tadpole;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TadpoleBaseMock extends Tadpole, FishBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Tadpole#getLeashHolder
-		return null;
-	}
-
 	default boolean getAgeLock()
 	{
 		// MockMC: Tadpole#getAgeLock
 		return false;
-	}
-
-	default int getAge()
-	{
-		// MockMC: Tadpole#getAge
-		return 0;
 	}
 
 	@Override
@@ -43,11 +32,6 @@ public interface TadpoleBaseMock extends Tadpole, FishBaseMock
 		return false;
 	}
 
-	default void setAge(int arg0)
-	{
-		// MockMC: Tadpole#setAge
-	}
-
 	@Override
 	default boolean isLeashed()
 	{
@@ -55,6 +39,27 @@ public interface TadpoleBaseMock extends Tadpole, FishBaseMock
 		return false;
 	}
 
+	@Override
+	default int getAge()
+	{
+		// MockMC: Tadpole#getAge
+		return 0;
+	}
+
+	@Override
+	default void setAge(int arg0)
+	{
+		// MockMC: Tadpole#setAge
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Tadpole#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setAgeLock(boolean arg0)
 	{
 		// MockMC: Tadpole#setAgeLock

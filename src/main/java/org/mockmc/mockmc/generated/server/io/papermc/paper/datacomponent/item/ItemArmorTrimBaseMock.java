@@ -16,6 +16,7 @@ import org.bukkit.inventory.meta.trim.ArmorTrim;
  */
 public interface ItemArmorTrimBaseMock extends ItemArmorTrim
 {
+	@Override
 	default ArmorTrim armorTrim()
 	{
 		// MockMC: ItemArmorTrim#armorTrim

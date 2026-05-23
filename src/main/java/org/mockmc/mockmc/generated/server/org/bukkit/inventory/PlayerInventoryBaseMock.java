@@ -18,22 +18,26 @@ import org.bukkit.inventory.PlayerInventory;
  */
 public interface PlayerInventoryBaseMock extends PlayerInventory, InventoryBaseMock
 {
+	@Override
 	default void setBoots(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setBoots
 	}
 
+	@Override
 	default void setChestplate(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setChestplate
 	}
 
+	@Override
 	default ItemStack getBoots()
 	{
 		// MockMC: PlayerInventory#getBoots
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setItem(EquipmentSlot arg0, ItemStack arg1)
 	{
 		// MockMC: PlayerInventory#setItem
@@ -45,6 +49,7 @@ public interface PlayerInventoryBaseMock extends PlayerInventory, InventoryBaseM
 		// MockMC: PlayerInventory#setItem
 	}
 
+	@Override
 	default ItemStack[] getArmorContents()
 	{
 		// MockMC: PlayerInventory#getArmorContents
@@ -62,6 +67,7 @@ public interface PlayerInventoryBaseMock extends PlayerInventory, InventoryBaseM
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default ItemStack getItemInHand()
 	{
@@ -69,66 +75,78 @@ public interface PlayerInventoryBaseMock extends PlayerInventory, InventoryBaseM
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getHelmet()
 	{
 		// MockMC: PlayerInventory#getHelmet
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setExtraContents(ItemStack[] arg0)
 	{
 		// MockMC: PlayerInventory#setExtraContents
 	}
 
+	@Override
 	default void setItemInOffHand(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setItemInOffHand
 	}
 
+	@Override
 	default ItemStack[] getExtraContents()
 	{
 		// MockMC: PlayerInventory#getExtraContents
 		return new ItemStack[0];
 	}
 
+	@Override
 	default ItemStack getItem(EquipmentSlot arg0)
 	{
 		// MockMC: PlayerInventory#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setHelmet(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setHelmet
 	}
 
+	@Override
 	default void setHeldItemSlot(int arg0)
 	{
 		// MockMC: PlayerInventory#setHeldItemSlot
 	}
 
+	@Override
 	default void setItemInMainHand(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setItemInMainHand
 	}
 
+	@Override
 	default void setLeggings(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setLeggings
 	}
 
+	@Override
 	default ItemStack getItemInOffHand()
 	{
 		// MockMC: PlayerInventory#getItemInOffHand
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getChestplate()
 	{
 		// MockMC: PlayerInventory#getChestplate
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getLeggings()
 	{
 		// MockMC: PlayerInventory#getLeggings
@@ -139,23 +157,27 @@ public interface PlayerInventoryBaseMock extends PlayerInventory, InventoryBaseM
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setItemInHand(ItemStack arg0)
 	{
 		// MockMC: PlayerInventory#setItemInHand
 	}
 
+	@Override
 	default int getHeldItemSlot()
 	{
 		// MockMC: PlayerInventory#getHeldItemSlot
 		return 0;
 	}
 
+	@Override
 	default void setArmorContents(ItemStack[] arg0)
 	{
 		// MockMC: PlayerInventory#setArmorContents
 	}
 
+	@Override
 	default ItemStack getItemInMainHand()
 	{
 		// MockMC: PlayerInventory#getItemInMainHand

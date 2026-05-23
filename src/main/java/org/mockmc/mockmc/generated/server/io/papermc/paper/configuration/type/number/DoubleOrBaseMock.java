@@ -15,18 +15,21 @@ import java.util.OptionalDouble;
  */
 public interface DoubleOrBaseMock extends DoubleOr
 {
+	@Override
 	default OptionalDouble value()
 	{
 		// MockMC: DoubleOr#value
 		return java.util.OptionalDouble.empty();
 	}
 
+	@Override
 	default double doubleValue()
 	{
 		// MockMC: DoubleOr#doubleValue
 		return 0.0d;
 	}
 
+	@Override
 	default double or(double arg0)
 	{
 		// MockMC: DoubleOr#or

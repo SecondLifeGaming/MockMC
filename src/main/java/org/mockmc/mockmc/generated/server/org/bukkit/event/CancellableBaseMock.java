@@ -15,12 +15,14 @@ import org.bukkit.event.Cancellable;
  */
 public interface CancellableBaseMock extends Cancellable
 {
+	@Override
 	default boolean isCancelled()
 	{
 		// MockMC: Cancellable#isCancelled
 		return false;
 	}
 
+	@Override
 	default void setCancelled(boolean arg0)
 	{
 		// MockMC: Cancellable#setCancelled

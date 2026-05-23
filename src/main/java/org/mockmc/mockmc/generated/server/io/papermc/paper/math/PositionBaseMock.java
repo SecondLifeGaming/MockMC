@@ -20,90 +20,105 @@ import org.bukkit.util.Vector;
  */
 public interface PositionBaseMock extends Position
 {
+	@Override
 	default boolean isFine()
 	{
 		// MockMC: Position#isFine
 		return false;
 	}
 
+	@Override
 	default Position offset(int arg0, int arg1, int arg2)
 	{
 		// MockMC: Position#offset
 		return null;
 	}
 
+	@Override
 	default Vector toVector()
 	{
 		// MockMC: Position#toVector
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default FinePosition offset(double arg0, double arg1, double arg2)
 	{
 		// MockMC: Position#offset
 		return null;
 	}
 
+	@Override
 	default BlockPosition toBlock()
 	{
 		// MockMC: Position#toBlock
 		return null;
 	}
 
+	@Override
 	default boolean isBlock()
 	{
 		// MockMC: Position#isBlock
 		return false;
 	}
 
+	@Override
 	default FinePosition toCenter()
 	{
 		// MockMC: Position#toCenter
 		return null;
 	}
 
+	@Override
 	default boolean isFinite()
 	{
 		// MockMC: Position#isFinite
 		return false;
 	}
 
+	@Override
 	default int blockZ()
 	{
 		// MockMC: Position#blockZ
 		return 0;
 	}
 
+	@Override
 	default Location toLocation(World arg0)
 	{
 		// MockMC: Position#toLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default int blockY()
 	{
 		// MockMC: Position#blockY
 		return 0;
 	}
 
+	@Override
 	default int blockX()
 	{
 		// MockMC: Position#blockX
 		return 0;
 	}
 
+	@Override
 	default double z()
 	{
 		// MockMC: Position#z
 		return 0.0d;
 	}
 
+	@Override
 	default double y()
 	{
 		// MockMC: Position#y
 		return 0.0d;
 	}
 
+	@Override
 	default double x()
 	{
 		// MockMC: Position#x

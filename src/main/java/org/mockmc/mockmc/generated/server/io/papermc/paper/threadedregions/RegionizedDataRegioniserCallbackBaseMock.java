@@ -17,11 +17,13 @@ import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
  */
 public interface RegionizedDataRegioniserCallbackBaseMock<T> extends RegionizedData.RegioniserCallback<T>
 {
+	@Override
 	default void split(T arg0, int arg1, Long2ReferenceOpenHashMap<T> arg2, ReferenceOpenHashSet<T> arg3)
 	{
 		// MockMC: RegioniserCallback#split
 	}
 
+	@Override
 	default void merge(T arg0, T arg1, long arg2)
 	{
 		// MockMC: RegioniserCallback#merge

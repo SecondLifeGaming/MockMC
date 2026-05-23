@@ -18,12 +18,14 @@ import org.bukkit.generator.ChunkGenerator;
  *             modern build cycles.
  */
 @Deprecated(since = "1.17.1")
+@SuppressWarnings("java:S1133")
 public interface ChunkGeneratorBiomeGridBaseMock extends ChunkGenerator.BiomeGrid
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default Biome getBiome(int arg0, int arg1)
 	{
@@ -35,6 +37,7 @@ public interface ChunkGeneratorBiomeGridBaseMock extends ChunkGenerator.BiomeGri
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.17.1")
 	default Biome getBiome(int arg0, int arg1, int arg2)
 	{
@@ -46,6 +49,7 @@ public interface ChunkGeneratorBiomeGridBaseMock extends ChunkGenerator.BiomeGri
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default void setBiome(int arg0, int arg1, Biome arg2)
 	{
@@ -56,6 +60,7 @@ public interface ChunkGeneratorBiomeGridBaseMock extends ChunkGenerator.BiomeGri
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.17.1")
 	default void setBiome(int arg0, int arg1, int arg2, Biome arg3)
 	{

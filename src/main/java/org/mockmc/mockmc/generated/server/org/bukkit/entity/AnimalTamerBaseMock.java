@@ -16,12 +16,14 @@ import org.bukkit.entity.AnimalTamer;
  */
 public interface AnimalTamerBaseMock extends AnimalTamer
 {
+	@Override
 	default String getName()
 	{
 		// MockMC: AnimalTamer#getName
 		return "";
 	}
 
+	@Override
 	default UUID getUniqueId()
 	{
 		// MockMC: AnimalTamer#getUniqueId

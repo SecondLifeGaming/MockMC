@@ -16,6 +16,7 @@ import com.mojang.brigadier.exceptions.DynamicNCommandExceptionType;
  */
 public interface DynamicNCommandExceptionTypeFunctionBaseMock extends DynamicNCommandExceptionType.Function
 {
+	@Override
 	default Message apply(Object[] arg0)
 	{
 		// MockMC: Function#apply

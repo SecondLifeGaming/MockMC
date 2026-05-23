@@ -16,7 +16,8 @@ import org.bukkit.entity.Warden;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WardenBaseMock extends Warden, MonsterBaseMock
 {
 	@Override
@@ -26,44 +27,52 @@ public interface WardenBaseMock extends Warden, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default void setAnger(Entity arg0, int arg1)
 	{
 		// MockMC: Warden#setAnger
 	}
 
+	@Override
 	default Warden.AngerLevel getAngerLevel()
 	{
 		// MockMC: Warden#getAngerLevel
 		return null;
 	}
 
+	@Override
 	default void clearAnger(Entity arg0)
 	{
 		// MockMC: Warden#clearAnger
 	}
 
+	@Override
 	default void increaseAnger(Entity arg0, int arg1)
 	{
 		// MockMC: Warden#increaseAnger
 	}
 
+	@Override
 	default int getAnger()
 	{
 		// MockMC: Warden#getAnger
 		return 0;
 	}
 
+	@Override
 	default int getAnger(Entity arg0)
 	{
 		// MockMC: Warden#getAnger
 		return 0;
 	}
 
+	@Override
 	default void setDisturbanceLocation(Location arg0)
 	{
 		// MockMC: Warden#setDisturbanceLocation
 	}
 
+	@Override
 	default LivingEntity getEntityAngryAt()
 	{
 		// MockMC: Warden#getEntityAngryAt
@@ -77,6 +86,7 @@ public interface WardenBaseMock extends Warden, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default int getHighestAnger()
 	{
 		// MockMC: Warden#getHighestAnger

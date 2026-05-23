@@ -17,24 +17,28 @@ import net.kyori.adventure.text.Component;
  */
 public interface ActionButtonBaseMock extends ActionButton
 {
+	@Override
 	default Component tooltip()
 	{
 		// MockMC: ActionButton#tooltip
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: ActionButton#width
 		return 0;
 	}
 
+	@Override
 	default DialogAction action()
 	{
 		// MockMC: ActionButton#action
 		return null;
 	}
 
+	@Override
 	default Component label()
 	{
 		// MockMC: ActionButton#label

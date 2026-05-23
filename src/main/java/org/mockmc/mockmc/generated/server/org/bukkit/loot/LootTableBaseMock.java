@@ -21,11 +21,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  */
 public interface LootTableBaseMock extends LootTable, KeyedBaseMock
 {
+	@Override
 	default void fillInventory(Inventory arg0, Random arg1, LootContext arg2)
 	{
 		// MockMC: LootTable#fillInventory
 	}
 
+	@Override
 	default Collection<ItemStack> populateLoot(Random arg0, LootContext arg1)
 	{
 		// MockMC: LootTable#populateLoot

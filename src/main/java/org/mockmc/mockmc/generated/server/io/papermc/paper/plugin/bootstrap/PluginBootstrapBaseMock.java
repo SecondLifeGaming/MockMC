@@ -18,12 +18,14 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public interface PluginBootstrapBaseMock extends PluginBootstrap
 {
+	@Override
 	default JavaPlugin createPlugin(PluginProviderContext arg0)
 	{
 		// MockMC: PluginBootstrap#createPlugin
 		return null;
 	}
 
+	@Override
 	default void bootstrap(BootstrapContext arg0)
 	{
 		// MockMC: PluginBootstrap#bootstrap

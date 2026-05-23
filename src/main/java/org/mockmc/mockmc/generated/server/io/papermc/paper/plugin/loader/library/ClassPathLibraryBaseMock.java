@@ -17,6 +17,7 @@ import io.papermc.paper.plugin.loader.library.LibraryStore;
  */
 public interface ClassPathLibraryBaseMock extends ClassPathLibrary
 {
+	@Override
 	default void register(LibraryStore arg0) throws LibraryLoadingException
 	{
 		// MockMC: ClassPathLibrary#register

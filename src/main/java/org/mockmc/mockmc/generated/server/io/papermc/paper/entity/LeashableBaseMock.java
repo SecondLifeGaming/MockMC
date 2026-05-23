@@ -15,21 +15,25 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.EntityBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LeashableBaseMock extends Leashable, EntityBaseMock
 {
+	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
 		// MockMC: Leashable#getLeashHolder
 		return null;
 	}
 
+	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
 		// MockMC: Leashable#setLeashHolder
 		return false;
 	}
 
+	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: Leashable#isLeashed

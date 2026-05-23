@@ -14,6 +14,7 @@ import net.md_5.bungee.nbt.TypedTag;
  */
 public interface TypedTagBaseMock extends TypedTag, TagBaseMock
 {
+	@Override
 	default byte getId()
 	{
 		// MockMC: TypedTag#getId

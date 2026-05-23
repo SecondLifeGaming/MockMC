@@ -20,41 +20,48 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface ResolvableProfileBaseMock extends ResolvableProfile
 {
+	@Override
 	default CompletableFuture<PlayerProfile> resolve()
 	{
 		// MockMC: ResolvableProfile#resolve
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default boolean dynamic()
 	{
 		// MockMC: ResolvableProfile#dynamic
 		return false;
 	}
 
+	@Override
 	default String name()
 	{
 		// MockMC: ResolvableProfile#name
 		return "";
 	}
 
+	@Override
 	default Collection<ProfileProperty> properties()
 	{
 		// MockMC: ResolvableProfile#properties
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void applySkinToPlayerHeadContents(net.kyori.adventure.text.object.PlayerHeadObjectContents.Builder arg0)
 	{
 		// MockMC: ResolvableProfile#applySkinToPlayerHeadContents
 	}
 
+	@Override
 	default ResolvableProfile.SkinPatch skinPatch()
 	{
 		// MockMC: ResolvableProfile#skinPatch
 		return null;
 	}
 
+	@Override
 	default UUID uuid()
 	{
 		// MockMC: ResolvableProfile#uuid

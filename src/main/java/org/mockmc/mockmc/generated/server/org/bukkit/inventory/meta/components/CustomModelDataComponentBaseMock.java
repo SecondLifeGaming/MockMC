@@ -18,45 +18,53 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface CustomModelDataComponentBaseMock extends CustomModelDataComponent, ConfigurationSerializableBaseMock
 {
+	@Override
 	default List<Float> getFloats()
 	{
 		// MockMC: CustomModelDataComponent#getFloats
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setStrings(List<String> arg0)
 	{
 		// MockMC: CustomModelDataComponent#setStrings
 	}
 
+	@Override
 	default List<Color> getColors()
 	{
 		// MockMC: CustomModelDataComponent#getColors
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<String> getStrings()
 	{
 		// MockMC: CustomModelDataComponent#getStrings
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setFlags(List<Boolean> arg0)
 	{
 		// MockMC: CustomModelDataComponent#setFlags
 	}
 
+	@Override
 	default List<Boolean> getFlags()
 	{
 		// MockMC: CustomModelDataComponent#getFlags
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setFloats(List<Float> arg0)
 	{
 		// MockMC: CustomModelDataComponent#setFloats
 	}
 
+	@Override
 	default void setColors(List<Color> arg0)
 	{
 		// MockMC: CustomModelDataComponent#setColors

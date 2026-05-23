@@ -18,7 +18,8 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MetadataValueAdapterBaseMock extends MetadataValueBaseMock
 {
 	/**

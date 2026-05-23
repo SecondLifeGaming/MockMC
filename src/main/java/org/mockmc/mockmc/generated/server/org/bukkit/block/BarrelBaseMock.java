@@ -16,9 +16,52 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BarrelBaseMock extends Barrel, LiddedBaseMock, LootableBaseMock, ContainerBaseMock
 {
+	@Override
+	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
+	{
+		// MockMC: Barrel#setHasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean hasBeenFilled()
+	{
+		// MockMC: Barrel#hasBeenFilled
+		return false;
+	}
+
+	@Override
+	default long getLastFilled()
+	{
+		// MockMC: Barrel#getLastFilled
+		return 0L;
+	}
+
+	@Override
+	default boolean isRefillEnabled()
+	{
+		// MockMC: Barrel#isRefillEnabled
+		return false;
+	}
+
+	@Override
+	default boolean canPlayerLoot(UUID arg0)
+	{
+		// MockMC: Barrel#canPlayerLoot
+		return false;
+	}
+
+	@Override
+	default boolean hasPlayerLooted(UUID arg0)
+	{
+		// MockMC: Barrel#hasPlayerLooted
+		return false;
+	}
+
 	@Override
 	default Block getBlock()
 	{
@@ -26,60 +69,28 @@ public interface BarrelBaseMock extends Barrel, LiddedBaseMock, LootableBaseMock
 		return null;
 	}
 
-	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
-	{
-		// MockMC: Barrel#setHasPlayerLooted
-		return false;
-	}
-
-	default boolean hasBeenFilled()
-	{
-		// MockMC: Barrel#hasBeenFilled
-		return false;
-	}
-
-	default long getLastFilled()
-	{
-		// MockMC: Barrel#getLastFilled
-		return 0L;
-	}
-
-	default boolean isRefillEnabled()
-	{
-		// MockMC: Barrel#isRefillEnabled
-		return false;
-	}
-
-	default boolean canPlayerLoot(UUID arg0)
-	{
-		// MockMC: Barrel#canPlayerLoot
-		return false;
-	}
-
-	default boolean hasPlayerLooted(UUID arg0)
-	{
-		// MockMC: Barrel#hasPlayerLooted
-		return false;
-	}
-
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Barrel#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Barrel#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: Barrel#getNextRefill
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Barrel#setNextRefill

@@ -16,38 +16,45 @@ import org.bukkit.loot.Lootable;
  */
 public interface LootableBaseMock extends Lootable
 {
+	@Override
 	default long getSeed()
 	{
 		// MockMC: Lootable#getSeed
 		return 0L;
 	}
 
+	@Override
 	default void setLootTable(LootTable arg0)
 	{
 		// MockMC: Lootable#setLootTable
 	}
 
+	@Override
 	default LootTable getLootTable()
 	{
 		// MockMC: Lootable#getLootTable
 		return null;
 	}
 
+	@Override
 	default void setLootTable(LootTable arg0, long arg1)
 	{
 		// MockMC: Lootable#setLootTable
 	}
 
+	@Override
 	default void clearLootTable()
 	{
 		// MockMC: Lootable#clearLootTable
 	}
 
+	@Override
 	default void setSeed(long arg0)
 	{
 		// MockMC: Lootable#setSeed
 	}
 
+	@Override
 	default boolean hasLootTable()
 	{
 		// MockMC: Lootable#hasLootTable

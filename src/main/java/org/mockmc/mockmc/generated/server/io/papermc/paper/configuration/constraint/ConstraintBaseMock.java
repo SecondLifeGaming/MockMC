@@ -15,12 +15,14 @@ import java.lang.annotation.Annotation;
  */
 public interface ConstraintBaseMock extends Constraint
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Constraint#annotationType
 		return null;
 	}
 
+	@Override
 	default Class<? extends org.spongepowered.configurate.objectmapping.meta.Constraint<?>> value()
 	{
 		// MockMC: Constraint#value

@@ -18,21 +18,25 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface DamageTypeBaseMock extends DamageType, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface DamageTypeBaseMock extends DamageType, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default DamageScaling getDamageScaling()
 	{
 		// MockMC: DamageType#getDamageScaling
 		return null;
 	}
 
+	@Override
 	default DamageEffect getDamageEffect()
 	{
 		// MockMC: DamageType#getDamageEffect
 		return null;
 	}
 
+	@Override
 	default DeathMessageType getDeathMessageType()
 	{
 		// MockMC: DamageType#getDeathMessageType
@@ -46,6 +50,7 @@ public interface DamageTypeBaseMock extends DamageType, KeyedBaseMock, Translata
 		return "";
 	}
 
+	@Override
 	default float getExhaustion()
 	{
 		// MockMC: DamageType#getExhaustion

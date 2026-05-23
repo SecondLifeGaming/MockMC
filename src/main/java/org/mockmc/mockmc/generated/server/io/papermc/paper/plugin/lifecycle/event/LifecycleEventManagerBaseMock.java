@@ -20,11 +20,13 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventType;
  */
 public interface LifecycleEventManagerBaseMock<O extends LifecycleEventOwner> extends LifecycleEventManager<O>
 {
+	@Override
 	default void registerEventHandler(LifecycleEventHandlerConfiguration<? super O> arg0)
 	{
 		// MockMC: LifecycleEventManager#registerEventHandler
 	}
 
+	@Override
 	default <E extends LifecycleEvent> void registerEventHandler(LifecycleEventType<? super O, ? extends E, ?> arg0,
 			LifecycleEventHandler<? super E> arg1)
 	{

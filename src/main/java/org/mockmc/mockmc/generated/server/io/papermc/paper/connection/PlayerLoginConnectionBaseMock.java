@@ -16,12 +16,14 @@ import io.papermc.paper.connection.PlayerLoginConnection;
  */
 public interface PlayerLoginConnectionBaseMock extends PlayerLoginConnection, ReadablePlayerCookieConnectionBaseMock
 {
+	@Override
 	default PlayerProfile getAuthenticatedProfile()
 	{
 		// MockMC: PlayerLoginConnection#getAuthenticatedProfile
 		return null;
 	}
 
+	@Override
 	default PlayerProfile getUnsafeProfile()
 	{
 		// MockMC: PlayerLoginConnection#getUnsafeProfile

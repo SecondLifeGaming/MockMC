@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface BubbleColumnBaseMock extends BubbleColumn, BlockDataBaseMock
 {
+	@Override
 	default void setDrag(boolean arg0)
 	{
 		// MockMC: BubbleColumn#setDrag
 	}
 
+	@Override
 	default boolean isDrag()
 	{
 		// MockMC: BubbleColumn#isDrag

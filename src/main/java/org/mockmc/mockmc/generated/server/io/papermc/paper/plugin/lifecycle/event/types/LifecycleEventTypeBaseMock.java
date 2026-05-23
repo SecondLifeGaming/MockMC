@@ -21,12 +21,14 @@ public interface LifecycleEventTypeBaseMock<O extends LifecycleEventOwner, E ext
 		extends
 			LifecycleEventType<O, E, C>
 {
+	@Override
 	default String name()
 	{
 		// MockMC: LifecycleEventType#name
 		return "";
 	}
 
+	@Override
 	default C newHandler(LifecycleEventHandler<? super E> arg0)
 	{
 		// MockMC: LifecycleEventType#newHandler

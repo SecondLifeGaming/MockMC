@@ -16,13 +16,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SwitchBaseMock extends Switch, PowerableBaseMock, FaceAttachableBaseMock, DirectionalBaseMock
+public interface SwitchBaseMock extends Switch, FaceAttachableBaseMock, DirectionalBaseMock, PowerableBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.15.2")
 	default void setFace(Switch.Face arg0)
 	{
@@ -40,7 +42,9 @@ public interface SwitchBaseMock extends Switch, PowerableBaseMock, FaceAttachabl
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.15.2")
 	default Switch.Face getFace()
 	{

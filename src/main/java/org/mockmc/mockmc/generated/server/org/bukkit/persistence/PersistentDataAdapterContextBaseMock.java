@@ -16,6 +16,7 @@ import org.bukkit.persistence.PersistentDataContainer;
  */
 public interface PersistentDataAdapterContextBaseMock extends PersistentDataAdapterContext
 {
+	@Override
 	default PersistentDataContainer newPersistentDataContainer()
 	{
 		// MockMC: PersistentDataAdapterContext#newPersistentDataContainer

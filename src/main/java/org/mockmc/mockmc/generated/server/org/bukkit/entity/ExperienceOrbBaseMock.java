@@ -14,43 +14,51 @@ import org.bukkit.entity.ExperienceOrb;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ExperienceOrbBaseMock extends ExperienceOrb, EntityBaseMock
 {
+	@Override
 	default void setExperience(int arg0)
 	{
 		// MockMC: ExperienceOrb#setExperience
 	}
 
+	@Override
 	default int getExperience()
 	{
 		// MockMC: ExperienceOrb#getExperience
 		return 0;
 	}
 
+	@Override
 	default ExperienceOrb.SpawnReason getSpawnReason()
 	{
 		// MockMC: ExperienceOrb#getSpawnReason
 		return null;
 	}
 
+	@Override
 	default int getCount()
 	{
 		// MockMC: ExperienceOrb#getCount
 		return 0;
 	}
 
+	@Override
 	default void setCount(int arg0)
 	{
 		// MockMC: ExperienceOrb#setCount
 	}
 
+	@Override
 	default UUID getTriggerEntityId()
 	{
 		// MockMC: ExperienceOrb#getTriggerEntityId
 		return null;
 	}
 
+	@Override
 	default UUID getSourceEntityId()
 	{
 		// MockMC: ExperienceOrb#getSourceEntityId
@@ -61,6 +69,7 @@ public interface ExperienceOrbBaseMock extends ExperienceOrb, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isFromBottle()
 	{

@@ -17,12 +17,14 @@ import org.bukkit.plugin.messaging.PluginMessageRecipient;
  */
 public interface PluginMessageRecipientBaseMock extends PluginMessageRecipient
 {
+	@Override
 	default Set<String> getListeningPluginChannels()
 	{
 		// MockMC: PluginMessageRecipient#getListeningPluginChannels
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void sendPluginMessage(Plugin arg0, String arg1, byte[] arg2)
 	{
 		// MockMC: PluginMessageRecipient#sendPluginMessage

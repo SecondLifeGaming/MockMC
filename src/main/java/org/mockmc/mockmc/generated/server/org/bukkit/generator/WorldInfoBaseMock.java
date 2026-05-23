@@ -18,44 +18,51 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface WorldInfoBaseMock extends WorldInfo, FeatureFlagSetHolderBaseMock, KeyedBaseMock
+public interface WorldInfoBaseMock extends WorldInfo, KeyedBaseMock, FeatureFlagSetHolderBaseMock
 {
+	@Override
 	default String getName()
 	{
 		// MockMC: WorldInfo#getName
 		return "";
 	}
 
+	@Override
 	default UUID getUID()
 	{
 		// MockMC: WorldInfo#getUID
 		return null;
 	}
 
+	@Override
 	default long getSeed()
 	{
 		// MockMC: WorldInfo#getSeed
 		return 0L;
 	}
 
+	@Override
 	default int getMinHeight()
 	{
 		// MockMC: WorldInfo#getMinHeight
 		return 0;
 	}
 
+	@Override
 	default World.Environment getEnvironment()
 	{
 		// MockMC: WorldInfo#getEnvironment
 		return null;
 	}
 
+	@Override
 	default BiomeProvider vanillaBiomeProvider()
 	{
 		// MockMC: WorldInfo#vanillaBiomeProvider
 		return null;
 	}
 
+	@Override
 	default int getMaxHeight()
 	{
 		// MockMC: WorldInfo#getMaxHeight

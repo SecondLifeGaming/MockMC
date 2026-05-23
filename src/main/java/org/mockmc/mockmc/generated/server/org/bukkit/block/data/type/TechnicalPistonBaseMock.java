@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface TechnicalPistonBaseMock extends TechnicalPiston, DirectionalBaseMock
 {
+	@Override
 	default TechnicalPiston.Type getType()
 	{
 		// MockMC: TechnicalPiston#getType
 		return null;
 	}
 
+	@Override
 	default void setType(TechnicalPiston.Type arg0)
 	{
 		// MockMC: TechnicalPiston#setType

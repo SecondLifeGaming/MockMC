@@ -18,50 +18,59 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface EntityEquipmentBaseMock extends EntityEquipment
 {
+	@Override
 	default float getDropChance(EquipmentSlot arg0)
 	{
 		// MockMC: EntityEquipment#getDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setBoots(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setBoots
 	}
 
+	@Override
 	default void setBoots(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setBoots
 	}
 
+	@Override
 	default Entity getHolder()
 	{
 		// MockMC: EntityEquipment#getHolder
 		return null;
 	}
 
+	@Override
 	default void setChestplateDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setChestplateDropChance
 	}
 
+	@Override
 	default ItemStack getBoots()
 	{
 		// MockMC: EntityEquipment#getBoots
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getHelmet()
 	{
 		// MockMC: EntityEquipment#getHelmet
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setItemInMainHandDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setItemInMainHandDropChance
 	}
 
+	@Override
 	default float getLeggingsDropChance()
 	{
 		// MockMC: EntityEquipment#getLeggingsDropChance
@@ -72,60 +81,71 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setItemInHandDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setItemInHandDropChance
 	}
 
+	@Override
 	default ItemStack getItemInOffHand()
 	{
 		// MockMC: EntityEquipment#getItemInOffHand
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setLeggings(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setLeggings
 	}
 
+	@Override
 	default void setLeggings(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setLeggings
 	}
 
+	@Override
 	default void setHelmet(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setHelmet
 	}
 
+	@Override
 	default void setHelmet(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setHelmet
 	}
 
+	@Override
 	default void clear()
 	{
 		// MockMC: EntityEquipment#clear
 	}
 
+	@Override
 	default ItemStack getLeggings()
 	{
 		// MockMC: EntityEquipment#getLeggings
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getChestplate()
 	{
 		// MockMC: EntityEquipment#getChestplate
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setDropChance(EquipmentSlot arg0, float arg1)
 	{
 		// MockMC: EntityEquipment#setDropChance
 	}
 
+	@Override
 	default void setBootsDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setBootsDropChance
@@ -135,6 +155,7 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default float getItemInHandDropChance()
 	{
@@ -142,12 +163,14 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 		return 0.0f;
 	}
 
+	@Override
 	default ItemStack getItemInMainHand()
 	{
 		// MockMC: EntityEquipment#getItemInMainHand
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack[] getArmorContents()
 	{
 		// MockMC: EntityEquipment#getArmorContents
@@ -158,6 +181,7 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default ItemStack getItemInHand()
 	{
@@ -165,74 +189,88 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default float getChestplateDropChance()
 	{
 		// MockMC: EntityEquipment#getChestplateDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setHelmetDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setHelmetDropChance
 	}
 
+	@Override
 	default void setItem(EquipmentSlot arg0, ItemStack arg1, boolean arg2)
 	{
 		// MockMC: EntityEquipment#setItem
 	}
 
+	@Override
 	default float getItemInMainHandDropChance()
 	{
 		// MockMC: EntityEquipment#getItemInMainHandDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setItem(EquipmentSlot arg0, ItemStack arg1)
 	{
 		// MockMC: EntityEquipment#setItem
 	}
 
+	@Override
 	default void setChestplate(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setChestplate
 	}
 
+	@Override
 	default void setChestplate(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setChestplate
 	}
 
+	@Override
 	default void setLeggingsDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setLeggingsDropChance
 	}
 
+	@Override
 	default float getHelmetDropChance()
 	{
 		// MockMC: EntityEquipment#getHelmetDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setItemInOffHand(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setItemInOffHand
 	}
 
+	@Override
 	default void setItemInOffHand(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setItemInOffHand
 	}
 
+	@Override
 	default void setItemInMainHand(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: EntityEquipment#setItemInMainHand
 	}
 
+	@Override
 	default void setItemInMainHand(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setItemInMainHand
 	}
 
+	@Override
 	default ItemStack getItem(EquipmentSlot arg0)
 	{
 		// MockMC: EntityEquipment#getItem
@@ -243,29 +281,34 @@ public interface EntityEquipmentBaseMock extends EntityEquipment
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setItemInHand(ItemStack arg0)
 	{
 		// MockMC: EntityEquipment#setItemInHand
 	}
 
+	@Override
 	default float getItemInOffHandDropChance()
 	{
 		// MockMC: EntityEquipment#getItemInOffHandDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default float getBootsDropChance()
 	{
 		// MockMC: EntityEquipment#getBootsDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setItemInOffHandDropChance(float arg0)
 	{
 		// MockMC: EntityEquipment#setItemInOffHandDropChance
 	}
 
+	@Override
 	default void setArmorContents(ItemStack[] arg0)
 	{
 		// MockMC: EntityEquipment#setArmorContents

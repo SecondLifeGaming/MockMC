@@ -15,12 +15,14 @@ import org.bukkit.permissions.ServerOperator;
  */
 public interface ServerOperatorBaseMock extends ServerOperator
 {
+	@Override
 	default boolean isOp()
 	{
 		// MockMC: ServerOperator#isOp
 		return false;
 	}
 
+	@Override
 	default void setOp(boolean arg0)
 	{
 		// MockMC: ServerOperator#setOp

@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.Repairable;
  */
 public interface RepairableBaseMock extends Repairable, ItemMetaBaseMock
 {
+	@Override
 	default int getRepairCost()
 	{
 		// MockMC: Repairable#getRepairCost
@@ -28,12 +29,14 @@ public interface RepairableBaseMock extends Repairable, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean hasRepairCost()
 	{
 		// MockMC: Repairable#hasRepairCost
 		return false;
 	}
 
+	@Override
 	default void setRepairCost(int arg0)
 	{
 		// MockMC: Repairable#setRepairCost

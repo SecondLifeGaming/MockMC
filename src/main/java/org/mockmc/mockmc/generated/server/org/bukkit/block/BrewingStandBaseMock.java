@@ -15,9 +15,11 @@ import org.bukkit.inventory.BrewerInventory;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BrewingStandBaseMock extends BrewingStand, ContainerBaseMock
 {
+	@Override
 	default int getBrewingTime()
 	{
 		// MockMC: BrewingStand#getBrewingTime
@@ -31,11 +33,13 @@ public interface BrewingStandBaseMock extends BrewingStand, ContainerBaseMock
 		return null;
 	}
 
+	@Override
 	default void setRecipeBrewTime(int arg0)
 	{
 		// MockMC: BrewingStand#setRecipeBrewTime
 	}
 
+	@Override
 	default void setBrewingTime(int arg0)
 	{
 		// MockMC: BrewingStand#setBrewingTime
@@ -55,18 +59,21 @@ public interface BrewingStandBaseMock extends BrewingStand, ContainerBaseMock
 		return null;
 	}
 
+	@Override
 	default int getRecipeBrewTime()
 	{
 		// MockMC: BrewingStand#getRecipeBrewTime
 		return 0;
 	}
 
+	@Override
 	default int getFuelLevel()
 	{
 		// MockMC: BrewingStand#getFuelLevel
 		return 0;
 	}
 
+	@Override
 	default void setFuelLevel(int arg0)
 	{
 		// MockMC: BrewingStand#setFuelLevel

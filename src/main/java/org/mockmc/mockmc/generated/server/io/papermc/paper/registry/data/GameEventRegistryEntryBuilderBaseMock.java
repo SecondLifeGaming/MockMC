@@ -18,9 +18,10 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface GameEventRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.GameEventRegistryEntry.Builder,
-			RegistryBuilderBaseMock<GameEvent>,
-			GameEventRegistryEntryBaseMock
+			GameEventRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<GameEvent>
 {
+	@Override
 	default io.papermc.paper.registry.data.GameEventRegistryEntry.Builder range(int arg0)
 	{
 		// MockMC: Builder#range

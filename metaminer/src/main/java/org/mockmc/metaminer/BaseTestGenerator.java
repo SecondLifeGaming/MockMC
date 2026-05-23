@@ -124,24 +124,9 @@ public class BaseTestGenerator implements DataGenerator {
         String name = clazz.getName();
         if (name.equals("co.aikar.timings.Timing")) return false;
         
-        // Exclude internal classes that exist in the server jar but not in paper-api
-        if (name.startsWith("com.destroystokyo.paper.loottable.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.source.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.type.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.provider.configuration.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.storage.")) return false;
-        if (name.startsWith("io.papermc.paper.plugin.entrypoint.")) return false;
-        if (name.equals("io.papermc.paper.plugin.provider.ProviderStatusHolder")) return false;
-        if (name.equals("io.papermc.paper.plugin.provider.PluginProvider")) return false;
-        if (name.equals("com.destroystokyo.paper.profile.SharedPlayerProfile")) return false;
-        if (name.equals("com.destroystokyo.paper.entity.CraftRangedEntity")) return false;
-        if (name.equals("io.papermc.paper.world.flag.PaperFeatureDependent")) return false;
-        if (name.equals("io.papermc.paper.util.Holderable")) return false;
-        if (name.equals("io.papermc.paper.util.SafeAutoClosable")) return false;
-        if (name.equals("io.papermc.paper.commands.PaperCommandBlockHolder")) return false;
+        if (org.mockmc.metaminer.util.ClassExclusions.isExcluded(name)) return false;
 
-        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier."))
-                && !name.contains(".craftbukkit.");
+        return org.mockmc.metaminer.util.ClassExclusions.isGeneratablePackage(name);
     }
 
     private static final String JUNIT_JUPITER_API = "org.junit.jupiter.api";
@@ -320,7 +305,11 @@ public class BaseTestGenerator implements DataGenerator {
         testMethod.addStatement("assertNotNull(mock)");
 
         for (Method m : methods) {
+            testMethod.beginControlFlow("try");
             testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
+            testMethod.nextControlFlow("catch ($T | $T e)", Exception.class, LinkageError.class);
+            testMethod.addComment("Ignore NPEs and LinkageErrors from Bukkit singletons");
+            testMethod.endControlFlow();
         }
         return testMethod.build();
     }

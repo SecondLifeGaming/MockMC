@@ -16,24 +16,28 @@ import io.papermc.paper.registry.data.dialog.type.DialogListType;
  */
 public interface DialogListTypeBuilderBaseMock extends DialogListType.Builder
 {
+	@Override
 	default DialogListType.Builder columns(int arg0)
 	{
 		// MockMC: Builder#columns
 		return null;
 	}
 
+	@Override
 	default DialogListType build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default DialogListType.Builder exitAction(ActionButton arg0)
 	{
 		// MockMC: Builder#exitAction
 		return null;
 	}
 
+	@Override
 	default DialogListType.Builder buttonWidth(int arg0)
 	{
 		// MockMC: Builder#buttonWidth

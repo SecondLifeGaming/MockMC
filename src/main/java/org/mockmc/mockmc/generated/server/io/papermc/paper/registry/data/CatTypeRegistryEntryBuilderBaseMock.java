@@ -22,12 +22,14 @@ public interface CatTypeRegistryEntryBuilderBaseMock
 			CatTypeRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Cat.Type>
 {
+	@Override
 	default io.papermc.paper.registry.data.CatTypeRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)
 	{
 		// MockMC: Builder#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.CatTypeRegistryEntry.Builder babyClientTextureAsset(ClientTextureAsset arg0)
 	{
 		// MockMC: Builder#babyClientTextureAsset

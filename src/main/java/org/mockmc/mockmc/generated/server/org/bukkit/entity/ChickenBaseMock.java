@@ -14,37 +14,15 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ChickenBaseMock extends Chicken, AnimalsBaseMock
 {
+	@Override
 	default Chicken.Variant getVariant()
 	{
 		// MockMC: Chicken#getVariant
 		return null;
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Chicken#getLeashHolder
-		return null;
-	}
-
-	default boolean isChickenJockey()
-	{
-		// MockMC: Chicken#isChickenJockey
-		return false;
-	}
-
-	default Chicken.SoundVariant getSoundVariant()
-	{
-		// MockMC: Chicken#getSoundVariant
-		return null;
-	}
-
-	default void setSoundVariant(Chicken.SoundVariant arg0)
-	{
-		// MockMC: Chicken#setSoundVariant
 	}
 
 	@Override
@@ -54,15 +32,18 @@ public interface ChickenBaseMock extends Chicken, AnimalsBaseMock
 		return false;
 	}
 
-	default void setEggLayTime(int arg0)
+	@Override
+	default boolean isChickenJockey()
 	{
-		// MockMC: Chicken#setEggLayTime
+		// MockMC: Chicken#isChickenJockey
+		return false;
 	}
 
-	default int getEggLayTime()
+	@Override
+	default Chicken.SoundVariant getSoundVariant()
 	{
-		// MockMC: Chicken#getEggLayTime
-		return 0;
+		// MockMC: Chicken#getSoundVariant
+		return null;
 	}
 
 	@Override
@@ -72,11 +53,39 @@ public interface ChickenBaseMock extends Chicken, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default void setSoundVariant(Chicken.SoundVariant arg0)
+	{
+		// MockMC: Chicken#setSoundVariant
+	}
+
+	@Override
+	default void setEggLayTime(int arg0)
+	{
+		// MockMC: Chicken#setEggLayTime
+	}
+
+	@Override
+	default int getEggLayTime()
+	{
+		// MockMC: Chicken#getEggLayTime
+		return 0;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Chicken#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setIsChickenJockey(boolean arg0)
 	{
 		// MockMC: Chicken#setIsChickenJockey
 	}
 
+	@Override
 	default void setVariant(Chicken.Variant arg0)
 	{
 		// MockMC: Chicken#setVariant

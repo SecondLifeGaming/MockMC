@@ -16,18 +16,21 @@ import org.bukkit.command.CommandSender;
  */
 public interface PaperSubcommandBaseMock extends PaperSubcommand
 {
+	@Override
 	default List<String> tabComplete(CommandSender arg0, String arg1, String[] arg2)
 	{
 		// MockMC: PaperSubcommand#tabComplete
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean execute(CommandSender arg0, String arg1, String[] arg2)
 	{
 		// MockMC: PaperSubcommand#execute
 		return false;
 	}
 
+	@Override
 	default boolean tabCompletes()
 	{
 		// MockMC: PaperSubcommand#tabCompletes

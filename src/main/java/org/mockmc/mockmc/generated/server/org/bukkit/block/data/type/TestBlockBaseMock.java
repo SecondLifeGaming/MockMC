@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface TestBlockBaseMock extends TestBlock, BlockDataBaseMock
 {
+	@Override
 	default void setMode(TestBlock.Mode arg0)
 	{
 		// MockMC: TestBlock#setMode
 	}
 
+	@Override
 	default TestBlock.Mode getMode()
 	{
 		// MockMC: TestBlock#getMode

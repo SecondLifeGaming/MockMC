@@ -17,36 +17,42 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ItemDialogBodyBaseMock extends ItemDialogBody
 {
+	@Override
 	default int height()
 	{
 		// MockMC: ItemDialogBody#height
 		return 0;
 	}
 
+	@Override
 	default PlainMessageDialogBody description()
 	{
 		// MockMC: ItemDialogBody#description
 		return null;
 	}
 
+	@Override
 	default boolean showTooltip()
 	{
 		// MockMC: ItemDialogBody#showTooltip
 		return false;
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: ItemDialogBody#width
 		return 0;
 	}
 
+	@Override
 	default boolean showDecorations()
 	{
 		// MockMC: ItemDialogBody#showDecorations
 		return false;
 	}
 
+	@Override
 	default ItemStack item()
 	{
 		// MockMC: ItemDialogBody#item

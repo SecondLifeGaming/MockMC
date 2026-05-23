@@ -17,6 +17,7 @@ import org.bukkit.NamespacedKey;
  */
 public interface WritablePlayerCookieConnectionBaseMock extends WritablePlayerCookieConnection, PlayerConnectionBaseMock
 {
+	@Override
 	default void storeCookie(NamespacedKey arg0, byte[] arg1)
 	{
 		// MockMC: WritablePlayerCookieConnection#storeCookie

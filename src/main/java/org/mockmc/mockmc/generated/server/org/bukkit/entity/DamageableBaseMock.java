@@ -16,13 +16,15 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface DamageableBaseMock extends Damageable, EntityBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11")
 	default double getMaxHealth()
 	{
@@ -34,28 +36,33 @@ public interface DamageableBaseMock extends Damageable, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11")
 	default void setMaxHealth(double arg0)
 	{
 		// MockMC: Damageable#setMaxHealth
 	}
 
+	@Override
 	default double getAbsorptionAmount()
 	{
 		// MockMC: Damageable#getAbsorptionAmount
 		return 0.0d;
 	}
 
+	@Override
 	default void damage(double arg0, Entity arg1)
 	{
 		// MockMC: Damageable#damage
 	}
 
+	@Override
 	default void damage(double arg0, DamageSource arg1)
 	{
 		// MockMC: Damageable#damage
 	}
 
+	@Override
 	default void damage(double arg0)
 	{
 		// MockMC: Damageable#damage
@@ -65,42 +72,50 @@ public interface DamageableBaseMock extends Damageable, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11")
 	default void resetMaxHealth()
 	{
 		// MockMC: Damageable#resetMaxHealth
 	}
 
+	@Override
 	default void kill()
 	{
 		// MockMC: Damageable#kill
 	}
 
+	@Override
 	default void kill(DamageSource arg0)
 	{
 		// MockMC: Damageable#kill
 	}
 
+	@Override
 	default void setAbsorptionAmount(double arg0)
 	{
 		// MockMC: Damageable#setAbsorptionAmount
 	}
 
+	@Override
 	default void heal(double arg0, EntityRegainHealthEvent.RegainReason arg1)
 	{
 		// MockMC: Damageable#heal
 	}
 
+	@Override
 	default void heal(double arg0)
 	{
 		// MockMC: Damageable#heal
 	}
 
+	@Override
 	default void setHealth(double arg0)
 	{
 		// MockMC: Damageable#setHealth
 	}
 
+	@Override
 	default double getHealth()
 	{
 		// MockMC: Damageable#getHealth

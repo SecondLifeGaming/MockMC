@@ -17,30 +17,35 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface ToolBuilderBaseMock extends Tool.Builder, DataComponentBuilderBaseMock<Tool>
 {
+	@Override
 	default Tool.Builder defaultMiningSpeed(float arg0)
 	{
 		// MockMC: Builder#defaultMiningSpeed
 		return null;
 	}
 
+	@Override
 	default Tool.Builder damagePerBlock(int arg0)
 	{
 		// MockMC: Builder#damagePerBlock
 		return null;
 	}
 
+	@Override
 	default Tool.Builder canDestroyBlocksInCreative(boolean arg0)
 	{
 		// MockMC: Builder#canDestroyBlocksInCreative
 		return null;
 	}
 
+	@Override
 	default Tool.Builder addRules(Collection<Tool.Rule> arg0)
 	{
 		// MockMC: Builder#addRules
 		return null;
 	}
 
+	@Override
 	default Tool.Builder addRule(Tool.Rule arg0)
 	{
 		// MockMC: Builder#addRule

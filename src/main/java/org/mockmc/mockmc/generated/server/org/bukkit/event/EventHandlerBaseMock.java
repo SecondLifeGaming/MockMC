@@ -17,18 +17,21 @@ import org.bukkit.event.EventPriority;
  */
 public interface EventHandlerBaseMock extends EventHandler
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: EventHandler#annotationType
 		return null;
 	}
 
+	@Override
 	default boolean ignoreCancelled()
 	{
 		// MockMC: EventHandler#ignoreCancelled
 		return false;
 	}
 
+	@Override
 	default EventPriority priority()
 	{
 		// MockMC: EventHandler#priority

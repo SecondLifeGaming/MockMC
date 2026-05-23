@@ -15,24 +15,28 @@ import java.util.OptionalInt;
  */
 public interface IntOrBaseMock extends IntOr
 {
+	@Override
 	default int intValue()
 	{
 		// MockMC: IntOr#intValue
 		return 0;
 	}
 
+	@Override
 	default boolean isDefined()
 	{
 		// MockMC: IntOr#isDefined
 		return false;
 	}
 
+	@Override
 	default int or(int arg0)
 	{
 		// MockMC: IntOr#or
 		return 0;
 	}
 
+	@Override
 	default OptionalInt value()
 	{
 		// MockMC: IntOr#value

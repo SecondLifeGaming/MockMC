@@ -16,6 +16,7 @@ import net.kyori.adventure.text.Component;
  */
 public interface BedEnterProblemBaseMock extends BedEnterProblem
 {
+	@Override
 	default Component errorMessage()
 	{
 		// MockMC: BedEnterProblem#errorMessage

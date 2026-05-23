@@ -17,12 +17,14 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface EntityEquipmentChangedEventEquipmentChangeBaseMock extends EntityEquipmentChangedEvent.EquipmentChange
 {
+	@Override
 	default ItemStack oldItem()
 	{
 		// MockMC: EquipmentChange#oldItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack newItem()
 	{
 		// MockMC: EquipmentChange#newItem

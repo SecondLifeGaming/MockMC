@@ -16,6 +16,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.OrientableBaseMo
  */
 public interface CreakingHeartBaseMock extends CreakingHeart, OrientableBaseMock
 {
+	@Override
 	default void setCreakingHeartState(CreakingHeart.State arg0)
 	{
 		// MockMC: CreakingHeart#setCreakingHeartState
@@ -25,12 +26,14 @@ public interface CreakingHeartBaseMock extends CreakingHeart, OrientableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5", forRemoval = true)
 	default void setActive(boolean arg0)
 	{
 		// MockMC: CreakingHeart#setActive
 	}
 
+	@Override
 	default boolean isNatural()
 	{
 		// MockMC: CreakingHeart#isNatural
@@ -41,6 +44,7 @@ public interface CreakingHeartBaseMock extends CreakingHeart, OrientableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5", forRemoval = true)
 	default boolean isActive()
 	{
@@ -48,11 +52,13 @@ public interface CreakingHeartBaseMock extends CreakingHeart, OrientableBaseMock
 		return false;
 	}
 
+	@Override
 	default void setNatural(boolean arg0)
 	{
 		// MockMC: CreakingHeart#setNatural
 	}
 
+	@Override
 	default CreakingHeart.State getCreakingHeartState()
 	{
 		// MockMC: CreakingHeart#getCreakingHeartState

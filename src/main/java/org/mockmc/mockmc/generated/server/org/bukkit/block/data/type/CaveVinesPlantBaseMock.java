@@ -16,6 +16,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface CaveVinesPlantBaseMock extends CaveVinesPlant, BlockDataBaseMock
 {
+	@Override
 	default boolean hasBerries()
 	{
 		// MockMC: CaveVinesPlant#hasBerries
@@ -26,6 +27,7 @@ public interface CaveVinesPlantBaseMock extends CaveVinesPlant, BlockDataBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isBerries()
 	{
@@ -33,6 +35,7 @@ public interface CaveVinesPlantBaseMock extends CaveVinesPlant, BlockDataBaseMoc
 		return false;
 	}
 
+	@Override
 	default void setBerries(boolean arg0)
 	{
 		// MockMC: CaveVinesPlant#setBerries

@@ -16,33 +16,39 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface GrindstoneInventoryBaseMock extends GrindstoneInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: GrindstoneInventory#getResult
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: GrindstoneInventory#setResult
 	}
 
+	@Override
 	default ItemStack getUpperItem()
 	{
 		// MockMC: GrindstoneInventory#getUpperItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setUpperItem(ItemStack arg0)
 	{
 		// MockMC: GrindstoneInventory#setUpperItem
 	}
 
+	@Override
 	default void setLowerItem(ItemStack arg0)
 	{
 		// MockMC: GrindstoneInventory#setLowerItem
 	}
 
+	@Override
 	default ItemStack getLowerItem()
 	{
 		// MockMC: GrindstoneInventory#getLowerItem

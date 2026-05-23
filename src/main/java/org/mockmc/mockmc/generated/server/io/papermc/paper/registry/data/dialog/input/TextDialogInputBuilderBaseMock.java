@@ -15,36 +15,42 @@ import io.papermc.paper.registry.data.dialog.input.TextDialogInput;
  */
 public interface TextDialogInputBuilderBaseMock extends TextDialogInput.Builder
 {
+	@Override
 	default TextDialogInput.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default TextDialogInput.Builder maxLength(int arg0)
 	{
 		// MockMC: Builder#maxLength
 		return null;
 	}
 
+	@Override
 	default TextDialogInput.Builder labelVisible(boolean arg0)
 	{
 		// MockMC: Builder#labelVisible
 		return null;
 	}
 
+	@Override
 	default TextDialogInput build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default TextDialogInput.Builder initial(String arg0)
 	{
 		// MockMC: Builder#initial
 		return null;
 	}
 
+	@Override
 	default TextDialogInput.Builder multiline(TextDialogInput.MultilineOptions arg0)
 	{
 		// MockMC: Builder#multiline

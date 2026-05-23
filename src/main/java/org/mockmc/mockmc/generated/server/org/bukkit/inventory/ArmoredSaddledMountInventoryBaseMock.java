@@ -16,7 +16,7 @@ import org.bukkit.inventory.ArmoredSaddledMountInventory;
 public interface ArmoredSaddledMountInventoryBaseMock
 		extends
 			ArmoredSaddledMountInventory,
-			ArmoredMountInventoryBaseMock,
-			SaddledMountInventoryBaseMock
+			SaddledMountInventoryBaseMock,
+			ArmoredMountInventoryBaseMock
 {
 }

@@ -21,23 +21,27 @@ public interface PlayerConfigurationConnectionBaseMock
 			PlayerConfigurationConnection,
 			PlayerCommonConnectionBaseMock
 {
+	@Override
 	default PlayerProfile getProfile()
 	{
 		// MockMC: PlayerConfigurationConnection#getProfile
 		return null;
 	}
 
+	@Override
 	default Audience getAudience()
 	{
 		// MockMC: PlayerConfigurationConnection#getAudience
 		return null;
 	}
 
+	@Override
 	default void clearChat()
 	{
 		// MockMC: PlayerConfigurationConnection#clearChat
 	}
 
+	@Override
 	default void completeReconfiguration()
 	{
 		// MockMC: PlayerConfigurationConnection#completeReconfiguration

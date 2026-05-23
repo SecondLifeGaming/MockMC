@@ -24,25 +24,30 @@ import org.mockmc.mockmc.generated.server.org.bukkit.metadata.MetadatableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 {
+	@Override
 	default void setType(Material arg0)
 	{
 		// MockMC: BlockState#setType
 	}
 
+	@Override
 	default boolean isPlaced()
 	{
 		// MockMC: BlockState#isPlaced
 		return false;
 	}
 
+	@Override
 	default void setBlockData(BlockData arg0)
 	{
 		// MockMC: BlockState#setBlockData
 	}
 
+	@Override
 	default Block getBlock()
 	{
 		// MockMC: BlockState#getBlock
@@ -53,6 +58,7 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setData(MaterialData arg0)
@@ -64,6 +70,7 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default byte getRawData()
 	{
@@ -71,72 +78,84 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 		return 0;
 	}
 
+	@Override
 	default byte getLightLevel()
 	{
 		// MockMC: BlockState#getLightLevel
 		return 0;
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops(ItemStack arg0, Entity arg1)
 	{
 		// MockMC: BlockState#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops(ItemStack arg0)
 	{
 		// MockMC: BlockState#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops()
 	{
 		// MockMC: BlockState#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getY()
 	{
 		// MockMC: BlockState#getY
 		return 0;
 	}
 
+	@Override
 	default int getX()
 	{
 		// MockMC: BlockState#getX
 		return 0;
 	}
 
+	@Override
 	default Material getType()
 	{
 		// MockMC: BlockState#getType
 		return null;
 	}
 
+	@Override
 	default int getZ()
 	{
 		// MockMC: BlockState#getZ
 		return 0;
 	}
 
+	@Override
 	default Chunk getChunk()
 	{
 		// MockMC: BlockState#getChunk
 		return null;
 	}
 
+	@Override
 	default boolean update(boolean arg0, boolean arg1)
 	{
 		// MockMC: BlockState#update
 		return false;
 	}
 
+	@Override
 	default boolean update()
 	{
 		// MockMC: BlockState#update
 		return false;
 	}
 
+	@Override
 	default boolean update(boolean arg0)
 	{
 		// MockMC: BlockState#update
@@ -147,48 +166,56 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default void setRawData(byte arg0)
 	{
 		// MockMC: BlockState#setRawData
 	}
 
+	@Override
 	default boolean isSuffocating()
 	{
 		// MockMC: BlockState#isSuffocating
 		return false;
 	}
 
+	@Override
 	default Location getLocation(Location arg0)
 	{
 		// MockMC: BlockState#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: BlockState#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default World getWorld()
 	{
 		// MockMC: BlockState#getWorld
 		return null;
 	}
 
+	@Override
 	default BlockData getBlockData()
 	{
 		// MockMC: BlockState#getBlockData
 		return null;
 	}
 
+	@Override
 	default BlockState copy(Location arg0)
 	{
 		// MockMC: BlockState#copy
 		return null;
 	}
 
+	@Override
 	default BlockState copy()
 	{
 		// MockMC: BlockState#copy
@@ -199,6 +226,7 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default MaterialData getData()
@@ -207,6 +235,7 @@ public interface BlockStateBaseMock extends BlockState, MetadatableBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean isCollidable()
 	{
 		// MockMC: BlockState#isCollidable

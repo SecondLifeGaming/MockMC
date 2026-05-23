@@ -18,13 +18,15 @@ import org.bukkit.inventory.meta.tags.ItemTagType;
  *             modern build cycles.
  */
 @Deprecated(since = "1.14", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ItemTagTypeBaseMock<T, Z> extends ItemTagType<T, Z>
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default Class<T> getPrimitiveType()
 	{
@@ -36,6 +38,7 @@ public interface ItemTagTypeBaseMock<T, Z> extends ItemTagType<T, Z>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default Class<Z> getComplexType()
 	{
@@ -47,6 +50,7 @@ public interface ItemTagTypeBaseMock<T, Z> extends ItemTagType<T, Z>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default T toPrimitive(Z arg0, ItemTagAdapterContext arg1)
 	{
@@ -58,6 +62,7 @@ public interface ItemTagTypeBaseMock<T, Z> extends ItemTagType<T, Z>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default Z fromPrimitive(T arg0, ItemTagAdapterContext arg1)
 	{

@@ -18,7 +18,7 @@ import org.bukkit.block.SuspiciousSand;
  */
 @Deprecated(since = "1.20", forRemoval = true)
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface SuspiciousSandBaseMock extends SuspiciousSand, BrushableBlockBaseMock
 {
 }

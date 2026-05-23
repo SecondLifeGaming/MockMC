@@ -20,30 +20,35 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.Buildab
  */
 public interface ConsumableBaseMock extends Consumable, BuildableDataComponentBaseMock<Consumable, Consumable.Builder>
 {
+	@Override
 	default boolean hasConsumeParticles()
 	{
 		// MockMC: Consumable#hasConsumeParticles
 		return false;
 	}
 
+	@Override
 	default List<ConsumeEffect> consumeEffects()
 	{
 		// MockMC: Consumable#consumeEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ItemUseAnimation animation()
 	{
 		// MockMC: Consumable#animation
 		return null;
 	}
 
+	@Override
 	default Key sound()
 	{
 		// MockMC: Consumable#sound
 		return null;
 	}
 
+	@Override
 	default float consumeSeconds()
 	{
 		// MockMC: Consumable#consumeSeconds

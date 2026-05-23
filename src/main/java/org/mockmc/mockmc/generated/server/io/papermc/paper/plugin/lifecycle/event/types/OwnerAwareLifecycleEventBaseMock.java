@@ -19,11 +19,13 @@ public interface OwnerAwareLifecycleEventBaseMock<O extends LifecycleEventOwner>
 			OwnerAwareLifecycleEvent<O>,
 			LifecycleEventBaseMock
 {
+	@Override
 	default void setOwner(O arg0)
 	{
 		// MockMC: OwnerAwareLifecycleEvent#setOwner
 	}
 
+	@Override
 	default O castOwner(LifecycleEventOwner arg0)
 	{
 		// MockMC: OwnerAwareLifecycleEvent#castOwner

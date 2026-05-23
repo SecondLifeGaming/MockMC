@@ -15,35 +15,14 @@ import org.bukkit.entity.LivingEntity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface GoatBaseMock extends Goat, AnimalsBaseMock
 {
+	@Override
 	default void setScreaming(boolean arg0)
 	{
 		// MockMC: Goat#setScreaming
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Goat#getLeashHolder
-		return null;
-	}
-
-	default void ram(LivingEntity arg0)
-	{
-		// MockMC: Goat#ram
-	}
-
-	default boolean hasLeftHorn()
-	{
-		// MockMC: Goat#hasLeftHorn
-		return false;
-	}
-
-	default void setRightHorn(boolean arg0)
-	{
-		// MockMC: Goat#setRightHorn
 	}
 
 	@Override
@@ -53,15 +32,23 @@ public interface GoatBaseMock extends Goat, AnimalsBaseMock
 		return false;
 	}
 
-	default void setLeftHorn(boolean arg0)
+	@Override
+	default void ram(LivingEntity arg0)
 	{
-		// MockMC: Goat#setLeftHorn
+		// MockMC: Goat#ram
 	}
 
-	default boolean isScreaming()
+	@Override
+	default boolean hasLeftHorn()
 	{
-		// MockMC: Goat#isScreaming
+		// MockMC: Goat#hasLeftHorn
 		return false;
+	}
+
+	@Override
+	default void setRightHorn(boolean arg0)
+	{
+		// MockMC: Goat#setRightHorn
 	}
 
 	@Override
@@ -71,6 +58,27 @@ public interface GoatBaseMock extends Goat, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default void setLeftHorn(boolean arg0)
+	{
+		// MockMC: Goat#setLeftHorn
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Goat#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default boolean isScreaming()
+	{
+		// MockMC: Goat#isScreaming
+		return false;
+	}
+
+	@Override
 	default boolean hasRightHorn()
 	{
 		// MockMC: Goat#hasRightHorn

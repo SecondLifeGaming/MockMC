@@ -18,6 +18,7 @@ import org.bukkit.command.TabCompleter;
  */
 public interface TabCompleterBaseMock extends TabCompleter
 {
+	@Override
 	default List<String> onTabComplete(CommandSender arg0, Command arg1, String arg2, String[] arg3)
 	{
 		// MockMC: TabCompleter#onTabComplete

@@ -18,58 +18,68 @@ import org.bukkit.projectiles.ProjectileSource;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: AbstractArrow#setItem
 	}
 
+	@Override
 	default int getLifetimeTicks()
 	{
 		// MockMC: AbstractArrow#getLifetimeTicks
 		return 0;
 	}
 
+	@Override
 	default ItemStack getItemStack()
 	{
 		// MockMC: AbstractArrow#getItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean isShotFromCrossbow()
 	{
 		// MockMC: AbstractArrow#isShotFromCrossbow
 		return false;
 	}
 
+	@Override
 	default void setCritical(boolean arg0)
 	{
 		// MockMC: AbstractArrow#setCritical
 	}
 
+	@Override
 	default void setHitSound(Sound arg0)
 	{
 		// MockMC: AbstractArrow#setHitSound
 	}
 
+	@Override
 	default void setItemStack(ItemStack arg0)
 	{
 		// MockMC: AbstractArrow#setItemStack
 	}
 
+	@Override
 	default AbstractArrow.PickupStatus getPickupStatus()
 	{
 		// MockMC: AbstractArrow#getPickupStatus
 		return null;
 	}
 
+	@Override
 	default void setDamage(double arg0)
 	{
 		// MockMC: AbstractArrow#setDamage
@@ -79,6 +89,7 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default ItemStack getItem()
 	{
@@ -86,11 +97,13 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setPickupStatus(AbstractArrow.PickupStatus arg0)
 	{
 		// MockMC: AbstractArrow#setPickupStatus
 	}
 
+	@Override
 	default Sound getHitSound()
 	{
 		// MockMC: AbstractArrow#getHitSound
@@ -101,28 +114,33 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setPickupRule(AbstractArrow.PickupRule arg0)
 	{
 		// MockMC: AbstractArrow#setPickupRule
 	}
 
+	@Override
 	default void setWeapon(ItemStack arg0)
 	{
 		// MockMC: AbstractArrow#setWeapon
 	}
 
+	@Override
 	default boolean isCritical()
 	{
 		// MockMC: AbstractArrow#isCritical
 		return false;
 	}
 
+	@Override
 	default void setShooter(ProjectileSource arg0, boolean arg1)
 	{
 		// MockMC: AbstractArrow#setShooter
 	}
 
+	@Override
 	default boolean isInBlock()
 	{
 		// MockMC: AbstractArrow#isInBlock
@@ -133,12 +151,14 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setKnockbackStrength(int arg0)
 	{
 		// MockMC: AbstractArrow#setKnockbackStrength
 	}
 
+	@Override
 	default ItemStack getWeapon()
 	{
 		// MockMC: AbstractArrow#getWeapon
@@ -149,6 +169,7 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default AbstractArrow.PickupRule getPickupRule()
 	{
@@ -160,6 +181,7 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int getKnockbackStrength()
 	{
@@ -167,6 +189,7 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getPierceLevel()
 	{
 		// MockMC: AbstractArrow#getPierceLevel
@@ -177,6 +200,7 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default Block getAttachedBlock()
 	{
@@ -184,11 +208,13 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 		return null;
 	}
 
+	@Override
 	default void setPierceLevel(int arg0)
 	{
 		// MockMC: AbstractArrow#setPierceLevel
 	}
 
+	@Override
 	default void setLifetimeTicks(int arg0)
 	{
 		// MockMC: AbstractArrow#setLifetimeTicks
@@ -198,18 +224,21 @@ public interface AbstractArrowBaseMock extends AbstractArrow, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setShotFromCrossbow(boolean arg0)
 	{
 		// MockMC: AbstractArrow#setShotFromCrossbow
 	}
 
+	@Override
 	default List<Block> getAttachedBlocks()
 	{
 		// MockMC: AbstractArrow#getAttachedBlocks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default double getDamage()
 	{
 		// MockMC: AbstractArrow#getDamage

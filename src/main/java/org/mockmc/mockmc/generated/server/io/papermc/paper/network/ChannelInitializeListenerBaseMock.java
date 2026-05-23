@@ -15,6 +15,7 @@ import io.papermc.paper.network.ChannelInitializeListener;
  */
 public interface ChannelInitializeListenerBaseMock extends ChannelInitializeListener
 {
+	@Override
 	default void afterInitChannel(Channel arg0)
 	{
 		// MockMC: ChannelInitializeListener#afterInitChannel

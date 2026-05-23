@@ -14,16 +14,10 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractCowBaseMock extends AbstractCow, AnimalsBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: AbstractCow#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface AbstractCowBaseMock extends AbstractCow, AnimalsBaseMock
 	{
 		// MockMC: AbstractCow#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: AbstractCow#getLeashHolder
+		return null;
 	}
 }

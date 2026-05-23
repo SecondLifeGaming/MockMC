@@ -15,14 +15,17 @@ import org.bukkit.block.SculkCatalyst;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SculkCatalystBaseMock extends SculkCatalyst, TileStateBaseMock
 {
+	@Override
 	default void bloom(Block arg0, int arg1)
 	{
 		// MockMC: SculkCatalyst#bloom
 	}
 
+	@Override
 	default void bloom(Position arg0, int arg1)
 	{
 		// MockMC: SculkCatalyst#bloom

@@ -18,6 +18,7 @@ public interface DialogActionStaticActionBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.action.DialogAction.StaticAction
 {
+	@Override
 	default ClickEvent value()
 	{
 		// MockMC: StaticAction#value

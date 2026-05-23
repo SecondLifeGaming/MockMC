@@ -23,21 +23,25 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MobBaseMock extends Mob, LeashableBaseMock, LootableBaseMock, LivingEntityBaseMock
 {
+	@Override
 	default boolean isAggressive()
 	{
 		// MockMC: Mob#isAggressive
 		return false;
 	}
 
+	@Override
 	default Sound getAmbientSound()
 	{
 		// MockMC: Mob#getAmbientSound
 		return null;
 	}
 
+	@Override
 	default void setAggressive(boolean arg0)
 	{
 		// MockMC: Mob#setAggressive
@@ -50,12 +54,14 @@ public interface MobBaseMock extends Mob, LeashableBaseMock, LootableBaseMock, L
 		return null;
 	}
 
+	@Override
 	default int getMaxHeadPitch()
 	{
 		// MockMC: Mob#getMaxHeadPitch
 		return 0;
 	}
 
+	@Override
 	default boolean isInDaylight()
 	{
 		// MockMC: Mob#isInDaylight
@@ -75,45 +81,53 @@ public interface MobBaseMock extends Mob, LeashableBaseMock, LootableBaseMock, L
 		// MockMC: Mob#setLootTable
 	}
 
+	@Override
 	default LivingEntity getTarget()
 	{
 		// MockMC: Mob#getTarget
 		return null;
 	}
 
+	@Override
 	default void setTarget(LivingEntity arg0)
 	{
 		// MockMC: Mob#setTarget
 	}
 
+	@Override
 	default int getHeadRotationSpeed()
 	{
 		// MockMC: Mob#getHeadRotationSpeed
 		return 0;
 	}
 
+	@Override
 	default void setLeftHanded(boolean arg0)
 	{
 		// MockMC: Mob#setLeftHanded
 	}
 
+	@Override
 	default void setAware(boolean arg0)
 	{
 		// MockMC: Mob#setAware
 	}
 
+	@Override
 	default boolean isLeftHanded()
 	{
 		// MockMC: Mob#isLeftHanded
 		return false;
 	}
 
+	@Override
 	default boolean shouldDespawnInPeaceful()
 	{
 		// MockMC: Mob#shouldDespawnInPeaceful
 		return false;
 	}
 
+	@Override
 	default boolean isAware()
 	{
 		// MockMC: Mob#isAware
@@ -127,54 +141,64 @@ public interface MobBaseMock extends Mob, LeashableBaseMock, LootableBaseMock, L
 		return false;
 	}
 
+	@Override
 	default void lookAt(double arg0, double arg1, double arg2, float arg3, float arg4)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default void lookAt(Entity arg0)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default void lookAt(double arg0, double arg1, double arg2)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default void lookAt(Entity arg0, float arg1, float arg2)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default void lookAt(Location arg0)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default void lookAt(Location arg0, float arg1, float arg2)
 	{
 		// MockMC: Mob#lookAt
 	}
 
+	@Override
 	default Pathfinder getPathfinder()
 	{
 		// MockMC: Mob#getPathfinder
 		return null;
 	}
 
+	@Override
 	default int getPossibleExperienceReward()
 	{
 		// MockMC: Mob#getPossibleExperienceReward
 		return 0;
 	}
 
+	@Override
 	default TriState getDespawnInPeacefulOverride()
 	{
 		// MockMC: Mob#getDespawnInPeacefulOverride
 		return null;
 	}
 
+	@Override
 	default void setDespawnInPeacefulOverride(TriState arg0)
 	{
 		// MockMC: Mob#setDespawnInPeacefulOverride

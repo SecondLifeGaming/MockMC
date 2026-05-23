@@ -15,20 +15,24 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.EntityBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ShearableBaseMock extends Shearable, EntityBaseMock
 {
+	@Override
 	default boolean readyToBeSheared()
 	{
 		// MockMC: Shearable#readyToBeSheared
 		return false;
 	}
 
+	@Override
 	default void shear()
 	{
 		// MockMC: Shearable#shear
 	}
 
+	@Override
 	default void shear(Sound.Source arg0)
 	{
 		// MockMC: Shearable#shear

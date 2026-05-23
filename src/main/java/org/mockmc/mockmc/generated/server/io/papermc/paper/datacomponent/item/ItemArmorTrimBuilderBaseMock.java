@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface ItemArmorTrimBuilderBaseMock extends ItemArmorTrim.Builder, DataComponentBuilderBaseMock<ItemArmorTrim>
 {
+	@Override
 	default ItemArmorTrim.Builder armorTrim(ArmorTrim arg0)
 	{
 		// MockMC: Builder#armorTrim

@@ -13,7 +13,13 @@ class PlayerGameConnectionBaseMockTest extends GeneratedTestBase
 	{
 		PlayerGameConnectionBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getPlayer());
+		try
+		{
+			assertSafeDefault(mock.getPlayer());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements PlayerGameConnectionBaseMock

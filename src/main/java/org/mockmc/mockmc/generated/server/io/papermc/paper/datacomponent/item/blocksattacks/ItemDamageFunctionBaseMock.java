@@ -15,24 +15,28 @@ import io.papermc.paper.datacomponent.item.blocksattacks.ItemDamageFunction;
  */
 public interface ItemDamageFunctionBaseMock extends ItemDamageFunction
 {
+	@Override
 	default float base()
 	{
 		// MockMC: ItemDamageFunction#base
 		return 0.0f;
 	}
 
+	@Override
 	default float factor()
 	{
 		// MockMC: ItemDamageFunction#factor
 		return 0.0f;
 	}
 
+	@Override
 	default float threshold()
 	{
 		// MockMC: ItemDamageFunction#threshold
 		return 0.0f;
 	}
 
+	@Override
 	default int damageToApply(float arg0)
 	{
 		// MockMC: ItemDamageFunction#damageToApply

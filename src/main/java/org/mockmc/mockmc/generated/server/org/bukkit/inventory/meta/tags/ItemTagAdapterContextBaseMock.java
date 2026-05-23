@@ -18,13 +18,15 @@ import org.bukkit.inventory.meta.tags.ItemTagAdapterContext;
  *             modern build cycles.
  */
 @Deprecated(since = "1.14", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ItemTagAdapterContextBaseMock extends ItemTagAdapterContext
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default CustomItemTagContainer newTagContainer()
 	{

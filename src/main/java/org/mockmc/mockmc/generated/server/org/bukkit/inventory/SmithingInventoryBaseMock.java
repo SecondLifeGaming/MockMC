@@ -17,50 +17,59 @@ import org.bukkit.inventory.SmithingInventory;
  */
 public interface SmithingInventoryBaseMock extends SmithingInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: SmithingInventory#getResult
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getInputTemplate()
 	{
 		// MockMC: SmithingInventory#getInputTemplate
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: SmithingInventory#setResult
 	}
 
+	@Override
 	default void setInputEquipment(ItemStack arg0)
 	{
 		// MockMC: SmithingInventory#setInputEquipment
 	}
 
+	@Override
 	default ItemStack getInputEquipment()
 	{
 		// MockMC: SmithingInventory#getInputEquipment
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setInputTemplate(ItemStack arg0)
 	{
 		// MockMC: SmithingInventory#setInputTemplate
 	}
 
+	@Override
 	default void setInputMineral(ItemStack arg0)
 	{
 		// MockMC: SmithingInventory#setInputMineral
 	}
 
+	@Override
 	default Recipe getRecipe()
 	{
 		// MockMC: SmithingInventory#getRecipe
 		return null;
 	}
 
+	@Override
 	default ItemStack getInputMineral()
 	{
 		// MockMC: SmithingInventory#getInputMineral

@@ -16,6 +16,7 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface FrogVariantRegistryEntryBaseMock extends FrogVariantRegistryEntry
 {
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: FrogVariantRegistryEntry#clientTextureAsset

@@ -15,16 +15,10 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedE
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface DrownedBaseMock extends Drowned, RangedEntityBaseMock, ZombieBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface DrownedBaseMock extends Drowned, ZombieBaseMock, RangedEntityBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Drowned#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -37,5 +31,12 @@ public interface DrownedBaseMock extends Drowned, RangedEntityBaseMock, ZombieBa
 	{
 		// MockMC: Drowned#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Drowned#getLeashHolder
+		return null;
 	}
 }

@@ -21,12 +21,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  */
 public interface MenuTypeBaseMock extends MenuType, FeatureDependantBaseMock, KeyedBaseMock
 {
+	@Override
 	default MenuType.Typed<InventoryView, InventoryViewBuilder<InventoryView>> typed()
 	{
 		// MockMC: MenuType#typed
 		return null;
 	}
 
+	@Override
 	default <V extends InventoryView, B extends InventoryViewBuilder<V>> MenuType.Typed<V, B> typed(Class<V> arg0)
 			throws IllegalArgumentException
 	{
@@ -34,12 +36,14 @@ public interface MenuTypeBaseMock extends MenuType, FeatureDependantBaseMock, Ke
 		return null;
 	}
 
+	@Override
 	default Class<? extends InventoryView> getInventoryViewClass()
 	{
 		// MockMC: MenuType#getInventoryViewClass
 		return null;
 	}
 
+	@Override
 	default InventoryView create(HumanEntity arg0, Component arg1)
 	{
 		// MockMC: MenuType#create

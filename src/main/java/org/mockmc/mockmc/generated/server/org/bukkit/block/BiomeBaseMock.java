@@ -15,9 +15,11 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface BiomeBaseMock extends Biome, OldEnumBaseMock<Biome>, KeyedBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface BiomeBaseMock extends Biome, KeyedBaseMock, OldEnumBaseMock<Biome>
 {
+	@Override
 	default String translationKey()
 	{
 		// MockMC: Biome#translationKey

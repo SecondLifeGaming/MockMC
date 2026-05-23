@@ -14,22 +14,10 @@ import org.bukkit.entity.Skeleton;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SkeletonBaseMock extends Skeleton, AbstractSkeletonBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Skeleton#getLeashHolder
-		return null;
-	}
-
-	default int inPowderedSnowTime()
-	{
-		// MockMC: Skeleton#inPowderedSnowTime
-		return 0;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -37,17 +25,34 @@ public interface SkeletonBaseMock extends Skeleton, AbstractSkeletonBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Skeleton#isLeashed
+		return false;
+	}
+
+	@Override
+	default int inPowderedSnowTime()
+	{
+		// MockMC: Skeleton#inPowderedSnowTime
+		return 0;
+	}
+
+	@Override
 	default void setConversionTime(int arg0)
 	{
 		// MockMC: Skeleton#setConversionTime
 	}
 
+	@Override
 	default boolean isConverting()
 	{
 		// MockMC: Skeleton#isConverting
 		return false;
 	}
 
+	@Override
 	default int getConversionTime()
 	{
 		// MockMC: Skeleton#getConversionTime
@@ -55,9 +60,9 @@ public interface SkeletonBaseMock extends Skeleton, AbstractSkeletonBaseMock
 	}
 
 	@Override
-	default boolean isLeashed()
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: Skeleton#isLeashed
-		return false;
+		// MockMC: Skeleton#getLeashHolder
+		return null;
 	}
 }

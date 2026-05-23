@@ -18,30 +18,35 @@ import org.bukkit.entity.Entity;
  */
 public interface CommandSourceStackBaseMock extends CommandSourceStack
 {
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: CommandSourceStack#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default CommandSourceStack withLocation(Location arg0)
 	{
 		// MockMC: CommandSourceStack#withLocation
 		return null;
 	}
 
+	@Override
 	default Entity getExecutor()
 	{
 		// MockMC: CommandSourceStack#getExecutor
 		return null;
 	}
 
+	@Override
 	default CommandSender getSender()
 	{
 		// MockMC: CommandSourceStack#getSender
 		return null;
 	}
 
+	@Override
 	default CommandSourceStack withExecutor(Entity arg0)
 	{
 		// MockMC: CommandSourceStack#withExecutor

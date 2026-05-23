@@ -20,79 +20,93 @@ import org.bukkit.entity.Mob;
  */
 public interface MobGoalsBaseMock extends MobGoals
 {
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getGoals(T arg0, GoalKey<T> arg1)
 	{
 		// MockMC: MobGoals#getGoals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> Goal<T> getGoal(T arg0, GoalKey<T> arg1)
 	{
 		// MockMC: MobGoals#getGoal
 		return null;
 	}
 
+	@Override
 	default <T extends Mob> void removeAllGoals(T arg0)
 	{
 		// MockMC: MobGoals#removeAllGoals
 	}
 
+	@Override
 	default <T extends Mob> void removeAllGoals(T arg0, GoalType arg1)
 	{
 		// MockMC: MobGoals#removeAllGoals
 	}
 
+	@Override
 	default <T extends Mob> void addGoal(T arg0, int arg1, Goal<T> arg2)
 	{
 		// MockMC: MobGoals#addGoal
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getAllGoalsWithout(T arg0, GoalType arg1)
 	{
 		// MockMC: MobGoals#getAllGoalsWithout
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getRunningGoals(T arg0)
 	{
 		// MockMC: MobGoals#getRunningGoals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getRunningGoals(T arg0, GoalType arg1)
 	{
 		// MockMC: MobGoals#getRunningGoals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> void removeGoal(T arg0, Goal<T> arg1)
 	{
 		// MockMC: MobGoals#removeGoal
 	}
 
+	@Override
 	default <T extends Mob> void removeGoal(T arg0, GoalKey<T> arg1)
 	{
 		// MockMC: MobGoals#removeGoal
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getRunningGoalsWithout(T arg0, GoalType arg1)
 	{
 		// MockMC: MobGoals#getRunningGoalsWithout
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getAllGoals(T arg0, GoalType arg1)
 	{
 		// MockMC: MobGoals#getAllGoals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> Collection<Goal<T>> getAllGoals(T arg0)
 	{
 		// MockMC: MobGoals#getAllGoals
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Mob> boolean hasGoal(T arg0, GoalKey<T> arg1)
 	{
 		// MockMC: MobGoals#hasGoal

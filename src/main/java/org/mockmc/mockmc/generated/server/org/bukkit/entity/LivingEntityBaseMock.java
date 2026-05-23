@@ -42,31 +42,36 @@ import org.mockmc.mockmc.generated.server.org.bukkit.projectiles.ProjectileSourc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LivingEntityBaseMock
 		extends
 			LivingEntity,
 			FrictionalBaseMock,
-			ProjectileSourceBaseMock,
+			DamageableBaseMock,
 			AttributableBaseMock,
-			DamageableBaseMock
+			ProjectileSourceBaseMock
 {
+	@Override
 	default double getLastDamage()
 	{
 		// MockMC: LivingEntity#getLastDamage
 		return 0.0d;
 	}
 
+	@Override
 	default void broadcastSlotBreak(EquipmentSlot arg0)
 	{
 		// MockMC: LivingEntity#broadcastSlotBreak
 	}
 
+	@Override
 	default void broadcastSlotBreak(EquipmentSlot arg0, Collection<Player> arg1)
 	{
 		// MockMC: LivingEntity#broadcastSlotBreak
 	}
 
+	@Override
 	default int getBeeStingerCooldown()
 	{
 		// MockMC: LivingEntity#getBeeStingerCooldown
@@ -77,6 +82,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default EntityCategory getCategory()
 	{
@@ -84,11 +90,13 @@ public interface LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setNoActionTicks(int arg0)
 	{
 		// MockMC: LivingEntity#setNoActionTicks
 	}
 
+	@Override
 	default boolean hasAI()
 	{
 		// MockMC: LivingEntity#hasAI
@@ -99,6 +107,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getArrowsStuck()
 	{
@@ -106,24 +115,28 @@ public interface LivingEntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean getCanPickupItems()
 	{
 		// MockMC: LivingEntity#getCanPickupItems
 		return false;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(int arg0)
 	{
 		// MockMC: LivingEntity#rayTraceEntities
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(int arg0, boolean arg1)
 	{
 		// MockMC: LivingEntity#rayTraceEntities
 		return null;
 	}
 
+	@Override
 	default Block getTargetBlock(Set<Material> arg0, int arg1)
 	{
 		// MockMC: LivingEntity#getTargetBlock
@@ -134,6 +147,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default Block getTargetBlock(int arg0, TargetBlockInfo.FluidMode arg1)
@@ -146,6 +160,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default Block getTargetBlock(int arg0)
 	{
@@ -153,22 +168,26 @@ public interface LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setWaypointStyle(Key arg0)
 	{
 		// MockMC: LivingEntity#setWaypointStyle
 	}
 
+	@Override
 	default boolean canUseEquipmentSlot(EquipmentSlot arg0)
 	{
 		// MockMC: LivingEntity#canUseEquipmentSlot
 		return false;
 	}
 
+	@Override
 	default void setCanPickupItems(boolean arg0)
 	{
 		// MockMC: LivingEntity#setCanPickupItems
 	}
 
+	@Override
 	default void swingOffHand()
 	{
 		// MockMC: LivingEntity#swingOffHand
@@ -178,6 +197,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default TargetEntityInfo getTargetEntityInfo(int arg0)
@@ -190,6 +210,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default TargetEntityInfo getTargetEntityInfo(int arg0, boolean arg1)
@@ -198,12 +219,14 @@ public interface LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default List<Block> getLineOfSight(Set<Material> arg0, int arg1)
 	{
 		// MockMC: LivingEntity#getLineOfSight
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Color getWaypointColor()
 	{
 		// MockMC: LivingEntity#getWaypointColor
@@ -214,6 +237,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default TargetBlockInfo getTargetBlockInfo(int arg0, TargetBlockInfo.FluidMode arg1)
@@ -226,6 +250,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default TargetBlockInfo getTargetBlockInfo(int arg0)
@@ -238,6 +263,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default ItemStack getItemInUse()
 	{
@@ -245,139 +271,164 @@ public interface LivingEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default float getSidewaysMovement()
 	{
 		// MockMC: LivingEntity#getSidewaysMovement
 		return 0.0f;
 	}
 
+	@Override
 	default void setRemainingAir(int arg0)
 	{
 		// MockMC: LivingEntity#setRemainingAir
 	}
 
+	@Override
 	default void setAI(boolean arg0)
 	{
 		// MockMC: LivingEntity#setAI
 	}
 
+	@Override
 	default float getUpwardsMovement()
 	{
 		// MockMC: LivingEntity#getUpwardsMovement
 		return 0.0f;
 	}
 
+	@Override
 	default void setArrowsInBody(int arg0)
 	{
 		// MockMC: LivingEntity#setArrowsInBody
 	}
 
+	@Override
 	default void setArrowsInBody(int arg0, boolean arg1)
 	{
 		// MockMC: LivingEntity#setArrowsInBody
 	}
 
+	@Override
 	default int getActiveItemUsedTime()
 	{
 		// MockMC: LivingEntity#getActiveItemUsedTime
 		return 0;
 	}
 
+	@Override
 	default void knockback(double arg0, double arg1, double arg2)
 	{
 		// MockMC: LivingEntity#knockback
 	}
 
+	@Override
 	default int getItemUseRemainingTime()
 	{
 		// MockMC: LivingEntity#getItemUseRemainingTime
 		return 0;
 	}
 
+	@Override
 	default float getHurtDirection()
 	{
 		// MockMC: LivingEntity#getHurtDirection
 		return 0.0f;
 	}
 
+	@Override
 	default boolean clearActivePotionEffects()
 	{
 		// MockMC: LivingEntity#clearActivePotionEffects
 		return false;
 	}
 
+	@Override
 	default void clearActiveItem()
 	{
 		// MockMC: LivingEntity#clearActiveItem
 	}
 
+	@Override
 	default int getNoDamageTicks()
 	{
 		// MockMC: LivingEntity#getNoDamageTicks
 		return 0;
 	}
 
+	@Override
 	default void setRemoveWhenFarAway(boolean arg0)
 	{
 		// MockMC: LivingEntity#setRemoveWhenFarAway
 	}
 
+	@Override
 	default boolean hasActiveItem()
 	{
 		// MockMC: LivingEntity#hasActiveItem
 		return false;
 	}
 
+	@Override
 	default boolean hasPotionEffect(PotionEffectType arg0)
 	{
 		// MockMC: LivingEntity#hasPotionEffect
 		return false;
 	}
 
+	@Override
 	default float getForwardsMovement()
 	{
 		// MockMC: LivingEntity#getForwardsMovement
 		return 0.0f;
 	}
 
+	@Override
 	default boolean getRemoveWhenFarAway()
 	{
 		// MockMC: LivingEntity#getRemoveWhenFarAway
 		return false;
 	}
 
+	@Override
 	default void setCollidable(boolean arg0)
 	{
 		// MockMC: LivingEntity#setCollidable
 	}
 
+	@Override
 	default void setArrowCooldown(int arg0)
 	{
 		// MockMC: LivingEntity#setArrowCooldown
 	}
 
+	@Override
 	default void setBeeStingerCooldown(int arg0)
 	{
 		// MockMC: LivingEntity#setBeeStingerCooldown
 	}
 
+	@Override
 	default void removePotionEffect(PotionEffectType arg0)
 	{
 		// MockMC: LivingEntity#removePotionEffect
 	}
 
+	@Override
 	default Sound getHurtSound()
 	{
 		// MockMC: LivingEntity#getHurtSound
 		return null;
 	}
 
+	@Override
 	default boolean isSleeping()
 	{
 		// MockMC: LivingEntity#isSleeping
 		return false;
 	}
 
+	@Override
 	default int getHandRaisedTime()
 	{
 		// MockMC: LivingEntity#getHandRaisedTime
@@ -388,65 +439,76 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default void setItemInUseTicks(int arg0)
 	{
 		// MockMC: LivingEntity#setItemInUseTicks
 	}
 
+	@Override
 	default boolean canBreatheUnderwater()
 	{
 		// MockMC: LivingEntity#canBreatheUnderwater
 		return false;
 	}
 
+	@Override
 	default Key getWaypointStyle()
 	{
 		// MockMC: LivingEntity#getWaypointStyle
 		return null;
 	}
 
+	@Override
 	default Collection<PotionEffect> getActivePotionEffects()
 	{
 		// MockMC: LivingEntity#getActivePotionEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setLastDamage(double arg0)
 	{
 		// MockMC: LivingEntity#setLastDamage
 	}
 
+	@Override
 	default Sound getFallDamageSound(int arg0)
 	{
 		// MockMC: LivingEntity#getFallDamageSound
 		return null;
 	}
 
+	@Override
 	default boolean isRiptiding()
 	{
 		// MockMC: LivingEntity#isRiptiding
 		return false;
 	}
 
+	@Override
 	default CombatTracker getCombatTracker()
 	{
 		// MockMC: LivingEntity#getCombatTracker
 		return null;
 	}
 
+	@Override
 	default List<Block> getLastTwoTargetBlocks(Set<Material> arg0, int arg1)
 	{
 		// MockMC: LivingEntity#getLastTwoTargetBlocks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isGliding()
 	{
 		// MockMC: LivingEntity#isGliding
 		return false;
 	}
 
+	@Override
 	default Set<UUID> getCollidableExemptions()
 	{
 		// MockMC: LivingEntity#getCollidableExemptions
@@ -457,24 +519,28 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setArrowsStuck(int arg0)
 	{
 		// MockMC: LivingEntity#setArrowsStuck
 	}
 
+	@Override
 	default Entity getTargetEntity(int arg0, boolean arg1)
 	{
 		// MockMC: LivingEntity#getTargetEntity
 		return null;
 	}
 
+	@Override
 	default Entity getTargetEntity(int arg0)
 	{
 		// MockMC: LivingEntity#getTargetEntity
 		return null;
 	}
 
+	@Override
 	default boolean isJumping()
 	{
 		// MockMC: LivingEntity#isJumping
@@ -485,6 +551,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4", forRemoval = true)
 	default int getItemInUseTicks()
 	{
@@ -492,62 +559,73 @@ public interface LivingEntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getRemainingAir()
 	{
 		// MockMC: LivingEntity#getRemainingAir
 		return 0;
 	}
 
+	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
 		// MockMC: LivingEntity#setLeashHolder
 		return false;
 	}
 
+	@Override
 	default int getBeeStingersInBody()
 	{
 		// MockMC: LivingEntity#getBeeStingersInBody
 		return 0;
 	}
 
+	@Override
 	default void setNoDamageTicks(int arg0)
 	{
 		// MockMC: LivingEntity#setNoDamageTicks
 	}
 
+	@Override
 	default void setBeeStingersInBody(int arg0)
 	{
 		// MockMC: LivingEntity#setBeeStingersInBody
 	}
 
+	@Override
 	default boolean hasLineOfSight(Entity arg0)
 	{
 		// MockMC: LivingEntity#hasLineOfSight
 		return false;
 	}
 
+	@Override
 	default boolean hasLineOfSight(Location arg0)
 	{
 		// MockMC: LivingEntity#hasLineOfSight
 		return false;
 	}
 
+	@Override
 	default void playPickupItemAnimation(Item arg0, int arg1)
 	{
 		// MockMC: LivingEntity#playPickupItemAnimation
 	}
 
+	@Override
 	default Sound getEatingSound(ItemStack arg0)
 	{
 		// MockMC: LivingEntity#getEatingSound
 		return null;
 	}
 
+	@Override
 	default void swingHand(EquipmentSlot arg0)
 	{
 		// MockMC: LivingEntity#swingHand
 	}
 
+	@Override
 	default void playPickupItemAnimation(Item arg0)
 	{
 		// MockMC: LivingEntity#playPickupItemAnimation
@@ -557,6 +635,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.10")
 	default int getNextBeeStingerRemoval()
 	{
@@ -564,17 +643,20 @@ public interface LivingEntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean isCollidable()
 	{
 		// MockMC: LivingEntity#isCollidable
 		return false;
 	}
 
+	@Override
 	default void setWaypointColor(Color arg0)
 	{
 		// MockMC: LivingEntity#setWaypointColor
 	}
 
+	@Override
 	default <T> T getMemory(MemoryKey<T> arg0)
 	{
 		// MockMC: LivingEntity#getMemory
@@ -585,52 +667,61 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default void setShieldBlockingDelay(int arg0)
 	{
 		// MockMC: LivingEntity#setShieldBlockingDelay
 	}
 
+	@Override
 	default void setBodyYaw(float arg0)
 	{
 		// MockMC: LivingEntity#setBodyYaw
 	}
 
+	@Override
 	default Player getKiller()
 	{
 		// MockMC: LivingEntity#getKiller
 		return null;
 	}
 
+	@Override
 	default int getActiveItemRemainingTime()
 	{
 		// MockMC: LivingEntity#getActiveItemRemainingTime
 		return 0;
 	}
 
+	@Override
 	default void completeUsingActiveItem()
 	{
 		// MockMC: LivingEntity#completeUsingActiveItem
 	}
 
+	@Override
 	default float getBodyYaw()
 	{
 		// MockMC: LivingEntity#getBodyYaw
 		return 0.0f;
 	}
 
+	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
 		// MockMC: LivingEntity#getLeashHolder
 		return null;
 	}
 
+	@Override
 	default Location getEyeLocation()
 	{
 		// MockMC: LivingEntity#getEyeLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Sound getDeathSound()
 	{
 		// MockMC: LivingEntity#getDeathSound
@@ -641,44 +732,52 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setHurtDirection(float arg0)
 	{
 		// MockMC: LivingEntity#setHurtDirection
 	}
 
+	@Override
 	default ItemStack getActiveItem()
 	{
 		// MockMC: LivingEntity#getActiveItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setMaximumAir(int arg0)
 	{
 		// MockMC: LivingEntity#setMaximumAir
 	}
 
+	@Override
 	default void setMaximumNoDamageTicks(int arg0)
 	{
 		// MockMC: LivingEntity#setMaximumNoDamageTicks
 	}
 
+	@Override
 	default void startUsingItem(EquipmentSlot arg0)
 	{
 		// MockMC: LivingEntity#startUsingItem
 	}
 
+	@Override
 	default PotionEffect getPotionEffect(PotionEffectType arg0)
 	{
 		// MockMC: LivingEntity#getPotionEffect
 		return null;
 	}
 
+	@Override
 	default void setRiptiding(boolean arg0)
 	{
 		// MockMC: LivingEntity#setRiptiding
 	}
 
+	@Override
 	default int getArrowCooldown()
 	{
 		// MockMC: LivingEntity#getArrowCooldown
@@ -689,41 +788,48 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.10")
 	default void setNextArrowRemoval(int arg0)
 	{
 		// MockMC: LivingEntity#setNextArrowRemoval
 	}
 
+	@Override
 	default <T> void setMemory(MemoryKey<T> arg0, T arg1)
 	{
 		// MockMC: LivingEntity#setMemory
 	}
 
+	@Override
 	default Block getTargetBlockExact(int arg0, FluidCollisionMode arg1)
 	{
 		// MockMC: LivingEntity#getTargetBlockExact
 		return null;
 	}
 
+	@Override
 	default Block getTargetBlockExact(int arg0)
 	{
 		// MockMC: LivingEntity#getTargetBlockExact
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(double arg0)
 	{
 		// MockMC: LivingEntity#rayTraceBlocks
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(double arg0, FluidCollisionMode arg1)
 	{
 		// MockMC: LivingEntity#rayTraceBlocks
 		return null;
 	}
 
+	@Override
 	default boolean isClimbing()
 	{
 		// MockMC: LivingEntity#isClimbing
@@ -734,6 +840,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.10")
 	default int getNextArrowRemoval()
 	{
@@ -741,18 +848,21 @@ public interface LivingEntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getMaximumNoDamageTicks()
 	{
 		// MockMC: LivingEntity#getMaximumNoDamageTicks
 		return 0;
 	}
 
+	@Override
 	default EquipmentSlot getHandRaised()
 	{
 		// MockMC: LivingEntity#getHandRaised
 		return null;
 	}
 
+	@Override
 	default int getMaximumAir()
 	{
 		// MockMC: LivingEntity#getMaximumAir
@@ -763,6 +873,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default int getShieldBlockingDelay()
 	{
@@ -770,86 +881,101 @@ public interface LivingEntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default Sound getFallDamageSoundSmall()
 	{
 		// MockMC: LivingEntity#getFallDamageSoundSmall
 		return null;
 	}
 
+	@Override
 	default void setActiveItemRemainingTime(int arg0)
 	{
 		// MockMC: LivingEntity#setActiveItemRemainingTime
 	}
 
+	@Override
 	default boolean addPotionEffects(Collection<PotionEffect> arg0)
 	{
 		// MockMC: LivingEntity#addPotionEffects
 		return false;
 	}
 
+	@Override
 	default boolean isSwimming()
 	{
 		// MockMC: LivingEntity#isSwimming
 		return false;
 	}
 
+	@Override
 	default void damageItemStack(EquipmentSlot arg0, int arg1)
 	{
 		// MockMC: LivingEntity#damageItemStack
 	}
 
+	@Override
 	default ItemStack damageItemStack(ItemStack arg0, int arg1)
 	{
 		// MockMC: LivingEntity#damageItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void playHurtAnimation(float arg0)
 	{
 		// MockMC: LivingEntity#playHurtAnimation
 	}
 
+	@Override
 	default double getEyeHeight()
 	{
 		// MockMC: LivingEntity#getEyeHeight
 		return 0.0d;
 	}
 
+	@Override
 	default double getEyeHeight(boolean arg0)
 	{
 		// MockMC: LivingEntity#getEyeHeight
 		return 0.0d;
 	}
 
+	@Override
 	default EntityEquipment getEquipment()
 	{
 		// MockMC: LivingEntity#getEquipment
 		return null;
 	}
 
+	@Override
 	default void swingMainHand()
 	{
 		// MockMC: LivingEntity#swingMainHand
 	}
 
+	@Override
 	default EquipmentSlot getActiveItemHand()
 	{
 		// MockMC: LivingEntity#getActiveItemHand
 		return null;
 	}
 
+	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: LivingEntity#isLeashed
 		return false;
 	}
 
+	@Override
 	default int getNoActionTicks()
 	{
 		// MockMC: LivingEntity#getNoActionTicks
 		return 0;
 	}
 
+	@Override
 	default boolean isHandRaised()
 	{
 		// MockMC: LivingEntity#isHandRaised
@@ -860,28 +986,33 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setSwimming(boolean arg0)
 	{
 		// MockMC: LivingEntity#setSwimming
 	}
 
+	@Override
 	default Sound getFallDamageSoundBig()
 	{
 		// MockMC: LivingEntity#getFallDamageSoundBig
 		return null;
 	}
 
+	@Override
 	default void setGliding(boolean arg0)
 	{
 		// MockMC: LivingEntity#setGliding
 	}
 
+	@Override
 	default void setJumping(boolean arg0)
 	{
 		// MockMC: LivingEntity#setJumping
 	}
 
+	@Override
 	default Sound getDrinkingSound(ItemStack arg0)
 	{
 		// MockMC: LivingEntity#getDrinkingSound
@@ -892,6 +1023,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default BlockFace getTargetBlockFace(int arg0, TargetBlockInfo.FluidMode arg1)
@@ -900,29 +1032,34 @@ public interface LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default BlockFace getTargetBlockFace(int arg0, FluidCollisionMode arg1)
 	{
 		// MockMC: LivingEntity#getTargetBlockFace
 		return null;
 	}
 
+	@Override
 	default BlockFace getTargetBlockFace(int arg0)
 	{
 		// MockMC: LivingEntity#getTargetBlockFace
 		return null;
 	}
 
+	@Override
 	default int getArrowsInBody()
 	{
 		// MockMC: LivingEntity#getArrowsInBody
 		return 0;
 	}
 
+	@Override
 	default void attack(Entity arg0)
 	{
 		// MockMC: LivingEntity#attack
 	}
 
+	@Override
 	default void setKiller(Player arg0)
 	{
 		// MockMC: LivingEntity#setKiller
@@ -932,12 +1069,14 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.10")
 	default void setNextBeeStingerRemoval(int arg0)
 	{
 		// MockMC: LivingEntity#setNextBeeStingerRemoval
 	}
 
+	@Override
 	default boolean addPotionEffect(PotionEffect arg0)
 	{
 		// MockMC: LivingEntity#addPotionEffect
@@ -948,6 +1087,7 @@ public interface LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default boolean addPotionEffect(PotionEffect arg0, boolean arg1)
 	{

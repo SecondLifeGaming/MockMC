@@ -26,8 +26,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface EnchantmentBaseMock extends KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface EnchantmentBaseMock extends TranslatableBaseMock, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with

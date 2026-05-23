@@ -16,12 +16,14 @@ import org.bukkit.scoreboard.ScoreboardManager;
  */
 public interface ScoreboardManagerBaseMock extends ScoreboardManager
 {
+	@Override
 	default Scoreboard getNewScoreboard()
 	{
 		// MockMC: ScoreboardManager#getNewScoreboard
 		return null;
 	}
 
+	@Override
 	default Scoreboard getMainScoreboard()
 	{
 		// MockMC: ScoreboardManager#getMainScoreboard

@@ -19,6 +19,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface StonecutterViewBaseMock extends StonecutterView, InventoryViewBaseMock
 {
+	@Override
 	default List<StonecuttingRecipe> getRecipes()
 	{
 		// MockMC: StonecutterView#getRecipes
@@ -32,12 +33,14 @@ public interface StonecutterViewBaseMock extends StonecutterView, InventoryViewB
 		return null;
 	}
 
+	@Override
 	default int getRecipeAmount()
 	{
 		// MockMC: StonecutterView#getRecipeAmount
 		return 0;
 	}
 
+	@Override
 	default int getSelectedRecipeIndex()
 	{
 		// MockMC: StonecutterView#getSelectedRecipeIndex

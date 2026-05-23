@@ -18,28 +18,33 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface PointedDripstoneBaseMock extends PointedDripstone, WaterloggedBaseMock
 {
+	@Override
 	default PointedDripstone.Thickness getThickness()
 	{
 		// MockMC: PointedDripstone#getThickness
 		return null;
 	}
 
+	@Override
 	default void setThickness(PointedDripstone.Thickness arg0)
 	{
 		// MockMC: PointedDripstone#setThickness
 	}
 
+	@Override
 	default Set<BlockFace> getVerticalDirections()
 	{
 		// MockMC: PointedDripstone#getVerticalDirections
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void setVerticalDirection(BlockFace arg0)
 	{
 		// MockMC: PointedDripstone#setVerticalDirection
 	}
 
+	@Override
 	default BlockFace getVerticalDirection()
 	{
 		// MockMC: PointedDripstone#getVerticalDirection

@@ -18,17 +18,20 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.AnaloguePowerabl
  */
 public interface RedstoneWireBaseMock extends RedstoneWire, AnaloguePowerableBaseMock
 {
+	@Override
 	default RedstoneWire.Connection getFace(BlockFace arg0)
 	{
 		// MockMC: RedstoneWire#getFace
 		return null;
 	}
 
+	@Override
 	default void setFace(BlockFace arg0, RedstoneWire.Connection arg1)
 	{
 		// MockMC: RedstoneWire#setFace
 	}
 
+	@Override
 	default Set<BlockFace> getAllowedFaces()
 	{
 		// MockMC: RedstoneWire#getAllowedFaces

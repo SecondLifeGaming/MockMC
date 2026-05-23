@@ -14,7 +14,8 @@ import org.bukkit.entity.GlowItemFrame;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface GlowItemFrameBaseMock extends GlowItemFrame, ItemFrameBaseMock
 {
 	@Override

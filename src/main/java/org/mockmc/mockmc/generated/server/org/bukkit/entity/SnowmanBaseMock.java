@@ -16,31 +16,14 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface SnowmanBaseMock extends Snowman, GolemBaseMock, ShearableBaseMock, RangedEntityBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface SnowmanBaseMock extends Snowman, RangedEntityBaseMock, ShearableBaseMock, GolemBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Snowman#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
 		// MockMC: Snowman#setLeashHolder
-		return false;
-	}
-
-	default void setDerp(boolean arg0)
-	{
-		// MockMC: Snowman#setDerp
-	}
-
-	default boolean isDerp()
-	{
-		// MockMC: Snowman#isDerp
 		return false;
 	}
 
@@ -49,5 +32,25 @@ public interface SnowmanBaseMock extends Snowman, GolemBaseMock, ShearableBaseMo
 	{
 		// MockMC: Snowman#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setDerp(boolean arg0)
+	{
+		// MockMC: Snowman#setDerp
+	}
+
+	@Override
+	default boolean isDerp()
+	{
+		// MockMC: Snowman#isDerp
+		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Snowman#getLeashHolder
+		return null;
 	}
 }

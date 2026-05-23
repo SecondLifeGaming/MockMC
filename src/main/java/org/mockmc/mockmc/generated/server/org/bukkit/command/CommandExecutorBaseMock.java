@@ -17,6 +17,7 @@ import org.bukkit.command.CommandSender;
  */
 public interface CommandExecutorBaseMock extends CommandExecutor
 {
+	@Override
 	default boolean onCommand(CommandSender arg0, Command arg1, String arg2, String[] arg3)
 	{
 		// MockMC: CommandExecutor#onCommand

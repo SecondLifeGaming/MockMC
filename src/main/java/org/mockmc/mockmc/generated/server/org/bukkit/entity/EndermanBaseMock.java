@@ -16,13 +16,15 @@ import org.bukkit.material.MaterialData;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default MaterialData getCarriedMaterial()
@@ -31,24 +33,28 @@ public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean teleportRandomly()
 	{
 		// MockMC: Enderman#teleportRandomly
 		return false;
 	}
 
+	@Override
 	default boolean teleportTowards(Entity arg0)
 	{
 		// MockMC: Enderman#teleportTowards
 		return false;
 	}
 
+	@Override
 	default boolean isScreaming()
 	{
 		// MockMC: Enderman#isScreaming
 		return false;
 	}
 
+	@Override
 	default void setHasBeenStaredAt(boolean arg0)
 	{
 		// MockMC: Enderman#setHasBeenStaredAt
@@ -61,6 +67,7 @@ public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default BlockData getCarriedBlock()
 	{
 		// MockMC: Enderman#getCarriedBlock
@@ -74,17 +81,20 @@ public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean teleport()
 	{
 		// MockMC: Enderman#teleport
 		return false;
 	}
 
+	@Override
 	default void setCarriedBlock(BlockData arg0)
 	{
 		// MockMC: Enderman#setCarriedBlock
 	}
 
+	@Override
 	default boolean hasBeenStaredAt()
 	{
 		// MockMC: Enderman#hasBeenStaredAt
@@ -102,6 +112,7 @@ public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setCarriedMaterial(MaterialData arg0)
@@ -109,6 +120,7 @@ public interface EndermanBaseMock extends Enderman, MonsterBaseMock
 		// MockMC: Enderman#setCarriedMaterial
 	}
 
+	@Override
 	default void setScreaming(boolean arg0)
 	{
 		// MockMC: Enderman#setScreaming

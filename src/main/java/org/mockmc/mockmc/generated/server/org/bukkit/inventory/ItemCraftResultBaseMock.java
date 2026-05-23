@@ -17,18 +17,21 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ItemCraftResultBaseMock extends ItemCraftResult
 {
+	@Override
 	default List<ItemStack> getOverflowItems()
 	{
 		// MockMC: ItemCraftResult#getOverflowItems
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ItemStack[] getResultingMatrix()
 	{
 		// MockMC: ItemCraftResult#getResultingMatrix
 		return new ItemStack[0];
 	}
 
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: ItemCraftResult#getResult

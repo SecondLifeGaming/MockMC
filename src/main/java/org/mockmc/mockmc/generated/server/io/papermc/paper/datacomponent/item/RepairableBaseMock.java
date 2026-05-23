@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemType;
  */
 public interface RepairableBaseMock extends Repairable
 {
+	@Override
 	default RegistryKeySet<ItemType> types()
 	{
 		// MockMC: Repairable#types

@@ -17,69 +17,81 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface ChestBoatBaseMock extends ChestBoat, LootableBaseMock, InventoryHolderBaseMock, BoatBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface ChestBoatBaseMock extends ChestBoat, BoatBaseMock, LootableBaseMock, InventoryHolderBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: ChestBoat#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: ChestBoat#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: ChestBoat#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: ChestBoat#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: ChestBoat#canPlayerLoot
 		return false;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: ChestBoat#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default Entity getEntity()
 	{
 		// MockMC: ChestBoat#getEntity
 		return null;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: ChestBoat#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: ChestBoat#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: ChestBoat#setNextRefill
 		return 0L;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: ChestBoat#getNextRefill

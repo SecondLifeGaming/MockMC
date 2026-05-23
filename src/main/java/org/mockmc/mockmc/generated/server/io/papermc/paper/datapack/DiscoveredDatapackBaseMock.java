@@ -20,42 +20,49 @@ import org.bukkit.FeatureFlag;
  */
 public interface DiscoveredDatapackBaseMock extends DiscoveredDatapack
 {
+	@Override
 	default DatapackSource getSource()
 	{
 		// MockMC: DiscoveredDatapack#getSource
 		return null;
 	}
 
+	@Override
 	default Datapack.Compatibility getCompatibility()
 	{
 		// MockMC: DiscoveredDatapack#getCompatibility
 		return null;
 	}
 
+	@Override
 	default Set<FeatureFlag> getRequiredFeatures()
 	{
 		// MockMC: DiscoveredDatapack#getRequiredFeatures
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Component getTitle()
 	{
 		// MockMC: DiscoveredDatapack#getTitle
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: DiscoveredDatapack#getName
 		return "";
 	}
 
+	@Override
 	default boolean isRequired()
 	{
 		// MockMC: DiscoveredDatapack#isRequired
 		return false;
 	}
 
+	@Override
 	default Component getDescription()
 	{
 		// MockMC: DiscoveredDatapack#getDescription

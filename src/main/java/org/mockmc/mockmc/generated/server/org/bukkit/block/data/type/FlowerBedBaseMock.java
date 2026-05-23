@@ -16,23 +16,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface FlowerBedBaseMock extends FlowerBed, DirectionalBaseMock
 {
+	@Override
 	default int getMinimumFlowerAmount()
 	{
 		// MockMC: FlowerBed#getMinimumFlowerAmount
 		return 0;
 	}
 
+	@Override
 	default int getFlowerAmount()
 	{
 		// MockMC: FlowerBed#getFlowerAmount
 		return 0;
 	}
 
+	@Override
 	default void setFlowerAmount(int arg0)
 	{
 		// MockMC: FlowerBed#setFlowerAmount
 	}
 
+	@Override
 	default int getMaximumFlowerAmount()
 	{
 		// MockMC: FlowerBed#getMaximumFlowerAmount

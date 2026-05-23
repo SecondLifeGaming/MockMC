@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface DeathProtectionBaseMock extends DeathProtection
 {
+	@Override
 	default List<ConsumeEffect> deathEffects()
 	{
 		// MockMC: DeathProtection#deathEffects

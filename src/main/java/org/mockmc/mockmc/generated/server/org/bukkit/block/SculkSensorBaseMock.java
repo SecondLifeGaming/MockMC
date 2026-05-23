@@ -13,26 +13,31 @@ import org.bukkit.block.SculkSensor;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SculkSensorBaseMock extends SculkSensor, TileStateBaseMock
 {
+	@Override
 	default int getListenerRange()
 	{
 		// MockMC: SculkSensor#getListenerRange
 		return 0;
 	}
 
+	@Override
 	default void setLastVibrationFrequency(int arg0)
 	{
 		// MockMC: SculkSensor#setLastVibrationFrequency
 	}
 
+	@Override
 	default int getLastVibrationFrequency()
 	{
 		// MockMC: SculkSensor#getLastVibrationFrequency
 		return 0;
 	}
 
+	@Override
 	default void setListenerRange(int arg0)
 	{
 		// MockMC: SculkSensor#setListenerRange

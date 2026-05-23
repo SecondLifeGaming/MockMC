@@ -15,13 +15,15 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.command.CommandBlockH
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CommandBlockBaseMock extends CommandBlock, TileStateBaseMock, CommandBlockHolderBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getName()
 	{
@@ -33,6 +35,7 @@ public interface CommandBlockBaseMock extends CommandBlock, TileStateBaseMock, C
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setName(String arg0)
 	{
@@ -46,11 +49,13 @@ public interface CommandBlockBaseMock extends CommandBlock, TileStateBaseMock, C
 		return "";
 	}
 
+	@Override
 	default void name(Component arg0)
 	{
 		// MockMC: CommandBlock#name
 	}
 
+	@Override
 	default Component name()
 	{
 		// MockMC: CommandBlock#name

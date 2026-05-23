@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface DyedItemColorBuilderBaseMock extends DyedItemColor.Builder, DataComponentBuilderBaseMock<DyedItemColor>
 {
+	@Override
 	default DyedItemColor.Builder color(Color arg0)
 	{
 		// MockMC: Builder#color

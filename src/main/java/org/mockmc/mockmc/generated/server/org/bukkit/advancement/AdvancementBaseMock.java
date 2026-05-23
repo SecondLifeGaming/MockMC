@@ -20,42 +20,49 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  */
 public interface AdvancementBaseMock extends Advancement, KeyedBaseMock
 {
+	@Override
 	default AdvancementDisplay getDisplay()
 	{
 		// MockMC: Advancement#getDisplay
 		return null;
 	}
 
+	@Override
 	default Advancement getRoot()
 	{
 		// MockMC: Advancement#getRoot
 		return null;
 	}
 
+	@Override
 	default Component displayName()
 	{
 		// MockMC: Advancement#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Advancement getParent()
 	{
 		// MockMC: Advancement#getParent
 		return null;
 	}
 
+	@Override
 	default AdvancementRequirements getRequirements()
 	{
 		// MockMC: Advancement#getRequirements
 		return null;
 	}
 
+	@Override
 	default Collection<String> getCriteria()
 	{
 		// MockMC: Advancement#getCriteria
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Advancement> getChildren()
 	{
 		// MockMC: Advancement#getChildren

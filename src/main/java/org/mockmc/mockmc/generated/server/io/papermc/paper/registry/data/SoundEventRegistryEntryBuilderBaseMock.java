@@ -19,15 +19,17 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface SoundEventRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.SoundEventRegistryEntry.Builder,
-			SoundEventRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Sound>
+			RegistryBuilderBaseMock<Sound>,
+			SoundEventRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.SoundEventRegistryEntry.Builder fixedRange(Float arg0)
 	{
 		// MockMC: Builder#fixedRange
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.SoundEventRegistryEntry.Builder location(Key arg0)
 	{
 		// MockMC: Builder#location

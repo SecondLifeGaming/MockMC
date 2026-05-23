@@ -19,12 +19,14 @@ public interface DialogActionCustomClickActionBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.action.DialogAction.CustomClickAction
 {
+	@Override
 	default Key id()
 	{
 		// MockMC: CustomClickAction#id
 		return null;
 	}
 
+	@Override
 	default BinaryTagHolder additions()
 	{
 		// MockMC: CustomClickAction#additions

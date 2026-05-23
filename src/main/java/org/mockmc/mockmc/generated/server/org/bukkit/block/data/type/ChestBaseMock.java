@@ -15,14 +15,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ChestBaseMock extends Chest, WaterloggedBaseMock, DirectionalBaseMock
+public interface ChestBaseMock extends Chest, DirectionalBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default Chest.Type getType()
 	{
 		// MockMC: Chest#getType
 		return null;
 	}
 
+	@Override
 	default void setType(Chest.Type arg0)
 	{
 		// MockMC: Chest#setType

@@ -16,8 +16,9 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.CollarColorabl
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface WolfBaseMock extends Wolf, TameableBaseMock, CollarColorableBaseMock, SittableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface WolfBaseMock extends Wolf, CollarColorableBaseMock, SittableBaseMock, TameableBaseMock
 {
 	@Override
 	default DyeColor getCollarColor()
@@ -27,20 +28,10 @@ public interface WolfBaseMock extends Wolf, TameableBaseMock, CollarColorableBas
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Wolf#setLeashHolder
+		// MockMC: Wolf#isLeashed
 		return false;
-	}
-
-	default void setVariant(Wolf.Variant arg0)
-	{
-		// MockMC: Wolf#setVariant
-	}
-
-	default void setInterested(boolean arg0)
-	{
-		// MockMC: Wolf#setInterested
 	}
 
 	@Override
@@ -50,35 +41,60 @@ public interface WolfBaseMock extends Wolf, TameableBaseMock, CollarColorableBas
 		return null;
 	}
 
+	@Override
+	default void setVariant(Wolf.Variant arg0)
+	{
+		// MockMC: Wolf#setVariant
+	}
+
+	@Override
+	default void setInterested(boolean arg0)
+	{
+		// MockMC: Wolf#setInterested
+	}
+
+	@Override
 	default boolean isWet()
 	{
 		// MockMC: Wolf#isWet
 		return false;
 	}
 
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Wolf#setLeashHolder
+		return false;
+	}
+
+	@Override
 	default Wolf.SoundVariant getSoundVariant()
 	{
 		// MockMC: Wolf#getSoundVariant
 		return null;
 	}
 
+	@Override
 	default Wolf.Variant getVariant()
 	{
 		// MockMC: Wolf#getVariant
 		return null;
 	}
 
+	@Override
 	default boolean isAngry()
 	{
 		// MockMC: Wolf#isAngry
 		return false;
 	}
 
+	@Override
 	default void setAngry(boolean arg0)
 	{
 		// MockMC: Wolf#setAngry
 	}
 
+	@Override
 	default float getTailAngle()
 	{
 		// MockMC: Wolf#getTailAngle
@@ -92,18 +108,13 @@ public interface WolfBaseMock extends Wolf, TameableBaseMock, CollarColorableBas
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Wolf#isLeashed
-		return false;
-	}
-
 	default boolean isInterested()
 	{
 		// MockMC: Wolf#isInterested
 		return false;
 	}
 
+	@Override
 	default void setSoundVariant(Wolf.SoundVariant arg0)
 	{
 		// MockMC: Wolf#setSoundVariant

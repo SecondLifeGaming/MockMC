@@ -21,6 +21,7 @@ public interface BootstrapContextBaseMock
 			PluginProviderContextBaseMock,
 			LifecycleEventOwnerBaseMock
 {
+	@Override
 	default LifecycleEventManager<BootstrapContext> getLifecycleManager()
 	{
 		// MockMC: BootstrapContext#getLifecycleManager

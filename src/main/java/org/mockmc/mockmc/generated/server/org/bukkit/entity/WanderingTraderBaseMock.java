@@ -15,9 +15,11 @@ import org.bukkit.entity.WanderingTrader;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WanderingTraderBaseMock extends WanderingTrader, AbstractVillagerBaseMock
 {
+	@Override
 	default boolean canDrinkPotion()
 	{
 		// MockMC: WanderingTrader#canDrinkPotion
@@ -25,32 +27,10 @@ public interface WanderingTraderBaseMock extends WanderingTrader, AbstractVillag
 	}
 
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: WanderingTrader#getLeashHolder
-		return null;
-	}
-
 	default Location getWanderingTowards()
 	{
 		// MockMC: WanderingTrader#getWanderingTowards
 		return new org.bukkit.Location(null, 0, 0, 0);
-	}
-
-	default void setDespawnDelay(int arg0)
-	{
-		// MockMC: WanderingTrader#setDespawnDelay
-	}
-
-	default void setCanDrinkPotion(boolean arg0)
-	{
-		// MockMC: WanderingTrader#setCanDrinkPotion
-	}
-
-	default boolean canDrinkMilk()
-	{
-		// MockMC: WanderingTrader#canDrinkMilk
-		return false;
 	}
 
 	@Override
@@ -60,15 +40,16 @@ public interface WanderingTraderBaseMock extends WanderingTrader, AbstractVillag
 		return false;
 	}
 
-	default int getDespawnDelay()
+	@Override
+	default void setDespawnDelay(int arg0)
 	{
-		// MockMC: WanderingTrader#getDespawnDelay
-		return 0;
+		// MockMC: WanderingTrader#setDespawnDelay
 	}
 
-	default void setWanderingTowards(Location arg0)
+	@Override
+	default void setCanDrinkPotion(boolean arg0)
 	{
-		// MockMC: WanderingTrader#setWanderingTowards
+		// MockMC: WanderingTrader#setCanDrinkPotion
 	}
 
 	@Override
@@ -78,6 +59,34 @@ public interface WanderingTraderBaseMock extends WanderingTrader, AbstractVillag
 		return false;
 	}
 
+	@Override
+	default boolean canDrinkMilk()
+	{
+		// MockMC: WanderingTrader#canDrinkMilk
+		return false;
+	}
+
+	@Override
+	default int getDespawnDelay()
+	{
+		// MockMC: WanderingTrader#getDespawnDelay
+		return 0;
+	}
+
+	@Override
+	default void setWanderingTowards(Location arg0)
+	{
+		// MockMC: WanderingTrader#setWanderingTowards
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: WanderingTrader#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setCanDrinkMilk(boolean arg0)
 	{
 		// MockMC: WanderingTrader#setCanDrinkMilk

@@ -20,7 +20,8 @@ import org.mockmc.mockmc.generated.server.com.mojang.brigadier.suggestion.Sugges
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.6", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface BukkitBrigadierCommandBaseMock<S extends BukkitBrigadierCommandSource>
 		extends
 			BukkitBrigadierCommand<S>,
@@ -31,6 +32,7 @@ public interface BukkitBrigadierCommandBaseMock<S extends BukkitBrigadierCommand
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default boolean test(S arg0)
 	{

@@ -21,18 +21,21 @@ import io.papermc.paper.registry.event.type.RegistryEntryAddEventType;
  */
 public interface RegistryEventProviderBaseMock<T, B extends RegistryBuilder<T>> extends RegistryEventProvider<T, B>
 {
+	@Override
 	default RegistryKey<T> registryKey()
 	{
 		// MockMC: RegistryEventProvider#registryKey
 		return null;
 	}
 
+	@Override
 	default LifecycleEventType.Prioritizable<BootstrapContext, RegistryComposeEvent<T, B>> compose()
 	{
 		// MockMC: RegistryEventProvider#compose
 		return null;
 	}
 
+	@Override
 	default RegistryEntryAddEventType<T, B> entryAdd()
 	{
 		// MockMC: RegistryEventProvider#entryAdd

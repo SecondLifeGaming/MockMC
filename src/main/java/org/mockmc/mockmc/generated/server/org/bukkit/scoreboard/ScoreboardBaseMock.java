@@ -25,6 +25,7 @@ import org.bukkit.scoreboard.Team;
  */
 public interface ScoreboardBaseMock extends Scoreboard
 {
+	@Override
 	default Team getEntityTeam(Entity arg0) throws IllegalArgumentException
 	{
 		// MockMC: Scoreboard#getEntityTeam
@@ -35,6 +36,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.8")
 	default Set<OfflinePlayer> getPlayers()
 	{
@@ -46,6 +48,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.2")
 	default Set<Objective> getObjectivesByCriteria(String arg0)
 	{
@@ -53,51 +56,60 @@ public interface ScoreboardBaseMock extends Scoreboard
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<Objective> getObjectivesByCriteria(Criteria arg0)
 	{
 		// MockMC: Scoreboard#getObjectivesByCriteria
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Team getTeam(String arg0)
 	{
 		// MockMC: Scoreboard#getTeam
 		return null;
 	}
 
+	@Override
 	default void clearSlot(DisplaySlot arg0)
 	{
 		// MockMC: Scoreboard#clearSlot
 	}
 
+	@Override
 	default void resetScores(String arg0)
 	{
 		// MockMC: Scoreboard#resetScores
 	}
 
+	@Override
 	default Set<Score> getScoresFor(Entity arg0) throws IllegalArgumentException
 	{
 		// MockMC: Scoreboard#getScoresFor
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void resetScores(OfflinePlayer arg0)
 	{
 		// MockMC: Scoreboard#resetScores
 	}
 
+	@Override
 	default Set<Team> getTeams()
 	{
 		// MockMC: Scoreboard#getTeams
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<Score> getScores(OfflinePlayer arg0)
 	{
 		// MockMC: Scoreboard#getScores
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<Score> getScores(String arg0)
 	{
 		// MockMC: Scoreboard#getScores
@@ -108,11 +120,25 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
-	default Objective registerNewObjective(String arg0, String arg1, Component arg2, RenderType arg3)
-			throws IllegalArgumentException
+	default Objective registerNewObjective(String arg0, Criteria arg1, String arg2)
 	{
 		// MockMC: Scoreboard#registerNewObjective
+		return null;
+	}
+
+	@Override
+	default Objective getObjective(String arg0)
+	{
+		// MockMC: Scoreboard#getObjective
+		return null;
+	}
+
+	@Override
+	default Objective getObjective(DisplaySlot arg0)
+	{
+		// MockMC: Scoreboard#getObjective
 		return null;
 	}
 
@@ -120,6 +146,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5")
 	default Objective registerNewObjective(String arg0, String arg1, String arg2)
 	{
@@ -131,29 +158,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.0")
-	default Objective registerNewObjective(String arg0, Criteria arg1, String arg2)
-	{
-		// MockMC: Scoreboard#registerNewObjective
-		return null;
-	}
-
-	default Objective getObjective(String arg0)
-	{
-		// MockMC: Scoreboard#getObjective
-		return null;
-	}
-
-	default Objective getObjective(DisplaySlot arg0)
-	{
-		// MockMC: Scoreboard#getObjective
-		return null;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Objective registerNewObjective(String arg0, String arg1, Component arg2)
 	{
@@ -161,17 +166,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 		return null;
 	}
 
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.13")
-	default Objective registerNewObjective(String arg0, String arg1)
-	{
-		// MockMC: Scoreboard#registerNewObjective
-		return null;
-	}
-
+	@Override
 	default Objective registerNewObjective(String arg0, Criteria arg1, Component arg2, RenderType arg3)
 			throws IllegalArgumentException
 	{
@@ -183,6 +178,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Objective registerNewObjective(String arg0, Criteria arg1, String arg2, RenderType arg3)
 	{
@@ -194,6 +190,7 @@ public interface ScoreboardBaseMock extends Scoreboard
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5")
 	default Objective registerNewObjective(String arg0, String arg1, String arg2, RenderType arg3)
 	{
@@ -201,42 +198,74 @@ public interface ScoreboardBaseMock extends Scoreboard
 		return null;
 	}
 
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.0")
+	default Objective registerNewObjective(String arg0, String arg1, Component arg2, RenderType arg3)
+			throws IllegalArgumentException
+	{
+		// MockMC: Scoreboard#registerNewObjective
+		return null;
+	}
+
+	@Override
 	default Objective registerNewObjective(String arg0, Criteria arg1, Component arg2) throws IllegalArgumentException
 	{
 		// MockMC: Scoreboard#registerNewObjective
 		return null;
 	}
 
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.13")
+	default Objective registerNewObjective(String arg0, String arg1)
+	{
+		// MockMC: Scoreboard#registerNewObjective
+		return null;
+	}
+
+	@Override
 	default Team getEntryTeam(String arg0)
 	{
 		// MockMC: Scoreboard#getEntryTeam
 		return null;
 	}
 
+	@Override
 	default Team registerNewTeam(String arg0)
 	{
 		// MockMC: Scoreboard#registerNewTeam
 		return null;
 	}
 
+	@Override
 	default Team getPlayerTeam(OfflinePlayer arg0)
 	{
 		// MockMC: Scoreboard#getPlayerTeam
 		return null;
 	}
 
+	@Override
 	default Set<String> getEntries()
 	{
 		// MockMC: Scoreboard#getEntries
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<Objective> getObjectives()
 	{
 		// MockMC: Scoreboard#getObjectives
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void resetScoresFor(Entity arg0) throws IllegalArgumentException
 	{
 		// MockMC: Scoreboard#resetScoresFor

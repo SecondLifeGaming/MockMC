@@ -18,53 +18,63 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.LockableTileSta
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BeaconBaseMock extends Beacon, LockableTileStateBaseMock
 {
+	@Override
 	default PotionEffect getSecondaryEffect()
 	{
 		// MockMC: Beacon#getSecondaryEffect
 		return null;
 	}
 
+	@Override
 	default void setSecondaryEffect(PotionEffectType arg0)
 	{
 		// MockMC: Beacon#setSecondaryEffect
 	}
 
+	@Override
 	default void setEffectRange(double arg0)
 	{
 		// MockMC: Beacon#setEffectRange
 	}
 
+	@Override
 	default void resetEffectRange()
 	{
 		// MockMC: Beacon#resetEffectRange
 	}
 
+	@Override
 	default void setPrimaryEffect(PotionEffectType arg0)
 	{
 		// MockMC: Beacon#setPrimaryEffect
 	}
 
+	@Override
 	default Collection<LivingEntity> getEntitiesInRange()
 	{
 		// MockMC: Beacon#getEntitiesInRange
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default PotionEffect getPrimaryEffect()
 	{
 		// MockMC: Beacon#getPrimaryEffect
 		return null;
 	}
 
+	@Override
 	default double getEffectRange()
 	{
 		// MockMC: Beacon#getEffectRange
 		return 0.0d;
 	}
 
+	@Override
 	default int getTier()
 	{
 		// MockMC: Beacon#getTier

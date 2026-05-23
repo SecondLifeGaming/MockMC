@@ -17,12 +17,14 @@ import org.bukkit.block.BlockType;
  */
 public interface BlockPredicateBuilderBaseMock extends BlockPredicate.Builder
 {
+	@Override
 	default BlockPredicate build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default BlockPredicate.Builder blocks(RegistryKeySet<BlockType> arg0)
 	{
 		// MockMC: Builder#blocks

@@ -17,18 +17,21 @@ import org.bukkit.inventory.MerchantRecipe;
  */
 public interface MerchantInventoryBaseMock extends MerchantInventory, InventoryBaseMock
 {
+	@Override
 	default MerchantRecipe getSelectedRecipe()
 	{
 		// MockMC: MerchantInventory#getSelectedRecipe
 		return null;
 	}
 
+	@Override
 	default int getSelectedRecipeIndex()
 	{
 		// MockMC: MerchantInventory#getSelectedRecipeIndex
 		return 0;
 	}
 
+	@Override
 	default Merchant getMerchant()
 	{
 		// MockMC: MerchantInventory#getMerchant

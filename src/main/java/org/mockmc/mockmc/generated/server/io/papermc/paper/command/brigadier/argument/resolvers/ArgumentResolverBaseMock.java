@@ -17,6 +17,7 @@ import io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver;
  */
 public interface ArgumentResolverBaseMock<T> extends ArgumentResolver<T>
 {
+	@Override
 	default T resolve(CommandSourceStack arg0) throws CommandSyntaxException
 	{
 		// MockMC: ArgumentResolver#resolve

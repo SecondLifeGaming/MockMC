@@ -16,29 +16,34 @@ import org.bukkit.scheduler.BukkitTask;
  */
 public interface BukkitTaskBaseMock extends BukkitTask
 {
+	@Override
 	default Plugin getOwner()
 	{
 		// MockMC: BukkitTask#getOwner
 		return null;
 	}
 
+	@Override
 	default boolean isSync()
 	{
 		// MockMC: BukkitTask#isSync
 		return false;
 	}
 
+	@Override
 	default void cancel()
 	{
 		// MockMC: BukkitTask#cancel
 	}
 
+	@Override
 	default int getTaskId()
 	{
 		// MockMC: BukkitTask#getTaskId
 		return 0;
 	}
 
+	@Override
 	default boolean isCancelled()
 	{
 		// MockMC: BukkitTask#isCancelled

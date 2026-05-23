@@ -24,23 +24,27 @@ public interface SpawnEggMetaBaseMock extends SpawnEggMeta, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default EntitySnapshot getSpawnedEntity()
 	{
 		// MockMC: SpawnEggMeta#getSpawnedEntity
 		return null;
 	}
 
+	@Override
 	default EntityType getCustomSpawnedType()
 	{
 		// MockMC: SpawnEggMeta#getCustomSpawnedType
 		return null;
 	}
 
+	@Override
 	default void setCustomSpawnedType(EntityType arg0)
 	{
 		// MockMC: SpawnEggMeta#setCustomSpawnedType
 	}
 
+	@Override
 	default void setSpawnedEntity(EntitySnapshot arg0)
 	{
 		// MockMC: SpawnEggMeta#setSpawnedEntity
@@ -50,6 +54,7 @@ public interface SpawnEggMetaBaseMock extends SpawnEggMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default EntityType getSpawnedType()
 	{
@@ -61,6 +66,7 @@ public interface SpawnEggMetaBaseMock extends SpawnEggMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setSpawnedType(EntityType arg0)
 	{

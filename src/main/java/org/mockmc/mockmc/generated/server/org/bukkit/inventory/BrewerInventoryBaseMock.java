@@ -17,23 +17,27 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface BrewerInventoryBaseMock extends BrewerInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getFuel()
 	{
 		// MockMC: BrewerInventory#getFuel
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setFuel(ItemStack arg0)
 	{
 		// MockMC: BrewerInventory#setFuel
 	}
 
+	@Override
 	default ItemStack getIngredient()
 	{
 		// MockMC: BrewerInventory#getIngredient
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setIngredient(ItemStack arg0)
 	{
 		// MockMC: BrewerInventory#setIngredient

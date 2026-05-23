@@ -20,12 +20,14 @@ public interface SeededContainerLootBuilderBaseMock
 			SeededContainerLoot.Builder,
 			DataComponentBuilderBaseMock<SeededContainerLoot>
 {
+	@Override
 	default SeededContainerLoot.Builder lootTable(Key arg0)
 	{
 		// MockMC: Builder#lootTable
 		return null;
 	}
 
+	@Override
 	default SeededContainerLoot.Builder seed(long arg0)
 	{
 		// MockMC: Builder#seed

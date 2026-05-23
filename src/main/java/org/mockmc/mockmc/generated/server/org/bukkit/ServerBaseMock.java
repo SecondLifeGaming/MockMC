@@ -100,12 +100,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.plugin.messaging.PluginMess
  */
 public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 {
+	@Override
 	default String getResourcePackPrompt()
 	{
 		// MockMC: Server#getResourcePackPrompt
 		return "";
 	}
 
+	@Override
 	default boolean isGlobalTickThread()
 	{
 		// MockMC: Server#isGlobalTickThread
@@ -116,6 +118,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterUndergroundCreatureSpawnLimit()
 	{
@@ -127,23 +130,27 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setMotd(String arg0)
 	{
 		// MockMC: Server#setMotd
 	}
 
+	@Override
 	default void setRespawnWorld(World arg0)
 	{
 		// MockMC: Server#setRespawnWorld
 	}
 
+	@Override
 	default boolean isStopping()
 	{
 		// MockMC: Server#isStopping
 		return false;
 	}
 
+	@Override
 	default void setMaxPlayers(int arg0)
 	{
 		// MockMC: Server#setMaxPlayers
@@ -153,7 +160,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void broadcast(BaseComponent arg0)
 	{
@@ -164,6 +173,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void broadcast(BaseComponent... arg0)
 	{
@@ -174,6 +184,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int broadcast(String arg0, String arg1)
 	{
@@ -181,151 +192,177 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default int broadcast(Component arg0)
 	{
 		// MockMC: Server#broadcast
 		return 0;
 	}
 
+	@Override
 	default int broadcast(Component arg0, String arg1)
 	{
 		// MockMC: Server#broadcast
 		return 0;
 	}
 
+	@Override
 	default void resetRecipes()
 	{
 		// MockMC: Server#resetRecipes
 	}
 
+	@Override
 	default void reloadData()
 	{
 		// MockMC: Server#reloadData
 	}
 
+	@Override
 	default int getPort()
 	{
 		// MockMC: Server#getPort
 		return 0;
 	}
 
+	@Override
 	default List<Player> matchPlayer(String arg0)
 	{
 		// MockMC: Server#matchPlayer
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean dispatchCommand(CommandSender arg0, String arg1) throws CommandException
 	{
 		// MockMC: Server#dispatchCommand
 		return false;
 	}
 
+	@Override
 	default Iterator<Recipe> recipeIterator()
 	{
 		// MockMC: Server#recipeIterator
 		return null;
 	}
 
+	@Override
 	default long getConnectionThrottle()
 	{
 		// MockMC: Server#getConnectionThrottle
 		return 0L;
 	}
 
+	@Override
 	default void setIdleTimeout(int arg0)
 	{
 		// MockMC: Server#setIdleTimeout
 	}
 
+	@Override
 	default Set<OfflinePlayer> getWhitelistedPlayers()
 	{
 		// MockMC: Server#getWhitelistedPlayers
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void restart()
 	{
 		// MockMC: Server#restart
 	}
 
+	@Override
 	default String getUpdateFolder()
 	{
 		// MockMC: Server#getUpdateFolder
 		return "";
 	}
 
+	@Override
 	default ItemCraftResult craftItemResult(ItemStack[] arg0, World arg1, Player arg2)
 	{
 		// MockMC: Server#craftItemResult
 		return null;
 	}
 
+	@Override
 	default ItemCraftResult craftItemResult(ItemStack[] arg0, World arg1)
 	{
 		// MockMC: Server#craftItemResult
 		return null;
 	}
 
+	@Override
 	default Entity getEntity(UUID arg0)
 	{
 		// MockMC: Server#getEntity
 		return null;
 	}
 
+	@Override
 	default String getWorldType()
 	{
 		// MockMC: Server#getWorldType
 		return "";
 	}
 
+	@Override
 	default Recipe getCraftingRecipe(ItemStack[] arg0, World arg1)
 	{
 		// MockMC: Server#getCraftingRecipe
 		return null;
 	}
 
+	@Override
 	default int getMaxPlayers()
 	{
 		// MockMC: Server#getMaxPlayers
 		return 0;
 	}
 
+	@Override
 	default MapView createMap(World arg0)
 	{
 		// MockMC: Server#createMap
 		return null;
 	}
 
+	@Override
 	default AsyncScheduler getAsyncScheduler()
 	{
 		// MockMC: Server#getAsyncScheduler
 		return null;
 	}
 
+	@Override
 	default void reloadWhitelist()
 	{
 		// MockMC: Server#reloadWhitelist
 	}
 
+	@Override
 	default Set<OfflinePlayer> getOperators()
 	{
 		// MockMC: Server#getOperators
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default double getAverageTickTime()
 	{
 		// MockMC: Server#getAverageTickTime
 		return 0.0d;
 	}
 
+	@Override
 	default boolean isAcceptingTransfers()
 	{
 		// MockMC: Server#isAcceptingTransfers
 		return false;
 	}
 
+	@Override
 	default boolean removeBossBar(NamespacedKey arg0)
 	{
 		// MockMC: Server#removeBossBar
@@ -336,6 +373,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6")
 	default <T extends Keyed> Registry<T> getRegistry(Class<T> arg0)
 	{
@@ -343,72 +381,84 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default Advancement getAdvancement(NamespacedKey arg0)
 	{
 		// MockMC: Server#getAdvancement
 		return null;
 	}
 
+	@Override
 	default <T extends Keyed> Iterable<Tag<T>> getTags(String arg0, Class<T> arg1)
 	{
 		// MockMC: Server#getTags
 		return java.util.Collections.emptyList();
 	}
 
-	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
-	{
-		// MockMC: Server#isOwnedByCurrentRegion
-		return false;
-	}
-
-	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2)
-	{
-		// MockMC: Server#isOwnedByCurrentRegion
-		return false;
-	}
-
-	default boolean isOwnedByCurrentRegion(World arg0, Position arg1, int arg2)
-	{
-		// MockMC: Server#isOwnedByCurrentRegion
-		return false;
-	}
-
+	@Override
 	default boolean isOwnedByCurrentRegion(Location arg0, int arg1)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
+	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2)
+	{
+		// MockMC: Server#isOwnedByCurrentRegion
+		return false;
+	}
+
+	@Override
+	default boolean isOwnedByCurrentRegion(World arg0, Position arg1, int arg2)
+	{
+		// MockMC: Server#isOwnedByCurrentRegion
+		return false;
+	}
+
+	@Override
 	default boolean isOwnedByCurrentRegion(Entity arg0)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
 	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3, int arg4)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
+	default boolean isOwnedByCurrentRegion(World arg0, int arg1, int arg2, int arg3)
+	{
+		// MockMC: Server#isOwnedByCurrentRegion
+		return false;
+	}
+
+	@Override
 	default boolean isOwnedByCurrentRegion(World arg0, Position arg1)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
 	default boolean isOwnedByCurrentRegion(Location arg0)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
 	default boolean isOwnedByCurrentRegion(Block arg0)
 	{
 		// MockMC: Server#isOwnedByCurrentRegion
 		return false;
 	}
 
+	@Override
 	default KeyedBossBar createBossBar(NamespacedKey arg0, String arg1, BarColor arg2, BarStyle arg3, BarFlag... arg4)
 	{
 		// MockMC: Server#createBossBar
@@ -419,6 +469,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.3", forRemoval = true)
 	default boolean shouldSendChatPreviews()
 	{
@@ -426,12 +477,14 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return false;
 	}
 
+	@Override
 	default BossBar createBossBar(String arg0, BarColor arg1, BarStyle arg2, BarFlag... arg3)
 	{
 		// MockMC: Server#createBossBar
 		return null;
 	}
 
+	@Override
 	default CachedServerIcon getServerIcon()
 	{
 		// MockMC: Server#getServerIcon
@@ -442,6 +495,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerWaterAmbientSpawns()
 	{
@@ -449,35 +503,41 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default ScoreboardManager getScoreboardManager()
 	{
 		// MockMC: Server#getScoreboardManager
 		return null;
 	}
 
+	@Override
 	default void setSpawnRadius(int arg0)
 	{
 		// MockMC: Server#setSpawnRadius
 	}
 
+	@Override
 	default Component shutdownMessage()
 	{
 		// MockMC: Server#shutdownMessage
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Path getLevelDirectory()
 	{
 		// MockMC: Server#getLevelDirectory
 		return null;
 	}
 
+	@Override
 	default Iterable<? extends Audience> audiences()
 	{
 		// MockMC: Server#audiences
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default OfflinePlayer[] getOfflinePlayers()
 	{
 		// MockMC: Server#getOfflinePlayers
@@ -488,6 +548,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterAmbientSpawnLimit()
 	{
@@ -495,103 +556,121 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getMaxWorldSize()
 	{
 		// MockMC: Server#getMaxWorldSize
 		return 0;
 	}
 
+	@Override
 	default boolean getAllowNether()
 	{
 		// MockMC: Server#getAllowNether
 		return false;
 	}
 
+	@Override
 	default void setWhitelist(boolean arg0)
 	{
 		// MockMC: Server#setWhitelist
 	}
 
+	@Override
 	default Logger getLogger()
 	{
 		// MockMC: Server#getLogger
 		return null;
 	}
 
+	@Override
 	default World createWorld(WorldCreator arg0)
 	{
 		// MockMC: Server#createWorld
 		return null;
 	}
 
+	@Override
 	default int getPauseWhenEmptyTime()
 	{
 		// MockMC: Server#getPauseWhenEmptyTime
 		return 0;
 	}
 
+	@Override
 	default void reload()
 	{
 		// MockMC: Server#reload
 	}
 
+	@Override
 	default int getSimulationDistance()
 	{
 		// MockMC: Server#getSimulationDistance
 		return 0;
 	}
 
+	@Override
 	default Iterator<KeyedBossBar> getBossBars()
 	{
 		// MockMC: Server#getBossBars
 		return null;
 	}
 
+	@Override
 	default ItemStack craftItem(ItemStack[] arg0, World arg1, Player arg2)
 	{
 		// MockMC: Server#craftItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack craftItem(ItemStack[] arg0, World arg1)
 	{
 		// MockMC: Server#craftItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default BukkitScheduler getScheduler()
 	{
 		// MockMC: Server#getScheduler
 		return null;
 	}
 
+	@Override
 	default File getUpdateFolderFile()
 	{
 		// MockMC: Server#getUpdateFolderFile
 		return null;
 	}
 
+	@Override
 	default ServerTickManager getServerTickManager()
 	{
 		// MockMC: Server#getServerTickManager
 		return null;
 	}
 
+	@Override
 	default void sendRichMessage(String arg0, TagResolver... arg1)
 	{
 		// MockMC: Server#sendRichMessage
 	}
 
+	@Override
 	default void sendRichMessage(String arg0)
 	{
 		// MockMC: Server#sendRichMessage
 	}
 
+	@Override
 	default void sendPlainMessage(String arg0)
 	{
 		// MockMC: Server#sendPlainMessage
 	}
 
+	@Override
 	default Recipe getRecipe(NamespacedKey arg0)
 	{
 		// MockMC: Server#getRecipe
@@ -602,6 +681,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerAmbientSpawns()
 	{
@@ -609,60 +689,70 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default List<String> getInitialDisabledPacks()
 	{
 		// MockMC: Server#getInitialDisabledPacks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default File getPluginsFolder()
 	{
 		// MockMC: Server#getPluginsFolder
 		return null;
 	}
 
+	@Override
 	default CommandSender createCommandSender(Consumer<? super Component> arg0)
 	{
 		// MockMC: Server#createCommandSender
 		return null;
 	}
 
+	@Override
 	default double[] getTPS()
 	{
 		// MockMC: Server#getTPS
 		return new double[0];
 	}
 
+	@Override
 	default boolean isEnforcingSecureProfiles()
 	{
 		// MockMC: Server#isEnforcingSecureProfiles
 		return false;
 	}
 
+	@Override
 	default boolean isHardcore()
 	{
 		// MockMC: Server#isHardcore
 		return false;
 	}
 
+	@Override
 	default MobGoals getMobGoals()
 	{
 		// MockMC: Server#getMobGoals
 		return null;
 	}
 
+	@Override
 	default HelpMap getHelpMap()
 	{
 		// MockMC: Server#getHelpMap
 		return null;
 	}
 
+	@Override
 	default Inventory createInventory(InventoryHolder arg0, InventoryType arg1)
 	{
 		// MockMC: Server#createInventory
 		return null;
 	}
 
+	@Override
 	default Inventory createInventory(InventoryHolder arg0, int arg1, Component arg2) throws IllegalArgumentException
 	{
 		// MockMC: Server#createInventory
@@ -673,6 +763,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Inventory createInventory(InventoryHolder arg0, InventoryType arg1, String arg2)
 	{
@@ -680,6 +771,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default Inventory createInventory(InventoryHolder arg0, int arg1) throws IllegalArgumentException
 	{
 		// MockMC: Server#createInventory
@@ -690,6 +782,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Inventory createInventory(InventoryHolder arg0, int arg1, String arg2) throws IllegalArgumentException
 	{
@@ -697,6 +790,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default Inventory createInventory(InventoryHolder arg0, InventoryType arg1, Component arg2)
 	{
 		// MockMC: Server#createInventory
@@ -707,6 +801,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4", forRemoval = true)
 	default Server.Spigot spigot()
 	{
@@ -714,12 +809,14 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default GameMode getDefaultGameMode()
 	{
 		// MockMC: Server#getDefaultGameMode
 		return null;
 	}
 
+	@Override
 	default ServerConfiguration getServerConfig()
 	{
 		// MockMC: Server#getServerConfig
@@ -730,6 +827,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getMonsterSpawnLimit()
 	{
@@ -737,6 +835,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default <T extends Keyed> Tag<T> getTag(String arg0, NamespacedKey arg1, Class<T> arg2)
 	{
 		// MockMC: Server#getTag
@@ -747,6 +846,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerMonsterSpawns()
 	{
@@ -754,18 +854,21 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default List<String> getInitialEnabledPacks()
 	{
 		// MockMC: Server#getInitialEnabledPacks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ChunkGenerator.ChunkData createChunkData(World arg0)
 	{
 		// MockMC: Server#createChunkData
 		return null;
 	}
 
+	@Override
 	default boolean suggestPlayerNamesWhenNullTabCompletions()
 	{
 		// MockMC: Server#suggestPlayerNamesWhenNullTabCompletions
@@ -776,7 +879,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.7.2")
 	default UnsafeValues getUnsafe()
 	{
@@ -784,6 +889,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default ResourcePack getServerResourcePack()
 	{
 		// MockMC: Server#getServerResourcePack
@@ -794,6 +900,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerWaterUndergroundCreatureSpawns()
 	{
@@ -801,18 +908,21 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default Player getPlayer(UUID arg0)
 	{
 		// MockMC: Server#getPlayer
 		return null;
 	}
 
+	@Override
 	default Player getPlayer(String arg0)
 	{
 		// MockMC: Server#getPlayer
 		return null;
 	}
 
+	@Override
 	default void setDefaultGameMode(GameMode arg0)
 	{
 		// MockMC: Server#setDefaultGameMode
@@ -822,6 +932,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getAnimalSpawnLimit()
 	{
@@ -833,6 +944,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getMotd()
 	{
@@ -840,6 +952,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return "";
 	}
 
+	@Override
 	default Messenger getMessenger()
 	{
 		// MockMC: Server#getMessenger
@@ -850,7 +963,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.18.1")
 	default PlayerProfile createPlayerProfile(UUID arg0)
 	{
@@ -862,7 +977,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.18.1")
 	default PlayerProfile createPlayerProfile(UUID arg0, String arg1)
 	{
@@ -870,6 +987,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default com.destroystokyo.paper.profile.PlayerProfile createProfileExact(UUID arg0, String arg1)
 	{
 		// MockMC: Server#createProfileExact
@@ -880,7 +998,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.18.1")
 	default PlayerProfile createPlayerProfile(String arg0)
 	{
@@ -888,82 +1008,96 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default OfflinePlayer getOfflinePlayer(String arg0)
 	{
 		// MockMC: Server#getOfflinePlayer
 		return null;
 	}
 
+	@Override
 	default OfflinePlayer getOfflinePlayer(UUID arg0)
 	{
 		// MockMC: Server#getOfflinePlayer
 		return null;
 	}
 
+	@Override
 	default void shutdown()
 	{
 		// MockMC: Server#shutdown
 	}
 
+	@Override
 	default String getResourcePack()
 	{
 		// MockMC: Server#getResourcePack
 		return "";
 	}
 
+	@Override
 	default boolean unloadWorld(World arg0, boolean arg1)
 	{
 		// MockMC: Server#unloadWorld
 		return false;
 	}
 
+	@Override
 	default boolean unloadWorld(String arg0, boolean arg1)
 	{
 		// MockMC: Server#unloadWorld
 		return false;
 	}
 
+	@Override
 	default String getResourcePackHash()
 	{
 		// MockMC: Server#getResourcePackHash
 		return "";
 	}
 
+	@Override
 	default boolean getAllowEnd()
 	{
 		// MockMC: Server#getAllowEnd
 		return false;
 	}
 
+	@Override
 	default boolean removeRecipe(NamespacedKey arg0, boolean arg1)
 	{
 		// MockMC: Server#removeRecipe
 		return false;
 	}
 
+	@Override
 	default boolean removeRecipe(NamespacedKey arg0)
 	{
 		// MockMC: Server#removeRecipe
 		return false;
 	}
 
+	@Override
 	default Component motd()
 	{
 		// MockMC: Server#motd
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void motd(Component arg0)
 	{
 		// MockMC: Server#motd
 	}
 
+	@Override
 	default MapView getMap(int arg0)
 	{
 		// MockMC: Server#getMap
 		return null;
 	}
 
+	@Override
 	default ItemFactory getItemFactory()
 	{
 		// MockMC: Server#getItemFactory
@@ -974,6 +1108,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getPermissionMessage()
 	{
@@ -981,66 +1116,77 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return "";
 	}
 
+	@Override
 	default String getBukkitVersion()
 	{
 		// MockMC: Server#getBukkitVersion
 		return "";
 	}
 
+	@Override
 	default List<Entity> selectEntities(CommandSender arg0, String arg1) throws IllegalArgumentException
 	{
 		// MockMC: Server#selectEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default WorldBorder createWorldBorder()
 	{
 		// MockMC: Server#createWorldBorder
 		return null;
 	}
 
+	@Override
 	default int getIdleTimeout()
 	{
 		// MockMC: Server#getIdleTimeout
 		return 0;
 	}
 
+	@Override
 	default boolean isTickingWorlds()
 	{
 		// MockMC: Server#isTickingWorlds
 		return false;
 	}
 
+	@Override
 	default int getViewDistance()
 	{
 		// MockMC: Server#getViewDistance
 		return 0;
 	}
 
+	@Override
 	default GlobalRegionScheduler getGlobalRegionScheduler()
 	{
 		// MockMC: Server#getGlobalRegionScheduler
 		return null;
 	}
 
+	@Override
 	default EntityFactory getEntityFactory()
 	{
 		// MockMC: Server#getEntityFactory
 		return null;
 	}
 
+	@Override
 	default boolean isWhitelistEnforced()
 	{
 		// MockMC: Server#isWhitelistEnforced
 		return false;
 	}
 
+	@Override
 	default boolean getAllowFlight()
 	{
 		// MockMC: Server#getAllowFlight
 		return false;
 	}
 
+	@Override
 	default DatapackManager getDatapackManager()
 	{
 		// MockMC: Server#getDatapackManager
@@ -1051,6 +1197,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getAmbientSpawnLimit()
 	{
@@ -1058,48 +1205,56 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default com.destroystokyo.paper.profile.PlayerProfile createProfile(String arg0)
 	{
 		// MockMC: Server#createProfile
 		return null;
 	}
 
+	@Override
 	default com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID arg0, String arg1)
 	{
 		// MockMC: Server#createProfile
 		return null;
 	}
 
+	@Override
 	default com.destroystokyo.paper.profile.PlayerProfile createProfile(UUID arg0)
 	{
 		// MockMC: Server#createProfile
 		return null;
 	}
 
+	@Override
 	default boolean hasWhitelist()
 	{
 		// MockMC: Server#hasWhitelist
 		return false;
 	}
 
+	@Override
 	default String getVersion()
 	{
 		// MockMC: Server#getVersion
 		return "";
 	}
 
+	@Override
 	default List<World> getWorlds()
 	{
 		// MockMC: Server#getWorlds
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isResourcePackRequired()
 	{
 		// MockMC: Server#isResourcePackRequired
 		return false;
 	}
 
+	@Override
 	default int getSpawnLimit(SpawnCategory arg0)
 	{
 		// MockMC: Server#getSpawnLimit
@@ -1110,6 +1265,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterAnimalSpawnLimit()
 	{
@@ -1117,12 +1273,14 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean reloadCommandAliases()
 	{
 		// MockMC: Server#reloadCommandAliases
 		return false;
 	}
 
+	@Override
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
 	default CachedServerIcon loadServerIcon(BufferedImage arg0) throws IllegalArgumentException, Exception
@@ -1131,6 +1289,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings(
 	{"Exception", "java:S112"})
 	default CachedServerIcon loadServerIcon(File arg0) throws IllegalArgumentException, Exception
@@ -1139,35 +1298,41 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default int getSpawnRadius()
 	{
 		// MockMC: Server#getSpawnRadius
 		return 0;
 	}
 
+	@Override
 	default Collection<? extends Player> getOnlinePlayers()
 	{
 		// MockMC: Server#getOnlinePlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setWhitelistEnforced(boolean arg0)
 	{
 		// MockMC: Server#setWhitelistEnforced
 	}
 
+	@Override
 	default ServicesManager getServicesManager()
 	{
 		// MockMC: Server#getServicesManager
 		return null;
 	}
 
+	@Override
 	default RegionScheduler getRegionScheduler()
 	{
 		// MockMC: Server#getRegionScheduler
 		return null;
 	}
 
+	@Override
 	default Map<String, String[]> getCommandAliases()
 	{
 		// MockMC: Server#getCommandAliases
@@ -1178,6 +1343,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerAnimalSpawns()
 	{
@@ -1189,6 +1355,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Merchant createMerchant(String arg0)
 	{
@@ -1200,6 +1367,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default Merchant createMerchant(Component arg0)
 	{
@@ -1207,42 +1375,49 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default Merchant createMerchant()
 	{
 		// MockMC: Server#createMerchant
 		return null;
 	}
 
+	@Override
 	default int getTicksPerSpawns(SpawnCategory arg0)
 	{
 		// MockMC: Server#getTicksPerSpawns
 		return 0;
 	}
 
+	@Override
 	default boolean isPaused()
 	{
 		// MockMC: Server#isPaused
 		return false;
 	}
 
+	@Override
 	default int getCurrentTick()
 	{
 		// MockMC: Server#getCurrentTick
 		return 0;
 	}
 
+	@Override
 	default Set<String> getIPBans()
 	{
 		// MockMC: Server#getIPBans
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default String getMinecraftVersion()
 	{
 		// MockMC: Server#getMinecraftVersion
 		return "";
 	}
 
+	@Override
 	default boolean forcesDefaultGameMode()
 	{
 		// MockMC: Server#forcesDefaultGameMode
@@ -1253,7 +1428,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default ItemStack createExplorerMap(World arg0, Location arg1, StructureType arg2, int arg3, boolean arg4)
 	{
@@ -1265,7 +1442,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default ItemStack createExplorerMap(World arg0, Location arg1, StructureType arg2)
 	{
@@ -1273,6 +1452,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack createExplorerMap(World arg0, Location arg1, org.bukkit.generator.structure.StructureType arg2,
 			MapCursor.Type arg3)
 	{
@@ -1280,6 +1460,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack createExplorerMap(World arg0, Location arg1, org.bukkit.generator.structure.StructureType arg2,
 			MapCursor.Type arg3, int arg4, boolean arg5)
 	{
@@ -1291,6 +1472,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getShutdownMessage()
 	{
@@ -1298,110 +1480,129 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return "";
 	}
 
+	@Override
 	default Warning.WarningState getWarningState()
 	{
 		// MockMC: Server#getWarningState
 		return null;
 	}
 
+	@Override
 	default KeyedBossBar getBossBar(NamespacedKey arg0)
 	{
 		// MockMC: Server#getBossBar
 		return null;
 	}
 
+	@Override
 	default LootTable getLootTable(NamespacedKey arg0)
 	{
 		// MockMC: Server#getLootTable
 		return null;
 	}
 
+	@Override
 	default boolean getOnlineMode()
 	{
 		// MockMC: Server#getOnlineMode
 		return false;
 	}
 
+	@Override
 	default void reloadPermissions()
 	{
 		// MockMC: Server#reloadPermissions
 	}
 
+	@Override
 	default String getIp()
 	{
 		// MockMC: Server#getIp
 		return "";
 	}
 
+	@Override
 	default void updateRecipes()
 	{
 		// MockMC: Server#updateRecipes
 	}
 
+	@Override
 	default Component permissionMessage()
 	{
 		// MockMC: Server#permissionMessage
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Iterator<Advancement> advancementIterator()
 	{
 		// MockMC: Server#advancementIterator
 		return null;
 	}
 
+	@Override
 	default PluginManager getPluginManager()
 	{
 		// MockMC: Server#getPluginManager
 		return null;
 	}
 
+	@Override
 	default UUID getPlayerUniqueId(String arg0)
 	{
 		// MockMC: Server#getPlayerUniqueId
 		return null;
 	}
 
+	@Override
 	default void savePlayers()
 	{
 		// MockMC: Server#savePlayers
 	}
 
+	@Override
 	default PotionBrewer getPotionBrewer()
 	{
 		// MockMC: Server#getPotionBrewer
 		return null;
 	}
 
+	@Override
 	default long[] getTickTimes()
 	{
 		// MockMC: Server#getTickTimes
 		return new long[0];
 	}
 
+	@Override
 	default Player getPlayerExact(String arg0)
 	{
 		// MockMC: Server#getPlayerExact
 		return null;
 	}
 
+	@Override
 	default boolean addRecipe(Recipe arg0, boolean arg1)
 	{
 		// MockMC: Server#addRecipe
 		return false;
 	}
 
+	@Override
 	default boolean addRecipe(Recipe arg0)
 	{
 		// MockMC: Server#addRecipe
 		return false;
 	}
 
+	@Override
 	default void setPauseWhenEmptyTime(int arg0)
 	{
 		// MockMC: Server#setPauseWhenEmptyTime
 	}
 
+	@Override
 	default void unbanIP(InetAddress arg0)
 	{
 		// MockMC: Server#unbanIP
@@ -1411,18 +1612,21 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default void unbanIP(String arg0)
 	{
 		// MockMC: Server#unbanIP
 	}
 
+	@Override
 	default CommandMap getCommandMap()
 	{
 		// MockMC: Server#getCommandMap
 		return null;
 	}
 
+	@Override
 	default void updateResources()
 	{
 		// MockMC: Server#updateResources
@@ -1432,17 +1636,20 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default void banIP(String arg0)
 	{
 		// MockMC: Server#banIP
 	}
 
+	@Override
 	default void banIP(InetAddress arg0)
 	{
 		// MockMC: Server#banIP
 	}
 
+	@Override
 	default boolean getGenerateStructures()
 	{
 		// MockMC: Server#getGenerateStructures
@@ -1453,6 +1660,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int broadcastMessage(String arg0)
 	{
@@ -1460,124 +1668,145 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default void allowPausing(Plugin arg0, boolean arg1)
 	{
 		// MockMC: Server#allowPausing
 	}
 
+	@Override
 	default StructureManager getStructureManager()
 	{
 		// MockMC: Server#getStructureManager
 		return null;
 	}
 
+	@Override
 	default Set<OfflinePlayer> getBannedPlayers()
 	{
 		// MockMC: Server#getBannedPlayers
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default BlockData createBlockData(Material arg0, String arg1) throws IllegalArgumentException
 	{
 		// MockMC: Server#createBlockData
 		return null;
 	}
 
+	@Override
 	default BlockData createBlockData(Material arg0)
 	{
 		// MockMC: Server#createBlockData
 		return null;
 	}
 
+	@Override
 	default BlockData createBlockData(String arg0) throws IllegalArgumentException
 	{
 		// MockMC: Server#createBlockData
 		return null;
 	}
 
+	@Override
 	default BlockData createBlockData(Material arg0, Consumer<? super BlockData> arg1)
 	{
 		// MockMC: Server#createBlockData
 		return null;
 	}
 
+	@Override
 	default PluginCommand getPluginCommand(String arg0)
 	{
 		// MockMC: Server#getPluginCommand
 		return null;
 	}
 
+	@Override
 	default World getWorld(Key arg0)
 	{
 		// MockMC: Server#getWorld
 		return null;
 	}
 
+	@Override
 	default World getWorld(UUID arg0)
 	{
 		// MockMC: Server#getWorld
 		return null;
 	}
 
+	@Override
 	default World getWorld(String arg0)
 	{
 		// MockMC: Server#getWorld
 		return null;
 	}
 
+	@Override
 	default World getWorld(NamespacedKey arg0)
 	{
 		// MockMC: Server#getWorld
 		return null;
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: Server#getName
 		return "";
 	}
 
+	@Override
 	default void clearRecipes()
 	{
 		// MockMC: Server#clearRecipes
 	}
 
+	@Override
 	default List<Recipe> getRecipesFor(ItemStack arg0)
 	{
 		// MockMC: Server#getRecipesFor
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default World getRespawnWorld()
 	{
 		// MockMC: Server#getRespawnWorld
 		return null;
 	}
 
+	@Override
 	default ServerLinks getServerLinks()
 	{
 		// MockMC: Server#getServerLinks
 		return null;
 	}
 
+	@Override
 	default boolean isLoggingIPs()
 	{
 		// MockMC: Server#isLoggingIPs
 		return false;
 	}
 
+	@Override
 	default Criteria getScoreboardCriteria(String arg0)
 	{
 		// MockMC: Server#getScoreboardCriteria
 		return null;
 	}
 
+	@Override
 	default ConsoleCommandSender getConsoleSender()
 	{
 		// MockMC: Server#getConsoleSender
 		return null;
 	}
 
+	@Override
 	default File getWorldContainer()
 	{
 		// MockMC: Server#getWorldContainer
@@ -1588,7 +1817,9 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default <T extends BanList<?>> T getBanList(BanList.Type arg0)
 	{
@@ -1596,12 +1827,14 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return null;
 	}
 
+	@Override
 	default <B extends BanList<E>, E> B getBanList(BanListType<B> arg0)
 	{
 		// MockMC: Server#getBanList
 		return null;
 	}
 
+	@Override
 	default int getMaxChainedNeighborUpdates()
 	{
 		// MockMC: Server#getMaxChainedNeighborUpdates
@@ -1612,6 +1845,7 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getTicksPerWaterSpawns()
 	{
@@ -1619,18 +1853,21 @@ public interface ServerBaseMock extends Server, PluginMessageRecipientBaseMock
 		return 0;
 	}
 
+	@Override
 	default OfflinePlayer getOfflinePlayerIfCached(String arg0)
 	{
 		// MockMC: Server#getOfflinePlayerIfCached
 		return null;
 	}
 
+	@Override
 	default boolean isPrimaryThread()
 	{
 		// MockMC: Server#isPrimaryThread
 		return false;
 	}
 
+	@Override
 	default boolean getHideOnlinePlayers()
 	{
 		// MockMC: Server#getHideOnlinePlayers

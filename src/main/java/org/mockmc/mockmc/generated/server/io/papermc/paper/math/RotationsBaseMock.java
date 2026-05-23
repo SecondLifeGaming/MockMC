@@ -15,48 +15,56 @@ import io.papermc.paper.math.Rotations;
  */
 public interface RotationsBaseMock extends Rotations
 {
+	@Override
 	default Rotations subtract(double arg0, double arg1, double arg2)
 	{
 		// MockMC: Rotations#subtract
 		return null;
 	}
 
+	@Override
 	default Rotations add(double arg0, double arg1, double arg2)
 	{
 		// MockMC: Rotations#add
 		return null;
 	}
 
+	@Override
 	default Rotations withX(double arg0)
 	{
 		// MockMC: Rotations#withX
 		return null;
 	}
 
+	@Override
 	default Rotations withY(double arg0)
 	{
 		// MockMC: Rotations#withY
 		return null;
 	}
 
+	@Override
 	default Rotations withZ(double arg0)
 	{
 		// MockMC: Rotations#withZ
 		return null;
 	}
 
+	@Override
 	default double z()
 	{
 		// MockMC: Rotations#z
 		return 0.0d;
 	}
 
+	@Override
 	default double x()
 	{
 		// MockMC: Rotations#x
 		return 0.0d;
 	}
 
+	@Override
 	default double y()
 	{
 		// MockMC: Rotations#y

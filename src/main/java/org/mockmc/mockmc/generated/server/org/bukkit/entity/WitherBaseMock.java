@@ -16,21 +16,31 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedE
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WitherBaseMock extends Wither, RangedEntityBaseMock, MonsterBaseMock, BossBaseMock
 {
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Wither#setLeashHolder
+		// MockMC: Wither#isLeashed
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Wither#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void enterInvulnerabilityPhase()
 	{
 		// MockMC: Wither#enterInvulnerabilityPhase
 	}
 
+	@Override
 	default void setCanTravelThroughPortals(boolean arg0)
 	{
 		// MockMC: Wither#setCanTravelThroughPortals
@@ -40,6 +50,7 @@ public interface WitherBaseMock extends Wither, RangedEntityBaseMock, MonsterBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default int getInvulnerabilityTicks()
 	{
@@ -51,6 +62,7 @@ public interface WitherBaseMock extends Wither, RangedEntityBaseMock, MonsterBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void setInvulnerabilityTicks(int arg0)
 	{
@@ -58,35 +70,40 @@ public interface WitherBaseMock extends Wither, RangedEntityBaseMock, MonsterBas
 	}
 
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: Wither#getLeashHolder
-		return null;
+		// MockMC: Wither#setLeashHolder
+		return false;
 	}
 
+	@Override
 	default int getInvulnerableTicks()
 	{
 		// MockMC: Wither#getInvulnerableTicks
 		return 0;
 	}
 
+	@Override
 	default LivingEntity getTarget(Wither.Head arg0)
 	{
 		// MockMC: Wither#getTarget
 		return null;
 	}
 
+	@Override
 	default void setInvulnerableTicks(int arg0)
 	{
 		// MockMC: Wither#setInvulnerableTicks
 	}
 
+	@Override
 	default boolean canTravelThroughPortals()
 	{
 		// MockMC: Wither#canTravelThroughPortals
 		return false;
 	}
 
+	@Override
 	default void setTarget(Wither.Head arg0, LivingEntity arg1)
 	{
 		// MockMC: Wither#setTarget
@@ -99,12 +116,6 @@ public interface WitherBaseMock extends Wither, RangedEntityBaseMock, MonsterBas
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Wither#isLeashed
-		return false;
-	}
-
 	default boolean isCharged()
 	{
 		// MockMC: Wither#isCharged

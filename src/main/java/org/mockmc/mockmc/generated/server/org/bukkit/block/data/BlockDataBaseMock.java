@@ -28,153 +28,179 @@ import org.bukkit.util.VoxelShape;
  */
 public interface BlockDataBaseMock extends BlockData
 {
+	@Override
 	default Color getMapColor()
 	{
 		// MockMC: BlockData#getMapColor
 		return null;
 	}
 
+	@Override
 	default SoundGroup getSoundGroup()
 	{
 		// MockMC: BlockData#getSoundGroup
 		return null;
 	}
 
+	@Override
 	default boolean matches(BlockData arg0)
 	{
 		// MockMC: BlockData#matches
 		return false;
 	}
 
+	@Override
 	default boolean isRandomlyTicked()
 	{
 		// MockMC: BlockData#isRandomlyTicked
 		return false;
 	}
 
+	@Override
 	default boolean isSupported(Block arg0)
 	{
 		// MockMC: BlockData#isSupported
 		return false;
 	}
 
+	@Override
 	default boolean isSupported(Location arg0)
 	{
 		// MockMC: BlockData#isSupported
 		return false;
 	}
 
+	@Override
 	default PistonMoveReaction getPistonMoveReaction()
 	{
 		// MockMC: BlockData#getPistonMoveReaction
 		return null;
 	}
 
+	@Override
 	default BlockState createBlockState()
 	{
 		// MockMC: BlockData#createBlockState
 		return null;
 	}
 
+	@Override
 	default Material getMaterial()
 	{
 		// MockMC: BlockData#getMaterial
 		return null;
 	}
 
+	@Override
 	default Material getPlacementMaterial()
 	{
 		// MockMC: BlockData#getPlacementMaterial
 		return null;
 	}
 
+	@Override
 	default boolean isOccluding()
 	{
 		// MockMC: BlockData#isOccluding
 		return false;
 	}
 
+	@Override
 	default BlockData clone()
 	{
 		// MockMC: BlockData#clone
 		return null;
 	}
 
+	@Override
 	default void rotate(StructureRotation arg0)
 	{
 		// MockMC: BlockData#rotate
 	}
 
+	@Override
 	default void mirror(Mirror arg0)
 	{
 		// MockMC: BlockData#mirror
 	}
 
+	@Override
 	default float getDestroySpeed(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: BlockData#getDestroySpeed
 		return 0.0f;
 	}
 
+	@Override
 	default int getLightEmission()
 	{
 		// MockMC: BlockData#getLightEmission
 		return 0;
 	}
 
+	@Override
 	default float getDestroySpeed(ItemStack arg0)
 	{
 		// MockMC: BlockData#getDestroySpeed
 		return 0.0f;
 	}
 
+	@Override
 	default String getAsString()
 	{
 		// MockMC: BlockData#getAsString
 		return "";
 	}
 
+	@Override
 	default String getAsString(boolean arg0)
 	{
 		// MockMC: BlockData#getAsString
 		return "";
 	}
 
+	@Override
 	default boolean requiresCorrectToolForDrops()
 	{
 		// MockMC: BlockData#requiresCorrectToolForDrops
 		return false;
 	}
 
+	@Override
 	default boolean isPreferredTool(ItemStack arg0)
 	{
 		// MockMC: BlockData#isPreferredTool
 		return false;
 	}
 
+	@Override
 	default BlockData merge(BlockData arg0)
 	{
 		// MockMC: BlockData#merge
 		return null;
 	}
 
+	@Override
 	default void copyTo(BlockData arg0)
 	{
 		// MockMC: BlockData#copyTo
 	}
 
+	@Override
 	default VoxelShape getCollisionShape(Location arg0)
 	{
 		// MockMC: BlockData#getCollisionShape
 		return null;
 	}
 
+	@Override
 	default boolean isReplaceable()
 	{
 		// MockMC: BlockData#isReplaceable
 		return false;
 	}
 
+	@Override
 	default boolean isFaceSturdy(BlockFace arg0, BlockSupport arg1)
 	{
 		// MockMC: BlockData#isFaceSturdy

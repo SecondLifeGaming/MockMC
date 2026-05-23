@@ -16,18 +16,21 @@ import io.papermc.paper.math.BlockPosition;
  */
 public interface ColumnBlockPositionBaseMock extends ColumnBlockPosition
 {
+	@Override
 	default BlockPosition toPosition(int arg0)
 	{
 		// MockMC: ColumnBlockPosition#toPosition
 		return null;
 	}
 
+	@Override
 	default int blockZ()
 	{
 		// MockMC: ColumnBlockPosition#blockZ
 		return 0;
 	}
 
+	@Override
 	default int blockX()
 	{
 		// MockMC: ColumnBlockPosition#blockX

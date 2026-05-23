@@ -16,12 +16,14 @@ import org.bukkit.inventory.meta.AxolotlBucketMeta;
  */
 public interface AxolotlBucketMetaBaseMock extends AxolotlBucketMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean hasVariant()
 	{
 		// MockMC: AxolotlBucketMeta#hasVariant
 		return false;
 	}
 
+	@Override
 	default void setVariant(Axolotl.Variant arg0)
 	{
 		// MockMC: AxolotlBucketMeta#setVariant
@@ -34,6 +36,7 @@ public interface AxolotlBucketMetaBaseMock extends AxolotlBucketMeta, ItemMetaBa
 		return null;
 	}
 
+	@Override
 	default Axolotl.Variant getVariant()
 	{
 		// MockMC: AxolotlBucketMeta#getVariant

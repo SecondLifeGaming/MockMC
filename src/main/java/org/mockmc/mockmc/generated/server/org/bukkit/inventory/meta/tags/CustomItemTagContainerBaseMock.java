@@ -20,13 +20,15 @@ import org.bukkit.inventory.meta.tags.ItemTagType;
  *             modern build cycles.
  */
 @Deprecated(since = "1.14", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default ItemTagAdapterContext getAdapterContext()
 	{
@@ -38,6 +40,7 @@ public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default <T, Z> boolean hasCustomTag(NamespacedKey arg0, ItemTagType<T, Z> arg1)
 	{
@@ -49,6 +52,7 @@ public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default void removeCustomTag(NamespacedKey arg0)
 	{
@@ -59,6 +63,7 @@ public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default <T, Z> Z getCustomTag(NamespacedKey arg0, ItemTagType<T, Z> arg1)
 	{
@@ -70,6 +75,7 @@ public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default <T, Z> void setCustomTag(NamespacedKey arg0, ItemTagType<T, Z> arg1, Z arg2)
 	{
@@ -80,6 +86,7 @@ public interface CustomItemTagContainerBaseMock extends CustomItemTagContainer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default boolean isEmpty()
 	{

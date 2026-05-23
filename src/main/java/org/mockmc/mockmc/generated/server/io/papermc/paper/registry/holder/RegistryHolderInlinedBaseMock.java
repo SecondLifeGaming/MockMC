@@ -15,6 +15,7 @@ import io.papermc.paper.registry.holder.RegistryHolder;
  */
 public interface RegistryHolderInlinedBaseMock<API, ENTRY> extends RegistryHolder.Inlined<API, ENTRY>
 {
+	@Override
 	default ENTRY entry()
 	{
 		// MockMC: Inlined#entry

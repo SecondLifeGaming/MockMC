@@ -15,21 +15,25 @@ import org.bukkit.Sound;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface JukeboxSongBaseMock extends JukeboxSong, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface JukeboxSongBaseMock extends JukeboxSong, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default Sound getSound()
 	{
 		// MockMC: JukeboxSong#getSound
 		return null;
 	}
 
+	@Override
 	default int getComparatorOutput()
 	{
 		// MockMC: JukeboxSong#getComparatorOutput
 		return 0;
 	}
 
+	@Override
 	default Component getDescription()
 	{
 		// MockMC: JukeboxSong#getDescription
@@ -48,6 +52,7 @@ public interface JukeboxSongBaseMock extends JukeboxSong, KeyedBaseMock, Transla
 		return "";
 	}
 
+	@Override
 	default float getLengthInSeconds()
 	{
 		// MockMC: JukeboxSong#getLengthInSeconds

@@ -14,24 +14,14 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CowBaseMock extends Cow, AbstractCowBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Cow#getLeashHolder
-		return null;
-	}
-
 	default void setVariant(Cow.Variant arg0)
 	{
 		// MockMC: Cow#setVariant
-	}
-
-	default void setSoundVariant(Cow.SoundVariant arg0)
-	{
-		// MockMC: Cow#setSoundVariant
 	}
 
 	@Override
@@ -41,16 +31,10 @@ public interface CowBaseMock extends Cow, AbstractCowBaseMock
 		return false;
 	}
 
-	default Cow.SoundVariant getSoundVariant()
+	@Override
+	default void setSoundVariant(Cow.SoundVariant arg0)
 	{
-		// MockMC: Cow#getSoundVariant
-		return null;
-	}
-
-	default Cow.Variant getVariant()
-	{
-		// MockMC: Cow#getVariant
-		return null;
+		// MockMC: Cow#setSoundVariant
 	}
 
 	@Override
@@ -58,5 +42,26 @@ public interface CowBaseMock extends Cow, AbstractCowBaseMock
 	{
 		// MockMC: Cow#isLeashed
 		return false;
+	}
+
+	@Override
+	default Cow.SoundVariant getSoundVariant()
+	{
+		// MockMC: Cow#getSoundVariant
+		return null;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Cow#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default Cow.Variant getVariant()
+	{
+		// MockMC: Cow#getVariant
+		return null;
 	}
 }

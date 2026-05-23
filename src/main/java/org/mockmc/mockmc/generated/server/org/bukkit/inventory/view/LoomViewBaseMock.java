@@ -26,12 +26,14 @@ public interface LoomViewBaseMock extends LoomView, InventoryViewBaseMock
 		return null;
 	}
 
+	@Override
 	default List<PatternType> getSelectablePatterns()
 	{
 		// MockMC: LoomView#getSelectablePatterns
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getSelectedPatternIndex()
 	{
 		// MockMC: LoomView#getSelectedPatternIndex

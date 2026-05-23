@@ -15,14 +15,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CopperGolemStatueBaseMock extends CopperGolemStatue, WaterloggedBaseMock, DirectionalBaseMock
+public interface CopperGolemStatueBaseMock extends CopperGolemStatue, DirectionalBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default CopperGolemStatue.Pose getCopperGolemPose()
 	{
 		// MockMC: CopperGolemStatue#getCopperGolemPose
 		return null;
 	}
 
+	@Override
 	default void setCopperGolemPose(CopperGolemStatue.Pose arg0)
 	{
 		// MockMC: CopperGolemStatue#setCopperGolemPose

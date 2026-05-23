@@ -14,37 +14,44 @@ import org.bukkit.block.EndGateway;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EndGatewayBaseMock extends EndGateway, TileStateBaseMock
 {
+	@Override
 	default void setExitLocation(Location arg0)
 	{
 		// MockMC: EndGateway#setExitLocation
 	}
 
+	@Override
 	default Location getExitLocation()
 	{
 		// MockMC: EndGateway#getExitLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default long getAge()
 	{
 		// MockMC: EndGateway#getAge
 		return 0L;
 	}
 
+	@Override
 	default boolean isExactTeleport()
 	{
 		// MockMC: EndGateway#isExactTeleport
 		return false;
 	}
 
+	@Override
 	default void setAge(long arg0)
 	{
 		// MockMC: EndGateway#setAge
 	}
 
+	@Override
 	default void setExactTeleport(boolean arg0)
 	{
 		// MockMC: EndGateway#setExactTeleport

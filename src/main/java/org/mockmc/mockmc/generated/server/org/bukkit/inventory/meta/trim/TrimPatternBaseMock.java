@@ -18,8 +18,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface TrimPatternBaseMock extends TrimPattern, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface TrimPatternBaseMock extends TrimPattern, TranslatableBaseMock, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
@@ -57,6 +58,7 @@ public interface TrimPatternBaseMock extends TrimPattern, KeyedBaseMock, Transla
 		return getKey();
 	}
 
+	@Override
 	default Component description()
 	{
 		// MockMC: TrimPattern#description

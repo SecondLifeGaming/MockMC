@@ -15,14 +15,17 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BrushableBlockBaseMock extends BrushableBlock, TileStateBaseMock, LootableBaseMock
 {
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: BrushableBlock#setItem
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: BrushableBlock#getItem

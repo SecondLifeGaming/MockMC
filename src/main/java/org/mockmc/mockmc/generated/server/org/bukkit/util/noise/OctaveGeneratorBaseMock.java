@@ -16,13 +16,13 @@ import org.bukkit.util.noise.NoiseGenerator;
  */
 public interface OctaveGeneratorBaseMock
 {
-	default double noise(double arg0, double arg1, double arg2, boolean arg3)
+	default double noise(double arg0, double arg1, double arg2, double arg3, double arg4, boolean arg5)
 	{
 		// MockMC: OctaveGenerator#noise
 		return 0.0d;
 	}
 
-	default double noise(double arg0, double arg1, double arg2, double arg3, double arg4, boolean arg5)
+	default double noise(double arg0, double arg1, double arg2, boolean arg3)
 	{
 		// MockMC: OctaveGenerator#noise
 		return 0.0d;

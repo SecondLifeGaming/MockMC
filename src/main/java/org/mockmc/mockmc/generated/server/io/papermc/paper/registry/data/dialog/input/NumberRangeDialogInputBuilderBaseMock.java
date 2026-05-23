@@ -16,30 +16,35 @@ import io.papermc.paper.registry.data.dialog.input.NumberRangeDialogInput;
  */
 public interface NumberRangeDialogInputBuilderBaseMock extends NumberRangeDialogInput.Builder
 {
+	@Override
 	default NumberRangeDialogInput.Builder labelFormat(String arg0)
 	{
 		// MockMC: Builder#labelFormat
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder initial(Float arg0)
 	{
 		// MockMC: Builder#initial
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder step(Float arg0)
 	{
 		// MockMC: Builder#step

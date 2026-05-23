@@ -17,12 +17,14 @@ import net.kyori.adventure.text.Component;
  */
 public interface MessageComponentSerializerBaseMock extends MessageComponentSerializer
 {
+	@Override
 	default Component deserialize(Message arg0)
 	{
 		// MockMC: MessageComponentSerializer#deserialize
 		return null;
 	}
 
+	@Override
 	default Message serialize(Component arg0)
 	{
 		// MockMC: MessageComponentSerializer#serialize

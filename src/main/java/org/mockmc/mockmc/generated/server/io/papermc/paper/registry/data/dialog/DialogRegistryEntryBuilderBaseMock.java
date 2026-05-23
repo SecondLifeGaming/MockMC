@@ -24,18 +24,21 @@ public interface DialogRegistryEntryBuilderBaseMock
 			RegistryBuilderBaseMock<Dialog>,
 			DialogRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder base(DialogBase arg0)
 	{
 		// MockMC: Builder#base
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder type(DialogType arg0)
 	{
 		// MockMC: Builder#type
 		return null;
 	}
 
+	@Override
 	default RegistryValueSetBuilder<Dialog, io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder> registryValueSet()
 	{
 		// MockMC: Builder#registryValueSet

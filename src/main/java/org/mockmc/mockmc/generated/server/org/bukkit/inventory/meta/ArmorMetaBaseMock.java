@@ -23,18 +23,21 @@ public interface ArmorMetaBaseMock extends ArmorMeta, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default ArmorTrim getTrim()
 	{
 		// MockMC: ArmorMeta#getTrim
 		return null;
 	}
 
+	@Override
 	default boolean hasTrim()
 	{
 		// MockMC: ArmorMeta#hasTrim
 		return false;
 	}
 
+	@Override
 	default void setTrim(ArmorTrim arg0)
 	{
 		// MockMC: ArmorMeta#setTrim

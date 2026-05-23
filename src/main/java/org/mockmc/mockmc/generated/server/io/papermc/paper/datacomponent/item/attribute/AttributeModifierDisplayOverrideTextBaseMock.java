@@ -19,6 +19,7 @@ public interface AttributeModifierDisplayOverrideTextBaseMock
 			io.papermc.paper.datacomponent.item.attribute.AttributeModifierDisplay.OverrideText,
 			AttributeModifierDisplayBaseMock
 {
+	@Override
 	default Component text()
 	{
 		// MockMC: OverrideText#text

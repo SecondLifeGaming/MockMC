@@ -14,26 +14,31 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface OminousItemSpawnerBaseMock extends OminousItemSpawner, EntityBaseMock
 {
+	@Override
 	default long getSpawnItemAfterTicks()
 	{
 		// MockMC: OminousItemSpawner#getSpawnItemAfterTicks
 		return 0L;
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: OminousItemSpawner#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setSpawnItemAfterTicks(long arg0)
 	{
 		// MockMC: OminousItemSpawner#setSpawnItemAfterTicks
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: OminousItemSpawner#setItem

@@ -17,13 +17,15 @@ import org.bukkit.util.Consumer;
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.2", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ConsumerBaseMock<T> extends Consumer<T>
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default void accept(T arg0)
 	{

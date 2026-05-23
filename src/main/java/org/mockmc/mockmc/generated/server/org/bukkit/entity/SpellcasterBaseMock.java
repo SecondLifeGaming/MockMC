@@ -14,9 +14,30 @@ import org.bukkit.entity.Spellcaster;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SpellcasterBaseMock extends Spellcaster, IllagerBaseMock
 {
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Spellcaster#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Spellcaster#isLeashed
+		return false;
+	}
+
+	@Override
+	default void setSpell(Spellcaster.Spell arg0)
+	{
+		// MockMC: Spellcaster#setSpell
+	}
+
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
@@ -25,27 +46,9 @@ public interface SpellcasterBaseMock extends Spellcaster, IllagerBaseMock
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Spellcaster#setLeashHolder
-		return false;
-	}
-
-	default void setSpell(Spellcaster.Spell arg0)
-	{
-		// MockMC: Spellcaster#setSpell
-	}
-
 	default Spellcaster.Spell getSpell()
 	{
 		// MockMC: Spellcaster#getSpell
 		return null;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Spellcaster#isLeashed
-		return false;
 	}
 }

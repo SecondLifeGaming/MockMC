@@ -18,77 +18,90 @@ import org.bukkit.Axis;
  */
 public interface AxisSetBaseMock extends AxisSet
 {
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: AxisSet#isEmpty
 		return false;
 	}
 
+	@Override
 	default void clear()
 	{
 		// MockMC: AxisSet#clear
 	}
 
+	@Override
 	default boolean remove(Object arg0)
 	{
 		// MockMC: AxisSet#remove
 		return false;
 	}
 
+	@Override
 	default boolean add(Axis arg0)
 	{
 		// MockMC: AxisSet#add
 		return false;
 	}
 
+	@Override
 	default boolean containsAll(Collection<?> arg0)
 	{
 		// MockMC: AxisSet#containsAll
 		return false;
 	}
 
+	@Override
 	default <T> T[] toArray(T[] arg0)
 	{
 		// MockMC: AxisSet#toArray
 		return null;
 	}
 
+	@Override
 	default Object[] toArray()
 	{
 		// MockMC: AxisSet#toArray
 		return new Object[0];
 	}
 
+	@Override
 	default boolean retainAll(Collection<?> arg0)
 	{
 		// MockMC: AxisSet#retainAll
 		return false;
 	}
 
+	@Override
 	default boolean removeAll(Collection<?> arg0)
 	{
 		// MockMC: AxisSet#removeAll
 		return false;
 	}
 
+	@Override
 	default boolean contains(Object arg0)
 	{
 		// MockMC: AxisSet#contains
 		return false;
 	}
 
+	@Override
 	default Iterator<Axis> iterator()
 	{
 		// MockMC: AxisSet#iterator
 		return null;
 	}
 
+	@Override
 	default boolean addAll(Collection<? extends Axis> arg0)
 	{
 		// MockMC: AxisSet#addAll
 		return false;
 	}
 
+	@Override
 	default int size()
 	{
 		// MockMC: AxisSet#size

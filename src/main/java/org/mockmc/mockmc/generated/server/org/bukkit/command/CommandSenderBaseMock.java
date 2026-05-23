@@ -23,24 +23,29 @@ import org.mockmc.mockmc.generated.server.org.bukkit.permissions.PermissibleBase
  */
 public interface CommandSenderBaseMock extends CommandSender, PermissibleBaseMock
 {
+	@Override
 	default String getName()
 	{
 		// MockMC: CommandSender#getName
 		return "";
 	}
 
+	@Override
 	default Server getServer()
 	{
 		// MockMC: CommandSender#getServer
 		return null;
 	}
 
+	@Override
 	default void sendMessage(String... arg0)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void sendMessage(Identity arg0, Component arg1, MessageType arg2)
 	{
 		// MockMC: CommandSender#sendMessage
@@ -50,7 +55,9 @@ public interface CommandSenderBaseMock extends CommandSender, PermissibleBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void sendMessage(BaseComponent arg0)
 	{
@@ -61,12 +68,14 @@ public interface CommandSenderBaseMock extends CommandSender, PermissibleBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendMessage(BaseComponent... arg0)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
+	@Override
 	default void sendMessage(String arg0)
 	{
 		// MockMC: CommandSender#sendMessage
@@ -76,6 +85,7 @@ public interface CommandSenderBaseMock extends CommandSender, PermissibleBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendMessage(UUID arg0, String arg1)
 	{
@@ -86,34 +96,40 @@ public interface CommandSenderBaseMock extends CommandSender, PermissibleBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendMessage(UUID arg0, String... arg1)
 	{
 		// MockMC: CommandSender#sendMessage
 	}
 
+	@Override
 	default void sendRichMessage(String arg0, TagResolver... arg1)
 	{
 		// MockMC: CommandSender#sendRichMessage
 	}
 
+	@Override
 	default void sendRichMessage(String arg0)
 	{
 		// MockMC: CommandSender#sendRichMessage
 	}
 
+	@Override
 	default CommandSender.Spigot spigot()
 	{
 		// MockMC: CommandSender#spigot
 		return null;
 	}
 
+	@Override
 	default Component name()
 	{
 		// MockMC: CommandSender#name
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void sendPlainMessage(String arg0)
 	{
 		// MockMC: CommandSender#sendPlainMessage

@@ -18,24 +18,28 @@ import org.bukkit.plugin.Plugin;
  */
 public interface EntitySchedulerBaseMock extends EntityScheduler
 {
+	@Override
 	default ScheduledTask runAtFixedRate(Plugin arg0, Consumer<ScheduledTask> arg1, Runnable arg2, long arg3, long arg4)
 	{
 		// MockMC: EntityScheduler#runAtFixedRate
 		return null;
 	}
 
+	@Override
 	default boolean execute(Plugin arg0, Runnable arg1, Runnable arg2, long arg3)
 	{
 		// MockMC: EntityScheduler#execute
 		return false;
 	}
 
+	@Override
 	default ScheduledTask run(Plugin arg0, Consumer<ScheduledTask> arg1, Runnable arg2)
 	{
 		// MockMC: EntityScheduler#run
 		return null;
 	}
 
+	@Override
 	default ScheduledTask runDelayed(Plugin arg0, Consumer<ScheduledTask> arg1, Runnable arg2, long arg3)
 	{
 		// MockMC: EntityScheduler#runDelayed

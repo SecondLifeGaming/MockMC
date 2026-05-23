@@ -18,7 +18,8 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.brigadier.Bukk
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface PaperCommandSourceStackBaseMock
 		extends
 			PaperCommandSourceStack,

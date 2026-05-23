@@ -50,14 +50,16 @@ public interface PlayerBaseMock
 			InboundConnectionBaseMock,
 			ChannelMessageSinkBaseMock,
 			ChannelMessageSourceBaseMock,
-			KeyIdentifiableBaseMock,
-			CommandSourceBaseMock
+			CommandSourceBaseMock,
+			KeyIdentifiableBaseMock
 {
+	@Override
 	default void sendResourcePackOffer(ResourcePackInfo arg0)
 	{
 		// MockMC: Player#sendResourcePackOffer
 	}
 
+	@Override
 	default Component getPlayerListHeader()
 	{
 		// MockMC: Player#getPlayerListHeader
@@ -82,6 +84,7 @@ public interface PlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendResourcePack(String arg0, byte[] arg1)
 	{
@@ -92,46 +95,54 @@ public interface PlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendResourcePack(String arg0)
 	{
 		// MockMC: Player#sendResourcePack
 	}
 
+	@Override
 	default HoverEvent<HoverEvent.ShowEntity> asHoverEvent(UnaryOperator<HoverEvent.ShowEntity> arg0)
 	{
 		// MockMC: Player#asHoverEvent
 		return null;
 	}
 
+	@Override
 	default void setServerLinks(List<ServerLink> arg0)
 	{
 		// MockMC: Player#setServerLinks
 	}
 
+	@Override
 	default PlayerSettings getPlayerSettings()
 	{
 		// MockMC: Player#getPlayerSettings
 		return null;
 	}
 
+	@Override
 	default List<GameProfile.Property> getGameProfileProperties()
 	{
 		// MockMC: Player#getGameProfileProperties
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void disconnect(Component arg0)
 	{
 		// MockMC: Player#disconnect
 	}
 
+	@Override
 	default UUID getUniqueId()
 	{
 		// MockMC: Player#getUniqueId
 		return null;
 	}
 
+	@Override
 	default TabList getTabList()
 	{
 		// MockMC: Player#getTabList
@@ -144,53 +155,62 @@ public interface PlayerBaseMock
 		// MockMC: Player#openBook
 	}
 
+	@Override
 	default ConnectionRequestBuilder createConnectionRequest(RegisteredServer arg0)
 	{
 		// MockMC: Player#createConnectionRequest
 		return null;
 	}
 
+	@Override
 	default Optional<ServerConnection> getCurrentServer()
 	{
 		// MockMC: Player#getCurrentServer
 		return java.util.Optional.empty();
 	}
 
+	@Override
 	default String getClientBrand()
 	{
 		// MockMC: Player#getClientBrand
 		return "";
 	}
 
+	@Override
 	default void transferToHost(InetSocketAddress arg0)
 	{
 		// MockMC: Player#transferToHost
 	}
 
+	@Override
 	default boolean hasSentPlayerSettings()
 	{
 		// MockMC: Player#hasSentPlayerSettings
 		return false;
 	}
 
+	@Override
 	default Component getPlayerListFooter()
 	{
 		// MockMC: Player#getPlayerListFooter
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Locale getEffectiveLocale()
 	{
 		// MockMC: Player#getEffectiveLocale
 		return null;
 	}
 
+	@Override
 	default Identity identity()
 	{
 		// MockMC: Player#identity
 		return null;
 	}
 
+	@Override
 	default void clearPlayerListHeaderAndFooter()
 	{
 		// MockMC: Player#clearPlayerListHeaderAndFooter
@@ -214,12 +234,14 @@ public interface PlayerBaseMock
 		// MockMC: Player#playSound
 	}
 
+	@Override
 	default Collection<ResourcePackInfo> getAppliedResourcePacks()
 	{
 		// MockMC: Player#getAppliedResourcePacks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void storeCookie(Key arg0, byte[] arg1)
 	{
 		// MockMC: Player#storeCookie
@@ -229,6 +251,7 @@ public interface PlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ResourcePackInfo getAppliedResourcePack()
 	{
@@ -248,29 +271,34 @@ public interface PlayerBaseMock
 		// MockMC: Player#stopSound
 	}
 
+	@Override
 	default Key key()
 	{
 		// MockMC: Player#key
 		return null;
 	}
 
+	@Override
 	default void requestCookie(Key arg0)
 	{
 		// MockMC: Player#requestCookie
 	}
 
+	@Override
 	default String getUsername()
 	{
 		// MockMC: Player#getUsername
 		return "";
 	}
 
+	@Override
 	default GameProfile getGameProfile()
 	{
 		// MockMC: Player#getGameProfile
 		return null;
 	}
 
+	@Override
 	default void setEffectiveLocale(Locale arg0)
 	{
 		// MockMC: Player#setEffectiveLocale
@@ -282,38 +310,45 @@ public interface PlayerBaseMock
 		// MockMC: Player#closeDialog
 	}
 
+	@Override
 	default Collection<ResourcePackInfo> getPendingResourcePacks()
 	{
 		// MockMC: Player#getPendingResourcePacks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void applySkinToPlayerHeadContents(PlayerHeadObjectContents.Builder arg0)
 	{
 		// MockMC: Player#applySkinToPlayerHeadContents
 	}
 
+	@Override
 	default void setCustomChatCompletions(Collection<String> arg0)
 	{
 		// MockMC: Player#setCustomChatCompletions
 	}
 
+	@Override
 	default void spoofChatInput(String arg0)
 	{
 		// MockMC: Player#spoofChatInput
 	}
 
+	@Override
 	default Optional<ModInfo> getModInfo()
 	{
 		// MockMC: Player#getModInfo
 		return java.util.Optional.empty();
 	}
 
+	@Override
 	default void removeCustomChatCompletions(Collection<String> arg0)
 	{
 		// MockMC: Player#removeCustomChatCompletions
 	}
 
+	@Override
 	default void setGameProfileProperties(List<GameProfile.Property> arg0)
 	{
 		// MockMC: Player#setGameProfileProperties
@@ -323,18 +358,21 @@ public interface PlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void clearHeaderAndFooter()
 	{
 		// MockMC: Player#clearHeaderAndFooter
 	}
 
+	@Override
 	default boolean isOnlineMode()
 	{
 		// MockMC: Player#isOnlineMode
 		return false;
 	}
 
+	@Override
 	default void addCustomChatCompletions(Collection<String> arg0)
 	{
 		// MockMC: Player#addCustomChatCompletions
@@ -344,6 +382,7 @@ public interface PlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ResourcePackInfo getPendingResourcePack()
 	{
@@ -351,6 +390,7 @@ public interface PlayerBaseMock
 		return null;
 	}
 
+	@Override
 	default long getPing()
 	{
 		// MockMC: Player#getPing

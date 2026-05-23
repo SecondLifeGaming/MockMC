@@ -16,9 +16,58 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface DropperBaseMock extends Dropper, LootableBaseMock, ContainerBaseMock
 {
+	@Override
+	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
+	{
+		// MockMC: Dropper#setHasPlayerLooted
+		return false;
+	}
+
+	@Override
+	default boolean hasBeenFilled()
+	{
+		// MockMC: Dropper#hasBeenFilled
+		return false;
+	}
+
+	@Override
+	default long getLastFilled()
+	{
+		// MockMC: Dropper#getLastFilled
+		return 0L;
+	}
+
+	@Override
+	default boolean isRefillEnabled()
+	{
+		// MockMC: Dropper#isRefillEnabled
+		return false;
+	}
+
+	@Override
+	default void drop()
+	{
+		// MockMC: Dropper#drop
+	}
+
+	@Override
+	default boolean canPlayerLoot(UUID arg0)
+	{
+		// MockMC: Dropper#canPlayerLoot
+		return false;
+	}
+
+	@Override
+	default boolean hasPlayerLooted(UUID arg0)
+	{
+		// MockMC: Dropper#hasPlayerLooted
+		return false;
+	}
+
 	@Override
 	default Block getBlock()
 	{
@@ -26,65 +75,28 @@ public interface DropperBaseMock extends Dropper, LootableBaseMock, ContainerBas
 		return null;
 	}
 
-	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
-	{
-		// MockMC: Dropper#setHasPlayerLooted
-		return false;
-	}
-
-	default boolean hasBeenFilled()
-	{
-		// MockMC: Dropper#hasBeenFilled
-		return false;
-	}
-
-	default long getLastFilled()
-	{
-		// MockMC: Dropper#getLastFilled
-		return 0L;
-	}
-
-	default boolean isRefillEnabled()
-	{
-		// MockMC: Dropper#isRefillEnabled
-		return false;
-	}
-
-	default void drop()
-	{
-		// MockMC: Dropper#drop
-	}
-
-	default boolean canPlayerLoot(UUID arg0)
-	{
-		// MockMC: Dropper#canPlayerLoot
-		return false;
-	}
-
-	default boolean hasPlayerLooted(UUID arg0)
-	{
-		// MockMC: Dropper#hasPlayerLooted
-		return false;
-	}
-
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Dropper#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Dropper#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: Dropper#getNextRefill
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Dropper#setNextRefill

@@ -24,29 +24,35 @@ public interface ChunkGeneratorChunkDataBaseMock extends ChunkGenerator.ChunkDat
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void setRegion(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, MaterialData arg6)
 	{
 		// MockMC: ChunkData#setRegion
 	}
 
+	@Override
 	default void setRegion(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, Material arg6)
 	{
 		// MockMC: ChunkData#setRegion
 	}
 
+	@Override
 	default void setRegion(int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, BlockData arg6)
 	{
 		// MockMC: ChunkData#setRegion
 	}
 
+	@Override
 	default BlockData getBlockData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkData#getBlockData
 		return null;
 	}
 
+	@Override
 	default void setBlock(int arg0, int arg1, int arg2, Material arg3)
 	{
 		// MockMC: ChunkData#setBlock
@@ -56,18 +62,22 @@ public interface ChunkGeneratorChunkDataBaseMock extends ChunkGenerator.ChunkDat
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void setBlock(int arg0, int arg1, int arg2, MaterialData arg3)
 	{
 		// MockMC: ChunkData#setBlock
 	}
 
+	@Override
 	default void setBlock(int arg0, int arg1, int arg2, BlockData arg3)
 	{
 		// MockMC: ChunkData#setBlock
 	}
 
+	@Override
 	default int getHeight(HeightMap arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkData#getHeight
@@ -78,7 +88,9 @@ public interface ChunkGeneratorChunkDataBaseMock extends ChunkGenerator.ChunkDat
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default MaterialData getTypeAndData(int arg0, int arg1, int arg2)
 	{
@@ -86,24 +98,28 @@ public interface ChunkGeneratorChunkDataBaseMock extends ChunkGenerator.ChunkDat
 		return null;
 	}
 
+	@Override
 	default int getMinHeight()
 	{
 		// MockMC: ChunkData#getMinHeight
 		return 0;
 	}
 
+	@Override
 	default Material getType(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkData#getType
 		return null;
 	}
 
+	@Override
 	default int getMaxHeight()
 	{
 		// MockMC: ChunkData#getMaxHeight
 		return 0;
 	}
 
+	@Override
 	default Biome getBiome(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkData#getBiome
@@ -114,6 +130,7 @@ public interface ChunkGeneratorChunkDataBaseMock extends ChunkGenerator.ChunkDat
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.8.8")
 	default byte getData(int arg0, int arg1, int arg2)
 	{

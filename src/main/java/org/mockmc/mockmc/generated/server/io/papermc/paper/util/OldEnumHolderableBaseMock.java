@@ -19,7 +19,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M> extends OldEnumBaseMock<A>, KeyedBaseMock
 {
 	/**

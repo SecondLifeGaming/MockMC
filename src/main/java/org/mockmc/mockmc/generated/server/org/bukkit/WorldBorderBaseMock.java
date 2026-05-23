@@ -18,23 +18,27 @@ import org.bukkit.WorldBorder;
  */
 public interface WorldBorderBaseMock extends WorldBorder
 {
+	@Override
 	default void setWarningDistance(int arg0)
 	{
 		// MockMC: WorldBorder#setWarningDistance
 	}
 
+	@Override
 	default double getSize()
 	{
 		// MockMC: WorldBorder#getSize
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxSize()
 	{
 		// MockMC: WorldBorder#getMaxSize
 		return 0.0d;
 	}
 
+	@Override
 	default int getWarningDistance()
 	{
 		// MockMC: WorldBorder#getWarningDistance
@@ -45,22 +49,14 @@ public interface WorldBorderBaseMock extends WorldBorder
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default void setSize(double arg0, TimeUnit arg1, long arg2)
 	{
 		// MockMC: WorldBorder#setSize
 	}
 
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.21.11", forRemoval = true)
-	default void setSize(double arg0, long arg1)
-	{
-		// MockMC: WorldBorder#setSize
-	}
-
+	@Override
 	default void setSize(double arg0)
 	{
 		// MockMC: WorldBorder#setSize
@@ -70,6 +66,18 @@ public interface WorldBorderBaseMock extends WorldBorder
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
+	@Deprecated(since = "1.21.11", forRemoval = true)
+	default void setSize(double arg0, long arg1)
+	{
+		// MockMC: WorldBorder#setSize
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default void setWarningTime(int arg0)
 	{
@@ -80,6 +88,7 @@ public interface WorldBorderBaseMock extends WorldBorder
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default int getWarningTime()
 	{
@@ -87,77 +96,91 @@ public interface WorldBorderBaseMock extends WorldBorder
 		return 0;
 	}
 
+	@Override
 	default void reset()
 	{
 		// MockMC: WorldBorder#reset
 	}
 
+	@Override
 	default void setDamageBuffer(double arg0)
 	{
 		// MockMC: WorldBorder#setDamageBuffer
 	}
 
+	@Override
 	default boolean isInside(Location arg0)
 	{
 		// MockMC: WorldBorder#isInside
 		return false;
 	}
 
+	@Override
 	default void changeSize(double arg0, long arg1)
 	{
 		// MockMC: WorldBorder#changeSize
 	}
 
+	@Override
 	default double getMaxCenterCoordinate()
 	{
 		// MockMC: WorldBorder#getMaxCenterCoordinate
 		return 0.0d;
 	}
 
+	@Override
 	default void setDamageAmount(double arg0)
 	{
 		// MockMC: WorldBorder#setDamageAmount
 	}
 
+	@Override
 	default double getDamageAmount()
 	{
 		// MockMC: WorldBorder#getDamageAmount
 		return 0.0d;
 	}
 
+	@Override
 	default Location getCenter()
 	{
 		// MockMC: WorldBorder#getCenter
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default World getWorld()
 	{
 		// MockMC: WorldBorder#getWorld
 		return null;
 	}
 
+	@Override
 	default double getDamageBuffer()
 	{
 		// MockMC: WorldBorder#getDamageBuffer
 		return 0.0d;
 	}
 
+	@Override
 	default void setCenter(Location arg0)
 	{
 		// MockMC: WorldBorder#setCenter
 	}
 
+	@Override
 	default void setCenter(double arg0, double arg1)
 	{
 		// MockMC: WorldBorder#setCenter
 	}
 
+	@Override
 	default void setWarningTimeTicks(int arg0)
 	{
 		// MockMC: WorldBorder#setWarningTimeTicks
 	}
 
+	@Override
 	default int getWarningTimeTicks()
 	{
 		// MockMC: WorldBorder#getWarningTimeTicks

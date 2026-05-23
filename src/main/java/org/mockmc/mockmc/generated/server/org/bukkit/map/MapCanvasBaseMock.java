@@ -24,45 +24,53 @@ public interface MapCanvasBaseMock extends MapCanvas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5")
 	default void setPixel(int arg0, int arg1, byte arg2)
 	{
 		// MockMC: MapCanvas#setPixel
 	}
 
+	@Override
 	default void drawImage(int arg0, int arg1, Image arg2)
 	{
 		// MockMC: MapCanvas#drawImage
 	}
 
+	@Override
 	default void setCursors(MapCursorCollection arg0)
 	{
 		// MockMC: MapCanvas#setCursors
 	}
 
+	@Override
 	default MapView getMapView()
 	{
 		// MockMC: MapCanvas#getMapView
 		return null;
 	}
 
+	@Override
 	default Color getPixelColor(int arg0, int arg1)
 	{
 		// MockMC: MapCanvas#getPixelColor
 		return null;
 	}
 
+	@Override
 	default Color getBasePixelColor(int arg0, int arg1)
 	{
 		// MockMC: MapCanvas#getBasePixelColor
 		return null;
 	}
 
+	@Override
 	default void drawText(int arg0, int arg1, MapFont arg2, String arg3)
 	{
 		// MockMC: MapCanvas#drawText
 	}
 
+	@Override
 	default void setPixelColor(int arg0, int arg1, Color arg2)
 	{
 		// MockMC: MapCanvas#setPixelColor
@@ -72,6 +80,7 @@ public interface MapCanvasBaseMock extends MapCanvas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19", forRemoval = true)
 	default byte getPixel(int arg0, int arg1)
 	{
@@ -79,6 +88,7 @@ public interface MapCanvasBaseMock extends MapCanvas
 		return 0;
 	}
 
+	@Override
 	default MapCursorCollection getCursors()
 	{
 		// MockMC: MapCanvas#getCursors
@@ -89,6 +99,7 @@ public interface MapCanvasBaseMock extends MapCanvas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19", forRemoval = true)
 	default byte getBasePixel(int arg0, int arg1)
 	{

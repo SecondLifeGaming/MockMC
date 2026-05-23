@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface CommandBlockBaseMock extends CommandBlock, DirectionalBaseMock
 {
+	@Override
 	default void setConditional(boolean arg0)
 	{
 		// MockMC: CommandBlock#setConditional
 	}
 
+	@Override
 	default boolean isConditional()
 	{
 		// MockMC: CommandBlock#isConditional

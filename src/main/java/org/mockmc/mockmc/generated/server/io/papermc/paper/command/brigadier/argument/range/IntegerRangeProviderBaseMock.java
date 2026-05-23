@@ -16,6 +16,7 @@ import io.papermc.paper.command.brigadier.argument.range.IntegerRangeProvider;
  */
 public interface IntegerRangeProviderBaseMock extends IntegerRangeProvider
 {
+	@Override
 	default Range<Integer> range()
 	{
 		// MockMC: IntegerRangeProvider#range

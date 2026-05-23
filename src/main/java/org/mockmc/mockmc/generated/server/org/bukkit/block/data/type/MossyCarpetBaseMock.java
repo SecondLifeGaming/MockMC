@@ -17,23 +17,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface MossyCarpetBaseMock extends MossyCarpet, BlockDataBaseMock
 {
+	@Override
 	default void setHeight(BlockFace arg0, org.bukkit.block.data.type.Wall.Height arg1)
 	{
 		// MockMC: MossyCarpet#setHeight
 	}
 
+	@Override
 	default boolean isBottom()
 	{
 		// MockMC: MossyCarpet#isBottom
 		return false;
 	}
 
+	@Override
 	default org.bukkit.block.data.type.Wall.Height getHeight(BlockFace arg0)
 	{
 		// MockMC: MossyCarpet#getHeight
 		return null;
 	}
 
+	@Override
 	default void setBottom(boolean arg0)
 	{
 		// MockMC: MossyCarpet#setBottom

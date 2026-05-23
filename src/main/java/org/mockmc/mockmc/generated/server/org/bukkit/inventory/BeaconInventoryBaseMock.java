@@ -16,11 +16,13 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface BeaconInventoryBaseMock extends BeaconInventory, InventoryBaseMock
 {
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: BeaconInventory#setItem
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: BeaconInventory#getItem

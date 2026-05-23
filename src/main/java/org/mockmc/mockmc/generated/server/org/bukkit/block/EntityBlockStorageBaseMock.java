@@ -15,42 +15,50 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EntityBlockStorageBaseMock<T extends Entity> extends EntityBlockStorage<T>, TileStateBaseMock
 {
+	@Override
 	default void clearEntities()
 	{
 		// MockMC: EntityBlockStorage#clearEntities
 	}
 
+	@Override
 	default List<T> releaseEntities()
 	{
 		// MockMC: EntityBlockStorage#releaseEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getEntityCount()
 	{
 		// MockMC: EntityBlockStorage#getEntityCount
 		return 0;
 	}
 
+	@Override
 	default boolean isFull()
 	{
 		// MockMC: EntityBlockStorage#isFull
 		return false;
 	}
 
+	@Override
 	default void setMaxEntities(int arg0)
 	{
 		// MockMC: EntityBlockStorage#setMaxEntities
 	}
 
+	@Override
 	default void addEntity(T arg0)
 	{
 		// MockMC: EntityBlockStorage#addEntity
 	}
 
+	@Override
 	default int getMaxEntities()
 	{
 		// MockMC: EntityBlockStorage#getMaxEntities

@@ -17,13 +17,15 @@ import org.bukkit.material.Redstone;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface RedstoneBaseMock extends Redstone
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default boolean isPowered()
 	{

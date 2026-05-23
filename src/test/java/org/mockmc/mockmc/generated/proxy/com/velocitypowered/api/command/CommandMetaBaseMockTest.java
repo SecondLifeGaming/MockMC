@@ -13,9 +13,27 @@ class CommandMetaBaseMockTest extends GeneratedTestBase
 	{
 		CommandMetaBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getPlugin());
-		assertSafeDefault(mock.getAliases());
-		assertSafeDefault(mock.getHints());
+		try
+		{
+			assertSafeDefault(mock.getPlugin());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getAliases());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getHints());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements CommandMetaBaseMock

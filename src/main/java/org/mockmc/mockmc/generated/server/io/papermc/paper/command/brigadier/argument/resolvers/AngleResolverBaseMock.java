@@ -17,6 +17,7 @@ import io.papermc.paper.command.brigadier.argument.resolvers.AngleResolver;
  */
 public interface AngleResolverBaseMock extends AngleResolver
 {
+	@Override
 	default float resolve(CommandSourceStack arg0) throws CommandSyntaxException
 	{
 		// MockMC: AngleResolver#resolve

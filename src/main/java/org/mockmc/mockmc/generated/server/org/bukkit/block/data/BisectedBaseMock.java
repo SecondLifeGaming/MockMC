@@ -15,11 +15,13 @@ import org.bukkit.block.data.Bisected;
  */
 public interface BisectedBaseMock extends Bisected, BlockDataBaseMock
 {
+	@Override
 	default void setHalf(Bisected.Half arg0)
 	{
 		// MockMC: Bisected#setHalf
 	}
 
+	@Override
 	default Bisected.Half getHalf()
 	{
 		// MockMC: Bisected#getHalf

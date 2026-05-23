@@ -16,7 +16,8 @@ import org.bukkit.inventory.meta.ItemMeta;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ItemTypeTypedBaseMock<M extends ItemMeta> extends ItemType.Typed<M>, ItemTypeBaseMock
 {
 	@Override
@@ -33,12 +34,14 @@ public interface ItemTypeTypedBaseMock<M extends ItemMeta> extends ItemType.Type
 		return "";
 	}
 
+	@Override
 	default ItemStack createItemStack(int arg0, Consumer<? super M> arg1)
 	{
 		// MockMC: Typed#createItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack createItemStack(Consumer<? super M> arg0)
 	{
 		// MockMC: Typed#createItemStack

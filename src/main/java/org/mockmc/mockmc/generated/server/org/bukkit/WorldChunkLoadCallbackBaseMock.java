@@ -18,12 +18,14 @@ import org.bukkit.World;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13.1")
+@SuppressWarnings("java:S1133")
 public interface WorldChunkLoadCallbackBaseMock extends World.ChunkLoadCallback
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.1")
 	default void onLoad(Chunk arg0)
 	{
@@ -34,6 +36,7 @@ public interface WorldChunkLoadCallbackBaseMock extends World.ChunkLoadCallback
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.1")
 	default void accept(Chunk arg0)
 	{

@@ -16,6 +16,7 @@ import com.velocitypowered.api.proxy.crypto.KeyIdentifiable;
  */
 public interface KeyIdentifiableBaseMock extends KeyIdentifiable
 {
+	@Override
 	default IdentifiedKey getIdentifiedKey()
 	{
 		// MockMC: KeyIdentifiable#getIdentifiedKey

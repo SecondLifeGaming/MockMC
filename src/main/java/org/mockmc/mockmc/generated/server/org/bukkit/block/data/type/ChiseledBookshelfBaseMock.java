@@ -17,23 +17,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface ChiseledBookshelfBaseMock extends ChiseledBookshelf, DirectionalBaseMock
 {
+	@Override
 	default void setSlotOccupied(int arg0, boolean arg1)
 	{
 		// MockMC: ChiseledBookshelf#setSlotOccupied
 	}
 
+	@Override
 	default int getMaximumOccupiedSlots()
 	{
 		// MockMC: ChiseledBookshelf#getMaximumOccupiedSlots
 		return 0;
 	}
 
+	@Override
 	default Set<Integer> getOccupiedSlots()
 	{
 		// MockMC: ChiseledBookshelf#getOccupiedSlots
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean isSlotOccupied(int arg0)
 	{
 		// MockMC: ChiseledBookshelf#isSlotOccupied

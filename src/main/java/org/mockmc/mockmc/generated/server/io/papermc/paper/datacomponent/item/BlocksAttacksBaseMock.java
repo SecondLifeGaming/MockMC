@@ -21,42 +21,49 @@ import org.bukkit.damage.DamageType;
  */
 public interface BlocksAttacksBaseMock extends BlocksAttacks
 {
+	@Override
 	default RegistryKeySet<DamageType> bypassedBy()
 	{
 		// MockMC: BlocksAttacks#bypassedBy
 		return null;
 	}
 
+	@Override
 	default float blockDelaySeconds()
 	{
 		// MockMC: BlocksAttacks#blockDelaySeconds
 		return 0.0f;
 	}
 
+	@Override
 	default float disableCooldownScale()
 	{
 		// MockMC: BlocksAttacks#disableCooldownScale
 		return 0.0f;
 	}
 
+	@Override
 	default List<DamageReduction> damageReductions()
 	{
 		// MockMC: BlocksAttacks#damageReductions
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ItemDamageFunction itemDamage()
 	{
 		// MockMC: BlocksAttacks#itemDamage
 		return null;
 	}
 
+	@Override
 	default Key blockSound()
 	{
 		// MockMC: BlocksAttacks#blockSound
 		return null;
 	}
 
+	@Override
 	default Key disableSound()
 	{
 		// MockMC: BlocksAttacks#disableSound

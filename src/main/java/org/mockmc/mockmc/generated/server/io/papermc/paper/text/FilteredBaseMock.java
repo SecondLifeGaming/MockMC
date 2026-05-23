@@ -15,12 +15,14 @@ import io.papermc.paper.text.Filtered;
  */
 public interface FilteredBaseMock<T> extends Filtered<T>
 {
+	@Override
 	default T raw()
 	{
 		// MockMC: Filtered#raw
 		return null;
 	}
 
+	@Override
 	default T filtered()
 	{
 		// MockMC: Filtered#filtered

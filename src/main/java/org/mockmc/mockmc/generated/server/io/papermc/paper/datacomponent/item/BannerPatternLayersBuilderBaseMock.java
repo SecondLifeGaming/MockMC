@@ -21,12 +21,14 @@ public interface BannerPatternLayersBuilderBaseMock
 			BannerPatternLayers.Builder,
 			DataComponentBuilderBaseMock<BannerPatternLayers>
 {
+	@Override
 	default BannerPatternLayers.Builder addAll(List<Pattern> arg0)
 	{
 		// MockMC: Builder#addAll
 		return null;
 	}
 
+	@Override
 	default BannerPatternLayers.Builder add(Pattern arg0)
 	{
 		// MockMC: Builder#add

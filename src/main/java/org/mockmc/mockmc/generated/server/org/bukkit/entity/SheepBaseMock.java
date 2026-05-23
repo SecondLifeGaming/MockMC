@@ -16,22 +16,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface SheepBaseMock
 		extends
 			Sheep,
-			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock,
-			ShearableBaseMock,
+			AnimalsBaseMock,
 			ColorableBaseMock,
-			AnimalsBaseMock
+			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock,
+			ShearableBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Sheep#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean isSheared()
 	{
@@ -47,15 +40,22 @@ public interface SheepBaseMock
 	}
 
 	@Override
-	default void setSheared(boolean arg0)
-	{
-		// MockMC: Sheep#setSheared
-	}
-
-	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: Sheep#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Sheep#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default void setSheared(boolean arg0)
+	{
+		// MockMC: Sheep#setSheared
 	}
 }

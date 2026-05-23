@@ -17,12 +17,14 @@ import org.bukkit.Location;
  */
 public interface PoiSearchResultBaseMock extends PoiSearchResult
 {
+	@Override
 	default PoiType poiType()
 	{
 		// MockMC: PoiSearchResult#poiType
 		return null;
 	}
 
+	@Override
 	default Location location()
 	{
 		// MockMC: PoiSearchResult#location

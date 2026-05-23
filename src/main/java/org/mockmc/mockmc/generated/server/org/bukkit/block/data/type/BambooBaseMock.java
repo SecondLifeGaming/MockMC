@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.AgeableBaseMock;
  */
 public interface BambooBaseMock extends Bamboo, SaplingBaseMock, AgeableBaseMock
 {
+	@Override
 	default Bamboo.Leaves getLeaves()
 	{
 		// MockMC: Bamboo#getLeaves
 		return null;
 	}
 
+	@Override
 	default void setLeaves(Bamboo.Leaves arg0)
 	{
 		// MockMC: Bamboo#setLeaves

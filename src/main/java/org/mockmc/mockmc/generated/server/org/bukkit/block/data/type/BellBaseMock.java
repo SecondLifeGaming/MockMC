@@ -15,14 +15,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface BellBaseMock extends Bell, PowerableBaseMock, DirectionalBaseMock
+public interface BellBaseMock extends Bell, DirectionalBaseMock, PowerableBaseMock
 {
+	@Override
 	default Bell.Attachment getAttachment()
 	{
 		// MockMC: Bell#getAttachment
 		return null;
 	}
 
+	@Override
 	default void setAttachment(Bell.Attachment arg0)
 	{
 		// MockMC: Bell#setAttachment

@@ -22,6 +22,7 @@ public interface FrogVariantRegistryEntryBuilderBaseMock
 			FrogVariantRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Frog.Variant>
 {
+	@Override
 	default io.papermc.paper.registry.data.FrogVariantRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)
 	{
 		// MockMC: Builder#clientTextureAsset

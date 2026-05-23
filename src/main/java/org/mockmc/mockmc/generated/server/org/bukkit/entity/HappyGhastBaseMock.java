@@ -14,16 +14,10 @@ import org.bukkit.entity.HappyGhast;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface HappyGhastBaseMock extends HappyGhast, VehicleBaseMock, AnimalsBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface HappyGhastBaseMock extends HappyGhast, AnimalsBaseMock, VehicleBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: HappyGhast#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface HappyGhastBaseMock extends HappyGhast, VehicleBaseMock, Animals
 	{
 		// MockMC: HappyGhast#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: HappyGhast#getLeashHolder
+		return null;
 	}
 }

@@ -16,6 +16,7 @@ import org.bukkit.damage.DamageEffect;
  */
 public interface DamageEffectBaseMock extends DamageEffect
 {
+	@Override
 	default Sound getSound()
 	{
 		// MockMC: DamageEffect#getSound

@@ -21,82 +21,97 @@ import org.bukkit.spawner.BaseSpawner;
  */
 public interface BaseSpawnerBaseMock extends BaseSpawner
 {
+	@Override
 	default EntitySnapshot getSpawnedEntity()
 	{
 		// MockMC: BaseSpawner#getSpawnedEntity
 		return null;
 	}
 
+	@Override
 	default List<SpawnerEntry> getPotentialSpawns()
 	{
 		// MockMC: BaseSpawner#getPotentialSpawns
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setRequiredPlayerRange(int arg0)
 	{
 		// MockMC: BaseSpawner#setRequiredPlayerRange
 	}
 
+	@Override
 	default EntityType getSpawnedType()
 	{
 		// MockMC: BaseSpawner#getSpawnedType
 		return null;
 	}
 
+	@Override
 	default void addPotentialSpawn(EntitySnapshot arg0, int arg1, SpawnRule arg2)
 	{
 		// MockMC: BaseSpawner#addPotentialSpawn
 	}
 
+	@Override
 	default void addPotentialSpawn(SpawnerEntry arg0)
 	{
 		// MockMC: BaseSpawner#addPotentialSpawn
 	}
 
+	@Override
 	default int getDelay()
 	{
 		// MockMC: BaseSpawner#getDelay
 		return 0;
 	}
 
+	@Override
 	default void setSpawnedEntity(EntitySnapshot arg0)
 	{
 		// MockMC: BaseSpawner#setSpawnedEntity
 	}
 
+	@Override
 	default void setSpawnedEntity(SpawnerEntry arg0)
 	{
 		// MockMC: BaseSpawner#setSpawnedEntity
 	}
 
+	@Override
 	default int getRequiredPlayerRange()
 	{
 		// MockMC: BaseSpawner#getRequiredPlayerRange
 		return 0;
 	}
 
+	@Override
 	default void setDelay(int arg0)
 	{
 		// MockMC: BaseSpawner#setDelay
 	}
 
+	@Override
 	default void setPotentialSpawns(Collection<SpawnerEntry> arg0)
 	{
 		// MockMC: BaseSpawner#setPotentialSpawns
 	}
 
+	@Override
 	default int getSpawnRange()
 	{
 		// MockMC: BaseSpawner#getSpawnRange
 		return 0;
 	}
 
+	@Override
 	default void setSpawnRange(int arg0)
 	{
 		// MockMC: BaseSpawner#setSpawnRange
 	}
 
+	@Override
 	default void setSpawnedType(EntityType arg0)
 	{
 		// MockMC: BaseSpawner#setSpawnedType

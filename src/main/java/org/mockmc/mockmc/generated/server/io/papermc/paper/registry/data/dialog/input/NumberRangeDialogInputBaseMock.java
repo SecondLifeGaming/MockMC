@@ -16,48 +16,56 @@ import net.kyori.adventure.text.Component;
  */
 public interface NumberRangeDialogInputBaseMock extends NumberRangeDialogInput
 {
+	@Override
 	default String key()
 	{
 		// MockMC: NumberRangeDialogInput#key
 		return "";
 	}
 
+	@Override
 	default String labelFormat()
 	{
 		// MockMC: NumberRangeDialogInput#labelFormat
 		return "";
 	}
 
+	@Override
 	default Float initial()
 	{
 		// MockMC: NumberRangeDialogInput#initial
 		return 0.0f;
 	}
 
+	@Override
 	default float start()
 	{
 		// MockMC: NumberRangeDialogInput#start
 		return 0.0f;
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: NumberRangeDialogInput#width
 		return 0;
 	}
 
+	@Override
 	default Float step()
 	{
 		// MockMC: NumberRangeDialogInput#step
 		return 0.0f;
 	}
 
+	@Override
 	default float end()
 	{
 		// MockMC: NumberRangeDialogInput#end
 		return 0.0f;
 	}
 
+	@Override
 	default Component label()
 	{
 		// MockMC: NumberRangeDialogInput#label

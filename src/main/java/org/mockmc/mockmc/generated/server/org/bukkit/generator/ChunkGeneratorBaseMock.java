@@ -68,7 +68,8 @@ public interface ChunkGeneratorBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.17.1")
 	default ChunkGenerator.ChunkData generateChunkData(World arg0, Random arg1, int arg2, int arg3,
 			ChunkGenerator.BiomeGrid arg4)

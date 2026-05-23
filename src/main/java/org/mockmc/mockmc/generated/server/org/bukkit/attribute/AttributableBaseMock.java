@@ -17,12 +17,14 @@ import org.bukkit.attribute.AttributeInstance;
  */
 public interface AttributableBaseMock extends Attributable
 {
+	@Override
 	default AttributeInstance getAttribute(Attribute arg0)
 	{
 		// MockMC: Attributable#getAttribute
 		return null;
 	}
 
+	@Override
 	default void registerAttribute(Attribute arg0)
 	{
 		// MockMC: Attributable#registerAttribute

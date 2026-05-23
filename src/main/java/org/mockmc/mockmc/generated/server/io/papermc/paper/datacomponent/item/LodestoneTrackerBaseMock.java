@@ -16,12 +16,14 @@ import org.bukkit.Location;
  */
 public interface LodestoneTrackerBaseMock extends LodestoneTracker
 {
+	@Override
 	default Location location()
 	{
 		// MockMC: LodestoneTracker#location
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean tracked()
 	{
 		// MockMC: LodestoneTracker#tracked

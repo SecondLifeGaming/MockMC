@@ -14,15 +14,18 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AgeableBaseMock extends Ageable, CreatureBaseMock
 {
+	@Override
 	default boolean isAdult()
 	{
 		// MockMC: Ageable#isAdult
 		return false;
 	}
 
+	@Override
 	default void setAge(int arg0)
 	{
 		// MockMC: Ageable#setAge
@@ -35,11 +38,13 @@ public interface AgeableBaseMock extends Ageable, CreatureBaseMock
 		return null;
 	}
 
+	@Override
 	default void setAgeLock(boolean arg0)
 	{
 		// MockMC: Ageable#setAgeLock
 	}
 
+	@Override
 	default void setAdult()
 	{
 		// MockMC: Ageable#setAdult
@@ -49,6 +54,7 @@ public interface AgeableBaseMock extends Ageable, CreatureBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default boolean canBreed()
 	{
@@ -67,12 +73,14 @@ public interface AgeableBaseMock extends Ageable, CreatureBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default void setBreed(boolean arg0)
 	{
 		// MockMC: Ageable#setBreed
 	}
 
+	@Override
 	default boolean getAgeLock()
 	{
 		// MockMC: Ageable#getAgeLock
@@ -86,11 +94,13 @@ public interface AgeableBaseMock extends Ageable, CreatureBaseMock
 		return false;
 	}
 
+	@Override
 	default void setBaby()
 	{
 		// MockMC: Ageable#setBaby
 	}
 
+	@Override
 	default int getAge()
 	{
 		// MockMC: Ageable#getAge

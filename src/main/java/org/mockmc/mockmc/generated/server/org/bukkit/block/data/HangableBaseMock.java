@@ -15,12 +15,14 @@ import org.bukkit.block.data.Hangable;
  */
 public interface HangableBaseMock extends Hangable, BlockDataBaseMock
 {
+	@Override
 	default boolean isHanging()
 	{
 		// MockMC: Hangable#isHanging
 		return false;
 	}
 
+	@Override
 	default void setHanging(boolean arg0)
 	{
 		// MockMC: Hangable#setHanging

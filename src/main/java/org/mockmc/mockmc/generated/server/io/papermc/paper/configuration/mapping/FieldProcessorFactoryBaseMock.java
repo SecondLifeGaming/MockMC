@@ -16,6 +16,7 @@ import java.lang.reflect.AnnotatedType;
  */
 public interface FieldProcessorFactoryBaseMock<A extends Annotation, T> extends FieldProcessor.Factory<A, T>
 {
+	@Override
 	default FieldProcessor<T> make(A arg0, AnnotatedType arg1)
 	{
 		// MockMC: Factory#make

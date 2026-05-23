@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CopperBulbBaseMock extends CopperBulb, PowerableBaseMock, LightableBaseMock
+public interface CopperBulbBaseMock extends CopperBulb, LightableBaseMock, PowerableBaseMock
 {
 }

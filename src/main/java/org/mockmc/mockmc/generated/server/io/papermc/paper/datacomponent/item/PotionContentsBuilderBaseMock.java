@@ -23,30 +23,35 @@ public interface PotionContentsBuilderBaseMock
 			PotionContents.Builder,
 			DataComponentBuilderBaseMock<PotionContents>
 {
+	@Override
 	default PotionContents.Builder customName(String arg0)
 	{
 		// MockMC: Builder#customName
 		return null;
 	}
 
+	@Override
 	default PotionContents.Builder addCustomEffect(PotionEffect arg0)
 	{
 		// MockMC: Builder#addCustomEffect
 		return null;
 	}
 
+	@Override
 	default PotionContents.Builder customColor(Color arg0)
 	{
 		// MockMC: Builder#customColor
 		return null;
 	}
 
+	@Override
 	default PotionContents.Builder potion(PotionType arg0)
 	{
 		// MockMC: Builder#potion
 		return null;
 	}
 
+	@Override
 	default PotionContents.Builder addCustomEffects(List<PotionEffect> arg0)
 	{
 		// MockMC: Builder#addCustomEffects

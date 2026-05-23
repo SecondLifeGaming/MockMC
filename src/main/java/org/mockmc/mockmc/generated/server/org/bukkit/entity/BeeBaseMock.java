@@ -16,121 +16,21 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BeeBaseMock extends Bee, AnimalsBaseMock
 {
+	@Override
 	default void setTimeSinceSting(int arg0)
 	{
 		// MockMC: Bee#setTimeSinceSting
 	}
 
+	@Override
 	default Location getHive()
 	{
 		// MockMC: Bee#getHive
 		return new org.bukkit.Location(null, 0, 0, 0);
-	}
-
-	default int getCropsGrownSincePollination()
-	{
-		// MockMC: Bee#getCropsGrownSincePollination
-		return 0;
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Bee#setLeashHolder
-		return false;
-	}
-
-	default TriState getRollingOverride()
-	{
-		// MockMC: Bee#getRollingOverride
-		return null;
-	}
-
-	default int getTicksSincePollination()
-	{
-		// MockMC: Bee#getTicksSincePollination
-		return 0;
-	}
-
-	default int getCannotEnterHiveTicks()
-	{
-		// MockMC: Bee#getCannotEnterHiveTicks
-		return 0;
-	}
-
-	default void setRollingOverride(TriState arg0)
-	{
-		// MockMC: Bee#setRollingOverride
-	}
-
-	default boolean hasStung()
-	{
-		// MockMC: Bee#hasStung
-		return false;
-	}
-
-	default void setAnger(int arg0)
-	{
-		// MockMC: Bee#setAnger
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Bee#getLeashHolder
-		return null;
-	}
-
-	default boolean hasNectar()
-	{
-		// MockMC: Bee#hasNectar
-		return false;
-	}
-
-	default void setCannotEnterHiveTicks(int arg0)
-	{
-		// MockMC: Bee#setCannotEnterHiveTicks
-	}
-
-	default int getTimeSinceSting()
-	{
-		// MockMC: Bee#getTimeSinceSting
-		return 0;
-	}
-
-	default void setHasNectar(boolean arg0)
-	{
-		// MockMC: Bee#setHasNectar
-	}
-
-	default Location getFlower()
-	{
-		// MockMC: Bee#getFlower
-		return new org.bukkit.Location(null, 0, 0, 0);
-	}
-
-	default void setTicksSincePollination(int arg0)
-	{
-		// MockMC: Bee#setTicksSincePollination
-	}
-
-	default void setHasStung(boolean arg0)
-	{
-		// MockMC: Bee#setHasStung
-	}
-
-	default int getAnger()
-	{
-		// MockMC: Bee#getAnger
-		return 0;
-	}
-
-	default void setHive(Location arg0)
-	{
-		// MockMC: Bee#setHive
 	}
 
 	@Override
@@ -140,17 +40,139 @@ public interface BeeBaseMock extends Bee, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default int getCropsGrownSincePollination()
+	{
+		// MockMC: Bee#getCropsGrownSincePollination
+		return 0;
+	}
+
+	@Override
+	default TriState getRollingOverride()
+	{
+		// MockMC: Bee#getRollingOverride
+		return null;
+	}
+
+	@Override
+	default int getTicksSincePollination()
+	{
+		// MockMC: Bee#getTicksSincePollination
+		return 0;
+	}
+
+	@Override
+	default int getCannotEnterHiveTicks()
+	{
+		// MockMC: Bee#getCannotEnterHiveTicks
+		return 0;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Bee#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default void setRollingOverride(TriState arg0)
+	{
+		// MockMC: Bee#setRollingOverride
+	}
+
+	@Override
+	default boolean hasStung()
+	{
+		// MockMC: Bee#hasStung
+		return false;
+	}
+
+	@Override
+	default void setAnger(int arg0)
+	{
+		// MockMC: Bee#setAnger
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Bee#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default boolean hasNectar()
+	{
+		// MockMC: Bee#hasNectar
+		return false;
+	}
+
+	@Override
+	default void setCannotEnterHiveTicks(int arg0)
+	{
+		// MockMC: Bee#setCannotEnterHiveTicks
+	}
+
+	@Override
+	default int getTimeSinceSting()
+	{
+		// MockMC: Bee#getTimeSinceSting
+		return 0;
+	}
+
+	@Override
+	default void setHasNectar(boolean arg0)
+	{
+		// MockMC: Bee#setHasNectar
+	}
+
+	@Override
+	default Location getFlower()
+	{
+		// MockMC: Bee#getFlower
+		return new org.bukkit.Location(null, 0, 0, 0);
+	}
+
+	@Override
+	default void setTicksSincePollination(int arg0)
+	{
+		// MockMC: Bee#setTicksSincePollination
+	}
+
+	@Override
+	default void setHasStung(boolean arg0)
+	{
+		// MockMC: Bee#setHasStung
+	}
+
+	@Override
+	default int getAnger()
+	{
+		// MockMC: Bee#getAnger
+		return 0;
+	}
+
+	@Override
+	default void setHive(Location arg0)
+	{
+		// MockMC: Bee#setHive
+	}
+
+	@Override
 	default void setCropsGrownSincePollination(int arg0)
 	{
 		// MockMC: Bee#setCropsGrownSincePollination
 	}
 
+	@Override
 	default boolean isRolling()
 	{
 		// MockMC: Bee#isRolling
 		return false;
 	}
 
+	@Override
 	default void setFlower(Location arg0)
 	{
 		// MockMC: Bee#setFlower

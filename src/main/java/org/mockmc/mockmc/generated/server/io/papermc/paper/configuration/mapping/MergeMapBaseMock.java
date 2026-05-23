@@ -15,12 +15,14 @@ import java.lang.annotation.Annotation;
  */
 public interface MergeMapBaseMock extends MergeMap
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: MergeMap#annotationType
 		return null;
 	}
 
+	@Override
 	default boolean restricted()
 	{
 		// MockMC: MergeMap#restricted

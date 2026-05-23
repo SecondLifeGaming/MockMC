@@ -16,18 +16,21 @@ import net.kyori.adventure.key.Key;
  */
 public interface TagEntryBaseMock<T> extends TagEntry<T>
 {
+	@Override
 	default boolean isTag()
 	{
 		// MockMC: TagEntry#isTag
 		return false;
 	}
 
+	@Override
 	default Key key()
 	{
 		// MockMC: TagEntry#key
 		return null;
 	}
 
+	@Override
 	default boolean isRequired()
 	{
 		// MockMC: TagEntry#isRequired

@@ -20,6 +20,7 @@ public interface VaultBaseMock extends Vault, DirectionalBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.3", forRemoval = true)
 	default void setTrialSpawnerState(Vault.State arg0)
 	{
@@ -30,6 +31,7 @@ public interface VaultBaseMock extends Vault, DirectionalBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.3", forRemoval = true)
 	default Vault.State getTrialSpawnerState()
 	{
@@ -37,23 +39,27 @@ public interface VaultBaseMock extends Vault, DirectionalBaseMock
 		return null;
 	}
 
+	@Override
 	default Vault.State getVaultState()
 	{
 		// MockMC: Vault#getVaultState
 		return null;
 	}
 
+	@Override
 	default boolean isOminous()
 	{
 		// MockMC: Vault#isOminous
 		return false;
 	}
 
+	@Override
 	default void setVaultState(Vault.State arg0)
 	{
 		// MockMC: Vault#setVaultState
 	}
 
+	@Override
 	default void setOminous(boolean arg0)
 	{
 		// MockMC: Vault#setOminous

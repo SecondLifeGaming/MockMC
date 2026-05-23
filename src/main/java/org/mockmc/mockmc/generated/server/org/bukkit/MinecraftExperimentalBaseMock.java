@@ -16,12 +16,14 @@ import org.bukkit.MinecraftExperimental;
  */
 public interface MinecraftExperimentalBaseMock extends MinecraftExperimental
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: MinecraftExperimental#annotationType
 		return null;
 	}
 
+	@Override
 	default MinecraftExperimental.Requires value()
 	{
 		// MockMC: MinecraftExperimental#value

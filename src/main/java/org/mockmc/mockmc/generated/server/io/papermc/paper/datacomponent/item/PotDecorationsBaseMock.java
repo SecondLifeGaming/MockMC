@@ -16,24 +16,28 @@ import org.bukkit.inventory.ItemType;
  */
 public interface PotDecorationsBaseMock extends PotDecorations
 {
+	@Override
 	default ItemType right()
 	{
 		// MockMC: PotDecorations#right
 		return null;
 	}
 
+	@Override
 	default ItemType front()
 	{
 		// MockMC: PotDecorations#front
 		return null;
 	}
 
+	@Override
 	default ItemType back()
 	{
 		// MockMC: PotDecorations#back
 		return null;
 	}
 
+	@Override
 	default ItemType left()
 	{
 		// MockMC: PotDecorations#left

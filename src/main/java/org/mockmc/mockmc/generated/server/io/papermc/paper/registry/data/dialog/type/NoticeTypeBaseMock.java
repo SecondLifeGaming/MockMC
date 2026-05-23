@@ -16,6 +16,7 @@ import io.papermc.paper.registry.data.dialog.type.NoticeType;
  */
 public interface NoticeTypeBaseMock extends NoticeType
 {
+	@Override
 	default ActionButton action()
 	{
 		// MockMC: NoticeType#action

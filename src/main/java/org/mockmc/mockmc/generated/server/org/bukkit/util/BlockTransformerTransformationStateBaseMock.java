@@ -17,12 +17,14 @@ import org.bukkit.util.BlockTransformer;
  */
 public interface BlockTransformerTransformationStateBaseMock extends BlockTransformer.TransformationState
 {
+	@Override
 	default BlockState getWorld()
 	{
 		// MockMC: TransformationState#getWorld
 		return null;
 	}
 
+	@Override
 	default BlockState getOriginal()
 	{
 		// MockMC: TransformationState#getOriginal

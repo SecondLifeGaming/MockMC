@@ -16,76 +16,89 @@ import org.bukkit.entity.Entity;
  */
 public interface ServerTickManagerBaseMock extends ServerTickManager
 {
+	@Override
 	default int getFrozenTicksToRun()
 	{
 		// MockMC: ServerTickManager#getFrozenTicksToRun
 		return 0;
 	}
 
+	@Override
 	default void setTickRate(float arg0)
 	{
 		// MockMC: ServerTickManager#setTickRate
 	}
 
+	@Override
 	default boolean isFrozen(Entity arg0)
 	{
 		// MockMC: ServerTickManager#isFrozen
 		return false;
 	}
 
+	@Override
 	default boolean isFrozen()
 	{
 		// MockMC: ServerTickManager#isFrozen
 		return false;
 	}
 
+	@Override
 	default float getTickRate()
 	{
 		// MockMC: ServerTickManager#getTickRate
 		return 0.0f;
 	}
 
+	@Override
 	default boolean requestGameToSprint(int arg0)
 	{
 		// MockMC: ServerTickManager#requestGameToSprint
 		return false;
 	}
 
+	@Override
 	default boolean stopSprinting()
 	{
 		// MockMC: ServerTickManager#stopSprinting
 		return false;
 	}
 
+	@Override
 	default void setFrozen(boolean arg0)
 	{
 		// MockMC: ServerTickManager#setFrozen
 	}
 
+	@Override
 	default boolean stepGameIfFrozen(int arg0)
 	{
 		// MockMC: ServerTickManager#stepGameIfFrozen
 		return false;
 	}
 
+	@Override
 	default boolean isSprinting()
 	{
 		// MockMC: ServerTickManager#isSprinting
 		return false;
 	}
 
+	@Override
 	default boolean isRunningNormally()
 	{
 		// MockMC: ServerTickManager#isRunningNormally
 		return false;
 	}
 
+	@Override
 	default boolean isStepping()
 	{
 		// MockMC: ServerTickManager#isStepping
 		return false;
 	}
 
+	@Override
 	default boolean stopStepping()
 	{
 		// MockMC: ServerTickManager#stopStepping

@@ -39,14 +39,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface HumanEntityBaseMock
 		extends
 			HumanEntity,
-			AnimalTamerBaseMock,
 			InventoryHolderBaseMock,
-			LivingEntityBaseMock
+			LivingEntityBaseMock,
+			AnimalTamerBaseMock
 {
+	@Override
 	default Location getLastDeathLocation()
 	{
 		// MockMC: HumanEntity#getLastDeathLocation
@@ -57,6 +59,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12")
 	default Entity getShoulderEntityRight()
 	{
@@ -64,29 +67,34 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void openInventory(InventoryView arg0)
 	{
 		// MockMC: HumanEntity#openInventory
 	}
 
+	@Override
 	default Location getBedLocation()
 	{
 		// MockMC: HumanEntity#getBedLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default InventoryView openInventory(Inventory arg0)
 	{
 		// MockMC: HumanEntity#openInventory
 		return null;
 	}
 
+	@Override
 	default boolean hasCooldown(Material arg0)
 	{
 		// MockMC: HumanEntity#hasCooldown
 		return false;
 	}
 
+	@Override
 	default boolean hasCooldown(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#hasCooldown
@@ -97,6 +105,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openStonecutter(Location arg0, boolean arg1)
 	{
@@ -108,6 +117,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openLoom(Location arg0, boolean arg1)
 	{
@@ -115,22 +125,26 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean isBlocking()
 	{
 		// MockMC: HumanEntity#isBlocking
 		return false;
 	}
 
+	@Override
 	default void setCooldown(Key arg0, int arg1)
 	{
 		// MockMC: HumanEntity#setCooldown
 	}
 
+	@Override
 	default void setCooldown(Material arg0, int arg1)
 	{
 		// MockMC: HumanEntity#setCooldown
 	}
 
+	@Override
 	default void setCooldown(ItemStack arg0, int arg1)
 	{
 		// MockMC: HumanEntity#setCooldown
@@ -140,6 +154,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openCartographyTable(Location arg0, boolean arg1)
 	{
@@ -147,18 +162,21 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default int getSleepTicks()
 	{
 		// MockMC: HumanEntity#getSleepTicks
 		return 0;
 	}
 
+	@Override
 	default MainHand getMainHand()
 	{
 		// MockMC: HumanEntity#getMainHand
 		return null;
 	}
 
+	@Override
 	default void setItemOnCursor(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#setItemOnCursor
@@ -168,6 +186,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openWorkbench(Location arg0, boolean arg1)
 	{
@@ -175,23 +194,27 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default int getUnsaturatedRegenRate()
 	{
 		// MockMC: HumanEntity#getUnsaturatedRegenRate
 		return 0;
 	}
 
+	@Override
 	default int getSaturatedRegenRate()
 	{
 		// MockMC: HumanEntity#getSaturatedRegenRate
 		return 0;
 	}
 
+	@Override
 	default void setFoodLevel(int arg0)
 	{
 		// MockMC: HumanEntity#setFoodLevel
 	}
 
+	@Override
 	default void setExhaustion(float arg0)
 	{
 		// MockMC: HumanEntity#setExhaustion
@@ -201,17 +224,20 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12")
 	default void setShoulderEntityLeft(Entity arg0)
 	{
 		// MockMC: HumanEntity#setShoulderEntityLeft
 	}
 
+	@Override
 	default void setSaturation(float arg0)
 	{
 		// MockMC: HumanEntity#setSaturation
 	}
 
+	@Override
 	default int getExpToLevel()
 	{
 		// MockMC: HumanEntity#getExpToLevel
@@ -229,6 +255,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12")
 	default Entity getShoulderEntityLeft()
 	{
@@ -236,6 +263,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default GameMode getGameMode()
 	{
 		// MockMC: HumanEntity#getGameMode
@@ -246,6 +274,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openSmithingTable(Location arg0, boolean arg1)
 	{
@@ -253,12 +282,21 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default float getSaturation()
 	{
 		// MockMC: HumanEntity#getSaturation
 		return 0.0f;
 	}
 
+	@Override
+	default UUID getUniqueId()
+	{
+		// MockMC: HumanEntity#getUniqueId
+		return null;
+	}
+
+	@Override
 	default ItemStack getItemOnCursor()
 	{
 		// MockMC: HumanEntity#getItemOnCursor
@@ -269,18 +307,21 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void openSign(Sign arg0)
 	{
 		// MockMC: HumanEntity#openSign
 	}
 
+	@Override
 	default boolean undiscoverRecipe(NamespacedKey arg0)
 	{
 		// MockMC: HumanEntity#undiscoverRecipe
 		return false;
 	}
 
+	@Override
 	default void openSign(Sign arg0, Side arg1)
 	{
 		// MockMC: HumanEntity#openSign
@@ -293,12 +334,14 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default InventoryView getOpenInventory()
 	{
 		// MockMC: HumanEntity#getOpenInventory
 		return null;
 	}
 
+	@Override
 	default boolean sleep(Location arg0, boolean arg1)
 	{
 		// MockMC: HumanEntity#sleep
@@ -309,24 +352,28 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12")
 	default void setShoulderEntityRight(Entity arg0)
 	{
 		// MockMC: HumanEntity#setShoulderEntityRight
 	}
 
+	@Override
 	default int undiscoverRecipes(Collection<NamespacedKey> arg0)
 	{
 		// MockMC: HumanEntity#undiscoverRecipes
 		return 0;
 	}
 
+	@Override
 	default int getEnchantmentSeed()
 	{
 		// MockMC: HumanEntity#getEnchantmentSeed
 		return 0;
 	}
 
+	@Override
 	default void setUnsaturatedRegenRate(int arg0)
 	{
 		// MockMC: HumanEntity#setUnsaturatedRegenRate
@@ -336,6 +383,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default Location getPotentialBedLocation()
 	{
@@ -343,18 +391,21 @@ public interface HumanEntityBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Entity releaseRightShoulderEntity()
 	{
 		// MockMC: HumanEntity#releaseRightShoulderEntity
 		return null;
 	}
 
+	@Override
 	default Inventory getEnderChest()
 	{
 		// MockMC: HumanEntity#getEnderChest
 		return null;
 	}
 
+	@Override
 	default Firework fireworkBoost(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#fireworkBoost
@@ -368,6 +419,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean discoverRecipe(NamespacedKey arg0)
 	{
 		// MockMC: HumanEntity#discoverRecipe
@@ -378,6 +430,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openEnchanting(Location arg0, boolean arg1)
 	{
@@ -385,6 +438,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default float getExhaustion()
 	{
 		// MockMC: HumanEntity#getExhaustion
@@ -395,6 +449,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openAnvil(Location arg0, boolean arg1)
 	{
@@ -402,52 +457,53 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default Entity releaseLeftShoulderEntity()
 	{
 		// MockMC: HumanEntity#releaseLeftShoulderEntity
 		return null;
 	}
 
+	@Override
 	default void wakeup(boolean arg0)
 	{
 		// MockMC: HumanEntity#wakeup
 	}
 
 	@Override
-	default UUID getUniqueId()
-	{
-		// MockMC: HumanEntity#getUniqueId
-		return null;
-	}
-
 	default void setGameMode(GameMode arg0)
 	{
 		// MockMC: HumanEntity#setGameMode
 	}
 
+	@Override
 	default int getCooldown(Material arg0)
 	{
 		// MockMC: HumanEntity#getCooldown
 		return 0;
 	}
 
+	@Override
 	default int getCooldown(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#getCooldown
 		return 0;
 	}
 
+	@Override
 	default int getCooldown(Key arg0)
 	{
 		// MockMC: HumanEntity#getCooldown
 		return 0;
 	}
 
+	@Override
 	default void startRiptideAttack(int arg0, float arg1, ItemStack arg2)
 	{
 		// MockMC: HumanEntity#startRiptideAttack
 	}
 
+	@Override
 	default boolean isDeeplySleeping()
 	{
 		// MockMC: HumanEntity#isDeeplySleeping
@@ -458,6 +514,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.21", forRemoval = true)
 	default boolean setWindowProperty(InventoryView.Property arg0, int arg1)
@@ -466,11 +523,13 @@ public interface HumanEntityBaseMock
 		return false;
 	}
 
+	@Override
 	default void setSaturatedRegenRate(int arg0)
 	{
 		// MockMC: HumanEntity#setSaturatedRegenRate
 	}
 
+	@Override
 	default int getFoodLevel()
 	{
 		// MockMC: HumanEntity#getFoodLevel
@@ -483,12 +542,14 @@ public interface HumanEntityBaseMock
 		// MockMC: HumanEntity#setHurtDirection
 	}
 
+	@Override
 	default float getAttackCooldown()
 	{
 		// MockMC: HumanEntity#getAttackCooldown
 		return 0.0f;
 	}
 
+	@Override
 	default int discoverRecipes(Collection<NamespacedKey> arg0)
 	{
 		// MockMC: HumanEntity#discoverRecipes
@@ -499,6 +560,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openMerchant(Merchant arg0, boolean arg1)
 	{
@@ -506,6 +568,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setStarvationRate(int arg0)
 	{
 		// MockMC: HumanEntity#setStarvationRate
@@ -515,6 +578,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openMerchant(Villager arg0, boolean arg1)
 	{
@@ -522,6 +586,7 @@ public interface HumanEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setLastDeathLocation(Location arg0)
 	{
 		// MockMC: HumanEntity#setLastDeathLocation
@@ -534,23 +599,27 @@ public interface HumanEntityBaseMock
 		return "";
 	}
 
+	@Override
 	default FishHook getFishHook()
 	{
 		// MockMC: HumanEntity#getFishHook
 		return null;
 	}
 
+	@Override
 	default Set<NamespacedKey> getDiscoveredRecipes()
 	{
 		// MockMC: HumanEntity#getDiscoveredRecipes
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void closeInventory(InventoryCloseEvent.Reason arg0)
 	{
 		// MockMC: HumanEntity#closeInventory
 	}
 
+	@Override
 	default void closeInventory()
 	{
 		// MockMC: HumanEntity#closeInventory
@@ -560,61 +629,71 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setItemInHand(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#setItemInHand
 	}
 
-	default Item dropItem(EquipmentSlot arg0, int arg1, boolean arg2, Consumer<Item> arg3)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default Item dropItem(int arg0, int arg1, boolean arg2, Consumer<Item> arg3)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default Item dropItem(EquipmentSlot arg0)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default Item dropItem(int arg0)
-	{
-		// MockMC: HumanEntity#dropItem
-		return null;
-	}
-
-	default boolean dropItem(boolean arg0)
-	{
-		// MockMC: HumanEntity#dropItem
-		return false;
-	}
-
+	@Override
 	default Item dropItem(EquipmentSlot arg0, int arg1)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
 	}
 
+	@Override
+	default Item dropItem(EquipmentSlot arg0, int arg1, boolean arg2, Consumer<Item> arg3)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
+	@Override
+	default Item dropItem(int arg0, int arg1, boolean arg2, Consumer<Item> arg3)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
+	@Override
+	default Item dropItem(int arg0)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
+	@Override
+	default boolean dropItem(boolean arg0)
+	{
+		// MockMC: HumanEntity#dropItem
+		return false;
+	}
+
+	@Override
 	default Item dropItem(ItemStack arg0)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
 	}
 
+	@Override
 	default Item dropItem(int arg0, int arg1)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
 	}
 
+	@Override
 	default Item dropItem(ItemStack arg0, boolean arg1, Consumer<Item> arg2)
+	{
+		// MockMC: HumanEntity#dropItem
+		return null;
+	}
+
+	@Override
+	default Item dropItem(EquipmentSlot arg0)
 	{
 		// MockMC: HumanEntity#dropItem
 		return null;
@@ -624,6 +703,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default InventoryView openGrindstone(Location arg0, boolean arg1)
 	{
@@ -635,6 +715,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5")
 	default Location getPotentialRespawnLocation()
 	{
@@ -642,12 +723,14 @@ public interface HumanEntityBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default int getStarvationRate()
 	{
 		// MockMC: HumanEntity#getStarvationRate
 		return 0;
 	}
 
+	@Override
 	default boolean hasDiscoveredRecipe(NamespacedKey arg0)
 	{
 		// MockMC: HumanEntity#hasDiscoveredRecipe
@@ -658,6 +741,7 @@ public interface HumanEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default ItemStack getItemInHand()
 	{
@@ -665,6 +749,7 @@ public interface HumanEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setEnchantmentSeed(int arg0)
 	{
 		// MockMC: HumanEntity#setEnchantmentSeed

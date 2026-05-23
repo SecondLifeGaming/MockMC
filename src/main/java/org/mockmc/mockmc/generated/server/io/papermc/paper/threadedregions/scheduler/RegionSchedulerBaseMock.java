@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
  */
 public interface RegionSchedulerBaseMock extends RegionScheduler
 {
+	@Override
 	default ScheduledTask runAtFixedRate(Plugin arg0, World arg1, int arg2, int arg3, Consumer<ScheduledTask> arg4,
 			long arg5, long arg6)
 	{
@@ -27,34 +28,40 @@ public interface RegionSchedulerBaseMock extends RegionScheduler
 		return null;
 	}
 
+	@Override
 	default ScheduledTask runAtFixedRate(Plugin arg0, Location arg1, Consumer<ScheduledTask> arg2, long arg3, long arg4)
 	{
 		// MockMC: RegionScheduler#runAtFixedRate
 		return null;
 	}
 
+	@Override
 	default void execute(Plugin arg0, World arg1, int arg2, int arg3, Runnable arg4)
 	{
 		// MockMC: RegionScheduler#execute
 	}
 
+	@Override
 	default void execute(Plugin arg0, Location arg1, Runnable arg2)
 	{
 		// MockMC: RegionScheduler#execute
 	}
 
+	@Override
 	default ScheduledTask runDelayed(Plugin arg0, Location arg1, Consumer<ScheduledTask> arg2, long arg3)
 	{
 		// MockMC: RegionScheduler#runDelayed
 		return null;
 	}
 
+	@Override
 	default ScheduledTask run(Plugin arg0, World arg1, int arg2, int arg3, Consumer<ScheduledTask> arg4)
 	{
 		// MockMC: RegionScheduler#run
 		return null;
 	}
 
+	@Override
 	default ScheduledTask runDelayed(Plugin arg0, World arg1, int arg2, int arg3, Consumer<ScheduledTask> arg4,
 			long arg5)
 	{
@@ -62,6 +69,7 @@ public interface RegionSchedulerBaseMock extends RegionScheduler
 		return null;
 	}
 
+	@Override
 	default ScheduledTask run(Plugin arg0, Location arg1, Consumer<ScheduledTask> arg2)
 	{
 		// MockMC: RegionScheduler#run

@@ -17,18 +17,21 @@ import net.kyori.adventure.text.Component;
  */
 public interface SingleOptionDialogInputOptionEntryBaseMock extends SingleOptionDialogInput.OptionEntry
 {
+	@Override
 	default Component display()
 	{
 		// MockMC: OptionEntry#display
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default boolean initial()
 	{
 		// MockMC: OptionEntry#initial
 		return false;
 	}
 
+	@Override
 	default String id()
 	{
 		// MockMC: OptionEntry#id

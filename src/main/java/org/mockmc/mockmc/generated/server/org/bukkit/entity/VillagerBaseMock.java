@@ -19,43 +19,39 @@ import org.bukkit.entity.ZombieVillager;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface VillagerBaseMock extends Villager, AbstractVillagerBaseMock
 {
+	@Override
 	default void clearReputations()
 	{
 		// MockMC: Villager#clearReputations
 	}
 
+	@Override
 	default void updateDemand()
 	{
 		// MockMC: Villager#updateDemand
 	}
 
+	@Override
 	default int getVillagerLevel()
 	{
 		// MockMC: Villager#getVillagerLevel
 		return 0;
 	}
 
+	@Override
 	default void shakeHead()
 	{
 		// MockMC: Villager#shakeHead
 	}
 
+	@Override
 	default void setRestocksToday(int arg0)
 	{
 		// MockMC: Villager#setRestocksToday
-	}
-
-	default void setProfession(Villager.Profession arg0)
-	{
-		// MockMC: Villager#setProfession
-	}
-
-	default void setVillagerExperience(int arg0)
-	{
-		// MockMC: Villager#setVillagerExperience
 	}
 
 	@Override
@@ -65,89 +61,74 @@ public interface VillagerBaseMock extends Villager, AbstractVillagerBaseMock
 		return null;
 	}
 
+	@Override
+	default void setProfession(Villager.Profession arg0)
+	{
+		// MockMC: Villager#setProfession
+	}
+
+	@Override
+	default void setVillagerExperience(int arg0)
+	{
+		// MockMC: Villager#setVillagerExperience
+	}
+
+	@Override
 	default ZombieVillager zombify()
 	{
 		// MockMC: Villager#zombify
 		return null;
 	}
 
+	@Override
 	default void setVillagerType(Villager.Type arg0)
 	{
 		// MockMC: Villager#setVillagerType
 	}
 
+	@Override
 	default void wakeup()
 	{
 		// MockMC: Villager#wakeup
 	}
 
+	@Override
 	default void restock()
 	{
 		// MockMC: Villager#restock
 	}
 
+	@Override
 	default Villager.Type getVillagerType()
 	{
 		// MockMC: Villager#getVillagerType
 		return null;
 	}
 
+	@Override
 	default void setReputation(UUID arg0, Reputation arg1)
 	{
 		// MockMC: Villager#setReputation
 	}
 
+	@Override
 	default void setVillagerLevel(int arg0)
 	{
 		// MockMC: Villager#setVillagerLevel
 	}
 
+	@Override
 	default Villager.Profession getProfession()
 	{
 		// MockMC: Villager#getProfession
 		return null;
 	}
 
+	@Override
 	default boolean sleep(Location arg0)
 	{
 		// MockMC: Villager#sleep
 		return false;
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Villager#setLeashHolder
-		return false;
-	}
-
-	default Reputation getReputation(UUID arg0)
-	{
-		// MockMC: Villager#getReputation
-		return null;
-	}
-
-	default int getRestocksToday()
-	{
-		// MockMC: Villager#getRestocksToday
-		return 0;
-	}
-
-	default Map<UUID, Reputation> getReputations()
-	{
-		// MockMC: Villager#getReputations
-		return java.util.Collections.emptyMap();
-	}
-
-	default boolean increaseLevel(int arg0)
-	{
-		// MockMC: Villager#increaseLevel
-		return false;
-	}
-
-	default void setReputations(Map<UUID, Reputation> arg0)
-	{
-		// MockMC: Villager#setReputations
 	}
 
 	@Override
@@ -157,12 +138,55 @@ public interface VillagerBaseMock extends Villager, AbstractVillagerBaseMock
 		return false;
 	}
 
+	@Override
+	default Reputation getReputation(UUID arg0)
+	{
+		// MockMC: Villager#getReputation
+		return null;
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Villager#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default int getRestocksToday()
+	{
+		// MockMC: Villager#getRestocksToday
+		return 0;
+	}
+
+	@Override
+	default Map<UUID, Reputation> getReputations()
+	{
+		// MockMC: Villager#getReputations
+		return java.util.Collections.emptyMap();
+	}
+
+	@Override
+	default boolean increaseLevel(int arg0)
+	{
+		// MockMC: Villager#increaseLevel
+		return false;
+	}
+
+	@Override
+	default void setReputations(Map<UUID, Reputation> arg0)
+	{
+		// MockMC: Villager#setReputations
+	}
+
+	@Override
 	default boolean addTrades(int arg0)
 	{
 		// MockMC: Villager#addTrades
 		return false;
 	}
 
+	@Override
 	default int getVillagerExperience()
 	{
 		// MockMC: Villager#getVillagerExperience

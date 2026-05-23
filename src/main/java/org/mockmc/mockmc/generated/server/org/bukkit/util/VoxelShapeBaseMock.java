@@ -17,12 +17,14 @@ import org.bukkit.util.VoxelShape;
  */
 public interface VoxelShapeBaseMock extends VoxelShape
 {
+	@Override
 	default Collection<BoundingBox> getBoundingBoxes()
 	{
 		// MockMC: VoxelShape#getBoundingBoxes
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean overlaps(BoundingBox arg0)
 	{
 		// MockMC: VoxelShape#overlaps

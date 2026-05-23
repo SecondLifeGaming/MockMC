@@ -15,11 +15,13 @@ import org.bukkit.block.data.Snowable;
  */
 public interface SnowableBaseMock extends Snowable, BlockDataBaseMock
 {
+	@Override
 	default void setSnowy(boolean arg0)
 	{
 		// MockMC: Snowable#setSnowy
 	}
 
+	@Override
 	default boolean isSnowy()
 	{
 		// MockMC: Snowable#isSnowy

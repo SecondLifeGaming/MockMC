@@ -18,24 +18,28 @@ import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
  */
 public interface PluginProviderContextBaseMock extends PluginProviderContext
 {
+	@Override
 	default PluginMeta getConfiguration()
 	{
 		// MockMC: PluginProviderContext#getConfiguration
 		return null;
 	}
 
+	@Override
 	default Path getDataDirectory()
 	{
 		// MockMC: PluginProviderContext#getDataDirectory
 		return null;
 	}
 
+	@Override
 	default Path getPluginSource()
 	{
 		// MockMC: PluginProviderContext#getPluginSource
 		return null;
 	}
 
+	@Override
 	default ComponentLogger getLogger()
 	{
 		// MockMC: PluginProviderContext#getLogger

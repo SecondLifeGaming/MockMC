@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.KnowledgeBookMeta;
  */
 public interface KnowledgeBookMetaBaseMock extends KnowledgeBookMeta, ItemMetaBaseMock
 {
+	@Override
 	default List<NamespacedKey> getRecipes()
 	{
 		// MockMC: KnowledgeBookMeta#getRecipes
@@ -30,17 +31,20 @@ public interface KnowledgeBookMetaBaseMock extends KnowledgeBookMeta, ItemMetaBa
 		return null;
 	}
 
+	@Override
 	default void addRecipe(NamespacedKey... arg0)
 	{
 		// MockMC: KnowledgeBookMeta#addRecipe
 	}
 
+	@Override
 	default boolean hasRecipes()
 	{
 		// MockMC: KnowledgeBookMeta#hasRecipes
 		return false;
 	}
 
+	@Override
 	default void setRecipes(List<NamespacedKey> arg0)
 	{
 		// MockMC: KnowledgeBookMeta#setRecipes

@@ -19,34 +19,40 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public interface ConfiguredPluginClassLoaderBaseMock extends ConfiguredPluginClassLoader
 {
+	@Override
 	default void init(JavaPlugin arg0)
 	{
 		// MockMC: ConfiguredPluginClassLoader#init
 	}
 
+	@Override
 	default void close() throws IOException
 	{
 		// MockMC: ConfiguredPluginClassLoader#close
 	}
 
+	@Override
 	default PluginMeta getConfiguration()
 	{
 		// MockMC: ConfiguredPluginClassLoader#getConfiguration
 		return null;
 	}
 
+	@Override
 	default PluginClassLoaderGroup getGroup()
 	{
 		// MockMC: ConfiguredPluginClassLoader#getGroup
 		return null;
 	}
 
+	@Override
 	default Class<?> loadClass(String arg0, boolean arg1, boolean arg2, boolean arg3) throws ClassNotFoundException
 	{
 		// MockMC: ConfiguredPluginClassLoader#loadClass
 		return null;
 	}
 
+	@Override
 	default JavaPlugin getPlugin()
 	{
 		// MockMC: ConfiguredPluginClassLoader#getPlugin

@@ -16,13 +16,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface GateBaseMock extends Gate, PowerableBaseMock, OpenableBaseMock, DirectionalBaseMock
+public interface GateBaseMock extends Gate, OpenableBaseMock, DirectionalBaseMock, PowerableBaseMock
 {
+	@Override
 	default void setInWall(boolean arg0)
 	{
 		// MockMC: Gate#setInWall
 	}
 
+	@Override
 	default boolean isInWall()
 	{
 		// MockMC: Gate#isInWall

@@ -25,18 +25,21 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 			EnchantmentRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Enchantment>
 {
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder weight(int arg0)
 	{
 		// MockMC: Builder#weight
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder description(Component arg0)
 	{
 		// MockMC: Builder#description
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder supportedItems(
 			RegistryKeySet<ItemType> arg0)
 	{
@@ -44,6 +47,7 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder minimumCost(
 			io.papermc.paper.registry.data.EnchantmentRegistryEntry.EnchantmentCost arg0)
 	{
@@ -51,6 +55,7 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder maximumCost(
 			io.papermc.paper.registry.data.EnchantmentRegistryEntry.EnchantmentCost arg0)
 	{
@@ -58,18 +63,21 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder primaryItems(RegistryKeySet<ItemType> arg0)
 	{
 		// MockMC: Builder#primaryItems
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder maxLevel(int arg0)
 	{
 		// MockMC: Builder#maxLevel
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder exclusiveWith(
 			RegistryKeySet<Enchantment> arg0)
 	{
@@ -77,12 +85,14 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder anvilCost(int arg0)
 	{
 		// MockMC: Builder#anvilCost
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder activeSlots(
 			Iterable<EquipmentSlotGroup> arg0)
 	{
@@ -90,6 +100,7 @@ public interface EnchantmentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.EnchantmentRegistryEntry.Builder activeSlots(EquipmentSlotGroup... arg0)
 	{
 		// MockMC: Builder#activeSlots

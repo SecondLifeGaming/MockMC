@@ -16,15 +16,17 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EnderDragonBaseMock
 		extends
 			EnderDragon,
-			ComplexLivingEntityBaseMock,
-			EnemyBaseMock,
+			MobBaseMock,
 			BossBaseMock,
-			MobBaseMock
+			EnemyBaseMock,
+			ComplexLivingEntityBaseMock
 {
+	@Override
 	default int getDeathAnimationTicks()
 	{
 		// MockMC: EnderDragon#getDeathAnimationTicks
@@ -38,22 +40,26 @@ public interface EnderDragonBaseMock
 		return null;
 	}
 
+	@Override
 	default void setPodium(Location arg0)
 	{
 		// MockMC: EnderDragon#setPodium
 	}
 
+	@Override
 	default DragonBattle getDragonBattle()
 	{
 		// MockMC: EnderDragon#getDragonBattle
 		return null;
 	}
 
+	@Override
 	default void setPhase(EnderDragon.Phase arg0)
 	{
 		// MockMC: EnderDragon#setPhase
 	}
 
+	@Override
 	default EnderDragon.Phase getPhase()
 	{
 		// MockMC: EnderDragon#getPhase
@@ -67,6 +73,7 @@ public interface EnderDragonBaseMock
 		return false;
 	}
 
+	@Override
 	default Location getPodium()
 	{
 		// MockMC: EnderDragon#getPodium

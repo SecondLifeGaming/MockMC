@@ -18,7 +18,8 @@ import org.bukkit.enchantments.Enchantment;
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.3", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface EnchantmentWrapperBaseMock
 {
 	/**

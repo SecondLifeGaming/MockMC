@@ -26,6 +26,7 @@ import org.bukkit.scoreboard.Team;
  */
 public interface TeamBaseMock extends Team
 {
+	@Override
 	default void setOption(Team.Option arg0, Team.OptionStatus arg1)
 	{
 		// MockMC: Team#setOption
@@ -35,7 +36,9 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default ChatColor getColor()
 	{
@@ -43,11 +46,13 @@ public interface TeamBaseMock extends Team
 		return null;
 	}
 
+	@Override
 	default void unregister()
 	{
 		// MockMC: Team#unregister
 	}
 
+	@Override
 	default boolean removeEntity(Entity arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#removeEntity
@@ -58,7 +63,9 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.9")
 	default void setNameTagVisibility(NameTagVisibility arg0)
 	{
@@ -69,24 +76,29 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void setColor(ChatColor arg0)
 	{
 		// MockMC: Team#setColor
 	}
 
+	@Override
 	default int getSize()
 	{
 		// MockMC: Team#getSize
 		return 0;
 	}
 
+	@Override
 	default void addEntries(String... arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#addEntries
 	}
 
+	@Override
 	default void addEntries(Collection<String> arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#addEntries
@@ -96,7 +108,9 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.9")
 	default NameTagVisibility getNameTagVisibility()
 	{
@@ -108,6 +122,7 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setPrefix(String arg0)
 	{
@@ -118,46 +133,54 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setSuffix(String arg0)
 	{
 		// MockMC: Team#setSuffix
 	}
 
+	@Override
 	default boolean removeEntry(String arg0)
 	{
 		// MockMC: Team#removeEntry
 		return false;
 	}
 
+	@Override
 	default Component displayName()
 	{
 		// MockMC: Team#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void displayName(Component arg0)
 	{
 		// MockMC: Team#displayName
 	}
 
+	@Override
 	default TextColor color()
 	{
 		// MockMC: Team#color
 		return null;
 	}
 
+	@Override
 	default void color(NamedTextColor arg0)
 	{
 		// MockMC: Team#color
 	}
 
+	@Override
 	default boolean removeEntities(Entity... arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#removeEntities
 		return false;
 	}
 
+	@Override
 	default boolean removeEntities(Collection<Entity> arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#removeEntities
@@ -168,18 +191,21 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setDisplayName(String arg0)
 	{
 		// MockMC: Team#setDisplayName
 	}
 
+	@Override
 	default Scoreboard getScoreboard()
 	{
 		// MockMC: Team#getScoreboard
 		return null;
 	}
 
+	@Override
 	default void addEntities(Collection<Entity> arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#addEntities
@@ -189,6 +215,7 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getPrefix()
 	{
@@ -196,11 +223,13 @@ public interface TeamBaseMock extends Team
 		return "";
 	}
 
+	@Override
 	default void addEntities(Entity... arg0)
 	{
 		// MockMC: Team#addEntities
 	}
 
+	@Override
 	default void setCanSeeFriendlyInvisibles(boolean arg0)
 	{
 		// MockMC: Team#setCanSeeFriendlyInvisibles
@@ -210,6 +239,7 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getSuffix()
 	{
@@ -217,17 +247,20 @@ public interface TeamBaseMock extends Team
 		return "";
 	}
 
+	@Override
 	default boolean hasColor()
 	{
 		// MockMC: Team#hasColor
 		return false;
 	}
 
+	@Override
 	default void addEntity(Entity arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#addEntity
 	}
 
+	@Override
 	default boolean allowFriendlyFire()
 	{
 		// MockMC: Team#allowFriendlyFire
@@ -238,6 +271,7 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getDisplayName()
 	{
@@ -245,104 +279,122 @@ public interface TeamBaseMock extends Team
 		return "";
 	}
 
+	@Override
 	default Set<String> getEntries()
 	{
 		// MockMC: Team#getEntries
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void addEntry(String arg0)
 	{
 		// MockMC: Team#addEntry
 	}
 
+	@Override
 	default boolean hasPlayer(OfflinePlayer arg0)
 	{
 		// MockMC: Team#hasPlayer
 		return false;
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: Team#getName
 		return "";
 	}
 
+	@Override
 	default Component prefix()
 	{
 		// MockMC: Team#prefix
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void prefix(Component arg0)
 	{
 		// MockMC: Team#prefix
 	}
 
+	@Override
 	default Team.OptionStatus getOption(Team.Option arg0)
 	{
 		// MockMC: Team#getOption
 		return null;
 	}
 
+	@Override
 	default boolean canSeeFriendlyInvisibles()
 	{
 		// MockMC: Team#canSeeFriendlyInvisibles
 		return false;
 	}
 
+	@Override
 	default boolean removeEntries(Collection<String> arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#removeEntries
 		return false;
 	}
 
+	@Override
 	default boolean removeEntries(String... arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#removeEntries
 		return false;
 	}
 
+	@Override
 	default boolean removePlayer(OfflinePlayer arg0)
 	{
 		// MockMC: Team#removePlayer
 		return false;
 	}
 
+	@Override
 	default Iterable<? extends Audience> audiences()
 	{
 		// MockMC: Team#audiences
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Component suffix()
 	{
 		// MockMC: Team#suffix
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void suffix(Component arg0)
 	{
 		// MockMC: Team#suffix
 	}
 
+	@Override
 	default boolean hasEntry(String arg0)
 	{
 		// MockMC: Team#hasEntry
 		return false;
 	}
 
+	@Override
 	default void setAllowFriendlyFire(boolean arg0)
 	{
 		// MockMC: Team#setAllowFriendlyFire
 	}
 
+	@Override
 	default boolean hasEntity(Entity arg0) throws IllegalStateException, IllegalArgumentException
 	{
 		// MockMC: Team#hasEntity
 		return false;
 	}
 
+	@Override
 	default void addPlayer(OfflinePlayer arg0)
 	{
 		// MockMC: Team#addPlayer
@@ -352,6 +404,7 @@ public interface TeamBaseMock extends Team
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.8.6")
 	default Set<OfflinePlayer> getPlayers()
 	{

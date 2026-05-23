@@ -21,36 +21,42 @@ import org.bukkit.Registry;
  */
 public interface RegistryKeySetBaseMock<T extends Keyed> extends RegistryKeySet<T>
 {
+	@Override
 	default boolean contains(TypedKey<T> arg0)
 	{
 		// MockMC: RegistryKeySet#contains
 		return false;
 	}
 
+	@Override
 	default Iterator<TypedKey<T>> iterator()
 	{
 		// MockMC: RegistryKeySet#iterator
 		return null;
 	}
 
+	@Override
 	default RegistryKey<T> registryKey()
 	{
 		// MockMC: RegistryKeySet#registryKey
 		return null;
 	}
 
+	@Override
 	default Collection<TypedKey<T>> values()
 	{
 		// MockMC: RegistryKeySet#values
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<T> resolve(Registry<T> arg0)
 	{
 		// MockMC: RegistryKeySet#resolve
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int size()
 	{
 		// MockMC: RegistryKeySet#size

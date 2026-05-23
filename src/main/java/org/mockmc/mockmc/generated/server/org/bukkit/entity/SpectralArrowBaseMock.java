@@ -13,14 +13,17 @@ import org.bukkit.entity.SpectralArrow;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SpectralArrowBaseMock extends SpectralArrow, AbstractArrowBaseMock
 {
+	@Override
 	default void setGlowingTicks(int arg0)
 	{
 		// MockMC: SpectralArrow#setGlowingTicks
 	}
 
+	@Override
 	default int getGlowingTicks()
 	{
 		// MockMC: SpectralArrow#getGlowingTicks

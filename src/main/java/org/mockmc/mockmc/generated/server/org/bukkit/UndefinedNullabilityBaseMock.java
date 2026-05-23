@@ -18,12 +18,14 @@ import org.bukkit.UndefinedNullability;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13.2")
+@SuppressWarnings("java:S1133")
 public interface UndefinedNullabilityBaseMock extends UndefinedNullability
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.2")
 	default Class<? extends Annotation> annotationType()
 	{
@@ -35,6 +37,7 @@ public interface UndefinedNullabilityBaseMock extends UndefinedNullability
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.2")
 	default String value()
 	{

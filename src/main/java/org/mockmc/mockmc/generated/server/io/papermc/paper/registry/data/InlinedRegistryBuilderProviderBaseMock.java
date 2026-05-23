@@ -22,6 +22,7 @@ import org.bukkit.MusicInstrument;
  */
 public interface InlinedRegistryBuilderProviderBaseMock extends InlinedRegistryBuilderProvider
 {
+	@Override
 	default MusicInstrument createInstrument(
 			Consumer<RegistryBuilderFactory<MusicInstrument, ? extends InstrumentRegistryEntry.Builder>> arg0)
 	{
@@ -29,6 +30,7 @@ public interface InlinedRegistryBuilderProviderBaseMock extends InlinedRegistryB
 		return null;
 	}
 
+	@Override
 	default Dialog createDialog(Consumer<RegistryBuilderFactory<Dialog, ? extends DialogRegistryEntry.Builder>> arg0)
 	{
 		// MockMC: InlinedRegistryBuilderProvider#createDialog

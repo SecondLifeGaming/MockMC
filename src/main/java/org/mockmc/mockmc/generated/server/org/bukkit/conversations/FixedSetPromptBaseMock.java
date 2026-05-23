@@ -16,7 +16,8 @@ package org.mockmc.mockmc.generated.server.org.bukkit.conversations;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface FixedSetPromptBaseMock
 {
 }

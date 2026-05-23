@@ -16,24 +16,28 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface SnowBaseMock extends Snow, BlockDataBaseMock
 {
+	@Override
 	default int getMaximumLayers()
 	{
 		// MockMC: Snow#getMaximumLayers
 		return 0;
 	}
 
+	@Override
 	default int getLayers()
 	{
 		// MockMC: Snow#getLayers
 		return 0;
 	}
 
+	@Override
 	default int getMinimumLayers()
 	{
 		// MockMC: Snow#getMinimumLayers
 		return 0;
 	}
 
+	@Override
 	default void setLayers(int arg0)
 	{
 		// MockMC: Snow#setLayers

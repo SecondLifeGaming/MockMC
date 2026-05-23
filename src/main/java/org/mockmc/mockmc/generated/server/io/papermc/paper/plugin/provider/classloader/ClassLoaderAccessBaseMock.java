@@ -16,6 +16,7 @@ import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
  */
 public interface ClassLoaderAccessBaseMock extends ClassLoaderAccess
 {
+	@Override
 	default boolean canAccess(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: ClassLoaderAccess#canAccess

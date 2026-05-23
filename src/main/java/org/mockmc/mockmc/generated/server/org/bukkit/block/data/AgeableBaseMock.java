@@ -15,18 +15,21 @@ import org.bukkit.block.data.Ageable;
  */
 public interface AgeableBaseMock extends Ageable, BlockDataBaseMock
 {
+	@Override
 	default int getAge()
 	{
 		// MockMC: Ageable#getAge
 		return 0;
 	}
 
+	@Override
 	default int getMaximumAge()
 	{
 		// MockMC: Ageable#getMaximumAge
 		return 0;
 	}
 
+	@Override
 	default void setAge(int arg0)
 	{
 		// MockMC: Ageable#setAge

@@ -15,12 +15,14 @@ import net.md_5.bungee.event.EventHandler;
  */
 public interface EventHandlerBaseMock extends EventHandler
 {
+	@Override
 	default byte priority()
 	{
 		// MockMC: EventHandler#priority
 		return 0;
 	}
 
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: EventHandler#annotationType

@@ -21,13 +21,15 @@ import org.bukkit.potion.PotionType;
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.2", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface PotionTypeInternalPotionDataBaseMock extends PotionType.InternalPotionData
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default PotionEffectType getEffectType()
 	{
@@ -39,6 +41,7 @@ public interface PotionTypeInternalPotionDataBaseMock extends PotionType.Interna
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default boolean isExtendable()
 	{
@@ -50,6 +53,7 @@ public interface PotionTypeInternalPotionDataBaseMock extends PotionType.Interna
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default boolean isUpgradeable()
 	{
@@ -61,6 +65,7 @@ public interface PotionTypeInternalPotionDataBaseMock extends PotionType.Interna
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default List<PotionEffect> getPotionEffects()
 	{
@@ -72,6 +77,7 @@ public interface PotionTypeInternalPotionDataBaseMock extends PotionType.Interna
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default boolean isInstant()
 	{
@@ -83,6 +89,7 @@ public interface PotionTypeInternalPotionDataBaseMock extends PotionType.Interna
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default int getMaxLevel()
 	{

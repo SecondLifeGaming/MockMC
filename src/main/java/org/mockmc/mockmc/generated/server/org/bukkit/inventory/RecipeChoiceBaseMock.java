@@ -16,6 +16,7 @@ import org.bukkit.inventory.RecipeChoice;
  */
 public interface RecipeChoiceBaseMock extends RecipeChoice
 {
+	@Override
 	default RecipeChoice clone()
 	{
 		// MockMC: RecipeChoice#clone
@@ -26,6 +27,7 @@ public interface RecipeChoiceBaseMock extends RecipeChoice
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.1")
 	default ItemStack getItemStack()
 	{
@@ -33,12 +35,14 @@ public interface RecipeChoiceBaseMock extends RecipeChoice
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default RecipeChoice validate(boolean arg0)
 	{
 		// MockMC: RecipeChoice#validate
 		return null;
 	}
 
+	@Override
 	default boolean test(ItemStack arg0)
 	{
 		// MockMC: RecipeChoice#test

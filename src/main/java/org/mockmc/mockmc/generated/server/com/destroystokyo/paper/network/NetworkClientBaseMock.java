@@ -16,18 +16,21 @@ import java.net.InetSocketAddress;
  */
 public interface NetworkClientBaseMock extends NetworkClient
 {
+	@Override
 	default int getProtocolVersion()
 	{
 		// MockMC: NetworkClient#getProtocolVersion
 		return 0;
 	}
 
+	@Override
 	default InetSocketAddress getVirtualHost()
 	{
 		// MockMC: NetworkClient#getVirtualHost
 		return null;
 	}
 
+	@Override
 	default InetSocketAddress getAddress()
 	{
 		// MockMC: NetworkClient#getAddress

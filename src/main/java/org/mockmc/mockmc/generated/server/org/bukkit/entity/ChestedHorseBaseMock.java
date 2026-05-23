@@ -14,27 +14,10 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ChestedHorseBaseMock extends ChestedHorse, AbstractHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: ChestedHorse#getLeashHolder
-		return null;
-	}
-
-	default void setCarryingChest(boolean arg0)
-	{
-		// MockMC: ChestedHorse#setCarryingChest
-	}
-
-	default boolean isCarryingChest()
-	{
-		// MockMC: ChestedHorse#isCarryingChest
-		return false;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -43,9 +26,29 @@ public interface ChestedHorseBaseMock extends ChestedHorse, AbstractHorseBaseMoc
 	}
 
 	@Override
+	default void setCarryingChest(boolean arg0)
+	{
+		// MockMC: ChestedHorse#setCarryingChest
+	}
+
+	@Override
+	default boolean isCarryingChest()
+	{
+		// MockMC: ChestedHorse#isCarryingChest
+		return false;
+	}
+
+	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: ChestedHorse#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: ChestedHorse#getLeashHolder
+		return null;
 	}
 }

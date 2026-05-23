@@ -21,24 +21,28 @@ import java.util.concurrent.CompletableFuture;
  */
 public interface ArgumentTypeBaseMock<T> extends ArgumentType<T>
 {
+	@Override
 	default Collection<String> getExamples()
 	{
 		// MockMC: ArgumentType#getExamples
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default T parse(StringReader arg0) throws CommandSyntaxException
 	{
 		// MockMC: ArgumentType#parse
 		return null;
 	}
 
+	@Override
 	default <S> T parse(StringReader arg0, S arg1) throws CommandSyntaxException
 	{
 		// MockMC: ArgumentType#parse
 		return null;
 	}
 
+	@Override
 	default <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> arg0, SuggestionsBuilder arg1)
 	{
 		// MockMC: ArgumentType#listSuggestions

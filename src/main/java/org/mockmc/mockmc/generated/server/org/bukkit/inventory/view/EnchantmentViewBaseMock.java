@@ -18,22 +18,26 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface EnchantmentViewBaseMock extends EnchantmentView, InventoryViewBaseMock
 {
+	@Override
 	default void setOffers(EnchantmentOffer[] arg0) throws IllegalArgumentException
 	{
 		// MockMC: EnchantmentView#setOffers
 	}
 
+	@Override
 	default void setEnchantmentSeed(int arg0)
 	{
 		// MockMC: EnchantmentView#setEnchantmentSeed
 	}
 
+	@Override
 	default int getEnchantmentSeed()
 	{
 		// MockMC: EnchantmentView#getEnchantmentSeed
 		return 0;
 	}
 
+	@Override
 	default EnchantmentOffer[] getOffers()
 	{
 		// MockMC: EnchantmentView#getOffers

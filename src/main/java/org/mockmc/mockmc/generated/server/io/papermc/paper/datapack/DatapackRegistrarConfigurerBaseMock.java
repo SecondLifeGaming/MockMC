@@ -17,18 +17,21 @@ import net.kyori.adventure.text.Component;
  */
 public interface DatapackRegistrarConfigurerBaseMock extends DatapackRegistrar.Configurer
 {
+	@Override
 	default DatapackRegistrar.Configurer position(boolean arg0, Datapack.Position arg1)
 	{
 		// MockMC: Configurer#position
 		return null;
 	}
 
+	@Override
 	default DatapackRegistrar.Configurer title(Component arg0)
 	{
 		// MockMC: Configurer#title
 		return null;
 	}
 
+	@Override
 	default DatapackRegistrar.Configurer autoEnableOnServerStart(boolean arg0)
 	{
 		// MockMC: Configurer#autoEnableOnServerStart

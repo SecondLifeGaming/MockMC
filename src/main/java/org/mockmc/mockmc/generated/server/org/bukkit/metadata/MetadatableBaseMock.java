@@ -20,12 +20,14 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface MetadatableBaseMock extends Metadatable
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean hasMetadata(String arg0)
 	{
@@ -37,6 +39,7 @@ public interface MetadatableBaseMock extends Metadatable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setMetadata(String arg0, MetadataValue arg1)
@@ -48,6 +51,7 @@ public interface MetadatableBaseMock extends Metadatable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default List<MetadataValue> getMetadata(String arg0)
@@ -60,6 +64,7 @@ public interface MetadatableBaseMock extends Metadatable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void removeMetadata(String arg0, Plugin arg1)
 	{

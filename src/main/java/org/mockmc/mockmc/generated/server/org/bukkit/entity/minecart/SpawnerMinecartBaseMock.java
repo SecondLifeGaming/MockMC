@@ -15,7 +15,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.spawner.SpawnerBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SpawnerMinecartBaseMock extends SpawnerMinecart, SpawnerBaseMock, MinecartBaseMock
 {
 }

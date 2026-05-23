@@ -16,18 +16,41 @@ import org.bukkit.entity.Tameable;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TameableBaseMock extends Tameable, AnimalsBaseMock
 {
+	@Override
 	default AnimalTamer getOwner()
 	{
 		// MockMC: Tameable#getOwner
 		return null;
 	}
 
+	@Override
 	default boolean isTamed()
 	{
 		// MockMC: Tameable#isTamed
+		return false;
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Tameable#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default void setOwner(AnimalTamer arg0)
+	{
+		// MockMC: Tameable#setOwner
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Tameable#isLeashed
 		return false;
 	}
 
@@ -38,33 +61,16 @@ public interface TameableBaseMock extends Tameable, AnimalsBaseMock
 		return null;
 	}
 
-	default void setOwner(AnimalTamer arg0)
-	{
-		// MockMC: Tameable#setOwner
-	}
-
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Tameable#setLeashHolder
-		return false;
-	}
-
 	default UUID getOwnerUniqueId()
 	{
 		// MockMC: Tameable#getOwnerUniqueId
 		return null;
 	}
 
+	@Override
 	default void setTamed(boolean arg0)
 	{
 		// MockMC: Tameable#setTamed
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Tameable#isLeashed
-		return false;
 	}
 }

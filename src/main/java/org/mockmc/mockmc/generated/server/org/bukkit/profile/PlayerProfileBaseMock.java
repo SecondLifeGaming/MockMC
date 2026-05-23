@@ -21,12 +21,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  *             modern build cycles.
  */
 @Deprecated(since = "1.18.1")
+@SuppressWarnings("java:S1133")
 public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSerializableBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default boolean isComplete()
 	{
@@ -38,6 +40,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default UUID getUniqueId()
 	{
@@ -49,6 +52,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default PlayerTextures getTextures()
 	{
@@ -60,6 +64,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default CompletableFuture<? extends PlayerProfile> update()
 	{
@@ -71,6 +76,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.18.1")
 	default PlayerProfile clone()
@@ -83,6 +89,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTextures(PlayerTextures arg0)
 	{
@@ -93,6 +100,7 @@ public interface PlayerProfileBaseMock extends PlayerProfile, ConfigurationSeria
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default String getName()
 	{

@@ -20,24 +20,28 @@ public interface PiercingWeaponBuilderBaseMock
 			PiercingWeapon.Builder,
 			DataComponentBuilderBaseMock<PiercingWeapon>
 {
+	@Override
 	default PiercingWeapon.Builder sound(Key arg0)
 	{
 		// MockMC: Builder#sound
 		return null;
 	}
 
+	@Override
 	default PiercingWeapon.Builder dealsKnockback(boolean arg0)
 	{
 		// MockMC: Builder#dealsKnockback
 		return null;
 	}
 
+	@Override
 	default PiercingWeapon.Builder dismounts(boolean arg0)
 	{
 		// MockMC: Builder#dismounts
 		return null;
 	}
 
+	@Override
 	default PiercingWeapon.Builder hitSound(Key arg0)
 	{
 		// MockMC: Builder#hitSound

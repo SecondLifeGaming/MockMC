@@ -17,27 +17,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.MerchantBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractVillagerBaseMock
 		extends
 			AbstractVillager,
-			InventoryHolderBaseMock,
 			MerchantBaseMock,
+			NPCBaseMock,
 			BreedableBaseMock,
-			NPCBaseMock
+			InventoryHolderBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: AbstractVillager#getLeashHolder
-		return null;
-	}
-
-	default void resetOffers()
-	{
-		// MockMC: AbstractVillager#resetOffers
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -46,10 +35,23 @@ public interface AbstractVillagerBaseMock
 	}
 
 	@Override
+	default void resetOffers()
+	{
+		// MockMC: AbstractVillager#resetOffers
+	}
+
+	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: AbstractVillager#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: AbstractVillager#getLeashHolder
+		return null;
 	}
 
 	@Override

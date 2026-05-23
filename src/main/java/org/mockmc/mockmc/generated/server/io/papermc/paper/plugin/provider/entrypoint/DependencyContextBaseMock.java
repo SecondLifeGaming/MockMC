@@ -16,12 +16,14 @@ import io.papermc.paper.plugin.provider.entrypoint.DependencyContext;
  */
 public interface DependencyContextBaseMock extends DependencyContext
 {
+	@Override
 	default boolean isTransitiveDependency(PluginMeta arg0, PluginMeta arg1)
 	{
 		// MockMC: DependencyContext#isTransitiveDependency
 		return false;
 	}
 
+	@Override
 	default boolean hasDependency(String arg0)
 	{
 		// MockMC: DependencyContext#hasDependency

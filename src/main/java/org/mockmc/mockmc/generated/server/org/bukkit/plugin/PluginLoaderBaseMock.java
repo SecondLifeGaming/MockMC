@@ -29,13 +29,15 @@ import org.bukkit.plugin.UnknownDependencyException;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface PluginLoaderBaseMock extends PluginLoader
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void enablePlugin(Plugin arg0)
 	{
@@ -46,6 +48,7 @@ public interface PluginLoaderBaseMock extends PluginLoader
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void disablePlugin(Plugin arg0)
 	{
@@ -56,6 +59,7 @@ public interface PluginLoaderBaseMock extends PluginLoader
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PluginDescriptionFile getPluginDescription(File arg0) throws InvalidDescriptionException
 	{
@@ -67,6 +71,7 @@ public interface PluginLoaderBaseMock extends PluginLoader
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default Map<Class<? extends Event>, Set<RegisteredListener>> createRegisteredListeners(Listener arg0, Plugin arg1)
 	{
@@ -78,6 +83,7 @@ public interface PluginLoaderBaseMock extends PluginLoader
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default Pattern[] getPluginFileFilters()
 	{
@@ -89,6 +95,7 @@ public interface PluginLoaderBaseMock extends PluginLoader
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default Plugin loadPlugin(File arg0) throws InvalidPluginException, UnknownDependencyException
 	{

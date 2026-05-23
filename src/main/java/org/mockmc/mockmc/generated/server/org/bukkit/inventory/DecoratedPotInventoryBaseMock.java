@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface DecoratedPotInventoryBaseMock extends DecoratedPotInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: DecoratedPotInventory#getItem
@@ -30,6 +31,7 @@ public interface DecoratedPotInventoryBaseMock extends DecoratedPotInventory, In
 		return null;
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: DecoratedPotInventory#setItem

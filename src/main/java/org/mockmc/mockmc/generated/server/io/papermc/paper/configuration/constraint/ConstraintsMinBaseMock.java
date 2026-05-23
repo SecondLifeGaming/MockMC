@@ -15,12 +15,14 @@ import java.lang.annotation.Annotation;
  */
 public interface ConstraintsMinBaseMock extends Constraints.Min
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Min#annotationType
 		return null;
 	}
 
+	@Override
 	default int value()
 	{
 		// MockMC: Min#value

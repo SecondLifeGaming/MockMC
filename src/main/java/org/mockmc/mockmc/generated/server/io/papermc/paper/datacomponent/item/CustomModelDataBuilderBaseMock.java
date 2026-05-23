@@ -21,48 +21,56 @@ public interface CustomModelDataBuilderBaseMock
 			CustomModelData.Builder,
 			DataComponentBuilderBaseMock<CustomModelData>
 {
+	@Override
 	default CustomModelData.Builder addFloats(List<Float> arg0)
 	{
 		// MockMC: Builder#addFloats
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addStrings(List<String> arg0)
 	{
 		// MockMC: Builder#addStrings
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addFlags(List<Boolean> arg0)
 	{
 		// MockMC: Builder#addFlags
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addColors(List<Color> arg0)
 	{
 		// MockMC: Builder#addColors
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addFloat(float arg0)
 	{
 		// MockMC: Builder#addFloat
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addColor(Color arg0)
 	{
 		// MockMC: Builder#addColor
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addString(String arg0)
 	{
 		// MockMC: Builder#addString
 		return null;
 	}
 
+	@Override
 	default CustomModelData.Builder addFlag(boolean arg0)
 	{
 		// MockMC: Builder#addFlag

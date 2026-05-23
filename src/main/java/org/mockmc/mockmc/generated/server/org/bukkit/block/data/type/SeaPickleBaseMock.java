@@ -16,23 +16,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface SeaPickleBaseMock extends SeaPickle, WaterloggedBaseMock
 {
+	@Override
 	default void setPickles(int arg0)
 	{
 		// MockMC: SeaPickle#setPickles
 	}
 
+	@Override
 	default int getPickles()
 	{
 		// MockMC: SeaPickle#getPickles
 		return 0;
 	}
 
+	@Override
 	default int getMinimumPickles()
 	{
 		// MockMC: SeaPickle#getMinimumPickles
 		return 0;
 	}
 
+	@Override
 	default int getMaximumPickles()
 	{
 		// MockMC: SeaPickle#getMaximumPickles

@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface MetadataStoreBaseBaseMock<T>
 {
 	/**

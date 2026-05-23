@@ -15,12 +15,14 @@ import org.bukkit.block.data.Powerable;
  */
 public interface PowerableBaseMock extends Powerable, BlockDataBaseMock
 {
+	@Override
 	default boolean isPowered()
 	{
 		// MockMC: Powerable#isPowered
 		return false;
 	}
 
+	@Override
 	default void setPowered(boolean arg0)
 	{
 		// MockMC: Powerable#setPowered

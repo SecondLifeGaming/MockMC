@@ -15,28 +15,33 @@ import org.bukkit.inventory.meta.Damageable;
  */
 public interface DamageableBaseMock extends Damageable, ItemMetaBaseMock
 {
+	@Override
 	default int getDamage()
 	{
 		// MockMC: Damageable#getDamage
 		return 0;
 	}
 
+	@Override
 	default void resetDamage()
 	{
 		// MockMC: Damageable#resetDamage
 	}
 
+	@Override
 	default boolean hasDamageValue()
 	{
 		// MockMC: Damageable#hasDamageValue
 		return false;
 	}
 
+	@Override
 	default void setMaxDamage(Integer arg0)
 	{
 		// MockMC: Damageable#setMaxDamage
 	}
 
+	@Override
 	default boolean hasDamage()
 	{
 		// MockMC: Damageable#hasDamage
@@ -50,17 +55,20 @@ public interface DamageableBaseMock extends Damageable, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default void setDamage(int arg0)
 	{
 		// MockMC: Damageable#setDamage
 	}
 
+	@Override
 	default int getMaxDamage()
 	{
 		// MockMC: Damageable#getMaxDamage
 		return 0;
 	}
 
+	@Override
 	default boolean hasMaxDamage()
 	{
 		// MockMC: Damageable#hasMaxDamage

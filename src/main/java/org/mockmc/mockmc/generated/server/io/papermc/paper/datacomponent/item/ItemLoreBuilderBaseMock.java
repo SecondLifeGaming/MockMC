@@ -18,18 +18,21 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface ItemLoreBuilderBaseMock extends ItemLore.Builder, DataComponentBuilderBaseMock<ItemLore>
 {
+	@Override
 	default ItemLore.Builder addLine(ComponentLike arg0)
 	{
 		// MockMC: Builder#addLine
 		return null;
 	}
 
+	@Override
 	default ItemLore.Builder addLines(List<? extends ComponentLike> arg0)
 	{
 		// MockMC: Builder#addLines
 		return null;
 	}
 
+	@Override
 	default ItemLore.Builder lines(List<? extends ComponentLike> arg0)
 	{
 		// MockMC: Builder#lines

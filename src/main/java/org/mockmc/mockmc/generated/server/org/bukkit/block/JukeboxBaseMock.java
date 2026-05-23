@@ -18,7 +18,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.TileStateInvent
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface JukeboxBaseMock extends Jukebox, TileStateInventoryHolderBaseMock
 {
 	@Override
@@ -28,45 +29,53 @@ public interface JukeboxBaseMock extends Jukebox, TileStateInventoryHolderBaseMo
 		return null;
 	}
 
+	@Override
 	default Material getPlaying()
 	{
 		// MockMC: Jukebox#getPlaying
 		return null;
 	}
 
+	@Override
 	default ItemStack getRecord()
 	{
 		// MockMC: Jukebox#getRecord
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean startPlaying()
 	{
 		// MockMC: Jukebox#startPlaying
 		return false;
 	}
 
+	@Override
 	default void stopPlaying()
 	{
 		// MockMC: Jukebox#stopPlaying
 	}
 
+	@Override
 	default boolean hasRecord()
 	{
 		// MockMC: Jukebox#hasRecord
 		return false;
 	}
 
+	@Override
 	default void setPlaying(Material arg0)
 	{
 		// MockMC: Jukebox#setPlaying
 	}
 
+	@Override
 	default void setRecord(ItemStack arg0)
 	{
 		// MockMC: Jukebox#setRecord
 	}
 
+	@Override
 	default boolean eject()
 	{
 		// MockMC: Jukebox#eject
@@ -80,6 +89,7 @@ public interface JukeboxBaseMock extends Jukebox, TileStateInventoryHolderBaseMo
 		return null;
 	}
 
+	@Override
 	default boolean isPlaying()
 	{
 		// MockMC: Jukebox#isPlaying

@@ -15,12 +15,14 @@ import io.papermc.paper.configuration.ServerConfiguration;
  */
 public interface ServerConfigurationBaseMock extends ServerConfiguration
 {
+	@Override
 	default boolean isProxyOnlineMode()
 	{
 		// MockMC: ServerConfiguration#isProxyOnlineMode
 		return false;
 	}
 
+	@Override
 	default boolean isProxyEnabled()
 	{
 		// MockMC: ServerConfiguration#isProxyEnabled

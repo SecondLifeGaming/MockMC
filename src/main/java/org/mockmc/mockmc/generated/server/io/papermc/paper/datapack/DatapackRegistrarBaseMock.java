@@ -23,18 +23,21 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  */
 public interface DatapackRegistrarBaseMock extends DatapackRegistrar, RegistrarBaseMock
 {
+	@Override
 	default boolean hasPackDiscovered(String arg0)
 	{
 		// MockMC: DatapackRegistrar#hasPackDiscovered
 		return false;
 	}
 
+	@Override
 	default Map<String, DiscoveredDatapack> getDiscoveredPacks()
 	{
 		// MockMC: DatapackRegistrar#getDiscoveredPacks
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(PluginMeta arg0, Path arg1, String arg2,
 			Consumer<DatapackRegistrar.Configurer> arg3) throws IOException
 	{
@@ -42,6 +45,7 @@ public interface DatapackRegistrarBaseMock extends DatapackRegistrar, RegistrarB
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(Path arg0, String arg1, Consumer<DatapackRegistrar.Configurer> arg2)
 			throws IOException
 	{
@@ -49,6 +53,7 @@ public interface DatapackRegistrarBaseMock extends DatapackRegistrar, RegistrarB
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(URI arg0, String arg1, Consumer<DatapackRegistrar.Configurer> arg2)
 			throws IOException
 	{
@@ -56,6 +61,7 @@ public interface DatapackRegistrarBaseMock extends DatapackRegistrar, RegistrarB
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(PluginMeta arg0, URI arg1, String arg2,
 			Consumer<DatapackRegistrar.Configurer> arg3) throws IOException
 	{
@@ -63,24 +69,28 @@ public interface DatapackRegistrarBaseMock extends DatapackRegistrar, RegistrarB
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(URI arg0, String arg1) throws IOException
 	{
 		// MockMC: DatapackRegistrar#discoverPack
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack discoverPack(Path arg0, String arg1) throws IOException
 	{
 		// MockMC: DatapackRegistrar#discoverPack
 		return null;
 	}
 
+	@Override
 	default DiscoveredDatapack getDiscoveredPack(String arg0)
 	{
 		// MockMC: DatapackRegistrar#getDiscoveredPack
 		return null;
 	}
 
+	@Override
 	default boolean removeDiscoveredPack(String arg0)
 	{
 		// MockMC: DatapackRegistrar#removeDiscoveredPack

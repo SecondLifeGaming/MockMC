@@ -16,6 +16,7 @@ import com.velocitypowered.api.proxy.messages.PluginMessageEncoder;
  */
 public interface PluginMessageEncoderBaseMock extends PluginMessageEncoder
 {
+	@Override
 	default void encode(ByteArrayDataOutput arg0)
 	{
 		// MockMC: PluginMessageEncoder#encode

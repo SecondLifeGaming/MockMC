@@ -19,24 +19,28 @@ import org.bukkit.entity.EntityType;
  */
 public interface EntitySnapshotBaseMock extends EntitySnapshot
 {
+	@Override
 	default String getAsString()
 	{
 		// MockMC: EntitySnapshot#getAsString
 		return "";
 	}
 
+	@Override
 	default EntityType getEntityType()
 	{
 		// MockMC: EntitySnapshot#getEntityType
 		return null;
 	}
 
+	@Override
 	default Entity createEntity(Location arg0)
 	{
 		// MockMC: EntitySnapshot#createEntity
 		return null;
 	}
 
+	@Override
 	default Entity createEntity(World arg0)
 	{
 		// MockMC: EntitySnapshot#createEntity

@@ -19,12 +19,14 @@ public interface SwingAnimationBuilderBaseMock
 			SwingAnimation.Builder,
 			DataComponentBuilderBaseMock<SwingAnimation>
 {
+	@Override
 	default SwingAnimation.Builder duration(int arg0)
 	{
 		// MockMC: Builder#duration
 		return null;
 	}
 
+	@Override
 	default SwingAnimation.Builder type(SwingAnimation.Animation arg0)
 	{
 		// MockMC: Builder#type

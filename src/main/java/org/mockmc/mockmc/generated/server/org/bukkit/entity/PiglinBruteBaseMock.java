@@ -14,16 +14,10 @@ import org.bukkit.entity.PiglinBrute;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PiglinBruteBaseMock extends PiglinBrute, PiglinAbstractBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: PiglinBrute#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface PiglinBruteBaseMock extends PiglinBrute, PiglinAbstractBaseMock
 	{
 		// MockMC: PiglinBrute#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: PiglinBrute#getLeashHolder
+		return null;
 	}
 }

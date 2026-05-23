@@ -16,7 +16,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.TileStateInvent
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ContainerBaseMock extends Container, LockableTileStateBaseMock, TileStateInventoryHolderBaseMock
 {
 	@Override

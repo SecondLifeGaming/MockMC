@@ -21,21 +21,25 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default String translationKey()
 	{
 		// MockMC: BlockType#translationKey
 		return "";
 	}
 
+	@Override
 	default ItemType getItemType()
 	{
 		// MockMC: BlockType#getItemType
 		return null;
 	}
 
+	@Override
 	default boolean hasGravity()
 	{
 		// MockMC: BlockType#hasGravity
@@ -46,6 +50,7 @@ public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, 
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6")
 	default Material asMaterial()
 	{
@@ -65,90 +70,105 @@ public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, 
 		return "";
 	}
 
+	@Override
 	default boolean hasItemType()
 	{
 		// MockMC: BlockType#hasItemType
 		return false;
 	}
 
+	@Override
 	default boolean isFlammable()
 	{
 		// MockMC: BlockType#isFlammable
 		return false;
 	}
 
+	@Override
 	default BlockData createBlockData()
 	{
 		// MockMC: BlockType#createBlockData
 		return null;
 	}
 
+	@Override
 	default BlockData createBlockData(String arg0)
 	{
 		// MockMC: BlockType#createBlockData
 		return null;
 	}
 
+	@Override
 	default float getSlipperiness()
 	{
 		// MockMC: BlockType#getSlipperiness
 		return 0.0f;
 	}
 
+	@Override
 	default boolean hasCollision()
 	{
 		// MockMC: BlockType#hasCollision
 		return false;
 	}
 
+	@Override
 	default Class<? extends BlockData> getBlockDataClass()
 	{
 		// MockMC: BlockType#getBlockDataClass
 		return null;
 	}
 
+	@Override
 	default boolean isOccluding()
 	{
 		// MockMC: BlockType#isOccluding
 		return false;
 	}
 
+	@Override
 	default Collection<? extends BlockData> createBlockDataStates()
 	{
 		// MockMC: BlockType#createBlockDataStates
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isAir()
 	{
 		// MockMC: BlockType#isAir
 		return false;
 	}
 
+	@Override
 	default boolean isBurnable()
 	{
 		// MockMC: BlockType#isBurnable
 		return false;
 	}
 
+	@Override
 	default float getHardness()
 	{
 		// MockMC: BlockType#getHardness
 		return 0.0f;
 	}
 
+	@Override
 	default float getBlastResistance()
 	{
 		// MockMC: BlockType#getBlastResistance
 		return 0.0f;
 	}
 
+	@Override
 	default BlockType.Typed<BlockData> typed()
 	{
 		// MockMC: BlockType#typed
 		return null;
 	}
 
+	@Override
 	default <B extends BlockData> BlockType.Typed<B> typed(Class<B> arg0)
 	{
 		// MockMC: BlockType#typed
@@ -159,6 +179,7 @@ public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, 
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.1", forRemoval = true)
 	default boolean isEnabledByFeature(World arg0)
 	{
@@ -166,6 +187,7 @@ public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, 
 		return false;
 	}
 
+	@Override
 	default boolean isSolid()
 	{
 		// MockMC: BlockType#isSolid
@@ -176,6 +198,7 @@ public interface BlockTypeBaseMock extends BlockType, FeatureDependantBaseMock, 
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isInteractable()
 	{

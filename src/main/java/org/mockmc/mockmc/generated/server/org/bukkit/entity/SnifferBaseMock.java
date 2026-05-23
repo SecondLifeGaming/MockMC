@@ -16,36 +16,15 @@ import org.bukkit.entity.Sniffer;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SnifferBaseMock extends Sniffer, AnimalsBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Sniffer#getLeashHolder
-		return null;
-	}
-
 	default Sniffer.State getState()
 	{
 		// MockMC: Sniffer#getState
 		return null;
-	}
-
-	default Collection<Location> getExploredLocations()
-	{
-		// MockMC: Sniffer#getExploredLocations
-		return java.util.Collections.emptyList();
-	}
-
-	default void removeExploredLocation(Location arg0)
-	{
-		// MockMC: Sniffer#removeExploredLocation
-	}
-
-	default void setState(Sniffer.State arg0)
-	{
-		// MockMC: Sniffer#setState
 	}
 
 	@Override
@@ -55,21 +34,17 @@ public interface SnifferBaseMock extends Sniffer, AnimalsBaseMock
 		return false;
 	}
 
-	default void addExploredLocation(Location arg0)
+	@Override
+	default Collection<Location> getExploredLocations()
 	{
-		// MockMC: Sniffer#addExploredLocation
+		// MockMC: Sniffer#getExploredLocations
+		return java.util.Collections.emptyList();
 	}
 
-	default boolean canDig()
+	@Override
+	default void removeExploredLocation(Location arg0)
 	{
-		// MockMC: Sniffer#canDig
-		return false;
-	}
-
-	default Location findPossibleDigLocation()
-	{
-		// MockMC: Sniffer#findPossibleDigLocation
-		return new org.bukkit.Location(null, 0, 0, 0);
+		// MockMC: Sniffer#removeExploredLocation
 	}
 
 	@Override
@@ -77,5 +52,38 @@ public interface SnifferBaseMock extends Sniffer, AnimalsBaseMock
 	{
 		// MockMC: Sniffer#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setState(Sniffer.State arg0)
+	{
+		// MockMC: Sniffer#setState
+	}
+
+	@Override
+	default void addExploredLocation(Location arg0)
+	{
+		// MockMC: Sniffer#addExploredLocation
+	}
+
+	@Override
+	default boolean canDig()
+	{
+		// MockMC: Sniffer#canDig
+		return false;
+	}
+
+	@Override
+	default Location findPossibleDigLocation()
+	{
+		// MockMC: Sniffer#findPossibleDigLocation
+		return new org.bukkit.Location(null, 0, 0, 0);
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Sniffer#getLeashHolder
+		return null;
 	}
 }

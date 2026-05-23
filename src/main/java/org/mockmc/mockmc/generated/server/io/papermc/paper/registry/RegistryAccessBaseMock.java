@@ -22,6 +22,7 @@ public interface RegistryAccessBaseMock extends RegistryAccess
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default <T extends Keyed> Registry<T> getRegistry(Class<T> arg0)
 	{
@@ -29,6 +30,7 @@ public interface RegistryAccessBaseMock extends RegistryAccess
 		return null;
 	}
 
+	@Override
 	default <T extends Keyed> Registry<T> getRegistry(RegistryKey<T> arg0)
 	{
 		// MockMC: RegistryAccess#getRegistry

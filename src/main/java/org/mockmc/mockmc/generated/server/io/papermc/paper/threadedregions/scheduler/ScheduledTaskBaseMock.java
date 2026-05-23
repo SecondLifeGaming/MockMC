@@ -16,30 +16,35 @@ import org.bukkit.plugin.Plugin;
  */
 public interface ScheduledTaskBaseMock extends ScheduledTask
 {
+	@Override
 	default ScheduledTask.ExecutionState getExecutionState()
 	{
 		// MockMC: ScheduledTask#getExecutionState
 		return null;
 	}
 
+	@Override
 	default boolean isRepeatingTask()
 	{
 		// MockMC: ScheduledTask#isRepeatingTask
 		return false;
 	}
 
+	@Override
 	default ScheduledTask.CancelledState cancel()
 	{
 		// MockMC: ScheduledTask#cancel
 		return null;
 	}
 
+	@Override
 	default Plugin getOwningPlugin()
 	{
 		// MockMC: ScheduledTask#getOwningPlugin
 		return null;
 	}
 
+	@Override
 	default boolean isCancelled()
 	{
 		// MockMC: ScheduledTask#isCancelled

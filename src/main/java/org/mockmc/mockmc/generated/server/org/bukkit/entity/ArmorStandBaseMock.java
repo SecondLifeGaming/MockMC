@@ -19,30 +19,36 @@ import org.bukkit.util.EulerAngle;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 {
+	@Override
 	default void setRightArmPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setRightArmPose
 	}
 
+	@Override
 	default Rotations getHeadRotations()
 	{
 		// MockMC: ArmorStand#getHeadRotations
 		return null;
 	}
 
+	@Override
 	default void setCanMove(boolean arg0)
 	{
 		// MockMC: ArmorStand#setCanMove
 	}
 
+	@Override
 	default void setSmall(boolean arg0)
 	{
 		// MockMC: ArmorStand#setSmall
 	}
 
+	@Override
 	default void setLeftLegPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setLeftLegPose
@@ -52,6 +58,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default void setHelmet(ItemStack arg0)
 	{
@@ -62,93 +69,110 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default void setLeggings(ItemStack arg0)
 	{
 		// MockMC: ArmorStand#setLeggings
 	}
 
+	@Override
 	default EulerAngle getLeftArmPose()
 	{
 		// MockMC: ArmorStand#getLeftArmPose
 		return null;
 	}
 
+	@Override
 	default Rotations getBodyRotations()
 	{
 		// MockMC: ArmorStand#getBodyRotations
 		return null;
 	}
 
+	@Override
 	default boolean hasBasePlate()
 	{
 		// MockMC: ArmorStand#hasBasePlate
 		return false;
 	}
 
+	@Override
 	default void setLeftArmPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setLeftArmPose
 	}
 
+	@Override
 	default void setMarker(boolean arg0)
 	{
 		// MockMC: ArmorStand#setMarker
 	}
 
+	@Override
 	default void addEquipmentLock(EquipmentSlot arg0, ArmorStand.LockType arg1)
 	{
 		// MockMC: ArmorStand#addEquipmentLock
 	}
 
+	@Override
 	default void setBodyPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setBodyPose
 	}
 
+	@Override
 	default void setLeftLegRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setLeftLegRotations
 	}
 
+	@Override
 	default void setItem(EquipmentSlot arg0, ItemStack arg1)
 	{
 		// MockMC: ArmorStand#setItem
 	}
 
+	@Override
 	default void removeEquipmentLock(EquipmentSlot arg0, ArmorStand.LockType arg1)
 	{
 		// MockMC: ArmorStand#removeEquipmentLock
 	}
 
+	@Override
 	default boolean hasArms()
 	{
 		// MockMC: ArmorStand#hasArms
 		return false;
 	}
 
+	@Override
 	default EulerAngle getHeadPose()
 	{
 		// MockMC: ArmorStand#getHeadPose
 		return null;
 	}
 
+	@Override
 	default void setArms(boolean arg0)
 	{
 		// MockMC: ArmorStand#setArms
 	}
 
+	@Override
 	default void setCanTick(boolean arg0)
 	{
 		// MockMC: ArmorStand#setCanTick
 	}
 
+	@Override
 	default boolean canTick()
 	{
 		// MockMC: ArmorStand#canTick
 		return false;
 	}
 
+	@Override
 	default Rotations getLeftLegRotations()
 	{
 		// MockMC: ArmorStand#getLeftLegRotations
@@ -162,6 +186,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setRightLegRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setRightLegRotations
@@ -171,23 +196,27 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default void setBoots(ItemStack arg0)
 	{
 		// MockMC: ArmorStand#setBoots
 	}
 
+	@Override
 	default void removeDisabledSlots(EquipmentSlot... arg0)
 	{
 		// MockMC: ArmorStand#removeDisabledSlots
 	}
 
+	@Override
 	default EulerAngle getRightLegPose()
 	{
 		// MockMC: ArmorStand#getRightLegPose
 		return null;
 	}
 
+	@Override
 	default boolean isMarker()
 	{
 		// MockMC: ArmorStand#isMarker
@@ -198,6 +227,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default ItemStack getBoots()
 	{
@@ -205,11 +235,13 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setLeftArmRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setLeftArmRotations
 	}
 
+	@Override
 	default void addDisabledSlots(EquipmentSlot... arg0)
 	{
 		// MockMC: ArmorStand#addDisabledSlots
@@ -219,6 +251,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default ItemStack getHelmet()
 	{
@@ -226,17 +259,20 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Rotations getLeftArmRotations()
 	{
 		// MockMC: ArmorStand#getLeftArmRotations
 		return null;
 	}
 
+	@Override
 	default void setHeadRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setHeadRotations
 	}
 
+	@Override
 	default boolean isVisible()
 	{
 		// MockMC: ArmorStand#isVisible
@@ -247,6 +283,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default ItemStack getChestplate()
 	{
@@ -258,6 +295,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default ItemStack getLeggings()
 	{
@@ -265,34 +303,40 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Rotations getRightLegRotations()
 	{
 		// MockMC: ArmorStand#getRightLegRotations
 		return null;
 	}
 
+	@Override
 	default void setVisible(boolean arg0)
 	{
 		// MockMC: ArmorStand#setVisible
 	}
 
+	@Override
 	default void setBasePlate(boolean arg0)
 	{
 		// MockMC: ArmorStand#setBasePlate
 	}
 
+	@Override
 	default boolean isSlotDisabled(EquipmentSlot arg0)
 	{
 		// MockMC: ArmorStand#isSlotDisabled
 		return false;
 	}
 
+	@Override
 	default EulerAngle getRightArmPose()
 	{
 		// MockMC: ArmorStand#getRightArmPose
 		return null;
 	}
 
+	@Override
 	default void setHeadPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setHeadPose
@@ -302,23 +346,27 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default void setChestplate(ItemStack arg0)
 	{
 		// MockMC: ArmorStand#setChestplate
 	}
 
+	@Override
 	default EulerAngle getBodyPose()
 	{
 		// MockMC: ArmorStand#getBodyPose
 		return null;
 	}
 
+	@Override
 	default void setBodyRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setBodyRotations
 	}
 
+	@Override
 	default EulerAngle getLeftLegPose()
 	{
 		// MockMC: ArmorStand#getLeftLegPose
@@ -329,6 +377,7 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default ItemStack getItemInHand()
 	{
@@ -336,41 +385,48 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Rotations getRightArmRotations()
 	{
 		// MockMC: ArmorStand#getRightArmRotations
 		return null;
 	}
 
+	@Override
 	default void setDisabledSlots(EquipmentSlot... arg0)
 	{
 		// MockMC: ArmorStand#setDisabledSlots
 	}
 
+	@Override
 	default boolean hasEquipmentLock(EquipmentSlot arg0, ArmorStand.LockType arg1)
 	{
 		// MockMC: ArmorStand#hasEquipmentLock
 		return false;
 	}
 
+	@Override
 	default Set<EquipmentSlot> getDisabledSlots()
 	{
 		// MockMC: ArmorStand#getDisabledSlots
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default ItemStack getItem(EquipmentSlot arg0)
 	{
 		// MockMC: ArmorStand#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean isSmall()
 	{
 		// MockMC: ArmorStand#isSmall
 		return false;
 	}
 
+	@Override
 	default void setRightLegPose(EulerAngle arg0)
 	{
 		// MockMC: ArmorStand#setRightLegPose
@@ -380,18 +436,21 @@ public interface ArmorStandBaseMock extends ArmorStand, LivingEntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15.2")
 	default void setItemInHand(ItemStack arg0)
 	{
 		// MockMC: ArmorStand#setItemInHand
 	}
 
+	@Override
 	default boolean canMove()
 	{
 		// MockMC: ArmorStand#canMove
 		return false;
 	}
 
+	@Override
 	default void setRightArmRotations(Rotations arg0)
 	{
 		// MockMC: ArmorStand#setRightArmRotations

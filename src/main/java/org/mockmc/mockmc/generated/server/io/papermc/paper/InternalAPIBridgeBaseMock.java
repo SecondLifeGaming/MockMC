@@ -31,36 +31,42 @@ import org.bukkit.entity.Pose;
  */
 public interface InternalAPIBridgeBaseMock extends InternalAPIBridge
 {
+	@Override
 	default Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> arg0)
 	{
 		// MockMC: InternalAPIBridge#restricted
 		return null;
 	}
 
+	@Override
 	default PoiType.Occupancy createOccupancy(String arg0)
 	{
 		// MockMC: InternalAPIBridge#createOccupancy
 		return null;
 	}
 
+	@Override
 	default Component defaultMannequinDescription()
 	{
 		// MockMC: InternalAPIBridge#defaultMannequinDescription
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default SkinParts.Mutable allSkinParts()
 	{
 		// MockMC: InternalAPIBridge#allSkinParts
 		return null;
 	}
 
+	@Override
 	default CombatEntry createCombatEntry(DamageSource arg0, float arg1, FallLocationType arg2, float arg3)
 	{
 		// MockMC: InternalAPIBridge#createCombatEntry
 		return null;
 	}
 
+	@Override
 	default CombatEntry createCombatEntry(LivingEntity arg0, DamageSource arg1, float arg2)
 	{
 		// MockMC: InternalAPIBridge#createCombatEntry
@@ -71,6 +77,7 @@ public interface InternalAPIBridgeBaseMock extends InternalAPIBridge
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5", forRemoval = true)
 	default Biome constructLegacyCustomBiome()
 	{
@@ -78,6 +85,7 @@ public interface InternalAPIBridgeBaseMock extends InternalAPIBridge
 		return null;
 	}
 
+	@Override
 	default <MODERN, LEGACY> GameRule<LEGACY> legacyGameRuleBridge(GameRule<MODERN> arg0, Function<LEGACY, MODERN> arg1,
 			Function<MODERN, LEGACY> arg2, Class<LEGACY> arg3)
 	{
@@ -85,18 +93,21 @@ public interface InternalAPIBridgeBaseMock extends InternalAPIBridge
 		return null;
 	}
 
+	@Override
 	default DamageEffect getDamageEffect(String arg0)
 	{
 		// MockMC: InternalAPIBridge#getDamageEffect
 		return null;
 	}
 
+	@Override
 	default Set<Pose> validMannequinPoses()
 	{
 		// MockMC: InternalAPIBridge#validMannequinPoses
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default ResolvableProfile defaultMannequinProfile()
 	{
 		// MockMC: InternalAPIBridge#defaultMannequinProfile

@@ -16,6 +16,7 @@ import org.spongepowered.configurate.serialize.SerializationException;
  */
 public interface FieldProcessorBaseMock<V> extends FieldProcessor<V>
 {
+	@Override
 	default V process(AnnotatedType arg0, V arg1, V arg2) throws SerializationException
 	{
 		// MockMC: FieldProcessor#process

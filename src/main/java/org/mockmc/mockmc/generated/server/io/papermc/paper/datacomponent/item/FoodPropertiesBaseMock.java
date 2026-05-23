@@ -19,18 +19,21 @@ public interface FoodPropertiesBaseMock
 			FoodProperties,
 			BuildableDataComponentBaseMock<FoodProperties, FoodProperties.Builder>
 {
+	@Override
 	default boolean canAlwaysEat()
 	{
 		// MockMC: FoodProperties#canAlwaysEat
 		return false;
 	}
 
+	@Override
 	default float saturation()
 	{
 		// MockMC: FoodProperties#saturation
 		return 0.0f;
 	}
 
+	@Override
 	default int nutrition()
 	{
 		// MockMC: FoodProperties#nutrition

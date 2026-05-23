@@ -15,6 +15,7 @@ import java.lang.annotation.Annotation;
  */
 public interface BelowZeroToEmptyBaseMock extends BelowZeroToEmpty
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: BelowZeroToEmpty#annotationType

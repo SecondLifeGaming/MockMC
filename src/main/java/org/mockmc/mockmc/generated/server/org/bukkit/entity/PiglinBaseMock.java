@@ -18,27 +18,39 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface PiglinBaseMock extends Piglin, InventoryHolderBaseMock, RangedEntityBaseMock, PiglinAbstractBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface PiglinBaseMock extends Piglin, PiglinAbstractBaseMock, RangedEntityBaseMock, InventoryHolderBaseMock
 {
+	@Override
 	default boolean isAbleToHunt()
 	{
 		// MockMC: Piglin#isAbleToHunt
 		return false;
 	}
 
+	@Override
 	default boolean addBarterMaterial(Material arg0)
 	{
 		// MockMC: Piglin#addBarterMaterial
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Piglin#isLeashed
+		return false;
+	}
+
+	@Override
 	default Set<Material> getBarterList()
 	{
 		// MockMC: Piglin#getBarterList
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean isDancing()
 	{
 		// MockMC: Piglin#isDancing
@@ -46,21 +58,10 @@ public interface PiglinBaseMock extends Piglin, InventoryHolderBaseMock, RangedE
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Piglin#setLeashHolder
-		return false;
-	}
-
 	default Set<Material> getInterestList()
 	{
 		// MockMC: Piglin#getInterestList
 		return java.util.Collections.emptySet();
-	}
-
-	default void setIsAbleToHunt(boolean arg0)
-	{
-		// MockMC: Piglin#setIsAbleToHunt
 	}
 
 	@Override
@@ -70,49 +71,62 @@ public interface PiglinBaseMock extends Piglin, InventoryHolderBaseMock, RangedE
 		return null;
 	}
 
+	@Override
+	default void setIsAbleToHunt(boolean arg0)
+	{
+		// MockMC: Piglin#setIsAbleToHunt
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Piglin#setLeashHolder
+		return false;
+	}
+
+	@Override
 	default boolean removeMaterialOfInterest(Material arg0)
 	{
 		// MockMC: Piglin#removeMaterialOfInterest
 		return false;
 	}
 
+	@Override
 	default boolean addMaterialOfInterest(Material arg0)
 	{
 		// MockMC: Piglin#addMaterialOfInterest
 		return false;
 	}
 
+	@Override
 	default void setDancing(long arg0)
 	{
 		// MockMC: Piglin#setDancing
 	}
 
+	@Override
 	default void setDancing(boolean arg0)
 	{
 		// MockMC: Piglin#setDancing
 	}
 
+	@Override
 	default boolean isChargingCrossbow()
 	{
 		// MockMC: Piglin#isChargingCrossbow
 		return false;
 	}
 
+	@Override
 	default boolean removeBarterMaterial(Material arg0)
 	{
 		// MockMC: Piglin#removeBarterMaterial
 		return false;
 	}
 
+	@Override
 	default void setChargingCrossbow(boolean arg0)
 	{
 		// MockMC: Piglin#setChargingCrossbow
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Piglin#isLeashed
-		return false;
 	}
 }

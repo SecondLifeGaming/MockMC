@@ -16,12 +16,14 @@ import org.bukkit.material.Colorable;
  */
 public interface ColorableBaseMock extends Colorable
 {
+	@Override
 	default DyeColor getColor()
 	{
 		// MockMC: Colorable#getColor
 		return null;
 	}
 
+	@Override
 	default void setColor(DyeColor arg0)
 	{
 		// MockMC: Colorable#setColor

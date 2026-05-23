@@ -15,12 +15,14 @@ import io.papermc.paper.math.Rotation;
  */
 public interface RotationBaseMock extends Rotation
 {
+	@Override
 	default float pitch()
 	{
 		// MockMC: Rotation#pitch
 		return 0.0f;
 	}
 
+	@Override
 	default float yaw()
 	{
 		// MockMC: Rotation#yaw

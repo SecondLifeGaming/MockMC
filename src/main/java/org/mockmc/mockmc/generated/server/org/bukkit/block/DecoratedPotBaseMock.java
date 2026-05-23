@@ -20,8 +20,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface DecoratedPotBaseMock extends DecoratedPot, LootableBaseMock, TileStateInventoryHolderBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface DecoratedPotBaseMock extends DecoratedPot, TileStateInventoryHolderBaseMock, LootableBaseMock
 {
 	@Override
 	default DecoratedPotInventory getSnapshotInventory()
@@ -34,6 +35,7 @@ public interface DecoratedPotBaseMock extends DecoratedPot, LootableBaseMock, Ti
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default List<Material> getShards()
 	{
@@ -41,11 +43,13 @@ public interface DecoratedPotBaseMock extends DecoratedPot, LootableBaseMock, Ti
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setSherd(DecoratedPot.Side arg0, Material arg1)
 	{
 		// MockMC: DecoratedPot#setSherd
 	}
 
+	@Override
 	default Material getSherd(DecoratedPot.Side arg0)
 	{
 		// MockMC: DecoratedPot#getSherd
@@ -59,11 +63,13 @@ public interface DecoratedPotBaseMock extends DecoratedPot, LootableBaseMock, Ti
 		return null;
 	}
 
+	@Override
 	default void startWobble(DecoratedPot.WobbleStyle arg0)
 	{
 		// MockMC: DecoratedPot#startWobble
 	}
 
+	@Override
 	default Map<DecoratedPot.Side, Material> getSherds()
 	{
 		// MockMC: DecoratedPot#getSherds

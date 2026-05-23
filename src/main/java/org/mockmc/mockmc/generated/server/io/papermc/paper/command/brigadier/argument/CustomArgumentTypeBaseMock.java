@@ -52,6 +52,7 @@ public interface CustomArgumentTypeBaseMock<T, N> extends CustomArgumentType<T, 
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default ArgumentType<N> getNativeType()
 	{
 		// MockMC: CustomArgumentType#getNativeType

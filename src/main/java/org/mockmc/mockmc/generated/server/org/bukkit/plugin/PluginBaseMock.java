@@ -30,52 +30,61 @@ import org.slf4j.Logger;
  */
 public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEventOwnerBaseMock
 {
+	@Override
 	default LifecycleEventManager<Plugin> getLifecycleManager()
 	{
 		// MockMC: Plugin#getLifecycleManager
 		return null;
 	}
 
+	@Override
 	default InputStream getResource(String arg0)
 	{
 		// MockMC: Plugin#getResource
 		return null;
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: Plugin#getName
 		return "";
 	}
 
+	@Override
 	default void setNaggable(boolean arg0)
 	{
 		// MockMC: Plugin#setNaggable
 	}
 
+	@Override
 	default ChunkGenerator getDefaultWorldGenerator(String arg0, String arg1)
 	{
 		// MockMC: Plugin#getDefaultWorldGenerator
 		return null;
 	}
 
+	@Override
 	default ComponentLogger getComponentLogger()
 	{
 		// MockMC: Plugin#getComponentLogger
 		return null;
 	}
 
+	@Override
 	default void onEnable()
 	{
 		// MockMC: Plugin#onEnable
 	}
 
+	@Override
 	default File getDataFolder()
 	{
 		// MockMC: Plugin#getDataFolder
 		return null;
 	}
 
+	@Override
 	default void onDisable()
 	{
 		// MockMC: Plugin#onDisable
@@ -85,6 +94,7 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default PluginDescriptionFile getDescription()
 	{
@@ -92,11 +102,13 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 		return null;
 	}
 
+	@Override
 	default void reloadConfig()
 	{
 		// MockMC: Plugin#reloadConfig
 	}
 
+	@Override
 	default Path getDataPath()
 	{
 		// MockMC: Plugin#getDataPath
@@ -107,7 +119,9 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PluginLoader getPluginLoader()
 	{
@@ -115,18 +129,21 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 		return null;
 	}
 
+	@Override
 	default Logger getSLF4JLogger()
 	{
 		// MockMC: Plugin#getSLF4JLogger
 		return null;
 	}
 
+	@Override
 	default Server getServer()
 	{
 		// MockMC: Plugin#getServer
 		return null;
 	}
 
+	@Override
 	default BiomeProvider getDefaultBiomeProvider(String arg0, String arg1)
 	{
 		// MockMC: Plugin#getDefaultBiomeProvider
@@ -140,18 +157,21 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 		return null;
 	}
 
+	@Override
 	default boolean isNaggable()
 	{
 		// MockMC: Plugin#isNaggable
 		return false;
 	}
 
+	@Override
 	default java.util.logging.Logger getLogger()
 	{
 		// MockMC: Plugin#getLogger
 		return null;
 	}
 
+	@Override
 	default void saveDefaultConfig()
 	{
 		// MockMC: Plugin#saveDefaultConfig
@@ -161,6 +181,7 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default org.apache.logging.log4j.Logger getLog4JLogger()
 	{
@@ -168,33 +189,39 @@ public interface PluginBaseMock extends Plugin, TabExecutorBaseMock, LifecycleEv
 		return null;
 	}
 
+	@Override
 	default FileConfiguration getConfig()
 	{
 		// MockMC: Plugin#getConfig
 		return null;
 	}
 
+	@Override
 	default void saveConfig()
 	{
 		// MockMC: Plugin#saveConfig
 	}
 
+	@Override
 	default boolean isEnabled()
 	{
 		// MockMC: Plugin#isEnabled
 		return false;
 	}
 
+	@Override
 	default void onLoad()
 	{
 		// MockMC: Plugin#onLoad
 	}
 
+	@Override
 	default void saveResource(String arg0, boolean arg1)
 	{
 		// MockMC: Plugin#saveResource
 	}
 
+	@Override
 	default String namespace()
 	{
 		// MockMC: Plugin#namespace

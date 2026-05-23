@@ -14,25 +14,30 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ItemDisplayBaseMock extends ItemDisplay, DisplayBaseMock
 {
+	@Override
 	default ItemDisplay.ItemDisplayTransform getItemDisplayTransform()
 	{
 		// MockMC: ItemDisplay#getItemDisplayTransform
 		return null;
 	}
 
+	@Override
 	default void setItemDisplayTransform(ItemDisplay.ItemDisplayTransform arg0)
 	{
 		// MockMC: ItemDisplay#setItemDisplayTransform
 	}
 
+	@Override
 	default void setItemStack(ItemStack arg0)
 	{
 		// MockMC: ItemDisplay#setItemStack
 	}
 
+	@Override
 	default ItemStack getItemStack()
 	{
 		// MockMC: ItemDisplay#getItemStack

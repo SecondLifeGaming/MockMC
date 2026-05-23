@@ -25,6 +25,7 @@ public interface InventoryViewBaseMock extends InventoryView
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getTitle()
 	{
@@ -32,58 +33,69 @@ public interface InventoryViewBaseMock extends InventoryView
 		return "";
 	}
 
+	@Override
 	default MenuType getMenuType()
 	{
 		// MockMC: InventoryView#getMenuType
 		return null;
 	}
 
+	@Override
 	default int convertSlot(int arg0)
 	{
 		// MockMC: InventoryView#convertSlot
 		return 0;
 	}
 
+	@Override
 	default InventoryType getType()
 	{
 		// MockMC: InventoryView#getType
 		return null;
 	}
 
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	default boolean setProperty(InventoryView.Property arg0, int arg1)
 	{
 		// MockMC: InventoryView#setProperty
 		return false;
 	}
 
+	@Override
 	default InventoryType.SlotType getSlotType(int arg0)
 	{
 		// MockMC: InventoryView#getSlotType
 		return null;
 	}
 
+	@Override
 	default Inventory getInventory(int arg0)
 	{
 		// MockMC: InventoryView#getInventory
 		return null;
 	}
 
+	@Override
 	default void setCursor(ItemStack arg0)
 	{
 		// MockMC: InventoryView#setCursor
 	}
 
+	@Override
 	default void close()
 	{
 		// MockMC: InventoryView#close
 	}
 
+	@Override
 	default void open()
 	{
 		// MockMC: InventoryView#open
 	}
 
+	@Override
 	default void setItem(int arg0, ItemStack arg1)
 	{
 		// MockMC: InventoryView#setItem
@@ -93,6 +105,7 @@ public interface InventoryViewBaseMock extends InventoryView
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.1")
 	default String getOriginalTitle()
 	{
@@ -100,30 +113,35 @@ public interface InventoryViewBaseMock extends InventoryView
 		return "";
 	}
 
+	@Override
 	default ItemStack getCursor()
 	{
 		// MockMC: InventoryView#getCursor
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Inventory getTopInventory()
 	{
 		// MockMC: InventoryView#getTopInventory
 		return null;
 	}
 
+	@Override
 	default HumanEntity getPlayer()
 	{
 		// MockMC: InventoryView#getPlayer
 		return null;
 	}
 
+	@Override
 	default Inventory getBottomInventory()
 	{
 		// MockMC: InventoryView#getBottomInventory
 		return null;
 	}
 
+	@Override
 	default int countSlots()
 	{
 		// MockMC: InventoryView#countSlots
@@ -134,18 +152,21 @@ public interface InventoryViewBaseMock extends InventoryView
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.1")
 	default void setTitle(String arg0)
 	{
 		// MockMC: InventoryView#setTitle
 	}
 
+	@Override
 	default ItemStack getItem(int arg0)
 	{
 		// MockMC: InventoryView#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: InventoryView#title

@@ -19,13 +19,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.6", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ReferenceBaseMock<T extends Keyed> extends Reference<T>, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default T valueOrNull()
 	{
@@ -37,6 +39,7 @@ public interface ReferenceBaseMock<T extends Keyed> extends Reference<T>, KeyedB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default T value()
 	{

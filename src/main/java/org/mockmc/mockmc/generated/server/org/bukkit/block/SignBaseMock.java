@@ -23,27 +23,32 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface SignBaseMock extends Sign, ColorableBaseMock, TileStateBaseMock
 {
+	@Override
 	default boolean isWaxed()
 	{
 		// MockMC: Sign#isWaxed
 		return false;
 	}
 
+	@Override
 	default Side getInteractableSideFor(double arg0, double arg1)
 	{
 		// MockMC: Sign#getInteractableSideFor
 		return null;
 	}
 
+	@Override
 	default Side getInteractableSideFor(Position arg0)
 	{
 		// MockMC: Sign#getInteractableSideFor
 		return null;
 	}
 
+	@Override
 	default Side getInteractableSideFor(Entity arg0)
 	{
 		// MockMC: Sign#getInteractableSideFor
@@ -54,6 +59,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void line(int arg0, Component arg1) throws IndexOutOfBoundsException
 	{
@@ -64,6 +70,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Component line(int arg0) throws IndexOutOfBoundsException
 	{
@@ -75,6 +82,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20")
 	default String getLine(int arg0) throws IndexOutOfBoundsException
 	{
@@ -82,6 +90,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 		return "";
 	}
 
+	@Override
 	default SignSide getSide(Side arg0)
 	{
 		// MockMC: Sign#getSide
@@ -104,6 +113,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20")
 	default void setGlowingText(boolean arg0)
 	{
@@ -114,6 +124,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20")
 	default String[] getLines()
 	{
@@ -121,11 +132,13 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 		return new String[0];
 	}
 
+	@Override
 	default void setWaxed(boolean arg0)
 	{
 		// MockMC: Sign#setWaxed
 	}
 
+	@Override
 	default Player getAllowedEditor()
 	{
 		// MockMC: Sign#getAllowedEditor
@@ -136,6 +149,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default void setEditable(boolean arg0)
 	{
@@ -157,6 +171,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default boolean isEditable()
 	{
@@ -164,6 +179,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 		return false;
 	}
 
+	@Override
 	default void setAllowedEditorUniqueId(UUID arg0)
 	{
 		// MockMC: Sign#setAllowedEditorUniqueId
@@ -173,6 +189,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20")
 	default void setLine(int arg0, String arg1) throws IndexOutOfBoundsException
 	{
@@ -183,6 +200,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20")
 	default boolean isGlowingText()
 	{
@@ -194,6 +212,7 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default List<Component> lines()
 	{
@@ -201,12 +220,14 @@ public interface SignBaseMock extends Sign, TileStateBaseMock, ColorableBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default SignSide getTargetSide(Player arg0)
 	{
 		// MockMC: Sign#getTargetSide
 		return null;
 	}
 
+	@Override
 	default UUID getAllowedEditorUniqueId()
 	{
 		// MockMC: Sign#getAllowedEditorUniqueId

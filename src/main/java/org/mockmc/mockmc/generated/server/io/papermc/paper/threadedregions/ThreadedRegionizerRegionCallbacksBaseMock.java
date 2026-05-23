@@ -18,44 +18,52 @@ public interface ThreadedRegionizerRegionCallbacksBaseMock<R extends ThreadedReg
 		extends
 			ThreadedRegionizer.RegionCallbacks<R, S>
 {
+	@Override
 	default void onRegionCreate(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionCreate
 	}
 
+	@Override
 	default void preSplit(ThreadedRegionizer.ThreadedRegion<R, S> arg0,
 			List<ThreadedRegionizer.ThreadedRegion<R, S>> arg1)
 	{
 		// MockMC: RegionCallbacks#preSplit
 	}
 
+	@Override
 	default void onRegionDestroy(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionDestroy
 	}
 
+	@Override
 	default R createNewData(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#createNewData
 		return null;
 	}
 
+	@Override
 	default void preMerge(ThreadedRegionizer.ThreadedRegion<R, S> arg0, ThreadedRegionizer.ThreadedRegion<R, S> arg1)
 	{
 		// MockMC: RegionCallbacks#preMerge
 	}
 
+	@Override
 	default S createNewSectionData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionCallbacks#createNewSectionData
 		return null;
 	}
 
+	@Override
 	default void onRegionActive(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionActive
 	}
 
+	@Override
 	default void onRegionInactive(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionInactive

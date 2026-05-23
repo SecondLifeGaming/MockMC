@@ -17,13 +17,15 @@ import org.bukkit.util.OldEnum;
  *             modern build cycles.
  */
 @Deprecated(since = "1.21", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface OldEnumBaseMock<T extends OldEnum<T>> extends OldEnum<T>
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int ordinal()
 	{
@@ -35,6 +37,7 @@ public interface OldEnumBaseMock<T extends OldEnum<T>> extends OldEnum<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int compareTo(T arg0)
 	{
@@ -46,6 +49,7 @@ public interface OldEnumBaseMock<T extends OldEnum<T>> extends OldEnum<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default String name()
 	{

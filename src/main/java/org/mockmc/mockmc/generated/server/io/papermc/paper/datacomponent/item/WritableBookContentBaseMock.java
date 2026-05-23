@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface WritableBookContentBaseMock extends WritableBookContent
 {
+	@Override
 	default List<Filtered<String>> pages()
 	{
 		// MockMC: WritableBookContent#pages

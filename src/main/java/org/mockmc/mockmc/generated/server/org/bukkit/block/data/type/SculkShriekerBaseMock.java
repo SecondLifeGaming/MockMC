@@ -16,22 +16,26 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface SculkShriekerBaseMock extends SculkShrieker, WaterloggedBaseMock
 {
+	@Override
 	default void setShrieking(boolean arg0)
 	{
 		// MockMC: SculkShrieker#setShrieking
 	}
 
+	@Override
 	default void setCanSummon(boolean arg0)
 	{
 		// MockMC: SculkShrieker#setCanSummon
 	}
 
+	@Override
 	default boolean isShrieking()
 	{
 		// MockMC: SculkShrieker#isShrieking
 		return false;
 	}
 
+	@Override
 	default boolean isCanSummon()
 	{
 		// MockMC: SculkShrieker#isCanSummon

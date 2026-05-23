@@ -20,63 +20,74 @@ import org.bukkit.entity.LivingEntity;
  */
 public interface CombatTrackerBaseMock extends CombatTracker
 {
+	@Override
 	default int getCombatDuration()
 	{
 		// MockMC: CombatTracker#getCombatDuration
 		return 0;
 	}
 
+	@Override
 	default CombatEntry computeMostSignificantFall()
 	{
 		// MockMC: CombatTracker#computeMostSignificantFall
 		return null;
 	}
 
+	@Override
 	default void setCombatEntries(List<CombatEntry> arg0)
 	{
 		// MockMC: CombatTracker#setCombatEntries
 	}
 
+	@Override
 	default boolean isTakingDamage()
 	{
 		// MockMC: CombatTracker#isTakingDamage
 		return false;
 	}
 
+	@Override
 	default LivingEntity getEntity()
 	{
 		// MockMC: CombatTracker#getEntity
 		return null;
 	}
 
+	@Override
 	default Component getDeathMessage()
 	{
 		// MockMC: CombatTracker#getDeathMessage
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void addCombatEntry(CombatEntry arg0)
 	{
 		// MockMC: CombatTracker#addCombatEntry
 	}
 
+	@Override
 	default void resetCombatState()
 	{
 		// MockMC: CombatTracker#resetCombatState
 	}
 
+	@Override
 	default boolean isInCombat()
 	{
 		// MockMC: CombatTracker#isInCombat
 		return false;
 	}
 
+	@Override
 	default List<CombatEntry> getCombatEntries()
 	{
 		// MockMC: CombatTracker#getCombatEntries
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default FallLocationType calculateFallLocationType()
 	{
 		// MockMC: CombatTracker#calculateFallLocationType

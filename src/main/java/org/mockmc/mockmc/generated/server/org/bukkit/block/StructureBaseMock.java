@@ -18,151 +18,179 @@ import org.bukkit.util.BlockVector;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface StructureBaseMock extends Structure, TileStateBaseMock
 {
+	@Override
 	default StructureRotation getRotation()
 	{
 		// MockMC: Structure#getRotation
 		return null;
 	}
 
+	@Override
 	default String getAuthor()
 	{
 		// MockMC: Structure#getAuthor
 		return "";
 	}
 
+	@Override
 	default BlockVector getStructureSize()
 	{
 		// MockMC: Structure#getStructureSize
 		return null;
 	}
 
+	@Override
 	default void setUsageMode(UsageMode arg0)
 	{
 		// MockMC: Structure#setUsageMode
 	}
 
+	@Override
 	default void setIgnoreEntities(boolean arg0)
 	{
 		// MockMC: Structure#setIgnoreEntities
 	}
 
+	@Override
 	default void setBoundingBoxVisible(boolean arg0)
 	{
 		// MockMC: Structure#setBoundingBoxVisible
 	}
 
+	@Override
 	default void setMirror(Mirror arg0)
 	{
 		// MockMC: Structure#setMirror
 	}
 
+	@Override
 	default float getIntegrity()
 	{
 		// MockMC: Structure#getIntegrity
 		return 0.0f;
 	}
 
+	@Override
 	default String getMetadata()
 	{
 		// MockMC: Structure#getMetadata
 		return "";
 	}
 
+	@Override
 	default long getSeed()
 	{
 		// MockMC: Structure#getSeed
 		return 0L;
 	}
 
+	@Override
 	default void setStructureSize(BlockVector arg0)
 	{
 		// MockMC: Structure#setStructureSize
 	}
 
+	@Override
 	default boolean isIgnoreEntities()
 	{
 		// MockMC: Structure#isIgnoreEntities
 		return false;
 	}
 
+	@Override
 	default Mirror getMirror()
 	{
 		// MockMC: Structure#getMirror
 		return null;
 	}
 
+	@Override
 	default UsageMode getUsageMode()
 	{
 		// MockMC: Structure#getUsageMode
 		return null;
 	}
 
+	@Override
 	default BlockVector getRelativePosition()
 	{
 		// MockMC: Structure#getRelativePosition
 		return null;
 	}
 
+	@Override
 	default void setRotation(StructureRotation arg0)
 	{
 		// MockMC: Structure#setRotation
 	}
 
+	@Override
 	default void setIntegrity(float arg0)
 	{
 		// MockMC: Structure#setIntegrity
 	}
 
+	@Override
 	default boolean isShowAir()
 	{
 		// MockMC: Structure#isShowAir
 		return false;
 	}
 
+	@Override
 	default void setAuthor(LivingEntity arg0)
 	{
 		// MockMC: Structure#setAuthor
 	}
 
+	@Override
 	default void setAuthor(String arg0)
 	{
 		// MockMC: Structure#setAuthor
 	}
 
+	@Override
 	default void setRelativePosition(BlockVector arg0)
 	{
 		// MockMC: Structure#setRelativePosition
 	}
 
+	@Override
 	default void setStructureName(String arg0)
 	{
 		// MockMC: Structure#setStructureName
 	}
 
+	@Override
 	default void setMetadata(String arg0)
 	{
 		// MockMC: Structure#setMetadata
 	}
 
+	@Override
 	default String getStructureName()
 	{
 		// MockMC: Structure#getStructureName
 		return "";
 	}
 
+	@Override
 	default void setShowAir(boolean arg0)
 	{
 		// MockMC: Structure#setShowAir
 	}
 
+	@Override
 	default void setSeed(long arg0)
 	{
 		// MockMC: Structure#setSeed
 	}
 
+	@Override
 	default boolean isBoundingBoxVisible()
 	{
 		// MockMC: Structure#isBoundingBoxVisible

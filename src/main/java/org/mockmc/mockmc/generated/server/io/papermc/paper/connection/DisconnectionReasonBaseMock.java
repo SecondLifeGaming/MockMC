@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerKickEvent;
  */
 public interface DisconnectionReasonBaseMock extends DisconnectionReason
 {
+	@Override
 	default Optional<PlayerKickEvent.Cause> game()
 	{
 		// MockMC: DisconnectionReason#game

@@ -16,8 +16,9 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.CollarColorabl
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface CatBaseMock extends Cat, TameableBaseMock, CollarColorableBaseMock, SittableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface CatBaseMock extends Cat, CollarColorableBaseMock, SittableBaseMock, TameableBaseMock
 {
 	@Override
 	default void setCollarColor(DyeColor arg0)
@@ -25,33 +26,30 @@ public interface CatBaseMock extends Cat, TameableBaseMock, CollarColorableBaseM
 		// MockMC: Cat#setCollarColor
 	}
 
+	@Override
 	default void setSoundVariant(Cat.SoundVariant arg0)
 	{
 		// MockMC: Cat#setSoundVariant
 	}
 
+	@Override
 	default void setLyingDown(boolean arg0)
 	{
 		// MockMC: Cat#setLyingDown
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Cat#setLeashHolder
+		// MockMC: Cat#isLeashed
 		return false;
 	}
 
+	@Override
 	default boolean isHeadUp()
 	{
 		// MockMC: Cat#isHeadUp
 		return false;
-	}
-
-	default Cat.SoundVariant getSoundVariant()
-	{
-		// MockMC: Cat#getSoundVariant
-		return null;
 	}
 
 	@Override
@@ -61,11 +59,27 @@ public interface CatBaseMock extends Cat, TameableBaseMock, CollarColorableBaseM
 		return null;
 	}
 
+	@Override
+	default Cat.SoundVariant getSoundVariant()
+	{
+		// MockMC: Cat#getSoundVariant
+		return null;
+	}
+
+	@Override
 	default void setHeadUp(boolean arg0)
 	{
 		// MockMC: Cat#setHeadUp
 	}
 
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Cat#setLeashHolder
+		return false;
+	}
+
+	@Override
 	default Cat.Type getCatType()
 	{
 		// MockMC: Cat#getCatType
@@ -79,21 +93,16 @@ public interface CatBaseMock extends Cat, TameableBaseMock, CollarColorableBaseM
 		return null;
 	}
 
+	@Override
 	default void setCatType(Cat.Type arg0)
 	{
 		// MockMC: Cat#setCatType
 	}
 
+	@Override
 	default boolean isLyingDown()
 	{
 		// MockMC: Cat#isLyingDown
-		return false;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Cat#isLeashed
 		return false;
 	}
 }

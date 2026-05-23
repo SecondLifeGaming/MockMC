@@ -14,8 +14,9 @@ import org.bukkit.entity.Squid;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface SquidBaseMock extends Squid, AgeableBaseMock, WaterMobBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface SquidBaseMock extends Squid, WaterMobBaseMock, AgeableBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException

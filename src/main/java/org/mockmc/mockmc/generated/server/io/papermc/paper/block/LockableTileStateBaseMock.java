@@ -16,12 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.TileStateBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LockableTileStateBaseMock
 		extends
 			LockableTileState,
 			TileStateBaseMock,
-			LockableBaseMock,
-			NameableBaseMock
+			NameableBaseMock,
+			LockableBaseMock
 {
 }

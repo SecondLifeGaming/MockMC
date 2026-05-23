@@ -18,7 +18,8 @@ import org.bukkit.conversations.ConversationContext;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface StringPromptBaseMock extends PromptBaseMock
 {
 	/**

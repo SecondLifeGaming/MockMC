@@ -15,7 +15,7 @@ import org.bukkit.entity.Ghast;
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface GhastBaseMock extends Ghast, FlyingBaseMock, EnemyBaseMock
 {
 	@Override
@@ -25,6 +25,7 @@ public interface GhastBaseMock extends Ghast, FlyingBaseMock, EnemyBaseMock
 		return null;
 	}
 
+	@Override
 	default void setExplosionPower(int arg0)
 	{
 		// MockMC: Ghast#setExplosionPower
@@ -37,17 +38,20 @@ public interface GhastBaseMock extends Ghast, FlyingBaseMock, EnemyBaseMock
 		return false;
 	}
 
+	@Override
 	default void setCharging(boolean arg0)
 	{
 		// MockMC: Ghast#setCharging
 	}
 
+	@Override
 	default boolean isCharging()
 	{
 		// MockMC: Ghast#isCharging
 		return false;
 	}
 
+	@Override
 	default int getExplosionPower()
 	{
 		// MockMC: Ghast#getExplosionPower

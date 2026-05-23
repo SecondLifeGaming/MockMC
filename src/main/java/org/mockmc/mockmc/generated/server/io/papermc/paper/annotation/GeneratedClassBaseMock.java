@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
  */
 public interface GeneratedClassBaseMock extends GeneratedClass
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: GeneratedClass#annotationType

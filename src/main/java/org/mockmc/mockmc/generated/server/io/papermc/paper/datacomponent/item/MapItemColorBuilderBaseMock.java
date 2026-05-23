@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface MapItemColorBuilderBaseMock extends MapItemColor.Builder, DataComponentBuilderBaseMock<MapItemColor>
 {
+	@Override
 	default MapItemColor.Builder color(Color arg0)
 	{
 		// MockMC: Builder#color

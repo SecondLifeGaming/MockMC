@@ -18,12 +18,14 @@ import org.bukkit.FeatureFlag;
  */
 public interface FeatureFlagSetHolderBaseMock extends FeatureFlagSetHolder
 {
+	@Override
 	default Set<FeatureFlag> getFeatureFlags()
 	{
 		// MockMC: FeatureFlagSetHolder#getFeatureFlags
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean isEnabled(FeatureDependant arg0)
 	{
 		// MockMC: FeatureFlagSetHolder#isEnabled

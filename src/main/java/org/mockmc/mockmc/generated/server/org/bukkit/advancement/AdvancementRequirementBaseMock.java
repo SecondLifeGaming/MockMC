@@ -16,12 +16,14 @@ import org.bukkit.advancement.AdvancementRequirement;
  */
 public interface AdvancementRequirementBaseMock extends AdvancementRequirement
 {
+	@Override
 	default boolean isStrict()
 	{
 		// MockMC: AdvancementRequirement#isStrict
 		return false;
 	}
 
+	@Override
 	default List<String> getRequiredCriteria()
 	{
 		// MockMC: AdvancementRequirement#getRequiredCriteria

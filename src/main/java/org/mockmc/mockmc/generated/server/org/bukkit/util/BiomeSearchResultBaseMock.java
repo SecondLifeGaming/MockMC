@@ -17,12 +17,14 @@ import org.bukkit.util.BiomeSearchResult;
  */
 public interface BiomeSearchResultBaseMock extends BiomeSearchResult
 {
+	@Override
 	default Biome getBiome()
 	{
 		// MockMC: BiomeSearchResult#getBiome
 		return null;
 	}
 
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: BiomeSearchResult#getLocation

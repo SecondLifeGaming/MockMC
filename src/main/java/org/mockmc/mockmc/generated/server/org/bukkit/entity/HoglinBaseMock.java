@@ -14,37 +14,15 @@ import org.bukkit.entity.Hoglin;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface HoglinBaseMock extends Hoglin, EnemyBaseMock, AnimalsBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface HoglinBaseMock extends Hoglin, AnimalsBaseMock, EnemyBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Hoglin#getLeashHolder
-		return null;
-	}
-
 	default boolean isAbleToBeHunted()
 	{
 		// MockMC: Hoglin#isAbleToBeHunted
 		return false;
-	}
-
-	default void setImmuneToZombification(boolean arg0)
-	{
-		// MockMC: Hoglin#setImmuneToZombification
-	}
-
-	default boolean isConverting()
-	{
-		// MockMC: Hoglin#isConverting
-		return false;
-	}
-
-	default int getConversionTime()
-	{
-		// MockMC: Hoglin#getConversionTime
-		return 0;
 	}
 
 	@Override
@@ -54,26 +32,56 @@ public interface HoglinBaseMock extends Hoglin, EnemyBaseMock, AnimalsBaseMock
 		return false;
 	}
 
-	default void setConversionTime(int arg0)
+	@Override
+	default void setImmuneToZombification(boolean arg0)
 	{
-		// MockMC: Hoglin#setConversionTime
-	}
-
-	default void setIsAbleToBeHunted(boolean arg0)
-	{
-		// MockMC: Hoglin#setIsAbleToBeHunted
-	}
-
-	default boolean isImmuneToZombification()
-	{
-		// MockMC: Hoglin#isImmuneToZombification
-		return false;
+		// MockMC: Hoglin#setImmuneToZombification
 	}
 
 	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: Hoglin#isLeashed
+		return false;
+	}
+
+	@Override
+	default boolean isConverting()
+	{
+		// MockMC: Hoglin#isConverting
+		return false;
+	}
+
+	@Override
+	default int getConversionTime()
+	{
+		// MockMC: Hoglin#getConversionTime
+		return 0;
+	}
+
+	@Override
+	default void setConversionTime(int arg0)
+	{
+		// MockMC: Hoglin#setConversionTime
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Hoglin#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default void setIsAbleToBeHunted(boolean arg0)
+	{
+		// MockMC: Hoglin#setIsAbleToBeHunted
+	}
+
+	@Override
+	default boolean isImmuneToZombification()
+	{
+		// MockMC: Hoglin#isImmuneToZombification
 		return false;
 	}
 }

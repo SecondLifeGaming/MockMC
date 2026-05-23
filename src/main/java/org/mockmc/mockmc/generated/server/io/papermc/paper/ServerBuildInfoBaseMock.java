@@ -19,60 +19,70 @@ import net.kyori.adventure.key.Key;
  */
 public interface ServerBuildInfoBaseMock extends ServerBuildInfo
 {
+	@Override
 	default String asString(ServerBuildInfo.StringRepresentation arg0)
 	{
 		// MockMC: ServerBuildInfo#asString
 		return "";
 	}
 
+	@Override
 	default String minecraftVersionId()
 	{
 		// MockMC: ServerBuildInfo#minecraftVersionId
 		return "";
 	}
 
+	@Override
 	default Optional<String> gitBranch()
 	{
 		// MockMC: ServerBuildInfo#gitBranch
 		return java.util.Optional.empty();
 	}
 
+	@Override
 	default OptionalInt buildNumber()
 	{
 		// MockMC: ServerBuildInfo#buildNumber
 		return java.util.OptionalInt.empty();
 	}
 
+	@Override
 	default String brandName()
 	{
 		// MockMC: ServerBuildInfo#brandName
 		return "";
 	}
 
+	@Override
 	default Optional<String> gitCommit()
 	{
 		// MockMC: ServerBuildInfo#gitCommit
 		return java.util.Optional.empty();
 	}
 
+	@Override
 	default boolean isBrandCompatible(Key arg0)
 	{
 		// MockMC: ServerBuildInfo#isBrandCompatible
 		return false;
 	}
 
+	@Override
 	default Key brandId()
 	{
 		// MockMC: ServerBuildInfo#brandId
 		return null;
 	}
 
+	@Override
 	default String minecraftVersionName()
 	{
 		// MockMC: ServerBuildInfo#minecraftVersionName
 		return "";
 	}
 
+	@Override
 	default Instant buildTime()
 	{
 		// MockMC: ServerBuildInfo#buildTime

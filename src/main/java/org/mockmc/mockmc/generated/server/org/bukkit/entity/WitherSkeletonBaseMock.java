@@ -14,16 +14,10 @@ import org.bukkit.entity.WitherSkeleton;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WitherSkeletonBaseMock extends WitherSkeleton, AbstractSkeletonBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: WitherSkeleton#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface WitherSkeletonBaseMock extends WitherSkeleton, AbstractSkeleton
 	{
 		// MockMC: WitherSkeleton#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: WitherSkeleton#getLeashHolder
+		return null;
 	}
 }

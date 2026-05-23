@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CocoaBaseMock extends Cocoa, AgeableBaseMock, DirectionalBaseMock
+public interface CocoaBaseMock extends Cocoa, DirectionalBaseMock, AgeableBaseMock
 {
 }

@@ -19,13 +19,15 @@ import org.bukkit.conversations.ConversationContext;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ConversationCancellerBaseMock extends ConversationCanceller
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void setConversation(Conversation arg0)
 	{
@@ -36,6 +38,7 @@ public interface ConversationCancellerBaseMock extends ConversationCanceller
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default ConversationCanceller clone()
 	{
@@ -47,6 +50,7 @@ public interface ConversationCancellerBaseMock extends ConversationCanceller
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean cancelBasedOnInput(ConversationContext arg0, String arg1)
 	{

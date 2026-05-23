@@ -17,24 +17,28 @@ import org.bukkit.damage.DamageSource;
  */
 public interface CombatEntryBaseMock extends CombatEntry
 {
+	@Override
 	default DamageSource getDamageSource()
 	{
 		// MockMC: CombatEntry#getDamageSource
 		return null;
 	}
 
+	@Override
 	default float getDamage()
 	{
 		// MockMC: CombatEntry#getDamage
 		return 0.0f;
 	}
 
+	@Override
 	default FallLocationType getFallLocationType()
 	{
 		// MockMC: CombatEntry#getFallLocationType
 		return null;
 	}
 
+	@Override
 	default float getFallDistance()
 	{
 		// MockMC: CombatEntry#getFallDistance

@@ -21,59 +21,69 @@ import org.bukkit.persistence.PersistentDataType;
  */
 public interface PersistentDataContainerViewBaseMock extends PersistentDataContainerView
 {
+	@Override
 	default byte[] serializeToBytes() throws IOException
 	{
 		// MockMC: PersistentDataContainerView#serializeToBytes
 		return new byte[0];
 	}
 
+	@Override
 	default <P, C> C get(NamespacedKey arg0, PersistentDataType<P, C> arg1)
 	{
 		// MockMC: PersistentDataContainerView#get
 		return null;
 	}
 
+	@Override
 	default <P, C> C getOrDefault(NamespacedKey arg0, PersistentDataType<P, C> arg1, C arg2)
 	{
 		// MockMC: PersistentDataContainerView#getOrDefault
 		return null;
 	}
 
+	@Override
 	default int getSize()
 	{
 		// MockMC: PersistentDataContainerView#getSize
 		return 0;
 	}
 
+	@Override
 	default void copyTo(PersistentDataContainer arg0, boolean arg1)
 	{
 		// MockMC: PersistentDataContainerView#copyTo
 	}
 
+	@Override
 	default PersistentDataAdapterContext getAdapterContext()
 	{
 		// MockMC: PersistentDataContainerView#getAdapterContext
 		return null;
 	}
 
+	@Override
 	default boolean has(NamespacedKey arg0)
 	{
 		// MockMC: PersistentDataContainerView#has
 		return false;
 	}
 
+	@Override
 	default <P, C> boolean has(NamespacedKey arg0, PersistentDataType<P, C> arg1)
 	{
 		// MockMC: PersistentDataContainerView#has
 		return false;
 	}
 
+	@Override
 	default Set<NamespacedKey> getKeys()
 	{
 		// MockMC: PersistentDataContainerView#getKeys
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: PersistentDataContainerView#isEmpty

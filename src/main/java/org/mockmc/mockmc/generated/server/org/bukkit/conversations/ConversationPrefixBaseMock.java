@@ -18,13 +18,15 @@ import org.bukkit.conversations.ConversationPrefix;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ConversationPrefixBaseMock extends ConversationPrefix
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default String getPrefix(ConversationContext arg0)
 	{

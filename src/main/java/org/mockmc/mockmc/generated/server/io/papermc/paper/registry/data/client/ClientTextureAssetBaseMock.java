@@ -16,12 +16,14 @@ import net.kyori.adventure.key.Key;
  */
 public interface ClientTextureAssetBaseMock extends ClientTextureAsset
 {
+	@Override
 	default Key identifier()
 	{
 		// MockMC: ClientTextureAsset#identifier
 		return null;
 	}
 
+	@Override
 	default Key texturePath()
 	{
 		// MockMC: ClientTextureAsset#texturePath

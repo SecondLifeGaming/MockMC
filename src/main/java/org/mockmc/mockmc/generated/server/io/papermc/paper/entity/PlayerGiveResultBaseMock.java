@@ -18,12 +18,14 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface PlayerGiveResultBaseMock extends PlayerGiveResult
 {
+	@Override
 	default Collection<ItemStack> leftovers()
 	{
 		// MockMC: PlayerGiveResult#leftovers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Item> drops()
 	{
 		// MockMC: PlayerGiveResult#drops

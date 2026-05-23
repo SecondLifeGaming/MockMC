@@ -14,24 +14,28 @@ import org.bukkit.util.Vector;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FireballBaseMock extends Fireball, ProjectileBaseMock, ExplosiveBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setPower(Vector arg0)
 	{
 		// MockMC: Fireball#setPower
 	}
 
+	@Override
 	default void setDirection(Vector arg0)
 	{
 		// MockMC: Fireball#setDirection
 	}
 
+	@Override
 	default void setAcceleration(Vector arg0)
 	{
 		// MockMC: Fireball#setAcceleration
@@ -41,6 +45,7 @@ public interface FireballBaseMock extends Fireball, ProjectileBaseMock, Explosiv
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Vector getPower()
 	{
@@ -48,6 +53,7 @@ public interface FireballBaseMock extends Fireball, ProjectileBaseMock, Explosiv
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default Vector getAcceleration()
 	{
 		// MockMC: Fireball#getAcceleration
@@ -58,6 +64,7 @@ public interface FireballBaseMock extends Fireball, ProjectileBaseMock, Explosiv
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6")
 	default Vector getDirection()
 	{

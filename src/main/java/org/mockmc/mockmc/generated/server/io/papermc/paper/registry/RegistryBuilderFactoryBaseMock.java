@@ -17,12 +17,14 @@ import io.papermc.paper.registry.TypedKey;
  */
 public interface RegistryBuilderFactoryBaseMock<T, B extends RegistryBuilder<T>> extends RegistryBuilderFactory<T, B>
 {
+	@Override
 	default B empty()
 	{
 		// MockMC: RegistryBuilderFactory#empty
 		return null;
 	}
 
+	@Override
 	default B copyFrom(TypedKey<T> arg0)
 	{
 		// MockMC: RegistryBuilderFactory#copyFrom

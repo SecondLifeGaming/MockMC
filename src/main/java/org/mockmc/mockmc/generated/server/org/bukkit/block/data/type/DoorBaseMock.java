@@ -17,14 +17,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface DoorBaseMock extends Door, PowerableBaseMock, BisectedBaseMock, OpenableBaseMock, DirectionalBaseMock
+public interface DoorBaseMock extends Door, BisectedBaseMock, OpenableBaseMock, DirectionalBaseMock, PowerableBaseMock
 {
+	@Override
 	default Door.Hinge getHinge()
 	{
 		// MockMC: Door#getHinge
 		return null;
 	}
 
+	@Override
 	default void setHinge(Door.Hinge arg0)
 	{
 		// MockMC: Door#setHinge

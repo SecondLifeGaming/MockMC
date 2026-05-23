@@ -81,20 +81,22 @@ import org.mockmc.mockmc.generated.server.org.bukkit.plugin.messaging.PluginMess
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WorldBaseMock
 		extends
 			World,
-			PluginMessageRecipientBaseMock,
-			RegionAccessorBaseMock,
 			WorldInfoBaseMock,
+			PluginMessageRecipientBaseMock,
 			MetadatableBaseMock,
-			PersistentDataHolderBaseMock
+			PersistentDataHolderBaseMock,
+			RegionAccessorBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default boolean setGameRuleValue(String arg0, String arg1)
 	{
@@ -102,35 +104,41 @@ public interface WorldBaseMock
 		return false;
 	}
 
+	@Override
 	default List<Player> getPlayers()
 	{
 		// MockMC: World#getPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getEntityCount()
 	{
 		// MockMC: World#getEntityCount
 		return 0;
 	}
 
+	@Override
 	default String[] getGameRules()
 	{
 		// MockMC: World#getGameRules
 		return new String[0];
 	}
 
+	@Override
 	default void setThunderDuration(int arg0)
 	{
 		// MockMC: World#setThunderDuration
 	}
 
+	@Override
 	default Location findLightningTarget(Location arg0)
 	{
 		// MockMC: World#findLightningTarget
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default long getGameTime()
 	{
 		// MockMC: World#getGameTime
@@ -141,6 +149,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerWaterAmbientSpawns()
 	{
@@ -148,12 +157,14 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
+	@Override
 	default boolean isChunkGenerated(long arg0)
 	{
 		// MockMC: World#isChunkGenerated
 		return false;
 	}
 
+	@Override
 	default boolean isChunkGenerated(int arg0, int arg1)
 	{
 		// MockMC: World#isChunkGenerated
@@ -167,12 +178,14 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isChunkLoaded(int arg0, int arg1)
 	{
 		// MockMC: World#isChunkLoaded
 		return false;
 	}
 
+	@Override
 	default boolean isChunkLoaded(Chunk arg0)
 	{
 		// MockMC: World#isChunkLoaded
@@ -183,6 +196,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings(
 	{"unchecked", "varargs"})
 	@Deprecated(since = "1.1")
@@ -192,12 +206,14 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Material> getInfiniburn()
 	{
 		// MockMC: World#getInfiniburn
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default double getTemperature(int arg0, int arg1, int arg2)
 	{
 		// MockMC: World#getTemperature
@@ -208,6 +224,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default double getTemperature(int arg0, int arg1)
 	{
@@ -219,6 +236,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14")
 	default boolean isChunkInUse(int arg0, int arg1)
 	{
@@ -226,11 +244,13 @@ public interface WorldBaseMock
 		return false;
 	}
 
+	@Override
 	default void setClearWeatherDuration(int arg0)
 	{
 		// MockMC: World#setClearWeatherDuration
 	}
 
+	@Override
 	default float getVoidDamageAmount()
 	{
 		// MockMC: World#getVoidDamageAmount
@@ -241,6 +261,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterAmbientSpawnLimit()
 	{
@@ -248,114 +269,135 @@ public interface WorldBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean isClearWeather()
 	{
 		// MockMC: World#isClearWeather
 		return false;
 	}
 
+	@Override
 	default BiomeProvider getBiomeProvider()
 	{
 		// MockMC: World#getBiomeProvider
 		return null;
 	}
 
+	@Override
 	default Location findLightningRod(Location arg0)
 	{
 		// MockMC: World#findLightningRod
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean setSpawnLocation(int arg0, int arg1, int arg2, float arg3)
 	{
 		// MockMC: World#setSpawnLocation
 		return false;
 	}
 
+	@Override
 	default boolean setSpawnLocation(int arg0, int arg1, int arg2)
 	{
 		// MockMC: World#setSpawnLocation
 		return false;
 	}
 
+	@Override
 	default Chunk[] getLoadedChunks()
 	{
 		// MockMC: World#getLoadedChunks
 		return new Chunk[0];
 	}
 
+	@Override
 	default boolean setSpawnLocation(Location arg0)
 	{
 		// MockMC: World#setSpawnLocation
 		return false;
 	}
 
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
-	{
-		// MockMC: World#playSound
-	}
-
+	@Override
 	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: World#playSound
 	}
 
-	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	@Override
+	default void playSound(Entity arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 		// MockMC: World#playSound
 	}
 
+	@Override
 	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
 	{
 		// MockMC: World#playSound
 	}
 
+	@Override
 	default void playSound(Location arg0, String arg1, float arg2, float arg3)
 	{
 		// MockMC: World#playSound
 	}
 
+	@Override
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
+	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
 	default void playSound(Location arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
 	{
 		// MockMC: World#playSound
 	}
 
+	@Override
+	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
+	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
+	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
+	default void playSound(Location arg0, Sound arg1, float arg2, float arg3)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
+	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
+	{
+		// MockMC: World#playSound
+	}
+
+	@Override
 	default boolean addPluginChunkTicket(int arg0, int arg1, Plugin arg2)
 	{
 		// MockMC: World#addPluginChunkTicket
 		return false;
 	}
 
-	default void playSound(Location arg0, Sound arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Entity arg0, String arg1, SoundCategory arg2, float arg3, float arg4, long arg5)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Entity arg0, String arg1, float arg2, float arg3)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Location arg0, Sound arg1, float arg2, float arg3)
-	{
-		// MockMC: World#playSound
-	}
-
-	default void playSound(Entity arg0, Sound arg1, float arg2, float arg3)
-	{
-		// MockMC: World#playSound
-	}
-
+	@Override
 	default int getSeaLevel()
 	{
 		// MockMC: World#getSeaLevel
@@ -366,6 +408,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterUndergroundCreatureSpawnLimit()
 	{
@@ -373,6 +416,7 @@ public interface WorldBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getChunkCount()
 	{
 		// MockMC: World#getChunkCount
@@ -383,18 +427,21 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerWaterAmbientSpawns(int arg0)
 	{
 		// MockMC: World#setTicksPerWaterAmbientSpawns
 	}
 
+	@Override
 	default int getTileEntityCount()
 	{
 		// MockMC: World#getTileEntityCount
 		return 0;
 	}
 
+	@Override
 	default DragonBattle getEnderDragonBattle()
 	{
 		// MockMC: World#getEnderDragonBattle
@@ -405,82 +452,96 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setNoTickViewDistance(int arg0)
 	{
 		// MockMC: World#setNoTickViewDistance
 	}
 
+	@Override
 	default void save()
 	{
 		// MockMC: World#save
 	}
 
+	@Override
 	default void save(boolean arg0)
 	{
 		// MockMC: World#save
 	}
 
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsyncUrgently(Block arg0)
 	{
 		// MockMC: World#getChunkAtAsyncUrgently
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsyncUrgently(int arg0, int arg1)
 	{
 		// MockMC: World#getChunkAtAsyncUrgently
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsyncUrgently(Block arg0, boolean arg1)
 	{
 		// MockMC: World#getChunkAtAsyncUrgently
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsyncUrgently(Location arg0)
 	{
 		// MockMC: World#getChunkAtAsyncUrgently
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsyncUrgently(Location arg0, boolean arg1)
 	{
 		// MockMC: World#getChunkAtAsyncUrgently
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default boolean isChunkForceLoaded(int arg0, int arg1)
 	{
 		// MockMC: World#isChunkForceLoaded
 		return false;
 	}
 
+	@Override
 	default WorldBorder getWorldBorder()
 	{
 		// MockMC: World#getWorldBorder
 		return null;
 	}
 
+	@Override
 	default List<Raid> getRaids()
 	{
 		// MockMC: World#getRaids
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getSendViewDistance()
 	{
 		// MockMC: World#getSendViewDistance
 		return 0;
 	}
 
+	@Override
 	default boolean isAutoSave()
 	{
 		// MockMC: World#isAutoSave
 		return false;
 	}
 
+	@Override
 	default Entity getEntity(UUID arg0)
 	{
 		// MockMC: World#getEntity
@@ -491,6 +552,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.1")
 	default WorldType getWorldType()
 	{
@@ -502,23 +564,27 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default void setPVP(boolean arg0)
 	{
 		// MockMC: World#setPVP
 	}
 
+	@Override
 	default void setFullTime(long arg0)
 	{
 		// MockMC: World#setFullTime
 	}
 
+	@Override
 	default LightningStrike strikeLightningEffect(Location arg0)
 	{
 		// MockMC: World#strikeLightningEffect
 		return null;
 	}
 
+	@Override
 	default double getCoordinateScale()
 	{
 		// MockMC: World#getCoordinateScale
@@ -529,6 +595,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default void setBiome(int arg0, int arg1, Biome arg2)
 	{
@@ -539,12 +606,14 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerAnimalSpawns(int arg0)
 	{
 		// MockMC: World#setTicksPerAnimalSpawns
 	}
 
+	@Override
 	default void removePluginChunkTickets(Plugin arg0)
 	{
 		// MockMC: World#removePluginChunkTickets
@@ -554,6 +623,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerWaterUndergroundCreatureSpawns()
 	{
@@ -561,18 +631,21 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
+	@Override
 	default Item dropItemNaturally(Location arg0, ItemStack arg1, Consumer<? super Item> arg2)
 	{
 		// MockMC: World#dropItemNaturally
 		return null;
 	}
 
+	@Override
 	default Item dropItemNaturally(Location arg0, ItemStack arg1)
 	{
 		// MockMC: World#dropItemNaturally
 		return null;
 	}
 
+	@Override
 	default Raid getRaid(int arg0)
 	{
 		// MockMC: World#getRaid
@@ -583,12 +656,14 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setWaterUndergroundCreatureSpawnLimit(int arg0)
 	{
 		// MockMC: World#setWaterUndergroundCreatureSpawnLimit
 	}
 
+	@Override
 	default <T> boolean setGameRule(GameRule<T> arg0, T arg1)
 	{
 		// MockMC: World#setGameRule
@@ -599,6 +674,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getAnimalSpawnLimit()
 	{
@@ -610,18 +686,21 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setWaterAnimalSpawnLimit(int arg0)
 	{
 		// MockMC: World#setWaterAnimalSpawnLimit
 	}
 
+	@Override
 	default int getLogicalHeight()
 	{
 		// MockMC: World#getLogicalHeight
 		return 0;
 	}
 
+	@Override
 	default List<BlockPopulator> getPopulators()
 	{
 		// MockMC: World#getPopulators
@@ -637,18 +716,21 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean hasSkyLight()
 	{
 		// MockMC: World#hasSkyLight
 		return false;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(Location arg0, Vector arg1, double arg2, double arg3)
 	{
 		// MockMC: World#rayTraceEntities
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(Location arg0, Vector arg1, double arg2, double arg3,
 			Predicate<? super Entity> arg4)
 	{
@@ -656,6 +738,7 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(Position arg0, Vector arg1, double arg2, double arg3,
 			Predicate<? super Entity> arg4)
 	{
@@ -663,12 +746,14 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(Location arg0, Vector arg1, double arg2)
 	{
 		// MockMC: World#rayTraceEntities
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceEntities(Location arg0, Vector arg1, double arg2, Predicate<? super Entity> arg3)
 	{
 		// MockMC: World#rayTraceEntities
@@ -682,42 +767,49 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Chunk getChunkAt(long arg0)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default Chunk getChunkAt(int arg0, int arg1, boolean arg2)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default Chunk getChunkAt(long arg0, boolean arg1)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default Chunk getChunkAt(Location arg0)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default Chunk getChunkAt(Block arg0)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default Chunk getChunkAt(int arg0, int arg1)
 	{
 		// MockMC: World#getChunkAt
 		return null;
 	}
 
+	@Override
 	default void sendGameEvent(Entity arg0, GameEvent arg1, Vector arg2)
 	{
 		// MockMC: World#sendGameEvent
@@ -730,11 +822,13 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setSpawnFlags(boolean arg0, boolean arg1)
 	{
 		// MockMC: World#setSpawnFlags
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1, double arg2, double arg3,
 			Predicate<? super LivingEntity> arg4)
 	{
@@ -742,24 +836,28 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1, double arg2, double arg3)
 	{
 		// MockMC: World#getNearbyLivingEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1)
 	{
 		// MockMC: World#getNearbyLivingEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1, double arg2)
 	{
 		// MockMC: World#getNearbyLivingEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1,
 			Predicate<? super LivingEntity> arg2)
 	{
@@ -767,6 +865,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<LivingEntity> getNearbyLivingEntities(Location arg0, double arg1, double arg2,
 			Predicate<? super LivingEntity> arg3)
 	{
@@ -774,6 +873,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default StructureSearchResult locateNearestStructure(Location arg0, StructureType arg1, int arg2, boolean arg3)
 	{
 		// MockMC: World#locateNearestStructure
@@ -784,6 +884,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19")
 	default Location locateNearestStructure(Location arg0, org.bukkit.StructureType arg1, int arg2, boolean arg3)
 	{
@@ -791,30 +892,35 @@ public interface WorldBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default StructureSearchResult locateNearestStructure(Location arg0, Structure arg1, int arg2, boolean arg3)
 	{
 		// MockMC: World#locateNearestStructure
 		return null;
 	}
 
+	@Override
 	default boolean isBedWorks()
 	{
 		// MockMC: World#isBedWorks
 		return false;
 	}
 
+	@Override
 	default boolean hasStorm()
 	{
 		// MockMC: World#hasStorm
 		return false;
 	}
 
+	@Override
 	default int getSimulationDistance()
 	{
 		// MockMC: World#getSimulationDistance
 		return 0;
 	}
 
+	@Override
 	default Collection<Chunk> getIntersectingChunks(BoundingBox arg0)
 	{
 		// MockMC: World#getIntersectingChunks
@@ -825,6 +931,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setWaterAmbientSpawnLimit(int arg0)
 	{
@@ -835,6 +942,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default Block getBlockAtKey(long arg0)
 	{
@@ -846,6 +954,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerAmbientSpawns()
 	{
@@ -853,34 +962,40 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
+	@Override
 	default void setSpawnLimit(SpawnCategory arg0, int arg1)
 	{
 		// MockMC: World#setSpawnLimit
 	}
 
+	@Override
 	default int getClearWeatherDuration()
 	{
 		// MockMC: World#getClearWeatherDuration
 		return 0;
 	}
 
+	@Override
 	default boolean isVoidDamageEnabled()
 	{
 		// MockMC: World#isVoidDamageEnabled
 		return false;
 	}
 
+	@Override
 	default boolean canGenerateStructures()
 	{
 		// MockMC: World#canGenerateStructures
 		return false;
 	}
 
+	@Override
 	default void setTicksPerSpawns(SpawnCategory arg0, int arg1)
 	{
 		// MockMC: World#setTicksPerSpawns
 	}
 
+	@Override
 	default Location getSpawnLocation()
 	{
 		// MockMC: World#getSpawnLocation
@@ -891,6 +1006,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Location locateNearestBiome(Location arg0, Biome arg1, int arg2, int arg3)
 	{
@@ -902,6 +1018,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Location locateNearestBiome(Location arg0, Biome arg1, int arg2)
 	{
@@ -909,12 +1026,14 @@ public interface WorldBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default BiomeSearchResult locateNearestBiome(Location arg0, int arg1, Biome... arg2)
 	{
 		// MockMC: World#locateNearestBiome
 		return null;
 	}
 
+	@Override
 	default BiomeSearchResult locateNearestBiome(Location arg0, int arg1, int arg2, int arg3, Biome... arg4)
 	{
 		// MockMC: World#locateNearestBiome
@@ -925,18 +1044,21 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerWaterUndergroundCreatureSpawns(int arg0)
 	{
 		// MockMC: World#setTicksPerWaterUndergroundCreatureSpawns
 	}
 
+	@Override
 	default boolean isHardcore()
 	{
 		// MockMC: World#isHardcore
 		return false;
 	}
 
+	@Override
 	default <T extends LivingEntity> T spawn(Location arg0, Class<T> arg1, CreatureSpawnEvent.SpawnReason arg2,
 			boolean arg3, Consumer<? super T> arg4) throws IllegalArgumentException
 	{
@@ -944,36 +1066,42 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean hasStructureAt(Position arg0, Structure arg1)
 	{
 		// MockMC: World#hasStructureAt
 		return false;
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1, double arg2, double arg3)
 	{
 		// MockMC: World#getNearbyPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1, Predicate<? super Player> arg2)
 	{
 		// MockMC: World#getNearbyPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1)
 	{
 		// MockMC: World#getNearbyPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1, double arg2, Predicate<? super Player> arg3)
 	{
 		// MockMC: World#getNearbyPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1, double arg2, double arg3,
 			Predicate<? super Player> arg4)
 	{
@@ -981,17 +1109,20 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Player> getNearbyPlayers(Location arg0, double arg1, double arg2)
 	{
 		// MockMC: World#getNearbyPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setViewDistance(int arg0)
 	{
 		// MockMC: World#setViewDistance
 	}
 
+	@Override
 	default boolean refreshChunk(int arg0, int arg1)
 	{
 		// MockMC: World#refreshChunk
@@ -1002,6 +1133,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default void setKeepSpawnInMemory(boolean arg0)
 	{
@@ -1012,6 +1144,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setMonsterSpawnLimit(int arg0)
 	{
@@ -1022,6 +1155,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.0")
 	default World.Spigot spigot()
@@ -1030,18 +1164,21 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean unloadChunk(int arg0, int arg1)
 	{
 		// MockMC: World#unloadChunk
 		return false;
 	}
 
+	@Override
 	default boolean unloadChunk(int arg0, int arg1, boolean arg2)
 	{
 		// MockMC: World#unloadChunk
 		return false;
 	}
 
+	@Override
 	default boolean unloadChunk(Chunk arg0)
 	{
 		// MockMC: World#unloadChunk
@@ -1052,6 +1189,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11")
 	default boolean isNatural()
 	{
@@ -1063,6 +1201,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getMonsterSpawnLimit()
 	{
@@ -1070,18 +1209,21 @@ public interface WorldBaseMock
 		return 0;
 	}
 
+	@Override
 	default Raid locateNearestRaid(Location arg0, int arg1)
 	{
 		// MockMC: World#locateNearestRaid
 		return null;
 	}
 
+	@Override
 	default Block getBlockAt(Location arg0)
 	{
 		// MockMC: World#getBlockAt
 		return null;
 	}
 
+	@Override
 	default Block getBlockAt(int arg0, int arg1, int arg2)
 	{
 		// MockMC: World#getBlockAt
@@ -1092,6 +1234,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default boolean getKeepSpawnInMemory()
 	{
@@ -1099,6 +1242,7 @@ public interface WorldBaseMock
 		return false;
 	}
 
+	@Override
 	default RayTraceResult rayTrace(Position arg0, Vector arg1, double arg2, FluidCollisionMode arg3, boolean arg4,
 			double arg5, Predicate<? super Entity> arg6, Predicate<? super Block> arg7)
 	{
@@ -1106,6 +1250,7 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTrace(Location arg0, Vector arg1, double arg2, FluidCollisionMode arg3, boolean arg4,
 			double arg5, Predicate<? super Entity> arg6)
 	{
@@ -1113,6 +1258,7 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTrace(Consumer<PositionedRayTraceConfigurationBuilder> arg0)
 	{
 		// MockMC: World#rayTrace
@@ -1123,6 +1269,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerMonsterSpawns()
 	{
@@ -1130,92 +1277,107 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
-	default boolean createExplosion(Location arg0, float arg1)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
+	@Override
 	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
+	@Override
 	default boolean createExplosion(Entity arg0, float arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
+	@Override
 	default boolean createExplosion(Location arg0, float arg1, boolean arg2, boolean arg3, Entity arg4)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4, boolean arg5)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
-	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
-	{
-		// MockMC: World#createExplosion
-		return false;
-	}
-
+	@Override
 	default boolean createExplosion(Entity arg0, float arg1, boolean arg2)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
-	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
+	@Override
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
+	@Override
+	default boolean createExplosion(Location arg0, float arg1)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
 	default boolean createExplosion(Entity arg0, float arg1)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
+	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Location arg0, float arg1, boolean arg2)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
 	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3)
 	{
 		// MockMC: World#createExplosion
 		return false;
 	}
 
+	@Override
 	default boolean createExplosion(double arg0, double arg1, double arg2, float arg3, boolean arg4, boolean arg5,
 			Entity arg6)
+	{
+		// MockMC: World#createExplosion
+		return false;
+	}
+
+	@Override
+	default boolean createExplosion(Entity arg0, Location arg1, float arg2, boolean arg3, boolean arg4, boolean arg5)
 	{
 		// MockMC: World#createExplosion
 		return false;
@@ -1225,6 +1387,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getWaterAnimalSpawnLimit()
 	{
@@ -1232,40 +1395,47 @@ public interface WorldBaseMock
 		return 0;
 	}
 
+	@Override
 	default Location locateNearestPoi(Location arg0, PoiType arg1, int arg2, PoiType.Occupancy arg3)
 	{
 		// MockMC: World#locateNearestPoi
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Location locateNearestPoi(Location arg0, PoiType arg1, int arg2)
 	{
 		// MockMC: World#locateNearestPoi
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setStorm(boolean arg0)
 	{
 		// MockMC: World#setStorm
 	}
 
+	@Override
 	default Collection<GeneratedStructure> getStructures(int arg0, int arg1)
 	{
 		// MockMC: World#getStructures
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setTime(long arg0)
 	{
 		// MockMC: World#setTime
 	}
 
+	@Override
 	default Collection<GeneratedStructure> getStructures(int arg0, int arg1, Structure arg2)
 	{
 		// MockMC: World#getStructures
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(Location arg0, Vector arg1, double arg2, FluidCollisionMode arg3,
 			boolean arg4)
 	{
@@ -1273,23 +1443,27 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default void setAutoSave(boolean arg0)
 	{
 		// MockMC: World#setAutoSave
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(Location arg0, Vector arg1, double arg2, FluidCollisionMode arg3)
 	{
 		// MockMC: World#rayTraceBlocks
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(Location arg0, Vector arg1, double arg2)
 	{
 		// MockMC: World#rayTraceBlocks
 		return null;
 	}
 
+	@Override
 	default RayTraceResult rayTraceBlocks(Position arg0, Vector arg1, double arg2, FluidCollisionMode arg3,
 			boolean arg4, Predicate<? super Block> arg5)
 	{
@@ -1297,18 +1471,21 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default double getVoidDamageMinBuildHeightOffset()
 	{
 		// MockMC: World#getVoidDamageMinBuildHeightOffset
 		return 0.0d;
 	}
 
+	@Override
 	default boolean isGameRule(String arg0)
 	{
 		// MockMC: World#isGameRule
 		return false;
 	}
 
+	@Override
 	default int getPlayerCount()
 	{
 		// MockMC: World#getPlayerCount
@@ -1322,12 +1499,14 @@ public interface WorldBaseMock
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default List<PoiSearchResult> locateAllPoiInRange(Location arg0, Predicate<PoiType> arg1, int arg2)
 	{
 		// MockMC: World#locateAllPoiInRange
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<PoiSearchResult> locateAllPoiInRange(Location arg0, Predicate<PoiType> arg1, int arg2,
 			PoiType.Occupancy arg3)
 	{
@@ -1335,29 +1514,34 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getWeatherDuration()
 	{
 		// MockMC: World#getWeatherDuration
 		return 0;
 	}
 
+	@Override
 	default void setHardcore(boolean arg0)
 	{
 		// MockMC: World#setHardcore
 	}
 
+	@Override
 	default LightningStrike strikeLightning(Location arg0)
 	{
 		// MockMC: World#strikeLightning
 		return null;
 	}
 
+	@Override
 	default boolean hasRaids()
 	{
 		// MockMC: World#hasRaids
 		return false;
 	}
 
+	@Override
 	default boolean removePluginChunkTicket(int arg0, int arg1, Plugin arg2)
 	{
 		// MockMC: World#removePluginChunkTicket
@@ -1368,6 +1552,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default boolean regenerateChunk(int arg0, int arg1)
 	{
@@ -1379,6 +1564,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerAnimalSpawns()
 	{
@@ -1386,34 +1572,40 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
+	@Override
 	default void setThundering(boolean arg0)
 	{
 		// MockMC: World#setThundering
 	}
 
+	@Override
 	default long getTicksPerSpawns(SpawnCategory arg0)
 	{
 		// MockMC: World#getTicksPerSpawns
 		return 0L;
 	}
 
+	@Override
 	default Collection<Chunk> getForceLoadedChunks()
 	{
 		// MockMC: World#getForceLoadedChunks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setVoidDamageAmount(float arg0)
 	{
 		// MockMC: World#setVoidDamageAmount
 	}
 
+	@Override
 	default boolean isRespawnAnchorWorks()
 	{
 		// MockMC: World#isRespawnAnchorWorks
 		return false;
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2, Predicate<? super T> arg3)
 	{
@@ -1421,6 +1613,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2, double arg3, double arg4, Predicate<? super T> arg5)
 	{
@@ -1428,6 +1621,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2, double arg3, double arg4)
 	{
@@ -1435,6 +1629,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2, double arg3, Predicate<? super T> arg4)
 	{
@@ -1442,6 +1637,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2)
 	{
@@ -1449,6 +1645,7 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getNearbyEntitiesByType(Class<? extends T> arg0, Location arg1,
 			double arg2, double arg3)
 	{
@@ -1456,158 +1653,186 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setSendViewDistance(int arg0)
 	{
 		// MockMC: World#setSendViewDistance
 	}
 
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
-			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, Location arg1, int arg2)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
-			T arg6)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
-			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, T arg3)
-	{
-		// MockMC: World#spawnParticle
-	}
-
-	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, T arg8)
-	{
-		// MockMC: World#spawnParticle
-	}
-
+	@Override
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			double arg6, T arg7, boolean arg8)
 	{
 		// MockMC: World#spawnParticle
 	}
 
-	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
-			double arg7, double arg8)
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, T arg5)
 	{
 		// MockMC: World#spawnParticle
 	}
 
+	@Override
+	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
+			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, List<Player> arg1, Player arg2, double arg3, double arg4, double arg5,
+			int arg6, double arg7, double arg8, double arg9, double arg10, T arg11, boolean arg12)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, T arg3)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
 	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
-			double arg6, double arg7, double arg8, T arg9, boolean arg10)
+			double arg6, double arg7, double arg8, T arg9)
 	{
 		// MockMC: World#spawnParticle
 	}
 
+	@Override
 	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			double arg6)
 	{
 		// MockMC: World#spawnParticle
 	}
 
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, T arg8)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default <T> void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5,
+			double arg6, double arg7, double arg8, T arg9, boolean arg10)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7, double arg8)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
+	default void spawnParticle(Particle arg0, double arg1, double arg2, double arg3, int arg4, double arg5, double arg6,
+			double arg7)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
 	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
 			double arg6, T arg7)
 	{
 		// MockMC: World#spawnParticle
 	}
 
+	@Override
+	default <T> void spawnParticle(Particle arg0, Location arg1, int arg2, double arg3, double arg4, double arg5,
+			T arg6)
+	{
+		// MockMC: World#spawnParticle
+	}
+
+	@Override
 	default boolean isPositionLoaded(Position arg0)
 	{
 		// MockMC: World#isPositionLoaded
 		return false;
 	}
 
+	@Override
 	default Iterable<? extends Audience> audiences()
 	{
 		// MockMC: World#audiences
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getViewDistance()
 	{
 		// MockMC: World#getViewDistance
 		return 0;
 	}
 
+	@Override
 	default long getFullTime()
 	{
 		// MockMC: World#getFullTime
 		return 0L;
 	}
 
+	@Override
 	default boolean hasCeiling()
 	{
 		// MockMC: World#hasCeiling
 		return false;
 	}
 
+	@Override
 	default File getWorldFolder()
 	{
 		// MockMC: World#getWorldFolder
 		return null;
 	}
 
+	@Override
 	default <T> void playEffect(Location arg0, Effect arg1, T arg2)
 	{
 		// MockMC: World#playEffect
 	}
 
+	@Override
 	default void playEffect(Location arg0, Effect arg1, int arg2, int arg3)
 	{
 		// MockMC: World#playEffect
 	}
 
+	@Override
 	default <T> void playEffect(Location arg0, Effect arg1, T arg2, int arg3)
 	{
 		// MockMC: World#playEffect
 	}
 
+	@Override
 	default void playEffect(Location arg0, Effect arg1, int arg2)
 	{
 		// MockMC: World#playEffect
 	}
 
+	@Override
 	default boolean isDayTime()
 	{
 		// MockMC: World#isDayTime
@@ -1618,6 +1843,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default boolean getPVP()
 	{
@@ -1629,6 +1855,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default int getAmbientSpawnLimit()
 	{
@@ -1640,6 +1867,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "26.1.2")
 	default <T> T getGameRuleDefault(GameRule<T> arg0)
 	{
@@ -1651,52 +1879,61 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setAmbientSpawnLimit(int arg0)
 	{
 		// MockMC: World#setAmbientSpawnLimit
 	}
 
+	@Override
 	default Path getWorldPath()
 	{
 		// MockMC: World#getWorldPath
 		return null;
 	}
 
+	@Override
 	default Collection<Player> getPlayersSeeingChunk(Chunk arg0)
 	{
 		// MockMC: World#getPlayersSeeingChunk
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getThunderDuration()
 	{
 		// MockMC: World#getThunderDuration
 		return 0;
 	}
 
+	@Override
 	default boolean loadChunk(int arg0, int arg1, boolean arg2)
 	{
 		// MockMC: World#loadChunk
 		return false;
 	}
 
+	@Override
 	default Collection<Player> getPlayersSeeingChunk(int arg0, int arg1)
 	{
 		// MockMC: World#getPlayersSeeingChunk
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void loadChunk(int arg0, int arg1)
 	{
 		// MockMC: World#loadChunk
 	}
 
+	@Override
 	default void loadChunk(Chunk arg0)
 	{
 		// MockMC: World#loadChunk
 	}
 
+	@Override
 	default boolean getAllowMonsters()
 	{
 		// MockMC: World#getAllowMonsters
@@ -1707,6 +1944,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default Location getLocationAtKey(long arg0)
 	{
@@ -1718,35 +1956,41 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerAmbientSpawns(int arg0)
 	{
 		// MockMC: World#setTicksPerAmbientSpawns
 	}
 
+	@Override
 	default void setVoidDamageMinBuildHeightOffset(double arg0)
 	{
 		// MockMC: World#setVoidDamageMinBuildHeightOffset
 	}
 
+	@Override
 	default int getSpawnLimit(SpawnCategory arg0)
 	{
 		// MockMC: World#getSpawnLimit
 		return 0;
 	}
 
+	@Override
 	default Collection<Plugin> getPluginChunkTickets(int arg0, int arg1)
 	{
 		// MockMC: World#getPluginChunkTickets
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Map<Plugin, Collection<Chunk>> getPluginChunkTickets()
 	{
 		// MockMC: World#getPluginChunkTickets
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default Collection<Entity> getNearbyEntities(Location arg0, double arg1, double arg2, double arg3,
 			Predicate<? super Entity> arg4)
 	{
@@ -1754,48 +1998,56 @@ public interface WorldBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Entity> getNearbyEntities(BoundingBox arg0, Predicate<? super Entity> arg1)
 	{
 		// MockMC: World#getNearbyEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Entity> getNearbyEntities(Location arg0, double arg1, double arg2, double arg3)
 	{
 		// MockMC: World#getNearbyEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Entity> getNearbyEntities(BoundingBox arg0)
 	{
 		// MockMC: World#getNearbyEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ChunkGenerator getGenerator()
 	{
 		// MockMC: World#getGenerator
 		return null;
 	}
 
+	@Override
 	default boolean unloadChunkRequest(int arg0, int arg1)
 	{
 		// MockMC: World#unloadChunkRequest
 		return false;
 	}
 
+	@Override
 	default Item dropItem(Location arg0, ItemStack arg1, Consumer<? super Item> arg2)
 	{
 		// MockMC: World#dropItem
 		return null;
 	}
 
+	@Override
 	default Item dropItem(Location arg0, ItemStack arg1)
 	{
 		// MockMC: World#dropItem
 		return null;
 	}
 
+	@Override
 	default boolean isFixedTime()
 	{
 		// MockMC: World#isFixedTime
@@ -1806,6 +2058,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerMonsterSpawns(int arg0)
 	{
@@ -1816,6 +2069,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11")
 	default boolean isUltraWarm()
 	{
@@ -1827,131 +2081,152 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.13.1")
-	default void getChunkAtAsync(int arg0, int arg1, World.ChunkLoadCallback arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
+	@Override
 	@Deprecated(since = "1.13.1")
 	default void getChunkAtAsync(Location arg0, World.ChunkLoadCallback arg1)
 	{
 		// MockMC: World#getChunkAtAsync
 	}
 
+	@Override
+	default void getChunkAtAsync(Block arg0, boolean arg1, Consumer<? super Chunk> arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	@Override
 	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3, Consumer<? super Chunk> arg4)
 	{
 		// MockMC: World#getChunkAtAsync
 	}
 
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default void getChunkAtAsync(Location arg0, Consumer<? super Chunk> arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default void getChunkAtAsync(Block arg0, Consumer<? super Chunk> arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.13.1")
-	default void getChunkAtAsync(Block arg0, World.ChunkLoadCallback arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default void getChunkAtAsync(Location arg0, boolean arg1, Consumer<? super Chunk> arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default void getChunkAtAsync(int arg0, int arg1, Consumer<? super Chunk> arg2)
-	{
-		// MockMC: World#getChunkAtAsync
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
+	@Override
 	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0)
 	{
 		// MockMC: World#getChunkAtAsync
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
+	@Override
+	default void getChunkAtAsync(Location arg0, boolean arg1, Consumer<? super Chunk> arg2)
 	{
 		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0, boolean arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
-	}
-
-	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1)
-	{
-		// MockMC: World#getChunkAtAsync
-		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
+	@Deprecated(since = "1.13.1")
+	default void getChunkAtAsync(int arg0, int arg1, World.ChunkLoadCallback arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default void getChunkAtAsync(Block arg0, Consumer<? super Chunk> arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	@Override
+	default void getChunkAtAsync(Location arg0, Consumer<? super Chunk> arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.13.1")
+	default void getChunkAtAsync(Block arg0, World.ChunkLoadCallback arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	@Override
+	default void getChunkAtAsync(int arg0, int arg1, Consumer<? super Chunk> arg2)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0, boolean arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(Block arg0)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(Location arg0, boolean arg1)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default CompletableFuture<Chunk> getChunkAtAsync(int arg0, int arg1, boolean arg2, boolean arg3)
+	{
+		// MockMC: World#getChunkAtAsync
+		return java.util.concurrent.CompletableFuture.completedFuture(null);
+	}
+
+	@Override
+	default void getChunkAtAsync(int arg0, int arg1, boolean arg2, Consumer<? super Chunk> arg3)
+	{
+		// MockMC: World#getChunkAtAsync
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setAnimalSpawnLimit(int arg0)
 	{
 		// MockMC: World#setAnimalSpawnLimit
 	}
 
+	@Override
 	default boolean isPiglinSafe()
 	{
 		// MockMC: World#isPiglinSafe
 		return false;
 	}
 
+	@Override
 	default <T extends AbstractArrow> T spawnArrow(Location arg0, Vector arg1, float arg2, float arg3, Class<T> arg4)
 	{
 		// MockMC: World#spawnArrow
 		return null;
 	}
 
+	@Override
 	default Arrow spawnArrow(Location arg0, Vector arg1, float arg2, float arg3)
 	{
 		// MockMC: World#spawnArrow
@@ -1962,6 +2237,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default String getGameRuleValue(String arg0)
 	{
@@ -1969,28 +2245,33 @@ public interface WorldBaseMock
 		return "";
 	}
 
+	@Override
 	default <T> T getGameRuleValue(GameRule<T> arg0)
 	{
 		// MockMC: World#getGameRuleValue
 		return null;
 	}
 
+	@Override
 	default ChunkSnapshot getEmptyChunkSnapshot(int arg0, int arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: World#getEmptyChunkSnapshot
 		return null;
 	}
 
+	@Override
 	default void setWeatherDuration(int arg0)
 	{
 		// MockMC: World#setWeatherDuration
 	}
 
+	@Override
 	default void playNote(Location arg0, Instrument arg1, Note arg2)
 	{
 		// MockMC: World#playNote
 	}
 
+	@Override
 	default boolean hasBonusChest()
 	{
 		// MockMC: World#hasBonusChest
@@ -2001,6 +2282,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getTicksPerWaterSpawns()
 	{
@@ -2008,16 +2290,19 @@ public interface WorldBaseMock
 		return 0L;
 	}
 
+	@Override
 	default void setChunkForceLoaded(int arg0, int arg1, boolean arg2)
 	{
 		// MockMC: World#setChunkForceLoaded
 	}
 
+	@Override
 	default void setVoidDamageEnabled(boolean arg0)
 	{
 		// MockMC: World#setVoidDamageEnabled
 	}
 
+	@Override
 	default double getHumidity(int arg0, int arg1, int arg2)
 	{
 		// MockMC: World#getHumidity
@@ -2028,6 +2313,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default double getHumidity(int arg0, int arg1)
 	{
@@ -2039,6 +2325,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getNoTickViewDistance()
 	{
@@ -2046,30 +2333,35 @@ public interface WorldBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean getAllowAnimals()
 	{
 		// MockMC: World#getAllowAnimals
 		return false;
 	}
 
+	@Override
 	default Block getHighestBlockAt(Location arg0, HeightMap arg1)
 	{
 		// MockMC: World#getHighestBlockAt
 		return null;
 	}
 
+	@Override
 	default Block getHighestBlockAt(Location arg0)
 	{
 		// MockMC: World#getHighestBlockAt
 		return null;
 	}
 
+	@Override
 	default Block getHighestBlockAt(int arg0, int arg1, HeightMap arg2)
 	{
 		// MockMC: World#getHighestBlockAt
 		return null;
 	}
 
+	@Override
 	default Block getHighestBlockAt(int arg0, int arg1)
 	{
 		// MockMC: World#getHighestBlockAt
@@ -2080,6 +2372,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default Biome getBiome(int arg0, int arg1)
 	{
@@ -2091,6 +2384,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.17.1")
 	default boolean generateTree(Location arg0, TreeType arg1, BlockChangeDelegate arg2)
 	{
@@ -2102,6 +2396,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.6")
 	default boolean generateTree(Location arg0, TreeType arg1)
 	{
@@ -2109,28 +2404,33 @@ public interface WorldBaseMock
 		return false;
 	}
 
+	@Override
 	default long getTime()
 	{
 		// MockMC: World#getTime
 		return 0L;
 	}
 
+	@Override
 	default void setDifficulty(Difficulty arg0)
 	{
 		// MockMC: World#setDifficulty
 	}
 
+	@Override
 	default boolean isThundering()
 	{
 		// MockMC: World#isThundering
 		return false;
 	}
 
+	@Override
 	default void setSimulationDistance(int arg0)
 	{
 		// MockMC: World#setSimulationDistance
 	}
 
+	@Override
 	default void getChunksAtAsync(int arg0, int arg1, int arg2, int arg3, boolean arg4, Runnable arg5)
 	{
 		// MockMC: World#getChunksAtAsync
@@ -2140,6 +2440,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.5", forRemoval = true)
 	default FallingBlock spawnFallingBlock(Location arg0, Material arg1, byte arg2) throws IllegalArgumentException
 	{
@@ -2151,6 +2452,7 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default FallingBlock spawnFallingBlock(Location arg0, MaterialData arg1) throws IllegalArgumentException
@@ -2159,6 +2461,7 @@ public interface WorldBaseMock
 		return null;
 	}
 
+	@Override
 	default FallingBlock spawnFallingBlock(Location arg0, BlockData arg1) throws IllegalArgumentException
 	{
 		// MockMC: World#spawnFallingBlock
@@ -2169,18 +2472,21 @@ public interface WorldBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default void setTicksPerWaterSpawns(int arg0)
 	{
 		// MockMC: World#setTicksPerWaterSpawns
 	}
 
+	@Override
 	default Difficulty getDifficulty()
 	{
 		// MockMC: World#getDifficulty
 		return null;
 	}
 
+	@Override
 	default int getTickableTileEntityCount()
 	{
 		// MockMC: World#getTickableTileEntityCount

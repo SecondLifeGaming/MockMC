@@ -14,24 +14,29 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CreeperBaseMock extends Creeper, MonsterBaseMock
 {
+	@Override
 	default void setIgnited(boolean arg0)
 	{
 		// MockMC: Creeper#setIgnited
 	}
 
+	@Override
 	default void setFuseTicks(int arg0)
 	{
 		// MockMC: Creeper#setFuseTicks
 	}
 
+	@Override
 	default void explode()
 	{
 		// MockMC: Creeper#explode
 	}
 
+	@Override
 	default boolean isIgnited()
 	{
 		// MockMC: Creeper#isIgnited
@@ -45,16 +50,19 @@ public interface CreeperBaseMock extends Creeper, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void setPowered(boolean arg0)
 	{
 		// MockMC: Creeper#setPowered
 	}
 
+	@Override
 	default void setMaxFuseTicks(int arg0)
 	{
 		// MockMC: Creeper#setMaxFuseTicks
 	}
 
+	@Override
 	default int getExplosionRadius()
 	{
 		// MockMC: Creeper#getExplosionRadius
@@ -68,39 +76,46 @@ public interface CreeperBaseMock extends Creeper, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default int getMaxFuseTicks()
 	{
 		// MockMC: Creeper#getMaxFuseTicks
 		return 0;
 	}
 
+	@Override
 	default void setExplosionRadius(int arg0)
 	{
 		// MockMC: Creeper#setExplosionRadius
 	}
 
+	@Override
 	default void ignite(Entity arg0)
 	{
 		// MockMC: Creeper#ignite
 	}
 
+	@Override
 	default void ignite()
 	{
 		// MockMC: Creeper#ignite
 	}
 
+	@Override
 	default int getFuseTicks()
 	{
 		// MockMC: Creeper#getFuseTicks
 		return 0;
 	}
 
+	@Override
 	default Entity getIgniter()
 	{
 		// MockMC: Creeper#getIgniter
 		return null;
 	}
 
+	@Override
 	default boolean isPowered()
 	{
 		// MockMC: Creeper#isPowered

@@ -20,42 +20,49 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface ConsumableBuilderBaseMock extends Consumable.Builder, DataComponentBuilderBaseMock<Consumable>
 {
+	@Override
 	default Consumable.Builder hasConsumeParticles(boolean arg0)
 	{
 		// MockMC: Builder#hasConsumeParticles
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder animation(ItemUseAnimation arg0)
 	{
 		// MockMC: Builder#animation
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder addEffects(List<ConsumeEffect> arg0)
 	{
 		// MockMC: Builder#addEffects
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder addEffect(ConsumeEffect arg0)
 	{
 		// MockMC: Builder#addEffect
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder effects(List<ConsumeEffect> arg0)
 	{
 		// MockMC: Builder#effects
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder sound(Key arg0)
 	{
 		// MockMC: Builder#sound
 		return null;
 	}
 
+	@Override
 	default Consumable.Builder consumeSeconds(float arg0)
 	{
 		// MockMC: Builder#consumeSeconds

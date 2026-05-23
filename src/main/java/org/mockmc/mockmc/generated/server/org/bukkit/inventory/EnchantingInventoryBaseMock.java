@@ -16,23 +16,27 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface EnchantingInventoryBaseMock extends EnchantingInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getSecondary()
 	{
 		// MockMC: EnchantingInventory#getSecondary
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: EnchantingInventory#setItem
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: EnchantingInventory#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setSecondary(ItemStack arg0)
 	{
 		// MockMC: EnchantingInventory#setSecondary

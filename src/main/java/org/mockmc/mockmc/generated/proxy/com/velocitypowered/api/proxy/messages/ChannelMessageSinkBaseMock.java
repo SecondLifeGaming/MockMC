@@ -17,12 +17,14 @@ import com.velocitypowered.api.proxy.messages.PluginMessageEncoder;
  */
 public interface ChannelMessageSinkBaseMock extends ChannelMessageSink
 {
+	@Override
 	default boolean sendPluginMessage(ChannelIdentifier arg0, byte[] arg1)
 	{
 		// MockMC: ChannelMessageSink#sendPluginMessage
 		return false;
 	}
 
+	@Override
 	default boolean sendPluginMessage(ChannelIdentifier arg0, PluginMessageEncoder arg1)
 	{
 		// MockMC: ChannelMessageSink#sendPluginMessage

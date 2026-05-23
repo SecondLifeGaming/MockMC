@@ -16,6 +16,7 @@ import org.bukkit.Color;
  */
 public interface DyedItemColorBaseMock extends DyedItemColor
 {
+	@Override
 	default Color color()
 	{
 		// MockMC: DyedItemColor#color

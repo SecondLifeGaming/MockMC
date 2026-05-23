@@ -31,14 +31,17 @@ import org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.CommandSenderBaseMo
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock, CommandSenderBaseMock
+public interface ProxiedPlayerBaseMock extends ProxiedPlayer, CommandSenderBaseMock, ConnectionBaseMock
 {
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void setTabHeader(BaseComponent arg0, BaseComponent arg1)
 	{
 		// MockMC: ProxiedPlayer#setTabHeader
 	}
 
+	@Override
 	default void setTabHeader(BaseComponent[] arg0, BaseComponent[] arg1)
 	{
 		// MockMC: ProxiedPlayer#setTabHeader
@@ -48,6 +51,7 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getUUID()
 	{
@@ -55,16 +59,19 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock
 		return "";
 	}
 
+	@Override
 	default void showDialog(Dialog arg0)
 	{
 		// MockMC: ProxiedPlayer#showDialog
 	}
 
+	@Override
 	default void storeCookie(String arg0, byte[] arg1)
 	{
 		// MockMC: ProxiedPlayer#storeCookie
 	}
 
+	@Override
 	default ProxiedPlayer.ChatMode getChatMode()
 	{
 		// MockMC: ProxiedPlayer#getChatMode
@@ -75,6 +82,7 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Scoreboard getScoreboard()
 	{
@@ -82,199 +90,238 @@ public interface ProxiedPlayerBaseMock extends ProxiedPlayer, ConnectionBaseMock
 		return null;
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, ServerConnectEvent.Reason arg1)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, Callback<Boolean> arg1, boolean arg2, int arg3)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, Callback<Boolean> arg1)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, Callback<Boolean> arg1, boolean arg2, ServerConnectEvent.Reason arg3,
 			int arg4)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerConnectRequest arg0)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, Callback<Boolean> arg1, boolean arg2)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void connect(ServerInfo arg0, Callback<Boolean> arg1, ServerConnectEvent.Reason arg2)
 	{
 		// MockMC: ProxiedPlayer#connect
 	}
 
+	@Override
 	default void sendData(String arg0, byte[] arg1)
 	{
 		// MockMC: ProxiedPlayer#sendData
 	}
 
+	@Override
 	default void sendTitle(Title arg0)
 	{
 		// MockMC: ProxiedPlayer#sendTitle
 	}
 
+	@Override
 	default byte getViewDistance()
 	{
 		// MockMC: ProxiedPlayer#getViewDistance
 		return 0;
 	}
 
+	@Override
 	default void setDisplayName(String arg0)
 	{
 		// MockMC: ProxiedPlayer#setDisplayName
 	}
 
+	@Override
 	default UUID getUniqueId()
 	{
 		// MockMC: ProxiedPlayer#getUniqueId
 		return null;
 	}
 
+	@Override
 	default CompletableFuture<byte[]> retrieveCookie(String arg0)
 	{
 		// MockMC: ProxiedPlayer#retrieveCookie
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default void transfer(String arg0, int arg1)
 	{
 		// MockMC: ProxiedPlayer#transfer
 	}
 
+	@Override
 	default void resetTabHeader()
 	{
 		// MockMC: ProxiedPlayer#resetTabHeader
 	}
 
+	@Override
 	default String getDisplayName()
 	{
 		// MockMC: ProxiedPlayer#getDisplayName
 		return "";
 	}
 
+	@Override
 	default boolean hasChatColors()
 	{
 		// MockMC: ProxiedPlayer#hasChatColors
 		return false;
 	}
 
+	@Override
 	default void chat(String arg0)
 	{
 		// MockMC: ProxiedPlayer#chat
 	}
 
+	@Override
 	default void clearDialog()
 	{
 		// MockMC: ProxiedPlayer#clearDialog
 	}
 
+	@Override
 	default PendingConnection getPendingConnection()
 	{
 		// MockMC: ProxiedPlayer#getPendingConnection
 		return null;
 	}
 
+	@Override
 	default void setReconnectServer(ServerInfo arg0)
 	{
 		// MockMC: ProxiedPlayer#setReconnectServer
 	}
 
+	@Override
 	default Locale getLocale()
 	{
 		// MockMC: ProxiedPlayer#getLocale
 		return null;
 	}
 
+	@Override
 	default Server getServer()
 	{
 		// MockMC: ProxiedPlayer#getServer
 		return null;
 	}
 
+	@Override
 	default String getClientBrand()
 	{
 		// MockMC: ProxiedPlayer#getClientBrand
 		return "";
 	}
 
+	@Override
 	default void sendMessage(UUID arg0, BaseComponent... arg1)
 	{
 		// MockMC: ProxiedPlayer#sendMessage
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void sendMessage(ChatMessageType arg0, BaseComponent... arg1)
 	{
 		// MockMC: ProxiedPlayer#sendMessage
 	}
 
+	@Override
 	default Map<String, String> getModList()
 	{
 		// MockMC: ProxiedPlayer#getModList
 		return java.util.Collections.emptyMap();
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void sendMessage(UUID arg0, BaseComponent arg1)
 	{
 		// MockMC: ProxiedPlayer#sendMessage
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void sendMessage(ChatMessageType arg0, BaseComponent arg1)
 	{
 		// MockMC: ProxiedPlayer#sendMessage
 	}
 
+	@Override
 	default void sendServerLinks(List<ServerLink> arg0)
 	{
 		// MockMC: ProxiedPlayer#sendServerLinks
 	}
 
+	@Override
 	default int getPing()
 	{
 		// MockMC: ProxiedPlayer#getPing
 		return 0;
 	}
 
+	@Override
 	default SkinConfiguration getSkinParts()
 	{
 		// MockMC: ProxiedPlayer#getSkinParts
 		return null;
 	}
 
+	@Override
 	default ProxiedPlayer.MainHand getMainHand()
 	{
 		// MockMC: ProxiedPlayer#getMainHand
 		return null;
 	}
 
+	@Override
 	default boolean isForgeUser()
 	{
 		// MockMC: ProxiedPlayer#isForgeUser
 		return false;
 	}
 
+	@Override
 	default ServerInfo getReconnectServer()
 	{
 		// MockMC: ProxiedPlayer#getReconnectServer

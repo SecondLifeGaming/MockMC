@@ -17,6 +17,7 @@ import org.bukkit.help.HelpTopicFactory;
  */
 public interface HelpTopicFactoryBaseMock<TCommand extends Command> extends HelpTopicFactory<TCommand>
 {
+	@Override
 	default HelpTopic createTopic(TCommand arg0)
 	{
 		// MockMC: HelpTopicFactory#createTopic

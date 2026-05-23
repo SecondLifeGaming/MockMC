@@ -22,6 +22,7 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12.1")
 	default boolean setOwner(String arg0)
 	{
@@ -29,6 +30,7 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 		return false;
 	}
 
+	@Override
 	default void setNoteBlockSound(NamespacedKey arg0)
 	{
 		// MockMC: SkullMeta#setNoteBlockSound
@@ -38,7 +40,9 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default PlayerProfile getOwnerProfile()
 	{
@@ -50,6 +54,7 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.12.1")
 	default String getOwner()
 	{
@@ -57,18 +62,21 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 		return "";
 	}
 
+	@Override
 	default OfflinePlayer getOwningPlayer()
 	{
 		// MockMC: SkullMeta#getOwningPlayer
 		return null;
 	}
 
+	@Override
 	default boolean hasOwner()
 	{
 		// MockMC: SkullMeta#hasOwner
 		return false;
 	}
 
+	@Override
 	default com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile()
 	{
 		// MockMC: SkullMeta#getPlayerProfile
@@ -82,12 +90,14 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default NamespacedKey getNoteBlockSound()
 	{
 		// MockMC: SkullMeta#getNoteBlockSound
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default boolean setOwningPlayer(OfflinePlayer arg0)
 	{
 		// MockMC: SkullMeta#setOwningPlayer
@@ -98,13 +108,16 @@ public interface SkullMetaBaseMock extends SkullMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void setOwnerProfile(PlayerProfile arg0)
 	{
 		// MockMC: SkullMeta#setOwnerProfile
 	}
 
+	@Override
 	default void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile arg0)
 	{
 		// MockMC: SkullMeta#setPlayerProfile

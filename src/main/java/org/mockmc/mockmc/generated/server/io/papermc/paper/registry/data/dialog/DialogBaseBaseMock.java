@@ -19,42 +19,49 @@ import net.kyori.adventure.text.Component;
  */
 public interface DialogBaseBaseMock extends DialogBase
 {
+	@Override
 	default Component externalTitle()
 	{
 		// MockMC: DialogBase#externalTitle
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default boolean pause()
 	{
 		// MockMC: DialogBase#pause
 		return false;
 	}
 
+	@Override
 	default boolean canCloseWithEscape()
 	{
 		// MockMC: DialogBase#canCloseWithEscape
 		return false;
 	}
 
+	@Override
 	default List<DialogBody> body()
 	{
 		// MockMC: DialogBase#body
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default DialogBase.DialogAfterAction afterAction()
 	{
 		// MockMC: DialogBase#afterAction
 		return null;
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: DialogBase#title
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default List<DialogInput> inputs()
 	{
 		// MockMC: DialogBase#inputs

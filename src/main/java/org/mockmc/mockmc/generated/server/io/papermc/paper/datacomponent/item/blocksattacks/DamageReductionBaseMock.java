@@ -17,24 +17,28 @@ import org.bukkit.damage.DamageType;
  */
 public interface DamageReductionBaseMock extends DamageReduction
 {
+	@Override
 	default RegistryKeySet<DamageType> type()
 	{
 		// MockMC: DamageReduction#type
 		return null;
 	}
 
+	@Override
 	default float factor()
 	{
 		// MockMC: DamageReduction#factor
 		return 0.0f;
 	}
 
+	@Override
 	default float horizontalBlockingAngle()
 	{
 		// MockMC: DamageReduction#horizontalBlockingAngle
 		return 0.0f;
 	}
 
+	@Override
 	default float base()
 	{
 		// MockMC: DamageReduction#base

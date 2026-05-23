@@ -16,17 +16,20 @@ import org.bukkit.block.data.Rail;
  */
 public interface RailBaseMock extends Rail, WaterloggedBaseMock
 {
+	@Override
 	default void setShape(Rail.Shape arg0)
 	{
 		// MockMC: Rail#setShape
 	}
 
+	@Override
 	default Rail.Shape getShape()
 	{
 		// MockMC: Rail#getShape
 		return null;
 	}
 
+	@Override
 	default Set<Rail.Shape> getShapes()
 	{
 		// MockMC: Rail#getShapes

@@ -18,24 +18,28 @@ import io.papermc.paper.registry.set.RegistrySet;
  */
 public interface DialogListTypeBaseMock extends DialogListType
 {
+	@Override
 	default int columns()
 	{
 		// MockMC: DialogListType#columns
 		return 0;
 	}
 
+	@Override
 	default ActionButton exitAction()
 	{
 		// MockMC: DialogListType#exitAction
 		return null;
 	}
 
+	@Override
 	default RegistrySet<Dialog> dialogs()
 	{
 		// MockMC: DialogListType#dialogs
 		return null;
 	}
 
+	@Override
 	default int buttonWidth()
 	{
 		// MockMC: DialogListType#buttonWidth

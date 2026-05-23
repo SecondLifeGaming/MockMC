@@ -16,6 +16,7 @@ import org.bukkit.Color;
  */
 public interface MapItemColorBaseMock extends MapItemColor
 {
+	@Override
 	default Color color()
 	{
 		// MockMC: MapItemColor#color

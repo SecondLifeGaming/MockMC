@@ -15,6 +15,7 @@ import net.md_5.bungee.event.EventHandlerMethod;
  */
 public interface EventExceptionHandlerBaseMock<T> extends EventExceptionHandler<T>
 {
+	@Override
 	default void handleEventException(String arg0, T arg1, EventHandlerMethod arg2, Throwable arg3)
 	{
 		// MockMC: EventExceptionHandler#handleEventException

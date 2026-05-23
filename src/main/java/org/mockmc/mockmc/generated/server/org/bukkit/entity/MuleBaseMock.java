@@ -14,16 +14,10 @@ import org.bukkit.entity.Mule;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MuleBaseMock extends Mule, ChestedHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Mule#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface MuleBaseMock extends Mule, ChestedHorseBaseMock
 	{
 		// MockMC: Mule#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Mule#getLeashHolder
+		return null;
 	}
 }

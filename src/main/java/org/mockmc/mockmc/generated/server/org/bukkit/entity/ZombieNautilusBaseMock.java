@@ -14,16 +14,11 @@ import org.bukkit.entity.ZombieNautilus;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ZombieNautilusBaseMock extends ZombieNautilus, AbstractNautilusBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: ZombieNautilus#getLeashHolder
-		return null;
-	}
-
 	default void setVariant(ZombieNautilus.Variant arg0)
 	{
 		// MockMC: ZombieNautilus#setVariant
@@ -43,6 +38,14 @@ public interface ZombieNautilusBaseMock extends ZombieNautilus, AbstractNautilus
 		return false;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: ZombieNautilus#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default ZombieNautilus.Variant getVariant()
 	{
 		// MockMC: ZombieNautilus#getVariant

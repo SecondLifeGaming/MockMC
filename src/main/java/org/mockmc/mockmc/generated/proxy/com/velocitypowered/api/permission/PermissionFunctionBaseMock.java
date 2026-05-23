@@ -16,6 +16,7 @@ import com.velocitypowered.api.permission.Tristate;
  */
 public interface PermissionFunctionBaseMock extends PermissionFunction
 {
+	@Override
 	default Tristate getPermissionValue(String arg0)
 	{
 		// MockMC: PermissionFunction#getPermissionValue

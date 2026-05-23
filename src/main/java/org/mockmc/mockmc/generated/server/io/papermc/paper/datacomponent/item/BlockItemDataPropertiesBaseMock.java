@@ -17,12 +17,14 @@ import org.bukkit.block.data.BlockData;
  */
 public interface BlockItemDataPropertiesBaseMock extends BlockItemDataProperties
 {
+	@Override
 	default BlockData applyTo(BlockData arg0)
 	{
 		// MockMC: BlockItemDataProperties#applyTo
 		return null;
 	}
 
+	@Override
 	default BlockData createBlockData(BlockType arg0)
 	{
 		// MockMC: BlockItemDataProperties#createBlockData

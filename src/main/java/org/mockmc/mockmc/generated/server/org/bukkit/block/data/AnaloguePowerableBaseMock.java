@@ -15,18 +15,21 @@ import org.bukkit.block.data.AnaloguePowerable;
  */
 public interface AnaloguePowerableBaseMock extends AnaloguePowerable, BlockDataBaseMock
 {
+	@Override
 	default int getPower()
 	{
 		// MockMC: AnaloguePowerable#getPower
 		return 0;
 	}
 
+	@Override
 	default int getMaximumPower()
 	{
 		// MockMC: AnaloguePowerable#getMaximumPower
 		return 0;
 	}
 
+	@Override
 	default void setPower(int arg0)
 	{
 		// MockMC: AnaloguePowerable#setPower

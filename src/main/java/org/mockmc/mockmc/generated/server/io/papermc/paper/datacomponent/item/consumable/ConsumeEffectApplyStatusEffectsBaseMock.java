@@ -20,12 +20,14 @@ public interface ConsumeEffectApplyStatusEffectsBaseMock
 			io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.ApplyStatusEffects,
 			ConsumeEffectBaseMock
 {
+	@Override
 	default float probability()
 	{
 		// MockMC: ApplyStatusEffects#probability
 		return 0.0f;
 	}
 
+	@Override
 	default List<PotionEffect> effects()
 	{
 		// MockMC: ApplyStatusEffects#effects

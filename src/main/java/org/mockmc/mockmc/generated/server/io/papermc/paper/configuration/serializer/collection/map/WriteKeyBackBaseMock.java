@@ -15,6 +15,7 @@ import java.lang.annotation.Annotation;
  */
 public interface WriteKeyBackBaseMock extends WriteKeyBack
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: WriteKeyBack#annotationType

@@ -20,12 +20,14 @@ import org.bukkit.profile.PlayerTextures;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PlayerProfileBaseMock
 		extends
 			PlayerProfile,
 			org.mockmc.mockmc.generated.server.org.bukkit.profile.PlayerProfileBaseMock
 {
+	@Override
 	default void setProperties(Collection<ProfileProperty> arg0)
 	{
 		// MockMC: PlayerProfile#setProperties
@@ -35,6 +37,7 @@ public interface PlayerProfileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1", forRemoval = true)
 	default String setName(String arg0)
 	{
@@ -49,6 +52,7 @@ public interface PlayerProfileBaseMock
 		return "";
 	}
 
+	@Override
 	default void clearProperties()
 	{
 		// MockMC: PlayerProfile#clearProperties
@@ -61,12 +65,14 @@ public interface PlayerProfileBaseMock
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default UUID getId()
 	{
 		// MockMC: PlayerProfile#getId
 		return null;
 	}
 
+	@Override
 	default boolean removeProperties(Collection<ProfileProperty> arg0)
 	{
 		// MockMC: PlayerProfile#removeProperties
@@ -77,6 +83,7 @@ public interface PlayerProfileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1", forRemoval = true)
 	default UUID setId(UUID arg0)
 	{
@@ -84,30 +91,35 @@ public interface PlayerProfileBaseMock
 		return null;
 	}
 
+	@Override
 	default Set<ProfileProperty> getProperties()
 	{
 		// MockMC: PlayerProfile#getProperties
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hasTextures()
 	{
 		// MockMC: PlayerProfile#hasTextures
 		return false;
 	}
 
+	@Override
 	default boolean hasProperty(String arg0)
 	{
 		// MockMC: PlayerProfile#hasProperty
 		return false;
 	}
 
+	@Override
 	default boolean completeFromCache()
 	{
 		// MockMC: PlayerProfile#completeFromCache
 		return false;
 	}
 
+	@Override
 	default boolean completeFromCache(boolean arg0)
 	{
 		// MockMC: PlayerProfile#completeFromCache
@@ -120,41 +132,48 @@ public interface PlayerProfileBaseMock
 		// MockMC: PlayerProfile#setTextures
 	}
 
+	@Override
 	default boolean completeFromCache(boolean arg0, boolean arg1)
 	{
 		// MockMC: PlayerProfile#completeFromCache
 		return false;
 	}
 
+	@Override
 	default void setProperty(ProfileProperty arg0)
 	{
 		// MockMC: PlayerProfile#setProperty
 	}
 
+	@Override
 	default boolean complete()
 	{
 		// MockMC: PlayerProfile#complete
 		return false;
 	}
 
+	@Override
 	default boolean complete(boolean arg0)
 	{
 		// MockMC: PlayerProfile#complete
 		return false;
 	}
 
+	@Override
 	default boolean complete(boolean arg0, boolean arg1)
 	{
 		// MockMC: PlayerProfile#complete
 		return false;
 	}
 
+	@Override
 	default boolean removeProperty(String arg0)
 	{
 		// MockMC: PlayerProfile#removeProperty
 		return false;
 	}
 
+	@Override
 	default boolean removeProperty(ProfileProperty arg0)
 	{
 		// MockMC: PlayerProfile#removeProperty
@@ -182,6 +201,7 @@ public interface PlayerProfileBaseMock
 		return null;
 	}
 
+	@Override
 	default void applySkinToPlayerHeadContents(PlayerHeadObjectContents.Builder arg0)
 	{
 		// MockMC: PlayerProfile#applySkinToPlayerHeadContents

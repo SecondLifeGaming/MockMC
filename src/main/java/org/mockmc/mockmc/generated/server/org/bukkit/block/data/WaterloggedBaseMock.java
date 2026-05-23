@@ -15,11 +15,13 @@ import org.bukkit.block.data.Waterlogged;
  */
 public interface WaterloggedBaseMock extends Waterlogged, BlockDataBaseMock
 {
+	@Override
 	default void setWaterlogged(boolean arg0)
 	{
 		// MockMC: Waterlogged#setWaterlogged
 	}
 
+	@Override
 	default boolean isWaterlogged()
 	{
 		// MockMC: Waterlogged#isWaterlogged

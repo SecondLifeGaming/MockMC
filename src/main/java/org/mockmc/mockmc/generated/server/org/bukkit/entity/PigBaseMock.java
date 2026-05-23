@@ -14,24 +14,14 @@ import org.bukkit.entity.Pig;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PigBaseMock extends Pig, VehicleBaseMock, SteerableBaseMock
 {
+	@Override
 	default void setVariant(Pig.Variant arg0)
 	{
 		// MockMC: Pig#setVariant
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Pig#getLeashHolder
-		return null;
-	}
-
-	default void setSoundVariant(Pig.SoundVariant arg0)
-	{
-		// MockMC: Pig#setSoundVariant
 	}
 
 	@Override
@@ -41,16 +31,10 @@ public interface PigBaseMock extends Pig, VehicleBaseMock, SteerableBaseMock
 		return false;
 	}
 
-	default Pig.SoundVariant getSoundVariant()
+	@Override
+	default void setSoundVariant(Pig.SoundVariant arg0)
 	{
-		// MockMC: Pig#getSoundVariant
-		return null;
-	}
-
-	default Pig.Variant getVariant()
-	{
-		// MockMC: Pig#getVariant
-		return null;
+		// MockMC: Pig#setSoundVariant
 	}
 
 	@Override
@@ -58,5 +42,26 @@ public interface PigBaseMock extends Pig, VehicleBaseMock, SteerableBaseMock
 	{
 		// MockMC: Pig#isLeashed
 		return false;
+	}
+
+	@Override
+	default Pig.SoundVariant getSoundVariant()
+	{
+		// MockMC: Pig#getSoundVariant
+		return null;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Pig#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default Pig.Variant getVariant()
+	{
+		// MockMC: Pig#getVariant
+		return null;
 	}
 }

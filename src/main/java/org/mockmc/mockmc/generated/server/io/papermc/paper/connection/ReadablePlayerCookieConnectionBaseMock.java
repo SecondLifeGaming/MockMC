@@ -18,6 +18,7 @@ import org.bukkit.NamespacedKey;
  */
 public interface ReadablePlayerCookieConnectionBaseMock extends ReadablePlayerCookieConnection, PlayerConnectionBaseMock
 {
+	@Override
 	default CompletableFuture<byte[]> retrieveCookie(NamespacedKey arg0)
 	{
 		// MockMC: ReadablePlayerCookieConnection#retrieveCookie

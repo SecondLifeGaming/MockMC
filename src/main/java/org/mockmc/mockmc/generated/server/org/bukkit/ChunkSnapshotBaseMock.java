@@ -19,12 +19,14 @@ import org.bukkit.block.data.BlockData;
  */
 public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 {
+	@Override
 	default BlockData getBlockData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getBlockData
 		return null;
 	}
 
+	@Override
 	default double getRawBiomeTemperature(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getRawBiomeTemperature
@@ -35,6 +37,7 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default double getRawBiomeTemperature(int arg0, int arg1)
 	{
@@ -42,54 +45,63 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 		return 0.0d;
 	}
 
+	@Override
 	default boolean isSectionEmpty(int arg0)
 	{
 		// MockMC: ChunkSnapshot#isSectionEmpty
 		return false;
 	}
 
+	@Override
 	default Key getWorldKey()
 	{
 		// MockMC: ChunkSnapshot#getWorldKey
 		return null;
 	}
 
+	@Override
 	default long getCaptureFullTime()
 	{
 		// MockMC: ChunkSnapshot#getCaptureFullTime
 		return 0L;
 	}
 
+	@Override
 	default int getBlockSkyLight(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getBlockSkyLight
 		return 0;
 	}
 
+	@Override
 	default int getZ()
 	{
 		// MockMC: ChunkSnapshot#getZ
 		return 0;
 	}
 
+	@Override
 	default int getX()
 	{
 		// MockMC: ChunkSnapshot#getX
 		return 0;
 	}
 
+	@Override
 	default boolean contains(BlockData arg0)
 	{
 		// MockMC: ChunkSnapshot#contains
 		return false;
 	}
 
+	@Override
 	default boolean contains(Biome arg0)
 	{
 		// MockMC: ChunkSnapshot#contains
 		return false;
 	}
 
+	@Override
 	default String getWorldName()
 	{
 		// MockMC: ChunkSnapshot#getWorldName
@@ -100,6 +112,7 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.15")
 	default Biome getBiome(int arg0, int arg1)
 	{
@@ -107,6 +120,7 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 		return null;
 	}
 
+	@Override
 	default Biome getBiome(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getBiome
@@ -117,6 +131,7 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default int getData(int arg0, int arg1, int arg2)
 	{
@@ -124,18 +139,21 @@ public interface ChunkSnapshotBaseMock extends ChunkSnapshot
 		return 0;
 	}
 
+	@Override
 	default Material getBlockType(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getBlockType
 		return null;
 	}
 
+	@Override
 	default int getHighestBlockYAt(int arg0, int arg1)
 	{
 		// MockMC: ChunkSnapshot#getHighestBlockYAt
 		return 0;
 	}
 
+	@Override
 	default int getBlockEmittedLight(int arg0, int arg1, int arg2)
 	{
 		// MockMC: ChunkSnapshot#getBlockEmittedLight

@@ -17,6 +17,7 @@ import com.velocitypowered.api.permission.PermissionSubject;
  */
 public interface PermissionProviderBaseMock extends PermissionProvider
 {
+	@Override
 	default PermissionFunction createFunction(PermissionSubject arg0)
 	{
 		// MockMC: PermissionProvider#createFunction

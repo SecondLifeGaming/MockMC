@@ -30,60 +30,70 @@ import org.bukkit.inventory.meta.ItemMeta;
  */
 public interface ItemFactoryBaseMock extends ItemFactory
 {
+	@Override
 	default Color getDefaultLeatherColor()
 	{
 		// MockMC: ItemFactory#getDefaultLeatherColor
 		return null;
 	}
 
+	@Override
 	default Component displayName(ItemStack arg0)
 	{
 		// MockMC: ItemFactory#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default ItemStack enchantWithLevels(ItemStack arg0, int arg1, RegistryKeySet<Enchantment> arg2, Random arg3)
 	{
 		// MockMC: ItemFactory#enchantWithLevels
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default Material getSpawnEgg(EntityType arg0)
 	{
 		// MockMC: ItemFactory#getSpawnEgg
 		return null;
 	}
 
+	@Override
 	default ItemStack enchantWithLevels(ItemStack arg0, int arg1, boolean arg2, Random arg3)
 	{
 		// MockMC: ItemFactory#enchantWithLevels
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemMeta asMetaFor(ItemMeta arg0, Material arg1) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#asMetaFor
 		return null;
 	}
 
+	@Override
 	default ItemMeta asMetaFor(ItemMeta arg0, ItemStack arg1) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#asMetaFor
 		return null;
 	}
 
+	@Override
 	default boolean isApplicable(ItemMeta arg0, ItemStack arg1) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#isApplicable
 		return false;
 	}
 
+	@Override
 	default boolean isApplicable(ItemMeta arg0, Material arg1) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#isApplicable
 		return false;
 	}
 
+	@Override
 	default ItemMeta getItemMeta(Material arg0)
 	{
 		// MockMC: ItemFactory#getItemMeta
@@ -94,6 +104,7 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1", forRemoval = true)
 	default String getI18NDisplayName(ItemStack arg0)
 	{
@@ -101,12 +112,14 @@ public interface ItemFactoryBaseMock extends ItemFactory
 		return "";
 	}
 
+	@Override
 	default ItemStack ensureServerConversions(ItemStack arg0)
 	{
 		// MockMC: ItemFactory#ensureServerConversions
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean equals(ItemMeta arg0, ItemMeta arg1) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#equals
@@ -117,7 +130,9 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default Content hoverContentOf(ItemStack arg0)
 	{
@@ -129,7 +144,9 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default Content hoverContentOf(Entity arg0)
 	{
@@ -141,7 +158,9 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default Content hoverContentOf(Entity arg0, BaseComponent[] arg1)
 	{
@@ -153,7 +172,9 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default Content hoverContentOf(Entity arg0, String arg1)
 	{
@@ -165,7 +186,9 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default Content hoverContentOf(Entity arg0, BaseComponent arg1)
 	{
@@ -177,6 +200,7 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.3")
 	default ItemStack enchantItem(World arg0, ItemStack arg1, int arg2, boolean arg3)
 	{
@@ -188,6 +212,7 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.3")
 	default ItemStack enchantItem(ItemStack arg0, int arg1, boolean arg2)
 	{
@@ -199,6 +224,7 @@ public interface ItemFactoryBaseMock extends ItemFactory
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.3")
 	default ItemStack enchantItem(Entity arg0, ItemStack arg1, int arg2, boolean arg3)
 	{
@@ -206,12 +232,14 @@ public interface ItemFactoryBaseMock extends ItemFactory
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack createItemStack(String arg0) throws IllegalArgumentException
 	{
 		// MockMC: ItemFactory#createItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default HoverEvent<HoverEvent.ShowItem> asHoverEvent(ItemStack arg0, UnaryOperator<HoverEvent.ShowItem> arg1)
 	{
 		// MockMC: ItemFactory#asHoverEvent

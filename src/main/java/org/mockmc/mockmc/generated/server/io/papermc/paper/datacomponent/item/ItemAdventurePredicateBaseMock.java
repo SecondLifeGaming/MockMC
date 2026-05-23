@@ -17,6 +17,7 @@ import java.util.List;
  */
 public interface ItemAdventurePredicateBaseMock extends ItemAdventurePredicate
 {
+	@Override
 	default List<BlockPredicate> predicates()
 	{
 		// MockMC: ItemAdventurePredicate#predicates

@@ -19,108 +19,126 @@ import org.bukkit.plugin.PluginLoadOrder;
  */
 public interface PluginMetaBaseMock extends PluginMeta
 {
+	@Override
 	default List<String> getContributors()
 	{
 		// MockMC: PluginMeta#getContributors
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String namespace()
 	{
 		// MockMC: PluginMeta#namespace
 		return "";
 	}
 
+	@Override
 	default List<String> getPluginSoftDependencies()
 	{
 		// MockMC: PluginMeta#getPluginSoftDependencies
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<String> getPluginDependencies()
 	{
 		// MockMC: PluginMeta#getPluginDependencies
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String getDisplayName()
 	{
 		// MockMC: PluginMeta#getDisplayName
 		return "";
 	}
 
+	@Override
 	default List<String> getAuthors()
 	{
 		// MockMC: PluginMeta#getAuthors
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default PermissionDefault getPermissionDefault()
 	{
 		// MockMC: PluginMeta#getPermissionDefault
 		return null;
 	}
 
+	@Override
 	default PluginLoadOrder getLoadOrder()
 	{
 		// MockMC: PluginMeta#getLoadOrder
 		return null;
 	}
 
+	@Override
 	default String getDescription()
 	{
 		// MockMC: PluginMeta#getDescription
 		return "";
 	}
 
+	@Override
 	default String getAPIVersion()
 	{
 		// MockMC: PluginMeta#getAPIVersion
 		return "";
 	}
 
+	@Override
 	default List<String> getProvidedPlugins()
 	{
 		// MockMC: PluginMeta#getProvidedPlugins
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String getVersion()
 	{
 		// MockMC: PluginMeta#getVersion
 		return "";
 	}
 
+	@Override
 	default String getLoggerPrefix()
 	{
 		// MockMC: PluginMeta#getLoggerPrefix
 		return "";
 	}
 
+	@Override
 	default String getMainClass()
 	{
 		// MockMC: PluginMeta#getMainClass
 		return "";
 	}
 
+	@Override
 	default List<String> getLoadBeforePlugins()
 	{
 		// MockMC: PluginMeta#getLoadBeforePlugins
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String getWebsite()
 	{
 		// MockMC: PluginMeta#getWebsite
 		return "";
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: PluginMeta#getName
 		return "";
 	}
 
+	@Override
 	default List<Permission> getPermissions()
 	{
 		// MockMC: PluginMeta#getPermissions

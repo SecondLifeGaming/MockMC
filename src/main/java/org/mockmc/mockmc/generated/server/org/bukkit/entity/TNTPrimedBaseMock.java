@@ -16,9 +16,11 @@ import org.bukkit.entity.TNTPrimed;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TNTPrimedBaseMock extends TNTPrimed, ExplosiveBaseMock
 {
+	@Override
 	default int getFuseTicks()
 	{
 		// MockMC: TNTPrimed#getFuseTicks
@@ -29,6 +31,7 @@ public interface TNTPrimedBaseMock extends TNTPrimed, ExplosiveBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Location getSourceLoc()
 	{
@@ -36,28 +39,33 @@ public interface TNTPrimedBaseMock extends TNTPrimed, ExplosiveBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setBlockData(BlockData arg0)
 	{
 		// MockMC: TNTPrimed#setBlockData
 	}
 
+	@Override
 	default Entity getSource()
 	{
 		// MockMC: TNTPrimed#getSource
 		return null;
 	}
 
+	@Override
 	default void setFuseTicks(int arg0)
 	{
 		// MockMC: TNTPrimed#setFuseTicks
 	}
 
+	@Override
 	default BlockData getBlockData()
 	{
 		// MockMC: TNTPrimed#getBlockData
 		return null;
 	}
 
+	@Override
 	default void setSource(Entity arg0)
 	{
 		// MockMC: TNTPrimed#setSource

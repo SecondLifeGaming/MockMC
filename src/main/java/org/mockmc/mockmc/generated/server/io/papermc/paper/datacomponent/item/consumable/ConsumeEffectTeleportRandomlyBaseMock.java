@@ -17,6 +17,7 @@ public interface ConsumeEffectTeleportRandomlyBaseMock
 			io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.TeleportRandomly,
 			ConsumeEffectBaseMock
 {
+	@Override
 	default float diameter()
 	{
 		// MockMC: TeleportRandomly#diameter

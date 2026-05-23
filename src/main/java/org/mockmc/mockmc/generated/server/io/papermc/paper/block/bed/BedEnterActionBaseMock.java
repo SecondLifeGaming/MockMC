@@ -18,24 +18,28 @@ import net.kyori.adventure.text.Component;
  */
 public interface BedEnterActionBaseMock extends BedEnterAction
 {
+	@Override
 	default BedRuleResult canSleep()
 	{
 		// MockMC: BedEnterAction#canSleep
 		return null;
 	}
 
+	@Override
 	default Component errorMessage()
 	{
 		// MockMC: BedEnterAction#errorMessage
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default BedEnterProblem problem()
 	{
 		// MockMC: BedEnterAction#problem
 		return null;
 	}
 
+	@Override
 	default BedRuleResult canSetSpawn()
 	{
 		// MockMC: BedEnterAction#canSetSpawn

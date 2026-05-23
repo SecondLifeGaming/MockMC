@@ -15,9 +15,11 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.TileStateInvent
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LecternBaseMock extends Lectern, TileStateInventoryHolderBaseMock
 {
+	@Override
 	default void setPage(int arg0)
 	{
 		// MockMC: Lectern#setPage
@@ -30,6 +32,7 @@ public interface LecternBaseMock extends Lectern, TileStateInventoryHolderBaseMo
 		return null;
 	}
 
+	@Override
 	default int getPage()
 	{
 		// MockMC: Lectern#getPage

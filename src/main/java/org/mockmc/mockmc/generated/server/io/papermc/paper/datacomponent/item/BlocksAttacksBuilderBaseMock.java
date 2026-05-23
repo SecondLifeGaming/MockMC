@@ -22,48 +22,56 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface BlocksAttacksBuilderBaseMock extends BlocksAttacks.Builder, DataComponentBuilderBaseMock<BlocksAttacks>
 {
+	@Override
 	default BlocksAttacks.Builder disableCooldownScale(float arg0)
 	{
 		// MockMC: Builder#disableCooldownScale
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder blockSound(Key arg0)
 	{
 		// MockMC: Builder#blockSound
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder itemDamage(ItemDamageFunction arg0)
 	{
 		// MockMC: Builder#itemDamage
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder damageReductions(List<DamageReduction> arg0)
 	{
 		// MockMC: Builder#damageReductions
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder disableSound(Key arg0)
 	{
 		// MockMC: Builder#disableSound
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder addDamageReduction(DamageReduction arg0)
 	{
 		// MockMC: Builder#addDamageReduction
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder bypassedBy(RegistryKeySet<DamageType> arg0)
 	{
 		// MockMC: Builder#bypassedBy
 		return null;
 	}
 
+	@Override
 	default BlocksAttacks.Builder blockDelaySeconds(float arg0)
 	{
 		// MockMC: Builder#blockDelaySeconds

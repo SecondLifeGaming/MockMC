@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ChargedProjectilesBaseMock extends ChargedProjectiles
 {
+	@Override
 	default List<ItemStack> projectiles()
 	{
 		// MockMC: ChargedProjectiles#projectiles

@@ -17,6 +17,7 @@ import org.bukkit.FeatureFlag;
  */
 public interface FeatureDependantBaseMock extends FeatureDependant
 {
+	@Override
 	default Set<FeatureFlag> requiredFeatures()
 	{
 		// MockMC: FeatureDependant#requiredFeatures

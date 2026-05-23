@@ -17,23 +17,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface UseCooldownComponentBaseMock extends UseCooldownComponent, ConfigurationSerializableBaseMock
 {
+	@Override
 	default float getCooldownSeconds()
 	{
 		// MockMC: UseCooldownComponent#getCooldownSeconds
 		return 0.0f;
 	}
 
+	@Override
 	default NamespacedKey getCooldownGroup()
 	{
 		// MockMC: UseCooldownComponent#getCooldownGroup
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default void setCooldownSeconds(float arg0)
 	{
 		// MockMC: UseCooldownComponent#setCooldownSeconds
 	}
 
+	@Override
 	default void setCooldownGroup(NamespacedKey arg0)
 	{
 		// MockMC: UseCooldownComponent#setCooldownGroup

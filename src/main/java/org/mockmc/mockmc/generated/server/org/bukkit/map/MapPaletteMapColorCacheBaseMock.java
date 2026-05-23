@@ -16,12 +16,14 @@ import org.bukkit.map.MapPalette;
  */
 public interface MapPaletteMapColorCacheBaseMock extends MapPalette.MapColorCache
 {
+	@Override
 	default byte matchColor(Color arg0)
 	{
 		// MockMC: MapColorCache#matchColor
 		return 0;
 	}
 
+	@Override
 	default boolean isCached()
 	{
 		// MockMC: MapColorCache#isCached

@@ -22,24 +22,28 @@ import org.mockmc.mockmc.generated.proxy.com.velocitypowered.api.proxy.messages.
  */
 public interface RegisteredServerBaseMock extends RegisteredServer, ChannelMessageSinkBaseMock
 {
+	@Override
 	default Collection<Player> getPlayersConnected()
 	{
 		// MockMC: RegisteredServer#getPlayersConnected
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default CompletableFuture<ServerPing> ping(PingOptions arg0)
 	{
 		// MockMC: RegisteredServer#ping
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default CompletableFuture<ServerPing> ping()
 	{
 		// MockMC: RegisteredServer#ping
 		return java.util.concurrent.CompletableFuture.completedFuture(null);
 	}
 
+	@Override
 	default ServerInfo getServerInfo()
 	{
 		// MockMC: RegisteredServer#getServerInfo

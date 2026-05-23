@@ -16,6 +16,7 @@ import net.kyori.adventure.text.Component;
  */
 public interface VersionFetcherBaseMock extends VersionFetcher
 {
+	@Override
 	default Component getVersionMessage()
 	{
 		// MockMC: VersionFetcher#getVersionMessage
@@ -26,6 +27,7 @@ public interface VersionFetcherBaseMock extends VersionFetcher
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Component getVersionMessage(String arg0)
 	{
@@ -33,6 +35,7 @@ public interface VersionFetcherBaseMock extends VersionFetcher
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default long getCacheTime()
 	{
 		// MockMC: VersionFetcher#getCacheTime

@@ -31,7 +31,8 @@ import net.md_5.bungee.api.scheduler.TaskScheduler;
  */
 public interface ProxyServerBaseMock
 {
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default ProxyConfig getConfig()
 	{
 		// MockMC: ProxyServer#getConfig
@@ -187,7 +188,8 @@ public interface ProxyServerBaseMock
 		return "";
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void broadcast(BaseComponent arg0)
 	{
 		// MockMC: ProxyServer#broadcast

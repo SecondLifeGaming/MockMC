@@ -17,6 +17,7 @@ import org.bukkit.ServerLinks;
  */
 public interface ServerLinksServerLinkBaseMock extends ServerLinks.ServerLink
 {
+	@Override
 	default Component displayName()
 	{
 		// MockMC: ServerLink#displayName
@@ -27,6 +28,7 @@ public interface ServerLinksServerLinkBaseMock extends ServerLinks.ServerLink
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getDisplayName()
 	{
@@ -34,12 +36,14 @@ public interface ServerLinksServerLinkBaseMock extends ServerLinks.ServerLink
 		return "";
 	}
 
+	@Override
 	default ServerLinks.Type getType()
 	{
 		// MockMC: ServerLink#getType
 		return null;
 	}
 
+	@Override
 	default URI getUrl()
 	{
 		// MockMC: ServerLink#getUrl

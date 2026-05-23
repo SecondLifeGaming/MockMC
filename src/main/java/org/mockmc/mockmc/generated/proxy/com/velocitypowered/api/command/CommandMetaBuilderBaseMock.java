@@ -17,24 +17,28 @@ import com.velocitypowered.api.command.CommandSource;
  */
 public interface CommandMetaBuilderBaseMock extends CommandMeta.Builder
 {
+	@Override
 	default CommandMeta.Builder aliases(String... arg0)
 	{
 		// MockMC: Builder#aliases
 		return null;
 	}
 
+	@Override
 	default CommandMeta.Builder hint(CommandNode<CommandSource> arg0)
 	{
 		// MockMC: Builder#hint
 		return null;
 	}
 
+	@Override
 	default CommandMeta build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default CommandMeta.Builder plugin(Object arg0)
 	{
 		// MockMC: Builder#plugin

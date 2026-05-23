@@ -22,12 +22,14 @@ public interface ItemContainerContentsBuilderBaseMock
 			ItemContainerContents.Builder,
 			DataComponentBuilderBaseMock<ItemContainerContents>
 {
+	@Override
 	default ItemContainerContents.Builder addAll(List<ItemStack> arg0)
 	{
 		// MockMC: Builder#addAll
 		return null;
 	}
 
+	@Override
 	default ItemContainerContents.Builder add(ItemStack arg0)
 	{
 		// MockMC: Builder#add

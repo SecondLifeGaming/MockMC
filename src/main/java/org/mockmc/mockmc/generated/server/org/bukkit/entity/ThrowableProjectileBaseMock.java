@@ -14,15 +14,18 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ThrowableProjectileBaseMock extends ThrowableProjectile, ProjectileBaseMock
 {
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: ThrowableProjectile#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: ThrowableProjectile#setItem

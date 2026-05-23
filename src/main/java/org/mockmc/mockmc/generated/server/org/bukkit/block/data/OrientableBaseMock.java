@@ -17,18 +17,21 @@ import org.bukkit.block.data.Orientable;
  */
 public interface OrientableBaseMock extends Orientable, BlockDataBaseMock
 {
+	@Override
 	default Set<Axis> getAxes()
 	{
 		// MockMC: Orientable#getAxes
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Axis getAxis()
 	{
 		// MockMC: Orientable#getAxis
 		return null;
 	}
 
+	@Override
 	default void setAxis(Axis arg0)
 	{
 		// MockMC: Orientable#setAxis

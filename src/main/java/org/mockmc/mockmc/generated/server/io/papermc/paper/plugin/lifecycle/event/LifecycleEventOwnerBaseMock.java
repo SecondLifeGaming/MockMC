@@ -16,6 +16,7 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
  */
 public interface LifecycleEventOwnerBaseMock extends LifecycleEventOwner
 {
+	@Override
 	default PluginMeta getPluginMeta()
 	{
 		// MockMC: LifecycleEventOwner#getPluginMeta

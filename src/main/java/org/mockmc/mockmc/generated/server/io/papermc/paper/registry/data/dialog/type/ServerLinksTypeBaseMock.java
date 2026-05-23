@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.dialog.type.ServerLinksType;
  */
 public interface ServerLinksTypeBaseMock extends ServerLinksType
 {
+	@Override
 	default int buttonWidth()
 	{
 		// MockMC: ServerLinksType#buttonWidth
 		return 0;
 	}
 
+	@Override
 	default ActionButton exitAction()
 	{
 		// MockMC: ServerLinksType#exitAction
 		return null;
 	}
 
+	@Override
 	default int columns()
 	{
 		// MockMC: ServerLinksType#columns

@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface ChickenVariantRegistryEntryBaseMock extends ChickenVariantRegistryEntry
 {
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: ChickenVariantRegistryEntry#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ChickenVariantRegistryEntry.Model model()
 	{
 		// MockMC: ChickenVariantRegistryEntry#model
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset babyClientTextureAsset()
 	{
 		// MockMC: ChickenVariantRegistryEntry#babyClientTextureAsset

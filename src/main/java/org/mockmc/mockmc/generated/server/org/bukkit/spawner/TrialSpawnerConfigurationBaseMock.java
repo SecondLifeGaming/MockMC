@@ -17,65 +17,77 @@ import org.bukkit.spawner.TrialSpawnerConfiguration;
  */
 public interface TrialSpawnerConfigurationBaseMock extends TrialSpawnerConfiguration, BaseSpawnerBaseMock
 {
+	@Override
 	default float getBaseSpawnsBeforeCooldown()
 	{
 		// MockMC: TrialSpawnerConfiguration#getBaseSpawnsBeforeCooldown
 		return 0.0f;
 	}
 
+	@Override
 	default void addPossibleReward(LootTable arg0, int arg1)
 	{
 		// MockMC: TrialSpawnerConfiguration#addPossibleReward
 	}
 
+	@Override
 	default float getAdditionalSpawnsBeforeCooldown()
 	{
 		// MockMC: TrialSpawnerConfiguration#getAdditionalSpawnsBeforeCooldown
 		return 0.0f;
 	}
 
+	@Override
 	default void setAdditionalSpawnsBeforeCooldown(float arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#setAdditionalSpawnsBeforeCooldown
 	}
 
+	@Override
 	default void setBaseSimultaneousEntities(float arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#setBaseSimultaneousEntities
 	}
 
+	@Override
 	default void setBaseSpawnsBeforeCooldown(float arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#setBaseSpawnsBeforeCooldown
 	}
 
+	@Override
 	default void setPossibleRewards(Map<LootTable, Integer> arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#setPossibleRewards
 	}
 
+	@Override
 	default float getBaseSimultaneousEntities()
 	{
 		// MockMC: TrialSpawnerConfiguration#getBaseSimultaneousEntities
 		return 0.0f;
 	}
 
+	@Override
 	default float getAdditionalSimultaneousEntities()
 	{
 		// MockMC: TrialSpawnerConfiguration#getAdditionalSimultaneousEntities
 		return 0.0f;
 	}
 
+	@Override
 	default void setAdditionalSimultaneousEntities(float arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#setAdditionalSimultaneousEntities
 	}
 
+	@Override
 	default void removePossibleReward(LootTable arg0)
 	{
 		// MockMC: TrialSpawnerConfiguration#removePossibleReward
 	}
 
+	@Override
 	default Map<LootTable, Integer> getPossibleRewards()
 	{
 		// MockMC: TrialSpawnerConfiguration#getPossibleRewards

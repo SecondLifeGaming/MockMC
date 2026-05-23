@@ -15,31 +15,14 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.BucketableBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface AxolotlBaseMock extends Axolotl, BucketableBaseMock, AnimalsBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface AxolotlBaseMock extends Axolotl, AnimalsBaseMock, BucketableBaseMock
 {
+	@Override
 	default void setPlayingDead(boolean arg0)
 	{
 		// MockMC: Axolotl#setPlayingDead
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Axolotl#getLeashHolder
-		return null;
-	}
-
-	default boolean isPlayingDead()
-	{
-		// MockMC: Axolotl#isPlayingDead
-		return false;
-	}
-
-	default Axolotl.Variant getVariant()
-	{
-		// MockMC: Axolotl#getVariant
-		return null;
 	}
 
 	@Override
@@ -49,9 +32,18 @@ public interface AxolotlBaseMock extends Axolotl, BucketableBaseMock, AnimalsBas
 		return false;
 	}
 
-	default void setVariant(Axolotl.Variant arg0)
+	@Override
+	default boolean isPlayingDead()
 	{
-		// MockMC: Axolotl#setVariant
+		// MockMC: Axolotl#isPlayingDead
+		return false;
+	}
+
+	@Override
+	default Axolotl.Variant getVariant()
+	{
+		// MockMC: Axolotl#getVariant
+		return null;
 	}
 
 	@Override
@@ -59,5 +51,18 @@ public interface AxolotlBaseMock extends Axolotl, BucketableBaseMock, AnimalsBas
 	{
 		// MockMC: Axolotl#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setVariant(Axolotl.Variant arg0)
+	{
+		// MockMC: Axolotl#setVariant
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Axolotl#getLeashHolder
+		return null;
 	}
 }

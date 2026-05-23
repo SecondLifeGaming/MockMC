@@ -15,42 +15,49 @@ import org.bukkit.Input;
  */
 public interface InputBaseMock extends Input
 {
+	@Override
 	default boolean isRight()
 	{
 		// MockMC: Input#isRight
 		return false;
 	}
 
+	@Override
 	default boolean isLeft()
 	{
 		// MockMC: Input#isLeft
 		return false;
 	}
 
+	@Override
 	default boolean isSneak()
 	{
 		// MockMC: Input#isSneak
 		return false;
 	}
 
+	@Override
 	default boolean isSprint()
 	{
 		// MockMC: Input#isSprint
 		return false;
 	}
 
+	@Override
 	default boolean isJump()
 	{
 		// MockMC: Input#isJump
 		return false;
 	}
 
+	@Override
 	default boolean isForward()
 	{
 		// MockMC: Input#isForward
 		return false;
 	}
 
+	@Override
 	default boolean isBackward()
 	{
 		// MockMC: Input#isBackward

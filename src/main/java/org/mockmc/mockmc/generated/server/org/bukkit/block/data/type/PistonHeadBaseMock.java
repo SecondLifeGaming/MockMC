@@ -15,11 +15,13 @@ import org.bukkit.block.data.type.PistonHead;
  */
 public interface PistonHeadBaseMock extends PistonHead, TechnicalPistonBaseMock
 {
+	@Override
 	default void setShort(boolean arg0)
 	{
 		// MockMC: PistonHead#setShort
 	}
 
+	@Override
 	default boolean isShort()
 	{
 		// MockMC: PistonHead#isShort

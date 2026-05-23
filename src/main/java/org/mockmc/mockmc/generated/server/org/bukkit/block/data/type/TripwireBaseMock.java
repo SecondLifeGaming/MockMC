@@ -18,12 +18,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  */
 public interface TripwireBaseMock extends Tripwire, AttachableBaseMock, PowerableBaseMock, MultipleFacingBaseMock
 {
+	@Override
 	default boolean isDisarmed()
 	{
 		// MockMC: Tripwire#isDisarmed
 		return false;
 	}
 
+	@Override
 	default void setDisarmed(boolean arg0)
 	{
 		// MockMC: Tripwire#setDisarmed

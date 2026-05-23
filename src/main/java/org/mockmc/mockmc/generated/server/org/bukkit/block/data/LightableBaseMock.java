@@ -15,12 +15,14 @@ import org.bukkit.block.data.Lightable;
  */
 public interface LightableBaseMock extends Lightable, BlockDataBaseMock
 {
+	@Override
 	default boolean isLit()
 	{
 		// MockMC: Lightable#isLit
 		return false;
 	}
 
+	@Override
 	default void setLit(boolean arg0)
 	{
 		// MockMC: Lightable#setLit

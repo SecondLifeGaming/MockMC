@@ -14,22 +14,10 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface CamelBaseMock extends Camel, AbstractHorseBaseMock, SittableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface CamelBaseMock extends Camel, SittableBaseMock, AbstractHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Camel#getLeashHolder
-		return null;
-	}
-
-	default boolean isDashing()
-	{
-		// MockMC: Camel#isDashing
-		return false;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -37,9 +25,11 @@ public interface CamelBaseMock extends Camel, AbstractHorseBaseMock, SittableBas
 		return false;
 	}
 
-	default void setDashing(boolean arg0)
+	@Override
+	default boolean isDashing()
 	{
-		// MockMC: Camel#setDashing
+		// MockMC: Camel#isDashing
+		return false;
 	}
 
 	@Override
@@ -47,5 +37,18 @@ public interface CamelBaseMock extends Camel, AbstractHorseBaseMock, SittableBas
 	{
 		// MockMC: Camel#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setDashing(boolean arg0)
+	{
+		// MockMC: Camel#setDashing
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Camel#getLeashHolder
+		return null;
 	}
 }

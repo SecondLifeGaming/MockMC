@@ -16,6 +16,7 @@ import org.bukkit.inventory.Recipe;
  */
 public interface RecipeBaseMock extends Recipe
 {
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: Recipe#getResult

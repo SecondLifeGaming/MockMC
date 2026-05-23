@@ -15,9 +15,11 @@ import org.bukkit.entity.ComplexLivingEntity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ComplexLivingEntityBaseMock extends ComplexLivingEntity, LivingEntityBaseMock
 {
+	@Override
 	default Set<ComplexEntityPart> getParts()
 	{
 		// MockMC: ComplexLivingEntity#getParts

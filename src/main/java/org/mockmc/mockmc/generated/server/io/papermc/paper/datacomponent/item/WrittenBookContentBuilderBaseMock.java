@@ -22,54 +22,63 @@ public interface WrittenBookContentBuilderBaseMock
 			WrittenBookContent.Builder,
 			DataComponentBuilderBaseMock<WrittenBookContent>
 {
+	@Override
 	default WrittenBookContent.Builder filteredTitle(Filtered<String> arg0)
 	{
 		// MockMC: Builder#filteredTitle
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder author(String arg0)
 	{
 		// MockMC: Builder#author
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder addFilteredPage(Filtered<? extends ComponentLike> arg0)
 	{
 		// MockMC: Builder#addFilteredPage
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder generation(int arg0)
 	{
 		// MockMC: Builder#generation
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder title(String arg0)
 	{
 		// MockMC: Builder#title
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder resolved(boolean arg0)
 	{
 		// MockMC: Builder#resolved
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder addPage(ComponentLike arg0)
 	{
 		// MockMC: Builder#addPage
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder addFilteredPages(List<Filtered<? extends ComponentLike>> arg0)
 	{
 		// MockMC: Builder#addFilteredPages
 		return null;
 	}
 
+	@Override
 	default WrittenBookContent.Builder addPages(List<? extends ComponentLike> arg0)
 	{
 		// MockMC: Builder#addPages

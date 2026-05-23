@@ -14,14 +14,17 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SizedFireballBaseMock extends SizedFireball, FireballBaseMock
 {
+	@Override
 	default void setDisplayItem(ItemStack arg0)
 	{
 		// MockMC: SizedFireball#setDisplayItem
 	}
 
+	@Override
 	default ItemStack getDisplayItem()
 	{
 		// MockMC: SizedFireball#getDisplayItem

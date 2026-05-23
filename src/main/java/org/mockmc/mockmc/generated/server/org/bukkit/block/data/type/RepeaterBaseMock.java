@@ -15,37 +15,43 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface RepeaterBaseMock extends Repeater, PowerableBaseMock, DirectionalBaseMock
+public interface RepeaterBaseMock extends Repeater, DirectionalBaseMock, PowerableBaseMock
 {
+	@Override
 	default int getMinimumDelay()
 	{
 		// MockMC: Repeater#getMinimumDelay
 		return 0;
 	}
 
+	@Override
 	default int getDelay()
 	{
 		// MockMC: Repeater#getDelay
 		return 0;
 	}
 
+	@Override
 	default boolean isLocked()
 	{
 		// MockMC: Repeater#isLocked
 		return false;
 	}
 
+	@Override
 	default int getMaximumDelay()
 	{
 		// MockMC: Repeater#getMaximumDelay
 		return 0;
 	}
 
+	@Override
 	default void setDelay(int arg0)
 	{
 		// MockMC: Repeater#setDelay
 	}
 
+	@Override
 	default void setLocked(boolean arg0)
 	{
 		// MockMC: Repeater#setLocked

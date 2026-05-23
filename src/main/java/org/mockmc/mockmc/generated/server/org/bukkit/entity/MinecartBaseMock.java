@@ -18,31 +18,37 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.FrictionalBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MinecartBaseMock extends Minecart, FrictionalBaseMock, VehicleBaseMock
 {
+	@Override
 	default void setFlyingVelocityMod(Vector arg0)
 	{
 		// MockMC: Minecart#setFlyingVelocityMod
 	}
 
+	@Override
 	default double getDamage()
 	{
 		// MockMC: Minecart#getDamage
 		return 0.0d;
 	}
 
+	@Override
 	default void setSlowWhenEmpty(boolean arg0)
 	{
 		// MockMC: Minecart#setSlowWhenEmpty
 	}
 
+	@Override
 	default Vector getDerailedVelocityMod()
 	{
 		// MockMC: Minecart#getDerailedVelocityMod
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default boolean isSlowWhenEmpty()
 	{
 		// MockMC: Minecart#isSlowWhenEmpty
@@ -53,6 +59,7 @@ public interface MinecartBaseMock extends Minecart, FrictionalBaseMock, VehicleB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setDisplayBlock(MaterialData arg0)
@@ -60,38 +67,45 @@ public interface MinecartBaseMock extends Minecart, FrictionalBaseMock, VehicleB
 		// MockMC: Minecart#setDisplayBlock
 	}
 
+	@Override
 	default void setDamage(double arg0)
 	{
 		// MockMC: Minecart#setDamage
 	}
 
+	@Override
 	default BlockData getDisplayBlockData()
 	{
 		// MockMC: Minecart#getDisplayBlockData
 		return null;
 	}
 
+	@Override
 	default void setDisplayBlockData(BlockData arg0)
 	{
 		// MockMC: Minecart#setDisplayBlockData
 	}
 
+	@Override
 	default void setDisplayBlockOffset(int arg0)
 	{
 		// MockMC: Minecart#setDisplayBlockOffset
 	}
 
+	@Override
 	default void setDerailedVelocityMod(Vector arg0)
 	{
 		// MockMC: Minecart#setDerailedVelocityMod
 	}
 
+	@Override
 	default int getDisplayBlockOffset()
 	{
 		// MockMC: Minecart#getDisplayBlockOffset
 		return 0;
 	}
 
+	@Override
 	default double getMaxSpeed()
 	{
 		// MockMC: Minecart#getMaxSpeed
@@ -102,6 +116,7 @@ public interface MinecartBaseMock extends Minecart, FrictionalBaseMock, VehicleB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default MaterialData getDisplayBlock()
@@ -110,17 +125,20 @@ public interface MinecartBaseMock extends Minecart, FrictionalBaseMock, VehicleB
 		return null;
 	}
 
+	@Override
 	default void setMaxSpeed(double arg0)
 	{
 		// MockMC: Minecart#setMaxSpeed
 	}
 
+	@Override
 	default Vector getFlyingVelocityMod()
 	{
 		// MockMC: Minecart#getFlyingVelocityMod
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default Material getMinecartMaterial()
 	{
 		// MockMC: Minecart#getMinecartMaterial

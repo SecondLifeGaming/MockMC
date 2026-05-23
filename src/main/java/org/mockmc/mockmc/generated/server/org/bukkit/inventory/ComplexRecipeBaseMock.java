@@ -14,6 +14,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ComplexRecipeBaseMock extends ComplexRecipe, RecipeBaseMock, KeyedBaseMock
+public interface ComplexRecipeBaseMock extends ComplexRecipe, KeyedBaseMock, RecipeBaseMock
 {
 }

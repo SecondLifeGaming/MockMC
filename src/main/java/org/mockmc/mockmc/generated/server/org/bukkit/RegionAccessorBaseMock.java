@@ -35,8 +35,9 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.world.flag.FeatureFla
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHolderBaseMock, KeyedBaseMock
+public interface RegionAccessorBaseMock extends RegionAccessor, KeyedBaseMock, FeatureFlagSetHolderBaseMock
 {
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, CreatureSpawnEvent.SpawnReason arg2,
 			Consumer<? super T> arg3) throws IllegalArgumentException
 	{
@@ -44,6 +45,7 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, Consumer<? super T> arg2,
 			CreatureSpawnEvent.SpawnReason arg3) throws IllegalArgumentException
 	{
@@ -51,6 +53,7 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, Consumer<? super T> arg2)
 			throws IllegalArgumentException
 	{
@@ -58,6 +61,7 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	@SuppressWarnings(
 	{"unchecked", "varargs"})
 	default Collection<Entity> getEntitiesByClasses(Class<?>... arg0)
@@ -66,6 +70,7 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, boolean arg2, Consumer<? super T> arg3)
 			throws IllegalArgumentException
 	{
@@ -73,12 +78,14 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1) throws IllegalArgumentException
 	{
 		// MockMC: RegionAccessor#spawn
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> T spawn(Location arg0, Class<T> arg1, CreatureSpawnEvent.SpawnReason arg2)
 			throws IllegalArgumentException
 	{
@@ -86,48 +93,56 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> Collection<T> getEntitiesByClass(Class<T> arg0)
 	{
 		// MockMC: RegionAccessor#getEntitiesByClass
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T extends Entity> T addEntity(T arg0)
 	{
 		// MockMC: RegionAccessor#addEntity
 		return null;
 	}
 
+	@Override
 	default Material getType(Location arg0)
 	{
 		// MockMC: RegionAccessor#getType
 		return null;
 	}
 
+	@Override
 	default Material getType(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getType
 		return null;
 	}
 
+	@Override
 	default List<Entity> getEntities()
 	{
 		// MockMC: RegionAccessor#getEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<LivingEntity> getLivingEntities()
 	{
 		// MockMC: RegionAccessor#getLivingEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default BlockState getBlockState(Location arg0)
 	{
 		// MockMC: RegionAccessor#getBlockState
 		return null;
 	}
 
+	@Override
 	default BlockState getBlockState(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getBlockState
@@ -141,86 +156,101 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default FluidData getFluidData(Location arg0)
 	{
 		// MockMC: RegionAccessor#getFluidData
 		return null;
 	}
 
+	@Override
 	default FluidData getFluidData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getFluidData
 		return null;
 	}
 
+	@Override
 	default FluidData getFluidData(Position arg0)
 	{
 		// MockMC: RegionAccessor#getFluidData
 		return null;
 	}
 
+	@Override
 	default void setBlockData(int arg0, int arg1, int arg2, BlockData arg3)
 	{
 		// MockMC: RegionAccessor#setBlockData
 	}
 
+	@Override
 	default void setBlockData(Location arg0, BlockData arg1)
 	{
 		// MockMC: RegionAccessor#setBlockData
 	}
 
+	@Override
 	default void setType(int arg0, int arg1, int arg2, Material arg3)
 	{
 		// MockMC: RegionAccessor#setType
 	}
 
+	@Override
 	default void setType(Location arg0, Material arg1)
 	{
 		// MockMC: RegionAccessor#setType
 	}
 
+	@Override
 	default Biome getComputedBiome(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getComputedBiome
 		return null;
 	}
 
+	@Override
 	default <T extends Entity> T createEntity(Location arg0, Class<T> arg1)
 	{
 		// MockMC: RegionAccessor#createEntity
 		return null;
 	}
 
+	@Override
 	default MoonPhase getMoonPhase()
 	{
 		// MockMC: RegionAccessor#getMoonPhase
 		return null;
 	}
 
+	@Override
 	default int getHighestBlockYAt(Location arg0)
 	{
 		// MockMC: RegionAccessor#getHighestBlockYAt
 		return 0;
 	}
 
+	@Override
 	default int getHighestBlockYAt(Location arg0, HeightMap arg1)
 	{
 		// MockMC: RegionAccessor#getHighestBlockYAt
 		return 0;
 	}
 
+	@Override
 	default int getHighestBlockYAt(int arg0, int arg1, HeightMap arg2)
 	{
 		// MockMC: RegionAccessor#getHighestBlockYAt
 		return 0;
 	}
 
+	@Override
 	default int getHighestBlockYAt(int arg0, int arg1)
 	{
 		// MockMC: RegionAccessor#getHighestBlockYAt
 		return 0;
 	}
 
+	@Override
 	default Entity spawnEntity(Location arg0, EntityType arg1, CreatureSpawnEvent.SpawnReason arg2,
 			Consumer<? super Entity> arg3)
 	{
@@ -228,82 +258,96 @@ public interface RegionAccessorBaseMock extends RegionAccessor, FeatureFlagSetHo
 		return null;
 	}
 
+	@Override
 	default Entity spawnEntity(Location arg0, EntityType arg1, CreatureSpawnEvent.SpawnReason arg2)
 	{
 		// MockMC: RegionAccessor#spawnEntity
 		return null;
 	}
 
+	@Override
 	default Entity spawnEntity(Location arg0, EntityType arg1)
 	{
 		// MockMC: RegionAccessor#spawnEntity
 		return null;
 	}
 
+	@Override
 	default Entity spawnEntity(Location arg0, EntityType arg1, boolean arg2)
 	{
 		// MockMC: RegionAccessor#spawnEntity
 		return null;
 	}
 
+	@Override
 	default Biome getBiome(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getBiome
 		return null;
 	}
 
+	@Override
 	default Biome getBiome(Location arg0)
 	{
 		// MockMC: RegionAccessor#getBiome
 		return null;
 	}
 
+	@Override
 	default void setBiome(int arg0, int arg1, int arg2, Biome arg3)
 	{
 		// MockMC: RegionAccessor#setBiome
 	}
 
+	@Override
 	default void setBiome(Location arg0, Biome arg1)
 	{
 		// MockMC: RegionAccessor#setBiome
 	}
 
+	@Override
 	default boolean generateTree(Location arg0, Random arg1, TreeType arg2, Consumer<? super BlockState> arg3)
 	{
 		// MockMC: RegionAccessor#generateTree
 		return false;
 	}
 
+	@Override
 	default boolean generateTree(Location arg0, Random arg1, TreeType arg2)
 	{
 		// MockMC: RegionAccessor#generateTree
 		return false;
 	}
 
+	@Override
 	default boolean generateTree(Location arg0, Random arg1, TreeType arg2, Predicate<? super BlockState> arg3)
 	{
 		// MockMC: RegionAccessor#generateTree
 		return false;
 	}
 
+	@Override
 	default BlockData getBlockData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionAccessor#getBlockData
 		return null;
 	}
 
+	@Override
 	default BlockData getBlockData(Location arg0)
 	{
 		// MockMC: RegionAccessor#getBlockData
 		return null;
 	}
 
+	@Override
 	default boolean hasCollisionsIn(BoundingBox arg0)
 	{
 		// MockMC: RegionAccessor#hasCollisionsIn
 		return false;
 	}
 
+	@Override
 	default boolean lineOfSightExists(Location arg0, Location arg1)
 	{
 		// MockMC: RegionAccessor#lineOfSightExists

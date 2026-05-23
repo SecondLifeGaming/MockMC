@@ -23,18 +23,21 @@ public interface RegistryEntryAddEventBaseMock<T, B extends RegistryBuilder<T>>
 			RegistryEntryAddEvent<T, B>,
 			RegistryEventBaseMock<T>
 {
+	@Override
 	default B builder()
 	{
 		// MockMC: RegistryEntryAddEvent#builder
 		return null;
 	}
 
+	@Override
 	default TypedKey<T> key()
 	{
 		// MockMC: RegistryEntryAddEvent#key
 		return null;
 	}
 
+	@Override
 	default <V extends Keyed> Tag<V> getOrCreateTag(TagKey<V> arg0)
 	{
 		// MockMC: RegistryEntryAddEvent#getOrCreateTag

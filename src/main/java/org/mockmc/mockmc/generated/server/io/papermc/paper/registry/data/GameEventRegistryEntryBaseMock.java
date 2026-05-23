@@ -15,6 +15,7 @@ import io.papermc.paper.registry.data.GameEventRegistryEntry;
  */
 public interface GameEventRegistryEntryBaseMock extends GameEventRegistryEntry
 {
+	@Override
 	default int range()
 	{
 		// MockMC: GameEventRegistryEntry#range

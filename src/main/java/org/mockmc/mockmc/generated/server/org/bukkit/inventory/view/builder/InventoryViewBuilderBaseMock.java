@@ -18,18 +18,21 @@ import org.bukkit.inventory.view.builder.InventoryViewBuilder;
  */
 public interface InventoryViewBuilderBaseMock<V extends InventoryView> extends InventoryViewBuilder<V>
 {
+	@Override
 	default InventoryViewBuilder<V> title(Component arg0)
 	{
 		// MockMC: InventoryViewBuilder#title
 		return null;
 	}
 
+	@Override
 	default InventoryViewBuilder<V> copy()
 	{
 		// MockMC: InventoryViewBuilder#copy
 		return null;
 	}
 
+	@Override
 	default V build(HumanEntity arg0)
 	{
 		// MockMC: InventoryViewBuilder#build

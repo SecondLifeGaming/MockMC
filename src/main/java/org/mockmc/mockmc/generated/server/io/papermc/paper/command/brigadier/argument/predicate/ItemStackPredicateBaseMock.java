@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ItemStackPredicateBaseMock extends ItemStackPredicate
 {
+	@Override
 	default boolean test(ItemStack arg0)
 	{
 		// MockMC: ItemStackPredicate#test

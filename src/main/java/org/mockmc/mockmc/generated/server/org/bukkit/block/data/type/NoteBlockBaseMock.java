@@ -18,22 +18,26 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  */
 public interface NoteBlockBaseMock extends NoteBlock, PowerableBaseMock
 {
+	@Override
 	default void setNote(Note arg0)
 	{
 		// MockMC: NoteBlock#setNote
 	}
 
+	@Override
 	default void setInstrument(Instrument arg0)
 	{
 		// MockMC: NoteBlock#setInstrument
 	}
 
+	@Override
 	default Note getNote()
 	{
 		// MockMC: NoteBlock#getNote
 		return null;
 	}
 
+	@Override
 	default Instrument getInstrument()
 	{
 		// MockMC: NoteBlock#getInstrument

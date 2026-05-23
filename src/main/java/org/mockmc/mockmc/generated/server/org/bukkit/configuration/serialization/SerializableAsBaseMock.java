@@ -16,12 +16,14 @@ import org.bukkit.configuration.serialization.SerializableAs;
  */
 public interface SerializableAsBaseMock extends SerializableAs
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: SerializableAs#annotationType
 		return null;
 	}
 
+	@Override
 	default String value()
 	{
 		// MockMC: SerializableAs#value

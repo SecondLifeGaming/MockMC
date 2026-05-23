@@ -17,13 +17,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ArtBaseMock extends Art, OldEnumBaseMock<Art>, KeyedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default int getId()
 	{
@@ -31,6 +33,7 @@ public interface ArtBaseMock extends Art, OldEnumBaseMock<Art>, KeyedBaseMock
 		return 0;
 	}
 
+	@Override
 	default int getBlockHeight()
 	{
 		// MockMC: Art#getBlockHeight
@@ -48,6 +51,7 @@ public interface ArtBaseMock extends Art, OldEnumBaseMock<Art>, KeyedBaseMock
 		return getKey();
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: Art#title
@@ -65,18 +69,21 @@ public interface ArtBaseMock extends Art, OldEnumBaseMock<Art>, KeyedBaseMock
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default Component author()
 	{
 		// MockMC: Art#author
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Key assetId()
 	{
 		// MockMC: Art#assetId
 		return null;
 	}
 
+	@Override
 	default int getBlockWidth()
 	{
 		// MockMC: Art#getBlockWidth

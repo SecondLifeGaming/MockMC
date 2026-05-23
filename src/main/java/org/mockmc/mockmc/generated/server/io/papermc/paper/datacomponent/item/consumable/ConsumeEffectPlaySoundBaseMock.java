@@ -19,6 +19,7 @@ public interface ConsumeEffectPlaySoundBaseMock
 			io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.PlaySound,
 			ConsumeEffectBaseMock
 {
+	@Override
 	default Key sound()
 	{
 		// MockMC: PlaySound#sound

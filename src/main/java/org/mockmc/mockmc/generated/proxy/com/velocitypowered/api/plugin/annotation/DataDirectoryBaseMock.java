@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
  */
 public interface DataDirectoryBaseMock extends DataDirectory
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: DataDirectory#annotationType

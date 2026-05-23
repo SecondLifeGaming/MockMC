@@ -16,36 +16,42 @@ import io.papermc.paper.registry.data.dialog.body.PlainMessageDialogBody;
  */
 public interface ItemDialogBodyBuilderBaseMock extends ItemDialogBody.Builder
 {
+	@Override
 	default ItemDialogBody build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default ItemDialogBody.Builder showDecorations(boolean arg0)
 	{
 		// MockMC: Builder#showDecorations
 		return null;
 	}
 
+	@Override
 	default ItemDialogBody.Builder description(PlainMessageDialogBody arg0)
 	{
 		// MockMC: Builder#description
 		return null;
 	}
 
+	@Override
 	default ItemDialogBody.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default ItemDialogBody.Builder showTooltip(boolean arg0)
 	{
 		// MockMC: Builder#showTooltip
 		return null;
 	}
 
+	@Override
 	default ItemDialogBody.Builder height(int arg0)
 	{
 		// MockMC: Builder#height

@@ -18,12 +18,14 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface MetadataValueBaseMock extends MetadataValue
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Plugin getOwningPlugin()
 	{
@@ -35,6 +37,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int asInt()
 	{
@@ -46,6 +49,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default long asLong()
 	{
@@ -57,6 +61,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default byte asByte()
 	{
@@ -68,6 +73,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default short asShort()
 	{
@@ -79,6 +85,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void invalidate()
 	{
@@ -89,6 +96,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String asString()
 	{
@@ -100,6 +108,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default double asDouble()
 	{
@@ -111,6 +120,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean asBoolean()
 	{
@@ -122,6 +132,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Object value()
 	{
@@ -133,6 +144,7 @@ public interface MetadataValueBaseMock extends MetadataValue
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default float asFloat()
 	{

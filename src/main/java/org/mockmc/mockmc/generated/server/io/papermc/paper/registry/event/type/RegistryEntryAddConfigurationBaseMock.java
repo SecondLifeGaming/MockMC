@@ -37,12 +37,14 @@ public interface RegistryEntryAddConfigurationBaseMock<T>
 		return null;
 	}
 
+	@Override
 	default RegistryEntryAddConfiguration<T> filter(Predicate<TypedKey<T>> arg0)
 	{
 		// MockMC: RegistryEntryAddConfiguration#filter
 		return null;
 	}
 
+	@Override
 	default RegistryEntryAddConfiguration<T> filter(TypedKey<T> arg0)
 	{
 		// MockMC: RegistryEntryAddConfiguration#filter

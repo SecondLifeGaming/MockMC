@@ -25,6 +25,7 @@ public interface PotionBrewerBaseMock extends PotionBrewer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default PotionEffect createEffect(PotionEffectType arg0, int arg1, int arg2)
 	{
@@ -32,6 +33,7 @@ public interface PotionBrewerBaseMock extends PotionBrewer
 		return null;
 	}
 
+	@Override
 	default void resetPotionMixes()
 	{
 		// MockMC: PotionBrewer#resetPotionMixes
@@ -41,6 +43,7 @@ public interface PotionBrewerBaseMock extends PotionBrewer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default Collection<PotionEffect> getEffectsFromDamage(int arg0)
 	{
@@ -52,6 +55,7 @@ public interface PotionBrewerBaseMock extends PotionBrewer
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default Collection<PotionEffect> getEffects(PotionType arg0, boolean arg1, boolean arg2)
 	{
@@ -59,11 +63,13 @@ public interface PotionBrewerBaseMock extends PotionBrewer
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void addPotionMix(PotionMix arg0)
 	{
 		// MockMC: PotionBrewer#addPotionMix
 	}
 
+	@Override
 	default void removePotionMix(NamespacedKey arg0)
 	{
 		// MockMC: PotionBrewer#removePotionMix

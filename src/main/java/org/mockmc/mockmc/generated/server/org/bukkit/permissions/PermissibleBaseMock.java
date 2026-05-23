@@ -21,76 +21,89 @@ import org.bukkit.plugin.Plugin;
  */
 public interface PermissibleBaseMock extends Permissible, ServerOperatorBaseMock
 {
+	@Override
 	default Set<PermissionAttachmentInfo> getEffectivePermissions()
 	{
 		// MockMC: Permissible#getEffectivePermissions
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean isPermissionSet(String arg0)
 	{
 		// MockMC: Permissible#isPermissionSet
 		return false;
 	}
 
+	@Override
 	default boolean isPermissionSet(Permission arg0)
 	{
 		// MockMC: Permissible#isPermissionSet
 		return false;
 	}
 
+	@Override
 	default PermissionAttachment addAttachment(Plugin arg0, String arg1, boolean arg2)
 	{
 		// MockMC: Permissible#addAttachment
 		return null;
 	}
 
+	@Override
 	default void removeAttachment(PermissionAttachment arg0)
 	{
 		// MockMC: Permissible#removeAttachment
 	}
 
+	@Override
 	default PermissionAttachment addAttachment(Plugin arg0, String arg1, boolean arg2, int arg3)
 	{
 		// MockMC: Permissible#addAttachment
 		return null;
 	}
 
+	@Override
 	default PermissionAttachment addAttachment(Plugin arg0)
 	{
 		// MockMC: Permissible#addAttachment
 		return null;
 	}
 
+	@Override
 	default PermissionAttachment addAttachment(Plugin arg0, int arg1)
 	{
 		// MockMC: Permissible#addAttachment
 		return null;
 	}
 
+	@Override
 	default void recalculatePermissions()
 	{
 		// MockMC: Permissible#recalculatePermissions
 	}
 
+	@Override
 	default boolean hasPermission(Permission arg0)
 	{
 		// MockMC: Permissible#hasPermission
 		return false;
 	}
 
+	@Override
 	default boolean hasPermission(String arg0)
 	{
 		// MockMC: Permissible#hasPermission
 		return false;
 	}
 
+	@Override
 	default TriState permissionValue(String arg0)
 	{
 		// MockMC: Permissible#permissionValue
 		return null;
 	}
 
+	@Override
 	default TriState permissionValue(Permission arg0)
 	{
 		// MockMC: Permissible#permissionValue

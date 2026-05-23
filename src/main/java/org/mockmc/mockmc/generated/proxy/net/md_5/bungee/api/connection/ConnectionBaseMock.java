@@ -21,6 +21,7 @@ public interface ConnectionBaseMock extends Connection
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default InetSocketAddress getAddress()
 	{
@@ -28,19 +29,23 @@ public interface ConnectionBaseMock extends Connection
 		return null;
 	}
 
+	@Override
 	default boolean isConnected()
 	{
 		// MockMC: Connection#isConnected
 		return false;
 	}
 
+	@Override
 	default Connection.Unsafe unsafe()
 	{
 		// MockMC: Connection#unsafe
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void disconnect(BaseComponent arg0)
 	{
 		// MockMC: Connection#disconnect
@@ -50,17 +55,20 @@ public interface ConnectionBaseMock extends Connection
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void disconnect(String arg0)
 	{
 		// MockMC: Connection#disconnect
 	}
 
+	@Override
 	default void disconnect(BaseComponent... arg0)
 	{
 		// MockMC: Connection#disconnect
 	}
 
+	@Override
 	default SocketAddress getSocketAddress()
 	{
 		// MockMC: Connection#getSocketAddress

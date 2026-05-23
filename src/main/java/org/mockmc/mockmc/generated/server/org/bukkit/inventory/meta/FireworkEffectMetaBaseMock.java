@@ -16,12 +16,14 @@ import org.bukkit.inventory.meta.FireworkEffectMeta;
  */
 public interface FireworkEffectMetaBaseMock extends FireworkEffectMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean hasEffect()
 	{
 		// MockMC: FireworkEffectMeta#hasEffect
 		return false;
 	}
 
+	@Override
 	default FireworkEffect getEffect()
 	{
 		// MockMC: FireworkEffectMeta#getEffect
@@ -35,6 +37,7 @@ public interface FireworkEffectMetaBaseMock extends FireworkEffectMeta, ItemMeta
 		return null;
 	}
 
+	@Override
 	default void setEffect(FireworkEffect arg0)
 	{
 		// MockMC: FireworkEffectMeta#setEffect

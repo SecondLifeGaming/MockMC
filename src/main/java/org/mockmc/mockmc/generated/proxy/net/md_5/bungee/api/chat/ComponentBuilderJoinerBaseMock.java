@@ -17,12 +17,14 @@ import net.md_5.bungee.api.chat.ComponentBuilder;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface ComponentBuilderJoinerBaseMock extends ComponentBuilder.Joiner
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default ComponentBuilder join(ComponentBuilder arg0, ComponentBuilder.FormatRetention arg1)

@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface UseRemainderBaseMock extends UseRemainder
 {
+	@Override
 	default ItemStack transformInto()
 	{
 		// MockMC: UseRemainder#transformInto

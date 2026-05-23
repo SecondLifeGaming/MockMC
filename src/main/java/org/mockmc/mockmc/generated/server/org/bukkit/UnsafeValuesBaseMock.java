@@ -62,12 +62,14 @@ import org.bukkit.potion.PotionType;
  *             modern build cycles.
  */
 @Deprecated(since = "1.7.2")
+@SuppressWarnings("java:S1133")
 public interface UnsafeValuesBaseMock extends UnsafeValues
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default boolean isValidRepairItemStack(ItemStack arg0, ItemStack arg1)
 	{
@@ -79,6 +81,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default PotionType.InternalPotionData getInternalPotionData(NamespacedKey arg0)
@@ -91,6 +94,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PlainTextComponentSerializer plainTextSerializer()
 	{
@@ -102,6 +106,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(Material arg0, EquipmentSlot arg1)
 	{
@@ -113,6 +118,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Advancement loadAdvancement(NamespacedKey arg0, String arg1)
 	{
@@ -124,6 +130,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default int getDataVersion()
 	{
@@ -135,6 +142,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default String getItemTranslationKey(Material arg0)
 	{
@@ -146,6 +154,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.3", forRemoval = true)
 	default NamespacedKey getBiomeKey(RegionAccessor arg0, int arg1, int arg2, int arg3)
 	{
@@ -157,6 +166,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default DamageSource.Builder createDamageSourceBuilder(DamageType arg0)
 	{
@@ -168,6 +178,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default GsonComponentSerializer gsonComponentSerializer()
 	{
@@ -179,6 +190,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ComponentFlattener componentFlattener()
 	{
@@ -190,6 +202,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PlainComponentSerializer plainComponentSerializer()
@@ -202,6 +215,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack deserializeItemHover(HoverEvent.ShowItem arg0)
 	{
@@ -213,6 +227,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default byte[] processClass(PluginDescriptionFile arg0, String arg1, byte[] arg2)
 	{
@@ -224,6 +239,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Component resolveWithContext(Component arg0, CommandSender arg1, Entity arg2, boolean arg3)
 			throws IOException
@@ -236,6 +252,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default byte[] serializeItem(ItemStack arg0)
 	{
@@ -247,6 +264,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default JsonObject serializeItemAsJson(ItemStack arg0)
 	{
@@ -258,6 +276,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default Color getSpawnEggLayerColor(EntityType arg0, int arg1)
 	{
@@ -269,6 +288,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Material getMaterial(String arg0, int arg1)
 	{
@@ -280,6 +300,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default int getProtocolVersion()
 	{
@@ -291,6 +312,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin arg0, BooleanSupplier arg1)
 	{
@@ -302,6 +324,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default boolean removeAdvancement(NamespacedKey arg0)
 	{
@@ -313,6 +336,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack modifyItemStack(ItemStack arg0, String arg1)
 	{
@@ -324,6 +348,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
 	{
@@ -335,6 +360,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack deserializeItemFromJson(JsonObject arg0) throws IllegalArgumentException
 	{
@@ -346,6 +372,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default VersionFetcher getVersionFetcher()
 	{
@@ -357,6 +384,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Map<String, Object> serializeStack(ItemStack arg0)
 	{
@@ -368,6 +396,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default String get(Class<?> arg0, String arg1)
 	{
@@ -379,6 +408,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default <B extends Keyed> B get(RegistryKey<B> arg0, NamespacedKey arg1)
 	{
@@ -390,6 +420,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack createEmptyStack()
 	{
@@ -401,6 +432,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default CreativeCategory getCreativeCategory(Material arg0)
 	{
@@ -412,6 +444,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Material fromLegacy(Material arg0)
 	{
@@ -423,6 +456,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.7.2")
 	default Material fromLegacy(MaterialData arg0, boolean arg1)
@@ -435,6 +469,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default String getStatisticCriteriaKey(Statistic arg0)
 	{
@@ -446,6 +481,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default BlockData fromLegacy(Material arg0, byte arg1)
 	{
@@ -457,6 +493,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.7.2")
 	default Material fromLegacy(MaterialData arg0)
@@ -469,6 +506,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default byte[] serializeEntity(Entity arg0, EntitySerializationFlag... arg1)
 	{
@@ -480,6 +518,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default byte[] serializeEntity(Entity arg0)
 	{
@@ -491,6 +530,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default String getBlockTranslationKey(Material arg0)
 	{
@@ -502,6 +542,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default String getMainLevelName()
 	{
@@ -513,6 +554,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default boolean hasDefaultEntityAttributes(NamespacedKey arg0)
 	{
@@ -524,6 +566,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Entity deserializeEntity(byte[] arg0, World arg1)
 	{
@@ -535,6 +578,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Entity deserializeEntity(byte[] arg0, World arg1, boolean arg2)
 	{
@@ -546,6 +590,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Entity deserializeEntity(byte[] arg0, World arg1, boolean arg2, boolean arg3)
 	{
@@ -557,6 +602,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Attributable getDefaultEntityAttributes(NamespacedKey arg0)
 	{
@@ -568,6 +614,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default List<Component> computeTooltipLines(ItemStack arg0, TooltipContext arg1, Player arg2)
 	{
@@ -579,6 +626,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default int nextEntityId()
 	{
@@ -590,6 +638,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default void checkSupported(PluginDescriptionFile arg0) throws InvalidPluginException
 	{
@@ -600,6 +649,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.3", forRemoval = true)
 	default String getTranslationKey(Attribute arg0)
 	{
@@ -611,6 +661,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default String getTranslationKey(EntityType arg0)
 	{
@@ -622,6 +673,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack deserializeStack(Map<String, Object> arg0)
 	{
@@ -633,6 +685,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default String getTranslationKey(ItemStack arg0)
 	{
@@ -644,6 +697,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default LegacyComponentSerializer legacyComponentSerializer()
 	{
@@ -655,6 +709,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default Material toLegacy(Material arg0)
 	{
@@ -666,6 +721,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean isSupportedApiVersion(String arg0)
 	{
@@ -677,6 +733,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.3", forRemoval = true)
 	default void setBiomeKey(RegionAccessor arg0, int arg1, int arg2, int arg3, NamespacedKey arg4)
 	{
@@ -687,6 +744,7 @@ public interface UnsafeValuesBaseMock extends UnsafeValues
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.2")
 	default ItemStack deserializeItem(byte[] arg0)
 	{

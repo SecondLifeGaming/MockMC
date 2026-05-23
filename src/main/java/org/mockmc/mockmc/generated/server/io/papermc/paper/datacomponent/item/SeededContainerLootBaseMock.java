@@ -16,12 +16,14 @@ import net.kyori.adventure.key.Key;
  */
 public interface SeededContainerLootBaseMock extends SeededContainerLoot
 {
+	@Override
 	default Key lootTable()
 	{
 		// MockMC: SeededContainerLoot#lootTable
 		return null;
 	}
 
+	@Override
 	default long seed()
 	{
 		// MockMC: SeededContainerLoot#seed

@@ -16,18 +16,21 @@ import org.bukkit.scheduler.BukkitWorker;
  */
 public interface BukkitWorkerBaseMock extends BukkitWorker
 {
+	@Override
 	default Plugin getOwner()
 	{
 		// MockMC: BukkitWorker#getOwner
 		return null;
 	}
 
+	@Override
 	default Thread getThread()
 	{
 		// MockMC: BukkitWorker#getThread
 		return null;
 	}
 
+	@Override
 	default int getTaskId()
 	{
 		// MockMC: BukkitWorker#getTaskId

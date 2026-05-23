@@ -32,6 +32,7 @@ public interface BlockPositionBaseMock extends BlockPosition, PositionBaseMock
 		return false;
 	}
 
+	@Override
 	default BlockPosition offset(BlockFace arg0, int arg1)
 	{
 		// MockMC: BlockPosition#offset
@@ -45,12 +46,14 @@ public interface BlockPositionBaseMock extends BlockPosition, PositionBaseMock
 		return null;
 	}
 
+	@Override
 	default BlockPosition offset(Axis arg0, int arg1)
 	{
 		// MockMC: BlockPosition#offset
 		return null;
 	}
 
+	@Override
 	default BlockPosition offset(BlockFace arg0)
 	{
 		// MockMC: BlockPosition#offset

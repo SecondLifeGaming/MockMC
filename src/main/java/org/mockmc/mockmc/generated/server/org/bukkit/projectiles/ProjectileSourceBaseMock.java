@@ -18,18 +18,21 @@ import org.bukkit.util.Vector;
  */
 public interface ProjectileSourceBaseMock extends ProjectileSource
 {
+	@Override
 	default <T extends Projectile> T launchProjectile(Class<? extends T> arg0)
 	{
 		// MockMC: ProjectileSource#launchProjectile
 		return null;
 	}
 
+	@Override
 	default <T extends Projectile> T launchProjectile(Class<? extends T> arg0, Vector arg1)
 	{
 		// MockMC: ProjectileSource#launchProjectile
 		return null;
 	}
 
+	@Override
 	default <T extends Projectile> T launchProjectile(Class<? extends T> arg0, Vector arg1, Consumer<? super T> arg2)
 	{
 		// MockMC: ProjectileSource#launchProjectile

@@ -15,7 +15,8 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BatBaseMock extends Bat, AmbientBaseMock
 {
 	@Override
@@ -25,18 +26,21 @@ public interface BatBaseMock extends Bat, AmbientBaseMock
 		return null;
 	}
 
+	@Override
 	default Location getTargetLocation()
 	{
 		// MockMC: Bat#getTargetLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean isAwake()
 	{
 		// MockMC: Bat#isAwake
 		return false;
 	}
 
+	@Override
 	default void setAwake(boolean arg0)
 	{
 		// MockMC: Bat#setAwake
@@ -56,6 +60,7 @@ public interface BatBaseMock extends Bat, AmbientBaseMock
 		return false;
 	}
 
+	@Override
 	default void setTargetLocation(Location arg0)
 	{
 		// MockMC: Bat#setTargetLocation

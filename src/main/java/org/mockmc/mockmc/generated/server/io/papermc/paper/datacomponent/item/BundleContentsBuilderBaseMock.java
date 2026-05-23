@@ -21,12 +21,14 @@ public interface BundleContentsBuilderBaseMock
 			BundleContents.Builder,
 			DataComponentBuilderBaseMock<BundleContents>
 {
+	@Override
 	default BundleContents.Builder add(ItemStack arg0)
 	{
 		// MockMC: Builder#add
 		return null;
 	}
 
+	@Override
 	default BundleContents.Builder addAll(List<ItemStack> arg0)
 	{
 		// MockMC: Builder#addAll

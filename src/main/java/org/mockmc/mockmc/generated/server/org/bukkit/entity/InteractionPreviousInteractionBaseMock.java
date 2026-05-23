@@ -17,12 +17,14 @@ import org.bukkit.entity.Interaction;
  */
 public interface InteractionPreviousInteractionBaseMock extends Interaction.PreviousInteraction
 {
+	@Override
 	default long getTimestamp()
 	{
 		// MockMC: PreviousInteraction#getTimestamp
 		return 0L;
 	}
 
+	@Override
 	default OfflinePlayer getPlayer()
 	{
 		// MockMC: PreviousInteraction#getPlayer

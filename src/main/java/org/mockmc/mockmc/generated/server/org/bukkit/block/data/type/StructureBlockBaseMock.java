@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface StructureBlockBaseMock extends StructureBlock, BlockDataBaseMock
 {
+	@Override
 	default void setMode(StructureBlock.Mode arg0)
 	{
 		// MockMC: StructureBlock#setMode
 	}
 
+	@Override
 	default StructureBlock.Mode getMode()
 	{
 		// MockMC: StructureBlock#getMode

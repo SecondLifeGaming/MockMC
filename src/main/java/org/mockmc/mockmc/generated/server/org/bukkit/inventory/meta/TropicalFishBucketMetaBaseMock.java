@@ -17,17 +17,20 @@ import org.bukkit.inventory.meta.TropicalFishBucketMeta;
  */
 public interface TropicalFishBucketMetaBaseMock extends TropicalFishBucketMeta, ItemMetaBaseMock
 {
+	@Override
 	default void setBodyColor(DyeColor arg0)
 	{
 		// MockMC: TropicalFishBucketMeta#setBodyColor
 	}
 
+	@Override
 	default TropicalFish.Pattern getPattern()
 	{
 		// MockMC: TropicalFishBucketMeta#getPattern
 		return null;
 	}
 
+	@Override
 	default void setPatternColor(DyeColor arg0)
 	{
 		// MockMC: TropicalFishBucketMeta#setPatternColor
@@ -40,23 +43,27 @@ public interface TropicalFishBucketMetaBaseMock extends TropicalFishBucketMeta, 
 		return null;
 	}
 
+	@Override
 	default void setPattern(TropicalFish.Pattern arg0)
 	{
 		// MockMC: TropicalFishBucketMeta#setPattern
 	}
 
+	@Override
 	default DyeColor getBodyColor()
 	{
 		// MockMC: TropicalFishBucketMeta#getBodyColor
 		return null;
 	}
 
+	@Override
 	default DyeColor getPatternColor()
 	{
 		// MockMC: TropicalFishBucketMeta#getPatternColor
 		return null;
 	}
 
+	@Override
 	default boolean hasVariant()
 	{
 		// MockMC: TropicalFishBucketMeta#hasVariant

@@ -16,22 +16,26 @@ import org.bukkit.inventory.meta.BlockStateMeta;
  */
 public interface BlockStateMetaBaseMock extends BlockStateMeta, ItemMetaBaseMock
 {
+	@Override
 	default void setBlockState(BlockState arg0)
 	{
 		// MockMC: BlockStateMeta#setBlockState
 	}
 
+	@Override
 	default BlockState getBlockState()
 	{
 		// MockMC: BlockStateMeta#getBlockState
 		return null;
 	}
 
+	@Override
 	default void clearBlockState()
 	{
 		// MockMC: BlockStateMeta#clearBlockState
 	}
 
+	@Override
 	default boolean hasBlockState()
 	{
 		// MockMC: BlockStateMeta#hasBlockState

@@ -14,16 +14,10 @@ import org.bukkit.entity.Parched;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ParchedBaseMock extends Parched, AbstractSkeletonBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Parched#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface ParchedBaseMock extends Parched, AbstractSkeletonBaseMock
 	{
 		// MockMC: Parched#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Parched#getLeashHolder
+		return null;
 	}
 }

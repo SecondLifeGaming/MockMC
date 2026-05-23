@@ -19,18 +19,21 @@ public interface ItemDamageFunctionBuilderBaseMock
 			ItemDamageFunction.Builder,
 			DataComponentBuilderBaseMock<ItemDamageFunction>
 {
+	@Override
 	default ItemDamageFunction.Builder base(float arg0)
 	{
 		// MockMC: Builder#base
 		return null;
 	}
 
+	@Override
 	default ItemDamageFunction.Builder factor(float arg0)
 	{
 		// MockMC: Builder#factor
 		return null;
 	}
 
+	@Override
 	default ItemDamageFunction.Builder threshold(float arg0)
 	{
 		// MockMC: Builder#threshold

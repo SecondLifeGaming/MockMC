@@ -14,16 +14,10 @@ import org.bukkit.entity.ZombieHorse;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ZombieHorseBaseMock extends ZombieHorse, AbstractHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: ZombieHorse#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface ZombieHorseBaseMock extends ZombieHorse, AbstractHorseBaseMock
 	{
 		// MockMC: ZombieHorse#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: ZombieHorse#getLeashHolder
+		return null;
 	}
 }

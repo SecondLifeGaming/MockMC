@@ -17,54 +17,64 @@ import org.mockmc.mockmc.generated.server.org.bukkit.NameableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BannerBaseMock extends Banner, TileStateBaseMock, NameableBaseMock
 {
+	@Override
 	default int numberOfPatterns()
 	{
 		// MockMC: Banner#numberOfPatterns
 		return 0;
 	}
 
+	@Override
 	default List<Pattern> getPatterns()
 	{
 		// MockMC: Banner#getPatterns
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Pattern removePattern(int arg0)
 	{
 		// MockMC: Banner#removePattern
 		return null;
 	}
 
+	@Override
 	default DyeColor getBaseColor()
 	{
 		// MockMC: Banner#getBaseColor
 		return null;
 	}
 
+	@Override
 	default void setBaseColor(DyeColor arg0)
 	{
 		// MockMC: Banner#setBaseColor
 	}
 
+	@Override
 	default void setPatterns(List<Pattern> arg0)
 	{
 		// MockMC: Banner#setPatterns
 	}
 
+	@Override
 	default Pattern getPattern(int arg0)
 	{
 		// MockMC: Banner#getPattern
 		return null;
 	}
 
+	@Override
 	default void addPattern(Pattern arg0)
 	{
 		// MockMC: Banner#addPattern
 	}
 
+	@Override
 	default void setPattern(int arg0, Pattern arg1)
 	{
 		// MockMC: Banner#setPattern

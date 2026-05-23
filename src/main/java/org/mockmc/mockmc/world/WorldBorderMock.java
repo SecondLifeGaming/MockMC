@@ -45,10 +45,6 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 
 	private static final double MIN_BORDER_SIZE = 1.0D;
 
-	private static final Plugin DUMMY_PLUGIN = (Plugin) java.lang.reflect.Proxy
-			.newProxyInstance(Plugin.class.getClassLoader(), new Class<?>[]
-			{Plugin.class}, (proxy, method, args) -> null);
-
 	@NotNull
 	private final World world;
 
@@ -142,7 +138,7 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 		// We can't use 'this' in the anonymous class below, so we need to store it in a
 		// variable.
 		WorldBorderMock thisBorder = this;
-		new BukkitRunnable()
+		BukkitRunnable task = new BukkitRunnable()
 		{
 
 			@Override
@@ -158,7 +154,11 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 					this.cancel();
 				}
 			}
-		}.runTaskTimer(DUMMY_PLUGIN, 1, 1);
+		};
+
+		@SuppressWarnings("NullAway")
+		Plugin dummy = null;
+		task.runTaskTimer(dummy, 1, 1);
 	}
 
 	@Override

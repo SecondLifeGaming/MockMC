@@ -16,24 +16,28 @@ import net.kyori.adventure.nbt.api.BinaryTagHolder;
  */
 public interface DialogResponseViewBaseMock extends DialogResponseView
 {
+	@Override
 	default Float getFloat(String arg0)
 	{
 		// MockMC: DialogResponseView#getFloat
 		return 0.0f;
 	}
 
+	@Override
 	default Boolean getBoolean(String arg0)
 	{
 		// MockMC: DialogResponseView#getBoolean
 		return false;
 	}
 
+	@Override
 	default BinaryTagHolder payload()
 	{
 		// MockMC: DialogResponseView#payload
 		return null;
 	}
 
+	@Override
 	default String getText(String arg0)
 	{
 		// MockMC: DialogResponseView#getText

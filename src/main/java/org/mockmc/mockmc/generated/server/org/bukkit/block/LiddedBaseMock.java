@@ -15,17 +15,20 @@ import org.bukkit.block.Lidded;
  */
 public interface LiddedBaseMock extends Lidded
 {
+	@Override
 	default boolean isOpen()
 	{
 		// MockMC: Lidded#isOpen
 		return false;
 	}
 
+	@Override
 	default void close()
 	{
 		// MockMC: Lidded#close
 	}
 
+	@Override
 	default void open()
 	{
 		// MockMC: Lidded#open

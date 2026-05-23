@@ -16,56 +16,66 @@ import org.bukkit.profile.PlayerTextures;
  */
 public interface PlayerTexturesBaseMock extends PlayerTextures
 {
+	@Override
 	default void setCape(URL arg0)
 	{
 		// MockMC: PlayerTextures#setCape
 	}
 
+	@Override
 	default void setSkin(URL arg0)
 	{
 		// MockMC: PlayerTextures#setSkin
 	}
 
+	@Override
 	default void setSkin(URL arg0, PlayerTextures.SkinModel arg1)
 	{
 		// MockMC: PlayerTextures#setSkin
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: PlayerTextures#isEmpty
 		return false;
 	}
 
+	@Override
 	default void clear()
 	{
 		// MockMC: PlayerTextures#clear
 	}
 
+	@Override
 	default PlayerTextures.SkinModel getSkinModel()
 	{
 		// MockMC: PlayerTextures#getSkinModel
 		return null;
 	}
 
+	@Override
 	default URL getCape()
 	{
 		// MockMC: PlayerTextures#getCape
 		return null;
 	}
 
+	@Override
 	default boolean isSigned()
 	{
 		// MockMC: PlayerTextures#isSigned
 		return false;
 	}
 
+	@Override
 	default long getTimestamp()
 	{
 		// MockMC: PlayerTextures#getTimestamp
 		return 0L;
 	}
 
+	@Override
 	default URL getSkin()
 	{
 		// MockMC: PlayerTextures#getSkin

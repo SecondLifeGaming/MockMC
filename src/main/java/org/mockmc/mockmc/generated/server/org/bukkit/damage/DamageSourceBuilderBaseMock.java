@@ -17,24 +17,28 @@ import org.bukkit.entity.Entity;
  */
 public interface DamageSourceBuilderBaseMock extends DamageSource.Builder
 {
+	@Override
 	default DamageSource.Builder withDamageLocation(Location arg0)
 	{
 		// MockMC: Builder#withDamageLocation
 		return null;
 	}
 
+	@Override
 	default DamageSource.Builder withDirectEntity(Entity arg0)
 	{
 		// MockMC: Builder#withDirectEntity
 		return null;
 	}
 
+	@Override
 	default DamageSource.Builder withCausingEntity(Entity arg0)
 	{
 		// MockMC: Builder#withCausingEntity
 		return null;
 	}
 
+	@Override
 	default DamageSource build()
 	{
 		// MockMC: Builder#build

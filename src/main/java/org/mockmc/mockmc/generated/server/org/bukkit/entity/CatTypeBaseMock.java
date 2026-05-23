@@ -15,7 +15,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface CatTypeBaseMock extends Cat.Type, OldEnumBaseMock<Cat.Type>, KeyedBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface CatTypeBaseMock extends Cat.Type, KeyedBaseMock, OldEnumBaseMock<Cat.Type>
 {
 }

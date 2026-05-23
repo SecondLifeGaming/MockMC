@@ -17,39 +17,46 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface FurnaceInventoryBaseMock extends FurnaceInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getFuel()
 	{
 		// MockMC: FurnaceInventory#getFuel
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setSmelting(ItemStack arg0)
 	{
 		// MockMC: FurnaceInventory#setSmelting
 	}
 
+	@Override
 	default boolean isFuel(ItemStack arg0)
 	{
 		// MockMC: FurnaceInventory#isFuel
 		return false;
 	}
 
+	@Override
 	default void setFuel(ItemStack arg0)
 	{
 		// MockMC: FurnaceInventory#setFuel
 	}
 
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: FurnaceInventory#setResult
 	}
 
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: FurnaceInventory#getResult
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean canSmelt(ItemStack arg0)
 	{
 		// MockMC: FurnaceInventory#canSmelt
@@ -63,6 +70,7 @@ public interface FurnaceInventoryBaseMock extends FurnaceInventory, InventoryBas
 		return null;
 	}
 
+	@Override
 	default ItemStack getSmelting()
 	{
 		// MockMC: FurnaceInventory#getSmelting

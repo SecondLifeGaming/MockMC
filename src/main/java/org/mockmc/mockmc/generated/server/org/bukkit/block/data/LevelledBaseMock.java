@@ -15,23 +15,27 @@ import org.bukkit.block.data.Levelled;
  */
 public interface LevelledBaseMock extends Levelled, BlockDataBaseMock
 {
+	@Override
 	default int getMinimumLevel()
 	{
 		// MockMC: Levelled#getMinimumLevel
 		return 0;
 	}
 
+	@Override
 	default int getLevel()
 	{
 		// MockMC: Levelled#getLevel
 		return 0;
 	}
 
+	@Override
 	default void setLevel(int arg0)
 	{
 		// MockMC: Levelled#setLevel
 	}
 
+	@Override
 	default int getMaximumLevel()
 	{
 		// MockMC: Levelled#getMaximumLevel

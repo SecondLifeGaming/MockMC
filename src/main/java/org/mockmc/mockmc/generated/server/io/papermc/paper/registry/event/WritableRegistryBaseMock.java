@@ -19,11 +19,13 @@ import java.util.function.Consumer;
  */
 public interface WritableRegistryBaseMock<T, B extends RegistryBuilder<T>> extends WritableRegistry<T, B>
 {
+	@Override
 	default void register(TypedKey<T> arg0, Consumer<? super B> arg1)
 	{
 		// MockMC: WritableRegistry#register
 	}
 
+	@Override
 	default void registerWith(TypedKey<T> arg0, Consumer<RegistryBuilderFactory<T, B>> arg1)
 	{
 		// MockMC: WritableRegistry#registerWith

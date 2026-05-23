@@ -17,21 +17,24 @@ import org.bukkit.entity.Phantom;
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface PhantomBaseMock extends Phantom, FlyingBaseMock, EnemyBaseMock
 {
+	@Override
 	default int getSize()
 	{
 		// MockMC: Phantom#getSize
 		return 0;
 	}
 
+	@Override
 	default boolean shouldBurnInDay()
 	{
 		// MockMC: Phantom#shouldBurnInDay
 		return false;
 	}
 
+	@Override
 	default void setSize(int arg0)
 	{
 		// MockMC: Phantom#setSize
@@ -44,22 +47,26 @@ public interface PhantomBaseMock extends Phantom, FlyingBaseMock, EnemyBaseMock
 		return null;
 	}
 
+	@Override
 	default void setShouldBurnInDay(boolean arg0)
 	{
 		// MockMC: Phantom#setShouldBurnInDay
 	}
 
+	@Override
 	default UUID getSpawningEntity()
 	{
 		// MockMC: Phantom#getSpawningEntity
 		return null;
 	}
 
+	@Override
 	default void setAnchorLocation(Location arg0)
 	{
 		// MockMC: Phantom#setAnchorLocation
 	}
 
+	@Override
 	default Location getAnchorLocation()
 	{
 		// MockMC: Phantom#getAnchorLocation

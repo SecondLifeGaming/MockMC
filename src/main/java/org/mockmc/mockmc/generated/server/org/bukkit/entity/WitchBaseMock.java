@@ -16,22 +16,10 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedE
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface WitchBaseMock extends Witch, RangedEntityBaseMock, RaiderBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface WitchBaseMock extends Witch, RaiderBaseMock, RangedEntityBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Witch#getLeashHolder
-		return null;
-	}
-
-	default int getPotionUseTimeLeft()
-	{
-		// MockMC: Witch#getPotionUseTimeLeft
-		return 0;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -39,15 +27,11 @@ public interface WitchBaseMock extends Witch, RangedEntityBaseMock, RaiderBaseMo
 		return false;
 	}
 
-	default void setDrinkingPotion(ItemStack arg0)
+	@Override
+	default int getPotionUseTimeLeft()
 	{
-		// MockMC: Witch#setDrinkingPotion
-	}
-
-	default boolean isDrinkingPotion()
-	{
-		// MockMC: Witch#isDrinkingPotion
-		return false;
+		// MockMC: Witch#getPotionUseTimeLeft
+		return 0;
 	}
 
 	@Override
@@ -57,11 +41,33 @@ public interface WitchBaseMock extends Witch, RangedEntityBaseMock, RaiderBaseMo
 		return false;
 	}
 
+	@Override
+	default void setDrinkingPotion(ItemStack arg0)
+	{
+		// MockMC: Witch#setDrinkingPotion
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Witch#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default boolean isDrinkingPotion()
+	{
+		// MockMC: Witch#isDrinkingPotion
+		return false;
+	}
+
+	@Override
 	default void setPotionUseTimeLeft(int arg0)
 	{
 		// MockMC: Witch#setPotionUseTimeLeft
 	}
 
+	@Override
 	default ItemStack getDrinkingPotion()
 	{
 		// MockMC: Witch#getDrinkingPotion

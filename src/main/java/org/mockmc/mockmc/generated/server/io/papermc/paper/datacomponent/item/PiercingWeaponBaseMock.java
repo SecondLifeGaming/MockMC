@@ -16,24 +16,28 @@ import net.kyori.adventure.key.Key;
  */
 public interface PiercingWeaponBaseMock extends PiercingWeapon
 {
+	@Override
 	default boolean dealsKnockback()
 	{
 		// MockMC: PiercingWeapon#dealsKnockback
 		return false;
 	}
 
+	@Override
 	default Key sound()
 	{
 		// MockMC: PiercingWeapon#sound
 		return null;
 	}
 
+	@Override
 	default Key hitSound()
 	{
 		// MockMC: PiercingWeapon#hitSound
 		return null;
 	}
 
+	@Override
 	default boolean dismounts()
 	{
 		// MockMC: PiercingWeapon#dismounts

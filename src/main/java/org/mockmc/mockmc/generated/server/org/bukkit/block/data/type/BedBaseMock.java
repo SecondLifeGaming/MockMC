@@ -16,23 +16,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface BedBaseMock extends Bed, DirectionalBaseMock
 {
+	@Override
 	default void setPart(Bed.Part arg0)
 	{
 		// MockMC: Bed#setPart
 	}
 
+	@Override
 	default Bed.Part getPart()
 	{
 		// MockMC: Bed#getPart
 		return null;
 	}
 
+	@Override
 	default boolean isOccupied()
 	{
 		// MockMC: Bed#isOccupied
 		return false;
 	}
 
+	@Override
 	default void setOccupied(boolean arg0)
 	{
 		// MockMC: Bed#setOccupied

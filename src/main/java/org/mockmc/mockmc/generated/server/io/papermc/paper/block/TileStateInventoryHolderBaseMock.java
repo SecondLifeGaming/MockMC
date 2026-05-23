@@ -17,7 +17,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.BlockInventoryHol
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TileStateInventoryHolderBaseMock
 		extends
 			TileStateInventoryHolder,
@@ -38,6 +39,7 @@ public interface TileStateInventoryHolderBaseMock
 		return null;
 	}
 
+	@Override
 	default Inventory getSnapshotInventory()
 	{
 		// MockMC: TileStateInventoryHolder#getSnapshotInventory

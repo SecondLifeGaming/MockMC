@@ -25,7 +25,8 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface MessageCommandSenderBaseMock extends MessageCommandSender, CommandSenderBaseMock
 {
 	/**

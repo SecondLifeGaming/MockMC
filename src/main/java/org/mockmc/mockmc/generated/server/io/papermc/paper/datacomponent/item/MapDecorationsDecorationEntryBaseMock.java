@@ -17,24 +17,28 @@ import org.bukkit.map.MapCursor;
  */
 public interface MapDecorationsDecorationEntryBaseMock extends MapDecorations.DecorationEntry
 {
+	@Override
 	default float rotation()
 	{
 		// MockMC: DecorationEntry#rotation
 		return 0.0f;
 	}
 
+	@Override
 	default double x()
 	{
 		// MockMC: DecorationEntry#x
 		return 0.0d;
 	}
 
+	@Override
 	default double z()
 	{
 		// MockMC: DecorationEntry#z
 		return 0.0d;
 	}
 
+	@Override
 	default MapCursor.Type type()
 	{
 		// MockMC: DecorationEntry#type

@@ -16,102 +16,121 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.FrictionalBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ItemBaseMock extends Item, FrictionalBaseMock, EntityBaseMock
 {
+	@Override
 	default void setPickupDelay(int arg0)
 	{
 		// MockMC: Item#setPickupDelay
 	}
 
+	@Override
 	default void setCanPlayerPickup(boolean arg0)
 	{
 		// MockMC: Item#setCanPlayerPickup
 	}
 
+	@Override
 	default UUID getOwner()
 	{
 		// MockMC: Item#getOwner
 		return null;
 	}
 
+	@Override
 	default int getPickupDelay()
 	{
 		// MockMC: Item#getPickupDelay
 		return 0;
 	}
 
+	@Override
 	default UUID getThrower()
 	{
 		// MockMC: Item#getThrower
 		return null;
 	}
 
+	@Override
 	default void setOwner(UUID arg0)
 	{
 		// MockMC: Item#setOwner
 	}
 
+	@Override
 	default void setItemStack(ItemStack arg0)
 	{
 		// MockMC: Item#setItemStack
 	}
 
+	@Override
 	default void setThrower(UUID arg0)
 	{
 		// MockMC: Item#setThrower
 	}
 
+	@Override
 	default void setCanMobPickup(boolean arg0)
 	{
 		// MockMC: Item#setCanMobPickup
 	}
 
+	@Override
 	default boolean canMobPickup()
 	{
 		// MockMC: Item#canMobPickup
 		return false;
 	}
 
+	@Override
 	default void setUnlimitedLifetime(boolean arg0)
 	{
 		// MockMC: Item#setUnlimitedLifetime
 	}
 
+	@Override
 	default void setHealth(int arg0)
 	{
 		// MockMC: Item#setHealth
 	}
 
+	@Override
 	default boolean canPlayerPickup()
 	{
 		// MockMC: Item#canPlayerPickup
 		return false;
 	}
 
+	@Override
 	default boolean isUnlimitedLifetime()
 	{
 		// MockMC: Item#isUnlimitedLifetime
 		return false;
 	}
 
+	@Override
 	default void setWillAge(boolean arg0)
 	{
 		// MockMC: Item#setWillAge
 	}
 
+	@Override
 	default int getHealth()
 	{
 		// MockMC: Item#getHealth
 		return 0;
 	}
 
+	@Override
 	default ItemStack getItemStack()
 	{
 		// MockMC: Item#getItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean willAge()
 	{
 		// MockMC: Item#willAge

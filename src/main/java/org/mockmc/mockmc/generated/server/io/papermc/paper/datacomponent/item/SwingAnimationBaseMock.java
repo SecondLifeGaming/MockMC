@@ -15,12 +15,14 @@ import io.papermc.paper.datacomponent.item.SwingAnimation;
  */
 public interface SwingAnimationBaseMock extends SwingAnimation
 {
+	@Override
 	default int duration()
 	{
 		// MockMC: SwingAnimation#duration
 		return 0;
 	}
 
+	@Override
 	default SwingAnimation.Animation type()
 	{
 		// MockMC: SwingAnimation#type

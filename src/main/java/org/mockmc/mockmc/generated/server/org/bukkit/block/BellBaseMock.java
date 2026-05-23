@@ -15,51 +15,60 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BellBaseMock extends Bell, TileStateBaseMock
 {
+	@Override
 	default boolean isResonating()
 	{
 		// MockMC: Bell#isResonating
 		return false;
 	}
 
+	@Override
 	default boolean isShaking()
 	{
 		// MockMC: Bell#isShaking
 		return false;
 	}
 
+	@Override
 	default boolean ring(Entity arg0)
 	{
 		// MockMC: Bell#ring
 		return false;
 	}
 
+	@Override
 	default boolean ring(Entity arg0, BlockFace arg1)
 	{
 		// MockMC: Bell#ring
 		return false;
 	}
 
+	@Override
 	default boolean ring()
 	{
 		// MockMC: Bell#ring
 		return false;
 	}
 
+	@Override
 	default boolean ring(BlockFace arg0)
 	{
 		// MockMC: Bell#ring
 		return false;
 	}
 
+	@Override
 	default int getResonatingTicks()
 	{
 		// MockMC: Bell#getResonatingTicks
 		return 0;
 	}
 
+	@Override
 	default int getShakingTicks()
 	{
 		// MockMC: Bell#getShakingTicks

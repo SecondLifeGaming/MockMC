@@ -15,108 +15,126 @@ import org.bukkit.generator.BiomeParameterPoint;
  */
 public interface BiomeParameterPointBaseMock extends BiomeParameterPoint
 {
+	@Override
 	default double getWeirdness()
 	{
 		// MockMC: BiomeParameterPoint#getWeirdness
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinTemperature()
 	{
 		// MockMC: BiomeParameterPoint#getMinTemperature
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinErosion()
 	{
 		// MockMC: BiomeParameterPoint#getMinErosion
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxWeirdness()
 	{
 		// MockMC: BiomeParameterPoint#getMaxWeirdness
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxDepth()
 	{
 		// MockMC: BiomeParameterPoint#getMaxDepth
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxContinentalness()
 	{
 		// MockMC: BiomeParameterPoint#getMaxContinentalness
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinWeirdness()
 	{
 		// MockMC: BiomeParameterPoint#getMinWeirdness
 		return 0.0d;
 	}
 
+	@Override
 	default double getTemperature()
 	{
 		// MockMC: BiomeParameterPoint#getTemperature
 		return 0.0d;
 	}
 
+	@Override
 	default double getErosion()
 	{
 		// MockMC: BiomeParameterPoint#getErosion
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxHumidity()
 	{
 		// MockMC: BiomeParameterPoint#getMaxHumidity
 		return 0.0d;
 	}
 
+	@Override
 	default double getDepth()
 	{
 		// MockMC: BiomeParameterPoint#getDepth
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxErosion()
 	{
 		// MockMC: BiomeParameterPoint#getMaxErosion
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinContinentalness()
 	{
 		// MockMC: BiomeParameterPoint#getMinContinentalness
 		return 0.0d;
 	}
 
+	@Override
 	default double getMaxTemperature()
 	{
 		// MockMC: BiomeParameterPoint#getMaxTemperature
 		return 0.0d;
 	}
 
+	@Override
 	default double getHumidity()
 	{
 		// MockMC: BiomeParameterPoint#getHumidity
 		return 0.0d;
 	}
 
+	@Override
 	default double getContinentalness()
 	{
 		// MockMC: BiomeParameterPoint#getContinentalness
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinHumidity()
 	{
 		// MockMC: BiomeParameterPoint#getMinHumidity
 		return 0.0d;
 	}
 
+	@Override
 	default double getMinDepth()
 	{
 		// MockMC: BiomeParameterPoint#getMinDepth

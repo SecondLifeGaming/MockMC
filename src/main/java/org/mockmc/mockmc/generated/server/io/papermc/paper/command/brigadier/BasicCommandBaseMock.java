@@ -18,23 +18,27 @@ import org.bukkit.command.CommandSender;
  */
 public interface BasicCommandBaseMock extends BasicCommand
 {
+	@Override
 	default boolean canUse(CommandSender arg0)
 	{
 		// MockMC: BasicCommand#canUse
 		return false;
 	}
 
+	@Override
 	default void execute(CommandSourceStack arg0, String[] arg1)
 	{
 		// MockMC: BasicCommand#execute
 	}
 
+	@Override
 	default Collection<String> suggest(CommandSourceStack arg0, String[] arg1)
 	{
 		// MockMC: BasicCommand#suggest
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String permission()
 	{
 		// MockMC: BasicCommand#permission

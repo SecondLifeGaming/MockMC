@@ -17,13 +17,15 @@ import org.bukkit.material.Openable;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface OpenableBaseMock extends Openable
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setOpen(boolean arg0)
 	{
@@ -34,6 +36,7 @@ public interface OpenableBaseMock extends Openable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13", forRemoval = true)
 	default boolean isOpen()
 	{

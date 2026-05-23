@@ -15,8 +15,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.MinecartBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface CommandMinecartBaseMock extends CommandMinecart, MinecartBaseMock, CommandBlockHolderBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface CommandMinecartBaseMock extends CommandMinecart, CommandBlockHolderBaseMock, MinecartBaseMock
 {
 	@Override
 	default void setCommand(String arg0)
@@ -28,6 +29,7 @@ public interface CommandMinecartBaseMock extends CommandMinecart, MinecartBaseMo
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setName(String arg0)
 	{

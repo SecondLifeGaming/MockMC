@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface CrafterViewBaseMock extends CrafterView, InventoryViewBaseMock
 {
+	@Override
 	default boolean isSlotDisabled(int arg0)
 	{
 		// MockMC: CrafterView#isSlotDisabled
@@ -30,11 +31,13 @@ public interface CrafterViewBaseMock extends CrafterView, InventoryViewBaseMock
 		return null;
 	}
 
+	@Override
 	default void setSlotDisabled(int arg0, boolean arg1)
 	{
 		// MockMC: CrafterView#setSlotDisabled
 	}
 
+	@Override
 	default boolean isPowered()
 	{
 		// MockMC: CrafterView#isPowered

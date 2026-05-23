@@ -17,15 +17,18 @@ import org.bukkit.potion.PotionEffect;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ThrownPotionBaseMock extends ThrownPotion, ThrowableProjectileBaseMock
 {
+	@Override
 	default Collection<PotionEffect> getEffects()
 	{
 		// MockMC: ThrownPotion#getEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void splash()
 	{
 		// MockMC: ThrownPotion#splash
@@ -37,12 +40,14 @@ public interface ThrownPotionBaseMock extends ThrownPotion, ThrowableProjectileB
 		// MockMC: ThrownPotion#setItem
 	}
 
+	@Override
 	default PotionMeta getPotionMeta()
 	{
 		// MockMC: ThrownPotion#getPotionMeta
 		return null;
 	}
 
+	@Override
 	default void setPotionMeta(PotionMeta arg0)
 	{
 		// MockMC: ThrownPotion#setPotionMeta

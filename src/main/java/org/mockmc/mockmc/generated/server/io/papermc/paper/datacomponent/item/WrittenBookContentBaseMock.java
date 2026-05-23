@@ -18,30 +18,35 @@ import net.kyori.adventure.text.Component;
  */
 public interface WrittenBookContentBaseMock extends WrittenBookContent
 {
+	@Override
 	default boolean resolved()
 	{
 		// MockMC: WrittenBookContent#resolved
 		return false;
 	}
 
+	@Override
 	default Filtered<String> title()
 	{
 		// MockMC: WrittenBookContent#title
 		return null;
 	}
 
+	@Override
 	default String author()
 	{
 		// MockMC: WrittenBookContent#author
 		return "";
 	}
 
+	@Override
 	default List<Filtered<Component>> pages()
 	{
 		// MockMC: WrittenBookContent#pages
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int generation()
 	{
 		// MockMC: WrittenBookContent#generation

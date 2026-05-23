@@ -15,36 +15,42 @@ import io.papermc.paper.datacomponent.item.AttackRange;
  */
 public interface AttackRangeBaseMock extends AttackRange
 {
+	@Override
 	default float mobFactor()
 	{
 		// MockMC: AttackRange#mobFactor
 		return 0.0f;
 	}
 
+	@Override
 	default float maxReach()
 	{
 		// MockMC: AttackRange#maxReach
 		return 0.0f;
 	}
 
+	@Override
 	default float minReach()
 	{
 		// MockMC: AttackRange#minReach
 		return 0.0f;
 	}
 
+	@Override
 	default float hitboxMargin()
 	{
 		// MockMC: AttackRange#hitboxMargin
 		return 0.0f;
 	}
 
+	@Override
 	default float minCreativeReach()
 	{
 		// MockMC: AttackRange#minCreativeReach
 		return 0.0f;
 	}
 
+	@Override
 	default float maxCreativeReach()
 	{
 		// MockMC: AttackRange#maxCreativeReach

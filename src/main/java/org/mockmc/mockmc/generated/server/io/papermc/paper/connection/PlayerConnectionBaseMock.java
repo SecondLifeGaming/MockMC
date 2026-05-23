@@ -18,41 +18,48 @@ import net.kyori.adventure.text.Component;
  */
 public interface PlayerConnectionBaseMock extends PlayerConnection
 {
+	@Override
 	default void disconnect(Component arg0)
 	{
 		// MockMC: PlayerConnection#disconnect
 	}
 
+	@Override
 	default boolean isTransferred()
 	{
 		// MockMC: PlayerConnection#isTransferred
 		return false;
 	}
 
+	@Override
 	default InetSocketAddress getClientAddress()
 	{
 		// MockMC: PlayerConnection#getClientAddress
 		return null;
 	}
 
+	@Override
 	default InetSocketAddress getVirtualHost()
 	{
 		// MockMC: PlayerConnection#getVirtualHost
 		return null;
 	}
 
+	@Override
 	default boolean isConnected()
 	{
 		// MockMC: PlayerConnection#isConnected
 		return false;
 	}
 
+	@Override
 	default InetSocketAddress getHAProxyAddress()
 	{
 		// MockMC: PlayerConnection#getHAProxyAddress
 		return null;
 	}
 
+	@Override
 	default SocketAddress getAddress()
 	{
 		// MockMC: PlayerConnection#getAddress

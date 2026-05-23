@@ -24,202 +24,237 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface InventoryBaseMock extends Inventory
 {
+	@Override
 	default void remove(ItemStack arg0)
 	{
 		// MockMC: Inventory#remove
 	}
 
+	@Override
 	default void remove(Material arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#remove
 	}
 
+	@Override
 	default HashMap<Integer, ItemStack> removeItemAnySlot(ItemStack... arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#removeItemAnySlot
 		return null;
 	}
 
+	@Override
 	default List<HumanEntity> getViewers()
 	{
 		// MockMC: Inventory#getViewers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ItemStack getItem(int arg0)
 	{
 		// MockMC: Inventory#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setMaxStackSize(int arg0)
 	{
 		// MockMC: Inventory#setMaxStackSize
 	}
 
+	@Override
 	default int firstEmpty()
 	{
 		// MockMC: Inventory#firstEmpty
 		return 0;
 	}
 
+	@Override
 	default void setStorageContents(ItemStack[] arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#setStorageContents
 	}
 
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: Inventory#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default int getMaxStackSize()
 	{
 		// MockMC: Inventory#getMaxStackSize
 		return 0;
 	}
 
+	@Override
 	default HashMap<Integer, ItemStack> removeItem(ItemStack... arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#removeItem
 		return null;
 	}
 
+	@Override
 	default void setItem(int arg0, ItemStack arg1)
 	{
 		// MockMC: Inventory#setItem
 	}
 
+	@Override
 	default void setContents(ItemStack[] arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#setContents
 	}
 
+	@Override
 	default int close()
 	{
 		// MockMC: Inventory#close
 		return 0;
 	}
 
+	@Override
 	default ItemStack[] getContents()
 	{
 		// MockMC: Inventory#getContents
 		return new ItemStack[0];
 	}
 
+	@Override
 	default ListIterator<ItemStack> iterator()
 	{
 		// MockMC: Inventory#iterator
 		return null;
 	}
 
+	@Override
 	default ListIterator<ItemStack> iterator(int arg0)
 	{
 		// MockMC: Inventory#iterator
 		return null;
 	}
 
+	@Override
 	default HashMap<Integer, ItemStack> addItem(ItemStack... arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#addItem
 		return null;
 	}
 
+	@Override
 	default void clear(int arg0)
 	{
 		// MockMC: Inventory#clear
 	}
 
+	@Override
 	default void clear()
 	{
 		// MockMC: Inventory#clear
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: Inventory#isEmpty
 		return false;
 	}
 
+	@Override
 	default ItemStack[] getStorageContents()
 	{
 		// MockMC: Inventory#getStorageContents
 		return new ItemStack[0];
 	}
 
+	@Override
 	default HashMap<Integer, ? extends ItemStack> all(ItemStack arg0)
 	{
 		// MockMC: Inventory#all
 		return null;
 	}
 
+	@Override
 	default HashMap<Integer, ? extends ItemStack> all(Material arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#all
 		return null;
 	}
 
+	@Override
 	default int first(ItemStack arg0)
 	{
 		// MockMC: Inventory#first
 		return 0;
 	}
 
+	@Override
 	default int first(Material arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#first
 		return 0;
 	}
 
+	@Override
 	default InventoryHolder getHolder()
 	{
 		// MockMC: Inventory#getHolder
 		return null;
 	}
 
+	@Override
 	default InventoryHolder getHolder(boolean arg0)
 	{
 		// MockMC: Inventory#getHolder
 		return null;
 	}
 
+	@Override
 	default boolean containsAtLeast(ItemStack arg0, int arg1)
 	{
 		// MockMC: Inventory#containsAtLeast
 		return false;
 	}
 
+	@Override
 	default InventoryType getType()
 	{
 		// MockMC: Inventory#getType
 		return null;
 	}
 
+	@Override
 	default boolean contains(Material arg0) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#contains
 		return false;
 	}
 
+	@Override
 	default boolean contains(Material arg0, int arg1) throws IllegalArgumentException
 	{
 		// MockMC: Inventory#contains
 		return false;
 	}
 
+	@Override
 	default boolean contains(ItemStack arg0)
 	{
 		// MockMC: Inventory#contains
 		return false;
 	}
 
+	@Override
 	default int getSize()
 	{
 		// MockMC: Inventory#getSize
 		return 0;
 	}
 
+	@Override
 	default boolean contains(ItemStack arg0, int arg1)
 	{
 		// MockMC: Inventory#contains

@@ -20,13 +20,15 @@ import org.bukkit.profile.PlayerProfile;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SkullBaseMock extends Skull, TileStateBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setOwnerProfile(PlayerProfile arg0)
 	{
@@ -37,6 +39,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default OfflinePlayer getOwningPlayer()
 	{
@@ -48,6 +51,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default boolean hasOwner()
 	{
@@ -59,6 +63,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default com.destroystokyo.paper.profile.PlayerProfile getPlayerProfile()
 	{
@@ -70,6 +75,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default void setPlayerProfile(com.destroystokyo.paper.profile.PlayerProfile arg0)
 	{
@@ -80,6 +86,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default SkullType getSkullType()
@@ -92,6 +99,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13")
 	default BlockFace getRotation()
 	{
@@ -103,23 +111,27 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.9")
 	default void setOwningPlayer(OfflinePlayer arg0)
 	{
 		// MockMC: Skull#setOwningPlayer
 	}
 
+	@Override
 	default Component customName()
 	{
 		// MockMC: Skull#customName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void setProfile(ResolvableProfile arg0)
 	{
 		// MockMC: Skull#setProfile
 	}
 
+	@Override
 	default void customName(Component arg0)
 	{
 		// MockMC: Skull#customName
@@ -129,18 +141,21 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13")
 	default void setRotation(BlockFace arg0)
 	{
 		// MockMC: Skull#setRotation
 	}
 
+	@Override
 	default ResolvableProfile getProfile()
 	{
 		// MockMC: Skull#getProfile
 		return null;
 	}
 
+	@Override
 	default NamespacedKey getNoteBlockSound()
 	{
 		// MockMC: Skull#getNoteBlockSound
@@ -151,6 +166,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.13", forRemoval = true)
 	default void setSkullType(SkullType arg0)
@@ -162,6 +178,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9.4")
 	default boolean setOwner(String arg0)
 	{
@@ -173,6 +190,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default PlayerProfile getOwnerProfile()
 	{
@@ -180,6 +198,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 		return null;
 	}
 
+	@Override
 	default void setNoteBlockSound(NamespacedKey arg0)
 	{
 		// MockMC: Skull#setNoteBlockSound
@@ -189,6 +208,7 @@ public interface SkullBaseMock extends Skull, TileStateBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9.4")
 	default String getOwner()
 	{

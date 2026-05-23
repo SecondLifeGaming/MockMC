@@ -16,18 +16,21 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface UseEffectsBuilderBaseMock extends UseEffects.Builder, DataComponentBuilderBaseMock<UseEffects>
 {
+	@Override
 	default UseEffects.Builder speedMultiplier(float arg0)
 	{
 		// MockMC: Builder#speedMultiplier
 		return null;
 	}
 
+	@Override
 	default UseEffects.Builder canSprint(boolean arg0)
 	{
 		// MockMC: Builder#canSprint
 		return null;
 	}
 
+	@Override
 	default UseEffects.Builder interactVibrations(boolean arg0)
 	{
 		// MockMC: Builder#interactVibrations

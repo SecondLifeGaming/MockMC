@@ -18,6 +18,7 @@ import org.spongepowered.configurate.transformation.ConfigurationTransformation;
  */
 public interface TransformationsDefaultsAwareBaseMock extends Transformations.DefaultsAware
 {
+	@Override
 	default void apply(ConfigurationTransformation.Builder arg0, Configurations.ContextMap arg1, ConfigurationNode arg2)
 	{
 		// MockMC: DefaultsAware#apply

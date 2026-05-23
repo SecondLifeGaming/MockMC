@@ -14,25 +14,14 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ArmadilloBaseMock extends Armadillo, AnimalsBaseMock
 {
+	@Override
 	default void rollOut()
 	{
 		// MockMC: Armadillo#rollOut
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Armadillo#getLeashHolder
-		return null;
-	}
-
-	default Armadillo.State getState()
-	{
-		// MockMC: Armadillo#getState
-		return null;
 	}
 
 	@Override
@@ -42,9 +31,11 @@ public interface ArmadilloBaseMock extends Armadillo, AnimalsBaseMock
 		return false;
 	}
 
-	default void rollUp()
+	@Override
+	default Armadillo.State getState()
 	{
-		// MockMC: Armadillo#rollUp
+		// MockMC: Armadillo#getState
+		return null;
 	}
 
 	@Override
@@ -52,5 +43,18 @@ public interface ArmadilloBaseMock extends Armadillo, AnimalsBaseMock
 	{
 		// MockMC: Armadillo#isLeashed
 		return false;
+	}
+
+	@Override
+	default void rollUp()
+	{
+		// MockMC: Armadillo#rollUp
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Armadillo#getLeashHolder
+		return null;
 	}
 }

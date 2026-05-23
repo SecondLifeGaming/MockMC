@@ -15,6 +15,7 @@ import io.papermc.paper.datacomponent.item.MapId;
  */
 public interface MapIdBaseMock extends MapId
 {
+	@Override
 	default int id()
 	{
 		// MockMC: MapId#id

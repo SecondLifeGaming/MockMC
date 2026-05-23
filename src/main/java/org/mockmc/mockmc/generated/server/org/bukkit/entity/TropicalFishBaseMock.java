@@ -16,47 +16,14 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.SchoolableFish
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TropicalFishBaseMock extends TropicalFish, SchoolableFishBaseMock
 {
+	@Override
 	default void setPattern(TropicalFish.Pattern arg0)
 	{
 		// MockMC: TropicalFish#setPattern
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: TropicalFish#getLeashHolder
-		return null;
-	}
-
-	default DyeColor getBodyColor()
-	{
-		// MockMC: TropicalFish#getBodyColor
-		return null;
-	}
-
-	default DyeColor getPatternColor()
-	{
-		// MockMC: TropicalFish#getPatternColor
-		return null;
-	}
-
-	default void setBodyColor(DyeColor arg0)
-	{
-		// MockMC: TropicalFish#setBodyColor
-	}
-
-	default TropicalFish.Pattern getPattern()
-	{
-		// MockMC: TropicalFish#getPattern
-		return null;
-	}
-
-	default void setPatternColor(DyeColor arg0)
-	{
-		// MockMC: TropicalFish#setPatternColor
 	}
 
 	@Override
@@ -67,9 +34,49 @@ public interface TropicalFishBaseMock extends TropicalFish, SchoolableFishBaseMo
 	}
 
 	@Override
+	default DyeColor getBodyColor()
+	{
+		// MockMC: TropicalFish#getBodyColor
+		return null;
+	}
+
+	@Override
+	default DyeColor getPatternColor()
+	{
+		// MockMC: TropicalFish#getPatternColor
+		return null;
+	}
+
+	@Override
+	default void setBodyColor(DyeColor arg0)
+	{
+		// MockMC: TropicalFish#setBodyColor
+	}
+
+	@Override
+	default TropicalFish.Pattern getPattern()
+	{
+		// MockMC: TropicalFish#getPattern
+		return null;
+	}
+
+	@Override
+	default void setPatternColor(DyeColor arg0)
+	{
+		// MockMC: TropicalFish#setPatternColor
+	}
+
+	@Override
 	default boolean isLeashed()
 	{
 		// MockMC: TropicalFish#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: TropicalFish#getLeashHolder
+		return null;
 	}
 }

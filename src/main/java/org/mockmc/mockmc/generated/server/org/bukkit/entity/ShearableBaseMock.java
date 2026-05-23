@@ -17,13 +17,15 @@ import org.bukkit.entity.Shearable;
  *             modern build cycles.
  */
 @Deprecated(since = "1.21", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ShearableBaseMock extends Shearable
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setSheared(boolean arg0)
 	{
@@ -34,6 +36,7 @@ public interface ShearableBaseMock extends Shearable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default boolean isSheared()
 	{

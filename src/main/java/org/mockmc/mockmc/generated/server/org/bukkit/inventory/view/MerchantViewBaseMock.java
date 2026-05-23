@@ -18,6 +18,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface MerchantViewBaseMock extends MerchantView, InventoryViewBaseMock
 {
+	@Override
 	default Merchant getMerchant()
 	{
 		// MockMC: MerchantView#getMerchant

@@ -14,6 +14,7 @@ import io.papermc.paper.registry.PaperRegistryBuilder;
  */
 public interface PaperRegistryBuilderBaseMock<M, T> extends PaperRegistryBuilder<M, T>, RegistryBuilderBaseMock<T>
 {
+	@Override
 	default M build()
 	{
 		// MockMC: PaperRegistryBuilder#build

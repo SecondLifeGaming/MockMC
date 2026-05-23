@@ -17,12 +17,14 @@ import org.bukkit.Tag;
  */
 public interface TagBaseMock<T extends Keyed> extends Tag<T>, KeyedBaseMock
 {
+	@Override
 	default boolean isTagged(T arg0)
 	{
 		// MockMC: Tag#isTagged
 		return false;
 	}
 
+	@Override
 	default Set<T> getValues()
 	{
 		// MockMC: Tag#getValues

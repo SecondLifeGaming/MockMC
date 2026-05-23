@@ -16,17 +16,20 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface FarmlandBaseMock extends Farmland, BlockDataBaseMock
 {
+	@Override
 	default void setMoisture(int arg0)
 	{
 		// MockMC: Farmland#setMoisture
 	}
 
+	@Override
 	default int getMaximumMoisture()
 	{
 		// MockMC: Farmland#getMaximumMoisture
 		return 0;
 	}
 
+	@Override
 	default int getMoisture()
 	{
 		// MockMC: Farmland#getMoisture

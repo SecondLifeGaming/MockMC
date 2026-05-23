@@ -14,27 +14,32 @@ import org.bukkit.entity.Panda;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface PandaBaseMock extends Panda, SittableBaseMock, AnimalsBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface PandaBaseMock extends Panda, AnimalsBaseMock, SittableBaseMock
 {
+	@Override
 	default boolean isSneezing()
 	{
 		// MockMC: Panda#isSneezing
 		return false;
 	}
 
+	@Override
 	default Panda.Gene getHiddenGene()
 	{
 		// MockMC: Panda#getHiddenGene
 		return null;
 	}
 
+	@Override
 	default boolean isEating()
 	{
 		// MockMC: Panda#isEating
 		return false;
 	}
 
+	@Override
 	default void setOnBack(boolean arg0)
 	{
 		// MockMC: Panda#setOnBack
@@ -47,38 +52,45 @@ public interface PandaBaseMock extends Panda, SittableBaseMock, AnimalsBaseMock
 		return null;
 	}
 
+	@Override
 	default void setSneezeTicks(int arg0)
 	{
 		// MockMC: Panda#setSneezeTicks
 	}
 
+	@Override
 	default void setRolling(boolean arg0)
 	{
 		// MockMC: Panda#setRolling
 	}
 
+	@Override
 	default int getEatingTicks()
 	{
 		// MockMC: Panda#getEatingTicks
 		return 0;
 	}
 
+	@Override
 	default void setHiddenGene(Panda.Gene arg0)
 	{
 		// MockMC: Panda#setHiddenGene
 	}
 
+	@Override
 	default void setEatingTicks(int arg0)
 	{
 		// MockMC: Panda#setEatingTicks
 	}
 
+	@Override
 	default boolean isScared()
 	{
 		// MockMC: Panda#isScared
 		return false;
 	}
 
+	@Override
 	default int getSneezeTicks()
 	{
 		// MockMC: Panda#getSneezeTicks
@@ -89,65 +101,11 @@ public interface PandaBaseMock extends Panda, SittableBaseMock, AnimalsBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19", forRemoval = true)
 	default void setIsOnBack(boolean arg0)
 	{
 		// MockMC: Panda#setIsOnBack
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.19", forRemoval = true)
-	default void setIsSitting(boolean arg0)
-	{
-		// MockMC: Panda#setIsSitting
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Panda#setLeashHolder
-		return false;
-	}
-
-	default void setSneezing(boolean arg0)
-	{
-		// MockMC: Panda#setSneezing
-	}
-
-	default void setUnhappyTicks(int arg0)
-	{
-		// MockMC: Panda#setUnhappyTicks
-	}
-
-	default int getUnhappyTicks()
-	{
-		// MockMC: Panda#getUnhappyTicks
-		return 0;
-	}
-
-	default Panda.Gene getMainGene()
-	{
-		// MockMC: Panda#getMainGene
-		return null;
-	}
-
-	default boolean isOnBack()
-	{
-		// MockMC: Panda#isOnBack
-		return false;
-	}
-
-	default void setMainGene(Panda.Gene arg0)
-	{
-		// MockMC: Panda#setMainGene
-	}
-
-	default void setEating(boolean arg0)
-	{
-		// MockMC: Panda#setEating
 	}
 
 	@Override
@@ -157,12 +115,77 @@ public interface PandaBaseMock extends Panda, SittableBaseMock, AnimalsBaseMock
 		return false;
 	}
 
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.19", forRemoval = true)
+	default void setIsSitting(boolean arg0)
+	{
+		// MockMC: Panda#setIsSitting
+	}
+
+	@Override
+	default void setSneezing(boolean arg0)
+	{
+		// MockMC: Panda#setSneezing
+	}
+
+	@Override
+	default void setUnhappyTicks(int arg0)
+	{
+		// MockMC: Panda#setUnhappyTicks
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Panda#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default int getUnhappyTicks()
+	{
+		// MockMC: Panda#getUnhappyTicks
+		return 0;
+	}
+
+	@Override
+	default Panda.Gene getMainGene()
+	{
+		// MockMC: Panda#getMainGene
+		return null;
+	}
+
+	@Override
+	default boolean isOnBack()
+	{
+		// MockMC: Panda#isOnBack
+		return false;
+	}
+
+	@Override
+	default void setMainGene(Panda.Gene arg0)
+	{
+		// MockMC: Panda#setMainGene
+	}
+
+	@Override
+	default void setEating(boolean arg0)
+	{
+		// MockMC: Panda#setEating
+	}
+
+	@Override
 	default boolean isRolling()
 	{
 		// MockMC: Panda#isRolling
 		return false;
 	}
 
+	@Override
 	default Panda.Gene getCombinedGene()
 	{
 		// MockMC: Panda#getCombinedGene

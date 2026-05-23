@@ -19,9 +19,11 @@ import org.bukkit.potion.PotionType;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ArrowBaseMock extends Arrow, AbstractArrowBaseMock
 {
+	@Override
 	default boolean addCustomEffect(PotionEffect arg0, boolean arg1)
 	{
 		// MockMC: Arrow#addCustomEffect
@@ -32,6 +34,7 @@ public interface ArrowBaseMock extends Arrow, AbstractArrowBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default PotionData getBasePotionData()
@@ -40,52 +43,61 @@ public interface ArrowBaseMock extends Arrow, AbstractArrowBaseMock
 		return null;
 	}
 
+	@Override
 	default List<PotionEffect> getCustomEffects()
 	{
 		// MockMC: Arrow#getCustomEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void clearCustomEffects()
 	{
 		// MockMC: Arrow#clearCustomEffects
 	}
 
+	@Override
 	default boolean hasCustomEffects()
 	{
 		// MockMC: Arrow#hasCustomEffects
 		return false;
 	}
 
+	@Override
 	default boolean hasCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: Arrow#hasCustomEffect
 		return false;
 	}
 
+	@Override
 	default void setBasePotionType(PotionType arg0)
 	{
 		// MockMC: Arrow#setBasePotionType
 	}
 
+	@Override
 	default boolean removeCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: Arrow#removeCustomEffect
 		return false;
 	}
 
+	@Override
 	default Color getColor()
 	{
 		// MockMC: Arrow#getColor
 		return null;
 	}
 
+	@Override
 	default PotionType getBasePotionType()
 	{
 		// MockMC: Arrow#getBasePotionType
 		return null;
 	}
 
+	@Override
 	default void setColor(Color arg0)
 	{
 		// MockMC: Arrow#setColor
@@ -95,6 +107,7 @@ public interface ArrowBaseMock extends Arrow, AbstractArrowBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default void setBasePotionData(PotionData arg0)

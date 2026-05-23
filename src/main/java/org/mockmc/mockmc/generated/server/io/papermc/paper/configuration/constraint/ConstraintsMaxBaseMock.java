@@ -15,12 +15,14 @@ import java.lang.annotation.Annotation;
  */
 public interface ConstraintsMaxBaseMock extends Constraints.Max
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Max#annotationType
 		return null;
 	}
 
+	@Override
 	default int value()
 	{
 		// MockMC: Max#value

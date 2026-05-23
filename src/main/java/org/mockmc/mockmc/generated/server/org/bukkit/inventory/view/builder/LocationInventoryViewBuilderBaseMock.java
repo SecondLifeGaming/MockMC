@@ -28,12 +28,14 @@ public interface LocationInventoryViewBuilderBaseMock<V extends InventoryView>
 		return null;
 	}
 
+	@Override
 	default LocationInventoryViewBuilder<V> checkReachable(boolean arg0)
 	{
 		// MockMC: LocationInventoryViewBuilder#checkReachable
 		return null;
 	}
 
+	@Override
 	default LocationInventoryViewBuilder<V> location(Location arg0)
 	{
 		// MockMC: LocationInventoryViewBuilder#location

@@ -29,93 +29,109 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default ItemType getCraftingRemainingItem()
 	{
 		// MockMC: ItemType#getCraftingRemainingItem
 		return null;
 	}
 
+	@Override
 	default ItemStack createItemStack(int arg0)
 	{
 		// MockMC: ItemType#createItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default short getMaxDurability()
 	{
 		// MockMC: ItemType#getMaxDurability
 		return 0;
 	}
 
+	@Override
 	default ItemStack createItemStack()
 	{
 		// MockMC: ItemType#createItemStack
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default String translationKey()
 	{
 		// MockMC: ItemType#translationKey
 		return "";
 	}
 
+	@Override
 	default boolean hasDefaultData(DataComponentType arg0)
 	{
 		// MockMC: ItemType#hasDefaultData
 		return false;
 	}
 
+	@Override
 	default ItemType.Typed<ItemMeta> typed()
 	{
 		// MockMC: ItemType#typed
 		return null;
 	}
 
+	@Override
 	default <M extends ItemMeta> ItemType.Typed<M> typed(Class<M> arg0)
 	{
 		// MockMC: ItemType#typed
 		return null;
 	}
 
+	@Override
 	default boolean isCompostable()
 	{
 		// MockMC: ItemType#isCompostable
 		return false;
 	}
 
+	@Override
 	default Class<? extends ItemMeta> getItemMetaClass()
 	{
 		// MockMC: ItemType#getItemMetaClass
 		return null;
 	}
 
+	@Override
 	default boolean isRecord()
 	{
 		// MockMC: ItemType#isRecord
 		return false;
 	}
 
+	@Override
 	default Set<DataComponentType> getDefaultDataTypes()
 	{
 		// MockMC: ItemType#getDefaultDataTypes
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hasBlockType()
 	{
 		// MockMC: ItemType#hasBlockType
 		return false;
 	}
 
+	@Override
 	default ItemRarity getItemRarity()
 	{
 		// MockMC: ItemType#getItemRarity
 		return null;
 	}
 
+	@Override
 	default boolean isFuel()
 	{
 		// MockMC: ItemType#isFuel
@@ -134,18 +150,21 @@ public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, Ke
 		return "";
 	}
 
+	@Override
 	default Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers()
 	{
 		// MockMC: ItemType#getDefaultAttributeModifiers
 		return null;
 	}
 
+	@Override
 	default Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot arg0)
 	{
 		// MockMC: ItemType#getDefaultAttributeModifiers
 		return null;
 	}
 
+	@Override
 	default BlockType getBlockType()
 	{
 		// MockMC: ItemType#getBlockType
@@ -156,6 +175,7 @@ public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, Ke
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default CreativeCategory getCreativeCategory()
 	{
@@ -167,6 +187,7 @@ public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, Ke
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.1", forRemoval = true)
 	default boolean isEnabledByFeature(World arg0)
 	{
@@ -174,30 +195,35 @@ public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, Ke
 		return false;
 	}
 
+	@Override
 	default <T> T getDefaultData(DataComponentType.Valued<T> arg0)
 	{
 		// MockMC: ItemType#getDefaultData
 		return null;
 	}
 
+	@Override
 	default float getCompostChance()
 	{
 		// MockMC: ItemType#getCompostChance
 		return 0.0f;
 	}
 
+	@Override
 	default int getBurnDuration()
 	{
 		// MockMC: ItemType#getBurnDuration
 		return 0;
 	}
 
+	@Override
 	default boolean isEdible()
 	{
 		// MockMC: ItemType#isEdible
 		return false;
 	}
 
+	@Override
 	default int getMaxStackSize()
 	{
 		// MockMC: ItemType#getMaxStackSize
@@ -208,6 +234,7 @@ public interface ItemTypeBaseMock extends ItemType, FeatureDependantBaseMock, Ke
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6")
 	default Material asMaterial()
 	{

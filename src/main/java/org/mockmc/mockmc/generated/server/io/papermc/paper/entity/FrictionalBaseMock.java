@@ -16,11 +16,13 @@ import net.kyori.adventure.util.TriState;
  */
 public interface FrictionalBaseMock extends Frictional
 {
+	@Override
 	default void setFrictionState(TriState arg0)
 	{
 		// MockMC: Frictional#setFrictionState
 	}
 
+	@Override
 	default TriState getFrictionState()
 	{
 		// MockMC: Frictional#getFrictionState

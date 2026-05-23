@@ -16,24 +16,28 @@ import org.bukkit.block.data.BlockData;
  */
 public interface BlockChangeDelegateBaseMock extends BlockChangeDelegate
 {
+	@Override
 	default boolean isEmpty(int arg0, int arg1, int arg2)
 	{
 		// MockMC: BlockChangeDelegate#isEmpty
 		return false;
 	}
 
+	@Override
 	default boolean setBlockData(int arg0, int arg1, int arg2, BlockData arg3)
 	{
 		// MockMC: BlockChangeDelegate#setBlockData
 		return false;
 	}
 
+	@Override
 	default int getHeight()
 	{
 		// MockMC: BlockChangeDelegate#getHeight
 		return 0;
 	}
 
+	@Override
 	default BlockData getBlockData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: BlockChangeDelegate#getBlockData

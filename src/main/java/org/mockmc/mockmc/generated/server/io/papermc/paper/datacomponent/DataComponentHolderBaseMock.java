@@ -17,16 +17,19 @@ import io.papermc.paper.datacomponent.DataComponentType;
  */
 public interface DataComponentHolderBaseMock extends DataComponentHolder, DataComponentViewBaseMock
 {
+	@Override
 	default <T> void setData(DataComponentType.Valued<T> arg0, DataComponentBuilder<T> arg1)
 	{
 		// MockMC: DataComponentHolder#setData
 	}
 
+	@Override
 	default void setData(DataComponentType.NonValued arg0)
 	{
 		// MockMC: DataComponentHolder#setData
 	}
 
+	@Override
 	default <T> void setData(DataComponentType.Valued<T> arg0, T arg1)
 	{
 		// MockMC: DataComponentHolder#setData

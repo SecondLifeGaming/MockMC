@@ -17,12 +17,14 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface ZombieNautilusVariantRegistryEntryBaseMock extends ZombieNautilusVariantRegistryEntry
 {
+	@Override
 	default ZombieNautilusVariantRegistryEntry.Model model()
 	{
 		// MockMC: ZombieNautilusVariantRegistryEntry#model
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: ZombieNautilusVariantRegistryEntry#clientTextureAsset

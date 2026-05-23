@@ -18,36 +18,42 @@ import org.bukkit.util.Vector;
  */
 public interface FluidDataBaseMock extends FluidData
 {
+	@Override
 	default boolean isSource()
 	{
 		// MockMC: FluidData#isSource
 		return false;
 	}
 
+	@Override
 	default FluidData clone()
 	{
 		// MockMC: FluidData#clone
 		return null;
 	}
 
+	@Override
 	default Vector computeFlowDirection(Location arg0)
 	{
 		// MockMC: FluidData#computeFlowDirection
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default float computeHeight(Location arg0)
 	{
 		// MockMC: FluidData#computeHeight
 		return 0.0f;
 	}
 
+	@Override
 	default Fluid getFluidType()
 	{
 		// MockMC: FluidData#getFluidType
 		return null;
 	}
 
+	@Override
 	default int getLevel()
 	{
 		// MockMC: FluidData#getLevel

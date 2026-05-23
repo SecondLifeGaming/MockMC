@@ -15,12 +15,14 @@ import org.bukkit.util.CachedServerIcon;
  */
 public interface CachedServerIconBaseMock extends CachedServerIcon
 {
+	@Override
 	default String getData()
 	{
 		// MockMC: CachedServerIcon#getData
 		return "";
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: CachedServerIcon#isEmpty

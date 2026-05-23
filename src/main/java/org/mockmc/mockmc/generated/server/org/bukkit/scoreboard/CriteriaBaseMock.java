@@ -16,18 +16,21 @@ import org.bukkit.scoreboard.RenderType;
  */
 public interface CriteriaBaseMock extends Criteria
 {
+	@Override
 	default String getName()
 	{
 		// MockMC: Criteria#getName
 		return "";
 	}
 
+	@Override
 	default boolean isReadOnly()
 	{
 		// MockMC: Criteria#isReadOnly
 		return false;
 	}
 
+	@Override
 	default RenderType getDefaultRenderType()
 	{
 		// MockMC: Criteria#getDefaultRenderType

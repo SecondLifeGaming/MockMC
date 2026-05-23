@@ -18,6 +18,7 @@ import org.bukkit.entity.Player;
  */
 public interface ChatRendererBaseMock extends ChatRenderer
 {
+	@Override
 	default Component render(Player arg0, Component arg1, Component arg2, Audience arg3)
 	{
 		// MockMC: ChatRenderer#render

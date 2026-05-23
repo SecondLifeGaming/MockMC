@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  */
 public interface RegistryEventBaseMock<T> extends RegistryEvent<T>, LifecycleEventBaseMock
 {
+	@Override
 	default RegistryKey<T> registryKey()
 	{
 		// MockMC: RegistryEvent#registryKey

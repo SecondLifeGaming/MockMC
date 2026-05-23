@@ -18,6 +18,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface BeaconViewBaseMock extends BeaconView, InventoryViewBaseMock
 {
+	@Override
 	default PotionEffectType getSecondaryEffect()
 	{
 		// MockMC: BeaconView#getSecondaryEffect
@@ -31,23 +32,27 @@ public interface BeaconViewBaseMock extends BeaconView, InventoryViewBaseMock
 		return null;
 	}
 
+	@Override
 	default void setSecondaryEffect(PotionEffectType arg0)
 	{
 		// MockMC: BeaconView#setSecondaryEffect
 	}
 
+	@Override
 	default PotionEffectType getPrimaryEffect()
 	{
 		// MockMC: BeaconView#getPrimaryEffect
 		return null;
 	}
 
+	@Override
 	default int getTier()
 	{
 		// MockMC: BeaconView#getTier
 		return 0;
 	}
 
+	@Override
 	default void setPrimaryEffect(PotionEffectType arg0)
 	{
 		// MockMC: BeaconView#setPrimaryEffect

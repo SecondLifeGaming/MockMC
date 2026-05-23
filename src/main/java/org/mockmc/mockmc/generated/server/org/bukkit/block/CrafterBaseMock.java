@@ -16,42 +16,36 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CrafterBaseMock extends Crafter, LootableBaseMock, ContainerBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: Crafter#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: Crafter#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default boolean isTriggered()
 	{
 		// MockMC: Crafter#isTriggered
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: Crafter#canPlayerLoot
 		return false;
-	}
-
-	default void setCraftingTicks(int arg0)
-	{
-		// MockMC: Crafter#setCraftingTicks
-	}
-
-	default long getNextRefill()
-	{
-		// MockMC: Crafter#getNextRefill
-		return 0L;
 	}
 
 	@Override
@@ -61,58 +55,81 @@ public interface CrafterBaseMock extends Crafter, LootableBaseMock, ContainerBas
 		return null;
 	}
 
+	@Override
+	default void setCraftingTicks(int arg0)
+	{
+		// MockMC: Crafter#setCraftingTicks
+	}
+
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: Crafter#getNextRefill
+		return 0L;
+	}
+
+	@Override
 	default int getCraftingTicks()
 	{
 		// MockMC: Crafter#getCraftingTicks
 		return 0;
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: Crafter#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: Crafter#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: Crafter#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default void setTriggered(boolean arg0)
 	{
 		// MockMC: Crafter#setTriggered
 	}
 
+	@Override
 	default void setSlotDisabled(int arg0, boolean arg1)
 	{
 		// MockMC: Crafter#setSlotDisabled
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Crafter#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Crafter#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default boolean isSlotDisabled(int arg0)
 	{
 		// MockMC: Crafter#isSlotDisabled
 		return false;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Crafter#setNextRefill

@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface CowVariantRegistryEntryBaseMock extends CowVariantRegistryEntry
 {
+	@Override
 	default CowVariantRegistryEntry.Model model()
 	{
 		// MockMC: CowVariantRegistryEntry#model
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: CowVariantRegistryEntry#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset babyClientTextureAsset()
 	{
 		// MockMC: CowVariantRegistryEntry#babyClientTextureAsset

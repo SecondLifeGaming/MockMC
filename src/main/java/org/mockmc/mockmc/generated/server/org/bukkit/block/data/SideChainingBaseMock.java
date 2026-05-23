@@ -15,11 +15,13 @@ import org.bukkit.block.data.SideChaining;
  */
 public interface SideChainingBaseMock extends SideChaining, BlockDataBaseMock
 {
+	@Override
 	default void setSideChain(SideChaining.ChainPart arg0)
 	{
 		// MockMC: SideChaining#setSideChain
 	}
 
+	@Override
 	default SideChaining.ChainPart getSideChain()
 	{
 		// MockMC: SideChaining#getSideChain

@@ -15,52 +15,62 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EnderSignalBaseMock extends EnderSignal, EntityBaseMock
 {
+	@Override
 	default void setDropItem(boolean arg0)
 	{
 		// MockMC: EnderSignal#setDropItem
 	}
 
+	@Override
 	default void setTargetLocation(Location arg0)
 	{
 		// MockMC: EnderSignal#setTargetLocation
 	}
 
+	@Override
 	default void setTargetLocation(Location arg0, boolean arg1)
 	{
 		// MockMC: EnderSignal#setTargetLocation
 	}
 
+	@Override
 	default boolean getDropItem()
 	{
 		// MockMC: EnderSignal#getDropItem
 		return false;
 	}
 
+	@Override
 	default void setDespawnTimer(int arg0)
 	{
 		// MockMC: EnderSignal#setDespawnTimer
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: EnderSignal#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: EnderSignal#setItem
 	}
 
+	@Override
 	default Location getTargetLocation()
 	{
 		// MockMC: EnderSignal#getTargetLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default int getDespawnTimer()
 	{
 		// MockMC: EnderSignal#getDespawnTimer

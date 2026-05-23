@@ -24,12 +24,14 @@ public interface BanListBaseMock<T> extends BanList<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default void pardon(String arg0)
 	{
 		// MockMC: BanList#pardon
 	}
 
+	@Override
 	default void pardon(T arg0)
 	{
 		// MockMC: BanList#pardon
@@ -39,6 +41,7 @@ public interface BanListBaseMock<T> extends BanList<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default <E extends BanEntry<? super T>> E addBan(String arg0, String arg1, Date arg2, String arg3)
 	{
@@ -46,24 +49,28 @@ public interface BanListBaseMock<T> extends BanList<T>
 		return null;
 	}
 
+	@Override
 	default BanEntry<T> addBan(T arg0, String arg1, Instant arg2, String arg3)
 	{
 		// MockMC: BanList#addBan
 		return null;
 	}
 
+	@Override
 	default BanEntry<T> addBan(T arg0, String arg1, Date arg2, String arg3)
 	{
 		// MockMC: BanList#addBan
 		return null;
 	}
 
+	@Override
 	default BanEntry<T> addBan(T arg0, String arg1, Duration arg2, String arg3)
 	{
 		// MockMC: BanList#addBan
 		return null;
 	}
 
+	@Override
 	default boolean isBanned(T arg0)
 	{
 		// MockMC: BanList#isBanned
@@ -74,6 +81,7 @@ public interface BanListBaseMock<T> extends BanList<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default boolean isBanned(String arg0)
 	{
@@ -85,6 +93,7 @@ public interface BanListBaseMock<T> extends BanList<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.1")
 	default Set<BanEntry> getBanEntries()
@@ -93,12 +102,14 @@ public interface BanListBaseMock<T> extends BanList<T>
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default <E extends BanEntry<? super T>> Set<E> getEntries()
 	{
 		// MockMC: BanList#getEntries
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default BanEntry<T> getBanEntry(T arg0)
 	{
 		// MockMC: BanList#getBanEntry
@@ -109,6 +120,7 @@ public interface BanListBaseMock<T> extends BanList<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default <E extends BanEntry<? super T>> E getBanEntry(String arg0)
 	{

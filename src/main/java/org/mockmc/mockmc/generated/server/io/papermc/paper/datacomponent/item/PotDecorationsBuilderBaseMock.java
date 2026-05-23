@@ -20,24 +20,28 @@ public interface PotDecorationsBuilderBaseMock
 			PotDecorations.Builder,
 			DataComponentBuilderBaseMock<PotDecorations>
 {
+	@Override
 	default PotDecorations.Builder left(ItemType arg0)
 	{
 		// MockMC: Builder#left
 		return null;
 	}
 
+	@Override
 	default PotDecorations.Builder back(ItemType arg0)
 	{
 		// MockMC: Builder#back
 		return null;
 	}
 
+	@Override
 	default PotDecorations.Builder right(ItemType arg0)
 	{
 		// MockMC: Builder#right
 		return null;
 	}
 
+	@Override
 	default PotDecorations.Builder front(ItemType arg0)
 	{
 		// MockMC: Builder#front

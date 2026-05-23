@@ -15,14 +15,17 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.LivingEntityBaseMock
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CollarColorableBaseMock extends CollarColorable, LivingEntityBaseMock
 {
+	@Override
 	default void setCollarColor(DyeColor arg0)
 	{
 		// MockMC: CollarColorable#setCollarColor
 	}
 
+	@Override
 	default DyeColor getCollarColor()
 	{
 		// MockMC: CollarColorable#getCollarColor

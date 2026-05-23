@@ -17,13 +17,15 @@ import com.destroystokyo.paper.Namespaced;
  *             modern build cycles.
  */
 @Deprecated(since = "1.20.6", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface NamespacedBaseMock extends Namespaced
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default String getKey()
 	{
@@ -35,6 +37,7 @@ public interface NamespacedBaseMock extends Namespaced
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default String getNamespace()
 	{

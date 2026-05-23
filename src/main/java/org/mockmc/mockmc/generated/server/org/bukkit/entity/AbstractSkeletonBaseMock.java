@@ -16,9 +16,49 @@ import org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedE
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractSkeletonBaseMock extends AbstractSkeleton, RangedEntityBaseMock, MonsterBaseMock
 {
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: AbstractSkeleton#setLeashHolder
+		return false;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.17", forRemoval = true)
+	default Skeleton.SkeletonType getSkeletonType()
+	{
+		// MockMC: AbstractSkeleton#getSkeletonType
+		return null;
+	}
+
+	@Override
+	default boolean shouldBurnInDay()
+	{
+		// MockMC: AbstractSkeleton#shouldBurnInDay
+		return false;
+	}
+
+	@Override
+	default void setShouldBurnInDay(boolean arg0)
+	{
+		// MockMC: AbstractSkeleton#setShouldBurnInDay
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: AbstractSkeleton#isLeashed
+		return false;
+	}
+
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
@@ -30,42 +70,7 @@ public interface AbstractSkeletonBaseMock extends AbstractSkeleton, RangedEntity
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@Deprecated(since = "1.17", forRemoval = true)
-	default Skeleton.SkeletonType getSkeletonType()
-	{
-		// MockMC: AbstractSkeleton#getSkeletonType
-		return null;
-	}
-
-	default boolean shouldBurnInDay()
-	{
-		// MockMC: AbstractSkeleton#shouldBurnInDay
-		return false;
-	}
-
-	default void setShouldBurnInDay(boolean arg0)
-	{
-		// MockMC: AbstractSkeleton#setShouldBurnInDay
-	}
-
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: AbstractSkeleton#setLeashHolder
-		return false;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: AbstractSkeleton#isLeashed
-		return false;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
 	@Deprecated(since = "1.17", forRemoval = true)
 	default void setSkeletonType(Skeleton.SkeletonType arg0)
 	{

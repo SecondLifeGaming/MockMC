@@ -14,12 +14,35 @@ import org.bukkit.entity.Frog;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FrogBaseMock extends Frog, AnimalsBaseMock
 {
+	@Override
 	default Frog.Variant getVariant()
 	{
 		// MockMC: Frog#getVariant
+		return null;
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Frog#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Frog#isLeashed
+		return false;
+	}
+
+	@Override
+	default Entity getTongueTarget()
+	{
+		// MockMC: Frog#getTongueTarget
 		return null;
 	}
 
@@ -31,30 +54,12 @@ public interface FrogBaseMock extends Frog, AnimalsBaseMock
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Frog#setLeashHolder
-		return false;
-	}
-
-	default Entity getTongueTarget()
-	{
-		// MockMC: Frog#getTongueTarget
-		return null;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Frog#isLeashed
-		return false;
-	}
-
 	default void setVariant(Frog.Variant arg0)
 	{
 		// MockMC: Frog#setVariant
 	}
 
+	@Override
 	default void setTongueTarget(Entity arg0)
 	{
 		// MockMC: Frog#setTongueTarget

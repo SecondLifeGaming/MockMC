@@ -16,55 +16,65 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ItemMetaBase
  */
 public interface ArmorStandMetaBaseMock extends ArmorStandMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean isMarker()
 	{
 		// MockMC: ArmorStandMeta#isMarker
 		return false;
 	}
 
+	@Override
 	default void setNoBasePlate(boolean arg0)
 	{
 		// MockMC: ArmorStandMeta#setNoBasePlate
 	}
 
+	@Override
 	default boolean isSmall()
 	{
 		// MockMC: ArmorStandMeta#isSmall
 		return false;
 	}
 
+	@Override
 	default void setInvisible(boolean arg0)
 	{
 		// MockMC: ArmorStandMeta#setInvisible
 	}
 
+	@Override
 	default boolean shouldShowArms()
 	{
 		// MockMC: ArmorStandMeta#shouldShowArms
 		return false;
 	}
 
+	@Override
 	default void setMarker(boolean arg0)
 	{
 		// MockMC: ArmorStandMeta#setMarker
 	}
 
+	@Override
 	default void setSmall(boolean arg0)
 	{
 		// MockMC: ArmorStandMeta#setSmall
 	}
 
+	@Override
 	default boolean isInvisible()
 	{
 		// MockMC: ArmorStandMeta#isInvisible
 		return false;
 	}
 
+	@Override
 	default void setShowArms(boolean arg0)
 	{
 		// MockMC: ArmorStandMeta#setShowArms
 	}
 
+	@Override
 	default boolean hasNoBasePlate()
 	{
 		// MockMC: ArmorStandMeta#hasNoBasePlate

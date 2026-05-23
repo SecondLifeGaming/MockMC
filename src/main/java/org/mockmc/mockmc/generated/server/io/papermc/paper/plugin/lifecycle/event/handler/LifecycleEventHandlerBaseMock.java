@@ -16,6 +16,7 @@ import io.papermc.paper.plugin.lifecycle.event.handler.LifecycleEventHandler;
  */
 public interface LifecycleEventHandlerBaseMock<E extends LifecycleEvent> extends LifecycleEventHandler<E>
 {
+	@Override
 	default void run(E arg0)
 	{
 		// MockMC: LifecycleEventHandler#run

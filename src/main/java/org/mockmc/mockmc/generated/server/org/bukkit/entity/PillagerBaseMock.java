@@ -16,16 +16,10 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface PillagerBaseMock extends Pillager, InventoryHolderBaseMock, RangedEntityBaseMock, IllagerBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface PillagerBaseMock extends Pillager, RangedEntityBaseMock, InventoryHolderBaseMock, IllagerBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Pillager#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -38,5 +32,12 @@ public interface PillagerBaseMock extends Pillager, InventoryHolderBaseMock, Ran
 	{
 		// MockMC: Pillager#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Pillager#getLeashHolder
+		return null;
 	}
 }

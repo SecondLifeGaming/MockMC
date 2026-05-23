@@ -17,40 +17,47 @@ import org.bukkit.inventory.meta.BannerMeta;
  */
 public interface BannerMetaBaseMock extends BannerMeta, ItemMetaBaseMock
 {
+	@Override
 	default Pattern getPattern(int arg0)
 	{
 		// MockMC: BannerMeta#getPattern
 		return null;
 	}
 
+	@Override
 	default void setPattern(int arg0, Pattern arg1)
 	{
 		// MockMC: BannerMeta#setPattern
 	}
 
+	@Override
 	default void addPattern(Pattern arg0)
 	{
 		// MockMC: BannerMeta#addPattern
 	}
 
+	@Override
 	default int numberOfPatterns()
 	{
 		// MockMC: BannerMeta#numberOfPatterns
 		return 0;
 	}
 
+	@Override
 	default Pattern removePattern(int arg0)
 	{
 		// MockMC: BannerMeta#removePattern
 		return null;
 	}
 
+	@Override
 	default List<Pattern> getPatterns()
 	{
 		// MockMC: BannerMeta#getPatterns
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setPatterns(List<Pattern> arg0)
 	{
 		// MockMC: BannerMeta#setPatterns

@@ -17,18 +17,21 @@ import org.bukkit.map.MapView;
  */
 public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 {
+	@Override
 	default Color getColor()
 	{
 		// MockMC: MapMeta#getColor
 		return null;
 	}
 
+	@Override
 	default int getMapId()
 	{
 		// MockMC: MapMeta#getMapId
 		return 0;
 	}
 
+	@Override
 	default boolean isScaling()
 	{
 		// MockMC: MapMeta#isScaling
@@ -39,6 +42,7 @@ public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.13.2")
 	default void setMapId(int arg0)
 	{
@@ -49,6 +53,7 @@ public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4")
 	default boolean hasLocationName()
 	{
@@ -60,6 +65,7 @@ public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4")
 	default String getLocationName()
 	{
@@ -67,28 +73,33 @@ public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 		return "";
 	}
 
+	@Override
 	default void setScaling(boolean arg0)
 	{
 		// MockMC: MapMeta#setScaling
 	}
 
+	@Override
 	default void setMapView(MapView arg0)
 	{
 		// MockMC: MapMeta#setMapView
 	}
 
+	@Override
 	default boolean hasMapId()
 	{
 		// MockMC: MapMeta#hasMapId
 		return false;
 	}
 
+	@Override
 	default boolean hasMapView()
 	{
 		// MockMC: MapMeta#hasMapView
 		return false;
 	}
 
+	@Override
 	default MapView getMapView()
 	{
 		// MockMC: MapMeta#getMapView
@@ -106,18 +117,21 @@ public interface MapMetaBaseMock extends MapMeta, ItemMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4")
 	default void setLocationName(String arg0)
 	{
 		// MockMC: MapMeta#setLocationName
 	}
 
+	@Override
 	default boolean hasColor()
 	{
 		// MockMC: MapMeta#hasColor
 		return false;
 	}
 
+	@Override
 	default void setColor(Color arg0)
 	{
 		// MockMC: MapMeta#setColor

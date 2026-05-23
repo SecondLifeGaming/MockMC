@@ -17,12 +17,14 @@ import org.bukkit.NamespacedKey;
  */
 public interface KeyedBaseMock extends Keyed
 {
+	@Override
 	default NamespacedKey getKey()
 	{
 		// MockMC: Keyed#getKey
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default Key key()
 	{
 		// MockMC: Keyed#key

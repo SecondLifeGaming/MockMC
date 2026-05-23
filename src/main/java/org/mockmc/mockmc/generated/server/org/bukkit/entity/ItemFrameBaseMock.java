@@ -16,53 +16,63 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ItemFrameBaseMock extends ItemFrame, HangingBaseMock
 {
+	@Override
 	default float getItemDropChance()
 	{
 		// MockMC: ItemFrame#getItemDropChance
 		return 0.0f;
 	}
 
+	@Override
 	default void setItemDropChance(float arg0)
 	{
 		// MockMC: ItemFrame#setItemDropChance
 	}
 
+	@Override
 	default Rotation getRotation()
 	{
 		// MockMC: ItemFrame#getRotation
 		return null;
 	}
 
+	@Override
 	default void setVisible(boolean arg0)
 	{
 		// MockMC: ItemFrame#setVisible
 	}
 
+	@Override
 	default boolean isFixed()
 	{
 		// MockMC: ItemFrame#isFixed
 		return false;
 	}
 
+	@Override
 	default void setItem(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: ItemFrame#setItem
 	}
 
+	@Override
 	default void setItem(ItemStack arg0)
 	{
 		// MockMC: ItemFrame#setItem
 	}
 
+	@Override
 	default ItemStack getItem()
 	{
 		// MockMC: ItemFrame#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setFixed(boolean arg0)
 	{
 		// MockMC: ItemFrame#setFixed
@@ -75,11 +85,13 @@ public interface ItemFrameBaseMock extends ItemFrame, HangingBaseMock
 		return null;
 	}
 
+	@Override
 	default void setRotation(Rotation arg0) throws IllegalArgumentException
 	{
 		// MockMC: ItemFrame#setRotation
 	}
 
+	@Override
 	default boolean isVisible()
 	{
 		// MockMC: ItemFrame#isVisible

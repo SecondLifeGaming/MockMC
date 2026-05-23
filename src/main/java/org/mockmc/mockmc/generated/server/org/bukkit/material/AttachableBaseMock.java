@@ -16,6 +16,7 @@ import org.bukkit.material.Attachable;
  */
 public interface AttachableBaseMock extends Attachable, DirectionalBaseMock
 {
+	@Override
 	default BlockFace getAttachedFace()
 	{
 		// MockMC: Attachable#getAttachedFace

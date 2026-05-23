@@ -17,6 +17,7 @@ import org.bukkit.advancement.AdvancementRequirements;
  */
 public interface AdvancementRequirementsBaseMock extends AdvancementRequirements
 {
+	@Override
 	default List<AdvancementRequirement> getRequirements()
 	{
 		// MockMC: AdvancementRequirements#getRequirements

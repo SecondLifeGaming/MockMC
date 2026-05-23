@@ -17,12 +17,14 @@ import java.lang.annotation.Annotation;
  */
 public interface SubscribeBaseMock extends Subscribe
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Subscribe#annotationType
 		return null;
 	}
 
+	@Override
 	default short priority()
 	{
 		// MockMC: Subscribe#priority
@@ -33,6 +35,7 @@ public interface SubscribeBaseMock extends Subscribe
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default PostOrder order()
 	{
@@ -40,6 +43,7 @@ public interface SubscribeBaseMock extends Subscribe
 		return null;
 	}
 
+	@Override
 	default boolean async()
 	{
 		// MockMC: Subscribe#async

@@ -19,6 +19,7 @@ public interface ReloadableRegistrarEventBaseMock<R extends Registrar>
 			ReloadableRegistrarEvent<R>,
 			RegistrarEventBaseMock<R>
 {
+	@Override
 	default ReloadableRegistrarEvent.Cause cause()
 	{
 		// MockMC: ReloadableRegistrarEvent#cause

@@ -16,18 +16,21 @@ import org.bukkit.Warning;
  */
 public interface WarningBaseMock extends Warning
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Warning#annotationType
 		return null;
 	}
 
+	@Override
 	default boolean value()
 	{
 		// MockMC: Warning#value
 		return false;
 	}
 
+	@Override
 	default String reason()
 	{
 		// MockMC: Warning#reason

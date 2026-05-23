@@ -24,28 +24,33 @@ public interface FurnaceViewBaseMock extends FurnaceView, InventoryViewBaseMock
 		return null;
 	}
 
+	@Override
 	default void setBurnTime(int arg0, int arg1)
 	{
 		// MockMC: FurnaceView#setBurnTime
 	}
 
+	@Override
 	default void setCookTime(int arg0, int arg1)
 	{
 		// MockMC: FurnaceView#setCookTime
 	}
 
+	@Override
 	default float getBurnTime()
 	{
 		// MockMC: FurnaceView#getBurnTime
 		return 0.0f;
 	}
 
+	@Override
 	default boolean isBurning()
 	{
 		// MockMC: FurnaceView#isBurning
 		return false;
 	}
 
+	@Override
 	default float getCookTime()
 	{
 		// MockMC: FurnaceView#getCookTime

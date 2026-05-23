@@ -16,6 +16,7 @@ import io.papermc.paper.plugin.loader.PluginLoader;
  */
 public interface PluginLoaderBaseMock extends PluginLoader
 {
+	@Override
 	default void classloader(PluginClasspathBuilder arg0)
 	{
 		// MockMC: PluginLoader#classloader

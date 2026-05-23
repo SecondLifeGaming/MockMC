@@ -15,32 +15,22 @@ import org.bukkit.entity.Turtle;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TurtleBaseMock extends Turtle, AnimalsBaseMock
 {
+	@Override
 	default boolean isGoingHome()
 	{
 		// MockMC: Turtle#isGoingHome
 		return false;
 	}
 
+	@Override
 	default boolean isLayingEgg()
 	{
 		// MockMC: Turtle#isLayingEgg
 		return false;
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Turtle#getLeashHolder
-		return null;
-	}
-
-	default Location getHome()
-	{
-		// MockMC: Turtle#getHome
-		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
 	@Override
@@ -50,17 +40,41 @@ public interface TurtleBaseMock extends Turtle, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default Location getHome()
+	{
+		// MockMC: Turtle#getHome
+		return new org.bukkit.Location(null, 0, 0, 0);
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Turtle#isLeashed
+		return false;
+	}
+
+	@Override
 	default boolean hasEgg()
 	{
 		// MockMC: Turtle#hasEgg
 		return false;
 	}
 
+	@Override
 	default void setHasEgg(boolean arg0)
 	{
 		// MockMC: Turtle#setHasEgg
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Turtle#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setHome(Location arg0)
 	{
 		// MockMC: Turtle#setHome
@@ -70,17 +84,11 @@ public interface TurtleBaseMock extends Turtle, AnimalsBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.4")
 	default boolean isDigging()
 	{
 		// MockMC: Turtle#isDigging
-		return false;
-	}
-
-	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Turtle#isLeashed
 		return false;
 	}
 }

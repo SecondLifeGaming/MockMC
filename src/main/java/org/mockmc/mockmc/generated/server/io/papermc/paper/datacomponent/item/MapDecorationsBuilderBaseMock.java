@@ -20,12 +20,14 @@ public interface MapDecorationsBuilderBaseMock
 			MapDecorations.Builder,
 			DataComponentBuilderBaseMock<MapDecorations>
 {
+	@Override
 	default MapDecorations.Builder put(String arg0, MapDecorations.DecorationEntry arg1)
 	{
 		// MockMC: Builder#put
 		return null;
 	}
 
+	@Override
 	default MapDecorations.Builder putAll(Map<String, MapDecorations.DecorationEntry> arg0)
 	{
 		// MockMC: Builder#putAll

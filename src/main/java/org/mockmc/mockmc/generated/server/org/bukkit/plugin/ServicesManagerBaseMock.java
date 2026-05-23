@@ -20,56 +20,66 @@ import org.bukkit.plugin.ServicesManager;
  */
 public interface ServicesManagerBaseMock extends ServicesManager
 {
+	@Override
 	default Collection<Class<?>> getKnownServices()
 	{
 		// MockMC: ServicesManager#getKnownServices
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default <T> T load(Class<T> arg0)
 	{
 		// MockMC: ServicesManager#load
 		return null;
 	}
 
+	@Override
 	default <T> boolean isProvidedFor(Class<T> arg0)
 	{
 		// MockMC: ServicesManager#isProvidedFor
 		return false;
 	}
 
+	@Override
 	default <T> void register(Class<T> arg0, T arg1, Plugin arg2, ServicePriority arg3)
 	{
 		// MockMC: ServicesManager#register
 	}
 
+	@Override
 	default <T> Collection<RegisteredServiceProvider<T>> getRegistrations(Class<T> arg0)
 	{
 		// MockMC: ServicesManager#getRegistrations
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<RegisteredServiceProvider<?>> getRegistrations(Plugin arg0)
 	{
 		// MockMC: ServicesManager#getRegistrations
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void unregisterAll(Plugin arg0)
 	{
 		// MockMC: ServicesManager#unregisterAll
 	}
 
+	@Override
 	default void unregister(Class<?> arg0, Object arg1)
 	{
 		// MockMC: ServicesManager#unregister
 	}
 
+	@Override
 	default void unregister(Object arg0)
 	{
 		// MockMC: ServicesManager#unregister
 	}
 
+	@Override
 	default <T> RegisteredServiceProvider<T> getRegistration(Class<T> arg0)
 	{
 		// MockMC: ServicesManager#getRegistration

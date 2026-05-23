@@ -14,7 +14,8 @@ import org.bukkit.entity.PigZombie;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PigZombieBaseMock extends PigZombie, ZombieBaseMock
 {
 	@Override
@@ -32,27 +33,9 @@ public interface PigZombieBaseMock extends PigZombie, ZombieBaseMock
 	}
 
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: PigZombie#getLeashHolder
-		return null;
-	}
-
-	@Override
 	default void setConversionTime(int arg0)
 	{
 		// MockMC: PigZombie#setConversionTime
-	}
-
-	default int getAnger()
-	{
-		// MockMC: PigZombie#getAnger
-		return 0;
-	}
-
-	default void setAngry(boolean arg0)
-	{
-		// MockMC: PigZombie#setAngry
 	}
 
 	@Override
@@ -62,10 +45,17 @@ public interface PigZombieBaseMock extends PigZombie, ZombieBaseMock
 		return false;
 	}
 
-	default boolean isAngry()
+	@Override
+	default int getAnger()
 	{
-		// MockMC: PigZombie#isAngry
-		return false;
+		// MockMC: PigZombie#getAnger
+		return 0;
+	}
+
+	@Override
+	default void setAngry(boolean arg0)
+	{
+		// MockMC: PigZombie#setAngry
 	}
 
 	@Override
@@ -75,6 +65,21 @@ public interface PigZombieBaseMock extends PigZombie, ZombieBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isAngry()
+	{
+		// MockMC: PigZombie#isAngry
+		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: PigZombie#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setAnger(int arg0)
 	{
 		// MockMC: PigZombie#setAnger

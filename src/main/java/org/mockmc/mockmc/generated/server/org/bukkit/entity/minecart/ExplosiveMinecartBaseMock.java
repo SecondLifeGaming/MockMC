@@ -15,46 +15,55 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.MinecartBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ExplosiveMinecartBaseMock extends ExplosiveMinecart, ExplosiveBaseMock, MinecartBaseMock
 {
+	@Override
 	default boolean isIgnited()
 	{
 		// MockMC: ExplosiveMinecart#isIgnited
 		return false;
 	}
 
+	@Override
 	default void ignite()
 	{
 		// MockMC: ExplosiveMinecart#ignite
 	}
 
+	@Override
 	default void setExplosionSpeedFactor(float arg0)
 	{
 		// MockMC: ExplosiveMinecart#setExplosionSpeedFactor
 	}
 
+	@Override
 	default void setFuseTicks(int arg0)
 	{
 		// MockMC: ExplosiveMinecart#setFuseTicks
 	}
 
+	@Override
 	default void explode()
 	{
 		// MockMC: ExplosiveMinecart#explode
 	}
 
+	@Override
 	default void explode(double arg0)
 	{
 		// MockMC: ExplosiveMinecart#explode
 	}
 
+	@Override
 	default float getExplosionSpeedFactor()
 	{
 		// MockMC: ExplosiveMinecart#getExplosionSpeedFactor
 		return 0.0f;
 	}
 
+	@Override
 	default int getFuseTicks()
 	{
 		// MockMC: ExplosiveMinecart#getFuseTicks

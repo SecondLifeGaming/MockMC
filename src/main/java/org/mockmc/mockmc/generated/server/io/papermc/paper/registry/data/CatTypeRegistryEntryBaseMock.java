@@ -16,12 +16,14 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface CatTypeRegistryEntryBaseMock extends CatTypeRegistryEntry
 {
+	@Override
 	default ClientTextureAsset babyClientTextureAsset()
 	{
 		// MockMC: CatTypeRegistryEntry#babyClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: CatTypeRegistryEntry#clientTextureAsset

@@ -16,6 +16,7 @@ import io.papermc.paper.command.brigadier.argument.range.DoubleRangeProvider;
  */
 public interface DoubleRangeProviderBaseMock extends DoubleRangeProvider
 {
+	@Override
 	default Range<Double> range()
 	{
 		// MockMC: DoubleRangeProvider#range

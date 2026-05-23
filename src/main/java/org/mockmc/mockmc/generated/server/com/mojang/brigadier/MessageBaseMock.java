@@ -14,6 +14,7 @@ import com.mojang.brigadier.Message;
  */
 public interface MessageBaseMock extends Message
 {
+	@Override
 	default String getString()
 	{
 		// MockMC: Message#getString

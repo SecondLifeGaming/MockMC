@@ -17,57 +17,67 @@ import org.bukkit.util.BoundingBox;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ConduitBaseMock extends Conduit, TileStateBaseMock
 {
+	@Override
 	default int getFrameBlockCount()
 	{
 		// MockMC: Conduit#getFrameBlockCount
 		return 0;
 	}
 
+	@Override
 	default boolean isHunting()
 	{
 		// MockMC: Conduit#isHunting
 		return false;
 	}
 
+	@Override
 	default LivingEntity getTarget()
 	{
 		// MockMC: Conduit#getTarget
 		return null;
 	}
 
+	@Override
 	default boolean hasTarget()
 	{
 		// MockMC: Conduit#hasTarget
 		return false;
 	}
 
+	@Override
 	default int getRange()
 	{
 		// MockMC: Conduit#getRange
 		return 0;
 	}
 
+	@Override
 	default boolean setTarget(LivingEntity arg0)
 	{
 		// MockMC: Conduit#setTarget
 		return false;
 	}
 
+	@Override
 	default BoundingBox getHuntingArea()
 	{
 		// MockMC: Conduit#getHuntingArea
 		return null;
 	}
 
+	@Override
 	default boolean isActive()
 	{
 		// MockMC: Conduit#isActive
 		return false;
 	}
 
+	@Override
 	default Collection<Block> getFrameBlocks()
 	{
 		// MockMC: Conduit#getFrameBlocks

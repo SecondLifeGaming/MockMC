@@ -16,24 +16,28 @@ import org.bukkit.persistence.PersistentDataType;
  */
 public interface PersistentDataTypeBaseMock<P, C> extends PersistentDataType<P, C>
 {
+	@Override
 	default C fromPrimitive(P arg0, PersistentDataAdapterContext arg1)
 	{
 		// MockMC: PersistentDataType#fromPrimitive
 		return null;
 	}
 
+	@Override
 	default Class<P> getPrimitiveType()
 	{
 		// MockMC: PersistentDataType#getPrimitiveType
 		return null;
 	}
 
+	@Override
 	default Class<C> getComplexType()
 	{
 		// MockMC: PersistentDataType#getComplexType
 		return null;
 	}
 
+	@Override
 	default P toPrimitive(C arg0, PersistentDataAdapterContext arg1)
 	{
 		// MockMC: PersistentDataType#toPrimitive

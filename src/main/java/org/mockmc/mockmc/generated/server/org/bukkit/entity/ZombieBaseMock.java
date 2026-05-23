@@ -15,13 +15,15 @@ import org.bukkit.entity.Zombie;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.10.2", forRemoval = true)
 	default Villager.Profession getVillagerProfession()
 	{
@@ -33,12 +35,14 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setArmsRaised(boolean arg0)
 	{
 		// MockMC: Zombie#setArmsRaised
 	}
 
+	@Override
 	default boolean shouldBurnInDay()
 	{
 		// MockMC: Zombie#shouldBurnInDay
@@ -49,6 +53,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isArmsRaised()
 	{
@@ -56,6 +61,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 		return false;
 	}
 
+	@Override
 	default void setShouldBurnInDay(boolean arg0)
 	{
 		// MockMC: Zombie#setShouldBurnInDay
@@ -65,6 +71,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default boolean isBaby()
 	{
@@ -72,10 +79,18 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Zombie#isLeashed
+		return false;
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2", forRemoval = true)
 	default boolean supportsBreakingDoors()
 	{
@@ -83,45 +98,51 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 		return false;
 	}
 
+	@Override
 	default void setCanBreakDoors(boolean arg0)
 	{
 		// MockMC: Zombie#setCanBreakDoors
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Zombie#setLeashHolder
-		return false;
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.10.2", forRemoval = true)
 	default void setVillagerProfession(Villager.Profession arg0)
 	{
 		// MockMC: Zombie#setVillagerProfession
 	}
 
+	@Override
 	default void setConversionTime(int arg0)
 	{
 		// MockMC: Zombie#setConversionTime
 	}
 
+	@Override
 	default boolean isConverting()
 	{
 		// MockMC: Zombie#isConverting
 		return false;
 	}
 
+	@Override
 	default int getConversionTime()
 	{
 		// MockMC: Zombie#getConversionTime
 		return 0;
 	}
 
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Zombie#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default boolean isDrowning()
 	{
 		// MockMC: Zombie#isDrowning
@@ -132,6 +153,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.10.2", forRemoval = true)
 	default boolean isVillager()
 	{
@@ -143,6 +165,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void startDrowning(int arg0)
 	{
@@ -150,12 +173,13 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	}
 
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: Zombie#getLeashHolder
-		return null;
+		// MockMC: Zombie#setLeashHolder
+		return false;
 	}
 
+	@Override
 	default boolean canBreakDoors()
 	{
 		// MockMC: Zombie#canBreakDoors
@@ -166,6 +190,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default void setBaby(boolean arg0)
 	{
@@ -176,6 +201,7 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9", forRemoval = true)
 	default void setVillager(boolean arg0)
 	{
@@ -183,12 +209,6 @@ public interface ZombieBaseMock extends Zombie, MonsterBaseMock, AgeableBaseMock
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: Zombie#isLeashed
-		return false;
-	}
-
 	default void stopDrowning()
 	{
 		// MockMC: Zombie#stopDrowning

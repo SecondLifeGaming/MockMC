@@ -18,42 +18,50 @@ import org.bukkit.inventory.MainHand;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MannequinBaseMock extends Mannequin, LivingEntityBaseMock
 {
+	@Override
 	default void setImmovable(boolean arg0)
 	{
 		// MockMC: Mannequin#setImmovable
 	}
 
+	@Override
 	default ResolvableProfile getProfile()
 	{
 		// MockMC: Mannequin#getProfile
 		return null;
 	}
 
+	@Override
 	default void setProfile(ResolvableProfile arg0)
 	{
 		// MockMC: Mannequin#setProfile
 	}
 
+	@Override
 	default void setDescription(Component arg0)
 	{
 		// MockMC: Mannequin#setDescription
 	}
 
+	@Override
 	default SkinParts.Mutable getSkinParts()
 	{
 		// MockMC: Mannequin#getSkinParts
 		return null;
 	}
 
+	@Override
 	default boolean isImmovable()
 	{
 		// MockMC: Mannequin#isImmovable
 		return false;
 	}
 
+	@Override
 	default Component getDescription()
 	{
 		// MockMC: Mannequin#getDescription
@@ -67,17 +75,20 @@ public interface MannequinBaseMock extends Mannequin, LivingEntityBaseMock
 		return null;
 	}
 
+	@Override
 	default MainHand getMainHand()
 	{
 		// MockMC: Mannequin#getMainHand
 		return null;
 	}
 
+	@Override
 	default void setSkinParts(SkinParts arg0)
 	{
 		// MockMC: Mannequin#setSkinParts
 	}
 
+	@Override
 	default void setMainHand(MainHand arg0)
 	{
 		// MockMC: Mannequin#setMainHand

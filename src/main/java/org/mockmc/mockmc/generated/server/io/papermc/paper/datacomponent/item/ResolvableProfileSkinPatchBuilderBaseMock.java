@@ -22,24 +22,28 @@ public interface ResolvableProfileSkinPatchBuilderBaseMock
 			ResolvableProfile.SkinPatchBuilder,
 			DataComponentBuilderBaseMock<ResolvableProfile.SkinPatch>
 {
+	@Override
 	default ResolvableProfile.SkinPatchBuilder model(PlayerTextures.SkinModel arg0)
 	{
 		// MockMC: SkinPatchBuilder#model
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.SkinPatchBuilder cape(Key arg0)
 	{
 		// MockMC: SkinPatchBuilder#cape
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.SkinPatchBuilder body(Key arg0)
 	{
 		// MockMC: SkinPatchBuilder#body
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.SkinPatchBuilder elytra(Key arg0)
 	{
 		// MockMC: SkinPatchBuilder#elytra

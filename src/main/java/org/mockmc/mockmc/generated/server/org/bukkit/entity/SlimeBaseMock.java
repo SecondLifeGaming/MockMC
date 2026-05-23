@@ -14,8 +14,9 @@ import org.bukkit.entity.Slime;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface SlimeBaseMock extends Slime, EnemyBaseMock, MobBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface SlimeBaseMock extends Slime, MobBaseMock, EnemyBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
@@ -24,12 +25,14 @@ public interface SlimeBaseMock extends Slime, EnemyBaseMock, MobBaseMock
 		return null;
 	}
 
+	@Override
 	default int getSize()
 	{
 		// MockMC: Slime#getSize
 		return 0;
 	}
 
+	@Override
 	default void setSize(int arg0)
 	{
 		// MockMC: Slime#setSize
@@ -49,12 +52,14 @@ public interface SlimeBaseMock extends Slime, EnemyBaseMock, MobBaseMock
 		return false;
 	}
 
+	@Override
 	default boolean canWander()
 	{
 		// MockMC: Slime#canWander
 		return false;
 	}
 
+	@Override
 	default void setWander(boolean arg0)
 	{
 		// MockMC: Slime#setWander

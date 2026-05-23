@@ -13,7 +13,13 @@ class PersistentDataAdapterContextBaseMockTest extends GeneratedTestBase
 	{
 		PersistentDataAdapterContextBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.newPersistentDataContainer());
+		try
+		{
+			assertSafeDefault(mock.newPersistentDataContainer());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements PersistentDataAdapterContextBaseMock

@@ -21,6 +21,7 @@ import io.papermc.paper.tag.PreFlattenTagRegistrar;
  */
 public interface TagEventTypeProviderBaseMock extends TagEventTypeProvider
 {
+	@Override
 	default <T> LifecycleEventType.Prioritizable<BootstrapContext, ReloadableRegistrarEvent<PostFlattenTagRegistrar<T>>> postFlatten(
 			RegistryKey<T> arg0)
 	{
@@ -28,6 +29,7 @@ public interface TagEventTypeProviderBaseMock extends TagEventTypeProvider
 		return null;
 	}
 
+	@Override
 	default <T> LifecycleEventType.Prioritizable<BootstrapContext, ReloadableRegistrarEvent<PreFlattenTagRegistrar<T>>> preFlatten(
 			RegistryKey<T> arg0)
 	{

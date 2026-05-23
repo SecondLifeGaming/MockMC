@@ -16,12 +16,14 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ArmoredMountInventoryBaseMock extends ArmoredMountInventory, MountInventoryBaseMock
 {
+	@Override
 	default ItemStack getArmor()
 	{
 		// MockMC: ArmoredMountInventory#getArmor
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setArmor(ItemStack arg0)
 	{
 		// MockMC: ArmoredMountInventory#setArmor

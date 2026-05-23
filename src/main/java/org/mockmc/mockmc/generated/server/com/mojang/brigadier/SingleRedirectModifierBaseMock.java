@@ -16,6 +16,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
  */
 public interface SingleRedirectModifierBaseMock<S> extends SingleRedirectModifier<S>
 {
+	@Override
 	default S apply(CommandContext<S> arg0) throws CommandSyntaxException
 	{
 		// MockMC: SingleRedirectModifier#apply

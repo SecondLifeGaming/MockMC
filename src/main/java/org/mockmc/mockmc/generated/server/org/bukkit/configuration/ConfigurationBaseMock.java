@@ -23,28 +23,33 @@ public interface ConfigurationBaseMock extends Configuration, ConfigurationSecti
 		// MockMC: Configuration#addDefault
 	}
 
+	@Override
 	default void addDefaults(Configuration arg0)
 	{
 		// MockMC: Configuration#addDefaults
 	}
 
+	@Override
 	default void addDefaults(Map<String, Object> arg0)
 	{
 		// MockMC: Configuration#addDefaults
 	}
 
+	@Override
 	default Configuration getDefaults()
 	{
 		// MockMC: Configuration#getDefaults
 		return null;
 	}
 
+	@Override
 	default ConfigurationOptions options()
 	{
 		// MockMC: Configuration#options
 		return null;
 	}
 
+	@Override
 	default void setDefaults(Configuration arg0)
 	{
 		// MockMC: Configuration#setDefaults

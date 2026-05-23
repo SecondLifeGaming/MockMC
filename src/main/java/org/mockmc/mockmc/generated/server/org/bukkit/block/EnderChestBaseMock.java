@@ -13,9 +13,11 @@ import org.bukkit.block.EnderChest;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface EnderChestBaseMock extends EnderChest, TileStateBaseMock, LiddedBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface EnderChestBaseMock extends EnderChest, LiddedBaseMock, TileStateBaseMock
 {
+	@Override
 	default boolean isBlocked()
 	{
 		// MockMC: EnderChest#isBlocked

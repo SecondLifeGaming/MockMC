@@ -19,34 +19,40 @@ import org.bukkit.help.HelpTopicFactory;
  */
 public interface HelpMapBaseMock extends HelpMap
 {
+	@Override
 	default void clear()
 	{
 		// MockMC: HelpMap#clear
 	}
 
+	@Override
 	default List<String> getIgnoredPlugins()
 	{
 		// MockMC: HelpMap#getIgnoredPlugins
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default HelpTopic getHelpTopic(String arg0)
 	{
 		// MockMC: HelpMap#getHelpTopic
 		return null;
 	}
 
+	@Override
 	default Collection<HelpTopic> getHelpTopics()
 	{
 		// MockMC: HelpMap#getHelpTopics
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void registerHelpTopicFactory(Class<?> arg0, HelpTopicFactory<?> arg1)
 	{
 		// MockMC: HelpMap#registerHelpTopicFactory
 	}
 
+	@Override
 	default void addTopic(HelpTopic arg0)
 	{
 		// MockMC: HelpMap#addTopic

@@ -15,37 +15,44 @@ import org.bukkit.entity.Player;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface LightningStrikeBaseMock extends LightningStrike, EntityBaseMock
 {
+	@Override
 	default void setFlashCount(int arg0)
 	{
 		// MockMC: LightningStrike#setFlashCount
 	}
 
+	@Override
 	default Player getCausingPlayer()
 	{
 		// MockMC: LightningStrike#getCausingPlayer
 		return null;
 	}
 
+	@Override
 	default Entity getCausingEntity()
 	{
 		// MockMC: LightningStrike#getCausingEntity
 		return null;
 	}
 
+	@Override
 	default void setLifeTicks(int arg0)
 	{
 		// MockMC: LightningStrike#setLifeTicks
 	}
 
+	@Override
 	default int getLifeTicks()
 	{
 		// MockMC: LightningStrike#getLifeTicks
 		return 0;
 	}
 
+	@Override
 	default int getFlashCount()
 	{
 		// MockMC: LightningStrike#getFlashCount
@@ -56,6 +63,7 @@ public interface LightningStrikeBaseMock extends LightningStrike, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getFlashes()
 	{
@@ -63,6 +71,7 @@ public interface LightningStrikeBaseMock extends LightningStrike, EntityBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean isEffect()
 	{
 		// MockMC: LightningStrike#isEffect
@@ -82,6 +91,7 @@ public interface LightningStrikeBaseMock extends LightningStrike, EntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setCausingPlayer(Player arg0)
 	{
 		// MockMC: LightningStrike#setCausingPlayer
@@ -91,6 +101,7 @@ public interface LightningStrikeBaseMock extends LightningStrike, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setFlashes(int arg0)
 	{

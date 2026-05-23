@@ -16,6 +16,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  */
 public interface DataComponentTypeBaseMock extends DataComponentType, KeyedBaseMock
 {
+	@Override
 	default boolean isPersistent()
 	{
 		// MockMC: DataComponentType#isPersistent

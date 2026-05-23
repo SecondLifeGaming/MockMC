@@ -16,7 +16,8 @@ import org.bukkit.entity.Player;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CreakingBaseMock extends Creaking, MonsterBaseMock
 {
 	@Override
@@ -26,6 +27,7 @@ public interface CreakingBaseMock extends Creaking, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default Location getHome()
 	{
 		// MockMC: Creaking#getHome
@@ -39,6 +41,7 @@ public interface CreakingBaseMock extends Creaking, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void activate(Player arg0)
 	{
 		// MockMC: Creaking#activate
@@ -51,11 +54,13 @@ public interface CreakingBaseMock extends Creaking, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void deactivate()
 	{
 		// MockMC: Creaking#deactivate
 	}
 
+	@Override
 	default boolean isActive()
 	{
 		// MockMC: Creaking#isActive

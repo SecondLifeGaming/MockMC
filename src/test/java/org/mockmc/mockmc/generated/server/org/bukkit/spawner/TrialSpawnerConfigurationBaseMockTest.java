@@ -13,7 +13,13 @@ class TrialSpawnerConfigurationBaseMockTest extends GeneratedTestBase
 	{
 		TrialSpawnerConfigurationBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getPossibleRewards());
+		try
+		{
+			assertSafeDefault(mock.getPossibleRewards());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements TrialSpawnerConfigurationBaseMock

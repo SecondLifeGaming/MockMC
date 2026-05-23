@@ -18,7 +18,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface StorageMinecartBaseMock
 		extends
 			StorageMinecart,
@@ -26,66 +27,77 @@ public interface StorageMinecartBaseMock
 			InventoryHolderBaseMock,
 			MinecartBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: StorageMinecart#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: StorageMinecart#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: StorageMinecart#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: StorageMinecart#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: StorageMinecart#canPlayerLoot
 		return false;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: StorageMinecart#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default Entity getEntity()
 	{
 		// MockMC: StorageMinecart#getEntity
 		return null;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: StorageMinecart#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: StorageMinecart#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: StorageMinecart#setNextRefill
 		return 0L;
 	}
 
+	@Override
 	default long getNextRefill()
 	{
 		// MockMC: StorageMinecart#getNextRefill

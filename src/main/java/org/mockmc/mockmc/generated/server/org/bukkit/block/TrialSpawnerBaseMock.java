@@ -17,115 +17,136 @@ import org.bukkit.spawner.TrialSpawnerConfiguration;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TrialSpawnerBaseMock extends TrialSpawner, TileStateBaseMock
 {
+	@Override
 	default Collection<Player> getTrackedPlayers()
 	{
 		// MockMC: TrialSpawner#getTrackedPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default long getCooldownEnd()
 	{
 		// MockMC: TrialSpawner#getCooldownEnd
 		return 0L;
 	}
 
+	@Override
 	default void setCooldownLength(int arg0)
 	{
 		// MockMC: TrialSpawner#setCooldownLength
 	}
 
+	@Override
 	default int getRequiredPlayerRange()
 	{
 		// MockMC: TrialSpawner#getRequiredPlayerRange
 		return 0;
 	}
 
+	@Override
 	default TrialSpawnerConfiguration getOminousConfiguration()
 	{
 		// MockMC: TrialSpawner#getOminousConfiguration
 		return null;
 	}
 
+	@Override
 	default void stopTrackingPlayer(Player arg0)
 	{
 		// MockMC: TrialSpawner#stopTrackingPlayer
 	}
 
+	@Override
 	default Collection<Entity> getTrackedEntities()
 	{
 		// MockMC: TrialSpawner#getTrackedEntities
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void startTrackingEntity(Entity arg0)
 	{
 		// MockMC: TrialSpawner#startTrackingEntity
 	}
 
+	@Override
 	default int getCooldownLength()
 	{
 		// MockMC: TrialSpawner#getCooldownLength
 		return 0;
 	}
 
+	@Override
 	default TrialSpawnerConfiguration getNormalConfiguration()
 	{
 		// MockMC: TrialSpawner#getNormalConfiguration
 		return null;
 	}
 
+	@Override
 	default void startTrackingPlayer(Player arg0)
 	{
 		// MockMC: TrialSpawner#startTrackingPlayer
 	}
 
+	@Override
 	default void stopTrackingEntity(Entity arg0)
 	{
 		// MockMC: TrialSpawner#stopTrackingEntity
 	}
 
+	@Override
 	default long getNextSpawnAttempt()
 	{
 		// MockMC: TrialSpawner#getNextSpawnAttempt
 		return 0L;
 	}
 
+	@Override
 	default boolean isTrackingEntity(Entity arg0)
 	{
 		// MockMC: TrialSpawner#isTrackingEntity
 		return false;
 	}
 
+	@Override
 	default void setNextSpawnAttempt(long arg0)
 	{
 		// MockMC: TrialSpawner#setNextSpawnAttempt
 	}
 
+	@Override
 	default boolean isTrackingPlayer(Player arg0)
 	{
 		// MockMC: TrialSpawner#isTrackingPlayer
 		return false;
 	}
 
+	@Override
 	default boolean isOminous()
 	{
 		// MockMC: TrialSpawner#isOminous
 		return false;
 	}
 
+	@Override
 	default void setCooldownEnd(long arg0)
 	{
 		// MockMC: TrialSpawner#setCooldownEnd
 	}
 
+	@Override
 	default void setOminous(boolean arg0)
 	{
 		// MockMC: TrialSpawner#setOminous
 	}
 
+	@Override
 	default void setRequiredPlayerRange(int arg0)
 	{
 		// MockMC: TrialSpawner#setRequiredPlayerRange

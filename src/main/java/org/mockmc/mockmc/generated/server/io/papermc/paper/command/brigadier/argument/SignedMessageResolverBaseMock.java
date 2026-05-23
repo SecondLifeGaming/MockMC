@@ -20,12 +20,14 @@ import net.kyori.adventure.chat.SignedMessage;
  */
 public interface SignedMessageResolverBaseMock extends SignedMessageResolver
 {
+	@Override
 	default String content()
 	{
 		// MockMC: SignedMessageResolver#content
 		return "";
 	}
 
+	@Override
 	default CompletableFuture<SignedMessage> resolveSignedMessage(String arg0, CommandContext<CommandSourceStack> arg1)
 			throws CommandSyntaxException
 	{

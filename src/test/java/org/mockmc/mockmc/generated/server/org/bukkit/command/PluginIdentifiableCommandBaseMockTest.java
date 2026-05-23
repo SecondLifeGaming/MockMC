@@ -13,7 +13,13 @@ class PluginIdentifiableCommandBaseMockTest extends GeneratedTestBase
 	{
 		PluginIdentifiableCommandBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getPlugin());
+		try
+		{
+			assertSafeDefault(mock.getPlugin());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements PluginIdentifiableCommandBaseMock

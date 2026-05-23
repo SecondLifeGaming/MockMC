@@ -16,6 +16,7 @@ public interface DialogActionCommandTemplateActionBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.action.DialogAction.CommandTemplateAction
 {
+	@Override
 	default String template()
 	{
 		// MockMC: CommandTemplateAction#template

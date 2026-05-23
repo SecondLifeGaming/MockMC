@@ -16,6 +16,7 @@ import org.bukkit.command.BlockCommandSender;
  */
 public interface BlockCommandSenderBaseMock extends BlockCommandSender, CommandSenderBaseMock
 {
+	@Override
 	default Block getBlock()
 	{
 		// MockMC: BlockCommandSender#getBlock

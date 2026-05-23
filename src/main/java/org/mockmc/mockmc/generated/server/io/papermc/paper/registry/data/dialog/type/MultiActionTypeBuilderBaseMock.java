@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.dialog.type.MultiActionType;
  */
 public interface MultiActionTypeBuilderBaseMock extends MultiActionType.Builder
 {
+	@Override
 	default MultiActionType.Builder exitAction(ActionButton arg0)
 	{
 		// MockMC: Builder#exitAction
 		return null;
 	}
 
+	@Override
 	default MultiActionType build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default MultiActionType.Builder columns(int arg0)
 	{
 		// MockMC: Builder#columns

@@ -15,18 +15,21 @@ import java.util.Set;
  */
 public interface PluginMessageBridgeImplBaseMock extends PluginMessageBridgeImpl
 {
+	@Override
 	default boolean addChannel(String arg0)
 	{
 		// MockMC: PluginMessageBridgeImpl#addChannel
 		return false;
 	}
 
+	@Override
 	default boolean removeChannel(String arg0)
 	{
 		// MockMC: PluginMessageBridgeImpl#removeChannel
 		return false;
 	}
 
+	@Override
 	default Set<String> channels()
 	{
 		// MockMC: PluginMessageBridgeImpl#channels

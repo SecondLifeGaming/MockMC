@@ -17,27 +17,32 @@ import org.bukkit.inventory.meta.FireworkMeta;
  */
 public interface FireworkMetaBaseMock extends FireworkMeta, ItemMetaBaseMock
 {
+	@Override
 	default void addEffects(FireworkEffect... arg0) throws IllegalArgumentException
 	{
 		// MockMC: FireworkMeta#addEffects
 	}
 
+	@Override
 	default void addEffects(Iterable<FireworkEffect> arg0) throws IllegalArgumentException
 	{
 		// MockMC: FireworkMeta#addEffects
 	}
 
+	@Override
 	default boolean hasEffects()
 	{
 		// MockMC: FireworkMeta#hasEffects
 		return false;
 	}
 
+	@Override
 	default void addEffect(FireworkEffect arg0) throws IllegalArgumentException
 	{
 		// MockMC: FireworkMeta#addEffect
 	}
 
+	@Override
 	default int getEffectsSize()
 	{
 		// MockMC: FireworkMeta#getEffectsSize
@@ -51,33 +56,39 @@ public interface FireworkMetaBaseMock extends FireworkMeta, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default void setPower(int arg0) throws IllegalArgumentException
 	{
 		// MockMC: FireworkMeta#setPower
 	}
 
+	@Override
 	default boolean hasPower()
 	{
 		// MockMC: FireworkMeta#hasPower
 		return false;
 	}
 
+	@Override
 	default void removeEffect(int arg0) throws IndexOutOfBoundsException
 	{
 		// MockMC: FireworkMeta#removeEffect
 	}
 
+	@Override
 	default void clearEffects()
 	{
 		// MockMC: FireworkMeta#clearEffects
 	}
 
+	@Override
 	default List<FireworkEffect> getEffects()
 	{
 		// MockMC: FireworkMeta#getEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int getPower()
 	{
 		// MockMC: FireworkMeta#getPower

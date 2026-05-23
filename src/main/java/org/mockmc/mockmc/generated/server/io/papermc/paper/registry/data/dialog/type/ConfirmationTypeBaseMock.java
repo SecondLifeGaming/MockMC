@@ -16,12 +16,14 @@ import io.papermc.paper.registry.data.dialog.type.ConfirmationType;
  */
 public interface ConfirmationTypeBaseMock extends ConfirmationType
 {
+	@Override
 	default ActionButton noButton()
 	{
 		// MockMC: ConfirmationType#noButton
 		return null;
 	}
 
+	@Override
 	default ActionButton yesButton()
 	{
 		// MockMC: ConfirmationType#yesButton

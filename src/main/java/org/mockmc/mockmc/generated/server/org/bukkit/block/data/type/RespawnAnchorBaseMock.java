@@ -16,17 +16,20 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface RespawnAnchorBaseMock extends RespawnAnchor, BlockDataBaseMock
 {
+	@Override
 	default int getCharges()
 	{
 		// MockMC: RespawnAnchor#getCharges
 		return 0;
 	}
 
+	@Override
 	default void setCharges(int arg0)
 	{
 		// MockMC: RespawnAnchor#setCharges
 	}
 
+	@Override
 	default int getMaximumCharges()
 	{
 		// MockMC: RespawnAnchor#getMaximumCharges

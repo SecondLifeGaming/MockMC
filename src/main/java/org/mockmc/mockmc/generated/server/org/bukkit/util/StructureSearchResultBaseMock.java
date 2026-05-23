@@ -17,12 +17,14 @@ import org.bukkit.util.StructureSearchResult;
  */
 public interface StructureSearchResultBaseMock extends StructureSearchResult
 {
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: StructureSearchResult#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Structure getStructure()
 	{
 		// MockMC: StructureSearchResult#getStructure

@@ -21,18 +21,21 @@ public interface TooltipDisplayBuilderBaseMock
 			TooltipDisplay.Builder,
 			DataComponentBuilderBaseMock<TooltipDisplay>
 {
+	@Override
 	default TooltipDisplay.Builder hideTooltip(boolean arg0)
 	{
 		// MockMC: Builder#hideTooltip
 		return null;
 	}
 
+	@Override
 	default TooltipDisplay.Builder addHiddenComponents(DataComponentType... arg0)
 	{
 		// MockMC: Builder#addHiddenComponents
 		return null;
 	}
 
+	@Override
 	default TooltipDisplay.Builder hiddenComponents(Set<DataComponentType> arg0)
 	{
 		// MockMC: Builder#hiddenComponents

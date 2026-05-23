@@ -15,6 +15,7 @@ import java.lang.annotation.Annotation;
  */
 public interface ThrowExceptionsBaseMock extends ThrowExceptions
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: ThrowExceptions#annotationType

@@ -16,28 +16,33 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface ScaffoldingBaseMock extends Scaffolding, WaterloggedBaseMock
 {
+	@Override
 	default void setBottom(boolean arg0)
 	{
 		// MockMC: Scaffolding#setBottom
 	}
 
+	@Override
 	default void setDistance(int arg0)
 	{
 		// MockMC: Scaffolding#setDistance
 	}
 
+	@Override
 	default int getMaximumDistance()
 	{
 		// MockMC: Scaffolding#getMaximumDistance
 		return 0;
 	}
 
+	@Override
 	default int getDistance()
 	{
 		// MockMC: Scaffolding#getDistance
 		return 0;
 	}
 
+	@Override
 	default boolean isBottom()
 	{
 		// MockMC: Scaffolding#isBottom

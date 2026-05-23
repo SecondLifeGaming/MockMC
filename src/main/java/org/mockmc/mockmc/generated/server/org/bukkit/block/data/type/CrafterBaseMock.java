@@ -16,34 +16,40 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface CrafterBaseMock extends Crafter, BlockDataBaseMock
 {
+	@Override
 	default boolean isTriggered()
 	{
 		// MockMC: Crafter#isTriggered
 		return false;
 	}
 
+	@Override
 	default void setCrafting(boolean arg0)
 	{
 		// MockMC: Crafter#setCrafting
 	}
 
+	@Override
 	default void setTriggered(boolean arg0)
 	{
 		// MockMC: Crafter#setTriggered
 	}
 
+	@Override
 	default org.bukkit.block.Orientation getOrientation()
 	{
 		// MockMC: Crafter#getOrientation
 		return null;
 	}
 
+	@Override
 	default boolean isCrafting()
 	{
 		// MockMC: Crafter#isCrafting
 		return false;
 	}
 
+	@Override
 	default void setOrientation(org.bukkit.block.Orientation arg0)
 	{
 		// MockMC: Crafter#setOrientation

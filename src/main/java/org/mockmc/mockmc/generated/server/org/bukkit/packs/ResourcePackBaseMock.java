@@ -16,30 +16,35 @@ import org.bukkit.packs.ResourcePack;
  */
 public interface ResourcePackBaseMock extends ResourcePack
 {
+	@Override
 	default boolean isRequired()
 	{
 		// MockMC: ResourcePack#isRequired
 		return false;
 	}
 
+	@Override
 	default String getUrl()
 	{
 		// MockMC: ResourcePack#getUrl
 		return "";
 	}
 
+	@Override
 	default String getHash()
 	{
 		// MockMC: ResourcePack#getHash
 		return "";
 	}
 
+	@Override
 	default UUID getId()
 	{
 		// MockMC: ResourcePack#getId
 		return null;
 	}
 
+	@Override
 	default String getPrompt()
 	{
 		// MockMC: ResourcePack#getPrompt

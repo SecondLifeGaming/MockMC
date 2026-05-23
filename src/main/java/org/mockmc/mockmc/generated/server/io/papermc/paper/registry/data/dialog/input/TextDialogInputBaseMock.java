@@ -16,42 +16,49 @@ import net.kyori.adventure.text.Component;
  */
 public interface TextDialogInputBaseMock extends TextDialogInput
 {
+	@Override
 	default String key()
 	{
 		// MockMC: TextDialogInput#key
 		return "";
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: TextDialogInput#width
 		return 0;
 	}
 
+	@Override
 	default Component label()
 	{
 		// MockMC: TextDialogInput#label
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default int maxLength()
 	{
 		// MockMC: TextDialogInput#maxLength
 		return 0;
 	}
 
+	@Override
 	default boolean labelVisible()
 	{
 		// MockMC: TextDialogInput#labelVisible
 		return false;
 	}
 
+	@Override
 	default String initial()
 	{
 		// MockMC: TextDialogInput#initial
 		return "";
 	}
 
+	@Override
 	default TextDialogInput.MultilineOptions multiline()
 	{
 		// MockMC: TextDialogInput#multiline

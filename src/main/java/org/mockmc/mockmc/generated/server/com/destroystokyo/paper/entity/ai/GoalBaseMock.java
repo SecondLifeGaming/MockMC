@@ -19,40 +19,47 @@ import org.bukkit.entity.Mob;
  */
 public interface GoalBaseMock<T extends Mob> extends Goal<T>
 {
+	@Override
 	default EnumSet<GoalType> getTypes()
 	{
 		// MockMC: Goal#getTypes
 		return null;
 	}
 
+	@Override
 	default void tick()
 	{
 		// MockMC: Goal#tick
 	}
 
+	@Override
 	default boolean shouldStayActive()
 	{
 		// MockMC: Goal#shouldStayActive
 		return false;
 	}
 
+	@Override
 	default void start()
 	{
 		// MockMC: Goal#start
 	}
 
+	@Override
 	default boolean shouldActivate()
 	{
 		// MockMC: Goal#shouldActivate
 		return false;
 	}
 
+	@Override
 	default GoalKey<T> getKey()
 	{
 		// MockMC: Goal#getKey
 		return null;
 	}
 
+	@Override
 	default void stop()
 	{
 		// MockMC: Goal#stop

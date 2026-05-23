@@ -16,23 +16,27 @@ import org.bukkit.inventory.StonecutterInventory;
  */
 public interface StonecutterInventoryBaseMock extends StonecutterInventory, InventoryBaseMock
 {
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: StonecutterInventory#getResult
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: StonecutterInventory#setResult
 	}
 
+	@Override
 	default ItemStack getInputItem()
 	{
 		// MockMC: StonecutterInventory#getInputItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setInputItem(ItemStack arg0)
 	{
 		// MockMC: StonecutterInventory#setInputItem

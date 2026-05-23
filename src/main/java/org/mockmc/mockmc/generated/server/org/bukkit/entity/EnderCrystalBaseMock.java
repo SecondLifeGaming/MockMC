@@ -14,26 +14,31 @@ import org.bukkit.entity.EnderCrystal;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EnderCrystalBaseMock extends EnderCrystal, EntityBaseMock
 {
+	@Override
 	default Location getBeamTarget()
 	{
 		// MockMC: EnderCrystal#getBeamTarget
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean isShowingBottom()
 	{
 		// MockMC: EnderCrystal#isShowingBottom
 		return false;
 	}
 
+	@Override
 	default void setBeamTarget(Location arg0)
 	{
 		// MockMC: EnderCrystal#setBeamTarget
 	}
 
+	@Override
 	default void setShowingBottom(boolean arg0)
 	{
 		// MockMC: EnderCrystal#setShowingBottom

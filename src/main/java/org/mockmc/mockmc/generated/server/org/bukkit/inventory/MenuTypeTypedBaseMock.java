@@ -26,6 +26,7 @@ public interface MenuTypeTypedBaseMock<V extends InventoryView, B extends Invent
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21")
 	default V create(HumanEntity arg0, String arg1)
 	{
@@ -33,6 +34,7 @@ public interface MenuTypeTypedBaseMock<V extends InventoryView, B extends Invent
 		return null;
 	}
 
+	@Override
 	default V create(HumanEntity arg0)
 	{
 		// MockMC: Typed#create
@@ -46,6 +48,7 @@ public interface MenuTypeTypedBaseMock<V extends InventoryView, B extends Invent
 		return null;
 	}
 
+	@Override
 	default B builder()
 	{
 		// MockMC: Typed#builder

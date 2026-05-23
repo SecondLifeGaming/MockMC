@@ -20,12 +20,14 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface MetadataStoreBaseMock<T> extends MetadataStore<T>
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setMetadata(T arg0, String arg1, MetadataValue arg2)
@@ -37,6 +39,7 @@ public interface MetadataStoreBaseMock<T> extends MetadataStore<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default List<MetadataValue> getMetadata(T arg0, String arg1)
@@ -49,6 +52,7 @@ public interface MetadataStoreBaseMock<T> extends MetadataStore<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void invalidateAll(Plugin arg0)
 	{
@@ -59,6 +63,7 @@ public interface MetadataStoreBaseMock<T> extends MetadataStore<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void removeMetadata(T arg0, String arg1, Plugin arg2)
 	{
@@ -69,6 +74,7 @@ public interface MetadataStoreBaseMock<T> extends MetadataStore<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean hasMetadata(T arg0, String arg1)
 	{

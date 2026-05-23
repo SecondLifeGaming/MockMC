@@ -16,17 +16,20 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface BeehiveBaseMock extends Beehive, DirectionalBaseMock
 {
+	@Override
 	default int getMaximumHoneyLevel()
 	{
 		// MockMC: Beehive#getMaximumHoneyLevel
 		return 0;
 	}
 
+	@Override
 	default void setHoneyLevel(int arg0)
 	{
 		// MockMC: Beehive#setHoneyLevel
 	}
 
+	@Override
 	default int getHoneyLevel()
 	{
 		// MockMC: Beehive#getHoneyLevel

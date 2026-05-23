@@ -13,14 +13,17 @@ import org.bukkit.entity.Sittable;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SittableBaseMock extends Sittable, EntityBaseMock
 {
+	@Override
 	default void setSitting(boolean arg0)
 	{
 		// MockMC: Sittable#setSitting
 	}
 
+	@Override
 	default boolean isSitting()
 	{
 		// MockMC: Sittable#isSitting

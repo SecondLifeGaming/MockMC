@@ -15,7 +15,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.BucketableBase
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FishBaseMock extends Fish, WaterMobBaseMock, BucketableBaseMock
 {
 	@Override

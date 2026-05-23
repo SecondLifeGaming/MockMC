@@ -30,17 +30,20 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 		return "";
 	}
 
+	@Override
 	default void setGeneration(BookMeta.Generation arg0)
 	{
 		// MockMC: BookMeta#setGeneration
 	}
 
+	@Override
 	default String getAuthor()
 	{
 		// MockMC: BookMeta#getAuthor
 		return "";
 	}
 
+	@Override
 	default boolean hasGeneration()
 	{
 		// MockMC: BookMeta#hasGeneration
@@ -73,7 +76,9 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder toBuilder()
 	{
@@ -81,18 +86,21 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: BookMeta#title
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default BookMeta title(Component arg0)
 	{
 		// MockMC: BookMeta#title
 		return null;
 	}
 
+	@Override
 	default String getTitle()
 	{
 		// MockMC: BookMeta#getTitle
@@ -110,24 +118,28 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 		// MockMC: BookMeta#setPage
 	}
 
+	@Override
 	default Book pages(List<Component> arg0)
 	{
 		// MockMC: BookMeta#pages
 		return null;
 	}
 
+	@Override
 	default List<Component> pages()
 	{
 		// MockMC: BookMeta#pages
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean hasTitle()
 	{
 		// MockMC: BookMeta#hasTitle
 		return false;
 	}
 
+	@Override
 	default boolean hasAuthor()
 	{
 		// MockMC: BookMeta#hasAuthor
@@ -145,35 +157,41 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 		// MockMC: BookMeta#addPage
 	}
 
+	@Override
 	default void addPages(Component... arg0)
 	{
 		// MockMC: BookMeta#addPages
 	}
 
+	@Override
 	default Component author()
 	{
 		// MockMC: BookMeta#author
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default BookMeta author(Component arg0)
 	{
 		// MockMC: BookMeta#author
 		return null;
 	}
 
+	@Override
 	default boolean setTitle(String arg0)
 	{
 		// MockMC: BookMeta#setTitle
 		return false;
 	}
 
+	@Override
 	default BookMeta.Generation getGeneration()
 	{
 		// MockMC: BookMeta#getGeneration
 		return null;
 	}
 
+	@Override
 	default void setAuthor(String arg0)
 	{
 		// MockMC: BookMeta#setAuthor
@@ -191,17 +209,20 @@ public interface BookMetaBaseMock extends BookMeta, WritableBookMetaBaseMock
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Component page(int arg0)
 	{
 		// MockMC: BookMeta#page
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void page(int arg0, Component arg1)
 	{
 		// MockMC: BookMeta#page
 	}
 
+	@Override
 	default BookMeta.Spigot spigot()
 	{
 		// MockMC: BookMeta#spigot

@@ -19,24 +19,28 @@ import org.bukkit.inventory.EquipmentSlotGroup;
  */
 public interface ItemAttributeModifiersEntryBaseMock extends ItemAttributeModifiers.Entry
 {
+	@Override
 	default EquipmentSlotGroup getGroup()
 	{
 		// MockMC: Entry#getGroup
 		return null;
 	}
 
+	@Override
 	default AttributeModifier modifier()
 	{
 		// MockMC: Entry#modifier
 		return null;
 	}
 
+	@Override
 	default AttributeModifierDisplay display()
 	{
 		// MockMC: Entry#display
 		return null;
 	}
 
+	@Override
 	default Attribute attribute()
 	{
 		// MockMC: Entry#attribute

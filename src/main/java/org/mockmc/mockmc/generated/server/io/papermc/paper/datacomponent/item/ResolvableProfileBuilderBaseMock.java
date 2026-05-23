@@ -23,36 +23,42 @@ public interface ResolvableProfileBuilderBaseMock
 			ResolvableProfile.Builder,
 			DataComponentBuilderBaseMock<ResolvableProfile>
 {
+	@Override
 	default ResolvableProfile.Builder addProperties(Collection<ProfileProperty> arg0)
 	{
 		// MockMC: Builder#addProperties
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.Builder name(String arg0)
 	{
 		// MockMC: Builder#name
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.Builder skinPatch(Consumer<ResolvableProfile.SkinPatchBuilder> arg0)
 	{
 		// MockMC: Builder#skinPatch
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.Builder skinPatch(ResolvableProfile.SkinPatch arg0)
 	{
 		// MockMC: Builder#skinPatch
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.Builder uuid(UUID arg0)
 	{
 		// MockMC: Builder#uuid
 		return null;
 	}
 
+	@Override
 	default ResolvableProfile.Builder addProperty(ProfileProperty arg0)
 	{
 		// MockMC: Builder#addProperty

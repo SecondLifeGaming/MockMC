@@ -22,6 +22,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 			WolfVariantRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Wolf.Variant>
 {
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder wildClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -29,6 +30,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder angryClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -36,6 +38,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder babyAngryClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -43,6 +46,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder tameClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -50,6 +54,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder babyTameClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -57,6 +62,7 @@ public interface WolfVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.WolfVariantRegistryEntry.Builder babyWildClientTextureAsset(
 			ClientTextureAsset arg0)
 	{

@@ -16,34 +16,40 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface LeavesBaseMock extends Leaves, WaterloggedBaseMock
 {
+	@Override
 	default void setPersistent(boolean arg0)
 	{
 		// MockMC: Leaves#setPersistent
 	}
 
+	@Override
 	default int getMaximumDistance()
 	{
 		// MockMC: Leaves#getMaximumDistance
 		return 0;
 	}
 
+	@Override
 	default int getDistance()
 	{
 		// MockMC: Leaves#getDistance
 		return 0;
 	}
 
+	@Override
 	default int getMinimumDistance()
 	{
 		// MockMC: Leaves#getMinimumDistance
 		return 0;
 	}
 
+	@Override
 	default void setDistance(int arg0)
 	{
 		// MockMC: Leaves#setDistance
 	}
 
+	@Override
 	default boolean isPersistent()
 	{
 		// MockMC: Leaves#isPersistent

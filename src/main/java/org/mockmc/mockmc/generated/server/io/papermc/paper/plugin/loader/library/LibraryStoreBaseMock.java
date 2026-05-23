@@ -16,6 +16,7 @@ import java.nio.file.Path;
  */
 public interface LibraryStoreBaseMock extends LibraryStore
 {
+	@Override
 	default void addLibrary(Path arg0)
 	{
 		// MockMC: LibraryStore#addLibrary

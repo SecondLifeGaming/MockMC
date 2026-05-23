@@ -16,23 +16,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.HatchableBaseMoc
  */
 public interface TurtleEggBaseMock extends TurtleEgg, HatchableBaseMock
 {
+	@Override
 	default int getMaximumEggs()
 	{
 		// MockMC: TurtleEgg#getMaximumEggs
 		return 0;
 	}
 
+	@Override
 	default int getMinimumEggs()
 	{
 		// MockMC: TurtleEgg#getMinimumEggs
 		return 0;
 	}
 
+	@Override
 	default void setEggs(int arg0)
 	{
 		// MockMC: TurtleEgg#setEggs
 	}
 
+	@Override
 	default int getEggs()
 	{
 		// MockMC: TurtleEgg#getEggs

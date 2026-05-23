@@ -42,8 +42,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.persistence.PersistentDataH
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBaseMock, PersistentDataHolderBaseMock
+public interface ItemMetaBaseMock extends ItemMeta, PersistentDataHolderBaseMock, ConfigurationSerializableBaseMock
 {
+	@Override
 	default Map<Enchantment, Integer> getEnchants()
 	{
 		// MockMC: ItemMeta#getEnchants
@@ -54,17 +55,20 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setLoreComponents(List<BaseComponent[]> arg0)
 	{
 		// MockMC: ItemMeta#setLoreComponents
 	}
 
+	@Override
 	default void lore(List<? extends Component> arg0)
 	{
 		// MockMC: ItemMeta#lore
 	}
 
+	@Override
 	default List<Component> lore()
 	{
 		// MockMC: ItemMeta#lore
@@ -75,6 +79,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "26.1")
 	default Tag<DamageType> getDamageResistant()
 	{
@@ -82,12 +87,14 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return null;
 	}
 
+	@Override
 	default boolean hasEquippable()
 	{
 		// MockMC: ItemMeta#hasEquippable
 		return false;
 	}
 
+	@Override
 	default void setRarity(ItemRarity arg0)
 	{
 		// MockMC: ItemMeta#setRarity
@@ -97,7 +104,9 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.14")
 	default CustomItemTagContainer getCustomTagContainer()
 	{
@@ -109,12 +118,14 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setDisplayName(String arg0)
 	{
 		// MockMC: ItemMeta#setDisplayName
 	}
 
+	@Override
 	default void removeItemFlags(ItemFlag... arg0)
 	{
 		// MockMC: ItemMeta#removeItemFlags
@@ -124,7 +135,9 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default void setPlaceableKeys(Collection<Namespaced> arg0)
 	{
@@ -135,6 +148,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default List<BaseComponent[]> getLoreComponents()
 	{
@@ -142,6 +156,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean hasUseCooldown()
 	{
 		// MockMC: ItemMeta#hasUseCooldown
@@ -152,23 +167,27 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default void setLocalizedName(String arg0)
 	{
 		// MockMC: ItemMeta#setLocalizedName
 	}
 
+	@Override
 	default boolean hasTool()
 	{
 		// MockMC: ItemMeta#hasTool
 		return false;
 	}
 
+	@Override
 	default void setAttributeModifiers(Multimap<Attribute, AttributeModifier> arg0)
 	{
 		// MockMC: ItemMeta#setAttributeModifiers
 	}
 
+	@Override
 	default boolean hasRarity()
 	{
 		// MockMC: ItemMeta#hasRarity
@@ -179,24 +198,29 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default void setDestroyableKeys(Collection<Namespaced> arg0)
 	{
 		// MockMC: ItemMeta#setDestroyableKeys
 	}
 
+	@Override
 	default NamespacedKey getItemModel()
 	{
 		// MockMC: ItemMeta#getItemModel
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default void setCustomModelDataComponent(CustomModelDataComponent arg0)
 	{
 		// MockMC: ItemMeta#setCustomModelDataComponent
 	}
 
+	@Override
 	default int getEnchantable()
 	{
 		// MockMC: ItemMeta#getEnchantable
@@ -207,6 +231,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default List<String> getLore()
 	{
@@ -214,45 +239,53 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default ItemStack getUseRemainder()
 	{
 		// MockMC: ItemMeta#getUseRemainder
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default boolean hasItemModel()
 	{
 		// MockMC: ItemMeta#hasItemModel
 		return false;
 	}
 
+	@Override
 	default void setEquippable(EquippableComponent arg0)
 	{
 		// MockMC: ItemMeta#setEquippable
 	}
 
+	@Override
 	default JukeboxPlayableComponent getJukeboxPlayable()
 	{
 		// MockMC: ItemMeta#getJukeboxPlayable
 		return null;
 	}
 
+	@Override
 	default ItemMeta clone()
 	{
 		// MockMC: ItemMeta#clone
 		return null;
 	}
 
+	@Override
 	default void setHideTooltip(boolean arg0)
 	{
 		// MockMC: ItemMeta#setHideTooltip
 	}
 
+	@Override
 	default void setUseRemainder(ItemStack arg0)
 	{
 		// MockMC: ItemMeta#setUseRemainder
 	}
 
+	@Override
 	default void setDamageResistantTypes(RegistryKeySet<DamageType> arg0)
 	{
 		// MockMC: ItemMeta#setDamageResistantTypes
@@ -262,6 +295,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5")
 	default void setCustomModelData(Integer arg0)
 	{
@@ -272,30 +306,35 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default void setCanDestroy(Set<Material> arg0)
 	{
 		// MockMC: ItemMeta#setCanDestroy
 	}
 
+	@Override
 	default ToolComponent getTool()
 	{
 		// MockMC: ItemMeta#getTool
 		return null;
 	}
 
+	@Override
 	default ItemRarity getRarity()
 	{
 		// MockMC: ItemMeta#getRarity
 		return null;
 	}
 
+	@Override
 	default boolean hasCustomModelDataComponent()
 	{
 		// MockMC: ItemMeta#hasCustomModelDataComponent
 		return false;
 	}
 
+	@Override
 	default String getAsString()
 	{
 		// MockMC: ItemMeta#getAsString
@@ -306,6 +345,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default boolean hasPlaceableKeys()
 	{
@@ -313,12 +353,14 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return false;
 	}
 
+	@Override
 	default boolean addEnchant(Enchantment arg0, int arg1, boolean arg2)
 	{
 		// MockMC: ItemMeta#addEnchant
 		return false;
 	}
 
+	@Override
 	default boolean hasFood()
 	{
 		// MockMC: ItemMeta#hasFood
@@ -329,7 +371,9 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default Set<Namespaced> getPlaceableKeys()
 	{
@@ -337,24 +381,28 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hasAttributeModifiers()
 	{
 		// MockMC: ItemMeta#hasAttributeModifiers
 		return false;
 	}
 
+	@Override
 	default boolean hasMaxStackSize()
 	{
 		// MockMC: ItemMeta#hasMaxStackSize
 		return false;
 	}
 
+	@Override
 	default boolean hasItemFlag(ItemFlag arg0)
 	{
 		// MockMC: ItemMeta#hasItemFlag
 		return false;
 	}
 
+	@Override
 	default EquippableComponent getEquippable()
 	{
 		// MockMC: ItemMeta#getEquippable
@@ -365,6 +413,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default boolean hasDestroyableKeys()
 	{
@@ -372,22 +421,26 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return false;
 	}
 
+	@Override
 	default FoodComponent getFood()
 	{
 		// MockMC: ItemMeta#getFood
 		return null;
 	}
 
+	@Override
 	default void setUnbreakable(boolean arg0)
 	{
 		// MockMC: ItemMeta#setUnbreakable
 	}
 
+	@Override
 	default void setFood(FoodComponent arg0)
 	{
 		// MockMC: ItemMeta#setFood
 	}
 
+	@Override
 	default void setItemModel(NamespacedKey arg0)
 	{
 		// MockMC: ItemMeta#setItemModel
@@ -397,6 +450,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getItemName()
 	{
@@ -404,6 +458,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return "";
 	}
 
+	@Override
 	default boolean hasTooltipStyle()
 	{
 		// MockMC: ItemMeta#hasTooltipStyle
@@ -414,6 +469,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setDisplayNameComponent(BaseComponent[] arg0)
 	{
@@ -424,18 +480,21 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "26.1")
 	default void setDamageResistant(Tag<DamageType> arg0)
 	{
 		// MockMC: ItemMeta#setDamageResistant
 	}
 
+	@Override
 	default boolean hasConflictingEnchant(Enchantment arg0)
 	{
 		// MockMC: ItemMeta#hasConflictingEnchant
 		return false;
 	}
 
+	@Override
 	default boolean removeEnchant(Enchantment arg0)
 	{
 		// MockMC: ItemMeta#removeEnchant
@@ -446,6 +505,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5")
 	default boolean hasCustomModelData()
 	{
@@ -453,51 +513,60 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return false;
 	}
 
+	@Override
 	default void setMaxStackSize(Integer arg0)
 	{
 		// MockMC: ItemMeta#setMaxStackSize
 	}
 
+	@Override
 	default Component displayName()
 	{
 		// MockMC: ItemMeta#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void displayName(Component arg0)
 	{
 		// MockMC: ItemMeta#displayName
 	}
 
+	@Override
 	default Collection<AttributeModifier> getAttributeModifiers(Attribute arg0)
 	{
 		// MockMC: ItemMeta#getAttributeModifiers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Multimap<Attribute, AttributeModifier> getAttributeModifiers(EquipmentSlot arg0)
 	{
 		// MockMC: ItemMeta#getAttributeModifiers
 		return null;
 	}
 
+	@Override
 	default Multimap<Attribute, AttributeModifier> getAttributeModifiers()
 	{
 		// MockMC: ItemMeta#getAttributeModifiers
 		return null;
 	}
 
+	@Override
 	default NamespacedKey getTooltipStyle()
 	{
 		// MockMC: ItemMeta#getTooltipStyle
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default void setTool(ToolComponent arg0)
 	{
 		// MockMC: ItemMeta#setTool
 	}
 
+	@Override
 	default void addItemFlags(ItemFlag... arg0)
 	{
 		// MockMC: ItemMeta#addItemFlags
@@ -507,6 +576,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default Set<Material> getCanPlaceOn()
 	{
@@ -518,6 +588,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default BaseComponent[] getDisplayNameComponent()
 	{
@@ -525,17 +596,20 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return new BaseComponent[0];
 	}
 
+	@Override
 	default boolean hasDisplayName()
 	{
 		// MockMC: ItemMeta#hasDisplayName
 		return false;
 	}
 
+	@Override
 	default void setGlider(boolean arg0)
 	{
 		// MockMC: ItemMeta#setGlider
 	}
 
+	@Override
 	default void setUseCooldown(UseCooldownComponent arg0)
 	{
 		// MockMC: ItemMeta#setUseCooldown
@@ -545,7 +619,9 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@Override
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default Set<Namespaced> getDestroyableKeys()
 	{
@@ -553,6 +629,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hasJukeboxPlayable()
 	{
 		// MockMC: ItemMeta#hasJukeboxPlayable
@@ -563,12 +640,14 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default void setCanPlaceOn(Set<Material> arg0)
 	{
 		// MockMC: ItemMeta#setCanPlaceOn
 	}
 
+	@Override
 	default Boolean getEnchantmentGlintOverride()
 	{
 		// MockMC: ItemMeta#getEnchantmentGlintOverride
@@ -579,6 +658,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.14", forRemoval = true)
 	default Set<Material> getCanDestroy()
 	{
@@ -586,17 +666,20 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void setEnchantmentGlintOverride(Boolean arg0)
 	{
 		// MockMC: ItemMeta#setEnchantmentGlintOverride
 	}
 
+	@Override
 	default boolean hasDamageResistant()
 	{
 		// MockMC: ItemMeta#hasDamageResistant
 		return false;
 	}
 
+	@Override
 	default boolean hasEnchantmentGlintOverride()
 	{
 		// MockMC: ItemMeta#hasEnchantmentGlintOverride
@@ -607,24 +690,28 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setItemName(String arg0)
 	{
 		// MockMC: ItemMeta#setItemName
 	}
 
+	@Override
 	default boolean hasItemName()
 	{
 		// MockMC: ItemMeta#hasItemName
 		return false;
 	}
 
+	@Override
 	default UseCooldownComponent getUseCooldown()
 	{
 		// MockMC: ItemMeta#getUseCooldown
 		return null;
 	}
 
+	@Override
 	default boolean isHideTooltip()
 	{
 		// MockMC: ItemMeta#isHideTooltip
@@ -635,6 +722,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default boolean hasLocalizedName()
 	{
@@ -642,34 +730,40 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return false;
 	}
 
+	@Override
 	default void setEnchantable(Integer arg0)
 	{
 		// MockMC: ItemMeta#setEnchantable
 	}
 
+	@Override
 	default int getMaxStackSize()
 	{
 		// MockMC: ItemMeta#getMaxStackSize
 		return 0;
 	}
 
+	@Override
 	default boolean hasEnchant(Enchantment arg0)
 	{
 		// MockMC: ItemMeta#hasEnchant
 		return false;
 	}
 
+	@Override
 	default boolean addAttributeModifier(Attribute arg0, AttributeModifier arg1)
 	{
 		// MockMC: ItemMeta#addAttributeModifier
 		return false;
 	}
 
+	@Override
 	default void setTooltipStyle(NamespacedKey arg0)
 	{
 		// MockMC: ItemMeta#setTooltipStyle
 	}
 
+	@Override
 	default boolean hasEnchantable()
 	{
 		// MockMC: ItemMeta#hasEnchantable
@@ -680,6 +774,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default boolean isFireResistant()
 	{
@@ -691,6 +786,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.5", forRemoval = true)
 	default String getLocalizedName()
 	{
@@ -698,41 +794,48 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return "";
 	}
 
+	@Override
 	default Set<ItemFlag> getItemFlags()
 	{
 		// MockMC: ItemMeta#getItemFlags
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Component itemName()
 	{
 		// MockMC: ItemMeta#itemName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void itemName(Component arg0)
 	{
 		// MockMC: ItemMeta#itemName
 	}
 
+	@Override
 	default boolean hasUseRemainder()
 	{
 		// MockMC: ItemMeta#hasUseRemainder
 		return false;
 	}
 
+	@Override
 	default String getAsComponentString()
 	{
 		// MockMC: ItemMeta#getAsComponentString
 		return "";
 	}
 
+	@Override
 	default boolean hasCustomName()
 	{
 		// MockMC: ItemMeta#hasCustomName
 		return false;
 	}
 
+	@Override
 	default boolean hasEnchants()
 	{
 		// MockMC: ItemMeta#hasEnchants
@@ -743,45 +846,53 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default void setFireResistant(boolean arg0)
 	{
 		// MockMC: ItemMeta#setFireResistant
 	}
 
+	@Override
 	default void setVersion(int arg0)
 	{
 		// MockMC: ItemMeta#setVersion
 	}
 
+	@Override
 	default boolean isGlider()
 	{
 		// MockMC: ItemMeta#isGlider
 		return false;
 	}
 
+	@Override
 	default void removeEnchantments()
 	{
 		// MockMC: ItemMeta#removeEnchantments
 	}
 
+	@Override
 	default void setJukeboxPlayable(JukeboxPlayableComponent arg0)
 	{
 		// MockMC: ItemMeta#setJukeboxPlayable
 	}
 
+	@Override
 	default RegistryKeySet<DamageType> getDamageResistantTypes()
 	{
 		// MockMC: ItemMeta#getDamageResistantTypes
 		return null;
 	}
 
+	@Override
 	default Component customName()
 	{
 		// MockMC: ItemMeta#customName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void customName(Component arg0)
 	{
 		// MockMC: ItemMeta#customName
@@ -791,6 +902,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getDisplayName()
 	{
@@ -802,42 +914,49 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setLore(List<String> arg0)
 	{
 		// MockMC: ItemMeta#setLore
 	}
 
+	@Override
 	default boolean hasLore()
 	{
 		// MockMC: ItemMeta#hasLore
 		return false;
 	}
 
+	@Override
 	default int getEnchantLevel(Enchantment arg0)
 	{
 		// MockMC: ItemMeta#getEnchantLevel
 		return 0;
 	}
 
+	@Override
 	default boolean removeAttributeModifier(EquipmentSlot arg0)
 	{
 		// MockMC: ItemMeta#removeAttributeModifier
 		return false;
 	}
 
+	@Override
 	default boolean removeAttributeModifier(Attribute arg0)
 	{
 		// MockMC: ItemMeta#removeAttributeModifier
 		return false;
 	}
 
+	@Override
 	default boolean removeAttributeModifier(Attribute arg0, AttributeModifier arg1)
 	{
 		// MockMC: ItemMeta#removeAttributeModifier
 		return false;
 	}
 
+	@Override
 	default CustomModelDataComponent getCustomModelDataComponent()
 	{
 		// MockMC: ItemMeta#getCustomModelDataComponent
@@ -848,6 +967,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5")
 	default int getCustomModelData()
 	{
@@ -855,6 +975,7 @@ public interface ItemMetaBaseMock extends ItemMeta, ConfigurationSerializableBas
 		return 0;
 	}
 
+	@Override
 	default boolean isUnbreakable()
 	{
 		// MockMC: ItemMeta#isUnbreakable

@@ -14,6 +14,7 @@ import io.papermc.paper.plugin.lifecycle.event.PaperLifecycleEvent;
  */
 public interface PaperLifecycleEventBaseMock extends PaperLifecycleEvent, LifecycleEventBaseMock
 {
+	@Override
 	default void invalidate()
 	{
 		// MockMC: PaperLifecycleEvent#invalidate

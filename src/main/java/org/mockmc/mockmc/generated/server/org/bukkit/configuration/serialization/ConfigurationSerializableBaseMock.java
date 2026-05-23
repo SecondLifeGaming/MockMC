@@ -16,6 +16,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
  */
 public interface ConfigurationSerializableBaseMock extends ConfigurationSerializable
 {
+	@Override
 	default Map<String, Object> serialize()
 	{
 		// MockMC: ConfigurationSerializable#serialize

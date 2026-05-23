@@ -17,52 +17,62 @@ import org.bukkit.util.Vector;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ProjectileBaseMock extends Projectile, EntityBaseMock
 {
+	@Override
 	default void setShooter(ProjectileSource arg0)
 	{
 		// MockMC: Projectile#setShooter
 	}
 
+	@Override
 	default void setHasBeenShot(boolean arg0)
 	{
 		// MockMC: Projectile#setHasBeenShot
 	}
 
+	@Override
 	default void hitEntity(Entity arg0, Vector arg1)
 	{
 		// MockMC: Projectile#hitEntity
 	}
 
+	@Override
 	default void hitEntity(Entity arg0)
 	{
 		// MockMC: Projectile#hitEntity
 	}
 
+	@Override
 	default boolean hasBeenShot()
 	{
 		// MockMC: Projectile#hasBeenShot
 		return false;
 	}
 
+	@Override
 	default boolean canHitEntity(Entity arg0)
 	{
 		// MockMC: Projectile#canHitEntity
 		return false;
 	}
 
+	@Override
 	default void setHasLeftShooter(boolean arg0)
 	{
 		// MockMC: Projectile#setHasLeftShooter
 	}
 
+	@Override
 	default boolean hasLeftShooter()
 	{
 		// MockMC: Projectile#hasLeftShooter
 		return false;
 	}
 
+	@Override
 	default UUID getOwnerUniqueId()
 	{
 		// MockMC: Projectile#getOwnerUniqueId
@@ -73,6 +83,7 @@ public interface ProjectileBaseMock extends Projectile, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default void setBounce(boolean arg0)
 	{
@@ -83,6 +94,7 @@ public interface ProjectileBaseMock extends Projectile, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default boolean doesBounce()
 	{
@@ -90,6 +102,7 @@ public interface ProjectileBaseMock extends Projectile, EntityBaseMock
 		return false;
 	}
 
+	@Override
 	default ProjectileSource getShooter()
 	{
 		// MockMC: Projectile#getShooter

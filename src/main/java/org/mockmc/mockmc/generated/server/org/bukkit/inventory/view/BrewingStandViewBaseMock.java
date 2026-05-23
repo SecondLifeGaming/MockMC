@@ -17,11 +17,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface BrewingStandViewBaseMock extends BrewingStandView, InventoryViewBaseMock
 {
+	@Override
 	default void setRecipeBrewTime(int arg0)
 	{
 		// MockMC: BrewingStandView#setRecipeBrewTime
 	}
 
+	@Override
 	default int getBrewingTicks()
 	{
 		// MockMC: BrewingStandView#getBrewingTicks
@@ -35,23 +37,27 @@ public interface BrewingStandViewBaseMock extends BrewingStandView, InventoryVie
 		return null;
 	}
 
+	@Override
 	default int getRecipeBrewTime()
 	{
 		// MockMC: BrewingStandView#getRecipeBrewTime
 		return 0;
 	}
 
+	@Override
 	default int getFuelLevel()
 	{
 		// MockMC: BrewingStandView#getFuelLevel
 		return 0;
 	}
 
+	@Override
 	default void setBrewingTicks(int arg0) throws IllegalArgumentException
 	{
 		// MockMC: BrewingStandView#setBrewingTicks
 	}
 
+	@Override
 	default void setFuelLevel(int arg0) throws IllegalArgumentException
 	{
 		// MockMC: BrewingStandView#setFuelLevel

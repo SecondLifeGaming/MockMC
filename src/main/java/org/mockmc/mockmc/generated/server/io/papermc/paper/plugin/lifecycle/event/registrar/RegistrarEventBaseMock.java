@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  */
 public interface RegistrarEventBaseMock<R extends Registrar> extends RegistrarEvent<R>, LifecycleEventBaseMock
 {
+	@Override
 	default R registrar()
 	{
 		// MockMC: RegistrarEvent#registrar

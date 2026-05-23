@@ -16,27 +16,32 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.TileStateBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MovingPistonBaseMock extends MovingPiston, TileStateBaseMock
 {
+	@Override
 	default BlockFace getDirection()
 	{
 		// MockMC: MovingPiston#getDirection
 		return null;
 	}
 
+	@Override
 	default BlockData getMovingBlock()
 	{
 		// MockMC: MovingPiston#getMovingBlock
 		return null;
 	}
 
+	@Override
 	default boolean isPistonHead()
 	{
 		// MockMC: MovingPiston#isPistonHead
 		return false;
 	}
 
+	@Override
 	default boolean isExtending()
 	{
 		// MockMC: MovingPiston#isExtending

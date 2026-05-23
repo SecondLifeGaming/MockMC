@@ -17,8 +17,8 @@ import org.bukkit.inventory.ItemStack;
 public interface ArmoredHorseInventoryBaseMock
 		extends
 			ArmoredHorseInventory,
-			AbstractHorseInventoryBaseMock,
-			ArmoredSaddledMountInventoryBaseMock
+			ArmoredSaddledMountInventoryBaseMock,
+			AbstractHorseInventoryBaseMock
 {
 	@Override
 	default void setArmor(ItemStack arg0)

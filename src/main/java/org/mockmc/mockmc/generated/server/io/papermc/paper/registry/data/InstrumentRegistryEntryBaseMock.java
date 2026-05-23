@@ -19,24 +19,28 @@ import org.bukkit.Sound;
  */
 public interface InstrumentRegistryEntryBaseMock extends InstrumentRegistryEntry
 {
+	@Override
 	default float duration()
 	{
 		// MockMC: InstrumentRegistryEntry#duration
 		return 0.0f;
 	}
 
+	@Override
 	default RegistryHolder<Sound, SoundEventRegistryEntry> soundEvent()
 	{
 		// MockMC: InstrumentRegistryEntry#soundEvent
 		return null;
 	}
 
+	@Override
 	default float range()
 	{
 		// MockMC: InstrumentRegistryEntry#range
 		return 0.0f;
 	}
 
+	@Override
 	default Component description()
 	{
 		// MockMC: InstrumentRegistryEntry#description

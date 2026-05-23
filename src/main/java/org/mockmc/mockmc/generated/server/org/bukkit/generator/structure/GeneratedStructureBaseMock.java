@@ -20,18 +20,21 @@ import org.mockmc.mockmc.generated.server.org.bukkit.persistence.PersistentDataH
  */
 public interface GeneratedStructureBaseMock extends GeneratedStructure, PersistentDataHolderBaseMock
 {
+	@Override
 	default Structure getStructure()
 	{
 		// MockMC: GeneratedStructure#getStructure
 		return null;
 	}
 
+	@Override
 	default Collection<StructurePiece> getPieces()
 	{
 		// MockMC: GeneratedStructure#getPieces
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default BoundingBox getBoundingBox()
 	{
 		// MockMC: GeneratedStructure#getBoundingBox

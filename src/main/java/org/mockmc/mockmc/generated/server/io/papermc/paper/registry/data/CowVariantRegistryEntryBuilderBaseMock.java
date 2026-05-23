@@ -22,6 +22,7 @@ public interface CowVariantRegistryEntryBuilderBaseMock
 			CowVariantRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Cow.Variant>
 {
+	@Override
 	default io.papermc.paper.registry.data.CowVariantRegistryEntry.Builder babyClientTextureAsset(
 			ClientTextureAsset arg0)
 	{
@@ -29,12 +30,14 @@ public interface CowVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.CowVariantRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)
 	{
 		// MockMC: Builder#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.CowVariantRegistryEntry.Builder model(
 			io.papermc.paper.registry.data.CowVariantRegistryEntry.Model arg0)
 	{

@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ObserverBaseMock extends Observer, PowerableBaseMock, DirectionalBaseMock
+public interface ObserverBaseMock extends Observer, DirectionalBaseMock, PowerableBaseMock
 {
 }

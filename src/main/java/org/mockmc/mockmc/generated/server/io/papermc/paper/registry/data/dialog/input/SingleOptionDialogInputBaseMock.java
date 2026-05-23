@@ -17,30 +17,35 @@ import net.kyori.adventure.text.Component;
  */
 public interface SingleOptionDialogInputBaseMock extends SingleOptionDialogInput
 {
+	@Override
 	default Component label()
 	{
 		// MockMC: SingleOptionDialogInput#label
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default String key()
 	{
 		// MockMC: SingleOptionDialogInput#key
 		return "";
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: SingleOptionDialogInput#width
 		return 0;
 	}
 
+	@Override
 	default boolean labelVisible()
 	{
 		// MockMC: SingleOptionDialogInput#labelVisible
 		return false;
 	}
 
+	@Override
 	default List<SingleOptionDialogInput.OptionEntry> entries()
 	{
 		// MockMC: SingleOptionDialogInput#entries

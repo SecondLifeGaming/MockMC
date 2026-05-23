@@ -16,6 +16,7 @@ import org.bukkit.Utility;
  */
 public interface UtilityBaseMock extends Utility
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: Utility#annotationType

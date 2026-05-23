@@ -16,6 +16,7 @@ import org.bukkit.permissions.PermissionRemovedExecutor;
  */
 public interface PermissionRemovedExecutorBaseMock extends PermissionRemovedExecutor
 {
+	@Override
 	default void attachmentRemoved(PermissionAttachment arg0)
 	{
 		// MockMC: PermissionRemovedExecutor#attachmentRemoved

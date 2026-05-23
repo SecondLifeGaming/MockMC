@@ -14,9 +14,11 @@ import org.bukkit.entity.Guardian;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 {
+	@Override
 	default boolean setLaser(boolean arg0)
 	{
 		// MockMC: Guardian#setLaser
@@ -30,12 +32,14 @@ public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default int getLaserTicks()
 	{
 		// MockMC: Guardian#getLaserTicks
 		return 0;
 	}
 
+	@Override
 	default boolean hasLaser()
 	{
 		// MockMC: Guardian#hasLaser
@@ -46,6 +50,7 @@ public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.10.2")
 	default void setElder(boolean arg0)
 	{
@@ -63,6 +68,7 @@ public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.10.2")
 	default boolean isElder()
 	{
@@ -70,11 +76,13 @@ public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void setLaserTicks(int arg0)
 	{
 		// MockMC: Guardian#setLaserTicks
 	}
 
+	@Override
 	default boolean isMoving()
 	{
 		// MockMC: Guardian#isMoving
@@ -88,6 +96,7 @@ public interface GuardianBaseMock extends Guardian, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default int getLaserDuration()
 	{
 		// MockMC: Guardian#getLaserDuration

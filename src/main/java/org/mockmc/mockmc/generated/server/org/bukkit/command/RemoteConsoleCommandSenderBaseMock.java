@@ -16,6 +16,7 @@ import org.bukkit.command.RemoteConsoleCommandSender;
  */
 public interface RemoteConsoleCommandSenderBaseMock extends RemoteConsoleCommandSender, CommandSenderBaseMock
 {
+	@Override
 	default SocketAddress getAddress()
 	{
 		// MockMC: RemoteConsoleCommandSender#getAddress

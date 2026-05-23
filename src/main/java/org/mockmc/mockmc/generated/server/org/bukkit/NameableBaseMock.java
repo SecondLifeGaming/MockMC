@@ -20,6 +20,7 @@ public interface NameableBaseMock extends Nameable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setCustomName(String arg0)
 	{
@@ -30,6 +31,7 @@ public interface NameableBaseMock extends Nameable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getCustomName()
 	{
@@ -37,11 +39,13 @@ public interface NameableBaseMock extends Nameable
 		return "";
 	}
 
+	@Override
 	default void customName(Component arg0)
 	{
 		// MockMC: Nameable#customName
 	}
 
+	@Override
 	default Component customName()
 	{
 		// MockMC: Nameable#customName

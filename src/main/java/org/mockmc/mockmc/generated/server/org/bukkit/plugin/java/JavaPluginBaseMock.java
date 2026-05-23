@@ -66,7 +66,8 @@ public interface JavaPluginBaseMock
 		// MockMC: JavaPlugin#init
 	}
 
-	@SuppressWarnings("removal")
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	default void init(PluginLoader arg0, Server arg1, PluginDescriptionFile arg2, File arg3, File arg4,
 			ClassLoader arg5)
 	{
@@ -160,7 +161,8 @@ public interface JavaPluginBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
+	@SuppressWarnings(
+	{"removal", "java:S1133"})
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PluginLoader getPluginLoader()
 	{

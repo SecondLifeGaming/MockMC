@@ -36,104 +36,121 @@ import org.mockmc.mockmc.generated.server.org.bukkit.metadata.MetadatableBaseMoc
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
-public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableBaseMock
+{"java:S1133", "removal", "deprecation"})
+public interface BlockBaseMock extends Block, TranslatableBaseMock, MetadatableBaseMock
 {
+	@Override
 	default String translationKey()
 	{
 		// MockMC: Block#translationKey
 		return "";
 	}
 
+	@Override
 	default boolean isBurnable()
 	{
 		// MockMC: Block#isBurnable
 		return false;
 	}
 
+	@Override
 	default boolean isReplaceable()
 	{
 		// MockMC: Block#isReplaceable
 		return false;
 	}
 
+	@Override
 	default VoxelShape getCollisionShape()
 	{
 		// MockMC: Block#getCollisionShape
 		return null;
 	}
 
+	@Override
 	default void setBiome(Biome arg0)
 	{
 		// MockMC: Block#setBiome
 	}
 
+	@Override
 	default Location getLocation(Location arg0)
 	{
 		// MockMC: Block#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: Block#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean isPassable()
 	{
 		// MockMC: Block#isPassable
 		return false;
 	}
 
+	@Override
 	default World getWorld()
 	{
 		// MockMC: Block#getWorld
 		return null;
 	}
 
+	@Override
 	default boolean isSuffocating()
 	{
 		// MockMC: Block#isSuffocating
 		return false;
 	}
 
+	@Override
 	default float getDestroySpeed(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: Block#getDestroySpeed
 		return 0.0f;
 	}
 
+	@Override
 	default boolean isBlockIndirectlyPowered()
 	{
 		// MockMC: Block#isBlockIndirectlyPowered
 		return false;
 	}
 
+	@Override
 	default boolean canPlace(BlockData arg0)
 	{
 		// MockMC: Block#canPlace
 		return false;
 	}
 
+	@Override
 	default float getDestroySpeed(ItemStack arg0)
 	{
 		// MockMC: Block#getDestroySpeed
 		return 0.0f;
 	}
 
+	@Override
 	default Block getRelative(BlockFace arg0, int arg1)
 	{
 		// MockMC: Block#getRelative
 		return null;
 	}
 
+	@Override
 	default Block getRelative(BlockFace arg0)
 	{
 		// MockMC: Block#getRelative
 		return null;
 	}
 
+	@Override
 	default Block getRelative(int arg0, int arg1, int arg2)
 	{
 		// MockMC: Block#getRelative
@@ -144,6 +161,7 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.1")
 	default long getBlockKey()
 	{
@@ -151,6 +169,7 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 		return 0L;
 	}
 
+	@Override
 	default Material getType()
 	{
 		// MockMC: Block#getType
@@ -161,6 +180,7 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default boolean isValidTool(ItemStack arg0)
 	{
@@ -168,30 +188,35 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 		return false;
 	}
 
+	@Override
 	default byte getLightFromBlocks()
 	{
 		// MockMC: Block#getLightFromBlocks
 		return 0;
 	}
 
+	@Override
 	default byte getLightLevel()
 	{
 		// MockMC: Block#getLightLevel
 		return 0;
 	}
 
+	@Override
 	default float getBreakSpeed(Player arg0)
 	{
 		// MockMC: Block#getBreakSpeed
 		return 0.0f;
 	}
 
+	@Override
 	default boolean applyBoneMeal(BlockFace arg0)
 	{
 		// MockMC: Block#applyBoneMeal
 		return false;
 	}
 
+	@Override
 	default double getTemperature()
 	{
 		// MockMC: Block#getTemperature
@@ -202,6 +227,7 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.18.2", forRemoval = true)
 	default BlockSoundGroup getSoundGroup()
 	{
@@ -209,62 +235,73 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 		return null;
 	}
 
+	@Override
 	default void tick()
 	{
 		// MockMC: Block#tick
 	}
 
+	@Override
 	default void setBlockData(BlockData arg0)
 	{
 		// MockMC: Block#setBlockData
 	}
 
+	@Override
 	default void setBlockData(BlockData arg0, boolean arg1)
 	{
 		// MockMC: Block#setBlockData
 	}
 
+	@Override
 	default double getHumidity()
 	{
 		// MockMC: Block#getHumidity
 		return 0.0d;
 	}
 
+	@Override
 	default BlockFace getFace(Block arg0)
 	{
 		// MockMC: Block#getFace
 		return null;
 	}
 
+	@Override
 	default boolean isCollidable()
 	{
 		// MockMC: Block#isCollidable
 		return false;
 	}
 
+	@Override
 	default boolean isSolid()
 	{
 		// MockMC: Block#isSolid
 		return false;
 	}
 
+	@Override
 	default boolean isBlockFaceIndirectlyPowered(BlockFace arg0)
 	{
 		// MockMC: Block#isBlockFaceIndirectlyPowered
 		return false;
 	}
 
+	@Override
 	default void fluidTick()
 	{
 		// MockMC: Block#fluidTick
 	}
 
+	@Override
 	default boolean isPreferredTool(ItemStack arg0)
 	{
 		// MockMC: Block#isPreferredTool
 		return false;
 	}
 
+	@Override
 	default Biome getBiome()
 	{
 		// MockMC: Block#getBiome
@@ -275,6 +312,7 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2", forRemoval = true)
 	default byte getData()
 	{
@@ -282,156 +320,182 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 		return 0;
 	}
 
+	@Override
 	default boolean isBlockPowered()
 	{
 		// MockMC: Block#isBlockPowered
 		return false;
 	}
 
+	@Override
 	default BlockData getBlockData()
 	{
 		// MockMC: Block#getBlockData
 		return null;
 	}
 
+	@Override
 	default SoundGroup getBlockSoundGroup()
 	{
 		// MockMC: Block#getBlockSoundGroup
 		return null;
 	}
 
+	@Override
 	default byte getLightFromSky()
 	{
 		// MockMC: Block#getLightFromSky
 		return 0;
 	}
 
+	@Override
 	default BoundingBox getBoundingBox()
 	{
 		// MockMC: Block#getBoundingBox
 		return null;
 	}
 
+	@Override
 	default int getY()
 	{
 		// MockMC: Block#getY
 		return 0;
 	}
 
+	@Override
 	default boolean isLiquid()
 	{
 		// MockMC: Block#isLiquid
 		return false;
 	}
 
+	@Override
 	default BlockState getState()
 	{
 		// MockMC: Block#getState
 		return null;
 	}
 
+	@Override
 	default BlockState getState(boolean arg0)
 	{
 		// MockMC: Block#getState
 		return null;
 	}
 
+	@Override
 	default int getX()
 	{
 		// MockMC: Block#getX
 		return 0;
 	}
 
+	@Override
 	default Chunk getChunk()
 	{
 		// MockMC: Block#getChunk
 		return null;
 	}
 
+	@Override
 	default PistonMoveReaction getPistonMoveReaction()
 	{
 		// MockMC: Block#getPistonMoveReaction
 		return null;
 	}
 
+	@Override
 	default int getBlockPower()
 	{
 		// MockMC: Block#getBlockPower
 		return 0;
 	}
 
+	@Override
 	default int getZ()
 	{
 		// MockMC: Block#getZ
 		return 0;
 	}
 
+	@Override
 	default int getBlockPower(BlockFace arg0)
 	{
 		// MockMC: Block#getBlockPower
 		return 0;
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops(ItemStack arg0, Entity arg1)
 	{
 		// MockMC: Block#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops(ItemStack arg0)
 	{
 		// MockMC: Block#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<ItemStack> getDrops()
 	{
 		// MockMC: Block#getDrops
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isBuildable()
 	{
 		// MockMC: Block#isBuildable
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(ItemStack arg0, boolean arg1)
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(ItemStack arg0, boolean arg1, boolean arg2)
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(boolean arg0)
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(ItemStack arg0)
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(boolean arg0, boolean arg1)
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally()
 	{
 		// MockMC: Block#breakNaturally
 		return false;
 	}
 
+	@Override
 	default boolean breakNaturally(ItemStack arg0, boolean arg1, boolean arg2, boolean arg3)
 	{
 		// MockMC: Block#breakNaturally
@@ -450,40 +514,47 @@ public interface BlockBaseMock extends Block, MetadatableBaseMock, TranslatableB
 		return "";
 	}
 
+	@Override
 	default void randomTick()
 	{
 		// MockMC: Block#randomTick
 	}
 
+	@Override
 	default RayTraceResult rayTrace(Location arg0, Vector arg1, double arg2, FluidCollisionMode arg3)
 	{
 		// MockMC: Block#rayTrace
 		return null;
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: Block#isEmpty
 		return false;
 	}
 
+	@Override
 	default Biome getComputedBiome()
 	{
 		// MockMC: Block#getComputedBiome
 		return null;
 	}
 
+	@Override
 	default boolean isBlockFacePowered(BlockFace arg0)
 	{
 		// MockMC: Block#isBlockFacePowered
 		return false;
 	}
 
+	@Override
 	default void setType(Material arg0)
 	{
 		// MockMC: Block#setType
 	}
 
+	@Override
 	default void setType(Material arg0, boolean arg1)
 	{
 		// MockMC: Block#setType

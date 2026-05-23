@@ -14,13 +14,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.spawner.SpawnerBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface CreatureSpawnerBaseMock extends CreatureSpawner, TileStateBaseMock, SpawnerBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface CreatureSpawnerBaseMock extends CreatureSpawner, SpawnerBaseMock, TileStateBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11.2")
 	default String getCreatureTypeName()
 	{
@@ -32,6 +34,7 @@ public interface CreatureSpawnerBaseMock extends CreatureSpawner, TileStateBaseM
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11.2")
 	default void setCreatureTypeByName(String arg0)
 	{

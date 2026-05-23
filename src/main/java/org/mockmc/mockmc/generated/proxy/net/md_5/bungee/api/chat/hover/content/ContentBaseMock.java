@@ -18,6 +18,7 @@ import net.md_5.bungee.api.chat.HoverEvent;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface ContentBaseMock
 {
 	/**

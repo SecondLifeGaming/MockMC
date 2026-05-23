@@ -19,29 +19,34 @@ import org.bukkit.plugin.java.PluginClassLoader;
  */
 public interface PaperClassLoaderStorageBaseMock extends PaperClassLoaderStorage
 {
+	@Override
 	default PluginClassLoaderGroup registerAccessBackedGroup(ConfiguredPluginClassLoader arg0, ClassLoaderAccess arg1)
 	{
 		// MockMC: PaperClassLoaderStorage#registerAccessBackedGroup
 		return null;
 	}
 
+	@Override
 	default void unregisterClassloader(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: PaperClassLoaderStorage#unregisterClassloader
 	}
 
+	@Override
 	default PluginClassLoaderGroup registerOpenGroup(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: PaperClassLoaderStorage#registerOpenGroup
 		return null;
 	}
 
+	@Override
 	default boolean registerUnsafePlugin(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: PaperClassLoaderStorage#registerUnsafePlugin
 		return false;
 	}
 
+	@Override
 	default PluginClassLoaderGroup registerSpigotGroup(PluginClassLoader arg0)
 	{
 		// MockMC: PaperClassLoaderStorage#registerSpigotGroup

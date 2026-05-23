@@ -15,25 +15,14 @@ import org.bukkit.entity.Steerable;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SteerableBaseMock extends Steerable, AnimalsBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Steerable#getLeashHolder
-		return null;
-	}
-
 	default void setCurrentBoostTicks(int arg0)
 	{
 		// MockMC: Steerable#setCurrentBoostTicks
-	}
-
-	default int getCurrentBoostTicks()
-	{
-		// MockMC: Steerable#getCurrentBoostTicks
-		return 0;
 	}
 
 	@Override
@@ -43,28 +32,6 @@ public interface SteerableBaseMock extends Steerable, AnimalsBaseMock
 		return false;
 	}
 
-	default int getBoostTicks()
-	{
-		// MockMC: Steerable#getBoostTicks
-		return 0;
-	}
-
-	default void setBoostTicks(int arg0)
-	{
-		// MockMC: Steerable#setBoostTicks
-	}
-
-	default void setSaddle(boolean arg0)
-	{
-		// MockMC: Steerable#setSaddle
-	}
-
-	default Material getSteerMaterial()
-	{
-		// MockMC: Steerable#getSteerMaterial
-		return null;
-	}
-
 	@Override
 	default boolean isLeashed()
 	{
@@ -72,6 +39,47 @@ public interface SteerableBaseMock extends Steerable, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default int getCurrentBoostTicks()
+	{
+		// MockMC: Steerable#getCurrentBoostTicks
+		return 0;
+	}
+
+	@Override
+	default int getBoostTicks()
+	{
+		// MockMC: Steerable#getBoostTicks
+		return 0;
+	}
+
+	@Override
+	default void setBoostTicks(int arg0)
+	{
+		// MockMC: Steerable#setBoostTicks
+	}
+
+	@Override
+	default void setSaddle(boolean arg0)
+	{
+		// MockMC: Steerable#setSaddle
+	}
+
+	@Override
+	default Material getSteerMaterial()
+	{
+		// MockMC: Steerable#getSteerMaterial
+		return null;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Steerable#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default boolean hasSaddle()
 	{
 		// MockMC: Steerable#hasSaddle

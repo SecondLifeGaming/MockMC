@@ -17,12 +17,14 @@ import org.bukkit.inventory.Inventory;
  */
 public interface DoubleChestInventoryBaseMock extends DoubleChestInventory, InventoryBaseMock
 {
+	@Override
 	default Inventory getLeftSide()
 	{
 		// MockMC: DoubleChestInventory#getLeftSide
 		return null;
 	}
 
+	@Override
 	default Inventory getRightSide()
 	{
 		// MockMC: DoubleChestInventory#getRightSide

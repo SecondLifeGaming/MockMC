@@ -20,12 +20,14 @@ public interface LodestoneTrackerBuilderBaseMock
 			LodestoneTracker.Builder,
 			DataComponentBuilderBaseMock<LodestoneTracker>
 {
+	@Override
 	default LodestoneTracker.Builder location(Location arg0)
 	{
 		// MockMC: Builder#location
 		return null;
 	}
 
+	@Override
 	default LodestoneTracker.Builder tracked(boolean arg0)
 	{
 		// MockMC: Builder#tracked

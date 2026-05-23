@@ -17,6 +17,7 @@ import org.bukkit.util.BlockTransformer;
  */
 public interface BlockTransformerBaseMock extends BlockTransformer
 {
+	@Override
 	default BlockState transform(LimitedRegion arg0, int arg1, int arg2, int arg3, BlockState arg4,
 			BlockTransformer.TransformationState arg5)
 	{

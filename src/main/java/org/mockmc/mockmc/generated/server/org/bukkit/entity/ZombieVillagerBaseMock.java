@@ -16,9 +16,11 @@ import org.bukkit.entity.ZombieVillager;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ZombieVillagerBaseMock extends ZombieVillager, ZombieBaseMock
 {
+	@Override
 	default Villager.Type getVillagerType()
 	{
 		// MockMC: ZombieVillager#getVillagerType
@@ -37,6 +39,7 @@ public interface ZombieVillagerBaseMock extends ZombieVillager, ZombieBaseMock
 		// MockMC: ZombieVillager#setConversionTime
 	}
 
+	@Override
 	default void setConversionTime(int arg0, boolean arg1)
 	{
 		// MockMC: ZombieVillager#setConversionTime
@@ -56,10 +59,18 @@ public interface ZombieVillagerBaseMock extends ZombieVillager, ZombieBaseMock
 		return 0;
 	}
 
+	@Override
 	default OfflinePlayer getConversionPlayer()
 	{
 		// MockMC: ZombieVillager#getConversionPlayer
 		return null;
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: ZombieVillager#isLeashed
+		return false;
 	}
 
 	@Override
@@ -70,33 +81,28 @@ public interface ZombieVillagerBaseMock extends ZombieVillager, ZombieBaseMock
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: ZombieVillager#setLeashHolder
-		return false;
-	}
-
-	default void setVillagerType(Villager.Type arg0)
-	{
-		// MockMC: ZombieVillager#setVillagerType
-	}
-
-	@Override
 	default Entity getLeashHolder() throws IllegalStateException
 	{
 		// MockMC: ZombieVillager#getLeashHolder
 		return null;
 	}
 
-	default void setConversionPlayer(OfflinePlayer arg0)
+	@Override
+	default void setVillagerType(Villager.Type arg0)
 	{
-		// MockMC: ZombieVillager#setConversionPlayer
+		// MockMC: ZombieVillager#setVillagerType
 	}
 
 	@Override
-	default boolean isLeashed()
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: ZombieVillager#isLeashed
+		// MockMC: ZombieVillager#setLeashHolder
 		return false;
+	}
+
+	@Override
+	default void setConversionPlayer(OfflinePlayer arg0)
+	{
+		// MockMC: ZombieVillager#setConversionPlayer
 	}
 }

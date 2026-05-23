@@ -19,14 +19,17 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, ShearableBaseMock
 {
+	@Override
 	default void setVariant(MushroomCow.Variant arg0)
 	{
 		// MockMC: MushroomCow#setVariant
 	}
 
+	@Override
 	default void setStewEffects(List<SuspiciousEffectEntry> arg0)
 	{
 		// MockMC: MushroomCow#setStewEffects
@@ -36,6 +39,7 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default boolean addEffectToNextStew(PotionEffect arg0, boolean arg1)
 	{
@@ -43,12 +47,14 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 		return false;
 	}
 
+	@Override
 	default boolean addEffectToNextStew(SuspiciousEffectEntry arg0, boolean arg1)
 	{
 		// MockMC: MushroomCow#addEffectToNextStew
 		return false;
 	}
 
+	@Override
 	default boolean hasEffectsForNextStew()
 	{
 		// MockMC: MushroomCow#hasEffectsForNextStew
@@ -56,33 +62,9 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: MushroomCow#setLeashHolder
-		return false;
-	}
-
-	default List<PotionEffect> getEffectsForNextStew()
-	{
-		// MockMC: MushroomCow#getEffectsForNextStew
-		return java.util.Collections.emptyList();
-	}
-
-	default List<SuspiciousEffectEntry> getStewEffects()
-	{
-		// MockMC: MushroomCow#getStewEffects
-		return java.util.Collections.emptyList();
-	}
-
-	default boolean removeEffectFromNextStew(PotionEffectType arg0)
-	{
-		// MockMC: MushroomCow#removeEffectFromNextStew
-		return false;
-	}
-
-	default boolean hasEffectForNextStew(PotionEffectType arg0)
-	{
-		// MockMC: MushroomCow#hasEffectForNextStew
+		// MockMC: MushroomCow#isLeashed
 		return false;
 	}
 
@@ -93,20 +75,57 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 		return null;
 	}
 
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.20.2", forRemoval = true)
-	default void setStewEffect(PotionEffectType arg0)
+	@Override
+	default List<PotionEffect> getEffectsForNextStew()
 	{
-		// MockMC: MushroomCow#setStewEffect
+		// MockMC: MushroomCow#getEffectsForNextStew
+		return java.util.Collections.emptyList();
+	}
+
+	@Override
+	default List<SuspiciousEffectEntry> getStewEffects()
+	{
+		// MockMC: MushroomCow#getStewEffects
+		return java.util.Collections.emptyList();
+	}
+
+	@Override
+	default boolean removeEffectFromNextStew(PotionEffectType arg0)
+	{
+		// MockMC: MushroomCow#removeEffectFromNextStew
+		return false;
+	}
+
+	@Override
+	default boolean hasEffectForNextStew(PotionEffectType arg0)
+	{
+		// MockMC: MushroomCow#hasEffectForNextStew
+		return false;
 	}
 
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
+	@Deprecated(since = "1.20.2", forRemoval = true)
+	default void setStewEffect(PotionEffectType arg0)
+	{
+		// MockMC: MushroomCow#setStewEffect
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: MushroomCow#setLeashHolder
+		return false;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default void setStewEffectDuration(int arg0)
 	{
@@ -117,6 +136,7 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default int getStewEffectDuration()
 	{
@@ -128,6 +148,7 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.2", forRemoval = true)
 	default PotionEffectType getStewEffectType()
 	{
@@ -136,17 +157,12 @@ public interface MushroomCowBaseMock extends MushroomCow, AbstractCowBaseMock, S
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: MushroomCow#isLeashed
-		return false;
-	}
-
 	default void clearEffectsForNextStew()
 	{
 		// MockMC: MushroomCow#clearEffectsForNextStew
 	}
 
+	@Override
 	default MushroomCow.Variant getVariant()
 	{
 		// MockMC: MushroomCow#getVariant

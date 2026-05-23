@@ -15,27 +15,10 @@ import org.bukkit.inventory.HorseInventory;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface HorseBaseMock extends Horse, AbstractHorseBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Horse#getLeashHolder
-		return null;
-	}
-
-	default Horse.Style getStyle()
-	{
-		// MockMC: Horse#getStyle
-		return null;
-	}
-
-	default void setColor(Horse.Color arg0)
-	{
-		// MockMC: Horse#setColor
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -50,11 +33,33 @@ public interface HorseBaseMock extends Horse, AbstractHorseBaseMock
 		return false;
 	}
 
+	@Override
+	default Horse.Style getStyle()
+	{
+		// MockMC: Horse#getStyle
+		return null;
+	}
+
+	@Override
+	default void setColor(Horse.Color arg0)
+	{
+		// MockMC: Horse#setColor
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Horse#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default void setStyle(Horse.Style arg0)
 	{
 		// MockMC: Horse#setStyle
 	}
 
+	@Override
 	default Horse.Color getColor()
 	{
 		// MockMC: Horse#getColor
@@ -65,6 +70,7 @@ public interface HorseBaseMock extends Horse, AbstractHorseBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11", forRemoval = true)
 	default void setCarryingChest(boolean arg0)
 	{
@@ -75,6 +81,7 @@ public interface HorseBaseMock extends Horse, AbstractHorseBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.11", forRemoval = true)
 	default boolean isCarryingChest()
 	{

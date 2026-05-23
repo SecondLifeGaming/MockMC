@@ -17,12 +17,14 @@ import org.bukkit.Keyed;
  */
 public interface RegistryEntryBaseMock<M, A extends Keyed> extends RegistryEntry<M, A>
 {
+	@Override
 	default RegistryEntryMeta<M, A> meta()
 	{
 		// MockMC: RegistryEntry#meta
 		return null;
 	}
 
+	@Override
 	default RegistryKey<A> apiKey()
 	{
 		// MockMC: RegistryEntry#apiKey
@@ -33,6 +35,7 @@ public interface RegistryEntryBaseMock<M, A extends Keyed> extends RegistryEntry
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default RegistryEntry<M, A> delayed()
 	{

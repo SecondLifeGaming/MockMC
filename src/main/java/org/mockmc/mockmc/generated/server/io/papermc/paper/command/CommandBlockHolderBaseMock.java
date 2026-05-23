@@ -16,34 +16,40 @@ import net.kyori.adventure.text.Component;
  */
 public interface CommandBlockHolderBaseMock extends CommandBlockHolder
 {
+	@Override
 	default String getCommand()
 	{
 		// MockMC: CommandBlockHolder#getCommand
 		return "";
 	}
 
+	@Override
 	default int getSuccessCount()
 	{
 		// MockMC: CommandBlockHolder#getSuccessCount
 		return 0;
 	}
 
+	@Override
 	default void lastOutput(Component arg0)
 	{
 		// MockMC: CommandBlockHolder#lastOutput
 	}
 
+	@Override
 	default Component lastOutput()
 	{
 		// MockMC: CommandBlockHolder#lastOutput
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void setSuccessCount(int arg0)
 	{
 		// MockMC: CommandBlockHolder#setSuccessCount
 	}
 
+	@Override
 	default void setCommand(String arg0)
 	{
 		// MockMC: CommandBlockHolder#setCommand

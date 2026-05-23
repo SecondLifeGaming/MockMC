@@ -17,6 +17,7 @@ import net.kyori.adventure.audience.Audience;
  */
 public interface DialogActionCallbackBaseMock extends DialogActionCallback
 {
+	@Override
 	default void accept(DialogResponseView arg0, Audience arg1)
 	{
 		// MockMC: DialogActionCallback#accept

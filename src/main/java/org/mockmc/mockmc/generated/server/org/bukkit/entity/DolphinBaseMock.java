@@ -15,8 +15,9 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface DolphinBaseMock extends Dolphin, AgeableBaseMock, WaterMobBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface DolphinBaseMock extends Dolphin, WaterMobBaseMock, AgeableBaseMock
 {
 	@Override
 	default Entity getLeashHolder() throws IllegalStateException
@@ -25,28 +26,33 @@ public interface DolphinBaseMock extends Dolphin, AgeableBaseMock, WaterMobBaseM
 		return null;
 	}
 
+	@Override
 	default void setMoistness(int arg0)
 	{
 		// MockMC: Dolphin#setMoistness
 	}
 
+	@Override
 	default boolean hasFish()
 	{
 		// MockMC: Dolphin#hasFish
 		return false;
 	}
 
+	@Override
 	default Location getTreasureLocation()
 	{
 		// MockMC: Dolphin#getTreasureLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setHasFish(boolean arg0)
 	{
 		// MockMC: Dolphin#setHasFish
 	}
 
+	@Override
 	default void setTreasureLocation(Location arg0)
 	{
 		// MockMC: Dolphin#setTreasureLocation
@@ -59,6 +65,7 @@ public interface DolphinBaseMock extends Dolphin, AgeableBaseMock, WaterMobBaseM
 		return false;
 	}
 
+	@Override
 	default int getMoistness()
 	{
 		// MockMC: Dolphin#getMoistness

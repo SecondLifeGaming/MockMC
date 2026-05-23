@@ -21,6 +21,7 @@ public interface LoginPhaseConnectionBaseMock
 			InboundConnectionBaseMock,
 			KeyIdentifiableBaseMock
 {
+	@Override
 	default void sendLoginPluginMessage(ChannelIdentifier arg0, byte[] arg1, LoginPhaseConnection.MessageConsumer arg2)
 	{
 		// MockMC: LoginPhaseConnection#sendLoginPluginMessage

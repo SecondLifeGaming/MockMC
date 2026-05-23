@@ -13,7 +13,8 @@ import org.bukkit.entity.WindCharge;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WindChargeBaseMock extends WindCharge, AbstractWindChargeBaseMock
 {
 }

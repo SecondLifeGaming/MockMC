@@ -14,19 +14,14 @@ import org.bukkit.entity.Vindicator;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface VindicatorBaseMock extends Vindicator, IllagerBaseMock
 {
+	@Override
 	default void setJohnny(boolean arg0)
 	{
 		// MockMC: Vindicator#setJohnny
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Vindicator#getLeashHolder
-		return null;
 	}
 
 	@Override
@@ -36,6 +31,14 @@ public interface VindicatorBaseMock extends Vindicator, IllagerBaseMock
 		return false;
 	}
 
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Vindicator#isLeashed
+		return false;
+	}
+
+	@Override
 	default boolean isJohnny()
 	{
 		// MockMC: Vindicator#isJohnny
@@ -43,9 +46,9 @@ public interface VindicatorBaseMock extends Vindicator, IllagerBaseMock
 	}
 
 	@Override
-	default boolean isLeashed()
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: Vindicator#isLeashed
-		return false;
+		// MockMC: Vindicator#getLeashHolder
+		return null;
 	}
 }

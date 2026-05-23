@@ -16,36 +16,42 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface AttackRangeBuilderBaseMock extends AttackRange.Builder, DataComponentBuilderBaseMock<AttackRange>
 {
+	@Override
 	default AttackRange.Builder minReach(float arg0)
 	{
 		// MockMC: Builder#minReach
 		return null;
 	}
 
+	@Override
 	default AttackRange.Builder hitboxMargin(float arg0)
 	{
 		// MockMC: Builder#hitboxMargin
 		return null;
 	}
 
+	@Override
 	default AttackRange.Builder minCreativeReach(float arg0)
 	{
 		// MockMC: Builder#minCreativeReach
 		return null;
 	}
 
+	@Override
 	default AttackRange.Builder maxCreativeReach(float arg0)
 	{
 		// MockMC: Builder#maxCreativeReach
 		return null;
 	}
 
+	@Override
 	default AttackRange.Builder mobFactor(float arg0)
 	{
 		// MockMC: Builder#mobFactor
 		return null;
 	}
 
+	@Override
 	default AttackRange.Builder maxReach(float arg0)
 	{
 		// MockMC: Builder#maxReach

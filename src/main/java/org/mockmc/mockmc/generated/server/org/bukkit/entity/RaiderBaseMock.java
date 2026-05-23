@@ -17,19 +17,23 @@ import org.bukkit.entity.Raider;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface RaiderBaseMock extends Raider, MonsterBaseMock
 {
+	@Override
 	default void setTicksOutsideRaid(int arg0)
 	{
 		// MockMC: Raider#setTicksOutsideRaid
 	}
 
+	@Override
 	default void setRaid(Raid arg0)
 	{
 		// MockMC: Raider#setRaid
 	}
 
+	@Override
 	default Raid getRaid()
 	{
 		// MockMC: Raider#getRaid
@@ -43,23 +47,27 @@ public interface RaiderBaseMock extends Raider, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void setWave(int arg0)
 	{
 		// MockMC: Raider#setWave
 	}
 
+	@Override
 	default int getWave()
 	{
 		// MockMC: Raider#getWave
 		return 0;
 	}
 
+	@Override
 	default Block getPatrolTarget()
 	{
 		// MockMC: Raider#getPatrolTarget
 		return null;
 	}
 
+	@Override
 	default boolean isPatrolLeader()
 	{
 		// MockMC: Raider#isPatrolLeader
@@ -73,40 +81,47 @@ public interface RaiderBaseMock extends Raider, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean isCelebrating()
 	{
 		// MockMC: Raider#isCelebrating
 		return false;
 	}
 
+	@Override
 	default boolean isCanJoinRaid()
 	{
 		// MockMC: Raider#isCanJoinRaid
 		return false;
 	}
 
+	@Override
 	default Sound getCelebrationSound()
 	{
 		// MockMC: Raider#getCelebrationSound
 		return null;
 	}
 
+	@Override
 	default void setCanJoinRaid(boolean arg0)
 	{
 		// MockMC: Raider#setCanJoinRaid
 	}
 
+	@Override
 	default void setCelebrating(boolean arg0)
 	{
 		// MockMC: Raider#setCelebrating
 	}
 
+	@Override
 	default int getTicksOutsideRaid()
 	{
 		// MockMC: Raider#getTicksOutsideRaid
 		return 0;
 	}
 
+	@Override
 	default void setPatrolLeader(boolean arg0)
 	{
 		// MockMC: Raider#setPatrolLeader
@@ -119,6 +134,7 @@ public interface RaiderBaseMock extends Raider, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void setPatrolTarget(Block arg0)
 	{
 		// MockMC: Raider#setPatrolTarget

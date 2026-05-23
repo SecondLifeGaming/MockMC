@@ -19,21 +19,25 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.persistence.Persisten
  */
 public interface PersistentDataContainerBaseMock extends PersistentDataContainer, PersistentDataContainerViewBaseMock
 {
+	@Override
 	default <P, C> void set(NamespacedKey arg0, PersistentDataType<P, C> arg1, C arg2)
 	{
 		// MockMC: PersistentDataContainer#set
 	}
 
+	@Override
 	default void readFromBytes(byte[] arg0, boolean arg1) throws IOException
 	{
 		// MockMC: PersistentDataContainer#readFromBytes
 	}
 
+	@Override
 	default void readFromBytes(byte[] arg0) throws IOException
 	{
 		// MockMC: PersistentDataContainer#readFromBytes
 	}
 
+	@Override
 	default void remove(NamespacedKey arg0)
 	{
 		// MockMC: PersistentDataContainer#remove

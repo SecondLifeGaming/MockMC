@@ -15,12 +15,14 @@ import io.papermc.paper.datacomponent.item.Weapon;
  */
 public interface WeaponBaseMock extends Weapon
 {
+	@Override
 	default float disableBlockingForSeconds()
 	{
 		// MockMC: Weapon#disableBlockingForSeconds
 		return 0.0f;
 	}
 
+	@Override
 	default int itemDamagePerAttack()
 	{
 		// MockMC: Weapon#itemDamagePerAttack

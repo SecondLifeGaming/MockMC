@@ -15,21 +15,25 @@ import org.bukkit.entity.Bee;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BeehiveBaseMock extends Beehive, EntityBlockStorageBaseMock<Bee>
 {
+	@Override
 	default Location getFlower()
 	{
 		// MockMC: Beehive#getFlower
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean isSedated()
 	{
 		// MockMC: Beehive#isSedated
 		return false;
 	}
 
+	@Override
 	default void setFlower(Location arg0)
 	{
 		// MockMC: Beehive#setFlower

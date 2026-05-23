@@ -28,6 +28,7 @@ public interface InstrumentRegistryEntryBuilderBaseMock
 			RegistryBuilderBaseMock<MusicInstrument>,
 			InstrumentRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(
 			RegistryHolder<Sound, SoundEventRegistryEntry> arg0)
 	{
@@ -35,6 +36,7 @@ public interface InstrumentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(
 			Consumer<RegistryBuilderFactory<Sound, ? extends SoundEventRegistryEntry.Builder>> arg0)
 	{
@@ -42,24 +44,28 @@ public interface InstrumentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(TypedKey<Sound> arg0)
 	{
 		// MockMC: Builder#soundEvent
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder duration(float arg0)
 	{
 		// MockMC: Builder#duration
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder range(float arg0)
 	{
 		// MockMC: Builder#range
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder description(Component arg0)
 	{
 		// MockMC: Builder#description

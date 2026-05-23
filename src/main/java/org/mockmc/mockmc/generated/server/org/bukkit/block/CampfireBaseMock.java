@@ -14,71 +14,84 @@ import org.bukkit.inventory.ItemStack;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CampfireBaseMock extends Campfire, TileStateBaseMock
 {
+	@Override
 	default boolean isCookingDisabled(int arg0)
 	{
 		// MockMC: Campfire#isCookingDisabled
 		return false;
 	}
 
+	@Override
 	default int getSize()
 	{
 		// MockMC: Campfire#getSize
 		return 0;
 	}
 
+	@Override
 	default void setCookTimeTotal(int arg0, int arg1)
 	{
 		// MockMC: Campfire#setCookTimeTotal
 	}
 
+	@Override
 	default void startCooking()
 	{
 		// MockMC: Campfire#startCooking
 	}
 
+	@Override
 	default boolean startCooking(int arg0)
 	{
 		// MockMC: Campfire#startCooking
 		return false;
 	}
 
+	@Override
 	default void stopCooking()
 	{
 		// MockMC: Campfire#stopCooking
 	}
 
+	@Override
 	default boolean stopCooking(int arg0)
 	{
 		// MockMC: Campfire#stopCooking
 		return false;
 	}
 
+	@Override
 	default void setCookTime(int arg0, int arg1)
 	{
 		// MockMC: Campfire#setCookTime
 	}
 
+	@Override
 	default ItemStack getItem(int arg0)
 	{
 		// MockMC: Campfire#getItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default int getCookTimeTotal(int arg0)
 	{
 		// MockMC: Campfire#getCookTimeTotal
 		return 0;
 	}
 
+	@Override
 	default int getCookTime(int arg0)
 	{
 		// MockMC: Campfire#getCookTime
 		return 0;
 	}
 
+	@Override
 	default void setItem(int arg0, ItemStack arg1)
 	{
 		// MockMC: Campfire#setItem

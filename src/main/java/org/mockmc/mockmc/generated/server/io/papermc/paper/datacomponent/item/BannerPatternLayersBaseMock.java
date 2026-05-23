@@ -17,6 +17,7 @@ import org.bukkit.block.banner.Pattern;
  */
 public interface BannerPatternLayersBaseMock extends BannerPatternLayers
 {
+	@Override
 	default List<Pattern> patterns()
 	{
 		// MockMC: BannerPatternLayers#patterns

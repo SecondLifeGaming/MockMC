@@ -15,8 +15,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface BedBaseMock extends Bed, TileStateBaseMock, ColorableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface BedBaseMock extends Bed, ColorableBaseMock, TileStateBaseMock
 {
 	@Override
 	default DyeColor getColor()

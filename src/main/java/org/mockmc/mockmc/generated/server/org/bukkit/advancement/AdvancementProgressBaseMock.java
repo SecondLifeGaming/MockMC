@@ -18,42 +18,49 @@ import org.bukkit.advancement.AdvancementProgress;
  */
 public interface AdvancementProgressBaseMock extends AdvancementProgress
 {
+	@Override
 	default Advancement getAdvancement()
 	{
 		// MockMC: AdvancementProgress#getAdvancement
 		return null;
 	}
 
+	@Override
 	default Date getDateAwarded(String arg0)
 	{
 		// MockMC: AdvancementProgress#getDateAwarded
 		return null;
 	}
 
+	@Override
 	default boolean revokeCriteria(String arg0)
 	{
 		// MockMC: AdvancementProgress#revokeCriteria
 		return false;
 	}
 
+	@Override
 	default boolean awardCriteria(String arg0)
 	{
 		// MockMC: AdvancementProgress#awardCriteria
 		return false;
 	}
 
+	@Override
 	default Collection<String> getAwardedCriteria()
 	{
 		// MockMC: AdvancementProgress#getAwardedCriteria
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<String> getRemainingCriteria()
 	{
 		// MockMC: AdvancementProgress#getRemainingCriteria
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean isDone()
 	{
 		// MockMC: AdvancementProgress#isDone

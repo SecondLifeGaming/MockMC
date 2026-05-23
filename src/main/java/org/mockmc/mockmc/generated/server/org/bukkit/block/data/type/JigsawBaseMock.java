@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface JigsawBaseMock extends Jigsaw, BlockDataBaseMock
 {
+	@Override
 	default void setOrientation(org.bukkit.block.Orientation arg0)
 	{
 		// MockMC: Jigsaw#setOrientation
 	}
 
+	@Override
 	default org.bukkit.block.Orientation getOrientation()
 	{
 		// MockMC: Jigsaw#getOrientation

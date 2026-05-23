@@ -20,12 +20,14 @@ public interface PrioritizedLifecycleEventHandlerConfigurationBaseMock<O extends
 			PrioritizedLifecycleEventHandlerConfiguration<O>,
 			LifecycleEventHandlerConfigurationBaseMock<O>
 {
+	@Override
 	default PrioritizedLifecycleEventHandlerConfiguration<O> priority(int arg0)
 	{
 		// MockMC: PrioritizedLifecycleEventHandlerConfiguration#priority
 		return null;
 	}
 
+	@Override
 	default PrioritizedLifecycleEventHandlerConfiguration<O> monitor()
 	{
 		// MockMC: PrioritizedLifecycleEventHandlerConfiguration#monitor

@@ -19,80 +19,95 @@ import org.bukkit.permissions.Permission;
  */
 public interface PermissionManagerBaseMock extends PermissionManager
 {
+	@Override
 	default Set<Permissible> getDefaultPermSubscriptions(boolean arg0)
 	{
 		// MockMC: PermissionManager#getDefaultPermSubscriptions
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void unsubscribeFromPermission(String arg0, Permissible arg1)
 	{
 		// MockMC: PermissionManager#unsubscribeFromPermission
 	}
 
+	@Override
 	default void addPermissions(List<Permission> arg0)
 	{
 		// MockMC: PermissionManager#addPermissions
 	}
 
+	@Override
 	default Set<Permissible> getPermissionSubscriptions(String arg0)
 	{
 		// MockMC: PermissionManager#getPermissionSubscriptions
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void subscribeToDefaultPerms(boolean arg0, Permissible arg1)
 	{
 		// MockMC: PermissionManager#subscribeToDefaultPerms
 	}
 
+	@Override
 	default void recalculatePermissionDefaults(Permission arg0)
 	{
 		// MockMC: PermissionManager#recalculatePermissionDefaults
 	}
 
+	@Override
 	default void removePermission(String arg0)
 	{
 		// MockMC: PermissionManager#removePermission
 	}
 
+	@Override
 	default void removePermission(Permission arg0)
 	{
 		// MockMC: PermissionManager#removePermission
 	}
 
+	@Override
 	default void clearPermissions()
 	{
 		// MockMC: PermissionManager#clearPermissions
 	}
 
+	@Override
 	default Permission getPermission(String arg0)
 	{
 		// MockMC: PermissionManager#getPermission
 		return null;
 	}
 
+	@Override
 	default void subscribeToPermission(String arg0, Permissible arg1)
 	{
 		// MockMC: PermissionManager#subscribeToPermission
 	}
 
+	@Override
 	default void unsubscribeFromDefaultPerms(boolean arg0, Permissible arg1)
 	{
 		// MockMC: PermissionManager#unsubscribeFromDefaultPerms
 	}
 
+	@Override
 	default Set<Permission> getPermissions()
 	{
 		// MockMC: PermissionManager#getPermissions
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void addPermission(Permission arg0)
 	{
 		// MockMC: PermissionManager#addPermission
 	}
 
+	@Override
 	default Set<Permission> getDefaultPermissions(boolean arg0)
 	{
 		// MockMC: PermissionManager#getDefaultPermissions

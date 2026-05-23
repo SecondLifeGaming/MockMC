@@ -15,14 +15,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface LecternBaseMock extends Lectern, PowerableBaseMock, DirectionalBaseMock
+public interface LecternBaseMock extends Lectern, DirectionalBaseMock, PowerableBaseMock
 {
+	@Override
 	default boolean hasBook()
 	{
 		// MockMC: Lectern#hasBook
 		return false;
 	}
 
+	@Override
 	default void setHasBook(boolean arg0)
 	{
 		// MockMC: Lectern#setHasBook

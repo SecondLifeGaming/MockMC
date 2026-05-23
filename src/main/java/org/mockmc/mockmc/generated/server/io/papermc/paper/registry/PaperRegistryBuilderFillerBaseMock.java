@@ -17,12 +17,14 @@ public interface PaperRegistryBuilderFillerBaseMock<M, T, B extends PaperRegistr
 		extends
 			PaperRegistryBuilder.Filler<M, T, B>
 {
+	@Override
 	default B fill(Conversions arg0, M arg1)
 	{
 		// MockMC: Filler#fill
 		return null;
 	}
 
+	@Override
 	default B create(Conversions arg0)
 	{
 		// MockMC: Filler#create

@@ -16,12 +16,14 @@ import com.velocitypowered.api.command.CommandSource;
  */
 public interface CommandInvocationBaseMock<T> extends CommandInvocation<T>
 {
+	@Override
 	default CommandSource source()
 	{
 		// MockMC: CommandInvocation#source
 		return null;
 	}
 
+	@Override
 	default T arguments()
 	{
 		// MockMC: CommandInvocation#arguments

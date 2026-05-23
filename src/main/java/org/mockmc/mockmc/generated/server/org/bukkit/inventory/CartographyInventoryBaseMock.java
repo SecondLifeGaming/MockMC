@@ -16,11 +16,13 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface CartographyInventoryBaseMock extends CartographyInventory, InventoryBaseMock
 {
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: CartographyInventory#setResult
 	}
 
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: CartographyInventory#getResult

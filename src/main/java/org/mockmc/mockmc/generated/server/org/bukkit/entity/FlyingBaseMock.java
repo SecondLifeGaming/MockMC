@@ -19,7 +19,7 @@ import org.bukkit.entity.Flying;
  */
 @Deprecated(since = "1.21.6", forRemoval = true)
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface FlyingBaseMock extends Flying, MobBaseMock
 {
 	/**

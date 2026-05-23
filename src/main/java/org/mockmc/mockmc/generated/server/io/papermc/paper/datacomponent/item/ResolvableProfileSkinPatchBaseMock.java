@@ -17,30 +17,35 @@ import org.bukkit.profile.PlayerTextures;
  */
 public interface ResolvableProfileSkinPatchBaseMock extends ResolvableProfile.SkinPatch
 {
+	@Override
 	default Key cape()
 	{
 		// MockMC: SkinPatch#cape
 		return null;
 	}
 
+	@Override
 	default Key body()
 	{
 		// MockMC: SkinPatch#body
 		return null;
 	}
 
+	@Override
 	default PlayerTextures.SkinModel model()
 	{
 		// MockMC: SkinPatch#model
 		return null;
 	}
 
+	@Override
 	default boolean isEmpty()
 	{
 		// MockMC: SkinPatch#isEmpty
 		return false;
 	}
 
+	@Override
 	default Key elytra()
 	{
 		// MockMC: SkinPatch#elytra

@@ -16,14 +16,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface StairsBaseMock extends Stairs, WaterloggedBaseMock, BisectedBaseMock, DirectionalBaseMock
+public interface StairsBaseMock extends Stairs, BisectedBaseMock, DirectionalBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default Stairs.Shape getShape()
 	{
 		// MockMC: Stairs#getShape
 		return null;
 	}
 
+	@Override
 	default void setShape(Stairs.Shape arg0)
 	{
 		// MockMC: Stairs#setShape

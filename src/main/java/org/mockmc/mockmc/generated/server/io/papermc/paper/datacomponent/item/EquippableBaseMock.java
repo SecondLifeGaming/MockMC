@@ -20,66 +20,77 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.Buildab
  */
 public interface EquippableBaseMock extends Equippable, BuildableDataComponentBaseMock<Equippable, Equippable.Builder>
 {
+	@Override
 	default boolean swappable()
 	{
 		// MockMC: Equippable#swappable
 		return false;
 	}
 
+	@Override
 	default EquipmentSlot slot()
 	{
 		// MockMC: Equippable#slot
 		return null;
 	}
 
+	@Override
 	default boolean equipOnInteract()
 	{
 		// MockMC: Equippable#equipOnInteract
 		return false;
 	}
 
+	@Override
 	default RegistryKeySet<EntityType> allowedEntities()
 	{
 		// MockMC: Equippable#allowedEntities
 		return null;
 	}
 
+	@Override
 	default boolean canBeSheared()
 	{
 		// MockMC: Equippable#canBeSheared
 		return false;
 	}
 
+	@Override
 	default Key shearSound()
 	{
 		// MockMC: Equippable#shearSound
 		return null;
 	}
 
+	@Override
 	default boolean dispensable()
 	{
 		// MockMC: Equippable#dispensable
 		return false;
 	}
 
+	@Override
 	default boolean damageOnHurt()
 	{
 		// MockMC: Equippable#damageOnHurt
 		return false;
 	}
 
+	@Override
 	default Key cameraOverlay()
 	{
 		// MockMC: Equippable#cameraOverlay
 		return null;
 	}
 
+	@Override
 	default Key assetId()
 	{
 		// MockMC: Equippable#assetId
 		return null;
 	}
 
+	@Override
 	default Key equipSound()
 	{
 		// MockMC: Equippable#equipSound

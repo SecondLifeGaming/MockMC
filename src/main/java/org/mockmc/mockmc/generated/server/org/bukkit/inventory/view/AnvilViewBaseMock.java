@@ -17,22 +17,26 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBase
  */
 public interface AnvilViewBaseMock extends AnvilView, InventoryViewBaseMock
 {
+	@Override
 	default int getMaximumRepairCost()
 	{
 		// MockMC: AnvilView#getMaximumRepairCost
 		return 0;
 	}
 
+	@Override
 	default void bypassEnchantmentLevelRestriction(boolean arg0)
 	{
 		// MockMC: AnvilView#bypassEnchantmentLevelRestriction
 	}
 
+	@Override
 	default void setMaximumRepairCost(int arg0)
 	{
 		// MockMC: AnvilView#setMaximumRepairCost
 	}
 
+	@Override
 	default void setRepairCost(int arg0)
 	{
 		// MockMC: AnvilView#setRepairCost
@@ -45,30 +49,35 @@ public interface AnvilViewBaseMock extends AnvilView, InventoryViewBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean bypassesEnchantmentLevelRestriction()
 	{
 		// MockMC: AnvilView#bypassesEnchantmentLevelRestriction
 		return false;
 	}
 
+	@Override
 	default int getRepairItemCountCost()
 	{
 		// MockMC: AnvilView#getRepairItemCountCost
 		return 0;
 	}
 
+	@Override
 	default int getRepairCost()
 	{
 		// MockMC: AnvilView#getRepairCost
 		return 0;
 	}
 
+	@Override
 	default String getRenameText()
 	{
 		// MockMC: AnvilView#getRenameText
 		return "";
 	}
 
+	@Override
 	default void setRepairItemCountCost(int arg0)
 	{
 		// MockMC: AnvilView#setRepairItemCountCost

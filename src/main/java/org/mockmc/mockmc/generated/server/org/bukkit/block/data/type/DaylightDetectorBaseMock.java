@@ -16,11 +16,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.AnaloguePowerabl
  */
 public interface DaylightDetectorBaseMock extends DaylightDetector, AnaloguePowerableBaseMock
 {
+	@Override
 	default void setInverted(boolean arg0)
 	{
 		// MockMC: DaylightDetector#setInverted
 	}
 
+	@Override
 	default boolean isInverted()
 	{
 		// MockMC: DaylightDetector#isInverted

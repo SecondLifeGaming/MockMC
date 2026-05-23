@@ -16,7 +16,8 @@ import org.bukkit.entity.Vex;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface VexBaseMock extends Vex, MonsterBaseMock
 {
 	@Override
@@ -30,6 +31,7 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getLifeTicks()
 	{
@@ -37,12 +39,14 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 		return 0;
 	}
 
+	@Override
 	default boolean isCharging()
 	{
 		// MockMC: Vex#isCharging
 		return false;
 	}
 
+	@Override
 	default Mob getSummoner()
 	{
 		// MockMC: Vex#getSummoner
@@ -56,22 +60,26 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 		return null;
 	}
 
+	@Override
 	default void setSummoner(Mob arg0)
 	{
 		// MockMC: Vex#setSummoner
 	}
 
+	@Override
 	default void setLimitedLifetimeTicks(int arg0)
 	{
 		// MockMC: Vex#setLimitedLifetimeTicks
 	}
 
+	@Override
 	default boolean hasLimitedLifetime()
 	{
 		// MockMC: Vex#hasLimitedLifetime
 		return false;
 	}
 
+	@Override
 	default int getLimitedLifetimeTicks()
 	{
 		// MockMC: Vex#getLimitedLifetimeTicks
@@ -82,6 +90,7 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean hasLimitedLife()
 	{
@@ -89,22 +98,26 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default Location getBound()
 	{
 		// MockMC: Vex#getBound
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setCharging(boolean arg0)
 	{
 		// MockMC: Vex#setCharging
 	}
 
+	@Override
 	default void setBound(Location arg0)
 	{
 		// MockMC: Vex#setBound
 	}
 
+	@Override
 	default void setLimitedLifetime(boolean arg0)
 	{
 		// MockMC: Vex#setLimitedLifetime
@@ -121,6 +134,7 @@ public interface VexBaseMock extends Vex, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setLifeTicks(int arg0)
 	{

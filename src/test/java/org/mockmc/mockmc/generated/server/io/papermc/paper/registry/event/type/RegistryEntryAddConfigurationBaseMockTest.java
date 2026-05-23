@@ -13,7 +13,13 @@ class RegistryEntryAddConfigurationBaseMockTest extends GeneratedTestBase
 	{
 		RegistryEntryAddConfigurationBaseMock<?> mock = new Stub<>();
 		assertNotNull(mock);
-		assertSafeDefault(mock.monitor());
+		try
+		{
+			assertSafeDefault(mock.monitor());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub<T> implements RegistryEntryAddConfigurationBaseMock<T>

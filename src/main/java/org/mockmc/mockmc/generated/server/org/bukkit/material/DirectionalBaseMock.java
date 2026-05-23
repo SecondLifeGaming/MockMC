@@ -16,11 +16,13 @@ import org.bukkit.material.Directional;
  */
 public interface DirectionalBaseMock extends Directional
 {
+	@Override
 	default void setFacingDirection(BlockFace arg0)
 	{
 		// MockMC: Directional#setFacingDirection
 	}
 
+	@Override
 	default BlockFace getFacing()
 	{
 		// MockMC: Directional#getFacing

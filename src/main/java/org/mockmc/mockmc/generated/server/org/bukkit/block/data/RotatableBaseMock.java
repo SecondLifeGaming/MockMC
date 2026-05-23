@@ -16,11 +16,13 @@ import org.bukkit.block.data.Rotatable;
  */
 public interface RotatableBaseMock extends Rotatable, BlockDataBaseMock
 {
+	@Override
 	default void setRotation(BlockFace arg0)
 	{
 		// MockMC: Rotatable#setRotation
 	}
 
+	@Override
 	default BlockFace getRotation()
 	{
 		// MockMC: Rotatable#getRotation

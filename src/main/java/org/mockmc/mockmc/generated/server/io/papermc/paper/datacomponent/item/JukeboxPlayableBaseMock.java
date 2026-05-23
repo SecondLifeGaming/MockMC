@@ -16,6 +16,7 @@ import org.bukkit.JukeboxSong;
  */
 public interface JukeboxPlayableBaseMock extends JukeboxPlayable
 {
+	@Override
 	default JukeboxSong jukeboxSong()
 	{
 		// MockMC: JukeboxPlayable#jukeboxSong

@@ -19,13 +19,15 @@ import org.bukkit.inventory.ItemStack;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default String getDescription()
 	{
@@ -37,6 +39,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean isHidden()
 	{
@@ -48,6 +51,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean shouldShowToast()
 	{
@@ -59,6 +63,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default ItemStack getIcon()
 	{
@@ -70,6 +75,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean shouldAnnounceChat()
 	{
@@ -81,6 +87,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default AdvancementDisplayType getType()
 	{
@@ -92,6 +99,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default float getX()
 	{
@@ -103,6 +111,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default String getTitle()
 	{
@@ -114,6 +123,7 @@ public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default float getY()
 	{

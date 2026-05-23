@@ -44,35 +44,41 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		// MockMC: PluginManager#unsubscribeFromPermission
 	}
 
+	@Override
 	default Plugin getPlugin(String arg0)
 	{
 		// MockMC: PluginManager#getPlugin
 		return null;
 	}
 
+	@Override
 	default boolean isTransitiveDependency(PluginMeta arg0, PluginMeta arg1)
 	{
 		// MockMC: PluginManager#isTransitiveDependency
 		return false;
 	}
 
+	@Override
 	default boolean isPluginEnabled(Plugin arg0)
 	{
 		// MockMC: PluginManager#isPluginEnabled
 		return false;
 	}
 
+	@Override
 	default void disablePlugin(Plugin arg0)
 	{
 		// MockMC: PluginManager#disablePlugin
 	}
 
+	@Override
 	default boolean isPluginEnabled(String arg0)
 	{
 		// MockMC: PluginManager#isPluginEnabled
 		return false;
 	}
 
+	@Override
 	default void enablePlugin(Plugin arg0)
 	{
 		// MockMC: PluginManager#enablePlugin
@@ -82,12 +88,14 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void registerInterface(Class<? extends PluginLoader> arg0) throws IllegalArgumentException
 	{
 		// MockMC: PluginManager#registerInterface
 	}
 
+	@Override
 	default Plugin loadPlugin(File arg0)
 			throws InvalidPluginException, InvalidDescriptionException, UnknownDependencyException
 	{
@@ -95,6 +103,7 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		return null;
 	}
 
+	@Override
 	default boolean useTimings()
 	{
 		// MockMC: PluginManager#useTimings
@@ -113,6 +122,7 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		// MockMC: PluginManager#removePermission
 	}
 
+	@Override
 	default void clearPlugins()
 	{
 		// MockMC: PluginManager#clearPlugins
@@ -125,6 +135,7 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void callEvent(Event arg0) throws IllegalStateException
 	{
 		// MockMC: PluginManager#callEvent
@@ -143,6 +154,7 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		return null;
 	}
 
+	@Override
 	default void disablePlugins()
 	{
 		// MockMC: PluginManager#disablePlugins
@@ -154,11 +166,13 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		// MockMC: PluginManager#subscribeToDefaultPerms
 	}
 
+	@Override
 	default void registerEvents(Listener arg0, Plugin arg1)
 	{
 		// MockMC: PluginManager#registerEvents
 	}
 
+	@Override
 	default Plugin[] getPlugins()
 	{
 		// MockMC: PluginManager#getPlugins
@@ -172,30 +186,35 @@ public interface PluginManagerBaseMock extends PluginManager, PermissionManagerB
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void registerEvent(Class<? extends Event> arg0, Listener arg1, EventPriority arg2, EventExecutor arg3,
 			Plugin arg4, boolean arg5)
 	{
 		// MockMC: PluginManager#registerEvent
 	}
 
+	@Override
 	default void registerEvent(Class<? extends Event> arg0, Listener arg1, EventPriority arg2, EventExecutor arg3,
 			Plugin arg4)
 	{
 		// MockMC: PluginManager#registerEvent
 	}
 
+	@Override
 	default Plugin[] loadPlugins(File[] arg0)
 	{
 		// MockMC: PluginManager#loadPlugins
 		return new Plugin[0];
 	}
 
+	@Override
 	default Plugin[] loadPlugins(File arg0)
 	{
 		// MockMC: PluginManager#loadPlugins
 		return new Plugin[0];
 	}
 
+	@Override
 	default void overridePermissionManager(Plugin arg0, PermissionManager arg1)
 	{
 		// MockMC: PluginManager#overridePermissionManager

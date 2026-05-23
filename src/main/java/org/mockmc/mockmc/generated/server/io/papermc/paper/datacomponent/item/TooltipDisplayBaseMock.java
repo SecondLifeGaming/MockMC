@@ -17,12 +17,14 @@ import java.util.Set;
  */
 public interface TooltipDisplayBaseMock extends TooltipDisplay
 {
+	@Override
 	default Set<DataComponentType> hiddenComponents()
 	{
 		// MockMC: TooltipDisplay#hiddenComponents
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hideTooltip()
 	{
 		// MockMC: TooltipDisplay#hideTooltip

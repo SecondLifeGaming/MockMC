@@ -18,54 +18,63 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface AdvancementDisplayBaseMock extends AdvancementDisplay
 {
+	@Override
 	default Component displayName()
 	{
 		// MockMC: AdvancementDisplay#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default boolean doesAnnounceToChat()
 	{
 		// MockMC: AdvancementDisplay#doesAnnounceToChat
 		return false;
 	}
 
+	@Override
 	default NamespacedKey backgroundPath()
 	{
 		// MockMC: AdvancementDisplay#backgroundPath
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default AdvancementDisplay.Frame frame()
 	{
 		// MockMC: AdvancementDisplay#frame
 		return null;
 	}
 
+	@Override
 	default boolean isHidden()
 	{
 		// MockMC: AdvancementDisplay#isHidden
 		return false;
 	}
 
+	@Override
 	default boolean doesShowToast()
 	{
 		// MockMC: AdvancementDisplay#doesShowToast
 		return false;
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: AdvancementDisplay#title
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Component description()
 	{
 		// MockMC: AdvancementDisplay#description
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default ItemStack icon()
 	{
 		// MockMC: AdvancementDisplay#icon

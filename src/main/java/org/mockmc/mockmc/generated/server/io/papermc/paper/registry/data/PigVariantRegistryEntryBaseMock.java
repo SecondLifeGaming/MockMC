@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface PigVariantRegistryEntryBaseMock extends PigVariantRegistryEntry
 {
+	@Override
 	default PigVariantRegistryEntry.Model model()
 	{
 		// MockMC: PigVariantRegistryEntry#model
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset clientTextureAsset()
 	{
 		// MockMC: PigVariantRegistryEntry#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset babyClientTextureAsset()
 	{
 		// MockMC: PigVariantRegistryEntry#babyClientTextureAsset

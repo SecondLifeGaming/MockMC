@@ -22,49 +22,58 @@ import org.bukkit.projectiles.ProjectileSource;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AreaEffectCloudBaseMock extends AreaEffectCloud, EntityBaseMock
 {
+	@Override
 	default int getDuration()
 	{
 		// MockMC: AreaEffectCloud#getDuration
 		return 0;
 	}
 
+	@Override
 	default void setWaitTime(int arg0)
 	{
 		// MockMC: AreaEffectCloud#setWaitTime
 	}
 
+	@Override
 	default float getRadiusPerTick()
 	{
 		// MockMC: AreaEffectCloud#getRadiusPerTick
 		return 0.0f;
 	}
 
+	@Override
 	default boolean removeCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: AreaEffectCloud#removeCustomEffect
 		return false;
 	}
 
+	@Override
 	default void setRadiusPerTick(float arg0)
 	{
 		// MockMC: AreaEffectCloud#setRadiusPerTick
 	}
 
+	@Override
 	default float getRadiusOnUse()
 	{
 		// MockMC: AreaEffectCloud#getRadiusOnUse
 		return 0.0f;
 	}
 
+	@Override
 	default int getReapplicationDelay()
 	{
 		// MockMC: AreaEffectCloud#getReapplicationDelay
 		return 0;
 	}
 
+	@Override
 	default boolean hasCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: AreaEffectCloud#hasCustomEffect
@@ -75,6 +84,7 @@ public interface AreaEffectCloudBaseMock extends AreaEffectCloud, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default PotionData getBasePotionData()
@@ -83,11 +93,13 @@ public interface AreaEffectCloudBaseMock extends AreaEffectCloud, EntityBaseMock
 		return null;
 	}
 
+	@Override
 	default void setDuration(int arg0)
 	{
 		// MockMC: AreaEffectCloud#setDuration
 	}
 
+	@Override
 	default void setDurationOnUse(int arg0)
 	{
 		// MockMC: AreaEffectCloud#setDurationOnUse
@@ -97,6 +109,7 @@ public interface AreaEffectCloudBaseMock extends AreaEffectCloud, EntityBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.20.6", forRemoval = true)
 	default void setBasePotionData(PotionData arg0)
@@ -104,116 +117,137 @@ public interface AreaEffectCloudBaseMock extends AreaEffectCloud, EntityBaseMock
 		// MockMC: AreaEffectCloud#setBasePotionData
 	}
 
+	@Override
 	default void setSource(ProjectileSource arg0)
 	{
 		// MockMC: AreaEffectCloud#setSource
 	}
 
+	@Override
 	default void setOwnerUniqueId(UUID arg0)
 	{
 		// MockMC: AreaEffectCloud#setOwnerUniqueId
 	}
 
+	@Override
 	default void setReapplicationDelay(int arg0)
 	{
 		// MockMC: AreaEffectCloud#setReapplicationDelay
 	}
 
+	@Override
 	default Particle getParticle()
 	{
 		// MockMC: AreaEffectCloud#getParticle
 		return null;
 	}
 
+	@Override
 	default void setRadius(float arg0)
 	{
 		// MockMC: AreaEffectCloud#setRadius
 	}
 
+	@Override
 	default boolean addCustomEffect(PotionEffect arg0, boolean arg1)
 	{
 		// MockMC: AreaEffectCloud#addCustomEffect
 		return false;
 	}
 
+	@Override
 	default void setColor(Color arg0)
 	{
 		// MockMC: AreaEffectCloud#setColor
 	}
 
+	@Override
 	default void setRadiusOnUse(float arg0)
 	{
 		// MockMC: AreaEffectCloud#setRadiusOnUse
 	}
 
+	@Override
 	default ProjectileSource getSource()
 	{
 		// MockMC: AreaEffectCloud#getSource
 		return null;
 	}
 
+	@Override
 	default PotionType getBasePotionType()
 	{
 		// MockMC: AreaEffectCloud#getBasePotionType
 		return null;
 	}
 
+	@Override
 	default void setBasePotionType(PotionType arg0)
 	{
 		// MockMC: AreaEffectCloud#setBasePotionType
 	}
 
+	@Override
 	default void clearCustomEffects()
 	{
 		// MockMC: AreaEffectCloud#clearCustomEffects
 	}
 
+	@Override
 	default UUID getOwnerUniqueId()
 	{
 		// MockMC: AreaEffectCloud#getOwnerUniqueId
 		return null;
 	}
 
+	@Override
 	default int getWaitTime()
 	{
 		// MockMC: AreaEffectCloud#getWaitTime
 		return 0;
 	}
 
+	@Override
 	default int getDurationOnUse()
 	{
 		// MockMC: AreaEffectCloud#getDurationOnUse
 		return 0;
 	}
 
+	@Override
 	default void setParticle(Particle arg0)
 	{
 		// MockMC: AreaEffectCloud#setParticle
 	}
 
+	@Override
 	default <T> void setParticle(Particle arg0, T arg1)
 	{
 		// MockMC: AreaEffectCloud#setParticle
 	}
 
+	@Override
 	default Color getColor()
 	{
 		// MockMC: AreaEffectCloud#getColor
 		return null;
 	}
 
+	@Override
 	default boolean hasCustomEffects()
 	{
 		// MockMC: AreaEffectCloud#hasCustomEffects
 		return false;
 	}
 
+	@Override
 	default float getRadius()
 	{
 		// MockMC: AreaEffectCloud#getRadius
 		return 0.0f;
 	}
 
+	@Override
 	default List<PotionEffect> getCustomEffects()
 	{
 		// MockMC: AreaEffectCloud#getCustomEffects

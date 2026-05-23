@@ -16,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface LockableBaseMock extends Lockable
 {
+	@Override
 	default boolean isLocked()
 	{
 		// MockMC: Lockable#isLocked
@@ -26,6 +27,7 @@ public interface LockableBaseMock extends Lockable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default void setLock(String arg0)
 	{
@@ -36,6 +38,7 @@ public interface LockableBaseMock extends Lockable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default String getLock()
 	{
@@ -43,6 +46,7 @@ public interface LockableBaseMock extends Lockable
 		return "";
 	}
 
+	@Override
 	default void setLockItem(ItemStack arg0)
 	{
 		// MockMC: Lockable#setLockItem

@@ -16,12 +16,14 @@ import org.bukkit.entity.Player;
  */
 public interface PlayerGameConnectionBaseMock extends PlayerGameConnection, PlayerCommonConnectionBaseMock
 {
+	@Override
 	default Player getPlayer()
 	{
 		// MockMC: PlayerGameConnection#getPlayer
 		return null;
 	}
 
+	@Override
 	default void reenterConfiguration()
 	{
 		// MockMC: PlayerGameConnection#reenterConfiguration

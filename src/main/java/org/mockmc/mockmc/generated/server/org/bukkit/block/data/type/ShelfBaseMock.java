@@ -20,9 +20,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
 public interface ShelfBaseMock
 		extends
 			Shelf,
-			WaterloggedBaseMock,
 			SideChainingBaseMock,
-			PowerableBaseMock,
-			DirectionalBaseMock
+			DirectionalBaseMock,
+			WaterloggedBaseMock,
+			PowerableBaseMock
 {
 }

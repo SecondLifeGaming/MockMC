@@ -20,17 +20,20 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setRepairCostAmount(int arg0)
 	{
 		// MockMC: AnvilInventory#setRepairCostAmount
 	}
 
+	@Override
 	default void setFirstItem(ItemStack arg0)
 	{
 		// MockMC: AnvilInventory#setFirstItem
 	}
 
+	@Override
 	default void setSecondItem(ItemStack arg0)
 	{
 		// MockMC: AnvilInventory#setSecondItem
@@ -40,6 +43,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default String getRenameText()
 	{
@@ -47,17 +51,20 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 		return "";
 	}
 
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: AnvilInventory#setResult
 	}
 
+	@Override
 	default ItemStack getSecondItem()
 	{
 		// MockMC: AnvilInventory#getSecondItem
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack getFirstItem()
 	{
 		// MockMC: AnvilInventory#getFirstItem
@@ -68,6 +75,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int getRepairCost()
 	{
@@ -75,6 +83,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 		return 0;
 	}
 
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: AnvilInventory#getResult
@@ -85,6 +94,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int getMaximumRepairCost()
 	{
@@ -96,6 +106,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default int getRepairCostAmount()
 	{
@@ -107,6 +118,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setMaximumRepairCost(int arg0)
 	{
@@ -117,6 +129,7 @@ public interface AnvilInventoryBaseMock extends AnvilInventory, InventoryBaseMoc
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	default void setRepairCost(int arg0)
 	{

@@ -16,36 +16,42 @@ import io.papermc.paper.registry.data.client.ClientTextureAsset;
  */
 public interface WolfVariantRegistryEntryBaseMock extends WolfVariantRegistryEntry
 {
+	@Override
 	default ClientTextureAsset babyWildClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#babyWildClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset babyTameClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#babyTameClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset tameClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#tameClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset angryClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#angryClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset babyAngryClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#babyAngryClientTextureAsset
 		return null;
 	}
 
+	@Override
 	default ClientTextureAsset wildClientTextureAsset()
 	{
 		// MockMC: WolfVariantRegistryEntry#wildClientTextureAsset

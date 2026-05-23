@@ -17,12 +17,14 @@ import io.papermc.paper.plugin.loader.library.ClassPathLibrary;
  */
 public interface PluginClasspathBuilderBaseMock extends PluginClasspathBuilder
 {
+	@Override
 	default PluginProviderContext getContext()
 	{
 		// MockMC: PluginClasspathBuilder#getContext
 		return null;
 	}
 
+	@Override
 	default PluginClasspathBuilder addLibrary(ClassPathLibrary arg0)
 	{
 		// MockMC: PluginClasspathBuilder#addLibrary

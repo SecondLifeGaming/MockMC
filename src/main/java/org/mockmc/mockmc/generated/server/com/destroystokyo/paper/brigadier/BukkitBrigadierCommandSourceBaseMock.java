@@ -21,13 +21,15 @@ import org.bukkit.entity.Entity;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface BukkitBrigadierCommandSourceBaseMock extends BukkitBrigadierCommandSource
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default Location getBukkitLocation()
 	{
@@ -39,6 +41,7 @@ public interface BukkitBrigadierCommandSourceBaseMock extends BukkitBrigadierCom
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default Entity getBukkitEntity()
 	{
@@ -50,6 +53,7 @@ public interface BukkitBrigadierCommandSourceBaseMock extends BukkitBrigadierCom
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default CommandSender getBukkitSender()
 	{
@@ -61,6 +65,7 @@ public interface BukkitBrigadierCommandSourceBaseMock extends BukkitBrigadierCom
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default World getBukkitWorld()
 	{

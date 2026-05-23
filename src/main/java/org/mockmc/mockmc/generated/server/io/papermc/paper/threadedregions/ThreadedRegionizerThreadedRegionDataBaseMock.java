@@ -19,6 +19,7 @@ public interface ThreadedRegionizerThreadedRegionDataBaseMock<R extends Threaded
 		extends
 			ThreadedRegionizer.ThreadedRegionData<R, S>
 {
+	@Override
 	default void split(ThreadedRegionizer<R, S> arg0,
 			Long2ReferenceOpenHashMap<ThreadedRegionizer.ThreadedRegion<R, S>> arg1,
 			ReferenceOpenHashSet<ThreadedRegionizer.ThreadedRegion<R, S>> arg2)
@@ -26,6 +27,7 @@ public interface ThreadedRegionizerThreadedRegionDataBaseMock<R extends Threaded
 		// MockMC: ThreadedRegionData#split
 	}
 
+	@Override
 	default void mergeInto(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: ThreadedRegionData#mergeInto

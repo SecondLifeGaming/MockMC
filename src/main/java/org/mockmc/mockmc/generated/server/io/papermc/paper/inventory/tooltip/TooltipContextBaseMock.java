@@ -15,24 +15,28 @@ import io.papermc.paper.inventory.tooltip.TooltipContext;
  */
 public interface TooltipContextBaseMock extends TooltipContext
 {
+	@Override
 	default TooltipContext asAdvanced()
 	{
 		// MockMC: TooltipContext#asAdvanced
 		return null;
 	}
 
+	@Override
 	default boolean isAdvanced()
 	{
 		// MockMC: TooltipContext#isAdvanced
 		return false;
 	}
 
+	@Override
 	default boolean isCreative()
 	{
 		// MockMC: TooltipContext#isCreative
 		return false;
 	}
 
+	@Override
 	default TooltipContext asCreative()
 	{
 		// MockMC: TooltipContext#asCreative

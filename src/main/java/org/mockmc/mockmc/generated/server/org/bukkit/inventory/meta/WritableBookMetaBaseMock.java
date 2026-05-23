@@ -16,11 +16,13 @@ import org.bukkit.inventory.meta.WritableBookMeta;
  */
 public interface WritableBookMetaBaseMock extends WritableBookMeta, ItemMetaBaseMock
 {
+	@Override
 	default void setPage(int arg0, String arg1)
 	{
 		// MockMC: WritableBookMeta#setPage
 	}
 
+	@Override
 	default List<String> getPages()
 	{
 		// MockMC: WritableBookMeta#getPages
@@ -34,34 +36,40 @@ public interface WritableBookMetaBaseMock extends WritableBookMeta, ItemMetaBase
 		return null;
 	}
 
+	@Override
 	default void addPage(String... arg0)
 	{
 		// MockMC: WritableBookMeta#addPage
 	}
 
+	@Override
 	default String getPage(int arg0)
 	{
 		// MockMC: WritableBookMeta#getPage
 		return "";
 	}
 
+	@Override
 	default int getPageCount()
 	{
 		// MockMC: WritableBookMeta#getPageCount
 		return 0;
 	}
 
+	@Override
 	default boolean hasPages()
 	{
 		// MockMC: WritableBookMeta#hasPages
 		return false;
 	}
 
+	@Override
 	default void setPages(String... arg0)
 	{
 		// MockMC: WritableBookMeta#setPages
 	}
 
+	@Override
 	default void setPages(List<String> arg0)
 	{
 		// MockMC: WritableBookMeta#setPages

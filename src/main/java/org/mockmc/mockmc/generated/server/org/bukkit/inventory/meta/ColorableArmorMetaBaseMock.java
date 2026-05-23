@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ColorableArmorMeta;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface ColorableArmorMetaBaseMock extends ColorableArmorMeta, ArmorMetaBaseMock, LeatherArmorMetaBaseMock
+public interface ColorableArmorMetaBaseMock extends ColorableArmorMeta, LeatherArmorMetaBaseMock, ArmorMetaBaseMock
 {
 	@Override
 	default ColorableArmorMeta clone()

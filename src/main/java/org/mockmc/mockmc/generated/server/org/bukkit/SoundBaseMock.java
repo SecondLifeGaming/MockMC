@@ -16,7 +16,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface SoundBaseMock extends Sound, OldEnumBaseMock<Sound>, KeyedBaseMock
 {
 	/**

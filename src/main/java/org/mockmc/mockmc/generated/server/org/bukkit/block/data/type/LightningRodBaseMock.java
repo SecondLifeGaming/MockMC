@@ -16,6 +16,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface LightningRodBaseMock extends LightningRod, WaterloggedBaseMock, PowerableBaseMock, DirectionalBaseMock
+public interface LightningRodBaseMock extends LightningRod, DirectionalBaseMock, WaterloggedBaseMock, PowerableBaseMock
 {
 }

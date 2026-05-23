@@ -17,23 +17,27 @@ import org.bukkit.block.data.MultipleFacing;
  */
 public interface MultipleFacingBaseMock extends MultipleFacing, BlockDataBaseMock
 {
+	@Override
 	default void setFace(BlockFace arg0, boolean arg1)
 	{
 		// MockMC: MultipleFacing#setFace
 	}
 
+	@Override
 	default Set<BlockFace> getAllowedFaces()
 	{
 		// MockMC: MultipleFacing#getAllowedFaces
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default boolean hasFace(BlockFace arg0)
 	{
 		// MockMC: MultipleFacing#hasFace
 		return false;
 	}
 
+	@Override
 	default Set<BlockFace> getFaces()
 	{
 		// MockMC: MultipleFacing#getFaces

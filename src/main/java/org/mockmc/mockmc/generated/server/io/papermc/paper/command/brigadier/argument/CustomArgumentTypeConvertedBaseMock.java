@@ -27,6 +27,7 @@ public interface CustomArgumentTypeConvertedBaseMock<T, N>
 		return null;
 	}
 
+	@Override
 	default <S> T convert(N arg0, S arg1) throws CommandSyntaxException
 	{
 		// MockMC: Converted#convert
@@ -40,6 +41,7 @@ public interface CustomArgumentTypeConvertedBaseMock<T, N>
 		return null;
 	}
 
+	@Override
 	default T convert(N arg0) throws CommandSyntaxException
 	{
 		// MockMC: Converted#convert

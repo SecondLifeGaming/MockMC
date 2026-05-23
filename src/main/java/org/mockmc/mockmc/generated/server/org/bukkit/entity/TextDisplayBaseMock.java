@@ -15,32 +15,38 @@ import org.bukkit.entity.TextDisplay;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TextDisplayBaseMock extends TextDisplay, DisplayBaseMock
 {
+	@Override
 	default int getLineWidth()
 	{
 		// MockMC: TextDisplay#getLineWidth
 		return 0;
 	}
 
+	@Override
 	default byte getTextOpacity()
 	{
 		// MockMC: TextDisplay#getTextOpacity
 		return 0;
 	}
 
+	@Override
 	default Component text()
 	{
 		// MockMC: TextDisplay#text
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void text(Component arg0)
 	{
 		// MockMC: TextDisplay#text
 	}
 
+	@Override
 	default void setShadowed(boolean arg0)
 	{
 		// MockMC: TextDisplay#setShadowed
@@ -50,44 +56,52 @@ public interface TextDisplayBaseMock extends TextDisplay, DisplayBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setText(String arg0)
 	{
 		// MockMC: TextDisplay#setText
 	}
 
+	@Override
 	default void setTextOpacity(byte arg0)
 	{
 		// MockMC: TextDisplay#setTextOpacity
 	}
 
+	@Override
 	default void setAlignment(TextDisplay.TextAlignment arg0)
 	{
 		// MockMC: TextDisplay#setAlignment
 	}
 
+	@Override
 	default boolean isSeeThrough()
 	{
 		// MockMC: TextDisplay#isSeeThrough
 		return false;
 	}
 
+	@Override
 	default TextDisplay.TextAlignment getAlignment()
 	{
 		// MockMC: TextDisplay#getAlignment
 		return null;
 	}
 
+	@Override
 	default void setBackgroundColor(Color arg0)
 	{
 		// MockMC: TextDisplay#setBackgroundColor
 	}
 
+	@Override
 	default void setSeeThrough(boolean arg0)
 	{
 		// MockMC: TextDisplay#setSeeThrough
 	}
 
+	@Override
 	default Color getBackgroundColor()
 	{
 		// MockMC: TextDisplay#getBackgroundColor
@@ -98,6 +112,7 @@ public interface TextDisplayBaseMock extends TextDisplay, DisplayBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getText()
 	{
@@ -105,22 +120,26 @@ public interface TextDisplayBaseMock extends TextDisplay, DisplayBaseMock
 		return "";
 	}
 
+	@Override
 	default boolean isShadowed()
 	{
 		// MockMC: TextDisplay#isShadowed
 		return false;
 	}
 
+	@Override
 	default void setDefaultBackground(boolean arg0)
 	{
 		// MockMC: TextDisplay#setDefaultBackground
 	}
 
+	@Override
 	default void setLineWidth(int arg0)
 	{
 		// MockMC: TextDisplay#setLineWidth
 	}
 
+	@Override
 	default boolean isDefaultBackground()
 	{
 		// MockMC: TextDisplay#isDefaultBackground

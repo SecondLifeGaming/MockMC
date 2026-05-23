@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
  */
 public interface SuspiciousStewMetaBaseMock extends SuspiciousStewMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean removeCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: SuspiciousStewMeta#removeCustomEffect
@@ -32,30 +33,35 @@ public interface SuspiciousStewMetaBaseMock extends SuspiciousStewMeta, ItemMeta
 		return null;
 	}
 
+	@Override
 	default boolean hasCustomEffect(PotionEffectType arg0)
 	{
 		// MockMC: SuspiciousStewMeta#hasCustomEffect
 		return false;
 	}
 
+	@Override
 	default boolean hasCustomEffects()
 	{
 		// MockMC: SuspiciousStewMeta#hasCustomEffects
 		return false;
 	}
 
+	@Override
 	default List<PotionEffect> getCustomEffects()
 	{
 		// MockMC: SuspiciousStewMeta#getCustomEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default boolean clearCustomEffects()
 	{
 		// MockMC: SuspiciousStewMeta#clearCustomEffects
 		return false;
 	}
 
+	@Override
 	default boolean addCustomEffect(SuspiciousEffectEntry arg0, boolean arg1)
 	{
 		// MockMC: SuspiciousStewMeta#addCustomEffect
@@ -66,6 +72,7 @@ public interface SuspiciousStewMetaBaseMock extends SuspiciousStewMeta, ItemMeta
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean addCustomEffect(PotionEffect arg0, boolean arg1)
 	{

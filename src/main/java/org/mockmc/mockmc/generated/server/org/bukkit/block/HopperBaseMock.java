@@ -16,36 +16,29 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface HopperBaseMock extends Hopper, LootableBaseMock, ContainerBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: Hopper#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: Hopper#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: Hopper#canPlayerLoot
 		return false;
-	}
-
-	default long getNextRefill()
-	{
-		// MockMC: Hopper#getNextRefill
-		return 0L;
-	}
-
-	default void setTransferCooldown(int arg0)
-	{
-		// MockMC: Hopper#setTransferCooldown
 	}
 
 	@Override
@@ -55,42 +48,62 @@ public interface HopperBaseMock extends Hopper, LootableBaseMock, ContainerBaseM
 		return null;
 	}
 
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: Hopper#getNextRefill
+		return 0L;
+	}
+
+	@Override
+	default void setTransferCooldown(int arg0)
+	{
+		// MockMC: Hopper#setTransferCooldown
+	}
+
+	@Override
 	default int getTransferCooldown()
 	{
 		// MockMC: Hopper#getTransferCooldown
 		return 0;
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: Hopper#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: Hopper#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: Hopper#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Hopper#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Hopper#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Hopper#setNextRefill

@@ -14,9 +14,11 @@ import org.bukkit.entity.Boss;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BossBaseMock extends Boss, EntityBaseMock
 {
+	@Override
 	default BossBar getBossBar()
 	{
 		// MockMC: Boss#getBossBar

@@ -16,19 +16,22 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.LeashableBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setMaxSpeed(double arg0)
 	{
 		// MockMC: Boat#setMaxSpeed
 	}
 
+	@Override
 	default Material getBoatMaterial()
 	{
 		// MockMC: Boat#getBoatMaterial
@@ -39,6 +42,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default double getMaxSpeed()
 	{
@@ -50,6 +54,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setUnoccupiedDeceleration(double arg0)
 	{
@@ -60,6 +65,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default void setBoatType(Boat.Type arg0)
 	{
@@ -70,6 +76,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19", forRemoval = true)
 	default TreeSpecies getWoodType()
@@ -82,6 +89,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default double getOccupiedDeceleration()
 	{
@@ -93,6 +101,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default double getUnoccupiedDeceleration()
 	{
@@ -104,6 +113,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("removal")
 	@Deprecated(since = "1.19", forRemoval = true)
 	default void setWoodType(TreeSpecies arg0)
@@ -111,6 +121,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 		// MockMC: Boat#setWoodType
 	}
 
+	@Override
 	default Boat.Status getStatus()
 	{
 		// MockMC: Boat#getStatus
@@ -121,6 +132,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setWorkOnLand(boolean arg0)
 	{
@@ -131,6 +143,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void setOccupiedDeceleration(double arg0)
 	{
@@ -141,6 +154,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default boolean getWorkOnLand()
 	{
@@ -152,6 +166,7 @@ public interface BoatBaseMock extends Boat, LeashableBaseMock, VehicleBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.2")
 	default Boat.Type getBoatType()
 	{

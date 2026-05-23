@@ -15,17 +15,20 @@ import org.bukkit.block.data.Brushable;
  */
 public interface BrushableBaseMock extends Brushable, BlockDataBaseMock
 {
+	@Override
 	default int getMaximumDusted()
 	{
 		// MockMC: Brushable#getMaximumDusted
 		return 0;
 	}
 
+	@Override
 	default void setDusted(int arg0)
 	{
 		// MockMC: Brushable#setDusted
 	}
 
+	@Override
 	default int getDusted()
 	{
 		// MockMC: Brushable#getDusted

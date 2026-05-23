@@ -20,6 +20,7 @@ public interface ConsumeEffectRemoveStatusEffectsBaseMock
 			io.papermc.paper.datacomponent.item.consumable.ConsumeEffect.RemoveStatusEffects,
 			ConsumeEffectBaseMock
 {
+	@Override
 	default RegistryKeySet<PotionEffectType> removeEffects()
 	{
 		// MockMC: RemoveStatusEffects#removeEffects

@@ -16,18 +16,21 @@ import io.papermc.paper.datacomponent.DataComponentView;
  */
 public interface DataComponentViewBaseMock extends DataComponentView
 {
+	@Override
 	default boolean hasData(DataComponentType arg0)
 	{
 		// MockMC: DataComponentView#hasData
 		return false;
 	}
 
+	@Override
 	default <T> T getDataOrDefault(DataComponentType.Valued<? extends T> arg0, T arg1)
 	{
 		// MockMC: DataComponentView#getDataOrDefault
 		return null;
 	}
 
+	@Override
 	default <T> T getData(DataComponentType.Valued<T> arg0)
 	{
 		// MockMC: DataComponentView#getData

@@ -21,12 +21,14 @@ public interface DeathProtectionBuilderBaseMock
 			DeathProtection.Builder,
 			DataComponentBuilderBaseMock<DeathProtection>
 {
+	@Override
 	default DeathProtection.Builder addEffects(List<ConsumeEffect> arg0)
 	{
 		// MockMC: Builder#addEffects
 		return null;
 	}
 
+	@Override
 	default DeathProtection.Builder addEffect(ConsumeEffect arg0)
 	{
 		// MockMC: Builder#addEffect

@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface JukeboxBaseMock extends Jukebox, BlockDataBaseMock
 {
+	@Override
 	default boolean hasRecord()
 	{
 		// MockMC: Jukebox#hasRecord
 		return false;
 	}
 
+	@Override
 	default void setHasRecord(boolean arg0)
 	{
 		// MockMC: Jukebox#setHasRecord

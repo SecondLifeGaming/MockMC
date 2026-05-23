@@ -15,6 +15,7 @@ import com.velocitypowered.api.event.ResultedEvent;
  */
 public interface ResultedEventResultBaseMock extends ResultedEvent.Result
 {
+	@Override
 	default boolean isAllowed()
 	{
 		// MockMC: Result#isAllowed

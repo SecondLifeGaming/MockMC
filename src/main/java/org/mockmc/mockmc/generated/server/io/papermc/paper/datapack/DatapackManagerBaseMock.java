@@ -17,23 +17,27 @@ import java.util.Collection;
  */
 public interface DatapackManagerBaseMock extends DatapackManager
 {
+	@Override
 	default void refreshPacks()
 	{
 		// MockMC: DatapackManager#refreshPacks
 	}
 
+	@Override
 	default Datapack getPack(String arg0)
 	{
 		// MockMC: DatapackManager#getPack
 		return null;
 	}
 
+	@Override
 	default Collection<Datapack> getEnabledPacks()
 	{
 		// MockMC: DatapackManager#getEnabledPacks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Collection<Datapack> getPacks()
 	{
 		// MockMC: DatapackManager#getPacks

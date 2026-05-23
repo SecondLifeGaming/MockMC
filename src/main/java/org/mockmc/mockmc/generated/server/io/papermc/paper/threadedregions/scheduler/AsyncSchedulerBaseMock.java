@@ -19,24 +19,28 @@ import org.bukkit.plugin.Plugin;
  */
 public interface AsyncSchedulerBaseMock extends AsyncScheduler
 {
+	@Override
 	default ScheduledTask runNow(Plugin arg0, Consumer<ScheduledTask> arg1)
 	{
 		// MockMC: AsyncScheduler#runNow
 		return null;
 	}
 
+	@Override
 	default ScheduledTask runAtFixedRate(Plugin arg0, Consumer<ScheduledTask> arg1, long arg2, long arg3, TimeUnit arg4)
 	{
 		// MockMC: AsyncScheduler#runAtFixedRate
 		return null;
 	}
 
+	@Override
 	default ScheduledTask runDelayed(Plugin arg0, Consumer<ScheduledTask> arg1, long arg2, TimeUnit arg3)
 	{
 		// MockMC: AsyncScheduler#runDelayed
 		return null;
 	}
 
+	@Override
 	default void cancelTasks(Plugin arg0)
 	{
 		// MockMC: AsyncScheduler#cancelTasks

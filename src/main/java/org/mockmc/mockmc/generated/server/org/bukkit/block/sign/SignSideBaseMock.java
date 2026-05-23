@@ -18,6 +18,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.ColorableBaseMock;
  */
 public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 {
+	@Override
 	default boolean isGlowingText()
 	{
 		// MockMC: SignSide#isGlowingText
@@ -28,6 +29,7 @@ public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setLine(int arg0, String arg1) throws IndexOutOfBoundsException
 	{
@@ -38,6 +40,7 @@ public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String[] getLines()
 	{
@@ -45,6 +48,7 @@ public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 		return new String[0];
 	}
 
+	@Override
 	default void setGlowingText(boolean arg0)
 	{
 		// MockMC: SignSide#setGlowingText
@@ -54,6 +58,7 @@ public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getLine(int arg0) throws IndexOutOfBoundsException
 	{
@@ -61,18 +66,21 @@ public interface SignSideBaseMock extends SignSide, ColorableBaseMock
 		return "";
 	}
 
+	@Override
 	default List<Component> lines()
 	{
 		// MockMC: SignSide#lines
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Component line(int arg0) throws IndexOutOfBoundsException
 	{
 		// MockMC: SignSide#line
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void line(int arg0, Component arg1) throws IndexOutOfBoundsException
 	{
 		// MockMC: SignSide#line

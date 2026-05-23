@@ -16,6 +16,7 @@ import org.bukkit.entity.EntitySnapshot;
  */
 public interface EntityFactoryBaseMock extends EntityFactory
 {
+	@Override
 	default EntitySnapshot createEntitySnapshot(String arg0) throws IllegalArgumentException
 	{
 		// MockMC: EntityFactory#createEntitySnapshot

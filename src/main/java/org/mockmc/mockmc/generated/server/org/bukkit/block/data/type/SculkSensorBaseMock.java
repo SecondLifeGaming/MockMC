@@ -15,12 +15,13 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface SculkSensorBaseMock extends SculkSensor, WaterloggedBaseMock, AnaloguePowerableBaseMock
+public interface SculkSensorBaseMock extends SculkSensor, AnaloguePowerableBaseMock, WaterloggedBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setPhase(SculkSensor.Phase arg0)
 	{
@@ -31,6 +32,7 @@ public interface SculkSensorBaseMock extends SculkSensor, WaterloggedBaseMock, A
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default SculkSensor.Phase getPhase()
 	{
@@ -38,12 +40,14 @@ public interface SculkSensorBaseMock extends SculkSensor, WaterloggedBaseMock, A
 		return null;
 	}
 
+	@Override
 	default SculkSensor.Phase getSculkSensorPhase()
 	{
 		// MockMC: SculkSensor#getSculkSensorPhase
 		return null;
 	}
 
+	@Override
 	default void setSculkSensorPhase(SculkSensor.Phase arg0)
 	{
 		// MockMC: SculkSensor#setSculkSensorPhase

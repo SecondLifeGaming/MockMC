@@ -17,7 +17,8 @@ import org.bukkit.entity.TippedArrow;
  *             modern build cycles.
  */
 @Deprecated(since = "1.14")
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface TippedArrowBaseMock extends TippedArrow, ArrowBaseMock
 {
 }

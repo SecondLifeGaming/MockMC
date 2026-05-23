@@ -16,26 +16,31 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.EntityBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface BucketableBaseMock extends Bucketable, EntityBaseMock
 {
+	@Override
 	default Sound getPickupSound()
 	{
 		// MockMC: Bucketable#getPickupSound
 		return null;
 	}
 
+	@Override
 	default void setFromBucket(boolean arg0)
 	{
 		// MockMC: Bucketable#setFromBucket
 	}
 
+	@Override
 	default boolean isFromBucket()
 	{
 		// MockMC: Bucketable#isFromBucket
 		return false;
 	}
 
+	@Override
 	default ItemStack getBaseBucketItem()
 	{
 		// MockMC: Bucketable#getBaseBucketItem

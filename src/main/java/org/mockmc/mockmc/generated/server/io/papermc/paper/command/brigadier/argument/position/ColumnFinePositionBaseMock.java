@@ -16,18 +16,21 @@ import io.papermc.paper.math.FinePosition;
  */
 public interface ColumnFinePositionBaseMock extends ColumnFinePosition
 {
+	@Override
 	default FinePosition toPosition(double arg0)
 	{
 		// MockMC: ColumnFinePosition#toPosition
 		return null;
 	}
 
+	@Override
 	default double x()
 	{
 		// MockMC: ColumnFinePosition#x
 		return 0.0d;
 	}
 
+	@Override
 	default double z()
 	{
 		// MockMC: ColumnFinePosition#z

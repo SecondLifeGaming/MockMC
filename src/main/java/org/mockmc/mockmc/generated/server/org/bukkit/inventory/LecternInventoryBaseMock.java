@@ -24,12 +24,14 @@ public interface LecternInventoryBaseMock extends LecternInventory, InventoryBas
 		return null;
 	}
 
+	@Override
 	default ItemStack getBook()
 	{
 		// MockMC: LecternInventory#getBook
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default void setBook(ItemStack arg0)
 	{
 		// MockMC: LecternInventory#setBook

@@ -22,12 +22,14 @@ public interface SuspiciousStewEffectsBuilderBaseMock
 			SuspiciousStewEffects.Builder,
 			DataComponentBuilderBaseMock<SuspiciousStewEffects>
 {
+	@Override
 	default SuspiciousStewEffects.Builder add(SuspiciousEffectEntry arg0)
 	{
 		// MockMC: Builder#add
 		return null;
 	}
 
+	@Override
 	default SuspiciousStewEffects.Builder addAll(Collection<SuspiciousEffectEntry> arg0)
 	{
 		// MockMC: Builder#addAll

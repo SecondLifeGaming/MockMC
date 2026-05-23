@@ -21,53 +21,62 @@ import org.bukkit.command.CommandSender;
  */
 public interface CommandMapBaseMock extends CommandMap
 {
+	@Override
 	default List<String> tabComplete(CommandSender arg0, String arg1, Location arg2) throws IllegalArgumentException
 	{
 		// MockMC: CommandMap#tabComplete
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<String> tabComplete(CommandSender arg0, String arg1) throws IllegalArgumentException
 	{
 		// MockMC: CommandMap#tabComplete
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Map<String, Command> getKnownCommands()
 	{
 		// MockMC: CommandMap#getKnownCommands
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default boolean register(String arg0, Command arg1)
 	{
 		// MockMC: CommandMap#register
 		return false;
 	}
 
+	@Override
 	default boolean register(String arg0, String arg1, Command arg2)
 	{
 		// MockMC: CommandMap#register
 		return false;
 	}
 
+	@Override
 	default void clearCommands()
 	{
 		// MockMC: CommandMap#clearCommands
 	}
 
+	@Override
 	default boolean dispatch(CommandSender arg0, String arg1) throws CommandException
 	{
 		// MockMC: CommandMap#dispatch
 		return false;
 	}
 
+	@Override
 	default Command getCommand(String arg0)
 	{
 		// MockMC: CommandMap#getCommand
 		return null;
 	}
 
+	@Override
 	default void registerAll(String arg0, List<Command> arg1)
 	{
 		// MockMC: CommandMap#registerAll

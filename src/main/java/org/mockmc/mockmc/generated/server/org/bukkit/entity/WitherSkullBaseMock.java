@@ -13,15 +13,18 @@ import org.bukkit.entity.WitherSkull;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface WitherSkullBaseMock extends WitherSkull, FireballBaseMock
 {
+	@Override
 	default boolean isCharged()
 	{
 		// MockMC: WitherSkull#isCharged
 		return false;
 	}
 
+	@Override
 	default void setCharged(boolean arg0)
 	{
 		// MockMC: WitherSkull#setCharged

@@ -17,30 +17,35 @@ import org.bukkit.Location;
  */
 public interface PathfinderPathResultBaseMock extends Pathfinder.PathResult
 {
+	@Override
 	default List<Location> getPoints()
 	{
 		// MockMC: PathResult#getPoints
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default Location getFinalPoint()
 	{
 		// MockMC: PathResult#getFinalPoint
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Location getNextPoint()
 	{
 		// MockMC: PathResult#getNextPoint
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default int getNextPointIndex()
 	{
 		// MockMC: PathResult#getNextPointIndex
 		return 0;
 	}
 
+	@Override
 	default boolean canReachFinalPoint()
 	{
 		// MockMC: PathResult#canReachFinalPoint

@@ -21,12 +21,14 @@ import net.md_5.bungee.api.config.ServerInfo;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("java:S1133")
 public interface ProxyConfigBaseMock extends ProxyConfig
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean addServers(Collection<ServerInfo> arg0)
 	{
@@ -38,6 +40,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ServerInfo removeServerNamed(String arg0)
 	{
@@ -49,6 +52,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getTabThrottle()
 	{
@@ -60,6 +64,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ServerInfo removeServer(ServerInfo arg0)
 	{
@@ -71,6 +76,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean removeServers(Collection<ServerInfo> arg0)
 	{
@@ -82,6 +88,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Favicon getFaviconObject()
 	{
@@ -93,6 +100,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getThrottle()
 	{
@@ -104,6 +112,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getServerConnectTimeout()
 	{
@@ -115,6 +124,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isLogCommands()
 	{
@@ -126,6 +136,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Collection<String> getDisabledCommands()
 	{
@@ -137,6 +148,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isOnlineMode()
 	{
@@ -148,6 +160,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getFavicon()
 	{
@@ -159,6 +172,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ServerInfo getServerInfo(String arg0)
 	{
@@ -170,6 +184,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean removeServersNamed(Collection<String> arg0)
 	{
@@ -181,6 +196,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default ServerInfo addServer(ServerInfo arg0)
 	{
@@ -192,6 +208,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isIpForward()
 	{
@@ -203,6 +220,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getPluginChannelNameLimit()
 	{
@@ -214,6 +232,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getUuid()
 	{
@@ -225,6 +244,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getPluginChannelLimit()
 	{
@@ -236,6 +256,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isLogInitialHandlerConnections()
 	{
@@ -247,6 +268,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Map<String, ServerInfo> getServersCopy()
 	{
@@ -258,6 +280,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isDisableEntityMetadataRewrite()
 	{
@@ -269,6 +292,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Map<String, ServerInfo> getServers()
 	{
@@ -280,6 +304,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isDisableTabListRewrite()
 	{
@@ -291,6 +316,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getGameVersion()
 	{
@@ -302,6 +328,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getRemotePingTimeout()
 	{
@@ -313,6 +340,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Collection<ListenerInfo> getListeners()
 	{
@@ -324,6 +352,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getPlayerLimit()
 	{
@@ -335,6 +364,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isUseNettyDnsResolver()
 	{
@@ -346,6 +376,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getRemotePingCache()
 	{
@@ -357,6 +388,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default int getTimeout()
 	{
@@ -368,6 +400,7 @@ public interface ProxyConfigBaseMock extends ProxyConfig
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default boolean isDisableModernTabLimiter()
 	{

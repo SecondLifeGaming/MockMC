@@ -16,18 +16,21 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface SaplingBaseMock extends Sapling, BlockDataBaseMock
 {
+	@Override
 	default int getStage()
 	{
 		// MockMC: Sapling#getStage
 		return 0;
 	}
 
+	@Override
 	default int getMaximumStage()
 	{
 		// MockMC: Sapling#getMaximumStage
 		return 0;
 	}
 
+	@Override
 	default void setStage(int arg0)
 	{
 		// MockMC: Sapling#setStage

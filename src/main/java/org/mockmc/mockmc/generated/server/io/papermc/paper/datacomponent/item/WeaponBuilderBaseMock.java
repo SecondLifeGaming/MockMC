@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface WeaponBuilderBaseMock extends Weapon.Builder, DataComponentBuilderBaseMock<Weapon>
 {
+	@Override
 	default Weapon.Builder disableBlockingForSeconds(float arg0)
 	{
 		// MockMC: Builder#disableBlockingForSeconds
 		return null;
 	}
 
+	@Override
 	default Weapon.Builder itemDamagePerAttack(int arg0)
 	{
 		// MockMC: Builder#itemDamagePerAttack

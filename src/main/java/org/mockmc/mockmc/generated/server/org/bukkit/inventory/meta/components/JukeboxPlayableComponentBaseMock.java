@@ -18,12 +18,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface JukeboxPlayableComponentBaseMock extends JukeboxPlayableComponent, ConfigurationSerializableBaseMock
 {
+	@Override
 	default NamespacedKey getSongKey()
 	{
 		// MockMC: JukeboxPlayableComponent#getSongKey
 		return org.bukkit.NamespacedKey.minecraft("mock");
 	}
 
+	@Override
 	default void setSong(JukeboxSong arg0)
 	{
 		// MockMC: JukeboxPlayableComponent#setSong
@@ -33,12 +35,14 @@ public interface JukeboxPlayableComponentBaseMock extends JukeboxPlayableCompone
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5", forRemoval = true)
 	default void setShowInTooltip(boolean arg0)
 	{
 		// MockMC: JukeboxPlayableComponent#setShowInTooltip
 	}
 
+	@Override
 	default JukeboxSong getSong()
 	{
 		// MockMC: JukeboxPlayableComponent#getSong
@@ -49,6 +53,7 @@ public interface JukeboxPlayableComponentBaseMock extends JukeboxPlayableCompone
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.5", forRemoval = true)
 	default boolean isShowInTooltip()
 	{
@@ -56,6 +61,7 @@ public interface JukeboxPlayableComponentBaseMock extends JukeboxPlayableCompone
 		return false;
 	}
 
+	@Override
 	default void setSongKey(NamespacedKey arg0)
 	{
 		// MockMC: JukeboxPlayableComponent#setSongKey

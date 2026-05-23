@@ -16,6 +16,7 @@ import net.md_5.bungee.api.scheduler.TaskScheduler;
  */
 public interface TaskSchedulerUnsafeBaseMock extends TaskScheduler.Unsafe
 {
+	@Override
 	default ExecutorService getExecutorService(Plugin arg0)
 	{
 		// MockMC: Unsafe#getExecutorService

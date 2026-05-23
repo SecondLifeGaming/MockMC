@@ -14,13 +14,15 @@ import org.bukkit.entity.Entity;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface EndermiteBaseMock extends Endermite, MonsterBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.17", forRemoval = true)
 	default boolean isPlayerSpawned()
 	{
@@ -39,6 +41,7 @@ public interface EndermiteBaseMock extends Endermite, MonsterBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.17", forRemoval = true)
 	default void setPlayerSpawned(boolean arg0)
 	{
@@ -52,6 +55,7 @@ public interface EndermiteBaseMock extends Endermite, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default int getLifetimeTicks()
 	{
 		// MockMC: Endermite#getLifetimeTicks
@@ -65,6 +69,7 @@ public interface EndermiteBaseMock extends Endermite, MonsterBaseMock
 		return false;
 	}
 
+	@Override
 	default void setLifetimeTicks(int arg0)
 	{
 		// MockMC: Endermite#setLifetimeTicks

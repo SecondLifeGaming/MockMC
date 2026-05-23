@@ -15,6 +15,7 @@ import io.papermc.paper.datacomponent.item.OminousBottleAmplifier;
  */
 public interface OminousBottleAmplifierBaseMock extends OminousBottleAmplifier
 {
+	@Override
 	default int amplifier()
 	{
 		// MockMC: OminousBottleAmplifier#amplifier

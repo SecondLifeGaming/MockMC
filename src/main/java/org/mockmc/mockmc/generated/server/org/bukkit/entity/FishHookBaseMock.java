@@ -15,59 +15,70 @@ import org.bukkit.inventory.EquipmentSlot;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FishHookBaseMock extends FishHook, ProjectileBaseMock
 {
+	@Override
 	default void resetFishingState()
 	{
 		// MockMC: FishHook#resetFishingState
 	}
 
+	@Override
 	default FishHook.HookState getState()
 	{
 		// MockMC: FishHook#getState
 		return null;
 	}
 
+	@Override
 	default int getTimeUntilBite()
 	{
 		// MockMC: FishHook#getTimeUntilBite
 		return 0;
 	}
 
+	@Override
 	default void setRainInfluenced(boolean arg0)
 	{
 		// MockMC: FishHook#setRainInfluenced
 	}
 
+	@Override
 	default void setTimeUntilBite(int arg0) throws IllegalArgumentException
 	{
 		// MockMC: FishHook#setTimeUntilBite
 	}
 
+	@Override
 	default void setMaxLureTime(int arg0)
 	{
 		// MockMC: FishHook#setMaxLureTime
 	}
 
+	@Override
 	default Entity getHookedEntity()
 	{
 		// MockMC: FishHook#getHookedEntity
 		return null;
 	}
 
+	@Override
 	default int retrieve(EquipmentSlot arg0)
 	{
 		// MockMC: FishHook#retrieve
 		return 0;
 	}
 
+	@Override
 	default float getMaxLureAngle()
 	{
 		// MockMC: FishHook#getMaxLureAngle
 		return 0.0f;
 	}
 
+	@Override
 	default boolean getApplyLure()
 	{
 		// MockMC: FishHook#getApplyLure
@@ -78,110 +89,130 @@ public interface FishHookBaseMock extends FishHook, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9.2", forRemoval = true)
 	default void setBiteChance(double arg0) throws IllegalArgumentException
 	{
 		// MockMC: FishHook#setBiteChance
 	}
 
+	@Override
 	default void setLureTime(int arg0, int arg1)
 	{
 		// MockMC: FishHook#setLureTime
 	}
 
+	@Override
 	default boolean pullHookedEntity()
 	{
 		// MockMC: FishHook#pullHookedEntity
 		return false;
 	}
 
+	@Override
 	default int getWaitTime()
 	{
 		// MockMC: FishHook#getWaitTime
 		return 0;
 	}
 
+	@Override
 	default void setMaxLureAngle(float arg0)
 	{
 		// MockMC: FishHook#setMaxLureAngle
 	}
 
+	@Override
 	default void setMinLureTime(int arg0)
 	{
 		// MockMC: FishHook#setMinLureTime
 	}
 
+	@Override
 	default int getMinLureTime()
 	{
 		// MockMC: FishHook#getMinLureTime
 		return 0;
 	}
 
+	@Override
 	default int getMinWaitTime()
 	{
 		// MockMC: FishHook#getMinWaitTime
 		return 0;
 	}
 
+	@Override
 	default float getMinLureAngle()
 	{
 		// MockMC: FishHook#getMinLureAngle
 		return 0.0f;
 	}
 
+	@Override
 	default int getMaxWaitTime()
 	{
 		// MockMC: FishHook#getMaxWaitTime
 		return 0;
 	}
 
+	@Override
 	default void setWaitTime(int arg0)
 	{
 		// MockMC: FishHook#setWaitTime
 	}
 
+	@Override
 	default void setWaitTime(int arg0, int arg1)
 	{
 		// MockMC: FishHook#setWaitTime
 	}
 
+	@Override
 	default boolean isRainInfluenced()
 	{
 		// MockMC: FishHook#isRainInfluenced
 		return false;
 	}
 
+	@Override
 	default void setMinLureAngle(float arg0)
 	{
 		// MockMC: FishHook#setMinLureAngle
 	}
 
+	@Override
 	default void setMaxWaitTime(int arg0)
 	{
 		// MockMC: FishHook#setMaxWaitTime
 	}
 
+	@Override
 	default int getMaxLureTime()
 	{
 		// MockMC: FishHook#getMaxLureTime
 		return 0;
 	}
 
+	@Override
 	default void setLureAngle(float arg0, float arg1)
 	{
 		// MockMC: FishHook#setLureAngle
 	}
 
+	@Override
 	default void setMinWaitTime(int arg0)
 	{
 		// MockMC: FishHook#setMinWaitTime
 	}
 
+	@Override
 	default void setApplyLure(boolean arg0)
 	{
 		// MockMC: FishHook#setApplyLure
 	}
 
+	@Override
 	default void setHookedEntity(Entity arg0)
 	{
 		// MockMC: FishHook#setHookedEntity
@@ -191,6 +222,7 @@ public interface FishHookBaseMock extends FishHook, ProjectileBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9.2", forRemoval = true)
 	default double getBiteChance()
 	{
@@ -198,18 +230,21 @@ public interface FishHookBaseMock extends FishHook, ProjectileBaseMock
 		return 0.0d;
 	}
 
+	@Override
 	default boolean isInOpenWater()
 	{
 		// MockMC: FishHook#isInOpenWater
 		return false;
 	}
 
+	@Override
 	default boolean isSkyInfluenced()
 	{
 		// MockMC: FishHook#isSkyInfluenced
 		return false;
 	}
 
+	@Override
 	default void setSkyInfluenced(boolean arg0)
 	{
 		// MockMC: FishHook#setSkyInfluenced

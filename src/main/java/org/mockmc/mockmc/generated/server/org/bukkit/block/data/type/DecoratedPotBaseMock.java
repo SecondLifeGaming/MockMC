@@ -15,14 +15,16 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface DecoratedPotBaseMock extends DecoratedPot, WaterloggedBaseMock, DirectionalBaseMock
+public interface DecoratedPotBaseMock extends DecoratedPot, DirectionalBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default boolean isCracked()
 	{
 		// MockMC: DecoratedPot#isCracked
 		return false;
 	}
 
+	@Override
 	default void setCracked(boolean arg0)
 	{
 		// MockMC: DecoratedPot#setCracked

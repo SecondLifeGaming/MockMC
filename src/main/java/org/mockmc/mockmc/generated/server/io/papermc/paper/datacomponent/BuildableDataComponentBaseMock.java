@@ -18,6 +18,7 @@ public interface BuildableDataComponentBaseMock<C extends BuildableDataComponent
 		extends
 			BuildableDataComponent<C, B>
 {
+	@Override
 	default B toBuilder()
 	{
 		// MockMC: BuildableDataComponent#toBuilder

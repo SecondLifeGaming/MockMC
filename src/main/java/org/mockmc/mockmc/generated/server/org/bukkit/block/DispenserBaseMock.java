@@ -17,37 +17,29 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface DispenserBaseMock extends Dispenser, LootableBaseMock, ContainerBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: Dispenser#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: Dispenser#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: Dispenser#canPlayerLoot
 		return false;
-	}
-
-	default BlockProjectileSource getBlockProjectileSource()
-	{
-		// MockMC: Dispenser#getBlockProjectileSource
-		return null;
-	}
-
-	default long getNextRefill()
-	{
-		// MockMC: Dispenser#getNextRefill
-		return 0L;
 	}
 
 	@Override
@@ -57,42 +49,63 @@ public interface DispenserBaseMock extends Dispenser, LootableBaseMock, Containe
 		return null;
 	}
 
+	@Override
+	default BlockProjectileSource getBlockProjectileSource()
+	{
+		// MockMC: Dispenser#getBlockProjectileSource
+		return null;
+	}
+
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: Dispenser#getNextRefill
+		return 0L;
+	}
+
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: Dispenser#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: Dispenser#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: Dispenser#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean dispense()
 	{
 		// MockMC: Dispenser#dispense
 		return false;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Dispenser#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Dispenser#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Dispenser#setNextRefill

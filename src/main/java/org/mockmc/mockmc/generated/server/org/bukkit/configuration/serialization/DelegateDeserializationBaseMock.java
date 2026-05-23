@@ -17,12 +17,14 @@ import org.bukkit.configuration.serialization.DelegateDeserialization;
  */
 public interface DelegateDeserializationBaseMock extends DelegateDeserialization
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: DelegateDeserialization#annotationType
 		return null;
 	}
 
+	@Override
 	default Class<? extends ConfigurationSerializable> value()
 	{
 		// MockMC: DelegateDeserialization#value

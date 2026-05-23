@@ -17,22 +17,26 @@ import org.bukkit.inventory.meta.CrossbowMeta;
  */
 public interface CrossbowMetaBaseMock extends CrossbowMeta, ItemMetaBaseMock
 {
+	@Override
 	default void addChargedProjectile(ItemStack arg0)
 	{
 		// MockMC: CrossbowMeta#addChargedProjectile
 	}
 
+	@Override
 	default boolean hasChargedProjectiles()
 	{
 		// MockMC: CrossbowMeta#hasChargedProjectiles
 		return false;
 	}
 
+	@Override
 	default void setChargedProjectiles(List<ItemStack> arg0)
 	{
 		// MockMC: CrossbowMeta#setChargedProjectiles
 	}
 
+	@Override
 	default List<ItemStack> getChargedProjectiles()
 	{
 		// MockMC: CrossbowMeta#getChargedProjectiles

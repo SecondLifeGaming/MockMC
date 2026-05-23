@@ -16,6 +16,7 @@ import io.papermc.paper.persistence.PersistentDataViewHolder;
  */
 public interface PersistentDataViewHolderBaseMock extends PersistentDataViewHolder
 {
+	@Override
 	default PersistentDataContainerView getPersistentDataContainer()
 	{
 		// MockMC: PersistentDataViewHolder#getPersistentDataContainer

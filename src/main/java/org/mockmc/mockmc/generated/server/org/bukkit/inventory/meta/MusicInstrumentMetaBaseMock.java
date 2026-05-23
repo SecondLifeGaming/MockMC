@@ -23,11 +23,13 @@ public interface MusicInstrumentMetaBaseMock extends MusicInstrumentMeta, ItemMe
 		return null;
 	}
 
+	@Override
 	default void setInstrument(MusicInstrument arg0)
 	{
 		// MockMC: MusicInstrumentMeta#setInstrument
 	}
 
+	@Override
 	default MusicInstrument getInstrument()
 	{
 		// MockMC: MusicInstrumentMeta#getInstrument

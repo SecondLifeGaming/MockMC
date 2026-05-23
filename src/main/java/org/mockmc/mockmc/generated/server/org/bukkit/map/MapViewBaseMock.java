@@ -18,107 +18,126 @@ import org.bukkit.map.MapView;
  */
 public interface MapViewBaseMock extends MapView
 {
+	@Override
 	default boolean isVirtual()
 	{
 		// MockMC: MapView#isVirtual
 		return false;
 	}
 
+	@Override
 	default int getCenterX()
 	{
 		// MockMC: MapView#getCenterX
 		return 0;
 	}
 
+	@Override
 	default int getCenterZ()
 	{
 		// MockMC: MapView#getCenterZ
 		return 0;
 	}
 
+	@Override
 	default void setWorld(World arg0)
 	{
 		// MockMC: MapView#setWorld
 	}
 
+	@Override
 	default boolean removeRenderer(MapRenderer arg0)
 	{
 		// MockMC: MapView#removeRenderer
 		return false;
 	}
 
+	@Override
 	default boolean isTrackingPosition()
 	{
 		// MockMC: MapView#isTrackingPosition
 		return false;
 	}
 
+	@Override
 	default boolean isLocked()
 	{
 		// MockMC: MapView#isLocked
 		return false;
 	}
 
+	@Override
 	default boolean isUnlimitedTracking()
 	{
 		// MockMC: MapView#isUnlimitedTracking
 		return false;
 	}
 
+	@Override
 	default MapView.Scale getScale()
 	{
 		// MockMC: MapView#getScale
 		return null;
 	}
 
+	@Override
 	default void setTrackingPosition(boolean arg0)
 	{
 		// MockMC: MapView#setTrackingPosition
 	}
 
+	@Override
 	default int getId()
 	{
 		// MockMC: MapView#getId
 		return 0;
 	}
 
+	@Override
 	default void addRenderer(MapRenderer arg0)
 	{
 		// MockMC: MapView#addRenderer
 	}
 
+	@Override
 	default void setLocked(boolean arg0)
 	{
 		// MockMC: MapView#setLocked
 	}
 
+	@Override
 	default List<MapRenderer> getRenderers()
 	{
 		// MockMC: MapView#getRenderers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default World getWorld()
 	{
 		// MockMC: MapView#getWorld
 		return null;
 	}
 
+	@Override
 	default void setScale(MapView.Scale arg0)
 	{
 		// MockMC: MapView#setScale
 	}
 
+	@Override
 	default void setCenterZ(int arg0)
 	{
 		// MockMC: MapView#setCenterZ
 	}
 
+	@Override
 	default void setUnlimitedTracking(boolean arg0)
 	{
 		// MockMC: MapView#setUnlimitedTracking
 	}
 
+	@Override
 	default void setCenterX(int arg0)
 	{
 		// MockMC: MapView#setCenterX

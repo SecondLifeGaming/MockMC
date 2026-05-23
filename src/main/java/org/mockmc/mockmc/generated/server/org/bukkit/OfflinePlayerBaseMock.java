@@ -33,10 +33,10 @@ import org.mockmc.mockmc.generated.server.org.bukkit.permissions.ServerOperatorB
 public interface OfflinePlayerBaseMock
 		extends
 			OfflinePlayer,
-			ConfigurationSerializableBaseMock,
+			PersistentDataViewHolderBaseMock,
 			AnimalTamerBaseMock,
 			ServerOperatorBaseMock,
-			PersistentDataViewHolderBaseMock
+			ConfigurationSerializableBaseMock
 {
 	@Override
 	default PersistentDataContainerView getPersistentDataContainer()
@@ -45,68 +45,81 @@ public interface OfflinePlayerBaseMock
 		return null;
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0, int arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0, Material arg1, int arg2) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0, EntityType arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0, EntityType arg1, int arg2) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default void incrementStatistic(Statistic arg0, Material arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#incrementStatistic
 	}
 
+	@Override
 	default Location getLastDeathLocation()
 	{
 		// MockMC: OfflinePlayer#getLastDeathLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setStatistic(Statistic arg0, EntityType arg1, int arg2)
 	{
 		// MockMC: OfflinePlayer#setStatistic
 	}
 
+	@Override
 	default void setStatistic(Statistic arg0, int arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#setStatistic
 	}
 
+	@Override
 	default void setWhitelisted(boolean arg0)
 	{
 		// MockMC: OfflinePlayer#setWhitelisted
 	}
 
+	@Override
 	default void setStatistic(Statistic arg0, Material arg1, int arg2) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#setStatistic
 	}
 
+	@Override
 	default long getLastSeen()
 	{
 		// MockMC: OfflinePlayer#getLastSeen
 		return 0L;
 	}
 
+	@Override
 	default void applySkinToPlayerHeadContents(PlayerHeadObjectContents.Builder arg0)
 	{
 		// MockMC: OfflinePlayer#applySkinToPlayerHeadContents
@@ -116,6 +129,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default long getLastPlayed()
 	{
@@ -127,6 +141,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.4")
 	default Location getBedSpawnLocation()
 	{
@@ -134,18 +149,21 @@ public interface OfflinePlayerBaseMock
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default boolean hasPlayedBefore()
 	{
 		// MockMC: OfflinePlayer#hasPlayedBefore
 		return false;
 	}
 
+	@Override
 	default Location getRespawnLocation(boolean arg0)
 	{
 		// MockMC: OfflinePlayer#getRespawnLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Location getRespawnLocation()
 	{
 		// MockMC: OfflinePlayer#getRespawnLocation
@@ -159,72 +177,85 @@ public interface OfflinePlayerBaseMock
 		return null;
 	}
 
+	@Override
 	default <E extends BanEntry<? super PlayerProfile>> E ban(String arg0, Date arg1, String arg2)
 	{
 		// MockMC: OfflinePlayer#ban
 		return null;
 	}
 
+	@Override
 	default <E extends BanEntry<? super PlayerProfile>> E ban(String arg0, Duration arg1, String arg2)
 	{
 		// MockMC: OfflinePlayer#ban
 		return null;
 	}
 
+	@Override
 	default <E extends BanEntry<? super PlayerProfile>> E ban(String arg0, Instant arg1, String arg2)
 	{
 		// MockMC: OfflinePlayer#ban
 		return null;
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0, EntityType arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default boolean isWhitelisted()
 	{
 		// MockMC: OfflinePlayer#isWhitelisted
 		return false;
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0, Material arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0, Material arg1, int arg2) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0, int arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default void decrementStatistic(Statistic arg0, EntityType arg1, int arg2)
 	{
 		// MockMC: OfflinePlayer#decrementStatistic
 	}
 
+	@Override
 	default boolean isOnline()
 	{
 		// MockMC: OfflinePlayer#isOnline
 		return false;
 	}
 
+	@Override
 	default boolean isConnected()
 	{
 		// MockMC: OfflinePlayer#isConnected
 		return false;
 	}
 
+	@Override
 	default long getFirstPlayed()
 	{
 		// MockMC: OfflinePlayer#getFirstPlayed
@@ -235,6 +266,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.4")
 	default BanEntry banPlayer(String arg0, Date arg1)
@@ -247,6 +279,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.4")
 	default BanEntry banPlayer(String arg0)
@@ -255,12 +288,14 @@ public interface OfflinePlayerBaseMock
 		return null;
 	}
 
+	@Override
 	default int getStatistic(Statistic arg0, Material arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#getStatistic
 		return 0;
 	}
 
+	@Override
 	default int getStatistic(Statistic arg0) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#getStatistic
@@ -271,6 +306,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.4")
 	default BanEntry banPlayer(String arg0, Date arg1, String arg2, boolean arg3)
@@ -279,6 +315,7 @@ public interface OfflinePlayerBaseMock
 		return null;
 	}
 
+	@Override
 	default int getStatistic(Statistic arg0, EntityType arg1) throws IllegalArgumentException
 	{
 		// MockMC: OfflinePlayer#getStatistic
@@ -289,6 +326,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.4")
 	default BanEntry banPlayer(String arg0, String arg1)
@@ -301,6 +339,7 @@ public interface OfflinePlayerBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	@Deprecated(since = "1.20.4")
 	default BanEntry banPlayer(String arg0, Date arg1, String arg2)
@@ -316,30 +355,35 @@ public interface OfflinePlayerBaseMock
 		return "";
 	}
 
+	@Override
 	default Player getPlayer()
 	{
 		// MockMC: OfflinePlayer#getPlayer
 		return null;
 	}
 
+	@Override
 	default Location getLocation()
 	{
 		// MockMC: OfflinePlayer#getLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default PlayerProfile getPlayerProfile()
 	{
 		// MockMC: OfflinePlayer#getPlayerProfile
 		return null;
 	}
 
+	@Override
 	default long getLastLogin()
 	{
 		// MockMC: OfflinePlayer#getLastLogin
 		return 0L;
 	}
 
+	@Override
 	default boolean isBanned()
 	{
 		// MockMC: OfflinePlayer#isBanned

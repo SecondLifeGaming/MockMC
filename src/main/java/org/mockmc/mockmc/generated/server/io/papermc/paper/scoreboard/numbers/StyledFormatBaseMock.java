@@ -17,16 +17,19 @@ import net.kyori.adventure.text.format.Style;
  */
 public interface StyledFormatBaseMock extends StyledFormat, NumberFormatBaseMock
 {
+	@Override
 	default void componentBuilderApply(ComponentBuilder<?, ?> arg0)
 	{
 		// MockMC: StyledFormat#componentBuilderApply
 	}
 
+	@Override
 	default void styleApply(Style.Builder arg0)
 	{
 		// MockMC: StyledFormat#styleApply
 	}
 
+	@Override
 	default Style style()
 	{
 		// MockMC: StyledFormat#style

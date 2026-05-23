@@ -17,18 +17,21 @@ import java.util.List;
  */
 public interface MultiActionTypeBaseMock extends MultiActionType
 {
+	@Override
 	default List<ActionButton> actions()
 	{
 		// MockMC: MultiActionType#actions
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int columns()
 	{
 		// MockMC: MultiActionType#columns
 		return 0;
 	}
 
+	@Override
 	default ActionButton exitAction()
 	{
 		// MockMC: MultiActionType#exitAction

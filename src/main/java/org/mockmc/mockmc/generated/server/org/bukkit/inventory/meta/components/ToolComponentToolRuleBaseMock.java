@@ -19,44 +19,52 @@ import org.mockmc.mockmc.generated.server.org.bukkit.configuration.serialization
  */
 public interface ToolComponentToolRuleBaseMock extends ToolComponent.ToolRule, ConfigurationSerializableBaseMock
 {
+	@Override
 	default Boolean isCorrectForDrops()
 	{
 		// MockMC: ToolRule#isCorrectForDrops
 		return false;
 	}
 
+	@Override
 	default Collection<Material> getBlocks()
 	{
 		// MockMC: ToolRule#getBlocks
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setCorrectForDrops(Boolean arg0)
 	{
 		// MockMC: ToolRule#setCorrectForDrops
 	}
 
+	@Override
 	default void setBlocks(Tag<Material> arg0)
 	{
 		// MockMC: ToolRule#setBlocks
 	}
 
+	@Override
 	default void setBlocks(Collection<Material> arg0)
 	{
 		// MockMC: ToolRule#setBlocks
 	}
 
+	@Override
 	default void setBlocks(Material arg0)
 	{
 		// MockMC: ToolRule#setBlocks
 	}
 
+	@Override
 	default Float getSpeed()
 	{
 		// MockMC: ToolRule#getSpeed
 		return 0.0f;
 	}
 
+	@Override
 	default void setSpeed(Float arg0)
 	{
 		// MockMC: ToolRule#setSpeed

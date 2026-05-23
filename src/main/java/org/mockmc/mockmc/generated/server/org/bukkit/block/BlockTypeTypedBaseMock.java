@@ -16,7 +16,8 @@ import org.bukkit.block.data.BlockData;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface BlockTypeTypedBaseMock<B extends BlockData> extends BlockType.Typed<B>, BlockTypeBaseMock
 {
 	@Override
@@ -47,6 +48,7 @@ public interface BlockTypeTypedBaseMock<B extends BlockData> extends BlockType.T
 		return null;
 	}
 
+	@Override
 	default B createBlockData(Consumer<? super B> arg0)
 	{
 		// MockMC: Typed#createBlockData

@@ -15,25 +15,29 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CandleBaseMock extends Candle, WaterloggedBaseMock, LightableBaseMock
+public interface CandleBaseMock extends Candle, LightableBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default int getMinimumCandles()
 	{
 		// MockMC: Candle#getMinimumCandles
 		return 0;
 	}
 
+	@Override
 	default int getCandles()
 	{
 		// MockMC: Candle#getCandles
 		return 0;
 	}
 
+	@Override
 	default void setCandles(int arg0)
 	{
 		// MockMC: Candle#setCandles
 	}
 
+	@Override
 	default int getMaximumCandles()
 	{
 		// MockMC: Candle#getMaximumCandles

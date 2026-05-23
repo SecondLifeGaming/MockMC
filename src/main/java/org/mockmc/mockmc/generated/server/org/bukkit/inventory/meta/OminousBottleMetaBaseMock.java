@@ -15,6 +15,7 @@ import org.bukkit.inventory.meta.OminousBottleMeta;
  */
 public interface OminousBottleMetaBaseMock extends OminousBottleMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean hasAmplifier()
 	{
 		// MockMC: OminousBottleMeta#hasAmplifier
@@ -28,11 +29,13 @@ public interface OminousBottleMetaBaseMock extends OminousBottleMeta, ItemMetaBa
 		return null;
 	}
 
+	@Override
 	default void setAmplifier(int arg0)
 	{
 		// MockMC: OminousBottleMeta#setAmplifier
 	}
 
+	@Override
 	default int getAmplifier()
 	{
 		// MockMC: OminousBottleMeta#getAmplifier

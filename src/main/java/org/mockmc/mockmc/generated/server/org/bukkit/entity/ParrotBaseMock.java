@@ -14,28 +14,10 @@ import org.bukkit.entity.Parrot;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface ParrotBaseMock extends Parrot, TameableBaseMock, SittableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface ParrotBaseMock extends Parrot, SittableBaseMock, TameableBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Parrot#getLeashHolder
-		return null;
-	}
-
-	default boolean isDancing()
-	{
-		// MockMC: Parrot#isDancing
-		return false;
-	}
-
-	default Parrot.Variant getVariant()
-	{
-		// MockMC: Parrot#getVariant
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -43,9 +25,18 @@ public interface ParrotBaseMock extends Parrot, TameableBaseMock, SittableBaseMo
 		return false;
 	}
 
-	default void setVariant(Parrot.Variant arg0)
+	@Override
+	default boolean isDancing()
 	{
-		// MockMC: Parrot#setVariant
+		// MockMC: Parrot#isDancing
+		return false;
+	}
+
+	@Override
+	default Parrot.Variant getVariant()
+	{
+		// MockMC: Parrot#getVariant
+		return null;
 	}
 
 	@Override
@@ -53,5 +44,18 @@ public interface ParrotBaseMock extends Parrot, TameableBaseMock, SittableBaseMo
 	{
 		// MockMC: Parrot#isLeashed
 		return false;
+	}
+
+	@Override
+	default void setVariant(Parrot.Variant arg0)
+	{
+		// MockMC: Parrot#setVariant
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Parrot#getLeashHolder
+		return null;
 	}
 }

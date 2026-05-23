@@ -16,12 +16,14 @@ import io.papermc.paper.registry.data.EnchantmentRegistryEntry;
  */
 public interface EnchantmentRegistryEntryEnchantmentCostBaseMock extends EnchantmentRegistryEntry.EnchantmentCost
 {
+	@Override
 	default int baseCost()
 	{
 		// MockMC: EnchantmentCost#baseCost
 		return 0;
 	}
 
+	@Override
 	default int additionalPerLevelCost()
 	{
 		// MockMC: EnchantmentCost#additionalPerLevelCost

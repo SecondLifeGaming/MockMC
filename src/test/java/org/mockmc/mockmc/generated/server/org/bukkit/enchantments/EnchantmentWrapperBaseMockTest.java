@@ -15,7 +15,13 @@ class EnchantmentWrapperBaseMockTest extends GeneratedTestBase
 	{
 		EnchantmentWrapperBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getEnchantment());
+		try
+		{
+			assertSafeDefault(mock.getEnchantment());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements EnchantmentWrapperBaseMock

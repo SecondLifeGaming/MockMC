@@ -17,29 +17,34 @@ import org.bukkit.inventory.Recipe;
  */
 public interface CraftingInventoryBaseMock extends CraftingInventory, InventoryBaseMock
 {
+	@Override
 	default void setResult(ItemStack arg0)
 	{
 		// MockMC: CraftingInventory#setResult
 	}
 
+	@Override
 	default ItemStack getResult()
 	{
 		// MockMC: CraftingInventory#getResult
 		return new org.bukkit.inventory.ItemStack(org.bukkit.Material.AIR);
 	}
 
+	@Override
 	default ItemStack[] getMatrix()
 	{
 		// MockMC: CraftingInventory#getMatrix
 		return new ItemStack[0];
 	}
 
+	@Override
 	default Recipe getRecipe()
 	{
 		// MockMC: CraftingInventory#getRecipe
 		return null;
 	}
 
+	@Override
 	default void setMatrix(ItemStack[] arg0)
 	{
 		// MockMC: CraftingInventory#setMatrix

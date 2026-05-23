@@ -18,18 +18,21 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface FireworksBuilderBaseMock extends Fireworks.Builder, DataComponentBuilderBaseMock<Fireworks>
 {
+	@Override
 	default Fireworks.Builder addEffects(List<FireworkEffect> arg0)
 	{
 		// MockMC: Builder#addEffects
 		return null;
 	}
 
+	@Override
 	default Fireworks.Builder addEffect(FireworkEffect arg0)
 	{
 		// MockMC: Builder#addEffect
 		return null;
 	}
 
+	@Override
 	default Fireworks.Builder flightDuration(int arg0)
 	{
 		// MockMC: Builder#flightDuration

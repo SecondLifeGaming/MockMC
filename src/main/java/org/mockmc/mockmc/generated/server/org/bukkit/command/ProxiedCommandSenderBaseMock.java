@@ -20,6 +20,7 @@ import org.bukkit.command.ProxiedCommandSender;
  */
 public interface ProxiedCommandSenderBaseMock extends ProxiedCommandSender, CommandSenderBaseMock
 {
+	@Override
 	default CommandSender getCallee()
 	{
 		// MockMC: ProxiedCommandSender#getCallee
@@ -30,6 +31,7 @@ public interface ProxiedCommandSenderBaseMock extends ProxiedCommandSender, Comm
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default Iterable<? extends Audience> audiences()
 	{
@@ -37,12 +39,14 @@ public interface ProxiedCommandSenderBaseMock extends ProxiedCommandSender, Comm
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default CommandSender getCaller()
 	{
 		// MockMC: ProxiedCommandSender#getCaller
 		return null;
 	}
 
+	@Override
 	default Audience audience()
 	{
 		// MockMC: ProxiedCommandSender#audience
@@ -50,7 +54,8 @@ public interface ProxiedCommandSenderBaseMock extends ProxiedCommandSender, Comm
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	default void sendMessage(Identity arg0, Component arg1, MessageType arg2)
 	{
 		// MockMC: ProxiedCommandSender#sendMessage

@@ -16,6 +16,7 @@ import org.bukkit.Registry;
  */
 public interface RegistryHolderBaseMock<B extends Keyed> extends RegistryHolder<B>
 {
+	@Override
 	default Registry<B> get()
 	{
 		// MockMC: RegistryHolder#get

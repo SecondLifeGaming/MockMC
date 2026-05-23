@@ -16,23 +16,27 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface TrialSpawnerBaseMock extends TrialSpawner, BlockDataBaseMock
 {
+	@Override
 	default TrialSpawner.State getTrialSpawnerState()
 	{
 		// MockMC: TrialSpawner#getTrialSpawnerState
 		return null;
 	}
 
+	@Override
 	default void setTrialSpawnerState(TrialSpawner.State arg0)
 	{
 		// MockMC: TrialSpawner#setTrialSpawnerState
 	}
 
+	@Override
 	default boolean isOminous()
 	{
 		// MockMC: TrialSpawner#isOminous
 		return false;
 	}
 
+	@Override
 	default void setOminous(boolean arg0)
 	{
 		// MockMC: TrialSpawner#setOminous

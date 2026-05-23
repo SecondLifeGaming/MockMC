@@ -14,7 +14,8 @@ import org.bukkit.entity.IronGolem;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface IronGolemBaseMock extends IronGolem, GolemBaseMock
 {
 	@Override
@@ -24,11 +25,13 @@ public interface IronGolemBaseMock extends IronGolem, GolemBaseMock
 		return null;
 	}
 
+	@Override
 	default void setPlayerCreated(boolean arg0)
 	{
 		// MockMC: IronGolem#setPlayerCreated
 	}
 
+	@Override
 	default boolean isPlayerCreated()
 	{
 		// MockMC: IronGolem#isPlayerCreated

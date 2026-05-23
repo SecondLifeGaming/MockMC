@@ -14,7 +14,8 @@ import org.bukkit.entity.NPC;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface NPCBaseMock extends NPC, CreatureBaseMock
 {
 	@Override

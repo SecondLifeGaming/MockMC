@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
  */
 public interface ItemContainerContentsBaseMock extends ItemContainerContents
 {
+	@Override
 	default List<ItemStack> contents()
 	{
 		// MockMC: ItemContainerContents#contents

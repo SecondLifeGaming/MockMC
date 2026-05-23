@@ -16,47 +16,56 @@ import org.bukkit.util.Vector;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ShulkerBulletBaseMock extends ShulkerBullet, ProjectileBaseMock
 {
+	@Override
 	default void setTargetDelta(Vector arg0)
 	{
 		// MockMC: ShulkerBullet#setTargetDelta
 	}
 
+	@Override
 	default int getFlightSteps()
 	{
 		// MockMC: ShulkerBullet#getFlightSteps
 		return 0;
 	}
 
+	@Override
 	default void setTarget(Entity arg0)
 	{
 		// MockMC: ShulkerBullet#setTarget
 	}
 
+	@Override
 	default void setFlightSteps(int arg0)
 	{
 		// MockMC: ShulkerBullet#setFlightSteps
 	}
 
+	@Override
 	default Vector getTargetDelta()
 	{
 		// MockMC: ShulkerBullet#getTargetDelta
 		return new org.bukkit.util.Vector(0, 0, 0);
 	}
 
+	@Override
 	default Entity getTarget()
 	{
 		// MockMC: ShulkerBullet#getTarget
 		return null;
 	}
 
+	@Override
 	default void setCurrentMovementDirection(BlockFace arg0)
 	{
 		// MockMC: ShulkerBullet#setCurrentMovementDirection
 	}
 
+	@Override
 	default BlockFace getCurrentMovementDirection()
 	{
 		// MockMC: ShulkerBullet#getCurrentMovementDirection

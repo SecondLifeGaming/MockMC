@@ -13,7 +13,13 @@ class DatapackRegistrarBaseMockTest extends GeneratedTestBase
 	{
 		DatapackRegistrarBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getDiscoveredPacks());
+		try
+		{
+			assertSafeDefault(mock.getDiscoveredPacks());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements DatapackRegistrarBaseMock

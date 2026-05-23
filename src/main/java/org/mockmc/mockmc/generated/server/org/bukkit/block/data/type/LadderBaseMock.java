@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface LadderBaseMock extends Ladder, WaterloggedBaseMock, DirectionalBaseMock
+public interface LadderBaseMock extends Ladder, DirectionalBaseMock, WaterloggedBaseMock
 {
 }

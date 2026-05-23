@@ -17,12 +17,14 @@ import org.bukkit.FireworkEffect;
  */
 public interface FireworksBaseMock extends Fireworks
 {
+	@Override
 	default List<FireworkEffect> effects()
 	{
 		// MockMC: Fireworks#effects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int flightDuration()
 	{
 		// MockMC: Fireworks#flightDuration

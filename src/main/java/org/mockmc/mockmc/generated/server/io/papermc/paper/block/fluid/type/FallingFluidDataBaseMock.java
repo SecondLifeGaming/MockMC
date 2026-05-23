@@ -16,6 +16,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.block.fluid.FluidData
  */
 public interface FallingFluidDataBaseMock extends FallingFluidData, FluidDataBaseMock
 {
+	@Override
 	default boolean isFalling()
 	{
 		// MockMC: FallingFluidData#isFalling

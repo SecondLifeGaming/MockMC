@@ -15,12 +15,14 @@ import org.bukkit.block.data.type.BigDripleaf;
  */
 public interface BigDripleafBaseMock extends BigDripleaf, DripleafBaseMock
 {
+	@Override
 	default BigDripleaf.Tilt getTilt()
 	{
 		// MockMC: BigDripleaf#getTilt
 		return null;
 	}
 
+	@Override
 	default void setTilt(BigDripleaf.Tilt arg0)
 	{
 		// MockMC: BigDripleaf#setTilt

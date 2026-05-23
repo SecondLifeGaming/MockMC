@@ -15,6 +15,7 @@ import io.papermc.paper.datacomponent.DataComponentBuilder;
  */
 public interface DataComponentBuilderBaseMock<C> extends DataComponentBuilder<C>
 {
+	@Override
 	default C build()
 	{
 		// MockMC: DataComponentBuilder#build

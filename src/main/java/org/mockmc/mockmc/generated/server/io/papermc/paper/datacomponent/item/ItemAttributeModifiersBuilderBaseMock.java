@@ -24,6 +24,7 @@ public interface ItemAttributeModifiersBuilderBaseMock
 			ItemAttributeModifiers.Builder,
 			DataComponentBuilderBaseMock<ItemAttributeModifiers>
 {
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1, EquipmentSlotGroup arg2,
 			AttributeModifierDisplay arg3)
 	{
@@ -31,18 +32,21 @@ public interface ItemAttributeModifiersBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1)
 	{
 		// MockMC: Builder#addModifier
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1, EquipmentSlotGroup arg2)
 	{
 		// MockMC: Builder#addModifier
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1,
 			AttributeModifierDisplay arg2)
 	{

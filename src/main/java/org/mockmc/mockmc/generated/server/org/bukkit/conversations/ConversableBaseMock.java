@@ -20,13 +20,15 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface ConversableBaseMock extends Conversable
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean beginConversation(Conversation arg0)
 	{
@@ -38,6 +40,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void acceptConversationInput(String arg0)
 	{
@@ -48,6 +51,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void sendRawMessage(String arg0)
 	{
@@ -58,6 +62,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void sendRawMessage(UUID arg0, String arg1)
 	{
@@ -68,6 +73,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void abandonConversation(Conversation arg0, ConversationAbandonedEvent arg1)
 	{
@@ -78,6 +84,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void abandonConversation(Conversation arg0)
 	{
@@ -88,6 +95,7 @@ public interface ConversableBaseMock extends Conversable
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default boolean isConversing()
 	{

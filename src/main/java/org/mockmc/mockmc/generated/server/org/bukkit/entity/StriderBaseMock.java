@@ -14,26 +14,15 @@ import org.bukkit.entity.Strider;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface StriderBaseMock extends Strider, VehicleBaseMock, SteerableBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Strider#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
 		// MockMC: Strider#setLeashHolder
 		return false;
-	}
-
-	default void setShivering(boolean arg0)
-	{
-		// MockMC: Strider#setShivering
 	}
 
 	@Override
@@ -43,6 +32,20 @@ public interface StriderBaseMock extends Strider, VehicleBaseMock, SteerableBase
 		return false;
 	}
 
+	@Override
+	default void setShivering(boolean arg0)
+	{
+		// MockMC: Strider#setShivering
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Strider#getLeashHolder
+		return null;
+	}
+
+	@Override
 	default boolean isShivering()
 	{
 		// MockMC: Strider#isShivering

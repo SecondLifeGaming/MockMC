@@ -16,12 +16,14 @@ import net.kyori.adventure.key.Key;
  */
 public interface UseCooldownBaseMock extends UseCooldown
 {
+	@Override
 	default Key cooldownGroup()
 	{
 		// MockMC: UseCooldown#cooldownGroup
 		return null;
 	}
 
+	@Override
 	default float seconds()
 	{
 		// MockMC: UseCooldown#seconds

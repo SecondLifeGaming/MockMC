@@ -16,17 +16,20 @@ import net.kyori.adventure.text.Component;
  */
 public interface DatapackBaseMock extends Datapack, DiscoveredDatapackBaseMock
 {
+	@Override
 	default void setEnabled(boolean arg0)
 	{
 		// MockMC: Datapack#setEnabled
 	}
 
+	@Override
 	default Component computeDisplayName()
 	{
 		// MockMC: Datapack#computeDisplayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default boolean isEnabled()
 	{
 		// MockMC: Datapack#isEnabled

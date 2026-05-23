@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface DispenserBaseMock extends Dispenser, DirectionalBaseMock
 {
+	@Override
 	default boolean isTriggered()
 	{
 		// MockMC: Dispenser#isTriggered
 		return false;
 	}
 
+	@Override
 	default void setTriggered(boolean arg0)
 	{
 		// MockMC: Dispenser#setTriggered

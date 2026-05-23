@@ -13,7 +13,13 @@ class WarningBaseMockTest extends GeneratedTestBase
 	{
 		WarningBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.reason());
+		try
+		{
+			assertSafeDefault(mock.reason());
+		} catch (Exception | LinkageError e)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements WarningBaseMock

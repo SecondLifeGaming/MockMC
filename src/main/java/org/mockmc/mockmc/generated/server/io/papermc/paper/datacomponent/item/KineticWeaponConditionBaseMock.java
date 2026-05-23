@@ -15,18 +15,21 @@ import io.papermc.paper.datacomponent.item.KineticWeapon;
  */
 public interface KineticWeaponConditionBaseMock extends KineticWeapon.Condition
 {
+	@Override
 	default float minSpeed()
 	{
 		// MockMC: Condition#minSpeed
 		return 0.0f;
 	}
 
+	@Override
 	default int maxDurationTicks()
 	{
 		// MockMC: Condition#maxDurationTicks
 		return 0;
 	}
 
+	@Override
 	default float minRelativeSpeed()
 	{
 		// MockMC: Condition#minRelativeSpeed

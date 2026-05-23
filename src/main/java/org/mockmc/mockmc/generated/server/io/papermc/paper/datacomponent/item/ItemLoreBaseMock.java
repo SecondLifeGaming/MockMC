@@ -17,12 +17,14 @@ import net.kyori.adventure.text.Component;
  */
 public interface ItemLoreBaseMock extends ItemLore
 {
+	@Override
 	default List<Component> lines()
 	{
 		// MockMC: ItemLore#lines
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<Component> styledLines()
 	{
 		// MockMC: ItemLore#styledLines

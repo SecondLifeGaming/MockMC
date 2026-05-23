@@ -19,36 +19,42 @@ import org.bukkit.potion.PotionType;
  */
 public interface PotionContentsBaseMock extends PotionContents
 {
+	@Override
 	default Color computeEffectiveColor()
 	{
 		// MockMC: PotionContents#computeEffectiveColor
 		return null;
 	}
 
+	@Override
 	default List<PotionEffect> allEffects()
 	{
 		// MockMC: PotionContents#allEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default String customName()
 	{
 		// MockMC: PotionContents#customName
 		return "";
 	}
 
+	@Override
 	default List<PotionEffect> customEffects()
 	{
 		// MockMC: PotionContents#customEffects
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default PotionType potion()
 	{
 		// MockMC: PotionContents#potion
 		return null;
 	}
 
+	@Override
 	default Color customColor()
 	{
 		// MockMC: PotionContents#customColor

@@ -15,21 +15,25 @@ import org.bukkit.entity.Painting;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PaintingBaseMock extends Painting, HangingBaseMock
 {
+	@Override
 	default boolean setArt(Art arg0, boolean arg1)
 	{
 		// MockMC: Painting#setArt
 		return false;
 	}
 
+	@Override
 	default boolean setArt(Art arg0)
 	{
 		// MockMC: Painting#setArt
 		return false;
 	}
 
+	@Override
 	default Art getArt()
 	{
 		// MockMC: Painting#getArt

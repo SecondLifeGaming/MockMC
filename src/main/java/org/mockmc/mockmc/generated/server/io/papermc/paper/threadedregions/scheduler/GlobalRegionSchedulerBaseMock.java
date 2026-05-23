@@ -18,28 +18,33 @@ import org.bukkit.plugin.Plugin;
  */
 public interface GlobalRegionSchedulerBaseMock extends GlobalRegionScheduler
 {
+	@Override
 	default void execute(Plugin arg0, Runnable arg1)
 	{
 		// MockMC: GlobalRegionScheduler#execute
 	}
 
+	@Override
 	default ScheduledTask runDelayed(Plugin arg0, Consumer<ScheduledTask> arg1, long arg2)
 	{
 		// MockMC: GlobalRegionScheduler#runDelayed
 		return null;
 	}
 
+	@Override
 	default ScheduledTask run(Plugin arg0, Consumer<ScheduledTask> arg1)
 	{
 		// MockMC: GlobalRegionScheduler#run
 		return null;
 	}
 
+	@Override
 	default void cancelTasks(Plugin arg0)
 	{
 		// MockMC: GlobalRegionScheduler#cancelTasks
 	}
 
+	@Override
 	default ScheduledTask runAtFixedRate(Plugin arg0, Consumer<ScheduledTask> arg1, long arg2, long arg3)
 	{
 		// MockMC: GlobalRegionScheduler#runAtFixedRate

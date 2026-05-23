@@ -16,11 +16,13 @@ import org.bukkit.inventory.meta.ShieldMeta;
  */
 public interface ShieldMetaBaseMock extends ShieldMeta, BannerMetaBaseMock
 {
+	@Override
 	default void setBaseColor(DyeColor arg0)
 	{
 		// MockMC: ShieldMeta#setBaseColor
 	}
 
+	@Override
 	default DyeColor getBaseColor()
 	{
 		// MockMC: ShieldMeta#getBaseColor

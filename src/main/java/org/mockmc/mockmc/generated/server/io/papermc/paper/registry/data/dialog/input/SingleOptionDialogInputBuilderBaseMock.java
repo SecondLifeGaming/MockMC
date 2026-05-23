@@ -16,18 +16,21 @@ import io.papermc.paper.registry.data.dialog.input.SingleOptionDialogInput;
  */
 public interface SingleOptionDialogInputBuilderBaseMock extends SingleOptionDialogInput.Builder
 {
+	@Override
 	default SingleOptionDialogInput.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default SingleOptionDialogInput.Builder labelVisible(boolean arg0)
 	{
 		// MockMC: Builder#labelVisible
 		return null;
 	}
 
+	@Override
 	default SingleOptionDialogInput build()
 	{
 		// MockMC: Builder#build

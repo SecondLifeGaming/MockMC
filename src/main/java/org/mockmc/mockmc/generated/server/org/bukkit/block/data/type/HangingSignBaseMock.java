@@ -16,6 +16,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface HangingSignBaseMock extends HangingSign, WaterloggedBaseMock, AttachableBaseMock, RotatableBaseMock
+public interface HangingSignBaseMock extends HangingSign, AttachableBaseMock, WaterloggedBaseMock, RotatableBaseMock
 {
 }

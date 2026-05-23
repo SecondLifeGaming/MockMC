@@ -16,6 +16,7 @@ import org.bukkit.spawner.Spawner;
  */
 public interface SpawnerBaseMock extends Spawner, BaseSpawnerBaseMock
 {
+	@Override
 	default void setMaxNearbyEntities(int arg0)
 	{
 		// MockMC: Spawner#setMaxNearbyEntities
@@ -27,55 +28,65 @@ public interface SpawnerBaseMock extends Spawner, BaseSpawnerBaseMock
 		// MockMC: Spawner#setDelay
 	}
 
+	@Override
 	default boolean isActivated()
 	{
 		// MockMC: Spawner#isActivated
 		return false;
 	}
 
+	@Override
 	default int getSpawnCount()
 	{
 		// MockMC: Spawner#getSpawnCount
 		return 0;
 	}
 
+	@Override
 	default int getMaxNearbyEntities()
 	{
 		// MockMC: Spawner#getMaxNearbyEntities
 		return 0;
 	}
 
+	@Override
 	default void setSpawnedItem(ItemStack arg0)
 	{
 		// MockMC: Spawner#setSpawnedItem
 	}
 
+	@Override
 	default void resetTimer()
 	{
 		// MockMC: Spawner#resetTimer
 	}
 
+	@Override
 	default void setMinSpawnDelay(int arg0)
 	{
 		// MockMC: Spawner#setMinSpawnDelay
 	}
 
+	@Override
 	default void setMaxSpawnDelay(int arg0)
 	{
 		// MockMC: Spawner#setMaxSpawnDelay
 	}
 
+	@Override
 	default void setSpawnCount(int arg0)
 	{
 		// MockMC: Spawner#setSpawnCount
 	}
 
+	@Override
 	default int getMaxSpawnDelay()
 	{
 		// MockMC: Spawner#getMaxSpawnDelay
 		return 0;
 	}
 
+	@Override
 	default int getMinSpawnDelay()
 	{
 		// MockMC: Spawner#getMinSpawnDelay

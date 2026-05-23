@@ -17,24 +17,28 @@ import org.bukkit.Color;
  */
 public interface CustomModelDataBaseMock extends CustomModelData
 {
+	@Override
 	default List<Color> colors()
 	{
 		// MockMC: CustomModelData#colors
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<Boolean> flags()
 	{
 		// MockMC: CustomModelData#flags
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<String> strings()
 	{
 		// MockMC: CustomModelData#strings
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default List<Float> floats()
 	{
 		// MockMC: CustomModelData#floats

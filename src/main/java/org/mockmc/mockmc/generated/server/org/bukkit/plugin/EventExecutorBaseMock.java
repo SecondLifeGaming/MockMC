@@ -18,6 +18,7 @@ import org.bukkit.plugin.EventExecutor;
  */
 public interface EventExecutorBaseMock extends EventExecutor
 {
+	@Override
 	default void execute(Listener arg0, Event arg1) throws EventException
 	{
 		// MockMC: EventExecutor#execute

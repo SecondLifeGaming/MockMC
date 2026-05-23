@@ -24,6 +24,7 @@ import org.bukkit.scoreboard.Scoreboard;
  */
 public interface ObjectiveBaseMock extends Objective
 {
+	@Override
 	default DisplaySlot getDisplaySlot()
 	{
 		// MockMC: Objective#getDisplaySlot
@@ -34,56 +35,66 @@ public interface ObjectiveBaseMock extends Objective
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void setDisplayName(String arg0)
 	{
 		// MockMC: Objective#setDisplayName
 	}
 
+	@Override
 	default boolean isModifiable()
 	{
 		// MockMC: Objective#isModifiable
 		return false;
 	}
 
+	@Override
 	default void setAutoUpdateDisplay(boolean arg0)
 	{
 		// MockMC: Objective#setAutoUpdateDisplay
 	}
 
+	@Override
 	default RenderType getRenderType()
 	{
 		// MockMC: Objective#getRenderType
 		return null;
 	}
 
+	@Override
 	default void unregister()
 	{
 		// MockMC: Objective#unregister
 	}
 
+	@Override
 	default Component displayName()
 	{
 		// MockMC: Objective#displayName
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default void displayName(Component arg0)
 	{
 		// MockMC: Objective#displayName
 	}
 
+	@Override
 	default Score getScoreFor(Entity arg0) throws IllegalArgumentException, IllegalStateException
 	{
 		// MockMC: Objective#getScoreFor
 		return null;
 	}
 
+	@Override
 	default void setRenderType(RenderType arg0)
 	{
 		// MockMC: Objective#setRenderType
 	}
 
+	@Override
 	default String getName()
 	{
 		// MockMC: Objective#getName
@@ -94,6 +105,7 @@ public interface ObjectiveBaseMock extends Objective
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.2")
 	default String getCriteria()
 	{
@@ -101,47 +113,55 @@ public interface ObjectiveBaseMock extends Objective
 		return "";
 	}
 
+	@Override
 	default Score getScore(String arg0)
 	{
 		// MockMC: Objective#getScore
 		return null;
 	}
 
+	@Override
 	default Score getScore(OfflinePlayer arg0)
 	{
 		// MockMC: Objective#getScore
 		return null;
 	}
 
+	@Override
 	default Scoreboard getScoreboard()
 	{
 		// MockMC: Objective#getScoreboard
 		return null;
 	}
 
+	@Override
 	default boolean willAutoUpdateDisplay()
 	{
 		// MockMC: Objective#willAutoUpdateDisplay
 		return false;
 	}
 
+	@Override
 	default Criteria getTrackedCriteria()
 	{
 		// MockMC: Objective#getTrackedCriteria
 		return null;
 	}
 
+	@Override
 	default void setDisplaySlot(DisplaySlot arg0)
 	{
 		// MockMC: Objective#setDisplaySlot
 	}
 
+	@Override
 	default NumberFormat numberFormat()
 	{
 		// MockMC: Objective#numberFormat
 		return null;
 	}
 
+	@Override
 	default void numberFormat(NumberFormat arg0)
 	{
 		// MockMC: Objective#numberFormat
@@ -151,6 +171,7 @@ public interface ObjectiveBaseMock extends Objective
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default String getDisplayName()
 	{

@@ -16,12 +16,14 @@ import io.papermc.paper.registry.data.dialog.input.TextDialogInput;
  */
 public interface TextDialogInputMultilineOptionsBaseMock extends TextDialogInput.MultilineOptions
 {
+	@Override
 	default Integer height()
 	{
 		// MockMC: MultilineOptions#height
 		return 0;
 	}
 
+	@Override
 	default Integer maxLines()
 	{
 		// MockMC: MultilineOptions#maxLines

@@ -17,22 +17,26 @@ import org.bukkit.inventory.meta.BundleMeta;
  */
 public interface BundleMetaBaseMock extends BundleMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean hasItems()
 	{
 		// MockMC: BundleMeta#hasItems
 		return false;
 	}
 
+	@Override
 	default void setItems(List<ItemStack> arg0)
 	{
 		// MockMC: BundleMeta#setItems
 	}
 
+	@Override
 	default void addItem(ItemStack arg0)
 	{
 		// MockMC: BundleMeta#addItem
 	}
 
+	@Override
 	default List<ItemStack> getItems()
 	{
 		// MockMC: BundleMeta#getItems

@@ -16,11 +16,13 @@ import org.bukkit.inventory.meta.LeatherArmorMeta;
  */
 public interface LeatherArmorMetaBaseMock extends LeatherArmorMeta, ItemMetaBaseMock
 {
+	@Override
 	default void setColor(Color arg0)
 	{
 		// MockMC: LeatherArmorMeta#setColor
 	}
 
+	@Override
 	default boolean isDyed()
 	{
 		// MockMC: LeatherArmorMeta#isDyed
@@ -34,6 +36,7 @@ public interface LeatherArmorMetaBaseMock extends LeatherArmorMeta, ItemMetaBase
 		return null;
 	}
 
+	@Override
 	default Color getColor()
 	{
 		// MockMC: LeatherArmorMeta#getColor

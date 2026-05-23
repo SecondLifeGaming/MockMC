@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
  */
 public interface ChatRendererViewerUnawareBaseMock extends ChatRenderer.ViewerUnaware
 {
+	@Override
 	default Component render(Player arg0, Component arg1, Component arg2)
 	{
 		// MockMC: ViewerUnaware#render

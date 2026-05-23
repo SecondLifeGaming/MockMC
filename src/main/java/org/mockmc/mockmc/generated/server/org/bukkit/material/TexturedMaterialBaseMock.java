@@ -19,7 +19,8 @@ import org.bukkit.material.TexturedMaterial;
  *             modern build cycles.
  */
 @Deprecated(since = "1.13", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings(
+{"java:S1133", "removal"})
 public interface TexturedMaterialBaseMock
 {
 	/**

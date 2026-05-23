@@ -15,103 +15,14 @@ import org.bukkit.entity.Fox;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface FoxBaseMock extends Fox, SittableBaseMock, AnimalsBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface FoxBaseMock extends Fox, AnimalsBaseMock, SittableBaseMock
 {
+	@Override
 	default void setSleeping(boolean arg0)
 	{
 		// MockMC: Fox#setSleeping
-	}
-
-	default void setSecondTrustedPlayer(AnimalTamer arg0)
-	{
-		// MockMC: Fox#setSecondTrustedPlayer
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Fox#setLeashHolder
-		return false;
-	}
-
-	default void setInterested(boolean arg0)
-	{
-		// MockMC: Fox#setInterested
-	}
-
-	default void setLeaping(boolean arg0)
-	{
-		// MockMC: Fox#setLeaping
-	}
-
-	default void setCrouching(boolean arg0)
-	{
-		// MockMC: Fox#setCrouching
-	}
-
-	default AnimalTamer getSecondTrustedPlayer()
-	{
-		// MockMC: Fox#getSecondTrustedPlayer
-		return null;
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Fox#getLeashHolder
-		return null;
-	}
-
-	default boolean isLeaping()
-	{
-		// MockMC: Fox#isLeaping
-		return false;
-	}
-
-	default void setFaceplanted(boolean arg0)
-	{
-		// MockMC: Fox#setFaceplanted
-	}
-
-	default boolean isCrouching()
-	{
-		// MockMC: Fox#isCrouching
-		return false;
-	}
-
-	default boolean isFaceplanted()
-	{
-		// MockMC: Fox#isFaceplanted
-		return false;
-	}
-
-	default Fox.Type getFoxType()
-	{
-		// MockMC: Fox#getFoxType
-		return null;
-	}
-
-	default void setFoxType(Fox.Type arg0)
-	{
-		// MockMC: Fox#setFoxType
-	}
-
-	default boolean isDefending()
-	{
-		// MockMC: Fox#isDefending
-		return false;
-	}
-
-	default void setDefending(boolean arg0)
-	{
-		// MockMC: Fox#setDefending
-	}
-
-	default boolean isInterested()
-	{
-		// MockMC: Fox#isInterested
-		return false;
 	}
 
 	@Override
@@ -121,12 +32,119 @@ public interface FoxBaseMock extends Fox, SittableBaseMock, AnimalsBaseMock
 		return false;
 	}
 
+	@Override
+	default void setSecondTrustedPlayer(AnimalTamer arg0)
+	{
+		// MockMC: Fox#setSecondTrustedPlayer
+	}
+
+	@Override
+	default void setInterested(boolean arg0)
+	{
+		// MockMC: Fox#setInterested
+	}
+
+	@Override
+	default void setLeaping(boolean arg0)
+	{
+		// MockMC: Fox#setLeaping
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Fox#getLeashHolder
+		return null;
+	}
+
+	@Override
+	default void setCrouching(boolean arg0)
+	{
+		// MockMC: Fox#setCrouching
+	}
+
+	@Override
+	default AnimalTamer getSecondTrustedPlayer()
+	{
+		// MockMC: Fox#getSecondTrustedPlayer
+		return null;
+	}
+
+	@Override
+	default boolean isLeaping()
+	{
+		// MockMC: Fox#isLeaping
+		return false;
+	}
+
+	@Override
+	default void setFaceplanted(boolean arg0)
+	{
+		// MockMC: Fox#setFaceplanted
+	}
+
+	@Override
+	default boolean setLeashHolder(Entity arg0)
+	{
+		// MockMC: Fox#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default boolean isCrouching()
+	{
+		// MockMC: Fox#isCrouching
+		return false;
+	}
+
+	@Override
+	default boolean isFaceplanted()
+	{
+		// MockMC: Fox#isFaceplanted
+		return false;
+	}
+
+	@Override
+	default Fox.Type getFoxType()
+	{
+		// MockMC: Fox#getFoxType
+		return null;
+	}
+
+	@Override
+	default void setFoxType(Fox.Type arg0)
+	{
+		// MockMC: Fox#setFoxType
+	}
+
+	@Override
+	default boolean isDefending()
+	{
+		// MockMC: Fox#isDefending
+		return false;
+	}
+
+	@Override
+	default void setDefending(boolean arg0)
+	{
+		// MockMC: Fox#setDefending
+	}
+
+	@Override
+	default boolean isInterested()
+	{
+		// MockMC: Fox#isInterested
+		return false;
+	}
+
+	@Override
 	default AnimalTamer getFirstTrustedPlayer()
 	{
 		// MockMC: Fox#getFirstTrustedPlayer
 		return null;
 	}
 
+	@Override
 	default void setFirstTrustedPlayer(AnimalTamer arg0)
 	{
 		// MockMC: Fox#setFirstTrustedPlayer

@@ -19,42 +19,49 @@ import net.kyori.adventure.text.Component;
  */
 public interface DialogBaseBuilderBaseMock extends DialogBase.Builder
 {
+	@Override
 	default DialogBase build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder inputs(List<? extends DialogInput> arg0)
 	{
 		// MockMC: Builder#inputs
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder externalTitle(Component arg0)
 	{
 		// MockMC: Builder#externalTitle
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder afterAction(DialogBase.DialogAfterAction arg0)
 	{
 		// MockMC: Builder#afterAction
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder body(List<? extends DialogBody> arg0)
 	{
 		// MockMC: Builder#body
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder canCloseWithEscape(boolean arg0)
 	{
 		// MockMC: Builder#canCloseWithEscape
 		return null;
 	}
 
+	@Override
 	default DialogBase.Builder pause(boolean arg0)
 	{
 		// MockMC: Builder#pause

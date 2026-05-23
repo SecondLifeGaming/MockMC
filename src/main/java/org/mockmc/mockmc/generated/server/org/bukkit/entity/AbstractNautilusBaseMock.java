@@ -16,21 +16,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractNautilusBaseMock
 		extends
 			AbstractNautilus,
 			VehicleBaseMock,
-			InventoryHolderBaseMock,
-			TameableBaseMock
+			TameableBaseMock,
+			InventoryHolderBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: AbstractNautilus#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -43,6 +37,13 @@ public interface AbstractNautilusBaseMock
 	{
 		// MockMC: AbstractNautilus#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: AbstractNautilus#getLeashHolder
+		return null;
 	}
 
 	@Override

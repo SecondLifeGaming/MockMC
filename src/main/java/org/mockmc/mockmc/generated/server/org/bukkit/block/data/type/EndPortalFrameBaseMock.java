@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.DirectionalBaseM
  */
 public interface EndPortalFrameBaseMock extends EndPortalFrame, DirectionalBaseMock
 {
+	@Override
 	default boolean hasEye()
 	{
 		// MockMC: EndPortalFrame#hasEye
 		return false;
 	}
 
+	@Override
 	default void setEye(boolean arg0)
 	{
 		// MockMC: EndPortalFrame#setEye

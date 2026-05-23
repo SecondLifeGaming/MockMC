@@ -17,54 +17,63 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface KineticWeaponBuilderBaseMock extends KineticWeapon.Builder, DataComponentBuilderBaseMock<KineticWeapon>
 {
+	@Override
 	default KineticWeapon.Builder hitSound(Key arg0)
 	{
 		// MockMC: Builder#hitSound
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder damageMultiplier(float arg0)
 	{
 		// MockMC: Builder#damageMultiplier
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder damageConditions(KineticWeapon.Condition arg0)
 	{
 		// MockMC: Builder#damageConditions
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder knockbackConditions(KineticWeapon.Condition arg0)
 	{
 		// MockMC: Builder#knockbackConditions
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder delayTicks(int arg0)
 	{
 		// MockMC: Builder#delayTicks
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder sound(Key arg0)
 	{
 		// MockMC: Builder#sound
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder contactCooldownTicks(int arg0)
 	{
 		// MockMC: Builder#contactCooldownTicks
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder dismountConditions(KineticWeapon.Condition arg0)
 	{
 		// MockMC: Builder#dismountConditions
 		return null;
 	}
 
+	@Override
 	default KineticWeapon.Builder forwardMovement(float arg0)
 	{
 		// MockMC: Builder#forwardMovement

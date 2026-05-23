@@ -14,37 +14,22 @@ import org.bukkit.entity.PiglinAbstract;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PiglinAbstractBaseMock extends PiglinAbstract, MonsterBaseMock, AgeableBaseMock
 {
+	@Override
 	default boolean isConverting()
 	{
 		// MockMC: PiglinAbstract#isConverting
 		return false;
 	}
 
+	@Override
 	default int getConversionTime()
 	{
 		// MockMC: PiglinAbstract#getConversionTime
 		return 0;
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: PiglinAbstract#getLeashHolder
-		return null;
-	}
-
-	default void setConversionTime(int arg0)
-	{
-		// MockMC: PiglinAbstract#setConversionTime
-	}
-
-	default boolean isImmuneToZombification()
-	{
-		// MockMC: PiglinAbstract#isImmuneToZombification
-		return false;
 	}
 
 	@Override
@@ -54,10 +39,38 @@ public interface PiglinAbstractBaseMock extends PiglinAbstract, MonsterBaseMock,
 		return false;
 	}
 
+	@Override
+	default void setConversionTime(int arg0)
+	{
+		// MockMC: PiglinAbstract#setConversionTime
+	}
+
+	@Override
+	default boolean isImmuneToZombification()
+	{
+		// MockMC: PiglinAbstract#isImmuneToZombification
+		return false;
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: PiglinAbstract#isLeashed
+		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: PiglinAbstract#getLeashHolder
+		return null;
+	}
+
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default boolean isBaby()
 	{
@@ -69,6 +82,7 @@ public interface PiglinAbstractBaseMock extends PiglinAbstract, MonsterBaseMock,
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.16.2")
 	default void setBaby(boolean arg0)
 	{
@@ -76,12 +90,6 @@ public interface PiglinAbstractBaseMock extends PiglinAbstract, MonsterBaseMock,
 	}
 
 	@Override
-	default boolean isLeashed()
-	{
-		// MockMC: PiglinAbstract#isLeashed
-		return false;
-	}
-
 	default void setImmuneToZombification(boolean arg0)
 	{
 		// MockMC: PiglinAbstract#setImmuneToZombification

@@ -14,19 +14,23 @@ import org.bukkit.entity.Player;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface SculkShriekerBaseMock extends SculkShrieker, TileStateBaseMock
 {
+	@Override
 	default void tryShriek(Player arg0)
 	{
 		// MockMC: SculkShrieker#tryShriek
 	}
 
+	@Override
 	default void setWarningLevel(int arg0)
 	{
 		// MockMC: SculkShrieker#setWarningLevel
 	}
 
+	@Override
 	default int getWarningLevel()
 	{
 		// MockMC: SculkShrieker#getWarningLevel

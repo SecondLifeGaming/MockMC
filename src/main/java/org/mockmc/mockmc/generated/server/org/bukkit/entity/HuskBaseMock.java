@@ -14,27 +14,28 @@ import org.bukkit.entity.Husk;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface HuskBaseMock extends Husk, ZombieBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: Husk#getLeashHolder
-		return null;
+		// MockMC: Husk#setLeashHolder
+		return false;
+	}
+
+	@Override
+	default boolean isLeashed()
+	{
+		// MockMC: Husk#isLeashed
+		return false;
 	}
 
 	@Override
 	default void setConversionTime(int arg0)
 	{
 		// MockMC: Husk#setConversionTime
-	}
-
-	@Override
-	default boolean setLeashHolder(Entity arg0)
-	{
-		// MockMC: Husk#setLeashHolder
-		return false;
 	}
 
 	@Override
@@ -52,9 +53,9 @@ public interface HuskBaseMock extends Husk, ZombieBaseMock
 	}
 
 	@Override
-	default boolean isLeashed()
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: Husk#isLeashed
-		return false;
+		// MockMC: Husk#getLeashHolder
+		return null;
 	}
 }

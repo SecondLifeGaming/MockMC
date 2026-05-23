@@ -20,6 +20,7 @@ public interface JukeboxPlayableBuilderBaseMock
 			JukeboxPlayable.Builder,
 			DataComponentBuilderBaseMock<JukeboxPlayable>
 {
+	@Override
 	default JukeboxPlayable.Builder jukeboxSong(JukeboxSong arg0)
 	{
 		// MockMC: Builder#jukeboxSong

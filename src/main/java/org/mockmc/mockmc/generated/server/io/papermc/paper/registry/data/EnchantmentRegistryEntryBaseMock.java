@@ -21,60 +21,70 @@ import org.bukkit.inventory.ItemType;
  */
 public interface EnchantmentRegistryEntryBaseMock extends EnchantmentRegistryEntry
 {
+	@Override
 	default int maxLevel()
 	{
 		// MockMC: EnchantmentRegistryEntry#maxLevel
 		return 0;
 	}
 
+	@Override
 	default RegistryKeySet<Enchantment> exclusiveWith()
 	{
 		// MockMC: EnchantmentRegistryEntry#exclusiveWith
 		return null;
 	}
 
+	@Override
 	default List<EquipmentSlotGroup> activeSlots()
 	{
 		// MockMC: EnchantmentRegistryEntry#activeSlots
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default int anvilCost()
 	{
 		// MockMC: EnchantmentRegistryEntry#anvilCost
 		return 0;
 	}
 
+	@Override
 	default RegistryKeySet<ItemType> supportedItems()
 	{
 		// MockMC: EnchantmentRegistryEntry#supportedItems
 		return null;
 	}
 
+	@Override
 	default EnchantmentRegistryEntry.EnchantmentCost minimumCost()
 	{
 		// MockMC: EnchantmentRegistryEntry#minimumCost
 		return null;
 	}
 
+	@Override
 	default int weight()
 	{
 		// MockMC: EnchantmentRegistryEntry#weight
 		return 0;
 	}
 
+	@Override
 	default Component description()
 	{
 		// MockMC: EnchantmentRegistryEntry#description
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default RegistryKeySet<ItemType> primaryItems()
 	{
 		// MockMC: EnchantmentRegistryEntry#primaryItems
 		return null;
 	}
 
+	@Override
 	default EnchantmentRegistryEntry.EnchantmentCost maximumCost()
 	{
 		// MockMC: EnchantmentRegistryEntry#maximumCost

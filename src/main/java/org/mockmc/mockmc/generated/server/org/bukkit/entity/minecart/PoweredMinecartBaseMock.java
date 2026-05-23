@@ -14,36 +14,43 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.MinecartBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface PoweredMinecartBaseMock extends PoweredMinecart, MinecartBaseMock
 {
+	@Override
 	default void setPushX(double arg0)
 	{
 		// MockMC: PoweredMinecart#setPushX
 	}
 
+	@Override
 	default int getFuel()
 	{
 		// MockMC: PoweredMinecart#getFuel
 		return 0;
 	}
 
+	@Override
 	default void setFuel(int arg0)
 	{
 		// MockMC: PoweredMinecart#setFuel
 	}
 
+	@Override
 	default void setPushZ(double arg0)
 	{
 		// MockMC: PoweredMinecart#setPushZ
 	}
 
+	@Override
 	default double getPushZ()
 	{
 		// MockMC: PoweredMinecart#getPushZ
 		return 0.0d;
 	}
 
+	@Override
 	default double getPushX()
 	{
 		// MockMC: PoweredMinecart#getPushX

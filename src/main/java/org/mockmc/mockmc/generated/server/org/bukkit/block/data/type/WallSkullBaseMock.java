@@ -15,6 +15,6 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.PowerableBaseMoc
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface WallSkullBaseMock extends WallSkull, PowerableBaseMock, DirectionalBaseMock
+public interface WallSkullBaseMock extends WallSkull, DirectionalBaseMock, PowerableBaseMock
 {
 }

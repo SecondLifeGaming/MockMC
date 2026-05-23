@@ -15,19 +15,22 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface DriedGhastBaseMock extends DriedGhast, WaterloggedBaseMock, DirectionalBaseMock
+public interface DriedGhastBaseMock extends DriedGhast, DirectionalBaseMock, WaterloggedBaseMock
 {
+	@Override
 	default int getMaximumHydration()
 	{
 		// MockMC: DriedGhast#getMaximumHydration
 		return 0;
 	}
 
+	@Override
 	default void setHydration(int arg0)
 	{
 		// MockMC: DriedGhast#setHydration
 	}
 
+	@Override
 	default int getHydration()
 	{
 		// MockMC: DriedGhast#getHydration

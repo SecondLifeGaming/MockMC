@@ -21,35 +21,41 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  */
 public interface PostFlattenTagRegistrarBaseMock<T> extends PostFlattenTagRegistrar<T>, RegistrarBaseMock
 {
+	@Override
 	default Map<TagKey<T>, Collection<TypedKey<T>>> getAllTags()
 	{
 		// MockMC: PostFlattenTagRegistrar#getAllTags
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default void setTag(TagKey<T> arg0, Collection<TypedKey<T>> arg1)
 	{
 		// MockMC: PostFlattenTagRegistrar#setTag
 	}
 
+	@Override
 	default Collection<TypedKey<T>> getTag(TagKey<T> arg0)
 	{
 		// MockMC: PostFlattenTagRegistrar#getTag
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default RegistryKey<T> registryKey()
 	{
 		// MockMC: PostFlattenTagRegistrar#registryKey
 		return null;
 	}
 
+	@Override
 	default boolean hasTag(TagKey<T> arg0)
 	{
 		// MockMC: PostFlattenTagRegistrar#hasTag
 		return false;
 	}
 
+	@Override
 	default void addToTag(TagKey<T> arg0, Collection<TypedKey<T>> arg1)
 	{
 		// MockMC: PostFlattenTagRegistrar#addToTag

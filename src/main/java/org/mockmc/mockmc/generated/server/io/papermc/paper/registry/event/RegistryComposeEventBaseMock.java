@@ -23,12 +23,14 @@ public interface RegistryComposeEventBaseMock<T, B extends RegistryBuilder<T>>
 			RegistryComposeEvent<T, B>,
 			RegistryEventBaseMock<T>
 {
+	@Override
 	default <V extends Keyed> Tag<V> getOrCreateTag(TagKey<V> arg0)
 	{
 		// MockMC: RegistryComposeEvent#getOrCreateTag
 		return null;
 	}
 
+	@Override
 	default WritableRegistry<T, B> registry()
 	{
 		// MockMC: RegistryComposeEvent#registry

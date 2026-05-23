@@ -15,9 +15,11 @@ import org.mockmc.mockmc.generated.server.org.bukkit.material.AttachableBaseMock
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface HangingBaseMock extends Hanging, EntityBaseMock, AttachableBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface HangingBaseMock extends Hanging, AttachableBaseMock, EntityBaseMock
 {
+	@Override
 	default boolean setFacingDirection(BlockFace arg0, boolean arg1)
 	{
 		// MockMC: Hanging#setFacingDirection

@@ -22,12 +22,14 @@ public interface BannerPatternRegistryEntryBuilderBaseMock
 			RegistryBuilderBaseMock<PatternType>,
 			BannerPatternRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.BannerPatternRegistryEntry.Builder translationKey(String arg0)
 	{
 		// MockMC: Builder#translationKey
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.BannerPatternRegistryEntry.Builder assetId(Key arg0)
 	{
 		// MockMC: Builder#assetId

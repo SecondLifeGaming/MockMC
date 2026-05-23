@@ -17,6 +17,7 @@ import java.util.Collection;
  */
 public interface RedirectModifierBaseMock<S> extends RedirectModifier<S>
 {
+	@Override
 	default Collection<S> apply(CommandContext<S> arg0) throws CommandSyntaxException
 	{
 		// MockMC: RedirectModifier#apply

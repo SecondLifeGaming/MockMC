@@ -16,60 +16,71 @@ import org.bukkit.BanEntry;
  */
 public interface BanEntryBaseMock<T> extends BanEntry<T>
 {
+	@Override
 	default void remove()
 	{
 		// MockMC: BanEntry#remove
 	}
 
+	@Override
 	default Date getCreated()
 	{
 		// MockMC: BanEntry#getCreated
 		return null;
 	}
 
+	@Override
 	default void save()
 	{
 		// MockMC: BanEntry#save
 	}
 
+	@Override
 	default T getBanTarget()
 	{
 		// MockMC: BanEntry#getBanTarget
 		return null;
 	}
 
+	@Override
 	default void setCreated(Date arg0)
 	{
 		// MockMC: BanEntry#setCreated
 	}
 
+	@Override
 	default void setExpiration(Date arg0)
 	{
 		// MockMC: BanEntry#setExpiration
 	}
 
+	@Override
 	default void setReason(String arg0)
 	{
 		// MockMC: BanEntry#setReason
 	}
 
+	@Override
 	default String getSource()
 	{
 		// MockMC: BanEntry#getSource
 		return "";
 	}
 
+	@Override
 	default String getReason()
 	{
 		// MockMC: BanEntry#getReason
 		return "";
 	}
 
+	@Override
 	default void setSource(String arg0)
 	{
 		// MockMC: BanEntry#setSource
 	}
 
+	@Override
 	default Date getExpiration()
 	{
 		// MockMC: BanEntry#getExpiration
@@ -80,6 +91,7 @@ public interface BanEntryBaseMock<T> extends BanEntry<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.20.1")
 	default String getTarget()
 	{

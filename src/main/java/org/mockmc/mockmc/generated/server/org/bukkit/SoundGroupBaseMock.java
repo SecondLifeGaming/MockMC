@@ -16,42 +16,49 @@ import org.bukkit.SoundGroup;
  */
 public interface SoundGroupBaseMock extends SoundGroup
 {
+	@Override
 	default Sound getFallSound()
 	{
 		// MockMC: SoundGroup#getFallSound
 		return null;
 	}
 
+	@Override
 	default Sound getHitSound()
 	{
 		// MockMC: SoundGroup#getHitSound
 		return null;
 	}
 
+	@Override
 	default float getVolume()
 	{
 		// MockMC: SoundGroup#getVolume
 		return 0.0f;
 	}
 
+	@Override
 	default float getPitch()
 	{
 		// MockMC: SoundGroup#getPitch
 		return 0.0f;
 	}
 
+	@Override
 	default Sound getBreakSound()
 	{
 		// MockMC: SoundGroup#getBreakSound
 		return null;
 	}
 
+	@Override
 	default Sound getStepSound()
 	{
 		// MockMC: SoundGroup#getStepSound
 		return null;
 	}
 
+	@Override
 	default Sound getPlaceSound()
 	{
 		// MockMC: SoundGroup#getPlaceSound

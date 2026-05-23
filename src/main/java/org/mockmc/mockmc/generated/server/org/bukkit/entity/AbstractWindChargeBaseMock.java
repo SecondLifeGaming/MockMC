@@ -13,9 +13,11 @@ import org.bukkit.entity.AbstractWindCharge;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface AbstractWindChargeBaseMock extends AbstractWindCharge, FireballBaseMock
 {
+	@Override
 	default void explode()
 	{
 		// MockMC: AbstractWindCharge#explode

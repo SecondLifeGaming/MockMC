@@ -21,6 +21,7 @@ public interface RegistryValueSetBuilderBaseMock<API, ENTRY_BUILDER extends Regi
 		extends
 			RegistryValueSetBuilder<API, ENTRY_BUILDER>
 {
+	@Override
 	default RegistryValueSetBuilder<API, ENTRY_BUILDER> add(
 			Consumer<RegistryBuilderFactory<API, ? extends ENTRY_BUILDER>> arg0)
 	{
@@ -28,6 +29,7 @@ public interface RegistryValueSetBuilderBaseMock<API, ENTRY_BUILDER extends Regi
 		return null;
 	}
 
+	@Override
 	default RegistryValueSet<API> build()
 	{
 		// MockMC: RegistryValueSetBuilder#build

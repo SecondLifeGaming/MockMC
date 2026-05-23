@@ -16,6 +16,7 @@ import java.util.List;
  */
 public interface ItemAttributeModifiersBaseMock extends ItemAttributeModifiers
 {
+	@Override
 	default List<ItemAttributeModifiers.Entry> modifiers()
 	{
 		// MockMC: ItemAttributeModifiers#modifiers

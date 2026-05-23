@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface HangingMossBaseMock extends HangingMoss, BlockDataBaseMock
 {
+	@Override
 	default boolean isTip()
 	{
 		// MockMC: HangingMoss#isTip
 		return false;
 	}
 
+	@Override
 	default void setTip(boolean arg0)
 	{
 		// MockMC: HangingMoss#setTip

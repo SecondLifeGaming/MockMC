@@ -15,16 +15,10 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.entity.SchoolableFish
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface CodBaseMock extends Cod, SchoolableFishBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Cod#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -37,5 +31,12 @@ public interface CodBaseMock extends Cod, SchoolableFishBaseMock
 	{
 		// MockMC: Cod#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Cod#getLeashHolder
+		return null;
 	}
 }

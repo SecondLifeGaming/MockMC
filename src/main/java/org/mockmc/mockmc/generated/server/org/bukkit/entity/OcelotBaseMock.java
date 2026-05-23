@@ -14,36 +14,14 @@ import org.bukkit.entity.Ocelot;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface OcelotBaseMock extends Ocelot, AnimalsBaseMock
 {
+	@Override
 	default void setTrusting(boolean arg0)
 	{
 		// MockMC: Ocelot#setTrusting
-	}
-
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Ocelot#getLeashHolder
-		return null;
-	}
-
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Deprecated(since = "1.19.4")
-	default Ocelot.Type getCatType()
-	{
-		// MockMC: Ocelot#getCatType
-		return null;
-	}
-
-	default boolean isTrusting()
-	{
-		// MockMC: Ocelot#isTrusting
-		return false;
 	}
 
 	@Override
@@ -57,10 +35,19 @@ public interface OcelotBaseMock extends Ocelot, AnimalsBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.4")
-	default void setCatType(Ocelot.Type arg0)
+	default Ocelot.Type getCatType()
 	{
-		// MockMC: Ocelot#setCatType
+		// MockMC: Ocelot#getCatType
+		return null;
+	}
+
+	@Override
+	default boolean isTrusting()
+	{
+		// MockMC: Ocelot#isTrusting
+		return false;
 	}
 
 	@Override
@@ -68,5 +55,23 @@ public interface OcelotBaseMock extends Ocelot, AnimalsBaseMock
 	{
 		// MockMC: Ocelot#isLeashed
 		return false;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Override
+	@Deprecated(since = "1.19.4")
+	default void setCatType(Ocelot.Type arg0)
+	{
+		// MockMC: Ocelot#setCatType
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Ocelot#getLeashHolder
+		return null;
 	}
 }

@@ -15,24 +15,28 @@ import io.papermc.paper.registry.data.dialog.input.BooleanDialogInput;
  */
 public interface BooleanDialogInputBuilderBaseMock extends BooleanDialogInput.Builder
 {
+	@Override
 	default BooleanDialogInput.Builder onTrue(String arg0)
 	{
 		// MockMC: Builder#onTrue
 		return null;
 	}
 
+	@Override
 	default BooleanDialogInput.Builder initial(boolean arg0)
 	{
 		// MockMC: Builder#initial
 		return null;
 	}
 
+	@Override
 	default BooleanDialogInput build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default BooleanDialogInput.Builder onFalse(String arg0)
 	{
 		// MockMC: Builder#onFalse

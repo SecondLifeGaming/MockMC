@@ -20,11 +20,13 @@ import org.bukkit.entity.Player;
  */
 public interface BossBarBaseMock extends BossBar
 {
+	@Override
 	default void addPlayer(Player arg0)
 	{
 		// MockMC: BossBar#addPlayer
 	}
 
+	@Override
 	default void removeAll()
 	{
 		// MockMC: BossBar#removeAll
@@ -34,72 +36,85 @@ public interface BossBarBaseMock extends BossBar
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void hide()
 	{
 		// MockMC: BossBar#hide
 	}
 
+	@Override
 	default String getTitle()
 	{
 		// MockMC: BossBar#getTitle
 		return "";
 	}
 
+	@Override
 	default BarStyle getStyle()
 	{
 		// MockMC: BossBar#getStyle
 		return null;
 	}
 
+	@Override
 	default void setColor(BarColor arg0)
 	{
 		// MockMC: BossBar#setColor
 	}
 
+	@Override
 	default List<Player> getPlayers()
 	{
 		// MockMC: BossBar#getPlayers
 		return java.util.Collections.emptyList();
 	}
 
+	@Override
 	default void setStyle(BarStyle arg0)
 	{
 		// MockMC: BossBar#setStyle
 	}
 
+	@Override
 	default void removeFlag(BarFlag arg0)
 	{
 		// MockMC: BossBar#removeFlag
 	}
 
+	@Override
 	default void setVisible(boolean arg0)
 	{
 		// MockMC: BossBar#setVisible
 	}
 
+	@Override
 	default boolean hasFlag(BarFlag arg0)
 	{
 		// MockMC: BossBar#hasFlag
 		return false;
 	}
 
+	@Override
 	default double getProgress()
 	{
 		// MockMC: BossBar#getProgress
 		return 0.0d;
 	}
 
+	@Override
 	default void removePlayer(Player arg0)
 	{
 		// MockMC: BossBar#removePlayer
 	}
 
+	@Override
 	default void addFlag(BarFlag arg0)
 	{
 		// MockMC: BossBar#addFlag
 	}
 
+	@Override
 	default void setProgress(double arg0)
 	{
 		// MockMC: BossBar#setProgress
@@ -109,23 +124,27 @@ public interface BossBarBaseMock extends BossBar
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.9")
 	default void show()
 	{
 		// MockMC: BossBar#show
 	}
 
+	@Override
 	default BarColor getColor()
 	{
 		// MockMC: BossBar#getColor
 		return null;
 	}
 
+	@Override
 	default void setTitle(String arg0)
 	{
 		// MockMC: BossBar#setTitle
 	}
 
+	@Override
 	default boolean isVisible()
 	{
 		// MockMC: BossBar#isVisible

@@ -24,36 +24,42 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  */
 public interface CommandsBaseMock extends Commands, RegistrarBaseMock
 {
+	@Override
 	default CommandDispatcher<CommandSourceStack> getDispatcher()
 	{
 		// MockMC: Commands#getDispatcher
 		return null;
 	}
 
+	@Override
 	default Set<String> register(String arg0, BasicCommand arg1)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(String arg0, String arg1, Collection<String> arg2, BasicCommand arg3)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(String arg0, String arg1, BasicCommand arg2)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(PluginMeta arg0, String arg1, String arg2, Collection<String> arg3, BasicCommand arg4)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(PluginMeta arg0, LiteralCommandNode<CommandSourceStack> arg1, String arg2,
 			Collection<String> arg3)
 	{
@@ -61,36 +67,42 @@ public interface CommandsBaseMock extends Commands, RegistrarBaseMock
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(String arg0, Collection<String> arg1, BasicCommand arg2)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(LiteralCommandNode<CommandSourceStack> arg0)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(LiteralCommandNode<CommandSourceStack> arg0, Collection<String> arg1)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(LiteralCommandNode<CommandSourceStack> arg0, String arg1, Collection<String> arg2)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> register(LiteralCommandNode<CommandSourceStack> arg0, String arg1)
 	{
 		// MockMC: Commands#register
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default Set<String> registerWithFlags(PluginMeta arg0, LiteralCommandNode<CommandSourceStack> arg1, String arg2,
 			Collection<String> arg3, Set<CommandRegistrationFlag> arg4)
 	{

@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
  */
 public interface PluginIdentifiableCommandBaseMock extends PluginIdentifiableCommand
 {
+	@Override
 	default Plugin getPlugin()
 	{
 		// MockMC: PluginIdentifiableCommand#getPlugin

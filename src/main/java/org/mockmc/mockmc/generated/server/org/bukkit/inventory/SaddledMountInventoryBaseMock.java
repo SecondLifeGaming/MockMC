@@ -16,11 +16,13 @@ import org.bukkit.inventory.SaddledMountInventory;
  */
 public interface SaddledMountInventoryBaseMock extends SaddledMountInventory, MountInventoryBaseMock
 {
+	@Override
 	default void setSaddle(ItemStack arg0)
 	{
 		// MockMC: SaddledMountInventory#setSaddle
 	}
 
+	@Override
 	default ItemStack getSaddle()
 	{
 		// MockMC: SaddledMountInventory#getSaddle

@@ -15,12 +15,14 @@ import org.bukkit.block.data.Openable;
  */
 public interface OpenableBaseMock extends Openable, BlockDataBaseMock
 {
+	@Override
 	default boolean isOpen()
 	{
 		// MockMC: Openable#isOpen
 		return false;
 	}
 
+	@Override
 	default void setOpen(boolean arg0)
 	{
 		// MockMC: Openable#setOpen

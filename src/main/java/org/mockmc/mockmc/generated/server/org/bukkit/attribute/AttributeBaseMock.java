@@ -16,15 +16,18 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface AttributeBaseMock extends Attribute, OldEnumBaseMock<Attribute>, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface AttributeBaseMock extends Attribute, OldEnumBaseMock<Attribute>, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default String translationKey()
 	{
 		// MockMC: Attribute#translationKey
 		return "";
 	}
 
+	@Override
 	default Attribute.Sentiment getSentiment()
 	{
 		// MockMC: Attribute#getSentiment

@@ -18,48 +18,56 @@ import org.bukkit.entity.Entity;
  */
 public interface DamageSourceBaseMock extends DamageSource
 {
+	@Override
 	default Entity getDirectEntity()
 	{
 		// MockMC: DamageSource#getDirectEntity
 		return null;
 	}
 
+	@Override
 	default Location getSourceLocation()
 	{
 		// MockMC: DamageSource#getSourceLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default Entity getCausingEntity()
 	{
 		// MockMC: DamageSource#getCausingEntity
 		return null;
 	}
 
+	@Override
 	default Location getDamageLocation()
 	{
 		// MockMC: DamageSource#getDamageLocation
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default DamageType getDamageType()
 	{
 		// MockMC: DamageSource#getDamageType
 		return null;
 	}
 
+	@Override
 	default boolean isIndirect()
 	{
 		// MockMC: DamageSource#isIndirect
 		return false;
 	}
 
+	@Override
 	default float getFoodExhaustion()
 	{
 		// MockMC: DamageSource#getFoodExhaustion
 		return 0.0f;
 	}
 
+	@Override
 	default boolean scalesWithDifficulty()
 	{
 		// MockMC: DamageSource#scalesWithDifficulty

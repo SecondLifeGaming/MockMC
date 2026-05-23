@@ -17,30 +17,35 @@ import net.kyori.adventure.text.Component;
  */
 public interface PaintingVariantRegistryEntryBaseMock extends PaintingVariantRegistryEntry
 {
+	@Override
 	default int height()
 	{
 		// MockMC: PaintingVariantRegistryEntry#height
 		return 0;
 	}
 
+	@Override
 	default Component title()
 	{
 		// MockMC: PaintingVariantRegistryEntry#title
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default int width()
 	{
 		// MockMC: PaintingVariantRegistryEntry#width
 		return 0;
 	}
 
+	@Override
 	default Component author()
 	{
 		// MockMC: PaintingVariantRegistryEntry#author
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default Key assetId()
 	{
 		// MockMC: PaintingVariantRegistryEntry#assetId

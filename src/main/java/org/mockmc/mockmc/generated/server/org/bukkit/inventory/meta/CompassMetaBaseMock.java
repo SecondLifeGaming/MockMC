@@ -16,12 +16,14 @@ import org.bukkit.inventory.meta.CompassMeta;
  */
 public interface CompassMetaBaseMock extends CompassMeta, ItemMetaBaseMock
 {
+	@Override
 	default Location getLodestone()
 	{
 		// MockMC: CompassMeta#getLodestone
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default void setLodestone(Location arg0)
 	{
 		// MockMC: CompassMeta#setLodestone
@@ -34,28 +36,33 @@ public interface CompassMetaBaseMock extends CompassMeta, ItemMetaBaseMock
 		return null;
 	}
 
+	@Override
 	default void setLodestoneTracked(boolean arg0)
 	{
 		// MockMC: CompassMeta#setLodestoneTracked
 	}
 
+	@Override
 	default void clearLodestone()
 	{
 		// MockMC: CompassMeta#clearLodestone
 	}
 
+	@Override
 	default boolean hasLodestone()
 	{
 		// MockMC: CompassMeta#hasLodestone
 		return false;
 	}
 
+	@Override
 	default boolean isLodestoneCompass()
 	{
 		// MockMC: CompassMeta#isLodestoneCompass
 		return false;
 	}
 
+	@Override
 	default boolean isLodestoneTracked()
 	{
 		// MockMC: CompassMeta#isLodestoneTracked

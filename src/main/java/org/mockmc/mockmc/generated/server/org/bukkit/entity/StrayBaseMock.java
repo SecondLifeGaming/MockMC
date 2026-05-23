@@ -14,16 +14,10 @@ import org.bukkit.entity.Stray;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface StrayBaseMock extends Stray, AbstractSkeletonBaseMock
 {
-	@Override
-	default Entity getLeashHolder() throws IllegalStateException
-	{
-		// MockMC: Stray#getLeashHolder
-		return null;
-	}
-
 	@Override
 	default boolean setLeashHolder(Entity arg0)
 	{
@@ -36,5 +30,12 @@ public interface StrayBaseMock extends Stray, AbstractSkeletonBaseMock
 	{
 		// MockMC: Stray#isLeashed
 		return false;
+	}
+
+	@Override
+	default Entity getLeashHolder() throws IllegalStateException
+	{
+		// MockMC: Stray#getLeashHolder
+		return null;
 	}
 }

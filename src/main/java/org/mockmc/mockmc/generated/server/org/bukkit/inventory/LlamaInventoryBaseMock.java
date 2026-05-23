@@ -16,11 +16,13 @@ import org.bukkit.inventory.LlamaInventory;
  */
 public interface LlamaInventoryBaseMock extends LlamaInventory, SaddledHorseInventoryBaseMock
 {
+	@Override
 	default void setDecor(ItemStack arg0)
 	{
 		// MockMC: LlamaInventory#setDecor
 	}
 
+	@Override
 	default ItemStack getDecor()
 	{
 		// MockMC: LlamaInventory#getDecor

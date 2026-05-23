@@ -16,12 +16,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface SculkCatalystBaseMock extends SculkCatalyst, BlockDataBaseMock
 {
+	@Override
 	default boolean isBloom()
 	{
 		// MockMC: SculkCatalyst#isBloom
 		return false;
 	}
 
+	@Override
 	default void setBloom(boolean arg0)
 	{
 		// MockMC: SculkCatalyst#setBloom

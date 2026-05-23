@@ -16,6 +16,7 @@ import java.lang.annotation.Annotation;
  */
 public interface DoNotUseBaseMock extends DoNotUse
 {
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: DoNotUse#annotationType

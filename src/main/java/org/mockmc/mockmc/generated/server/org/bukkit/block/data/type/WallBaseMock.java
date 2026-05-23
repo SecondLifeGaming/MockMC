@@ -17,22 +17,26 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.WaterloggedBaseM
  */
 public interface WallBaseMock extends Wall, WaterloggedBaseMock
 {
+	@Override
 	default void setUp(boolean arg0)
 	{
 		// MockMC: Wall#setUp
 	}
 
+	@Override
 	default void setHeight(BlockFace arg0, Wall.Height arg1)
 	{
 		// MockMC: Wall#setHeight
 	}
 
+	@Override
 	default Wall.Height getHeight(BlockFace arg0)
 	{
 		// MockMC: Wall#getHeight
 		return null;
 	}
 
+	@Override
 	default boolean isUp()
 	{
 		// MockMC: Wall#isUp

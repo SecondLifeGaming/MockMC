@@ -15,6 +15,7 @@ import io.papermc.paper.ban.BanListType;
  */
 public interface BanListTypeBaseMock<T> extends BanListType<T>
 {
+	@Override
 	default Class<T> typeClass()
 	{
 		// MockMC: BanListType#typeClass

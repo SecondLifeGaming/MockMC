@@ -13,49 +13,58 @@ import org.bukkit.entity.Interaction;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface InteractionBaseMock extends Interaction, EntityBaseMock
 {
+	@Override
 	default float getInteractionWidth()
 	{
 		// MockMC: Interaction#getInteractionWidth
 		return 0.0f;
 	}
 
+	@Override
 	default void setInteractionWidth(float arg0)
 	{
 		// MockMC: Interaction#setInteractionWidth
 	}
 
+	@Override
 	default float getInteractionHeight()
 	{
 		// MockMC: Interaction#getInteractionHeight
 		return 0.0f;
 	}
 
+	@Override
 	default void setResponsive(boolean arg0)
 	{
 		// MockMC: Interaction#setResponsive
 	}
 
+	@Override
 	default Interaction.PreviousInteraction getLastAttack()
 	{
 		// MockMC: Interaction#getLastAttack
 		return null;
 	}
 
+	@Override
 	default Interaction.PreviousInteraction getLastInteraction()
 	{
 		// MockMC: Interaction#getLastInteraction
 		return null;
 	}
 
+	@Override
 	default boolean isResponsive()
 	{
 		// MockMC: Interaction#isResponsive
 		return false;
 	}
 
+	@Override
 	default void setInteractionHeight(float arg0)
 	{
 		// MockMC: Interaction#setInteractionHeight

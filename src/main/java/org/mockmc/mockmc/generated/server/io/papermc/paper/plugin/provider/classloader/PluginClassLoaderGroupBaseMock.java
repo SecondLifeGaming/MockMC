@@ -17,23 +17,27 @@ import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
  */
 public interface PluginClassLoaderGroupBaseMock extends PluginClassLoaderGroup
 {
+	@Override
 	default void remove(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: PluginClassLoaderGroup#remove
 	}
 
+	@Override
 	default ClassLoaderAccess getAccess()
 	{
 		// MockMC: PluginClassLoaderGroup#getAccess
 		return null;
 	}
 
+	@Override
 	default Class<?> getClassByName(String arg0, boolean arg1, ConfiguredPluginClassLoader arg2)
 	{
 		// MockMC: PluginClassLoaderGroup#getClassByName
 		return null;
 	}
 
+	@Override
 	default void add(ConfiguredPluginClassLoader arg0)
 	{
 		// MockMC: PluginClassLoaderGroup#add

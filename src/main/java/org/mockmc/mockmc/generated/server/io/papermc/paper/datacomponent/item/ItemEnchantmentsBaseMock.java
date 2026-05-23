@@ -17,6 +17,7 @@ import org.bukkit.enchantments.Enchantment;
  */
 public interface ItemEnchantmentsBaseMock extends ItemEnchantments
 {
+	@Override
 	default Map<Enchantment, Integer> enchantments()
 	{
 		// MockMC: ItemEnchantments#enchantments

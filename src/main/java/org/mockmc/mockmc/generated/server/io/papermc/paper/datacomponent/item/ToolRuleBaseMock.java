@@ -18,18 +18,21 @@ import org.bukkit.block.BlockType;
  */
 public interface ToolRuleBaseMock extends Tool.Rule
 {
+	@Override
 	default TriState correctForDrops()
 	{
 		// MockMC: Rule#correctForDrops
 		return null;
 	}
 
+	@Override
 	default Float speed()
 	{
 		// MockMC: Rule#speed
 		return 0.0f;
 	}
 
+	@Override
 	default RegistryKeySet<BlockType> blocks()
 	{
 		// MockMC: Rule#blocks

@@ -17,37 +17,29 @@ import org.mockmc.mockmc.generated.server.org.bukkit.loot.LootableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface ChestBaseMock extends Chest, LiddedBaseMock, LootableBaseMock, ContainerBaseMock
 {
+	@Override
 	default boolean setHasPlayerLooted(UUID arg0, boolean arg1)
 	{
 		// MockMC: Chest#setHasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasBeenFilled()
 	{
 		// MockMC: Chest#hasBeenFilled
 		return false;
 	}
 
+	@Override
 	default boolean canPlayerLoot(UUID arg0)
 	{
 		// MockMC: Chest#canPlayerLoot
 		return false;
-	}
-
-	default Inventory getBlockInventory()
-	{
-		// MockMC: Chest#getBlockInventory
-		return null;
-	}
-
-	default long getNextRefill()
-	{
-		// MockMC: Chest#getNextRefill
-		return 0L;
 	}
 
 	@Override
@@ -57,42 +49,63 @@ public interface ChestBaseMock extends Chest, LiddedBaseMock, LootableBaseMock, 
 		return null;
 	}
 
+	@Override
+	default Inventory getBlockInventory()
+	{
+		// MockMC: Chest#getBlockInventory
+		return null;
+	}
+
+	@Override
+	default long getNextRefill()
+	{
+		// MockMC: Chest#getNextRefill
+		return 0L;
+	}
+
+	@Override
 	default boolean isBlocked()
 	{
 		// MockMC: Chest#isBlocked
 		return false;
 	}
 
+	@Override
 	default long getLastFilled()
 	{
 		// MockMC: Chest#getLastFilled
 		return 0L;
 	}
 
+	@Override
 	default boolean isRefillEnabled()
 	{
 		// MockMC: Chest#isRefillEnabled
 		return false;
 	}
 
+	@Override
 	default boolean hasPlayerLooted(UUID arg0)
 	{
 		// MockMC: Chest#hasPlayerLooted
 		return false;
 	}
 
+	@Override
 	default boolean hasPendingRefill()
 	{
 		// MockMC: Chest#hasPendingRefill
 		return false;
 	}
 
+	@Override
 	default Long getLastLooted(UUID arg0)
 	{
 		// MockMC: Chest#getLastLooted
 		return 0L;
 	}
 
+	@Override
 	default long setNextRefill(long arg0)
 	{
 		// MockMC: Chest#setNextRefill

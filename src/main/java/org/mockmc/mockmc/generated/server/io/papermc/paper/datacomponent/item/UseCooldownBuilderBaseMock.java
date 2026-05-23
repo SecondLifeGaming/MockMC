@@ -17,6 +17,7 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  */
 public interface UseCooldownBuilderBaseMock extends UseCooldown.Builder, DataComponentBuilderBaseMock<UseCooldown>
 {
+	@Override
 	default UseCooldown.Builder cooldownGroup(Key arg0)
 	{
 		// MockMC: Builder#cooldownGroup

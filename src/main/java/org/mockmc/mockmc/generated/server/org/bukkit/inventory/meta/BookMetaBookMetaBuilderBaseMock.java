@@ -20,13 +20,14 @@ import org.bukkit.inventory.meta.BookMeta;
  */
 @Deprecated(since = "1.21.11", forRemoval = true)
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilder
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta build()
 	{
@@ -38,6 +39,7 @@ public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilde
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder author(Component arg0)
 	{
@@ -49,6 +51,7 @@ public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilde
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder pages(Component... arg0)
 	{
@@ -60,6 +63,7 @@ public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilde
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder pages(Collection<Component> arg0)
 	{
@@ -71,6 +75,7 @@ public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilde
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder title(Component arg0)
 	{
@@ -82,6 +87,7 @@ public interface BookMetaBookMetaBuilderBaseMock extends BookMeta.BookMetaBuilde
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.21.11", forRemoval = true)
 	default BookMeta.BookMetaBuilder addPage(Component arg0)
 	{

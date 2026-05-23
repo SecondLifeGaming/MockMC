@@ -16,15 +16,18 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryHolderBa
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
-public interface AllayBaseMock extends Allay, InventoryHolderBaseMock, CreatureBaseMock
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
+public interface AllayBaseMock extends Allay, CreatureBaseMock, InventoryHolderBaseMock
 {
+	@Override
 	default Allay duplicateAllay()
 	{
 		// MockMC: Allay#duplicateAllay
 		return null;
 	}
 
+	@Override
 	default void setDuplicationCooldown(long arg0)
 	{
 		// MockMC: Allay#setDuplicationCooldown
@@ -37,6 +40,7 @@ public interface AllayBaseMock extends Allay, InventoryHolderBaseMock, CreatureB
 		return false;
 	}
 
+	@Override
 	default void stopDancing()
 	{
 		// MockMC: Allay#stopDancing
@@ -49,44 +53,52 @@ public interface AllayBaseMock extends Allay, InventoryHolderBaseMock, CreatureB
 		return null;
 	}
 
+	@Override
 	default void setCanDuplicate(boolean arg0)
 	{
 		// MockMC: Allay#setCanDuplicate
 	}
 
+	@Override
 	default Location getJukebox()
 	{
 		// MockMC: Allay#getJukebox
 		return new org.bukkit.Location(null, 0, 0, 0);
 	}
 
+	@Override
 	default long getDuplicationCooldown()
 	{
 		// MockMC: Allay#getDuplicationCooldown
 		return 0L;
 	}
 
+	@Override
 	default void resetDuplicationCooldown()
 	{
 		// MockMC: Allay#resetDuplicationCooldown
 	}
 
+	@Override
 	default boolean isDancing()
 	{
 		// MockMC: Allay#isDancing
 		return false;
 	}
 
+	@Override
 	default void startDancing(Location arg0)
 	{
 		// MockMC: Allay#startDancing
 	}
 
+	@Override
 	default void startDancing()
 	{
 		// MockMC: Allay#startDancing
 	}
 
+	@Override
 	default boolean canDuplicate()
 	{
 		// MockMC: Allay#canDuplicate

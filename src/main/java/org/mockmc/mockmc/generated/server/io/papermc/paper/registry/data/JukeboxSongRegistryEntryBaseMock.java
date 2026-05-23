@@ -19,24 +19,28 @@ import org.bukkit.Sound;
  */
 public interface JukeboxSongRegistryEntryBaseMock extends JukeboxSongRegistryEntry
 {
+	@Override
 	default float lengthInSeconds()
 	{
 		// MockMC: JukeboxSongRegistryEntry#lengthInSeconds
 		return 0.0f;
 	}
 
+	@Override
 	default int comparatorOutput()
 	{
 		// MockMC: JukeboxSongRegistryEntry#comparatorOutput
 		return 0;
 	}
 
+	@Override
 	default Component description()
 	{
 		// MockMC: JukeboxSongRegistryEntry#description
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default RegistryHolder<Sound, SoundEventRegistryEntry> soundEvent()
 	{
 		// MockMC: JukeboxSongRegistryEntry#soundEvent

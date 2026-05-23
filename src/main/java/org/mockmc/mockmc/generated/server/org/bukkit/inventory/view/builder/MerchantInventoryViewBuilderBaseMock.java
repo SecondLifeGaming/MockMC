@@ -21,6 +21,7 @@ public interface MerchantInventoryViewBuilderBaseMock<V extends InventoryView>
 			MerchantInventoryViewBuilder<V>,
 			InventoryViewBuilderBaseMock<V>
 {
+	@Override
 	default MerchantInventoryViewBuilder<V> merchant(Merchant arg0)
 	{
 		// MockMC: MerchantInventoryViewBuilder#merchant
@@ -34,6 +35,7 @@ public interface MerchantInventoryViewBuilderBaseMock<V extends InventoryView>
 		return null;
 	}
 
+	@Override
 	default MerchantInventoryViewBuilder<V> checkReachable(boolean arg0)
 	{
 		// MockMC: MerchantInventoryViewBuilder#checkReachable

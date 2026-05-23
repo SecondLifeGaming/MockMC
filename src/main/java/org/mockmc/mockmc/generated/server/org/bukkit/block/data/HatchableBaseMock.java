@@ -15,17 +15,20 @@ import org.bukkit.block.data.Hatchable;
  */
 public interface HatchableBaseMock extends Hatchable, BlockDataBaseMock
 {
+	@Override
 	default int getHatch()
 	{
 		// MockMC: Hatchable#getHatch
 		return 0;
 	}
 
+	@Override
 	default void setHatch(int arg0)
 	{
 		// MockMC: Hatchable#setHatch
 	}
 
+	@Override
 	default int getMaximumHatch()
 	{
 		// MockMC: Hatchable#getMaximumHatch

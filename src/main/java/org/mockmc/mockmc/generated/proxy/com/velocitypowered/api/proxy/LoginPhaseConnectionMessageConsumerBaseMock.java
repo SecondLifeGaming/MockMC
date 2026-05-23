@@ -16,6 +16,7 @@ import com.velocitypowered.api.proxy.LoginPhaseConnection;
  */
 public interface LoginPhaseConnectionMessageConsumerBaseMock extends LoginPhaseConnection.MessageConsumer
 {
+	@Override
 	default void onMessageResponse(byte[] arg0)
 	{
 		// MockMC: MessageConsumer#onMessageResponse

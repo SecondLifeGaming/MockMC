@@ -17,24 +17,28 @@ import org.mockmc.mockmc.generated.server.org.bukkit.block.data.BlockDataBaseMoc
  */
 public interface BrewingStandBaseMock extends BrewingStand, BlockDataBaseMock
 {
+	@Override
 	default boolean hasBottle(int arg0)
 	{
 		// MockMC: BrewingStand#hasBottle
 		return false;
 	}
 
+	@Override
 	default int getMaximumBottles()
 	{
 		// MockMC: BrewingStand#getMaximumBottles
 		return 0;
 	}
 
+	@Override
 	default Set<Integer> getBottles()
 	{
 		// MockMC: BrewingStand#getBottles
 		return java.util.Collections.emptySet();
 	}
 
+	@Override
 	default void setBottle(int arg0, boolean arg1)
 	{
 		// MockMC: BrewingStand#setBottle

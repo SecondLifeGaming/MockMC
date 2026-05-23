@@ -16,12 +16,14 @@ import org.bukkit.block.Block;
  */
 public interface BlockInWorldPredicateBaseMock extends BlockInWorldPredicate
 {
+	@Override
 	default BlockInWorldPredicate.Result testBlock(Block arg0)
 	{
 		// MockMC: BlockInWorldPredicate#testBlock
 		return null;
 	}
 
+	@Override
 	default BlockInWorldPredicate.Result testBlock(Block arg0, boolean arg1)
 	{
 		// MockMC: BlockInWorldPredicate#testBlock

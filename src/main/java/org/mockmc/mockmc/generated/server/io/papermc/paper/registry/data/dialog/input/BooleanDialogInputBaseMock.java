@@ -16,30 +16,35 @@ import net.kyori.adventure.text.Component;
  */
 public interface BooleanDialogInputBaseMock extends BooleanDialogInput
 {
+	@Override
 	default String key()
 	{
 		// MockMC: BooleanDialogInput#key
 		return "";
 	}
 
+	@Override
 	default Component label()
 	{
 		// MockMC: BooleanDialogInput#label
 		return net.kyori.adventure.text.Component.empty();
 	}
 
+	@Override
 	default boolean initial()
 	{
 		// MockMC: BooleanDialogInput#initial
 		return false;
 	}
 
+	@Override
 	default String onFalse()
 	{
 		// MockMC: BooleanDialogInput#onFalse
 		return "";
 	}
 
+	@Override
 	default String onTrue()
 	{
 		// MockMC: BooleanDialogInput#onTrue

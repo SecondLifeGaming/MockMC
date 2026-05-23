@@ -16,13 +16,15 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.MobBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface RangedEntityBaseMock extends RangedEntity, MobBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.2")
 	default boolean isChargingAttack()
 	{
@@ -41,6 +43,7 @@ public interface RangedEntityBaseMock extends RangedEntity, MobBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.19.2")
 	default void setChargingAttack(boolean arg0)
 	{
@@ -61,6 +64,7 @@ public interface RangedEntityBaseMock extends RangedEntity, MobBaseMock
 		return false;
 	}
 
+	@Override
 	default void rangedAttack(LivingEntity arg0, float arg1)
 	{
 		// MockMC: RangedEntity#rangedAttack

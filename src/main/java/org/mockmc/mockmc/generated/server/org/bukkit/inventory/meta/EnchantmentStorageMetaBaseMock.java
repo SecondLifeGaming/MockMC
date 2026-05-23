@@ -17,24 +17,28 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
  */
 public interface EnchantmentStorageMetaBaseMock extends EnchantmentStorageMeta, ItemMetaBaseMock
 {
+	@Override
 	default boolean hasConflictingStoredEnchant(Enchantment arg0)
 	{
 		// MockMC: EnchantmentStorageMeta#hasConflictingStoredEnchant
 		return false;
 	}
 
+	@Override
 	default Map<Enchantment, Integer> getStoredEnchants()
 	{
 		// MockMC: EnchantmentStorageMeta#getStoredEnchants
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default boolean addStoredEnchant(Enchantment arg0, int arg1, boolean arg2)
 	{
 		// MockMC: EnchantmentStorageMeta#addStoredEnchant
 		return false;
 	}
 
+	@Override
 	default boolean hasStoredEnchant(Enchantment arg0)
 	{
 		// MockMC: EnchantmentStorageMeta#hasStoredEnchant
@@ -48,18 +52,21 @@ public interface EnchantmentStorageMetaBaseMock extends EnchantmentStorageMeta, 
 		return null;
 	}
 
+	@Override
 	default boolean removeStoredEnchant(Enchantment arg0) throws IllegalArgumentException
 	{
 		// MockMC: EnchantmentStorageMeta#removeStoredEnchant
 		return false;
 	}
 
+	@Override
 	default boolean hasStoredEnchants()
 	{
 		// MockMC: EnchantmentStorageMeta#hasStoredEnchants
 		return false;
 	}
 
+	@Override
 	default int getStoredEnchantLevel(Enchantment arg0)
 	{
 		// MockMC: EnchantmentStorageMeta#getStoredEnchantLevel

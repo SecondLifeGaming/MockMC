@@ -20,17 +20,20 @@ import org.bukkit.scoreboard.Scoreboard;
  */
 public interface ScoreBaseMock extends Score
 {
+	@Override
 	default boolean isTriggerable()
 	{
 		// MockMC: Score#isTriggerable
 		return false;
 	}
 
+	@Override
 	default void customName(Component arg0)
 	{
 		// MockMC: Score#customName
 	}
 
+	@Override
 	default Component customName()
 	{
 		// MockMC: Score#customName
@@ -41,6 +44,7 @@ public interface ScoreBaseMock extends Score
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.7.8")
 	default OfflinePlayer getPlayer()
 	{
@@ -48,57 +52,67 @@ public interface ScoreBaseMock extends Score
 		return null;
 	}
 
+	@Override
 	default void resetScore() throws IllegalStateException
 	{
 		// MockMC: Score#resetScore
 	}
 
+	@Override
 	default Objective getObjective()
 	{
 		// MockMC: Score#getObjective
 		return null;
 	}
 
+	@Override
 	default void setTriggerable(boolean arg0)
 	{
 		// MockMC: Score#setTriggerable
 	}
 
+	@Override
 	default Scoreboard getScoreboard()
 	{
 		// MockMC: Score#getScoreboard
 		return null;
 	}
 
+	@Override
 	default void setScore(int arg0)
 	{
 		// MockMC: Score#setScore
 	}
 
+	@Override
 	default boolean isScoreSet()
 	{
 		// MockMC: Score#isScoreSet
 		return false;
 	}
 
+	@Override
 	default int getScore()
 	{
 		// MockMC: Score#getScore
 		return 0;
 	}
 
+	@Override
 	default String getEntry()
 	{
 		// MockMC: Score#getEntry
 		return "";
 	}
 
+	@Override
 	default NumberFormat numberFormat()
 	{
 		// MockMC: Score#numberFormat
 		return null;
 	}
 
+	@Override
 	default void numberFormat(NumberFormat arg0)
 	{
 		// MockMC: Score#numberFormat

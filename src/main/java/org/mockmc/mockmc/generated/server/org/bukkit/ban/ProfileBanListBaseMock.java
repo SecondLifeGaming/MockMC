@@ -25,7 +25,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default <E extends BanEntry<? super PlayerProfile>> E getBanEntry(org.bukkit.profile.PlayerProfile arg0)
 	{
@@ -37,7 +39,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default void pardon(org.bukkit.profile.PlayerProfile arg0)
 	{
@@ -48,7 +52,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default boolean isBanned(org.bukkit.profile.PlayerProfile arg0)
 	{
@@ -60,7 +66,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default <E extends BanEntry<? super PlayerProfile>> E addBan(org.bukkit.profile.PlayerProfile arg0, String arg1,
 			Date arg2, String arg3)
@@ -73,7 +81,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default <E extends BanEntry<? super PlayerProfile>> E addBan(org.bukkit.profile.PlayerProfile arg0, String arg1,
 			Instant arg2, String arg3)
@@ -82,6 +92,7 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 		return null;
 	}
 
+	@Override
 	default BanEntry<PlayerProfile> addBan(PlayerProfile arg0, String arg1, Date arg2, String arg3)
 	{
 		// MockMC: ProfileBanList#addBan
@@ -92,7 +103,9 @@ public interface ProfileBanListBaseMock extends ProfileBanList, BanListBaseMock<
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
+	@Override
+	@SuppressWarnings(
+	{"deprecation", "java:S1133"})
 	@Deprecated(since = "1.0")
 	default <E extends BanEntry<? super PlayerProfile>> E addBan(org.bukkit.profile.PlayerProfile arg0, String arg1,
 			Duration arg2, String arg3)

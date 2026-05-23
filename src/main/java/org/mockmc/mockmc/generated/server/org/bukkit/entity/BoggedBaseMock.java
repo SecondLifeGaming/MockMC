@@ -15,19 +15,19 @@ import org.bukkit.entity.Entity;
  * build cycles.
  */
 @SuppressWarnings(
-{"removal", "deprecation"})
+{"java:S1133", "removal", "deprecation"})
 public interface BoggedBaseMock
 		extends
 			Bogged,
+			AbstractSkeletonBaseMock,
 			org.mockmc.mockmc.generated.server.io.papermc.paper.entity.ShearableBaseMock,
-			ShearableBaseMock,
-			AbstractSkeletonBaseMock
+			ShearableBaseMock
 {
 	@Override
-	default Entity getLeashHolder() throws IllegalStateException
+	default boolean setLeashHolder(Entity arg0)
 	{
-		// MockMC: Bogged#getLeashHolder
-		return null;
+		// MockMC: Bogged#setLeashHolder
+		return false;
 	}
 
 	@Override
@@ -38,9 +38,9 @@ public interface BoggedBaseMock
 	}
 
 	@Override
-	default boolean setLeashHolder(Entity arg0)
+	default boolean isLeashed()
 	{
-		// MockMC: Bogged#setLeashHolder
+		// MockMC: Bogged#isLeashed
 		return false;
 	}
 
@@ -51,9 +51,9 @@ public interface BoggedBaseMock
 	}
 
 	@Override
-	default boolean isLeashed()
+	default Entity getLeashHolder() throws IllegalStateException
 	{
-		// MockMC: Bogged#isLeashed
-		return false;
+		// MockMC: Bogged#getLeashHolder
+		return null;
 	}
 }

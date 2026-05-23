@@ -18,9 +18,11 @@ import org.bukkit.inventory.FurnaceInventory;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings(
+{"java:S1133", "deprecation"})
 public interface FurnaceBaseMock extends Furnace, ContainerBaseMock
 {
+	@Override
 	default short getBurnTime()
 	{
 		// MockMC: Furnace#getBurnTime
@@ -34,6 +36,7 @@ public interface FurnaceBaseMock extends Furnace, ContainerBaseMock
 		return null;
 	}
 
+	@Override
 	default boolean hasRecipeUsedCount(NamespacedKey arg0)
 	{
 		// MockMC: Furnace#hasRecipeUsedCount
@@ -54,61 +57,72 @@ public interface FurnaceBaseMock extends Furnace, ContainerBaseMock
 		return null;
 	}
 
+	@Override
 	default void setRecipeUsedCount(CookingRecipe<?> arg0, int arg1)
 	{
 		// MockMC: Furnace#setRecipeUsedCount
 	}
 
+	@Override
 	default double getCookSpeedMultiplier()
 	{
 		// MockMC: Furnace#getCookSpeedMultiplier
 		return 0.0d;
 	}
 
+	@Override
 	default short getCookTime()
 	{
 		// MockMC: Furnace#getCookTime
 		return 0;
 	}
 
+	@Override
 	default void setBurnTime(short arg0)
 	{
 		// MockMC: Furnace#setBurnTime
 	}
 
+	@Override
 	default Map<CookingRecipe<?>, Integer> getRecipesUsed()
 	{
 		// MockMC: Furnace#getRecipesUsed
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default void setCookTime(short arg0)
 	{
 		// MockMC: Furnace#setCookTime
 	}
 
+	@Override
 	default void setCookTimeTotal(int arg0)
 	{
 		// MockMC: Furnace#setCookTimeTotal
 	}
 
+	@Override
 	default void setCookSpeedMultiplier(double arg0)
 	{
 		// MockMC: Furnace#setCookSpeedMultiplier
 	}
 
+	@Override
 	default int getCookTimeTotal()
 	{
 		// MockMC: Furnace#getCookTimeTotal
 		return 0;
 	}
 
+	@Override
 	default int getRecipeUsedCount(NamespacedKey arg0)
 	{
 		// MockMC: Furnace#getRecipeUsedCount
 		return 0;
 	}
 
+	@Override
 	default void setRecipesUsed(Map<CookingRecipe<?>, Integer> arg0)
 	{
 		// MockMC: Furnace#setRecipesUsed

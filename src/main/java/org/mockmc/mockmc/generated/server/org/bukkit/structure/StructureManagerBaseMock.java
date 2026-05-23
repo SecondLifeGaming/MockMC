@@ -22,96 +22,113 @@ import org.bukkit.structure.StructureManager;
  */
 public interface StructureManagerBaseMock extends StructureManager
 {
+	@Override
 	default Structure loadStructure(NamespacedKey arg0, boolean arg1)
 	{
 		// MockMC: StructureManager#loadStructure
 		return null;
 	}
 
+	@Override
 	default Structure loadStructure(NamespacedKey arg0)
 	{
 		// MockMC: StructureManager#loadStructure
 		return null;
 	}
 
+	@Override
 	default Structure loadStructure(InputStream arg0) throws IOException
 	{
 		// MockMC: StructureManager#loadStructure
 		return null;
 	}
 
+	@Override
 	default Structure loadStructure(File arg0) throws IOException
 	{
 		// MockMC: StructureManager#loadStructure
 		return null;
 	}
 
+	@Override
 	default Structure registerStructure(NamespacedKey arg0, Structure arg1)
 	{
 		// MockMC: StructureManager#registerStructure
 		return null;
 	}
 
+	@Override
 	default Structure copy(Structure arg0)
 	{
 		// MockMC: StructureManager#copy
 		return null;
 	}
 
+	@Override
 	default Map<NamespacedKey, Structure> getStructures()
 	{
 		// MockMC: StructureManager#getStructures
 		return java.util.Collections.emptyMap();
 	}
 
+	@Override
 	default Structure createStructure()
 	{
 		// MockMC: StructureManager#createStructure
 		return null;
 	}
 
+	@Override
 	default void deleteStructure(NamespacedKey arg0) throws IOException
 	{
 		// MockMC: StructureManager#deleteStructure
 	}
 
+	@Override
 	default void deleteStructure(NamespacedKey arg0, boolean arg1) throws IOException
 	{
 		// MockMC: StructureManager#deleteStructure
 	}
 
+	@Override
 	default Structure getStructure(NamespacedKey arg0)
 	{
 		// MockMC: StructureManager#getStructure
 		return null;
 	}
 
+	@Override
 	default void saveStructure(NamespacedKey arg0)
 	{
 		// MockMC: StructureManager#saveStructure
 	}
 
+	@Override
 	default void saveStructure(File arg0, Structure arg1) throws IOException
 	{
 		// MockMC: StructureManager#saveStructure
 	}
 
+	@Override
 	default void saveStructure(NamespacedKey arg0, Structure arg1) throws IOException
 	{
 		// MockMC: StructureManager#saveStructure
 	}
 
+	@Override
 	default void saveStructure(OutputStream arg0, Structure arg1) throws IOException
 	{
 		// MockMC: StructureManager#saveStructure
 	}
 
+	@Override
 	default File getStructureFile(NamespacedKey arg0)
 	{
 		// MockMC: StructureManager#getStructureFile
 		return null;
 	}
 
+	@Override
 	default Structure unregisterStructure(NamespacedKey arg0)
 	{
 		// MockMC: StructureManager#unregisterStructure

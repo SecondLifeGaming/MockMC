@@ -18,9 +18,11 @@ import org.mockmc.mockmc.generated.server.org.bukkit.TranslatableBaseMock;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("removal")
-public interface TrimMaterialBaseMock extends TrimMaterial, KeyedBaseMock, TranslatableBaseMock
+@SuppressWarnings(
+{"java:S1133", "removal"})
+public interface TrimMaterialBaseMock extends TrimMaterial, TranslatableBaseMock, KeyedBaseMock
 {
+	@Override
 	default Component description()
 	{
 		// MockMC: TrimMaterial#description

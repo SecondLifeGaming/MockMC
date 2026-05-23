@@ -21,24 +21,28 @@ public interface WritableBookContentBuilderBaseMock
 			WritableBookContent.Builder,
 			DataComponentBuilderBaseMock<WritableBookContent>
 {
+	@Override
 	default WritableBookContent.Builder addPage(String arg0)
 	{
 		// MockMC: Builder#addPage
 		return null;
 	}
 
+	@Override
 	default WritableBookContent.Builder addPages(List<String> arg0)
 	{
 		// MockMC: Builder#addPages
 		return null;
 	}
 
+	@Override
 	default WritableBookContent.Builder addFilteredPages(List<Filtered<String>> arg0)
 	{
 		// MockMC: Builder#addFilteredPages
 		return null;
 	}
 
+	@Override
 	default WritableBookContent.Builder addFilteredPage(Filtered<String> arg0)
 	{
 		// MockMC: Builder#addFilteredPage

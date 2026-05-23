@@ -15,41 +15,49 @@ import com.destroystokyo.paper.SkinParts;
  */
 public interface SkinPartsMutableBaseMock extends SkinParts.Mutable, SkinPartsBaseMock
 {
+	@Override
 	default void setJacketEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setJacketEnabled
 	}
 
+	@Override
 	default void setHatsEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setHatsEnabled
 	}
 
+	@Override
 	default void setCapeEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setCapeEnabled
 	}
 
+	@Override
 	default void setRightPantsEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setRightPantsEnabled
 	}
 
+	@Override
 	default void setLeftSleeveEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setLeftSleeveEnabled
 	}
 
+	@Override
 	default void setRightSleeveEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setRightSleeveEnabled
 	}
 
+	@Override
 	default void setLeftPantsEnabled(boolean arg0)
 	{
 		// MockMC: Mutable#setLeftPantsEnabled
 	}
 
+	@Override
 	default SkinParts immutableCopy()
 	{
 		// MockMC: Mutable#immutableCopy

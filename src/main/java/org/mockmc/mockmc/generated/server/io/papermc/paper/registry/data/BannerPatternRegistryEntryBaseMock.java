@@ -16,12 +16,14 @@ import net.kyori.adventure.key.Key;
  */
 public interface BannerPatternRegistryEntryBaseMock extends BannerPatternRegistryEntry
 {
+	@Override
 	default Key assetId()
 	{
 		// MockMC: BannerPatternRegistryEntry#assetId
 		return null;
 	}
 
+	@Override
 	default String translationKey()
 	{
 		// MockMC: BannerPatternRegistryEntry#translationKey

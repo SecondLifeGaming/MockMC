@@ -17,12 +17,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  */
 public interface PoiTypeBaseMock extends PoiType, KeyedBaseMock
 {
+	@Override
 	default boolean hasOccupants()
 	{
 		// MockMC: PoiType#hasOccupants
 		return false;
 	}
 
+	@Override
 	default boolean is(BlockData arg0)
 	{
 		// MockMC: PoiType#is
