@@ -38,13 +38,6 @@ class CommandBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getPermission());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getPermissionMessage());
 		} catch (Exception | LinkageError _)
 		{
@@ -81,6 +74,13 @@ class CommandBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getUsage());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getPermission());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

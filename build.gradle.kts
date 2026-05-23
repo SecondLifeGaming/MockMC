@@ -81,10 +81,10 @@ sonar {
 		property("sonar.organization", "secondlifegaming")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
-		property("sonar.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
-		property("sonar.test.exclusions", "**/generated/**,src/test/java/org/mockmc/mockmc/generated/**")
-		property("sonar.coverage.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
-		property("sonar.cpd.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.test.exclusions", "**/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.coverage.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.cpd.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
 	}
 }
 

@@ -15,14 +15,14 @@ class ConfigurationAdapterBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getListeners());
+			assertSafeDefault(mock.getServers());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getServers());
+			assertSafeDefault(mock.getListeners());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

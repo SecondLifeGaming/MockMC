@@ -116,14 +116,6 @@ public interface ScoreboardBaseMock extends Scoreboard
 		return java.util.Collections.emptySet();
 	}
 
-	@Override
-	default Objective registerNewObjective(String arg0, Criteria arg1, Component arg2, RenderType arg3)
-			throws IllegalArgumentException
-	{
-		// MockMC: Scoreboard#registerNewObjective
-		return null;
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -138,6 +130,13 @@ public interface ScoreboardBaseMock extends Scoreboard
 
 	@Override
 	default Objective getObjective(String arg0)
+	{
+		// MockMC: Scoreboard#getObjective
+		return null;
+	}
+
+	@Override
+	default Objective getObjective(DisplaySlot arg0)
 	{
 		// MockMC: Scoreboard#getObjective
 		return null;
@@ -168,9 +167,10 @@ public interface ScoreboardBaseMock extends Scoreboard
 	}
 
 	@Override
-	default Objective getObjective(DisplaySlot arg0)
+	default Objective registerNewObjective(String arg0, Criteria arg1, Component arg2, RenderType arg3)
+			throws IllegalArgumentException
 	{
-		// MockMC: Scoreboard#getObjective
+		// MockMC: Scoreboard#registerNewObjective
 		return null;
 	}
 

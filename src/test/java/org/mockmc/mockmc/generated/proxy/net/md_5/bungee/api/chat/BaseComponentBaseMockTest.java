@@ -38,13 +38,6 @@ class BaseComponentBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getFont());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getColor());
 		} catch (Exception | LinkageError _)
 		{
@@ -155,6 +148,13 @@ class BaseComponentBaseMockTest extends GeneratedTestBase
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
+		try
+		{
+			assertSafeDefault(mock.getShadowColor());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	@Test
@@ -164,7 +164,7 @@ class BaseComponentBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getShadowColor());
+			assertSafeDefault(mock.getFont());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

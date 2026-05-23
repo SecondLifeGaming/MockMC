@@ -31,13 +31,6 @@ class BanEntryBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getExpiration());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getCreated());
 		} catch (Exception | LinkageError _)
 		{
@@ -53,6 +46,13 @@ class BanEntryBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSource());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getExpiration());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

@@ -17,13 +17,6 @@ class ProxyConfigBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getListeners());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getGameVersion());
 		} catch (Exception | LinkageError _)
 		{
@@ -67,6 +60,13 @@ class ProxyConfigBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getFaviconObject());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getListeners());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

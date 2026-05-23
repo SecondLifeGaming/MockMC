@@ -15,14 +15,14 @@ class MultiActionTypeBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.actions());
+			assertSafeDefault(mock.exitAction());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.exitAction());
+			assertSafeDefault(mock.actions());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

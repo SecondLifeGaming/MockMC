@@ -31,13 +31,6 @@ class ServerInfoBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getPermission());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getMotd());
 		} catch (Exception | LinkageError _)
 		{
@@ -53,6 +46,13 @@ class ServerInfoBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSocketAddress());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getPermission());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

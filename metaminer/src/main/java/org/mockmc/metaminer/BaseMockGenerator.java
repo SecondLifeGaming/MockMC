@@ -942,12 +942,14 @@ public class BaseMockGenerator implements DataGenerator {
         addQuirkSuppressions(methodQuirks, m.getName(), suppressions);
     }
 
+    private JsonObject getQuirkObject(JsonObject methodQuirks, String key) {
+        return methodQuirks.has(key) ? methodQuirks.getAsJsonObject(key) : null;
+    }
+
     private void addQuirkSuppressions(JsonObject methodQuirks, String key, Set<String> suppressions) {
-        if (methodQuirks.has(key)) {
-            JsonObject mq = methodQuirks.getAsJsonObject(key);
-            if (mq.has(ADDITIONAL_SUPPRESSIONS)) {
-                mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
-            }
+        JsonObject mq = getQuirkObject(methodQuirks, key);
+        if (mq != null && mq.has(ADDITIONAL_SUPPRESSIONS)) {
+            mq.getAsJsonArray(ADDITIONAL_SUPPRESSIONS).forEach(e -> suppressions.add(e.getAsString()));
         }
     }
 
@@ -1033,11 +1035,9 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private String getReplacementFromQuirk(JsonObject methodQuirks, String key) {
-        if (methodQuirks.has(key)) {
-            JsonObject mq = methodQuirks.getAsJsonObject(key);
-            if (mq.has(REPLACEMENT)) {
-                return mq.get(REPLACEMENT).getAsString();
-            }
+        JsonObject mq = getQuirkObject(methodQuirks, key);
+        if (mq != null && mq.has(REPLACEMENT)) {
+            return mq.get(REPLACEMENT).getAsString();
         }
         return null;
     }
