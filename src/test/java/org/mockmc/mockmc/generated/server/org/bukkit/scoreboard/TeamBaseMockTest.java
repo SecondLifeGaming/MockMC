@@ -66,6 +66,20 @@ class TeamBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.getSuffix());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getPrefix());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getColor());
 		} catch (Exception | LinkageError _)
 		{
@@ -80,21 +94,7 @@ class TeamBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getPrefix());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getScoreboard());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getSuffix());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

@@ -106,7 +106,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@NotNull
 	public ComponentFlattener componentFlattener()
@@ -117,7 +116,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public PlainComponentSerializer plainComponentSerializer()
@@ -128,7 +126,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public PlainTextComponentSerializer plainTextSerializer()
@@ -139,7 +136,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public GsonComponentSerializer gsonComponentSerializer()
@@ -150,7 +146,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
@@ -161,7 +156,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public LegacyComponentSerializer legacyComponentSerializer()
@@ -253,7 +247,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public byte[] serializeItem(ItemStack itemstack)
 	{
@@ -325,7 +318,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public ItemStack deserializeItem(byte[] data)
 	{
@@ -411,7 +403,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@Nullable
 	public String getBlockTranslationKey(@NotNull Material material)
@@ -431,7 +422,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@Nullable
 	public String getItemTranslationKey(@NotNull Material material)
@@ -451,7 +441,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@Nullable
 	public String getTranslationKey(@NotNull EntityType type)
@@ -463,7 +452,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@Nullable
 	public String getTranslationKey(@NotNull ItemStack itemStack)
@@ -546,7 +534,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
 	{
@@ -579,7 +566,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 			BooleanSupplier booleanSupplier)
@@ -590,7 +576,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public ItemStack createEmptyStack()
 	{
@@ -600,7 +585,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@NotNull
 	public Map<String, Object> serializeStack(ItemStack itemStack)

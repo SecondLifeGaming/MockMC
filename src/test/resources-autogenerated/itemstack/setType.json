@@ -209,13 +209,15 @@
 	{
 		"key": "minecraft:acacia_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:acacia_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -482,13 +484,15 @@
 	{
 		"key": "minecraft:attached_melon_stem",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:attached_pumpkin_stem",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -737,7 +741,8 @@
 	{
 		"key": "minecraft:bamboo_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -805,13 +810,15 @@
 	{
 		"key": "minecraft:bamboo_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:bamboo_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -979,7 +986,8 @@
 	{
 		"key": "minecraft:beetroots",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1010,7 +1018,8 @@
 	{
 		"key": "minecraft:big_dripleaf_stem",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1223,13 +1232,15 @@
 	{
 		"key": "minecraft:birch_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:birch_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1263,7 +1274,6 @@
 			"material": "minecraft:black_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -1298,7 +1308,8 @@
 	{
 		"key": "minecraft:black_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1425,7 +1436,8 @@
 	{
 		"key": "minecraft:black_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1569,7 +1581,6 @@
 			"material": "minecraft:blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -1604,7 +1615,8 @@
 	{
 		"key": "minecraft:blue_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1767,7 +1779,8 @@
 	{
 		"key": "minecraft:blue_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -1942,7 +1955,8 @@
 	{
 		"key": "minecraft:brain_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2086,7 +2100,6 @@
 			"material": "minecraft:brown_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -2121,7 +2134,8 @@
 	{
 		"key": "minecraft:brown_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2284,7 +2298,8 @@
 	{
 		"key": "minecraft:brown_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2314,7 +2329,8 @@
 	{
 		"key": "minecraft:bubble_column",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2356,7 +2372,8 @@
 	{
 		"key": "minecraft:bubble_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2535,7 +2552,8 @@
 	{
 		"key": "minecraft:candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2565,7 +2583,8 @@
 	{
 		"key": "minecraft:carrots",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2620,7 +2639,8 @@
 	{
 		"key": "minecraft:cave_air",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2639,13 +2659,15 @@
 	{
 		"key": "minecraft:cave_vines",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:cave_vines_plant",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -2935,13 +2957,15 @@
 	{
 		"key": "minecraft:cherry_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:cherry_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -3025,6 +3049,18 @@
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:chiseled_cinnabar",
+		"result": {
+			"material": "minecraft:chiseled_cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -3140,6 +3176,18 @@
 		}
 	},
 	{
+		"key": "minecraft:chiseled_sulfur",
+		"result": {
+			"material": "minecraft:chiseled_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:chiseled_tuff",
 		"result": {
 			"material": "minecraft:chiseled_tuff",
@@ -3191,6 +3239,102 @@
 		"key": "minecraft:chorus_plant",
 		"result": {
 			"material": "minecraft:chorus_plant",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar",
+		"result": {
+			"material": "minecraft:cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_slab",
+		"result": {
+			"material": "minecraft:cinnabar_brick_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_stairs",
+		"result": {
+			"material": "minecraft:cinnabar_brick_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_brick_wall",
+		"result": {
+			"material": "minecraft:cinnabar_brick_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_bricks",
+		"result": {
+			"material": "minecraft:cinnabar_bricks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_slab",
+		"result": {
+			"material": "minecraft:cinnabar_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_stairs",
+		"result": {
+			"material": "minecraft:cinnabar_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:cinnabar_wall",
+		"result": {
+			"material": "minecraft:cinnabar_wall",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -3418,7 +3562,8 @@
 	{
 		"key": "minecraft:cocoa",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -3976,7 +4121,8 @@
 	{
 		"key": "minecraft:copper_wall_torch",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -4156,7 +4302,8 @@
 	{
 		"key": "minecraft:creeper_wall_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -4369,13 +4516,15 @@
 	{
 		"key": "minecraft:crimson_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:crimson_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -4506,7 +4655,6 @@
 			"material": "minecraft:cyan_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -4541,7 +4689,8 @@
 	{
 		"key": "minecraft:cyan_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -4668,7 +4817,8 @@
 	{
 		"key": "minecraft:cyan_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -4929,13 +5079,15 @@
 	{
 		"key": "minecraft:dark_oak_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:dark_oak_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5038,7 +5190,8 @@
 	{
 		"key": "minecraft:dead_brain_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5080,7 +5233,8 @@
 	{
 		"key": "minecraft:dead_bubble_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5134,7 +5288,8 @@
 	{
 		"key": "minecraft:dead_fire_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5176,7 +5331,8 @@
 	{
 		"key": "minecraft:dead_horn_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5218,7 +5374,8 @@
 	{
 		"key": "minecraft:dead_tube_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -5809,7 +5966,8 @@
 	{
 		"key": "minecraft:dragon_wall_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -6036,13 +6194,15 @@
 	{
 		"key": "minecraft:end_gateway",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:end_portal",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -6512,7 +6672,8 @@
 	{
 		"key": "minecraft:fire",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -6566,7 +6727,8 @@
 	{
 		"key": "minecraft:fire_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -6792,7 +6954,8 @@
 	{
 		"key": "minecraft:frosted_ice",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -7351,7 +7514,6 @@
 			"material": "minecraft:gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -7386,7 +7548,8 @@
 	{
 		"key": "minecraft:gray_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -7513,7 +7676,8 @@
 	{
 		"key": "minecraft:gray_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -7547,7 +7711,6 @@
 			"material": "minecraft:green_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -7582,7 +7745,8 @@
 	{
 		"key": "minecraft:green_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -7709,7 +7873,8 @@
 	{
 		"key": "minecraft:green_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -8007,7 +8172,8 @@
 	{
 		"key": "minecraft:horn_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -8685,13 +8851,15 @@
 	{
 		"key": "minecraft:jungle_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:jungle_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -8721,7 +8889,8 @@
 	{
 		"key": "minecraft:kelp_plant",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -8824,7 +8993,8 @@
 	{
 		"key": "minecraft:lava",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -8842,7 +9012,8 @@
 	{
 		"key": "minecraft:lava_cauldron",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9006,7 +9177,6 @@
 			"material": "minecraft:light_blue_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9041,7 +9211,8 @@
 	{
 		"key": "minecraft:light_blue_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9168,7 +9339,8 @@
 	{
 		"key": "minecraft:light_blue_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9202,7 +9374,6 @@
 			"material": "minecraft:light_gray_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9237,7 +9408,8 @@
 	{
 		"key": "minecraft:light_gray_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9364,7 +9536,8 @@
 	{
 		"key": "minecraft:light_gray_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9458,7 +9631,6 @@
 			"material": "minecraft:lime_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9493,7 +9665,8 @@
 	{
 		"key": "minecraft:lime_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9620,7 +9793,8 @@
 	{
 		"key": "minecraft:lime_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9716,7 +9890,6 @@
 			"material": "minecraft:magenta_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -9751,7 +9924,8 @@
 	{
 		"key": "minecraft:magenta_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -9878,7 +10052,8 @@
 	{
 		"key": "minecraft:magenta_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -10152,13 +10327,15 @@
 	{
 		"key": "minecraft:mangrove_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:mangrove_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -10236,7 +10413,8 @@
 	{
 		"key": "minecraft:melon_stem",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -10435,7 +10613,8 @@
 	{
 		"key": "minecraft:moving_piston",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -10587,6 +10766,18 @@
 		"key": "minecraft:music_disc_blocks",
 		"result": {
 			"material": "minecraft:music_disc_blocks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:music_disc_bounce",
+		"result": {
+			"material": "minecraft:music_disc_bounce",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
 				"org.bukkit.inventory.meta.Damageable",
@@ -10947,7 +11138,8 @@
 	{
 		"key": "minecraft:nether_portal",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -11440,13 +11632,15 @@
 	{
 		"key": "minecraft:oak_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:oak_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -11566,7 +11760,6 @@
 			"material": "minecraft:orange_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -11601,7 +11794,8 @@
 	{
 		"key": "minecraft:orange_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -11740,7 +11934,8 @@
 	{
 		"key": "minecraft:orange_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12231,13 +12426,15 @@
 	{
 		"key": "minecraft:pale_oak_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:pale_oak_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12431,7 +12628,8 @@
 	{
 		"key": "minecraft:piglin_wall_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12466,7 +12664,6 @@
 			"material": "minecraft:pink_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -12501,7 +12698,8 @@
 	{
 		"key": "minecraft:pink_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12652,7 +12850,8 @@
 	{
 		"key": "minecraft:pink_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12682,13 +12881,15 @@
 	{
 		"key": "minecraft:piston_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:pitcher_crop",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12731,7 +12932,8 @@
 	{
 		"key": "minecraft:player_wall_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -12964,6 +13166,54 @@
 		}
 	},
 	{
+		"key": "minecraft:polished_cinnabar",
+		"result": {
+			"material": "minecraft:polished_cinnabar",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_slab",
+		"result": {
+			"material": "minecraft:polished_cinnabar_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_stairs",
+		"result": {
+			"material": "minecraft:polished_cinnabar_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_cinnabar_wall",
+		"result": {
+			"material": "minecraft:polished_cinnabar_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:polished_deepslate",
 		"result": {
 			"material": "minecraft:polished_deepslate",
@@ -13084,6 +13334,54 @@
 		}
 	},
 	{
+		"key": "minecraft:polished_sulfur",
+		"result": {
+			"material": "minecraft:polished_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_slab",
+		"result": {
+			"material": "minecraft:polished_sulfur_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_stairs",
+		"result": {
+			"material": "minecraft:polished_sulfur_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:polished_sulfur_wall",
+		"result": {
+			"material": "minecraft:polished_sulfur_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:polished_tuff",
 		"result": {
 			"material": "minecraft:polished_tuff",
@@ -13182,7 +13480,21 @@
 	{
 		"key": "minecraft:potatoes",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
+		}
+	},
+	{
+		"key": "minecraft:potent_sulfur",
+		"result": {
+			"material": "minecraft:potent_sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.BlockStateMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
 		}
 	},
 	{
@@ -13201,235 +13513,274 @@
 	{
 		"key": "minecraft:potted_acacia_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_allium",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_azalea_bush",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_azure_bluet",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_bamboo",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_birch_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_blue_orchid",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_brown_mushroom",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_cactus",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_cherry_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_closed_eyeblossom",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_cornflower",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_crimson_fungus",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_crimson_roots",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_dandelion",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_dark_oak_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_dead_bush",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_fern",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_flowering_azalea_bush",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_golden_dandelion",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_jungle_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_lily_of_the_valley",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_mangrove_propagule",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_oak_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_open_eyeblossom",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_orange_tulip",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_oxeye_daisy",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_pale_oak_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_pink_tulip",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_poppy",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_red_mushroom",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_red_tulip",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_spruce_sapling",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_torchflower",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_warped_fungus",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_warped_roots",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_white_tulip",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:potted_wither_rose",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:powder_snow",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -13447,7 +13798,8 @@
 	{
 		"key": "minecraft:powder_snow_cauldron",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -13658,7 +14010,8 @@
 	{
 		"key": "minecraft:pumpkin_stem",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -13680,7 +14033,6 @@
 			"material": "minecraft:purple_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -13715,7 +14067,8 @@
 	{
 		"key": "minecraft:purple_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -13842,7 +14195,8 @@
 	{
 		"key": "minecraft:purple_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -14178,7 +14532,6 @@
 			"material": "minecraft:red_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -14213,7 +14566,8 @@
 	{
 		"key": "minecraft:red_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -14484,7 +14838,8 @@
 	{
 		"key": "minecraft:red_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -14562,13 +14917,15 @@
 	{
 		"key": "minecraft:redstone_wall_torch",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:redstone_wire",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -15212,7 +15569,8 @@
 	{
 		"key": "minecraft:skeleton_wall_skull",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -15583,7 +15941,8 @@
 	{
 		"key": "minecraft:soul_fire",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -15637,7 +15996,8 @@
 	{
 		"key": "minecraft:soul_wall_torch",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -15949,13 +16309,15 @@
 	{
 		"key": "minecraft:spruce_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:spruce_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -16575,6 +16937,139 @@
 		}
 	},
 	{
+		"key": "minecraft:sulfur",
+		"result": {
+			"material": "minecraft:sulfur",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_slab",
+		"result": {
+			"material": "minecraft:sulfur_brick_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_stairs",
+		"result": {
+			"material": "minecraft:sulfur_brick_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_brick_wall",
+		"result": {
+			"material": "minecraft:sulfur_brick_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_bricks",
+		"result": {
+			"material": "minecraft:sulfur_bricks",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_cube_bucket",
+		"result": {
+			"material": "minecraft:sulfur_cube_bucket",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_cube_spawn_egg",
+		"result": {
+			"material": "minecraft:sulfur_cube_spawn_egg",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable",
+				"org.bukkit.inventory.meta.SpawnEggMeta"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_slab",
+		"result": {
+			"material": "minecraft:sulfur_slab",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_spike",
+		"result": {
+			"material": "minecraft:sulfur_spike",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_stairs",
+		"result": {
+			"material": "minecraft:sulfur_stairs",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
+		"key": "minecraft:sulfur_wall",
+		"result": {
+			"material": "minecraft:sulfur_wall",
+			"meta": [
+				"org.bukkit.inventory.meta.BlockDataMeta",
+				"org.bukkit.inventory.meta.Damageable",
+				"org.bukkit.inventory.meta.ItemMeta",
+				"org.bukkit.inventory.meta.Repairable"
+			]
+		}
+	},
+	{
 		"key": "minecraft:sunflower",
 		"result": {
 			"material": "minecraft:sunflower",
@@ -16640,7 +17135,8 @@
 	{
 		"key": "minecraft:sweet_berry_bush",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -16695,7 +17191,8 @@
 	{
 		"key": "minecraft:tall_seagrass",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -16836,7 +17333,8 @@
 	{
 		"key": "minecraft:torchflower_crop",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -16929,7 +17427,8 @@
 	{
 		"key": "minecraft:tripwire",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17021,7 +17520,8 @@
 	{
 		"key": "minecraft:tube_coral_wall_fan",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17185,7 +17685,8 @@
 	{
 		"key": "minecraft:twisting_vines_plant",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17279,13 +17780,15 @@
 	{
 		"key": "minecraft:void_air",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:wall_torch",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17548,13 +18051,15 @@
 	{
 		"key": "minecraft:warped_wall_hanging_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
 		"key": "minecraft:warped_wall_sign",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17572,7 +18077,8 @@
 	{
 		"key": "minecraft:water",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -17590,7 +18096,8 @@
 	{
 		"key": "minecraft:water_cauldron",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -18530,7 +19037,8 @@
 	{
 		"key": "minecraft:weeping_vines_plant",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -18588,7 +19096,6 @@
 			"material": "minecraft:white_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -18623,7 +19130,8 @@
 	{
 		"key": "minecraft:white_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -18762,7 +19270,8 @@
 	{
 		"key": "minecraft:white_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -18867,7 +19376,8 @@
 	{
 		"key": "minecraft:wither_skeleton_wall_skull",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -19028,7 +19538,6 @@
 			"material": "minecraft:yellow_bed",
 			"meta": [
 				"org.bukkit.inventory.meta.BlockDataMeta",
-				"org.bukkit.inventory.meta.BlockStateMeta",
 				"org.bukkit.inventory.meta.Damageable",
 				"org.bukkit.inventory.meta.ItemMeta",
 				"org.bukkit.inventory.meta.Repairable"
@@ -19063,7 +19572,8 @@
 	{
 		"key": "minecraft:yellow_candle_cake",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -19190,7 +19700,8 @@
 	{
 		"key": "minecraft:yellow_wall_banner",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{
@@ -19286,7 +19797,8 @@
 	{
 		"key": "minecraft:zombie_wall_head",
 		"result": {
-			"material": "minecraft:air"
+			"throws": "java.lang.NullPointerException",
+			"throwsMsg": "Cannot invoke \"net.minecraft.world.level.ItemLike.asItem()\" because \"item\" is null"
 		}
 	},
 	{

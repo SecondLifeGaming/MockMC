@@ -17,13 +17,6 @@ class AbstractRespawnEventBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getRespawnLocation());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getRespawnReason());
 		} catch (Exception | LinkageError _)
 		{
@@ -32,6 +25,13 @@ class AbstractRespawnEventBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getRespawnFlags());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getRespawnLocation());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

@@ -25,7 +25,7 @@ class MapMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getColor());
+			assertSafeDefault(mock.getMapView());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -39,7 +39,7 @@ class MapMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getMapView());
+			assertSafeDefault(mock.getColor());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

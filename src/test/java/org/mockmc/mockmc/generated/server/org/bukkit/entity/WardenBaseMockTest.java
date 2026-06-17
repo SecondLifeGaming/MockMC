@@ -15,14 +15,14 @@ class WardenBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getEntityAngryAt());
+			assertSafeDefault(mock.getAngerLevel());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getAngerLevel());
+			assertSafeDefault(mock.getEntityAngryAt());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

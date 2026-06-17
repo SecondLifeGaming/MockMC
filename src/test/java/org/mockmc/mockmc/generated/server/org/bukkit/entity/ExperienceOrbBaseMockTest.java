@@ -15,6 +15,13 @@ class ExperienceOrbBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.getSpawnReason());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getSourceEntityId());
 		} catch (Exception | LinkageError _)
 		{
@@ -23,13 +30,6 @@ class ExperienceOrbBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getTriggerEntityId());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getSpawnReason());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

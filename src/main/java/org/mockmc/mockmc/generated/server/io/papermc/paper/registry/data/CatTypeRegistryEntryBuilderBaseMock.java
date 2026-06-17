@@ -10,8 +10,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.CatTypeRegistryEntry.Builder}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.10-alpha.jar (Version:
+ * paper-api-26.2.build.10-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
@@ -19,8 +19,8 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
 public interface CatTypeRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.CatTypeRegistryEntry.Builder,
-			CatTypeRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Cat.Type>
+			RegistryBuilderBaseMock<Cat.Type>,
+			CatTypeRegistryEntryBaseMock
 {
 	@Override
 	default io.papermc.paper.registry.data.CatTypeRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)

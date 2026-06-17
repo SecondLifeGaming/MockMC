@@ -22,14 +22,14 @@ class ShulkerBulletBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getTargetDelta());
+			assertSafeDefault(mock.getCurrentMovementDirection());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getCurrentMovementDirection());
+			assertSafeDefault(mock.getTargetDelta());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

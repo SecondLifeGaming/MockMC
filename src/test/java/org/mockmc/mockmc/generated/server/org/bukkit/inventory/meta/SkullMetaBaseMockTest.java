@@ -32,14 +32,14 @@ class SkullMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getPlayerProfile());
+			assertSafeDefault(mock.getOwningPlayer());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getOwningPlayer());
+			assertSafeDefault(mock.getNoteBlockSound());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -53,7 +53,7 @@ class SkullMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getNoteBlockSound());
+			assertSafeDefault(mock.getPlayerProfile());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

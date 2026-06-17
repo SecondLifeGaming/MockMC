@@ -2,7 +2,6 @@ package org.mockmc.mockmc;
 
 import com.destroystokyo.paper.SkinParts;
 import com.google.common.base.Preconditions;
-import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
@@ -29,7 +28,9 @@ import java.util.function.Predicate;
 @NullMarked
 @ApiStatus.Internal
 @ApiStatus.Experimental
-public class MockMCInternalAPIBridge implements InternalAPIBridge
+public class MockMCInternalAPIBridge
+		implements
+			org.mockmc.mockmc.generated.server.io.papermc.paper.InternalAPIBridgeBaseMock
 {
 
 	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component
@@ -115,6 +116,12 @@ public class MockMCInternalAPIBridge implements InternalAPIBridge
 	public io.papermc.paper.entity.poi.PoiType.Occupancy createOccupancy(String arg0)
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	@Override
+	public org.bukkit.inventory.ItemStack deserializeItem(byte[] bytes)
+	{
+		return ((org.mockmc.mockmc.util.UnsafeValuesMock) org.bukkit.Bukkit.getUnsafe()).deserializeItem(bytes);
 	}
 
 }

@@ -15,6 +15,13 @@ class FurnaceBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.getRecipesUsed());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getInventory());
 		} catch (Exception | LinkageError _)
 		{
@@ -23,13 +30,6 @@ class FurnaceBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSnapshotInventory());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getRecipesUsed());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

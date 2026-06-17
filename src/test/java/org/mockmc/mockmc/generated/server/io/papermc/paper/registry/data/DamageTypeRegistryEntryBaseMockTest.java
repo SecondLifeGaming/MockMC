@@ -15,7 +15,7 @@ class DamageTypeRegistryEntryBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.damageScaling());
+			assertSafeDefault(mock.messageId());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -29,7 +29,7 @@ class DamageTypeRegistryEntryBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.messageId());
+			assertSafeDefault(mock.damageScaling());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

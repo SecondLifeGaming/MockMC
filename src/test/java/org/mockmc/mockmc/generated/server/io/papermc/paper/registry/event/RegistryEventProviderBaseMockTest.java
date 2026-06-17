@@ -23,14 +23,14 @@ class RegistryEventProviderBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.registryKey());
+			assertSafeDefault(mock.entryAdd());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.entryAdd());
+			assertSafeDefault(mock.registryKey());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

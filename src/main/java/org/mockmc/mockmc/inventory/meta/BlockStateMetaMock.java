@@ -118,59 +118,63 @@ public class BlockStateMetaMock extends ItemMetaMock
 	 * ItemMeta type. Using EnumMap for O(1) lookup performance using an internal
 	 * array.
 	 */
-	static final Map<Material, Class<? extends TileStateMock>> BLOCK_STATE_MATERIALS;
+	private static Map<Material, Class<? extends TileStateMock>> blockStateMaterialsMap = null;
 
-	static
+	public static Map<Material, Class<? extends TileStateMock>> getBlockStateMaterials()
 	{
-		// To update this list check Paper class "CraftItemMetas"
-		Map<Material, Class<? extends TileStateMock>> map = new java.util.EnumMap<>(Material.class);
-		MaterialTags.BEDS.getValues().forEach(m -> map.put(m, BedStateMock.class));
-		MaterialTags.SHULKER_BOXES.getValues().forEach(m -> map.put(m, ShulkerBoxStateMock.class));
-		MaterialTags.SIGNS.getValues().forEach(m -> map.put(m, SignStateMock.class));
-		map.put(Material.BARREL, BarrelStateMock.class);
-		map.put(Material.BEACON, BeaconStateMock.class);
-		map.put(Material.BEE_NEST, BeehiveStateMock.class);
-		map.put(Material.BEEHIVE, BeehiveStateMock.class);
-		map.put(Material.BELL, BellStateMock.class);
-		map.put(Material.BLAST_FURNACE, BlastFurnaceStateMock.class);
-		map.put(Material.BREWING_STAND, BrewingStandStateMock.class);
-		map.put(Material.CALIBRATED_SCULK_SENSOR, CalibratedSculkSensorStateMock.class);
-		map.put(Material.CAMPFIRE, CampfireStateMock.class);
-		map.put(Material.CHEST, ChestStateMock.class);
-		map.put(Material.CHISELED_BOOKSHELF, null);
-		map.put(Material.COMMAND_BLOCK, CommandBlockStateMock.class);
-		map.put(Material.CREAKING_HEART, null);
-		map.put(Material.CHAIN_COMMAND_BLOCK, CommandBlockStateMock.class);
-		map.put(Material.REPEATING_COMMAND_BLOCK, CommandBlockStateMock.class);
-		map.put(Material.COMPARATOR, ComparatorStateMock.class);
-		map.put(Material.CONDUIT, null);
-		map.put(Material.CRAFTER, null);
-		map.put(Material.DAYLIGHT_DETECTOR, DaylightDetectorStateMock.class);
-		map.put(Material.DECORATED_POT, null);
-		map.put(Material.DISPENSER, DispenserStateMock.class);
-		map.put(Material.DROPPER, DropperStateMock.class);
-		map.put(Material.ENCHANTING_TABLE, EnchantingTableStateMock.class);
-		map.put(Material.ENDER_CHEST, EnderChestStateMock.class);
-		map.put(Material.FURNACE, FurnaceStateMock.class);
-		map.put(Material.HOPPER, HopperStateMock.class);
-		map.put(Material.JIGSAW, JigsawStateMock.class);
-		map.put(Material.JUKEBOX, JukeboxStateMock.class);
-		map.put(Material.LECTERN, LecternStateMock.class);
-		map.put(Material.SCULK_CATALYST, SculkCatalystStateMock.class);
-		map.put(Material.SCULK_SENSOR, SculkSensorStateMock.class);
-		map.put(Material.SCULK_SHRIEKER, SculkShriekerStateMock.class);
-		map.put(Material.SMOKER, SmokerStateMock.class);
-		map.put(Material.SOUL_CAMPFIRE, CampfireStateMock.class);
-		map.put(Material.SPAWNER, CreatureSpawnerStateMock.class);
-		map.put(Material.STRUCTURE_BLOCK, StructureStateMock.class);
-		map.put(Material.SUSPICIOUS_GRAVEL, null);
-		map.put(Material.SUSPICIOUS_SAND, null);
-		map.put(Material.TEST_BLOCK, TestBlockStateMock.class);
-		map.put(Material.TEST_INSTANCE_BLOCK, TestInstanceBlockStateMock.class);
-		map.put(Material.TRAPPED_CHEST, ChestStateMock.class);
-		map.put(Material.TRIAL_SPAWNER, null);
-		map.put(Material.VAULT, null);
-		BLOCK_STATE_MATERIALS = Collections.unmodifiableMap(map);
+		if (blockStateMaterialsMap == null)
+		{
+			// To update this list check Paper class "CraftItemMetas"
+			Map<Material, Class<? extends TileStateMock>> map = new java.util.EnumMap<>(Material.class);
+			MaterialTags.BEDS.getValues().forEach(m -> map.put(m, BedStateMock.class));
+			MaterialTags.SHULKER_BOXES.getValues().forEach(m -> map.put(m, ShulkerBoxStateMock.class));
+			MaterialTags.SIGNS.getValues().forEach(m -> map.put(m, SignStateMock.class));
+			map.put(Material.BARREL, BarrelStateMock.class);
+			map.put(Material.BEACON, BeaconStateMock.class);
+			map.put(Material.BEE_NEST, BeehiveStateMock.class);
+			map.put(Material.BEEHIVE, BeehiveStateMock.class);
+			map.put(Material.BELL, BellStateMock.class);
+			map.put(Material.BLAST_FURNACE, BlastFurnaceStateMock.class);
+			map.put(Material.BREWING_STAND, BrewingStandStateMock.class);
+			map.put(Material.CALIBRATED_SCULK_SENSOR, CalibratedSculkSensorStateMock.class);
+			map.put(Material.CAMPFIRE, CampfireStateMock.class);
+			map.put(Material.CHEST, ChestStateMock.class);
+			map.put(Material.CHISELED_BOOKSHELF, null);
+			map.put(Material.COMMAND_BLOCK, CommandBlockStateMock.class);
+			map.put(Material.CREAKING_HEART, null);
+			map.put(Material.CHAIN_COMMAND_BLOCK, CommandBlockStateMock.class);
+			map.put(Material.REPEATING_COMMAND_BLOCK, CommandBlockStateMock.class);
+			map.put(Material.COMPARATOR, ComparatorStateMock.class);
+			map.put(Material.CONDUIT, null);
+			map.put(Material.CRAFTER, null);
+			map.put(Material.DAYLIGHT_DETECTOR, DaylightDetectorStateMock.class);
+			map.put(Material.DECORATED_POT, null);
+			map.put(Material.DISPENSER, DispenserStateMock.class);
+			map.put(Material.DROPPER, DropperStateMock.class);
+			map.put(Material.ENCHANTING_TABLE, EnchantingTableStateMock.class);
+			map.put(Material.ENDER_CHEST, EnderChestStateMock.class);
+			map.put(Material.FURNACE, FurnaceStateMock.class);
+			map.put(Material.HOPPER, HopperStateMock.class);
+			map.put(Material.JIGSAW, JigsawStateMock.class);
+			map.put(Material.JUKEBOX, JukeboxStateMock.class);
+			map.put(Material.LECTERN, LecternStateMock.class);
+			map.put(Material.SCULK_CATALYST, SculkCatalystStateMock.class);
+			map.put(Material.SCULK_SENSOR, SculkSensorStateMock.class);
+			map.put(Material.SCULK_SHRIEKER, SculkShriekerStateMock.class);
+			map.put(Material.SMOKER, SmokerStateMock.class);
+			map.put(Material.SOUL_CAMPFIRE, CampfireStateMock.class);
+			map.put(Material.SPAWNER, CreatureSpawnerStateMock.class);
+			map.put(Material.STRUCTURE_BLOCK, StructureStateMock.class);
+			map.put(Material.SUSPICIOUS_GRAVEL, null);
+			map.put(Material.SUSPICIOUS_SAND, null);
+			map.put(Material.TEST_BLOCK, TestBlockStateMock.class);
+			map.put(Material.TEST_INSTANCE_BLOCK, TestInstanceBlockStateMock.class);
+			map.put(Material.TRAPPED_CHEST, ChestStateMock.class);
+			map.put(Material.TRIAL_SPAWNER, null);
+			map.put(Material.VAULT, null);
+			blockStateMaterialsMap = Collections.unmodifiableMap(map);
+		}
+		return blockStateMaterialsMap;
 	}
 
 	private BlockState blockState;

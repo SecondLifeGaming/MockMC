@@ -22,13 +22,6 @@ class VillagerBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getVillagerType());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.zombify());
 		} catch (Exception | LinkageError _)
 		{
@@ -37,6 +30,13 @@ class VillagerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getReputations());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getVillagerType());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

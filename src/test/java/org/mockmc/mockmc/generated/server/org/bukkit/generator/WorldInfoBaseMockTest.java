@@ -29,14 +29,14 @@ class WorldInfoBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getEnvironment());
+			assertSafeDefault(mock.vanillaBiomeProvider());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.vanillaBiomeProvider());
+			assertSafeDefault(mock.getEnvironment());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

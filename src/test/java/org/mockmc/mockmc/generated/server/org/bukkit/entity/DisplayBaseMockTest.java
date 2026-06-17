@@ -29,14 +29,14 @@ class DisplayBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getGlowColorOverride());
+			assertSafeDefault(mock.getBrightness());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getBrightness());
+			assertSafeDefault(mock.getGlowColorOverride());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

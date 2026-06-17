@@ -15,6 +15,13 @@ class BeaconViewBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.getTopInventory());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getPrimaryEffect());
 		} catch (Exception | LinkageError _)
 		{
@@ -23,13 +30,6 @@ class BeaconViewBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getSecondaryEffect());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getTopInventory());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

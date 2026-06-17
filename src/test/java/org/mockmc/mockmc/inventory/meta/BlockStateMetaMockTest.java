@@ -284,14 +284,14 @@ public class BlockStateMetaMockTest
 
 	public static Stream<Arguments> container_Materials()
 	{
-		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+		return BlockStateMetaMock.getBlockStateMaterials().entrySet().stream()
 				.filter(e -> e.getValue() != null && Container.class.isAssignableFrom(e.getValue()))
 				.map(Map.Entry::getKey).map(Arguments::of);
 	}
 
 	public static Stream<Arguments> nonContainer_Materials()
 	{
-		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+		return BlockStateMetaMock.getBlockStateMaterials().entrySet().stream()
 				.filter(e -> e.getValue() != null && !Container.class.isAssignableFrom(e.getValue()))
 				.map(Map.Entry::getKey).filter(m -> m.asItemType() != null).map(Arguments::of);
 	}
@@ -300,7 +300,7 @@ public class BlockStateMetaMockTest
 	// and there's no way to set it back after edits.
 	public static Stream<Arguments> container_Materials_noFurnaces()
 	{
-		return BlockStateMetaMock.BLOCK_STATE_MATERIALS.entrySet().stream()
+		return BlockStateMetaMock.getBlockStateMaterials().entrySet().stream()
 				.filter(e -> e.getValue() != null && Container.class.isAssignableFrom(e.getValue()))
 				.filter(e -> !AbstractFurnaceStateMock.class.isAssignableFrom(e.getValue())).map(Map.Entry::getKey)
 				.map(Arguments::of);

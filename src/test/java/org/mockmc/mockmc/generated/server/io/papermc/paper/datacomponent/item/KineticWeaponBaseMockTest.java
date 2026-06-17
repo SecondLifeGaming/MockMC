@@ -22,6 +22,13 @@ class KineticWeaponBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.hitSound());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.dismountConditions());
 		} catch (Exception | LinkageError _)
 		{
@@ -37,13 +44,6 @@ class KineticWeaponBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.damageConditions());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.hitSound());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

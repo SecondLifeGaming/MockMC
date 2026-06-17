@@ -64,9 +64,9 @@ tasks.register<DownloadJarsTask>("downloadJars") {
 	description = "Downloads backend API JARs for metaminer"
 	outputDir.set(layout.projectDirectory.dir("jars"))
 	jars.set(mapOf(
-		"velocity-3.5.0-SNAPSHOT-593.jar" to "https://fill-data.papermc.io/v1/objects/25bfbee6155fbce24f709bf18f1bb915817c4151d6d418ca01282742ab1f123a/velocity-3.5.0-SNAPSHOT-593.jar",
-		"paper-26.1.2-53.jar" to "https://fill-data.papermc.io/v1/objects/6934188878fc351e1be5bfba5f2b8c4591224886e4b34e3de09dbec68a351caf/paper-26.1.2-53.jar",
-		"folia-1.21.11-14.jar" to "https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar",
+		"velocity-3.5.0-SNAPSHOT-601.jar" to "https://fill-data.papermc.io/v1/objects/0407642d1ed2883100eb823c2805523f191fa637db1f42ac0ec7ef29cbe455a9/velocity-3.5.0-SNAPSHOT-601.jar",
+		"paper-26.2-10.jar" to "https://fill-data.papermc.io/v1/objects/e369ccd1987b5f69eae1fc3dd0348bda0802cbff9549775019548e3b4de22971/paper-26.2-10.jar",
+		"folia-26.1.2-8.jar" to "https://fill-data.papermc.io/v1/objects/607afd1c3320008e1ffd2eaee6780ace4419d5f8c527b75e79f259be79ebf57b/folia-26.1.2-8.jar",
 		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
 	))
 }
@@ -234,6 +234,10 @@ tasks {
 				)
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
+				jFlags = listOf(
+					"-XX:TieredStopAtLevel=1",
+					"-XX:+UseSerialGC"
+				)
 			}
 		}
 	}
@@ -439,10 +443,10 @@ data class DependencyHashResult(
 )
 
 val backendJars = mapOf(
-	"Folia" to "folia-1.21.11-14.jar",
-	"Paper" to "paper-26.1.2-53.jar",
+	"Folia" to "folia-26.1.2-8.jar",
+	"Paper" to "paper-26.1.2-69.jar",
 	"Spigot" to "spigot-26.1.2.jar",
-	"Velocity" to "velocity-3.5.0-SNAPSHOT-593.jar",
+	"Velocity" to "velocity-3.5.0-SNAPSHOT-601.jar",
 	"Waterfall" to "waterfall-1.21-609.jar"
 )
 

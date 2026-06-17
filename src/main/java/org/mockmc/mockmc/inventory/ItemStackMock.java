@@ -710,13 +710,52 @@ public class ItemStackMock extends ItemStack
 	@NotNull
 	public static ItemStack deserialize(@NotNull Map<String, Object> args)
 	{
-		return Bukkit.getUnsafe().deserializeStack(args);
+		Preconditions.checkNotNull(args, "args cannot be null");
+		// Reconstruct directly from the map fields — no NMS required.
+		// This makes round-tripping work in pure unit-test environments.
+		String materialName = (String) args.getOrDefault(FIELD_MATERIAL, "AIR");
+		Material material;
+		try
+		{
+			material = Material.valueOf(materialName.toUpperCase(Locale.ROOT));
+		} catch (IllegalArgumentException e)
+		{
+			material = Material.AIR;
+		}
+		if (material == Material.AIR || !material.isItem())
+		{
+			return new ItemStackMock(Material.AIR);
+		}
+		Object amountObj = args.getOrDefault(FIELD_AMOUNT, args.getOrDefault(FIELD_COUNT, 1));
+		int amount = (amountObj instanceof Number n) ? n.intValue() : 1;
+		ItemStackMock stack = new ItemStackMock(material, amount);
+		// Re-apply meta if present (serialized under "components" or "meta" key)
+		Object metaObj = args.getOrDefault("components", args.get("meta"));
+		if (metaObj instanceof Map<?, ?> metaMap)
+		{
+			try
+			{
+				ItemMeta meta = ItemMetaMock.deserialize((Map<String, Object>) metaMap);
+				stack.setItemMeta(meta);
+			} catch (Exception ignored)
+			{
+				// Meta reconstruction is best-effort; item type/amount are always preserved
+			}
+		}
+		return stack;
 	}
 
 	@Override
 	public byte @NotNull [] serializeAsBytes()
 	{
-		return Bukkit.getUnsafe().serializeItem(this);
+		// NMS-free implementation: convert the existing serialize() map to UTF-8 JSON
+		// bytes.
+		// The resulting bytes start with '{', which allows round-tripping via
+		// ItemStackMock.deserialize() in mock/unit-test environments without any NMS
+		// classes.
+		com.google.gson.Gson gson = new com.google.gson.Gson();
+		String json = gson.toJson(serialize());
+		return json.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 	}
 
 }

@@ -15,7 +15,7 @@ class ConfiguredPluginClassLoaderBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getGroup());
+			assertSafeDefault(mock.getConfiguration());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -29,7 +29,7 @@ class ConfiguredPluginClassLoaderBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getConfiguration());
+			assertSafeDefault(mock.getGroup());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

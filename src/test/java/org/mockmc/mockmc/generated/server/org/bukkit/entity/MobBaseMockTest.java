@@ -22,6 +22,13 @@ class MobBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.getAmbientSound());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getEquipment());
 		} catch (Exception | LinkageError _)
 		{
@@ -37,13 +44,6 @@ class MobBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPathfinder());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getAmbientSound());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

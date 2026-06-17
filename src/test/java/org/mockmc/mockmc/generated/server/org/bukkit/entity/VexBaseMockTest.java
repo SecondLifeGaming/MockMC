@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "removal", "java:S1874"})
 class VexBaseMockTest extends GeneratedTestBase
 {
 	@Test
@@ -13,6 +15,13 @@ class VexBaseMockTest extends GeneratedTestBase
 	{
 		VexBaseMock mock = new Stub();
 		assertNotNull(mock);
+		try
+		{
+			assertSafeDefault(mock.getOwner());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 		try
 		{
 			assertSafeDefault(mock.getBound());

@@ -24,6 +24,13 @@ class ScoreboardBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.getTeams());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getPlayers());
 		} catch (Exception | LinkageError _)
 		{
@@ -32,13 +39,6 @@ class ScoreboardBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getObjectives());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getTeams());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

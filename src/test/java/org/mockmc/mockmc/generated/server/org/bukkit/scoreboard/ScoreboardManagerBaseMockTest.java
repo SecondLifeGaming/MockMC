@@ -15,14 +15,14 @@ class ScoreboardManagerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getMainScoreboard());
+			assertSafeDefault(mock.getNewScoreboard());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getNewScoreboard());
+			assertSafeDefault(mock.getMainScoreboard());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

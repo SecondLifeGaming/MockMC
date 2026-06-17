@@ -15,13 +15,6 @@ class TrialSpawnerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getTrackedPlayers());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getTrackedEntities());
 		} catch (Exception | LinkageError _)
 		{
@@ -37,6 +30,13 @@ class TrialSpawnerBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getOminousConfiguration());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getTrackedPlayers());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

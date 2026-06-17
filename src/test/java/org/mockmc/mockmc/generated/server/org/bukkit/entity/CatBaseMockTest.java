@@ -15,13 +15,6 @@ class CatBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getCollarColor());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getSoundVariant());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,6 +23,13 @@ class CatBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getCatType());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getCollarColor());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

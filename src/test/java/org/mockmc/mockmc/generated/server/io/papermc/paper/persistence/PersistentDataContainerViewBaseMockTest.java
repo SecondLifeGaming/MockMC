@@ -22,14 +22,14 @@ class PersistentDataContainerViewBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getAdapterContext());
+			assertSafeDefault(mock.serializeToBytes());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.serializeToBytes());
+			assertSafeDefault(mock.getAdapterContext());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

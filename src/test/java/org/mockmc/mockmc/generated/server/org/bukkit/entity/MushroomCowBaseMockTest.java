@@ -24,14 +24,14 @@ class MushroomCowBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getEffectsForNextStew());
+			assertSafeDefault(mock.getStewEffectType());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getStewEffectType());
+			assertSafeDefault(mock.getEffectsForNextStew());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

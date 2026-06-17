@@ -22,13 +22,6 @@ class DialogBaseBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.inputs());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.title());
 		} catch (Exception | LinkageError _)
 		{
@@ -36,7 +29,7 @@ class DialogBaseBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.externalTitle());
+			assertSafeDefault(mock.inputs());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -44,6 +37,13 @@ class DialogBaseBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.afterAction());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.externalTitle());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

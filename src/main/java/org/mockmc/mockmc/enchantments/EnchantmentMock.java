@@ -6,15 +6,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.papermc.paper.enchantments.EnchantmentRarity;
 import io.papermc.paper.registry.set.RegistryKeySet;
+import io.papermc.paper.registry.RegistryKey;
+import io.papermc.paper.registry.TypedKey;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.mockmc.mockmc.registry.RegistryKeySetMock;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -98,6 +104,15 @@ public class EnchantmentMock extends Enchantment
 
 	private final int anvilCost;
 
+	private final int weight;
+
+	private final JsonElement supportedItemsData;
+	private final JsonElement primaryItemsData;
+	private final JsonElement exclusiveWithData;
+	private RegistryKeySet<ItemType> supportedItems;
+	private RegistryKeySet<ItemType> primaryItems;
+	private RegistryKeySet<Enchantment> exclusiveWith;
+
 	/**
 	 * @param namespacedKey
 	 *            The key representing this enchantment
@@ -134,6 +149,18 @@ public class EnchantmentMock extends Enchantment
 			boolean discoverable, Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
 			int anvilCost)
 	{
+		this(namespacedKey, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCost,
+				maxModifiedCost, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost, 1, null,
+				null, null);
+	}
+
+	@SuppressWarnings("java:S107")
+	public EnchantmentMock(NamespacedKey namespacedKey, boolean treasure, boolean cursed, int maxLevel, int startLevel,
+			String name, Component[] displayNames, int[] minModifiedCost, int[] maxModifiedCost, boolean tradeable,
+			boolean discoverable, Set<NamespacedKey> conflicts, Set<NamespacedKey> enchantables, String translationKey,
+			int anvilCost, int weight, JsonElement supportedItemsData, JsonElement primaryItemsData,
+			JsonElement exclusiveWithData)
+	{
 		this.namespacedKey = namespacedKey;
 		this.treasure = treasure;
 		this.cursed = cursed;
@@ -149,6 +176,10 @@ public class EnchantmentMock extends Enchantment
 		this.enchantables = enchantables;
 		this.translationKey = translationKey;
 		this.anvilCost = anvilCost;
+		this.weight = weight;
+		this.supportedItemsData = supportedItemsData;
+		this.primaryItemsData = primaryItemsData;
+		this.exclusiveWithData = exclusiveWithData;
 	}
 
 	/**
@@ -178,6 +209,10 @@ public class EnchantmentMock extends Enchantment
 		this.enchantables = getEnchantables(data.get(ENCHANTABLE_KEY).getAsJsonArray());
 		this.translationKey = data.get(TRANSLATION_KEY).getAsString();
 		this.anvilCost = data.get(ANVIL_COST_KEY).getAsInt();
+		this.weight = 1;
+		this.supportedItemsData = null;
+		this.primaryItemsData = null;
+		this.exclusiveWithData = null;
 	}
 
 	@Override
@@ -364,7 +399,7 @@ public class EnchantmentMock extends Enchantment
 	{
 		Preconditions.checkNotNull(item, "Item cannot be null");
 		NamespacedKey itemKey = item.getType().getKey();
-		return enchantables.contains(itemKey);
+		return getSupportedItems().contains(TypedKey.create(RegistryKey.ITEM, itemKey));
 	}
 
 	@Override
@@ -394,7 +429,11 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull RegistryKeySet<Enchantment> getExclusiveWith()
 	{
-		return null;
+		if (this.exclusiveWith == null)
+		{
+			this.exclusiveWith = resolveEnchantmentKeySet(this.exclusiveWithData);
+		}
+		return this.exclusiveWith;
 	}
 
 	/**
@@ -403,7 +442,11 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull RegistryKeySet<ItemType> getSupportedItems()
 	{
-		return null;
+		if (this.supportedItems == null)
+		{
+			this.supportedItems = resolveItemKeySet(this.supportedItemsData);
+		}
+		return this.supportedItems;
 	}
 
 	/**
@@ -412,7 +455,11 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public @NotNull RegistryKeySet<ItemType> getPrimaryItems()
 	{
-		return null;
+		if (this.primaryItems == null)
+		{
+			this.primaryItems = resolveItemKeySet(this.primaryItemsData);
+		}
+		return this.primaryItems;
 	}
 
 	/**
@@ -421,7 +468,7 @@ public class EnchantmentMock extends Enchantment
 	@Override
 	public int getWeight()
 	{
-		return 0;
+		return this.weight;
 	}
 
 	/**
@@ -466,7 +513,7 @@ public class EnchantmentMock extends Enchantment
 		Preconditions.checkNotNull(data);
 		List<String> expectedArguments = List.of(KEY, TREASURE_KEY, CURSED_KEY, MAX_LEVEL_KEY, START_LEVEL_KEY,
 				NAME_KEY, DISPLAY_NAMES_KEY, MIN_MODIFIED_COSTS_KEY, MAX_MODIFIED_COSTS_KEY, TRADEABLE_KEY,
-				DISCOVERABLE_KEY, CONFLICTS_KEY, ENCHANTABLES_KEY);
+				DISCOVERABLE_KEY, CONFLICTS_KEY, TRANSLATION_KEY, ANVIL_COST_KEY);
 		expectedArguments.forEach(
 				expectedKey -> Preconditions.checkArgument(data.has(expectedKey), "Missing json key: " + expectedKey));
 		NamespacedKey key = NamespacedKey.fromString(data.get(KEY).getAsString());
@@ -481,11 +528,67 @@ public class EnchantmentMock extends Enchantment
 		boolean tradeable = data.get(TRADEABLE_KEY).getAsBoolean();
 		boolean discoverable = data.get(DISCOVERABLE_KEY).getAsBoolean();
 		Set<NamespacedKey> conflicts = getConflicts(data.get(CONFLICTS_KEY).getAsJsonArray());
-		Set<NamespacedKey> enchantables = getEnchantables(data.get(ENCHANTABLES_KEY).getAsJsonArray());
 		String translationKey = data.get(TRANSLATION_KEY).getAsString();
 		int anvilCost = data.get(ANVIL_COST_KEY).getAsInt();
+		int weight = data.has("weight") ? data.get("weight").getAsInt() : 1;
+		JsonElement supportedItemsData = data.get("supportedItems");
+		JsonElement primaryItemsData = data.get("primaryItems");
+		JsonElement exclusiveWithData = data.get("exclusiveWith");
 		return new EnchantmentMock(key, treasure, cursed, maxLevel, startLevel, name, displayNames, minModifiedCosts,
-				maxModifiedCosts, tradeable, discoverable, conflicts, enchantables, translationKey, anvilCost);
+				maxModifiedCosts, tradeable, discoverable, conflicts, Set.of(), translationKey, anvilCost, weight,
+				supportedItemsData, primaryItemsData, exclusiveWithData);
+	}
+
+	private RegistryKeySet<ItemType> resolveItemKeySet(JsonElement data)
+	{
+		if (data == null || data.isJsonNull())
+		{
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM,
+					this.enchantables != null ? this.enchantables : List.of());
+		}
+		if (data.isJsonPrimitive())
+		{
+			NamespacedKey tagKey = NamespacedKey.fromString(data.getAsString());
+			Tag<Material> tag = org.bukkit.Bukkit.getTag(Tag.REGISTRY_ITEMS, tagKey, Material.class);
+			if (tag == null)
+			{
+				return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, List.of());
+			}
+			Collection<NamespacedKey> keys = tag.getValues().stream().map(Material::getKey).toList();
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, keys);
+		} else if (data.isJsonArray())
+		{
+			JsonArray array = data.getAsJsonArray();
+			List<NamespacedKey> keys = new java.util.ArrayList<>();
+			for (JsonElement el : array)
+			{
+				keys.add(NamespacedKey.fromString(el.getAsString()));
+			}
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, keys);
+		}
+		return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, List.of());
+	}
+
+	private RegistryKeySet<Enchantment> resolveEnchantmentKeySet(JsonElement data)
+	{
+		if (data == null || data.isJsonNull())
+		{
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, List.of());
+		}
+		if (data.isJsonPrimitive())
+		{
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, List.of());
+		} else if (data.isJsonArray())
+		{
+			JsonArray array = data.getAsJsonArray();
+			List<NamespacedKey> keys = new java.util.ArrayList<>();
+			for (JsonElement el : array)
+			{
+				keys.add(NamespacedKey.fromString(el.getAsString()));
+			}
+			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, keys);
+		}
+		return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, List.of());
 	}
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)

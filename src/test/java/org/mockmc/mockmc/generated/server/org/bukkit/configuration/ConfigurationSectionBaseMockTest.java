@@ -36,14 +36,14 @@ class ConfigurationSectionBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getCurrentPath());
+			assertSafeDefault(mock.getDefaultSection());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getDefaultSection());
+			assertSafeDefault(mock.getCurrentPath());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

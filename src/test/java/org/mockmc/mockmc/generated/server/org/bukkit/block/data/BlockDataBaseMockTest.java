@@ -23,13 +23,6 @@ class BlockDataBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getAsString());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getMaterial());
 		} catch (Exception | LinkageError _)
 		{
@@ -37,7 +30,7 @@ class BlockDataBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.createBlockState());
+			assertSafeDefault(mock.getSoundGroup());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -45,13 +38,6 @@ class BlockDataBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPistonMoveReaction());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getSoundGroup());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -66,6 +52,20 @@ class BlockDataBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPlacementMaterial());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.createBlockState());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getAsString());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

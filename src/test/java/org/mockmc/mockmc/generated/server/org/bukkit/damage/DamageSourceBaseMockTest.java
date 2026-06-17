@@ -22,14 +22,14 @@ class DamageSourceBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getCausingEntity());
+			assertSafeDefault(mock.getDirectEntity());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getDirectEntity());
+			assertSafeDefault(mock.getCausingEntity());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

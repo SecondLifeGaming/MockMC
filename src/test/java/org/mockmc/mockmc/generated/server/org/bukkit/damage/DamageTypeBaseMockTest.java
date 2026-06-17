@@ -15,6 +15,13 @@ class DamageTypeBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.getTranslationKey());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getDamageScaling());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,13 +37,6 @@ class DamageTypeBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getDeathMessageType());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getTranslationKey());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

@@ -15,14 +15,14 @@ class BukkitSchedulerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getActiveWorkers());
+			assertSafeDefault(mock.getPendingTasks());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getPendingTasks());
+			assertSafeDefault(mock.getActiveWorkers());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

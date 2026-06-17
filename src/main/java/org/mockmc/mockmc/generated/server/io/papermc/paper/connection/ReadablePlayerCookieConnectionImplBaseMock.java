@@ -9,19 +9,13 @@ import org.bukkit.NamespacedKey;
  * {@link io.papermc.paper.connection.ReadablePlayerCookieConnectionImpl}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
 public interface ReadablePlayerCookieConnectionImplBaseMock extends ReadablePlayerCookieConnectionBaseMock
 {
-	default boolean canStoreCookie()
-	{
-		// MockMC: ReadablePlayerCookieConnectionImpl#canStoreCookie
-		return false;
-	}
-
 	default boolean isAwaitingCookies()
 	{
 		// MockMC: ReadablePlayerCookieConnectionImpl#isAwaitingCookies

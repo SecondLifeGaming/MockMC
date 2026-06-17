@@ -15,13 +15,6 @@ class ProxiedCommandSenderBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.audience());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getCaller());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,6 +23,13 @@ class ProxiedCommandSenderBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getCallee());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.audience());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

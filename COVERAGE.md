@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: Sat May 23 18:28:19 CDT 2026
+Generated on: Tue Jun 16 14:12:12 CDT 2026
 
 ## Overall Coverage: 99.67%
 
-- **Total API Methods**: 6765
-- **Mirrored via BaseMocks**: 6743
+- **Total API Methods**: 6767
+- **Mirrored via BaseMocks**: 6745
 - **Manual Implementations**: (TBD - Analysis in progress)
 
 ## Coverage by Package
@@ -37,7 +37,7 @@ Generated on: Sat May 23 18:28:19 CDT 2026
 | com.velocitypowered.api.proxy.server | 4 | 100% Mirror |
 | com.velocitypowered.api.scheduler | 6 | 100% Mirror |
 | com.velocitypowered.api.util | 5 | 100% Mirror |
-| io.papermc.paper | 21 | 100% Mirror |
+| io.papermc.paper | 32 | 100% Mirror |
 | io.papermc.paper.advancement | 9 | 100% Mirror |
 | io.papermc.paper.annotation | 0 | 100% Mirror |
 | io.papermc.paper.ban | 1 | 100% Mirror |
@@ -57,7 +57,7 @@ Generated on: Sat May 23 18:28:19 CDT 2026
 | io.papermc.paper.configuration | 2 | 100% Mirror |
 | io.papermc.paper.connection | 21 | 100% Mirror |
 | io.papermc.paper.datacomponent | 9 | 100% Mirror |
-| io.papermc.paper.datacomponent.item | 117 | 100% Mirror |
+| io.papermc.paper.datacomponent.item | 118 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.attribute | 0 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.blocksattacks | 8 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.consumable | 0 | 100% Mirror |
@@ -84,7 +84,7 @@ Generated on: Sat May 23 18:28:19 CDT 2026
 | io.papermc.paper.plugin.provider.entrypoint | 2 | 100% Mirror |
 | io.papermc.paper.raytracing | 10 | 100% Mirror |
 | io.papermc.paper.registry | 6 | 100% Mirror |
-| io.papermc.paper.registry.data | 55 | 100% Mirror |
+| io.papermc.paper.registry.data | 62 | 100% Mirror |
 | io.papermc.paper.registry.data.client | 2 | 100% Mirror |
 | io.papermc.paper.registry.data.dialog | 34 | 100% Mirror |
 | io.papermc.paper.registry.data.dialog.action | 1 | 100% Mirror |
@@ -126,14 +126,14 @@ Generated on: Sat May 23 18:28:19 CDT 2026
 | net.md_5.bungee.protocol | 76 | 100% Mirror |
 | net.md_5.bungee.protocol.channel | 3 | 100% Mirror |
 | net.md_5.bungee.tab | 7 | 100% Mirror |
-| org.bukkit | 896 | 100% Mirror |
+| org.bukkit | 868 | 100% Mirror |
 | org.bukkit.advancement | 26 | 100% Mirror |
-| org.bukkit.attribute | 16 | 100% Mirror |
+| org.bukkit.attribute | 17 | 100% Mirror |
 | org.bukkit.ban | 8 | 100% Mirror |
 | org.bukkit.block | 401 | 100% Mirror |
 | org.bukkit.block.banner | 3 | 100% Mirror |
 | org.bukkit.block.data | 81 | 100% Mirror |
-| org.bukkit.block.data.type | 184 | 100% Mirror |
+| org.bukkit.block.data.type | 186 | 100% Mirror |
 | org.bukkit.block.sign | 8 | 100% Mirror |
 | org.bukkit.boss | 35 | 100% Mirror |
 | org.bukkit.command | 79 | 100% Mirror |
@@ -144,7 +144,7 @@ Generated on: Sat May 23 18:28:19 CDT 2026
 | org.bukkit.conversations | 20 | 100% Mirror |
 | org.bukkit.damage | 14 | 100% Mirror |
 | org.bukkit.enchantments | 26 | 100% Mirror |
-| org.bukkit.entity | 1694 | 100% Mirror |
+| org.bukkit.entity | 1702 | 100% Mirror |
 | org.bukkit.entity.boat | 0 | 100% Mirror |
 | org.bukkit.entity.minecart | 21 | 100% Mirror |
 | org.bukkit.event | 8 | 100% Mirror |

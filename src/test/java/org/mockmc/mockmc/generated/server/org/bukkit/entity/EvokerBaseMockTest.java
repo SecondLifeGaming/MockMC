@@ -17,14 +17,14 @@ class EvokerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getCurrentSpell());
+			assertSafeDefault(mock.getWololoTarget());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getWololoTarget());
+			assertSafeDefault(mock.getCurrentSpell());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

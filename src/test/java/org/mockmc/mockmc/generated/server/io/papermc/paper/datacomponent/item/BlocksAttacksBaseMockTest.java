@@ -15,6 +15,13 @@ class BlocksAttacksBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.bypassedBy());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.itemDamage());
 		} catch (Exception | LinkageError _)
 		{
@@ -23,13 +30,6 @@ class BlocksAttacksBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.damageReductions());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.bypassedBy());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

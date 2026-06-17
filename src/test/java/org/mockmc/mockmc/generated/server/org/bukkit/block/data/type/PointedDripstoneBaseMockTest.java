@@ -7,6 +7,8 @@ import org.bukkit.block.data.type.PointedDripstone;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings(
+{"deprecation", "removal", "java:S1874"})
 class PointedDripstoneBaseMockTest extends GeneratedTestBase
 {
 	@Test
@@ -14,27 +16,6 @@ class PointedDripstoneBaseMockTest extends GeneratedTestBase
 	{
 		PointedDripstoneBaseMock mock = new Stub();
 		assertNotNull(mock);
-		try
-		{
-			assertSafeDefault(mock.getVerticalDirection());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getVerticalDirections());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getThickness());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
 	}
 
 	private static class Stub implements PointedDripstoneBaseMock

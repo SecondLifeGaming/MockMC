@@ -466,15 +466,17 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 
 	private void populateData()
 	{
-		try
+		for (JsonElement structureJSONElement : keyedData)
 		{
-			for (JsonElement structureJSONElement : keyedData)
+			try
 			{
 				processElement(structureJSONElement.getAsJsonObject());
+			} catch (ExceptionInInitializerError e)
+			{
+				LOGGER.log(java.util.logging.Level.SEVERE,
+						"Failed to populate registry element: " + structureJSONElement, e);
+				// This can happen during recursion, it's fine
 			}
-		} catch (ExceptionInInitializerError _)
-		{
-			// This can happen during recursion, it's fine
 		}
 	}
 

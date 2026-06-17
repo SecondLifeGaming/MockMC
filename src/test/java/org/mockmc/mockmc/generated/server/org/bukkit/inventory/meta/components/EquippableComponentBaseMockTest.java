@@ -22,7 +22,7 @@ class EquippableComponentBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getAllowedEntities());
+			assertSafeDefault(mock.getModel());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -36,14 +36,14 @@ class EquippableComponentBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getModel());
+			assertSafeDefault(mock.getCameraOverlay());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getCameraOverlay());
+			assertSafeDefault(mock.getAllowedEntities());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

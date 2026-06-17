@@ -36,7 +36,7 @@ class AdvancementDisplayBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.icon());
+			assertSafeDefault(mock.backgroundPath());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -50,7 +50,7 @@ class AdvancementDisplayBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.backgroundPath());
+			assertSafeDefault(mock.icon());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

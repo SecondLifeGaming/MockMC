@@ -17,14 +17,14 @@ class TranslationProviderBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getTranslationKey());
+			assertSafeDefault(mock.asTranslatableComponent());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.asTranslatableComponent());
+			assertSafeDefault(mock.getTranslationKey());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

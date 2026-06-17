@@ -340,4 +340,10 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 		return new KineticWeaponMock.ConditionMock(maxDurationTicks, minSpeed, minRelativeSpeed);
 	}
 
+	@Override
+	public SulfurCubeContent sulfurCubeContent(ItemStack itemStack)
+	{
+		return new SulfurCubeContentMock(itemStack);
+	}
+
 }

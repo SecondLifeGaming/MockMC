@@ -31,13 +31,6 @@ class OfflinePlayerBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getPersistentDataContainer());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getPlayer());
 		} catch (Exception | LinkageError _)
 		{
@@ -45,7 +38,14 @@ class OfflinePlayerBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getBedSpawnLocation());
+			assertSafeDefault(mock.getUniqueId());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getPersistentDataContainer());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -73,7 +73,7 @@ class OfflinePlayerBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getUniqueId());
+			assertSafeDefault(mock.getBedSpawnLocation());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

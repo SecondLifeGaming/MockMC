@@ -15,14 +15,14 @@ class BaseSpawnerBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getSpawnedType());
+			assertSafeDefault(mock.getSpawnedEntity());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getSpawnedEntity());
+			assertSafeDefault(mock.getSpawnedType());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

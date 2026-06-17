@@ -15,13 +15,6 @@ class AdvancementProgressBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getAdvancement());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getRemainingCriteria());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,6 +23,13 @@ class AdvancementProgressBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getAwardedCriteria());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getAdvancement());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

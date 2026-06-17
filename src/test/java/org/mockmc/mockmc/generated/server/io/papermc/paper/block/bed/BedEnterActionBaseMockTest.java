@@ -22,6 +22,13 @@ class BedEnterActionBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.problem());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.canSleep());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,13 +37,6 @@ class BedEnterActionBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.canSetSpawn());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.problem());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

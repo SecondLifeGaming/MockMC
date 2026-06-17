@@ -17,6 +17,13 @@ class FireballBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
+			assertSafeDefault(mock.getAcceleration());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getDirection());
 		} catch (Exception | LinkageError _)
 		{
@@ -25,13 +32,6 @@ class FireballBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getPower());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getAcceleration());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

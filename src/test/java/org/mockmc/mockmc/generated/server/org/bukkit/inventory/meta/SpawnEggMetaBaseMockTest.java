@@ -25,7 +25,7 @@ class SpawnEggMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getSpawnedType());
+			assertSafeDefault(mock.getCustomSpawnedType());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
@@ -39,7 +39,7 @@ class SpawnEggMetaBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getCustomSpawnedType());
+			assertSafeDefault(mock.getSpawnedType());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

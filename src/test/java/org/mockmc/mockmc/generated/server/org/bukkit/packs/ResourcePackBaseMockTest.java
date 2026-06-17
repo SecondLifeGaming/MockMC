@@ -22,6 +22,13 @@ class ResourcePackBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
+			assertSafeDefault(mock.getPrompt());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
 			assertSafeDefault(mock.getUrl());
 		} catch (Exception | LinkageError _)
 		{
@@ -30,13 +37,6 @@ class ResourcePackBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getHash());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
-			assertSafeDefault(mock.getPrompt());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

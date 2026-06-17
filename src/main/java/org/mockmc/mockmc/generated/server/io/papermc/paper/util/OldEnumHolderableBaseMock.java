@@ -10,7 +10,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * {@link io.papermc.paper.util.OldEnumHolderable}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.

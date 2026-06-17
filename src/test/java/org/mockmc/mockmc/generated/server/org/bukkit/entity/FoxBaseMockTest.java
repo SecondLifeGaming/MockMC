@@ -22,14 +22,14 @@ class FoxBaseMockTest extends GeneratedTestBase
 		}
 		try
 		{
-			assertSafeDefault(mock.getFirstTrustedPlayer());
+			assertSafeDefault(mock.getSecondTrustedPlayer());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getSecondTrustedPlayer());
+			assertSafeDefault(mock.getFirstTrustedPlayer());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

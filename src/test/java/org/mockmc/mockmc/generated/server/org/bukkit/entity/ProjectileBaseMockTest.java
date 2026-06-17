@@ -15,14 +15,14 @@ class ProjectileBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getShooter());
+			assertSafeDefault(mock.getOwnerUniqueId());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
 		}
 		try
 		{
-			assertSafeDefault(mock.getOwnerUniqueId());
+			assertSafeDefault(mock.getShooter());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons

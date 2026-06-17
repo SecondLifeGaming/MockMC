@@ -85,7 +85,9 @@ tasks {
 	}
 
 	runServer {
+		minecraftVersion("1.21.1")
 		pluginJars.setFrom(shadowJar.flatMap { it.archiveFile })
+		runClasspath.setFrom(rootProject.file("jars/paper-26.2-10.jar"))
 	}
 
 	register<JavaExec>("runGenerator") {

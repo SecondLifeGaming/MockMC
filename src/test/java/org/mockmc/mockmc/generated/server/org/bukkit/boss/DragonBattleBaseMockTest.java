@@ -15,13 +15,6 @@ class DragonBattleBaseMockTest extends GeneratedTestBase
 		assertNotNull(mock);
 		try
 		{
-			assertSafeDefault(mock.getBossBar());
-		} catch (Exception | LinkageError _)
-		{
-			// Ignore NPEs and LinkageErrors from Bukkit singletons
-		}
-		try
-		{
 			assertSafeDefault(mock.getEnderDragon());
 		} catch (Exception | LinkageError _)
 		{
@@ -51,6 +44,13 @@ class DragonBattleBaseMockTest extends GeneratedTestBase
 		try
 		{
 			assertSafeDefault(mock.getHealingCrystals());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
+		try
+		{
+			assertSafeDefault(mock.getBossBar());
 		} catch (Exception | LinkageError _)
 		{
 			// Ignore NPEs and LinkageErrors from Bukkit singletons
