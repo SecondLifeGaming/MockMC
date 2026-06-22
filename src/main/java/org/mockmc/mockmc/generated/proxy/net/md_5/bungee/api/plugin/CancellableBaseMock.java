@@ -12,13 +12,16 @@ import net.md_5.bungee.api.plugin.Cancellable;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface CancellableBaseMock extends Cancellable
 {
+	@Override
 	default void setCancelled(boolean arg0)
 	{
 		// MockMC: Cancellable#setCancelled
 	}
 
+	@Override
 	default boolean isCancelled()
 	{
 		// MockMC: Cancellable#isCancelled

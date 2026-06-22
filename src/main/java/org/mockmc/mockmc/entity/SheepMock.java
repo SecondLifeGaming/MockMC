@@ -18,12 +18,8 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see AnimalsMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class SheepMock extends AnimalsMock
-		implements
-			Sheep,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.SheepBaseMock
+@SuppressWarnings("deprecation")
+public class SheepMock extends AnimalsMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.SheepBaseMock
 {
 
 	private boolean sheared = false;
@@ -73,6 +69,22 @@ public class SheepMock extends AnimalsMock
 	public EntityType getType()
 	{
 		return EntityType.SHEEP;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>
+	 * Delegates to {@link #shear(Sound.Source)} using {@link Sound.Source#PLAYER},
+	 * bypassing the generated no-op stub.
+	 * </p>
+	 *
+	 * @mockmc.version 26.2-dev
+	 */
+	@Override
+	public void shear()
+	{
+		this.shear(Sound.Source.PLAYER);
 	}
 
 	@Override

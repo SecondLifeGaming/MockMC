@@ -1,7 +1,7 @@
 // MockMC: Unique Stub for OldEnumHolderable
 package org.mockmc.mockmc.generated.server.io.papermc.paper.util;
 
-import org.bukkit.NamespacedKey;
+import net.minecraft.core.Holder;
 import org.bukkit.util.OldEnum;
 import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
 import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
@@ -11,7 +11,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  * {@link io.papermc.paper.util.OldEnumHolderable}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
@@ -20,25 +20,9 @@ import org.mockmc.mockmc.generated.server.org.bukkit.util.OldEnumBaseMock;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
-@SuppressWarnings("removal")
-public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M>
-		extends
-			OldEnumBaseMock<A>,
-			HolderableBaseMock<M>,
-			KeyedBaseMock
+@SuppressWarnings("all")
+public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M> extends KeyedBaseMock, OldEnumBaseMock<A>
 {
-	/**
-	 * @deprecated Suppressed to prevent legacy API noise from interfering with
-	 *             modern build cycles.
-	 */
-	@Override
-	@Deprecated(since = "1.0")
-	default NamespacedKey getKey()
-	{
-		// MockMC: OldEnumHolderable#getKey
-		return org.bukkit.NamespacedKey.minecraft("mock");
-	}
-
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
@@ -67,11 +51,33 @@ public interface OldEnumHolderableBaseMock<A extends OldEnum<A>, M>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Deprecated(since = "1.0")
+	default M getHandle()
+	{
+		// MockMC: OldEnumHolderable#getHandle
+		return null;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
 	@Override
 	@Deprecated(since = "1.0")
 	default int compareTo(A arg0)
 	{
 		// MockMC: OldEnumHolderable#compareTo
 		return 0;
+	}
+
+	/**
+	 * @deprecated Suppressed to prevent legacy API noise from interfering with
+	 *             modern build cycles.
+	 */
+	@Deprecated(since = "1.0")
+	default Holder<M> getHolder()
+	{
+		// MockMC: OldEnumHolderable#getHolder
+		return null;
 	}
 }

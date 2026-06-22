@@ -14,8 +14,10 @@ import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface Dynamic2CommandExceptionTypeFunctionBaseMock extends Dynamic2CommandExceptionType.Function
 {
+	@Override
 	default Message apply(Object arg0, Object arg1)
 	{
 		// MockMC: Function#apply

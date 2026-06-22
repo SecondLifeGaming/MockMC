@@ -11,13 +11,14 @@ import org.mockmc.mockmc.generated.server.org.bukkit.KeyedBaseMock;
  * {@link org.bukkit.inventory.CraftingRecipe}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-public interface CraftingRecipeBaseMock extends RecipeBaseMock, KeyedBaseMock
+@SuppressWarnings("all")
+public interface CraftingRecipeBaseMock extends KeyedBaseMock, RecipeBaseMock
 {
 	default CraftingBookCategory getCategory()
 	{

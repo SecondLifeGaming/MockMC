@@ -310,6 +310,23 @@ public class CombatTrackerMock implements CombatTracker
 	private static Component getLocalizedDeathMessage(DamageSource damageSource, LivingEntity livingEntity)
 	{
 		String string = "death.attack." + damageSource.getDamageType().getTranslationKey();
+		if (damageSource.getCausingEntity() instanceof org.bukkit.entity.Firework firework)
+		{
+			org.bukkit.projectiles.ProjectileSource shooter = firework.getShooter();
+			org.bukkit.inventory.ItemStack itemStack = firework.getItem();
+			if (shooter instanceof LivingEntity livingShooter)
+			{
+				if (!itemStack.isEmpty() && itemStack.getItemMeta().hasCustomName())
+				{
+					return Component.translatable("death.attack.fireworks.item", livingEntity.teamDisplayName(),
+							livingShooter.teamDisplayName(), itemStack.displayName());
+				} else
+				{
+					return Component.translatable("death.attack.fireworks.player", livingEntity.teamDisplayName(),
+							livingShooter.teamDisplayName());
+				}
+			}
+		}
 		if (damageSource.getCausingEntity() == null && damageSource.getDirectEntity() == null)
 		{
 			LivingEntity killCredit = livingEntity.getKiller();

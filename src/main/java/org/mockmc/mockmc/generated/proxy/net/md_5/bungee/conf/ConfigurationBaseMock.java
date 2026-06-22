@@ -18,7 +18,7 @@ import org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.ProxyConfigBaseMock
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings("all")
 public interface ConfigurationBaseMock extends ProxyConfigBaseMock
 {
 	default void load()

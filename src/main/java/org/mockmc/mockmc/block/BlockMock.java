@@ -405,13 +405,19 @@ public class BlockMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	public boolean breakNaturally(@Nullable ItemStack tool)
 	{
 		ItemStack item = Optional.ofNullable(tool).orElse(ItemStack.empty());
-		return this.breakNaturally(item, false);
+		return this.breakNaturally(item, false, false, false);
 	}
 
 	@Override
 	public boolean breakNaturally(boolean triggerEffect, boolean dropExperience)
 	{
 		return this.breakNaturally(ItemStack.empty(), triggerEffect, dropExperience);
+	}
+
+	@Override
+	public boolean breakNaturally(@NotNull ItemStack tool, boolean triggerEffect)
+	{
+		return this.breakNaturally(tool, triggerEffect, false, false);
 	}
 
 	@Override

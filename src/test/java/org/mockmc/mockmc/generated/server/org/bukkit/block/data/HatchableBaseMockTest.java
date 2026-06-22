@@ -7,6 +7,7 @@ import org.bukkit.block.data.Hatchable;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class HatchableBaseMockTest extends GeneratedTestBase
 {
 	@Test

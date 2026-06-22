@@ -16,29 +16,35 @@ import net.md_5.bungee.jni.cipher.BungeeCipher;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface BungeeCipherBaseMock extends BungeeCipher
 {
+	@Override
 	default void free()
 	{
 		// MockMC: BungeeCipher#free
 	}
 
+	@Override
 	default boolean allowComposite()
 	{
 		// MockMC: BungeeCipher#allowComposite
 		return false;
 	}
 
+	@Override
 	default void init(boolean arg0, SecretKey arg1) throws GeneralSecurityException
 	{
 		// MockMC: BungeeCipher#init
 	}
 
+	@Override
 	default void cipher(ByteBuf arg0, ByteBuf arg1) throws GeneralSecurityException
 	{
 		// MockMC: BungeeCipher#cipher
 	}
 
+	@Override
 	default ByteBuf cipher(ChannelHandlerContext arg0, ByteBuf arg1) throws GeneralSecurityException
 	{
 		// MockMC: BungeeCipher#cipher

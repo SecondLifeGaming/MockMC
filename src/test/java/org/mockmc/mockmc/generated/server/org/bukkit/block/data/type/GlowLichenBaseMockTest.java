@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.GlowLichen;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class GlowLichenBaseMockTest extends GeneratedTestBase
 {
 	@Test

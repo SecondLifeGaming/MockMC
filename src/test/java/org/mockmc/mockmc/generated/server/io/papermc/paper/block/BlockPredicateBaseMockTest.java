@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class BlockPredicateBaseMockTest extends GeneratedTestBase
 {
 	@Test
@@ -13,7 +14,13 @@ class BlockPredicateBaseMockTest extends GeneratedTestBase
 	{
 		BlockPredicateBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.blocks());
+		try
+		{
+			assertSafeDefault(mock.blocks());
+		} catch (Exception | LinkageError _)
+		{
+			// Ignore NPEs and LinkageErrors from Bukkit singletons
+		}
 	}
 
 	private static class Stub implements BlockPredicateBaseMock

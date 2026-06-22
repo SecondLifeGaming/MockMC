@@ -21,6 +21,19 @@ public record WritableBookContentMock(List<Filtered<String>> pages) implements W
 		return Collections.unmodifiableList(this.pages);
 	}
 
+	/**
+	 * @mockmc.version 26.2-1.0.0
+	 */
+	@Override
+	public net.kyori.adventure.inventory.Book asBook()
+	{
+		return net.kyori.adventure.inventory.Book.book(net.kyori.adventure.text.Component.empty(),
+				net.kyori.adventure.text.Component.empty(),
+				this.pages.stream()
+						.map(f -> (net.kyori.adventure.text.Component) net.kyori.adventure.text.Component.text(f.raw()))
+						.toList());
+	}
+
 	static class BuilderMock implements WritableBookContent.Builder
 	{
 		private static void validatePageLength(String page)

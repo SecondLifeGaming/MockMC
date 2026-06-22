@@ -13,14 +13,17 @@ import net.md_5.bungee.event.EventHandler;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface EventHandlerBaseMock extends EventHandler
 {
+	@Override
 	default byte priority()
 	{
 		// MockMC: EventHandler#priority
 		return 0;
 	}
 
+	@Override
 	default Class<? extends Annotation> annotationType()
 	{
 		// MockMC: EventHandler#annotationType

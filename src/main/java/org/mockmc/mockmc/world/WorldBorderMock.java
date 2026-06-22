@@ -18,8 +18,6 @@ import org.bukkit.plugin.Plugin;
 /**
  * Mock implementation of a {@link WorldBorder}.
  */
-@SuppressWarnings(
-{"removal"})
 public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.bukkit.WorldBorderBaseMock
 {
 
@@ -45,10 +43,6 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 
 	private static final double MIN_BORDER_SIZE = 1.0D;
 
-	private static final Plugin DUMMY_PLUGIN = (Plugin) java.lang.reflect.Proxy
-			.newProxyInstance(Plugin.class.getClassLoader(), new Class<?>[]
-			{Plugin.class}, (proxy, method, args) -> null);
-
 	@NotNull
 	private final World world;
 
@@ -61,6 +55,8 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	private int warningDistance;
 
 	private int warningTimeTicks;
+
+	private int warningTimeSeconds;
 
 	private double centerX;
 
@@ -106,11 +102,27 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	@Override
 	public void setSize(double newSize)
 	{
-		this.setSize(newSize, 0L);
+		this.changeSize(newSize, 0L);
 	}
 
 	@Override
-	public void setSize(double newSize, @Range(from = 0, to = Integer.MAX_VALUE) long ticks)
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
+	public void setSize(double newSize, long seconds)
+	{
+		this.changeSize(newSize, seconds * 20L);
+	}
+
+	@Override
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
+	public void setSize(double newSize, @NotNull java.util.concurrent.TimeUnit unit, long duration)
+	{
+		this.changeSize(newSize, unit.toMillis(duration) / 50L);
+	}
+
+	@Override
+	public void changeSize(double newSize, @Range(from = 0, to = Long.MAX_VALUE) long ticks)
 	{
 		newSize = Math.clamp(newSize, MIN_BORDER_SIZE, MAX_BORDER_SIZE);
 		ticks = Math.clamp(ticks, 0L, MAX_MOVEMENT_TIME);
@@ -123,7 +135,7 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 		{
 			return;
 		}
-		double durationTicks = event.getDurationTicks();
+		long durationTicks = event.getDurationTicks();
 		newSize = event.getNewSize();
 		if (durationTicks <= 0)
 		{
@@ -135,14 +147,14 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	}
 
 	@SuppressWarnings("ConstantConditions")
-	private void moveBorderOverTime(double distance, double ticks, double newSize)
+	private void moveBorderOverTime(double distance, long ticks, double newSize)
 	{
 		double distancePerTick = distance / ticks;
 		final double oldSize = this.size;
 		// We can't use 'this' in the anonymous class below, so we need to store it in a
 		// variable.
 		WorldBorderMock thisBorder = this;
-		new BukkitRunnable()
+		BukkitRunnable task = new BukkitRunnable()
 		{
 
 			@Override
@@ -158,7 +170,20 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 					this.cancel();
 				}
 			}
-		}.runTaskTimer(DUMMY_PLUGIN, 1, 1);
+		};
+
+		Plugin dummy = getPlugin();
+		task.runTaskTimer(dummy, 1, 1);
+	}
+
+	private @NotNull Plugin getPlugin()
+	{
+		Plugin[] plugins = org.bukkit.Bukkit.getPluginManager().getPlugins();
+		if (plugins.length > 0)
+		{
+			return plugins[0];
+		}
+		return org.mockmc.mockmc.MockMC.createMockPlugin();
 	}
 
 	@Override
@@ -215,6 +240,24 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	}
 
 	@Override
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
+	public int getWarningTime()
+	{
+		return this.warningTimeSeconds;
+	}
+
+	@Override
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
+	public void setWarningTime(int seconds)
+	{
+		Preconditions.checkArgument(seconds >= 0, "seconds cannot be lower than 0");
+		this.warningTimeSeconds = seconds;
+		this.warningTimeTicks = seconds * 20;
+	}
+
+	@Override
 	@NonNegative
 	public int getWarningTimeTicks()
 	{
@@ -226,6 +269,7 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	{
 		Preconditions.checkArgument(ticks >= 0, "ticks cannot be lower than 0");
 		this.warningTimeTicks = ticks;
+		this.warningTimeSeconds = ticks / 20;
 	}
 
 	@Override

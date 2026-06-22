@@ -1,6 +1,7 @@
 package org.mockmc.mockmc.inventory;
 
 import com.google.common.base.Preconditions;
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -18,7 +19,6 @@ import org.jetbrains.annotations.Nullable;
 {"deprecation", "removal", "unchecked"})
 public abstract class InventoryViewMock
 		implements
-			InventoryView,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBaseMock
 {
 
@@ -310,6 +310,13 @@ public abstract class InventoryViewMock
 	public int countSlots()
 	{
 		return this.getTopInventory().getSize() + this.getBottomInventory().getSize();
+	}
+
+	@Override
+	@NotNull
+	public Component title()
+	{
+		return LegacyComponentSerializer.legacySection().deserialize(this.name);
 	}
 
 }

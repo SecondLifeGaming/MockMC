@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.GlassPane;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class GlassPaneBaseMockTest extends GeneratedTestBase
 {
 	@Test

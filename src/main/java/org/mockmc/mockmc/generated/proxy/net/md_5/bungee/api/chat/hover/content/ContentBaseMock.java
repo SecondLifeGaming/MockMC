@@ -18,13 +18,13 @@ import net.md_5.bungee.api.chat.HoverEvent;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("all")
 public interface ContentBaseMock
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void assertAction(HoverEvent.Action arg0) throws UnsupportedOperationException
 	{
@@ -35,7 +35,6 @@ public interface ContentBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default HoverEvent.Action requiredAction()
 	{

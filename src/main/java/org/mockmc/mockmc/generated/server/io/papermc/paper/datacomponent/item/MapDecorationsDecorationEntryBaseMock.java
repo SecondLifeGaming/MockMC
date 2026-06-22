@@ -9,32 +9,37 @@ import org.bukkit.map.MapCursor;
  * {@link MapDecorations.DecorationEntry}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface MapDecorationsDecorationEntryBaseMock extends MapDecorations.DecorationEntry
 {
+	@Override
 	default float rotation()
 	{
 		// MockMC: DecorationEntry#rotation
 		return 0.0f;
 	}
 
+	@Override
 	default double x()
 	{
 		// MockMC: DecorationEntry#x
 		return 0.0d;
 	}
 
+	@Override
 	default double z()
 	{
 		// MockMC: DecorationEntry#z
 		return 0.0d;
 	}
 
+	@Override
 	default MapCursor.Type type()
 	{
 		// MockMC: DecorationEntry#type

@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Barrel;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class BarrelBaseMockTest extends GeneratedTestBase
 {
 	@Test

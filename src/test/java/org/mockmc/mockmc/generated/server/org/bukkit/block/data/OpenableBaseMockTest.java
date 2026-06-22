@@ -7,6 +7,7 @@ import org.bukkit.block.data.Openable;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class OpenableBaseMockTest extends GeneratedTestBase
 {
 	@Test

@@ -16,18 +16,20 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface JukeboxSongRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder,
-			RegistryBuilderBaseMock<JukeboxSong>,
-			JukeboxSongRegistryEntryBaseMock
+			JukeboxSongRegistryEntryBaseMock,
+			RegistryBuilderBaseMock<JukeboxSong>
 {
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(
 			RegistryHolder<Sound, SoundEventRegistryEntry> arg0)
 	{
@@ -35,6 +37,7 @@ public interface JukeboxSongRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(
 			Consumer<RegistryBuilderFactory<Sound, ? extends SoundEventRegistryEntry.Builder>> arg0)
 	{
@@ -42,24 +45,28 @@ public interface JukeboxSongRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder soundEvent(TypedKey<Sound> arg0)
 	{
 		// MockMC: Builder#soundEvent
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder lengthInSeconds(float arg0)
 	{
 		// MockMC: Builder#lengthInSeconds
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder comparatorOutput(int arg0)
 	{
 		// MockMC: Builder#comparatorOutput
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.JukeboxSongRegistryEntry.Builder description(Component arg0)
 	{
 		// MockMC: Builder#description

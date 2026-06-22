@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Dripleaf;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class DripleafBaseMockTest extends GeneratedTestBase
 {
 	@Test

@@ -17,8 +17,10 @@ import java.util.concurrent.CompletableFuture;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface SuggestionProviderBaseMock<S> extends SuggestionProvider<S>
 {
+	@Override
 	default CompletableFuture<Suggestions> getSuggestions(CommandContext<S> arg0, SuggestionsBuilder arg1)
 			throws CommandSyntaxException
 	{

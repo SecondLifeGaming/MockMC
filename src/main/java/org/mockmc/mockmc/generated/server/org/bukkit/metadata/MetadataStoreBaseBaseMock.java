@@ -10,8 +10,8 @@ import org.bukkit.plugin.Plugin;
  * {@link org.bukkit.metadata.MetadataStoreBase}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
@@ -20,6 +20,7 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
+@SuppressWarnings("all")
 public interface MetadataStoreBaseBaseMock<T>
 {
 	/**
@@ -47,7 +48,6 @@ public interface MetadataStoreBaseBaseMock<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default List<MetadataValue> getMetadata(T arg0, String arg1)
 	{
@@ -59,7 +59,6 @@ public interface MetadataStoreBaseBaseMock<T>
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("deprecation")
 	@Deprecated(since = "1.0")
 	default void setMetadata(T arg0, String arg1, MetadataValue arg2)
 	{

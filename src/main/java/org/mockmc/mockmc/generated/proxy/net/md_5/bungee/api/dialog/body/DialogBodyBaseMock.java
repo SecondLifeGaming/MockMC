@@ -11,6 +11,7 @@ package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.dialog.body;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DialogBodyBaseMock
 {
 	default String getType()

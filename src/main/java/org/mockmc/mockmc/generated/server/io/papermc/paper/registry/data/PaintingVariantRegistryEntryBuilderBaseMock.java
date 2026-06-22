@@ -11,42 +11,48 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder}.
  * This interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PaintingVariantRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder,
 			PaintingVariantRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Art>
 {
+	@Override
 	default io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder author(Component arg0)
 	{
 		// MockMC: Builder#author
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder assetId(Key arg0)
 	{
 		// MockMC: Builder#assetId
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder height(int arg0)
 	{
 		// MockMC: Builder#height
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PaintingVariantRegistryEntry.Builder title(Component arg0)
 	{
 		// MockMC: Builder#title

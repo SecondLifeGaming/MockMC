@@ -356,7 +356,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:acacia_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -1690,7 +1690,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:bamboo_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -3091,7 +3091,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:birch_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -8370,7 +8370,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:cherry_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -9193,6 +9193,44 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:cinnabar_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:chiseled_cinnabar",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_cinnabar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_cinnabar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:chiseled_cinnabar"
+		},
+		"shape": [
+			"a",
+			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:cut_copper_slab"
 				],
 				"type": "material"
@@ -9535,6 +9573,44 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:sulfur_slab"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_slab"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:chiseled_sulfur",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:chiseled_sulfur"
+		},
+		"shape": [
+			"a",
+			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:tuff_slab"
 				],
 				"type": "material"
@@ -9603,6 +9679,392 @@
 		"shape": [
 			"a",
 			"b"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:cinnabar_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_brick_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_bricks",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_bricks"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:cinnabar_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
 		],
 		"type": "shaped"
 	},
@@ -12564,7 +13026,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:crimson_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -14623,7 +15085,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:dark_oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -27386,7 +27848,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:jungle_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -33063,7 +33525,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:mangrove_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -35883,7 +36345,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -38213,7 +38675,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:pale_oak_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -40458,6 +40920,224 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:polished_cinnabar"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_cinnabar_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:cobbled_deepslate"
 				],
 				"type": "material"
@@ -40988,6 +41668,224 @@
 		"choiceMap": {
 			"a": {
 				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:polished_sulfur_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
 					"minecraft:tuff"
 				],
 				"type": "material"
@@ -41200,6 +42098,82 @@
 			"def"
 		],
 		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choices": [
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			{
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		],
+		"group": "",
+		"key": "minecraft:potent_sulfur",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:potent_sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.potent_sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:potent_sulfur"
+		},
+		"type": "shapeless"
 	},
 	{
 		"category": "MISC",
@@ -48554,7 +49528,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:spruce_hanging_sign",
 		"result": {
 			"amount": 6,
@@ -50558,6 +51532,442 @@
 			"type": "minecraft:sugar"
 		},
 		"type": "shapeless"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:sulfur_bricks"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_brick_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:polished_sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_bricks",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_bricks"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur_spike"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_from_sulfur_spikes",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur"
+		},
+		"shape": [
+			"ab",
+			"cd"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_slab",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_slab"
+		},
+		"shape": [
+			"abc"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "BUILDING",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"g": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"h": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"i": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_stairs",
+		"result": {
+			"amount": 4,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_stairs"
+		},
+		"shape": [
+			"abc",
+			"def",
+			"ghi"
+		],
+		"type": "shaped"
+	},
+	{
+		"category": "MISC",
+		"choiceMap": {
+			"a": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"b": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"c": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"d": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"e": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			},
+			"f": {
+				"choices": [
+					"minecraft:sulfur"
+				],
+				"type": "material"
+			}
+		},
+		"group": "",
+		"key": "minecraft:sulfur_wall",
+		"result": {
+			"amount": 6,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_wall"
+		},
+		"shape": [
+			"abc",
+			"def"
+		],
+		"type": "shaped"
 	},
 	{
 		"category": "MISC",
@@ -52718,7 +54128,7 @@
 				"type": "material"
 			}
 		},
-		"group": "hanging_sign",
+		"group": "wooden_hanging_sign",
 		"key": "minecraft:warped_hanging_sign",
 		"result": {
 			"amount": 6,

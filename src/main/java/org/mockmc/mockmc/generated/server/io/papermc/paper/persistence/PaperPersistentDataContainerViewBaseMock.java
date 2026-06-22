@@ -3,6 +3,8 @@ package org.mockmc.mockmc.generated.server.io.papermc.paper.persistence;
 
 import java.io.IOException;
 import java.util.Set;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -13,11 +15,12 @@ import org.bukkit.persistence.PersistentDataType;
  * {@link io.papermc.paper.persistence.PaperPersistentDataContainerView}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PaperPersistentDataContainerViewBaseMock extends PersistentDataContainerViewBaseMock
 {
 	@Override
@@ -55,6 +58,12 @@ public interface PaperPersistentDataContainerViewBaseMock extends PersistentData
 		return null;
 	}
 
+	default Tag getTag(String arg0)
+	{
+		// MockMC: PaperPersistentDataContainerView#getTag
+		return null;
+	}
+
 	@Override
 	default void copyTo(PersistentDataContainer arg0, boolean arg1)
 	{
@@ -65,6 +74,12 @@ public interface PaperPersistentDataContainerViewBaseMock extends PersistentData
 	default <P, C> C getOrDefault(NamespacedKey arg0, PersistentDataType<P, C> arg1, C arg2)
 	{
 		// MockMC: PaperPersistentDataContainerView#getOrDefault
+		return null;
+	}
+
+	default CompoundTag toTagCompound()
+	{
+		// MockMC: PaperPersistentDataContainerView#toTagCompound
 		return null;
 	}
 

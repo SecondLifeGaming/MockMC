@@ -1247,7 +1247,7 @@ class BlockTypeMockTest
 		@Disabled("Not implemented yet #1088")
 		void givenPointedDripstone()
 		{
-			PointedDripstone data = BlockType.POINTED_DRIPSTONE.createBlockData();
+			PointedDripstone data = (PointedDripstone) BlockType.POINTED_DRIPSTONE.createBlockData();
 			assertNotNull(data);
 			assertInstanceOf(PointedDripstone.class, data);
 		}

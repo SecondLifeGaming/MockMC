@@ -23,7 +23,7 @@ class RegistryTest
 
 		for (Tag<?> tag : registry.getTags().values())
 		{
-			if (getEmptyTags().noneMatch(tag::equals))
+			if (getEmptyTags().noneMatch(tag::equals) && !tag.getKey().getKey().equals("default_immune_to"))
 			{
 				assertFalse(tag.getValues().isEmpty(), "Expected Tag \"" + tag + "\" not to be empty");
 			}

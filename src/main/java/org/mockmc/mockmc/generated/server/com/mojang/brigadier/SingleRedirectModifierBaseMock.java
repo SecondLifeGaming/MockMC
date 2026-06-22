@@ -14,8 +14,10 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface SingleRedirectModifierBaseMock<S> extends SingleRedirectModifier<S>
 {
+	@Override
 	default S apply(CommandContext<S> arg0) throws CommandSyntaxException
 	{
 		// MockMC: SingleRedirectModifier#apply

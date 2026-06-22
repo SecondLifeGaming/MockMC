@@ -13,13 +13,16 @@ import net.md_5.bungee.protocol.DefinedPacket;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ConnectionUnsafeBaseMock extends Connection.Unsafe
 {
+	@Override
 	default void sendPacketQueued(DefinedPacket arg0)
 	{
 		// MockMC: Unsafe#sendPacketQueued
 	}
 
+	@Override
 	default void sendPacket(DefinedPacket arg0)
 	{
 		// MockMC: Unsafe#sendPacket

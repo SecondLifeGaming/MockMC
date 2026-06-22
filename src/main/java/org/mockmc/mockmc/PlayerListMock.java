@@ -25,6 +25,8 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
+import net.kyori.adventure.text.Component;
+import org.bukkit.event.player.PlayerKickEvent;
 
 /**
  * Replica of the Bukkit internal PlayerList and CraftPlayerList implementation
@@ -557,12 +559,25 @@ public class PlayerListMock
 
 	public synchronized @NotNull Set<OfflinePlayer> getWhitelistedPlayers()
 	{
-		return new HashSet<>(this.whitelistedPlayers);
+		return this.whitelistedPlayers;
 	}
 
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
 	public synchronized void reloadWhitelist()
 	{
-		// No-op in mock
+		if (this.isWhitelistEnabled && this.isWhitelistEnforced)
+		{
+			for (PlayerMock player : new HashSet<>(this.onlinePlayers))
+			{
+				if (!this.whitelistedPlayers.contains(player) && !player.isOp())
+				{
+					player.kick(Component.text("You are not white-listed on this server!"),
+							PlayerKickEvent.Cause.WHITELIST);
+				}
+			}
+		}
 	}
 
 	public synchronized void addWhitelistedPlayer(@NotNull OfflinePlayer player)

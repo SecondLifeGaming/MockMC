@@ -13,6 +13,7 @@ import net.md_5.bungee.api.CommandSender;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface CommandBaseMock
 {
 	default void execute(CommandSender arg0, String[] arg1)

@@ -16,10 +16,9 @@ import net.md_5.bungee.protocol.ProtocolConstants;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DefinedPacketBaseMock
 {
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void handle(AbstractPacketHandler arg0) throws Exception
 	{
 		// MockMC: DefinedPacket#handle

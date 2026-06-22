@@ -7,8 +7,7 @@ import org.bukkit.block.data.type.PinkPetals;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-@SuppressWarnings(
-{"deprecation", "removal", "java:S1874"})
+@SuppressWarnings("all")
 class PinkPetalsBaseMockTest extends GeneratedTestBase
 {
 	@Test

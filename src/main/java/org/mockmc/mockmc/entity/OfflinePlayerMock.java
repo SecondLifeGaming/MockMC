@@ -178,7 +178,13 @@ public class OfflinePlayerMock implements org.mockmc.mockmc.generated.server.org
 	public void setWhitelisted(boolean value)
 	{
 		MockMC.ensureMocking();
-		Bukkit.getWhitelistedPlayers().add(this);
+		if (value)
+		{
+			MockMC.getMock().getPlayerList().addWhitelistedPlayer(this);
+		} else
+		{
+			MockMC.getMock().getPlayerList().removeWhitelistedPlayer(this);
+		}
 	}
 
 	@Override
@@ -240,5 +246,37 @@ public class OfflinePlayerMock implements org.mockmc.mockmc.generated.server.org
 	{
 		// Paper does not cache this.
 		return new PlayerProfileMock(this);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason)
+	{
+		return ban(reason, (Date) null, null);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires)
+	{
+		return ban(reason, expires, null);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
+			@Nullable String source)
+	{
+		return ban(reason, expires, source);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable String source)
+	{
+		return ban(reason, (Date) null, source);
+	}
+
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
+			@Nullable String source, boolean kickPlayer)
+	{
+		return ban(reason, expires, source);
 	}
 }

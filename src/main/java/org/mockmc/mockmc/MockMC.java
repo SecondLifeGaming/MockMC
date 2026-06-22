@@ -69,6 +69,10 @@ public class MockMC
 	 */
 	public static @NotNull ServerMock mock()
 	{
+		if (mock != null)
+		{
+			throw new IllegalStateException("Already mocking");
+		}
 		return mock(new ServerMock());
 	}
 

@@ -8,11 +8,9 @@ import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.entity.TeleportFlag;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.math.Position;
-import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.bossbar.BossBarImplementation;
 import net.kyori.adventure.chat.SignedMessage;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.minimessage.MiniMessage;
@@ -604,10 +602,10 @@ public class PlayerMock extends HumanEntityMock
 	{
 		if (value)
 		{
-			server.getWhitelistedPlayers().add(this);
+			server.getPlayerList().addWhitelistedPlayer(this);
 		} else
 		{
-			server.getWhitelistedPlayers().remove(this);
+			server.getPlayerList().removeWhitelistedPlayer(this);
 		}
 	}
 
@@ -627,6 +625,53 @@ public class PlayerMock extends HumanEntityMock
 	public boolean isBanned()
 	{
 		return MockMC.getMock().getBanList(BanList.Type.NAME).isBanned(getName());
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason)
+	{
+		return ban(reason, (Date) null, null);
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires)
+	{
+		return ban(reason, expires, null);
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
+			@Nullable String source)
+	{
+		return ban(reason, expires, source);
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable String source)
+	{
+		return ban(reason, (Date) null, source);
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
+			@Nullable String source, boolean kickPlayer)
+	{
+		return ban(reason, expires, source);
 	}
 
 	@Override
@@ -1107,34 +1152,6 @@ public class PlayerMock extends HumanEntityMock
 	{
 		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL_LOWER);
 		this.sendMessage(message.asComponent());
-	}
-
-	@Override
-	public void sendMessage(@NotNull final Identity source, @NotNull final Component message,
-			@NotNull final MessageType type)
-	{
-		Preconditions.checkNotNull(message, "input");
-		this.sendMessage(message);
-	}
-
-	/**
-	 * @deprecated Use {@link #sendMessage(Component)} instead.
-	 */
-	@Override
-	@Deprecated(since = "1.21")
-	public void sendMessage(@NotNull Component message, @NotNull MessageType type)
-	{
-		this.sendMessage(message);
-	}
-
-	/**
-	 * @deprecated Use {@link #sendMessage(Component)} instead.
-	 */
-	@Override
-	@Deprecated(since = "1.21")
-	public void sendMessage(@NotNull ComponentLike message, @NotNull MessageType type)
-	{
-		this.sendMessage(message);
 	}
 
 	@Override
@@ -3045,7 +3062,7 @@ public class PlayerMock extends HumanEntityMock
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
 			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
 			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
-			PlayerMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender), comp);
+			PlayerMock.this.sendMessage(comp);
 		}
 	}
 

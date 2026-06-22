@@ -9,23 +9,26 @@ import io.papermc.paper.plugin.lifecycle.event.handler.configuration.Prioritized
  * {@link PrioritizedLifecycleEventHandlerConfiguration}. This interface mirrors
  * the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PrioritizedLifecycleEventHandlerConfigurationBaseMock<O extends LifecycleEventOwner>
 		extends
 			PrioritizedLifecycleEventHandlerConfiguration<O>,
 			LifecycleEventHandlerConfigurationBaseMock<O>
 {
+	@Override
 	default PrioritizedLifecycleEventHandlerConfiguration<O> priority(int arg0)
 	{
 		// MockMC: PrioritizedLifecycleEventHandlerConfiguration#priority
 		return null;
 	}
 
+	@Override
 	default PrioritizedLifecycleEventHandlerConfiguration<O> monitor()
 	{
 		// MockMC: PrioritizedLifecycleEventHandlerConfiguration#monitor

@@ -56,7 +56,16 @@ public class TestRegistryAccess implements RegistryAccess
 			if (methodName.equals("iterator") || methodName.equals("getOrThrow") || methodName.equals("get")) {
 				if (finalTargetClass == org.bukkit.GameRule.class) {
 					if (methodName.equals("iterator")) return Collections.emptyIterator();
-					return null;
+					return Mockito.mock(org.bukkit.GameRule.class, invocation2 -> {
+						String mName = invocation2.getMethod().getName();
+						if (mName.equals("getName")) {
+							return registryKey.key().value();
+						}
+						if (mName.equals("getType")) {
+							return Boolean.class;
+						}
+						return Mockito.RETURNS_DEFAULTS.answer(invocation2);
+					});
 				}
 				Class<?> classToMock = finalTargetClass;
 				if (classToMock == org.bukkit.inventory.ItemType.class) {
@@ -66,24 +75,56 @@ public class TestRegistryAccess implements RegistryAccess
 						// Fallback to ItemType.class
 					}
 				}
-				T dummyObj = Mockito.mock((Class<T>) classToMock, Mockito.withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS));
-				Mockito.when(dummyObj.getKey()).thenReturn(org.bukkit.NamespacedKey.minecraft("dummy_" + registryKey.key().value()));
-				
-				if (finalTargetClass == org.bukkit.potion.PotionType.class) {
-					org.bukkit.potion.PotionEffect dummyEffect = Mockito.mock(org.bukkit.potion.PotionEffect.class, Mockito.RETURNS_DEEP_STUBS);
-					Mockito.when(((org.bukkit.potion.PotionType) dummyObj).getPotionEffects()).thenReturn(Collections.singletonList(dummyEffect));
-				}
-				if (finalTargetClass == org.bukkit.inventory.ItemType.class) {
-					Mockito.doReturn(org.bukkit.inventory.meta.ItemMeta.class).when((org.bukkit.inventory.ItemType) dummyObj).getItemMetaClass();
-				}
-				if (finalTargetClass == org.bukkit.generator.structure.Structure.class) {
-					Mockito.when(((org.bukkit.generator.structure.Structure) dummyObj).getStructureType().getKey()).thenReturn(org.bukkit.NamespacedKey.minecraft("dummy_structure"));
-				}
-				if (finalTargetClass == org.bukkit.enchantments.Enchantment.class) {
-					org.bukkit.enchantments.Enchantment enc = (org.bukkit.enchantments.Enchantment) dummyObj;
-					Mockito.when(enc.description()).thenReturn(net.kyori.adventure.text.Component.empty());
-					Mockito.when(enc.displayName(Mockito.anyInt())).thenReturn(net.kyori.adventure.text.Component.empty());
-				}
+				T dummyObj = Mockito.mock((Class<T>) classToMock, invocation2 -> {
+					String mName = invocation2.getMethod().getName();
+					if (mName.equals("getKey")) {
+						return org.bukkit.NamespacedKey.minecraft("dummy_" + registryKey.key().value());
+					}
+					if (finalTargetClass == org.bukkit.potion.PotionEffectType.class) {
+						if (mName.equals("getColor")) {
+							return org.bukkit.Color.RED;
+						}
+						if (mName.equals("getEffectCategory")) {
+							return org.bukkit.potion.PotionEffectType.Category.HARMFUL;
+						}
+					}
+					if (finalTargetClass == org.bukkit.potion.PotionType.class && mName.equals("getPotionEffects")) {
+						org.bukkit.potion.PotionEffect dummyEffect = Mockito.mock(org.bukkit.potion.PotionEffect.class, Mockito.RETURNS_DEFAULTS);
+						return Collections.singletonList(dummyEffect);
+					}
+					if (finalTargetClass == org.bukkit.inventory.ItemType.class && mName.equals("getItemMetaClass")) {
+						return org.bukkit.inventory.meta.ItemMeta.class;
+					}
+					if (finalTargetClass == org.bukkit.damage.DamageType.class) {
+						if (mName.equals("getDamageScaling")) {
+							return org.bukkit.damage.DamageScaling.ALWAYS;
+						}
+						if (mName.equals("getDamageEffect")) {
+							return Mockito.mock(org.bukkit.damage.DamageEffect.class, inv3 -> {
+								if (inv3.getMethod().getName().equals("getSound")) {
+									return org.bukkit.Sound.ENTITY_GENERIC_HURT;
+								}
+								return Mockito.RETURNS_DEFAULTS.answer(inv3);
+							});
+						}
+						if (mName.equals("getDeathMessageType")) {
+							return org.bukkit.damage.DeathMessageType.DEFAULT;
+						}
+					}
+					if (finalTargetClass == org.bukkit.generator.structure.Structure.class && mName.equals("getStructureType")) {
+						return Mockito.mock(org.bukkit.generator.structure.StructureType.class, inv3 -> {
+							if (inv3.getMethod().getName().equals("getKey")) {
+								return org.bukkit.NamespacedKey.minecraft("dummy_structure");
+							}
+							return Mockito.RETURNS_DEFAULTS.answer(inv3);
+						});
+					}
+					if (finalTargetClass == org.bukkit.enchantments.Enchantment.class && (mName.equals("description") || mName.equals("displayName"))) {
+						return net.kyori.adventure.text.Component.empty();
+					}
+					return Mockito.RETURNS_DEFAULTS.answer(invocation2);
+				});
+
 				if (methodName.equals("iterator")) return Collections.singletonList(dummyObj).iterator();
 				return dummyObj;
 			}
@@ -121,7 +162,16 @@ public class TestRegistryAccess implements RegistryAccess
 			if (methodName.equals("iterator") || methodName.equals("getOrThrow") || methodName.equals("get")) {
 				if (aClass == org.bukkit.GameRule.class) {
 					if (methodName.equals("iterator")) return Collections.emptyIterator();
-					return null;
+					return Mockito.mock(org.bukkit.GameRule.class, invocation2 -> {
+						String mName = invocation2.getMethod().getName();
+						if (mName.equals("getName")) {
+							return aClass.getSimpleName().toLowerCase();
+						}
+						if (mName.equals("getType")) {
+							return Boolean.class;
+						}
+						return Mockito.RETURNS_DEFAULTS.answer(invocation2);
+					});
 				}
 
 				Class<?> classToMock = aClass;
@@ -132,24 +182,56 @@ public class TestRegistryAccess implements RegistryAccess
 						// Fallback to ItemType.class
 					}
 				}
-				T dummyObj = Mockito.mock((Class<T>) classToMock, Mockito.withSettings().defaultAnswer(Mockito.RETURNS_DEEP_STUBS));
-				Mockito.when(dummyObj.getKey()).thenReturn(org.bukkit.NamespacedKey.minecraft("dummy_" + aClass.getSimpleName().toLowerCase()));
-				
-				if (aClass == org.bukkit.potion.PotionType.class) {
-					org.bukkit.potion.PotionEffect dummyEffect = Mockito.mock(org.bukkit.potion.PotionEffect.class, Mockito.RETURNS_DEEP_STUBS);
-					Mockito.when(((org.bukkit.potion.PotionType) dummyObj).getPotionEffects()).thenReturn(Collections.singletonList(dummyEffect));
-				}
-				if (aClass == org.bukkit.inventory.ItemType.class) {
-					Mockito.doReturn(org.bukkit.inventory.meta.ItemMeta.class).when((org.bukkit.inventory.ItemType) dummyObj).getItemMetaClass();
-				}
-				if (aClass == org.bukkit.generator.structure.Structure.class) {
-					Mockito.when(((org.bukkit.generator.structure.Structure) dummyObj).getStructureType().getKey()).thenReturn(org.bukkit.NamespacedKey.minecraft("dummy_structure"));
-				}
-				if (aClass == org.bukkit.enchantments.Enchantment.class) {
-					org.bukkit.enchantments.Enchantment enc = (org.bukkit.enchantments.Enchantment) dummyObj;
-					Mockito.when(enc.description()).thenReturn(net.kyori.adventure.text.Component.empty());
-					Mockito.when(enc.displayName(Mockito.anyInt())).thenReturn(net.kyori.adventure.text.Component.empty());
-				}
+				T dummyObj = Mockito.mock((Class<T>) classToMock, invocation2 -> {
+					String mName = invocation2.getMethod().getName();
+					if (mName.equals("getKey")) {
+						return org.bukkit.NamespacedKey.minecraft("dummy_" + aClass.getSimpleName().toLowerCase());
+					}
+					if (aClass == org.bukkit.potion.PotionEffectType.class) {
+						if (mName.equals("getColor")) {
+							return org.bukkit.Color.RED;
+						}
+						if (mName.equals("getEffectCategory")) {
+							return org.bukkit.potion.PotionEffectType.Category.HARMFUL;
+						}
+					}
+					if (aClass == org.bukkit.potion.PotionType.class && mName.equals("getPotionEffects")) {
+						org.bukkit.potion.PotionEffect dummyEffect = Mockito.mock(org.bukkit.potion.PotionEffect.class, Mockito.RETURNS_DEFAULTS);
+						return Collections.singletonList(dummyEffect);
+					}
+					if (aClass == org.bukkit.inventory.ItemType.class && mName.equals("getItemMetaClass")) {
+						return org.bukkit.inventory.meta.ItemMeta.class;
+					}
+					if (aClass == org.bukkit.damage.DamageType.class) {
+						if (mName.equals("getDamageScaling")) {
+							return org.bukkit.damage.DamageScaling.ALWAYS;
+						}
+						if (mName.equals("getDamageEffect")) {
+							return Mockito.mock(org.bukkit.damage.DamageEffect.class, inv3 -> {
+								if (inv3.getMethod().getName().equals("getSound")) {
+									return org.bukkit.Sound.ENTITY_GENERIC_HURT;
+								}
+								return Mockito.RETURNS_DEFAULTS.answer(inv3);
+							});
+						}
+						if (mName.equals("getDeathMessageType")) {
+							return org.bukkit.damage.DeathMessageType.DEFAULT;
+						}
+					}
+					if (aClass == org.bukkit.generator.structure.Structure.class && mName.equals("getStructureType")) {
+						return Mockito.mock(org.bukkit.generator.structure.StructureType.class, inv3 -> {
+							if (inv3.getMethod().getName().equals("getKey")) {
+								return org.bukkit.NamespacedKey.minecraft("dummy_structure");
+							}
+							return Mockito.RETURNS_DEFAULTS.answer(inv3);
+						});
+					}
+					if (aClass == org.bukkit.enchantments.Enchantment.class && (mName.equals("description") || mName.equals("displayName"))) {
+						return net.kyori.adventure.text.Component.empty();
+					}
+					return Mockito.RETURNS_DEFAULTS.answer(invocation2);
+				});
+
 				if (methodName.equals("iterator")) return Collections.singletonList(dummyObj).iterator();
 				return dummyObj;
 			}

@@ -7,6 +7,7 @@ import io.papermc.paper.registry.RegistryBuilder;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class WritableRegistryBaseMockTest extends GeneratedTestBase
 {
 	@Test

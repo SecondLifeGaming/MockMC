@@ -11,32 +11,37 @@ import net.kyori.adventure.text.Component;
  * {@link ConnectionRequestBuilder.Result}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: velocity-3.5.0-SNAPSHOT-593.jar (Version:
- * velocity-3.5.0-SNAPSHOT-593)
+ * Source: velocity-3.5.0-SNAPSHOT-601.jar (Version:
+ * velocity-3.5.0-SNAPSHOT-601)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ConnectionRequestBuilderResultBaseMock extends ConnectionRequestBuilder.Result
 {
+	@Override
 	default ConnectionRequestBuilder.Status getStatus()
 	{
 		// MockMC: Result#getStatus
 		return null;
 	}
 
+	@Override
 	default Optional<Component> getReasonComponent()
 	{
 		// MockMC: Result#getReasonComponent
 		return java.util.Optional.empty();
 	}
 
+	@Override
 	default RegisteredServer getAttemptedConnection()
 	{
 		// MockMC: Result#getAttemptedConnection
 		return null;
 	}
 
+	@Override
 	default boolean isSuccessful()
 	{
 		// MockMC: Result#isSuccessful

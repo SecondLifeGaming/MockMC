@@ -209,6 +209,29 @@
 	{
 		"input": {
 			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:chiseled_cinnabar_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_cinnabar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_cinnabar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:chiseled_cinnabar"
+		}
+	},
+	{
+		"input": {
+			"choices": [
 				"minecraft:copper_block"
 			],
 			"type": "material"
@@ -508,6 +531,29 @@
 	{
 		"input": {
 			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:chiseled_sulfur_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:chiseled_sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.chiseled_sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:chiseled_sulfur"
+		}
+	},
+	{
+		"input": {
+			"choices": [
 				"minecraft:polished_tuff"
 			],
 			"type": "material"
@@ -595,6 +641,328 @@
 				"minecraft:repair_cost": 0
 			},
 			"type": "minecraft:chiseled_tuff"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_slab_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_stairs_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_cinnabar_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_brick_wall_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_bricks_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_bricks"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_bricks_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_bricks"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:cinnabar_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:cinnabar_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.cinnabar_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:cinnabar_wall"
 		}
 	},
 	{
@@ -3521,6 +3889,167 @@
 	{
 		"input": {
 			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_slab_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_slab_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_stairs_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_stairs_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_wall_from_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_cinnabar"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_cinnabar_wall_from_polished_cinnabar_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_cinnabar_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_cinnabar_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_cinnabar_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
 				"minecraft:cobbled_deepslate"
 			],
 			"type": "material"
@@ -3999,6 +4528,167 @@
 				"minecraft:repair_cost": 0
 			},
 			"type": "minecraft:polished_granite_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_slab_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_stairs_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_wall_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:polished_sulfur_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:polished_sulfur_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.polished_sulfur_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:polished_sulfur_wall"
 		}
 	},
 	{
@@ -5080,6 +5770,328 @@
 				"minecraft:repair_cost": 0
 			},
 			"type": "minecraft:stone_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur_bricks"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_sulfur_bricks_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_brick_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_brick_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_brick_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_brick_wall"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:polished_sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_bricks_from_polished_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_bricks"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_bricks_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_bricks",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_bricks"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_bricks"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_slab_from_sulfur_stonecutting",
+		"result": {
+			"amount": 2,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_slab",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_slab"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_slab"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_stairs_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_stairs",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_stairs"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_stairs"
+		}
+	},
+	{
+		"input": {
+			"choices": [
+				"minecraft:sulfur"
+			],
+			"type": "material"
+		},
+		"key": "minecraft:sulfur_wall_from_sulfur_stonecutting",
+		"result": {
+			"amount": 1,
+			"components": {
+				"minecraft:break_sound": "minecraft:entity.item.break",
+				"minecraft:item_model": "minecraft:sulfur_wall",
+				"minecraft:item_name": {
+					"translate": "block.minecraft.sulfur_wall"
+				},
+				"minecraft:max_stack_size": 64,
+				"minecraft:rarity": "COMMON",
+				"minecraft:repair_cost": 0
+			},
+			"type": "minecraft:sulfur_wall"
 		}
 	},
 	{

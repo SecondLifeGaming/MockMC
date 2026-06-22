@@ -16,68 +16,79 @@ import org.bukkit.util.Vector;
  * {@link PositionedRayTraceConfigurationBuilder}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PositionedRayTraceConfigurationBuilderBaseMock extends PositionedRayTraceConfigurationBuilder
 {
+	@Override
 	default PositionedRayTraceConfigurationBuilder blockCollisionMode(BlockCollisionMode arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#blockCollisionMode
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder entityFilter(Predicate<? super Entity> arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#entityFilter
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder raySize(double arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#raySize
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder blockFilter(Predicate<? super Block> arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#blockFilter
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder ignorePassableBlocks(boolean arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#ignorePassableBlocks
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder fluidCollisionMode(FluidCollisionMode arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#fluidCollisionMode
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder maxDistance(double arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#maxDistance
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder start(Location arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#start
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder direction(Vector arg0)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#direction
 		return null;
 	}
 
+	@Override
 	default PositionedRayTraceConfigurationBuilder targets(RayTraceTarget arg0, RayTraceTarget... arg1)
 	{
 		// MockMC: PositionedRayTraceConfigurationBuilder#targets

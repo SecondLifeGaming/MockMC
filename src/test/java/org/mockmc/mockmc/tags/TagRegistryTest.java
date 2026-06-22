@@ -23,6 +23,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TagRegistryTest
 {
 
+	@Test
+	void testRegistriesInitialized()
+	{
+		assertNotNull(TagRegistry.BLOCKS);
+	}
+
 	@Nested
 	class Blocks
 	{
@@ -168,7 +174,7 @@ class TagRegistryTest
 			@NotNull
 			Map<NamespacedKey, Tag<?>> actual = TagRegistry.DAMAGE_TYPES.getTags();
 			assertNotNull(actual);
-			assertEquals(33, actual.size());
+			assertEquals(34, actual.size());
 		}
 
 		@Test

@@ -8,21 +8,22 @@ import org.bukkit.util.noise.NoiseGenerator;
  * {@link org.bukkit.util.noise.OctaveGenerator}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface OctaveGeneratorBaseMock
 {
-	default double noise(double arg0, double arg1, double arg2, boolean arg3)
+	default double noise(double arg0, double arg1, double arg2, double arg3, double arg4, boolean arg5)
 	{
 		// MockMC: OctaveGenerator#noise
 		return 0.0d;
 	}
 
-	default double noise(double arg0, double arg1, double arg2, double arg3, double arg4, boolean arg5)
+	default double noise(double arg0, double arg1, double arg2, boolean arg3)
 	{
 		// MockMC: OctaveGenerator#noise
 		return 0.0d;

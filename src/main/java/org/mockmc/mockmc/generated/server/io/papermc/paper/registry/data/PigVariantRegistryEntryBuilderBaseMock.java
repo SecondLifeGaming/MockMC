@@ -10,18 +10,20 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PigVariantRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder,
 			PigVariantRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<Pig.Variant>
 {
+	@Override
 	default io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder model(
 			io.papermc.paper.registry.data.PigVariantRegistryEntry.Model arg0)
 	{
@@ -29,12 +31,14 @@ public interface PigVariantRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder clientTextureAsset(ClientTextureAsset arg0)
 	{
 		// MockMC: Builder#clientTextureAsset
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.PigVariantRegistryEntry.Builder babyClientTextureAsset(
 			ClientTextureAsset arg0)
 	{

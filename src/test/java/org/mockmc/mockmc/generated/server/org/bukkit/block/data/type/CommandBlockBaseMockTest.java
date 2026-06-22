@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.CommandBlock;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class CommandBlockBaseMockTest extends GeneratedTestBase
 {
 	@Test

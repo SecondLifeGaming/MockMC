@@ -7,6 +7,7 @@ import io.papermc.paper.block.fluid.type.FlowingFluidData;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class FlowingFluidDataBaseMockTest extends GeneratedTestBase
 {
 	@Test

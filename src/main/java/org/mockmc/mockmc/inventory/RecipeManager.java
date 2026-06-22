@@ -138,9 +138,9 @@ public class RecipeManager
 	}
 
 	@Nullable
-	public Recipe getCraftingRecipe(@NotNull ItemStack @NotNull [] craftingMatrix)
+	public Recipe getCraftingRecipe(@Nullable ItemStack[] craftingMatrix)
 	{
-		Preconditions.checkArgument(craftingMatrix != null, CRAFTING_MATRIX_CANNOT_BE_NULL);
+		Preconditions.checkArgument(craftingMatrix != null, "craftingMatrix must not be null");
 		Preconditions.checkArgument(craftingMatrix.length == 9, "craftingMatrix must be an array of length 9");
 
 		List<Recipe> possibleRecipes = getRecipes(RecipeType.CRAFTING);

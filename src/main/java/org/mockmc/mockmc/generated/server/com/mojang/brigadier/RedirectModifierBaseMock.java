@@ -15,8 +15,10 @@ import java.util.Collection;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface RedirectModifierBaseMock<S> extends RedirectModifier<S>
 {
+	@Override
 	default Collection<S> apply(CommandContext<S> arg0) throws CommandSyntaxException
 	{
 		// MockMC: RedirectModifier#apply

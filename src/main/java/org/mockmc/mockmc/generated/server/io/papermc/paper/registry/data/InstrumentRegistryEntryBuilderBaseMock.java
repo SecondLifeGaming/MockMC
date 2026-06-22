@@ -16,18 +16,20 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface InstrumentRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder,
 			InstrumentRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<MusicInstrument>
 {
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(
 			RegistryHolder<Sound, SoundEventRegistryEntry> arg0)
 	{
@@ -35,6 +37,7 @@ public interface InstrumentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(
 			Consumer<RegistryBuilderFactory<Sound, ? extends SoundEventRegistryEntry.Builder>> arg0)
 	{
@@ -42,24 +45,28 @@ public interface InstrumentRegistryEntryBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder soundEvent(TypedKey<Sound> arg0)
 	{
 		// MockMC: Builder#soundEvent
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder duration(float arg0)
 	{
 		// MockMC: Builder#duration
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder range(float arg0)
 	{
 		// MockMC: Builder#range
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.InstrumentRegistryEntry.Builder description(Component arg0)
 	{
 		// MockMC: Builder#description

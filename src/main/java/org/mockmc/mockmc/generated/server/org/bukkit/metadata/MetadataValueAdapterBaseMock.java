@@ -8,8 +8,8 @@ import org.bukkit.plugin.Plugin;
  * {@link org.bukkit.metadata.MetadataValueAdapter}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
@@ -18,7 +18,7 @@ import org.bukkit.plugin.Plugin;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0")
-@SuppressWarnings("deprecation")
+@SuppressWarnings("all")
 public interface MetadataValueAdapterBaseMock extends MetadataValueBaseMock
 {
 	/**

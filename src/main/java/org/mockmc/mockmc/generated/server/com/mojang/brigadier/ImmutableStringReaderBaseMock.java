@@ -12,62 +12,73 @@ import com.mojang.brigadier.ImmutableStringReader;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ImmutableStringReaderBaseMock extends ImmutableStringReader
 {
+	@Override
 	default char peek()
 	{
 		// MockMC: ImmutableStringReader#peek
 		return 0;
 	}
 
+	@Override
 	default char peek(int arg0)
 	{
 		// MockMC: ImmutableStringReader#peek
 		return 0;
 	}
 
+	@Override
 	default String getString()
 	{
 		// MockMC: ImmutableStringReader#getString
 		return "";
 	}
 
+	@Override
 	default String getRead()
 	{
 		// MockMC: ImmutableStringReader#getRead
 		return "";
 	}
 
+	@Override
 	default String getRemaining()
 	{
 		// MockMC: ImmutableStringReader#getRemaining
 		return "";
 	}
 
+	@Override
 	default boolean canRead()
 	{
 		// MockMC: ImmutableStringReader#canRead
 		return false;
 	}
 
+	@Override
 	default boolean canRead(int arg0)
 	{
 		// MockMC: ImmutableStringReader#canRead
 		return false;
 	}
 
+	@Override
 	default int getRemainingLength()
 	{
 		// MockMC: ImmutableStringReader#getRemainingLength
 		return 0;
 	}
 
+	@Override
 	default int getTotalLength()
 	{
 		// MockMC: ImmutableStringReader#getTotalLength
 		return 0;
 	}
 
+	@Override
 	default int getCursor()
 	{
 		// MockMC: ImmutableStringReader#getCursor

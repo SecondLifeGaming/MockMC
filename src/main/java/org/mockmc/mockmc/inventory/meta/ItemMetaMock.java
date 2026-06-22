@@ -780,7 +780,17 @@ public class ItemMetaMock
 		}
 		if (this.hasAttributeModifiers())
 		{
-			map.put(ATTRIBUTE_MODIFIERS, this.getAttributeModifiers());
+			java.util.Map<String, java.util.List<java.util.Map<String, Object>>> serializedModifiers = new java.util.HashMap<>();
+			for (org.bukkit.attribute.Attribute attribute : this.attributeModifiers.keySet())
+			{
+				java.util.List<java.util.Map<String, Object>> modifierList = new java.util.ArrayList<>();
+				for (org.bukkit.attribute.AttributeModifier modifier : this.attributeModifiers.get(attribute))
+				{
+					modifierList.add(modifier.serialize());
+				}
+				serializedModifiers.put(attribute.getKey().toString(), modifierList);
+			}
+			map.put(ATTRIBUTE_MODIFIERS, serializedModifiers);
 		}
 		if (!this.getItemFlags().isEmpty())
 		{
@@ -947,7 +957,7 @@ public class ItemMetaMock
 				}
 			}
 		}
-		setAttributeModifiers((Multimap<Attribute, AttributeModifier>) args.get(ATTRIBUTE_MODIFIERS));
+		deserializeAttributeModifiers(args);
 		Set<ItemFlag> tempSet = NbtParser.parseSet(args.get(ITEM_FLAGS), o -> NbtParser.parseEnum(o, ItemFlag.class));
 		if (tempSet != null)
 		{
@@ -960,6 +970,77 @@ public class ItemMetaMock
 		}
 		var useRemainderData = NbtParser.parseMap(args.get(USE_REMAINDER), Function.identity());
 		useRemainder = (useRemainderData == null ? null : Bukkit.getUnsafe().deserializeStack(useRemainderData));
+	}
+
+	@SuppressWarnings("unchecked")
+	private void deserializeAttributeModifiers(@NotNull Map<String, Object> args)
+	{
+		Object modifiersObj = args.get(ATTRIBUTE_MODIFIERS);
+		if (modifiersObj instanceof com.google.common.collect.Multimap)
+		{
+			setAttributeModifiers(
+					(com.google.common.collect.Multimap<org.bukkit.attribute.Attribute, org.bukkit.attribute.AttributeModifier>) modifiersObj);
+		} else if (modifiersObj instanceof java.util.Map<?, ?> modifierMap)
+		{
+			deserializeAttributeModifiersFromMap(modifierMap);
+		} else
+		{
+			setAttributeModifiers(null);
+		}
+	}
+
+	private void deserializeAttributeModifiersFromMap(java.util.Map<?, ?> modifierMap)
+	{
+		com.google.common.collect.Multimap<org.bukkit.attribute.Attribute, org.bukkit.attribute.AttributeModifier> deserializedModifiers = com.google.common.collect.LinkedHashMultimap
+				.create();
+		for (java.util.Map.Entry<?, ?> entry : modifierMap.entrySet())
+		{
+			org.bukkit.attribute.Attribute attribute = getAttributeFromKey(entry.getKey().toString());
+			if (attribute != null && entry.getValue() instanceof java.util.List<?> list)
+			{
+				deserializeAttributeModifiersList(deserializedModifiers, attribute, list);
+			}
+		}
+		setAttributeModifiers(deserializedModifiers);
+	}
+
+	private org.bukkit.attribute.Attribute getAttributeFromKey(String attributeKey)
+	{
+		org.bukkit.attribute.Attribute attribute = org.bukkit.Registry.ATTRIBUTE
+				.get(org.bukkit.NamespacedKey.fromString(attributeKey));
+		if (attribute == null)
+		{
+			try
+			{
+				return org.bukkit.attribute.Attribute.valueOf(attributeKey.toUpperCase());
+			} catch (Exception _)
+			{
+				// Fallback if the attribute is not found in Registry
+			}
+		}
+		return attribute;
+	}
+
+	private void deserializeAttributeModifiersList(
+			com.google.common.collect.Multimap<org.bukkit.attribute.Attribute, org.bukkit.attribute.AttributeModifier> deserializedModifiers,
+			org.bukkit.attribute.Attribute attribute, java.util.List<?> list)
+	{
+		for (Object rawModifier : list)
+		{
+			if (rawModifier instanceof java.util.Map<?, ?> serializedModifier)
+			{
+				try
+				{
+					@SuppressWarnings("unchecked")
+					org.bukkit.attribute.AttributeModifier modifier = org.bukkit.attribute.AttributeModifier
+							.deserialize((java.util.Map<String, Object>) serializedModifier);
+					deserializedModifiers.put(attribute, modifier);
+				} catch (Exception _)
+				{
+					// Handle cases where the format might differ or deserialize fails
+				}
+			}
+		}
 	}
 
 	/**

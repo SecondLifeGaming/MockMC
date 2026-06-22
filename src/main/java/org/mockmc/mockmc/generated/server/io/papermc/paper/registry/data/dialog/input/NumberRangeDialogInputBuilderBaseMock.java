@@ -8,38 +8,44 @@ import io.papermc.paper.registry.data.dialog.input.NumberRangeDialogInput;
  * {@link NumberRangeDialogInput.Builder}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface NumberRangeDialogInputBuilderBaseMock extends NumberRangeDialogInput.Builder
 {
+	@Override
 	default NumberRangeDialogInput.Builder labelFormat(String arg0)
 	{
 		// MockMC: Builder#labelFormat
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder initial(Float arg0)
 	{
 		// MockMC: Builder#initial
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput build()
 	{
 		// MockMC: Builder#build
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default NumberRangeDialogInput.Builder step(Float arg0)
 	{
 		// MockMC: Builder#step

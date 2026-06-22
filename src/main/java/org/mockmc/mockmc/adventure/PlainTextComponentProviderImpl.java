@@ -19,15 +19,31 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("deprecation")
 public class PlainTextComponentProviderImpl implements PlainTextComponentSerializer.Provider
 {
 
 	private static final Pattern LOCALIZATION_PATTERN = Pattern.compile("%(?:(\\d+)\\$)?s");
 
-	private static final ComponentFlattener BASIC_COMPONENT_FLATTENER = ComponentFlattener.basic().toBuilder()
-			.complexMapper(TranslatableComponent.class, PlainTextComponentProviderImpl::processTranslatable).build();
+	private static final ComponentFlattener BASIC_COMPONENT_FLATTENER = createBasicComponentFlattener();
+
+	@SuppressWarnings("java:S3011")
+	private static ComponentFlattener createBasicComponentFlattener()
+	{
+		try
+		{
+			ComponentFlattener basic = ComponentFlattener.basic();
+			java.lang.reflect.Method toBuilder = basic.getClass().getMethod("toBuilder");
+			toBuilder.setAccessible(true);
+			ComponentFlattener.Builder builder = (ComponentFlattener.Builder) toBuilder.invoke(basic);
+			return builder
+					.complexMapper(TranslatableComponent.class, PlainTextComponentProviderImpl::processTranslatable)
+					.build();
+		} catch (Exception e)
+		{
+			throw new IllegalStateException("Failed to create component flattener", e);
+		}
+	}
 
 	@Override
 	public @NotNull PlainTextComponentSerializer plainTextSimple()
@@ -81,7 +97,7 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			{
 				consumer.accept(Component.text(translated.substring(lastIndex)));
 			}
-		} catch (Throwable e)
+		} catch (Exception e)
 		{
 			Bukkit.getLogger().log(Level.SEVERE, "Unexpected exception while processing translatable component", e);
 		}
@@ -100,7 +116,7 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 				{
 					consumer.accept(argumentList.get(idx).asComponent());
 				}
-			} catch (final NumberFormatException ex)
+			} catch (final NumberFormatException _)
 			{
 				// ignore, drop the format placeholder
 			}

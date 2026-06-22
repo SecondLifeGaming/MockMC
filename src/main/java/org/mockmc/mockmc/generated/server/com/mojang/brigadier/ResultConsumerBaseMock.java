@@ -13,8 +13,10 @@ import com.mojang.brigadier.context.CommandContext;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ResultConsumerBaseMock<S> extends ResultConsumer<S>
 {
+	@Override
 	default void onCommandComplete(CommandContext<S> arg0, boolean arg1, int arg2)
 	{
 		// MockMC: ResultConsumer#onCommandComplete

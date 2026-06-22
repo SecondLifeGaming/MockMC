@@ -8,26 +8,30 @@ import io.papermc.paper.registry.data.dialog.input.SingleOptionDialogInput;
  * {@link SingleOptionDialogInput.Builder}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface SingleOptionDialogInputBuilderBaseMock extends SingleOptionDialogInput.Builder
 {
+	@Override
 	default SingleOptionDialogInput.Builder width(int arg0)
 	{
 		// MockMC: Builder#width
 		return null;
 	}
 
+	@Override
 	default SingleOptionDialogInput.Builder labelVisible(boolean arg0)
 	{
 		// MockMC: Builder#labelVisible
 		return null;
 	}
 
+	@Override
 	default SingleOptionDialogInput build()
 	{
 		// MockMC: Builder#build

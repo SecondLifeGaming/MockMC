@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.LeafLitter;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class LeafLitterBaseMockTest extends GeneratedTestBase
 {
 	@Test

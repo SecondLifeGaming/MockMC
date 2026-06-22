@@ -15,164 +15,192 @@ import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface BuiltInExceptionProviderBaseMock extends BuiltInExceptionProvider
 {
+	@Override
 	default DynamicCommandExceptionType readerInvalidDouble()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidDouble
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType longTooHigh()
 	{
 		// MockMC: BuiltInExceptionProvider#longTooHigh
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedFloat()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedFloat
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedEndOfQuote()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedEndOfQuote
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType integerTooHigh()
 	{
 		// MockMC: BuiltInExceptionProvider#integerTooHigh
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerInvalidEscape()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidEscape
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType dispatcherExpectedArgumentSeparator()
 	{
 		// MockMC: BuiltInExceptionProvider#dispatcherExpectedArgumentSeparator
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerExpectedSymbol()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedSymbol
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerInvalidFloat()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidFloat
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerInvalidBool()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidBool
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerInvalidInt()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidInt
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedDouble()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedDouble
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType floatTooHigh()
 	{
 		// MockMC: BuiltInExceptionProvider#floatTooHigh
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType literalIncorrect()
 	{
 		// MockMC: BuiltInExceptionProvider#literalIncorrect
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType doubleTooLow()
 	{
 		// MockMC: BuiltInExceptionProvider#doubleTooLow
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedLong()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedLong
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType integerTooLow()
 	{
 		// MockMC: BuiltInExceptionProvider#integerTooLow
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType dispatcherUnknownArgument()
 	{
 		// MockMC: BuiltInExceptionProvider#dispatcherUnknownArgument
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedStartOfQuote()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedStartOfQuote
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType doubleTooHigh()
 	{
 		// MockMC: BuiltInExceptionProvider#doubleTooHigh
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedBool()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedBool
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType readerExpectedInt()
 	{
 		// MockMC: BuiltInExceptionProvider#readerExpectedInt
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType floatTooLow()
 	{
 		// MockMC: BuiltInExceptionProvider#floatTooLow
 		return null;
 	}
 
+	@Override
 	default Dynamic2CommandExceptionType longTooLow()
 	{
 		// MockMC: BuiltInExceptionProvider#longTooLow
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType dispatcherParseException()
 	{
 		// MockMC: BuiltInExceptionProvider#dispatcherParseException
 		return null;
 	}
 
+	@Override
 	default SimpleCommandExceptionType dispatcherUnknownCommand()
 	{
 		// MockMC: BuiltInExceptionProvider#dispatcherUnknownCommand
 		return null;
 	}
 
+	@Override
 	default DynamicCommandExceptionType readerInvalidLong()
 	{
 		// MockMC: BuiltInExceptionProvider#readerInvalidLong

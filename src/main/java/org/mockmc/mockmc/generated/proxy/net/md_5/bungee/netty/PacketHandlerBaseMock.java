@@ -14,46 +14,35 @@ import net.md_5.bungee.protocol.PacketWrapper;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PacketHandlerBaseMock
 {
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void exception(Throwable arg0) throws Exception
 	{
 		// MockMC: PacketHandler#exception
 	}
 
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void connected(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#connected
 	}
 
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default boolean shouldHandle(PacketWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#shouldHandle
 		return false;
 	}
 
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void disconnected(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#disconnected
 	}
 
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void writabilityChanged(ChannelWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#writabilityChanged
 	}
 
-	@SuppressWarnings(
-	{"Exception", "java:S112"})
 	default void handle(PacketWrapper arg0) throws Exception
 	{
 		// MockMC: PacketHandler#handle
