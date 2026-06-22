@@ -7,8 +7,7 @@ import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-@SuppressWarnings(
-{"deprecation", "removal", "java:S1874"})
+@SuppressWarnings("all")
 class BukkitBrigadierCommandBaseMockTest extends GeneratedTestBase
 {
 	@Test

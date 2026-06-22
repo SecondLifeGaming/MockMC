@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Jukebox;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class JukeboxBaseMockTest extends GeneratedTestBase
 {
 	@Test

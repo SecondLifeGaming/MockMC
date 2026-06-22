@@ -9,53 +9,62 @@ import java.util.List;
  * {@link ThreadedRegionizer.RegionCallbacks}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: remapped-folia-26.1.2-8.jar (Version: remapped-folia-26.1.2-8)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ThreadedRegionizerRegionCallbacksBaseMock<R extends ThreadedRegionizer.ThreadedRegionData<R, S>, S extends ThreadedRegionizer.ThreadedRegionSectionData>
 		extends
 			ThreadedRegionizer.RegionCallbacks<R, S>
 {
+	@Override
 	default void onRegionCreate(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionCreate
 	}
 
+	@Override
 	default void preSplit(ThreadedRegionizer.ThreadedRegion<R, S> arg0,
 			List<ThreadedRegionizer.ThreadedRegion<R, S>> arg1)
 	{
 		// MockMC: RegionCallbacks#preSplit
 	}
 
+	@Override
 	default void onRegionDestroy(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionDestroy
 	}
 
+	@Override
 	default R createNewData(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#createNewData
 		return null;
 	}
 
+	@Override
 	default void preMerge(ThreadedRegionizer.ThreadedRegion<R, S> arg0, ThreadedRegionizer.ThreadedRegion<R, S> arg1)
 	{
 		// MockMC: RegionCallbacks#preMerge
 	}
 
+	@Override
 	default S createNewSectionData(int arg0, int arg1, int arg2)
 	{
 		// MockMC: RegionCallbacks#createNewSectionData
 		return null;
 	}
 
+	@Override
 	default void onRegionActive(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionActive
 	}
 
+	@Override
 	default void onRegionInactive(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: RegionCallbacks#onRegionInactive

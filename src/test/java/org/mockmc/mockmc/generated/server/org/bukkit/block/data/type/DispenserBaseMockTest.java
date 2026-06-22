@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Dispenser;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class DispenserBaseMockTest extends GeneratedTestBase
 {
 	@Test

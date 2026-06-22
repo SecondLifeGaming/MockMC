@@ -1,7 +1,6 @@
 package org.mockmc.mockmc.command;
 
 import com.google.common.base.Preconditions;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
@@ -279,8 +278,7 @@ public class ConsoleCommandSenderMock
 		{
 			Preconditions.checkNotNull(components, "Components must not be null");
 			Component comp = BungeeComponentSerializer.get().deserialize(components);
-			ConsoleCommandSenderMock.this.sendMessage(sender == null ? Identity.nil() : Identity.identity(sender),
-					comp);
+			ConsoleCommandSenderMock.this.sendMessage(comp);
 		}
 	}
 }

@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Candle;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class CandleBaseMockTest extends GeneratedTestBase
 {
 	@Test

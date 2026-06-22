@@ -13,6 +13,7 @@ import io.netty.buffer.ByteBuf;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface EntityMapBaseMock
 {
 	default void rewriteClientbound(ByteBuf arg0, int arg1, int arg2)

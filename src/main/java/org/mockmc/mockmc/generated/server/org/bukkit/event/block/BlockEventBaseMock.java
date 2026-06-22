@@ -8,12 +8,13 @@ import org.bukkit.block.Block;
  * {@link org.bukkit.event.block.BlockEvent}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface BlockEventBaseMock
 {
 	default Block getBlock()

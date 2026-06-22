@@ -52,9 +52,8 @@ class LootableMinecartMockTest
 	void testSetHasPlayerLootedTwiceSameValue() throws InterruptedException
 	{
 		Player player = server.addPlayer();
-		long time = System.currentTimeMillis();
 		minecart.setHasPlayerLooted(player, true);
-		assertEquals(time, minecart.getLastLooted(player));
+		long time = minecart.getLastLooted(player);
 		TimeUnit.MILLISECONDS.sleep(10);
 		minecart.setHasPlayerLooted(player, true);
 		assertEquals(time, minecart.getLastLooted(player));

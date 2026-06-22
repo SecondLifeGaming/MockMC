@@ -7,6 +7,7 @@ import org.bukkit.inventory.meta.BlockDataMeta;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class BlockDataMetaBaseMockTest extends GeneratedTestBase
 {
 	@Test

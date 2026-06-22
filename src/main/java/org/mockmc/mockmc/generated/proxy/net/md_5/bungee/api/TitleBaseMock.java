@@ -14,64 +14,73 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface TitleBaseMock extends Title
 {
+	@Override
 	default Title fadeOut(int arg0)
 	{
 		// MockMC: Title#fadeOut
 		return null;
 	}
 
+	@Override
 	default Title fadeIn(int arg0)
 	{
 		// MockMC: Title#fadeIn
 		return null;
 	}
 
+	@Override
 	default Title subTitle(BaseComponent... arg0)
 	{
 		// MockMC: Title#subTitle
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	default Title subTitle(BaseComponent arg0)
 	{
 		// MockMC: Title#subTitle
 		return null;
 	}
 
+	@Override
 	default Title reset()
 	{
 		// MockMC: Title#reset
 		return null;
 	}
 
+	@Override
 	default Title clear()
 	{
 		// MockMC: Title#clear
 		return null;
 	}
 
+	@Override
 	default Title stay(int arg0)
 	{
 		// MockMC: Title#stay
 		return null;
 	}
 
+	@Override
 	default Title send(ProxiedPlayer arg0)
 	{
 		// MockMC: Title#send
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	default Title title(BaseComponent arg0)
 	{
 		// MockMC: Title#title
 		return null;
 	}
 
+	@Override
 	default Title title(BaseComponent... arg0)
 	{
 		// MockMC: Title#title

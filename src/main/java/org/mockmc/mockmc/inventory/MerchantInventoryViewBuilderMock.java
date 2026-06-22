@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class MerchantInventoryViewBuilderMock<V extends InventoryView>
 		implements
-			MerchantInventoryViewBuilder<V>,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.view.builder.MerchantInventoryViewBuilderBaseMock<V>
 {
 
@@ -56,5 +55,17 @@ public class MerchantInventoryViewBuilderMock<V extends InventoryView>
 	{
 		Component effectiveTitle = title != null ? title : menuType.getMenuTypeData().inventoryType().defaultTitle();
 		return menuType.create(player, effectiveTitle);
+	}
+
+	@Override
+	public @NotNull MerchantInventoryViewBuilder<V> merchant(@Nullable org.bukkit.inventory.Merchant merchant)
+	{
+		throw new org.mockmc.mockmc.exception.UnimplementedOperationException();
+	}
+
+	@Override
+	public @NotNull MerchantInventoryViewBuilder<V> checkReachable(boolean checkReachable)
+	{
+		throw new org.mockmc.mockmc.exception.UnimplementedOperationException();
 	}
 }

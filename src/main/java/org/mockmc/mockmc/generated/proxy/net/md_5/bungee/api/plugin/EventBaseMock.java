@@ -11,6 +11,7 @@ package org.mockmc.mockmc.generated.proxy.net.md_5.bungee.api.plugin;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface EventBaseMock
 {
 	default boolean callEvent()

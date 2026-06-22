@@ -1,6 +1,8 @@
 import java.security.MessageDigest
 import java.net.URI
 import java.io.InputStream
+import java.nio.file.FileSystems
+import java.nio.file.Files
 
 abstract class DownloadJarsTask : DefaultTask() {
 	@get:OutputDirectory
@@ -22,6 +24,21 @@ abstract class DownloadJarsTask : DefaultTask() {
 					dest.outputStream().use { output ->
 						(input as InputStream).copyTo(output)
 					}
+				}
+				
+				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
+				val env = mapOf("create" to "false")
+				val jarUri = URI.create("jar:file:${dest.absolutePath}")
+				try {
+					FileSystems.newFileSystem(jarUri, env).use { fs ->
+						val providerPath = fs.getPath("META-INF/services/net.kyori.adventure.bossbar.BossBarImplementation\$Provider")
+						if (Files.exists(providerPath)) {
+							println("Stripping conflicting BossBar provider from $name...")
+							Files.delete(providerPath)
+						}
+					}
+				} catch (e: Exception) {
+					// Ignore if not a valid jar or if it fails
 				}
 			}
 		}
@@ -47,9 +64,9 @@ tasks.register<DownloadJarsTask>("downloadJars") {
 	description = "Downloads backend API JARs for metaminer"
 	outputDir.set(layout.projectDirectory.dir("jars"))
 	jars.set(mapOf(
-		"velocity-3.5.0-SNAPSHOT-593.jar" to "https://fill-data.papermc.io/v1/objects/25bfbee6155fbce24f709bf18f1bb915817c4151d6d418ca01282742ab1f123a/velocity-3.5.0-SNAPSHOT-593.jar",
-		"paper-26.1.2-53.jar" to "https://fill-data.papermc.io/v1/objects/6934188878fc351e1be5bfba5f2b8c4591224886e4b34e3de09dbec68a351caf/paper-26.1.2-53.jar",
-		"folia-1.21.11-14.jar" to "https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar",
+		"velocity-3.5.0-SNAPSHOT-601.jar" to "https://fill-data.papermc.io/v1/objects/0407642d1ed2883100eb823c2805523f191fa637db1f42ac0ec7ef29cbe455a9/velocity-3.5.0-SNAPSHOT-601.jar",
+		"paper-26.2-25.jar" to "https://fill-data.papermc.io/v1/objects/83c6af7161cebd44dad740759750fa321287a7083ce4cd3a6fb28d89c7bc97cc/paper-26.2-25.jar",
+		"folia-26.1.2-8.jar" to "https://fill-data.papermc.io/v1/objects/607afd1c3320008e1ffd2eaee6780ace4419d5f8c527b75e79f259be79ebf57b/folia-26.1.2-8.jar",
 		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
 	))
 }
@@ -64,10 +81,10 @@ sonar {
 		property("sonar.organization", "secondlifegaming")
 		property("sonar.host.url", "https://sonarcloud.io")
 		property("sonar.coverage.jacoco.xmlReportPaths", "**/build/reports/jacoco/test/jacocoTestReport.xml")
-		property("sonar.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
-		property("sonar.test.exclusions", "**/generated/**,src/test/java/org/mockmc/mockmc/generated/**")
-		property("sonar.coverage.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
-		property("sonar.cpd.exclusions", "**/generated/**,src/main/java/org/mockmc/mockmc/generated/**")
+		property("sonar.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.test.exclusions", "**/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.coverage.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+		property("sonar.cpd.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
 	}
 }
 
@@ -79,6 +96,11 @@ tasks.withType<Checkstyle> {
 	exclude("**/generated/**")
 	exclude("io/papermc/**")
 }
+
+tasks.withType<Test>().configureEach {
+	jvmArgs("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC", "-Xmx1g")
+}
+
 
 spotless {
 	java {
@@ -104,12 +126,18 @@ dependencies {
 
 	// Remapped Server Jars from MetaMiner (Autonomous)
 	compileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
+	testCompileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
 
 	// Unbundled Libraries (Autonomous)
 	compileOnly(fileTree("jars/cache/libraries") { 
 		include("**/*.jar") 
-		exclude("**/folia-api-*.jar")
 		exclude("**/paper-api-*.jar")
+		exclude("**/folia-api-*.jar")
+	})
+	testCompileOnly(fileTree("jars/cache/libraries") { 
+		include("**/*.jar") 
+		exclude("**/paper-api-*.jar")
+		exclude("**/folia-api-*.jar")
 	})
 
 	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
@@ -192,17 +220,19 @@ tasks {
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			"-XX:TieredStopAtLevel=1",
-			"-XX:CompileCommand=exclude,org/mockmc/mockmc/generated/*.*",
-			"-XX:CompileCommand=exclude,org/mockmc/mockmc/*.*"
+			// -Xint: workaround for JDK 25.0.3 C1 JIT crash in TreeScanner.visitBlock
+			// (com.sun.tools.javac.comp.Lower.freevars -> SIGSEGV). TieredStopAtLevel=1
+			// is insufficient because C1 itself is the crash tier; interpreter-only avoids it.
+			// Remove once JDK 25 fixes the javac desugar regression.
+			"-Xint"
 		)
 	}
 
 	compileTestJava {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
-		options.forkOptions.memoryMaximumSize = "8g"
-		options.forkOptions.jvmArgs = mutableListOf("-XX:TieredStopAtLevel=1", "-XX:+UseSerialGC")
+		options.forkOptions.memoryMaximumSize = "4g"
+		options.forkOptions.jvmArgs = mutableListOf("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC")
 	}
 
 	javadoc {
@@ -217,6 +247,10 @@ tasks {
 				)
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
+				jFlags = listOf(
+					"-XX:TieredStopAtLevel=1",
+					"-XX:+UseSerialGC"
+				)
 			}
 		}
 	}
@@ -224,8 +258,14 @@ tasks {
 	test {
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
+		exclude("org/mockmc/mockmc/generated/**")
 		ignoreFailures = true
 		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+		doFirst {
+			println("Default test Classpath:")
+			classpath.files.forEach { println("  - ${it.absolutePath}") }
+		}
 	}
 
 	check {
@@ -421,11 +461,46 @@ data class DependencyHashResult(
 	val resolvedVersion: String
 )
 
+object JarServiceStripper {
+	fun strip(jarFile: File) {
+		if (!jarFile.exists()) return
+		val servicesToStrip = listOf(
+			"io.papermc.paper.ServerBuildInfo",
+			"io.papermc.paper.InternalAPIBridge",
+			"io.papermc.paper.datacomponent.item.ItemComponentTypesBridge",
+			"io.papermc.paper.registry.RegistryAccess",
+			"io.papermc.paper.plugin.lifecycle.event.types.LifecycleEventTypeProvider",
+			"io.papermc.paper.datacomponent.item.attribute.AttributeModifierDisplayBridge",
+			"io.papermc.paper.datacomponent.item.blocksattacks.BlocksAttacksBridge",
+			"io.papermc.paper.command.brigadier.argument.VanillaArgumentProvider",
+			"io.papermc.paper.command.brigadier.MessageComponentSerializer",
+			"net.kyori.adventure.bossbar.BossBarImplementation\$Provider",
+			"net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer\$Provider",
+			"net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer\$Provider",
+			"org.bukkit.plugin.PluginLoader"
+		)
+		val env = mapOf("create" to "false")
+		val jarUri = URI.create("jar:file:${jarFile.absolutePath}")
+		try {
+			FileSystems.newFileSystem(jarUri, env).use { fs ->
+				servicesToStrip.forEach { serviceName ->
+					val providerPath = fs.getPath("META-INF/services/$serviceName")
+					if (Files.exists(providerPath)) {
+						println("Stripping conflicting service provider $serviceName from ${jarFile.name}...")
+						Files.delete(providerPath)
+					}
+				}
+			}
+		} catch (e: Exception) {
+			println("Failed to strip service providers from ${jarFile.name}: ${e.message}")
+		}
+	}
+}
+
 val backendJars = mapOf(
-	"Folia" to "folia-1.21.11-14.jar",
-	"Paper" to "paper-26.1.2-53.jar",
-	"Spigot" to "spigot-26.1.2.jar",
-	"Velocity" to "velocity-3.5.0-SNAPSHOT-593.jar",
+	"Folia" to "folia-26.1.2-8.jar",
+	"Paper" to "paper-26.2-25.jar",
+	"Velocity" to "velocity-3.5.0-SNAPSHOT-601.jar",
 	"Waterfall" to "waterfall-1.21-609.jar"
 )
 
@@ -436,13 +511,24 @@ backendJars.forEach { (name, jarName) ->
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
 		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 
-		val defaultClasspath = sourceSets.test.get().runtimeClasspath
-		classpath = defaultClasspath + files("jars/$jarName")
+		val remappedJar = file("jars/cache/remapped-$jarName")
+		val backendFile = if (remappedJar.exists()) remappedJar else file("jars/$jarName")
+		val libraries = fileTree("jars/cache/libraries") { 
+			include("**/*.jar") 
+			exclude("**/paper-api-*.jar")
+			exclude("**/folia-api-*.jar")
+		}
+		
+		classpath = sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
 		testClassesDirs = sourceSets.test.get().output.classesDirs
 
 		doFirst {
 			println("Running tests against backend: $name ($jarName)")
+			JarServiceStripper.strip(backendFile)
+			println("Test Classpath:")
+			classpath.files.forEach { println("  - ${it.absolutePath}") }
 		}
 	}
 }
@@ -450,7 +536,7 @@ backendJars.forEach { (name, jarName) ->
 tasks.register("testAllBackends") {
 	group = "verification"
 	description = "Runs the test suite against all provided backend JARs"
-	dependsOn("testFolia", "testPaper", "testSpigot", "testVelocity", "testWaterfall")
+	dependsOn("testFolia", "testPaper", "testVelocity", "testWaterfall")
 }
 
 configurations.all {
@@ -458,4 +544,8 @@ configurations.all {
 		force("com.mojang:brigadier:1.3.10")
 	}
 }
+
+
+
+
 

@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.TNT;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class TNTBaseMockTest extends GeneratedTestBase
 {
 	@Test

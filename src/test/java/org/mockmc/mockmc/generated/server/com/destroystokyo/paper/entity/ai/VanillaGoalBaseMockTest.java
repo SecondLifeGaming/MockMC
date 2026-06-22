@@ -7,6 +7,7 @@ import org.bukkit.entity.Mob;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class VanillaGoalBaseMockTest extends GeneratedTestBase
 {
 	@Test

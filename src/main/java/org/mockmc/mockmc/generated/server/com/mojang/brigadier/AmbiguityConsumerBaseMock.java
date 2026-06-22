@@ -14,8 +14,10 @@ import java.util.Collection;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface AmbiguityConsumerBaseMock<S> extends AmbiguityConsumer<S>
 {
+	@Override
 	default void ambiguous(CommandNode<S> arg0, CommandNode<S> arg1, CommandNode<S> arg2, Collection<String> arg3)
 	{
 		// MockMC: AmbiguityConsumer#ambiguous

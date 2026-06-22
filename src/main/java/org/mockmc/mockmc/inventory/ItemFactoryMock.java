@@ -147,6 +147,6 @@ public class ItemFactoryMock implements org.mockmc.mockmc.generated.server.org.b
 
 	public ItemStack deserializeItem(byte[] bytes)
 	{
-		return org.bukkit.Bukkit.getUnsafe().deserializeItem(bytes);
+		return io.papermc.paper.InternalAPIBridge.get().deserializeItem(bytes);
 	}
 }

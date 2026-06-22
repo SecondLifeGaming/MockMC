@@ -15,14 +15,17 @@ import net.md_5.bungee.protocol.packet.PluginMessage;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface IForgeServerPacketHandlerBaseMock<S> extends IForgeServerPacketHandler<S>
 {
+	@Override
 	default S send(PluginMessage arg0, UserConnection arg1)
 	{
 		// MockMC: IForgeServerPacketHandler#send
 		return null;
 	}
 
+	@Override
 	default S handle(PluginMessage arg0, ChannelWrapper arg1)
 	{
 		// MockMC: IForgeServerPacketHandler#handle

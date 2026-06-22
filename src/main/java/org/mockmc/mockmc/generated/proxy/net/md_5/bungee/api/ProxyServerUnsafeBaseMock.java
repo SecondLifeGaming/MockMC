@@ -13,35 +13,42 @@ import net.md_5.bungee.protocol.channel.BungeeChannelInitializer;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ProxyServerUnsafeBaseMock extends ProxyServer.Unsafe
 {
+	@Override
 	default BungeeChannelInitializer getFrontendChannelInitializer()
 	{
 		// MockMC: Unsafe#getFrontendChannelInitializer
 		return null;
 	}
 
+	@Override
 	default void setFrontendChannelInitializer(BungeeChannelInitializer arg0)
 	{
 		// MockMC: Unsafe#setFrontendChannelInitializer
 	}
 
+	@Override
 	default void setServerInfoChannelInitializer(BungeeChannelInitializer arg0)
 	{
 		// MockMC: Unsafe#setServerInfoChannelInitializer
 	}
 
+	@Override
 	default BungeeChannelInitializer getServerInfoChannelInitializer()
 	{
 		// MockMC: Unsafe#getServerInfoChannelInitializer
 		return null;
 	}
 
+	@Override
 	default void setBackendChannelInitializer(BungeeChannelInitializer arg0)
 	{
 		// MockMC: Unsafe#setBackendChannelInitializer
 	}
 
+	@Override
 	default BungeeChannelInitializer getBackendChannelInitializer()
 	{
 		// MockMC: Unsafe#getBackendChannelInitializer

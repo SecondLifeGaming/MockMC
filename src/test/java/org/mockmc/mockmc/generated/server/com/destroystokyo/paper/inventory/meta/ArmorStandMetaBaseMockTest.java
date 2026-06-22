@@ -7,6 +7,7 @@ import com.destroystokyo.paper.inventory.meta.ArmorStandMeta;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class ArmorStandMetaBaseMockTest extends GeneratedTestBase
 {
 	@Test

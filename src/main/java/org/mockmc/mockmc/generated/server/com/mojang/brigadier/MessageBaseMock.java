@@ -12,8 +12,10 @@ import com.mojang.brigadier.Message;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface MessageBaseMock extends Message
 {
+	@Override
 	default String getString()
 	{
 		// MockMC: Message#getString

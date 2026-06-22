@@ -7,6 +7,7 @@ import io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class LifecycleEventManagerBaseMockTest extends GeneratedTestBase
 {
 	@Test

@@ -18,7 +18,6 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Wither;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -61,8 +60,6 @@ import java.util.function.Consumer;
  *
  * @see EntityMock
  */
-@SuppressWarnings(
-{"removal"})
 public abstract class LivingEntityMock extends EntityMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LivingEntityBaseMock
@@ -406,21 +403,24 @@ public abstract class LivingEntityMock extends EntityMock
 
 	@Override
 	@Nullable
-	@SuppressWarnings("removal")
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
 	public ItemStack getItemInUse()
 	{
 		return this.activeItem;
 	}
 
 	@Override
-	@SuppressWarnings("removal")
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
 	public int getItemInUseTicks()
 	{
 		return this.activeItemUsedTicks;
 	}
 
 	@Override
-	@SuppressWarnings("removal")
+	@SuppressWarnings(
+	{"java:S1874", "java:S1133"})
 	public void setItemInUseTicks(int ticks)
 	{
 		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");
@@ -556,7 +556,8 @@ public abstract class LivingEntityMock extends EntityMock
 	public boolean addPotionEffect(@NotNull PotionEffect effect)
 	{
 		// force is ignored
-		return addPotionEffect(effect, true);
+		addPotionEffect(effect, EntityPotionEffectEvent.Cause.PLUGIN);
+		return true;
 	}
 
 	/**
@@ -592,7 +593,8 @@ public abstract class LivingEntityMock extends EntityMock
 				? EntityPotionEffectEvent.Action.ADDED
 				: EntityPotionEffectEvent.Action.CHANGED;
 		boolean override = oldEffect != null;
-		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, cause, action, override);
+		EntityPotionEffectEvent event = new EntityPotionEffectEvent(this, oldEffect, effect, null, cause, action,
+				override);
 		Bukkit.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
@@ -674,7 +676,7 @@ public abstract class LivingEntityMock extends EntityMock
 			boolean allExpired = queue.size() == expiredCount;
 			if (allExpired)
 			{
-				var event = new EntityPotionEffectEvent(this, mapToPotionEffect(queue.peek()), null,
+				var event = new EntityPotionEffectEvent(this, mapToPotionEffect(queue.peek()), null, null,
 						EntityPotionEffectEvent.Cause.EXPIRATION, EntityPotionEffectEvent.Action.REMOVED, true);
 				Bukkit.getPluginManager().callEvent(event);
 				if (!event.isCancelled())
@@ -718,7 +720,8 @@ public abstract class LivingEntityMock extends EntityMock
 			return;
 		}
 		var activeEffect = queue.peek();
-		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, cause, action, true);
+		var changeEvent = new EntityPotionEffectEvent(this, mapToPotionEffect(activeEffect), null, null, cause, action,
+				true);
 		Bukkit.getPluginManager().callEvent(changeEvent);
 		if (!changeEvent.isCancelled())
 		{
@@ -743,7 +746,7 @@ public abstract class LivingEntityMock extends EntityMock
 		// Fire removal events for all active effects
 		activeEffects.forEach((type, queue) -> queue.forEach(activeEffect ->
 		{
-			var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null,
+			var event = new EntityPotionEffectEvent(this, activeEffect.getPotionEffect(), null, null,
 					EntityPotionEffectEvent.Cause.PLUGIN, EntityPotionEffectEvent.Action.CLEARED, true);
 			Bukkit.getPluginManager().callEvent(event);
 		}));
@@ -786,15 +789,30 @@ public abstract class LivingEntityMock extends EntityMock
 	}
 
 	@Override
+	// @mockmc.version 26.2-dev
 	public boolean setLeashHolder(@Nullable Entity holder)
 	{
-		if (this instanceof Wither)
+		// Only Mob entities can be leashed in Paper 26.2+
+		if (!(this instanceof org.bukkit.entity.Mob))
+		{
+			return false;
+		}
+		// Wither cannot be leashed
+		if (this instanceof org.bukkit.entity.Wither)
 		{
 			return false;
 		}
 		if (holder != null && (!holder.isValid() || holder.isDead()))
 		{
 			return false;
+		}
+		// Only Mob, Player, and LeashHitch entities are valid leash holders.
+		// Accepting other entity types (e.g. ArmorStand) returns true but does not
+		// establish a leash — isLeashed() will return false.
+		if (holder != null && !(holder instanceof org.bukkit.entity.Mob)
+				&& !(holder instanceof org.bukkit.entity.Player) && !(holder instanceof org.bukkit.entity.LeashHitch))
+		{
+			return true; // accepted but not applied
 		}
 		this.leashHolder = holder;
 		return true;
@@ -1083,5 +1101,38 @@ public abstract class LivingEntityMock extends EntityMock
 	public void setKiller(@Nullable Player killer)
 	{
 		this.killer = killer;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>
+	 * In MockMC, attacking is not simulated. Null entities throw NPE; non-null
+	 * targets throw
+	 * {@link org.mockmc.mockmc.exception.UnimplementedOperationException}.
+	 * </p>
+	 *
+	 * @mockmc.version 26.2-dev
+	 */
+	@Override
+	public void attack(@NotNull org.bukkit.entity.Entity entity)
+	{
+		Preconditions.checkNotNull(entity, "Target entity cannot be null");
+		throw new org.mockmc.mockmc.exception.UnimplementedOperationException();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>
+	 * Delegates to {@link #getActiveItemRemainingTime()}.
+	 * </p>
+	 *
+	 * @mockmc.version 26.2-dev
+	 */
+	@Override
+	public int getItemUseRemainingTime()
+	{
+		return getActiveItemRemainingTime();
 	}
 }

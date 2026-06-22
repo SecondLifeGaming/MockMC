@@ -9,8 +9,8 @@ import org.bukkit.conversations.ConversationAbandonedListener;
  * {@link ConversationAbandonedListener}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
@@ -19,13 +19,14 @@ import org.bukkit.conversations.ConversationAbandonedListener;
  *             modern build cycles.
  */
 @Deprecated(since = "1.0", forRemoval = true)
-@SuppressWarnings("removal")
+@SuppressWarnings("all")
 public interface ConversationAbandonedListenerBaseMock extends ConversationAbandonedListener
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0", forRemoval = true)
 	default void conversationAbandoned(ConversationAbandonedEvent arg0)
 	{

@@ -13,14 +13,17 @@ import net.md_5.bungee.api.connection.Server;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ServerBaseMock extends Server, ConnectionBaseMock
 {
+	@Override
 	default ServerInfo getInfo()
 	{
 		// MockMC: Server#getInfo
 		return null;
 	}
 
+	@Override
 	default void sendData(String arg0, byte[] arg1)
 	{
 		// MockMC: Server#sendData

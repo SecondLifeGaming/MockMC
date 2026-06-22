@@ -12,6 +12,7 @@ import net.md_5.bungee.api.chat.objects.ChatObject;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ChatObjectBaseMock extends ChatObject
 {
 }

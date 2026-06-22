@@ -23,7 +23,8 @@ public class AttributeInstanceElementFactory
 
 		JsonObject jsonObject = new JsonObject();
 		jsonObject.add("baseValue", PrimitiveElementFactory.toJson(attributeInstance.getBaseValue()));
-		jsonObject.add("defaultValue", PrimitiveElementFactory.toJson(attributeInstance.getDefaultValue()));
+		double safeDefault = attributeInstance.getAttribute().getDefaultValue();
+		jsonObject.add("defaultValue", PrimitiveElementFactory.toJson(safeDefault));
 		jsonObject.add("modifiers", CollectionElementFactory.toJson(attributeInstance.getModifiers()));
 		return jsonObject;
 	}

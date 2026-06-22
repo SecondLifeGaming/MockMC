@@ -9,22 +9,25 @@ import net.kyori.adventure.nbt.api.BinaryTagHolder;
  * {@link io.papermc.paper.registry.data.dialog.action.DialogAction.CustomClickAction}.
  * This interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DialogActionCustomClickActionBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.action.DialogAction.CustomClickAction
 {
+	@Override
 	default Key id()
 	{
 		// MockMC: CustomClickAction#id
 		return null;
 	}
 
+	@Override
 	default BinaryTagHolder additions()
 	{
 		// MockMC: CustomClickAction#additions

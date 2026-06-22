@@ -47,7 +47,7 @@ import lombok.EqualsAndHashCode;
  */
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @SuppressWarnings(
 {"UnstableApiUsage", "unchecked"})
 public class ItemTypeMock<M extends ItemMeta>
@@ -55,6 +55,7 @@ public class ItemTypeMock<M extends ItemMeta>
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ItemTypeTypedBaseMock<M>
 {
 
+	@EqualsAndHashCode.Include
 	private final NamespacedKey namespacedKey;
 
 	@Nullable

@@ -7,6 +7,7 @@ import org.bukkit.block.data.Levelled;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class LevelledBaseMockTest extends GeneratedTestBase
 {
 	@Test

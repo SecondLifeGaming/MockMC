@@ -48,7 +48,7 @@ class MockMCURLClassLoaderTest
 	{
 		PluginMeta meta = urlClassLoader.getConfiguration();
 		assertEquals("1.15", meta.getAPIVersion());
-		assertTrue(meta.getAuthors().contains("Thorinwasher"));
+		assertTrue(meta.getAuthors().contains("westkevin12"));
 		assertEquals("TestPlugin", meta.getName());
 		assertEquals("org.mockmc.testplugin.TestPlugin", meta.getMainClass());
 	}
