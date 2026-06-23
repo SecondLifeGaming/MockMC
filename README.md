@@ -3,11 +3,11 @@
     <a href="https://github.com/SecondLifeGaming/MockMC/actions/">
         <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.1?color=1bcc94&logo=apache-maven" />
+    <a href="https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2">
+        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.2?color=1bcc94&logo=apache-maven" />
     </a>
-    <a href="https://javadoc.io/doc/io.github.secondlifegaming/mockmc-v26.1">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/io.github.secondlifegaming/mockmc-v26.1/javadoc.svg" />
+    <a href="https://javadoc.io/doc/io.github.secondlifegaming/mockmc-v26.2">
+        <img alt="Javadocs" src="https://javadoc.io/badge2/io.github.secondlifegaming/mockmc-v26.2/javadoc.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells">
@@ -49,7 +49,7 @@ MockMC is available via Maven Central.
 
 > [!TIP]
 > **Latest Version:**
-> [![Maven Central](https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.1?color=1bcc94&logo=apache-maven)](<[https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1](https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.1)>)
+> [![Maven Central](https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.2?color=1bcc94&logo=apache-maven)](<[https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2](https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2)>)
 
 <details>
 <summary><h3>Adding MockMC via Gradle</h3></summary>
@@ -73,7 +73,7 @@ def getMockMCPaperVersion() {
 }
 
 dependencies {
-    testImplementation 'io.github.secondlifegaming:mockmc-v26.1:dev-2a95b9a32'
+    testImplementation 'io.github.secondlifegaming:mockmc-v26.2:dev-a5c761fc9'
     testImplementation "io.papermc.paper:paper-api:${getMockMCPaperVersion()}"
 }
 ```
@@ -96,8 +96,8 @@ Add the Paper repository and the MockMC dependency to your `pom.xml`.
 <dependencies>
     <dependency>
         <groupId>io.github.secondlifegaming</groupId>
-        <artifactId>mockmc-v26.1</artifactId>
-        <version>dev-2a95b9a32</version>
+        <artifactId>mockmc-v26.2</artifactId>
+        <version>dev-a5c761fc9</version>
         <scope>test</scope>
     </dependency>
 
