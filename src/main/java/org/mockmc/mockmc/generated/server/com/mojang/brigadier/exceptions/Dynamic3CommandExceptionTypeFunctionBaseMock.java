@@ -14,8 +14,10 @@ import com.mojang.brigadier.exceptions.Dynamic3CommandExceptionType;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface Dynamic3CommandExceptionTypeFunctionBaseMock extends Dynamic3CommandExceptionType.Function
 {
+	@Override
 	default Message apply(Object arg0, Object arg1, Object arg2)
 	{
 		// MockMC: Function#apply

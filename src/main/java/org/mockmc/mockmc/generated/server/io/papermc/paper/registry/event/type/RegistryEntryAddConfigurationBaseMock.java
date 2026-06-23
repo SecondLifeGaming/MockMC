@@ -12,12 +12,13 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.lifecycle.even
  * {@link RegistryEntryAddConfiguration}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface RegistryEntryAddConfigurationBaseMock<T>
 		extends
 			RegistryEntryAddConfiguration<T>,
@@ -37,12 +38,14 @@ public interface RegistryEntryAddConfigurationBaseMock<T>
 		return null;
 	}
 
+	@Override
 	default RegistryEntryAddConfiguration<T> filter(Predicate<TypedKey<T>> arg0)
 	{
 		// MockMC: RegistryEntryAddConfiguration#filter
 		return null;
 	}
 
+	@Override
 	default RegistryEntryAddConfiguration<T> filter(TypedKey<T> arg0)
 	{
 		// MockMC: RegistryEntryAddConfiguration#filter

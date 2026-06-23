@@ -14,6 +14,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface AbstractReconnectHandlerBaseMock extends ReconnectHandlerBaseMock
 {
 	@Override

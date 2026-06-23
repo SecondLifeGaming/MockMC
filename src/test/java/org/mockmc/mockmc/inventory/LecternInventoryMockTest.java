@@ -6,7 +6,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockmc.mockmc.MockMCExtension;
-import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.block.state.LecternStateMock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,7 +22,6 @@ class LecternInventoryMockTest
 	@BeforeEach
 	void setup()
 	{
-		new ServerMock();
 		block = new LecternStateMock(Material.LECTERN);
 		inventory = new LecternInventoryMock(block);
 	}

@@ -29,9 +29,9 @@ import net.md_5.bungee.api.scheduler.TaskScheduler;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ProxyServerBaseMock
 {
-	@SuppressWarnings("deprecation")
 	default ProxyConfig getConfig()
 	{
 		// MockMC: ProxyServer#getConfig
@@ -187,7 +187,6 @@ public interface ProxyServerBaseMock
 		return "";
 	}
 
-	@SuppressWarnings("deprecation")
 	default void broadcast(BaseComponent arg0)
 	{
 		// MockMC: ProxyServer#broadcast

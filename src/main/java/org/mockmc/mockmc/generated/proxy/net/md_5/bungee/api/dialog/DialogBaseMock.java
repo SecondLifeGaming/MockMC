@@ -13,14 +13,17 @@ import net.md_5.bungee.api.dialog.DialogBase;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DialogBaseMock extends Dialog
 {
+	@Override
 	default DialogBase getBase()
 	{
 		// MockMC: Dialog#getBase
 		return null;
 	}
 
+	@Override
 	default void setBase(DialogBase arg0)
 	{
 		// MockMC: Dialog#setBase

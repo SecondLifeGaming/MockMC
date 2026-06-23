@@ -85,12 +85,15 @@ tasks {
 	}
 
 	runServer {
+		minecraftVersion("1.21.1")
 		pluginJars.setFrom(shadowJar.flatMap { it.archiveFile })
+		runClasspath.setFrom(rootProject.file("jars/paper-26.2-25.jar"))
 	}
 
 	register<JavaExec>("runGenerator") {
 		group = "application"
 		mainClass.set("org.mockmc.metaminer.StandaloneRunner")
+		dependsOn(":downloadJars")
 		classpath = sourceSets.main.get().runtimeClasspath
 		args(rootProject.projectDir.absolutePath)
 		standardOutput = System.out

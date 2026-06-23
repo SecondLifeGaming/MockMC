@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Observer;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class ObserverBaseMockTest extends GeneratedTestBase
 {
 	@Test

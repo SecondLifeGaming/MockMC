@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import io.papermc.paper.entity.Shearable;
 import net.kyori.adventure.sound.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Snowman;
@@ -14,11 +13,10 @@ import java.util.UUID;
  *
  * @see GolemMock
  */
+@SuppressWarnings("java:S110")
 public class SnowmanMock extends GolemMock
 		implements
-			Snowman,
 			MockRangedEntity<SnowmanMock>,
-			Shearable,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SnowmanBaseMock
 {
 
@@ -54,6 +52,12 @@ public class SnowmanMock extends GolemMock
 	public void shear(@NotNull Sound.Source source)
 	{
 		setDerp(true);
+	}
+
+	@Override
+	public void shear()
+	{
+		this.shear(net.kyori.adventure.sound.Sound.Source.NEUTRAL);
 	}
 
 	@Override

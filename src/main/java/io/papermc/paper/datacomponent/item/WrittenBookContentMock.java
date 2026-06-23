@@ -18,6 +18,16 @@ public record WrittenBookContentMock(Filtered<String> title, String author, int 
 		List<Filtered<Component>> pages, boolean resolved) implements WrittenBookContent
 {
 
+	/**
+	 * @mockmc.version 26.2-1.0.0
+	 */
+	@Override
+	public net.kyori.adventure.inventory.Book asBook()
+	{
+		return net.kyori.adventure.inventory.Book.book(net.kyori.adventure.text.Component.text(this.title.raw()),
+				net.kyori.adventure.text.Component.text(this.author), this.pages.stream().map(Filtered::raw).toList());
+	}
+
 	static class BuilderMock implements WrittenBookContent.Builder
 	{
 		private static void validateTitle(String title)
@@ -144,8 +154,8 @@ public record WrittenBookContentMock(Filtered<String> title, String author, int 
 		@Override
 		public WrittenBookContent build()
 		{
-			return new WrittenBookContentMock(this.title, this.author, this.generation, new ObjectArrayList(this.pages),
-					this.resolved);
+			return new WrittenBookContentMock(this.title, this.author, this.generation,
+					new ObjectArrayList<>(this.pages), this.resolved);
 		}
 
 	}

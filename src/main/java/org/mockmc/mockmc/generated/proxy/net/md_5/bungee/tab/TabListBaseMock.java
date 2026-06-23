@@ -14,6 +14,7 @@ import net.md_5.bungee.protocol.packet.PlayerListItemUpdate;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface TabListBaseMock
 {
 	default void onUpdate(PlayerListItemRemove arg0)

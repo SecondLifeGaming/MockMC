@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.SeaPickle;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class SeaPickleBaseMockTest extends GeneratedTestBase
 {
 	@Test

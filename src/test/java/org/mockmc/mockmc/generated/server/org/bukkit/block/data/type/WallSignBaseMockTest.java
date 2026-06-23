@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.WallSign;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class WallSignBaseMockTest extends GeneratedTestBase
 {
 	@Test

@@ -3,9 +3,7 @@ package org.mockmc.mockmc.entity;
 import com.destroystokyo.paper.profile.PlayerProfile;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.bossbar.BossBar;
-import net.kyori.adventure.identity.Identity;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.util.TriState;
@@ -2543,15 +2541,6 @@ class PlayerMockTest
 				.clickEvent(ClickEvent.openUrl("https://www.youtube.com/watch?v=dQw4w9WgXcQ")).build();
 		player.sendMessage(comp);
 		player.assertSaid(comp);
-	}
-
-	@Test
-	void sendMessage_GivenNullComponentMessage()
-	{
-		Identity identity = Identity.nil();
-		NullPointerException e = assertThrows(NullPointerException.class,
-				() -> player.sendMessage(identity, null, MessageType.CHAT));
-		assertEquals("input", e.getMessage());
 	}
 
 	@Test

@@ -15,12 +15,14 @@ import net.md_5.bungee.api.connection.Connection;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ConnectionBaseMock extends Connection
 {
 	/**
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default InetSocketAddress getAddress()
 	{
@@ -28,19 +30,21 @@ public interface ConnectionBaseMock extends Connection
 		return null;
 	}
 
+	@Override
 	default boolean isConnected()
 	{
 		// MockMC: Connection#isConnected
 		return false;
 	}
 
+	@Override
 	default Connection.Unsafe unsafe()
 	{
 		// MockMC: Connection#unsafe
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	default void disconnect(BaseComponent arg0)
 	{
 		// MockMC: Connection#disconnect
@@ -50,17 +54,20 @@ public interface ConnectionBaseMock extends Connection
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
+	@Override
 	@Deprecated(since = "1.0")
 	default void disconnect(String arg0)
 	{
 		// MockMC: Connection#disconnect
 	}
 
+	@Override
 	default void disconnect(BaseComponent... arg0)
 	{
 		// MockMC: Connection#disconnect
 	}
 
+	@Override
 	default SocketAddress getSocketAddress()
 	{
 		// MockMC: Connection#getSocketAddress

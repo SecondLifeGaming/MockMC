@@ -47,6 +47,7 @@ import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.event.world.ClockTimeSkipEvent;
 import org.bukkit.event.world.TimeSkipEvent;
 import org.bukkit.generator.BiomeProvider;
 import org.bukkit.inventory.ItemStack;
@@ -452,7 +453,26 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public @NotNull Location getLocationAtKey(long key)
 	{
-		return org.mockmc.mockmc.generated.server.org.bukkit.WorldBaseMock.super.getLocationAtKey(key);
+		int x = (int) (key << 37 >> 37);
+		int z = (int) (key << 10 >> 37);
+		int y = (int) (key >> 54);
+		return new Location(this, x, y, z);
+	}
+
+	@Override
+	public @NotNull ChunkMock getChunkAt(long chunkKey)
+	{
+		int x = (int) chunkKey;
+		int z = (int) (chunkKey >> 32);
+		return getChunkAt(x, z);
+	}
+
+	@Override
+	public @NotNull ChunkMock getChunkAt(long chunkKey, boolean generate)
+	{
+		int x = (int) chunkKey;
+		int z = (int) (chunkKey >> 32);
+		return getChunkAt(x, z, generate);
 	}
 
 	@Override
@@ -805,6 +825,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	public <T extends Entity> @NotNull T spawn(@NotNull Location location, @NotNull Class<T> clazz,
 			@Nullable CreatureSpawnEvent.SpawnReason reason) throws IllegalArgumentException
 	{
+		Preconditions.checkNotNull(reason, "SpawnReason cannot be null");
 		return this.spawn(location, clazz, null, reason);
 	}
 
@@ -813,6 +834,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 			@Nullable CreatureSpawnEvent.SpawnReason reason, @Nullable Consumer<? super T> function)
 			throws IllegalArgumentException
 	{
+		Preconditions.checkNotNull(reason, "SpawnReason cannot be null");
 		return this.spawn(location, clazz, function, reason);
 	}
 
@@ -1046,7 +1068,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	@Override
 	public void setFullTime(long time)
 	{
-		TimeSkipEvent event = new TimeSkipEvent(this, TimeSkipEvent.SkipReason.CUSTOM, time - this.getFullTime());
+		TimeSkipEvent event = new TimeSkipEvent(this, ClockTimeSkipEvent.SkipReason.CUSTOM, time - this.getFullTime());
 		this.server.getPluginManager().callEvent(event);
 		if (!event.isCancelled())
 		{
@@ -1947,7 +1969,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 			case MOTION_BLOCKING -> {
 				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged
 						&& waterlogged.isWaterlogged();
-				yield block.getType().isSolid() || isWaterLogged;
+				yield block.getType().isSolid() || block.getType() == Material.WATER || isWaterLogged;
 			}
 			case MOTION_BLOCKING_NO_LEAVES -> {
 				boolean isWaterLogged = block.getBlockData() instanceof Waterlogged waterlogged
@@ -2399,7 +2421,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 		this.setGameRule(GameRules.MOB_GRIEFING, true);
 		this.setGameRule(GameRules.NATURAL_HEALTH_REGENERATION, true);
 		this.setGameRule(GameRules.PLAYER_MOVEMENT_CHECK, true);
-		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 0);
+		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_CREATIVE_DELAY, 1);
 		this.setGameRule(GameRules.PLAYERS_NETHER_PORTAL_DEFAULT_DELAY, 80);
 		this.setGameRule(GameRules.PLAYERS_SLEEPING_PERCENTAGE, 100);
 		this.setGameRule(GameRules.PROJECTILES_CAN_BREAK_BLOCKS, true);

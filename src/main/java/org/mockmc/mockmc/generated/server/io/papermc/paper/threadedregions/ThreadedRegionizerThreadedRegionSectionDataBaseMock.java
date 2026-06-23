@@ -8,11 +8,12 @@ import io.papermc.paper.threadedregions.ThreadedRegionizer;
  * {@link ThreadedRegionizer.ThreadedRegionSectionData}. This interface mirrors
  * the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: remapped-folia-26.1.2-8.jar (Version: remapped-folia-26.1.2-8)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ThreadedRegionizerThreadedRegionSectionDataBaseMock
 		extends
 			ThreadedRegionizer.ThreadedRegionSectionData

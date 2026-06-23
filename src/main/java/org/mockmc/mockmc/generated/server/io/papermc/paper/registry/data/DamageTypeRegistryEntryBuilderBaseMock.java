@@ -12,42 +12,48 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder}. This
  * interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DamageTypeRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder,
 			DamageTypeRegistryEntryBaseMock,
 			RegistryBuilderBaseMock<DamageType>
 {
+	@Override
 	default io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder deathMessageType(DeathMessageType arg0)
 	{
 		// MockMC: Builder#deathMessageType
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder damageEffect(DamageEffect arg0)
 	{
 		// MockMC: Builder#damageEffect
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder messageId(String arg0)
 	{
 		// MockMC: Builder#messageId
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder damageScaling(DamageScaling arg0)
 	{
 		// MockMC: Builder#damageScaling
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.DamageTypeRegistryEntry.Builder exhaustion(float arg0)
 	{
 		// MockMC: Builder#exhaustion

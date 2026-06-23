@@ -13,17 +13,19 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.DataCom
  * {@link ItemAttributeModifiers.Builder}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ItemAttributeModifiersBuilderBaseMock
 		extends
 			ItemAttributeModifiers.Builder,
 			DataComponentBuilderBaseMock<ItemAttributeModifiers>
 {
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1, EquipmentSlotGroup arg2,
 			AttributeModifierDisplay arg3)
 	{
@@ -31,18 +33,21 @@ public interface ItemAttributeModifiersBuilderBaseMock
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1)
 	{
 		// MockMC: Builder#addModifier
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1, EquipmentSlotGroup arg2)
 	{
 		// MockMC: Builder#addModifier
 		return null;
 	}
 
+	@Override
 	default ItemAttributeModifiers.Builder addModifier(Attribute arg0, AttributeModifier arg1,
 			AttributeModifierDisplay arg2)
 	{

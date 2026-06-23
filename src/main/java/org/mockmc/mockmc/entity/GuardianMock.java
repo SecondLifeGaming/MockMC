@@ -11,11 +11,9 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("java:S110")
 public class GuardianMock extends MonsterMock
 		implements
-			Guardian,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.GuardianBaseMock
 {
 
@@ -56,6 +54,15 @@ public class GuardianMock extends MonsterMock
 	public boolean isElder()
 	{
 		return false;
+	}
+
+	/**
+	 * @mockmc.version 26.2-dev
+	 */
+	@Override
+	public void setElder(boolean elder)
+	{
+		throw new UnsupportedOperationException("A guardian cannot be made into an elder guardian");
 	}
 
 	@Override

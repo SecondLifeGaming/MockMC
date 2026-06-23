@@ -2,7 +2,6 @@ package org.mockmc.mockmc;
 
 import com.destroystokyo.paper.SkinParts;
 import com.google.common.base.Preconditions;
-import io.papermc.paper.InternalAPIBridge;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.world.damagesource.CombatEntry;
 import io.papermc.paper.world.damagesource.FallLocationType;
@@ -23,13 +22,16 @@ import org.mockmc.mockmc.world.damagesource.CombatEntryMock;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import io.papermc.paper.entity.poi.PoiType;
 
 @SuppressWarnings(
 {"UnstableApiUsage", "deprecation", "removal", "unchecked"})
 @NullMarked
 @ApiStatus.Internal
 @ApiStatus.Experimental
-public class MockMCInternalAPIBridge implements InternalAPIBridge
+public class MockMCInternalAPIBridge
+		implements
+			org.mockmc.mockmc.generated.server.io.papermc.paper.InternalAPIBridgeBaseMock
 {
 
 	private static final Component DEFAULT_MANNEQUIN_DESCRIPTION = Component
@@ -69,6 +71,12 @@ public class MockMCInternalAPIBridge implements InternalAPIBridge
 	{
 		return CombatEntryMock.builder().damageSource(damageSource).damage(damage).fallLocationType(fallLocationType)
 				.fallDistance(fallDistance).build();
+	}
+
+	@Override
+	public DamageSource.Builder createDamageSourceBuilder(org.bukkit.damage.DamageType damageType)
+	{
+		return new org.mockmc.mockmc.damage.DamageSourceBuilderMock(damageType);
 	}
 
 	@Override
@@ -112,9 +120,31 @@ public class MockMCInternalAPIBridge implements InternalAPIBridge
 	}
 
 	@Override
-	public io.papermc.paper.entity.poi.PoiType.Occupancy createOccupancy(String arg0)
+	public PoiType.Occupancy createOccupancy(String arg0)
 	{
 		throw new UnimplementedOperationException();
+	}
+
+	/**
+	 * @mockmc.version 26.2-2.1.4
+	 */
+	@Override
+	public org.bukkit.inventory.ItemStack createEmptyStack()
+	{
+		return org.mockmc.mockmc.inventory.ItemStackMock.empty();
+	}
+
+	@Override
+	public io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager<org.bukkit.plugin.Plugin> createPluginLifecycleEventManager(
+			org.bukkit.plugin.java.JavaPlugin arg0, java.util.function.BooleanSupplier arg1)
+	{
+		return new org.mockmc.mockmc.plugin.lifecycle.event.LifecycleEventManagerMock<>(arg0, arg1);
+	}
+
+	@Override
+	public org.bukkit.inventory.ItemStack deserializeItem(byte[] bytes)
+	{
+		return ((org.mockmc.mockmc.util.UnsafeValuesMock) org.bukkit.Bukkit.getUnsafe()).deserializeItem(bytes);
 	}
 
 }

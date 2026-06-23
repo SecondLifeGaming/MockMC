@@ -11,12 +11,13 @@ import org.bukkit.generator.WorldInfo;
  * {@link org.bukkit.generator.BiomeProvider}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface BiomeProviderBaseMock
 {
 	default Biome getBiome(WorldInfo arg0, int arg1, int arg2, int arg3, BiomeParameterPoint arg4)

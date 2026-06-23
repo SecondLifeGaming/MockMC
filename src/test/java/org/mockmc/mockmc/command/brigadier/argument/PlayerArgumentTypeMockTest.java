@@ -85,8 +85,8 @@ class PlayerArgumentTypeMockTest
 
 		var notch = serverMock.addPlayer("notch");
 		var dinnerbone = serverMock.addPlayer("dinnerbone");
-		notch.teleport(new Location(null, 0, 0, 0));
-		dinnerbone.teleport(new Location(null, 100, 100, 100));
+		notch.teleport(new Location(notch.getWorld(), 0, 0, 0));
+		dinnerbone.teleport(new Location(dinnerbone.getWorld(), 100, 100, 100));
 
 		var stack = CommandSourceStackMock.from(notch);
 

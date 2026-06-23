@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.damage.DamageSourceBuilderMock;
 import org.mockmc.mockmc.exception.ItemSerializationException;
+import org.mockmc.mockmc.exception.UnimplementedOperationException;
 import org.mockmc.mockmc.inventory.ItemStackMock;
 import org.mockmc.mockmc.inventory.SerializableMeta;
 import org.mockmc.mockmc.inventory.meta.ItemMetaMock;
@@ -106,7 +107,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@NotNull
 	public ComponentFlattener componentFlattener()
@@ -117,7 +117,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public PlainComponentSerializer plainComponentSerializer()
@@ -128,7 +127,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public PlainTextComponentSerializer plainTextSerializer()
@@ -139,7 +137,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public GsonComponentSerializer gsonComponentSerializer()
@@ -150,7 +147,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public GsonComponentSerializer colorDownsamplingGsonComponentSerializer()
@@ -161,7 +157,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(forRemoval = true, since = "1.18")
 	@NotNull
 	public LegacyComponentSerializer legacyComponentSerializer()
@@ -171,12 +166,60 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 
 	/**
 	 * @deprecated Use modern API instead.
+	 * @mockmc.version 1.21-1.0.0
+	 */
+	@Override
+	@Deprecated(since = "1.13")
+	public Material fromLegacy(Material material)
+	{
+		if (material == null)
+		{
+			return null;
+		}
+		if (material.isLegacy())
+		{
+			throw new UnimplementedOperationException("fromLegacy is not supported for legacy materials");
+		}
+		return material;
+	}
+
+	/**
+	 * @deprecated Use modern API instead.
+	 * @mockmc.version 1.21-1.0.0
 	 */
 	@Override
 	@Deprecated(since = "1.13")
 	public Material fromLegacy(MaterialData material)
 	{
+		if (material == null)
+		{
+			throw new NullPointerException("material cannot be null");
+		}
 		return fromLegacy(material, false);
+	}
+
+	/**
+	 * @deprecated Use modern API instead.
+	 * @mockmc.version 1.21-1.0.0
+	 */
+	@Override
+	@Deprecated(since = "1.13")
+	public Material fromLegacy(MaterialData material, boolean arg1)
+	{
+		if (material == null)
+		{
+			throw new NullPointerException("material cannot be null");
+		}
+		Material type = material.getItemType();
+		if (type == null)
+		{
+			return null;
+		}
+		if (type.isLegacy())
+		{
+			throw new UnimplementedOperationException("fromLegacy is not supported for legacy materials");
+		}
+		return type;
 	}
 
 	/**
@@ -253,7 +296,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public byte[] serializeItem(ItemStack itemstack)
 	{
@@ -325,7 +367,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public ItemStack deserializeItem(byte[] data)
 	{
@@ -335,31 +376,7 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 		try (java.io.ByteArrayInputStream bai = new java.io.ByteArrayInputStream(data);
 				java.util.zip.GZIPInputStream gzis = new java.util.zip.GZIPInputStream(bai))
 		{
-			final ObjectInputStream ois = new ObjectInputStream(gzis)
-			{
-				{
-					enableResolveObject(true);
-				}
-
-				@Override
-				protected Object resolveObject(Object obj) throws IOException
-				{
-					if (obj instanceof Map<?, ?> map && map.containsKey(
-							org.bukkit.configuration.serialization.ConfigurationSerialization.SERIALIZED_TYPE_KEY))
-					{
-						try
-						{
-							return org.bukkit.configuration.serialization.ConfigurationSerialization
-									.deserializeObject((Map<String, Object>) map);
-						} catch (Exception _)
-						{
-							// If it fails, return the map as is.
-							return map;
-						}
-					}
-					return super.resolveObject(obj);
-				}
-			};
+			final ObjectInputStream ois = new ObjectInputStream(gzis);
 			Object read = ois.readObject();
 			if (!(read instanceof Map))
 			{
@@ -411,7 +428,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@Nullable
 	public String getBlockTranslationKey(@NotNull Material material)
@@ -431,7 +447,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@Nullable
 	public String getItemTranslationKey(@NotNull Material material)
@@ -451,7 +466,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@Nullable
 	public String getTranslationKey(@NotNull EntityType type)
@@ -463,7 +477,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@Nullable
 	public String getTranslationKey(@NotNull ItemStack itemStack)
@@ -546,7 +559,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public DamageSource.@NotNull Builder createDamageSourceBuilder(@NotNull DamageType damageType)
 	{
@@ -579,7 +591,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public LifecycleEventManager<Plugin> createPluginLifecycleEventManager(JavaPlugin javaPlugin,
 			BooleanSupplier booleanSupplier)
@@ -590,7 +601,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	public ItemStack createEmptyStack()
 	{
@@ -600,22 +610,42 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Override
 	@Deprecated(since = "1.13")
 	@NotNull
 	public Map<String, Object> serializeStack(ItemStack itemStack)
 	{
 		if (itemStack.isEmpty())
 		{
-			return Map.of("id", "minecraft:air", "DataVersion", this.getDataVersion(), PROPERTY_SCHEMA_VERSION, 1);
+			return Map.of("id", "minecraft:air", "v", this.getDataVersion(), "DataVersion", this.getDataVersion(),
+					PROPERTY_SCHEMA_VERSION, 1);
 		}
 		LOGGER.log(Level.FINE, "serializeStack: {0}", itemStack.getType());
 		Map<String, Object> result = new HashMap<>();
 		result.put("id", itemStack.getType().getKey().asString());
 		result.put(FIELD_COUNT, itemStack.getAmount());
+		result.put("v", this.getDataVersion());
 		result.put("DataVersion", this.getDataVersion());
 		result.put(PROPERTY_SCHEMA_VERSION, 1);
-		Map<String, Object> serializedMeta = itemStack.getItemMeta().serialize();
+		Map<String, Object> serializedMeta = new HashMap<>();
+		if (itemStack.hasItemMeta())
+		{
+			serializedMeta.putAll(itemStack.getItemMeta().serialize());
+		}
+		if (itemStack instanceof org.mockmc.mockmc.inventory.ItemStackMock itemStackMock
+				&& !itemStackMock.getComponentsInternal().isEmpty())
+		{
+			for (Map.Entry<io.papermc.paper.datacomponent.DataComponentType, Object> entry : itemStackMock
+					.getComponentsInternal().entrySet())
+			{
+				Object value = entry.getValue();
+				if (value instanceof net.kyori.adventure.text.Component component)
+				{
+					value = net.kyori.adventure.text.serializer.gson.GsonComponentSerializer.gson()
+							.serialize(component);
+				}
+				serializedMeta.put(entry.getKey().getKey().toString(), value);
+			}
+		}
 		if (!serializedMeta.isEmpty())
 		{
 			for (Map.Entry<String, String> entry : RENAME_JSON_PROPERTY.entrySet())

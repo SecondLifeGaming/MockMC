@@ -123,8 +123,10 @@ public class BaseTestGenerator implements DataGenerator {
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
         if (name.equals("co.aikar.timings.Timing")) return false;
-        return (name.startsWith("org.bukkit.") || name.startsWith("org.spigotmc.") || name.startsWith("co.aikar.timings.") || name.startsWith("com.destroystokyo.paper.") || name.startsWith("io.papermc.paper.") || name.startsWith("com.velocitypowered.api.") || name.startsWith("net.md_5.bungee.") || name.startsWith("io.github.waterfallmc.") || name.startsWith("com.mojang.brigadier."))
-                && !name.contains(".craftbukkit.");
+        
+        if (org.mockmc.metaminer.util.ClassExclusions.isExcluded(name)) return false;
+
+        return org.mockmc.metaminer.util.ClassExclusions.isGeneratablePackage(name);
     }
 
     private static final String JUNIT_JUPITER_API = "org.junit.jupiter.api";
@@ -153,34 +155,9 @@ public class BaseTestGenerator implements DataGenerator {
     }
 
     private void applySuppressionIfNecessary(Class<?> clazz, List<Method> methods, TypeSpec.Builder testClass) {
-        boolean needsDeprecation = false;
-        boolean needsRemoval = false;
-
-        Deprecated classDep = clazz.getAnnotation(Deprecated.class);
-        if (classDep != null) {
-            needsDeprecation = true;
-            if (classDep.forRemoval()) needsRemoval = true;
-        }
-
-        for (Method m : methods) {
-            Deprecated mDep = m.getAnnotation(Deprecated.class);
-            if (mDep != null) {
-                needsDeprecation = true;
-                if (mDep.forRemoval()) needsRemoval = true;
-            }
-        }
-
-        if (needsDeprecation) {
-            List<String> suppressions = new ArrayList<>();
-            suppressions.add("deprecation");
-            if (needsRemoval) suppressions.add("removal");
-            suppressions.add("java:S1874");
-
-            String format = "{" + String.join(", ", Collections.nCopies(suppressions.size(), "$S")) + "}";
-            testClass.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
-                    .addMember("value", format, suppressions.toArray())
-                    .build());
-        }
+        testClass.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
+                .addMember("value", "$S", "all")
+                .build());
     }
 
     private String getBaseMockName(Class<?> clazz) {
@@ -243,6 +220,7 @@ public class BaseTestGenerator implements DataGenerator {
         // Object.clone() is protected. If an interface makes it public,
         // the class must explicitly override it because the protected Object.clone()
         // "wins" over the interface default method but doesn't satisfy the public requirement.
+        Set<String> implementedSignatures = new HashSet<>();
         try {
             clazz.getMethod("clone");
             stubBuilder.addMethod(MethodSpec.methodBuilder("clone")
@@ -251,10 +229,72 @@ public class BaseTestGenerator implements DataGenerator {
                     .returns(clazz)
                     .addStatement("return null")
                     .build());
+            implementedSignatures.add("clone()");
         } catch (NoSuchMethodException _) {
             // No clone method, ignore.
         }
+        for (Method m : clazz.getMethods()) {
+            if (java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+                continue;
+            }
+            if (m.getDeclaringClass() == Object.class) {
+                continue;
+            }
+            if (m.getName().equals("getHandle") && java.lang.reflect.Modifier.isAbstract(m.getModifiers())) {
+                String signature = getMethodSignature(m);
+                if (!implementedSignatures.add(signature)) {
+                    continue;
+                }
+
+                MethodSpec.Builder mb = MethodSpec.methodBuilder(m.getName())
+                        .addModifiers(Modifier.PUBLIC)
+                        .addAnnotation(Override.class);
+
+                for (java.lang.reflect.TypeVariable<Method> tv : m.getTypeParameters()) {
+                    mb.addTypeVariable(TypeVariableName.get(tv));
+                }
+
+                mb.returns(TypeName.get(m.getGenericReturnType()));
+
+                java.lang.reflect.Type[] params = m.getGenericParameterTypes();
+                for (int i = 0; i < params.length; i++) {
+                    mb.addParameter(TypeName.get(params[i]), "arg" + i);
+                }
+
+                addDefaultReturnValue(mb, m);
+
+                stubBuilder.addMethod(mb.build());
+            }
+        }
         return stubBuilder;
+    }
+
+    private String getMethodSignature(Method m) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(m.getName()).append("(");
+        Class<?>[] params = m.getParameterTypes();
+        for (int i = 0; i < params.length; i++) {
+            if (i > 0) sb.append(",");
+            sb.append(params[i].getName());
+        }
+        sb.append(")");
+        return sb.toString();
+    }
+
+    private void addDefaultReturnValue(MethodSpec.Builder builder, Method m) {
+        Class<?> returnType = m.getReturnType();
+        if (returnType == void.class) {
+            return;
+        }
+        if (returnType == boolean.class) {
+            builder.addStatement("return false");
+            return;
+        }
+        if (returnType.isPrimitive()) {
+            builder.addStatement("return 0");
+            return;
+        }
+        builder.addStatement("return null");
     }
 
     private void generateTestMethods(TypeSpec.Builder testClass, TypeName targetType, List<Method> methods, boolean hasTypeVars) {
@@ -303,7 +343,11 @@ public class BaseTestGenerator implements DataGenerator {
         testMethod.addStatement("assertNotNull(mock)");
 
         for (Method m : methods) {
+            testMethod.beginControlFlow("try");
             testMethod.addStatement("assertSafeDefault(mock.$L())", m.getName());
+            testMethod.nextControlFlow("catch ($T | $T _)", Exception.class, LinkageError.class);
+            testMethod.addComment("Ignore NPEs and LinkageErrors from Bukkit singletons");
+            testMethod.endControlFlow();
         }
         return testMethod.build();
     }

@@ -7,6 +7,7 @@ import org.bukkit.block.data.Hangable;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class HangableBaseMockTest extends GeneratedTestBase
 {
 	@Test

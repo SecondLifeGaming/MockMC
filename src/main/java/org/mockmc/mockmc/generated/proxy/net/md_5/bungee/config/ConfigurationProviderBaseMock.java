@@ -18,6 +18,7 @@ import net.md_5.bungee.config.Configuration;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ConfigurationProviderBaseMock
 {
 	default void save(Configuration arg0, Writer arg1)

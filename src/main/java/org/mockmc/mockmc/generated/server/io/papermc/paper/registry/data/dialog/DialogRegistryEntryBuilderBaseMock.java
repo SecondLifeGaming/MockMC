@@ -12,30 +12,34 @@ import org.mockmc.mockmc.generated.server.io.papermc.paper.registry.RegistryBuil
  * {@link io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder}.
  * This interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface DialogRegistryEntryBuilderBaseMock
 		extends
 			io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder,
-			DialogRegistryEntryBaseMock,
-			RegistryBuilderBaseMock<Dialog>
+			RegistryBuilderBaseMock<Dialog>,
+			DialogRegistryEntryBaseMock
 {
+	@Override
 	default io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder base(DialogBase arg0)
 	{
 		// MockMC: Builder#base
 		return null;
 	}
 
+	@Override
 	default io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder type(DialogType arg0)
 	{
 		// MockMC: Builder#type
 		return null;
 	}
 
+	@Override
 	default RegistryValueSetBuilder<Dialog, io.papermc.paper.registry.data.dialog.DialogRegistryEntry.Builder> registryValueSet()
 	{
 		// MockMC: Builder#registryValueSet

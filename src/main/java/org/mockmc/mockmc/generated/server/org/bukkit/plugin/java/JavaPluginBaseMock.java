@@ -25,12 +25,13 @@ import org.bukkit.plugin.PluginLoader;
  * {@link org.bukkit.plugin.java.JavaPlugin}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: paper-api-26.1.2.build.53-stable.jar (Version:
- * paper-api-26.1.2.build.53-stable)
+ * Source: paper-api-26.2.build.25-alpha.jar (Version:
+ * paper-api-26.2.build.25-alpha)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface JavaPluginBaseMock
 {
 	default void setEnabled(boolean arg0)
@@ -66,7 +67,6 @@ public interface JavaPluginBaseMock
 		// MockMC: JavaPlugin#init
 	}
 
-	@SuppressWarnings("removal")
 	default void init(PluginLoader arg0, Server arg1, PluginDescriptionFile arg2, File arg3, File arg4,
 			ClassLoader arg5)
 	{
@@ -160,7 +160,6 @@ public interface JavaPluginBaseMock
 	 * @deprecated Suppressed to prevent legacy API noise from interfering with
 	 *             modern build cycles.
 	 */
-	@SuppressWarnings("removal")
 	@Deprecated(since = "1.0", forRemoval = true)
 	default PluginLoader getPluginLoader()
 	{

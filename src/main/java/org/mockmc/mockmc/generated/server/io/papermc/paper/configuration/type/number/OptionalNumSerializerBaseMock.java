@@ -9,11 +9,12 @@ import org.spongepowered.configurate.serialize.SerializationException;
  * {@link io.papermc.paper.configuration.type.number.OptionalNumSerializer}.
  * This interface mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface OptionalNumSerializerBaseMock<T, O>
 {
 	default T deserialize(AnnotatedType arg0, Object arg1) throws SerializationException

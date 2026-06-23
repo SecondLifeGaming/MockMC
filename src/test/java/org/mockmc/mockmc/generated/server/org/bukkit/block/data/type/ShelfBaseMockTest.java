@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Shelf;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class ShelfBaseMockTest extends GeneratedTestBase
 {
 	@Test

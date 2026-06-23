@@ -13,8 +13,10 @@ import net.md_5.bungee.api.plugin.TabExecutor;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface TabExecutorBaseMock extends TabExecutor
 {
+	@Override
 	default Iterable<String> onTabComplete(CommandSender arg0, String[] arg1)
 	{
 		// MockMC: TabExecutor#onTabComplete

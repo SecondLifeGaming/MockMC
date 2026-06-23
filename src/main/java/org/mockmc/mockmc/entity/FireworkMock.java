@@ -3,9 +3,12 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.inventory.ItemStackMock;
 import org.mockmc.mockmc.inventory.meta.FireworkMetaMock;
 import java.util.UUID;
 
@@ -25,6 +28,8 @@ public class FireworkMock extends ProjectileMock
 	private FireworkMeta meta;
 
 	private boolean shotAtAngle = false;
+
+	private ItemStack item = new ItemStackMock(Material.FIREWORK_ROCKET);
 
 	/**
 	 * Constructs a new {@link FireworkMock} on the provided {@link ServerMock} with
@@ -88,5 +93,25 @@ public class FireworkMock extends ProjectileMock
 	public void setShotAtAngle(boolean shotAtAngle)
 	{
 		this.shotAtAngle = shotAtAngle;
+	}
+
+	/**
+	 * @mockmc.version 1.21-1.0.0
+	 */
+	@Override
+	@NotNull
+	public ItemStack getItem()
+	{
+		return this.item;
+	}
+
+	/**
+	 * @mockmc.version 1.21-1.0.0
+	 */
+	@Override
+	public void setItem(@NotNull ItemStack item)
+	{
+		Preconditions.checkNotNull(item, "item cannot be null!");
+		this.item = item.clone();
 	}
 }

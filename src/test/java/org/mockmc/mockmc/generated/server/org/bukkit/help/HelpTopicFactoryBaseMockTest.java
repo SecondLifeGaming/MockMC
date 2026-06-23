@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class HelpTopicFactoryBaseMockTest extends GeneratedTestBase
 {
 	@Test

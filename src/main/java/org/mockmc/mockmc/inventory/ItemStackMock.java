@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import io.papermc.paper.datacomponent.DataComponentType;
 import io.papermc.paper.persistence.PersistentDataContainerView;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -31,7 +30,6 @@ import org.mockmc.mockmc.persistence.PersistentDataContainerViewMock;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -51,7 +49,6 @@ public class ItemStackMock extends ItemStack
 {
 
 	private static final String FIELD_AMOUNT = "amount";
-	private static final String FIELD_COUNT = "count";
 	private static final String FIELD_MATERIAL = "type";
 
 	@NonNull
@@ -75,6 +72,12 @@ public class ItemStackMock extends ItemStack
 	}
 
 	private final Map<DataComponentType, Object> components = new HashMap<>();
+
+	@ApiStatus.Internal
+	public @NotNull Map<DataComponentType, Object> getComponentsInternal()
+	{
+		return this.components;
+	}
 
 	private ItemType type = ItemType.AIR;
 	private int amount = 1;
@@ -258,6 +261,15 @@ public class ItemStackMock extends ItemStack
 			return Objects.requireNonNull(meta.displayName());
 		}
 		return Component.translatable(getType().translationKey());
+	}
+
+	/**
+	 * @mockmc.version 1.21-1.0.0
+	 */
+	@Override
+	public @NotNull String translationKey()
+	{
+		return ((org.mockmc.mockmc.util.UnsafeValuesMock) Bukkit.getUnsafe()).getTranslationKey(this);
 	}
 
 	@Override
@@ -674,34 +686,18 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public Map<String, Object> serialize()
 	{
-		Map<String, Object> result = new LinkedHashMap<>();
-		result.put(FIELD_MATERIAL, this.getType().name());
-		result.put("id", this.getType().getKey().toString());
-		result.put(FIELD_AMOUNT, this.getAmount());
-		result.put(FIELD_COUNT, this.getAmount());
-		Map<String, Object> componentsMap = new LinkedHashMap<>();
-		if (this.hasItemMeta())
-		{
-			componentsMap.putAll(this.getItemMeta().serialize());
-		}
+		Map<String, Object> result = new java.util.LinkedHashMap<>();
+		result.put("type", getType().name());
+		result.put("amount", getAmount());
 
-		if (!this.components.isEmpty())
-		{
-			for (Map.Entry<DataComponentType, Object> entry : this.components.entrySet())
-			{
-				Object value = entry.getValue();
-				if (value instanceof Component component)
-				{
-					value = GsonComponentSerializer.gson().serialize(component);
-				}
-				componentsMap.put(entry.getKey().getKey().toString(), value);
-			}
-		}
+		Map<String, Object> unsafeSerialized = ((org.mockmc.mockmc.util.UnsafeValuesMock) Bukkit.getUnsafe())
+				.serializeStack(this);
+		result.putAll(unsafeSerialized);
 
-		if (!componentsMap.isEmpty())
+		ItemMeta meta = getItemMeta();
+		if (meta != null && !Bukkit.getItemFactory().equals(meta, null))
 		{
-			result.put("components", componentsMap);
-			result.put("meta", componentsMap);
+			result.put("meta", meta.serialize());
 		}
 
 		return result;
@@ -716,7 +712,7 @@ public class ItemStackMock extends ItemStack
 	@Override
 	public byte @NotNull [] serializeAsBytes()
 	{
-		return Bukkit.getUnsafe().serializeItem(this);
+		return ((org.mockmc.mockmc.util.UnsafeValuesMock) Bukkit.getUnsafe()).serializeItem(this);
 	}
 
 }

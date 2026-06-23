@@ -42,6 +42,7 @@ public interface MessageTarget
 	 *
 	 * @param expected
 	 *            The message that should have been received by the target.
+	 * @deprecated Scheduled for removal.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull Component expected)
@@ -64,15 +65,26 @@ public interface MessageTarget
 	 *
 	 * @param expected
 	 *            The message that should have been received by the target.
+	 * @deprecated Scheduled for removal.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertSaid(@NotNull String expected)
 	{
-		assertSaid(LegacyComponentSerializer.legacySection().deserialize(expected));
+		String actual = nextMessage();
+		if (actual == null)
+		{
+			throw new AssertionError("No more messages were sent");
+		}
+		if (!Objects.equals(expected, actual))
+		{
+			throw new AssertionError(String.format("Expected: %s but was: %s", expected, actual));
+		}
 	}
 
 	/**
 	 * Asserts that more messages were received by the message target.
+	 *
+	 * @deprecated Scheduled for removal.
 	 */
 	@Deprecated(forRemoval = true)
 	default void assertNoMoreSaid()

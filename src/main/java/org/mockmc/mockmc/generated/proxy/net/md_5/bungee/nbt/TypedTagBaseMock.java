@@ -12,8 +12,10 @@ import net.md_5.bungee.nbt.TypedTag;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface TypedTagBaseMock extends TypedTag, TagBaseMock
 {
+	@Override
 	default byte getId()
 	{
 		// MockMC: TypedTag#getId

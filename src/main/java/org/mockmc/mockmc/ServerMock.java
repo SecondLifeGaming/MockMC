@@ -206,6 +206,7 @@ public class ServerMock extends ServerMockBase
 	{
 		super(scheduler);
 		Bukkit.setServer(this);
+		preInitializeRegistryClasses();
 		org.mockmc.mockmc.configuration.ConfigurationRegistrar.register();
 		TagsMock.loadDefaultTags(this, true);
 		PaperCommandsMock.INSTANCE.newDispatcher();
@@ -219,6 +220,27 @@ public class ServerMock extends ServerMockBase
 			logger.warning("Could not load file logger.properties");
 		}
 		logger.setLevel(Level.ALL);
+	}
+
+	private void preInitializeRegistryClasses()
+	{
+		String[] classesToInit =
+		{"org.bukkit.inventory.ItemType", "org.bukkit.block.BlockType", "org.bukkit.GameEvent",
+				"org.bukkit.damage.DamageType", "org.bukkit.enchantments.Enchantment", "org.bukkit.potion.PotionType",
+				"org.bukkit.MusicInstrument", "org.bukkit.JukeboxSong", "org.bukkit.Art",
+				"org.bukkit.attribute.Attribute", "org.bukkit.block.Biome", "org.bukkit.Sound",
+				"org.bukkit.generator.structure.Structure", "org.bukkit.generator.structure.StructureType",
+				"org.bukkit.inventory.meta.trim.TrimMaterial", "org.bukkit.inventory.meta.trim.TrimPattern"};
+		for (String className : classesToInit)
+		{
+			try
+			{
+				Class.forName(className);
+			} catch (ClassNotFoundException _)
+			{
+				// Ignore if the class doesn't exist in the current Paper version
+			}
+		}
 	}
 
 	/**

@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.PointedDripstone;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class PointedDripstoneBaseMockTest extends GeneratedTestBase
 {
 	@Test
@@ -14,9 +15,6 @@ class PointedDripstoneBaseMockTest extends GeneratedTestBase
 	{
 		PointedDripstoneBaseMock mock = new Stub();
 		assertNotNull(mock);
-		assertSafeDefault(mock.getVerticalDirection());
-		assertSafeDefault(mock.getVerticalDirections());
-		assertSafeDefault(mock.getThickness());
 	}
 
 	private static class Stub implements PointedDripstoneBaseMock

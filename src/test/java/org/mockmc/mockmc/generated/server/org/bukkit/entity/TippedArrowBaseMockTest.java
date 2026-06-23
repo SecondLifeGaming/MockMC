@@ -6,8 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
-@SuppressWarnings(
-{"deprecation", "java:S1874"})
+@SuppressWarnings("all")
 class TippedArrowBaseMockTest extends GeneratedTestBase
 {
 	@Test

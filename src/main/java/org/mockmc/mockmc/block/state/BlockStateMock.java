@@ -356,8 +356,8 @@ public class BlockStateMock implements org.mockmc.mockmc.generated.server.org.bu
 	{
 		final int prime = 31;
 		int hash = 1;
-		hash = prime * hash + (this.isPlaced() ? this.getWorld().hashCode() : 0);
-		hash = prime * hash + (this.isPlaced() ? this.getLocation().hashCode() : 0);
+		hash = prime * hash + (this.isPlaced() && this.getWorld() != null ? this.getWorld().hashCode() : 0);
+		hash = prime * hash + (this.isPlaced() && this.getLocation() != null ? this.getLocation().hashCode() : 0);
 		hash = prime * hash + this.getBlockData().hashCode();
 		return hash;
 	}
@@ -373,7 +373,7 @@ public class BlockStateMock implements org.mockmc.mockmc.generated.server.org.bu
 		{
 			return false;
 		}
-		return !this.isPlaced() || this.getLocation().equals(other.getLocation());
+		return !this.isPlaced() || java.util.Objects.equals(this.getLocation(), other.getLocation());
 	}
 
 	// Implement toStringInternal() instead of overriding toString()

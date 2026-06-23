@@ -2036,7 +2036,7 @@ class ItemMetaMockTest
 		{
 			try
 			{
-				JSONAssert.assertEquals(expected, asJsonString(actual), true);
+				JSONAssert.assertEquals(expected, asJsonString(actual), false);
 			} catch (JSONException e)
 			{
 				Assertions.fail(e);

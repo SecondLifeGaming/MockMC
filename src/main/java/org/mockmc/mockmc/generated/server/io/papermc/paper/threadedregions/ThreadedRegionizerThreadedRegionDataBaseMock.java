@@ -10,15 +10,17 @@ import it.unimi.dsi.fastutil.objects.ReferenceOpenHashSet;
  * {@link ThreadedRegionizer.ThreadedRegionData}. This interface mirrors the
  * Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: remapped-folia-26.1.2-8.jar (Version: remapped-folia-26.1.2-8)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ThreadedRegionizerThreadedRegionDataBaseMock<R extends ThreadedRegionizer.ThreadedRegionData<R, S>, S extends ThreadedRegionizer.ThreadedRegionSectionData>
 		extends
 			ThreadedRegionizer.ThreadedRegionData<R, S>
 {
+	@Override
 	default void split(ThreadedRegionizer<R, S> arg0,
 			Long2ReferenceOpenHashMap<ThreadedRegionizer.ThreadedRegion<R, S>> arg1,
 			ReferenceOpenHashSet<ThreadedRegionizer.ThreadedRegion<R, S>> arg2)
@@ -26,6 +28,7 @@ public interface ThreadedRegionizerThreadedRegionDataBaseMock<R extends Threaded
 		// MockMC: ThreadedRegionData#split
 	}
 
+	@Override
 	default void mergeInto(ThreadedRegionizer.ThreadedRegion<R, S> arg0)
 	{
 		// MockMC: ThreadedRegionData#mergeInto

@@ -7,6 +7,7 @@ import org.bukkit.block.data.type.Cake;
 import org.junit.jupiter.api.Test;
 import org.mockmc.mockmc.generated.GeneratedTestBase;
 
+@SuppressWarnings("all")
 class CakeBaseMockTest extends GeneratedTestBase
 {
 	@Test

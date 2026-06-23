@@ -14,24 +14,29 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface ReconnectHandlerBaseMock extends ReconnectHandler
 {
+	@Override
 	default ServerInfo getServer(ProxiedPlayer arg0)
 	{
 		// MockMC: ReconnectHandler#getServer
 		return null;
 	}
 
+	@Override
 	default void save()
 	{
 		// MockMC: ReconnectHandler#save
 	}
 
+	@Override
 	default void setServer(ProxiedPlayer arg0)
 	{
 		// MockMC: ReconnectHandler#setServer
 	}
 
+	@Override
 	default void close()
 	{
 		// MockMC: ReconnectHandler#close

@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Map;
 import net.kyori.adventure.text.Component;
+import net.minecraft.server.level.ClientInformation;
 import net.minecraft.server.network.ServerCommonPacketListenerImpl;
 import org.bukkit.NamespacedKey;
 import org.bukkit.ServerLinks;
@@ -15,11 +16,12 @@ import org.bukkit.ServerLinks;
  * {@link io.papermc.paper.connection.PaperCommonConnection}. This interface
  * mirrors the Bukkit/Paper API to ensure 100% IDE completion.
  *
- * Source: remapped-folia-1.21.11-14.jar (Version: remapped-folia-1.21.11-14)
+ * Source: paper-26.2.jar (Version: paper-26.2)
  *
  * Reason: Suppressed to prevent legacy API noise from interfering with modern
  * build cycles.
  */
+@SuppressWarnings("all")
 public interface PaperCommonConnectionBaseMock<T extends ServerCommonPacketListenerImpl>
 		extends
 			PlayerCommonConnectionBaseMock
@@ -61,6 +63,12 @@ public interface PaperCommonConnectionBaseMock<T extends ServerCommonPacketListe
 	default void disconnect(Component arg0)
 	{
 		// MockMC: PaperCommonConnection#disconnect
+	}
+
+	default ClientInformation getClientInformation()
+	{
+		// MockMC: PaperCommonConnection#getClientInformation
+		return null;
 	}
 
 	@Override
