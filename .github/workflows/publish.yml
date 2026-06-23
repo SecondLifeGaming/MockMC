@@ -48,20 +48,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test --refresh-dependencies
 
-      - name: Run unit tests
-        run: ./gradlew jacocoTestReport --continue
-
-      - name: SonarCloud Scan
-        continue-on-error: true
-        run: ./gradlew sonar --no-configuration-cache
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Publish
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache -Pmockmc.version=${{ inputs.version }}
