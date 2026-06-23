@@ -372,7 +372,15 @@ mavenPublishing {
 }
 
 signing {
-	useGpgCmd()
+	val inMemoryKey = project.findProperty("signingInMemoryKey") as? String
+	if (!inMemoryKey.isNullOrEmpty()) {
+		useInMemoryPgpKeys(
+			inMemoryKey,
+			project.findProperty("signingInMemoryKeyPassword") as? String
+		)
+	} else {
+		useGpgCmd()
+	}
 }
 
 fun isAction(): Boolean {
