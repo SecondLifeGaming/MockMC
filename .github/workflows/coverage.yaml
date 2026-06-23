@@ -29,7 +29,7 @@ jobs:
         run: ./gradlew spotlessApply
 
       - name: Run unit tests
-        run: ./gradlew jacocoTestReport --refresh-dependencies --continue
+        run: ./gradlew testAllBackends jacocoTestReport --refresh-dependencies --continue
         continue-on-error: true
 
       - name: Upload coverage to Codecov
