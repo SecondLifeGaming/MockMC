@@ -7,7 +7,7 @@ import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.mockmc.mockmc.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.item.PotionContentsBaseMock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 @NullMarked
 @SuppressWarnings(
 {"NonExtendableApiUsage", "UnstableApiUsage"})
-public class PotionContentsMock implements PotionContents
+public class PotionContentsMock implements PotionContentsBaseMock
 {
 
 	private final @Nullable PotionType potion;
@@ -56,17 +56,7 @@ public class PotionContentsMock implements PotionContents
 		return customName;
 	}
 
-	@Override
-	public @Unmodifiable List<PotionEffect> allEffects()
-	{
-		throw new UnimplementedOperationException();
-	}
 
-	@Override
-	public Color computeEffectiveColor()
-	{
-		throw new UnimplementedOperationException();
-	}
 
 	static class BuilderMock implements Builder
 	{
