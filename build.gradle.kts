@@ -521,6 +521,16 @@ backendJars.forEach { (name, jarName) ->
 		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 
+		if (name == "Velocity") {
+			include("org/mockmc/mockmc/generated/proxy/com/velocitypowered/**")
+		} else if (name == "Waterfall") {
+			include("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
+		} else { // Paper or Folia
+			include("org/mockmc/mockmc/**")
+			exclude("org/mockmc/mockmc/generated/proxy/**")
+			exclude("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
+		}
+
 		val remappedJar = file("jars/cache/remapped-$jarName")
 		val backendFile = if (remappedJar.exists()) remappedJar else file("jars/$jarName")
 		val libraries = fileTree("jars/cache/libraries") { 
