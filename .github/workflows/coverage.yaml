@@ -2,9 +2,9 @@ name: Coverage check
 
 on:
   pull_request:
-    branches: [ v1.*, master, experimental/generator ]
+    branches: [ master ]
   push:
-    branches: [ v1.*, master, experimental/generator ]
+    branches: [ master ]
 
 jobs:
   coverage:
@@ -32,22 +32,4 @@ jobs:
         run: ./gradlew testAllBackends jacocoTestReport --refresh-dependencies --continue
         continue-on-error: true
 
-      - name: Upload coverage to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: false
 
-      - name: List test results (Debug)
-        if: ${{ !cancelled() }}
-        run: find . -name "TEST-*.xml"
-
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: "**/build/test-results/**/*.xml"
-          report_type: test_results
-          fail_ci_if_error: false

@@ -62,14 +62,8 @@ jobs:
             ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
-    uses: SecondLifeGaming/MockMC/.github/workflows/publish.yml@master
+    uses: ./.github/workflows/publish.yml
     needs: tag
     if: ${{ needs.tag.outputs.version != null }}
     with:
-      version: $(echo ${{ needs.tag.outputs.version }} | sed -e 's:v::')
-    secrets:
-      MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-      MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_PASS }}
-      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      version: ${{ replace(needs.tag.outputs.version, 'v', '') }}

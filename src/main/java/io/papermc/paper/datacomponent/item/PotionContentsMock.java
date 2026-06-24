@@ -56,8 +56,6 @@ public class PotionContentsMock implements PotionContentsBaseMock
 		return customName;
 	}
 
-
-
 	static class BuilderMock implements Builder
 	{
 

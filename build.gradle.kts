@@ -220,11 +220,10 @@ tasks {
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			// -Xint: workaround for JDK 25.0.3 C1 JIT crash in TreeScanner.visitBlock
-			// (com.sun.tools.javac.comp.Lower.freevars -> SIGSEGV). TieredStopAtLevel=1
-			// is insufficient because C1 itself is the crash tier; interpreter-only avoids it.
-			// Remove once JDK 25 fixes the javac desugar regression.
-			"-Xint"
+			// -XX:-TieredCompilation: workaround for JDK 25.0.3 C1 JIT crash in TreeScanner.visitBlock
+			// (com.sun.tools.javac.comp.Lower.freevars -> SIGSEGV). Disabling TieredCompilation
+			// bypasses C1 JIT entirely and runs compilation using the stable C2 JIT at full speed.
+			"-XX:-TieredCompilation"
 		)
 	}
 
@@ -365,9 +364,22 @@ mavenPublishing {
 		}
 	}
 	publishToMavenCentral(true)
-	// No key available to sign with for maven local
-	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
+	// No key available to sign with for maven local or GitHub Packages
+	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") || it.contains("GitHubPackages") }) {
 		signAllPublications()
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/SecondLifeGaming/MockMC")
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
+		}
 	}
 }
 
