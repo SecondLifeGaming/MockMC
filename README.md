@@ -1,7 +1,7 @@
 <p align="center">
     <!-- Badges -->
-    <a href="https://github.com/SecondLifeGaming/MockMC/actions/">
-        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/publish.yml/badge.svg" />
+    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
+        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
     </a>
     <a href="https://github.com/SecondLifeGaming/MockMC/releases">
         <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
