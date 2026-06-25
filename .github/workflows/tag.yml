@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{steps.bump-semver.outputs.new_version}}
+      clean_version: ${{steps.clean-version.outputs.version}}
     steps:
       - uses: actions/checkout@v6
 
@@ -49,6 +50,13 @@ jobs:
           current_version: ${{ steps.get-latest-tag.outputs.tag }}
           level: ${{ steps.release-label.outputs.level }}
 
+      - name: Strip version prefix
+        id: clean-version
+        if: ${{ steps.bump-semver.outputs.new_version != null }}
+        run: echo "version=${VERSION#v}" >> "$GITHUB_OUTPUT"
+        env:
+          VERSION: ${{ steps.bump-semver.outputs.new_version }}
+
       - name: Push tag
         uses: actions-ecosystem/action-push-tag@v1
         if: ${{ steps.bump-semver.outputs.new_version != null }}
@@ -62,14 +70,8 @@ jobs:
             ${{ steps.paper-version.outputs.paper_details }}
   call-publish-workflow:
     name: Call publish workflow
-    uses: SecondLifeGaming/MockMC/.github/workflows/publish.yml@master
+    uses: ./.github/workflows/publish.yml
     needs: tag
-    if: ${{ needs.tag.outputs.version != null }}
+    if: ${{ needs.tag.outputs.clean_version != null && needs.tag.outputs.clean_version != '' }}
     with:
-      version: $(echo ${{ needs.tag.outputs.version }} | sed -e 's:v::')
-    secrets:
-      MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-      MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_PASS }}
-      GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-      GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
-      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      version: ${{ needs.tag.outputs.clean_version }}

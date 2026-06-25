@@ -98,7 +98,7 @@ tasks.withType<Checkstyle> {
 }
 
 tasks.withType<Test>().configureEach {
-	jvmArgs("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC", "-Xmx1g")
+	jvmArgs("-XX:-TieredCompilation", "-XX:+UseG1GC", "-Xmx1g")
 }
 
 
@@ -216,15 +216,17 @@ tasks {
 	compileJava {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
+		// -XX:+UseSerialGC: workaround for JDK 25 javac NPE in checkDefaultMethodClashes.
+		// The generated *BaseMock interface diamond hierarchy causes WeakHashMap keys inside
+		// Types$CandidatesCache to be collected by a concurrent GC phase while get() is in
+		// progress, producing a NullPointerException in Reference.refersTo(). SerialGC is
+		// single-threaded so it cannot race with WeakHashMap lookups.
+		// Remove once the upstream JDK 25 bug is fixed in a patch release.
 		options.forkOptions.jvmArgs = listOf(
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			// -Xint: workaround for JDK 25.0.3 C1 JIT crash in TreeScanner.visitBlock
-			// (com.sun.tools.javac.comp.Lower.freevars -> SIGSEGV). TieredStopAtLevel=1
-			// is insufficient because C1 itself is the crash tier; interpreter-only avoids it.
-			// Remove once JDK 25 fixes the javac desugar regression.
-			"-Xint"
+			"-XX:+UseSerialGC"
 		)
 	}
 
@@ -232,7 +234,7 @@ tasks {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
 		options.forkOptions.memoryMaximumSize = "4g"
-		options.forkOptions.jvmArgs = mutableListOf("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC")
+		options.forkOptions.jvmArgs = mutableListOf("-XX:-TieredCompilation", "-XX:+UseG1GC")
 	}
 
 	javadoc {
@@ -248,7 +250,7 @@ tasks {
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
 				jFlags = listOf(
-					"-XX:TieredStopAtLevel=1",
+					"-XX:-TieredCompilation",
 					"-XX:+UseSerialGC"
 				)
 			}
@@ -365,9 +367,22 @@ mavenPublishing {
 		}
 	}
 	publishToMavenCentral(true)
-	// No key available to sign with for maven local
-	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") }) {
+	// No key available to sign with for maven local or GitHub Packages
+	if (!project.gradle.startParameter.taskNames.any { it.contains("publishToMavenLocal") || it.contains("GitHubPackages") }) {
 		signAllPublications()
+	}
+}
+
+publishing {
+	repositories {
+		maven {
+			name = "GitHubPackages"
+			url = uri("https://maven.pkg.github.com/SecondLifeGaming/MockMC")
+			credentials {
+				username = System.getenv("GITHUB_ACTOR")
+				password = System.getenv("GITHUB_TOKEN")
+			}
+		}
 	}
 }
 

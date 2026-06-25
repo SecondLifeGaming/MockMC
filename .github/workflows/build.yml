@@ -2,11 +2,12 @@ name: Build
 
 on:
   pull_request:
-    branches: [ v1.* ]
+    branches: [ master ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
 
     steps:
       - uses: actions/checkout@v6
@@ -20,5 +21,12 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
 
+      - name: Run generator
+        run: ./gradlew :metaminer:runGenerator
+
+      - name: Apply Spotless formatting
+        run: ./gradlew spotlessApply
+
       - name: Run unit tests
-        run: ./gradlew test --refresh-dependencies
+        timeout-minutes: 160
+        run: ./gradlew testAllBackends --refresh-dependencies

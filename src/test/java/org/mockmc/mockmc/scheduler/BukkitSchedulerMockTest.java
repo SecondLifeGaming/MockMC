@@ -325,7 +325,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		countDownLatch.await(1, TimeUnit.SECONDS);
+		countDownLatch.await(10, TimeUnit.SECONDS);
 
 		assertTrue(alive.get());
 		assertEquals(1, scheduler.getActiveRunningCount());

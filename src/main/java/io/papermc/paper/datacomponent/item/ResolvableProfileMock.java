@@ -4,13 +4,12 @@ import com.destroystokyo.paper.profile.PlayerProfile;
 import com.destroystokyo.paper.profile.ProfileProperty;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableSet;
-import net.kyori.adventure.text.object.PlayerHeadObjectContents;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Unmodifiable;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import org.mockmc.mockmc.exception.UnimplementedOperationException;
 import org.mockmc.mockmc.profile.PlayerProfileMock;
+import org.mockmc.mockmc.exception.UnimplementedOperationException;
+import org.mockmc.mockmc.generated.server.io.papermc.paper.datacomponent.item.ResolvableProfileBaseMock;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,14 +22,8 @@ import java.util.function.Consumer;
 @SuppressWarnings(
 {"NonExtendableApiUsage", "UnstableApiUsage"})
 public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
-		@Unmodifiable Collection<ProfileProperty> properties) implements ResolvableProfile
+		@Unmodifiable Collection<ProfileProperty> properties) implements ResolvableProfileBaseMock
 {
-
-	@Override
-	public boolean dynamic()
-	{
-		throw new UnimplementedOperationException();
-	}
 
 	@Override
 	public CompletableFuture<PlayerProfile> resolve()
@@ -38,18 +31,6 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		PlayerProfileMock playerProfileMock = new PlayerProfileMock(name, uuid);
 		playerProfileMock.setProperties(properties);
 		return CompletableFuture.completedFuture(playerProfileMock);
-	}
-
-	@Override
-	public SkinPatch skinPatch()
-	{
-		throw new UnimplementedOperationException();
-	}
-
-	@Override
-	public void applySkinToPlayerHeadContents(PlayerHeadObjectContents.@NotNull Builder builder)
-	{
-		throw new UnimplementedOperationException();
 	}
 
 	static class BuilderMock implements Builder

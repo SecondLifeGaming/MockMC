@@ -3,11 +3,8 @@
     <a href="https://github.com/SecondLifeGaming/MockMC/actions/">
         <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/publish.yml/badge.svg" />
     </a>
-    <a href="https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2">
-        <img alt="Maven Central" src="https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.2?color=1bcc94&logo=apache-maven" />
-    </a>
-    <a href="https://javadoc.io/doc/io.github.secondlifegaming/mockmc-v26.2">
-        <img alt="Javadocs" src="https://javadoc.io/badge2/io.github.secondlifegaming/mockmc-v26.2/javadoc.svg" />
+    <a href="https://github.com/SecondLifeGaming/MockMC/releases">
+        <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells">
@@ -17,9 +14,6 @@
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=SecondLifeGaming_MockMC">
         <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=bugs">
-    </a>
-    <a href="https://codecov.io/gh/SecondLifeGaming/MockMC" >
-        <img alt="Coverage" src="https://codecov.io/gh/SecondLifeGaming/MockMC/branch/master/graph/badge.svg?token=AFJ9H8R51P"/>
     </a>
     <!-- Logo -->
     <hr />
@@ -45,11 +39,11 @@ We have completely overhauled the metaminer engine using **JavaPoet**. This shif
 
 ## Usage
 
-MockMC is available via Maven Central.
+MockMC is published to GitHub Packages.
 
 > [!TIP]
 > **Latest Version:**
-> [![Maven Central](https://img.shields.io/maven-central/v/io.github.secondlifegaming/mockmc-v26.2?color=1bcc94&logo=apache-maven)](<[https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2](https://central.sonatype.com/artifact/io.github.secondlifegaming/mockmc-v26.2)>)
+> [![GitHub Packages](https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages)](https://github.com/SecondLifeGaming/MockMC/releases)
 
 <details>
 <summary><h3>Adding MockMC via Gradle</h3></summary>
@@ -58,6 +52,7 @@ MockMC is available via Maven Central.
 repositories {
     mavenCentral()
     maven { url 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url 'https://maven.pkg.github.com/SecondLifeGaming/MockMC' }
 }
 
 // Helper to extract the Paper version from the MockMC JAR
@@ -90,6 +85,10 @@ Add the Paper repository and the MockMC dependency to your `pom.xml`.
     <repository>
         <id>papermc</id>
         <url>https://repo.papermc.io/repository/maven-public/</url>
+    </repository>
+    <repository>
+        <id>github-mockmc</id>
+        <url>https://maven.pkg.github.com/SecondLifeGaming/MockMC</url>
     </repository>
 </repositories>
 

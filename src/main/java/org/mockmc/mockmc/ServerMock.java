@@ -205,6 +205,7 @@ public class ServerMock extends ServerMockBase
 	private ServerMock(BukkitSchedulerMock scheduler)
 	{
 		super(scheduler);
+		MockMC.setServerInstanceToNull();
 		Bukkit.setServer(this);
 		preInitializeRegistryClasses();
 		org.mockmc.mockmc.configuration.ConfigurationRegistrar.register();
