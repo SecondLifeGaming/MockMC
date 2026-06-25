@@ -216,17 +216,17 @@ tasks {
 	compileJava {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
-		// -Xint: workaround for JDK 25 javac NPE in checkDefaultMethodClashes (WeakHashMap.get via
-		// CandidatesCache). The complex interface diamond hierarchy of generated *BaseMock types
-		// causes WeakHashMap keys to be GC'd during compilation, producing a NullPointerException
-		// in Reference.refersTo(). Running the compiler in interpreted-only mode prevents the race.
-		// Remove once JDK-XXXXXXXX is fixed in a subsequent JDK 25 patch release.
+		// -XX:+UseSerialGC: workaround for JDK 25 javac NPE in checkDefaultMethodClashes.
+		// The generated *BaseMock interface diamond hierarchy causes WeakHashMap keys inside
+		// Types$CandidatesCache to be collected by a concurrent GC phase while get() is in
+		// progress, producing a NullPointerException in Reference.refersTo(). SerialGC is
+		// single-threaded so it cannot race with WeakHashMap lookups.
+		// Remove once the upstream JDK 25 bug is fixed in a patch release.
 		options.forkOptions.jvmArgs = listOf(
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			"-XX:-TieredCompilation",
-			"-Xint"
+			"-XX:+UseSerialGC"
 		)
 	}
 

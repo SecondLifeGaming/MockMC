@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 180
 
     steps:
       - uses: actions/checkout@v6
@@ -27,4 +28,5 @@ jobs:
         run: ./gradlew spotlessApply
 
       - name: Run unit tests
+        timeout-minutes: 160
         run: ./gradlew testAllBackends --refresh-dependencies
