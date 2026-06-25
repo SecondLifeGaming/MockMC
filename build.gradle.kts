@@ -98,7 +98,7 @@ tasks.withType<Checkstyle> {
 }
 
 tasks.withType<Test>().configureEach {
-	jvmArgs("-Xint", "-XX:+UseG1GC", "-Xmx1g")
+	jvmArgs("-XX:-TieredCompilation", "-XX:+UseG1GC", "-Xmx1g")
 }
 
 
@@ -216,10 +216,16 @@ tasks {
 	compileJava {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
+		// -Xint: workaround for JDK 25 javac NPE in checkDefaultMethodClashes (WeakHashMap.get via
+		// CandidatesCache). The complex interface diamond hierarchy of generated *BaseMock types
+		// causes WeakHashMap keys to be GC'd during compilation, producing a NullPointerException
+		// in Reference.refersTo(). Running the compiler in interpreted-only mode prevents the race.
+		// Remove once JDK-XXXXXXXX is fixed in a subsequent JDK 25 patch release.
 		options.forkOptions.jvmArgs = listOf(
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
+			"-XX:-TieredCompilation",
 			"-Xint"
 		)
 	}
@@ -228,7 +234,7 @@ tasks {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
 		options.forkOptions.memoryMaximumSize = "4g"
-		options.forkOptions.jvmArgs = mutableListOf("-Xint", "-XX:+UseG1GC")
+		options.forkOptions.jvmArgs = mutableListOf("-XX:-TieredCompilation", "-XX:+UseG1GC")
 	}
 
 	javadoc {
@@ -244,7 +250,7 @@ tasks {
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
 				jFlags = listOf(
-					"-Xint",
+					"-XX:-TieredCompilation",
 					"-XX:+UseSerialGC"
 				)
 			}

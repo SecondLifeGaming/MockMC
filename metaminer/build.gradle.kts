@@ -88,7 +88,7 @@ tasks {
 		minecraftVersion("26.2")
 		pluginJars.setFrom(shadowJar.flatMap { it.archiveFile })
 		runClasspath.setFrom(rootProject.file("jars/paper-26.2-25.jar"))
-		jvmArgs("-Xshare:off", "-Xint")
+		jvmArgs("-Xshare:off", "-XX:-TieredCompilation")
 	}
 
 	register<JavaExec>("runGenerator") {
