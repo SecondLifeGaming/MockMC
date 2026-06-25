@@ -49,11 +49,11 @@ jobs:
 
       # Target 2: Ships to Maven Central for public use
       - name: Publish to Maven Central
-        run: ./gradlew publishAllPublicationsToMavenRepository --no-configuration-cache -Pmockmc.version=${{ inputs.version }}
-        env:
-          # Mapping your existing repository secrets securely into the Gradle engine
-          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_PASS }}
+        run: >
+          ./gradlew publishAllPublicationsToMavenRepository --no-configuration-cache
+          -Pmockmc.version=${{ inputs.version }}
+          -PmavenCentralUsername="${{ secrets.MAVEN_USERNAME }}"
+          -PmavenCentralPassword="${{ secrets.MAVEN_PASS }}"
 
       - name: Create GitHub Release
         run: |
