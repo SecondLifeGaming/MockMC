@@ -1,0 +1,15 @@
+{
+	"effects": [
+		{
+			"ambient": false,
+			"amplifier": 0,
+			"duration": 900,
+			"icon": true,
+			"particles": true,
+			"type": "minecraft:poison"
+		}
+	],
+	"extendable": true,
+	"maxLevel": 2,
+	"upgradeable": true
+}

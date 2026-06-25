@@ -1,0 +1,15 @@
+{
+	"effects": [
+		{
+			"ambient": false,
+			"amplifier": 0,
+			"duration": 3600,
+			"icon": true,
+			"particles": true,
+			"type": "minecraft:infested"
+		}
+	],
+	"extendable": false,
+	"maxLevel": 1,
+	"upgradeable": false
+}

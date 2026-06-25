@@ -1,0 +1,15 @@
+{
+	"effects": [
+		{
+			"ambient": false,
+			"amplifier": 3,
+			"duration": 400,
+			"icon": true,
+			"particles": true,
+			"type": "minecraft:slowness"
+		}
+	],
+	"extendable": false,
+	"maxLevel": 1,
+	"upgradeable": false
+}
