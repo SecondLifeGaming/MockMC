@@ -45,6 +45,14 @@ public class MaterialDataGenerator implements DataGenerator
 	@Override
 	public void generateData() throws java.io.IOException
 	{
+		try
+		{
+			org.bukkit.Bukkit.getName();
+		}
+		catch (Exception _)
+		{
+			return;
+		}
 		JsonObject json = createJsonObject();
 		JsonUtil.dump(json, new File(dataFolder, "material_data.json"));
 	}
@@ -69,12 +77,9 @@ public class MaterialDataGenerator implements DataGenerator
 			BlockData data = material.createBlockData();
 			String dataString = data.getAsString(false);
 			Matcher matcher = BLOCK_DATA_PATTERN.matcher(dataString);
-			if (material.key() == null || !matcher.find())
+			if (!matcher.find())
 			{
-				if (material.key() != null)
-				{
-					json.add(material.key().toString(), new JsonObject());
-				}
+				json.add(material.key().toString(), new JsonObject());
 				return;
 			}
 

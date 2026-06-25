@@ -98,7 +98,7 @@ tasks.withType<Checkstyle> {
 }
 
 tasks.withType<Test>().configureEach {
-	jvmArgs("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC", "-Xmx1g")
+	jvmArgs("-Xint", "-XX:+UseG1GC", "-Xmx1g")
 }
 
 
@@ -220,10 +220,7 @@ tasks {
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			// -XX:-TieredCompilation: workaround for JDK 25.0.3 C1 JIT crash in TreeScanner.visitBlock
-			// (com.sun.tools.javac.comp.Lower.freevars -> SIGSEGV). Disabling TieredCompilation
-			// bypasses C1 JIT entirely and runs compilation using the stable C2 JIT at full speed.
-			"-XX:-TieredCompilation"
+			"-Xint"
 		)
 	}
 
@@ -231,7 +228,7 @@ tasks {
 		options.compilerArgs.addAll(listOf("-Xlint:deprecation", "-Xlint:removal", "-Xlint:unchecked", "-Xmaxwarns", "1000"))
 		options.isFork = true
 		options.forkOptions.memoryMaximumSize = "4g"
-		options.forkOptions.jvmArgs = mutableListOf("-XX:TieredStopAtLevel=1", "-XX:+UseG1GC")
+		options.forkOptions.jvmArgs = mutableListOf("-Xint", "-XX:+UseG1GC")
 	}
 
 	javadoc {
@@ -247,7 +244,7 @@ tasks {
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
 				jFlags = listOf(
-					"-XX:TieredStopAtLevel=1",
+					"-Xint",
 					"-XX:+UseSerialGC"
 				)
 			}
