@@ -52,10 +52,11 @@ jobs:
         run: >
           ./gradlew publishAllPublicationsToMavenRepository --no-configuration-cache
           -Pmockmc.version=${{ inputs.version }}
-          -PmavenCentralUsername="${{ secrets.MAVEN_USERNAME }}"
-          -PmavenCentralPassword="${{ secrets.MAVEN_PASS }}"
-          -PsigningInMemoryKey="${{ secrets.GPG_PRIVATE_KEY }}"
-          -PsigningInMemoryKeyPassword=""
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_PASS }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ""
 
       - name: Create GitHub Release
         run: |
