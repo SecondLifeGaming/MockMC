@@ -73,7 +73,7 @@ fun getMockMCPaperVersion(): String {
 }
 
 dependencies {
-    testImplementation("io.github.secondlifegaming:mockmc-v26.2:0.0.4")
+    testImplementation("io.github.secondlifegaming:mockmc-v26.2:0.0.5")
     testImplementation("io.papermc.paper:paper-api:${getMockMCPaperVersion()}")
 }
 
@@ -98,7 +98,7 @@ Add the Paper repository mapping and the library dependencies to your plugin’s
     <dependency>
         <groupId>io.github.secondlifegaming</groupId>
         <artifactId>mockmc-v26.2</artifactId>
-        <version>0.0.4</version>
+        <version>0.0.5</version><!-- mockmc-version -->
         <scope>test</scope>
     </dependency>
 

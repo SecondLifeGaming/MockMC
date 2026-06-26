@@ -66,6 +66,18 @@ jobs:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ""
 
+      - name: Update README version
+        run: |
+          sed -i "s/mockmc-v26\.2:[0-9]\+\.[0-9]\+\.[0-9]\+/mockmc-v26.2:${{ inputs.version }}/g" README.md
+          sed -i "s|<version>[0-9]\+\.[0-9]\+\.[0-9]\+</version><!-- mockmc-version -->|<version>${{ inputs.version }}</version><!-- mockmc-version -->|g" README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "docs: bump README version to ${{ inputs.version }}"
+          git push
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Create GitHub Release
         run: |
           gh release create v${{ inputs.version }} build/libs/*.jar --title "v${{ inputs.version }}" --notes "Release v${{ inputs.version }}"
