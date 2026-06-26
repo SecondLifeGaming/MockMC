@@ -18,12 +18,13 @@
 
 ## 🗺️ Knowledge Index
 
-| Context Trigger                | Document to Read                                | Description                                |
-| :----------------------------- | :---------------------------------------------- | :----------------------------------------- |
-| **New Implementation**         | [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md)    | 1.21 modernization and stub logic.         |
-| **Logic/Registration**         | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)  | Metaminer engine internals.                |
-| **Task Priority**              | [`TODO.md`](TODO.md)                            | Current phases (Phase 6 Functional Depth). |
-| **Missing/Incorrect API**      | `metaminer/.../BaseMockGenerator.java`          | Source of truth for generation.            |
+| Context Trigger                | Document to Read                                          | Description                                         |
+| :----------------------------- | :-------------------------------------------------------- | :-------------------------------------------------- |
+| **New Implementation**         | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)            | Engine pipeline, smart stub logic, JAR requirements.|
+| **Logic/Registration**         | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)            | Metaminer internals and generated mock layout.      |
+| **Task Priority**              | [`TODO.md`](TODO.md)                                      | Current phases (Phase 6 Functional Depth).          |
+| **Missing/Incorrect API**      | `metaminer/.../BaseMockGenerator.java`                    | Source of truth for generation.                     |
+| **Multi-Agent Workflow**       | [`AGENTS_PROTOCOL.md`](AGENTS_PROTOCOL.md)                | Auditor / Architect / Coder role definitions.       |
 
 ---
 

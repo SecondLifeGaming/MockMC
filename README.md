@@ -55,21 +55,21 @@ Add the Paper public repository and drop MockMC into your dependencies block. No
 ```kotlin
 repositories {
     mavenCentral()
-    maven { url = uri("[https://repo.papermc.io/repository/maven-public/](https://repo.papermc.io/repository/maven-public/)") }
+    maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
 }
 
-// Helper block to safely extract matching Paper API version bounds from the MockMC manifest
-def getMockMCPaperVersion() {
-    try {
-        def mockmcJar = configurations.testRuntimeClasspath.incoming.files.find { it.name.contains("mockmc-") }
-        if (mockmcJar) {
-            def jarFile = new java.util.jar.JarFile(mockmcJar)
-            def paperVersion = jarFile.manifest.mainAttributes.getValue("Paper-Version")
+// Helper to safely extract the Paper API version bundled in the MockMC manifest
+fun getMockMCPaperVersion(): String {
+    return try {
+        val mockmcJar = configurations["testRuntimeClasspath"].incoming.files
+            .find { it.name.contains("mockmc-") }
+        if (mockmcJar != null) {
+            val jarFile = java.util.jar.JarFile(mockmcJar)
+            val paperVersion = jarFile.manifest.mainAttributes.getValue("Paper-Version")
             jarFile.close()
-            return paperVersion ?: "26.2"
-        }
-    } catch (Exception ignored) { /* Fallback to standard tracking default */ }
-    return "26.2"
+            paperVersion ?: "26.2"
+        } else "26.2"
+    } catch (e: Exception) { "26.2" }
 }
 
 dependencies {
@@ -90,7 +90,7 @@ Add the Paper repository mapping and the library dependencies to your plugin’s
 <repositories>
     <repository>
         <id>papermc</id>
-        <url>[https://repo.papermc.io/repository/maven-public/](https://repo.papermc.io/repository/maven-public/)</url>
+        <url>https://repo.papermc.io/repository/maven-public/</url>
     </repository>
 </repositories>
 
