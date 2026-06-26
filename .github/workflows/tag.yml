@@ -76,5 +76,6 @@ jobs:
     uses: ./.github/workflows/publish.yml
     needs: tag
     if: ${{ needs.tag.outputs.clean_version != null && needs.tag.outputs.clean_version != '' }}
+    secrets: inherit
     with:
       version: ${{ needs.tag.outputs.clean_version }}

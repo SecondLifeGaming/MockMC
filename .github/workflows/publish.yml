@@ -47,6 +47,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
 
+      - name: Debug signing config
+        run: |
+          echo "GPG key length: ${#ORG_GRADLE_PROJECT_signingInMemoryKey}"
+          echo "Maven username set: $( [ -n "$ORG_GRADLE_PROJECT_mavenCentralUsername" ] && echo yes || echo NO )"
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+
       # Target 2: Ships to Maven Central for public use
       - name: Publish to Maven Central
         run: >
