@@ -1,7 +1,7 @@
 <p align="center">
     <!-- Badges -->
-    <a href="https://github.com/SecondLifeGaming/MockMC/actions/">
-        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/publish.yml/badge.svg" />
+    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
+        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
     </a>
     <a href="https://github.com/SecondLifeGaming/MockMC/releases">
         <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
@@ -27,50 +27,56 @@ MockMC is a testing framework for Minecraft server software, forked from the exc
 
 MockBukkit set the standard for Bukkit-based unit testing. However, as server APIs like Paper and Folia have expanded into thousands of methods, maintaining manual stubs became tedious.
 
-While the original MockBukkit utilized a `metaminer` to help generate stubs, it lacked type safety, often skipped inheritance chains, and required significant manual overhead to keep the mock surface in sync. We created MockMC to solve these core architectural challenges.
+While the original MockBukkit utilized [metaminer](https://github.com/MockBukkit/MockBukkit/tree/minecraft/v26/metaminer) to help generate stubs, it required manual overhead to keep the mock surface in sync. We created MockMC to solve these core architectural challenges.
 
-### The JavaPoet Evolution
-We have completely overhauled the metaminer engine using **JavaPoet**. This shift moves MockMC to an **"Engine First"** strategy:
+### The Overhaul
 
-* **Type-Safe Inheritance**: Unlike previous miners that generated basic stubs, our JavaPoet-based engine correctly maps inheritance and generic types directly from the API JARs.
-* **Universal JAR Scraping**: The engine scrapes directly from provided JARs, allowing for instant, automated support for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
-* **Zero-Lag Updates**: Every method—even those added in a brand-new Paper update—is immediately available with safe, type-specific defaults (Empty collections, Optionals, etc.).
-* **Focus on Logic**: Because the engine handles the thousands of interface methods automatically, our manual implementation efforts are focused strictly on **simulating complex logic**.
+We have completely overhauled the [metaminer](/metaminer) engine using **JavaPoet**. This shift moves MockMC to an **"Engine First"** strategy:
+
+- **Automated Source Generation**: Uses **JavaPoet** for automated source generation directly from the server schemas.
+- **Type-Safe Inheritance**: The generation engine parses and mirrors deep interface inheritance hierarchies and complex generic types straight out of the upstream source distributions.
+- **Universal Scraping Surface**: The tool reads structures cleanly across ecosystems, enabling instant, automated runtime stub generations for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
+- **Zero-Lag Updates**: Every method, even deep experimental tracking components added in a brand-new target server revision, is immediately generated with safe, type-specific fallback rules.
+- **Focus on Logic**: Because our engine programmatically spins up the thousands of interface methods automatically, our human implementation efforts are focused strictly on **simulating complex physics and block states**.
 
 ## Usage
 
-MockMC is published to GitHub Packages.
+MockMC is published to Maven Central for frictionless public resolution. Visual tracking releases are also mirrored directly to GitHub Packages.
 
 > [!TIP]
-> **Latest Version:**
+> **Latest Version Status:**
 > [![GitHub Packages](https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages)](https://github.com/SecondLifeGaming/MockMC/releases)
 
 <details>
-<summary><h3>Adding MockMC via Gradle</h3></summary>
+<summary><h3>Adding MockMC via Gradle (Kotlin DSL)</h3></summary>
 
-```gradle
+Add the Paper public repository and drop MockMC into your dependencies block. No access tokens or credential configurations are required.
+
+```kotlin
 repositories {
     mavenCentral()
-    maven { url 'https://repo.papermc.io/repository/maven-public/' }
-    maven { url 'https://maven.pkg.github.com/SecondLifeGaming/MockMC' }
+    maven { url = uri("[https://repo.papermc.io/repository/maven-public/](https://repo.papermc.io/repository/maven-public/)") }
 }
 
-// Helper to extract the Paper version from the MockMC JAR
+// Helper block to safely extract matching Paper API version bounds from the MockMC manifest
 def getMockMCPaperVersion() {
-    def mockmcJar = configurations.testImplementation.resolve().find { it.name.contains('mockmc-') }
-    if (mockmcJar) {
-        def jarFile = new java.util.jar.JarFile(mockmcJar)
-        def paperVersion = jarFile.manifest.mainAttributes.getValue('Paper-Version')
-        jarFile.close()
-        return paperVersion ?: '1.21-R0.1-SNAPSHOT'
-    }
-    return '1.21-R0.1-SNAPSHOT'
+    try {
+        def mockmcJar = configurations.testRuntimeClasspath.incoming.files.find { it.name.contains("mockmc-") }
+        if (mockmcJar) {
+            def jarFile = new java.util.jar.JarFile(mockmcJar)
+            def paperVersion = jarFile.manifest.mainAttributes.getValue("Paper-Version")
+            jarFile.close()
+            return paperVersion ?: "26.2"
+        }
+    } catch (Exception ignored) { /* Fallback to standard tracking default */ }
+    return "26.2"
 }
 
 dependencies {
-    testImplementation 'io.github.secondlifegaming:mockmc-v26.2:dev-a5c761fc9'
-    testImplementation "io.papermc.paper:paper-api:${getMockMCPaperVersion()}"
+    testImplementation("io.github.secondlifegaming:mockmc-v26.2:0.0.4")
+    testImplementation("io.papermc.paper:paper-api:${getMockMCPaperVersion()}")
 }
+
 ```
 
 </details>
@@ -78,17 +84,13 @@ dependencies {
 <details>
 <summary><h3>Adding MockMC via Maven</h3></summary>
 
-Add the Paper repository and the MockMC dependency to your `pom.xml`.
+Add the Paper repository mapping and the library dependencies to your plugin’s `pom.xml`:
 
 ```xml
 <repositories>
     <repository>
         <id>papermc</id>
-        <url>https://repo.papermc.io/repository/maven-public/</url>
-    </repository>
-    <repository>
-        <id>github-mockmc</id>
-        <url>https://maven.pkg.github.com/SecondLifeGaming/MockMC</url>
+        <url>[https://repo.papermc.io/repository/maven-public/](https://repo.papermc.io/repository/maven-public/)</url>
     </repository>
 </repositories>
 
@@ -96,24 +98,25 @@ Add the Paper repository and the MockMC dependency to your `pom.xml`.
     <dependency>
         <groupId>io.github.secondlifegaming</groupId>
         <artifactId>mockmc-v26.2</artifactId>
-        <version>dev-a5c761fc9</version>
+        <version>0.0.4</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>io.papermc.paper</groupId>
         <artifactId>paper-api</artifactId>
-        <version>1.21-R0.1-SNAPSHOT</version>
+        <version>26.2</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+
 ```
 
 </details>
 
 ### Quick Start
 
-Initialize the mock environment in your test setup:
+Initialize the mock server pipeline inside your unit test setup:
 
 ```java
 private ServerMock server;
@@ -129,21 +132,22 @@ public void setUp() {
 public void tearDown() {
     MockMC.unmock();
 }
+
 ```
 
 ---
 
 ## 🛡️ Total API Coverage
 
-Unlike traditional mocking frameworks that throw `UnimplementedOperationException` when encountering an unmapped method, MockMC utilizes a **Total Coverage** model.
+Rather than throwing `UnimplementedOperationException` when encountering an unmapped method block, MockMC utilizes a **Total Coverage** layer.
 
-Because our engine generates the entire API surface using JavaPoet, every single method is guaranteed to exist. If a specific behavioral implementation hasn't been manually coded yet, the engine provides **Safe Defaults**:
+Because our automated code engine maps the entire API surface using JavaPoet source patterns, every single method is guaranteed to link cleanly at runtime. If a specific behavior has not been explicitly overwritten with complex logic yet, the engine provides **Safe Defaults**:
 
-* **Collections/Arrays**: Returns empty, non-null instances.
-* **Optionals**: Returns `Optional.empty()`.
-* **Objects**: Returns `null` or a basic mock stub where appropriate.
-* **Primitives**: Returns standard defaults (e.g., `false`, `0`).
+- **Collections/Arrays**: Returns clean, empty, non-null instances.
+- **Optionals**: Returns standard `Optional.empty()`.
+- **Objects**: Returns `null` or an isolated mock sub-stub where safe.
+- **Primitives**: Returns typical zeroed boundaries (e.g., `false`, `0`).
 
-This ensures your test suites never crash due to upstream API changes, allowing you to focus on testing your plugin's logic rather than fighting the mock environment.
+This setup ensures your active automated testing pipelines never encounter compilation breakage or unexpected failures due to minor structural additions in the upstream API.
 
 ---

@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           java-version: 25
-          distribution: 'temurin'
+          distribution: "temurin"
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v6
@@ -41,12 +41,30 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test --refresh-dependencies
 
-
       - name: Publish to GitHub Packages
         run: ./gradlew publishAllPublicationsToGitHubPackagesRepository --no-configuration-cache -Pmockmc.version=${{ inputs.version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTOR: ${{ github.actor }}
+
+      - name: Debug signing config
+        run: |
+          echo "GPG key length: ${#ORG_GRADLE_PROJECT_signingInMemoryKey}"
+          echo "Maven username set: $( [ -n "$ORG_GRADLE_PROJECT_mavenCentralUsername" ] && echo yes || echo NO )"
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+
+      # Target 2: Ships to Maven Central for public use
+      - name: Publish to Maven Central
+        run: >
+          ./gradlew publishAllPublicationsToMavenRepository --no-configuration-cache
+          -Pmockmc.version=${{ inputs.version }}
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_PASS }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ""
 
       - name: Create GitHub Release
         run: |
