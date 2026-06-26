@@ -54,6 +54,8 @@ jobs:
           -Pmockmc.version=${{ inputs.version }}
           -PmavenCentralUsername="${{ secrets.MAVEN_USERNAME }}"
           -PmavenCentralPassword="${{ secrets.MAVEN_PASS }}"
+          -PsigningInMemoryKey="${{ secrets.GPG_PRIVATE_KEY }}"
+          -PsigningInMemoryKeyPassword=""
 
       - name: Create GitHub Release
         run: |
