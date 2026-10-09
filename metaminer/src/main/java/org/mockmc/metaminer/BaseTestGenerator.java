@@ -1,7 +1,7 @@
 package org.mockmc.metaminer;
 
 import com.google.common.reflect.ClassPath;
-import com.squareup.javapoet.*;
+import com.palantir.javapoet.*;
 
 import javax.lang.model.element.Modifier;
 import java.io.File;
@@ -27,6 +27,11 @@ public class BaseTestGenerator implements DataGenerator {
 
     @Override
     public void generateData() throws java.io.IOException {
+        File generatedTestDir = new File(testSourceFolder, "org/mockmc/mockmc/generated");
+        if (generatedTestDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(generatedTestDir);
+        }
+
         generateBaseClass();
         URLClassLoader customLoader = createClassLoader();
         ClassPath classPath = ClassPath.from(customLoader);
@@ -106,6 +111,8 @@ public class BaseTestGenerator implements DataGenerator {
                 if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
                 try {
                     Class<?> c = classInfo.load();
+                    java.security.CodeSource cs = c.getProtectionDomain().getCodeSource();
+                    if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains("folia")) continue;
                     if (isGeneratableType(c)) {
                         toGenerate.add(c);
                     }
@@ -188,11 +195,61 @@ public class BaseTestGenerator implements DataGenerator {
     }
 
     private List<TypeVariableName> getTypeVariables(Class<?> clazz) {
-        List<TypeVariableName> typeVars = new ArrayList<>();
-        for (java.lang.reflect.TypeVariable<?> tv : clazz.getTypeParameters()) {
-            typeVars.add(TypeVariableName.get(tv));
+        TypeVariableName[] typeVars = new TypeVariableName[clazz.getTypeParameters().length];
+        for (int i = 0; i < clazz.getTypeParameters().length; i++) {
+            typeVars[i] = TypeVariableName.get(clazz.getTypeParameters()[i].getName());
         }
-        return typeVars;
+        for (int i = 0; i < clazz.getTypeParameters().length; i++) {
+            java.lang.reflect.TypeVariable<?> tv = clazz.getTypeParameters()[i];
+            try {
+                java.lang.reflect.Type[] bounds = tv.getBounds();
+                if (bounds != null && bounds.length > 0 && !(bounds.length == 1 && bounds[0] == Object.class)) {
+                    TypeName[] mappedBounds = new TypeName[bounds.length];
+                    for (int j = 0; j < bounds.length; j++) {
+                        mappedBounds[j] = mapType(bounds[j], clazz, typeVars);
+                    }
+                    typeVars[i] = typeVars[i].withBounds(mappedBounds);
+                }
+            } catch (Exception _) {
+                // Keep unbounded fallback
+            }
+        }
+        return Arrays.asList(typeVars);
+    }
+
+    private TypeName mapType(java.lang.reflect.Type type, Class<?> clazz, TypeVariableName[] ourTypeVars) {
+        if (type instanceof java.lang.reflect.TypeVariable<?> tv) {
+            if (clazz != null) {
+                java.lang.reflect.TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
+                for (int i = 0; i < typeParameters.length; i++) {
+                    if (typeParameters[i].equals(tv)) {
+                        return ourTypeVars[i];
+                    }
+                }
+            }
+            return TypeVariableName.get(tv.getName());
+        }
+        if (type instanceof java.lang.reflect.ParameterizedType pt) {
+            TypeName[] args = new TypeName[pt.getActualTypeArguments().length];
+            for (int i = 0; i < args.length; i++) {
+                args[i] = mapType(pt.getActualTypeArguments()[i], clazz, ourTypeVars);
+            }
+            Class<?> raw = (Class<?>) pt.getRawType();
+            return ParameterizedTypeName.get(ClassName.get(raw), args);
+        }
+        if (type instanceof java.lang.reflect.GenericArrayType gat) {
+            return ArrayTypeName.of(mapType(gat.getGenericComponentType(), clazz, ourTypeVars));
+        }
+        if (type instanceof java.lang.reflect.WildcardType wt) {
+            if (wt.getLowerBounds().length > 0) {
+                return WildcardTypeName.supertypeOf(mapType(wt.getLowerBounds()[0], clazz, ourTypeVars));
+            }
+            if (wt.getUpperBounds().length > 0 && wt.getUpperBounds()[0] != Object.class) {
+                return WildcardTypeName.subtypeOf(mapType(wt.getUpperBounds()[0], clazz, ourTypeVars));
+            }
+            return WildcardTypeName.subtypeOf(Object.class);
+        }
+        return TypeName.get(type);
     }
 
     private TypeName getSuperInterface(ClassName baseMockClass, List<TypeVariableName> typeVars) {

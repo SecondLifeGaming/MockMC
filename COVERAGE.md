@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: Wed Jun 24 21:20:10 CDT 2026
+Generated on: Thu Oct 08 22:09:57 CDT 2026
 
-## Overall Coverage: 99.68%
+## Overall Coverage: 96.49%
 
-- **Total API Methods**: 6770
-- **Mirrored via BaseMocks**: 6748
+- **Total API Methods**: 6834
+- **Mirrored via BaseMocks**: 6594
 - **Manual Implementations**: (TBD - Analysis in progress)
 
 ## Coverage by Package
@@ -16,20 +16,20 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | com.destroystokyo.paper | 11 | 100% Mirror |
 | com.destroystokyo.paper.block | 5 | 100% Mirror |
 | com.destroystokyo.paper.brigadier | 4 | 100% Mirror |
-| com.destroystokyo.paper.entity | 24 | 100% Mirror |
+| com.destroystokyo.paper.entity | 26 | 100% Mirror |
 | com.destroystokyo.paper.entity.ai | 21 | 100% Mirror |
 | com.destroystokyo.paper.inventory.meta | 10 | 100% Mirror |
 | com.destroystokyo.paper.loottable | 15 | 100% Mirror |
 | com.destroystokyo.paper.network | 4 | 100% Mirror |
-| com.destroystokyo.paper.profile | 26 | 100% Mirror |
+| com.destroystokyo.paper.profile | 27 | 100% Mirror |
 | com.destroystokyo.paper.util | 3 | 100% Mirror |
 | com.velocitypowered.api.command | 23 | 100% Mirror |
 | com.velocitypowered.api.event | 22 | 100% Mirror |
 | com.velocitypowered.api.event.annotation | 0 | 100% Mirror |
 | com.velocitypowered.api.permission | 5 | 100% Mirror |
-| com.velocitypowered.api.plugin | 27 | 100% Mirror |
+| com.velocitypowered.api.plugin | 29 | 100% Mirror |
 | com.velocitypowered.api.plugin.annotation | 0 | 100% Mirror |
-| com.velocitypowered.api.proxy | 89 | 100% Mirror |
+| com.velocitypowered.api.proxy | 91 | 100% Mirror |
 | com.velocitypowered.api.proxy.config | 25 | 100% Mirror |
 | com.velocitypowered.api.proxy.crypto | 14 | 100% Mirror |
 | com.velocitypowered.api.proxy.messages | 6 | 100% Mirror |
@@ -37,7 +37,7 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | com.velocitypowered.api.proxy.server | 4 | 100% Mirror |
 | com.velocitypowered.api.scheduler | 6 | 100% Mirror |
 | com.velocitypowered.api.util | 5 | 100% Mirror |
-| io.papermc.paper | 32 | 100% Mirror |
+| io.papermc.paper | 33 | 100% Mirror |
 | io.papermc.paper.advancement | 9 | 100% Mirror |
 | io.papermc.paper.annotation | 0 | 100% Mirror |
 | io.papermc.paper.ban | 1 | 100% Mirror |
@@ -45,9 +45,10 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | io.papermc.paper.block.bed | 5 | 100% Mirror |
 | io.papermc.paper.block.fluid | 6 | 100% Mirror |
 | io.papermc.paper.block.fluid.type | 1 | 100% Mirror |
+| io.papermc.paper.block.pot | 0 | 100% Mirror |
 | io.papermc.paper.chat | 1 | 100% Mirror |
 | io.papermc.paper.command | 6 | 100% Mirror |
-| io.papermc.paper.command.brigadier | 21 | 100% Mirror |
+| io.papermc.paper.command.brigadier | 23 | 100% Mirror |
 | io.papermc.paper.command.brigadier.argument | 7 | 100% Mirror |
 | io.papermc.paper.command.brigadier.argument.position | 6 | 100% Mirror |
 | io.papermc.paper.command.brigadier.argument.predicate | 2 | 100% Mirror |
@@ -55,17 +56,17 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | io.papermc.paper.command.brigadier.argument.resolvers | 2 | 100% Mirror |
 | io.papermc.paper.command.brigadier.argument.resolvers.selector | 0 | 100% Mirror |
 | io.papermc.paper.configuration | 2 | 100% Mirror |
-| io.papermc.paper.connection | 21 | 100% Mirror |
+| io.papermc.paper.connection | 22 | 100% Mirror |
 | io.papermc.paper.datacomponent | 9 | 100% Mirror |
-| io.papermc.paper.datacomponent.item | 118 | 100% Mirror |
+| io.papermc.paper.datacomponent.item | 123 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.attribute | 0 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.blocksattacks | 8 | 100% Mirror |
 | io.papermc.paper.datacomponent.item.consumable | 0 | 100% Mirror |
 | io.papermc.paper.datapack | 24 | 100% Mirror |
 | io.papermc.paper.dialog | 6 | 100% Mirror |
-| io.papermc.paper.entity | 21 | 100% Mirror |
+| io.papermc.paper.entity | 26 | 100% Mirror |
 | io.papermc.paper.entity.poi | 4 | 100% Mirror |
-| io.papermc.paper.event.player | 28 | 100% Mirror |
+| io.papermc.paper.event.player | 29 | 100% Mirror |
 | io.papermc.paper.event.world.border | 1 | 100% Mirror |
 | io.papermc.paper.inventory.tooltip | 4 | 100% Mirror |
 | io.papermc.paper.math | 46 | 100% Mirror |
@@ -84,7 +85,7 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | io.papermc.paper.plugin.provider.entrypoint | 2 | 100% Mirror |
 | io.papermc.paper.raytracing | 10 | 100% Mirror |
 | io.papermc.paper.registry | 6 | 100% Mirror |
-| io.papermc.paper.registry.data | 62 | 100% Mirror |
+| io.papermc.paper.registry.data | 71 | 100% Mirror |
 | io.papermc.paper.registry.data.client | 2 | 100% Mirror |
 | io.papermc.paper.registry.data.dialog | 34 | 100% Mirror |
 | io.papermc.paper.registry.data.dialog.action | 1 | 100% Mirror |
@@ -99,7 +100,7 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | io.papermc.paper.tag | 34 | 100% Mirror |
 | io.papermc.paper.text | 2 | 100% Mirror |
 | io.papermc.paper.threadedregions.scheduler | 26 | 100% Mirror |
-| io.papermc.paper.world.damagesource | 15 | 100% Mirror |
+| io.papermc.paper.world.damagesource | 16 | 100% Mirror |
 | io.papermc.paper.world.flag | 3 | 100% Mirror |
 | net.md_5.bungee.api | 102 | 100% Mirror |
 | net.md_5.bungee.api.chat | 110 | 100% Mirror |
@@ -126,11 +127,11 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | net.md_5.bungee.protocol | 76 | 100% Mirror |
 | net.md_5.bungee.protocol.channel | 3 | 100% Mirror |
 | net.md_5.bungee.tab | 7 | 100% Mirror |
-| org.bukkit | 870 | 100% Mirror |
+| org.bukkit | 876 | 100% Mirror |
 | org.bukkit.advancement | 26 | 100% Mirror |
 | org.bukkit.attribute | 17 | 100% Mirror |
 | org.bukkit.ban | 8 | 100% Mirror |
-| org.bukkit.block | 401 | 100% Mirror |
+| org.bukkit.block | 406 | 100% Mirror |
 | org.bukkit.block.banner | 3 | 100% Mirror |
 | org.bukkit.block.data | 81 | 100% Mirror |
 | org.bukkit.block.data.type | 186 | 100% Mirror |
@@ -142,9 +143,9 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | org.bukkit.configuration.file | 10 | 100% Mirror |
 | org.bukkit.configuration.serialization | 3 | 100% Mirror |
 | org.bukkit.conversations | 20 | 100% Mirror |
-| org.bukkit.damage | 14 | 100% Mirror |
+| org.bukkit.damage | 15 | 100% Mirror |
 | org.bukkit.enchantments | 26 | 100% Mirror |
-| org.bukkit.entity | 1704 | 100% Mirror |
+| org.bukkit.entity | 1721 | 100% Mirror |
 | org.bukkit.entity.boat | 0 | 100% Mirror |
 | org.bukkit.entity.minecart | 21 | 100% Mirror |
 | org.bukkit.event | 8 | 100% Mirror |
@@ -162,7 +163,7 @@ Generated on: Wed Jun 24 21:20:10 CDT 2026
 | org.bukkit.generator.structure | 7 | 100% Mirror |
 | org.bukkit.help | 13 | 100% Mirror |
 | org.bukkit.inventory | 309 | 100% Mirror |
-| org.bukkit.inventory.meta | 344 | 100% Mirror |
+| org.bukkit.inventory.meta | 347 | 100% Mirror |
 | org.bukkit.inventory.meta.components | 58 | 100% Mirror |
 | org.bukkit.inventory.meta.tags | 11 | 100% Mirror |
 | org.bukkit.inventory.meta.trim | 8 | 100% Mirror |

@@ -64,10 +64,10 @@ tasks.register<DownloadJarsTask>("downloadJars") {
 	description = "Downloads backend API JARs for metaminer"
 	outputDir.set(layout.projectDirectory.dir("jars"))
 	jars.set(mapOf(
-		"velocity-3.5.0-SNAPSHOT-601.jar" to "https://fill-data.papermc.io/v1/objects/0407642d1ed2883100eb823c2805523f191fa637db1f42ac0ec7ef29cbe455a9/velocity-3.5.0-SNAPSHOT-601.jar",
-		"paper-26.2-25.jar" to "https://fill-data.papermc.io/v1/objects/83c6af7161cebd44dad740759750fa321287a7083ce4cd3a6fb28d89c7bc97cc/paper-26.2-25.jar",
-		"folia-26.1.2-8.jar" to "https://fill-data.papermc.io/v1/objects/607afd1c3320008e1ffd2eaee6780ace4419d5f8c527b75e79f259be79ebf57b/folia-26.1.2-8.jar",
-		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
+		"velocity-4.2.1-SNAPSHOT-36.jar" to "https://fill-data.papermc.io/v1/objects/62a06a6bbf3c48b72473ac64a1bdea38e940b82780a99998e83b42d34022b42c/velocity-4.2.1-SNAPSHOT-36.jar",
+		"paper-26.3-157.jar" to "https://fill-data.papermc.io/v1/objects/77cdcd758777734b0b64db74974f68e56cb08637f3c36b26734842cb8521cc2e/paper-26.3-157.jar",
+		"folia-26.2-7.jar" to "https://fill-data.papermc.io/v1/objects/128a634192261cd38bb4a5dc54075018a0f896fd6c6f529e37dca6e99e32b3b3/folia-26.2-7.jar",
+		"waterfall-1.21-615.jar" to "https://fill-data.papermc.io/v1/objects/5eda8bfd0691e5088701f87020c68964299586df0faba289a634122d282d598c/waterfall-1.21-615.jar"
 	))
 }
 
@@ -124,9 +124,13 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	// Remapped Server Jars from MetaMiner (Autonomous)
-	compileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
-	testCompileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
+	// Remapped Server Jars from MetaMiner (Autonomous) - Paper primary, Folia secondary
+	val remappedJars = files(
+		fileTree("jars/cache") { include("remapped-paper-*.jar") },
+		fileTree("jars/cache") { include("remapped-folia-*.jar") }
+	)
+	compileOnly(remappedJars)
+	testCompileOnly(remappedJars)
 
 	// Unbundled Libraries (Autonomous)
 	compileOnly(fileTree("jars/cache/libraries") { 
@@ -139,6 +143,12 @@ dependencies {
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
 	})
+
+	// Fallback API: declared AFTER paper-api so Paper wins for shared classes.
+	// Only classes missing from Paper (e.g. removed in a newer release) resolve from here,
+	// which keeps mocks for older Folia APIs compiling.
+	compileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
+	testCompileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
 
 	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
 	val backendJars = fileTree("jars") {
@@ -226,7 +236,7 @@ tasks {
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			"-XX:+UseSerialGC"
+			"-XX:+UseG1GC"
 		)
 	}
 
@@ -521,10 +531,10 @@ object JarServiceStripper {
 }
 
 val backendJars = mapOf(
-	"Folia" to "folia-26.1.2-8.jar",
-	"Paper" to "paper-26.2-25.jar",
-	"Velocity" to "velocity-3.5.0-SNAPSHOT-601.jar",
-	"Waterfall" to "waterfall-1.21-609.jar"
+	"Folia" to "folia-26.2-7.jar",
+	"Paper" to "paper-26.3-157.jar",
+	"Velocity" to "velocity-4.2.1-SNAPSHOT-36.jar",
+	"Waterfall" to "waterfall-1.21-615.jar"
 )
 
 backendJars.forEach { (name, jarName) ->
@@ -554,7 +564,14 @@ backendJars.forEach { (name, jarName) ->
 			exclude("**/folia-api-*.jar")
 		}
 		
-		classpath = sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+		val foliaApi = fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") }
+		
+		// Folia runs against its own API first so classes only present in that API resolve at runtime.
+		classpath = if (name == "Folia") {
+			foliaApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+		} else {
+			sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+		}
 		testClassesDirs = sourceSets.test.get().output.classesDirs
 
 		doFirst {

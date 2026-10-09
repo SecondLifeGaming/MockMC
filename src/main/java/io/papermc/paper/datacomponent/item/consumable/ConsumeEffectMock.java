@@ -19,7 +19,7 @@ public final class ConsumeEffectMock implements ConsumeEffect
 		throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
 	}
 
-	record TeleportRandomlyMock(float diameter) implements TeleportRandomly
+	record TeleportRandomlyMock(float diameter, boolean directionalParticles) implements TeleportRandomly
 	{
 	}
 

@@ -163,6 +163,24 @@ public abstract class ServerMockBase extends Server.Spigot
 		return this.foliaSchedulers.getAsyncScheduler();
 	}
 
+	public double[] getRegionTPS(@NotNull org.bukkit.World world, int rx, int rz)
+	{
+		return new double[]
+		{20.0, 20.0, 20.0};
+	}
+
+	public double[] getRegionTPS(@NotNull org.bukkit.Chunk chunk)
+	{
+		return new double[]
+		{20.0, 20.0, 20.0};
+	}
+
+	public double[] getRegionTPS(@NotNull org.bukkit.Location location)
+	{
+		return new double[]
+		{20.0, 20.0, 20.0};
+	}
+
 	@ApiStatus.Internal
 	public void registerFoliaTask(@NotNull org.mockmc.mockmc.scheduler.paper.PaperScheduledTask task)
 	{

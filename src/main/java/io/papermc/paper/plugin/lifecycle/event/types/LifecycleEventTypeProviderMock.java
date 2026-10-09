@@ -10,7 +10,9 @@ import org.mockmc.mockmc.plugin.lifecycle.event.types.PrioritizableLifecycleEven
 public class LifecycleEventTypeProviderMock implements LifecycleEventTypeProvider
 {
 
-	private final TagEventTypeProviderMock tagEventProvider = new TagEventTypeProviderMock();
+	private final TagEventTypeProviderMock tagEventProvider = new TagEventTypeProviderMock()
+	{
+	};
 
 	@Override
 	public <O extends LifecycleEventOwner, E extends LifecycleEvent> LifecycleEventType.Monitorable<O, E> monitor(

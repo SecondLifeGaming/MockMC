@@ -39,6 +39,12 @@ abstract class AbstractBossMock extends MonsterMock
 	}
 
 	@Override
+	public boolean isTrackedBy(@NotNull org.bukkit.entity.Player player)
+	{
+		return super.isTrackedBy(player);
+	}
+
+	@Override
 	public @NotNull net.kyori.adventure.text.event.HoverEvent<net.kyori.adventure.text.event.HoverEvent.ShowEntity> asHoverEvent(
 			@NotNull java.util.function.UnaryOperator<net.kyori.adventure.text.event.HoverEvent.ShowEntity> op)
 	{

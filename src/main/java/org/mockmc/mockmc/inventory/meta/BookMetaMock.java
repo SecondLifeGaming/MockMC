@@ -23,7 +23,6 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class BookMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.KnowledgeBookMetaBaseMock,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BookMetaBaseMock
 {
 

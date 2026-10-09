@@ -76,11 +76,30 @@ public class JarCracker {
                 throw new IOException("Could not find patched jar in " + versionDirs[0].getAbsolutePath());
             }
 
-            // Move libraries to a stable location
+            // Move libraries to a stable location, merging with existing
             File libDir = new File(tempDir, "libraries");
             if (libDir.exists()) {
-                if (finalLibDir.exists()) FileUtils.deleteQuietly(finalLibDir);
-                FileUtils.moveDirectory(libDir, finalLibDir);
+                if (!finalLibDir.exists()) finalLibDir.mkdirs();
+                FileUtils.copyDirectory(libDir, finalLibDir);
+            }
+
+            // Also check for libraries directly inside the bundler JAR (e.g. paper-api)
+            try (ZipFile bundlerZip = new ZipFile(bundlerJar)) {
+                var entries = bundlerZip.entries();
+                while (entries.hasMoreElements()) {
+                    ZipEntry entry = entries.nextElement();
+                    if (!entry.isDirectory() && entry.getName().startsWith("META-INF/libraries/") && entry.getName().endsWith(".jar")) {
+                        String relPath = entry.getName().substring("META-INF/libraries/".length());
+                        File targetLib = new File(finalLibDir, relPath);
+                        if (!targetLib.exists()) {
+                            targetLib.getParentFile().mkdirs();
+                            try (InputStream is = bundlerZip.getInputStream(entry);
+                                 FileOutputStream fos = new FileOutputStream(targetLib)) {
+                                IOUtils.copy(is, fos);
+                            }
+                        }
+                    }
+                }
             }
 
             // REPACK the jar to ensure it has standard ZIP headers that SpecialSource likes

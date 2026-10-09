@@ -33,6 +33,10 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		return CompletableFuture.completedFuture(playerProfileMock);
 	}
 
+	public void applySkinToPlayerHeadContents(Builder builder)
+	{
+	}
+
 	static class BuilderMock implements Builder
 	{
 		private final Set<ProfileProperty> properties = new HashSet<>();

@@ -25,7 +25,25 @@ public class JukeboxSongMock implements JukeboxSong, org.mockmc.mockmc.generated
 	public static JukeboxSongMock from(JsonObject jsonObject)
 	{
 		NamespacedKey key = NamespacedKey.fromString(jsonObject.get("key").getAsString());
-		String translationKey = jsonObject.get("translationKey").getAsString();
+		String translationKey = null;
+		if (jsonObject.has("translationKey"))
+		{
+			translationKey = jsonObject.get("translationKey").getAsString();
+		} else if (jsonObject.has("description"))
+		{
+			if (jsonObject.get("description").isJsonObject()
+					&& jsonObject.getAsJsonObject("description").has("translate"))
+			{
+				translationKey = jsonObject.getAsJsonObject("description").get("translate").getAsString();
+			} else if (jsonObject.get("description").isJsonPrimitive())
+			{
+				translationKey = jsonObject.get("description").getAsString();
+			}
+		}
+		if (translationKey == null)
+		{
+			translationKey = "jukebox_song." + key.getNamespace() + "." + key.getKey();
+		}
 		return new JukeboxSongMock(key, translationKey);
 	}
 

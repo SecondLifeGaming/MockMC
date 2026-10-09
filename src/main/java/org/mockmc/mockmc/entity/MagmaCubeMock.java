@@ -32,4 +32,10 @@ public class MagmaCubeMock extends SlimeMock
 	{
 		return EntityType.MAGMA_CUBE;
 	}
+
+	@Override
+	public boolean isTrackedBy(@NotNull org.bukkit.entity.Player player)
+	{
+		return super.isTrackedBy(player);
+	}
 }

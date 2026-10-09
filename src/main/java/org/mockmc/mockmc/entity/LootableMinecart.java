@@ -10,7 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class LootableMinecart extends MinecartMock implements LootableInventory
+public abstract class LootableMinecart extends MinecartMock
+		implements
+			LootableInventory,
+			org.mockmc.mockmc.generated.server.com.destroystokyo.paper.loottable.LootableInventoryBaseMock
 {
 
 	private long nextRefill = -1;

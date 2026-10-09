@@ -2718,6 +2718,14 @@ public class PlayerMock extends HumanEntityMock
 	}
 
 	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
+			double offsetY, double offsetZ, double speed, double rotation, double extra, @Nullable T data,
+			boolean force, @NotNull Particle.RandomizationType randomizationType)
+	{
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, force);
+	}
+
+	@Override
 	@NotNull
 	public String getLocale()
 	{

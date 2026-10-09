@@ -90,19 +90,13 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public MapItemColor.Builder mapItemColor()
-	{
-		return new MapItemColorMock.BuilderMock();
-	}
-
-	@Override
 	public MapDecorations.Builder mapDecorations()
 	{
 		return new MapDecorationsMock.BuilderMock();
 	}
 
 	@Override
-	public MapDecorations.DecorationEntry decorationEntry(MapCursor.Type type, double x, double z, float rotation)
+	public MapDecorations.DecorationEntry mapDecorationEntry(MapCursor.Type type, double x, double z, float rotation)
 	{
 		return new MapDecorationsMock.DecorationEntryMock(type, x, z, rotation);
 	}
@@ -199,7 +193,7 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	}
 
 	@Override
-	public Tool.Rule rule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
+	public Tool.Rule toolRule(RegistryKeySet<BlockType> blocks, @Nullable Float speed, TriState correctForDrops)
 	{
 		return new ToolMock.RuleMock(blocks, speed, correctForDrops);
 	}
@@ -344,6 +338,25 @@ public class ItemComponentTypesBridgeMock implements ItemComponentTypesBridge
 	public SulfurCubeContent sulfurCubeContent(ItemStack itemStack)
 	{
 		return new SulfurCubeContentMock(itemStack);
+	}
+
+	@Override
+	public SignText.Builder signText()
+	{
+		return new SignTextMock.BuilderMock();
+	}
+
+	@Override
+	public VillagerFood villagerFood(int nutrition)
+	{
+		return new VillagerFoodMock(nutrition);
+	}
+
+	@Override
+	public MobVisibility mobVisibility(RegistryKeySet<org.bukkit.entity.EntityType> targetingEntityTypes,
+			float visibility)
+	{
+		return new MobVisibilityMock(targetingEntityTypes, visibility);
 	}
 
 }

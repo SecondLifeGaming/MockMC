@@ -10,7 +10,6 @@ import net.kyori.adventure.key.Keyed;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.Translatable;
 import org.bukkit.Material;
@@ -112,16 +111,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 	public ComponentFlattener componentFlattener()
 	{
 		return ComponentFlattener.basic();
-	}
-
-	/**
-	 * @deprecated Use modern API instead.
-	 */
-	@Deprecated(forRemoval = true, since = "1.18")
-	@NotNull
-	public PlainComponentSerializer plainComponentSerializer()
-	{
-		return PlainComponentSerializer.plain();
 	}
 
 	/**

@@ -248,6 +248,7 @@ public abstract class LivingEntityMock extends EntityMock
 	}
 
 	@Override
+	@SuppressWarnings("deprecation")
 	public void setMaxHealth(double health)
 	{
 		getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);

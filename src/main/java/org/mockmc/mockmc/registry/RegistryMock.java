@@ -471,11 +471,15 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 			try
 			{
 				processElement(structureJSONElement.getAsJsonObject());
-			} catch (ExceptionInInitializerError e)
+			} catch (Throwable t)
 			{
 				LOGGER.log(java.util.logging.Level.SEVERE,
-						"Failed to populate registry element: " + structureJSONElement, e);
-				// This can happen during recursion, it's fine
+						"Failed to populate registry element: " + structureJSONElement, t);
+				if (t.getCause() != null)
+				{
+					LOGGER.log(java.util.logging.Level.SEVERE, "Caused by: ", t.getCause());
+				}
+				throw t;
 			}
 		}
 	}

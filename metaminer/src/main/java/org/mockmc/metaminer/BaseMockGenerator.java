@@ -3,7 +3,7 @@ package org.mockmc.metaminer;
 import com.google.common.reflect.ClassPath;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.squareup.javapoet.*;
+import com.palantir.javapoet.*;
 import javax.lang.model.element.Modifier;
 import java.io.File;
 import java.io.FileReader;
@@ -190,9 +190,18 @@ public class BaseMockGenerator implements DataGenerator {
         return mirroredRaw;
     }
 
+    private ClassLoader primaryLoader;
+    private ClassLoader customLoader;
+    private Set<String> primaryJarNames;
+
     @Override
     public void generateData() throws java.io.IOException {
         try {
+            File generatedDir = new File(dataFolder, "org/mockmc/mockmc/generated");
+            if (generatedDir.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(generatedDir);
+            }
+
             File cacheDir = new File(jarDirectory, "cache");
             List<URL> urls = processJars(cacheDir);
 
@@ -202,9 +211,16 @@ public class BaseMockGenerator implements DataGenerator {
                 addJarsRecursively(libDir, urls);
             }
 
-            URLClassLoader customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+            // Paper is the primary API; Folia only fills gaps for classes Paper does not have.
+            urls.sort(Comparator.comparingInt((URL u) -> u.getPath().contains("folia") ? 1 : 0)
+                    .thenComparing(URL::getPath));
+
+            this.customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+            List<URL> primaryUrls = urls.stream().filter(u -> !u.getPath().contains("folia")).toList();
+            this.primaryLoader = new URLClassLoader(primaryUrls.toArray(new URL[0]), this.customLoader);
+            this.primaryJarNames = new HashSet<>(primaryUrls.stream().map(URL::getPath).toList());
             ClassPath classPath = ClassPath.from(customLoader);
-            Set<Class<?>> toGenerate = scanPackages(classPath);
+            Set<Class<?>> toGenerate = scanPackages(classPath, customLoader);
 
             for (Class<?> c : toGenerate) {
                 generateForClass(c, toGenerate);
@@ -242,7 +258,7 @@ public class BaseMockGenerator implements DataGenerator {
         return urls;
     }
 
-    private Set<Class<?>> scanPackages(ClassPath classPath) {
+    private Set<Class<?>> scanPackages(ClassPath classPath, ClassLoader fallbackLoader) {
         Set<Class<?>> toGenerate = new HashSet<>();
         String[] packagesToScan = {
                 "org.bukkit",
@@ -259,7 +275,9 @@ public class BaseMockGenerator implements DataGenerator {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
                 try {
                     if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
-                    Class<?> c = classInfo.load();
+                    Class<?> c = Class.forName(classInfo.getName(), false, primaryLoader != null ? primaryLoader : fallbackLoader);
+                    CodeSource cs = c.getProtectionDomain().getCodeSource();
+                    if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains("folia")) continue;
                     collectInterfaces(c, toGenerate);
                 } catch (Exception | LinkageError _) {
                     // Ignore loading errors
@@ -310,12 +328,14 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private void collectInterfaces(Class<?> c, Set<Class<?>> toGenerate) {
-        if (isGeneratableType(c)) {
+        if (isGeneratableType(c) && isAccessible(c)) {
             toGenerate.add(c);
         }
         try {
             for (Class<?> nested : c.getDeclaredClasses()) {
-                collectInterfaces(nested, toGenerate);
+                if (isAccessible(nested)) {
+                    collectInterfaces(nested, toGenerate);
+                }
             }
         } catch (Exception _) {
             // Ignore class inspection errors
@@ -393,11 +413,30 @@ public class BaseMockGenerator implements DataGenerator {
         TypeVariableName[] typeVars = new TypeVariableName[clazz.getTypeParameters().length];
         if (clazz.getTypeParameters().length > 0) {
             for (int i = 0; i < clazz.getTypeParameters().length; i++) {
-                typeVars[i] = TypeVariableName.get(clazz.getTypeParameters()[i]);
+                typeVars[i] = TypeVariableName.get(clazz.getTypeParameters()[i].getName());
+            }
+            for (int i = 0; i < clazz.getTypeParameters().length; i++) {
+                TypeVariable<?> tv = clazz.getTypeParameters()[i];
+                try {
+                    java.lang.reflect.Type[] bounds = tv.getBounds();
+                    if (bounds != null && bounds.length > 0 && !(bounds.length == 1 && bounds[0] == Object.class)) {
+                        TypeName[] mappedBounds = new TypeName[bounds.length];
+                        for (int j = 0; j < bounds.length; j++) {
+                            mappedBounds[j] = mapType(bounds[j], clazz, typeVars, null);
+                        }
+                        typeVars[i] = typeVars[i].withBounds(mappedBounds);
+                    }
+                } catch (Exception _) {
+                    // Keep unbounded fallback
+                }
                 typeSpec.addTypeVariable(typeVars[i]);
             }
             if (clazz.isInterface()) {
-                typeSpec.addSuperinterface(ParameterizedTypeName.get(ClassName.get(clazz), typeVars));
+                TypeName[] typeVarNames = new TypeName[typeVars.length];
+                for (int i = 0; i < typeVars.length; i++) {
+                    typeVarNames[i] = TypeVariableName.get(clazz.getTypeParameters()[i].getName());
+                }
+                typeSpec.addSuperinterface(ParameterizedTypeName.get(ClassName.get(clazz), typeVarNames));
             }
         } else {
             if (clazz.isInterface()) {
@@ -426,13 +465,35 @@ public class BaseMockGenerator implements DataGenerator {
 
     private Set<java.lang.reflect.Type> collectOurInterfaces(Class<?> clazz) {
         Set<java.lang.reflect.Type> ourInterfaces = new HashSet<>();
-        for (java.lang.reflect.Type ifaceType : getAllGenericInterfaces(clazz)) {
+        Class<?> primaryClazz = primaryLoader != null ? loadPrimaryClass(clazz) : clazz;
+        for (java.lang.reflect.Type ifaceType : primaryClazz.getGenericInterfaces()) {
             Class<?> iface = getRawType(ifaceType);
             if (iface != null && isGeneratableType(iface) && !iface.isSealed()) {
-                ourInterfaces.add(ifaceType);
+                // Verify iface exists in primary API / protection domain of primaryClazz
+                if (isClassInSameProtectionDomainOrPrimary(iface, primaryClazz)) {
+                    ourInterfaces.add(ifaceType);
+                }
             }
         }
         return ourInterfaces;
+    }
+
+    private boolean isClassInSameProtectionDomainOrPrimary(Class<?> iface, Class<?> primaryClazz) {
+        if (primaryLoader == null) return true;
+        try {
+            Class<?> primaryIface = primaryLoader.loadClass(iface.getName());
+            return primaryIface != null;
+        } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            return false;
+        }
+    }
+
+    private Class<?> loadPrimaryClass(Class<?> clazz) {
+        try {
+            return primaryLoader.loadClass(clazz.getName());
+        } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            return clazz;
+        }
     }
 
     private void pruneRedundantInterfaces(Set<java.lang.reflect.Type> interfaces) {
@@ -462,16 +523,31 @@ public class BaseMockGenerator implements DataGenerator {
 
     private Map<String, List<Method>> collectMethodsBySignature(Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
         Map<String, List<Method>> methodsBySignature = new HashMap<>();
-        List<java.lang.reflect.Type> hierarchy = new ArrayList<>();
-        hierarchy.add(clazz);
-        hierarchy.addAll(getAllGenericInterfaces(clazz));
+        List<Class<?>> classVariants = new ArrayList<>();
+        classVariants.add(clazz);
+        if (customLoader != null) {
+            try {
+                Class<?> altClass = customLoader.loadClass(clazz.getName());
+                if (altClass != clazz) {
+                    classVariants.add(altClass);
+                }
+            } catch (ClassNotFoundException | NoClassDefFoundError _) {
+                // Ignore if not found in customLoader
+            }
+        }
 
-        for (java.lang.reflect.Type type : hierarchy) {
-            Class<?> c = getRawType(type);
-            if (c == null) continue;
-            for (Method m : c.getDeclaredMethods()) {
-                if (shouldSkipMethod(m, clazz)) continue;
-                methodsBySignature.computeIfAbsent(getMethodSignature(m, clazz, typeVars, typeMap), _ -> new ArrayList<>()).add(m);
+        for (Class<?> targetClass : classVariants) {
+            List<java.lang.reflect.Type> hierarchy = new ArrayList<>();
+            hierarchy.add(targetClass);
+            hierarchy.addAll(getAllGenericInterfaces(targetClass));
+
+            for (java.lang.reflect.Type type : hierarchy) {
+                Class<?> c = getRawType(type);
+                if (c == null) continue;
+                for (Method m : c.getDeclaredMethods()) {
+                    if (shouldSkipMethod(m, clazz)) continue;
+                    methodsBySignature.computeIfAbsent(getMethodSignature(m, clazz, typeVars, typeMap), _ -> new ArrayList<>()).add(m);
+                }
             }
         }
         return methodsBySignature;
@@ -483,12 +559,9 @@ public class BaseMockGenerator implements DataGenerator {
         if (m.isBridge() || m.isSynthetic() || m.getName().contains("$")) return true;
         if (m.getName().equals("getHandle") && isNmsType(m.getGenericReturnType())) return true;
 
-        boolean isAbstract = m.getDeclaringClass().isInterface() ? !m.isDefault() : java.lang.reflect.Modifier.isAbstract(m.getModifiers());
-        if (!isAbstract) {
-            if (isNmsType(m.getGenericReturnType()) || !isAccessible(m.getGenericReturnType())) return true;
-            for (java.lang.reflect.Type t : m.getGenericParameterTypes()) {
-                if (isNmsType(t) || !isAccessible(t)) return true;
-            }
+        if (isNmsType(m.getGenericReturnType()) || !isAccessible(m.getGenericReturnType())) return true;
+        for (java.lang.reflect.Type t : m.getGenericParameterTypes()) {
+            if (isNmsType(t) || !isAccessible(t)) return true;
         }
 
         return isQuirkExcluded(m, clazz);
@@ -534,6 +607,8 @@ public class BaseMockGenerator implements DataGenerator {
         if (isStandardPackage(raw.getName())) return true;
         if (!isRawClassAccessible(raw)) return false;
 
+
+
         if (type instanceof java.lang.reflect.ParameterizedType pt) {
             return areTypeArgumentsAccessible(pt);
         }
@@ -547,7 +622,7 @@ public class BaseMockGenerator implements DataGenerator {
     private boolean isRawClassAccessible(Class<?> raw) {
         if (!java.lang.reflect.Modifier.isPublic(raw.getModifiers())) return false;
         Class<?> declaring = raw.getDeclaringClass();
-        return declaring == null || isAccessible(declaring);
+        return declaring == null || (java.lang.reflect.Modifier.isPublic(declaring.getModifiers()) && isRawClassAccessible(declaring));
     }
 
     private boolean areTypeArgumentsAccessible(java.lang.reflect.ParameterizedType pt) {
@@ -574,28 +649,58 @@ public class BaseMockGenerator implements DataGenerator {
 
     private boolean shouldGenerateMethod(Class<?> clazz, List<Method> providers, Set<Class<?>> allGeneratable) {
         boolean declaredInThis = false;
-        Set<Class<?>> generatableSuperProviders = new HashSet<>();
+        boolean hasDefaultImplementationInParents = false;
         boolean isMissingImplementation = false;
 
+        Set<Class<?>> declaringClasses = new HashSet<>();
         for (Method m : providers) {
-            if (m.getDeclaringClass() == clazz) {
+            declaringClasses.add(m.getDeclaringClass());
+            String declaringClassName = m.getDeclaringClass().getName();
+            if (declaringClassName.equals(clazz.getName())) {
                 declaredInThis = true;
-            } else if (allGeneratable.contains(m.getDeclaringClass())) {
-                generatableSuperProviders.add(m.getDeclaringClass());
             }
 
-            if (!m.isDefault() && !java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
+            if (m.isDefault()) {
+                if (!declaringClassName.equals(clazz.getName())) {
+                    hasDefaultImplementationInParents = true;
+                }
+            } else if (!java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
                 isMissingImplementation = true;
             }
         }
 
-        // Prune redundant super-interfaces
-        generatableSuperProviders.removeIf(a -> generatableSuperProviders.stream().anyMatch(b -> a != b && a.isAssignableFrom(b)));
+        if (declaredInThis) return true;
 
-        boolean inMirroredSuperInterface = !generatableSuperProviders.isEmpty();
-        boolean conflict = generatableSuperProviders.size() > 1;
+        Set<Class<?>> independentDeclaring = new HashSet<>(declaringClasses);
+        for (Class<?> p : declaringClasses) {
+            for (Class<?> c : declaringClasses) {
+                if (p != c && p.isAssignableFrom(c)) {
+                    independentDeclaring.remove(p);
+                }
+            }
+        }
 
-        return declaredInThis || (isMissingImplementation && !inMirroredSuperInterface) || conflict;
+        // If multiple unrelated interfaces declare this method (e.g. LivingEntity and Leashable for isLeashed),
+        // each branch defines its own default stub, so clazzBaseMock must override it to disambiguate unrelated defaults.
+        if (independentDeclaring.size() > 1) {
+            return true;
+        }
+
+        if (providers.stream().anyMatch(m -> isProvidedByGeneratableAncestor(clazz, m, allGeneratable))) {
+            return false;
+        }
+        return isMissingImplementation && !hasDefaultImplementationInParents;
+    }
+
+    private boolean isProvidedByGeneratableAncestor(Class<?> clazz, Method m, Set<Class<?>> allGeneratable) {
+        Class<?> declaring = m.getDeclaringClass();
+        for (java.lang.reflect.Type ifaceType : getAllGenericInterfaces(clazz)) {
+            Class<?> a = getRawType(ifaceType);
+            if (a != null && a != clazz && allGeneratable.contains(a) && declaring.isAssignableFrom(a)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Method selectBestMethod(List<Method> providers) {
@@ -646,6 +751,14 @@ public class BaseMockGenerator implements DataGenerator {
         if (m.getDeclaringClass() == Object.class) {
             return false;
         }
+        if (!isAccessible(m.getGenericReturnType())) {
+            return false;
+        }
+        for (java.lang.reflect.Type paramType : m.getGenericParameterTypes()) {
+            if (!isAccessible(paramType)) {
+                return false;
+            }
+        }
 
         String name = m.getName();
         Class<?>[] params = m.getParameterTypes();
@@ -670,12 +783,18 @@ public class BaseMockGenerator implements DataGenerator {
     private void generateMethodSpec(TypeSpec.Builder typeSpec, Method m, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Set<String> classSuppressions) {
         MethodSpec.Builder builder = MethodSpec.methodBuilder(m.getName())
                 .addModifiers(Modifier.PUBLIC, Modifier.DEFAULT);
-        // Always add @Override for mirrored methods if we are in an interface (which we are)
-        // and the method is actually overriding something. 
-        // For simplicity and to satisfy the linter, we add it if the method exists in any super-interface,
-        // or if clazz is an interface (since the generated mock extends it directly).
-        if (clazz.isInterface() || isOverriding(m, clazz)) {
-            builder.addAnnotation(Override.class);
+
+        boolean isPrimary = isPrimaryApiMethod(m, clazz);
+        if (isPrimary) {
+            if (shouldAddOverride(m, clazz)) {
+                builder.addAnnotation(Override.class);
+            }
+        } else {
+            builder.addAnnotation(AnnotationSpec.builder(Deprecated.class)
+                    .addMember("since", "$S", "legacy")
+                    .addMember("forRemoval", "$L", true)
+                    .build());
+            builder.addJavadoc("Legacy or cross-server API method.\n@mockmc.version legacy\n");
         }
 
         applyMethodAnnotations(builder, m, clazz, ourTypeVars, typeMap, classSuppressions);
@@ -1024,24 +1143,90 @@ public class BaseMockGenerator implements DataGenerator {
         return null;
     }
 
-    private boolean isOverriding(Method m, Class<?> clazz) {
-        for (java.lang.reflect.Type iface : getAllGenericInterfaces(clazz)) {
+    private Set<java.lang.reflect.Type> getAllGenericInterfacesRecursively(Class<?> clazz) {
+        Set<java.lang.reflect.Type> result = new HashSet<>();
+        if (clazz == null) return result;
+        for (java.lang.reflect.Type iface : clazz.getGenericInterfaces()) {
+            result.add(iface);
             Class<?> raw = getRawType(iface);
-            if (raw == null || !isGeneratableType(raw)) continue;
-            try {
-                raw.getMethod(m.getName(), m.getParameterTypes());
-                return true;
-            } catch (NoSuchMethodException _) {
-                // Not in this interface
+            if (raw != null) {
+                result.addAll(getAllGenericInterfacesRecursively(raw));
+            }
+        }
+        return result;
+    }
+
+    private boolean shouldAddOverride(Method m, Class<?> clazz) {
+        if (!clazz.isInterface()) {
+            return false;
+        }
+        try {
+            Class<?> primaryClazz = primaryLoader != null ? primaryLoader.loadClass(clazz.getName()) : clazz;
+            for (Method pm : primaryClazz.getMethods()) {
+                if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
+                    boolean match = true;
+                    for (int i = 0; i < pm.getParameterCount(); i++) {
+                        Class<?> p1 = pm.getParameterTypes()[i];
+                        Class<?> p2 = m.getParameterTypes()[i];
+                        if (!p1.equals(p2) && !p1.getName().equals(p2.getName())) {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (match) return true;
+                }
+            }
+            return false;
+        } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            return false;
+        }
+    }
+
+    private boolean hasMatchingMethod(Class<?> targetClass, Method m) {
+        for (Method pm : targetClass.getDeclaredMethods()) {
+            if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
+                boolean paramsMatch = true;
+                for (int i = 0; i < pm.getParameterCount(); i++) {
+                    Class<?> p1 = pm.getParameterTypes()[i];
+                    Class<?> p2 = m.getParameterTypes()[i];
+                    if (!p1.equals(p2) && !p1.getName().equals(p2.getName())) {
+                        paramsMatch = false;
+                        break;
+                    }
+                }
+                if (paramsMatch) return true;
             }
         }
         return false;
     }
 
+    private boolean isPrimaryApiMethod(Method m, Class<?> clazz) {
+        if (!isAccessible(clazz)) return false;
+        try {
+            Class<?> primaryClazz = primaryLoader != null ? primaryLoader.loadClass(clazz.getName()) : clazz;
+            for (Method pm : primaryClazz.getMethods()) {
+                if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
+                    boolean paramsMatch = true;
+                    for (int i = 0; i < pm.getParameterCount(); i++) {
+                        if (!pm.getParameterTypes()[i].getName().equals(m.getParameterTypes()[i].getName())) {
+                            paramsMatch = false;
+                            break;
+                        }
+                    }
+                    if (paramsMatch) return true;
+                }
+            }
+            return false;
+        } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            return false;
+        }
+    }
+
     private boolean isGeneratableType(Class<?> clazz) {
-        if (clazz == null) return false;
+        if (clazz == null || clazz.isEnum()) return false;
         if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
+        if (!isAccessible(clazz)) return false;
         String name = clazz.getName();
         if (name.equals("co.aikar.timings.Timing")) return false;
         if (org.mockmc.metaminer.util.ClassExclusions.isExcluded(name)) return false;

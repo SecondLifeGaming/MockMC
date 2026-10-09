@@ -5,12 +5,17 @@ public final class ClassExclusions {
     private ClassExclusions() {}
     
     private static final String[] EXCLUDED_PREFIXES = {
-        "com.destroystokyo.paper.loottable.",
         "io.papermc.paper.plugin.provider.source.",
         "io.papermc.paper.plugin.provider.type.",
         "io.papermc.paper.plugin.provider.configuration.",
         "io.papermc.paper.plugin.storage.",
-        "io.papermc.paper.plugin.entrypoint."
+        "io.papermc.paper.plugin.entrypoint.",
+        "io.papermc.paper.configuration.",
+        "io.papermc.paper.plugin.lifecycle.event.",
+        "io.papermc.paper.tag.",
+        "io.papermc.paper.registry.data.",
+        "io.papermc.paper.registry.event.",
+        "io.papermc.paper.registry.set."
     };
     
     private static final String[] EXCLUDED_CLASSES = {
@@ -22,7 +27,15 @@ public final class ClassExclusions {
         "io.papermc.paper.util.Holderable",
         "io.papermc.paper.util.SafeAutoClosable",
         "io.papermc.paper.commands.PaperCommandBlockHolder",
-        "io.papermc.paper.entity.PaperBucketable"
+        "io.papermc.paper.entity.PaperBucketable",
+        "org.bukkit.inventory.RecipeChoice$PredicateChoice",
+        "io.papermc.paper.util.OldEnum",
+        "io.papermc.paper.registry.HolderableBase",
+        "io.papermc.paper.datacomponent.BuildableDataComponent",
+        "io.papermc.paper.command.brigadier.BasicCommand",
+        "io.papermc.paper.registry.PaperRegistryBuilderFiller",
+        "io.papermc.paper.registry.RegistryBuilderFactory",
+        "org.bukkit.Warning"
     };
     
     private static final String[] GENERATABLE_PACKAGES = {
@@ -38,11 +51,12 @@ public final class ClassExclusions {
     };
 
     public static boolean isExcluded(String name) {
+        String canonicalName = name.replace('$', '.');
         for (String prefix : EXCLUDED_PREFIXES) {
-            if (name.startsWith(prefix)) return true;
+            if (canonicalName.startsWith(prefix) || name.startsWith(prefix)) return true;
         }
         for (String clazz : EXCLUDED_CLASSES) {
-            if (name.equals(clazz)) return true;
+            if (canonicalName.equals(clazz) || name.equals(clazz)) return true;
         }
         return false;
     }

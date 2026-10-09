@@ -20,7 +20,7 @@ repositories {
 dependencies {
 	implementation("io.papermc.paper:paper-api:${rootProject.property("paper.api.full-version")}")
 	implementation("commons-io:commons-io:2.18.0")
-	implementation("com.squareup:javapoet:1.13.0")
+	implementation("com.palantir.javapoet:javapoet:0.20.0")
 	implementation("io.leangen.geantyref:geantyref:1.3.16")
 	implementation("com.google.code.gson:gson:2.11.0")
 	implementation("net.md-5:SpecialSource:1.11.0")
@@ -78,6 +78,7 @@ tasks {
 
 	shadowJar {
 		relocate("com.squareup.javapoet", "org.mockmc.metaminer.javapoet")
+		relocate("com.palantir.javapoet", "org.mockmc.metaminer.javapoet")
 	}
 
 	build {
@@ -85,9 +86,9 @@ tasks {
 	}
 
 	runServer {
-		minecraftVersion("26.2")
+		minecraftVersion("26.3")
 		pluginJars.setFrom(shadowJar.flatMap { it.archiveFile })
-		runClasspath.setFrom(rootProject.file("jars/paper-26.2-25.jar"))
+		runClasspath.setFrom(rootProject.file("jars/paper-26.3-157.jar"))
 		jvmArgs("-Xshare:off", "-XX:-TieredCompilation")
 	}
 
@@ -97,6 +98,7 @@ tasks {
 		dependsOn(":downloadJars")
 		classpath = sourceSets.main.get().runtimeClasspath
 		args(rootProject.projectDir.absolutePath)
+		jvmArgs("-Xint", "-Xshare:off")
 		standardOutput = System.out
 		errorOutput = System.err
 		

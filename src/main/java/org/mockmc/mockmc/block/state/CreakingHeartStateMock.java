@@ -34,4 +34,27 @@ public class CreakingHeartStateMock extends TileStateMock implements CreakingHea
 		return new CreakingHeartStateMock(this);
 	}
 
+	@Override
+	public org.bukkit.Location spreadResin()
+	{
+		return null;
+	}
+
+	@Override
+	public org.bukkit.entity.Creaking spawnCreaking()
+	{
+		return null;
+	}
+
+	@Override
+	public void setCreaking(org.bukkit.entity.@org.jspecify.annotations.Nullable Creaking creaking)
+	{
+	}
+
+	@Override
+	public org.bukkit.entity.Creaking getCreaking()
+	{
+		return null;
+	}
+
 }
