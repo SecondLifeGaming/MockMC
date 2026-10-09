@@ -2091,7 +2091,7 @@ public class PlayerMock extends HumanEntityMock
 		{
 			this.exp = (this.exp - 1.0F) * this.getExpToLevel();
 			this.giveExpLevels(1);
-			this.exp /= this.getExpToLevel();
+			this.exp /= (float) this.getExpToLevel();
 		}
 	}
 
@@ -2482,7 +2482,7 @@ public class PlayerMock extends HumanEntityMock
 	public void setHealthScale(double scale)
 	{
 		Preconditions.checkArgument(scale >= 0, "Must be greater than 0");
-		Preconditions.checkArgument(scale != Double.NaN, scale + " is not a number!");
+		Preconditions.checkArgument(!Double.isNaN(scale), scale + " is not a number!");
 		// There is also too high but... what constitutes too high?
 		this.healthScale = scale;
 		this.scaledHealth = true;
@@ -2989,8 +2989,7 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.SYSTEM, new BaseComponent[]
-			{component});
+			this.sendMessage(ChatMessageType.SYSTEM, component);
 		}
 
 		@Override
@@ -3010,8 +3009,7 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.CHAT, sender, new BaseComponent[]
-			{component});
+			this.sendMessage(ChatMessageType.CHAT, sender, component);
 		}
 
 		@Override
@@ -3031,8 +3029,7 @@ public class PlayerMock extends HumanEntityMock
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			this.sendMessage(position, null, new BaseComponent[]
-			{component});
+			this.sendMessage(position, null, component);
 		}
 
 		@Override
@@ -3053,8 +3050,7 @@ public class PlayerMock extends HumanEntityMock
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender,
 				@NotNull BaseComponent component)
 		{
-			this.sendMessage(position, sender, new BaseComponent[]
-			{component});
+			this.sendMessage(position, sender, component);
 		}
 
 		@Override

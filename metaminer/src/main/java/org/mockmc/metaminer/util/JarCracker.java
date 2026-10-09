@@ -91,6 +91,9 @@ public class JarCracker {
                     if (!entry.isDirectory() && entry.getName().startsWith("META-INF/libraries/") && entry.getName().endsWith(".jar")) {
                         String relPath = entry.getName().substring("META-INF/libraries/".length());
                         File targetLib = new File(finalLibDir, relPath);
+                        if (!targetLib.toPath().normalize().startsWith(finalLibDir.toPath().normalize())) {
+                            throw new IOException("Zip slip vulnerability detected in entry: " + entry.getName());
+                        }
                         if (!targetLib.exists()) {
                             targetLib.getParentFile().mkdirs();
                             try (InputStream is = bundlerZip.getInputStream(entry);

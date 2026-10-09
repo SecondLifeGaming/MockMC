@@ -162,8 +162,7 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 				} else
 				{
 					size = newSize;
-					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, (double) ticks)
-							.callEvent();
+					new WorldBorderBoundsChangeFinishEvent(world, thisBorder, oldSize, newSize, ticks).callEvent();
 					this.cancel();
 				}
 			}
