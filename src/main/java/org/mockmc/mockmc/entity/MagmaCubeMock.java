@@ -1,14 +1,12 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.MagmaCube;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class MagmaCubeMock extends SlimeMock
 		implements
-			MagmaCube,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MagmaCubeBaseMock
 {
 
@@ -31,11 +29,5 @@ public class MagmaCubeMock extends SlimeMock
 	public EntityType getType()
 	{
 		return EntityType.MAGMA_CUBE;
-	}
-
-	@Override
-	public boolean isTrackedBy(@NotNull org.bukkit.entity.Player player)
-	{
-		return super.isTrackedBy(player);
 	}
 }

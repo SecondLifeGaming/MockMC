@@ -27,6 +27,8 @@ public class BaseMockGenerator implements DataGenerator {
     private static final String REPLACEMENT = "replacement";
 
     private static final String SINCE = "since";
+    private static final String FOR_REMOVAL = "forRemoval";
+    private static final String FOLIA = "folia";
     private static final String RETURN_NULL = "return null";
     private static final String BRIGADIER_PACKAGE = "com.mojang.brigadier";
 
@@ -192,7 +194,6 @@ public class BaseMockGenerator implements DataGenerator {
 
     private ClassLoader primaryLoader;
     private ClassLoader customLoader;
-    private Set<String> primaryJarNames;
 
     @Override
     public void generateData() throws java.io.IOException {
@@ -212,13 +213,12 @@ public class BaseMockGenerator implements DataGenerator {
             }
 
             // Paper is the primary API; Folia only fills gaps for classes Paper does not have.
-            urls.sort(Comparator.comparingInt((URL u) -> u.getPath().contains("folia") ? 1 : 0)
+            urls.sort(Comparator.comparingInt((URL u) -> u.getPath().contains(FOLIA) ? 1 : 0)
                     .thenComparing(URL::getPath));
 
             this.customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-            List<URL> primaryUrls = urls.stream().filter(u -> !u.getPath().contains("folia")).toList();
+            List<URL> primaryUrls = urls.stream().filter(u -> !u.getPath().contains(FOLIA)).toList();
             this.primaryLoader = new URLClassLoader(primaryUrls.toArray(new URL[0]), this.customLoader);
-            this.primaryJarNames = new HashSet<>(primaryUrls.stream().map(URL::getPath).toList());
             ClassPath classPath = ClassPath.from(customLoader);
             Set<Class<?>> toGenerate = scanPackages(classPath, customLoader);
 
@@ -241,7 +241,7 @@ public class BaseMockGenerator implements DataGenerator {
                 File processedJar = jar;
 
                 // 1. Crack Paper/Folia bundler if necessary
-                if (jar.getName().contains("paper") || jar.getName().contains("folia")) {
+                if (jar.getName().contains("paper") || jar.getName().contains(FOLIA)) {
                     org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
 
                     if (result != null) {
@@ -273,18 +273,26 @@ public class BaseMockGenerator implements DataGenerator {
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
-                try {
-                    if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
-                    Class<?> c = Class.forName(classInfo.getName(), false, primaryLoader != null ? primaryLoader : fallbackLoader);
-                    CodeSource cs = c.getProtectionDomain().getCodeSource();
-                    if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains("folia")) continue;
-                    collectInterfaces(c, toGenerate);
-                } catch (Exception | LinkageError _) {
-                    // Ignore loading errors
-                }
+                processClassInfo(classInfo, fallbackLoader, toGenerate);
             }
         }
         return toGenerate;
+    }
+
+    private void processClassInfo(ClassPath.ClassInfo classInfo, ClassLoader fallbackLoader, Set<Class<?>> toGenerate) {
+        if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) {
+            return;
+        }
+        try {
+            Class<?> c = Class.forName(classInfo.getName(), false, primaryLoader != null ? primaryLoader : fallbackLoader);
+            CodeSource cs = c.getProtectionDomain().getCodeSource();
+            if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains(FOLIA)) {
+                return;
+            }
+            collectInterfaces(c, toGenerate);
+        } catch (Exception | LinkageError _) {
+            // Ignore loading errors
+        }
     }
 
     private void addJarsRecursively(File dir, List<URL> urls) throws java.io.IOException {
@@ -351,7 +359,7 @@ public class BaseMockGenerator implements DataGenerator {
         TypeVariableName[] typeVars = addTypeVariables(clazz, typeSpec);
         Map<TypeVariable<?>, java.lang.reflect.Type> typeMap = buildTypeMap(clazz);
 
-        Set<String> classSuppressions = applyClassSuppressions(clazz, typeSpec);
+        Set<String> classSuppressions = applyClassSuppressions(typeSpec);
         applySuperInterfaces(clazz, typeSpec, typeVars, typeMap);
 
         Map<String, List<Method>> methodsBySignature = collectMethodsBySignature(clazz, typeVars, typeMap);
@@ -394,7 +402,7 @@ public class BaseMockGenerator implements DataGenerator {
                 builder.addMember(SINCE, "$S", "1.0");
             }
             if (d.forRemoval()) {
-                builder.addMember("forRemoval", "$L", true);
+                builder.addMember(FOR_REMOVAL, "$L", true);
             }
             typeSpec.addAnnotation(builder.build());
             
@@ -410,43 +418,48 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private TypeVariableName[] addTypeVariables(Class<?> clazz, TypeSpec.Builder typeSpec) {
-        TypeVariableName[] typeVars = new TypeVariableName[clazz.getTypeParameters().length];
-        if (clazz.getTypeParameters().length > 0) {
-            for (int i = 0; i < clazz.getTypeParameters().length; i++) {
-                typeVars[i] = TypeVariableName.get(clazz.getTypeParameters()[i].getName());
-            }
-            for (int i = 0; i < clazz.getTypeParameters().length; i++) {
-                TypeVariable<?> tv = clazz.getTypeParameters()[i];
-                try {
-                    java.lang.reflect.Type[] bounds = tv.getBounds();
-                    if (bounds != null && bounds.length > 0 && !(bounds.length == 1 && bounds[0] == Object.class)) {
-                        TypeName[] mappedBounds = new TypeName[bounds.length];
-                        for (int j = 0; j < bounds.length; j++) {
-                            mappedBounds[j] = mapType(bounds[j], clazz, typeVars, null);
-                        }
-                        typeVars[i] = typeVars[i].withBounds(mappedBounds);
-                    }
-                } catch (Exception _) {
-                    // Keep unbounded fallback
-                }
-                typeSpec.addTypeVariable(typeVars[i]);
-            }
-            if (clazz.isInterface()) {
-                TypeName[] typeVarNames = new TypeName[typeVars.length];
-                for (int i = 0; i < typeVars.length; i++) {
-                    typeVarNames[i] = TypeVariableName.get(clazz.getTypeParameters()[i].getName());
-                }
-                typeSpec.addSuperinterface(ParameterizedTypeName.get(ClassName.get(clazz), typeVarNames));
-            }
-        } else {
+        TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
+        TypeVariableName[] typeVars = new TypeVariableName[typeParameters.length];
+        if (typeParameters.length == 0) {
             if (clazz.isInterface()) {
                 typeSpec.addSuperinterface(clazz);
             }
+            return typeVars;
+        }
+
+        for (int i = 0; i < typeParameters.length; i++) {
+            typeVars[i] = TypeVariableName.get(typeParameters[i].getName());
+        }
+        for (int i = 0; i < typeParameters.length; i++) {
+            typeVars[i] = bindTypeVariableBounds(typeParameters[i], clazz, typeVars);
+            typeSpec.addTypeVariable(typeVars[i]);
+        }
+        if (clazz.isInterface()) {
+            TypeName[] typeVarNames = new TypeName[typeVars.length];
+            System.arraycopy(typeVars, 0, typeVarNames, 0, typeVars.length);
+            typeSpec.addSuperinterface(ParameterizedTypeName.get(ClassName.get(clazz), typeVarNames));
         }
         return typeVars;
     }
 
-    private Set<String> applyClassSuppressions(Class<?> clazz, TypeSpec.Builder typeSpec) {
+    private TypeVariableName bindTypeVariableBounds(TypeVariable<?> tv, Class<?> clazz, TypeVariableName[] typeVars) {
+        TypeVariableName typeVar = TypeVariableName.get(tv.getName());
+        try {
+            java.lang.reflect.Type[] bounds = tv.getBounds();
+            if (bounds != null && bounds.length > 0 && !(bounds.length == 1 && bounds[0] == Object.class)) {
+                TypeName[] mappedBounds = new TypeName[bounds.length];
+                for (int j = 0; j < bounds.length; j++) {
+                    mappedBounds[j] = mapType(bounds[j], clazz, typeVars, null);
+                }
+                return typeVar.withBounds(mappedBounds);
+            }
+        } catch (Exception _) {
+            // Keep unbounded fallback
+        }
+        return typeVar;
+    }
+
+    private Set<String> applyClassSuppressions(TypeSpec.Builder typeSpec) {
         typeSpec.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
                 .addMember("value", "$S", "all")
                 .build());
@@ -468,17 +481,14 @@ public class BaseMockGenerator implements DataGenerator {
         Class<?> primaryClazz = primaryLoader != null ? loadPrimaryClass(clazz) : clazz;
         for (java.lang.reflect.Type ifaceType : primaryClazz.getGenericInterfaces()) {
             Class<?> iface = getRawType(ifaceType);
-            if (iface != null && isGeneratableType(iface) && !iface.isSealed()) {
-                // Verify iface exists in primary API / protection domain of primaryClazz
-                if (isClassInSameProtectionDomainOrPrimary(iface, primaryClazz)) {
-                    ourInterfaces.add(ifaceType);
-                }
+            if (iface != null && isGeneratableType(iface) && !iface.isSealed() && isClassInSameProtectionDomainOrPrimary(iface)) {
+                ourInterfaces.add(ifaceType);
             }
         }
         return ourInterfaces;
     }
 
-    private boolean isClassInSameProtectionDomainOrPrimary(Class<?> iface, Class<?> primaryClazz) {
+    private boolean isClassInSameProtectionDomainOrPrimary(Class<?> iface) {
         if (primaryLoader == null) return true;
         try {
             Class<?> primaryIface = primaryLoader.loadClass(iface.getName());
@@ -537,20 +547,25 @@ public class BaseMockGenerator implements DataGenerator {
         }
 
         for (Class<?> targetClass : classVariants) {
-            List<java.lang.reflect.Type> hierarchy = new ArrayList<>();
-            hierarchy.add(targetClass);
-            hierarchy.addAll(getAllGenericInterfaces(targetClass));
-
-            for (java.lang.reflect.Type type : hierarchy) {
-                Class<?> c = getRawType(type);
-                if (c == null) continue;
-                for (Method m : c.getDeclaredMethods()) {
-                    if (shouldSkipMethod(m, clazz)) continue;
-                    methodsBySignature.computeIfAbsent(getMethodSignature(m, clazz, typeVars, typeMap), _ -> new ArrayList<>()).add(m);
-                }
-            }
+            collectTargetClassMethods(targetClass, clazz, typeVars, typeMap, methodsBySignature);
         }
         return methodsBySignature;
+    }
+
+    private void collectTargetClassMethods(Class<?> targetClass, Class<?> clazz, TypeVariableName[] typeVars,
+            Map<TypeVariable<?>, java.lang.reflect.Type> typeMap, Map<String, List<Method>> methodsBySignature) {
+        List<java.lang.reflect.Type> hierarchy = new ArrayList<>();
+        hierarchy.add(targetClass);
+        hierarchy.addAll(getAllGenericInterfaces(targetClass));
+
+        for (java.lang.reflect.Type type : hierarchy) {
+            Class<?> c = getRawType(type);
+            if (c == null) continue;
+            for (Method m : c.getDeclaredMethods()) {
+                if (shouldSkipMethod(m, clazz)) continue;
+                methodsBySignature.computeIfAbsent(getMethodSignature(m, clazz, typeVars, typeMap), _ -> new ArrayList<>()).add(m);
+            }
+        }
     }
 
     private boolean shouldSkipMethod(Method m, Class<?> clazz) {
@@ -671,15 +686,7 @@ public class BaseMockGenerator implements DataGenerator {
 
         if (declaredInThis) return true;
 
-        Set<Class<?>> independentDeclaring = new HashSet<>(declaringClasses);
-        for (Class<?> p : declaringClasses) {
-            for (Class<?> c : declaringClasses) {
-                if (p != c && p.isAssignableFrom(c)) {
-                    independentDeclaring.remove(p);
-                }
-            }
-        }
-
+        Set<Class<?>> independentDeclaring = filterIndependentDeclaringClasses(declaringClasses);
         // If multiple unrelated interfaces declare this method (e.g. LivingEntity and Leashable for isLeashed),
         // each branch defines its own default stub, so clazzBaseMock must override it to disambiguate unrelated defaults.
         if (independentDeclaring.size() > 1) {
@@ -690,6 +697,18 @@ public class BaseMockGenerator implements DataGenerator {
             return false;
         }
         return isMissingImplementation && !hasDefaultImplementationInParents;
+    }
+
+    private Set<Class<?>> filterIndependentDeclaringClasses(Set<Class<?>> declaringClasses) {
+        Set<Class<?>> independent = new HashSet<>(declaringClasses);
+        for (Class<?> p : declaringClasses) {
+            for (Class<?> c : declaringClasses) {
+                if (p != c && p.isAssignableFrom(c)) {
+                    independent.remove(p);
+                }
+            }
+        }
+        return independent;
     }
 
     private boolean isProvidedByGeneratableAncestor(Class<?> clazz, Method m, Set<Class<?>> allGeneratable) {
@@ -791,8 +810,8 @@ public class BaseMockGenerator implements DataGenerator {
             }
         } else {
             builder.addAnnotation(AnnotationSpec.builder(Deprecated.class)
-                    .addMember("since", "$S", "legacy")
-                    .addMember("forRemoval", "$L", true)
+                    .addMember(SINCE, "$S", "legacy")
+                    .addMember(FOR_REMOVAL, "$L", true)
                     .build());
             builder.addJavadoc("Legacy or cross-server API method.\n@mockmc.version legacy\n");
         }
@@ -968,7 +987,7 @@ public class BaseMockGenerator implements DataGenerator {
                 depBuilder.addMember(SINCE, "$S", "1.0");
             }
             if (toApply.forRemoval()) {
-                depBuilder.addMember("forRemoval", "$L", true);
+                depBuilder.addMember(FOR_REMOVAL, "$L", true);
             }
             builder.addAnnotation(depBuilder.build());
 
@@ -1143,19 +1162,6 @@ public class BaseMockGenerator implements DataGenerator {
         return null;
     }
 
-    private Set<java.lang.reflect.Type> getAllGenericInterfacesRecursively(Class<?> clazz) {
-        Set<java.lang.reflect.Type> result = new HashSet<>();
-        if (clazz == null) return result;
-        for (java.lang.reflect.Type iface : clazz.getGenericInterfaces()) {
-            result.add(iface);
-            Class<?> raw = getRawType(iface);
-            if (raw != null) {
-                result.addAll(getAllGenericInterfacesRecursively(raw));
-            }
-        }
-        return result;
-    }
-
     private boolean shouldAddOverride(Method m, Class<?> clazz) {
         if (!clazz.isInterface()) {
             return false;
@@ -1163,17 +1169,8 @@ public class BaseMockGenerator implements DataGenerator {
         try {
             Class<?> primaryClazz = primaryLoader != null ? primaryLoader.loadClass(clazz.getName()) : clazz;
             for (Method pm : primaryClazz.getMethods()) {
-                if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
-                    boolean match = true;
-                    for (int i = 0; i < pm.getParameterCount(); i++) {
-                        Class<?> p1 = pm.getParameterTypes()[i];
-                        Class<?> p2 = m.getParameterTypes()[i];
-                        if (!p1.equals(p2) && !p1.getName().equals(p2.getName())) {
-                            match = false;
-                            break;
-                        }
-                    }
-                    if (match) return true;
+                if (isMethodSignatureEquivalent(pm, m)) {
+                    return true;
                 }
             }
             return false;
@@ -1182,22 +1179,18 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private boolean hasMatchingMethod(Class<?> targetClass, Method m) {
-        for (Method pm : targetClass.getDeclaredMethods()) {
-            if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
-                boolean paramsMatch = true;
-                for (int i = 0; i < pm.getParameterCount(); i++) {
-                    Class<?> p1 = pm.getParameterTypes()[i];
-                    Class<?> p2 = m.getParameterTypes()[i];
-                    if (!p1.equals(p2) && !p1.getName().equals(p2.getName())) {
-                        paramsMatch = false;
-                        break;
-                    }
-                }
-                if (paramsMatch) return true;
+    private boolean isMethodSignatureEquivalent(Method pm, Method m) {
+        if (!pm.getName().equals(m.getName()) || pm.getParameterCount() != m.getParameterCount()) {
+            return false;
+        }
+        for (int i = 0; i < pm.getParameterCount(); i++) {
+            Class<?> p1 = pm.getParameterTypes()[i];
+            Class<?> p2 = m.getParameterTypes()[i];
+            if (!p1.isAssignableFrom(p2)) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean isPrimaryApiMethod(Method m, Class<?> clazz) {
@@ -1205,15 +1198,8 @@ public class BaseMockGenerator implements DataGenerator {
         try {
             Class<?> primaryClazz = primaryLoader != null ? primaryLoader.loadClass(clazz.getName()) : clazz;
             for (Method pm : primaryClazz.getMethods()) {
-                if (pm.getName().equals(m.getName()) && pm.getParameterCount() == m.getParameterCount()) {
-                    boolean paramsMatch = true;
-                    for (int i = 0; i < pm.getParameterCount(); i++) {
-                        if (!pm.getParameterTypes()[i].getName().equals(m.getParameterTypes()[i].getName())) {
-                            paramsMatch = false;
-                            break;
-                        }
-                    }
-                    if (paramsMatch) return true;
+                if (isMethodSignatureEquivalent(pm, m)) {
+                    return true;
                 }
             }
             return false;

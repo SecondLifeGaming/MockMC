@@ -103,3 +103,31 @@ The `jars/` directory must contain the correct snapshot JARs before running `:ru
 | Folia | `io.papermc.paper.threadedregions` |
 | Velocity | `com.velocitypowered.api` |
 | BungeeCord/Waterfall | `net.md_5.bungee` |
+
+---
+
+## Multi-Version Pinning & Differential Fallback Strategy
+
+To balance bleeding-edge API support against upstream version lags (e.g., Paper releasing `26.3` before a corresponding `Folia 26.2` updates to `26.3`), MetaMiner utilizes a tiered scanning order:
+
+### 1. Tiered Scanning Architecture
+1. **Primary Canonical Pass (Latest Paper Target)**:
+   - Scans the primary modern server release (e.g. `paper-26.3`).
+   - Acts as the single source of truth for all common Bukkit and Paper interfaces (`org.bukkit.*`, `io.papermc.paper.*`).
+   - Prevents older platform versions from downgrading method signatures or re-introducing removed deprecated methods.
+2. **Platform Extension Pass (Folia & Proxies)**:
+   - Evaluates the latest available versions of supplementary platforms (e.g. `folia-26.2`, `velocity-4.2.1`, `waterfall-1.21`).
+   - **Folia Exclusive Scopes**: Exclusively generates classes from Folia namespaces (such as `io.papermc.paper.threadedregions.*`).
+   - Does **not** mutate or conflict with common Bukkit/Paper interfaces generated in the Primary Pass.
+   - **Seamless Upgrade Path**: When `Folia 26.3` is released upstream, bumping the version in `build.gradle.kts` automatically promotes Folia into the primary version tier with zero architectural changes.
+3. **Differential Historical Fallback (Backward Compatibility)**:
+   - Scans older baseline JARs (e.g. `paper-26.2`, `1.21.x`) to identify methods removed in modern Paper.
+   - For non-conflicting signatures, generates smart stubs decorated with:
+     ```java
+     /**
+      * @deprecated Removed in modern API; preserved for binary test compatibility.
+      * @mockmc.version <version>
+      */
+     @Deprecated(forRemoval = true, since = "...")
+     ```
+

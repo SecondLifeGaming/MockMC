@@ -1,4 +1,5 @@
 package org.mockmc.mockmc.inventory.meta;
+
 import java.util.Objects;
 
 import com.google.common.base.Preconditions;
@@ -19,11 +20,9 @@ import java.util.Map;
  *
  * @see ItemMetaMock
  */
-@DelegateDeserialization(SerializableMeta.class)
-@SuppressWarnings("deprecation")
+@DelegateDeserialization(SerializableMeta.class) @SuppressWarnings("deprecation")
 public class BookMetaMock extends ItemMetaMock
-		implements
-			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BookMetaBaseMock
+		implements org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BookMetaBaseMock
 {
 
 	@Nullable
@@ -49,8 +48,7 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * Constructs a new {@link BookMetaMock}, cloning the data from another.
 	 *
-	 * @param meta
-	 *            The meta to clone.
+	 * @param meta The meta to clone.
 	 */
 	public BookMetaMock(@NotNull ItemMeta meta)
 	{
@@ -105,8 +103,7 @@ public class BookMetaMock extends ItemMetaMock
 		return !this.pages.isEmpty();
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public String getTitle()
 	{
 		return this.title;
@@ -119,10 +116,12 @@ public class BookMetaMock extends ItemMetaMock
 		{
 			this.title = null;
 			return true;
-		} else if (title.length() > 65535)
+		}
+		else if (title.length() > 65535)
 		{
 			return false;
-		} else
+		}
+		else
 		{
 			this.title = title;
 			return true;
@@ -135,8 +134,7 @@ public class BookMetaMock extends ItemMetaMock
 		return !Strings.isNullOrEmpty(this.author);
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public String getAuthor()
 	{
 		return author;
@@ -151,9 +149,7 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
-	@NotNull
+	@Override @Deprecated(since = "1.16") @NotNull
 	public String getPage(int page)
 	{
 		Preconditions.checkArgument(this.isValidPage(page), "Invalid page number");
@@ -168,20 +164,21 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
+	@Override @Deprecated(since = "1.16")
 	public void setPage(int page, @Nullable String text)
 	{
 		if (!this.isValidPage(page))
 		{
 			throw new IllegalArgumentException("Invalid page number " + page + "/" + this.pages.size());
-		} else
+		}
+		else
 		{
 			String newText;
 			if (text != null)
 			{
 				newText = text.length() > 32767 ? text.substring(0, 32767) : text;
-			} else
+			}
+			else
 			{
 				newText = "";
 			}
@@ -192,9 +189,7 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
-	@NotNull
+	@Override @Deprecated(since = "1.16") @NotNull
 	public List<String> getPages()
 	{
 		return this.pages;
@@ -203,8 +198,7 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
+	@Override @Deprecated(since = "1.16")
 	public void setPages(@NotNull List<String> pages)
 	{
 		this.pages.clear();
@@ -217,9 +211,8 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
-	public void setPages(String @NotNull [] pages)
+	@Override @Deprecated(since = "1.16")
+	public void setPages(String @NotNull... pages)
 	{
 		this.pages.clear();
 		this.addPage(pages);
@@ -237,9 +230,8 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * @deprecated Use adventure API instead.
 	 */
-	@Override
-	@Deprecated(since = "1.16")
-	public void addPage(String @NotNull [] pages)
+	@Override @Deprecated(since = "1.16")
+	public void addPage(String @NotNull... pages)
 	{
 		for (String page : pages)
 		{
@@ -253,10 +245,8 @@ public class BookMetaMock extends ItemMetaMock
 		return this.pages.size();
 	}
 
-	@Override
-	@SuppressWarnings(
-	{"MethodDoesntCallSuperMethod", "java:S2975", "java:S1182"})
-	@NotNull
+	@Override @SuppressWarnings(
+	{ "MethodDoesntCallSuperMethod", "java:S2975", "java:S1182" }) @NotNull
 	public BookMetaMock clone()
 	{
 		return new BookMetaMock(this);
@@ -268,8 +258,7 @@ public class BookMetaMock extends ItemMetaMock
 		return generation != null;
 	}
 
-	@Override
-	@Nullable
+	@Override @Nullable
 	public Generation getGeneration()
 	{
 		return generation;
@@ -284,12 +273,10 @@ public class BookMetaMock extends ItemMetaMock
 	/**
 	 * Required method for Bukkit deserialization.
 	 *
-	 * @param args
-	 *            A serialized BookMetaMock object in a Map&lt;String, Object&gt;
-	 *            format.
+	 * @param args A serialized BookMetaMock object in a Map&lt;String, Object&gt; format.
 	 * @return A new instance of the BookMetaMock class.
 	 */
-	@NotNull
+	@NotNull @SuppressWarnings("java:S9149")
 	public static BookMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		BookMetaMock serialMock = new BookMetaMock();
@@ -302,13 +289,11 @@ public class BookMetaMock extends ItemMetaMock
 	}
 
 	/**
-	 * Serializes the properties of an BookMetaMock to a HashMap. Unimplemented
-	 * properties are not present in the map.
+	 * Serializes the properties of an BookMetaMock to a HashMap. Unimplemented properties are not present in the map.
 	 *
 	 * @return A HashMap of String, Object pairs representing the BookMetaMock.
 	 */
-	@Override
-	@NotNull
+	@Override @NotNull
 	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();

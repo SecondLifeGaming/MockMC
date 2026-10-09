@@ -21,23 +21,37 @@
     <hr />
 </p>
 
-MockMC is a testing framework for Minecraft server software, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project. It provides complete mock implementations of server environments, allowing you to run unit tests for your plugins with speed and precision.
+MockMC is an automated, type-safe testing framework for Minecraft server software, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project.
 
-## 🛠 Why the Fork?
+While MockBukkit focuses on handcrafted in-game simulation, MockMC is designed for **bleeding-edge version adaptability and 100% compile-safe multi-platform testing**.
 
-MockBukkit set the standard for Bukkit-based unit testing. However, as server APIs like Paper and Folia have expanded into thousands of methods, maintaining manual stubs became tedious.
+---
 
-While the original MockBukkit utilized [metaminer](https://github.com/MockBukkit/MockBukkit/tree/minecraft/v26/metaminer) to help generate stubs, it required manual overhead to keep the mock surface in sync. We created MockMC to solve these core architectural challenges.
+## ⚖️ MockBukkit vs. MockMC: Which Should You Use?
 
-### The Overhaul
+| Feature                    | MockBukkit                                                                            | MockMC                                                                                  |
+| :------------------------- | :------------------------------------------------------------------------------------ | :-------------------------------------------------------------------------------------- |
+| **Primary Goal**           | Deep in-game behavioral simulation (physics, complex event lifecycles, recipe logic). | Rapid adaptation to new/experimental APIs with 100% type-safe compilation.              |
+| **Method Implementation**  | Handcrafted behavior for each method.                                                 | Automated **Smart Stubs** generated directly from server bytecode via JavaPoet.         |
+| **New Release Turnaround** | Requires manual coding of new API methods before tests can compile.                   | **Day 1 readiness**: Regenerates the full API surface automatically from upstream JARs. |
+| **Platforms Supported**    | Bukkit / Paper.                                                                       | **Paper, Folia** (regional schedulers), **Velocity**, and **Waterfall**.                |
+| **Unimplemented Methods**  | Often throws `UnimplementedOperationException`.                                       | Safe defaults (`false`, `0`, `Optional.empty()`, empty collections).                    |
 
-We have completely overhauled the [metaminer](/metaminer) engine using **JavaPoet**. This shift moves MockMC to an **"Engine First"** strategy:
+> [!TIP]
+> **Rule of Thumb:**
+>
+> - If you need deep simulation of vanilla Minecraft mechanics on a stable release, use **MockBukkit**.
+> - If you write your own test assertions and need your tests to compile and pass cleanly against **latest Paper/Folia snapshots or multi-platform proxies without runtime stub crashes**, use **MockMC**.
 
-- **Automated Source Generation**: Uses **JavaPoet** for automated source generation directly from the server schemas.
-- **Type-Safe Inheritance**: The generation engine parses and mirrors deep interface inheritance hierarchies and complex generic types straight out of the upstream source distributions.
-- **Universal Scraping Surface**: The tool reads structures cleanly across ecosystems, enabling instant, automated runtime stub generations for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
-- **Zero-Lag Updates**: Every method, even deep experimental tracking components added in a brand-new target server revision, is immediately generated with safe, type-specific fallback rules.
-- **Focus on Logic**: Because our engine programmatically spins up the thousands of interface methods automatically, our human implementation efforts are focused strictly on **simulating complex physics and block states**.
+---
+
+## ⚙️ How It Works: "Engine First"
+
+MockMC decouples API compilation from manual implementation:
+
+1. **Autonomous Bytecode Remapping**: The [`metaminer`](/metaminer) engine inspects target server JARs (`Paper`, `Folia`, `Velocity`) and remaps them without external build plugins.
+2. **Automated API Mirrors**: JavaPoet generates `*BaseMock` interfaces with non-crashing Smart Stubs for every interface method.
+3. **Layered Behavior**: Manual implementations focus strictly on complex logic (e.g., custom matchers, state tracking); the generator handles the remaining 95% of boilerplate.
 
 ## Usage
 
@@ -137,17 +151,14 @@ public void tearDown() {
 
 ---
 
-## 🛡️ Total API Coverage
+## 🛡️ Smart Stub Defaults
 
-Rather than throwing `UnimplementedOperationException` when encountering an unmapped method block, MockMC utilizes a **Total Coverage** layer.
+When an API method does not yet have an explicit behavioral simulation, generated mocks automatically return safe defaults instead of throwing `UnimplementedOperationException`:
 
-Because our automated code engine maps the entire API surface using JavaPoet source patterns, every single method is guaranteed to link cleanly at runtime. If a specific behavior has not been explicitly overwritten with complex logic yet, the engine provides **Safe Defaults**:
-
-- **Collections/Arrays**: Returns clean, empty, non-null instances.
-- **Optionals**: Returns standard `Optional.empty()`.
-- **Objects**: Returns `null` or an isolated mock sub-stub where safe.
-- **Primitives**: Returns typical zeroed boundaries (e.g., `false`, `0`).
-
-This setup ensures your active automated testing pipelines never encounter compilation breakage or unexpected failures due to minor structural additions in the upstream API.
-
----
+| Return Type                             | Default Value                                       |
+| :-------------------------------------- | :-------------------------------------------------- |
+| **Primitives (`boolean`, `int`, etc.)** | `false`, `0`, etc.                                  |
+| **Optionals**                           | `Optional.empty()`                                  |
+| **Collections / Lists / Sets**          | Empty, immutable collection                         |
+| **Adventure Components**                | `Component.empty()`                                 |
+| **Objects / Interfaces**                | `null` (or isolated default mock where appropriate) |

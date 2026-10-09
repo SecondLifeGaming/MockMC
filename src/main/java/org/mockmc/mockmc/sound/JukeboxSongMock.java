@@ -1,14 +1,11 @@
 package org.mockmc.mockmc.sound;
 
 import com.google.gson.JsonObject;
-import org.bukkit.JukeboxSong;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class JukeboxSongMock implements JukeboxSong, org.mockmc.mockmc.generated.server.org.bukkit.JukeboxSongBaseMock
+public class JukeboxSongMock implements org.mockmc.mockmc.generated.server.org.bukkit.JukeboxSongBaseMock
 {
 
 	private final NamespacedKey key;

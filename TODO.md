@@ -10,6 +10,10 @@ _Focus: Scaling manual behavior implementations for the 1.21.x API surface._
     - [ ] `PaperLeashable`: Implement stateful leash tracking (now that visibility issues are resolved).
     - [ ] `GameRule`: Extend dynamic game rule registration support.
     - [ ] `PluginManager`: Enhance event firing for Paper-specific events.
+- [ ] **Multi-Version Pinning & Differential Fallback Engine**:
+    - [ ] Prioritize Paper 26.3 as primary canonical API surface.
+    - [ ] Restrict Folia 26.2 to non-conflicting platform-exclusive scopes (`io.papermc.paper.threadedregions.*`) until Folia 26.3 exists.
+    - [ ] Implement historical fallback scanning for deprecated/removed methods across versions with automated `@mockmc.version` and `@Deprecated` tagging.
 - [ ] **Automated Coverage Auditing**: Integrate `COVERAGE.md` into CI to prevent regression in functional depth.
 - [x] **Maven Central Publishing**: CI/CD pipeline configured (`feat/maven-central`); GPG signing via in-memory key, `secrets: inherit` propagation to reusable workflow. Pending successful end-to-end run.
 

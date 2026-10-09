@@ -3,7 +3,6 @@ package org.mockmc.mockmc.entity;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.Boss;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.boss.BossBarMock;
@@ -11,7 +10,6 @@ import java.util.UUID;
 
 abstract class AbstractBossMock extends MonsterMock
 		implements
-			Boss,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.BossBaseMock
 {
 
@@ -36,12 +34,6 @@ abstract class AbstractBossMock extends MonsterMock
 	public BossBar getBossBar()
 	{
 		return bossBarMock;
-	}
-
-	@Override
-	public boolean isTrackedBy(@NotNull org.bukkit.entity.Player player)
-	{
-		return super.isTrackedBy(player);
 	}
 
 	@Override

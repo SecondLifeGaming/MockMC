@@ -248,7 +248,6 @@ public abstract class LivingEntityMock extends EntityMock
 	}
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void setMaxHealth(double health)
 	{
 		getAttribute(Attribute.MAX_HEALTH).setBaseValue(health);
@@ -404,24 +403,18 @@ public abstract class LivingEntityMock extends EntityMock
 
 	@Override
 	@Nullable
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public ItemStack getItemInUse()
 	{
 		return this.activeItem;
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public int getItemInUseTicks()
 	{
 		return this.activeItemUsedTicks;
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public void setItemInUseTicks(int ticks)
 	{
 		Preconditions.checkArgument(ticks >= 0, "Ticks must be >= 0");

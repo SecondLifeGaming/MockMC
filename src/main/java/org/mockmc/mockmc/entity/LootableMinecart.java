@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import com.destroystokyo.paper.loottable.LootableInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,7 +11,6 @@ import java.util.UUID;
 
 public abstract class LootableMinecart extends MinecartMock
 		implements
-			LootableInventory,
 			org.mockmc.mockmc.generated.server.com.destroystokyo.paper.loottable.LootableInventoryBaseMock
 {
 
