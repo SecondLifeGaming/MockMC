@@ -206,6 +206,9 @@ public class BaseMockGenerator implements DataGenerator {
             File cacheDir = new File(jarDirectory, "cache");
             List<URL> urls = processJars(cacheDir);
 
+            // Sanitize fallback Folia API jar so it never shadows Paper API classes
+            sanitizeFoliaApi(cacheDir);
+
             // 3. Add unbundled libraries recursively
             File libDir = new File(cacheDir, "libraries");
             if (libDir.exists()) {
@@ -1219,4 +1222,84 @@ public class BaseMockGenerator implements DataGenerator {
 
         return org.mockmc.metaminer.util.ClassExclusions.isGeneratablePackage(name);
     }
+
+    private void sanitizeFoliaApi(File cacheDir) {
+        File foliaDir = new File(cacheDir, "libraries/dev/folia/folia-api");
+        File paperDir = new File(cacheDir, "libraries/io/papermc/paper/paper-api");
+        if (!foliaDir.exists() || !paperDir.exists()) {
+            return;
+        }
+
+        List<File> foliaJars = new ArrayList<>();
+        collectJarsRecursive(foliaDir, foliaJars);
+        List<File> paperJars = new ArrayList<>();
+        collectJarsRecursive(paperDir, paperJars);
+        if (foliaJars.isEmpty() || paperJars.isEmpty()) {
+            return;
+        }
+
+        File paperApiJar = paperJars.get(0);
+        Set<String> paperEntries = new HashSet<>();
+        try (java.util.zip.ZipFile paperZip = new java.util.zip.ZipFile(paperApiJar)) {
+            var entries = paperZip.entries();
+            while (entries.hasMoreElements()) {
+                paperEntries.add(entries.nextElement().getName());
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Failed to read paper-api jar for sanitization: {0}", e.getMessage());
+            return;
+        }
+
+        for (File foliaJar : foliaJars) {
+            File tmpJar = new File(foliaJar.getParentFile(), foliaJar.getName() + ".tmp");
+            boolean modified = false;
+            try (java.util.zip.ZipFile foliaZip = new java.util.zip.ZipFile(foliaJar);
+                 java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(tmpJar))) {
+                var entries = foliaZip.entries();
+                while (entries.hasMoreElements()) {
+                    java.util.zip.ZipEntry entry = entries.nextElement();
+                    String name = entry.getName();
+                    if (paperEntries.contains(name)) {
+                        modified = true;
+                        continue;
+                    }
+                    java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry(name);
+                    zos.putNextEntry(newEntry);
+                    if (!entry.isDirectory()) {
+                        try (java.io.InputStream is = foliaZip.getInputStream(entry)) {
+                            org.apache.commons.io.IOUtils.copy(is, zos);
+                        }
+                    }
+                    zos.closeEntry();
+                }
+            } catch (IOException e) {
+                LOGGER.log(Level.WARNING, "Failed sanitizing folia-api jar: {0}", e.getMessage());
+                org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
+                continue;
+            }
+
+            if (modified) {
+                LOGGER.log(Level.INFO, "Sanitized {0} to exclude classes already present in Paper API.", foliaJar.getName());
+                if (!foliaJar.delete() || !tmpJar.renameTo(foliaJar)) {
+                    LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version.", foliaJar.getName());
+                }
+            } else {
+                org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
+            }
+        }
+    }
+
+    private void collectJarsRecursive(File dir, List<File> list) {
+        File[] files = dir.listFiles();
+        if (files == null) return;
+        for (File f : files) {
+            if (f.isDirectory()) {
+                collectJarsRecursive(f, list);
+            } else if (f.getName().endsWith(".jar") && !f.getName().endsWith(".tmp")) {
+                list.add(f);
+            }
+        }
+    }
 }
+
+

@@ -60,10 +60,29 @@ public abstract class LootableMinecart extends MinecartMock
 	}
 
 	@Override
+	public boolean hasPlayerLooted(@NotNull org.bukkit.entity.Player player)
+	{
+		return hasPlayerLooted(player.getUniqueId());
+	}
+
+	@Override
 	@Nullable
 	public Long getLastLooted(@NotNull UUID player)
 	{
 		return this.lootedPlayers != null ? this.lootedPlayers.get(player) : null;
+	}
+
+	@Override
+	@Nullable
+	public Long getLastLooted(@NotNull org.bukkit.entity.Player player)
+	{
+		return getLastLooted(player.getUniqueId());
+	}
+
+	@Override
+	public boolean setHasPlayerLooted(@NotNull org.bukkit.entity.Player player, boolean looted)
+	{
+		return setHasPlayerLooted(player.getUniqueId(), looted);
 	}
 
 	@Override

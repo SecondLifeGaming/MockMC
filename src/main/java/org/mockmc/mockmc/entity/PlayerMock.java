@@ -15,7 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
@@ -1720,10 +1720,10 @@ public class PlayerMock extends HumanEntityMock
 	@Deprecated
 	public void setPlayerListHeaderFooter(BaseComponent @NotNull [] header, BaseComponent @NotNull [] footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get()
-				.deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
-		this.playerListFooter = BungeeComponentSerializer.get()
-				.deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListHeader = deserializeBungee(
+				Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = deserializeBungee(
+				Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
@@ -1765,10 +1765,8 @@ public class PlayerMock extends HumanEntityMock
 	@Deprecated
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-		{header});
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-		{footer});
+		this.playerListHeader = deserializeBungee(header);
+		this.playerListFooter = deserializeBungee(footer);
 	}
 
 	@Override
@@ -1788,7 +1786,7 @@ public class PlayerMock extends HumanEntityMock
 	@Deprecated
 	public void setSubtitle(BaseComponent[] subtitle)
 	{
-		this.subtitles.add(BungeeComponentSerializer.get().deserialize(subtitle));
+		this.subtitles.add(deserializeBungee(subtitle));
 	}
 
 	@Override
@@ -1800,8 +1798,7 @@ public class PlayerMock extends HumanEntityMock
 	{
 		if (subtitle != null)
 		{
-			this.subtitles.add(BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-			{subtitle}));
+			this.subtitles.add(deserializeBungee(subtitle));
 		}
 	}
 
@@ -1814,7 +1811,7 @@ public class PlayerMock extends HumanEntityMock
 	{
 		if (title != null)
 		{
-			this.titles.add(BungeeComponentSerializer.get().deserialize(title));
+			this.titles.add(deserializeBungee(title));
 		}
 	}
 
@@ -1827,8 +1824,7 @@ public class PlayerMock extends HumanEntityMock
 	{
 		if (title != null)
 		{
-			this.titles.add(BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-			{title}));
+			this.titles.add(deserializeBungee(title));
 		}
 	}
 
@@ -3050,7 +3046,8 @@ public class PlayerMock extends HumanEntityMock
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender,
 				@NotNull BaseComponent component)
 		{
-			this.sendMessage(position, sender, component);
+			this.sendMessage(position, sender, new BaseComponent[]
+			{component});
 		}
 
 		@Override
@@ -3063,11 +3060,21 @@ public class PlayerMock extends HumanEntityMock
 		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			Component comp = deserializeBungee(components);
 			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
 			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
 			PlayerMock.this.sendMessage(comp);
 		}
+	}
+
+	private static Component deserializeBungee(BaseComponent... components)
+	{
+		if (components == null || components.length == 0)
+		{
+			return Component.empty();
+		}
+		String json = net.md_5.bungee.chat.ComponentSerializer.toString(components);
+		return GsonComponentSerializer.gson().deserialize(json);
 	}
 
 	/**

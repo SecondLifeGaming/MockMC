@@ -9,7 +9,6 @@ import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
@@ -435,8 +434,9 @@ public class ItemMetaMock
 	@NotNull
 	public BaseComponent @NotNull [] getDisplayNameComponent()
 	{
-		return BungeeComponentSerializer.get()
-				.serialize(GsonComponentSerializer.gson().deserialize(this.displayNameData));
+		Component component = GsonComponentSerializer.gson().deserialize(this.displayNameData);
+		String json = GsonComponentSerializer.gson().serialize(component);
+		return net.md_5.bungee.chat.ComponentSerializer.parse(json);
 	}
 
 	@Override
@@ -472,8 +472,10 @@ public class ItemMetaMock
 	@Deprecated(since = "1.16")
 	public void setDisplayNameComponent(BaseComponent @Nullable [] components)
 	{
-		this.displayNameData = GsonComponentSerializer.gson().serialize(BungeeComponentSerializer.get()
-				.deserialize(Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new)));
+		BaseComponent[] filtered = Arrays.stream(components).filter(Objects::nonNull).toArray(BaseComponent[]::new);
+		String json = net.md_5.bungee.chat.ComponentSerializer.toString(filtered);
+		Component component = GsonComponentSerializer.gson().deserialize(json);
+		this.displayNameData = GsonComponentSerializer.gson().serialize(component);
 	}
 
 	@Override
@@ -619,11 +621,12 @@ public class ItemMetaMock
 	@Nullable
 	public List<BaseComponent[]> getLoreComponents()
 	{
-		return this.loreData == null
-				? null
-				: this.loreData.stream().map(
-						c -> BungeeComponentSerializer.get().serialize(GsonComponentSerializer.gson().deserialize(c)))
-						.toList();
+		return this.loreData == null ? null : this.loreData.stream().map(c ->
+		{
+			Component component = GsonComponentSerializer.gson().deserialize(c);
+			String json = GsonComponentSerializer.gson().serialize(component);
+			return net.md_5.bungee.chat.ComponentSerializer.parse(json);
+		}).toList();
 	}
 
 	@Override
@@ -638,7 +641,11 @@ public class ItemMetaMock
 	@Override
 	public void setLoreComponents(@Nullable List<BaseComponent[]> lore)
 	{
-		lore(lore == null ? null : lore.stream().map(c -> BungeeComponentSerializer.get().deserialize(c)).toList());
+		lore(lore == null ? null : lore.stream().map(c ->
+		{
+			String json = net.md_5.bungee.chat.ComponentSerializer.toString(c);
+			return GsonComponentSerializer.gson().deserialize(json);
+		}).toList());
 	}
 
 	/**

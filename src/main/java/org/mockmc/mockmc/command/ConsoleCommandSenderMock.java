@@ -3,7 +3,6 @@ package org.mockmc.mockmc.command;
 import com.google.common.base.Preconditions;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.Server;
@@ -277,7 +276,8 @@ public class ConsoleCommandSenderMock
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
 		{
 			Preconditions.checkNotNull(components, "Components must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			String json = net.md_5.bungee.chat.ComponentSerializer.toString(components);
+			Component comp = net.kyori.adventure.text.serializer.gson.GsonComponentSerializer.gson().deserialize(json);
 			ConsoleCommandSenderMock.this.sendMessage(comp);
 		}
 	}

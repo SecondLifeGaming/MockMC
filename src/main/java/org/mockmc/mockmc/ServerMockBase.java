@@ -669,11 +669,8 @@ public abstract class ServerMockBase extends Server.Spigot
 		{
 			return Optional.empty();
 		}
-		Tag<?> tag = registry.getTags().get(key);
-		if (tag == null)
-		{
-			return Optional.empty();
-		}
+		Tag<?> tag = registry.getTags().computeIfAbsent(key,
+				k -> org.mockmc.mockmc.tags.TagFactory.createEmptyTag(registry, k));
 		return Optional.of((Tag<T>) tag);
 	}
 

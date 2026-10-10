@@ -18,10 +18,30 @@ public final class TagFactory
 		Preconditions.checkNotNull(key, "key cannot be null");
 
 		String path = String.format("/tags/%s/%s.json", registry.getRegistry(), key.value());
-		JsonElement values = ResourceLoader.loadResource(path).getAsJsonObject().get("values");
+		JsonElement root = ResourceLoader.loadResource(path);
+		if (root == null || !root.isJsonObject() || !root.getAsJsonObject().has("values"))
+		{
+			return createEmptyTag(registry, key);
+		}
+		JsonElement values = root.getAsJsonObject().get("values");
 
 		Preconditions.checkArgument(values.isJsonArray(), "Invalid tag values");
 		return createTag(registry, key, values.getAsJsonArray());
+	}
+
+	@NotNull
+	public static Tag<?> createEmptyTag(@NotNull TagRegistry registry, @NotNull NamespacedKey key)
+	{
+		Preconditions.checkNotNull(registry, "registry cannot be null");
+		Preconditions.checkNotNull(key, "key cannot be null");
+		return switch (registry)
+		{
+			case BLOCKS, ITEMS -> new MaterialTagMock(key, java.util.Collections.emptySet());
+			case ENTITY_TYPES -> new EntityTypeTagMock(key, java.util.Collections.emptySet());
+			case FLUIDS -> new FluidTagMock(key, java.util.Collections.emptySet());
+			case GAME_EVENTS -> new GameEventTagMock(key, java.util.Collections.emptySet());
+			case DAMAGE_TYPES -> new DamageTypeTagMock(key, java.util.Collections.emptySet());
+		};
 	}
 
 	static Tag<?> createTag(@NotNull TagRegistry tagRegistry, @NotNull NamespacedKey key, @NotNull JsonArray values)
