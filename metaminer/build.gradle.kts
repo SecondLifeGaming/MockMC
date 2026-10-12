@@ -73,7 +73,6 @@ tasks {
 		jvmArgs("-Xint")
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 		systemProperty("net.bytebuddy.experimental", "true")
-		ignoreFailures = true
 	}
 
 	shadowJar {

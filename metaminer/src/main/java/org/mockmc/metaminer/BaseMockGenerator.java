@@ -210,9 +210,8 @@ public class BaseMockGenerator implements DataGenerator {
         if (stagingDir.exists()) {
             org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
         }
-        if (backupDir.exists()) {
-            org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
-        }
+        // An interrupted previous run may have left the last known-good tree only in the backup directory.
+        org.mockmc.metaminer.util.AtomicDirectorySwap.recover(generatedDir, backupDir);
 
         try {
             File cacheDir = new File(jarDirectory, "cache");
@@ -264,18 +263,7 @@ public class BaseMockGenerator implements DataGenerator {
         if (!stagedPackageDir.exists()) {
             return;
         }
-        if (targetPackageDir.exists() && !targetPackageDir.renameTo(backupDir)) {
-            throw new java.io.IOException("Failed to rename existing generated directory to backup");
-        }
-        if (!stagedPackageDir.renameTo(targetPackageDir)) {
-            if (!backupDir.renameTo(targetPackageDir)) {
-                LOGGER.log(Level.WARNING, "Failed to restore backup directory to generated during rollback: {0}", backupDir.getAbsolutePath());
-            }
-            throw new java.io.IOException("Failed to promote staging directory to generated");
-        }
-        if (backupDir.exists()) {
-            org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
-        }
+        org.mockmc.metaminer.util.AtomicDirectorySwap.promote(stagedPackageDir, targetPackageDir, backupDir);
         org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
     }
 
@@ -284,13 +272,7 @@ public class BaseMockGenerator implements DataGenerator {
             if (stagingDir.exists()) {
                 org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
             }
-            if (!generatedDir.exists() && backupDir.exists()) {
-                if (!backupDir.renameTo(generatedDir)) {
-                    LOGGER.log(Level.WARNING, "Failed to restore backup directory to generated during rollback: {0}", backupDir.getAbsolutePath());
-                }
-            } else if (backupDir.exists()) {
-                org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
-            }
+            org.mockmc.metaminer.util.AtomicDirectorySwap.recover(generatedDir, backupDir);
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Failed during rollback of staging directory", e);
         }

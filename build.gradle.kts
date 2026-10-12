@@ -26,6 +26,22 @@ abstract class DownloadJarsTask : DefaultTask() {
 					}
 				}
 
+				// fill-data URLs are content-addressed: .../objects/<sha256>/<file>
+				val expected = url.substringBeforeLast('/').substringAfterLast('/')
+				if (Regex("[0-9a-f]{64}").matches(expected)) {
+					val digest = MessageDigest.getInstance("SHA-256")
+					dest.inputStream().use { ins ->
+						val buf = ByteArray(8192)
+						var n = ins.read(buf)
+						while (n >= 0) { digest.update(buf, 0, n); n = ins.read(buf) }
+					}
+					val actual = digest.digest().joinToString("") { "%02x".format(it) }
+					if (actual != expected) {
+						dest.delete()
+						throw GradleException("Checksum mismatch for $name: expected $expected but was $actual")
+					}
+				}
+
 				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
 				val env = mapOf("create" to "false")
 				val jarUri = URI.create("jar:file:${dest.absolutePath}")
@@ -61,16 +77,30 @@ plugins {
 group = "io.github.secondlifegaming"
 version = getFullVersion()
 
+// versions.json is the single source of truth for which artifacts are used.
+// Per platform: the entry flagged "primary", otherwise the first listed version.
+val manifestSelection: Map<String, String> = run {
+	val manifestFile = file("jars/manifests/versions.json")
+	check(manifestFile.exists()) { "Missing version manifest: $manifestFile" }
+	@Suppress("UNCHECKED_CAST")
+	val root = groovy.json.JsonSlurper().parse(manifestFile) as Map<String, Any?>
+	@Suppress("UNCHECKED_CAST")
+	val platforms = root["platforms"] as Map<String, Map<String, Any?>>
+	platforms.entries.associate { (platform, def) ->
+		@Suppress("UNCHECKED_CAST")
+		val versions = def["versions"] as List<Map<String, Any?>>
+		check(versions.isNotEmpty()) { "Manifest platform '$platform' has no versions" }
+		val chosen = versions.firstOrNull { it["primary"] == true } ?: versions.first()
+		val url = chosen["url"] as? String ?: error("Manifest platform '$platform' entry lacks a url")
+		platform to url
+	}
+}
+
 tasks.register<DownloadJarsTask>("downloadJars") {
 	group = "setup"
-	description = "Downloads backend API JARs for metaminer"
+	description = "Downloads backend API JARs for metaminer (selected by jars/manifests/versions.json)"
 	outputDir.set(layout.projectDirectory.dir("jars"))
-	jars.set(mapOf(
-		"velocity-4.2.1-SNAPSHOT-36.jar" to "https://fill-data.papermc.io/v1/objects/62a06a6bbf3c48b72473ac64a1bdea38e940b82780a99998e83b42d34022b42c/velocity-4.2.1-SNAPSHOT-36.jar",
-		"paper-26.3-157.jar" to "https://fill-data.papermc.io/v1/objects/77cdcd758777734b0b64db74974f68e56cb08637f3c36b26734842cb8521cc2e/paper-26.3-157.jar",
-		"folia-26.2-7.jar" to "https://fill-data.papermc.io/v1/objects/128a634192261cd38bb4a5dc54075018a0f896fd6c6f529e37dca6e99e32b3b3/folia-26.2-7.jar",
-		"waterfall-1.21-615.jar" to "https://fill-data.papermc.io/v1/objects/5eda8bfd0691e5088701f87020c68964299586df0faba289a634122d282d598c/waterfall-1.21-615.jar"
-	))
+	jars.set(manifestSelection.values.associateBy({ it.substringAfterLast('/') }, { it }))
 }
 
 tasks.named("compileJava") {
@@ -550,12 +580,9 @@ object JarServiceStripper {
 	}
 }
 
-val backendJars = mapOf(
-	"Folia" to "folia-26.2-7.jar",
-	"Paper" to "paper-26.3-157.jar",
-	"Velocity" to "velocity-4.2.1-SNAPSHOT-36.jar",
-	"Waterfall" to "waterfall-1.21-615.jar"
-)
+val backendJars: Map<String, String> = manifestSelection.entries.associate { (platform, url) ->
+	platform.replaceFirstChar { it.uppercase() } to url.substringAfterLast('/')
+}
 
 backendJars.forEach { (name, jarName) ->
 	tasks.register<Test>("test$name") {
@@ -566,6 +593,8 @@ backendJars.forEach { (name, jarName) ->
 		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceIn(1, 4)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 		jvmArgs("-Xint", "-Xshare:off")
+		// Backend verification must fail the build on genuine test failures.
+		ignoreFailures = false
 
 		if (name == "Velocity") {
 			include("org/mockmc/mockmc/generated/proxy/com/velocitypowered/**")
