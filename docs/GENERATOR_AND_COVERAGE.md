@@ -4,7 +4,7 @@ This document details how the MockMC `metaminer` engine measures, accounts for, 
 
 ---
 
-## 🎯 What the 100% Metric Actually Measures
+## What the 100% Metric Actually Measures
 
 The headline metric in `COVERAGE.md`:
 
@@ -21,20 +21,20 @@ The headline metric in `COVERAGE.md`:
 
 ---
 
-## 📐 Accounting Categories
+## Accounting Categories
 
 When `CoverageReportGenerator` analyzes the pinned JARs, it classifies each method into one of three categories:
 
-| Category | Description | Implementation Source |
-|---|---|---|
-| **Category A: Automated BaseMocks** | Generated `*BaseMock` interface default methods returning safe, non-crashing defaults (`false`, `0`, `Optional.empty()`, empty immutable collections, `Component.empty()`, or `null`). | `metaminer/generator/BaseMockGenerator.java` |
-| **Category B: Manual Implementations** | Explicit behavioral mocks providing stateful simulation, event dispatching, player inventories, command sender logic, or entity metadata. | `src/main/java/org/mockmc/mockmc/*Mock.java` |
-| **Category C: Justified Exclusions** | API classes intentionally excluded from generation (see below). | `org.mockmc.metaminer.util.ClassExclusions` |
-| **Unaccounted Methods** | Methods present in the target JAR bytecode that have neither an automated stub, a manual override, nor an exclusion entry. **Must always be 0.** | Regression / Blocker |
+| Category                               | Description                                                                                                                                                                            | Implementation Source                        |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| **Category A: Automated BaseMocks**    | Generated `*BaseMock` interface default methods returning safe, non-crashing defaults (`false`, `0`, `Optional.empty()`, empty immutable collections, `Component.empty()`, or `null`). | `metaminer/generator/BaseMockGenerator.java` |
+| **Category B: Manual Implementations** | Explicit behavioral mocks providing stateful simulation, event dispatching, player inventories, command sender logic, or entity metadata.                                              | `src/main/java/org/mockmc/mockmc/*Mock.java` |
+| **Category C: Justified Exclusions**   | API classes intentionally excluded from generation (see below).                                                                                                                        | `org.mockmc.metaminer.util.ClassExclusions`  |
+| **Unaccounted Methods**                | Methods present in the target JAR bytecode that have neither an automated stub, a manual override, nor an exclusion entry. **Must always be 0.**                                       | Regression / Blocker                         |
 
 ---
 
-## 🚫 Justified Exclusions
+## Justified Exclusions
 
 Classes are excluded from generation only under strictly justified circumstances:
 
@@ -46,9 +46,9 @@ All exclusions are maintained centrally in [`ClassExclusions.java`](../metaminer
 
 ---
 
-## 🔬 Source Artifacts Scanned
+## Source Artifacts Scanned
 
-Coverage reports are produced against the explicit set of pinned JARs:
+Coverage reports are produced against the explicit set of pinned JARs selected by `jars/manifests/versions.json` (validated for the 26.2–26.3 range only):
 
 - `jars/paper-26.3-157.jar`
 - `jars/folia-26.2-7.jar`
@@ -58,7 +58,7 @@ Coverage reports are produced against the explicit set of pinned JARs:
 
 ---
 
-## 🔄 Reproducing the Coverage Report
+## Reproducing the Coverage Report
 
 To regenerate `COVERAGE.md` from the pinned JARs:
 

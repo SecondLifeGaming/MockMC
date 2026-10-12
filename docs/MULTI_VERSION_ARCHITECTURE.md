@@ -4,7 +4,7 @@ This document serves as the authoritative architectural contract governing multi
 
 ---
 
-## 🎯 Architectural Principles
+## Architectural Principles
 
 MockMC achieves automated, type-safe API generation across backend and proxy ecosystems using an **"Engine First"** methodology. Unlike traditional mock frameworks that manually write stubs for every interface, MockMC uses the `metaminer` engine to extract API surfaces directly from target server bytecode and emit `*BaseMock` smart stubs.
 
@@ -18,16 +18,16 @@ To prevent cross-version pollution and maintain strict compilation guarantees, M
 
 ---
 
-## 🏗️ Pinned Platform Artifacts (The Current Baseline)
+## Pinned Platform Artifacts (The Current Baseline)
 
 MockMC currently pins the following target platform builds in `build.gradle.kts`:
 
-| Platform | Pinned Artifact | Release Line | Scope / Authority |
-|---|---|---|---|
-| **Paper** | `paper-26.3-157.jar` | 26.3 (Primary) | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
-| **Folia** | `folia-26.2-7.jar` | 26.2 (Extension) | **Platform-exclusive scope only**: `io.papermc.paper.threadedregions.*`. |
-| **Velocity** | `velocity-4.2.1-SNAPSHOT-36.jar` | 4.2.1 | Proxy API: `com.velocitypowered.api.*`. |
-| **Waterfall** | `waterfall-1.21-615.jar` | 1.21 | Proxy API: `net.md_5.bungee.*`. |
+| Platform      | Pinned Artifact                  | Release Line     | Scope / Authority                                                                          |
+| ------------- | -------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
+| **Paper**     | `paper-26.3-157.jar`             | 26.3 (Primary)   | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
+| **Folia**     | `folia-26.2-7.jar`               | 26.2 (Extension) | **Platform-exclusive scope only**: `io.papermc.paper.threadedregions.*`.                   |
+| **Velocity**  | `velocity-4.2.1-SNAPSHOT-36.jar` | 4.2.1            | Proxy API: `com.velocitypowered.api.*`.                                                    |
+| **Waterfall** | `waterfall-1.21-615.jar`         | 1.21             | Proxy API: `net.md_5.bungee.*`.                                                            |
 
 ### The Paper 26.3 + Folia 26.2 Pairing
 
@@ -40,7 +40,7 @@ A frequent point of confusion is why MockMC pairs Paper 26.3 with Folia 26.2:
 
 ---
 
-## 🔍 Tiered Scanning Pipeline (`metaminer`)
+## Tiered Scanning Pipeline (`metaminer`)
 
 The generator scans and processes bytecode in three strictly ordered passes:
 
@@ -72,7 +72,7 @@ The generator scans and processes bytecode in three strictly ordered passes:
 
 ---
 
-## 📦 Classpath Resolution & Classloader Isolation
+## Classpath Resolution & Classloader Isolation
 
 In `build.gradle.kts`, dependencies are ordered intentionally to mirror the tiered architecture:
 
@@ -93,27 +93,27 @@ Testing is partitioned across backend targets:
 
 ---
 
-## ➕ How to Introduce or Bump a Target Version
+## How to Introduce or Bump a Target Version
 
 When adding a new version or updating an existing target:
 
 1. **Update Pinned Declarations**:
-   - In `build.gradle.kts`, update the URL and artifact name in the `downloadJars` task.
-   - In `gradle.properties`, update `paper.api.version` and `paper.api.full-version`.
+    - In `jars/manifests/versions.json`, update the platform entry (`version`, `build`, `url`, and `primary` for Paper). This manifest is the single source of truth: `downloadJars` and the `test<Backend>` tasks derive artifact names from it, and the sha256 embedded in each fill-data URL is verified on download. Do not edit URLs in `build.gradle.kts`.
+    - In `gradle.properties`, update `paper.api.version` and `paper.api.full-version`.
 2. **Execute JAR Unbundling & Remapping**:
-   ```bash
-   ./gradlew downloadJars
-   ```
+    ```bash
+    ./gradlew downloadJars
+    ```
 3. **Run Code Generation**:
-   ```bash
-   ./gradlew :metaminer:runGenerator
-   ```
+    ```bash
+    ./gradlew :metaminer:runGenerator
+    ```
 4. **Format & Verify**:
-   ```bash
-   ./gradlew spotlessApply
-   ./gradlew compileJava
-   ./gradlew testAllBackends
-   ```
+    ```bash
+    ./gradlew spotlessApply
+    ./gradlew compileJava
+    ./gradlew testAllBackends
+    ```
 5. **Update Documentation**:
-   - Refresh `COVERAGE.md`.
-   - Update `docs/VERSION_SUPPORT.md` with the new status tier.
+    - Refresh `COVERAGE.md`.
+    - Update `docs/VERSION_SUPPORT.md` with the new status tier.

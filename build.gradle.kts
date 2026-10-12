@@ -78,29 +78,38 @@ group = "io.github.secondlifegaming"
 version = getFullVersion()
 
 // versions.json is the single source of truth for which artifacts are used.
-// Per platform: the entry flagged "primary", otherwise the first listed version.
-val manifestSelection: Map<String, String> = run {
+// Every listed version is downloaded (platforms only list versions that exist upstream);
+// per platform, the entry flagged "primary" (otherwise the first listed) drives the backend test classpath.
+val manifestResolved: Pair<List<String>, Map<String, String>> = run {
 	val manifestFile = file("jars/manifests/versions.json")
 	check(manifestFile.exists()) { "Missing version manifest: $manifestFile" }
 	@Suppress("UNCHECKED_CAST")
 	val root = groovy.json.JsonSlurper().parse(manifestFile) as Map<String, Any?>
 	@Suppress("UNCHECKED_CAST")
 	val platforms = root["platforms"] as Map<String, Map<String, Any?>>
-	platforms.entries.associate { (platform, def) ->
+	val all = mutableListOf<String>()
+	val selected = linkedMapOf<String, String>()
+	platforms.forEach { (platform, def) ->
 		@Suppress("UNCHECKED_CAST")
 		val versions = def["versions"] as List<Map<String, Any?>>
 		check(versions.isNotEmpty()) { "Manifest platform '$platform' has no versions" }
+		versions.forEach { v ->
+			all += v["url"] as? String ?: error("Manifest platform '$platform' entry lacks a url")
+		}
 		val chosen = versions.firstOrNull { it["primary"] == true } ?: versions.first()
-		val url = chosen["url"] as? String ?: error("Manifest platform '$platform' entry lacks a url")
-		platform to url
+		selected[platform] = chosen["url"] as String
 	}
+	check(all.map { it.substringAfterLast('/') }.toSet().size == all.size) { "Duplicate artifact names in version manifest" }
+	all.toList() to selected.toMap()
 }
+val manifestAllUrls: List<String> = manifestResolved.first
+val manifestSelection: Map<String, String> = manifestResolved.second
 
 tasks.register<DownloadJarsTask>("downloadJars") {
 	group = "setup"
-	description = "Downloads backend API JARs for metaminer (selected by jars/manifests/versions.json)"
+	description = "Downloads all backend API JARs listed in jars/manifests/versions.json"
 	outputDir.set(layout.projectDirectory.dir("jars"))
-	jars.set(manifestSelection.values.associateBy({ it.substringAfterLast('/') }, { it }))
+	jars.set(manifestAllUrls.associateBy { it.substringAfterLast('/') })
 }
 
 tasks.named("compileJava") {
