@@ -7,17 +7,11 @@ import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.damage.DamageEffect;
 import org.bukkit.damage.DamageScaling;
-import org.bukkit.damage.DamageType;
 import org.bukkit.damage.DeathMessageType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class DamageTypeMock
-		implements
-			DamageType,
-			org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageTypeBaseMock
+public class DamageTypeMock implements org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageTypeBaseMock
 {
 
 	static final String EXHAUSTION_KEY = "exhaustion";

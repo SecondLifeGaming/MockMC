@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class CrafterInventoryMock extends InventoryMock
 		implements
-			CrafterInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.CrafterInventoryBaseMock
 {
 

@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(MockMCExtension.class)
+@SuppressWarnings("deprecation")
 class ItemMockTest
 {
 

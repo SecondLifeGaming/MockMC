@@ -1,0 +1,54 @@
+{
+  "targetRange": {
+    "start": "26.2",
+    "end": "26.3"
+  },
+  "platforms": {
+    "paper": {
+      "type": "primary",
+      "versions": [
+        {
+          "version": "26.3",
+          "build": 157,
+          "url": "https://fill-data.papermc.io/v1/objects/77cdcd758777734b0b64db74974f68e56cb08637f3c36b26734842cb8521cc2e/paper-26.3-157.jar",
+          "primary": true
+        },
+        {
+          "version": "26.2",
+          "build": 25,
+          "url": "https://fill-data.papermc.io/v1/objects/83c6af7161cebd44dad740759750fa321287a7083ce4cd3a6fb28d89c7bc97cc/paper-26.2-25.jar"
+        }
+      ]
+    },
+    "folia": {
+      "type": "extension",
+      "versions": [
+        {
+          "version": "26.2",
+          "build": 7,
+          "url": "https://fill-data.papermc.io/v1/objects/128a634192261cd38bb4a5dc54075018a0f896fd6c6f529e37dca6e99e32b3b3/folia-26.2-7.jar"
+        }
+      ]
+    },
+    "velocity": {
+      "type": "proxy",
+      "versions": [
+        {
+          "version": "4.2.1",
+          "build": 36,
+          "url": "https://fill-data.papermc.io/v1/objects/62a06a6bbf3c48b72473ac64a1bdea38e940b82780a99998e83b42d34022b42c/velocity-4.2.1-SNAPSHOT-36.jar"
+        }
+      ]
+    },
+    "waterfall": {
+      "type": "proxy",
+      "versions": [
+        {
+          "version": "1.21",
+          "build": 615,
+          "url": "https://fill-data.papermc.io/v1/objects/5eda8bfd0691e5088701f87020c68964299586df0faba289a634122d282d598c/waterfall-1.21-615.jar"
+        }
+      ]
+    }
+  }
+}

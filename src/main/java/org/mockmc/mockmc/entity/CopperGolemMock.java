@@ -19,7 +19,6 @@ import java.util.UUID;
  */
 public class CopperGolemMock extends GolemMock
 		implements
-			CopperGolem,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CopperGolemBaseMock
 {
 

@@ -15,8 +15,6 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Mock implementation of an {@link InventoryView}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class InventoryViewMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryViewBaseMock

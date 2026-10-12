@@ -1,7 +1,6 @@
 package org.mockmc.mockmc.inventory.meta;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.Registry;
 import org.bukkit.configuration.serialization.DelegateDeserialization;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
@@ -15,8 +14,6 @@ import java.util.Map;
 import java.util.Objects;
 
 @DelegateDeserialization(SerializableMeta.class)
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ArmorMetaMock extends ItemMetaMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.ArmorMetaBaseMock
@@ -95,8 +92,8 @@ public class ArmorMetaMock extends ItemMetaMock
 		if (hasTrim())
 		{
 			Map<String, Object> trimData = new HashMap<>();
-			trimData.put("material", this.trim.getMaterial().key().toString());
-			trimData.put("pattern", this.trim.getPattern().key().toString());
+			trimData.put("material", this.trim.getMaterial().getKey().toString());
+			trimData.put("pattern", this.trim.getPattern().getKey().toString());
 			serialized.put("trim", trimData);
 		}
 		return serialized;
@@ -106,16 +103,27 @@ public class ArmorMetaMock extends ItemMetaMock
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
 		super.deserializeInternal(args);
-		if (args.containsKey("trim"))
+		if (args.get("trim") instanceof Map<?, ?> rawTrimData)
 		{
-			Map<String, Object> trimData = (Map<String, Object>) args.get("trim");
-			String materialKey = trimData.get("material").toString();
-			String patternKey = trimData.get("pattern").toString();
-			TrimMaterial trimMaterial = Registry.TRIM_MATERIAL.get(NamespacedKey.fromString(materialKey));
-			TrimPattern trimPattern = Registry.TRIM_PATTERN.get(NamespacedKey.fromString(patternKey));
-			if (trimMaterial != null && trimPattern != null)
+			Object rawMaterial = rawTrimData.get("material");
+			Object rawPattern = rawTrimData.get("pattern");
+			if (rawMaterial != null && rawPattern != null)
 			{
-				this.setTrim(new ArmorTrim(trimMaterial, trimPattern));
+				NamespacedKey materialKey = NamespacedKey.fromString(rawMaterial.toString());
+				NamespacedKey patternKey = NamespacedKey.fromString(rawPattern.toString());
+				io.papermc.paper.registry.RegistryAccess registryAccess = io.papermc.paper.registry.RegistryAccess
+						.registryAccess();
+				TrimMaterial trimMaterial = materialKey != null
+						? registryAccess.getRegistry(io.papermc.paper.registry.RegistryKey.TRIM_MATERIAL)
+								.get(materialKey)
+						: null;
+				TrimPattern trimPattern = patternKey != null
+						? registryAccess.getRegistry(io.papermc.paper.registry.RegistryKey.TRIM_PATTERN).get(patternKey)
+						: null;
+				if (trimMaterial != null && trimPattern != null)
+				{
+					this.setTrim(new ArmorTrim(trimMaterial, trimPattern));
+				}
 			}
 		}
 	}
@@ -137,6 +145,7 @@ public class ArmorMetaMock extends ItemMetaMock
 	 * @see org.bukkit.configuration.serialization.ConfigurationSerializable
 	 */
 	@NotNull
+	@SuppressWarnings("java:S2176")
 	public static ArmorMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		ArmorMetaMock armorMetaMock = new ArmorMetaMock();

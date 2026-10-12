@@ -17,7 +17,6 @@ import java.util.Objects;
  */
 public class MerchantInventoryMock extends InventoryMock
 		implements
-			MerchantInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.MerchantInventoryBaseMock
 {
 

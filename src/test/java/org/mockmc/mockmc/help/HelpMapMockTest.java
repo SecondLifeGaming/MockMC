@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockmc.mockmc.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class HelpMapMockTest
 {

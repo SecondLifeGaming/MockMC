@@ -18,7 +18,6 @@ import java.util.UUID;
  */
 public class TadpoleMock extends FishMock
 		implements
-			Tadpole,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.TadpoleBaseMock
 {
 

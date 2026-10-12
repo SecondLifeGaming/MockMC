@@ -20,13 +20,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.inventory.PlayerInventoryBa
  *
  * @see InventoryMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class PlayerInventoryMock extends InventoryMock
-		implements
-			PlayerInventory,
-			EntityEquipment,
-			PlayerInventoryBaseMock
+public class PlayerInventoryMock extends InventoryMock implements EntityEquipment, PlayerInventoryBaseMock
 {
 
 	/**

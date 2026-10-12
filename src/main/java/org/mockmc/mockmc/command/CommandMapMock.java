@@ -12,7 +12,6 @@ import org.mockmc.mockmc.command.brigadier.bukkit.BukkitBrigadierForwardingMapMo
  */
 public class CommandMapMock extends SimpleCommandMap
 		implements
-			CommandMap,
 			org.mockmc.mockmc.generated.server.org.bukkit.command.CommandMapBaseMock
 {
 

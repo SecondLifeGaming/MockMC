@@ -10,8 +10,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.entity.LivingEntityMock;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class LivingEntitySimulation
 {
 
@@ -38,6 +36,7 @@ public class LivingEntitySimulation
 	 *         The EntityDamageEvent that got thrown
 	 *         </p>
 	 */
+	@SuppressWarnings("removal")
 	public EntityDamageEvent simulateDamage(double amount, @NotNull DamageSource source)
 	{
 		EntityDamageEvent event;

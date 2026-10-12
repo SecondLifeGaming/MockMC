@@ -1,14 +1,12 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Ocelot;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class OcelotMock extends AnimalsMock
 		implements
-			Ocelot,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.OcelotBaseMock
 {
 

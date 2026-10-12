@@ -18,6 +18,8 @@ public class JukeboxSongMock implements org.mockmc.mockmc.generated.server.org.b
 		this.key = key;
 	}
 
+	private static final String DESCRIPTION = "description";
+
 	@ApiStatus.Internal
 	public static JukeboxSongMock from(JsonObject jsonObject)
 	{
@@ -26,15 +28,14 @@ public class JukeboxSongMock implements org.mockmc.mockmc.generated.server.org.b
 		if (jsonObject.has("translationKey"))
 		{
 			translationKey = jsonObject.get("translationKey").getAsString();
-		} else if (jsonObject.has("description"))
+		} else if (jsonObject.has(DESCRIPTION))
 		{
-			if (jsonObject.get("description").isJsonObject()
-					&& jsonObject.getAsJsonObject("description").has("translate"))
+			if (jsonObject.get(DESCRIPTION).isJsonObject() && jsonObject.getAsJsonObject(DESCRIPTION).has("translate"))
 			{
-				translationKey = jsonObject.getAsJsonObject("description").get("translate").getAsString();
-			} else if (jsonObject.get("description").isJsonPrimitive())
+				translationKey = jsonObject.getAsJsonObject(DESCRIPTION).get("translate").getAsString();
+			} else if (jsonObject.get(DESCRIPTION).isJsonPrimitive())
 			{
-				translationKey = jsonObject.get("description").getAsString();
+				translationKey = jsonObject.get(DESCRIPTION).getAsString();
 			}
 		}
 		if (translationKey == null)
@@ -44,6 +45,10 @@ public class JukeboxSongMock implements org.mockmc.mockmc.generated.server.org.b
 		return new JukeboxSongMock(key, translationKey);
 	}
 
+	/**
+	 * @deprecated Use modern JukeboxSong API.
+	 * @mockmc.version 1.21
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21")
 	@NotNull

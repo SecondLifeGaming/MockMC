@@ -2,7 +2,6 @@ package org.mockmc.mockmc.entity;
 
 import org.bukkit.Material;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.entity.BlockDisplay;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
@@ -10,7 +9,6 @@ import java.util.UUID;
 
 public class BlockDisplayMock extends DisplayMock
 		implements
-			BlockDisplay,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.BlockDisplayBaseMock
 {
 

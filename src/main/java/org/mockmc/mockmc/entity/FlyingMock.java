@@ -10,11 +10,8 @@ import java.util.UUID;
  *
  * @see MobMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class FlyingMock extends MobMock
 		implements
-			Flying,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.FlyingBaseMock
 {
 

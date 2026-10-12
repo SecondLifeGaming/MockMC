@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("deprecation")
 public class PlainTextComponentProviderImpl implements PlainTextComponentSerializer.Provider
 {
 

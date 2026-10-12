@@ -121,7 +121,7 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 		{
 			initialized = true;
 			// Load data first, before any class loading can happen
-			String fileName = String.format("/keyed/%s.json", registryKey.key().value());
+			String fileName = "/keyed/" + registryKey.key().value() + ".json";
 			this.keyedData = ResourceLoader.loadResource(fileName).getAsJsonObject().get(VALUES).getAsJsonArray();
 
 			// Now we can load the type and constructor, which might trigger recursion
@@ -471,15 +471,15 @@ public class RegistryMock<T extends Keyed> implements org.mockmc.mockmc.generate
 			try
 			{
 				processElement(structureJSONElement.getAsJsonObject());
-			} catch (Throwable t)
+			} catch (Exception e)
 			{
-				LOGGER.log(java.util.logging.Level.SEVERE,
-						"Failed to populate registry element: " + structureJSONElement, t);
-				if (t.getCause() != null)
+				LOGGER.log(java.util.logging.Level.SEVERE, e,
+						() -> "Failed to populate registry element: " + structureJSONElement);
+				if (e.getCause() != null)
 				{
-					LOGGER.log(java.util.logging.Level.SEVERE, "Caused by: ", t.getCause());
+					LOGGER.log(java.util.logging.Level.SEVERE, "Caused by: ", e.getCause());
 				}
-				throw t;
+				throw new IllegalStateException("Failed to populate registry element: " + structureJSONElement, e);
 			}
 		}
 	}

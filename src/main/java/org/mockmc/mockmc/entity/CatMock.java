@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class CatMock extends TameableAnimalMock
 		implements
-			Cat,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CatBaseMock
 {
 

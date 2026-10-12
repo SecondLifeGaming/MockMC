@@ -18,11 +18,8 @@ import java.util.UUID;
  *
  * @see PiglinAbstractMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class PiglinMock extends PiglinAbstractMock
 		implements
-			Piglin,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinBaseMock
 {
 

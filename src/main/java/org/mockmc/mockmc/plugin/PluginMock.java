@@ -16,8 +16,7 @@ import java.util.function.Consumer;
 /**
  * A simple plugin that does nothing.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class PluginMock extends JavaPlugin
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginBaseMock

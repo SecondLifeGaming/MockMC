@@ -12,9 +12,8 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.AgeableBaseMock;
  *
  * @see CreatureMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class AgeableMock extends CreatureMock implements Ageable, AgeableBaseMock
+@SuppressWarnings("java:S110")
+public class AgeableMock extends CreatureMock implements AgeableBaseMock
 {
 
 	private int age;

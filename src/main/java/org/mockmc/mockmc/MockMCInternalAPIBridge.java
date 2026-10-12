@@ -25,7 +25,7 @@ import java.util.function.Predicate;
 import io.papermc.paper.entity.poi.PoiType;
 
 @SuppressWarnings(
-{"UnstableApiUsage", "deprecation", "removal", "unchecked"})
+{"UnstableApiUsage", "deprecation"})
 @NullMarked
 @ApiStatus.Internal
 @ApiStatus.Experimental
@@ -50,6 +50,7 @@ public class MockMCInternalAPIBridge
 	@Override
 	@Deprecated(forRemoval = true, since = "1.21.5")
 	@ApiStatus.ScheduledForRemoval(inVersion = "1.22")
+	@SuppressWarnings("removal")
 	public Biome constructLegacyCustomBiome()
 	{
 		if (customBiome == null)

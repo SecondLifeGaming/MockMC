@@ -21,7 +21,6 @@ import java.util.UUID;
  */
 public abstract class ThrownPotionMock extends ThrowableProjectileMock
 		implements
-			ThrownPotion,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ThrownPotionBaseMock
 {
 

@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class PiglinBruteMock extends PiglinAbstractMock
 		implements
-			PiglinBrute,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinBruteBaseMock
 {
 

@@ -790,11 +790,8 @@ public class ItemMetaMock
 			java.util.Map<String, java.util.List<java.util.Map<String, Object>>> serializedModifiers = new java.util.HashMap<>();
 			for (org.bukkit.attribute.Attribute attribute : this.attributeModifiers.keySet())
 			{
-				java.util.List<java.util.Map<String, Object>> modifierList = new java.util.ArrayList<>();
-				for (org.bukkit.attribute.AttributeModifier modifier : this.attributeModifiers.get(attribute))
-				{
-					modifierList.add(modifier.serialize());
-				}
+				java.util.List<java.util.Map<String, Object>> modifierList = this.attributeModifiers.get(attribute)
+						.stream().map(org.bukkit.attribute.AttributeModifier::serialize).toList();
 				serializedModifiers.put(attribute.getKey().toString(), modifierList);
 			}
 			map.put(ATTRIBUTE_MODIFIERS, serializedModifiers);
@@ -914,7 +911,6 @@ public class ItemMetaMock
 		return serialMock;
 	}
 
-	@SuppressWarnings("unchecked")
 	@ApiStatus.Internal
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{

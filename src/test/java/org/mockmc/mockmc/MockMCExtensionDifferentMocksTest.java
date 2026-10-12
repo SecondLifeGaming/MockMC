@@ -30,8 +30,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class MockMCExtensionDifferentMocksTest
 {
@@ -273,7 +271,7 @@ class MockMCExtensionDifferentMocksTest
 	}
 
 	@SuppressWarnings(
-	{"java:S1144", "java:S1172"})
+	{"java:S1144", "java:S1172", "unused"})
 	private void testMethodWithInteger(@MockMCInject Integer param)
 	{
 		// I just need the methods signature. It doesn't have to do anything.

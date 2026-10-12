@@ -33,8 +33,11 @@ public record ResolvableProfileMock(@Nullable UUID uuid, @Nullable String name,
 		return CompletableFuture.completedFuture(playerProfileMock);
 	}
 
+	@SuppressWarnings("unused")
 	public void applySkinToPlayerHeadContents(Builder builder)
 	{
+		// No-op in mock environment: skin textures are not resolved or applied to head
+		// contents
 	}
 
 	static class BuilderMock implements Builder

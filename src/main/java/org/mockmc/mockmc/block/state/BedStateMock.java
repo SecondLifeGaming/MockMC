@@ -13,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class BedStateMock extends TileStateMock implements Bed
 {
 
@@ -28,12 +26,12 @@ public class BedStateMock extends TileStateMock implements Bed
 	public BedStateMock(@NotNull Material material)
 	{
 		super(material);
-		checkType(material, MaterialTags.BEDS);
+		checkType(material, org.bukkit.Tag.BEDS);
 	}
 
 	/**
 	 * Constructs a new {@link BedStateMock} for the provided {@link Block}. Only
-	 * supports materials in {@link MaterialTags#BEDS}
+	 * supports materials in {@link org.bukkit.Tag#BEDS}
 	 *
 	 * @param block
 	 *            The block this state is for.
@@ -41,7 +39,7 @@ public class BedStateMock extends TileStateMock implements Bed
 	protected BedStateMock(@NotNull Block block)
 	{
 		super(block);
-		checkType(block, MaterialTags.BEDS);
+		checkType(block, org.bukkit.Tag.BEDS);
 	}
 
 	/**

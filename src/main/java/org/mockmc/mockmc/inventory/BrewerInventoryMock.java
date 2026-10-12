@@ -16,7 +16,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class BrewerInventoryMock extends InventoryMock
 		implements
-			BrewerInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.BrewerInventoryBaseMock
 {
 

@@ -27,7 +27,9 @@ class LeashableTest
 	void setUp()
 	{
 		WorldMock world = server.addSimpleWorld("world");
-		pig = world.spawn(world.getSpawnLocation(), PigMock.class);
+		pig = world.spawn(world.getSpawnLocation(), PigMock.class, _ ->
+		{
+		});
 		player = server.addPlayer();
 	}
 

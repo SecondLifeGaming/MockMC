@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ZombieHorseMock extends AbstractHorseMock
 		implements
-			ZombieHorse,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieHorseBaseMock
 {
 

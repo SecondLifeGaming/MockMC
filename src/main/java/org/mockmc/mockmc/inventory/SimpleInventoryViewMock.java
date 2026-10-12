@@ -12,8 +12,6 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryViewMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SimpleInventoryViewMock extends InventoryViewMock
 {
 

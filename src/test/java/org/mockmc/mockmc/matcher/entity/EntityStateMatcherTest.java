@@ -28,7 +28,9 @@ class EntityStateMatcherTest
 	void setUp()
 	{
 		warden = (WardenMock) server.addSimpleWorld("world").spawn(server.addSimpleWorld("world").getSpawnLocation(),
-				Warden.class);
+				Warden.class, _ ->
+				{
+				});
 		player = server.addPlayer();
 	}
 

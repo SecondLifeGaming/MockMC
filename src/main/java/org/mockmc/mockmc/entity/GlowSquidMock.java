@@ -2,14 +2,12 @@ package org.mockmc.mockmc.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.GlowSquid;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class GlowSquidMock extends SquidMock
 		implements
-			GlowSquid,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.GlowSquidBaseMock
 {
 

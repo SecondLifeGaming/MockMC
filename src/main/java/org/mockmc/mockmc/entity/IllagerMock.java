@@ -12,7 +12,6 @@ import java.util.UUID;
  */
 public abstract class IllagerMock extends RaiderMock
 		implements
-			Illager,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.IllagerBaseMock
 {
 

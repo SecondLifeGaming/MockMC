@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SkeletonHorseMock extends AbstractHorseMock
 		implements
-			SkeletonHorse,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SkeletonHorseBaseMock
 {
 

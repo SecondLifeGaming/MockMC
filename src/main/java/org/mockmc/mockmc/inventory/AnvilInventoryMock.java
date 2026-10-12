@@ -11,11 +11,8 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see InventoryMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class AnvilInventoryMock extends InventoryMock
 		implements
-			AnvilInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.AnvilInventoryBaseMock
 {
 

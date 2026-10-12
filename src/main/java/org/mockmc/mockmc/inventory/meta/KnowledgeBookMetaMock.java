@@ -84,7 +84,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock
 	}
 
 	@Override
-	public void addRecipe(@NotNull NamespacedKey @NotNull [] recipes)
+	public void addRecipe(@NotNull NamespacedKey @NotNull... recipes)
 	{
 		for (NamespacedKey recipe : recipes)
 		{
@@ -128,6 +128,7 @@ public class KnowledgeBookMetaMock extends ItemMetaMock
 	 * @return A new instance of the KnowledgeBookMetaMock class.
 	 */
 	@NotNull
+	@SuppressWarnings("java:S2176")
 	public static KnowledgeBookMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		KnowledgeBookMetaMock serialMock = new KnowledgeBookMetaMock();

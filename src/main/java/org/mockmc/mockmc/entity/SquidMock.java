@@ -1,15 +1,12 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Squid;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class SquidMock extends AgeableMock
-		implements
-			Squid,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.SquidBaseMock
+@SuppressWarnings("java:S110")
+public class SquidMock extends AgeableMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.SquidBaseMock
 {
 
 	/**

@@ -65,11 +65,8 @@ import java.util.stream.Stream;
 /**
  * Mock implementation of a {@link PluginManager}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class PluginManagerMock extends PermissionManagerMock
 		implements
-			PluginManager,
 			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginManagerBaseMock
 {
 
@@ -821,18 +818,23 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public Plugin loadPlugin(@NotNull File file) throws UnknownDependencyException
 	{
+		PluginDescriptionFile descriptionFile;
+		try (JarFile jarFile = new JarFile(file))
+		{
+			descriptionFile = new PluginDescriptionFile(jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
+		} catch (IOException | InvalidDescriptionException e)
+		{
+			throw new UnknownDependencyException(e);
+		}
 		try
 		{
-			JarFile jarFile = new JarFile(file);
-			PluginDescriptionFile descriptionFile = new PluginDescriptionFile(
-					jarFile.getInputStream(jarFile.getEntry("plugin.yml")));
 			MockMCURLClassLoader classLoader = createURLClassLoader(file, descriptionFile);
 			Class<?> pluginClass = classLoader.loadClass(descriptionFile.getMainClass(), true, false, false);
 			JavaPlugin plugin = (JavaPlugin) pluginClass.getConstructor().newInstance();
 			registerLoadedPlugin(plugin);
 			return plugin;
-		} catch (IOException | InvalidDescriptionException | ClassNotFoundException | NoSuchMethodException
-				| InstantiationException | IllegalAccessException | InvocationTargetException e)
+		} catch (IOException | ClassNotFoundException | NoSuchMethodException | InstantiationException
+				| IllegalAccessException | InvocationTargetException e)
 		{
 			throw new PluginLoadException(e);
 		}

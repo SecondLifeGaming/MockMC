@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(MockMCExtension.class)
+@SuppressWarnings("deprecation")
 class MapMetaMockTest
 {
 

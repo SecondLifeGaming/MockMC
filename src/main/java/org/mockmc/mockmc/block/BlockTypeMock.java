@@ -18,8 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class BlockTypeMock<B extends BlockData>
 		implements
 			BlockType.Typed<B>,
@@ -109,7 +108,6 @@ public class BlockTypeMock<B extends BlockData>
 
 	@NotNull
 	@Override
-	@SuppressWarnings("unchecked")
 	public <O extends BlockData> Typed<O> typed(@NotNull Class<O> blockDataType)
 	{
 		return (Typed<O>) this;
@@ -138,7 +136,6 @@ public class BlockTypeMock<B extends BlockData>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public Class<B> getBlockDataClass()
 	{
@@ -158,7 +155,6 @@ public class BlockTypeMock<B extends BlockData>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public B createBlockData()
 	{
@@ -176,7 +172,6 @@ public class BlockTypeMock<B extends BlockData>
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public B createBlockData(@Nullable String data)
 	{

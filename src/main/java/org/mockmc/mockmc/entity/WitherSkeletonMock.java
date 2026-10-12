@@ -12,11 +12,9 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class WitherSkeletonMock extends AbstractSkeletonMock
 		implements
-			WitherSkeleton,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitherSkeletonBaseMock
 {
 

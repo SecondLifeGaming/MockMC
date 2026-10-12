@@ -1,14 +1,12 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.PigZombie;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class PigZombieMock extends ZombieMock
 		implements
-			PigZombie,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PigZombieBaseMock
 {
 

@@ -13,10 +13,7 @@ import java.util.UUID;
  *
  * @see AmbientMock
  */
-public class BatMock extends AmbientMock
-		implements
-			Bat,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.BatBaseMock
+public class BatMock extends AmbientMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.BatBaseMock
 {
 
 	private boolean awake = true;

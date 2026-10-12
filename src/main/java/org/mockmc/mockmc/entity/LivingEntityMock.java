@@ -60,6 +60,8 @@ import java.util.function.Consumer;
  *
  * @see EntityMock
  */
+@SuppressWarnings(
+{"deprecation", "removal"})
 public abstract class LivingEntityMock extends EntityMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LivingEntityBaseMock

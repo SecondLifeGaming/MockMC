@@ -31,10 +31,7 @@ import java.util.stream.Stream;
 /**
  * Mock implementation of an {@link Inventory}.
  */
-public class InventoryMock
-		implements
-			Inventory,
-			org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryBaseMock
+public class InventoryMock implements org.mockmc.mockmc.generated.server.org.bukkit.inventory.InventoryBaseMock
 {
 
 	private static final int MAX_STACK_SIZE = 64;

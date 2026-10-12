@@ -2,8 +2,6 @@ package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.AbstractVillager;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.inventory.InventoryHolder;
-import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,9 +18,7 @@ import java.util.UUID;
  */
 public abstract class AbstractVillagerMock extends AgeableMock
 		implements
-			Merchant,
 			AbstractVillager,
-			InventoryHolder,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.MerchantBaseMock
 {
 

@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class PoweredMinecartMock extends MinecartMock
 		implements
-			PoweredMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.PoweredMinecartBaseMock
 {
 

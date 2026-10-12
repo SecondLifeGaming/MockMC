@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class SpruceBoatMock extends BoatMock
 		implements
-			SpruceBoat,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.SpruceBoatBaseMock
 {
 

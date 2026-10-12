@@ -3,7 +3,6 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
@@ -12,7 +11,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ExplosiveMinecartMock extends MinecartMock
 		implements
-			ExplosiveMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.ExplosiveMinecartBaseMock
 {
 

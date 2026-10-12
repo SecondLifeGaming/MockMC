@@ -2,7 +2,6 @@ package org.mockmc.mockmc.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
-import org.bukkit.entity.Dolphin;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
@@ -10,7 +9,6 @@ import java.util.UUID;
 
 public class DolphinMock extends AgeableMock
 		implements
-			Dolphin,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.DolphinBaseMock
 {
 

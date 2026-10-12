@@ -2,16 +2,12 @@ package org.mockmc.mockmc.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
-import org.bukkit.entity.AbstractArrow;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class AbstractArrowMock extends AbstractProjectileMock
 		implements
-			AbstractArrow,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractArrowBaseMock
 {
 

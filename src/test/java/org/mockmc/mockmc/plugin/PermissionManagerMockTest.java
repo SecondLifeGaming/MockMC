@@ -188,7 +188,7 @@ class PermissionManagerMockTest
 	{"permission.op", "permission.op.inherited"})
 	void testPermissionsLoadedFromPlugin_defaultOp(String node)
 	{
-		JavaPlugin plugin = getTestPlugin();
+		getTestPlugin();
 		Player player = serverMock.addPlayer();
 		player.setOp(true);
 		assertTrue(player.hasPermission(node));

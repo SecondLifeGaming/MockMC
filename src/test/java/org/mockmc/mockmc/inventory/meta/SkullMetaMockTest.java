@@ -17,8 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class SkullMetaMockTest
 {
@@ -102,7 +100,6 @@ class SkullMetaMockTest
 	void testSetOwnerProfile()
 	{
 		SkullMetaMock meta = new SkullMetaMock();
-		PlayerMock playerMock = server.addPlayer();
 		PlayerProfile profile = server.createPlayerProfile(UUID.randomUUID(), "Test");
 
 		meta.setOwnerProfile(profile);

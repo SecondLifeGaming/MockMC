@@ -17,8 +17,6 @@ import java.util.Collections;
 
 import static org.mockmc.mockmc.matcher.help.HelpMapFactoryRegisteredMatcher.hasFactoryRegistered;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class HelpMapFactoryRegisteredMatcherTest extends AbstractMatcherTest
 {

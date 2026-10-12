@@ -21,8 +21,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class LifecycleEventRunnerMock
 {
 
@@ -80,6 +78,7 @@ public class LifecycleEventRunnerMock
 				.equals(possibleOwner.getPluginMeta().getName()));
 	}
 
+	@SuppressWarnings("unchecked")
 	public <O extends LifecycleEventOwner, R extends PaperRegistrarMock<? super O>> void callReloadableRegistrarEvent(
 			final LifecycleEventType<O, ? extends ReloadableRegistrarEvent<? super R>, ?> lifecycleEventType,
 			final R registrar, final Class<? extends O> ownerClass, final ReloadableRegistrarEvent.Cause cause)
@@ -131,8 +130,8 @@ public class LifecycleEventRunnerMock
 
 	public void reset()
 	{
-		((AbstractLifecycleEventTypeMock) LifecycleEvents.COMMANDS).clear();
-		((AbstractLifecycleEventTypeMock) LifecycleEvents.DATAPACK_DISCOVERY).clear();
+		((AbstractLifecycleEventTypeMock<?, ?, ?>) LifecycleEvents.COMMANDS).clear();
+		((AbstractLifecycleEventTypeMock<?, ?, ?>) LifecycleEvents.DATAPACK_DISCOVERY).clear();
 	}
 
 	private LifecycleEventRunnerMock()

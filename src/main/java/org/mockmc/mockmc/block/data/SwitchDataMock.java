@@ -16,8 +16,7 @@ import static org.mockmc.mockmc.block.data.BlockDataKey.POWERED;
 /**
  * Mock implementation of a {@link Switch}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("deprecation")
 public class SwitchDataMock extends BlockDataMock implements Switch
 {
 
@@ -94,7 +93,6 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 		return this.getLimitationValue(BlockDataLimitation.Type.FACES);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public @NotNull Face getFace()
 	{
@@ -102,7 +100,7 @@ public class SwitchDataMock extends BlockDataMock implements Switch
 	}
 
 	@Override
-	public void setFace(@SuppressWarnings("deprecation") @NotNull Face face)
+	public void setFace(@NotNull Face face)
 	{
 		Preconditions.checkNotNull(face, "BlockFace cannot be null");
 		setAttachedFace(AttachedFace.valueOf(face.name()));

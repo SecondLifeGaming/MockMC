@@ -18,7 +18,6 @@ import java.util.UUID;
  */
 public class PufferFishMock extends FishMock
 		implements
-			PufferFish,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PufferFishBaseMock
 {
 

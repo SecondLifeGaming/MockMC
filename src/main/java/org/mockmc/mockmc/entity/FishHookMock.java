@@ -17,11 +17,8 @@ import java.util.UUID;
  *
  * @see ProjectileMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class FishHookMock extends ProjectileMock
 		implements
-			FishHook,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.FishHookBaseMock
 {
 

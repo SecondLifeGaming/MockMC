@@ -18,8 +18,6 @@ import static org.mockmc.mockmc.matcher.command.CommandResultResponseMatcher.has
 import static org.mockmc.mockmc.matcher.command.CommandResultSucceedMatcher.hasFailed;
 import static org.mockmc.mockmc.matcher.command.CommandResultSucceedMatcher.hasSucceeded;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class CommandResultTest
 {

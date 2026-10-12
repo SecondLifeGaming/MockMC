@@ -3,7 +3,6 @@ package org.mockmc.mockmc.structure;
 import com.google.common.base.Preconditions;
 import org.bukkit.NamespacedKey;
 import org.bukkit.structure.Structure;
-import org.bukkit.structure.StructureManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.exception.UnimplementedOperationException;
@@ -20,7 +19,6 @@ import java.util.Map;
 
 public class StructureManagerMock
 		implements
-			StructureManager,
 			org.mockmc.mockmc.generated.server.org.bukkit.structure.StructureManagerBaseMock
 {
 

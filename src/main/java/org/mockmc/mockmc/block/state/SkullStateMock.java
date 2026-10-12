@@ -22,11 +22,9 @@ import org.mockmc.mockmc.profile.PlayerProfileMock;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class SkullStateMock extends TileStateMock
 		implements
-			Skull,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.SkullBaseMock
 {
 

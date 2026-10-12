@@ -131,3 +131,9 @@ To balance bleeding-edge API support against upstream version lags (e.g., Paper 
      @Deprecated(forRemoval = true, since = "...")
      ```
 
+For comprehensive details on artifact pinning, multi-backend test tasks, and compatibility lifecycles, see:
+- [`MULTI_VERSION_ARCHITECTURE.md`](MULTI_VERSION_ARCHITECTURE.md)
+- [`VERSION_SUPPORT.md`](VERSION_SUPPORT.md)
+- [`GENERATOR_AND_COVERAGE.md`](GENERATOR_AND_COVERAGE.md)
+
+

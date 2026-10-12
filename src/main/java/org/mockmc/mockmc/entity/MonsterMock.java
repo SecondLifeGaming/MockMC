@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public abstract class MonsterMock extends CreatureMock
 		implements
-			Monster,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MonsterBaseMock
 {
 

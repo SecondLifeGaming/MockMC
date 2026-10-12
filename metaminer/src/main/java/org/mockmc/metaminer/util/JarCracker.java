@@ -43,7 +43,7 @@ public class JarCracker {
         File finalJar = new File(cacheDir, "patched-" + bundlerJar.getName());
         File finalLibDir = new File(cacheDir, "libraries");
         
-        if (finalJar.exists()) {
+        if (isValidCache(finalJar, finalLibDir)) {
             return new CrackResult(finalJar, mcVersion);
         }
 
@@ -56,68 +56,12 @@ public class JarCracker {
             // Run the bundler to let it self-extract and patch
             ProcessBuilder pb = new ProcessBuilder(JAVA_BIN, "-Xmx512M", "-jar", bundlerJar.getAbsolutePath(), "--help");
             pb.directory(tempDir);
-            Process process = pb.start();
-            process.waitFor();
+            runProcessSafely(pb, "Bundler self-extraction");
             
-            // Find the patched jar in versions/ directory
-            File versionsDir = new File(tempDir, "versions");
-            if (!versionsDir.exists()) {
-                throw new IOException("Bundler did not create versions directory");
-            }
-            
-            File[] versionDirs = versionsDir.listFiles(File::isDirectory);
-            if (versionDirs == null || versionDirs.length == 0) {
-                 throw new IOException("No version directories found in " + versionsDir.getAbsolutePath());
-            }
-            
-            // Pick the first one (usually only one)
-            File patchedJar = findJarRecursive(versionDirs[0]);
-            if (patchedJar == null) {
-                throw new IOException("Could not find patched jar in " + versionDirs[0].getAbsolutePath());
-            }
-
-            // Move libraries to a stable location, merging with existing
-            File libDir = new File(tempDir, "libraries");
-            if (libDir.exists()) {
-                if (!finalLibDir.exists()) finalLibDir.mkdirs();
-                FileUtils.copyDirectory(libDir, finalLibDir);
-            }
-
-            // Also check for libraries directly inside the bundler JAR (e.g. paper-api)
-            try (ZipFile bundlerZip = new ZipFile(bundlerJar)) {
-                var entries = bundlerZip.entries();
-                while (entries.hasMoreElements()) {
-                    ZipEntry entry = entries.nextElement();
-                    if (!entry.isDirectory() && entry.getName().startsWith("META-INF/libraries/") && entry.getName().endsWith(".jar")) {
-                        String relPath = entry.getName().substring("META-INF/libraries/".length());
-                        File targetLib = new File(finalLibDir, relPath);
-                        if (!targetLib.toPath().normalize().startsWith(finalLibDir.toPath().normalize())) {
-                            throw new IOException("Zip slip vulnerability detected in entry: " + entry.getName());
-                        }
-                        if (!targetLib.exists()) {
-                            targetLib.getParentFile().mkdirs();
-                            try (InputStream is = bundlerZip.getInputStream(entry);
-                                 FileOutputStream fos = new FileOutputStream(targetLib)) {
-                                IOUtils.copy(is, fos);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // REPACK the jar to ensure it has standard ZIP headers that SpecialSource likes
-            File repackDir = new File(tempDir, "repack");
-            repackDir.mkdirs();
-            
-            // Extract
-            ProcessBuilder extractPb = new ProcessBuilder(JAR_BIN, "xf", patchedJar.getAbsolutePath());
-            extractPb.directory(repackDir);
-            extractPb.start().waitFor();
-
-            // Re-create
-            ProcessBuilder repackPb = new ProcessBuilder(JAR_BIN, "cf", finalJar.getAbsolutePath(), ".");
-            repackPb.directory(repackDir);
-            repackPb.start().waitFor();
+            File patchedJar = extractPatchedJar(tempDir);
+            syncLibraries(tempDir, finalLibDir);
+            extractBundlerInternalLibraries(bundlerJar, finalLibDir);
+            repackJar(tempDir, patchedJar, finalJar);
 
             LOGGER.log(Level.INFO, "Successfully unbundled and repacked: {0}", finalJar.getName());
             
@@ -127,6 +71,129 @@ public class JarCracker {
             throw new IOException("Unbundling interrupted", e);
         } finally {
             FileUtils.deleteQuietly(tempDir);
+        }
+    }
+
+    private static File extractPatchedJar(File tempDir) throws IOException {
+        File versionsDir = new File(tempDir, "versions");
+        if (!versionsDir.exists()) {
+            throw new IOException("Bundler did not create versions directory");
+        }
+        
+        File[] versionDirs = versionsDir.listFiles(File::isDirectory);
+        if (versionDirs == null || versionDirs.length == 0) {
+            throw new IOException("No version directories found in " + versionsDir.getAbsolutePath());
+        }
+        
+        File patchedJar = findJarRecursive(versionDirs[0]);
+        if (patchedJar == null) {
+            throw new IOException("Could not find patched jar in " + versionDirs[0].getAbsolutePath());
+        }
+        return patchedJar;
+    }
+
+    private static void syncLibraries(File tempDir, File finalLibDir) throws IOException {
+        File libDir = new File(tempDir, "libraries");
+        if (libDir.exists()) {
+            if (!finalLibDir.exists()) finalLibDir.mkdirs();
+            FileUtils.copyDirectory(libDir, finalLibDir);
+        }
+    }
+
+    private static void extractBundlerInternalLibraries(File bundlerJar, File finalLibDir) throws IOException {
+        try (ZipFile bundlerZip = new ZipFile(bundlerJar)) {
+            var entries = bundlerZip.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = entries.nextElement();
+                if (!entry.isDirectory() && entry.getName().startsWith("META-INF/libraries/") && entry.getName().endsWith(".jar")) {
+                    String relPath = entry.getName().substring("META-INF/libraries/".length());
+                    File targetLib = new File(finalLibDir, relPath);
+                    if (!targetLib.toPath().normalize().startsWith(finalLibDir.toPath().normalize())) {
+                        throw new IOException("Zip slip vulnerability detected in entry: " + entry.getName());
+                    }
+                    if (!targetLib.exists()) {
+                        targetLib.getParentFile().mkdirs();
+                        try (InputStream is = bundlerZip.getInputStream(entry);
+                             FileOutputStream fos = new FileOutputStream(targetLib)) {
+                            IOUtils.copy(is, fos);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void repackJar(File tempDir, File patchedJar, File finalJar) throws IOException, InterruptedException {
+        File repackDir = new File(tempDir, "repack");
+        repackDir.mkdirs();
+        
+        ProcessBuilder extractPb = new ProcessBuilder(JAR_BIN, "xf", patchedJar.getAbsolutePath());
+        extractPb.directory(repackDir);
+        runProcessSafely(extractPb, "JAR extraction");
+
+        ProcessBuilder repackPb = new ProcessBuilder(JAR_BIN, "cf", finalJar.getAbsolutePath(), ".");
+        repackPb.directory(repackDir);
+        runProcessSafely(repackPb, "JAR repack");
+
+        if (!isValidJar(finalJar)) {
+            throw new IOException("Repacked JAR failed verification: " + finalJar.getAbsolutePath());
+        }
+    }
+
+    private static boolean isValidCache(File finalJar, File finalLibDir) {
+        if (!finalJar.exists() || !isValidJar(finalJar)) {
+            return false;
+        }
+        if (!finalLibDir.exists() || !finalLibDir.isDirectory()) {
+            return false;
+        }
+        File[] libs = finalLibDir.listFiles();
+        return libs != null && libs.length > 0;
+    }
+
+    private static boolean isValidJar(File jarFile) {
+        try (ZipFile zipFile = new ZipFile(jarFile)) {
+            ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
+            return manifest != null;
+        } catch (IOException _) {
+            return false;
+        }
+    }
+
+    private static void runProcessSafely(ProcessBuilder pb, String stepName) throws IOException, InterruptedException {
+        Process process = pb.start();
+        ByteArrayOutputStream stderrBuffer = new ByteArrayOutputStream();
+        
+        java.util.concurrent.CompletableFuture<Void> stdoutDrain = java.util.concurrent.CompletableFuture.runAsync(() -> {
+            try (InputStream is = process.getInputStream()) {
+                IOUtils.copy(is, OutputStream.nullOutputStream());
+            } catch (IOException _) {
+                // Best-effort stdout discarding; ignore EOF or broken pipe upon process exit
+            }
+        });
+
+        java.util.concurrent.CompletableFuture<Void> stderrDrain = java.util.concurrent.CompletableFuture.runAsync(() -> {
+            try (InputStream is = process.getErrorStream()) {
+                IOUtils.copy(is, stderrBuffer);
+            } catch (IOException _) {
+                // Best-effort stderr capturing; ignore EOF upon process exit
+            }
+        });
+
+        int exitCode = process.waitFor();
+        try {
+            stdoutDrain.get(5, java.util.concurrent.TimeUnit.SECONDS);
+            stderrDrain.get(5, java.util.concurrent.TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw e;
+        } catch (java.util.concurrent.ExecutionException | java.util.concurrent.TimeoutException _) {
+            // Stream draining best-effort timeout/error after process exit
+        }
+
+        if (exitCode != 0) {
+            String err = stderrBuffer.toString(StandardCharsets.UTF_8);
+            throw new IOException(stepName + " failed with exit code " + exitCode + ": " + err);
         }
     }
 

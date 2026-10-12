@@ -9,11 +9,8 @@ import org.mockmc.mockmc.exception.UnimplementedOperationException;
  *
  * @see MobMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public interface MockRangedEntity<T extends MobMock>
 		extends
-			RangedEntity,
 			org.mockmc.mockmc.generated.server.com.destroystokyo.paper.entity.RangedEntityBaseMock
 {
 

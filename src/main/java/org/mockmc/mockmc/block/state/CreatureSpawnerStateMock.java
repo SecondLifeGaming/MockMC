@@ -15,11 +15,8 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class CreatureSpawnerStateMock extends TileStateMock
 		implements
-			CreatureSpawner,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.CreatureSpawnerBaseMock
 {
 

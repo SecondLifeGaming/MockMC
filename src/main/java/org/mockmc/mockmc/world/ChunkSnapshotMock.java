@@ -11,12 +11,7 @@ import java.util.Map;
 /**
  * Mock implementation of a {@link ChunkSnapshot}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class ChunkSnapshotMock
-		implements
-			ChunkSnapshot,
-			org.mockmc.mockmc.generated.server.org.bukkit.ChunkSnapshotBaseMock
+public class ChunkSnapshotMock implements org.mockmc.mockmc.generated.server.org.bukkit.ChunkSnapshotBaseMock
 {
 
 	private final String worldName;

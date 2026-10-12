@@ -15,9 +15,7 @@ import java.util.function.BiConsumer;
 /**
  * Mock implementation of a {@link MapCanvas}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class MapCanvasMock implements MapCanvas, org.mockmc.mockmc.generated.server.org.bukkit.map.MapCanvasBaseMock
+public class MapCanvasMock implements org.mockmc.mockmc.generated.server.org.bukkit.map.MapCanvasBaseMock
 {
 
 	private static final int MAP_SIZE = 128;

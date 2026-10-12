@@ -8,7 +8,6 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 @SuppressWarnings("all")
 public class BiomeMock extends OldKeyedEnumMock<Biome>
 		implements
-			Biome,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.BiomeBaseMock
 {
 

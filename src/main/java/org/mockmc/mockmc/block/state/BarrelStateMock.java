@@ -15,7 +15,6 @@ import java.util.Objects;
  */
 public class BarrelStateMock extends ContainerStateMock
 		implements
-			Barrel,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.BarrelBaseMock
 {
 

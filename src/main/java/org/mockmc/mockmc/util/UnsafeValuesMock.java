@@ -42,7 +42,6 @@ import org.mockmc.mockmc.potion.InternalPotionDataMock;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -332,12 +331,7 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 		}
 		if (obj instanceof java.util.Collection<?> col)
 		{
-			List<Object> newList = new ArrayList<>();
-			for (Object val : col)
-			{
-				newList.add(recursivePrepareForSerialization(val));
-			}
-			return newList;
+			return col.stream().map(this::recursivePrepareForSerialization).toList();
 		}
 		if (obj instanceof com.google.common.collect.Multimap<?, ?> multimap)
 		{
@@ -401,18 +395,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 		Map<String, Object> args = SerializationUtils.createDefaultBuilder().fromJson(jsonObject, Map.class);
 		return deserializeStack(args);
 	}
-
-	/**
-	 * @deprecated Use modern API instead.
-	 */
-
-	/**
-	 * @deprecated Use modern API instead.
-	 */
-
-	/**
-	 * @deprecated Use modern API instead.
-	 */
 
 	/**
 	 * @deprecated Use modern API instead.
@@ -527,7 +509,7 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 				value += ".effect.empty";
 			}
 		}
-		return String.format("%s.%s.%s", prefix, translatable.key().namespace(), value);
+		return prefix + "." + translatable.key().namespace() + "." + value;
 	}
 
 	private <T extends Keyed & Translatable> String formatTranslatable(String prefix, T translatable)
@@ -751,10 +733,6 @@ public class UnsafeValuesMock implements org.mockmc.mockmc.generated.server.org.
 			throw new IllegalArgumentException("Error while deserializing item meta", e);
 		}
 	}
-
-	/**
-	 * @deprecated Use modern API instead.
-	 */
 
 	/**
 	 * @deprecated Use modern API instead.

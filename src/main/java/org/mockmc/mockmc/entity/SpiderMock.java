@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class SpiderMock extends MonsterMock
 		implements
-			Spider,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SpiderBaseMock
 {
 

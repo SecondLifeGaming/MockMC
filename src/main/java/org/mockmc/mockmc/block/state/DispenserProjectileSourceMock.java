@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 class DispenserProjectileSourceMock
 		implements
-			BlockProjectileSource,
 			org.mockmc.mockmc.generated.server.org.bukkit.projectiles.BlockProjectileSourceBaseMock
 {
 

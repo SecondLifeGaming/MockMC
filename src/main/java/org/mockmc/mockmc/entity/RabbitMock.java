@@ -8,7 +8,6 @@ import java.util.UUID;
 
 public class RabbitMock extends AnimalsMock
 		implements
-			Rabbit,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.RabbitBaseMock
 {
 

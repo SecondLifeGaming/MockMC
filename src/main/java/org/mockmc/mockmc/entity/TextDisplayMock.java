@@ -16,11 +16,8 @@ import java.util.UUID;
  *
  * @see DisplayMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class TextDisplayMock extends DisplayMock
 		implements
-			TextDisplay,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.TextDisplayBaseMock
 {
 

@@ -25,10 +25,13 @@ public class BaseMockGenerator implements DataGenerator {
     private static final String EXCLUDE_METHODS = "excludeMethods";
     private static final String METHOD_QUIRKS = "methodQuirks";
     private static final String REPLACEMENT = "replacement";
+    private static final String SUPPRESS_RAWTYPES = "rawtypes";
 
     private static final String SINCE = "since";
     private static final String FOR_REMOVAL = "forRemoval";
     private static final String FOLIA = "folia";
+    private static final String PAPER = "paper";
+    private static final String GENERATED_PATH = "org/mockmc/mockmc/generated";
     private static final String RETURN_NULL = "return null";
     private static final String BRIGADIER_PACKAGE = "com.mojang.brigadier";
 
@@ -195,29 +198,35 @@ public class BaseMockGenerator implements DataGenerator {
     private ClassLoader primaryLoader;
     private ClassLoader customLoader;
 
+    private final Set<String> paperClassNames = new HashSet<>();
+    private final Set<String> foliaClassNames = new HashSet<>();
+
     @Override
     public void generateData() throws java.io.IOException {
-        try {
-            File generatedDir = new File(dataFolder, "org/mockmc/mockmc/generated");
-            if (generatedDir.exists()) {
-                org.apache.commons.io.FileUtils.deleteDirectory(generatedDir);
-            }
+        File generatedDir = new File(dataFolder, GENERATED_PATH);
+        File stagingDir = new File(dataFolder, "org/mockmc/mockmc/.generated-staging");
+        File backupDir = new File(dataFolder, "org/mockmc/mockmc/.generated-backup");
 
+        if (stagingDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
+        }
+        if (backupDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
+        }
+
+        try {
             File cacheDir = new File(jarDirectory, "cache");
             List<URL> urls = processJars(cacheDir);
 
-            // Sanitize fallback Folia API jar so it never shadows Paper API classes
             sanitizeFoliaApi(cacheDir);
+            populateBytecodeClassNames(cacheDir);
 
-            // 3. Add unbundled libraries recursively
             File libDir = new File(cacheDir, "libraries");
             if (libDir.exists()) {
                 addJarsRecursively(libDir, urls);
             }
 
-            // Paper is the primary API; Folia only fills gaps for classes Paper does not have.
-            urls.sort(Comparator.comparingInt((URL u) -> u.getPath().contains(FOLIA) ? 1 : 0)
-                    .thenComparing(URL::getPath));
+            urls.sort(Comparator.comparingInt(this::calculateUrlPriority).thenComparing(URL::getPath));
 
             this.customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
             List<URL> primaryUrls = urls.stream().filter(u -> !u.getPath().contains(FOLIA)).toList();
@@ -226,37 +235,147 @@ public class BaseMockGenerator implements DataGenerator {
             Set<Class<?>> toGenerate = scanPackages(classPath, customLoader);
 
             for (Class<?> c : toGenerate) {
-                generateForClass(c, toGenerate);
+                generateForClass(c, toGenerate, stagingDir);
             }
+
+            promoteStagingDirectory(stagingDir, backupDir);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+            rollbackStaging(generatedDir, stagingDir, backupDir);
             throw new java.io.IOException("Generation interrupted", e);
+        } catch (Exception t) {
+            rollbackStaging(generatedDir, stagingDir, backupDir);
+            throw t;
+        }
+    }
+
+    private int calculateUrlPriority(URL u) {
+        String p = u.getPath();
+        if (p.contains("paper-26.3") || p.contains("paper-api-26.3")) return 0;
+        if (p.contains("paper-26.2") || p.contains("paper-api-26.2")) return 1;
+        if (p.contains(PAPER)) return 2;
+        if (p.contains(FOLIA)) return 10;
+        return 5;
+    }
+
+    private void promoteStagingDirectory(File stagingDir, File backupDir) throws IOException {
+        File targetPackageDir = new File(dataFolder, GENERATED_PATH);
+        File stagedPackageDir = new File(stagingDir, GENERATED_PATH);
+        if (!stagedPackageDir.exists()) {
+            return;
+        }
+        if (targetPackageDir.exists() && !targetPackageDir.renameTo(backupDir)) {
+            throw new java.io.IOException("Failed to rename existing generated directory to backup");
+        }
+        if (!stagedPackageDir.renameTo(targetPackageDir)) {
+            if (!backupDir.renameTo(targetPackageDir)) {
+                LOGGER.log(Level.WARNING, "Failed to restore backup directory to generated during rollback: {0}", backupDir.getAbsolutePath());
+            }
+            throw new java.io.IOException("Failed to promote staging directory to generated");
+        }
+        if (backupDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
+        }
+        org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
+    }
+
+    private void rollbackStaging(File generatedDir, File stagingDir, File backupDir) {
+        try {
+            if (stagingDir.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(stagingDir);
+            }
+            if (!generatedDir.exists() && backupDir.exists()) {
+                if (!backupDir.renameTo(generatedDir)) {
+                    LOGGER.log(Level.WARNING, "Failed to restore backup directory to generated during rollback: {0}", backupDir.getAbsolutePath());
+                }
+            } else if (backupDir.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(backupDir);
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed during rollback of staging directory", e);
+        }
+    }
+
+    private void populateBytecodeClassNames(File cacheDir) {
+        paperClassNames.clear();
+        foliaClassNames.clear();
+
+        File[] remappedFiles = cacheDir.listFiles((dir, name) -> name.startsWith("remapped-") && name.endsWith(".jar"));
+        if (remappedFiles != null) {
+            for (File rf : remappedFiles) {
+                if (rf.getName().contains(PAPER)) {
+                    collectClassNamesFromJar(rf, paperClassNames);
+                } else if (rf.getName().contains(FOLIA)) {
+                    collectClassNamesFromJar(rf, foliaClassNames);
+                }
+            }
+        }
+
+        File libDir = new File(cacheDir, "libraries");
+        if (libDir.exists()) {
+            scanApiJars(new File(libDir, "io/papermc/paper/paper-api"), paperClassNames);
+            scanApiJars(new File(libDir, "dev/folia/folia-api"), foliaClassNames);
+        }
+    }
+
+    private void scanApiJars(File apiDir, Set<String> targetSet) {
+        if (apiDir.exists()) {
+            List<File> jars = new ArrayList<>();
+            collectJarsRecursive(apiDir, jars);
+            for (File j : jars) {
+                collectClassNamesFromJar(j, targetSet);
+            }
+        }
+    }
+
+    private void collectClassNamesFromJar(File jar, Set<String> targetSet) {
+        try (JarFile jf = new JarFile(jar)) {
+            jf.stream().forEach(entry -> {
+                String name = entry.getName();
+                if (name.endsWith(".class") && !name.contains("$")) {
+                    String className = name.substring(0, name.length() - 6).replace('/', '.');
+                    targetSet.add(className);
+                }
+            });
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, e, () -> "Failed reading jar " + jar.getName());
         }
     }
 
     private List<URL> processJars(File cacheDir) throws java.io.IOException, InterruptedException {
         List<URL> urls = new ArrayList<>();
         LOGGER.log(Level.INFO, "Scanning JAR directory: {0}", jarDirectory.getAbsolutePath());
-        File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
-
-        if (jarFiles != null) {
-            for (File jar : jarFiles) {
-                File processedJar = jar;
-
-                // 1. Crack Paper/Folia bundler if necessary
-                if (jar.getName().contains("paper") || jar.getName().contains(FOLIA)) {
-                    org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
-
-                    if (result != null) {
-                        File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
-                        File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
-                        processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, remappedJar);
-                    }
+        
+        List<File> jarFiles = new ArrayList<>();
+        File platformsDir = new File(jarDirectory, "platforms");
+        if (platformsDir.exists()) {
+            collectJarsRecursive(platformsDir, jarFiles);
+        }
+        File[] rootJarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+        if (rootJarFiles != null) {
+            for (File rj : rootJarFiles) {
+                if (!jarFiles.contains(rj)) {
+                    jarFiles.add(rj);
                 }
-
-                urls.add(processedJar.toURI().toURL());
-                extractVersionInfo(jar);
             }
+        }
+
+        for (File jar : jarFiles) {
+            File processedJar = jar;
+
+            // 1. Crack Paper/Folia bundler if necessary
+            if (jar.getName().contains(PAPER) || jar.getName().contains(FOLIA)) {
+                org.mockmc.metaminer.util.JarCracker.CrackResult result = org.mockmc.metaminer.util.JarCracker.crack(jar, cacheDir);
+
+                if (result != null) {
+                    File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
+                    File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
+                    processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, remappedJar);
+                }
+            }
+
+            urls.add(processedJar.toURI().toURL());
+            extractVersionInfo(jar);
         }
         return urls;
     }
@@ -289,7 +408,7 @@ public class BaseMockGenerator implements DataGenerator {
         try {
             Class<?> c = Class.forName(classInfo.getName(), false, primaryLoader != null ? primaryLoader : fallbackLoader);
             CodeSource cs = c.getProtectionDomain().getCodeSource();
-            if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains(FOLIA)) {
+            if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains(FOLIA) && paperClassNames.contains(c.getName())) {
                 return;
             }
             collectInterfaces(c, toGenerate);
@@ -353,7 +472,7 @@ public class BaseMockGenerator implements DataGenerator {
         }
     }
 
-    private void generateForClass(Class<?> clazz, Set<Class<?>> allGeneratable) throws java.io.IOException {
+    private void generateForClass(Class<?> clazz, Set<Class<?>> allGeneratable, File outputDir) throws java.io.IOException {
         String packageName = getGeneratedPackageName(clazz);
         String simpleName = getMockName(clazz);
         String version = getVersionForClass(clazz);
@@ -362,7 +481,7 @@ public class BaseMockGenerator implements DataGenerator {
         TypeVariableName[] typeVars = addTypeVariables(clazz, typeSpec);
         Map<TypeVariable<?>, java.lang.reflect.Type> typeMap = buildTypeMap(clazz);
 
-        Set<String> classSuppressions = applyClassSuppressions(typeSpec);
+        Set<String> classSuppressions = applyClassSuppressions(typeSpec, clazz);
         applySuperInterfaces(clazz, typeSpec, typeVars, typeMap);
 
         Map<String, List<Method>> methodsBySignature = collectMethodsBySignature(clazz, typeVars, typeMap);
@@ -376,7 +495,7 @@ public class BaseMockGenerator implements DataGenerator {
                 .skipJavaLangImports(true)
                 .build();
 
-        javaFile.writeTo(dataFolder);
+        javaFile.writeTo(outputDir != null ? outputDir : dataFolder);
     }
 
     private TypeSpec.Builder initTypeSpec(Class<?> clazz, String simpleName, String version) {
@@ -462,11 +581,30 @@ public class BaseMockGenerator implements DataGenerator {
         return typeVar;
     }
 
-    private Set<String> applyClassSuppressions(TypeSpec.Builder typeSpec) {
-        typeSpec.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
-                .addMember("value", "$S", "all")
-                .build());
-        return Set.of("all");
+    private Set<String> applyClassSuppressions(TypeSpec.Builder typeSpec, Class<?> clazz) {
+        // Precise suppressions only: no blanket @SuppressWarnings("all").
+        // Specific warnings are attached at the method or class level based on actual API signatures.
+        Set<String> suppressions = new LinkedHashSet<>();
+        for (TypeVariable<?> tv : clazz.getTypeParameters()) {
+            for (java.lang.reflect.Type bound : tv.getBounds()) {
+                Class<?> raw = getRawType(bound);
+                if (raw != null && raw.getTypeParameters().length > 0 && !(bound instanceof java.lang.reflect.ParameterizedType)) {
+                    suppressions.add(SUPPRESS_RAWTYPES);
+                }
+            }
+        }
+        for (java.lang.reflect.Type iface : clazz.getGenericInterfaces()) {
+            Class<?> raw = getRawType(iface);
+            if (raw != null && raw.getTypeParameters().length > 0 && !(iface instanceof java.lang.reflect.ParameterizedType)) {
+                suppressions.add(SUPPRESS_RAWTYPES);
+            }
+        }
+        if (!suppressions.isEmpty()) {
+            AnnotationSpec.Builder suppressBuilder = AnnotationSpec.builder(SuppressWarnings.class);
+            suppressions.forEach(s -> suppressBuilder.addMember("value", "$S", s));
+            typeSpec.addAnnotation(suppressBuilder.build());
+        }
+        return suppressions;
     }
 
     private void applySuperInterfaces(Class<?> clazz, TypeSpec.Builder typeSpec, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
@@ -497,6 +635,13 @@ public class BaseMockGenerator implements DataGenerator {
             Class<?> primaryIface = primaryLoader.loadClass(iface.getName());
             return primaryIface != null;
         } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            if (customLoader != null) {
+                try {
+                    return customLoader.loadClass(iface.getName()) != null;
+                } catch (ClassNotFoundException | NoClassDefFoundError _) {
+                    return false;
+                }
+            }
             return false;
         }
     }
@@ -1010,9 +1155,23 @@ public class BaseMockGenerator implements DataGenerator {
         for (int i = 0; i < params.length; i++) {
             builder.addParameter(mapType(params[i].getParameterizedType(), clazz, ourTypeVars, typeMap), "arg" + i);
         }
-        if (m.isVarArgs()) {
+        if (m.isVarArgs() || isSuperMethodVarArgs(m, clazz)) {
             builder.varargs(true);
         }
+    }
+
+    private boolean isSuperMethodVarArgs(Method m, Class<?> clazz) {
+        if (m.getParameterCount() == 0) return false;
+        Class<?> lastParam = m.getParameterTypes()[m.getParameterCount() - 1];
+        if (!lastParam.isArray()) return false;
+        for (Class<?> iface : clazz.getInterfaces()) {
+            for (Method sm : iface.getMethods()) {
+                if (isMethodSignatureEquivalent(sm, m) && sm.isVarArgs()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void addMethodExceptions(MethodSpec.Builder builder, Method m) {
@@ -1033,6 +1192,18 @@ public class BaseMockGenerator implements DataGenerator {
             if (exceptionType == Exception.class) {
                 methodSuppressions.add("Exception");
                 methodSuppressions.add("java:S112"); // Sonar rule for generic exceptions
+            }
+        }
+
+
+        for (TypeVariable<Method> tv : m.getTypeParameters()) {
+            if (typeVars != null) {
+                for (TypeVariableName enclosingTv : typeVars) {
+                    if (enclosingTv.name().equals(tv.getName())) {
+                        methodSuppressions.add("hiding");
+                        break;
+                    }
+                }
             }
         }
 
@@ -1112,7 +1283,7 @@ public class BaseMockGenerator implements DataGenerator {
         if (raw != null) {
             collectSuppressions(raw, suppressions);
             if (raw.getTypeParameters().length > 0 && !(type instanceof java.lang.reflect.ParameterizedType)) {
-                suppressions.add("rawtypes");
+                suppressions.add(SUPPRESS_RAWTYPES);
             }
             if (type instanceof java.lang.reflect.ParameterizedType pt) {
                 for (java.lang.reflect.Type arg : pt.getActualTypeArguments()) {
@@ -1212,7 +1383,7 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private boolean isGeneratableType(Class<?> clazz) {
-        if (clazz == null || clazz.isEnum()) return false;
+        if (clazz == null || clazz.isEnum() || clazz.isAnnotation()) return false;
         if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         if (!isAccessible(clazz)) return false;
@@ -1238,7 +1409,17 @@ public class BaseMockGenerator implements DataGenerator {
             return;
         }
 
-        File paperApiJar = paperJars.get(0);
+        Set<String> paperEntries = readPaperEntries(paperJars.get(0));
+        if (paperEntries.isEmpty()) {
+            return;
+        }
+
+        for (File foliaJar : foliaJars) {
+            sanitizeSingleFoliaJar(foliaJar, paperEntries);
+        }
+    }
+
+    private Set<String> readPaperEntries(File paperApiJar) {
         Set<String> paperEntries = new HashSet<>();
         try (java.util.zip.ZipFile paperZip = new java.util.zip.ZipFile(paperApiJar)) {
             var entries = paperZip.entries();
@@ -1247,45 +1428,50 @@ public class BaseMockGenerator implements DataGenerator {
             }
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "Failed to read paper-api jar for sanitization: {0}", e.getMessage());
+        }
+        return paperEntries;
+    }
+
+    private void sanitizeSingleFoliaJar(File foliaJar, Set<String> paperEntries) {
+        File tmpJar = new File(foliaJar.getParentFile(), foliaJar.getName() + ".tmp");
+        boolean modified = false;
+        try (java.util.zip.ZipFile foliaZip = new java.util.zip.ZipFile(foliaJar);
+             java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(tmpJar))) {
+            var entries = foliaZip.entries();
+            while (entries.hasMoreElements()) {
+                java.util.zip.ZipEntry entry = entries.nextElement();
+                String name = entry.getName();
+                if (paperEntries.contains(name)) {
+                    modified = true;
+                    continue;
+                }
+                java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry(name);
+                zos.putNextEntry(newEntry);
+                if (!entry.isDirectory()) {
+                    try (java.io.InputStream is = foliaZip.getInputStream(entry)) {
+                        org.apache.commons.io.IOUtils.copy(is, zos);
+                    }
+                }
+                zos.closeEntry();
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Failed sanitizing folia-api jar: {0}", e.getMessage());
+            org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
             return;
         }
 
-        for (File foliaJar : foliaJars) {
-            File tmpJar = new File(foliaJar.getParentFile(), foliaJar.getName() + ".tmp");
-            boolean modified = false;
-            try (java.util.zip.ZipFile foliaZip = new java.util.zip.ZipFile(foliaJar);
-                 java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(tmpJar))) {
-                var entries = foliaZip.entries();
-                while (entries.hasMoreElements()) {
-                    java.util.zip.ZipEntry entry = entries.nextElement();
-                    String name = entry.getName();
-                    if (paperEntries.contains(name)) {
-                        modified = true;
-                        continue;
-                    }
-                    java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry(name);
-                    zos.putNextEntry(newEntry);
-                    if (!entry.isDirectory()) {
-                        try (java.io.InputStream is = foliaZip.getInputStream(entry)) {
-                            org.apache.commons.io.IOUtils.copy(is, zos);
-                        }
-                    }
-                    zos.closeEntry();
-                }
-            } catch (IOException e) {
-                LOGGER.log(Level.WARNING, "Failed sanitizing folia-api jar: {0}", e.getMessage());
-                org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
-                continue;
-            }
-
-            if (modified) {
-                LOGGER.log(Level.INFO, "Sanitized {0} to exclude classes already present in Paper API.", foliaJar.getName());
-                if (!foliaJar.delete() || !tmpJar.renameTo(foliaJar)) {
+        if (modified) {
+            LOGGER.log(Level.INFO, "Sanitized {0} to exclude classes already present in Paper API.", foliaJar.getName());
+            try {
+                java.nio.file.Files.delete(foliaJar.toPath());
+                if (!tmpJar.renameTo(foliaJar)) {
                     LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version.", foliaJar.getName());
                 }
-            } else {
-                org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
+            } catch (IOException ex) {
+                LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version: {1}", new Object[]{foliaJar.getName(), ex.getMessage()});
             }
+        } else {
+            org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
         }
     }
 

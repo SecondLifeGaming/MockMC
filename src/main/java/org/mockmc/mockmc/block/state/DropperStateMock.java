@@ -14,7 +14,6 @@ import org.mockmc.mockmc.inventory.InventoryMock;
  */
 public class DropperStateMock extends ContainerStateMock
 		implements
-			Dropper,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.DropperBaseMock
 {
 

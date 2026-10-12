@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class PolarBearMock extends AnimalsMock
 		implements
-			PolarBear,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PolarBearBaseMock
 {
 

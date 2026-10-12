@@ -34,8 +34,7 @@ import java.util.Map;
  * @param <B>
  *            The type of {@link InventoryViewBuilder} this menu type uses.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilder<V>>
 		implements
 			MenuType.Typed<V, B>,
@@ -122,7 +121,6 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public V create(@NotNull HumanEntity player, Component title)
 	{
@@ -141,7 +139,6 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public B builder()
 	{
@@ -161,7 +158,6 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	@NotNull
 	public <V2 extends InventoryView, B2 extends InventoryViewBuilder<V2>> Typed<V2, B2> typed(
 			@NotNull Class<V2> viewClass) throws IllegalArgumentException

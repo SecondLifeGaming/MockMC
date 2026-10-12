@@ -127,8 +127,6 @@ import java.util.logging.Logger;
 /**
  * Mock implementation of a {@link Server} and {@link Server.Spigot}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ServerMock extends ServerMockBase
 {
 	@Override
@@ -1346,6 +1344,7 @@ public class ServerMock extends ServerMockBase
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void reload()
 	{
 		Plugin[] pluginsClone = pluginManager.getPlugins().clone();
@@ -1519,6 +1518,7 @@ public class ServerMock extends ServerMockBase
 
 	@Override
 	@NotNull
+	@SuppressWarnings("unchecked")
 	public Set<OfflinePlayer> getBannedPlayers()
 	{
 		return this.getBanList(Type.PROFILE).getEntries().stream().map(banEntry -> (BanEntry<PlayerProfile>) banEntry)

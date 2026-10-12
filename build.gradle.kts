@@ -25,7 +25,7 @@ abstract class DownloadJarsTask : DefaultTask() {
 						(input as InputStream).copyTo(output)
 					}
 				}
-				
+
 				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
 				val env = mapOf("create" to "false")
 				val jarUri = URI.create("jar:file:${dest.absolutePath}")
@@ -54,6 +54,8 @@ plugins {
 	id("com.diffplug.spotless") version "7.0.2"
 	id("signing")
 	id("org.sonarqube") version "6.0.1.5171"
+	id("eclipse")
+	id("idea")
 }
 
 group = "io.github.secondlifegaming"
@@ -73,6 +75,11 @@ tasks.register<DownloadJarsTask>("downloadJars") {
 
 tasks.named("compileJava") {
 	dependsOn("downloadJars")
+}
+
+tasks.withType<JavaCompile>().configureEach {
+	options.isFork = true
+	options.forkOptions.jvmArgs = mutableListOf("-Xint", "-Xshare:off")
 }
 
 sonar {
@@ -101,6 +108,19 @@ tasks.withType<Test>().configureEach {
 	jvmArgs("-XX:-TieredCompilation", "-XX:+UseG1GC", "-Xmx1g")
 }
 
+eclipse {
+	jdt {
+		file {
+			withProperties {
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecation", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.terminalDeprecation", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast", "ignore")
+			}
+		}
+	}
+}
 
 spotless {
 	java {
@@ -133,13 +153,13 @@ dependencies {
 	testCompileOnly(remappedJars)
 
 	// Unbundled Libraries (Autonomous)
-	compileOnly(fileTree("jars/cache/libraries") { 
-		include("**/*.jar") 
+	compileOnly(fileTree("jars/cache/libraries") {
+		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
 	})
-	testCompileOnly(fileTree("jars/cache/libraries") { 
-		include("**/*.jar") 
+	testCompileOnly(fileTree("jars/cache/libraries") {
+		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
 	})
@@ -272,7 +292,7 @@ tasks {
 		useJUnitPlatform()
 		exclude("org/mockmc/mockmc/generated/**")
 		ignoreFailures = true
-		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceIn(1, 4)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 		doFirst {
 			println("Default test Classpath:")
@@ -543,14 +563,22 @@ backendJars.forEach { (name, jarName) ->
 		description = "Runs tests against $name backend"
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
-		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceIn(1, 4)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+		jvmArgs("-Xint", "-Xshare:off")
 
 		if (name == "Velocity") {
 			include("org/mockmc/mockmc/generated/proxy/com/velocitypowered/**")
 		} else if (name == "Waterfall") {
 			include("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
-		} else { // Paper or Folia
+		} else if (name == "Paper") {
+			include("org/mockmc/mockmc/**")
+			exclude("org/mockmc/mockmc/generated/proxy/**")
+			exclude("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
+			// Folia-only classes absent from Paper 26.3
+			exclude("org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/PinkPetalsBaseMockTest*")
+			exclude("org/mockmc/mockmc/generated/server/io/papermc/paper/datacomponent/item/MapItemColor*")
+		} else { // Folia
 			include("org/mockmc/mockmc/**")
 			exclude("org/mockmc/mockmc/generated/proxy/**")
 			exclude("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
@@ -558,14 +586,14 @@ backendJars.forEach { (name, jarName) ->
 
 		val remappedJar = file("jars/cache/remapped-$jarName")
 		val backendFile = if (remappedJar.exists()) remappedJar else file("jars/$jarName")
-		val libraries = fileTree("jars/cache/libraries") { 
-			include("**/*.jar") 
+		val libraries = fileTree("jars/cache/libraries") {
+			include("**/*.jar")
 			exclude("**/paper-api-*.jar")
 			exclude("**/folia-api-*.jar")
 		}
-		
+
 		val foliaApi = fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") }
-		
+
 		// Folia runs against its own API first so classes only present in that API resolve at runtime.
 		classpath = if (name == "Folia") {
 			foliaApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries

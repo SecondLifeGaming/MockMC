@@ -14,11 +14,8 @@ import org.mockmc.mockmc.command.CommandBlockHolderMock;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class CommandBlockStateMock extends TileStateMock
 		implements
-			CommandBlock,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.CommandBlockBaseMock,
 			CommandBlockHolderMock
 {

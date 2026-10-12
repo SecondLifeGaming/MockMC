@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class LlamaInventoryMock extends AbstractHorseInventoryMock
 		implements
-			LlamaInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.LlamaInventoryBaseMock
 {
 

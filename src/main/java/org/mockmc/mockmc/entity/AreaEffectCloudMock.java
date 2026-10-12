@@ -3,7 +3,6 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
 import org.bukkit.Particle;
-import org.bukkit.entity.AreaEffectCloud;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
@@ -18,11 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class AreaEffectCloudMock extends EntityMock
 		implements
-			AreaEffectCloud,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AreaEffectCloudBaseMock
 {
 

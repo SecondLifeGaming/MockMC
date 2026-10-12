@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class CreeperMock extends MonsterMock
 		implements
-			Creeper,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CreeperBaseMock
 {
 

@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class WitherSkullMock extends FireballMock
 		implements
-			WitherSkull,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitherSkullBaseMock
 {
 

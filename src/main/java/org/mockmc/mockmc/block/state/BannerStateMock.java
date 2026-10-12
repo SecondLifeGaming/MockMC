@@ -21,8 +21,6 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class BannerStateMock extends TileStateMock implements Banner
 {
 

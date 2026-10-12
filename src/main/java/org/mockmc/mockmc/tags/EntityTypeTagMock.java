@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,8 @@ public class EntityTypeTagMock extends BaseTagMock<EntityType>
 
 			NamespacedKey minecraftKey = NamespacedKey.fromString(primitiveElement.getAsString());
 			Preconditions.checkArgument(minecraftKey != null, "The value is not a valid namespaced key");
-			entityTypes.add(Bukkit.getRegistry(EntityType.class).get(minecraftKey));
+			entityTypes.add(io.papermc.paper.registry.RegistryAccess.registryAccess()
+					.getRegistry(io.papermc.paper.registry.RegistryKey.ENTITY_TYPE).get(minecraftKey));
 		}
 
 		return new EntityTypeTagMock(key, entityTypes);

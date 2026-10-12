@@ -15,7 +15,6 @@ import org.mockmc.mockmc.inventory.InventoryMock;
  */
 public class CrafterStateMock extends ContainerStateMock
 		implements
-			Crafter,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.CrafterBaseMock
 {
 

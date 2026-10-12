@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class OminousItemSpawnerMock extends EntityMock
 		implements
-			OminousItemSpawner,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.OminousItemSpawnerBaseMock
 {
 

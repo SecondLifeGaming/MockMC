@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.ban;
 
-import org.bukkit.BanEntry;
 import org.bukkit.Bukkit;
 import org.bukkit.profile.PlayerProfile;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class ProfileBanListMockTest
 {
@@ -155,8 +152,7 @@ class ProfileBanListMockTest
 	void testGetBanEntryBukkit()
 	{
 		PlayerProfile testPlayer = Bukkit.createPlayerProfile(UUID.randomUUID(), "TestPlayer");
-		BanEntry<? super com.destroystokyo.paper.profile.PlayerProfile> banEntry = banList.addBan(testPlayer,
-				"TestReason", (Date) null, null);
+		banList.addBan(testPlayer, "TestReason", (Date) null, null);
 
 		assertEquals("TestReason", banList.getBanEntry(testPlayer).getReason());
 	}

@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class WolfMock extends TameableAnimalMock
 		implements
-			Wolf,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WolfBaseMock
 {
 
@@ -149,7 +148,12 @@ public class WolfMock extends TameableAnimalMock
 			org.bukkit.NamespacedKey key = org.bukkit.NamespacedKey.fromString((String) nbt.get("variant"));
 			if (key != null)
 			{
-				this.setVariant(org.bukkit.Registry.WOLF_VARIANT.get(key));
+				org.bukkit.entity.Wolf.Variant wolfVariant = io.papermc.paper.registry.RegistryAccess.registryAccess()
+						.getRegistry(io.papermc.paper.registry.RegistryKey.WOLF_VARIANT).get(key);
+				if (wolfVariant != null)
+				{
+					this.setVariant(wolfVariant);
+				}
 			}
 		}
 		if (nbt.has("CollarColor"))
@@ -168,7 +172,7 @@ public class WolfMock extends TameableAnimalMock
 	private float calculateNonAngryTailAngle()
 	{
 		return this.isTamed()
-				? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * 3.1415927F)
+				? (float) ((0.55F - (this.getMaxHealth() - this.getHealth()) * 0.02F) * Math.PI)
 				: 0.62831855F;
 	}
 }

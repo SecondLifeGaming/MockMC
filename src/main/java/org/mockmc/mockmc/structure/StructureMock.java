@@ -21,10 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class StructureMock
-		implements
-			Structure,
-			org.mockmc.mockmc.generated.server.org.bukkit.structure.StructureBaseMock
+public class StructureMock implements org.mockmc.mockmc.generated.server.org.bukkit.structure.StructureBaseMock
 {
 
 	private final PersistentDataContainer persistentDataContainer;

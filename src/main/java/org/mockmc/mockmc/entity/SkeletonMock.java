@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SkeletonMock extends AbstractSkeletonMock
 		implements
-			Skeleton,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SkeletonBaseMock
 {
 

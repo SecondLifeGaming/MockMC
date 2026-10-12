@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see ChestedHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class MuleMock extends ChestedHorseMock
 		implements
-			Mule,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MuleBaseMock
 {
 

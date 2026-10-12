@@ -1,9 +1,7 @@
 package org.mockmc.mockmc.plugin;
 
 import com.destroystokyo.paper.utils.PaperPluginLogger;
-import com.google.common.base.Preconditions;
 import io.papermc.paper.plugin.configuration.PluginMeta;
-import io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoader;
 import io.papermc.paper.plugin.provider.classloader.PluginClassLoaderGroup;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.dynamic.DynamicType;
@@ -26,7 +24,6 @@ import java.util.zip.ZipEntry;
 
 public class MockMCConfiguredPluginClassLoader extends URLClassLoader
 		implements
-			ConfiguredPluginClassLoader,
 			org.mockmc.mockmc.generated.server.io.papermc.paper.plugin.provider.classloader.ConfiguredPluginClassLoaderBaseMock
 {
 
@@ -84,15 +81,24 @@ public class MockMCConfiguredPluginClassLoader extends URLClassLoader
 	}
 
 	@Override
-	protected Class<?> findClass(String name)
+	protected Class<?> findClass(String name) throws ClassNotFoundException
 	{
+		if (jarFile == null)
+		{
+			throw new ClassNotFoundException(name);
+		}
 		try
 		{
-			Preconditions.checkNotNull(jarFile, "No jar file selected");
 			ZipEntry entry = jarFile.getEntry(name.replace('.', '/') + ".class");
-			InputStream inputStream = jarFile.getInputStream(entry);
-			byte[] array = inputStream.readAllBytes();
-			return defineClass(name, array, 0, array.length);
+			if (entry == null)
+			{
+				throw new ClassNotFoundException(name);
+			}
+			try (InputStream inputStream = jarFile.getInputStream(entry))
+			{
+				byte[] array = inputStream.readAllBytes();
+				return defineClass(name, array, 0, array.length);
+			}
 		} catch (IOException e)
 		{
 			throw new PluginClassNotFoundException(e);

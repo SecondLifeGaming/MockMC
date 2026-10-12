@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Villager;
-import org.bukkit.entity.ZombieVillager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.ServerMock;
@@ -12,7 +11,6 @@ import java.util.UUID;
 
 public class ZombieVillagerMock extends ZombieMock
 		implements
-			ZombieVillager,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieVillagerBaseMock
 {
 

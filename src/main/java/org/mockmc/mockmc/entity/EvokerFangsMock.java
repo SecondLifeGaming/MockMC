@@ -16,7 +16,6 @@ import java.util.UUID;
  */
 public class EvokerFangsMock extends EntityMock
 		implements
-			EvokerFangs,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EvokerFangsBaseMock
 {
 

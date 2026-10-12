@@ -13,8 +13,7 @@ import java.util.AbstractMap;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class BukkitBrigadierForwardingMapMock extends AbstractMap<String, Command>
 {
 

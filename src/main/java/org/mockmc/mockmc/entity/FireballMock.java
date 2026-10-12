@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see ProjectileMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class FireballMock extends ProjectileMock
 		implements
-			Fireball,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.FireballBaseMock
 {
 

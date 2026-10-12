@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SculkCatalystStateMock extends TileStateMock
 		implements
-			SculkCatalyst,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.SculkCatalystBaseMock
 {
 

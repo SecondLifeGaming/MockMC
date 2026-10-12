@@ -10,8 +10,6 @@ import java.io.File;
 /**
  * Empty JavaPlugin used for testing only
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class EmptyPlugin extends JavaPlugin
 {
 

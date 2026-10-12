@@ -1,16 +1,12 @@
 package org.mockmc.mockmc.persistence;
 
 import com.google.common.base.Preconditions;
-import io.papermc.paper.persistence.PersistentDataContainerView;
 import org.bukkit.NamespacedKey;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
 import org.mockmc.mockmc.generated.server.io.papermc.paper.persistence.PersistentDataContainerViewBaseMock;
 
-public abstract class PersistentDataContainerViewMock
-		implements
-			PersistentDataContainerView,
-			PersistentDataContainerViewBaseMock
+public abstract class PersistentDataContainerViewMock implements PersistentDataContainerViewBaseMock
 {
 
 	private final PersistentDataAdapterContext context = new PersistentDataAdapterContextMock();

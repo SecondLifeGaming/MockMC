@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class DialogMock implements Dialog
 {
 

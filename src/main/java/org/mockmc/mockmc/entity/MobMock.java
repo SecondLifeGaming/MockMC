@@ -14,7 +14,7 @@ import org.mockmc.mockmc.generated.server.org.bukkit.entity.MobBaseMock;
  *
  * @see LivingEntityMock
  */
-public abstract class MobMock extends LivingEntityMock implements Mob, MobBaseMock
+public abstract class MobMock extends LivingEntityMock implements MobBaseMock
 {
 
 	private boolean aware = true;

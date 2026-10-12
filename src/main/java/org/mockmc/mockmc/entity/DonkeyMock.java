@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see ChestedHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class DonkeyMock extends ChestedHorseMock
 		implements
-			Donkey,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.DonkeyBaseMock
 {
 

@@ -20,11 +20,9 @@ import static org.bukkit.attribute.AttributeModifier.Operation.MULTIPLY_SCALAR_1
 /**
  * Mock implementation of {@link AttributeInstance}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class AttributeInstanceMock
 		implements
-			AttributeInstance,
 			org.mockmc.mockmc.generated.server.org.bukkit.attribute.AttributeInstanceBaseMock
 {
 
@@ -113,8 +111,6 @@ public class AttributeInstanceMock
 		}
 	}
 
-	@SuppressWarnings(
-	{"removal"})
 	private void removeModifierByUuid(@NotNull AttributeModifier modifier)
 	{
 		modifiersByUuid.remove(modifier.getUniqueId());
@@ -143,8 +139,6 @@ public class AttributeInstanceMock
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"removal"})
 	public void addModifier(@NotNull AttributeModifier modifier)
 	{
 		Preconditions.checkNotNull(modifier, "Modifier shouldn't be null");

@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.*;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class BaseTestGenerator implements DataGenerator {
     private static final Logger LOGGER = Logger.getLogger(BaseTestGenerator.class.getName());
+    private static final String GENERATED_PATH = "org/mockmc/mockmc/generated";
     private final File testSourceFolder;
     private final File jarDirectory;
 
@@ -27,26 +29,77 @@ public class BaseTestGenerator implements DataGenerator {
 
     @Override
     public void generateData() throws java.io.IOException {
-        File generatedTestDir = new File(testSourceFolder, "org/mockmc/mockmc/generated");
-        if (generatedTestDir.exists()) {
-            org.apache.commons.io.FileUtils.deleteDirectory(generatedTestDir);
+        File generatedTestDir = new File(testSourceFolder, GENERATED_PATH);
+        File stagingTestDir = new File(testSourceFolder, "org/mockmc/mockmc/.generated-staging");
+        File backupTestDir = new File(testSourceFolder, "org/mockmc/mockmc/.generated-backup");
+
+        if (stagingTestDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(stagingTestDir);
+        }
+        if (backupTestDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(backupTestDir);
         }
 
-        generateBaseClass();
-        URLClassLoader customLoader = createClassLoader();
-        ClassPath classPath = ClassPath.from(customLoader);
-        Set<Class<?>> toGenerate = scanForClasses(classPath);
+        try {
+            generateBaseClass(stagingTestDir);
+            URLClassLoader customLoader = createClassLoader();
+            ClassPath classPath = ClassPath.from(customLoader);
+            Set<Class<?>> toGenerate = scanForClasses(classPath);
 
-        if (LOGGER.isLoggable(java.util.logging.Level.INFO)) {
-            LOGGER.info(String.format("Found %d classes to generate tests for.", toGenerate.size()));
-        }
+            if (LOGGER.isLoggable(java.util.logging.Level.INFO)) {
+                LOGGER.info(String.format("Found %d classes to generate tests for.", toGenerate.size()));
+            }
 
-        for (Class<?> c : toGenerate) {
-            generateTestForClass(c);
+            for (Class<?> c : toGenerate) {
+                generateTestForClass(c, stagingTestDir);
+            }
+
+            promoteStagingDirectory(stagingTestDir, backupTestDir);
+        } catch (Exception e) {
+            rollbackStaging(generatedTestDir, stagingTestDir, backupTestDir);
+            throw e;
         }
     }
 
-    private void generateBaseClass() throws IOException {
+    private void promoteStagingDirectory(File stagingTestDir, File backupTestDir) throws IOException {
+        File targetPackageDir = new File(testSourceFolder, GENERATED_PATH);
+        File stagedPackageDir = new File(stagingTestDir, GENERATED_PATH);
+        if (!stagedPackageDir.exists()) {
+            return;
+        }
+        if (targetPackageDir.exists() && !targetPackageDir.renameTo(backupTestDir)) {
+            throw new java.io.IOException("Failed to rename existing generated test directory to backup");
+        }
+        if (!stagedPackageDir.renameTo(targetPackageDir)) {
+            if (backupTestDir.exists() && !backupTestDir.renameTo(targetPackageDir)) {
+                LOGGER.log(Level.WARNING, "Failed to restore backup test directory to generated during rollback: {0}", backupTestDir.getAbsolutePath());
+            }
+            throw new java.io.IOException("Failed to promote staging test directory to generated");
+        }
+        if (backupTestDir.exists()) {
+            org.apache.commons.io.FileUtils.deleteDirectory(backupTestDir);
+        }
+        org.apache.commons.io.FileUtils.deleteDirectory(stagingTestDir);
+    }
+
+    private void rollbackStaging(File generatedTestDir, File stagingTestDir, File backupTestDir) {
+        try {
+            if (stagingTestDir.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(stagingTestDir);
+            }
+            if (!generatedTestDir.exists() && backupTestDir.exists()) {
+                if (!backupTestDir.renameTo(generatedTestDir)) {
+                    LOGGER.log(Level.WARNING, "Failed to restore backup test directory to generated during rollback: {0}", backupTestDir.getAbsolutePath());
+                }
+            } else if (backupTestDir.exists()) {
+                org.apache.commons.io.FileUtils.deleteDirectory(backupTestDir);
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, "Failed during rollback of staging test directory", e);
+        }
+    }
+
+    private void generateBaseClass(File outputFolder) throws IOException {
         TypeSpec baseClass = TypeSpec.classBuilder("GeneratedTestBase")
                 .addModifiers(Modifier.PUBLIC, Modifier.ABSTRACT)
                 .addMethod(MethodSpec.methodBuilder("assertSafeDefault")
@@ -60,17 +113,25 @@ public class BaseTestGenerator implements DataGenerator {
                 .addFileComment("Base class for mechanical sanity tests.")
                 .indent("    ")
                 .build()
-                .writeTo(testSourceFolder);
+                .writeTo(outputFolder != null ? outputFolder : testSourceFolder);
     }
 
     private URLClassLoader createClassLoader() throws IOException {
         List<URL> urls = new ArrayList<>();
-        File[] jarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
-        if (jarFiles != null) {
-            for (File jar : jarFiles) {
-                urls.add(jar.toURI().toURL());
+        List<File> jarFiles = new ArrayList<>();
+        File platformsDir = new File(jarDirectory, "platforms");
+        if (platformsDir.exists()) {
+            collectJarsRecursive(platformsDir, jarFiles);
+        }
+        File[] rootJarFiles = jarDirectory.listFiles((dir, name) -> name.endsWith(".jar"));
+        if (rootJarFiles != null) {
+            for (File rj : rootJarFiles) {
+                if (!jarFiles.contains(rj)) {
+                    jarFiles.add(rj);
+                }
             }
         }
+        jarFiles.stream().map(this::toJarUrl).filter(Objects::nonNull).forEach(urls::add);
         
         File cacheDir = new File(jarDirectory, "cache");
         File libDir = new File(cacheDir, "libraries");
@@ -79,6 +140,14 @@ public class BaseTestGenerator implements DataGenerator {
         }
         
         return new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
+    }
+
+    private URL toJarUrl(File jar) {
+        try {
+            return jar.toURI().toURL();
+        } catch (Exception _) {
+            return null;
+        }
     }
 
     private void addJarsRecursively(File dir, List<URL> urls) throws java.io.IOException {
@@ -95,6 +164,8 @@ public class BaseTestGenerator implements DataGenerator {
 
     private Set<Class<?>> scanForClasses(ClassPath classPath) {
         Set<Class<?>> toGenerate = new HashSet<>();
+        Set<String> paperClasses = scanPaperClasses();
+
         String[] packagesToScan = {
                 "org.bukkit",
                 "org.spigotmc",
@@ -108,11 +179,11 @@ public class BaseTestGenerator implements DataGenerator {
         };
         for (String pkg : packagesToScan) {
             for (ClassPath.ClassInfo classInfo : classPath.getTopLevelClassesRecursive(pkg)) {
-                if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) continue;
+                if (!shouldScanClassInfo(classInfo, paperClasses)) {
+                    continue;
+                }
                 try {
                     Class<?> c = classInfo.load();
-                    java.security.CodeSource cs = c.getProtectionDomain().getCodeSource();
-                    if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains("folia")) continue;
                     if (isGeneratableType(c)) {
                         toGenerate.add(c);
                     }
@@ -124,8 +195,71 @@ public class BaseTestGenerator implements DataGenerator {
         return toGenerate;
     }
 
+    private boolean shouldScanClassInfo(ClassPath.ClassInfo classInfo, Set<String> paperClasses) {
+        if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) {
+            return false;
+        }
+        try {
+            Class<?> c = classInfo.load();
+            java.security.CodeSource cs = c.getProtectionDomain().getCodeSource();
+            return !(cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains("folia") && paperClasses.contains(c.getName()));
+        } catch (Exception | LinkageError _) {
+            return false;
+        }
+    }
+
+    private Set<String> scanPaperClasses() {
+        Set<String> paperClasses = new HashSet<>();
+        File cacheDir = new File(jarDirectory, "cache");
+        File[] remappedFiles = cacheDir.listFiles((dir, name) -> name.startsWith("remapped-") && name.endsWith(".jar"));
+        if (remappedFiles != null) {
+            for (File rf : remappedFiles) {
+                if (rf.getName().contains("paper")) {
+                    collectClassNamesFromJar(rf, paperClasses);
+                }
+            }
+        }
+        File libDir = new File(cacheDir, "libraries");
+        if (libDir.exists()) {
+            File paperApiDir = new File(libDir, "io/papermc/paper/paper-api");
+            if (paperApiDir.exists()) {
+                List<File> paperJars = new ArrayList<>();
+                collectJarsRecursive(paperApiDir, paperJars);
+                for (File pj : paperJars) {
+                    collectClassNamesFromJar(pj, paperClasses);
+                }
+            }
+        }
+        return paperClasses;
+    }
+
+    private void collectClassNamesFromJar(File jar, Set<String> targetSet) {
+        try (java.util.jar.JarFile jf = new java.util.jar.JarFile(jar)) {
+            jf.stream().forEach(entry -> {
+                String name = entry.getName();
+                if (name.endsWith(".class") && !name.contains("$")) {
+                    targetSet.add(name.substring(0, name.length() - 6).replace('/', '.'));
+                }
+            });
+        } catch (IOException _) {
+            // Unreadable jar skipped during class scan
+        }
+    }
+
+    private void collectJarsRecursive(File dir, List<File> list) {
+        File[] files = dir.listFiles();
+        if (files == null) return;
+        for (File f : files) {
+            if (f.isDirectory()) {
+                collectJarsRecursive(f, list);
+            } else if (f.getName().endsWith(".jar") && !f.getName().endsWith(".tmp")) {
+                list.add(f);
+            }
+        }
+    }
+
     private boolean isGeneratableType(Class<?> clazz) {
-        if (clazz == null) return false;
+        if (clazz == null || clazz.isEnum() || clazz.isAnnotation()) return false;
         if (!java.lang.reflect.Modifier.isPublic(clazz.getModifiers()) || clazz.isSealed()) return false;
         if (!clazz.isInterface() && !java.lang.reflect.Modifier.isAbstract(clazz.getModifiers())) return false;
         String name = clazz.getName();
@@ -138,7 +272,7 @@ public class BaseTestGenerator implements DataGenerator {
 
     private static final String JUNIT_JUPITER_API = "org.junit.jupiter.api";
 
-    private void generateTestForClass(Class<?> clazz) throws IOException {
+    private void generateTestForClass(Class<?> clazz, File outputDir) throws IOException {
         String packageName = getGeneratedPackageName(clazz);
         String baseMockName = getBaseMockName(clazz);
         if (baseMockName == null) return;
@@ -149,7 +283,7 @@ public class BaseTestGenerator implements DataGenerator {
 
         List<Method> methods = scanMethodsForSanityTests(clazz);
 
-        applySuppressionIfNecessary(clazz, methods, testClass);
+        applySuppressionIfNecessary(testClass);
 
         List<TypeVariableName> typeVars = getTypeVariables(clazz);
         TypeName superInterface = getSuperInterface(baseMockClass, typeVars);
@@ -158,14 +292,16 @@ public class BaseTestGenerator implements DataGenerator {
         TypeName testTargetType = getTestTargetType(baseMockClass, typeVars);
         generateTestMethods(testClass, testTargetType, methods, !typeVars.isEmpty());
 
-        writeJavaFile(packageName, testClass, baseMockName);
+        writeJavaFile(packageName, testClass, baseMockName, outputDir);
     }
 
-    private void applySuppressionIfNecessary(Class<?> clazz, List<Method> methods, TypeSpec.Builder testClass) {
+    private void applySuppressionIfNecessary(TypeSpec.Builder testClass) {
         testClass.addAnnotation(AnnotationSpec.builder(SuppressWarnings.class)
                 .addMember("value", "$S", "all")
                 .build());
     }
+
+
 
     private String getBaseMockName(Class<?> clazz) {
         String rawSimpleName = clazz.getSimpleName();
@@ -219,37 +355,49 @@ public class BaseTestGenerator implements DataGenerator {
 
     private TypeName mapType(java.lang.reflect.Type type, Class<?> clazz, TypeVariableName[] ourTypeVars) {
         if (type instanceof java.lang.reflect.TypeVariable<?> tv) {
-            if (clazz != null) {
-                java.lang.reflect.TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
-                for (int i = 0; i < typeParameters.length; i++) {
-                    if (typeParameters[i].equals(tv)) {
-                        return ourTypeVars[i];
-                    }
-                }
-            }
-            return TypeVariableName.get(tv.getName());
+            return mapTypeVariable(tv, clazz, ourTypeVars);
         }
         if (type instanceof java.lang.reflect.ParameterizedType pt) {
-            TypeName[] args = new TypeName[pt.getActualTypeArguments().length];
-            for (int i = 0; i < args.length; i++) {
-                args[i] = mapType(pt.getActualTypeArguments()[i], clazz, ourTypeVars);
-            }
-            Class<?> raw = (Class<?>) pt.getRawType();
-            return ParameterizedTypeName.get(ClassName.get(raw), args);
+            return mapParameterizedType(pt, clazz, ourTypeVars);
         }
         if (type instanceof java.lang.reflect.GenericArrayType gat) {
             return ArrayTypeName.of(mapType(gat.getGenericComponentType(), clazz, ourTypeVars));
         }
         if (type instanceof java.lang.reflect.WildcardType wt) {
-            if (wt.getLowerBounds().length > 0) {
-                return WildcardTypeName.supertypeOf(mapType(wt.getLowerBounds()[0], clazz, ourTypeVars));
-            }
-            if (wt.getUpperBounds().length > 0 && wt.getUpperBounds()[0] != Object.class) {
-                return WildcardTypeName.subtypeOf(mapType(wt.getUpperBounds()[0], clazz, ourTypeVars));
-            }
-            return WildcardTypeName.subtypeOf(Object.class);
+            return mapWildcardType(wt, clazz, ourTypeVars);
         }
         return TypeName.get(type);
+    }
+
+    private TypeName mapTypeVariable(java.lang.reflect.TypeVariable<?> tv, Class<?> clazz, TypeVariableName[] ourTypeVars) {
+        if (clazz != null) {
+            java.lang.reflect.TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
+            for (int i = 0; i < typeParameters.length; i++) {
+                if (typeParameters[i].equals(tv)) {
+                    return ourTypeVars[i];
+                }
+            }
+        }
+        return TypeVariableName.get(tv.getName());
+    }
+
+    private TypeName mapParameterizedType(java.lang.reflect.ParameterizedType pt, Class<?> clazz, TypeVariableName[] ourTypeVars) {
+        TypeName[] args = new TypeName[pt.getActualTypeArguments().length];
+        for (int i = 0; i < args.length; i++) {
+            args[i] = mapType(pt.getActualTypeArguments()[i], clazz, ourTypeVars);
+        }
+        Class<?> raw = (Class<?>) pt.getRawType();
+        return ParameterizedTypeName.get(ClassName.get(raw), args);
+    }
+
+    private TypeName mapWildcardType(java.lang.reflect.WildcardType wt, Class<?> clazz, TypeVariableName[] ourTypeVars) {
+        if (wt.getLowerBounds().length > 0) {
+            return WildcardTypeName.supertypeOf(mapType(wt.getLowerBounds()[0], clazz, ourTypeVars));
+        }
+        if (wt.getUpperBounds().length > 0 && wt.getUpperBounds()[0] != Object.class) {
+            return WildcardTypeName.subtypeOf(mapType(wt.getUpperBounds()[0], clazz, ourTypeVars));
+        }
+        return WildcardTypeName.subtypeOf(Object.class);
     }
 
     private TypeName getSuperInterface(ClassName baseMockClass, List<TypeVariableName> typeVars) {
@@ -274,10 +422,18 @@ public class BaseTestGenerator implements DataGenerator {
                 .addModifiers(Modifier.PRIVATE, Modifier.STATIC)
                 .addSuperinterface(superInterface);
 
-        // Object.clone() is protected. If an interface makes it public,
-        // the class must explicitly override it because the protected Object.clone()
-        // "wins" over the interface default method but doesn't satisfy the public requirement.
         Set<String> implementedSignatures = new HashSet<>();
+        addCloneOverrideIfPresent(clazz, stubBuilder, implementedSignatures);
+
+        for (Method m : clazz.getMethods()) {
+            if (isAbstractGetHandle(m) && implementedSignatures.add(getMethodSignature(m))) {
+                stubBuilder.addMethod(buildStubHandleMethod(m));
+            }
+        }
+        return stubBuilder;
+    }
+
+    private void addCloneOverrideIfPresent(Class<?> clazz, TypeSpec.Builder stubBuilder, Set<String> implementedSignatures) {
         try {
             clazz.getMethod("clone");
             stubBuilder.addMethod(MethodSpec.methodBuilder("clone")
@@ -290,40 +446,33 @@ public class BaseTestGenerator implements DataGenerator {
         } catch (NoSuchMethodException _) {
             // No clone method, ignore.
         }
-        for (Method m : clazz.getMethods()) {
-            if (java.lang.reflect.Modifier.isStatic(m.getModifiers())) {
-                continue;
-            }
-            if (m.getDeclaringClass() == Object.class) {
-                continue;
-            }
-            if (m.getName().equals("getHandle") && java.lang.reflect.Modifier.isAbstract(m.getModifiers())) {
-                String signature = getMethodSignature(m);
-                if (!implementedSignatures.add(signature)) {
-                    continue;
-                }
+    }
 
-                MethodSpec.Builder mb = MethodSpec.methodBuilder(m.getName())
-                        .addModifiers(Modifier.PUBLIC)
-                        .addAnnotation(Override.class);
+    private boolean isAbstractGetHandle(Method m) {
+        return !java.lang.reflect.Modifier.isStatic(m.getModifiers())
+                && m.getDeclaringClass() != Object.class
+                && m.getName().equals("getHandle")
+                && java.lang.reflect.Modifier.isAbstract(m.getModifiers());
+    }
 
-                for (java.lang.reflect.TypeVariable<Method> tv : m.getTypeParameters()) {
-                    mb.addTypeVariable(TypeVariableName.get(tv));
-                }
+    private MethodSpec buildStubHandleMethod(Method m) {
+        MethodSpec.Builder mb = MethodSpec.methodBuilder(m.getName())
+                .addModifiers(Modifier.PUBLIC)
+                .addAnnotation(Override.class);
 
-                mb.returns(TypeName.get(m.getGenericReturnType()));
-
-                java.lang.reflect.Type[] params = m.getGenericParameterTypes();
-                for (int i = 0; i < params.length; i++) {
-                    mb.addParameter(TypeName.get(params[i]), "arg" + i);
-                }
-
-                addDefaultReturnValue(mb, m);
-
-                stubBuilder.addMethod(mb.build());
-            }
+        for (java.lang.reflect.TypeVariable<Method> tv : m.getTypeParameters()) {
+            mb.addTypeVariable(TypeVariableName.get(tv));
         }
-        return stubBuilder;
+
+        mb.returns(TypeName.get(m.getGenericReturnType()));
+
+        java.lang.reflect.Type[] params = m.getGenericParameterTypes();
+        for (int i = 0; i < params.length; i++) {
+            mb.addParameter(TypeName.get(params[i]), "arg" + i);
+        }
+
+        addDefaultReturnValue(mb, m);
+        return mb.build();
     }
 
     private String getMethodSignature(Method m) {
@@ -409,13 +558,13 @@ public class BaseTestGenerator implements DataGenerator {
         return testMethod.build();
     }
 
-    private void writeJavaFile(String packageName, TypeSpec.Builder testClass, String baseMockName) throws IOException {
+    private void writeJavaFile(String packageName, TypeSpec.Builder testClass, String baseMockName, File outputFolder) throws IOException {
         JavaFile.builder(packageName, testClass.build())
                 .addFileComment("Auto-generated mechanical sanity test for $L", baseMockName)
                 .addStaticImport(ClassName.get(JUNIT_JUPITER_API, "Assertions"), "*")
                 .indent("    ")
                 .build()
-                .writeTo(testSourceFolder);
+                .writeTo(outputFolder != null ? outputFolder : testSourceFolder);
     }
     private boolean shouldGenerateSafeDefaultCheck(Method m, Set<String> checkedMethods) {
         if (!java.lang.reflect.Modifier.isPublic(m.getModifiers()) || java.lang.reflect.Modifier.isStatic(m.getModifiers())) {

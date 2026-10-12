@@ -28,8 +28,7 @@ import java.util.UUID;
 /**
  * Mock implementation of a {@link ConsoleCommandSender}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class ConsoleCommandSenderMock
 		implements
 			ConsoleCommandSender,

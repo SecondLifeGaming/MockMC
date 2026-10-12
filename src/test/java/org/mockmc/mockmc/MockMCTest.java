@@ -34,8 +34,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockmc.mockmc.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class MockMCTest
 {

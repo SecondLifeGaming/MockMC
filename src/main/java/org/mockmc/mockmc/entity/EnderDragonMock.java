@@ -11,7 +11,6 @@ import java.util.UUID;
 
 public class EnderDragonMock extends AbstractBossMock
 		implements
-			EnderDragon,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderDragonBaseMock
 {
 

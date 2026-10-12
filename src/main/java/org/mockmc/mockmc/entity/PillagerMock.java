@@ -19,7 +19,7 @@ import java.util.UUID;
  *
  * @see IllagerMock
  */
-public class PillagerMock extends IllagerMock implements Pillager, MockRangedEntity<PillagerMock>, PillagerBaseMock
+public class PillagerMock extends IllagerMock implements MockRangedEntity<PillagerMock>, PillagerBaseMock
 {
 
 	private final Inventory inventory = new InventoryMock(this, 5, InventoryType.CHEST);

@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class EnderChestStateMock extends TileStateMock
 		implements
-			EnderChest,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.EnderChestBaseMock
 {
 

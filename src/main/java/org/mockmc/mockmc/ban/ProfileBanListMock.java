@@ -19,7 +19,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+{"deprecation", "unchecked"})
 public class ProfileBanListMock implements ProfileBanList
 {
 
@@ -147,6 +147,7 @@ public class ProfileBanListMock implements ProfileBanList
 
 	@Override
 	@Deprecated(since = "1.20")
+	@SuppressWarnings("rawtypes")
 	public synchronized @NotNull Set<BanEntry> getBanEntries()
 	{
 		ImmutableSet.Builder<BanEntry> builder = ImmutableSet.builder();

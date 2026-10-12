@@ -73,6 +73,7 @@ class BukkitBrigadierForwardingMapMockTest
 	}
 
 	@Test
+	@SuppressWarnings("unlikely-arg-type")
 	void containsValueWithNonCommand()
 	{
 		assertFalse(map.containsValue("Hello world"));
@@ -85,12 +86,14 @@ class BukkitBrigadierForwardingMapMockTest
 	}
 
 	@Test
+	@SuppressWarnings("unlikely-arg-type")
 	void removeWithNonString()
 	{
 		assertNull(map.remove(1));
 	}
 
 	@Test
+	@SuppressWarnings("unlikely-arg-type")
 	void getWithNonString()
 	{
 		assertNull(map.get(1));

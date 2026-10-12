@@ -3,7 +3,6 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.EnderSignal;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +13,6 @@ import java.util.UUID;
 
 public class EnderSignalMock extends EntityMock
 		implements
-			EnderSignal,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderSignalBaseMock
 {
 

@@ -10,11 +10,8 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class VehicleMock extends EntityMock
 		implements
-			Vehicle,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.VehicleBaseMock
 {
 

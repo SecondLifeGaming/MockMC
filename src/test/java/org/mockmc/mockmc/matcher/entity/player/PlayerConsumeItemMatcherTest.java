@@ -14,8 +14,6 @@ import org.mockmc.testutils.matcher.AbstractMatcherTest;
 
 import static org.mockmc.mockmc.matcher.entity.player.PlayerConsumeItemMatcher.hasConsumed;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class PlayerConsumeItemMatcherTest extends AbstractMatcherTest
 {

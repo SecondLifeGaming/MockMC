@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockmc.mockmc.matcher.entity.ranged.RangedEntityAttackMatcher.hasAttacked;
 import static org.mockmc.mockmc.matcher.entity.ranged.RangedEntityAttackMatcher.hasNotAttacked;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class AbstractSkeletonMockTest
 {

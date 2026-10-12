@@ -15,11 +15,9 @@ import java.util.UUID;
  *
  * @see SpellcasterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("deprecation")
 public class EvokerMock extends SpellcasterMock
 		implements
-			Evoker,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EvokerBaseMock
 {
 

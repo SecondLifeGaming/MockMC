@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public abstract class SpellcasterMock extends IllagerMock
 		implements
-			Spellcaster,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SpellcasterBaseMock
 {
 

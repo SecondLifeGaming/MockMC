@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import org.bukkit.Bukkit;
 import org.bukkit.GameEvent;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,8 @@ public class GameEventTagMock extends BaseTagMock<GameEvent>
 
 			NamespacedKey minecraftKey = NamespacedKey.fromString(primitiveElement.getAsString());
 			Preconditions.checkArgument(minecraftKey != null, "The value is not a valid namespaced key");
-			gameEvents.add(Bukkit.getRegistry(GameEvent.class).get(minecraftKey));
+			gameEvents.add(io.papermc.paper.registry.RegistryAccess.registryAccess()
+					.getRegistry(io.papermc.paper.registry.RegistryKey.GAME_EVENT).get(minecraftKey));
 		}
 
 		return new GameEventTagMock(key, gameEvents);

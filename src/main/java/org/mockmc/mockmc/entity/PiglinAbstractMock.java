@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class PiglinAbstractMock extends MonsterMock
 		implements
-			PiglinAbstract,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinAbstractBaseMock
 {
 

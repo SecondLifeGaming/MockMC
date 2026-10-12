@@ -5,11 +5,8 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.Sound;
 import org.mockmc.mockmc.util.OldKeyedEnumMock;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SoundMock extends OldKeyedEnumMock<Sound>
 		implements
-			Sound,
 			org.mockmc.mockmc.generated.server.org.bukkit.SoundBaseMock
 {
 

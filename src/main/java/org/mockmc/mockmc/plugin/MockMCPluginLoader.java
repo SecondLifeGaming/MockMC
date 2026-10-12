@@ -4,7 +4,6 @@ import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.RegisteredListener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
@@ -13,12 +12,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class MockMCPluginLoader
-		implements
-			PluginLoader,
-			org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginLoaderBaseMock
+public class MockMCPluginLoader implements org.mockmc.mockmc.generated.server.org.bukkit.plugin.PluginLoaderBaseMock
 {
 	@Override
 	public Pattern[] getPluginFileFilters()

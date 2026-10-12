@@ -176,7 +176,13 @@ public class RegistryAccessMock implements RegistryAccess
 			return getDelegate().size();
 		}
 
+		/**
+		 * @deprecated Legacy method.
+		 */
 		@Override
+		@Deprecated(since = "1.20.6", forRemoval = true)
+		@SuppressWarnings(
+		{"deprecation", "removal", "java:S1133"})
 		public @Nullable T match(@NotNull String s)
 		{
 			return getDelegate().match(s);

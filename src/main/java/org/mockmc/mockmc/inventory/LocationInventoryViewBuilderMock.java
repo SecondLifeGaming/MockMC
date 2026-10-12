@@ -15,7 +15,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class LocationInventoryViewBuilderMock<V extends InventoryView>
 		implements
-			LocationInventoryViewBuilder<V>,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.view.builder.LocationInventoryViewBuilderBaseMock<V>
 {
 

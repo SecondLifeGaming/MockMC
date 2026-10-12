@@ -3,18 +3,14 @@ package org.mockmc.mockmc.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.HopperMinecart;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class HopperMinecartMock extends LootableMinecart
 		implements
-			HopperMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.HopperMinecartBaseMock
 {
 

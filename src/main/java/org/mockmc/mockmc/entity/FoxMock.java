@@ -14,10 +14,7 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class FoxMock extends AnimalsMock
-		implements
-			Fox,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.FoxBaseMock
+public class FoxMock extends AnimalsMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.FoxBaseMock
 {
 
 	private Type foxType = Type.RED;

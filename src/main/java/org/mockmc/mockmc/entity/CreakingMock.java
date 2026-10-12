@@ -20,7 +20,6 @@ import java.util.UUID;
 @ApiStatus.Experimental
 public class CreakingMock extends MonsterMock
 		implements
-			Creaking,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CreakingBaseMock
 {
 

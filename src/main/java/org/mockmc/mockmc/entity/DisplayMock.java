@@ -2,7 +2,6 @@ package org.mockmc.mockmc.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.Color;
-import org.bukkit.entity.Display;
 import org.bukkit.util.Transformation;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +13,6 @@ import java.util.UUID;
 
 public class DisplayMock extends EntityMock
 		implements
-			Display,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.DisplayBaseMock
 {
 

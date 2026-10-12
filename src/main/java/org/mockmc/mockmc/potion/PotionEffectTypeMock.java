@@ -23,8 +23,7 @@ import java.util.Map;
  *
  * @author TheBusyBiscuit
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class PotionEffectTypeMock extends PotionEffectType
 {
 	@Override

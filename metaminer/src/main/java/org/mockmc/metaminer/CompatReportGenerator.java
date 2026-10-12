@@ -168,33 +168,37 @@ public class CompatReportGenerator implements DataGenerator
 			{
 				JarEntry entry = entries.nextElement();
 				String name = entry.getName();
-				if (!name.endsWith(".class") || name.contains("$") || !isApiClass(name))
+				if (name.endsWith(".class") && !name.contains("$") && isApiClass(name))
 				{
-					continue;
-				}
-				try (InputStream in = jarFile.getInputStream(entry))
-				{
-					ClassNode node = new ClassNode();
-					new ClassReader(in).accept(node, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG);
-					if ((node.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) == 0)
-					{
-						continue;
-					}
-					Set<String> methods = new TreeSet<>();
-					for (MethodNode m : node.methods)
-					{
-						boolean visible = (m.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) != 0;
-						boolean synthetic = (m.access & (Opcodes.ACC_SYNTHETIC | Opcodes.ACC_BRIDGE)) != 0;
-						if (visible && !synthetic)
-						{
-							methods.add(m.name + m.desc);
-						}
-					}
-					api.put(node.name.replace('/', '.'), methods);
+					readApiEntry(jarFile, entry, api);
 				}
 			}
 		}
 		return api;
+	}
+
+	private static void readApiEntry(JarFile jarFile, JarEntry entry, Map<String, Set<String>> api) throws IOException
+	{
+		try (InputStream in = jarFile.getInputStream(entry))
+		{
+			ClassNode node = new ClassNode();
+			new ClassReader(in).accept(node, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG);
+			if ((node.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) == 0)
+			{
+				return;
+			}
+			Set<String> methods = new TreeSet<>();
+			for (MethodNode m : node.methods)
+			{
+				boolean visible = (m.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) != 0;
+				boolean synthetic = (m.access & (Opcodes.ACC_SYNTHETIC | Opcodes.ACC_BRIDGE)) != 0;
+				if (visible && !synthetic)
+				{
+					methods.add(m.name + m.desc);
+				}
+			}
+			api.put(node.name.replace('/', '.'), methods);
+		}
 	}
 
 	private static boolean isApiClass(String path)

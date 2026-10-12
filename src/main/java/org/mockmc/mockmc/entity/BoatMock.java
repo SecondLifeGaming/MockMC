@@ -14,12 +14,7 @@ import java.util.UUID;
  *
  * @see VehicleMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class BoatMock extends VehicleMock
-		implements
-			Boat,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.BoatBaseMock
+public class BoatMock extends VehicleMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.BoatBaseMock
 {
 
 	private double maxSpeed = 0.4D;

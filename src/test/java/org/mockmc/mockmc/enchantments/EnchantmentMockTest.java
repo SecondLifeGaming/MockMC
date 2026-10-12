@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,15 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class EnchantmentMockTest
 {
 
 	private final static String NAMESPACE = "mock_bukkit";
 	private NamespacedKey key;
-	private EnchantmentTarget target;
 	private int maxLevel;
 	private int minLevel;
 	private String name;

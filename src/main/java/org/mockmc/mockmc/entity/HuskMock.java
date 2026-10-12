@@ -11,10 +11,7 @@ import java.util.UUID;
  *
  * @see ZombieMock
  */
-public class HuskMock extends ZombieMock
-		implements
-			Husk,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.HuskBaseMock
+public class HuskMock extends ZombieMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.HuskBaseMock
 {
 
 	/**
