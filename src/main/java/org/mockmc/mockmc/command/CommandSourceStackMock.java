@@ -68,9 +68,13 @@ public class CommandSourceStackMock implements CommandSourceStack
 	public @NotNull Entity getEntityOrThrow()
 	{
 		if (executor != null)
+		{
 			return executor;
+		}
 		if (sender instanceof Entity entity)
+		{
 			return entity;
+		}
 		throw new IllegalStateException("CommandSourceStack has no entity");
 	}
 
@@ -78,7 +82,9 @@ public class CommandSourceStackMock implements CommandSourceStack
 	public @NotNull org.bukkit.entity.Player getPlayerOrThrow()
 	{
 		if (sender instanceof org.bukkit.entity.Player player)
+		{
 			return player;
+		}
 		throw new IllegalStateException("CommandSourceStack sender is not a player");
 	}
 

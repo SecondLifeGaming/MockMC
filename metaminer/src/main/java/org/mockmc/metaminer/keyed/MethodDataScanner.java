@@ -59,7 +59,7 @@ public class MethodDataScanner
 		Preconditions.checkArgument(returnType != null, "The return type can't be null!");
 		Preconditions.checkArgument(method != null, "The method can't be null!");
 
-		if (method.getName().startsWith("has"))
+		if (method.getName().startsWith("has") && object != null)
 		{
 			try
 			{

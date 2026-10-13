@@ -291,8 +291,8 @@ public class PlayerMock extends HumanEntityMock
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
 		super(server, uuid);
+		Preconditions.checkNotNull(name, "Name cannot be null");
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
