@@ -11,8 +11,6 @@ import static net.kyori.adventure.text.format.TextColor.color;
 import static net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class LegacyComponentSerializerTest
 {

@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class WindChargeMock extends AbstractWindChargeMock
 		implements
-			WindCharge,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WindChargeBaseMock
 {
 

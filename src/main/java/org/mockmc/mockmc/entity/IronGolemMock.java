@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class IronGolemMock extends GolemMock
 		implements
-			IronGolem,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.IronGolemBaseMock
 {
 

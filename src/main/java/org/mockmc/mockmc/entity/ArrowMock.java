@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
@@ -10,11 +9,8 @@ import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.potion.PotionUtils;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ArrowMock extends AbstractArrowMock
 		implements
-			Arrow,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ArrowBaseMock
 {
 

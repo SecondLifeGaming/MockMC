@@ -13,8 +13,6 @@ import org.mockmc.mockmc.MockMCExtension;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class DialogMockTest
 {

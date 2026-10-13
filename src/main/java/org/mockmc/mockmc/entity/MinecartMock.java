@@ -19,11 +19,8 @@ import java.util.UUID;
  *
  * @see VehicleMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class MinecartMock extends VehicleMock
 		implements
-			Minecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MinecartBaseMock
 {
 

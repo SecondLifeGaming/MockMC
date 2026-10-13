@@ -1,7 +1,6 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.Material;
-import org.bukkit.entity.ChestBoat;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
@@ -10,11 +9,8 @@ import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.inventory.ChestInventoryMock;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ChestBoatMock extends BoatMock
 		implements
-			ChestBoat,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ChestBoatBaseMock
 {
 

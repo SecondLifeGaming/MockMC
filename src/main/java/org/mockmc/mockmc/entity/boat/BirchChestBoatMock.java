@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class BirchChestBoatMock extends ChestBoatMock
 		implements
-			BirchChestBoat,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.BirchChestBoatBaseMock
 {
 

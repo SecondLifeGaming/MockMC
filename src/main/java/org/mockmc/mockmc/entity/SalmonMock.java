@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class SalmonMock extends SchoolableFishMock
 		implements
-			Salmon,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SalmonBaseMock
 {
 

@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class JukeboxStateMockTest
 {

@@ -34,8 +34,7 @@ import java.util.Set;
 import static java.util.Objects.requireNonNull;
 
 @ApiStatus.Internal
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class PaperCommandsMock implements Commands, PaperRegistrarMock<LifecycleEventOwner>
 {
 

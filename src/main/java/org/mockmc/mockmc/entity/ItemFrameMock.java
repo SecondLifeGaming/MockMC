@@ -18,7 +18,6 @@ import java.util.UUID;
  */
 public class ItemFrameMock extends HangingMock
 		implements
-			ItemFrame,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemFrameBaseMock
 {
 

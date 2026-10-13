@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class VindicatorMock extends IllagerMock
 		implements
-			Vindicator,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.VindicatorBaseMock
 {
 

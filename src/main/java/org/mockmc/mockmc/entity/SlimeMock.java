@@ -2,15 +2,11 @@ package org.mockmc.mockmc.entity;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Slime;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class SlimeMock extends MobMock
-		implements
-			Slime,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.SlimeBaseMock
+public class SlimeMock extends MobMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.SlimeBaseMock
 {
 
 	private int size = 1;

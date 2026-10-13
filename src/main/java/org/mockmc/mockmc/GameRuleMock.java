@@ -9,8 +9,6 @@ import org.jspecify.annotations.NullMarked;
 import java.util.function.Function;
 
 @NullMarked
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class GameRuleMock<T> extends GameRule<T>
 {
 

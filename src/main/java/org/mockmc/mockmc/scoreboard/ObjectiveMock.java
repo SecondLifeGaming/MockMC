@@ -18,12 +18,7 @@ import java.util.Map;
 /**
  * Mock implementation of an {@link Objective}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
-public class ObjectiveMock
-		implements
-			Objective,
-			org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ObjectiveBaseMock
+public class ObjectiveMock implements org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ObjectiveBaseMock
 {
 
 	@Nullable

@@ -21,9 +21,9 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.registry.RegistryKeySetMock;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Mock implementation of an {@link Enchantment}.
@@ -70,8 +70,6 @@ public class EnchantmentMock extends Enchantment
 	private static final String ANVIL_COST_KEY = "anvilCost";
 
 	private static final String KEY = "key";
-
-	private static final String ENCHANTABLES_KEY = "enchantables";
 
 	@NotNull
 	private final String name;
@@ -558,12 +556,8 @@ public class EnchantmentMock extends Enchantment
 			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, keys);
 		} else if (data.isJsonArray())
 		{
-			JsonArray array = data.getAsJsonArray();
-			List<NamespacedKey> keys = new java.util.ArrayList<>();
-			for (JsonElement el : array)
-			{
-				keys.add(NamespacedKey.fromString(el.getAsString()));
-			}
+			List<NamespacedKey> keys = data.getAsJsonArray().asList().stream()
+					.map(el -> NamespacedKey.fromString(el.getAsString())).toList();
 			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, keys);
 		}
 		return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ITEM, List.of());
@@ -580,12 +574,8 @@ public class EnchantmentMock extends Enchantment
 			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, List.of());
 		} else if (data.isJsonArray())
 		{
-			JsonArray array = data.getAsJsonArray();
-			List<NamespacedKey> keys = new java.util.ArrayList<>();
-			for (JsonElement el : array)
-			{
-				keys.add(NamespacedKey.fromString(el.getAsString()));
-			}
+			List<NamespacedKey> keys = data.getAsJsonArray().asList().stream()
+					.map(el -> NamespacedKey.fromString(el.getAsString())).toList();
 			return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, keys);
 		}
 		return new RegistryKeySetMock<>(io.papermc.paper.registry.RegistryKey.ENCHANTMENT, List.of());
@@ -593,22 +583,14 @@ public class EnchantmentMock extends Enchantment
 
 	private static Set<NamespacedKey> getConflicts(JsonArray conflicts)
 	{
-		Set<NamespacedKey> output = new HashSet<>();
-		for (JsonElement conflict : conflicts)
-		{
-			output.add(NamespacedKey.fromString(conflict.getAsString()));
-		}
-		return output;
+		return conflicts.asList().stream().map(conflict -> NamespacedKey.fromString(conflict.getAsString()))
+				.collect(Collectors.toSet());
 	}
 
 	private static Set<NamespacedKey> getEnchantables(JsonArray enchantables)
 	{
-		Set<NamespacedKey> output = new HashSet<>();
-		for (JsonElement enchantable : enchantables)
-		{
-			output.add(NamespacedKey.fromString(enchantable.getAsString()));
-		}
-		return output;
+		return enchantables.asList().stream().map(enchantable -> NamespacedKey.fromString(enchantable.getAsString()))
+				.collect(Collectors.toSet());
 	}
 
 	private static Component[] getDisplayNames(JsonArray displayNamesData, int maxLevel)

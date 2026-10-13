@@ -20,7 +20,9 @@ class BenchmarkTest
 		long start = System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++)
 		{
-			server.addSimpleWorld("world").spawn(new Location(null, 0, 0, 0), ZombieMock.class);
+			server.addSimpleWorld("world").spawn(new Location(null, 0, 0, 0), ZombieMock.class, _ ->
+			{
+			});
 		}
 		long spawnEnd = System.currentTimeMillis();
 		System.out.println("Spawned 10,000 zombies in " + (spawnEnd - start) + "ms");

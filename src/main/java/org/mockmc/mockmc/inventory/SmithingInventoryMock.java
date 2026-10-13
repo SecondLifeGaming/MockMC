@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SmithingInventoryMock extends InventoryMock
 		implements
-			SmithingInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.SmithingInventoryBaseMock
 {
 

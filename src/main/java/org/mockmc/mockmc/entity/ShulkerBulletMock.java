@@ -18,7 +18,6 @@ import java.util.UUID;
  */
 public class ShulkerBulletMock extends AbstractProjectileMock
 		implements
-			ShulkerBullet,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ShulkerBulletBaseMock
 {
 

@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class HangingSignStateMock extends SignStateMock
 		implements
-			HangingSign,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.HangingSignBaseMock
 {
 

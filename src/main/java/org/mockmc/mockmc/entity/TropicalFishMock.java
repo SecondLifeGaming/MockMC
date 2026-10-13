@@ -19,7 +19,6 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class TropicalFishMock extends SchoolableFishMock
 		implements
-			TropicalFish,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.TropicalFishBaseMock
 {
 

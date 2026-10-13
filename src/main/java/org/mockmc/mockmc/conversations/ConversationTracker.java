@@ -12,7 +12,7 @@ import java.util.logging.Level;
 
 @ApiStatus.Internal
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+{"deprecation", "removal"})
 public class ConversationTracker
 {
 

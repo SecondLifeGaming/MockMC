@@ -3,14 +3,12 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Trident;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class TridentMock extends AbstractArrowMock
 		implements
-			Trident,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.TridentBaseMock
 {
 

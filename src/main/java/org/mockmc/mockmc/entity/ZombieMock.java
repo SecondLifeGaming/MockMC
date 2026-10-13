@@ -14,11 +14,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ZombieMock extends MonsterMock
 		implements
-			Zombie,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZombieBaseMock
 {
 

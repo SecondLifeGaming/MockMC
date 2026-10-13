@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class GrindstoneInventoryMock extends InventoryMock
 		implements
-			GrindstoneInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.GrindstoneInventoryBaseMock
 {
 

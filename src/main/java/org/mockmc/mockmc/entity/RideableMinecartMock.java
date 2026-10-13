@@ -2,14 +2,12 @@ package org.mockmc.mockmc.entity;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.RideableMinecart;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class RideableMinecartMock extends MinecartMock
 		implements
-			RideableMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.RideableMinecartBaseMock
 {
 

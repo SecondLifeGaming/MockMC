@@ -16,10 +16,7 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class VexMock extends MonsterMock
-		implements
-			Vex,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.VexBaseMock
+public class VexMock extends MonsterMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.VexBaseMock
 {
 
 	private boolean isCharging = false;
@@ -81,6 +78,9 @@ public class VexMock extends MonsterMock
 		}
 	}
 
+	/**
+	 * @deprecated Use {@link #getLimitedLifetimeTicks()} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public int getLifeTicks()
@@ -88,6 +88,9 @@ public class VexMock extends MonsterMock
 		return this.getLimitedLifetimeTicks();
 	}
 
+	/**
+	 * @deprecated Use {@link #setLimitedLifetimeTicks(int)} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public void setLifeTicks(int lifeTicks)
@@ -96,6 +99,9 @@ public class VexMock extends MonsterMock
 		this.setLimitedLifetimeTicks(lifeTicks);
 	}
 
+	/**
+	 * @deprecated Use {@link #hasLimitedLifetime()} instead.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public boolean hasLimitedLife()

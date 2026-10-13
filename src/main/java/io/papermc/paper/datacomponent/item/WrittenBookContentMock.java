@@ -12,7 +12,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked", "NonExtendableApiUsage", "UnstableApiUsage"})
+{"NonExtendableApiUsage", "UnstableApiUsage"})
 @NullMarked
 public record WrittenBookContentMock(Filtered<String> title, String author, int generation,
 		List<Filtered<Component>> pages, boolean resolved) implements WrittenBookContent

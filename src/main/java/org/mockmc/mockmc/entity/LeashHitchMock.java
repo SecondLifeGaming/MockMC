@@ -3,14 +3,12 @@ package org.mockmc.mockmc.entity;
 import com.google.common.base.Preconditions;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LeashHitch;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class LeashHitchMock extends HangingMock
 		implements
-			LeashHitch,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LeashHitchBaseMock
 {
 

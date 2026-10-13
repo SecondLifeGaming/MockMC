@@ -18,10 +18,7 @@ import java.util.Objects;
  *
  * @see ContainerStateMock
  */
-public class LecternStateMock extends ContainerStateMock
-		implements
-			Lectern,
-			org.mockmc.mockmc.generated.server.org.bukkit.block.LockableBaseMock
+public class LecternStateMock extends ContainerStateMock implements Lectern
 {
 
 	private int currentPage;
@@ -95,7 +92,7 @@ public class LecternStateMock extends ContainerStateMock
 		ItemStack book = getInventory().getItem(0);
 		int maxPages = getMaxPages(book);
 
-		this.currentPage = Math.min(Math.max(0, page), maxPages - 1);
+		this.currentPage = Math.clamp(page, 0, maxPages - 1);
 	}
 
 	private int getMaxPages(@Nullable ItemStack book)
@@ -107,9 +104,9 @@ public class LecternStateMock extends ContainerStateMock
 
 		ItemMeta meta = book.getItemMeta();
 
-		if (meta instanceof BookMeta)
+		if (meta instanceof BookMeta bookMeta)
 		{
-			return ((BookMeta) meta).getPageCount();
+			return bookMeta.getPageCount();
 		} else
 		{
 			return 1;

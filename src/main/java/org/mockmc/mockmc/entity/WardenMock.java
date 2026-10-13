@@ -23,7 +23,6 @@ import java.util.UUID;
  */
 public class WardenMock extends MonsterMock
 		implements
-			Warden,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WardenBaseMock
 {
 

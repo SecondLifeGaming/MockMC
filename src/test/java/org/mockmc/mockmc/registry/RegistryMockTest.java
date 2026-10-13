@@ -35,8 +35,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class RegistryMockTest
 {
@@ -187,6 +185,7 @@ class RegistryMockTest
 				.map(RegistryMockTest::getRegistryKey);
 	}
 
+	@SuppressWarnings("unchecked")
 	static RegistryKey<? extends Keyed> getRegistryKey(Field field)
 	{
 		try

@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class DragonFireballMock extends FireballMock
 		implements
-			DragonFireball,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.DragonFireballBaseMock
 {
 

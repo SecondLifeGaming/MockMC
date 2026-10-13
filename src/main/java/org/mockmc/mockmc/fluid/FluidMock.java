@@ -8,7 +8,6 @@ import org.mockmc.mockmc.util.OldKeyedEnumMock;
 @SuppressWarnings("removal")
 public class FluidMock extends OldKeyedEnumMock<Fluid>
 		implements
-			Fluid,
 			org.mockmc.mockmc.generated.server.org.bukkit.FluidBaseMock
 {
 

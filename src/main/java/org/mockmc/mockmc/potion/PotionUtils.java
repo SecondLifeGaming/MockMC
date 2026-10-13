@@ -15,8 +15,7 @@ import org.mockmc.mockmc.util.ResourceLoader;
  * Utility class copied from CraftPotionUtil.
  * https://hub.spigotmc.org/stash/projects/SPIGOT/repos/craftbukkit/browse/src/main/java/org/bukkit/craftbukkit/potion/CraftPotionUtil.java#14
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class PotionUtils
 {
 

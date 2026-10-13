@@ -53,6 +53,7 @@ public class MapMetaMock extends ItemMetaMock
 	 * @param meta
 	 *            The meta to clone.
 	 */
+	@SuppressWarnings("deprecation")
 	public MapMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
@@ -139,8 +140,13 @@ public class MapMetaMock extends ItemMetaMock
 		return this.color != null;
 	}
 
+	/**
+	 * @deprecated Use {@link #getColor()} or component APIs.
+	 */
 	@Override
+	@Deprecated(since = "26.3")
 	@Nullable
+	@SuppressWarnings("java:S1133")
 	public Color getColor()
 	{
 		return this.color;
@@ -195,6 +201,7 @@ public class MapMetaMock extends ItemMetaMock
 	 * @return A new instance of the MapMetaMock class.
 	 */
 	@NotNull
+	@SuppressWarnings("java:S2176")
 	public static MapMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		MapMetaMock serialMock = new MapMetaMock();
@@ -205,7 +212,11 @@ public class MapMetaMock extends ItemMetaMock
 		{
 			serialMock.color = Color.fromARGB((int) args.get("color"));
 		}
-		serialMock.scaling = NbtParser.parseByte(args.get("scaling"));
+		Byte scalingByte = NbtParser.parseByte(args.get("scaling"));
+		if (scalingByte != null)
+		{
+			serialMock.scaling = scalingByte;
+		}
 		return serialMock;
 	}
 

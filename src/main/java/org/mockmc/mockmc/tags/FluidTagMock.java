@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-import org.bukkit.Bukkit;
 import org.bukkit.Fluid;
 import org.bukkit.NamespacedKey;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +31,8 @@ public class FluidTagMock extends BaseTagMock<Fluid>
 
 			NamespacedKey minecraftKey = NamespacedKey.fromString(primitiveElement.getAsString());
 			Preconditions.checkArgument(minecraftKey != null, "The value is not a valid namespaced key");
-			Fluid fluid = Bukkit.getRegistry(Fluid.class).get(minecraftKey);
+			Fluid fluid = io.papermc.paper.registry.RegistryAccess.registryAccess()
+					.getRegistry(io.papermc.paper.registry.RegistryKey.FLUID).get(minecraftKey);
 			Preconditions.checkState(fluid != null, "Unknown gameEvent {}", minecraftKey);
 			fluids.add(fluid);
 		}

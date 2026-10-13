@@ -2,15 +2,12 @@ package org.mockmc.mockmc.entity;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Panda;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-public class PandaMock extends AnimalsMock
-		implements
-			Panda,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.PandaBaseMock
+@SuppressWarnings("java:S110")
+public class PandaMock extends AnimalsMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.PandaBaseMock
 {
 
 	private Gene mainGene = Gene.NORMAL;

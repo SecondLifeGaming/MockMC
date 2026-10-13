@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class CaveSpiderMock extends SpiderMock
 		implements
-			CaveSpider,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CaveSpiderBaseMock
 {
 

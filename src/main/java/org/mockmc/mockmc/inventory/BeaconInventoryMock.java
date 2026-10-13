@@ -14,7 +14,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class BeaconInventoryMock extends InventoryMock
 		implements
-			BeaconInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.BeaconInventoryBaseMock
 {
 

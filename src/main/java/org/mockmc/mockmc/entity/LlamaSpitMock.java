@@ -1,14 +1,12 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LlamaSpit;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
 public class LlamaSpitMock extends ProjectileMock
 		implements
-			LlamaSpit,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LlamaSpitBaseMock
 {
 

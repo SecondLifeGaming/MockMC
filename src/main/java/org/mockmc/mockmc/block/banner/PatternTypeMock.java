@@ -6,11 +6,8 @@ import org.bukkit.block.banner.PatternType;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.util.OldKeyedEnumMock;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class PatternTypeMock extends OldKeyedEnumMock<PatternType>
 		implements
-			PatternType,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.banner.PatternTypeBaseMock
 {
 

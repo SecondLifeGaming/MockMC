@@ -16,8 +16,7 @@ import java.util.Objects;
 /**
  * Mock implementation of a {@link Metadatable}.
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("deprecation")
 public class MetadataTable implements Metadatable
 {
 

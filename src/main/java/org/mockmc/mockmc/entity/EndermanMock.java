@@ -21,11 +21,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class EndermanMock extends MonsterMock
 		implements
-			Enderman,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EndermanBaseMock
 {
 

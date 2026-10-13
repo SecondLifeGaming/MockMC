@@ -11,11 +11,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ZoglinMock extends MonsterMock
 		implements
-			Zoglin,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ZoglinBaseMock
 {
 

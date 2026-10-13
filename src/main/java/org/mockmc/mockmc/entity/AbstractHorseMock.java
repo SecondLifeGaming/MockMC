@@ -14,11 +14,8 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class AbstractHorseMock extends AnimalsMock
 		implements
-			AbstractHorse,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractHorseBaseMock
 {
 

@@ -106,16 +106,12 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public void setSize(double newSize, long seconds)
 	{
 		this.changeSize(newSize, seconds * 20L);
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public void setSize(double newSize, @NotNull java.util.concurrent.TimeUnit unit, long duration)
 	{
 		this.changeSize(newSize, unit.toMillis(duration) / 50L);
@@ -240,16 +236,12 @@ public class WorldBorderMock implements org.mockmc.mockmc.generated.server.org.b
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public int getWarningTime()
 	{
 		return this.warningTimeSeconds;
 	}
 
 	@Override
-	@SuppressWarnings(
-	{"java:S1874", "java:S1133"})
 	public void setWarningTime(int seconds)
 	{
 		Preconditions.checkArgument(seconds >= 0, "seconds cannot be lower than 0");

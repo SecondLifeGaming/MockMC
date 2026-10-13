@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class SculkShriekerStateMock extends TileStateMock
 		implements
-			SculkShrieker,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.SculkShriekerBaseMock
 {
 

@@ -5,15 +5,11 @@ import com.google.gson.JsonObject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class TrimPatternMock
 		implements
-			TrimPattern,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.trim.TrimPatternBaseMock
 {
 

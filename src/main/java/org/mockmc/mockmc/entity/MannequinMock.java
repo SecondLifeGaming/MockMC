@@ -18,7 +18,6 @@ import java.util.UUID;
  */
 public class MannequinMock extends LivingEntityMock
 		implements
-			Mannequin,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MannequinBaseMock
 {
 

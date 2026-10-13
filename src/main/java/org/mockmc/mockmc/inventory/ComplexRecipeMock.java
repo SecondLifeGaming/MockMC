@@ -2,14 +2,10 @@ package org.mockmc.mockmc.inventory;
 
 import com.google.common.base.Preconditions;
 import org.bukkit.NamespacedKey;
-import org.bukkit.inventory.ComplexRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class ComplexRecipeMock
-		implements
-			ComplexRecipe,
-			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ComplexRecipeBaseMock
+public class ComplexRecipeMock implements org.mockmc.mockmc.generated.server.org.bukkit.inventory.ComplexRecipeBaseMock
 {
 
 	private final NamespacedKey key;

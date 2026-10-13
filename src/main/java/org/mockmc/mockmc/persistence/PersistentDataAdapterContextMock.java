@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PersistentDataAdapterContextMock
 		implements
-			PersistentDataAdapterContext,
 			org.mockmc.mockmc.generated.server.org.bukkit.persistence.PersistentDataAdapterContextBaseMock
 {
 

@@ -349,4 +349,10 @@ public class CombatTrackerMock implements CombatTracker
 		}
 	}
 
+	@Override
+	public int getLastDamageTime()
+	{
+		return this.lastDamageTime;
+	}
+
 }

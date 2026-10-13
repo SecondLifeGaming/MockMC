@@ -14,7 +14,6 @@ import java.util.UUID;
 @NullMarked
 public class NautilusMock extends AbstractNautilusMock
 		implements
-			Nautilus,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.NautilusBaseMock
 {
 

@@ -7,7 +7,7 @@ import net.kyori.adventure.text.TranslationArgument;
 import net.kyori.adventure.text.flattener.ComponentFlattener;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.kyori.adventure.translation.GlobalTranslator;
-import net.kyori.adventure.translation.TranslationRegistry;
+import net.kyori.adventure.translation.TranslationStore;
 import net.kyori.adventure.translation.Translator;
 import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
@@ -19,7 +19,6 @@ import java.util.logging.Level;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("deprecation")
 public class PlainTextComponentProviderImpl implements PlainTextComponentSerializer.Provider
 {
 
@@ -68,7 +67,7 @@ public class PlainTextComponentProviderImpl implements PlainTextComponentSeriali
 			{
 				for (Translator source : GlobalTranslator.translator().sources())
 				{
-					if (source instanceof TranslationRegistry registry && registry.contains(translatable.key()))
+					if (source instanceof TranslationStore<?> registry && registry.contains(translatable.key()))
 					{
 						consumer.accept(GlobalTranslator.render(translatable, Locale.US));
 						return;

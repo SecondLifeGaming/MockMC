@@ -16,7 +16,6 @@ import java.util.UUID;
  */
 public class SpawnerMinecartMock extends MinecartMock
 		implements
-			SpawnerMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.SpawnerMinecartBaseMock
 {
 

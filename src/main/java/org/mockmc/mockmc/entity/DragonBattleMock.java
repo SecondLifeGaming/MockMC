@@ -13,10 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class DragonBattleMock
-		implements
-			DragonBattle,
-			org.mockmc.mockmc.generated.server.org.bukkit.boss.DragonBattleBaseMock
+public class DragonBattleMock implements org.mockmc.mockmc.generated.server.org.bukkit.boss.DragonBattleBaseMock
 {
 
 	public static final int GATEWAY_COUNT = 20;

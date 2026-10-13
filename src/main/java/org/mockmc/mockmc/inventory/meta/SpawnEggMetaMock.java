@@ -14,8 +14,6 @@ import java.util.Map;
  * @see ItemMetaMock
  */
 @DelegateDeserialization(SerializableMeta.class)
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SpawnEggMetaMock extends ItemMetaMock
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.SpawnEggMetaBaseMock
@@ -38,7 +36,7 @@ public class SpawnEggMetaMock extends ItemMetaMock
 	public SpawnEggMetaMock(@NotNull ItemMeta meta)
 	{
 		super(meta);
-		if (meta instanceof SpawnEggMeta spawnMeta)
+		if (meta instanceof SpawnEggMeta)
 		{
 			// TODO cloning logic from spawnMeta
 		}
@@ -54,12 +52,6 @@ public class SpawnEggMetaMock extends ItemMetaMock
 	public void setSpawnedType(EntityType type)
 	{
 		throw new UnsupportedOperationException("Must change item type to set spawned type");
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		return super.equals(obj);
 	}
 
 	@Override
@@ -80,6 +72,7 @@ public class SpawnEggMetaMock extends ItemMetaMock
 	 * @return A new instance of the SpawnEggMetaMock class.
 	 */
 	@NotNull
+	@SuppressWarnings("java:S2176")
 	public static SpawnEggMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		SpawnEggMetaMock serialMock = new SpawnEggMetaMock();

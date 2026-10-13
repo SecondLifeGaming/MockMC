@@ -9,7 +9,6 @@ import org.mockmc.mockmc.AsyncCatcher;
  */
 public class ScoreboardManagerMock
 		implements
-			ScoreboardManager,
 			org.mockmc.mockmc.generated.server.org.bukkit.scoreboard.ScoreboardManagerBaseMock
 {
 

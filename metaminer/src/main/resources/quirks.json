@@ -1,4 +1,10 @@
 {
+  "org.bukkit.inventory.RecipeChoice": {
+    "excludeInterfaces": [
+      "org.bukkit.inventory.RecipeChoice$PredicateChoice"
+    ]
+  },
+
   "org.bukkit.Art": {
     "methodQuirks": {
       "key()": {

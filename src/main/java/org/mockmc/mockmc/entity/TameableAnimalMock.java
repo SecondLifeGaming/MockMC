@@ -16,7 +16,7 @@ import java.util.UUID;
  *
  * @see AnimalsMock
  */
-public class TameableAnimalMock extends AnimalsMock implements Tameable, Creature
+public class TameableAnimalMock extends AnimalsMock implements Tameable
 {
 
 	private @Nullable UUID owner;

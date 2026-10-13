@@ -12,7 +12,6 @@ import java.util.UUID;
  */
 public class MarkerMock extends EntityMock
 		implements
-			Marker,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.MarkerBaseMock
 {
 

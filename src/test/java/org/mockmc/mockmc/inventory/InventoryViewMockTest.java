@@ -24,8 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class InventoryViewMockTest
 {
@@ -228,6 +226,7 @@ class InventoryViewMockTest
 		Player player = server.addPlayer();
 		InventoryMock chest = new ChestInventoryMock(null, 9);
 		InventoryViewMock view1 = new PlayerInventoryViewMock(player, chest);
+		view1.setItem(-1, null);
 
 		// Verify no items were dropped (since item was null) [ there can be only 1: the
 		// player ]

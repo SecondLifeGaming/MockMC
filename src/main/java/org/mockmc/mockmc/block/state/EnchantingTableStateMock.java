@@ -13,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class EnchantingTableStateMock extends TileStateMock implements EnchantingTable
 {
 

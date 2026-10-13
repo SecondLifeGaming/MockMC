@@ -16,11 +16,8 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class FallingBlockMock extends EntityMock
 		implements
-			FallingBlock,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.FallingBlockBaseMock
 {
 

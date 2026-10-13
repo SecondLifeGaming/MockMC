@@ -11,11 +11,8 @@ import org.mockmc.mockmc.ServerMock;
 import org.mockmc.mockmc.world.WorldMock;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class WitherMock extends AbstractBossMock
 		implements
-			Wither,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WitherBaseMock
 {
 

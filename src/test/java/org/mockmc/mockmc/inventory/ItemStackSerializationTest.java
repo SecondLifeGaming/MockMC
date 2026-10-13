@@ -12,13 +12,12 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class ItemStackSerializationTest
 {
 
 	@Test
+	@SuppressWarnings("unchecked")
 	void testSerialize_WithComponent()
 	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);
@@ -34,6 +33,7 @@ class ItemStackSerializationTest
 	}
 
 	@Test
+	@SuppressWarnings("unchecked")
 	void testSerialize_WithItemMeta()
 	{
 		ItemStackMock itemStack = new ItemStackMock(Material.DIAMOND_PICKAXE);

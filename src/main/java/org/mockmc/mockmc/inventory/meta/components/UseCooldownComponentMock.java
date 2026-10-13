@@ -19,7 +19,6 @@ import java.util.Map;
 @SuppressWarnings("UnstableApiUsage")
 public class UseCooldownComponentMock
 		implements
-			UseCooldownComponent,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.UseCooldownComponentBaseMock
 {
 

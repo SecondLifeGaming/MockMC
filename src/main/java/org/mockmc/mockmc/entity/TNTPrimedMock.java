@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class TNTPrimedMock extends EntityMock
 		implements
-			TNTPrimed,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.TNTPrimedBaseMock
 {
 

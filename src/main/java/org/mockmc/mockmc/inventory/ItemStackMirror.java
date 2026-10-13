@@ -44,7 +44,7 @@ import java.util.function.UnaryOperator;
  * @see ItemStack
  */
 @SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+{"deprecation", "removal"})
 @ApiStatus.Internal
 @DelegateDeserialization(ItemStack.class)
 public final class ItemStackMirror extends ItemStack

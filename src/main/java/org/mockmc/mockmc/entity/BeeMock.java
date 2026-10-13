@@ -18,10 +18,7 @@ import java.util.UUID;
  * @mockmc.version 1.21-1.0.0
  */
 @SuppressWarnings("java:S110")
-public class BeeMock extends AnimalsMock
-		implements
-			Bee,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.BeeBaseMock
+public class BeeMock extends AnimalsMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.BeeBaseMock
 {
 
 	@Nullable

@@ -2,16 +2,12 @@ package org.mockmc.mockmc.ban;
 
 import com.google.common.base.Preconditions;
 import com.google.common.net.InetAddresses;
-import org.bukkit.BanEntry;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import java.net.InetAddress;
 import java.util.Date;
 
-public class IpBanEntryMock
-		implements
-			BanEntry<InetAddress>,
-			org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<InetAddress>
+public class IpBanEntryMock implements org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<InetAddress>
 {
 
 	private final String target;

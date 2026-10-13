@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import org.bukkit.entity.Monster;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 
@@ -14,7 +13,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class SimpleMonsterMock extends MonsterMock implements Monster
+@SuppressWarnings("java:S110")
+public class SimpleMonsterMock extends MonsterMock
 {
 
 	/**

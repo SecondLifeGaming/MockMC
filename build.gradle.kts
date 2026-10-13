@@ -25,7 +25,23 @@ abstract class DownloadJarsTask : DefaultTask() {
 						(input as InputStream).copyTo(output)
 					}
 				}
-				
+
+				// fill-data URLs are content-addressed: .../objects/<sha256>/<file>
+				val expected = url.substringBeforeLast('/').substringAfterLast('/')
+				if (Regex("[0-9a-f]{64}").matches(expected)) {
+					val digest = MessageDigest.getInstance("SHA-256")
+					dest.inputStream().use { ins ->
+						val buf = ByteArray(8192)
+						var n = ins.read(buf)
+						while (n >= 0) { digest.update(buf, 0, n); n = ins.read(buf) }
+					}
+					val actual = digest.digest().joinToString("") { "%02x".format(it) }
+					if (actual != expected) {
+						dest.delete()
+						throw GradleException("Checksum mismatch for $name: expected $expected but was $actual")
+					}
+				}
+
 				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
 				val env = mapOf("create" to "false")
 				val jarUri = URI.create("jar:file:${dest.absolutePath}")
@@ -54,25 +70,55 @@ plugins {
 	id("com.diffplug.spotless") version "7.0.2"
 	id("signing")
 	id("org.sonarqube") version "6.0.1.5171"
+	id("eclipse")
+	id("idea")
 }
 
 group = "io.github.secondlifegaming"
 version = getFullVersion()
 
+// versions.json is the single source of truth for which artifacts are used.
+// Every listed version is downloaded (platforms only list versions that exist upstream);
+// per platform, the entry flagged "primary" (otherwise the first listed) drives the backend test classpath.
+val manifestResolved: Pair<List<String>, Map<String, String>> = run {
+	val manifestFile = file("jars/manifests/versions.json")
+	check(manifestFile.exists()) { "Missing version manifest: $manifestFile" }
+	@Suppress("UNCHECKED_CAST")
+	val root = groovy.json.JsonSlurper().parse(manifestFile) as Map<String, Any?>
+	@Suppress("UNCHECKED_CAST")
+	val platforms = root["platforms"] as Map<String, Map<String, Any?>>
+	val all = mutableListOf<String>()
+	val selected = linkedMapOf<String, String>()
+	platforms.forEach { (platform, def) ->
+		@Suppress("UNCHECKED_CAST")
+		val versions = def["versions"] as List<Map<String, Any?>>
+		check(versions.isNotEmpty()) { "Manifest platform '$platform' has no versions" }
+		versions.forEach { v ->
+			all += v["url"] as? String ?: error("Manifest platform '$platform' entry lacks a url")
+		}
+		val chosen = versions.firstOrNull { it["primary"] == true } ?: versions.first()
+		selected[platform] = chosen["url"] as String
+	}
+	check(all.map { it.substringAfterLast('/') }.toSet().size == all.size) { "Duplicate artifact names in version manifest" }
+	all.toList() to selected.toMap()
+}
+val manifestAllUrls: List<String> = manifestResolved.first
+val manifestSelection: Map<String, String> = manifestResolved.second
+
 tasks.register<DownloadJarsTask>("downloadJars") {
 	group = "setup"
-	description = "Downloads backend API JARs for metaminer"
+	description = "Downloads all backend API JARs listed in jars/manifests/versions.json"
 	outputDir.set(layout.projectDirectory.dir("jars"))
-	jars.set(mapOf(
-		"velocity-3.5.0-SNAPSHOT-601.jar" to "https://fill-data.papermc.io/v1/objects/0407642d1ed2883100eb823c2805523f191fa637db1f42ac0ec7ef29cbe455a9/velocity-3.5.0-SNAPSHOT-601.jar",
-		"paper-26.2-25.jar" to "https://fill-data.papermc.io/v1/objects/83c6af7161cebd44dad740759750fa321287a7083ce4cd3a6fb28d89c7bc97cc/paper-26.2-25.jar",
-		"folia-26.1.2-8.jar" to "https://fill-data.papermc.io/v1/objects/607afd1c3320008e1ffd2eaee6780ace4419d5f8c527b75e79f259be79ebf57b/folia-26.1.2-8.jar",
-		"waterfall-1.21-609.jar" to "https://fill-data.papermc.io/v1/objects/5439f3875772e1810284e5f37886cfea8bf48ef6c665e214f30d1146ad66af70/waterfall-1.21-609.jar"
-	))
+	jars.set(manifestAllUrls.associateBy { it.substringAfterLast('/') })
 }
 
 tasks.named("compileJava") {
 	dependsOn("downloadJars")
+}
+
+tasks.withType<JavaCompile>().configureEach {
+	options.isFork = true
+	options.forkOptions.jvmArgs = mutableListOf("-Xint", "-Xshare:off")
 }
 
 sonar {
@@ -101,6 +147,19 @@ tasks.withType<Test>().configureEach {
 	jvmArgs("-XX:-TieredCompilation", "-XX:+UseG1GC", "-Xmx1g")
 }
 
+eclipse {
+	jdt {
+		file {
+			withProperties {
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecation", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecationInDeprecatedCode", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.deprecationWhenOverridingDeprecatedMethod", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.terminalDeprecation", "ignore")
+				setProperty("org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast", "ignore")
+			}
+		}
+	}
+}
 
 spotless {
 	java {
@@ -124,20 +183,40 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	// Remapped Server Jars from MetaMiner (Autonomous)
-	compileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
-	testCompileOnly(fileTree("jars/cache") { include("remapped-*.jar") })
+	// Remapped Server Jars from MetaMiner (Autonomous) - Paper primary, Folia secondary
+	val remappedJars = files(
+		fileTree("jars/cache") { include("remapped-paper-*.jar") },
+		fileTree("jars/cache") { include("remapped-folia-*.jar") }
+	)
+	compileOnly(remappedJars)
+	testCompileOnly(remappedJars)
 
 	// Unbundled Libraries (Autonomous)
-	compileOnly(fileTree("jars/cache/libraries") { 
-		include("**/*.jar") 
+	compileOnly(fileTree("jars/cache/libraries") {
+		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
 	})
-	testCompileOnly(fileTree("jars/cache/libraries") { 
-		include("**/*.jar") 
+	testCompileOnly(fileTree("jars/cache/libraries") {
+		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
+	})
+
+	// Fallback API: declared AFTER paper-api so Paper wins for shared classes.
+	// Only classes missing from Paper (e.g. removed in a newer release) resolve from here,
+	// which keeps mocks for older Folia APIs compiling.
+	compileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
+	testCompileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
+
+	// Fallback Paper API: Sanitized by BaseMockGenerator so only classes removed in newer Paper remain.
+	compileOnly(fileTree("jars/cache/libraries/io/papermc/paper/paper-api") {
+		include("**/*.jar")
+		exclude("**/*${property("paper.api.full-version")}*")
+	})
+	testCompileOnly(fileTree("jars/cache/libraries/io/papermc/paper/paper-api") {
+		include("**/*.jar")
+		exclude("**/*${property("paper.api.full-version")}*")
 	})
 
 	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
@@ -226,7 +305,7 @@ tasks {
 			"-Xmx8g",
 			"-Xss4m",
 			"-XX:MaxMetaspaceSize=1G",
-			"-XX:+UseSerialGC"
+			"-XX:+UseG1GC"
 		)
 	}
 
@@ -262,7 +341,7 @@ tasks {
 		useJUnitPlatform()
 		exclude("org/mockmc/mockmc/generated/**")
 		ignoreFailures = true
-		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceIn(1, 4)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
 		doFirst {
 			println("Default test Classpath:")
@@ -520,12 +599,9 @@ object JarServiceStripper {
 	}
 }
 
-val backendJars = mapOf(
-	"Folia" to "folia-26.1.2-8.jar",
-	"Paper" to "paper-26.2-25.jar",
-	"Velocity" to "velocity-3.5.0-SNAPSHOT-601.jar",
-	"Waterfall" to "waterfall-1.21-609.jar"
-)
+val backendJars: Map<String, String> = manifestSelection.entries.associate { (platform, url) ->
+	platform.replaceFirstChar { it.uppercase() } to url.substringAfterLast('/')
+}
 
 backendJars.forEach { (name, jarName) ->
 	tasks.register<Test>("test$name") {
@@ -533,14 +609,24 @@ backendJars.forEach { (name, jarName) ->
 		description = "Runs tests against $name backend"
 		dependsOn(project(":extra:TestPlugin").tasks.jar)
 		useJUnitPlatform()
-		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceAtLeast(1)
+		maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).coerceIn(1, 4)
 		systemProperty("junit.jupiter.execution.parallel.enabled", "false")
+		jvmArgs("-Xint", "-Xshare:off")
+		// Backend verification must fail the build on genuine test failures.
+		ignoreFailures = false
 
 		if (name == "Velocity") {
 			include("org/mockmc/mockmc/generated/proxy/com/velocitypowered/**")
 		} else if (name == "Waterfall") {
 			include("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
-		} else { // Paper or Folia
+		} else if (name == "Paper") {
+			include("org/mockmc/mockmc/**")
+			exclude("org/mockmc/mockmc/generated/proxy/**")
+			exclude("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
+			// Folia-only classes absent from Paper 26.3
+			exclude("org/mockmc/mockmc/generated/server/org/bukkit/block/data/type/PinkPetalsBaseMockTest*")
+			exclude("org/mockmc/mockmc/generated/server/io/papermc/paper/datacomponent/item/MapItemColor*")
+		} else { // Folia
 			include("org/mockmc/mockmc/**")
 			exclude("org/mockmc/mockmc/generated/proxy/**")
 			exclude("org/mockmc/mockmc/generated/server/net/md_5/bungee/**")
@@ -548,13 +634,20 @@ backendJars.forEach { (name, jarName) ->
 
 		val remappedJar = file("jars/cache/remapped-$jarName")
 		val backendFile = if (remappedJar.exists()) remappedJar else file("jars/$jarName")
-		val libraries = fileTree("jars/cache/libraries") { 
-			include("**/*.jar") 
+		val libraries = fileTree("jars/cache/libraries") {
+			include("**/*.jar")
 			exclude("**/paper-api-*.jar")
 			exclude("**/folia-api-*.jar")
 		}
-		
-		classpath = sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+
+		val foliaApi = fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") }
+
+		// Folia runs against its own API first so classes only present in that API resolve at runtime.
+		classpath = if (name == "Folia") {
+			foliaApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+		} else {
+			sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+		}
 		testClassesDirs = sourceSets.test.get().output.classesDirs
 
 		doFirst {

@@ -100,7 +100,7 @@ public class FireworkMetaMock extends ItemMetaMock
 	}
 
 	@Override
-	public void addEffects(@NotNull FireworkEffect @NotNull [] effects)
+	public void addEffects(@NotNull FireworkEffect @NotNull... effects)
 	{
 		Preconditions.checkNotNull(effects, "effects must never be null");
 		for (FireworkEffect effect : effects)
@@ -178,7 +178,8 @@ public class FireworkMetaMock extends ItemMetaMock
 	 *            Object&gt; format.
 	 * @return A new instance of the FireworkMetaMock class.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings(
+	{"unchecked", "java:S2176"})
 	@NotNull
 	public static FireworkMetaMock deserialize(@NotNull Map<String, Object> args)
 	{

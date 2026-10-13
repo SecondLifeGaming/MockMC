@@ -16,11 +16,8 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class AbstractSkeletonMock extends MonsterMock
 		implements
-			AbstractSkeleton,
 			MockRangedEntity<AbstractSkeletonMock>,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractSkeletonBaseMock
 {

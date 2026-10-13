@@ -18,8 +18,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class MetadataTableTest
 {
@@ -79,7 +77,6 @@ class MetadataTableTest
 	@Test
 	void getMetadata_NoneSet_EmptyList()
 	{
-		PluginMock plugin1 = MockMC.createMockPlugin();
 		List<MetadataValue> metadata = mt.getMetadata("MyMetadata");
 		assertEquals(0, metadata.size());
 	}

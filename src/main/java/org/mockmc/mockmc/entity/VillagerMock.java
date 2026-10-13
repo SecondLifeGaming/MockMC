@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import com.destroystokyo.paper.MaterialTags;
 import com.destroystokyo.paper.entity.villager.Reputation;
 import com.destroystokyo.paper.entity.villager.ReputationType;
 import com.google.common.base.Preconditions;
@@ -26,11 +25,8 @@ import java.util.stream.Collectors;
  *
  * @see AbstractVillagerMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class VillagerMock extends AbstractVillagerMock
 		implements
-			Villager,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.VillagerBaseMock
 {
 
@@ -168,7 +164,7 @@ public class VillagerMock extends AbstractVillagerMock
 		Preconditions.checkArgument(location != null, "Location cannot be null");
 		Preconditions.checkArgument(location.getWorld() != null, "Location needs to be in a world");
 		Preconditions.checkArgument(location.getWorld().equals(this.getWorld()), "Cannot sleep across worlds");
-		if (!MaterialTags.BEDS.isTagged(location.getBlock()))
+		if (!org.bukkit.Tag.BEDS.isTagged(location.getBlock().getType()))
 		{
 			return false;
 		}

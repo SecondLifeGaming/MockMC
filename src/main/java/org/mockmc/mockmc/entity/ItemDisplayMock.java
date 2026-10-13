@@ -1,7 +1,6 @@
 package org.mockmc.mockmc.entity;
 
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ItemDisplay;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +9,6 @@ import java.util.UUID;
 
 public class ItemDisplayMock extends DisplayMock
 		implements
-			ItemDisplay,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ItemDisplayBaseMock
 {
 

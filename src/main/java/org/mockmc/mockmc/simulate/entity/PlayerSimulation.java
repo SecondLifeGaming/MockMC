@@ -31,8 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.entity.PlayerMock;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("removal")
 public class PlayerSimulation
 {
 

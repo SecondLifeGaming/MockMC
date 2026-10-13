@@ -19,8 +19,6 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class TestPlugin extends JavaPlugin implements Listener
 {
 

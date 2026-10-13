@@ -11,10 +11,7 @@ import java.util.UUID;
  *
  * @see MonsterMock
  */
-public class BlazeMock extends MonsterMock
-		implements
-			Blaze,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.BlazeBaseMock
+public class BlazeMock extends MonsterMock implements org.mockmc.mockmc.generated.server.org.bukkit.entity.BlazeBaseMock
 {
 
 	/**

@@ -14,7 +14,6 @@ import org.mockmc.mockmc.inventory.ChiseledBookshelfInventoryMock;
  */
 public class ChiseledBookshelfStateMock extends TileStateMock
 		implements
-			ChiseledBookshelf,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.ChiseledBookshelfBaseMock
 {
 	private final ChiseledBookshelfInventoryMock inventory = new ChiseledBookshelfInventoryMock(this);

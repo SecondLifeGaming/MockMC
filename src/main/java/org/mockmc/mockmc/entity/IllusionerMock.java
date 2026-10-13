@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class IllusionerMock extends SpellcasterMock
 		implements
-			Illusioner,
 			MockRangedEntity<IllusionerMock>,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.IllusionerBaseMock
 {

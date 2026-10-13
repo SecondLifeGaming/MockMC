@@ -14,8 +14,6 @@ import org.mockmc.mockmc.MockMC;
 import java.util.Set;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class DummyCommandSender implements CommandSender
 {
 

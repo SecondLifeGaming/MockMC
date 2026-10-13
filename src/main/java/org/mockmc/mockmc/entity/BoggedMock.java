@@ -15,11 +15,8 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class BoggedMock extends AbstractSkeletonMock
 		implements
-			Bogged,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.BoggedBaseMock
 {
 

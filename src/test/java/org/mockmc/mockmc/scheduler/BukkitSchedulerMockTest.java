@@ -850,8 +850,12 @@ class BukkitSchedulerMockTest
 	{
 		WorldMock world = server.addSimpleWorld("bumba");
 		Location loc = world.getSpawnLocation();
-		PandaMock invalidPanda = (PandaMock) world.spawn(loc, Panda.class);
-		PandaMock goodPanda = (PandaMock) world.spawn(loc, Panda.class);
+		PandaMock invalidPanda = (PandaMock) world.spawn(loc, Panda.class, _ ->
+		{
+		});
+		PandaMock goodPanda = (PandaMock) world.spawn(loc, Panda.class, _ ->
+		{
+		});
 
 		// We have to use reflection here to cover this particular branch because there
 		// is no way this an be naturally

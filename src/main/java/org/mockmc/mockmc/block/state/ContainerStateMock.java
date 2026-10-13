@@ -18,8 +18,6 @@ import java.util.Objects;
  *
  * @see TileStateMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class ContainerStateMock extends LockableTileStateMock implements Container
 {
 

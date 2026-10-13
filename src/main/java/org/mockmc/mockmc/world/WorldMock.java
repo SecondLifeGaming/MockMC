@@ -99,8 +99,6 @@ import java.util.stream.Collectors;
  *
  * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.WorldBaseMock
 {
 
@@ -867,6 +865,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	 * @return The spawned entity.
 	 * @mockmc.version 1.21-1.0.0
 	 */
+	@SuppressWarnings("unchecked")
 	public <T extends Entity> @NotNull T spawn(@Nullable Location location, @Nullable Class<T> clazz,
 			@Nullable Consumer<? super T> function, CreatureSpawnEvent.@NotNull SpawnReason reason,
 			boolean randomizeData, boolean callSpawnEvent)
@@ -1721,6 +1720,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	 */
 	@Override
 	@Deprecated(since = "1.13")
+	@SuppressWarnings("unchecked")
 	public boolean setGameRuleValue(@Nullable String rule, @NotNull String value)
 	{
 		if (rule == null)
@@ -1893,6 +1893,15 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 		spawnedParticles
 				.add(new SpawnedParticle(fullTime, particle, null != receivers ? new ArrayList<>(receivers) : null,
 						source, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, force));
+	}
+
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, @Nullable List<Player> receivers, @Nullable Player source,
+			double x, double y, double z, int count, double offsetX, double offsetY, double offsetZ, double speed,
+			double rotation, double extra, @Nullable T data, boolean force,
+			@NotNull Particle.RandomizationType randomizationType)
+	{
+		spawnParticle(particle, receivers, source, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, force);
 	}
 
 	@Override
@@ -2451,6 +2460,7 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 	/**
 	 * Helper method for game rule migration in v1.21.11.
 	 */
+	@SuppressWarnings("unchecked")
 	private static <M, L> M shimLegacyValue(L value, org.bukkit.GameRule<M> gameRule)
 	{
 		if (gameRule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
@@ -2459,10 +2469,10 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 			return legacyGameRuleWrapper.getToLegacyFromModern().apply(value);
 		}
 
-		// noinspection unchecked
 		return (M) value;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static <M, L> M convertLegacyValue(GameRule<M> rule, L newValue)
 	{
 		if (rule instanceof GameRuleMock.LegacyGameRuleWrapperMock<?, ?>)
@@ -2471,7 +2481,6 @@ public class WorldMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 			return legacyWrapper.getFromLegacyToModern().apply(newValue);
 		} else
 		{
-			// noinspection unchecked
 			return (M) newValue;
 		}
 	}

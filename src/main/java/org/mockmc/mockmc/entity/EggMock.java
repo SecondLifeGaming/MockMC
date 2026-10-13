@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class EggMock extends ThrowableProjectileMock
 		implements
-			Egg,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EggBaseMock
 {
 

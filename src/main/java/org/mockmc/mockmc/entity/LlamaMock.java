@@ -19,13 +19,10 @@ import java.util.UUID;
  *
  * @see ChestedHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class LlamaMock extends ChestedHorseMock
 		implements
-			Llama,
 			MockRangedEntity<LlamaMock>,
-			org.mockmc.mockmc.generated.server.org.bukkit.entity.TraderLlamaBaseMock
+			org.mockmc.mockmc.generated.server.org.bukkit.entity.LlamaBaseMock
 {
 
 	@NotNull

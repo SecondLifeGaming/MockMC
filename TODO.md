@@ -2,15 +2,27 @@
 
 This document outlines the strategic phases for achieving 100% automated API mirroring and high-fidelity logic simulation.
 
-## 🚀 Phase 6: Functional Mock Depth & Scale (CURRENT)
+## 🚀 Phase 6: Multi-Version Expansion & Functional Depth (CURRENT)
 
-_Focus: Scaling manual behavior implementations for the 1.21.x API surface._
+_Focus: Validating the multi-version architecture (Paper 26.3 + Folia 26.2 proof of concept) and expanding behavioral mock depth._
 
+### 1. Architectural Validation (26.2 - 26.3 Multi-Version Contract)
+- [x] **Canonical Tier Establishment**: Paper 26.3 established as the primary source of truth for Bukkit/Paper API surface.
+- [x] **Platform Scope Restriction**: Folia 26.2 restricted strictly to `io.papermc.paper.threadedregions.*`, preventing downgrade of canonical Paper classes.
+- [x] **Autonomous Unbundling & Remapping**: Decoupled from build-time Paperweight; `JarCracker` and `StandaloneRemapper` support Java 25 bytecode.
+- [x] **Multi-Backend Test Verification**: Distinct test tasks (`testPaper`, `testFolia`, `testVelocity`, `testWaterfall`, `testAllBackends`) in Gradle.
+- [x] **Architectural Documentation**: Published `MULTI_VERSION_ARCHITECTURE.md`, `VERSION_SUPPORT.md`, and `GENERATOR_AND_COVERAGE.md`.
+
+### 2. Behavioral Depth Workstream (Current Sprint)
+*Note on API versioning: While the compile API surface targets Paper 26.3, core in-game mechanics and mock state machines originally authored under 1.21.x are progressively audited and upgraded to modern Paper semantics.*
 - [/] **Targeted Logic Implementation**:
     - [ ] `PaperLeashable`: Implement stateful leash tracking (now that visibility issues are resolved).
     - [ ] `GameRule`: Extend dynamic game rule registration support.
     - [ ] `PluginManager`: Enhance event firing for Paper-specific events.
-- [ ] **Automated Coverage Auditing**: Integrate `COVERAGE.md` into CI to prevent regression in functional depth.
+
+### 3. Planned Multi-Version Expansion & Automation (Future Milestones)
+- [ ] **Automated Historical Fallback Scanning**: Expand MetaMiner to automatically scan older baseline JARs for removed methods and generate `@Deprecated(forRemoval = true, since = "...")` stubs tagged with `@mockmc.version`.
+- [ ] **CI Coverage Auditing**: Integrate `COVERAGE.md` verification into CI to fail builds if unaccounted methods > 0.
 - [x] **Maven Central Publishing**: CI/CD pipeline configured (`feat/maven-central`); GPG signing via in-memory key, `secrets: inherit` propagation to reusable workflow. Pending successful end-to-end run.
 
 ## ✅ Phase 5: Autonomous Modernization (COMPLETE)

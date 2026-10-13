@@ -46,6 +46,13 @@ public class DamageSourceBuilderMock implements DamageSource.Builder
 	}
 
 	@Override
+	public DamageSource.@NotNull Builder withDamageContext(
+			@NotNull java.util.function.Consumer<net.kyori.adventure.pointer.Pointers.Builder> consumer)
+	{
+		return this;
+	}
+
+	@Override
 	public @NotNull DamageSource build()
 	{
 		return new DamageSourceMock(this.damageType, this.causingEntity, this.directEntity, this.damageLocation);

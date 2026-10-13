@@ -9,8 +9,6 @@ import org.bukkit.generator.structure.StructureType;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class StructureMock extends Structure
 		implements
 			org.mockmc.mockmc.generated.server.org.bukkit.generator.structure.GeneratedStructureBaseMock

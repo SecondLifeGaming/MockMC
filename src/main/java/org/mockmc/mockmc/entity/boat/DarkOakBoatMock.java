@@ -14,7 +14,6 @@ import java.util.UUID;
  */
 public class DarkOakBoatMock extends BoatMock
 		implements
-			DarkOakBoat,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.boat.DarkOakBoatBaseMock
 {
 

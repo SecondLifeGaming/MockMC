@@ -21,36 +21,68 @@
     <hr />
 </p>
 
-MockMC is a testing framework for Minecraft server software, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project. It provides complete mock implementations of server environments, allowing you to run unit tests for your plugins with speed and precision.
+MockMC is an automated, type-safe testing framework for the modern Minecraft ecosystem, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project.
 
-## 🛠 Why the Fork?
+While MockBukkit is built exclusively for the Bukkit/Paper backend with handcrafted in-game simulation, MockMC expands testing across **the entire server and proxy stack — Paper, Folia (regional multithreading), Velocity, and Waterfall** — powered by an automated bytecode generation engine that provides 100% compile-safe method coverage.
 
-MockBukkit set the standard for Bukkit-based unit testing. However, as server APIs like Paper and Folia have expanded into thousands of methods, maintaining manual stubs became tedious.
+---
 
-While the original MockBukkit utilized [metaminer](https://github.com/MockBukkit/MockBukkit/tree/minecraft/v26/metaminer) to help generate stubs, it required manual overhead to keep the mock surface in sync. We created MockMC to solve these core architectural challenges.
+## ⚖️ MockBukkit vs. MockMC: Which Should You Use?
 
-### The Overhaul
+| Feature                    | MockBukkit                                                                            | MockMC                                                                                     |
+| :------------------------- | :------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------- |
+| **Ecosystem Reach**        | **Paper & Bukkit only** (single backend server focus).                                | **Full Platform Stack**: **Paper**, **Folia** (regional threading), **Velocity**, and **Waterfall**. |
+| **Primary Goal**           | Deep in-game behavioral simulation (physics, complex event lifecycles, recipe logic). | **Multi-platform test coverage** and rapid adaptation to new APIs with **100% compile safety**. |
+| **Folia Support**          | ❌ None (`RegionScheduler`, `AsyncScheduler` unsupported).                           | ✅ **Supported**: Synchronously executes Folia regional schedulers in tests.               |
+| **Proxy Testing**          | ❌ None (no Velocity or BungeeCord APIs).                                             | ✅ **Supported**: Full API mirrors for `com.velocitypowered.api` and `net.md_5.bungee`.    |
+| **Method Implementation**  | Handcrafted behavior for each method.                                                 | Automated **Smart Stubs** generated directly from server bytecode via JavaPoet.            |
+| **New Release Turnaround** | Requires manual coding of new API methods before tests can compile.                   | **Automated Pipeline**: Regenerates the full API surface automatically from upstream JARs. |
+| **Unimplemented Methods**  | Often throws `UnimplementedOperationException`.                                       | Safe defaults (`false`, `0`, `Optional.empty()`, empty collections).                       |
+| **Behavior Guarantee**     | Simulates vanilla state progression.                                                  | Simulates registered behavior; unmapped methods return safe non-crashing defaults.         |
 
-We have completely overhauled the [metaminer](/metaminer) engine using **JavaPoet**. This shift moves MockMC to an **"Engine First"** strategy:
+> [!TIP]
+> **Rule of Thumb:**
+>
+> - **Use MockBukkit if:** You are building exclusively for a single Paper/Bukkit server and need deep simulation of vanilla Minecraft mechanics (e.g. block physics, complex entity AI, vanilla crafting).
+> - **Use MockMC if:** 
+>   1. You develop **cross-platform plugins** targeting **Velocity, Waterfall/BungeeCord, or Folia** alongside Paper.
+>   2. You want your tests to **compile and run cleanly against modern Paper/Folia builds** without failing on unmocked interface methods or platform-specific schedulers.
 
-- **Automated Source Generation**: Uses **JavaPoet** for automated source generation directly from the server schemas.
-- **Type-Safe Inheritance**: The generation engine parses and mirrors deep interface inheritance hierarchies and complex generic types straight out of the upstream source distributions.
-- **Universal Scraping Surface**: The tool reads structures cleanly across ecosystems, enabling instant, automated runtime stub generations for **Paper, Folia, Velocity, BungeeCord, and Waterfall**.
-- **Zero-Lag Updates**: Every method, even deep experimental tracking components added in a brand-new target server revision, is immediately generated with safe, type-specific fallback rules.
-- **Focus on Logic**: Because our engine programmatically spins up the thousands of interface methods automatically, our human implementation efforts are focused strictly on **simulating complex physics and block states**.
+---
+
+## 🗺️ Version Support Matrix & Pinned Compatibility Contract
+
+MockMC does not dynamically pull arbitrary snapshots; it operates on an **explicitly pinned multi-tier contract**. The latest Paper target serves as the canonical Bukkit and Paper API baseline, while supplementary platform artifacts supply platform-exclusive namespaces:
+
+| Platform      | Pinned Target Build          | Role in MockMC          | Scope                                                            |
+| ------------- | ---------------------------- | ----------------------- | ---------------------------------------------------------------- |
+| **Paper**     | `paper-26.3-157`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
+| **Folia**     | `folia-26.2-7`               | **Platform Extension**  | Region schedulers (`io.papermc.paper.threadedregions.*`)         |
+| **Velocity**  | `velocity-4.2.1-SNAPSHOT-36` | **Proxy Extension**     | Velocity API (`com.velocitypowered.api.*`)                       |
+| **Waterfall** | `waterfall-1.21-615`         | **Proxy Extension**     | BungeeCord/Waterfall API (`net.md_5.bungee.*`)                   |
+
+_For complete details on artifact pinning, classloader isolation, and upgrade lifecycles, see [`docs/MULTI_VERSION_ARCHITECTURE.md`](docs/MULTI_VERSION_ARCHITECTURE.md) and [`docs/VERSION_SUPPORT.md`](docs/VERSION_SUPPORT.md)._
+
+---
+
+## ⚙️ How It Works: "Engine First"
+
+MockMC decouples API compilation from manual implementation:
+
+1. **Autonomous Bytecode Remapping**: The [`metaminer`](/metaminer) engine inspects target server JARs (`Paper`, `Folia`, `Velocity`) and remaps them without external build plugins.
+2. **Automated API Mirrors**: JavaPoet generates `*BaseMock` interfaces with non-crashing Smart Stubs for every discovered interface method.
+3. **Layered Behavior**: Manual implementations focus strictly on stateful behavior (player simulation, custom matchers, inventory state); the generator handles the remaining 95% of boilerplate.
+
+---
 
 ## Usage
 
 MockMC is published to Maven Central for frictionless public resolution. Visual tracking releases are also mirrored directly to GitHub Packages.
 
-> [!TIP]
-> **Latest Version Status:**
-> [![GitHub Packages](https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages)](https://github.com/SecondLifeGaming/MockMC/releases)
-
 <details>
 <summary><h3>Adding MockMC via Gradle (Kotlin DSL)</h3></summary>
 
-Add the Paper public repository and drop MockMC into your dependencies block. No access tokens or credential configurations are required.
+Add the Paper public repository and drop MockMC into your dependencies block:
 
 ```kotlin
 repositories {
@@ -58,25 +90,11 @@ repositories {
     maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
 }
 
-// Helper to safely extract the Paper API version bundled in the MockMC manifest
-fun getMockMCPaperVersion(): String {
-    return try {
-        val mockmcJar = configurations["testRuntimeClasspath"].incoming.files
-            .find { it.name.contains("mockmc-") }
-        if (mockmcJar != null) {
-            val jarFile = java.util.jar.JarFile(mockmcJar)
-            val paperVersion = jarFile.manifest.mainAttributes.getValue("Paper-Version")
-            jarFile.close()
-            paperVersion ?: "26.2"
-        } else "26.2"
-    } catch (e: Exception) { "26.2" }
-}
-
 dependencies {
-    testImplementation("io.github.secondlifegaming:mockmc-v26.2:0.0.5")
-    testImplementation("io.papermc.paper:paper-api:${getMockMCPaperVersion()}")
+    // Pinned release line
+    testImplementation("io.github.secondlifegaming:mockmc:0.0.5")
+    testImplementation("io.papermc.paper:paper-api:26.3.build.157-beta")
 }
-
 ```
 
 </details>
@@ -97,19 +115,18 @@ Add the Paper repository mapping and the library dependencies to your plugin’s
 <dependencies>
     <dependency>
         <groupId>io.github.secondlifegaming</groupId>
-        <artifactId>mockmc-v26.2</artifactId>
-        <version>0.0.5</version><!-- mockmc-version -->
+        <artifactId>mockmc</artifactId>
+        <version>0.0.5</version>
         <scope>test</scope>
     </dependency>
 
     <dependency>
         <groupId>io.papermc.paper</groupId>
         <artifactId>paper-api</artifactId>
-        <version>26.2</version>
+        <version>26.3.build.157-beta</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
-
 ```
 
 </details>
@@ -132,22 +149,24 @@ public void setUp() {
 public void tearDown() {
     MockMC.unmock();
 }
-
 ```
 
 ---
 
-## 🛡️ Total API Coverage
+## 🛡️ Smart Stub Defaults & Behavioral Limitations
 
-Rather than throwing `UnimplementedOperationException` when encountering an unmapped method block, MockMC utilizes a **Total Coverage** layer.
+When an API method does not yet have an explicit behavioral simulation in a manual mock, generated mocks automatically return safe defaults instead of throwing `UnimplementedOperationException`:
 
-Because our automated code engine maps the entire API surface using JavaPoet source patterns, every single method is guaranteed to link cleanly at runtime. If a specific behavior has not been explicitly overwritten with complex logic yet, the engine provides **Safe Defaults**:
+| Return Type                             | Default Value                                       |
+| :-------------------------------------- | :-------------------------------------------------- |
+| **Primitives (`boolean`, `int`, etc.)** | `false`, `0`, etc.                                  |
+| **Optionals**                           | `Optional.empty()`                                  |
+| **Collections / Lists / Sets**          | Empty, immutable collection                         |
+| **Adventure Components**                | `Component.empty()`                                 |
+| **Objects / Interfaces**                | `null` (or isolated default mock where appropriate) |
 
-- **Collections/Arrays**: Returns clean, empty, non-null instances.
-- **Optionals**: Returns standard `Optional.empty()`.
-- **Objects**: Returns `null` or an isolated mock sub-stub where safe.
-- **Primitives**: Returns typical zeroed boundaries (e.g., `false`, `0`).
-
-This setup ensures your active automated testing pipelines never encounter compilation breakage or unexpected failures due to minor structural additions in the upstream API.
-
----
+> [!WARNING]
+> **Limitations of Safe Defaults:**
+> A safe default (such as returning `false`, `0`, or `null`) prevents runtime test crashes when your plugin calls peripheral server methods. However, **it does not simulate active server state progression**. If your test asserts on the downstream side effects of an unmocked method (for example, world physics or mob AI reactions), you must explicitly mock or assert that behavior in your test setup.
+>
+> See [`docs/GENERATOR_AND_COVERAGE.md`](docs/GENERATOR_AND_COVERAGE.md) for how MockMC accounts for structural API surface versus functional simulation depth.

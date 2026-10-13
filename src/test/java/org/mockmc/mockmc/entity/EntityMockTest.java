@@ -69,8 +69,6 @@ import static org.mockmc.mockmc.matcher.entity.EntityTeleportationMatcher.hasTel
 import static org.mockmc.mockmc.matcher.plugin.PluginManagerFiredEventClassMatcher.hasFiredEventInstance;
 import static org.mockmc.mockmc.matcher.plugin.PluginManagerFiredEventFilterMatcher.hasFiredFilteredEvent;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class EntityMockTest
 {

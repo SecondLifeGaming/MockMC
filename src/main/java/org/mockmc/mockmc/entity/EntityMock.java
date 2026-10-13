@@ -321,6 +321,13 @@ public abstract class EntityMock extends Entity.Spigot
 	}
 
 	@Override
+	@Nullable
+	public Location getOrigin()
+	{
+		return location.clone();
+	}
+
+	@Override
 	public Location getLocation(@Nullable Location loc)
 	{
 		if (loc == null)
@@ -1062,6 +1069,20 @@ public abstract class EntityMock extends Entity.Spigot
 	}
 
 	@Override
+	@NotNull
+	public org.bukkit.SoundCategory getSoundCategory()
+	{
+		return org.bukkit.SoundCategory.NEUTRAL;
+	}
+
+	@Override
+	@NotNull
+	public net.kyori.adventure.sound.Sound.Source soundSource()
+	{
+		return net.kyori.adventure.sound.Sound.Source.NEUTRAL;
+	}
+
+	@Override
 	public boolean isInsideVehicle()
 	{
 		return this.vehicle != null;
@@ -1551,5 +1572,23 @@ public abstract class EntityMock extends Entity.Spigot
 	public NbtStateMock getNbtState()
 	{
 		return nbtState;
+	}
+
+	@Override
+	public boolean fromMobSpawner()
+	{
+		return false;
+	}
+
+	@Override
+	public org.bukkit.block.PistonMoveReaction getPistonMoveReaction()
+	{
+		return org.bukkit.block.PistonMoveReaction.MOVE;
+	}
+
+	@Override
+	public boolean isInLava()
+	{
+		return false;
 	}
 }

@@ -214,28 +214,28 @@ class ServerMockTest
 	@Test
 	void addPlayer_Calls_AsyncPreLoginEvent()
 	{
-		PlayerMock player = server.addPlayer();
+		server.addPlayer();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(AsyncPlayerPreLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerJoinEvent()
 	{
-		PlayerMock player = server.addPlayer();
+		server.addPlayer();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerJoinEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerLoginEvent()
 	{
-		PlayerMock player = server.addPlayer();
+		server.addPlayer();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerLoginEvent.class));
 	}
 
 	@Test
 	void addPlayer_Calls_PlayerSpawnLocationEvent()
 	{
-		PlayerMock player = server.addPlayer();
+		server.addPlayer();
 		assertThat(server.getPluginManager(), hasFiredEventInstance(PlayerSpawnLocationEvent.class));
 	}
 
@@ -2426,7 +2426,7 @@ class ServerMockTest
 				Iterable<Tag<Fluid>> fluidTag = server.getTags(Tag.REGISTRY_FLUIDS, Fluid.class);
 
 				assertNotNull(fluidTag);
-				assertEquals(6, Iterables.size(fluidTag));
+				assertEquals(10, Iterables.size(fluidTag));
 			}
 
 			@Test

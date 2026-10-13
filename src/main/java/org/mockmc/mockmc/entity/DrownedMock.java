@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import org.bukkit.entity.Drowned;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
@@ -8,7 +7,6 @@ import java.util.UUID;
 
 public class DrownedMock extends ZombieMock
 		implements
-			Drowned,
 			MockRangedEntity<DrownedMock>,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.DrownedBaseMock
 {

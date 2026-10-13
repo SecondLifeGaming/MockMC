@@ -8,8 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class SecondTestPlugin extends JavaPlugin implements Listener
 {
 

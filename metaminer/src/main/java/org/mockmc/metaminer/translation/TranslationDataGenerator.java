@@ -88,15 +88,73 @@ public class TranslationDataGenerator implements DataGenerator
 		{
 			return null;
 		}
-		try (java.util.jar.JarFile jarFile = new java.util.jar.JarFile(files[0]))
-		{
-			java.util.jar.JarEntry entry = jarFile.getJarEntry(resourcePath);
-			if (entry != null)
+
+		String primaryPrefix = resolvePrimaryPaperPrefix();
+		java.util.Arrays.sort(files, (a, b) -> {
+			if (primaryPrefix != null)
 			{
-				try (InputStream entryStream = jarFile.getInputStream(entry))
+				boolean aIsPrimary = a.getName().contains(primaryPrefix);
+				boolean bIsPrimary = b.getName().contains(primaryPrefix);
+				if (aIsPrimary != bIsPrimary)
 				{
-					return new java.io.ByteArrayInputStream(entryStream.readAllBytes());
+					return aIsPrimary ? -1 : 1;
 				}
+			}
+			return b.getName().compareTo(a.getName());
+		});
+
+		for (File file : files)
+		{
+			try (java.util.jar.JarFile jarFile = new java.util.jar.JarFile(file))
+			{
+				java.util.jar.JarEntry entry = jarFile.getJarEntry(resourcePath);
+				if (entry != null)
+				{
+					try (InputStream entryStream = jarFile.getInputStream(entry))
+					{
+						return new java.io.ByteArrayInputStream(entryStream.readAllBytes());
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private String resolvePrimaryPaperPrefix()
+	{
+		File manifestFile = new File("../jars/manifests/versions.json");
+		if (!manifestFile.exists())
+		{
+			manifestFile = new File("jars/manifests/versions.json");
+		}
+		if (manifestFile.exists())
+		{
+			try (java.io.Reader reader = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8))
+			{
+				JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+				JsonObject platforms = root.getAsJsonObject("platforms");
+				if (platforms != null && platforms.has("paper"))
+				{
+					JsonObject paper = platforms.getAsJsonObject("paper");
+					com.google.gson.JsonArray versions = paper.getAsJsonArray("versions");
+					if (versions != null)
+					{
+						for (JsonElement el : versions)
+						{
+							JsonObject v = el.getAsJsonObject();
+							if (v.has("primary") && v.get("primary").getAsBoolean())
+							{
+								String ver = v.get("version").getAsString();
+								String build = v.has("build") ? v.get("build").getAsString() : "";
+								return "remapped-paper-" + ver + "-" + build;
+							}
+						}
+					}
+				}
+			}
+			catch (Exception _)
+			{
+				// Fall back to default version ordering
 			}
 		}
 		return null;

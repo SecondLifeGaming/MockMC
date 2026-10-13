@@ -14,7 +14,6 @@ import java.util.UUID;
 @NullMarked
 public class CamelHuskMock extends CamelMock
 		implements
-			CamelHusk,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CamelHuskBaseMock
 {
 

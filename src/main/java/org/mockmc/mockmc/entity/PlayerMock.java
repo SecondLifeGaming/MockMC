@@ -15,7 +15,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import net.kyori.adventure.text.serializer.bungeecord.BungeeComponentSerializer;
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.kyori.adventure.util.TriState;
 import net.md_5.bungee.api.ChatMessageType;
@@ -291,8 +291,8 @@ public class PlayerMock extends HumanEntityMock
 	 */
 	public PlayerMock(@NotNull ServerMock server, @NotNull String name, @NotNull UUID uuid)
 	{
-		super(server, uuid);
 		Preconditions.checkNotNull(name, "Name cannot be null");
+		super(server, uuid);
 		setName(name);
 		setDisplayName(name);
 		this.online = true;
@@ -631,47 +631,46 @@ public class PlayerMock extends HumanEntityMock
 	 * @mockmc.version 26.2-2.1.4
 	 */
 	@Override
-	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason)
+	public BanEntry<PlayerProfile> banPlayer(@Nullable String reason)
 	{
-		return ban(reason, (Date) null, null);
+		return ban(reason, (Instant) null, null);
 	}
 
 	/**
 	 * @mockmc.version 26.2-2.1.4
 	 */
 	@Override
-	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires)
+	public BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires)
 	{
-		return ban(reason, expires, null);
+		return ban(reason, expires != null ? expires.toInstant() : null, null);
 	}
 
 	/**
 	 * @mockmc.version 26.2-2.1.4
 	 */
 	@Override
-	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
-			@Nullable String source)
+	public BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires, @Nullable String source)
 	{
-		return ban(reason, expires, source);
+		return ban(reason, expires != null ? expires.toInstant() : null, source);
 	}
 
 	/**
 	 * @mockmc.version 26.2-2.1.4
 	 */
 	@Override
-	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable String source)
+	public BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable String source)
 	{
-		return ban(reason, (Date) null, source);
+		return ban(reason, (Instant) null, source);
 	}
 
 	/**
 	 * @mockmc.version 26.2-2.1.4
 	 */
 	@Override
-	public @Nullable BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires,
-			@Nullable String source, boolean kickPlayer)
+	public BanEntry<PlayerProfile> banPlayer(@Nullable String reason, @Nullable Date expires, @Nullable String source,
+			boolean kickPlayer)
 	{
-		return ban(reason, expires, source);
+		return ban(reason, expires != null ? expires.toInstant() : null, source, kickPlayer);
 	}
 
 	@Override
@@ -703,8 +702,16 @@ public class PlayerMock extends HumanEntityMock
 	public <E extends BanEntry<? super PlayerProfile>> E ban(@Nullable String reason, @Nullable Date expires,
 			@Nullable String source, boolean kickPlayer)
 	{
+		return this.ban(reason, expires != null ? expires.toInstant() : null, source, kickPlayer);
+	}
+
+	@Override
+	@Nullable
+	public <E extends BanEntry<? super PlayerProfile>> E ban(@Nullable String reason, @Nullable Instant instant,
+			@Nullable String source, boolean kickPlayer)
+	{
 		E banEntry = (E) ((ProfileBanList) getServer().getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(),
-				reason, expires, source);
+				reason, instant, source);
 		if (kickPlayer)
 		{
 			this.kickPlayer(reason);
@@ -714,18 +721,16 @@ public class PlayerMock extends HumanEntityMock
 
 	@Override
 	@Nullable
-	public <E extends BanEntry<? super PlayerProfile>> E ban(@Nullable String reason, @Nullable Instant instant,
-			@Nullable String source, boolean kickPlayer)
-	{
-		return this.ban(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
-	}
-
-	@Override
-	@Nullable
 	public <E extends BanEntry<? super PlayerProfile>> E ban(@Nullable String reason, @Nullable Duration duration,
 			@Nullable String source, boolean kickPlayer)
 	{
-		return this.ban(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
+		E banEntry = (E) ((ProfileBanList) getServer().getBanList(BanList.Type.PROFILE)).addBan(this.getPlayerProfile(),
+				reason, duration, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+		return banEntry;
 	}
 
 	/**
@@ -942,10 +947,10 @@ public class PlayerMock extends HumanEntityMock
 		this.displayName = displayName;
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.21")
 	@NotNull
 	public String getDisplayName()
@@ -953,14 +958,11 @@ public class PlayerMock extends HumanEntityMock
 		return LegacyComponentSerializer.legacySection().serialize(this.displayName);
 	}
 
-	@Override
-	/**
-	 * @deprecated Use modern API instead.
-	 */
-	@Deprecated(since = "1.21.3")
 	/**
 	 * @deprecated Use {@link #displayName(Component)} instead.
 	 */
+	@Override
+	@Deprecated(since = "1.21.3")
 	public void setDisplayName(@Nullable String name)
 	{
 		this.displayName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
@@ -1000,14 +1002,11 @@ public class PlayerMock extends HumanEntityMock
 		return this.playerListFooter;
 	}
 
-	@Override
-	/**
-	 * @deprecated Use modern API instead.
-	 */
-	@Deprecated(since = "1.21.3")
 	/**
 	 * @deprecated Use {@link #playerListName(Component)} instead.
 	 */
+	@Override
+	@Deprecated(since = "1.21.3")
 	@NotNull
 	public String getPlayerListName()
 	{
@@ -1016,11 +1015,11 @@ public class PlayerMock extends HumanEntityMock
 				: LegacyComponentSerializer.legacySection().serialize(this.playerListName);
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.21.3")
 	public void setPlayerListName(@Nullable String name)
 	{
 		this.playerListName = name == null ? null : LegacyComponentSerializer.legacySection().deserialize(name);
@@ -1229,9 +1228,17 @@ public class PlayerMock extends HumanEntityMock
 	public BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Date expires, @Nullable String source,
 			boolean kickPlayer)
 	{
+		return this.banIp(reason, expires != null ? expires.toInstant() : null, source, kickPlayer);
+	}
+
+	@Override
+	@Nullable
+	public BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant instant, @Nullable String source,
+			boolean kickPlayer)
+	{
 		Preconditions.checkArgument(this.getAddress() != null, "The Address of this Player is null");
 		BanEntry<InetAddress> banEntry = ((IpBanList) this.server.getBanList(BanList.Type.IP))
-				.addBan(this.getAddress().getAddress(), reason, expires, source);
+				.addBan(this.getAddress().getAddress(), reason, instant, source);
 		if (kickPlayer)
 		{
 			this.kickPlayer(reason);
@@ -1241,18 +1248,17 @@ public class PlayerMock extends HumanEntityMock
 
 	@Override
 	@Nullable
-	public BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Instant instant, @Nullable String source,
-			boolean kickPlayer)
-	{
-		return this.banIp(reason, instant != null ? Date.from(instant) : null, source, kickPlayer);
-	}
-
-	@Override
-	@Nullable
 	public BanEntry<InetAddress> banIp(@Nullable String reason, @Nullable Duration duration, @Nullable String source,
 			boolean kickPlayer)
 	{
-		return this.banIp(reason, duration != null ? Instant.now().plus(duration) : null, source, kickPlayer);
+		Preconditions.checkArgument(this.getAddress() != null, "The Address of this Player is null");
+		BanEntry<InetAddress> banEntry = ((IpBanList) this.server.getBanList(BanList.Type.IP))
+				.addBan(this.getAddress().getAddress(), reason, duration, source);
+		if (kickPlayer)
+		{
+			this.kickPlayer(reason);
+		}
+		return banEntry;
 	}
 
 	/**
@@ -1261,6 +1267,7 @@ public class PlayerMock extends HumanEntityMock
 	 * @param sneak
 	 *            Whether the player is beginning to sneak.
 	 * @return The event.
+	 * @deprecated Use {@link PlayerSimulation#simulateSneak(boolean)} instead.
 	 */
 	@Deprecated(forRemoval = true, since = "4.0")
 	@NotNull
@@ -1287,6 +1294,7 @@ public class PlayerMock extends HumanEntityMock
 	 * @param sprint
 	 *            Whether the player is beginning to sprint.
 	 * @return The event.
+	 * @deprecated Use {@link PlayerSimulation#simulateSprint(boolean)} instead.
 	 */
 	@Deprecated(forRemoval = true, since = "4.0")
 	@NotNull
@@ -1307,10 +1315,10 @@ public class PlayerMock extends HumanEntityMock
 		this.sleepingIgnored = isSleeping;
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2")
 	public void playNote(@NotNull Location loc, byte instrument, byte note)
 	{
@@ -1518,10 +1526,10 @@ public class PlayerMock extends HumanEntityMock
 		// We will just pretend all Sounds have stopped.
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2")
 	public void playEffect(@NotNull Location loc, @NotNull Effect effect, int data)
 	{
@@ -1560,15 +1568,16 @@ public class PlayerMock extends HumanEntityMock
 		if (!event.isCancelled())
 		{
 			block.setType(Material.AIR);
-			// todo: BlockDropItemEvent when BlockMock#getDrops is implemented.
+			// Note: BlockDropItemEvent should be called when BlockMock#getDrops is
+			// implemented.
 		}
 		return !event.isCancelled();
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.6.2")
 	public void sendBlockChange(@NotNull Location loc, @NotNull Material material, byte data)
 	{
@@ -1607,11 +1616,11 @@ public class PlayerMock extends HumanEntityMock
 		}
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.20")
 	public void sendSignChange(@NotNull Location loc, String[] lines)
 	{
 		this.sendSignChange(loc, lines, DyeColor.BLACK);
@@ -1672,33 +1681,33 @@ public class PlayerMock extends HumanEntityMock
 		actionBar.add(component);
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void sendActionBar(@NotNull String message)
 	{
 		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL);
 		// Pretend we sent the action bar.
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void sendActionBar(char alternateChar, @NotNull String message)
 	{
 		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL);
 		// Pretend we sent the action bar.
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void sendActionBar(@NotNull BaseComponent... message)
 	{
 		Preconditions.checkNotNull(message, MESSAGE_CANNOT_BE_NULL);
@@ -1713,17 +1722,17 @@ public class PlayerMock extends HumanEntityMock
 		return actionBar.poll();
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.13")
 	public void setPlayerListHeaderFooter(BaseComponent @NotNull [] header, BaseComponent @NotNull [] footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get()
-				.deserialize(Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
-		this.playerListFooter = BungeeComponentSerializer.get()
-				.deserialize(Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListHeader = deserializeBungee(
+				Arrays.stream(header).filter(Objects::nonNull).toArray(BaseComponent[]::new));
+		this.playerListFooter = deserializeBungee(
+				Arrays.stream(footer).filter(Objects::nonNull).toArray(BaseComponent[]::new));
 	}
 
 	@Override
@@ -1758,85 +1767,81 @@ public class PlayerMock extends HumanEntityMock
 		this.playerListFooter = footer.asComponent();
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.13")
 	public void setPlayerListHeaderFooter(@Nullable BaseComponent header, @Nullable BaseComponent footer)
 	{
-		this.playerListHeader = BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-		{header});
-		this.playerListFooter = BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-		{footer});
+		this.playerListHeader = deserializeBungee(header);
+		this.playerListFooter = deserializeBungee(footer);
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.21")
 	public void setTitleTimes(int fadeInTicks, int stayTicks, int fadeOutTicks)
 	{
 		// No-op
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void setSubtitle(BaseComponent[] subtitle)
 	{
-		this.subtitles.add(BungeeComponentSerializer.get().deserialize(subtitle));
+		this.subtitles.add(deserializeBungee(subtitle));
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void setSubtitle(BaseComponent subtitle)
 	{
 		if (subtitle != null)
 		{
-			this.subtitles.add(BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-			{subtitle}));
+			this.subtitles.add(deserializeBungee(subtitle));
 		}
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void showTitle(@Nullable BaseComponent[] title)
 	{
 		if (title != null)
 		{
-			this.titles.add(BungeeComponentSerializer.get().deserialize(title));
+			this.titles.add(deserializeBungee(title));
 		}
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void showTitle(@Nullable BaseComponent title)
 	{
 		if (title != null)
 		{
-			this.titles.add(BungeeComponentSerializer.get().deserialize(new BaseComponent[]
-			{title}));
+			this.titles.add(deserializeBungee(title));
 		}
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void showTitle(@Nullable BaseComponent[] title, @Nullable BaseComponent[] subtitle, int fadeInTicks,
 			int stayTicks, int fadeOutTicks)
 	{
@@ -1848,11 +1853,11 @@ public class PlayerMock extends HumanEntityMock
 		}
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void showTitle(@Nullable BaseComponent title, @Nullable BaseComponent subtitle, int fadeInTicks,
 			int stayTicks, int fadeOutTicks)
 	{
@@ -1885,11 +1890,11 @@ public class PlayerMock extends HumanEntityMock
 		this.clearTitle();
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void sendTitle(@NotNull Title title)
 	{
 		Preconditions.checkNotNull(title, "Title is null");
@@ -2075,24 +2080,28 @@ public class PlayerMock extends HumanEntityMock
 	@Override
 	public void giveExp(int amount)
 	{
-		this.exp += (float) amount / (float) this.getExpToLevel();
-		setTotalExperience(this.expTotal + amount);
-		while (this.exp < 0.0F)
+		this.expTotal = Math.max(0, this.expTotal + amount);
+
+		// Work in whole experience points within the current level; progress is derived
+		// once at the end.
+		int points = Math.round(this.exp * this.getExpToLevel()) + amount;
+		while (points >= this.getExpToLevel())
 		{
-			float total = this.exp * this.getExpToLevel();
-			boolean shouldContinue = this.expLevel > 0;
-			this.giveExpLevels(-1);
-			if (shouldContinue)
-			{
-				this.exp = 1.0F + (total / this.getExpToLevel());
-			}
-		}
-		while (this.exp >= 1.0F)
-		{
-			this.exp = (this.exp - 1.0F) * this.getExpToLevel();
+			points -= this.getExpToLevel();
 			this.giveExpLevels(1);
-			this.exp /= this.getExpToLevel();
 		}
+		while (points < 0)
+		{
+			if (this.expLevel == 0)
+			{
+				points = 0;
+				break;
+			}
+			this.giveExpLevels(-1);
+			points += this.getExpToLevel();
+		}
+		// The cast is required: without it this would be integer division.
+		this.exp = (float) points / this.getExpToLevel();
 	}
 
 	@Override
@@ -2251,10 +2260,10 @@ public class PlayerMock extends HumanEntityMock
 		this.allowFlight = flight;
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.12.2")
 	public void hidePlayer(@NotNull Player player)
 	{
@@ -2272,10 +2281,10 @@ public class PlayerMock extends HumanEntityMock
 		blockingPlugins.add(plugin);
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.12.2")
 	public void showPlayer(@NotNull Player player)
 	{
@@ -2362,6 +2371,8 @@ public class PlayerMock extends HumanEntityMock
 	 * @param fly
 	 *            Whether the player is starting to fly.
 	 * @return The event.
+	 * @deprecated Use {@link PlayerSimulation#simulateToggleFlight(boolean)}
+	 *             instead.
 	 */
 	@Deprecated(forRemoval = true, since = "4.0")
 	@NotNull
@@ -2482,7 +2493,7 @@ public class PlayerMock extends HumanEntityMock
 	public void setHealthScale(double scale)
 	{
 		Preconditions.checkArgument(scale >= 0, "Must be greater than 0");
-		Preconditions.checkArgument(scale != Double.NaN, scale + " is not a number!");
+		Preconditions.checkArgument(!Double.isNaN(scale), scale + " is not a number!");
 		// There is also too high but... what constitutes too high?
 		this.healthScale = scale;
 		this.scaledHealth = true;
@@ -2514,10 +2525,10 @@ public class PlayerMock extends HumanEntityMock
 		this.spectatorTarget = entity;
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
+	@Override
 	@Deprecated(since = "1.8.7")
 	public void sendTitle(String title, String subtitle)
 	{
@@ -2525,11 +2536,11 @@ public class PlayerMock extends HumanEntityMock
 		this.subtitles.add(LegacyComponentSerializer.legacySection().deserialize(subtitle));
 	}
 
-	@Override
 	/**
 	 * @deprecated Use modern API instead.
 	 */
-	@Deprecated
+	@Override
+	@Deprecated(since = "1.11")
 	public void sendTitle(String title, String subtitle, int fadeIn, int stay, int fadeOut)
 	{
 		sendTitle(title, subtitle);
@@ -2715,6 +2726,14 @@ public class PlayerMock extends HumanEntityMock
 		// We currently have no way of properly spawning particles, therefore the force
 		// parameter is unused
 		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, data);
+	}
+
+	@Override
+	public <T> void spawnParticle(@NotNull Particle particle, double x, double y, double z, int count, double offsetX,
+			double offsetY, double offsetZ, double speed, double rotation, double extra, @Nullable T data,
+			boolean force, @NotNull Particle.RandomizationType randomizationType)
+	{
+		this.spawnParticle(particle, x, y, z, count, offsetX, offsetY, offsetZ, extra, data, force);
 	}
 
 	@Override
@@ -2974,96 +2993,107 @@ public class PlayerMock extends HumanEntityMock
 	public class PlayerSpigotMock extends Player.Spigot
 	{
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.SYSTEM, new BaseComponent[]
-			{component});
+			this.sendMessage(ChatMessageType.SYSTEM, component);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull BaseComponent... components)
 		{
 			this.sendMessage(ChatMessageType.SYSTEM, components);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent component)
 		{
-			this.sendMessage(ChatMessageType.CHAT, sender, new BaseComponent[]
-			{component});
+			this.sendMessage(ChatMessageType.CHAT, sender, component);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@Nullable UUID sender, @NotNull BaseComponent... components)
 		{
 			this.sendMessage(ChatMessageType.CHAT, sender, components);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent component)
 		{
-			this.sendMessage(position, null, new BaseComponent[]
-			{component});
+			this.sendMessage(position, null, component);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @NotNull BaseComponent... components)
 		{
 			this.sendMessage(position, null, components);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender,
 				@NotNull BaseComponent component)
 		{
-			this.sendMessage(position, sender, new BaseComponent[]
-			{component});
+			this.deliver(position, component);
 		}
 
-		@Override
 		/**
 		 * @deprecated Use modern API instead.
 		 */
+		@Override
 		@Deprecated(forRemoval = true, since = "4.0")
 		public void sendMessage(@NotNull ChatMessageType position, @Nullable UUID sender,
 				@NotNull BaseComponent... components)
 		{
+			this.deliver(position, components);
+		}
+
+		private void deliver(ChatMessageType position, BaseComponent... components)
+		{
 			Preconditions.checkNotNull(position, "Position must not be null");
 			Preconditions.checkNotNull(components, "Component must not be null");
-			Component comp = BungeeComponentSerializer.get().deserialize(components);
+			Component comp = deserializeBungee(components);
 			String serialized = LegacyComponentSerializer.legacySection().serialize(comp);
 			comp = LegacyComponentSerializer.legacySection().deserialize(serialized);
 			PlayerMock.this.sendMessage(comp);
 		}
+	}
+
+	private static Component deserializeBungee(BaseComponent... components)
+	{
+		if (components == null || components.length == 0)
+		{
+			return Component.empty();
+		}
+		String json = net.md_5.bungee.chat.ComponentSerializer.toString(components);
+		return GsonComponentSerializer.gson().deserialize(json);
 	}
 
 	/**

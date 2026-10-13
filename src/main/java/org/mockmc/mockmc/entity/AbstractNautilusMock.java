@@ -10,7 +10,6 @@ import java.util.UUID;
 @NullMarked
 public class AbstractNautilusMock extends AnimalsMock
 		implements
-			AbstractNautilus,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AbstractNautilusBaseMock
 {
 

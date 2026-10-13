@@ -1,4 +1,5 @@
 package org.mockmc.mockmc.inventory.meta;
+
 import java.util.Objects;
 
 import com.google.common.base.Preconditions;
@@ -23,7 +24,6 @@ import java.util.Map;
 @SuppressWarnings("deprecation")
 public class BookMetaMock extends ItemMetaMock
 		implements
-			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.KnowledgeBookMetaBaseMock,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BookMetaBaseMock
 {
 
@@ -220,7 +220,7 @@ public class BookMetaMock extends ItemMetaMock
 	 */
 	@Override
 	@Deprecated(since = "1.16")
-	public void setPages(String @NotNull [] pages)
+	public void setPages(@NotNull String... pages)
 	{
 		this.pages.clear();
 		this.addPage(pages);
@@ -240,7 +240,7 @@ public class BookMetaMock extends ItemMetaMock
 	 */
 	@Override
 	@Deprecated(since = "1.16")
-	public void addPage(String @NotNull [] pages)
+	public void addPage(@NotNull String... pages)
 	{
 		for (String page : pages)
 		{
@@ -291,6 +291,7 @@ public class BookMetaMock extends ItemMetaMock
 	 * @return A new instance of the BookMetaMock class.
 	 */
 	@NotNull
+	@SuppressWarnings("java:S9149")
 	public static BookMetaMock deserialize(@NotNull Map<String, Object> args)
 	{
 		BookMetaMock serialMock = new BookMetaMock();

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings(
-{"UnstableApiUsage", "deprecation", "removal", "unchecked"})
+{"UnstableApiUsage", "deprecation", "removal"})
 @ExtendWith(MockMCExtension.class)
 class ItemTypeMockTest
 {

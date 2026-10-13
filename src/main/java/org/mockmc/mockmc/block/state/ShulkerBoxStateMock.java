@@ -19,7 +19,6 @@ import java.util.Objects;
  */
 public class ShulkerBoxStateMock extends ContainerStateMock
 		implements
-			ShulkerBox,
 			org.mockmc.mockmc.generated.server.org.bukkit.block.ShulkerBoxBaseMock
 {
 

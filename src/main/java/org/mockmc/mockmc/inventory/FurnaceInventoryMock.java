@@ -18,11 +18,9 @@ import java.util.Set;
  *
  * @see InventoryMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("deprecation")
 public class FurnaceInventoryMock extends InventoryMock
 		implements
-			FurnaceInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.FurnaceInventoryBaseMock
 {
 

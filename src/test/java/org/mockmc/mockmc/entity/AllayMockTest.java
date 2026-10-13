@@ -206,7 +206,9 @@ class AllayMockTest
 	{
 		WorldMock world = serverMock.addSimpleWorld("world");
 		Location location = new Location(world, 0, 0, 0);
-		Allay allayMock = world.spawn(location, Allay.class);
+		Allay allayMock = world.spawn(location, Allay.class, _ ->
+		{
+		});
 		Allay duplicate = allayMock.duplicateAllay();
 		assertNotNull(duplicate);
 		assertNotEquals(allayMock, duplicate);

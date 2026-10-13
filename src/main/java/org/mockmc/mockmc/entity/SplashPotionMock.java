@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class SplashPotionMock extends ThrownPotionMock
 		implements
-			SplashPotion,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SplashPotionBaseMock
 {
 

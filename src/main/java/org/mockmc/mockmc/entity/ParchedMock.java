@@ -13,11 +13,8 @@ import java.util.UUID;
  * @see AbstractSkeletonMock
  */
 @NullMarked
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class ParchedMock extends AbstractSkeletonMock
 		implements
-			Parched,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ParchedBaseMock
 {
 

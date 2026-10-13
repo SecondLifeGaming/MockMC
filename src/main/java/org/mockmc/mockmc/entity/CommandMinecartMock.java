@@ -2,18 +2,14 @@ package org.mockmc.mockmc.entity;
 
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.CommandMinecart;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.mockmc.mockmc.ServerMock;
 import java.util.Objects;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class CommandMinecartMock extends MinecartMock
 		implements
-			CommandMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.CommandMinecartBaseMock
 {
 

@@ -17,12 +17,7 @@ import java.util.Objects;
  *
  * @mockmc.version 1.21-1.0.0
  */
-@SuppressWarnings(
-{"deprecation", "removal"})
-public class ArtMock extends OldKeyedEnumMock<Art>
-		implements
-			Art,
-			org.mockmc.mockmc.generated.server.org.bukkit.ArtBaseMock
+public class ArtMock extends OldKeyedEnumMock<Art> implements org.mockmc.mockmc.generated.server.org.bukkit.ArtBaseMock
 {
 
 	private final int blockHeight;
@@ -122,7 +117,6 @@ public class ArtMock extends OldKeyedEnumMock<Art>
 	@Override
 	@Deprecated(since = "1.21", forRemoval = true)
 	@NotNull
-	@SuppressWarnings("removal")
 	public Key key()
 	{
 		return this.key;

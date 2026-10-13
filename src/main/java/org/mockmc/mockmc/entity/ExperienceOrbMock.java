@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class ExperienceOrbMock extends EntityMock
 		implements
-			ExperienceOrb,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ExperienceOrbBaseMock
 {
 

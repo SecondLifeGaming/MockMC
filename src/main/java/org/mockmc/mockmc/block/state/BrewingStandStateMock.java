@@ -17,10 +17,7 @@ import java.util.Objects;
  *
  * @see ContainerStateMock
  */
-public class BrewingStandStateMock extends ContainerStateMock
-		implements
-			BrewingStand,
-			org.mockmc.mockmc.generated.server.org.bukkit.block.LockableBaseMock
+public class BrewingStandStateMock extends ContainerStateMock implements BrewingStand
 {
 
 	private int recipeBrewingTime = 400;

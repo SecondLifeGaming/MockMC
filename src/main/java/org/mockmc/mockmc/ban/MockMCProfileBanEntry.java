@@ -1,7 +1,6 @@
 package org.mockmc.mockmc.ban;
 
 import com.google.common.base.Preconditions;
-import org.bukkit.BanEntry;
 import org.bukkit.profile.PlayerProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,7 +10,6 @@ import java.util.Date;
 {"deprecation"})
 public class MockMCProfileBanEntry
 		implements
-			BanEntry<PlayerProfile>,
 			org.mockmc.mockmc.generated.server.org.bukkit.BanEntryBaseMock<PlayerProfile>
 {
 

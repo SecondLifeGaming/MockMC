@@ -3,7 +3,6 @@ package org.mockmc.mockmc.entity;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.Inventory;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
@@ -11,7 +10,6 @@ import java.util.UUID;
 
 public class StorageMinecartMock extends LootableMinecart
 		implements
-			StorageMinecart,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.minecart.StorageMinecartBaseMock
 {
 

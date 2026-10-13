@@ -26,8 +26,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockmc.mockmc.matcher.command.MessageTargetReceivedMessageMatcher.hasReceived;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 @ExtendWith(MockMCExtension.class)
 class ConsoleCommandSenderMockTest
 {

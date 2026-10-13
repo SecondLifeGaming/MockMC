@@ -1,6 +1,5 @@
 package org.mockmc.mockmc.entity;
 
-import com.destroystokyo.paper.loottable.LootableInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -10,7 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public abstract class LootableMinecart extends MinecartMock implements LootableInventory
+public abstract class LootableMinecart extends MinecartMock
+		implements
+			org.mockmc.mockmc.generated.server.com.destroystokyo.paper.loottable.LootableInventoryBaseMock
 {
 
 	private long nextRefill = -1;
@@ -59,10 +60,29 @@ public abstract class LootableMinecart extends MinecartMock implements LootableI
 	}
 
 	@Override
+	public boolean hasPlayerLooted(@NotNull org.bukkit.entity.Player player)
+	{
+		return hasPlayerLooted(player.getUniqueId());
+	}
+
+	@Override
 	@Nullable
 	public Long getLastLooted(@NotNull UUID player)
 	{
 		return this.lootedPlayers != null ? this.lootedPlayers.get(player) : null;
+	}
+
+	@Override
+	@Nullable
+	public Long getLastLooted(@NotNull org.bukkit.entity.Player player)
+	{
+		return getLastLooted(player.getUniqueId());
+	}
+
+	@Override
+	public boolean setHasPlayerLooted(@NotNull org.bukkit.entity.Player player, boolean looted)
+	{
+		return setHasPlayerLooted(player.getUniqueId(), looted);
 	}
 
 	@Override

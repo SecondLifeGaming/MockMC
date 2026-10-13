@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class LargeFireballMock extends SizedFireballMock
 		implements
-			LargeFireball,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LargeFireballBaseMock
 {
 

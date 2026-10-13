@@ -19,7 +19,6 @@ import java.util.UUID;
 @SuppressWarnings("java:S110")
 public class AnimalsMock extends AgeableMock
 		implements
-			Animals,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.AnimalsBaseMock
 {
 

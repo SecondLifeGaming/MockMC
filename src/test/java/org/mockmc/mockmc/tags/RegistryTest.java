@@ -32,7 +32,8 @@ class RegistryTest
 
 	static Stream<Tag<?>> getEmptyTags()
 	{
-		return Stream.of(Tag.INCORRECT_FOR_NETHERITE_TOOL, Tag.INCORRECT_FOR_DIAMOND_TOOL, Tag.SUPPORTS_FROGSPAWN);
+		return Stream.of(Tag.INCORRECT_FOR_NETHERITE_TOOL, Tag.INCORRECT_FOR_DIAMOND_TOOL, Tag.SUPPORTS_FROGSPAWN,
+				org.bukkit.tag.DamageTypeTags.BYPASSES_COOLDOWN);
 	}
 
 }

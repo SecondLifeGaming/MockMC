@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see AbstractHorseMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class CamelMock extends AbstractHorseMock
 		implements
-			Camel,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.CamelBaseMock
 {
 

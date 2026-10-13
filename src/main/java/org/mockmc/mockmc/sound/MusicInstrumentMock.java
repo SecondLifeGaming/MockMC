@@ -10,8 +10,6 @@ import org.bukkit.Sound;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class MusicInstrumentMock extends MusicInstrument
 {
 

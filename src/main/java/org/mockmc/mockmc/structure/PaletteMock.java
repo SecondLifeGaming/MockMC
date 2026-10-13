@@ -3,14 +3,13 @@ package org.mockmc.mockmc.structure;
 import com.google.common.base.Preconditions;
 import org.bukkit.Material;
 import org.bukkit.block.BlockState;
-import org.bukkit.structure.Palette;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.block.state.BlockStateMockFactory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PaletteMock implements Palette, org.mockmc.mockmc.generated.server.org.bukkit.structure.PaletteBaseMock
+public class PaletteMock implements org.mockmc.mockmc.generated.server.org.bukkit.structure.PaletteBaseMock
 {
 
 	/**

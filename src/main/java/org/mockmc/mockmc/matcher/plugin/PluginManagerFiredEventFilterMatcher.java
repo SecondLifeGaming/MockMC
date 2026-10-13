@@ -12,8 +12,7 @@ import java.util.function.Predicate;
 
 import static org.hamcrest.Matchers.not;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
+@SuppressWarnings("unchecked")
 public class PluginManagerFiredEventFilterMatcher<T extends Event> extends TypeSafeMatcher<PluginManagerMock>
 {
 

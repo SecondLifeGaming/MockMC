@@ -9,10 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
-public class DamageSourceMock
-		implements
-			DamageSource,
-			org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageSourceBaseMock
+public class DamageSourceMock implements org.mockmc.mockmc.generated.server.org.bukkit.damage.DamageSourceBaseMock
 {
 
 	private final DamageType damageType;

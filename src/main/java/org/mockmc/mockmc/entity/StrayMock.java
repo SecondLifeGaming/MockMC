@@ -12,11 +12,8 @@ import java.util.UUID;
  *
  * @see AbstractSkeletonMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class StrayMock extends AbstractSkeletonMock
 		implements
-			Stray,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.StrayBaseMock
 {
 

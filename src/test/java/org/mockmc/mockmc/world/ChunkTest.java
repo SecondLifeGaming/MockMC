@@ -180,7 +180,9 @@ class ChunkTest
 	void getEntities_OneEntity_OneEntity()
 	{
 		ChunkMock chunk = world.getChunkAt(10 >> 4, 20 >> 4);
-		Entity entity = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
+		Entity entity = world.spawn(new Location(world, 10, 5, 20), Zombie.class, _ ->
+		{
+		});
 		assertEquals(1, chunk.getEntities().length);
 		assertEquals(entity, chunk.getEntities()[0]);
 	}
@@ -189,9 +191,15 @@ class ChunkTest
 	void getEntities_TwoEntities_TwoEntities_ExcludesOutOfChunk()
 	{
 		ChunkMock chunk = world.getChunkAt(10 >> 4, 20 >> 4);
-		Entity entity1 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
-		Entity entity2 = world.spawn(new Location(world, 10, 5, 20), Zombie.class);
-		Zombie entity3 = world.spawn(new Location(world, 60, 5, 20), Zombie.class);
+		Entity entity1 = world.spawn(new Location(world, 10, 5, 20), Zombie.class, _ ->
+		{
+		});
+		Entity entity2 = world.spawn(new Location(world, 10, 5, 20), Zombie.class, _ ->
+		{
+		});
+		Zombie entity3 = world.spawn(new Location(world, 60, 5, 20), Zombie.class, _ ->
+		{
+		});
 
 		List<Entity> entities = List.of(chunk.getEntities());
 
@@ -241,7 +249,6 @@ class ChunkTest
 	void contains_Biome_False()
 	{
 		ChunkMock chunk = world.getChunkAt(0, 0);
-		Block block = chunk.getBlock(0, 0, 0);
 		assertFalse(chunk.contains(Biome.BADLANDS));
 	}
 

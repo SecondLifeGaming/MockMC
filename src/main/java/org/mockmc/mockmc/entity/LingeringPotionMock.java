@@ -13,7 +13,6 @@ import java.util.UUID;
  */
 public class LingeringPotionMock extends ThrownPotionMock
 		implements
-			LingeringPotion,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.LingeringPotionBaseMock
 {
 

@@ -48,4 +48,10 @@ public abstract class BaseTagMock<T extends Keyed> implements Tag<T>
 		return this.key;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Tag[" + this.key + "]";
+	}
+
 }

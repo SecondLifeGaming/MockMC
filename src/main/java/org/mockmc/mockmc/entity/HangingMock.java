@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class HangingMock extends EntityMock
 		implements
-			Hanging,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.HangingBaseMock
 {
 

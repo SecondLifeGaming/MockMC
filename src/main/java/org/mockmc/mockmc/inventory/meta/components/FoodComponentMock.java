@@ -17,7 +17,6 @@ import java.util.Map;
 @SuppressWarnings("UnstableApiUsage")
 public class FoodComponentMock
 		implements
-			FoodComponent,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.components.FoodComponentBaseMock
 {
 

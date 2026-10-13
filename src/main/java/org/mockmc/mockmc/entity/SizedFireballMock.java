@@ -17,7 +17,6 @@ import java.util.UUID;
  */
 public class SizedFireballMock extends FireballMock
 		implements
-			SizedFireball,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.SizedFireballBaseMock
 {
 

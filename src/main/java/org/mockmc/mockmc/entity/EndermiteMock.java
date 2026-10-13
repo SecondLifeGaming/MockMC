@@ -1,16 +1,12 @@
 package org.mockmc.mockmc.entity;
 
-import org.bukkit.entity.Endermite;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 import org.mockmc.mockmc.ServerMock;
 import java.util.UUID;
 
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public class EndermiteMock extends MonsterMock
 		implements
-			Endermite,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EndermiteBaseMock
 {
 

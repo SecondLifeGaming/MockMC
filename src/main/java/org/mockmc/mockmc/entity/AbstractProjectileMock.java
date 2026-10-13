@@ -14,11 +14,8 @@ import java.util.UUID;
  *
  * @see EntityMock
  */
-@SuppressWarnings(
-{"deprecation", "removal", "unchecked"})
 public abstract class AbstractProjectileMock extends EntityMock
 		implements
-			Projectile,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.ProjectileBaseMock
 {
 

@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ShelfInventoryMock extends InventoryMock
 		implements
-			ShelfInventory,
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.ShelfInventoryBaseMock
 {
 

@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 public class EnderCrystalMock extends EntityMock
 		implements
-			EnderCrystal,
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.EnderCrystalBaseMock
 {
 

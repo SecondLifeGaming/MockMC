@@ -21,11 +21,7 @@ import java.util.stream.Collectors;
  *            The type of the tagged objects.
  */
 @SuppressWarnings("UnstableApiUsage")
-public class TagMock<T extends Keyed>
-		implements
-			Tag<T>,
-			org.bukkit.Tag<T>,
-			org.mockmc.mockmc.generated.server.org.bukkit.TagBaseMock<T>
+public class TagMock<T extends Keyed> implements Tag<T>, org.mockmc.mockmc.generated.server.org.bukkit.TagBaseMock<T>
 {
 
 	private final TagKey<T> tagKey;
