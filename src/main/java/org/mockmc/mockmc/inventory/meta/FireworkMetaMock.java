@@ -178,7 +178,8 @@ public class FireworkMetaMock extends ItemMetaMock
 	 *            Object&gt; format.
 	 * @return A new instance of the FireworkMetaMock class.
 	 */
-	@SuppressWarnings({"unchecked", "java:S2176"})
+	@SuppressWarnings(
+	{"unchecked", "java:S2176"})
 	@NotNull
 	public static FireworkMetaMock deserialize(@NotNull Map<String, Object> args)
 	{

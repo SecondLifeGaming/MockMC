@@ -209,6 +209,16 @@ dependencies {
 	compileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
 	testCompileOnly(fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") })
 
+	// Fallback Paper API: Sanitized by BaseMockGenerator so only classes removed in newer Paper remain.
+	compileOnly(fileTree("jars/cache/libraries/io/papermc/paper/paper-api") {
+		include("**/*.jar")
+		exclude("**/*${property("paper.api.full-version")}*")
+	})
+	testCompileOnly(fileTree("jars/cache/libraries/io/papermc/paper/paper-api") {
+		include("**/*.jar")
+		exclude("**/*${property("paper.api.full-version")}*")
+	})
+
 	// Backend Jars for non-bundled or fallback resolution (Velocity, Bungee, etc.)
 	val backendJars = fileTree("jars") {
 		include("*.jar")

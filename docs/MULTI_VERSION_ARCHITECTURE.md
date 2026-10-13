@@ -104,16 +104,20 @@ When adding a new version or updating an existing target:
     ```bash
     ./gradlew downloadJars
     ```
-3. **Run Code Generation**:
+3. **Purge Stale Generated Stubs**:
+    ```bash
+    rm -rf src/main/java/org/mockmc/mockmc/generated/* src/test/java/org/mockmc/mockmc/generated/*
+    ```
+4. **Run Code Generation**:
     ```bash
     ./gradlew :metaminer:runGenerator
     ```
-4. **Format & Verify**:
+5. **Format & Verify**:
     ```bash
     ./gradlew spotlessApply
-    ./gradlew compileJava
+    ./gradlew compileJava compileTestJava
     ./gradlew testAllBackends
     ```
-5. **Update Documentation**:
+6. **Update Documentation**:
     - Refresh `COVERAGE.md`.
     - Update `docs/VERSION_SUPPORT.md` with the new status tier.

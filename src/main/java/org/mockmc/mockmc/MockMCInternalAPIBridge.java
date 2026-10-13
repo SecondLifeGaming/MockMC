@@ -81,7 +81,7 @@ public class MockMCInternalAPIBridge
 	}
 
 	@Override
-	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate)
+	public Predicate<CommandSourceStack> restricted(Predicate<CommandSourceStack> predicate, boolean arg1)
 	{
 		throw new UnimplementedOperationException();
 	}

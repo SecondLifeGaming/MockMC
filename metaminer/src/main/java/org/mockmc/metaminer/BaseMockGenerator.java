@@ -217,7 +217,7 @@ public class BaseMockGenerator implements DataGenerator {
             File cacheDir = new File(jarDirectory, "cache");
             List<URL> urls = processJars(cacheDir);
 
-            sanitizeFoliaApi(cacheDir);
+            sanitizeApiJars(cacheDir);
             populateBytecodeClassNames(cacheDir);
 
             File libDir = new File(cacheDir, "libraries");
@@ -1376,29 +1376,76 @@ public class BaseMockGenerator implements DataGenerator {
         return org.mockmc.metaminer.util.ClassExclusions.isGeneratablePackage(name);
     }
 
-    private void sanitizeFoliaApi(File cacheDir) {
-        File foliaDir = new File(cacheDir, "libraries/dev/folia/folia-api");
+    private void sanitizeApiJars(File cacheDir) {
         File paperDir = new File(cacheDir, "libraries/io/papermc/paper/paper-api");
-        if (!foliaDir.exists() || !paperDir.exists()) {
+        if (!paperDir.exists()) {
             return;
         }
 
-        List<File> foliaJars = new ArrayList<>();
-        collectJarsRecursive(foliaDir, foliaJars);
         List<File> paperJars = new ArrayList<>();
         collectJarsRecursive(paperDir, paperJars);
-        if (foliaJars.isEmpty() || paperJars.isEmpty()) {
+        if (paperJars.isEmpty()) {
             return;
         }
 
-        Set<String> paperEntries = readPaperEntries(paperJars.get(0));
-        if (paperEntries.isEmpty()) {
+        // Determine primary Paper API jar (marked as primary in versions.json or highest version)
+        File primaryPaperJar = findPrimaryPaperJar(paperJars);
+        if (primaryPaperJar == null) {
             return;
         }
 
-        for (File foliaJar : foliaJars) {
-            sanitizeSingleFoliaJar(foliaJar, paperEntries);
+        Set<String> primaryEntries = readPaperEntries(primaryPaperJar);
+        if (primaryEntries.isEmpty()) {
+            return;
         }
+
+        // 1. Sanitize Folia API jars
+        File foliaDir = new File(cacheDir, "libraries/dev/folia/folia-api");
+        if (foliaDir.exists()) {
+            List<File> foliaJars = new ArrayList<>();
+            collectJarsRecursive(foliaDir, foliaJars);
+            for (File foliaJar : foliaJars) {
+                sanitizeSingleJar(foliaJar, primaryEntries, "Folia API");
+            }
+        }
+
+        // 2. Sanitize older Paper API fallback jars so only removed/differential classes remain
+        for (File paperJar : paperJars) {
+            if (!paperJar.equals(primaryPaperJar)) {
+                sanitizeSingleJar(paperJar, primaryEntries, "Fallback Paper API");
+            }
+        }
+    }
+
+    private File findPrimaryPaperJar(List<File> paperJars) {
+        File versionsJson = new File(jarDirectory, "manifests/versions.json");
+        if (versionsJson.exists()) {
+            try {
+                com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(new java.io.FileReader(versionsJson)).getAsJsonObject();
+                com.google.gson.JsonObject platforms = root.getAsJsonObject("platforms");
+                if (platforms != null && platforms.has("paper")) {
+                    com.google.gson.JsonArray versions = platforms.getAsJsonObject("paper").getAsJsonArray("versions");
+                    for (var elem : versions) {
+                        com.google.gson.JsonObject vObj = elem.getAsJsonObject();
+                        if (vObj.has("primary") && vObj.get("primary").getAsBoolean()) {
+                            String v = vObj.get("version").getAsString();
+                            int b = vObj.get("build").getAsInt();
+                            for (File pj : paperJars) {
+                                if (pj.getName().contains(v) && pj.getName().contains(String.valueOf(b))) {
+                                    return pj;
+                                }
+                            }
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                LOGGER.log(Level.WARNING, "Failed to parse versions.json for primary paper-api jar: {0}", e.getMessage());
+            }
+        }
+        // Fallback: pick the latest jar by version
+        return paperJars.stream()
+                .max(Comparator.comparing(File::getName))
+                .orElse(paperJars.get(0));
     }
 
     private Set<String> readPaperEntries(File paperApiJar) {
@@ -1414,12 +1461,12 @@ public class BaseMockGenerator implements DataGenerator {
         return paperEntries;
     }
 
-    private void sanitizeSingleFoliaJar(File foliaJar, Set<String> paperEntries) {
-        File tmpJar = new File(foliaJar.getParentFile(), foliaJar.getName() + ".tmp");
+    private void sanitizeSingleJar(File targetJar, Set<String> paperEntries, String jarTypeName) {
+        File tmpJar = new File(targetJar.getParentFile(), targetJar.getName() + ".tmp");
         boolean modified = false;
-        try (java.util.zip.ZipFile foliaZip = new java.util.zip.ZipFile(foliaJar);
+        try (java.util.zip.ZipFile zip = new java.util.zip.ZipFile(targetJar);
              java.util.zip.ZipOutputStream zos = new java.util.zip.ZipOutputStream(new java.io.FileOutputStream(tmpJar))) {
-            var entries = foliaZip.entries();
+            var entries = zip.entries();
             while (entries.hasMoreElements()) {
                 java.util.zip.ZipEntry entry = entries.nextElement();
                 String name = entry.getName();
@@ -1430,27 +1477,27 @@ public class BaseMockGenerator implements DataGenerator {
                 java.util.zip.ZipEntry newEntry = new java.util.zip.ZipEntry(name);
                 zos.putNextEntry(newEntry);
                 if (!entry.isDirectory()) {
-                    try (java.io.InputStream is = foliaZip.getInputStream(entry)) {
+                    try (java.io.InputStream is = zip.getInputStream(entry)) {
                         org.apache.commons.io.IOUtils.copy(is, zos);
                     }
                 }
                 zos.closeEntry();
             }
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Failed sanitizing folia-api jar: {0}", e.getMessage());
+            LOGGER.log(Level.WARNING, "Failed sanitizing " + jarTypeName + " jar: {0}", e.getMessage());
             org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
             return;
         }
 
         if (modified) {
-            LOGGER.log(Level.INFO, "Sanitized {0} to exclude classes already present in Paper API.", foliaJar.getName());
+            LOGGER.log(Level.INFO, "Sanitized {0} ({1}) to exclude classes already present in Primary Paper API.", new Object[]{targetJar.getName(), jarTypeName});
             try {
-                java.nio.file.Files.delete(foliaJar.toPath());
-                if (!tmpJar.renameTo(foliaJar)) {
-                    LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version.", foliaJar.getName());
+                java.nio.file.Files.delete(targetJar.toPath());
+                if (!tmpJar.renameTo(targetJar)) {
+                    LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version.", targetJar.getName());
                 }
             } catch (IOException ex) {
-                LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version: {1}", new Object[]{foliaJar.getName(), ex.getMessage()});
+                LOGGER.log(Level.WARNING, "Failed replacing {0} with sanitized version: {1}", new Object[]{targetJar.getName(), ex.getMessage()});
             }
         } else {
             org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);

@@ -27,9 +27,11 @@ Autonomous protocol for scaling functional test coverage and preserving multi-ve
     - **NEVER** edit files under `org/mockmc/mockmc/generated/` directly.
     - Execute the mandatory multi-backend verification suite before marking changes complete:
       ```bash
-      ./gradlew :metaminer:runGenerator   # if generator rules changed
+      ./gradlew downloadJars
+      rm -rf src/main/java/org/mockmc/mockmc/generated/* src/test/java/org/mockmc/mockmc/generated/*
+      ./gradlew :metaminer:runGenerator   # if generator rules or target JARs changed
       ./gradlew spotlessApply
-      ./gradlew compileJava
+      ./gradlew compileJava compileTestJava
       ./gradlew testPaper
       ./gradlew testFolia
       ./gradlew testVelocity

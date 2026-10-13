@@ -59,8 +59,10 @@
 
 ### 5. Mandatory Tooling Sequence
 
-Before committing:
+Before committing or after updating target JAR manifests:
 
-1.  `./gradlew :metaminer:runGenerator` (if engine/logic changed).
-2.  `./gradlew spotlessApply`.
-3.  `./gradlew compileJava` (100% API Verification).
+1.  `./gradlew downloadJars` (ensure target platforms are downloaded and verified).
+2.  `rm -rf src/main/java/org/mockmc/mockmc/generated/* src/test/java/org/mockmc/mockmc/generated/*` (purge stale generated stubs before re-running generation).
+3.  `./gradlew :metaminer:runGenerator` (if engine/logic/JARs changed).
+4.  `./gradlew spotlessApply`.
+5.  `./gradlew compileJava compileTestJava` (100% API Verification).

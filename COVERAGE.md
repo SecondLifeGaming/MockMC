@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: 2026-10-12T04:43:04.091909315Z
+Generated on: 2026-10-13T03:53:07.456926911Z
 
 ## Accounted-For API Surface: 100.00%
 
-- **Total Discovered API Methods**: 12885
-- **Category A: Automated BaseMocks**: 12405
+- **Total Discovered API Methods**: 12921
+- **Category A: Automated BaseMocks**: 12441
 - **Category B: Manual Implementations**: 0
 - **Category C: Justified Exclusions**: 480
 - **Unaccounted Methods**: 0
@@ -39,7 +39,7 @@ Generated on: 2026-10-12T04:43:04.091909315Z
 | com.velocitypowered.api.proxy.server | 4 | 100% Accounted |
 | com.velocitypowered.api.scheduler | 6 | 100% Accounted |
 | com.velocitypowered.api.util | 5 | 100% Accounted |
-| io.papermc.paper | 66 | 100% Accounted |
+| io.papermc.paper | 68 | 100% Accounted |
 | io.papermc.paper.advancement | 18 | 100% Accounted |
 | io.papermc.paper.annotation | 0 | 100% Accounted |
 | io.papermc.paper.ban | 2 | 100% Accounted |
@@ -66,13 +66,13 @@ Generated on: 2026-10-12T04:43:04.091909315Z
 | io.papermc.paper.datacomponent.item.consumable | 0 | 100% Accounted |
 | io.papermc.paper.datapack | 48 | 100% Accounted |
 | io.papermc.paper.dialog | 12 | 100% Accounted |
-| io.papermc.paper.entity | 52 | 100% Accounted |
+| io.papermc.paper.entity | 54 | 100% Accounted |
 | io.papermc.paper.entity.poi | 8 | 100% Accounted |
 | io.papermc.paper.event.player | 58 | 100% Accounted |
 | io.papermc.paper.event.world.border | 2 | 100% Accounted |
 | io.papermc.paper.inventory.tooltip | 8 | 100% Accounted |
 | io.papermc.paper.math | 92 | 100% Accounted |
-| io.papermc.paper.persistence | 22 | 100% Accounted |
+| io.papermc.paper.persistence | 32 | 100% Accounted |
 | io.papermc.paper.plugin | 30 | 100% Accounted |
 | io.papermc.paper.plugin.bootstrap | 14 | 100% Accounted |
 | io.papermc.paper.plugin.configuration | 36 | 100% Accounted |
@@ -129,7 +129,7 @@ Generated on: 2026-10-12T04:43:04.091909315Z
 | net.md_5.bungee.protocol | 76 | 100% Accounted |
 | net.md_5.bungee.protocol.channel | 3 | 100% Accounted |
 | net.md_5.bungee.tab | 7 | 100% Accounted |
-| org.bukkit | 1752 | 100% Accounted |
+| org.bukkit | 1758 | 100% Accounted |
 | org.bukkit.advancement | 52 | 100% Accounted |
 | org.bukkit.attribute | 34 | 100% Accounted |
 | org.bukkit.ban | 16 | 100% Accounted |
@@ -147,7 +147,7 @@ Generated on: 2026-10-12T04:43:04.091909315Z
 | org.bukkit.conversations | 40 | 100% Accounted |
 | org.bukkit.damage | 30 | 100% Accounted |
 | org.bukkit.enchantments | 52 | 100% Accounted |
-| org.bukkit.entity | 3442 | 100% Accounted |
+| org.bukkit.entity | 3454 | 100% Accounted |
 | org.bukkit.entity.boat | 0 | 100% Accounted |
 | org.bukkit.entity.minecart | 42 | 100% Accounted |
 | org.bukkit.event | 16 | 100% Accounted |
@@ -177,7 +177,7 @@ Generated on: 2026-10-12T04:43:04.091909315Z
 | org.bukkit.metadata | 70 | 100% Accounted |
 | org.bukkit.packs | 10 | 100% Accounted |
 | org.bukkit.permissions | 32 | 100% Accounted |
-| org.bukkit.persistence | 24 | 100% Accounted |
+| org.bukkit.persistence | 28 | 100% Accounted |
 | org.bukkit.plugin | 158 | 100% Accounted |
 | org.bukkit.plugin.java | 64 | 100% Accounted |
 | org.bukkit.plugin.messaging | 48 | 100% Accounted |
