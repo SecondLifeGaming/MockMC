@@ -253,13 +253,21 @@ class BukkitSchedulerMockTest
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 	}
 
+	private void assertActiveRunningCount(int expected)
+	{
+		assertEquals(expected, scheduler.getActiveRunningCount());
+	}
+
 	@Test
-	void longScheduledRunningTask_Throws_RunTimeException()
+	void longScheduledRunningTask_Throws_RunTimeException() throws InterruptedException
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		PluginMock pluginMock = MockMC.createMockPlugin();
+		final CountDownLatch firstStarted = new CountDownLatch(1);
+		final CountDownLatch secondStarted = new CountDownLatch(1);
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
+			firstStarted.countDown();
 			// noinspection InfiniteLoopStatement
 			while (true)
 			{
@@ -274,6 +282,7 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
+			secondStarted.countDown();
 			// noinspection InfiniteLoopStatement
 			while (true)
 			{
@@ -286,13 +295,15 @@ class BukkitSchedulerMockTest
 				}
 			}
 		}, 2);
-		assertEquals(1, scheduler.getActiveRunningCount());
+		assertTrue(firstStarted.await(10, TimeUnit.SECONDS));
+		assertActiveRunningCount(1);
 		scheduler.performOneTick();
-		assertEquals(1, scheduler.getActiveRunningCount());
+		assertActiveRunningCount(1);
 		scheduler.performOneTick();
-		assertEquals(2, scheduler.getActiveRunningCount());
+		assertTrue(secondStarted.await(10, TimeUnit.SECONDS));
+		assertActiveRunningCount(2);
 		scheduler.performOneTick();
-		assertEquals(2, scheduler.getActiveRunningCount());
+		assertActiveRunningCount(2);
 		scheduler.setShutdownTimeout(300);
 		assertThrows(TaskCancelledException.class, () -> scheduler.shutdown());
 	}
@@ -305,15 +316,11 @@ class BukkitSchedulerMockTest
 		final CountDownLatch countDownLatch = new CountDownLatch(1);
 		final AtomicBoolean alive = new AtomicBoolean(true);
 
-		testTask = scheduler.runTaskAsynchronously(null, () ->
+		scheduler.runTaskAsynchronously(null, () ->
 		{
 			countDownLatch.countDown();
 			while (alive.get())
 			{
-				if (testTask.isCancelled())
-				{
-					alive.set(false);
-				}
 				try
 				{
 					Thread.sleep(SLEEP_TIME);
@@ -325,10 +332,10 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		countDownLatch.await(10, TimeUnit.SECONDS);
+		assertTrue(countDownLatch.await(10, TimeUnit.SECONDS));
 
 		assertTrue(alive.get());
-		assertEquals(1, scheduler.getActiveRunningCount());
+		assertActiveRunningCount(1);
 		scheduler.performTicks(10);
 		scheduler.setShutdownTimeout(10);
 		assertThrows(AsyncTaskException.class, () -> scheduler.shutdown());

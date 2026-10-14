@@ -135,7 +135,7 @@ sonar {
 }
 
 checkstyle {
-	toolVersion = "13.4.1"
+	toolVersion = "14.3.0"
 }
 
 tasks.withType<Checkstyle> {
