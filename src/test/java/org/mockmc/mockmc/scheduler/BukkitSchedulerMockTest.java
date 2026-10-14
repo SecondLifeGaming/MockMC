@@ -253,13 +253,8 @@ class BukkitSchedulerMockTest
 		assertEquals(0, scheduler1.getNumberOfQueuedAsyncTasks());
 	}
 
-	private void assertActiveRunningCount(int expected) throws InterruptedException
+	private void assertActiveRunningCount(int expected)
 	{
-		long start = System.currentTimeMillis();
-		while (scheduler.getActiveRunningCount() != expected && (System.currentTimeMillis() - start) < 3000)
-		{
-			Thread.sleep(10L);
-		}
 		assertEquals(expected, scheduler.getActiveRunningCount());
 	}
 
@@ -268,8 +263,11 @@ class BukkitSchedulerMockTest
 	{
 		assertEquals(0, scheduler.getNumberOfQueuedAsyncTasks());
 		PluginMock pluginMock = MockMC.createMockPlugin();
+		final CountDownLatch firstStarted = new CountDownLatch(1);
+		final CountDownLatch secondStarted = new CountDownLatch(1);
 		scheduler.runTaskAsynchronously(pluginMock, () ->
 		{
+			firstStarted.countDown();
 			// noinspection InfiniteLoopStatement
 			while (true)
 			{
@@ -284,6 +282,7 @@ class BukkitSchedulerMockTest
 		});
 		scheduler.runTaskLaterAsynchronously(pluginMock, () ->
 		{
+			secondStarted.countDown();
 			// noinspection InfiniteLoopStatement
 			while (true)
 			{
@@ -296,10 +295,12 @@ class BukkitSchedulerMockTest
 				}
 			}
 		}, 2);
+		assertTrue(firstStarted.await(10, TimeUnit.SECONDS));
 		assertActiveRunningCount(1);
 		scheduler.performOneTick();
 		assertActiveRunningCount(1);
 		scheduler.performOneTick();
+		assertTrue(secondStarted.await(10, TimeUnit.SECONDS));
 		assertActiveRunningCount(2);
 		scheduler.performOneTick();
 		assertActiveRunningCount(2);
@@ -331,7 +332,7 @@ class BukkitSchedulerMockTest
 				}
 			}
 		});
-		countDownLatch.await(10, TimeUnit.SECONDS);
+		assertTrue(countDownLatch.await(10, TimeUnit.SECONDS));
 
 		assertTrue(alive.get());
 		assertActiveRunningCount(1);
