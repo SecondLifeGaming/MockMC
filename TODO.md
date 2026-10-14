@@ -35,9 +35,11 @@ _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an auto
 
 ### 7.1: Canonical Manifest Schema, Provenance & Scanner Completeness
 
-- [ ] **Bytecode API Manifest Generation**: Serialize canonical `api-manifest-<platform>-<ver>.json` capturing types, methods, descriptors, parameters, return types, modifiers, and annotations.
-- [ ] **Provenance & Scanner Completeness Auditing**: Record scanner version, remapping SHA, and explicitly capture unanalyzed entries to prevent silent omission of APIs.
-- [ ] **Status & Exclusion Linking**: Tag each symbol with its MockMC status (Smart Stub, Manual Mock, Justified Exclusion, Deprecated Fallback) and embed justification strings.
+- [x] **Canonical Manifest Specification & Provenance Contract**: Formalized and hardened [`docs/RFC_MANIFEST_SCHEMA.md`](docs/RFC_MANIFEST_SCHEMA.md) with deterministic serialization rules, per-entry disposition inventory, member-level completeness, and decoupled overlay architecture.
+- [x] **Bytecode API Manifest Model**: Implemented strongly typed immutable records (`ApiManifest.java`, `MockmcOverlay.java`).
+- [x] **Deterministic Canonical Serializer**: Built `ManifestCanonicalSerializer.java` with UTF-8, LF line endings, 2-space indentation, lexicographical key sorting, and canonical SHA-256 digest computation.
+- [x] **Bytecode Scanner with Exhaustive Accounting**: Implemented `BytecodeManifestScanner.java` in `:metaminer` enforcing the accounting triplet (`totalClassesDiscovered == analyzed + excluded + failed`), member-level completeness invariant, and scoped fallback provenance.
+- [x] **Manifest Integrity & Repeatability Test Suite**: Built `ManifestIntegrityTest.java` verifying bit-for-bit repeatability, line-ending invariants, and ASM parsing completeness.
 
 ### 7.2: Deterministic Pairwise Diff Engine & Compatibility Classifications
 
