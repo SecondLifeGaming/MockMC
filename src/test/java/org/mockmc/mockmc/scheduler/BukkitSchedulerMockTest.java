@@ -315,15 +315,11 @@ class BukkitSchedulerMockTest
 		final CountDownLatch countDownLatch = new CountDownLatch(1);
 		final AtomicBoolean alive = new AtomicBoolean(true);
 
-		testTask = scheduler.runTaskAsynchronously(null, () ->
+		scheduler.runTaskAsynchronously(null, () ->
 		{
 			countDownLatch.countDown();
 			while (alive.get())
 			{
-				if (testTask.isCancelled())
-				{
-					alive.set(false);
-				}
 				try
 				{
 					Thread.sleep(SLEEP_TIME);
