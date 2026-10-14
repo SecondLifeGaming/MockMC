@@ -51,9 +51,10 @@ _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an auto
 
 ### 7.3: Generated COMPAT.md & Per-Platform/Version Reports
 
-- [ ] **CompatReportGenerator Refactoring**: Upgrade `CompatReportGenerator` to consume the new `VersionDiffEngine`.
-- [ ] **Multi-Report Generation**: Generate unified `COMPAT.md` and per-version reports (e.g. `COMPAT-paper-26.2-to-26.3.md`) from the same underlying JSON data model.
-- [ ] **Deterministic Output Guarantee**: Ensure sorted, deterministic report generation to prevent git churn.
+- [x] **CompatReportGenerator Refactoring**: Upgraded `CompatReportGenerator` to consume `BytecodeManifestScanner` and `VersionDiffEngine`.
+- [x] **Markdown Report Renderer**: Built `CompatMarkdownRenderer` to project structured `PairwiseDiff` into deterministic GitHub-flavored Markdown.
+- [x] **Multi-Report Generation**: Emits unified `COMPAT.md` from the canonical JSON data model without ad-hoc string scraping.
+- [x] **Deterministic Output Guarantee**: Sorted lexicographical grouping by class and symbol prevents git churn.
 
 ### 7.4: Static Documentation Site Shell, Guides & Search
 
