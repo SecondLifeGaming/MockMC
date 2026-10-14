@@ -43,11 +43,11 @@ _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an auto
 
 ### 7.2: Deterministic Pairwise Diff Engine & Compatibility Classifications
 
-- [ ] **Descriptor-Level Pairwise Diff Engine**: Implement `VersionDiffEngine` to compare arbitrary platform versions and track JVM descriptors as atomic identity.
-- [ ] **Binary vs. Source Incompatibility**: Distinguish binary breaks (`NoSuchMethodError`, removed descriptors), source breaks (ambiguous overloads), and compatible additions (default methods, overloads).
-- [ ] **Bridge & Synthetic Method Filtering**: Prevent compiler bridge methods from contaminating public API change summaries.
-- [ ] **Migration Linkage**: Support `migrationHint` detection (e.g. legacy String text methods superseded by Adventure `Title` / `Component`).
-- [ ] **Machine-Readable Diff Export**: Emit structured diff manifests (`diff-<platform>-<fromVer>-to-<toVer>.json`).
+- [x] **Descriptor-Level Pairwise Diff Engine**: Implemented `VersionDiffEngine` comparing arbitrary platform versions and tracking JVM descriptors as atomic identity.
+- [x] **Binary vs. Source Incompatibility**: Distinguishes binary breaks (`NoSuchMethodError`, removed descriptors, added non-default interface methods), source breaks, and compatible additions.
+- [x] **Bridge & Synthetic Method Filtering**: Filters compiler bridge and synthetic methods from public API change summaries.
+- [x] **Migration Linkage & Deprecation Tracking**: Tracks `@Deprecated` introduction and correlates removed/added overloads.
+- [x] **Machine-Readable Diff Data Model**: Implemented `PairwiseDiff.java` immutable schema representation with unit test coverage (`VersionDiffEngineTest.java`).
 
 ### 7.3: Generated COMPAT.md & Per-Platform/Version Reports
 
