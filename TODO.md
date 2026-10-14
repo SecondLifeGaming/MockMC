@@ -7,6 +7,7 @@ This document outlines the strategic phases for achieving 100% automated API mir
 _Focus: Validating the multi-version architecture (Paper 26.3 + Folia 26.2 proof of concept) and expanding behavioral mock depth._
 
 ### 1. Architectural Validation (26.2 - 26.3 Multi-Version Contract)
+
 - [x] **Canonical Tier Establishment**: Paper 26.3 established as the primary source of truth for Bukkit/Paper API surface.
 - [x] **Platform Scope Restriction**: Folia 26.2 restricted strictly to `io.papermc.paper.threadedregions.*`, preventing downgrade of canonical Paper classes.
 - [x] **Autonomous Unbundling & Remapping**: Decoupled from build-time Paperweight; `JarCracker` and `StandaloneRemapper` support Java 25 bytecode.
@@ -14,16 +15,62 @@ _Focus: Validating the multi-version architecture (Paper 26.3 + Folia 26.2 proof
 - [x] **Architectural Documentation**: Published `MULTI_VERSION_ARCHITECTURE.md`, `VERSION_SUPPORT.md`, and `GENERATOR_AND_COVERAGE.md`.
 
 ### 2. Behavioral Depth Workstream (Current Sprint)
-*Note on API versioning: While the compile API surface targets Paper 26.3, core in-game mechanics and mock state machines originally authored under 1.21.x are progressively audited and upgraded to modern Paper semantics.*
+
+_Note on API versioning: While the compile API surface targets Paper 26.3, core in-game mechanics and mock state machines originally authored under 1.21.x are progressively audited and upgraded to modern Paper semantics._
+
 - [/] **Targeted Logic Implementation**:
     - [ ] `PaperLeashable`: Implement stateful leash tracking (now that visibility issues are resolved).
     - [ ] `GameRule`: Extend dynamic game rule registration support.
     - [ ] `PluginManager`: Enhance event firing for Paper-specific events.
 
 ### 3. Planned Multi-Version Expansion & Automation (Future Milestones)
+
 - [ ] **Automated Historical Fallback Scanning**: Expand MetaMiner to automatically scan older baseline JARs for removed methods and generate `@Deprecated(forRemoval = true, since = "...")` stubs tagged with `@mockmc.version`.
 - [ ] **CI Coverage Auditing**: Integrate `COVERAGE.md` verification into CI to fail builds if unaccounted methods > 0.
 - [x] **Maven Central Publishing**: CI/CD pipeline configured (`feat/maven-central`); GPG signing via in-memory key, `secrets: inherit` propagation to reusable workflow. Pending successful end-to-end run.
+
+## 🌐 Phase 7: Automated Developer Reference & API Explorer (PLANNED RFC)
+
+_Focus: Turning MockMC's bytecode discovery and diff infrastructure into an automated, version-aware Minecraft plugin developer reference and interactive API explorer. See [`docs/RFC_DEVELOPER_WIKI.md`](docs/RFC_DEVELOPER_WIKI.md)._
+
+### 7.1: Canonical Manifest Schema, Provenance & Scanner Completeness
+
+- [ ] **Bytecode API Manifest Generation**: Serialize canonical `api-manifest-<platform>-<ver>.json` capturing types, methods, descriptors, parameters, return types, modifiers, and annotations.
+- [ ] **Provenance & Scanner Completeness Auditing**: Record scanner version, remapping SHA, and explicitly capture unanalyzed entries to prevent silent omission of APIs.
+- [ ] **Status & Exclusion Linking**: Tag each symbol with its MockMC status (Smart Stub, Manual Mock, Justified Exclusion, Deprecated Fallback) and embed justification strings.
+
+### 7.2: Deterministic Pairwise Diff Engine & Compatibility Classifications
+
+- [ ] **Descriptor-Level Pairwise Diff Engine**: Implement `VersionDiffEngine` to compare arbitrary platform versions and track JVM descriptors as atomic identity.
+- [ ] **Binary vs. Source Incompatibility**: Distinguish binary breaks (`NoSuchMethodError`, removed descriptors), source breaks (ambiguous overloads), and compatible additions (default methods, overloads).
+- [ ] **Bridge & Synthetic Method Filtering**: Prevent compiler bridge methods from contaminating public API change summaries.
+- [ ] **Migration Linkage**: Support `migrationHint` detection (e.g. legacy String text methods superseded by Adventure `Title` / `Component`).
+- [ ] **Machine-Readable Diff Export**: Emit structured diff manifests (`diff-<platform>-<fromVer>-to-<toVer>.json`).
+
+### 7.3: Generated COMPAT.md & Per-Platform/Version Reports
+
+- [ ] **CompatReportGenerator Refactoring**: Upgrade `CompatReportGenerator` to consume the new `VersionDiffEngine`.
+- [ ] **Multi-Report Generation**: Generate unified `COMPAT.md` and per-version reports (e.g. `COMPAT-paper-26.2-to-26.3.md`) from the same underlying JSON data model.
+- [ ] **Deterministic Output Guarantee**: Ensure sorted, deterministic report generation to prevent git churn.
+
+### 7.4: Static Documentation Site Shell, Guides & Search
+
+- [ ] **Static Doc Site Scaffolding**: Set up GitHub Pages documentation framework in `site/` (VitePress/Starlight).
+- [ ] **Core Developer Guides**: Port and write guides (Getting Started, First Test, Multi-Version Testing Recipes, Architecture).
+- [ ] **Pre-Indexed Static Search**: Integrate client-side search engine (Pagefind) for sub-millisecond offline symbol queries.
+
+### 7.5: Version-Range Explorer & Test Cross-Referencing
+
+- [ ] **Derived Range Aggregation**: Compute arbitrary range views dynamically by folding pairwise diffs without storing $O(N^2)$ manifests.
+- [ ] **Interactive Range Browser**: Client-side widget allowing developers to select platform and min/max versions (e.g. Paper 26.2 to 26.3) with real-time fuzzy search.
+- [ ] **Behavioral Test Cross-Referencing**: Link verified JUnit tests with outcome indicators, explicit test scope caveats, and contribution guides.
+
+### 7.6: CI Validation, Security Hardening & Automatic Publication
+
+- [ ] **Pre-Publication Integrity Gates**: CI verification failing builds on unanalyzed classes, schema violations, or broken links.
+- [ ] **Artifact-Trust & Fork Isolation**: Ensure untrusted fork PRs run read-only validation without deploy credentials.
+- [ ] **Content Sanitization & CSP**: HTML-escape all scraped bytecode metadata and enforce strict Content Security Policy.
+- [ ] **Automated GitHub Pages Deployment**: GitHub Actions workflow (`docs.yml`) building and publishing the static site on release or `main` merge.
 
 ## ✅ Phase 5: Autonomous Modernization (COMPLETE)
 
