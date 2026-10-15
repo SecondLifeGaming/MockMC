@@ -2,8 +2,8 @@
 	<div class="range-browser">
 		<div class="controls-panel">
 			<div class="control-group">
-				<label>Platform</label>
-				<select v-model="selectedPlatform">
+				<label for="platform-select">Platform</label>
+				<select id="platform-select" v-model="selectedPlatform">
 					<option value="paper">Paper (Canonical)</option>
 					<option value="folia">Folia (Threaded Regions)</option>
 					<option value="velocity">Velocity</option>
@@ -12,22 +12,22 @@
 			</div>
 
 			<div class="control-group">
-				<label>Min Version</label>
-				<select v-model="minVersion">
+				<label for="min-version-select">Min Version</label>
+				<select id="min-version-select" v-model="minVersion">
 					<option v-for="ver in availableVersions" :key="ver" :value="ver">{{ ver }}</option>
 				</select>
 			</div>
 
 			<div class="control-group">
-				<label>Max Version</label>
-				<select v-model="maxVersion">
+				<label for="max-version-select">Max Version</label>
+				<select id="max-version-select" v-model="maxVersion">
 					<option v-for="ver in availableVersions" :key="ver" :value="ver">{{ ver }}</option>
 				</select>
 			</div>
 
 			<div class="control-group">
-				<label>Category</label>
-				<select v-model="selectedCategory" @change="onFilterChange">
+				<label for="category-select">Category</label>
+				<select id="category-select" v-model="selectedCategory" @change="onFilterChange">
 					<option value="ALL">All Categories</option>
 					<option value="CLASS">Classes</option>
 					<option value="INTERFACE">Interfaces</option>
@@ -40,8 +40,8 @@
 			</div>
 
 			<div class="control-group">
-				<label>Filter Status</label>
-				<select v-model="selectedStatus" @change="onFilterChange">
+				<label for="status-select">Filter Status</label>
+				<select id="status-select" v-model="selectedStatus" @change="onFilterChange">
 					<option value="CHANGED">Changed in Range</option>
 					<option value="ALL">All Symbols (Full API Surface)</option>
 					<option value="INTRODUCED">Introduced in Range (New)</option>
@@ -52,8 +52,9 @@
 			</div>
 
 			<div class="control-group search-box">
-				<label>Search Symbol</label>
+				<label for="search-input">Search Symbol</label>
 				<input
+					id="search-input"
 					type="text"
 					v-model="searchQuery"
 					@input="onSearchInput"

@@ -39,6 +39,11 @@ public class DocSiteDataGenerator implements DataGenerator {
 			"co.aikar.timings"
 	);
 
+	private static final String STATUS_INTRODUCED = "INTRODUCED";
+	private static final String STATUS_REMOVED = "REMOVED";
+	private static final String STATUS_DEPRECATED = "DEPRECATED";
+	private static final String STATUS_STABLE = "STABLE";
+
 	private final File rootDir;
 
 	public DocSiteDataGenerator(File rootDir) {
@@ -56,41 +61,8 @@ public class DocSiteDataGenerator implements DataGenerator {
 			return;
 		}
 
-		BytecodeManifestScanner.ScanConfiguration fallbackConfig = new BytecodeManifestScanner.ScanConfiguration(
-				"folia",
-				extractVersion(fallback.getName()),
-				0,
-				"extension",
-				"metaminer",
-				"unknown",
-				false,
-				"none",
-				"none",
-				"ASM9_8",
-				API_PREFIXES,
-				List.of(),
-				List.of(),
-				true,
-				"Fallback extension"
-		);
-
-		BytecodeManifestScanner.ScanConfiguration primaryConfig = new BytecodeManifestScanner.ScanConfiguration(
-				"paper",
-				extractVersion(primary.getName()),
-				0,
-				"canonical",
-				"metaminer",
-				"unknown",
-				false,
-				"none",
-				"none",
-				"ASM9_8",
-				API_PREFIXES,
-				List.of(),
-				List.of(),
-				false,
-				null
-		);
+		BytecodeManifestScanner.ScanConfiguration fallbackConfig = createScanConfig("folia", fallback.getName(), "extension", true, "Fallback extension");
+		BytecodeManifestScanner.ScanConfiguration primaryConfig = createScanConfig("paper", primary.getName(), "canonical", false, null);
 
 		ApiManifest fallbackManifest = BytecodeManifestScanner.scanJar(fallback, fallbackConfig);
 		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primary, primaryConfig);
@@ -103,17 +75,53 @@ public class DocSiteDataGenerator implements DataGenerator {
 		}
 
 		List<ClientSymbol> clientSymbols = new ArrayList<>();
-		int idCounter = 1;
+		int idCounter = collectPrimarySymbols(primaryManifest, changeMap, clientSymbols, 1);
+		collectRemovedSymbols(diff, clientSymbols, idCounter);
 
-		// 1. Process all classes and methods in primary (26.3)
+		writeExplorerDatasets(clientSymbols);
+	}
+
+	private static BytecodeManifestScanner.ScanConfiguration createScanConfig(
+			String platform,
+			String jarName,
+			String tier,
+			boolean isFallback,
+			String fallbackNote
+	) {
+		return new BytecodeManifestScanner.ScanConfiguration(
+				platform,
+				extractVersion(jarName),
+				0,
+				tier,
+				"metaminer",
+				"unknown",
+				false,
+				"none",
+				"none",
+				"ASM9_8",
+				API_PREFIXES,
+				List.of(),
+				List.of(),
+				isFallback,
+				fallbackNote
+		);
+	}
+
+	private int collectPrimarySymbols(
+			ApiManifest primaryManifest,
+			Map<String, PairwiseDiff.ChangeEntry> changeMap,
+			List<ClientSymbol> clientSymbols,
+			int startId
+	) {
+		int idCounter = startId;
 		for (Map.Entry<String, ApiManifest.ClassEntry> classEntry : primaryManifest.classes().entrySet()) {
 			String className = classEntry.getKey();
 			ApiManifest.ClassEntry clazz = classEntry.getValue();
 
 			PairwiseDiff.ChangeEntry classChange = changeMap.get(className);
-			String classStatus = classChange != null && classChange.category() == PairwiseDiff.ChangeCategory.ADDED ? "INTRODUCED" : "STABLE";
-			String classStatusText = "INTRODUCED".equals(classStatus) ? "Introduced in 26.3" : "Stable throughout 26.2 - 26.3";
-			String classStatusClass = "INTRODUCED".equals(classStatus) ? "status-added" : "status-stable";
+			String classStatus = classChange != null && classChange.category() == PairwiseDiff.ChangeCategory.ADDED ? STATUS_INTRODUCED : STATUS_STABLE;
+			String classStatusText = STATUS_INTRODUCED.equals(classStatus) ? "Introduced in 26.3" : "Stable throughout 26.2 - 26.3";
+			String classStatusClass = STATUS_INTRODUCED.equals(classStatus) ? "status-added" : "status-stable";
 
 			clientSymbols.add(new ClientSymbol(
 					String.valueOf(idCounter++),
@@ -129,59 +137,71 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 			for (Map.Entry<String, ApiManifest.MethodEntry> methodEntry : clazz.methods().entrySet()) {
 				ApiManifest.MethodEntry m = methodEntry.getValue();
-				if (m.isBridge() || m.isSynthetic()) continue;
-				if (!m.accessFlags().contains("PUBLIC") && !m.accessFlags().contains("PROTECTED")) continue;
+				if (m.isBridge() || m.isSynthetic() || (!m.accessFlags().contains("PUBLIC") && !m.accessFlags().contains("PROTECTED"))) {
+					continue;
+				}
 
 				String fullSymbol = className + "#" + methodEntry.getKey();
 				PairwiseDiff.ChangeEntry methodChange = changeMap.get(fullSymbol);
+				clientSymbols.add(createMethodClientSymbol(String.valueOf(idCounter++), className, m, methodChange));
+			}
+		}
+		return idCounter;
+	}
 
-				String mStatus = "STABLE";
-				String mStatusText = "Stable throughout 26.2 - 26.3";
-				String mStatusClass = "status-stable";
+	private ClientSymbol createMethodClientSymbol(
+			String id,
+			String className,
+			ApiManifest.MethodEntry m,
+			PairwiseDiff.ChangeEntry methodChange
+	) {
+		String mStatus = STATUS_STABLE;
+		String mStatusText = "Stable throughout 26.2 - 26.3";
+		String mStatusClass = "status-stable";
 
-				if (methodChange != null) {
-					if (methodChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
-						mStatus = "INTRODUCED";
-						mStatusText = "Introduced in 26.3";
-						mStatusClass = "status-added";
-					} else if (methodChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
-						mStatus = "DEPRECATED";
-						mStatusText = "Deprecated in 26.3";
-						mStatusClass = "status-deprecated";
-					}
-				}
-
-				String testLink = null;
-				String testMethod = null;
-				String testOutcome = null;
-				String testScopeNote = null;
-
-				if (className.contains("Player")) {
-					testLink = "https://github.com/westkevin12/MockBukkit/blob/master/src/test/java/org/mockmc/mockmc/entity/PlayerMockTest.java";
-					testMethod = "PlayerMockTest";
-					testOutcome = "PASSED";
-					testScopeNote = "Verifies player state machine and entity simulation.";
-				}
-
-				clientSymbols.add(new ClientSymbol(
-						String.valueOf(idCounter++),
-						"METHOD",
-						className + "#" + m.name(),
-						m.descriptor(),
-						mStatus,
-						mStatusText,
-						mStatusClass,
-						determineScope(className),
-						testLink,
-						testMethod,
-						testOutcome,
-						testScopeNote,
-						null
-				));
+		if (methodChange != null) {
+			if (methodChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
+				mStatus = STATUS_INTRODUCED;
+				mStatusText = "Introduced in 26.3";
+				mStatusClass = "status-added";
+			} else if (methodChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
+				mStatus = STATUS_DEPRECATED;
+				mStatusText = "Deprecated in 26.3";
+				mStatusClass = "status-deprecated";
 			}
 		}
 
-		// 2. Include removed symbols from diff
+		String testLink = null;
+		String testMethod = null;
+		String testOutcome = null;
+		String testScopeNote = null;
+
+		if (className.contains("Player")) {
+			testLink = "https://github.com/westkevin12/MockBukkit/blob/master/src/test/java/org/mockmc/mockmc/entity/PlayerMockTest.java";
+			testMethod = "PlayerMockTest";
+			testOutcome = "PASSED";
+			testScopeNote = "Verifies player state machine and entity simulation.";
+		}
+
+		return new ClientSymbol(
+				id,
+				"METHOD",
+				className + "#" + m.name(),
+				m.descriptor(),
+				mStatus,
+				mStatusText,
+				mStatusClass,
+				determineScope(className),
+				testLink,
+				testMethod,
+				testOutcome,
+				testScopeNote,
+				null
+		);
+	}
+
+	private void collectRemovedSymbols(PairwiseDiff diff, List<ClientSymbol> clientSymbols, int startId) {
+		int idCounter = startId;
 		for (PairwiseDiff.ChangeEntry change : diff.changes()) {
 			if (change.category() == PairwiseDiff.ChangeCategory.REMOVED) {
 				String symbol = change.symbol();
@@ -191,7 +211,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 						change.type().name(),
 						symbol,
 						change.details() != null ? change.details().descriptor() : "()V",
-						"REMOVED",
+						STATUS_REMOVED,
 						"Removed upstream in 26.3 (Binary Incompatible)",
 						"status-removed",
 						determineScope(symbol),
@@ -200,7 +220,9 @@ public class DocSiteDataGenerator implements DataGenerator {
 				));
 			}
 		}
+	}
 
+	private void writeExplorerDatasets(List<ClientSymbol> clientSymbols) throws IOException {
 		File publicDataDir = new File(rootDir, "site/docs/public/data");
 		File pagesDir = new File(publicDataDir, "pages");
 		pagesDir.mkdirs();
@@ -215,10 +237,11 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 		for (ClientSymbol s : clientSymbols) {
 			switch (s.status()) {
-				case "INTRODUCED" -> countAdded++;
-				case "REMOVED" -> countRemoved++;
-				case "DEPRECATED" -> countDeprecated++;
-				case "STABLE" -> countStable++;
+				case STATUS_INTRODUCED -> countAdded++;
+				case STATUS_REMOVED -> countRemoved++;
+				case STATUS_DEPRECATED -> countDeprecated++;
+				case STATUS_STABLE -> countStable++;
+				default -> { /* ignore unmapped */ }
 			}
 		}
 
@@ -250,18 +273,18 @@ public class DocSiteDataGenerator implements DataGenerator {
 			}
 		}
 
-		// 3. Write lightweight search index: symbol name/id/status only (~400KB instead of 5.3MB)
-		List<SearchIndexItem> searchIndex = new ArrayList<>(totalSymbols);
-		for (ClientSymbol s : clientSymbols) {
-			searchIndex.add(new SearchIndexItem(
-					s.id(),
-					s.name(),
-					s.descriptor(),
-					s.kind(),
-					s.status(),
-					s.scope()
-			));
-		}
+		// 3. Write lightweight search index via stream
+		List<SearchIndexItem> searchIndex = clientSymbols.stream()
+				.map(s -> new SearchIndexItem(
+						s.id(),
+						s.name(),
+						s.descriptor(),
+						s.kind(),
+						s.status(),
+						s.scope()
+				))
+				.toList();
+
 		File searchFile = new File(publicDataDir, "search-index.json");
 		try (FileWriter writer = new FileWriter(searchFile, StandardCharsets.UTF_8)) {
 			GSON.toJson(searchIndex, writer);
