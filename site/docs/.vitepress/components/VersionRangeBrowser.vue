@@ -47,6 +47,7 @@
 					<option value="INTRODUCED">Introduced in Range (New)</option>
 					<option value="REMOVED">Binary Breaking / Removed</option>
 					<option value="DEPRECATED">Deprecated in Range</option>
+					<option value="EXTENSION">Platform Extension (Folia / Scoped)</option>
 					<option value="STABLE">Stable / Unchanged Only</option>
 				</select>
 			</div>
@@ -71,6 +72,7 @@
 			<span class="badge badge-added">{{ displayedCountAdded.toLocaleString() }} Added</span>
 			<span class="badge badge-removed">{{ displayedCountRemoved.toLocaleString() }} Breaking</span>
 			<span class="badge badge-deprecated">{{ displayedCountDeprecated.toLocaleString() }} Deprecated</span>
+			<span class="badge badge-extension">{{ displayedCountExtension.toLocaleString() }} Extension</span>
 			<span class="badge badge-stable">{{ displayedCountStable.toLocaleString() }} Stable</span>
 		</div>
 
@@ -138,6 +140,7 @@ const totalPagesCount = ref(302);
 const countAdded = ref(169);
 const countRemoved = ref(238);
 const countDeprecated = ref(0);
+const countExtension = ref(0);
 const countStable = ref(14651);
 
 // Chunks cache
@@ -162,6 +165,7 @@ onMounted(async () => {
 				countAdded.value = meta.countAdded;
 				countRemoved.value = meta.countRemoved;
 				countDeprecated.value = meta.countDeprecated;
+				countExtension.value = meta.countExtension || 0;
 				countStable.value = meta.countStable;
 			}
 		})
@@ -273,12 +277,10 @@ function paginateSearchResults() {
 		statusText: getStatusText(item.status),
 		statusClass: getStatusClass(item.status),
 		scope: item.scope,
-		testLink: item.name.includes("Player")
-			? "https://github.com/westkevin12/MockBukkit/blob/master/src/test/java/org/mockmc/mockmc/entity/PlayerMockTest.java"
-			: null,
-		testMethod: item.name.includes("Player") ? "PlayerMockTest" : null,
-		testOutcome: "PASSED",
-		testScopeNote: item.name.includes("Player") ? "Verifies player state machine and entity simulation." : null,
+		testLink: null,
+		testMethod: null,
+		testOutcome: null,
+		testScopeNote: null,
 		migrationHint: null,
 	}));
 }
@@ -312,6 +314,13 @@ const displayedCountDeprecated = computed(() => {
 	return countDeprecated.value;
 });
 
+const displayedCountExtension = computed(() => {
+	if (isSearchingOrFiltering.value) {
+		return searchMatches.value.filter((s) => s.status === "EXTENSION").length;
+	}
+	return countExtension.value;
+});
+
 const displayedCountStable = computed(() => {
 	if (isSearchingOrFiltering.value) {
 		return searchMatches.value.filter((s) => s.status === "STABLE").length;
@@ -327,6 +336,8 @@ function getStatusClass(status) {
 			return "status-removed";
 		case "DEPRECATED":
 			return "status-deprecated";
+		case "EXTENSION":
+			return "status-extension";
 		default:
 			return "status-stable";
 	}
@@ -340,6 +351,8 @@ function getStatusText(status) {
 			return "Removed upstream in 26.3 (Binary Incompatible)";
 		case "DEPRECATED":
 			return "Deprecated in 26.3";
+		case "EXTENSION":
+			return "Platform Extension (Folia Threaded Regions)";
 		default:
 			return "Stable throughout 26.2 - 26.3";
 	}
@@ -431,6 +444,10 @@ function getStatusText(status) {
 	background: rgba(245, 158, 11, 0.15);
 	color: #f59e0b;
 }
+.badge-extension {
+	background: rgba(168, 85, 247, 0.15);
+	color: #a855f7;
+}
 .badge-stable {
 	background: rgba(59, 130, 246, 0.15);
 	color: #3b82f6;
@@ -499,6 +516,10 @@ function getStatusText(status) {
 .status-stable {
 	background: rgba(59, 130, 246, 0.15);
 	color: #3b82f6;
+}
+.status-extension {
+	background: rgba(168, 85, 247, 0.15);
+	color: #a855f7;
 }
 
 .symbol-meta {

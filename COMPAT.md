@@ -8,11 +8,11 @@
 
 | Category | Count |
 | --- | --- |
-| Binary Incompatible Changes | 238 |
+| Binary Incompatible Changes | 241 |
 | Source Incompatible Changes | 0 |
 | Compatible Additions | 169 |
-| Deprecations | 0 |
-| Total API Changes | 407 |
+| Deprecations | 1 |
+| Total API Changes | 411 |
 
 ## Binary Incompatible Changes
 
@@ -24,10 +24,12 @@ Breaking changes requiring recompilation or plugin code updates.
 
 ### `com.destroystokyo.paper.profile.PaperGameProfileRepository`
 
+- **Class MODIFIED**: `com.destroystokyo.paper.profile.PaperGameProfileRepository` (Superclass changed from com.mojang.authlib.yggdrasil.YggdrasilGameProfileRepository to com.mojang.authlib.services.MinecraftServicesProfileRepository in 26.3-178)
 - `<init>(Ljava/net/Proxy;Lcom/mojang/authlib/Environment;)V` (REMOVED)
 
 ### `com.destroystokyo.paper.profile.PaperMinecraftSessionService`
 
+- **Class MODIFIED**: `com.destroystokyo.paper.profile.PaperMinecraftSessionService` (Superclass changed from com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService to com.mojang.authlib.services.MinecraftServicesSessionService in 26.3-178)
 - `<init>(Lcom/mojang/authlib/yggdrasil/ServicesKeySet;Ljava/net/Proxy;Lcom/mojang/authlib/Environment;)V` (REMOVED)
 - `fetchProfile(Lcom/mojang/authlib/GameProfile;Z)Lcom/mojang/authlib/yggdrasil/ProfileResult;` (REMOVED)
 - `fetchProfile(Ljava/util/UUID;Z)Lcom/mojang/authlib/yggdrasil/ProfileResult;` (REMOVED)
@@ -58,12 +60,12 @@ Breaking changes requiring recompilation or plugin code updates.
 
 ### `io.papermc.paper.configuration.GlobalConfiguration`
 
-- `threadedRegions` (REMOVED)
+- `threadedRegions:Lio/papermc/paper/configuration/GlobalConfiguration$ThreadedRegions;` (REMOVED)
 
 ### `io.papermc.paper.configuration.GlobalConfiguration$Misc`
 
-- `fixFarEndTerrainGeneration` (REMOVED)
-- `sendFullPosForItemEntities` (REMOVED)
+- `fixFarEndTerrainGeneration:Z` (REMOVED)
+- `sendFullPosForItemEntities:Z` (REMOVED)
 
 ### `io.papermc.paper.configuration.GlobalConfiguration$ThreadedRegions`
 
@@ -102,10 +104,10 @@ Breaking changes requiring recompilation or plugin code updates.
 
 ### `io.papermc.paper.registry.data.PaperTrimMaterialRegistryEntry`
 
-- `assetPathOverrides` (REMOVED)
 - `assetPathOverrides()Ljava/util/Map;` (REMOVED)
-- `baseAssetPath` (REMOVED)
+- `assetPathOverrides:Ljava/util/Map;` (REMOVED)
 - `baseAssetPath()Ljava/lang/String;` (REMOVED)
+- `baseAssetPath:Lnet/minecraft/world/item/equipment/trim/MaterialAssetGroup$AssetInfo;` (REMOVED)
 
 ### `io.papermc.paper.registry.data.PaperTrimMaterialRegistryEntry$PaperBuilder`
 
@@ -234,6 +236,7 @@ Breaking changes requiring recompilation or plugin code updates.
 
 ### `io.papermc.paper.threadedregions.TickRegions`
 
+- **Class MODIFIED**: `io.papermc.paper.threadedregions.TickRegions` (No longer implements interface io.papermc.paper.threadedregions.ThreadedRegionizer$RegionCallbacks in 26.3-178)
 - `createNewData(Lio/papermc/paper/threadedregions/ThreadedRegionizer$ThreadedRegion;)Lio/papermc/paper/threadedregions/TickRegions$TickRegionData;` (REMOVED)
 - `createNewSectionData(III)Lio/papermc/paper/threadedregions/TickRegions$TickRegionSectionData;` (REMOVED)
 - `getScheduler()Lio/papermc/paper/threadedregions/TickRegionScheduler;` (REMOVED)
@@ -377,7 +380,7 @@ Breaking changes requiring recompilation or plugin code updates.
 ### `org.bukkit.craftbukkit.block.CraftBlockEntityState`
 
 - `<init>(Lorg/bukkit/World;Lnet/minecraft/world/level/block/entity/BlockEntity;)V` (REMOVED)
-- `DISABLE_SNAPSHOT` (REMOVED)
+- `DISABLE_SNAPSHOT:Ljava/lang/ThreadLocal;` (REMOVED)
 
 ### `org.bukkit.craftbukkit.block.CraftBlockStates$1`
 
@@ -601,7 +604,7 @@ Breaking changes requiring recompilation or plugin code updates.
 
 ### `org.bukkit.craftbukkit.entity.CraftPlayer`
 
-- `packetProcessor` (REMOVED)
+- `packetProcessor:Lnet/minecraft/network/PacketProcessor;` (REMOVED)
 - `schedulePacket(Lnet/minecraft/network/PacketListener;Lnet/minecraft/network/protocol/Packet;)V` (REMOVED)
 - `sendSignChange(Lorg/bukkit/Location;[Ljava/lang/String;)V` (REMOVED)
 - `sendSignChange(Lorg/bukkit/Location;[Ljava/lang/String;Lorg/bukkit/DyeColor;)V` (REMOVED)
@@ -618,7 +621,7 @@ Breaking changes requiring recompilation or plugin code updates.
 - `callPlayerBedEnterEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lcom/mojang/datafixers/util/Either;)Lcom/mojang/datafixers/util/Either;` (REMOVED)
 - `callPlayerBedFailEnterEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/entity/player/Player$BedSleepingProblem;)Lio/papermc/paper/event/player/PlayerBedFailEnterEvent;` (REMOVED)
 - `callPlayerSignOpenEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/entity/SignBlockEntity;ZLorg/bukkit/event/player/PlayerSignOpenEvent$Cause;)Z` (REMOVED)
-- `sourceBlockOverrideRT` (REMOVED)
+- `sourceBlockOverrideRT:Ljava/lang/ThreadLocal;` (REMOVED)
 
 ### `org.bukkit.craftbukkit.generator.CraftBiomeParameterPoint`
 
@@ -796,8 +799,8 @@ New API classes, methods, and default implementations added upstream.
 
 ### `io.papermc.paper.configuration.WorldConfiguration$Chunks`
 
-- `minChunkUnloadCount` (ADDED)
-- `minChunkUnloadFraction` (ADDED)
+- `minChunkUnloadCount:I` (ADDED)
+- `minChunkUnloadFraction:D` (ADDED)
 
 ### `io.papermc.paper.datacomponent.item.ItemComponentTypesBridgesImpl`
 
@@ -837,7 +840,7 @@ New API classes, methods, and default implementations added upstream.
 
 ### `io.papermc.paper.inventory.recipe.StackedContentsExtrasMap`
 
-- `predicateIngredients` (ADDED)
+- `predicateIngredients:Ljava/util/List;` (ADDED)
 
 ### `io.papermc.paper.persistence.PaperPersistentDataKey`
 
@@ -857,8 +860,8 @@ New API classes, methods, and default implementations added upstream.
 
 ### `io.papermc.paper.registry.data.PaperInstrumentRegistryEntry`
 
-- `durabilityDamage` (ADDED)
 - `durabilityDamage()I` (ADDED)
+- `durabilityDamage:I` (ADDED)
 
 ### `io.papermc.paper.registry.data.PaperInstrumentRegistryEntry$PaperBuilder`
 
@@ -866,8 +869,8 @@ New API classes, methods, and default implementations added upstream.
 
 ### `io.papermc.paper.registry.data.PaperTrimMaterialRegistryEntry`
 
-- `paletteId` (ADDED)
 - `paletteId()Lnet/kyori/adventure/key/Key;` (ADDED)
+- `paletteId:Lnet/minecraft/resources/Identifier;` (ADDED)
 
 ### `io.papermc.paper.registry.data.PaperTrimMaterialRegistryEntry$PaperBuilder`
 
@@ -903,7 +906,7 @@ New API classes, methods, and default implementations added upstream.
 
 ### `org.bukkit.craftbukkit.CraftStatistic`
 
-- `SLEEP_IN_STRAW_BED` (ADDED)
+- `SLEEP_IN_STRAW_BED:Lorg/bukkit/craftbukkit/CraftStatistic;` (ADDED)
 
 ### `org.bukkit.craftbukkit.CraftWorld`
 
@@ -1219,7 +1222,7 @@ New API classes, methods, and default implementations added upstream.
 - `callPlayerBedEnterEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/attribute/BedRule;Lcom/mojang/datafixers/util/Either;)Lcom/mojang/datafixers/util/Either;` (ADDED)
 - `callPlayerBedFailEnterEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/attribute/BedRule;Lnet/minecraft/world/entity/player/Player$BedSleepingProblem;)Lio/papermc/paper/event/player/PlayerBedFailEnterEvent;` (ADDED)
 - `callPlayerSignOpenEvent(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lnet/minecraft/world/level/block/entity/SignTextSlot;Lorg/bukkit/event/player/PlayerSignOpenEvent$Cause;)Z` (ADDED)
-- `sourceBlockOverride` (ADDED)
+- `sourceBlockOverride:Lnet/minecraft/core/BlockPos;` (ADDED)
 
 ### `org.bukkit.craftbukkit.generator.CustomChunkGenerator`
 
@@ -1301,4 +1304,12 @@ New API classes, methods, and default implementations added upstream.
 ### `org.bukkit.craftbukkit.potion.CraftPotionEffectTypeCategory$1`
 
 - **Class ADDED**: `org.bukkit.craftbukkit.potion.CraftPotionEffectTypeCategory$1` (Class added upstream in 26.3-178)
+
+## Newly Deprecated APIs
+
+APIs marked with `@Deprecated` upstream in `26.3-178`.
+
+### `org.bukkit.craftbukkit.potion.CraftPotionEffectTypeCategory`
+
+- **Class DEPRECATED**: `org.bukkit.craftbukkit.potion.CraftPotionEffectTypeCategory` (Class marked @Deprecated in 26.3-178)
 

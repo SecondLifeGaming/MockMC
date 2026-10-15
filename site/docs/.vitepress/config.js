@@ -52,7 +52,7 @@ export default defineConfig({
       provider: 'local'
     },
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/westkevin12/MockBukkit' }
+      { icon: 'github', link: 'https://github.com/SecondLifeGaming/MockMC' }
     ],
     footer: {
       message: 'Released under the MIT License.',

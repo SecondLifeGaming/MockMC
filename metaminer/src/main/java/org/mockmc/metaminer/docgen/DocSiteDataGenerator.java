@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Generates pre-chunked, indexed static JSON datasets for the VitePress API Explorer:
@@ -42,7 +44,24 @@ public class DocSiteDataGenerator implements DataGenerator {
 	private static final String STATUS_INTRODUCED = "INTRODUCED";
 	private static final String STATUS_REMOVED = "REMOVED";
 	private static final String STATUS_DEPRECATED = "DEPRECATED";
+	private static final String STATUS_EXTENSION = "EXTENSION";
 	private static final String STATUS_STABLE = "STABLE";
+
+	private static final String TEXT_INTRODUCED_26_3 = "Introduced in 26.3";
+	private static final String TEXT_STABLE_RANGE = "Stable throughout 26.2 - 26.3";
+	private static final String TEXT_FOLIA_EXTENSION = "Folia Threaded Regions Extension (26.2)";
+
+	private static final String CSS_ADDED = "status-added";
+	private static final String CSS_STABLE = "status-stable";
+	private static final String CSS_DEPRECATED = "status-deprecated";
+	private static final String CSS_EXTENSION = "status-extension";
+
+	private static final String SCOPE_FOLIA_EXTENSION = "Folia Extension (io.papermc.paper.threadedregions.*)";
+	private static final String ACCESS_PUBLIC = "PUBLIC";
+	private static final String ACCESS_PROTECTED = "PROTECTED";
+
+	private static final String PREFIX_REMAPPED_PAPER = "remapped-paper-";
+	private static final String PREFIX_PAPER_API = "paper-api-";
 
 	private final File rootDir;
 
@@ -53,32 +72,67 @@ public class DocSiteDataGenerator implements DataGenerator {
 	@Override
 	public void generateData() throws IOException {
 		File cacheDir = new File(rootDir, "jars/cache");
-		File primary = findLatestJar(cacheDir, "remapped-paper-", "paper-api-");
-		File fallback = findLatestJar(cacheDir, "remapped-folia-", "folia-api-");
+		File primaryPaper = findBestJar(cacheDir, "26.3", PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
+		File baselinePaper = findBestJar(cacheDir, "26.2", PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
+		File foliaJar = findBestJar(cacheDir, "26.2", "remapped-folia-", "folia-api-");
 
-		if (primary == null || fallback == null) {
-			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: missing target jars");
+		if (primaryPaper == null) {
+			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: missing primary paper jar");
 			return;
 		}
 
-		BytecodeManifestScanner.ScanConfiguration fallbackConfig = createScanConfig("folia", fallback.getName(), "extension", true, "Fallback extension");
-		BytecodeManifestScanner.ScanConfiguration primaryConfig = createScanConfig("paper", primary.getName(), "canonical", false, null);
+		BytecodeManifestScanner.ScanConfiguration primaryConfig = createScanConfig("paper", primaryPaper.getName(), "canonical", false, null);
+		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primaryPaper, primaryConfig);
 
-		ApiManifest fallbackManifest = BytecodeManifestScanner.scanJar(fallback, fallbackConfig);
-		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primary, primaryConfig);
-		PairwiseDiff diff = VersionDiffEngine.computeDiff(fallbackManifest, primaryManifest);
-
-		// Build change map by symbol
 		Map<String, PairwiseDiff.ChangeEntry> changeMap = new HashMap<>();
-		for (PairwiseDiff.ChangeEntry entry : diff.changes()) {
-			changeMap.put(entry.symbol(), entry);
+		PairwiseDiff paperDiff = null;
+
+		if (baselinePaper != null) {
+			BytecodeManifestScanner.ScanConfiguration baselineConfig = createScanConfig("paper", baselinePaper.getName(), "baseline", false, null);
+			ApiManifest baselineManifest = BytecodeManifestScanner.scanJar(baselinePaper, baselineConfig);
+			paperDiff = VersionDiffEngine.computeDiff(baselineManifest, primaryManifest);
+			for (PairwiseDiff.ChangeEntry entry : paperDiff.changes()) {
+				changeMap.put(entry.symbol(), entry);
+			}
 		}
 
 		List<ClientSymbol> clientSymbols = new ArrayList<>();
 		int idCounter = collectPrimarySymbols(primaryManifest, changeMap, clientSymbols, 1);
-		collectRemovedSymbols(diff, clientSymbols, idCounter);
 
-		writeExplorerDatasets(clientSymbols);
+		if (paperDiff != null) {
+			idCounter = collectRemovedSymbols(paperDiff, clientSymbols, idCounter);
+		}
+
+		// Process Folia extensions separately to identify platform-exclusive symbols
+		if (foliaJar != null) {
+			collectFoliaExtensions(foliaJar, primaryManifest, clientSymbols, idCounter);
+		}
+
+		// Sort symbols deterministically by name
+		clientSymbols.sort(Comparator.comparing(ClientSymbol::name));
+
+		// Reassign sequential IDs after sorting
+		List<ClientSymbol> reindexedSymbols = new ArrayList<>(clientSymbols.size());
+		for (int i = 0; i < clientSymbols.size(); i++) {
+			ClientSymbol s = clientSymbols.get(i);
+			reindexedSymbols.add(new ClientSymbol(
+					String.valueOf(i + 1),
+					s.kind(),
+					s.name(),
+					s.descriptor(),
+					s.status(),
+					s.statusText(),
+					s.statusClass(),
+					s.scope(),
+					s.testLink(),
+					s.testMethod(),
+					s.testOutcome(),
+					s.testScopeNote(),
+					s.migrationHint()
+			));
+		}
+
+		writeExplorerDatasets(reindexedSymbols);
 	}
 
 	private static BytecodeManifestScanner.ScanConfiguration createScanConfig(
@@ -118,33 +172,75 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String className = classEntry.getKey();
 			ApiManifest.ClassEntry clazz = classEntry.getValue();
 
-			PairwiseDiff.ChangeEntry classChange = changeMap.get(className);
-			String classStatus = classChange != null && classChange.category() == PairwiseDiff.ChangeCategory.ADDED ? STATUS_INTRODUCED : STATUS_STABLE;
-			String classStatusText = STATUS_INTRODUCED.equals(classStatus) ? "Introduced in 26.3" : "Stable throughout 26.2 - 26.3";
-			String classStatusClass = STATUS_INTRODUCED.equals(classStatus) ? "status-added" : "status-stable";
+			clientSymbols.add(createClassClientSymbol(String.valueOf(idCounter++), className, clazz, changeMap.get(className)));
+			idCounter = collectClassMethods(className, clazz, changeMap, clientSymbols, idCounter);
+			idCounter = collectClassFields(className, clazz, changeMap, clientSymbols, idCounter);
+		}
+		return idCounter;
+	}
 
-			clientSymbols.add(new ClientSymbol(
-					String.valueOf(idCounter++),
-					clazz.kind(),
-					className,
-					"L" + className.replace('.', '/') + ";",
-					classStatus,
-					classStatusText,
-					classStatusClass,
-					determineScope(className),
-					null, null, null, null, null
-			));
+	private ClientSymbol createClassClientSymbol(
+			String id,
+			String className,
+			ApiManifest.ClassEntry clazz,
+			PairwiseDiff.ChangeEntry classChange
+	) {
+		boolean isAdded = classChange != null && classChange.category() == PairwiseDiff.ChangeCategory.ADDED;
+		String classStatus = isAdded ? STATUS_INTRODUCED : STATUS_STABLE;
+		String classStatusText = isAdded ? TEXT_INTRODUCED_26_3 : TEXT_STABLE_RANGE;
+		String classStatusClass = isAdded ? CSS_ADDED : CSS_STABLE;
 
-			for (Map.Entry<String, ApiManifest.MethodEntry> methodEntry : clazz.methods().entrySet()) {
-				ApiManifest.MethodEntry m = methodEntry.getValue();
-				if (m.isBridge() || m.isSynthetic() || (!m.accessFlags().contains("PUBLIC") && !m.accessFlags().contains("PROTECTED"))) {
-					continue;
-				}
+		return new ClientSymbol(
+				id,
+				clazz.kind(),
+				className,
+				"L" + className.replace('.', '/') + ";",
+				classStatus,
+				classStatusText,
+				classStatusClass,
+				determineScope(className),
+				null, null, null, null, null
+		);
+	}
 
-				String fullSymbol = className + "#" + methodEntry.getKey();
-				PairwiseDiff.ChangeEntry methodChange = changeMap.get(fullSymbol);
-				clientSymbols.add(createMethodClientSymbol(String.valueOf(idCounter++), className, m, methodChange));
+	private int collectClassMethods(
+			String className,
+			ApiManifest.ClassEntry clazz,
+			Map<String, PairwiseDiff.ChangeEntry> changeMap,
+			List<ClientSymbol> clientSymbols,
+			int startId
+	) {
+		int idCounter = startId;
+		for (Map.Entry<String, ApiManifest.MethodEntry> methodEntry : clazz.methods().entrySet()) {
+			ApiManifest.MethodEntry m = methodEntry.getValue();
+			if (m.isBridge() || m.isSynthetic() || (!m.accessFlags().contains(ACCESS_PUBLIC) && !m.accessFlags().contains(ACCESS_PROTECTED))) {
+				continue;
 			}
+
+			String fullSymbol = className + "#" + methodEntry.getKey();
+			PairwiseDiff.ChangeEntry methodChange = changeMap.get(fullSymbol);
+			clientSymbols.add(createMethodClientSymbol(String.valueOf(idCounter++), className, m, methodChange));
+		}
+		return idCounter;
+	}
+
+	private int collectClassFields(
+			String className,
+			ApiManifest.ClassEntry clazz,
+			Map<String, PairwiseDiff.ChangeEntry> changeMap,
+			List<ClientSymbol> clientSymbols,
+			int startId
+	) {
+		int idCounter = startId;
+		for (Map.Entry<String, ApiManifest.FieldEntry> fieldEntry : clazz.fields().entrySet()) {
+			ApiManifest.FieldEntry f = fieldEntry.getValue();
+			if (f.isSynthetic() || (!f.accessFlags().contains(ACCESS_PUBLIC) && !f.accessFlags().contains(ACCESS_PROTECTED))) {
+				continue;
+			}
+
+			String fullSymbol = className + "#" + f.name() + ":" + f.descriptor();
+			PairwiseDiff.ChangeEntry fieldChange = changeMap.get(fullSymbol);
+			clientSymbols.add(createFieldClientSymbol(String.valueOf(idCounter++), className, f, fieldChange));
 		}
 		return idCounter;
 	}
@@ -156,31 +252,19 @@ public class DocSiteDataGenerator implements DataGenerator {
 			PairwiseDiff.ChangeEntry methodChange
 	) {
 		String mStatus = STATUS_STABLE;
-		String mStatusText = "Stable throughout 26.2 - 26.3";
-		String mStatusClass = "status-stable";
+		String mStatusText = TEXT_STABLE_RANGE;
+		String mStatusClass = CSS_STABLE;
 
 		if (methodChange != null) {
 			if (methodChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
 				mStatus = STATUS_INTRODUCED;
-				mStatusText = "Introduced in 26.3";
-				mStatusClass = "status-added";
+				mStatusText = TEXT_INTRODUCED_26_3;
+				mStatusClass = CSS_ADDED;
 			} else if (methodChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
 				mStatus = STATUS_DEPRECATED;
 				mStatusText = "Deprecated in 26.3";
-				mStatusClass = "status-deprecated";
+				mStatusClass = CSS_DEPRECATED;
 			}
-		}
-
-		String testLink = null;
-		String testMethod = null;
-		String testOutcome = null;
-		String testScopeNote = null;
-
-		if (className.contains("Player")) {
-			testLink = "https://github.com/westkevin12/MockBukkit/blob/master/src/test/java/org/mockmc/mockmc/entity/PlayerMockTest.java";
-			testMethod = "PlayerMockTest";
-			testOutcome = "PASSED";
-			testScopeNote = "Verifies player state machine and entity simulation.";
 		}
 
 		return new ClientSymbol(
@@ -192,15 +276,54 @@ public class DocSiteDataGenerator implements DataGenerator {
 				mStatusText,
 				mStatusClass,
 				determineScope(className),
-				testLink,
-				testMethod,
-				testOutcome,
-				testScopeNote,
+				null,
+				null,
+				null,
+				null,
 				null
 		);
 	}
 
-	private void collectRemovedSymbols(PairwiseDiff diff, List<ClientSymbol> clientSymbols, int startId) {
+	private ClientSymbol createFieldClientSymbol(
+			String id,
+			String className,
+			ApiManifest.FieldEntry f,
+			PairwiseDiff.ChangeEntry fieldChange
+	) {
+		String fStatus = STATUS_STABLE;
+		String fStatusText = TEXT_STABLE_RANGE;
+		String fStatusClass = CSS_STABLE;
+
+		if (fieldChange != null) {
+			if (fieldChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
+				fStatus = STATUS_INTRODUCED;
+				fStatusText = TEXT_INTRODUCED_26_3;
+				fStatusClass = CSS_ADDED;
+			} else if (fieldChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
+				fStatus = STATUS_DEPRECATED;
+				fStatusText = "Deprecated in 26.3";
+				fStatusClass = CSS_DEPRECATED;
+			}
+		}
+
+		return new ClientSymbol(
+				id,
+				"FIELD",
+				className + "#" + f.name(),
+				f.descriptor(),
+				fStatus,
+				fStatusText,
+				fStatusClass,
+				determineScope(className),
+				null,
+				null,
+				null,
+				null,
+				null
+		);
+	}
+
+	private int collectRemovedSymbols(PairwiseDiff diff, List<ClientSymbol> clientSymbols, int startId) {
 		int idCounter = startId;
 		for (PairwiseDiff.ChangeEntry change : diff.changes()) {
 			if (change.category() == PairwiseDiff.ChangeCategory.REMOVED) {
@@ -220,6 +343,55 @@ public class DocSiteDataGenerator implements DataGenerator {
 				));
 			}
 		}
+		return idCounter;
+	}
+
+	private void collectFoliaExtensions(
+			File foliaJar,
+			ApiManifest primaryManifest,
+			List<ClientSymbol> clientSymbols,
+			int startId
+	) throws IOException {
+		BytecodeManifestScanner.ScanConfiguration foliaConfig = createScanConfig("folia", foliaJar.getName(), "extension", true, "Folia threaded regions extension");
+		ApiManifest foliaManifest = BytecodeManifestScanner.scanJar(foliaJar, foliaConfig);
+
+		int idCounter = startId;
+		for (Map.Entry<String, ApiManifest.ClassEntry> entry : foliaManifest.classes().entrySet()) {
+			String className = entry.getKey();
+			// Only index Folia-exclusive extension symbols (e.g. io.papermc.paper.threadedregions.*)
+			if (className.startsWith("io.papermc.paper.threadedregions") && !primaryManifest.classes().containsKey(className)) {
+				ApiManifest.ClassEntry clazz = entry.getValue();
+				clientSymbols.add(new ClientSymbol(
+						String.valueOf(idCounter++),
+						clazz.kind(),
+						className,
+						"L" + className.replace('.', '/') + ";",
+						STATUS_EXTENSION,
+						TEXT_FOLIA_EXTENSION,
+						CSS_EXTENSION,
+						SCOPE_FOLIA_EXTENSION,
+						null, null, null, null, null
+				));
+
+				for (Map.Entry<String, ApiManifest.MethodEntry> methodEntry : clazz.methods().entrySet()) {
+					ApiManifest.MethodEntry m = methodEntry.getValue();
+					if (m.isBridge() || m.isSynthetic() || (!m.accessFlags().contains(ACCESS_PUBLIC) && !m.accessFlags().contains(ACCESS_PROTECTED))) {
+						continue;
+					}
+					clientSymbols.add(new ClientSymbol(
+							String.valueOf(idCounter++),
+							"METHOD",
+							className + "#" + m.name(),
+							m.descriptor(),
+							STATUS_EXTENSION,
+							TEXT_FOLIA_EXTENSION,
+							CSS_EXTENSION,
+							SCOPE_FOLIA_EXTENSION,
+							null, null, null, null, null
+					));
+				}
+			}
+		}
 	}
 
 	private void writeExplorerDatasets(List<ClientSymbol> clientSymbols) throws IOException {
@@ -233,6 +405,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 		int countAdded = 0;
 		int countRemoved = 0;
 		int countDeprecated = 0;
+		int countExtension = 0;
 		int countStable = 0;
 
 		for (ClientSymbol s : clientSymbols) {
@@ -240,6 +413,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 				case STATUS_INTRODUCED -> countAdded++;
 				case STATUS_REMOVED -> countRemoved++;
 				case STATUS_DEPRECATED -> countDeprecated++;
+				case STATUS_EXTENSION -> countExtension++;
 				case STATUS_STABLE -> countStable++;
 				default -> { /* ignore unmapped */ }
 			}
@@ -253,6 +427,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 				countAdded,
 				countRemoved,
 				countDeprecated,
+				countExtension,
 				countStable
 		);
 
@@ -302,7 +477,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 	private static String determineScope(String name) {
 		if (name.startsWith("io.papermc.paper.threadedregions")) {
-			return "Scoped Extension (io.papermc.paper.threadedregions.*)";
+			return SCOPE_FOLIA_EXTENSION;
 		}
 		if (name.startsWith("io.papermc.paper.datacomponent")) {
 			return "Canonical Paper Data Component";
@@ -318,7 +493,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 	private static String extractVersion(String jarName) {
 		String name = jarName.replace(".jar", "");
-		for (String prefix : List.of("remapped-paper-", "remapped-folia-", "paper-api-", "folia-api-")) {
+		for (String prefix : List.of(PREFIX_REMAPPED_PAPER, "remapped-folia-", PREFIX_PAPER_API, "folia-api-")) {
 			if (name.startsWith(prefix)) {
 				return name.substring(prefix.length());
 			}
@@ -326,10 +501,36 @@ public class DocSiteDataGenerator implements DataGenerator {
 		return name;
 	}
 
-	private static File findLatestJar(File dir, String... prefixes) {
+	private static final Pattern BUILD_PATTERN = Pattern.compile("-(\\d+)\\.jar$");
+
+	private static File findBestJar(File dir, String targetVersion, String... prefixes) {
 		List<File> found = new ArrayList<>();
 		collectJars(dir, prefixes, found);
-		return found.stream().max(Comparator.comparing(File::getPath)).orElse(null);
+
+		// Filter by target version if present in filename
+		List<File> matchingVersion = found.stream()
+				.filter(f -> f.getName().contains("-" + targetVersion + "-") || f.getName().contains("-" + targetVersion + "."))
+				.toList();
+
+		List<File> candidates = matchingVersion.isEmpty() ? found : matchingVersion;
+		if (candidates.isEmpty()) {
+			return null;
+		}
+
+		// Sort by integer build number extracted from filename
+		return candidates.stream().max(Comparator.comparingInt(DocSiteDataGenerator::extractBuildNumber)).orElse(null);
+	}
+
+	private static int extractBuildNumber(File file) {
+		Matcher matcher = BUILD_PATTERN.matcher(file.getName());
+		if (matcher.find()) {
+			try {
+				return Integer.parseInt(matcher.group(1));
+			} catch (NumberFormatException _) {
+				return 0;
+			}
+		}
+		return 0;
 	}
 
 	private static void collectJars(File dir, String[] prefixes, List<File> found) {
@@ -356,6 +557,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 			int countAdded,
 			int countRemoved,
 			int countDeprecated,
+			int countExtension,
 			int countStable
 	) {}
 
