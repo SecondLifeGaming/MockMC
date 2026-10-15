@@ -33,7 +33,8 @@ public class StandaloneRunner
 				new org.mockmc.metaminer.world.WorldConfigurationGenerator(testFolder),
 				new org.mockmc.metaminer.tests.ItemStackTestDataGenerator(testFolder),
 				new CoverageReportGenerator(dataFolder),
-				new CompatReportGenerator(dataFolder)
+				new CompatReportGenerator(dataFolder),
+				new org.mockmc.metaminer.docgen.DocSiteDataGenerator(dataFolder)
 		);
 
 		for (DataGenerator generator : generators)

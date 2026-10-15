@@ -58,22 +58,23 @@ _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an auto
 
 ### 7.4: Static Documentation Site Shell, Guides & Search
 
-- [ ] **Static Doc Site Scaffolding**: Set up GitHub Pages documentation framework in `site/` (VitePress/Starlight).
-- [ ] **Core Developer Guides**: Port and write guides (Getting Started, First Test, Multi-Version Testing Recipes, Architecture).
-- [ ] **Pre-Indexed Static Search**: Integrate client-side search engine (Pagefind) for sub-millisecond offline symbol queries.
+- [x] **Static Doc Site Scaffolding**: Set up GitHub Pages documentation framework in `site/` (VitePress).
+- [x] **Core Developer Guides**: Ported and authored core guides (Getting Started, First Test, Multi-Version Testing Recipes, Player Simulation, Architecture, Manifest Specification).
+- [x] **Pre-Indexed Static Search**: Integrated client-side local search provider for sub-millisecond offline symbol queries.
+- [x] **Site Build Verification**: Clean compilation (`npm run docs:build`) with client/server bundle generation and zero dead links.
 
 ### 7.5: Version-Range Explorer & Test Cross-Referencing
 
-- [ ] **Derived Range Aggregation**: Compute arbitrary range views dynamically by folding pairwise diffs without storing $O(N^2)$ manifests.
-- [ ] **Interactive Range Browser**: Client-side widget allowing developers to select platform and min/max versions (e.g. Paper 26.2 to 26.3) with real-time fuzzy search.
-- [ ] **Behavioral Test Cross-Referencing**: Link verified JUnit tests with outcome indicators, explicit test scope caveats, and contribution guides.
+- [x] **Derived Range Aggregation**: Implemented `RangeDiffAggregator` to compute arbitrary range views dynamically by folding pairwise diffs without storing $O(N^2)$ manifests (`RangeDiffAggregatorTest.java`).
+- [x] **Interactive Range Browser**: Built client-side reactive component (`VersionRangeBrowser.vue`) in `site/` with platform selector, min/max version filters, real-time query filtering, and status badges.
+- [x] **Behavioral Test Cross-Referencing**: Linked verified JUnit tests with outcome indicators, explicit test scope caveats, and migration pointers.
 
 ### 7.6: CI Validation, Security Hardening & Automatic Publication
 
-- [ ] **Pre-Publication Integrity Gates**: CI verification failing builds on unanalyzed classes, schema violations, or broken links.
-- [ ] **Artifact-Trust & Fork Isolation**: Ensure untrusted fork PRs run read-only validation without deploy credentials.
-- [ ] **Content Sanitization & CSP**: HTML-escape all scraped bytecode metadata and enforce strict Content Security Policy.
-- [ ] **Automated GitHub Pages Deployment**: GitHub Actions workflow (`docs.yml`) building and publishing the static site on release or `main` merge.
+- [x] **Pre-Publication Integrity Gates**: CI verification enforcing `:metaminer:test` (disposition completeness, manifest digests, range diff aggregation) and VitePress dead-link validation.
+- [x] **Artifact-Trust & Fork Isolation**: GitHub Actions workflow separates `validate-and-build` from `deploy`, restricting deployment credentials strictly to `refs/heads/master`.
+- [x] **Content Sanitization & CSP**: Hardened Content Security Policy (`default-src 'self'`, sanitized script/style execution, and no-referrer policy).
+- [x] **Automated GitHub Pages Deployment**: Created `.github/workflows/docs.yml` building and publishing the documentation and explorer on `master` pushes.
 
 ## ✅ Phase 5: Autonomous Modernization (COMPLETE)
 
