@@ -6,11 +6,12 @@
     <a href="https://secondlifegaming.github.io/MockMC/explorer/">
         <img alt="API Explorer" src="https://img.shields.io/badge/API%20Explorer-Paper%20%26%20Folia-brightgreen?style=flat" />
     </a>
-    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
-        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
-    </a>
     <a href="https://github.com/SecondLifeGaming/MockMC/releases">
         <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
+    </a>
+    <br />
+    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
+        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells">
