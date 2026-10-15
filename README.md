@@ -1,5 +1,11 @@
 <p align="center">
     <!-- Badges -->
+    <a href="https://secondlifegaming.github.io/MockMC/">
+        <img alt="Documentation" src="https://img.shields.io/badge/docs-GitHub%20Pages-blue?style=flat&logo=github" />
+    </a>
+    <a href="https://secondlifegaming.github.io/MockMC/explorer/">
+        <img alt="API Explorer" src="https://img.shields.io/badge/API%20Explorer-Paper%20%26%20Folia-brightgreen?style=flat" />
+    </a>
     <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
         <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
     </a>
@@ -24,6 +30,17 @@
 MockMC is an automated, type-safe testing framework for the modern Minecraft ecosystem, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project.
 
 While MockBukkit is built exclusively for the Bukkit/Paper backend with handcrafted in-game simulation, MockMC expands testing across **the entire server and proxy stack — Paper, Folia (regional multithreading), Velocity, and Waterfall** — powered by an automated bytecode generation engine that provides 100% compile-safe method coverage.
+
+---
+
+## 📚 Documentation & Developer Reference
+
+Explore our interactive guides and API compatibility explorer:
+
+- 🌐 **[Developer Documentation Hub](https://secondlifegaming.github.io/MockMC/)**: Comprehensive setup guides, testing recipes, and architecture documentation.
+- 🔍 **[Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/)**: Instant version-range diffs (Added, Breaking, Deprecated) across Paper and Folia releases covering 15,000+ API symbols.
+- 🚀 **[Multi-Version Testing Guide](https://secondlifegaming.github.io/MockMC/guides/multi-version-testing)**: How to structure tests across Paper, Folia, Velocity, and Waterfall in a single test suite.
+- 🧪 **[Your First MockMC Test](https://secondlifegaming.github.io/MockMC/guides/first-test)**: Step-by-step tutorial on bootstrapping server mocks and testing plugin events.
 
 ---
 
