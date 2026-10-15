@@ -60,6 +60,13 @@ jobs:
           name: site-doc-data
           path: site/docs/public/data/
 
+      - name: Validate Generated Documentation Data
+        run: |
+          test -s site/docs/public/data/explorer-meta.json || { echo "explorer-meta.json is missing or empty!"; exit 1; }
+          test -s site/docs/public/data/search-index.json || { echo "search-index.json is missing or empty!"; exit 1; }
+          test -d site/docs/public/data/pages || { echo "pages directory missing!"; exit 1; }
+          [ $(ls -1 site/docs/public/data/pages/page-*.json | wc -l) -gt 0 ] || { echo "no page chunks found!"; exit 1; }
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -74,6 +81,13 @@ jobs:
       - name: Build VitePress Site (with dead-link checks)
         working-directory: site
         run: npm run docs:build
+
+      - name: Upload PR Site Preview Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitepress-preview-site
+          path: site/docs/.vitepress/dist
+          retention-days: 5
 
       - name: Upload GitHub Pages Artifact
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'

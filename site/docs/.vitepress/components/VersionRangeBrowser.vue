@@ -64,6 +64,10 @@
 			</div>
 		</div>
 
+		<div v-if="selectedPlatform !== 'paper'" class="unsupported-banner">
+			<strong>Platform Notice:</strong> The active manifest and range-diff validation currently indexes canonical <strong>Paper 26.2 → 26.3</strong> with Folia 26.2 regional extensions. Standalone multi-version pairwise diffing for {{ selectedPlatform.toUpperCase() }} is under active indexing.
+		</div>
+
 		<div class="summary-bar">
 			<span class="badge badge-info">
 				Showing {{ displayedTotal.toLocaleString() }}
@@ -134,14 +138,14 @@ const loadingPage = ref(false);
 
 const availableVersions = ["26.2", "26.3"];
 
-// Metadata
-const totalSymbolsCount = ref(15058);
-const totalPagesCount = ref(302);
-const countAdded = ref(169);
-const countRemoved = ref(238);
+// Metadata initialized from canonical explorer-meta.json (16,180 symbols)
+const totalSymbolsCount = ref(16180);
+const totalPagesCount = ref(324);
+const countAdded = ref(166);
+const countRemoved = ref(163);
 const countDeprecated = ref(0);
-const countExtension = ref(0);
-const countStable = ref(14651);
+const countExtension = ref(334);
+const countStable = ref(15517);
 
 // Chunks cache
 const pageCache = new Map();
@@ -374,6 +378,15 @@ function getStatusText(status) {
 	border-radius: 8px;
 	margin-bottom: 1rem;
 }
+.unsupported-banner {
+	margin-bottom: 1rem;
+	padding: 0.75rem 1rem;
+	background: rgba(245, 158, 11, 0.12);
+	border-left: 4px solid #f59e0b;
+	border-radius: 4px;
+	font-size: 0.88rem;
+	color: var(--vp-c-text-1);
+}
 .control-group {
 	display: flex;
 	flex-direction: column;
@@ -433,24 +446,24 @@ function getStatusText(status) {
 	color: var(--vp-c-text-1);
 }
 .badge-added {
-	background: rgba(16, 185, 129, 0.15);
-	color: #10b981;
+	background: var(--vp-c-green-soft, rgba(16, 185, 129, 0.16));
+	color: var(--vp-c-green-1, #059669);
 }
 .badge-removed {
-	background: rgba(239, 68, 68, 0.15);
-	color: #ef4444;
+	background: var(--vp-c-red-soft, rgba(239, 68, 68, 0.16));
+	color: var(--vp-c-red-1, #dc2626);
 }
 .badge-deprecated {
-	background: rgba(245, 158, 11, 0.15);
-	color: #f59e0b;
+	background: var(--vp-c-yellow-soft, rgba(245, 158, 11, 0.16));
+	color: var(--vp-c-yellow-1, #d97706);
 }
 .badge-extension {
-	background: rgba(168, 85, 247, 0.15);
-	color: #a855f7;
+	background: var(--vp-c-purple-soft, rgba(168, 85, 247, 0.16));
+	color: var(--vp-c-purple-1, #9333ea);
 }
 .badge-stable {
-	background: rgba(59, 130, 246, 0.15);
-	color: #3b82f6;
+	background: var(--vp-c-blue-soft, rgba(59, 130, 246, 0.16));
+	color: var(--vp-c-blue-1, #2563eb);
 }
 
 .symbol-list {
@@ -465,8 +478,7 @@ function getStatusText(status) {
 	border: 1px solid var(--vp-c-divider);
 	border-radius: 8px;
 	background: var(--vp-c-bg);
-	overflow-wrap: break-word;
-	word-break: break-word;
+	overflow-wrap: anywhere;
 	max-width: 100%;
 	box-sizing: border-box;
 }
@@ -489,8 +501,7 @@ function getStatusText(status) {
 .symbol-name {
 	font-weight: 600;
 	font-size: 0.95rem;
-	overflow-wrap: break-word;
-	word-break: break-all;
+	overflow-wrap: anywhere;
 	max-width: 100%;
 }
 .status-badge {
@@ -502,24 +513,24 @@ function getStatusText(status) {
 	white-space: nowrap;
 }
 .status-added {
-	background: rgba(16, 185, 129, 0.15);
-	color: #10b981;
+	background: var(--vp-c-green-soft, rgba(16, 185, 129, 0.16));
+	color: var(--vp-c-green-1, #059669);
 }
 .status-removed {
-	background: rgba(239, 68, 68, 0.15);
-	color: #ef4444;
+	background: var(--vp-c-red-soft, rgba(239, 68, 68, 0.16));
+	color: var(--vp-c-red-1, #dc2626);
 }
 .status-deprecated {
-	background: rgba(245, 158, 11, 0.15);
-	color: #f59e0b;
+	background: var(--vp-c-yellow-soft, rgba(245, 158, 11, 0.16));
+	color: var(--vp-c-yellow-1, #d97706);
 }
 .status-stable {
-	background: rgba(59, 130, 246, 0.15);
-	color: #3b82f6;
+	background: var(--vp-c-blue-soft, rgba(59, 130, 246, 0.16));
+	color: var(--vp-c-blue-1, #2563eb);
 }
 .status-extension {
-	background: rgba(168, 85, 247, 0.15);
-	color: #a855f7;
+	background: var(--vp-c-purple-soft, rgba(168, 85, 247, 0.16));
+	color: var(--vp-c-purple-1, #9333ea);
 }
 
 .symbol-meta {
@@ -538,24 +549,23 @@ function getStatusText(status) {
 	flex-direction: column;
 	gap: 0.25rem;
 	color: var(--vp-c-text-2);
-	overflow-wrap: break-word;
-	word-break: break-word;
+	overflow-wrap: anywhere;
 }
 .test-info a {
 	color: var(--vp-c-brand-1);
 	text-decoration: underline;
-	word-break: break-all;
+	overflow-wrap: anywhere;
 }
 .scope-note {
 	display: block;
 	font-style: italic;
 	font-size: 0.8rem;
 	color: var(--vp-c-text-3);
-	overflow-wrap: break-word;
+	overflow-wrap: anywhere;
 }
 .migration-hint {
-	color: #f59e0b;
-	word-break: break-all;
+	color: var(--vp-c-yellow-1, #d97706);
+	overflow-wrap: anywhere;
 }
 
 .pagination {

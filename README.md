@@ -39,7 +39,7 @@ While MockBukkit is built exclusively for the Bukkit/Paper backend with handcraf
 Explore our interactive guides and API compatibility explorer:
 
 - 🌐 **[Developer Documentation Hub](https://secondlifegaming.github.io/MockMC/)**: Comprehensive setup guides, testing recipes, and architecture documentation.
-- 🔍 **[Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/)**: Instant version-range diffs (Added, Breaking, Deprecated) across Paper and Folia releases covering 15,000+ API symbols.
+- 🔍 **[Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/)**: Instant version-range diffs (Added, Breaking, Deprecated) across validated Paper and Folia releases (26.2 → 26.3) covering 16,000+ API symbols.
 - 🚀 **[Multi-Version Testing Guide](https://secondlifegaming.github.io/MockMC/guides/multi-version-testing)**: How to structure tests across Paper, Folia, Velocity, and Waterfall in a single test suite.
 - 🧪 **[Your First MockMC Test](https://secondlifegaming.github.io/MockMC/guides/first-test)**: Step-by-step tutorial on bootstrapping server mocks and testing plugin events.
 
@@ -74,7 +74,7 @@ MockMC does not dynamically pull arbitrary snapshots; it operates on an **explic
 
 | Platform      | Pinned Target Build          | Role in MockMC          | Scope                                                            |
 | ------------- | ---------------------------- | ----------------------- | ---------------------------------------------------------------- |
-| **Paper**     | `paper-26.3-157`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
+| **Paper**     | `paper-26.3-178`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
 | **Folia**     | `folia-26.2-7`               | **Platform Extension**  | Region schedulers (`io.papermc.paper.threadedregions.*`)         |
 | **Velocity**  | `velocity-4.2.1-SNAPSHOT-36` | **Proxy Extension**     | Velocity API (`com.velocitypowered.api.*`)                       |
 | **Waterfall** | `waterfall-1.21-615`         | **Proxy Extension**     | BungeeCord/Waterfall API (`net.md_5.bungee.*`)                   |
@@ -111,7 +111,7 @@ repositories {
 dependencies {
     // Pinned release line
     testImplementation("io.github.secondlifegaming:mockmc:0.0.5")
-    testImplementation("io.papermc.paper:paper-api:26.3.build.157-beta")
+    testImplementation("io.papermc.paper:paper-api:26.3.build.178-stable")
 }
 ```
 
@@ -141,10 +141,11 @@ Add the Paper repository mapping and the library dependencies to your plugin’s
     <dependency>
         <groupId>io.papermc.paper</groupId>
         <artifactId>paper-api</artifactId>
-        <version>26.3.build.157-beta</version>
+        <version>26.3.build.178-stable</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+```
 ```
 
 </details>

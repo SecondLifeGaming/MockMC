@@ -50,7 +50,7 @@ All exclusions are maintained centrally in [`ClassExclusions.java`](../metaminer
 
 Coverage reports are produced against the explicit set of pinned JARs selected by `jars/manifests/versions.json` (validated for the 26.2–26.3 range only):
 
-- `jars/paper-26.3-157.jar`
+- `jars/paper-26.3-178.jar`
 - `jars/folia-26.2-7.jar`
 - `jars/velocity-4.2.1-SNAPSHOT-36.jar`
 - `jars/waterfall-1.21-615.jar`
