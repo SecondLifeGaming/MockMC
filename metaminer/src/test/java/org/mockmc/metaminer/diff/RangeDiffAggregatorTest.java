@@ -71,4 +71,46 @@ class RangeDiffAggregatorTest {
 				.orElseThrow();
 		assertEquals(RangeDiffAggregator.RangeLifecycleStatus.TRANSIENT_IN_RANGE, netTransient.status());
 	}
+
+	@Test
+	void testRangeAggregationReintroducedSymbol() {
+		// Delta(v1 -> v2): method removed
+		PairwiseDiff.ChangeEntry removedInV2 = new PairwiseDiff.ChangeEntry(
+				"org.bukkit.entity.Player#restoredMethod()V",
+				PairwiseDiff.SymbolType.METHOD,
+				PairwiseDiff.ChangeCategory.REMOVED,
+				PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+				null, null
+		);
+		PairwiseDiff diff1 = new PairwiseDiff(
+				PairwiseDiff.CURRENT_SCHEMA, PairwiseDiff.CURRENT_SCHEMA_VERSION,
+				"paper", "26.1", "26.2",
+				new PairwiseDiff.Summary(1, 0, 0, 0, 1),
+				List.of(removedInV2)
+		);
+
+		// Delta(v2 -> v3): method reintroduced
+		PairwiseDiff.ChangeEntry reintroducedInV3 = new PairwiseDiff.ChangeEntry(
+				"org.bukkit.entity.Player#restoredMethod()V",
+				PairwiseDiff.SymbolType.METHOD,
+				PairwiseDiff.ChangeCategory.ADDED,
+				PairwiseDiff.CompatibilityImpact.COMPATIBLE_ADDITION,
+				null, null
+		);
+		PairwiseDiff diff2 = new PairwiseDiff(
+				PairwiseDiff.CURRENT_SCHEMA, PairwiseDiff.CURRENT_SCHEMA_VERSION,
+				"paper", "26.2", "26.3",
+				new PairwiseDiff.Summary(0, 0, 1, 0, 1),
+				List.of(reintroducedInV3)
+		);
+
+		RangeDiffAggregator.RangeSummary summary = RangeDiffAggregator.aggregateRange("paper", List.of(diff1, diff2));
+		assertNotNull(summary);
+		assertEquals(1, summary.netChanges().size());
+
+		RangeDiffAggregator.RangeChangeEntry reintroduced = summary.netChanges().get(0);
+		assertEquals(RangeDiffAggregator.RangeLifecycleStatus.REINTRODUCED_IN_RANGE, reintroduced.status());
+		assertEquals("26.2", reintroduced.removalVersion());
+		assertEquals("26.3", reintroduced.introductionVersion());
+	}
 }

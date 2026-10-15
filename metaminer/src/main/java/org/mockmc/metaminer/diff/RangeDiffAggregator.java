@@ -45,6 +45,7 @@ public final class RangeDiffAggregator {
 		INTRODUCED_IN_RANGE,
 		REMOVED_IN_RANGE,
 		TRANSIENT_IN_RANGE,
+		REINTRODUCED_IN_RANGE,
 		DEPRECATED_IN_RANGE
 	}
 
@@ -56,7 +57,7 @@ public final class RangeDiffAggregator {
 		String minVersion = chronologicalDiffs.get(0).fromVersion();
 		String maxVersion = chronologicalDiffs.get(chronologicalDiffs.size() - 1).toVersion();
 
-		// Track state of each symbol across versions: symbol -> SymbolTracker
+		// Track sequence of lifecycle events for each symbol across versions
 		Map<String, SymbolTracker> trackers = new HashMap<>();
 
 		for (PairwiseDiff diff : chronologicalDiffs) {
@@ -64,23 +65,7 @@ public final class RangeDiffAggregator {
 
 			for (PairwiseDiff.ChangeEntry change : diff.changes()) {
 				SymbolTracker tracker = trackers.computeIfAbsent(change.symbol(), _ -> new SymbolTracker(change.symbol(), change.type()));
-
-				switch (change.category()) {
-					case ADDED -> {
-						tracker.introducedAt = stepTo;
-						tracker.presentAtEnd = true;
-						tracker.impact = change.compatibilityImpact();
-					}
-					case REMOVED -> {
-						tracker.removedAt = stepTo;
-						tracker.presentAtEnd = false;
-						tracker.impact = change.compatibilityImpact();
-					}
-					case DEPRECATED -> {
-						tracker.deprecatedAt = stepTo;
-					}
-					case MODIFIED -> {}
-				}
+				tracker.events.add(new SymbolEvent(change.category(), stepTo, change.compatibilityImpact()));
 			}
 		}
 
@@ -91,51 +76,17 @@ public final class RangeDiffAggregator {
 		int deprecationsCount = 0;
 
 		for (SymbolTracker tracker : trackers.values()) {
-			if (tracker.introducedAt != null && tracker.removedAt != null) {
-				// Added then removed within range
-				transientCount++;
-				netChanges.add(new RangeChangeEntry(
-						tracker.symbol,
-						tracker.type,
-						RangeLifecycleStatus.TRANSIENT_IN_RANGE,
-						PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
-						tracker.introducedAt,
-						tracker.removedAt,
-						"Introduced in " + tracker.introducedAt + " and removed in " + tracker.removedAt
-				));
-			} else if (tracker.introducedAt != null && tracker.presentAtEnd) {
-				netAdded++;
-				netChanges.add(new RangeChangeEntry(
-						tracker.symbol,
-						tracker.type,
-						RangeLifecycleStatus.INTRODUCED_IN_RANGE,
-						tracker.impact != null ? tracker.impact : PairwiseDiff.CompatibilityImpact.COMPATIBLE_ADDITION,
-						tracker.introducedAt,
-						null,
-						"Introduced in " + tracker.introducedAt
-				));
-			} else if (tracker.removedAt != null && !tracker.presentAtEnd) {
-				netRemoved++;
-				netChanges.add(new RangeChangeEntry(
-						tracker.symbol,
-						tracker.type,
-						RangeLifecycleStatus.REMOVED_IN_RANGE,
-						PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
-						null,
-						tracker.removedAt,
-						"Removed in " + tracker.removedAt
-				));
-			} else if (tracker.deprecatedAt != null) {
-				deprecationsCount++;
-				netChanges.add(new RangeChangeEntry(
-						tracker.symbol,
-						tracker.type,
-						RangeLifecycleStatus.DEPRECATED_IN_RANGE,
-						PairwiseDiff.CompatibilityImpact.NON_BREAKING_DEPRECATION,
-						null,
-						null,
-						"Deprecated in " + tracker.deprecatedAt
-				));
+			RangeChangeEntry entry = evaluateSymbolLifecycle(tracker);
+			if (entry == null) {
+				continue;
+			}
+			netChanges.add(entry);
+			switch (entry.status()) {
+				case INTRODUCED_IN_RANGE -> netAdded++;
+				case REMOVED_IN_RANGE -> netRemoved++;
+				case TRANSIENT_IN_RANGE -> transientCount++;
+				case DEPRECATED_IN_RANGE -> deprecationsCount++;
+				case REINTRODUCED_IN_RANGE -> { /* Reintroduced symbols are captured in netChanges list */ }
 			}
 		}
 
@@ -153,14 +104,102 @@ public final class RangeDiffAggregator {
 		);
 	}
 
+	private static RangeChangeEntry evaluateSymbolLifecycle(SymbolTracker tracker) {
+		List<SymbolEvent> events = tracker.events;
+		if (events.isEmpty()) {
+			return null;
+		}
+
+		List<SymbolEvent> lifeEvents = events.stream()
+				.filter(e -> e.category == PairwiseDiff.ChangeCategory.ADDED || e.category == PairwiseDiff.ChangeCategory.REMOVED)
+				.toList();
+
+		if (!lifeEvents.isEmpty()) {
+			return buildLifecycleChange(tracker, lifeEvents);
+		}
+
+		String deprecatedAt = findDeprecatedAt(events);
+		if (deprecatedAt != null) {
+			return new RangeChangeEntry(
+					tracker.symbol,
+					tracker.type,
+					RangeLifecycleStatus.DEPRECATED_IN_RANGE,
+					PairwiseDiff.CompatibilityImpact.NON_BREAKING_DEPRECATION,
+					null,
+					null,
+					"Deprecated in " + deprecatedAt
+			);
+		}
+		return null;
+	}
+
+	private static RangeChangeEntry buildLifecycleChange(SymbolTracker tracker, List<SymbolEvent> lifeEvents) {
+		SymbolEvent first = lifeEvents.get(0);
+		SymbolEvent last = lifeEvents.get(lifeEvents.size() - 1);
+
+		if (first.category == PairwiseDiff.ChangeCategory.REMOVED && last.category == PairwiseDiff.ChangeCategory.ADDED) {
+			return new RangeChangeEntry(
+					tracker.symbol,
+					tracker.type,
+					RangeLifecycleStatus.REINTRODUCED_IN_RANGE,
+					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+					last.version,
+					first.version,
+					"Removed in " + first.version + " and reintroduced in " + last.version
+			);
+		}
+		if (first.category == PairwiseDiff.ChangeCategory.ADDED && last.category == PairwiseDiff.ChangeCategory.REMOVED) {
+			return new RangeChangeEntry(
+					tracker.symbol,
+					tracker.type,
+					RangeLifecycleStatus.TRANSIENT_IN_RANGE,
+					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+					first.version,
+					last.version,
+					"Introduced in " + first.version + " and removed in " + last.version
+			);
+		}
+		if (last.category == PairwiseDiff.ChangeCategory.ADDED) {
+			return new RangeChangeEntry(
+					tracker.symbol,
+					tracker.type,
+					RangeLifecycleStatus.INTRODUCED_IN_RANGE,
+					last.impact != null ? last.impact : PairwiseDiff.CompatibilityImpact.COMPATIBLE_ADDITION,
+					last.version,
+					null,
+					"Introduced in " + last.version
+			);
+		}
+		return new RangeChangeEntry(
+				tracker.symbol,
+				tracker.type,
+				RangeLifecycleStatus.REMOVED_IN_RANGE,
+				PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+				null,
+				last.version,
+				"Removed in " + last.version
+		);
+	}
+
+	private static String findDeprecatedAt(List<SymbolEvent> events) {
+		for (SymbolEvent ev : events) {
+			if (ev.category == PairwiseDiff.ChangeCategory.DEPRECATED) {
+				return ev.version;
+			}
+		}
+		return null;
+	}
+
+	private record SymbolEvent(
+			PairwiseDiff.ChangeCategory category,
+			String version,
+			PairwiseDiff.CompatibilityImpact impact
+	) {}
+
 	private static class SymbolTracker {
 		final String symbol;
 		final PairwiseDiff.SymbolType type;
-		String introducedAt;
-		String removedAt;
-		String deprecatedAt;
-		boolean presentAtEnd;
-		PairwiseDiff.CompatibilityImpact impact;
+		final List<SymbolEvent> events = new ArrayList<>();
 
 		SymbolTracker(String symbol, PairwiseDiff.SymbolType type) {
 			this.symbol = symbol;

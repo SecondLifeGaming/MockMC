@@ -1,8 +1,12 @@
 # Compatibility Diff Viewer
 
-Inspect binary and source breaking changes computed by `VersionDiffEngine` between platform versions.
+Inspect binary and structural breaking changes computed by `VersionDiffEngine` between platform versions.
 
-## Current Comparison: `Paper 26.2` \u2192 `Paper 26.3`
+::: tip Structural Bytecode Analysis
+The compatibility reports and explorer views are generated directly from upstream server bytecode descriptors and modifiers. While comprehensive for runtime JVM linkage (`NoSuchMethodError`, `NoSuchFieldError`, modifier restrictions), source-level compatibility (such as complex generic boundary adjustments or compiler overload selection) is progressively validated alongside verified JUnit tests.
+:::
+
+## Current Comparison: `Paper 26.2` → `Paper 26.3`
 
 | Impact Category | Detected Count | Description |
 | :--- | :--- | :--- |

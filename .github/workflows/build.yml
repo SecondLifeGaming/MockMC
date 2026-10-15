@@ -9,8 +9,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: 'build-and-docs'
@@ -43,22 +41,35 @@ jobs:
         timeout-minutes: 160
         run: ./gradlew testAllBackends --refresh-dependencies
 
+      - name: Upload Generated Documentation Data Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-doc-data
+          path: site/docs/public/data/
+          retention-days: 1
+
   docs:
     runs-on: ubuntu-latest
     needs: build
     steps:
       - uses: actions/checkout@v6
 
+      - name: Download Generated Documentation Data Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-doc-data
+          path: site/docs/public/data/
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
-          cache-dependency-path: 'site/package.json'
+          cache-dependency-path: 'site/package-lock.json'
 
       - name: Install Site Dependencies
         working-directory: site
-        run: npm ci || npm install
+        run: npm ci
 
       - name: Build VitePress Site (with dead-link checks)
         working-directory: site
@@ -77,6 +88,9 @@ jobs:
     runs-on: ubuntu-latest
     needs: docs
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    permissions:
+      pages: write
+      id-token: write
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

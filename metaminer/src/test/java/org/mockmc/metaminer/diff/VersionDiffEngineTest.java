@@ -166,4 +166,109 @@ class VersionDiffEngineTest {
 
 		assertEquals(3, diff.changes().size());
 	}
+
+	@Test
+	void testClassMetadataAndFieldDiffing() {
+		ApiManifest.Provenance prov1 = new ApiManifest.Provenance(
+				"paper", "1.0", 1, "canonical",
+				new ApiManifest.SourceJar("paper-1.0.jar", "sha1", 100),
+				new ApiManifest.ScannerInfo("metaminer", "commit1", false),
+				new ApiManifest.RemappingInfo("none", "none", "ASM9_8")
+		);
+		ApiManifest.Provenance prov2 = new ApiManifest.Provenance(
+				"paper", "2.0", 2, "canonical",
+				new ApiManifest.SourceJar("paper-2.0.jar", "sha2", 100),
+				new ApiManifest.ScannerInfo("metaminer", "commit2", false),
+				new ApiManifest.RemappingInfo("none", "none", "ASM9_8")
+		);
+		ApiManifest.ScanAccounting emptyAccounting = new ApiManifest.ScanAccounting(
+				"COMPLETE", List.of(), List.of(), 1, 1, 0, 0, 0, 2, List.of(), Map.of(), List.of()
+		);
+
+		// Field in v1: int COUNT
+		ApiManifest.FieldEntry countFieldV1 = new ApiManifest.FieldEntry(
+				"COUNT", "I", null, "int", List.of("PUBLIC", "STATIC"), false, 0, List.of(),
+				new ApiManifest.SymbolProvenance("paper", "1.0", "paper", "1.0", false, null)
+		);
+		// Field in v2: long COUNT (type/descriptor changed)
+		ApiManifest.FieldEntry countFieldV2 = new ApiManifest.FieldEntry(
+				"COUNT", "J", null, "long", List.of("PUBLIC", "STATIC"), false, 0L, List.of(),
+				new ApiManifest.SymbolProvenance("paper", "2.0", "paper", "2.0", false, null)
+		);
+
+		// Field in v1: public String NAME
+		ApiManifest.FieldEntry nameFieldV1 = new ApiManifest.FieldEntry(
+				"NAME", "Ljava/lang/String;", null, "java.lang.String", List.of("PUBLIC"), false, null, List.of(),
+				new ApiManifest.SymbolProvenance("paper", "1.0", "paper", "1.0", false, null)
+		);
+		// Field in v2: public final String NAME (became final)
+		ApiManifest.FieldEntry nameFieldV2 = new ApiManifest.FieldEntry(
+				"NAME", "Ljava/lang/String;", null, "java.lang.String", List.of("PUBLIC", "FINAL"), false, null, List.of(),
+				new ApiManifest.SymbolProvenance("paper", "2.0", "paper", "2.0", false, null)
+		);
+
+		// Class in v1: class TestClass implements AutoCloseable
+		ApiManifest.ClassEntry classV1 = new ApiManifest.ClassEntry(
+				"CLASS",
+				List.of("PUBLIC"),
+				null,
+				"java.lang.Object",
+				List.of("java.lang.AutoCloseable"),
+				List.of(),
+				Map.of(),
+				Map.of("COUNT", countFieldV1, "NAME", nameFieldV1)
+		);
+
+		// Class in v2: class TestClass extends Number (superclass changed, interface removed)
+		ApiManifest.ClassEntry classV2 = new ApiManifest.ClassEntry(
+				"CLASS",
+				List.of("PUBLIC"),
+				null,
+				"java.lang.Number",
+				List.of(), // removed AutoCloseable
+				List.of(),
+				Map.of(),
+				Map.of("COUNT", countFieldV2, "NAME", nameFieldV2)
+		);
+
+		ApiManifest manifest1 = new ApiManifest(ApiManifest.CURRENT_SCHEMA, ApiManifest.CURRENT_SCHEMA_VERSION, prov1, emptyAccounting, Map.of("org.bukkit.TestClass", classV1));
+		ApiManifest manifest2 = new ApiManifest(ApiManifest.CURRENT_SCHEMA, ApiManifest.CURRENT_SCHEMA_VERSION, prov2, emptyAccounting, Map.of("org.bukkit.TestClass", classV2));
+
+		PairwiseDiff diff = VersionDiffEngine.computeDiff(manifest1, manifest2);
+		assertNotNull(diff);
+
+		// Verify superclass change detected
+		boolean hasSuperChange = diff.changes().stream().anyMatch(c ->
+				c.symbol().equals("org.bukkit.TestClass")
+						&& c.details() != null && c.details().reason().contains("Superclass changed")
+						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE);
+		assertTrue(hasSuperChange, "Superclass change must be detected as BINARY_INCOMPATIBLE");
+
+		// Verify interface removal detected
+		boolean hasIfaceRemoval = diff.changes().stream().anyMatch(c ->
+				c.symbol().equals("org.bukkit.TestClass")
+						&& c.details() != null && c.details().reason().contains("No longer implements interface")
+						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE);
+		assertTrue(hasIfaceRemoval, "Interface removal must be detected as BINARY_INCOMPATIBLE");
+
+		// Verify field descriptor change (COUNT: int -> long) detected as removal + addition
+		boolean hasOldFieldRemoved = diff.changes().stream().anyMatch(c ->
+				c.symbol().equals("org.bukkit.TestClass#COUNT:I")
+						&& c.category() == PairwiseDiff.ChangeCategory.REMOVED
+						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE);
+		assertTrue(hasOldFieldRemoved, "Old field descriptor removal must be detected as BINARY_INCOMPATIBLE");
+
+		boolean hasNewFieldAdded = diff.changes().stream().anyMatch(c ->
+				c.symbol().equals("org.bukkit.TestClass#COUNT:J")
+						&& c.category() == PairwiseDiff.ChangeCategory.ADDED
+						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.COMPATIBLE_ADDITION);
+		assertTrue(hasNewFieldAdded, "New field descriptor addition must be detected as COMPATIBLE_ADDITION");
+
+		// Verify field final modifier change detected
+		boolean hasFinalChange = diff.changes().stream().anyMatch(c ->
+				c.symbol().equals("org.bukkit.TestClass#NAME:Ljava/lang/String;")
+						&& c.category() == PairwiseDiff.ChangeCategory.MODIFIED
+						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE);
+		assertTrue(hasFinalChange, "Field becoming FINAL must be detected as BINARY_INCOMPATIBLE");
+	}
 }
