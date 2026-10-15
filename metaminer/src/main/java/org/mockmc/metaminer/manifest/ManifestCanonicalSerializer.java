@@ -98,54 +98,56 @@ public final class ManifestCanonicalSerializer {
 		}
 		if (element.isJsonPrimitive()) {
 			JsonPrimitive prim = element.getAsJsonPrimitive();
-			if (prim.isString()) {
-				return escapeJsonString(prim.getAsString());
-			}
-			return prim.toString();
+			return prim.isString() ? escapeJsonString(prim.getAsString()) : prim.toString();
+		}
+		if (element.isJsonArray()) {
+			return formatCanonicalArray(element.getAsJsonArray(), indentLevel);
+		}
+		if (element.isJsonObject()) {
+			return formatCanonicalObject(element.getAsJsonObject(), indentLevel);
+		}
+		return element.toString();
+	}
+
+	private static String formatCanonicalArray(JsonArray arr, int indentLevel) {
+		if (arr.isEmpty()) {
+			return "[]";
 		}
 		String indent = "  ".repeat(indentLevel);
 		String childIndent = "  ".repeat(indentLevel + 1);
-
-		if (element.isJsonArray()) {
-			JsonArray arr = element.getAsJsonArray();
-			if (arr.isEmpty()) {
-				return "[]";
+		StringBuilder sb = new StringBuilder("[\n");
+		for (int i = 0; i < arr.size(); i++) {
+			sb.append(childIndent);
+			sb.append(formatCanonicalJson(arr.get(i), indentLevel + 1));
+			if (i < arr.size() - 1) {
+				sb.append(",");
 			}
-			StringBuilder sb = new StringBuilder("[\n");
-			for (int i = 0; i < arr.size(); i++) {
-				sb.append(childIndent);
-				sb.append(formatCanonicalJson(arr.get(i), indentLevel + 1));
-				if (i < arr.size() - 1) {
-					sb.append(",");
-				}
-				sb.append("\n");
-			}
-			sb.append(indent).append("]");
-			return sb.toString();
+			sb.append("\n");
 		}
+		sb.append(indent).append("]");
+		return sb.toString();
+	}
 
-		if (element.isJsonObject()) {
-			JsonObject obj = element.getAsJsonObject();
-			if (obj.isEmpty()) {
-				return "{}";
-			}
-			StringBuilder sb = new StringBuilder("{\n");
-			List<Map.Entry<String, JsonElement>> entries = new ArrayList<>(obj.entrySet());
-			for (int i = 0; i < entries.size(); i++) {
-				Map.Entry<String, JsonElement> entry = entries.get(i);
-				sb.append(childIndent);
-				sb.append(escapeJsonString(entry.getKey())).append(": ");
-				sb.append(formatCanonicalJson(entry.getValue(), indentLevel + 1));
-				if (i < entries.size() - 1) {
-					sb.append(",");
-				}
-				sb.append("\n");
-			}
-			sb.append(indent).append("}");
-			return sb.toString();
+	private static String formatCanonicalObject(JsonObject obj, int indentLevel) {
+		if (obj.isEmpty()) {
+			return "{}";
 		}
-
-		return element.toString();
+		String indent = "  ".repeat(indentLevel);
+		String childIndent = "  ".repeat(indentLevel + 1);
+		StringBuilder sb = new StringBuilder("{\n");
+		List<Map.Entry<String, JsonElement>> entries = new ArrayList<>(obj.entrySet());
+		for (int i = 0; i < entries.size(); i++) {
+			Map.Entry<String, JsonElement> entry = entries.get(i);
+			sb.append(childIndent);
+			sb.append(escapeJsonString(entry.getKey())).append(": ");
+			sb.append(formatCanonicalJson(entry.getValue(), indentLevel + 1));
+			if (i < entries.size() - 1) {
+				sb.append(",");
+			}
+			sb.append("\n");
+		}
+		sb.append(indent).append("}");
+		return sb.toString();
 	}
 
 	private static String escapeJsonString(String value) {

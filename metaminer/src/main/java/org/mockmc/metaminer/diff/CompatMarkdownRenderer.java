@@ -95,34 +95,46 @@ public final class CompatMarkdownRenderer {
 	}
 
 	private static void writeGroupedChanges(PrintWriter out, List<PairwiseDiff.ChangeEntry> entries) {
-		Map<String, List<PairwiseDiff.ChangeEntry>> byClass = new TreeMap<>();
-		for (PairwiseDiff.ChangeEntry entry : entries) {
-			String className;
-			if (entry.type() == PairwiseDiff.SymbolType.CLASS) {
-				className = entry.symbol();
-			} else {
-				int hashIdx = entry.symbol().indexOf('#');
-				className = hashIdx > 0 ? entry.symbol().substring(0, hashIdx) : entry.symbol();
-			}
-			byClass.computeIfAbsent(className, _ -> new ArrayList<>()).add(entry);
-		}
-
+		Map<String, List<PairwiseDiff.ChangeEntry>> byClass = groupChangesByClass(entries);
 		for (Map.Entry<String, List<PairwiseDiff.ChangeEntry>> classEntry : byClass.entrySet()) {
 			out.println("### `" + classEntry.getKey() + "`");
 			out.println();
 			for (PairwiseDiff.ChangeEntry item : classEntry.getValue()) {
-				if (item.type() == PairwiseDiff.SymbolType.CLASS) {
-					out.println("- **Class " + item.category().name() + "**: `" + item.symbol() + "`"
-							+ (item.details() != null && item.details().reason() != null ? " (" + item.details().reason() + ")" : ""));
-				} else {
-					String memberPart = item.symbol().substring(item.symbol().indexOf('#') + 1);
-					String migration = item.migrationHint() != null
-							? " \u2192 Superseded by `" + item.migrationHint().replacementSymbol() + "`"
-							: "";
-					out.println("- `" + memberPart + "` (" + item.category().name() + ")" + migration);
-				}
+				writeChangeItem(out, item);
 			}
 			out.println();
+		}
+	}
+
+	private static Map<String, List<PairwiseDiff.ChangeEntry>> groupChangesByClass(List<PairwiseDiff.ChangeEntry> entries) {
+		Map<String, List<PairwiseDiff.ChangeEntry>> byClass = new TreeMap<>();
+		for (PairwiseDiff.ChangeEntry entry : entries) {
+			String className = extractClassName(entry);
+			byClass.computeIfAbsent(className, _ -> new ArrayList<>()).add(entry);
+		}
+		return byClass;
+	}
+
+	private static String extractClassName(PairwiseDiff.ChangeEntry entry) {
+		if (entry.type() == PairwiseDiff.SymbolType.CLASS) {
+			return entry.symbol();
+		}
+		int hashIdx = entry.symbol().indexOf('#');
+		return hashIdx > 0 ? entry.symbol().substring(0, hashIdx) : entry.symbol();
+	}
+
+	private static void writeChangeItem(PrintWriter out, PairwiseDiff.ChangeEntry item) {
+		if (item.type() == PairwiseDiff.SymbolType.CLASS) {
+			String reason = (item.details() != null && item.details().reason() != null)
+					? " (" + item.details().reason() + ")"
+					: "";
+			out.println("- **Class " + item.category().name() + "**: `" + item.symbol() + "`" + reason);
+		} else {
+			String memberPart = item.symbol().substring(item.symbol().indexOf('#') + 1);
+			String migration = item.migrationHint() != null
+					? " \u2192 Superseded by `" + item.migrationHint().replacementSymbol() + "`"
+					: "";
+			out.println("- `" + memberPart + "` (" + item.category().name() + ")" + migration);
 		}
 	}
 }

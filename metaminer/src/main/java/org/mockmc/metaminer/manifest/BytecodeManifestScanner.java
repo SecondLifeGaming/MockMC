@@ -70,121 +70,13 @@ public class BytecodeManifestScanner {
 		Map<String, ApiManifest.ClassDisposition> dispositionInventory = new TreeMap<>();
 		List<ApiManifest.FailedEntry> failedEntries = new ArrayList<>();
 
-		int totalDiscovered = 0;
-		int totalAnalyzed = 0;
-		int totalExcluded = 0;
-		int totalMethodsAnalyzed = 0;
-		int totalFieldsAnalyzed = 0;
+		ScanCounters scanCounters = new ScanCounters();
 
 		try (JarFile jar = new JarFile(jarFile)) {
 			Enumeration<JarEntry> entries = jar.entries();
 			while (entries.hasMoreElements()) {
 				JarEntry entry = entries.nextElement();
-				String name = entry.getName();
-				if (!name.endsWith(".class") || name.startsWith("META-INF/")) {
-					continue;
-				}
-
-				String className = name.substring(0, name.length() - ".class".length()).replace('/', '.');
-				if (!isInScanRoots(className, config.packageRoots())) {
-					continue;
-				}
-
-				totalDiscovered++;
-
-				// Check exclusions
-				ApiManifest.ExclusionRule matchedRule = findExclusionRule(className, config.justifiedExclusions());
-				if (matchedRule != null) {
-					totalExcluded++;
-					dispositionInventory.put(className, new ApiManifest.ClassDisposition(
-							ApiManifest.DispositionType.JUSTIFIED_EXCLUSION,
-							null,
-							null,
-							matchedRule.pattern(),
-							matchedRule.category()
-					));
-					continue;
-				}
-
-				// Check scoped prefixes (e.g. Folia extension scope)
-				if (!config.scopedPackagePrefixes().isEmpty() && !isInScopedPrefixes(className, config.scopedPackagePrefixes())) {
-					totalExcluded++;
-					dispositionInventory.put(className, new ApiManifest.ClassDisposition(
-							ApiManifest.DispositionType.JUSTIFIED_EXCLUSION,
-							null,
-							null,
-							"scoped-prefix-filter",
-							"OUT_OF_PLATFORM_SCOPE"
-					));
-					continue;
-				}
-
-				// Parse class
-				try (InputStream in = jar.getInputStream(entry)) {
-					ClassNode classNode = new ClassNode();
-					ClassReader reader = new ClassReader(in);
-					reader.accept(classNode, 0);
-
-					Map<String, ApiManifest.MethodEntry> methods = new TreeMap<>();
-					for (MethodNode mn : classNode.methods) {
-						ApiManifest.MethodEntry methodEntry = parseMethod(classNode, mn, config);
-						methods.put(mn.name + mn.desc, methodEntry);
-					}
-
-					Map<String, ApiManifest.FieldEntry> fields = new TreeMap<>();
-					for (FieldNode fn : classNode.fields) {
-						ApiManifest.FieldEntry fieldEntry = parseField(classNode, fn, config);
-						fields.put(fn.name, fieldEntry);
-					}
-
-					String kind = determineClassKind(classNode.access);
-					List<String> accessFlags = parseAccessFlags(classNode.access, true);
-					String superClass = classNode.superName != null ? classNode.superName.replace('/', '.') : null;
-					List<String> interfaces = new ArrayList<>();
-					for (String iface : classNode.interfaces) {
-						interfaces.add(iface.replace('/', '.'));
-					}
-					Collections.sort(interfaces);
-
-					List<ApiManifest.AnnotationEntry> annotations = parseAnnotations(classNode.visibleAnnotations);
-
-					ApiManifest.ClassEntry classEntry = new ApiManifest.ClassEntry(
-							kind,
-							accessFlags,
-							classNode.signature,
-							superClass,
-							interfaces,
-							annotations,
-							methods,
-							fields
-					);
-
-					classes.put(className, classEntry);
-					totalAnalyzed++;
-					totalMethodsAnalyzed += methods.size();
-					totalFieldsAnalyzed += fields.size();
-
-					dispositionInventory.put(className, new ApiManifest.ClassDisposition(
-							ApiManifest.DispositionType.ANALYZED,
-							methods.size(),
-							fields.size(),
-							null,
-							null
-					));
-				} catch (Throwable t) {
-					failedEntries.add(new ApiManifest.FailedEntry(
-							className,
-							"PARSE_ERROR",
-							t.getClass().getName() + ": " + t.getMessage()
-					));
-					dispositionInventory.put(className, new ApiManifest.ClassDisposition(
-							ApiManifest.DispositionType.FAILED,
-							null,
-							null,
-							null,
-							null
-					));
-				}
+				processJarEntry(jar, entry, config, classes, dispositionInventory, failedEntries, scanCounters);
 			}
 		}
 
@@ -195,12 +87,12 @@ public class BytecodeManifestScanner {
 				status,
 				config.packageRoots(),
 				config.scopedPackagePrefixes(),
-				totalDiscovered,
-				totalAnalyzed,
-				totalExcluded,
+				scanCounters.discovered,
+				scanCounters.analyzed,
+				scanCounters.excluded,
 				totalFailed,
-				totalMethodsAnalyzed,
-				totalFieldsAnalyzed,
+				scanCounters.methodsAnalyzed,
+				scanCounters.fieldsAnalyzed,
 				config.justifiedExclusions(),
 				dispositionInventory,
 				failedEntries
@@ -213,6 +105,129 @@ public class BytecodeManifestScanner {
 				accounting,
 				classes
 		);
+	}
+
+	private static class ScanCounters {
+		int discovered = 0;
+		int analyzed = 0;
+		int excluded = 0;
+		int methodsAnalyzed = 0;
+		int fieldsAnalyzed = 0;
+	}
+
+	private static void processJarEntry(
+			JarFile jar,
+			JarEntry entry,
+			ScanConfiguration config,
+			Map<String, ApiManifest.ClassEntry> classes,
+			Map<String, ApiManifest.ClassDisposition> dispositionInventory,
+			List<ApiManifest.FailedEntry> failedEntries,
+			ScanCounters counters
+	) {
+		String name = entry.getName();
+		if (!name.endsWith(".class") || name.startsWith("META-INF/")) {
+			return;
+		}
+
+		String className = name.substring(0, name.length() - ".class".length()).replace('/', '.');
+		if (!isInScanRoots(className, config.packageRoots())) {
+			return;
+		}
+
+		counters.discovered++;
+
+		// Check justified exclusions
+		ApiManifest.ExclusionRule matchedRule = findExclusionRule(className, config.justifiedExclusions());
+		if (matchedRule != null) {
+			counters.excluded++;
+			dispositionInventory.put(className, new ApiManifest.ClassDisposition(
+					ApiManifest.DispositionType.JUSTIFIED_EXCLUSION,
+					null,
+					null,
+					matchedRule.pattern(),
+					matchedRule.category()
+			));
+			return;
+		}
+
+		// Check scoped prefixes (e.g. Folia extension scope)
+		if (!config.scopedPackagePrefixes().isEmpty() && !isInScopedPrefixes(className, config.scopedPackagePrefixes())) {
+			counters.excluded++;
+			dispositionInventory.put(className, new ApiManifest.ClassDisposition(
+					ApiManifest.DispositionType.JUSTIFIED_EXCLUSION,
+					null,
+					null,
+					"scoped-prefix-filter",
+					"OUT_OF_PLATFORM_SCOPE"
+			));
+			return;
+		}
+
+		// Parse class bytecode
+		try (InputStream in = jar.getInputStream(entry)) {
+			ClassNode classNode = new ClassNode();
+			ClassReader reader = new ClassReader(in);
+			reader.accept(classNode, 0);
+
+			Map<String, ApiManifest.MethodEntry> methods = new TreeMap<>();
+			for (MethodNode mn : classNode.methods) {
+				ApiManifest.MethodEntry methodEntry = parseMethod(classNode, mn, config);
+				methods.put(mn.name + mn.desc, methodEntry);
+			}
+
+			Map<String, ApiManifest.FieldEntry> fields = new TreeMap<>();
+			for (FieldNode fn : classNode.fields) {
+				ApiManifest.FieldEntry fieldEntry = parseField(fn, config);
+				fields.put(fn.name, fieldEntry);
+			}
+
+			String kind = determineClassKind(classNode.access);
+			List<String> accessFlags = parseAccessFlags(classNode.access, true);
+			String superClass = classNode.superName != null ? classNode.superName.replace('/', '.') : null;
+			List<String> interfaces = classNode.interfaces.stream()
+					.map(iface -> iface.replace('/', '.'))
+					.sorted()
+					.toList();
+
+			List<ApiManifest.AnnotationEntry> annotations = parseAnnotations(classNode.visibleAnnotations);
+
+			ApiManifest.ClassEntry classEntry = new ApiManifest.ClassEntry(
+					kind,
+					accessFlags,
+					classNode.signature,
+					superClass,
+					interfaces,
+					annotations,
+					methods,
+					fields
+			);
+
+			classes.put(className, classEntry);
+			counters.analyzed++;
+			counters.methodsAnalyzed += methods.size();
+			counters.fieldsAnalyzed += fields.size();
+
+			dispositionInventory.put(className, new ApiManifest.ClassDisposition(
+					ApiManifest.DispositionType.ANALYZED,
+					methods.size(),
+					fields.size(),
+					null,
+					null
+			));
+		} catch (Exception e) {
+			failedEntries.add(new ApiManifest.FailedEntry(
+					className,
+					"PARSE_ERROR",
+					e.getClass().getName() + ": " + e.getMessage()
+			));
+			dispositionInventory.put(className, new ApiManifest.ClassDisposition(
+					ApiManifest.DispositionType.FAILED,
+					null,
+					null,
+					null,
+					null
+			));
+		}
 	}
 
 	private static ApiManifest.MethodEntry parseMethod(ClassNode cn, MethodNode mn, ScanConfiguration config) {
@@ -268,7 +283,7 @@ public class BytecodeManifestScanner {
 		);
 	}
 
-	private static ApiManifest.FieldEntry parseField(ClassNode cn, FieldNode fn, ScanConfiguration config) {
+	private static ApiManifest.FieldEntry parseField(FieldNode fn, ScanConfiguration config) {
 		String fieldType = Type.getType(fn.desc).getClassName();
 		List<String> accessFlags = parseAccessFlags(fn.access, false);
 		boolean isSynthetic = (fn.access & Opcodes.ACC_SYNTHETIC) != 0;
