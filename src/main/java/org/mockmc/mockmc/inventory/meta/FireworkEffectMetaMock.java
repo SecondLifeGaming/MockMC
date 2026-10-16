@@ -21,6 +21,8 @@ public class FireworkEffectMetaMock extends ItemMetaMock
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.FireworkEffectMetaBaseMock
 {
 
+	static final String FIREWORK_EFFECT = "effect";
+
 	@Nullable
 	private FireworkEffect effect;
 
@@ -117,9 +119,10 @@ public class FireworkEffectMetaMock extends ItemMetaMock
 	{
 		FireworkEffectMetaMock serialMock = new FireworkEffectMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("effect"))
+		if (args.containsKey(FIREWORK_EFFECT))
 		{
-			serialMock.effect = (FireworkEffect) FireworkEffect.deserialize((Map<String, Object>) args.get("effect"));
+			serialMock.effect = (FireworkEffect) FireworkEffect
+					.deserialize((Map<String, Object>) args.get(FIREWORK_EFFECT));
 		}
 		return serialMock;
 	}
@@ -138,7 +141,7 @@ public class FireworkEffectMetaMock extends ItemMetaMock
 		final Map<String, Object> serialized = super.serialize();
 		if (effect != null)
 		{
-			serialized.put("effect", effect.serialize());
+			serialized.put(FIREWORK_EFFECT, effect.serialize());
 		}
 		return serialized;
 	}

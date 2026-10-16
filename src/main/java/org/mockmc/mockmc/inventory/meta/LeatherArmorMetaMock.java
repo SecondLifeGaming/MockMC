@@ -22,6 +22,8 @@ public class LeatherArmorMetaMock extends ItemMetaMock
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.LeatherArmorMetaBaseMock
 {
 
+	static final String LEATHER_COLOR = "color";
+
 	@Nullable
 	private Color color;
 
@@ -116,9 +118,9 @@ public class LeatherArmorMetaMock extends ItemMetaMock
 	{
 		LeatherArmorMetaMock serialMock = new LeatherArmorMetaMock();
 		serialMock.deserializeInternal(args);
-		if (args.containsKey("color"))
+		if (args.containsKey(LEATHER_COLOR))
 		{
-			serialMock.color = Color.fromARGB((int) args.get("color"));
+			serialMock.color = Color.fromARGB((int) args.get(LEATHER_COLOR));
 		}
 		return serialMock;
 	}
@@ -137,7 +139,7 @@ public class LeatherArmorMetaMock extends ItemMetaMock
 		final Map<String, Object> serialized = super.serialize();
 		if (isDyed())
 		{
-			serialized.put("color", color.asARGB());
+			serialized.put(LEATHER_COLOR, color.asARGB());
 		}
 		return serialized;
 	}

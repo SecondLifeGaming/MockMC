@@ -688,7 +688,7 @@ public class ItemStackMock extends ItemStack
 	{
 		Map<String, Object> result = new java.util.LinkedHashMap<>();
 		result.put("type", getType().name());
-		result.put("amount", getAmount());
+		result.put(FIELD_AMOUNT, getAmount());
 
 		Map<String, Object> unsafeSerialized = ((org.mockmc.mockmc.util.UnsafeValuesMock) Bukkit.getUnsafe())
 				.serializeStack(this);

@@ -73,79 +73,90 @@ public class SerializableMeta implements ConfigurationSerializable
 
 		for (Map.Entry<Class<? extends ItemMetaMock>, String> mapping : SerializableMeta.classMap.entrySet())
 		{
-			Class<? extends ItemMetaMock> clazz = mapping.getKey();
-
-			// Deserialize method
-			try
-			{
-				Method deserializeMethod = clazz.getDeclaredMethod("deserialize", Map.class);
-				builder.put(mapping.getValue(), a ->
-				{
-					try
-					{
-						return (ItemMetaMock) deserializeMethod.invoke(null, a);
-					} catch (IllegalAccessException | InvocationTargetException e)
-					{
-						throw new ItemSerializationException("Error while calling deserialize method.", e);
-					}
-				});
-				continue;
-			} catch (NoSuchMethodException e)
-			{
-				// If we don't found the method, we can then try the next method
-			}
-
-			// Value of
-			try
-			{
-				Method deserializeMethod = clazz.getDeclaredMethod("valueOf", Map.class);
-				builder.put(mapping.getValue(), a ->
-				{
-					try
-					{
-						return (ItemMetaMock) deserializeMethod.invoke(null, a);
-					} catch (IllegalAccessException | InvocationTargetException e)
-					{
-						throw new ItemSerializationException("Error while calling valueOf method.", e);
-					}
-				});
-				continue;
-			} catch (NoSuchMethodException e)
-			{
-				// If we don't found the method, we can then try the next method
-			}
-
-			// Constructor
-			try
-			{
-				Constructor<? extends ItemMetaMock> constructor = clazz.getDeclaredConstructor(Map.class);
-				builder.put(mapping.getValue(), a ->
-				{
-					try
-					{
-						return constructor.newInstance(a);
-					} catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
-					{
-						throw new ItemSerializationException("Error while calling deserialize constructor.", e);
-					}
-				});
-			} catch (NoSuchMethodException e)
-			{
-				String message = String.format(
-						"""
-								There is no deserialization method available for class %s. Make sure that the class follows the
-								rules of class org.bukkit.configuration.serialization.ConfigurationSerializable.
-
-								To be compliant it should have one of the following:
-								- A static method "deserialize" that accepts a single Map<String, Object> and returns the class instance.
-								- A static method "valueOf" that accepts a single Map<String, Object> and returns the class instance.
-								- A constructor that accepts a single Map<String, Object>.
-								""",
-						clazz.getName());
-				throw new UnsupportedOperationException(message, e);
-			}
+			builder.put(mapping.getValue(), createDeserializer(mapping.getKey()));
 		}
 		return builder.build();
+	}
+
+	private static Function<Map<String, Object>, ? extends ItemMetaMock> createDeserializer(
+			Class<? extends ItemMetaMock> clazz)
+	{
+		Function<Map<String, Object>, ? extends ItemMetaMock> fromDeserialize = findMethodDeserializer(clazz,
+				"deserialize", "deserialize");
+		if (fromDeserialize != null)
+		{
+			return fromDeserialize;
+		}
+
+		Function<Map<String, Object>, ? extends ItemMetaMock> fromValueOf = findMethodDeserializer(clazz, "valueOf",
+				"valueOf");
+		if (fromValueOf != null)
+		{
+			return fromValueOf;
+		}
+
+		Function<Map<String, Object>, ? extends ItemMetaMock> fromConstructor = findConstructorDeserializer(clazz);
+		if (fromConstructor != null)
+		{
+			return fromConstructor;
+		}
+
+		String message = String.format(
+				"""
+						There is no deserialization method available for class %s. Make sure that the class follows the
+						rules of class org.bukkit.configuration.serialization.ConfigurationSerializable.
+
+						To be compliant it should have one of the following:
+						- A static method "deserialize" that accepts a single Map<String, Object> and returns the class instance.
+						- A static method "valueOf" that accepts a single Map<String, Object> and returns the class instance.
+						- A constructor that accepts a single Map<String, Object>.
+						""",
+				clazz.getName());
+		throw new UnsupportedOperationException(message);
+	}
+
+	private static Function<Map<String, Object>, ? extends ItemMetaMock> findMethodDeserializer(
+			Class<? extends ItemMetaMock> clazz, String methodName, String operationName)
+	{
+		try
+		{
+			Method method = clazz.getDeclaredMethod(methodName, Map.class);
+			return a ->
+			{
+				try
+				{
+					return (ItemMetaMock) method.invoke(null, a);
+				} catch (IllegalAccessException | InvocationTargetException e)
+				{
+					throw new ItemSerializationException("Error while calling " + operationName + " method.", e);
+				}
+			};
+		} catch (NoSuchMethodException e)
+		{
+			return null;
+		}
+	}
+
+	private static Function<Map<String, Object>, ? extends ItemMetaMock> findConstructorDeserializer(
+			Class<? extends ItemMetaMock> clazz)
+	{
+		try
+		{
+			Constructor<? extends ItemMetaMock> constructor = clazz.getDeclaredConstructor(Map.class);
+			return a ->
+			{
+				try
+				{
+					return constructor.newInstance(a);
+				} catch (InstantiationException | IllegalAccessException | InvocationTargetException e)
+				{
+					throw new ItemSerializationException("Error while calling deserialize constructor.", e);
+				}
+			};
+		} catch (NoSuchMethodException e)
+		{
+			return null;
+		}
 	}
 
 	private SerializableMeta()
@@ -224,38 +235,39 @@ public class SerializableMeta implements ConfigurationSerializable
 	{
 		List<T> result = new ArrayList<>();
 		List<?> list = getObject(List.class, map, field, true);
-		if (list != null && !list.isEmpty())
-		{
-			for (Object object : list)
-			{
-				T cast = null;
-				if (clazz.isInstance(object))
-				{
-					cast = (T) clazz.cast(object);
-				}
-
-				if ((clazz == Float.class || clazz == Double.class) && object instanceof Number number)
-				{
-					if (clazz == Float.class)
-					{
-						cast = clazz.cast(number.floatValue());
-					} else
-					{
-						cast = clazz.cast(number.doubleValue());
-					}
-				}
-
-				if (cast != null)
-				{
-					result.add(cast);
-				}
-			}
-
-			return result;
-		} else
+		if (list == null || list.isEmpty())
 		{
 			return result;
 		}
+		for (Object object : list)
+		{
+			T cast = castListElement(clazz, object);
+			if (cast != null)
+			{
+				result.add(cast);
+			}
+		}
+		return result;
+	}
+
+	private static <T> T castListElement(Class<T> clazz, Object object)
+	{
+		if (clazz.isInstance(object))
+		{
+			return clazz.cast(object);
+		}
+		if (object instanceof Number number)
+		{
+			if (clazz == Float.class)
+			{
+				return clazz.cast(number.floatValue());
+			}
+			if (clazz == Double.class)
+			{
+				return clazz.cast(number.doubleValue());
+			}
+		}
+		return null;
 	}
 
 }

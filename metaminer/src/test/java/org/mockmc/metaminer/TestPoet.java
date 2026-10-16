@@ -5,9 +5,9 @@ import org.bukkit.Bukkit;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 
-public class TestPoet {
+class TestPoet {
     @Test
-    public void runTest() throws IOException {
+    void runTest() throws IOException {
         ClassPath cp = ClassPath.from(Bukkit.class.getClassLoader());
         int count = 0;
         for (ClassPath.ClassInfo info : cp.getTopLevelClassesRecursive("org.bukkit")) {
@@ -16,8 +16,10 @@ public class TestPoet {
                 if (clazz.isInterface()) {
                     count++;
                 }
-            } catch (Throwable t) {}
+            } catch (Throwable ignored) {
+                // Ignore classes that cannot be loaded
+            }
         }
-        System.out.println("Found " + count + " interfaces.");
+        org.junit.jupiter.api.Assertions.assertTrue(count > 0, "Expected Bukkit interfaces to be found");
     }
 }

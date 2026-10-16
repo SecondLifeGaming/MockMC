@@ -37,6 +37,8 @@ public class PotionMetaMock extends ItemMetaMock
 {
 
 	public static final String BASE_POTION_TYPE = "base-potion-type";
+	public static final String CUSTOM_COLOR = "custom-color";
+	public static final String CUSTOM_POTION_NAME = "custom-potion-name";
 
 	@Nullable
 	private PotionType type;
@@ -279,13 +281,13 @@ public class PotionMetaMock extends ItemMetaMock
 		{
 			this.type = Registry.POTION.get(NamespacedKey.fromString((String) args.get(BASE_POTION_TYPE)));
 		}
-		if (args.containsKey("custom-color"))
+		if (args.containsKey(CUSTOM_COLOR))
 		{
-			this.color = (Color) args.get("custom-color");
+			this.color = (Color) args.get(CUSTOM_COLOR);
 		}
-		if (args.containsKey("custom-potion-name"))
+		if (args.containsKey(CUSTOM_POTION_NAME))
 		{
-			this.customName = (String) args.get("custom-potion-name");
+			this.customName = (String) args.get(CUSTOM_POTION_NAME);
 		}
 	}
 
@@ -323,11 +325,11 @@ public class PotionMetaMock extends ItemMetaMock
 		}
 		if (color != null)
 		{
-			serialized.put("custom-color", color);
+			serialized.put(CUSTOM_COLOR, color);
 		}
 		if (customName != null)
 		{
-			serialized.put("custom-potion-name", customName);
+			serialized.put(CUSTOM_POTION_NAME, customName);
 		}
 		return serialized;
 	}

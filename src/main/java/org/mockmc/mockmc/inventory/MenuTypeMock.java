@@ -63,15 +63,17 @@ public class MenuTypeMock<V extends InventoryView, B extends InventoryViewBuilde
 		}
 	}
 
+	private static final String TYPE_CHEST = "CHEST";
+
 	private static final Map<String, MenuTypeData> MENU_TYPE_DATA = Map.ofEntries(
-			Map.entry("minecraft:generic_9x1", new MenuTypeData(InventoryView.class, "CHEST", 9, BuilderType.BASE)),
-			Map.entry("minecraft:generic_9x2", new MenuTypeData(InventoryView.class, "CHEST", 18, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x1", new MenuTypeData(InventoryView.class, TYPE_CHEST, 9, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x2", new MenuTypeData(InventoryView.class, TYPE_CHEST, 18, BuilderType.BASE)),
 			Map.entry("minecraft:generic_9x3",
-					new MenuTypeData(InventoryView.class, "CHEST", 27, BuilderType.LOCATION)),
-			Map.entry("minecraft:generic_9x4", new MenuTypeData(InventoryView.class, "CHEST", 36, BuilderType.BASE)),
-			Map.entry("minecraft:generic_9x5", new MenuTypeData(InventoryView.class, "CHEST", 45, BuilderType.BASE)),
+					new MenuTypeData(InventoryView.class, TYPE_CHEST, 27, BuilderType.LOCATION)),
+			Map.entry("minecraft:generic_9x4", new MenuTypeData(InventoryView.class, TYPE_CHEST, 36, BuilderType.BASE)),
+			Map.entry("minecraft:generic_9x5", new MenuTypeData(InventoryView.class, TYPE_CHEST, 45, BuilderType.BASE)),
 			Map.entry("minecraft:generic_9x6",
-					new MenuTypeData(InventoryView.class, "CHEST", 54, BuilderType.LOCATION)),
+					new MenuTypeData(InventoryView.class, TYPE_CHEST, 54, BuilderType.LOCATION)),
 			Map.entry("minecraft:generic_3x3",
 					new MenuTypeData(InventoryView.class, "DISPENSER", 9, BuilderType.LOCATION)),
 			Map.entry("minecraft:crafter_3x3", new MenuTypeData(CrafterView.class, "CRAFTER", 9, BuilderType.LOCATION)),

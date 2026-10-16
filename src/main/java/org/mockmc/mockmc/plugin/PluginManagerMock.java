@@ -71,6 +71,12 @@ public class PluginManagerMock extends PermissionManagerMock
 {
 
 	private static final Pattern VALID_PLUGIN_NAMES = Pattern.compile("^[A-Za-z0-9_.-]+$");
+	private static final String CLASS_CANNOT_BE_NULL = "Class cannot be null";
+	private static final String NAME_CANNOT_BE_NULL = "Name cannot be null";
+	private static final String PLUGIN_CANNOT_BE_NULL = "Plugin cannot be null";
+	private static final String LISTENER_CANNOT_BE_NULL = "Listener cannot be null";
+	private static final String EVENT_CANNOT_BE_NULL = "Event cannot be null";
+	private static final String NOT_A_STRING = "Not a String";
 
 	@NotNull
 	private final ServerMock server;
@@ -192,7 +198,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	public <T extends Event> void assertEventFired(@Nullable String message, @NotNull Class<T> eventClass,
 			@NotNull Predicate<T> predicate)
 	{
-		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+		Preconditions.checkNotNull(eventClass, CLASS_CANNOT_BE_NULL);
 		for (Event event : events)
 		{
 			if (eventClass.isInstance(event) && predicate.test(eventClass.cast(event)))
@@ -220,7 +226,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Deprecated(forRemoval = true)
 	public <T extends Event> void assertEventFired(@NotNull Class<T> eventClass, @NotNull Predicate<T> predicate)
 	{
-		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+		Preconditions.checkNotNull(eventClass, CLASS_CANNOT_BE_NULL);
 		assertEventFired("No event of the correct class tested true", eventClass, predicate);
 	}
 
@@ -237,7 +243,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Deprecated(forRemoval = true)
 	public void assertEventFired(@NotNull Class<? extends Event> eventClass)
 	{
-		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+		Preconditions.checkNotNull(eventClass, CLASS_CANNOT_BE_NULL);
 		assertEventFired("No event of that type has been fired", eventClass::isInstance);
 	}
 
@@ -253,7 +259,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass)
 	{
-		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+		Preconditions.checkNotNull(eventClass, CLASS_CANNOT_BE_NULL);
 		assertEventNotFired(eventClass,
 				"An event of type " + eventClass.getSimpleName() + " has been fired when it shouldn't have been");
 	}
@@ -272,7 +278,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Deprecated(forRemoval = true)
 	public void assertEventNotFired(@NotNull Class<? extends Event> eventClass, @Nullable String message)
 	{
-		Preconditions.checkNotNull(eventClass, "Class cannot be null");
+		Preconditions.checkNotNull(eventClass, CLASS_CANNOT_BE_NULL);
 		for (Event event : this.events)
 		{
 			if (eventClass.isAssignableFrom(event.getClass()))
@@ -285,7 +291,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public synchronized Plugin getPlugin(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, NAME_CANNOT_BE_NULL);
 		for (Plugin plugin : plugins)
 		{
 			if (name.equals(plugin.getName()))
@@ -362,7 +368,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	private Constructor<? extends Plugin> getCompatibleConstructor(@NotNull Class<? extends Plugin> class1,
 			@NotNull Class<?> @NotNull [] types) throws NoSuchMethodException
 	{
-		Preconditions.checkNotNull(class1, "Class cannot be null");
+		Preconditions.checkNotNull(class1, CLASS_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(types, "Types cannot be null");
 		for (Constructor<?> constructor : class1.getDeclaredConstructors())
 		{
@@ -431,7 +437,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@NotNull
 	public File createTemporaryDirectory(@NotNull String name) throws IOException
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, NAME_CANNOT_BE_NULL);
 		File directory = new File(getParentTemporaryDirectory(), name);
 		directory.mkdirs();
 		return directory;
@@ -449,7 +455,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@NotNull
 	public File createTemporaryPluginFile(@NotNull String name) throws IOException
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, NAME_CANNOT_BE_NULL);
 		File pluginFile = new File(getParentTemporaryDirectory(), name + ".jar");
 		if (!pluginFile.exists() && !pluginFile.createNewFile())
 		{
@@ -467,7 +473,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	 */
 	public void registerLoadedPlugin(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		synchronized (this)
 		{
 			addCommandsFrom(plugin);
@@ -508,7 +514,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	public Plugin loadPlugin(@NotNull Class<? extends Plugin> class1, @NotNull PluginDescriptionFile description,
 			@NotNull Object @NotNull [] parameters)
 	{
-		Preconditions.checkNotNull(class1, "Class cannot be null");
+		Preconditions.checkNotNull(class1, CLASS_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(description, "Description cannot be null");
 		Preconditions.checkNotNull(parameters, "Parameters cannot be null");
 		try
@@ -605,7 +611,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	private PluginDescriptionFile findPluginDescription(@NotNull Class<? extends Plugin> class1)
 			throws IOException, InvalidDescriptionException
 	{
-		Preconditions.checkNotNull(class1, "Class cannot be null");
+		Preconditions.checkNotNull(class1, CLASS_CANNOT_BE_NULL);
 		try
 		{
 			Enumeration<URL> resources = class1.getClassLoader().getResources("paper-plugin.yml");
@@ -641,7 +647,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public void callEvent(@NotNull Event event)
 	{
-		Preconditions.checkNotNull(event, "Event cannot be null");
+		Preconditions.checkNotNull(event, EVENT_CANNOT_BE_NULL);
 		if (event.isAsynchronous() && server.isOnMainThread())
 		{
 			throw new IllegalStateException("Asynchronous Events cannot be called on the main Thread.");
@@ -679,7 +685,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	 */
 	public <T extends Event> void callEventAsynchronously(@NotNull T event, @Nullable Consumer<T> func)
 	{
-		Preconditions.checkNotNull(event, "Event cannot be null");
+		Preconditions.checkNotNull(event, EVENT_CANNOT_BE_NULL);
 		if (!event.isAsynchronous())
 		{
 			throw new IllegalStateException("Synchronous Events cannot be called asynchronously.");
@@ -690,8 +696,8 @@ public class PluginManagerMock extends PermissionManagerMock
 
 	private void callRegisteredListener(@NotNull RegisteredListener registration, @NotNull Event event)
 	{
-		Preconditions.checkNotNull(registration, "Listener cannot be null");
-		Preconditions.checkNotNull(event, "Event cannot be null");
+		Preconditions.checkNotNull(registration, LISTENER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(event, EVENT_CANNOT_BE_NULL);
 		if (!registration.getPlugin().isEnabled())
 		{
 			return;
@@ -724,7 +730,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public void enablePlugin(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
 		if (!plugin.isEnabled())
 		{
@@ -746,12 +752,12 @@ public class PluginManagerMock extends PermissionManagerMock
 	private void addSection(@NotNull PluginCommand command, @NotNull String name, @UnknownNullability Object value)
 	{
 		Preconditions.checkNotNull(command, "Command cannot be null");
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, NAME_CANNOT_BE_NULL);
 		switch (name)
 		{
 			case "description" :
 				Preconditions.checkNotNull(value, "Value cannot be null");
-				Preconditions.checkArgument(value instanceof String, "Not a String");
+				Preconditions.checkArgument(value instanceof String, NOT_A_STRING);
 				command.setDescription((String) value);
 				break;
 			case "aliases" :
@@ -767,16 +773,16 @@ public class PluginManagerMock extends PermissionManagerMock
 				}
 				break;
 			case "permission" :
-				Preconditions.checkArgument(value == null || value instanceof String, "Not a String");
+				Preconditions.checkArgument(value == null || value instanceof String, NOT_A_STRING);
 				command.setPermission(value == null ? null : (String) value);
 				break;
 			case "permission-message" :
-				Preconditions.checkArgument(value == null || value instanceof String, "Not a String");
+				Preconditions.checkArgument(value == null || value instanceof String, NOT_A_STRING);
 				command.setPermissionMessage(value == null ? null : (String) value);
 				break;
 			case "usage" :
 				Preconditions.checkNotNull(value, "Value cannot be null");
-				Preconditions.checkArgument(value instanceof String, "Not a String");
+				Preconditions.checkArgument(value instanceof String, NOT_A_STRING);
 				command.setUsage((String) value);
 				break;
 			default :
@@ -793,7 +799,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	 */
 	protected synchronized void addCommandsFrom(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Map<String, Map<String, Object>> pluginCommands = plugin.getDescription().getCommands();
 		for (Entry<String, Map<String, Object>> entry : pluginCommands.entrySet())
 		{
@@ -810,7 +816,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public boolean isPluginEnabled(@NotNull String name)
 	{
-		Preconditions.checkNotNull(name, "Name cannot be null");
+		Preconditions.checkNotNull(name, NAME_CANNOT_BE_NULL);
 		Plugin plugin = getPlugin(name);
 		return plugin != null && plugin.isEnabled();
 	}
@@ -885,8 +891,8 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public void registerEvents(@NotNull Listener listener, @NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(listener, "Listener cannot be null");
-		Preconditions.checkNotNull(plugin, "Listener cannot be null");
+		Preconditions.checkNotNull(listener, LISTENER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(plugin, LISTENER_CANNOT_BE_NULL);
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + listener + " while not enabled");
@@ -906,7 +912,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	 */
 	public void unregisterPluginEvents(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Listener cannot be null");
+		Preconditions.checkNotNull(plugin, LISTENER_CANNOT_BE_NULL);
 		HandlerList.unregisterAll(plugin);
 	}
 
@@ -922,11 +928,11 @@ public class PluginManagerMock extends PermissionManagerMock
 			@NotNull EventPriority priority, @NotNull EventExecutor executor, @NotNull Plugin plugin,
 			boolean ignoreCancelled)
 	{
-		Preconditions.checkNotNull(listener, "Listener cannot be null");
-		Preconditions.checkNotNull(listener, "Listener cannot be null");
+		Preconditions.checkNotNull(listener, LISTENER_CANNOT_BE_NULL);
+		Preconditions.checkNotNull(listener, LISTENER_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(priority, "Priority cannot be null");
 		Preconditions.checkNotNull(executor, "Executor cannot be null");
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		if (!plugin.isEnabled())
 		{
 			throw new IllegalPluginAccessException("Plugin attempted to register " + event + " while not enabled");
@@ -952,7 +958,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@NotNull
 	private Class<? extends Event> getRegistrationClass(@NotNull Class<? extends Event> clazz)
 	{
-		Preconditions.checkNotNull(clazz, "Class cannot be null");
+		Preconditions.checkNotNull(clazz, CLASS_CANNOT_BE_NULL);
 		try
 		{
 			clazz.getDeclaredMethod("getHandlerList");
@@ -974,7 +980,7 @@ public class PluginManagerMock extends PermissionManagerMock
 	@Override
 	public void disablePlugin(@NotNull Plugin plugin)
 	{
-		Preconditions.checkNotNull(plugin, "Plugin cannot be null");
+		Preconditions.checkNotNull(plugin, PLUGIN_CANNOT_BE_NULL);
 		Preconditions.checkArgument(plugin instanceof JavaPlugin, "Not a JavaPlugin");
 		if (!plugin.isEnabled())
 		{

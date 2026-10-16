@@ -23,6 +23,8 @@ public class PiglinMock extends PiglinAbstractMock
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.PiglinBaseMock
 {
 
+	private static final String MATERIAL_CANNOT_BE_NULL = "material cannot be null";
+
 	private final Set<Material> allowedInterestItems = new HashSet<>();
 
 	private final Set<Material> allowedBarteringItems = new HashSet<>();
@@ -63,28 +65,28 @@ public class PiglinMock extends PiglinAbstractMock
 	@Override
 	public boolean addBarterMaterial(@NotNull Material material)
 	{
-		Preconditions.checkArgument(material != null, "material cannot be null");
+		Preconditions.checkArgument(material != null, MATERIAL_CANNOT_BE_NULL);
 		return this.allowedBarteringItems.add(material);
 	}
 
 	@Override
 	public boolean removeBarterMaterial(@NotNull Material material)
 	{
-		Preconditions.checkArgument(material != null, "material cannot be null");
+		Preconditions.checkArgument(material != null, MATERIAL_CANNOT_BE_NULL);
 		return this.allowedBarteringItems.remove(material);
 	}
 
 	@Override
 	public boolean addMaterialOfInterest(@NotNull Material material)
 	{
-		Preconditions.checkArgument(material != null, "material cannot be null");
+		Preconditions.checkArgument(material != null, MATERIAL_CANNOT_BE_NULL);
 		return this.allowedInterestItems.add(material);
 	}
 
 	@Override
 	public boolean removeMaterialOfInterest(@NotNull Material material)
 	{
-		Preconditions.checkArgument(material != null, "material cannot be null");
+		Preconditions.checkArgument(material != null, MATERIAL_CANNOT_BE_NULL);
 		return this.allowedInterestItems.remove(material);
 	}
 

@@ -35,6 +35,8 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 {
 
 	private static final int MAX_STACK_SIZE = 64;
+	private static final String VIEWER_MUST_NOT_BE_NULL = "The viewer must not be null!";
+	private static final String MATERIAL_CANNOT_BE_NULL = "Material cannot be null";
 
 	private final ItemStack @NotNull [] items;
 
@@ -229,7 +231,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	 */
 	public void addViewer(@NotNull HumanEntity viewer)
 	{
-		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		Preconditions.checkNotNull(viewer, VIEWER_MUST_NOT_BE_NULL);
 		viewers.add(viewer);
 	}
 
@@ -254,7 +256,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	{
 		for (HumanEntity viewer : viewers)
 		{
-			Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+			Preconditions.checkNotNull(viewer, VIEWER_MUST_NOT_BE_NULL);
 			addViewer(viewer);
 		}
 	}
@@ -267,7 +269,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	 */
 	public void removeViewer(@NotNull HumanEntity viewer)
 	{
-		Preconditions.checkNotNull(viewer, "The viewer must not be null!");
+		Preconditions.checkNotNull(viewer, VIEWER_MUST_NOT_BE_NULL);
 		viewers.remove(viewer);
 	}
 
@@ -517,7 +519,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	@NotNull
 	public HashMap<Integer, ? extends ItemStack> all(@NotNull Material material) throws IllegalArgumentException
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, MATERIAL_CANNOT_BE_NULL);
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
 		ItemStack[] items = this.getStorageContents();
 		for (int i = 0; i < items.length; i++)
@@ -552,7 +554,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	@Override
 	public int first(@NotNull Material material) throws IllegalArgumentException
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, MATERIAL_CANNOT_BE_NULL);
 		ItemStack[] contents = this.getStorageContents();
 		for (int i = 0; i < contents.length; i++)
 		{
@@ -616,7 +618,7 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	@Override
 	public void remove(@NotNull Material material) throws IllegalArgumentException
 	{
-		Preconditions.checkNotNull(material, "Material cannot be null");
+		Preconditions.checkNotNull(material, MATERIAL_CANNOT_BE_NULL);
 		ItemStack[] contents = this.getStorageContents();
 		for (int i = 0; i < contents.length; i++)
 		{

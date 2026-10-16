@@ -74,12 +74,8 @@ public class TranslationDataGenerator implements DataGenerator
 
 	private InputStream findStreamInJarCache() throws java.io.IOException
 	{
-		File jarsDir = new File("../jars/cache");
-		if (!jarsDir.exists())
-		{
-			jarsDir = new File("jars/cache");
-		}
-		if (!jarsDir.exists())
+		File jarsDir = resolveJarsDir();
+		if (jarsDir == null)
 		{
 			return null;
 		}
@@ -90,6 +86,31 @@ public class TranslationDataGenerator implements DataGenerator
 		}
 
 		String primaryPrefix = resolvePrimaryPaperPrefix();
+		sortJarFiles(files, primaryPrefix);
+
+		for (File file : files)
+		{
+			InputStream entryStream = readResourceFromJar(file);
+			if (entryStream != null)
+			{
+				return entryStream;
+			}
+		}
+		return null;
+	}
+
+	private File resolveJarsDir()
+	{
+		File jarsDir = new File("../jars/cache");
+		if (!jarsDir.exists())
+		{
+			jarsDir = new File("jars/cache");
+		}
+		return jarsDir.exists() ? jarsDir : null;
+	}
+
+	private void sortJarFiles(File[] files, String primaryPrefix)
+	{
 		java.util.Arrays.sort(files, (a, b) -> {
 			if (primaryPrefix != null)
 			{
@@ -102,18 +123,18 @@ public class TranslationDataGenerator implements DataGenerator
 			}
 			return b.getName().compareTo(a.getName());
 		});
+	}
 
-		for (File file : files)
+	private InputStream readResourceFromJar(File file) throws java.io.IOException
+	{
+		try (java.util.jar.JarFile jarFile = new java.util.jar.JarFile(file))
 		{
-			try (java.util.jar.JarFile jarFile = new java.util.jar.JarFile(file))
+			java.util.jar.JarEntry entry = jarFile.getJarEntry(resourcePath);
+			if (entry != null)
 			{
-				java.util.jar.JarEntry entry = jarFile.getJarEntry(resourcePath);
-				if (entry != null)
+				try (InputStream entryStream = jarFile.getInputStream(entry))
 				{
-					try (InputStream entryStream = jarFile.getInputStream(entry))
-					{
-						return new java.io.ByteArrayInputStream(entryStream.readAllBytes());
-					}
+					return new java.io.ByteArrayInputStream(entryStream.readAllBytes());
 				}
 			}
 		}
@@ -127,34 +148,42 @@ public class TranslationDataGenerator implements DataGenerator
 		{
 			manifestFile = new File("jars/manifests/versions.json");
 		}
-		if (manifestFile.exists())
+		if (!manifestFile.exists())
 		{
-			try (java.io.Reader reader = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8))
+			return null;
+		}
+		try (java.io.Reader reader = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8))
+		{
+			JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
+			return extractPrimaryPrefixFromRoot(root);
+		}
+		catch (Exception _)
+		{
+			return null;
+		}
+	}
+
+	private String extractPrimaryPrefixFromRoot(JsonObject root)
+	{
+		JsonObject platforms = root.getAsJsonObject("platforms");
+		if (platforms == null || !platforms.has("paper"))
+		{
+			return null;
+		}
+		JsonObject paper = platforms.getAsJsonObject("paper");
+		com.google.gson.JsonArray versions = paper.getAsJsonArray("versions");
+		if (versions == null)
+		{
+			return null;
+		}
+		for (JsonElement el : versions)
+		{
+			JsonObject v = el.getAsJsonObject();
+			if (v.has("primary") && v.get("primary").getAsBoolean())
 			{
-				JsonObject root = JsonParser.parseReader(reader).getAsJsonObject();
-				JsonObject platforms = root.getAsJsonObject("platforms");
-				if (platforms != null && platforms.has("paper"))
-				{
-					JsonObject paper = platforms.getAsJsonObject("paper");
-					com.google.gson.JsonArray versions = paper.getAsJsonArray("versions");
-					if (versions != null)
-					{
-						for (JsonElement el : versions)
-						{
-							JsonObject v = el.getAsJsonObject();
-							if (v.has("primary") && v.get("primary").getAsBoolean())
-							{
-								String ver = v.get("version").getAsString();
-								String build = v.has("build") ? v.get("build").getAsString() : "";
-								return "remapped-paper-" + ver + "-" + build;
-							}
-						}
-					}
-				}
-			}
-			catch (Exception _)
-			{
-				// Fall back to default version ordering
+				String ver = v.get("version").getAsString();
+				String build = v.has("build") ? v.get("build").getAsString() : "";
+				return "remapped-paper-" + ver + "-" + build;
 			}
 		}
 		return null;

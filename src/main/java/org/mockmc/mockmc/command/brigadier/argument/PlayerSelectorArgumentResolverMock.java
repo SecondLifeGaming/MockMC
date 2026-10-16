@@ -56,50 +56,51 @@ public class PlayerSelectorArgumentResolverMock implements PlayerSelectorArgumen
 
 	private List<Player> resolveSelector(String selector, CommandSourceStack source)
 	{
-		switch (selector)
+		return switch (selector)
 		{
-			case "@a" :
-				return new ArrayList<>(Bukkit.getOnlinePlayers());
-			case "@p" :
-			{
-				org.bukkit.Location sourceLocation = source.getLocation();
-				org.bukkit.World sourceWorld = sourceLocation.getWorld();
-				if (sourceWorld == null)
-				{
-					return Collections.emptyList();
-				}
-				Player nearest = null;
-				double nearestDistance = Double.MAX_VALUE;
-				for (Player player : Bukkit.getOnlinePlayers())
-				{
-					if (!player.getWorld().equals(sourceWorld))
-					{
-						continue;
-					}
-					double distance = player.getLocation().distanceSquared(sourceLocation);
-					if (distance < nearestDistance)
-					{
-						nearestDistance = distance;
-						nearest = player;
-					}
-				}
-				return nearest != null ? List.of(nearest) : Collections.emptyList();
-			}
-			case "@r" :
-			{
-				List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-				if (players.isEmpty())
-				{
-					return Collections.emptyList();
-				}
-				Collections.shuffle(players);
-				return List.of(players.getFirst());
-			}
-			case "@s" :
-				return (source.getExecutor() instanceof Player player) ? List.of(player) : Collections.emptyList();
-			default :
-				return Collections.emptyList();
+			case "@a" -> new ArrayList<>(Bukkit.getOnlinePlayers());
+			case "@p" -> findNearestPlayer(source);
+			case "@r" -> getRandomPlayer();
+			case "@s" -> (source.getExecutor() instanceof Player player) ? List.of(player) : Collections.emptyList();
+			default -> Collections.emptyList();
+		};
+	}
+
+	private List<Player> findNearestPlayer(CommandSourceStack source)
+	{
+		org.bukkit.Location sourceLocation = source.getLocation();
+		org.bukkit.World sourceWorld = sourceLocation.getWorld();
+		if (sourceWorld == null)
+		{
+			return Collections.emptyList();
 		}
+		Player nearest = null;
+		double nearestDistance = Double.MAX_VALUE;
+		for (Player player : Bukkit.getOnlinePlayers())
+		{
+			if (!player.getWorld().equals(sourceWorld))
+			{
+				continue;
+			}
+			double distance = player.getLocation().distanceSquared(sourceLocation);
+			if (distance < nearestDistance)
+			{
+				nearestDistance = distance;
+				nearest = player;
+			}
+		}
+		return nearest != null ? List.of(nearest) : Collections.emptyList();
+	}
+
+	private List<Player> getRandomPlayer()
+	{
+		List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+		if (players.isEmpty())
+		{
+			return Collections.emptyList();
+		}
+		Collections.shuffle(players);
+		return List.of(players.getFirst());
 	}
 
 }

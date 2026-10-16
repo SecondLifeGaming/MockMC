@@ -26,6 +26,8 @@ public class BundleMetaMock extends ItemMetaMock
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.meta.BundleMetaBaseMock
 {
 
+	static final String BUNDLE_ITEMS = "items";
+
 	private List<ItemStack> items;
 
 	/**
@@ -132,9 +134,9 @@ public class BundleMetaMock extends ItemMetaMock
 	{
 		BundleMetaMock serialMock = new BundleMetaMock();
 		serialMock.deserializeInternal(args);
-		serialMock.items = args.get("items") == null
+		serialMock.items = args.get(BUNDLE_ITEMS) == null
 				? new ArrayList<>()
-				: SerializationUtils.deserialize((Collection<Object>) args.get("items"));
+				: SerializationUtils.deserialize((Collection<Object>) args.get(BUNDLE_ITEMS));
 		return serialMock;
 	}
 
@@ -149,7 +151,7 @@ public class BundleMetaMock extends ItemMetaMock
 	public Map<String, Object> serialize()
 	{
 		final Map<String, Object> serialized = super.serialize();
-		serialized.put("items", SerializationUtils.serialize(this.items));
+		serialized.put(BUNDLE_ITEMS, SerializationUtils.serialize(this.items));
 		return serialized;
 	}
 
