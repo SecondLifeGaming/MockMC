@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -113,4 +114,28 @@ class JarCrackerFailureTest
 		org.junit.jupiter.api.Assertions.assertTimeoutPreemptively(java.time.Duration.ofSeconds(60),
 				() -> JarCracker.runProcessSafely(pb, "noisy"));
 	}
+
+	@Test
+	void detectMcVersionExtractsVersionFromVersionsList(@TempDir Path root) throws IOException
+	{
+		File jar = root.resolve("paper-test.jar").toFile();
+		try (ZipOutputStream zos = new ZipOutputStream(Files.newOutputStream(jar.toPath())))
+		{
+			zos.putNextEntry(new ZipEntry("META-INF/versions.list"));
+			zos.write("07349f2a63fe23db4e5edd5ad44f0359f700f67f4afad8272ac2cfaf5f6fc1d7\t1.20.6\t1.20.6/paper-1.20.6.jar\n".getBytes());
+			zos.closeEntry();
+		}
+
+		assertEquals("1.20.6", JarCracker.detectMcVersion(jar));
+	}
+
+	@Test
+	void detectMcVersionFallbackWhenMissing(@TempDir Path root) throws IOException
+	{
+		File jar = root.resolve("no-versions.jar").toFile();
+		writeJar(jar, true);
+
+		assertEquals("1.21.1", JarCracker.detectMcVersion(jar));
+	}
 }
+

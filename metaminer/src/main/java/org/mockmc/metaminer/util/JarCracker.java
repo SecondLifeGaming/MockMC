@@ -216,7 +216,7 @@ public class JarCracker {
         }
     }
 
-    private static String detectMcVersion(File bundlerJar) throws IOException {
+    static String detectMcVersion(File bundlerJar) throws IOException {
         try (ZipFile zipFile = new ZipFile(bundlerJar)) {
             ZipEntry entry = zipFile.getEntry("META-INF/versions.list");
             if (entry != null) {
@@ -225,8 +225,11 @@ public class JarCracker {
                     String[] lines = content.split("\n");
                     if (lines.length > 0) {
                         String line = lines[0].trim();
-                        if (line.contains(DEFAULT_MC_VERSION)) return DEFAULT_MC_VERSION;
-                        if (line.contains("1.21")) return "1.21";
+                        // Format is: <sha256>\t<version>\t<jar-path>
+                        String[] parts = line.split("\\s+");
+                        if (parts.length >= 2 && !parts[1].isBlank()) {
+                            return parts[1].trim();
+                        }
                     }
                 }
             }
