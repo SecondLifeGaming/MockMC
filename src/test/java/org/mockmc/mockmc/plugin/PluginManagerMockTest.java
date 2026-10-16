@@ -279,6 +279,7 @@ class PluginManagerMockTest
 			@Override
 			public void run()
 			{
+				// No-op for test
 			}
 		};
 		runnable.runTaskTimer(plugin, 1, 1);

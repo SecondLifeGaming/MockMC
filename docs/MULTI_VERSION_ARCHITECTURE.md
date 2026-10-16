@@ -24,7 +24,7 @@ MockMC currently pins the following target platform builds in `build.gradle.kts`
 
 | Platform      | Pinned Artifact                  | Release Line     | Scope / Authority                                                                          |
 | ------------- | -------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
-| **Paper**     | `paper-26.3-157.jar`             | 26.3 (Primary)   | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
+| **Paper**     | `paper-26.3-178.jar`             | 26.3 (Primary)   | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
 | **Folia**     | `folia-26.2-7.jar`               | 26.2 (Extension) | **Platform-exclusive scope only**: `io.papermc.paper.threadedregions.*`.                   |
 | **Velocity**  | `velocity-4.2.1-SNAPSHOT-36.jar` | 4.2.1            | Proxy API: `com.velocitypowered.api.*`.                                                    |
 | **Waterfall** | `waterfall-1.21-615.jar`         | 1.21             | Proxy API: `net.md_5.bungee.*`.                                                            |
@@ -46,7 +46,7 @@ The generator scans and processes bytecode in three strictly ordered passes:
 
 ```
 +-----------------------------------------------------------------------+
-|  Pass 1: Canonical Paper Pass (paper-26.3-157)                         |
+|  Pass 1: Canonical Paper Pass (paper-26.3-178)                         |
 |  - Generates org.bukkit.* and io.papermc.paper.*                      |
 |  - Canonical authority for all shared server classes                   |
 +-----------------------------------------------------------------------+

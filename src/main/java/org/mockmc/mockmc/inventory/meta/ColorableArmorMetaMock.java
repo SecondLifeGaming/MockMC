@@ -18,6 +18,8 @@ public class ColorableArmorMetaMock extends ArmorMetaMock
 
 	static final int DEFAULT_LEATHER_COLOR = Color.fromRGB(0xA06540).asARGB();
 
+	static final String COLOR_KEY = "color";
+
 	@Nullable
 	private Integer color;
 
@@ -107,7 +109,7 @@ public class ColorableArmorMetaMock extends ArmorMetaMock
 		Map<String, Object> serialized = super.serialize();
 		if (this.isDyed())
 		{
-			serialized.put("color", this.getColor().serialize());
+			serialized.put(COLOR_KEY, this.getColor().serialize());
 		}
 		return serialized;
 	}
@@ -116,9 +118,9 @@ public class ColorableArmorMetaMock extends ArmorMetaMock
 	protected void deserializeInternal(@NotNull Map<String, Object> args)
 	{
 		super.deserializeInternal(args);
-		if (args.containsKey("color"))
+		if (args.containsKey(COLOR_KEY))
 		{
-			this.color = Color.deserialize(NbtParser.parseMap(args.get("color"), NbtParser::parseDouble)).asARGB();
+			this.color = Color.deserialize(NbtParser.parseMap(args.get(COLOR_KEY), NbtParser::parseDouble)).asARGB();
 		}
 	}
 

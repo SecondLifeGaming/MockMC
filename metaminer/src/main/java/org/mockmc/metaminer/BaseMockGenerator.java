@@ -1420,32 +1420,46 @@ public class BaseMockGenerator implements DataGenerator {
     private File findPrimaryPaperJar(List<File> paperJars) {
         File versionsJson = new File(jarDirectory, "manifests/versions.json");
         if (versionsJson.exists()) {
-            try {
-                com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(new java.io.FileReader(versionsJson)).getAsJsonObject();
-                com.google.gson.JsonObject platforms = root.getAsJsonObject("platforms");
-                if (platforms != null && platforms.has("paper")) {
-                    com.google.gson.JsonArray versions = platforms.getAsJsonObject("paper").getAsJsonArray("versions");
-                    for (var elem : versions) {
-                        com.google.gson.JsonObject vObj = elem.getAsJsonObject();
-                        if (vObj.has("primary") && vObj.get("primary").getAsBoolean()) {
-                            String v = vObj.get("version").getAsString();
-                            int b = vObj.get("build").getAsInt();
-                            for (File pj : paperJars) {
-                                if (pj.getName().contains(v) && pj.getName().contains(String.valueOf(b))) {
-                                    return pj;
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                LOGGER.log(Level.WARNING, "Failed to parse versions.json for primary paper-api jar: {0}", e.getMessage());
+            File primaryFromManifest = findPrimaryFromManifest(versionsJson, paperJars);
+            if (primaryFromManifest != null) {
+                return primaryFromManifest;
             }
         }
         // Fallback: pick the latest jar by version
         return paperJars.stream()
                 .max(Comparator.comparing(File::getName))
                 .orElse(paperJars.get(0));
+    }
+
+    private File findPrimaryFromManifest(File versionsJson, List<File> paperJars) {
+        try (java.io.FileReader reader = new java.io.FileReader(versionsJson)) {
+            com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
+            com.google.gson.JsonObject platforms = root.getAsJsonObject("platforms");
+            if (platforms == null || !platforms.has(PAPER)) {
+                return null;
+            }
+            com.google.gson.JsonArray versions = platforms.getAsJsonObject(PAPER).getAsJsonArray("versions");
+            for (var elem : versions) {
+                com.google.gson.JsonObject vObj = elem.getAsJsonObject();
+                if (vObj.has("primary") && vObj.get("primary").getAsBoolean()) {
+                    String v = vObj.get("version").getAsString();
+                    int b = vObj.get("build").getAsInt();
+                    return matchJarVersion(paperJars, v, b);
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, "Failed to parse versions.json for primary paper-api jar: {0}", e.getMessage());
+        }
+        return null;
+    }
+
+    private File matchJarVersion(List<File> paperJars, String version, int build) {
+        for (File pj : paperJars) {
+            if (pj.getName().contains(version) && pj.getName().contains(String.valueOf(build))) {
+                return pj;
+            }
+        }
+        return null;
     }
 
     private Set<String> readPaperEntries(File paperApiJar) {

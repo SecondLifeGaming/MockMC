@@ -35,6 +35,8 @@ import org.mockmc.mockmc.entity.PlayerMock;
 public class PlayerSimulation
 {
 
+	private static final String BLOCK_CANNOT_BE_NULL = "Block cannot be null";
+
 	private final PlayerMock playerMock;
 
 	public PlayerSimulation(PlayerMock playerMock)
@@ -94,7 +96,7 @@ public class PlayerSimulation
 	 */
 	private @NotNull BlockDamageEvent simulateBlockDamagePure(@NotNull Block block)
 	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
+		Preconditions.checkNotNull(block, BLOCK_CANNOT_BE_NULL);
 		BlockDamageEvent event = new BlockDamageEvent(playerMock, block, playerMock.getItemInHand(), false);
 		Bukkit.getPluginManager().callEvent(event);
 		return event;
@@ -114,7 +116,7 @@ public class PlayerSimulation
 	 */
 	public @Nullable BlockDamageEvent simulateBlockDamage(@NotNull Block block)
 	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
+		Preconditions.checkNotNull(block, BLOCK_CANNOT_BE_NULL);
 		if (playerMock.getGameMode() != GameMode.SURVIVAL)
 		{
 			return null;
@@ -146,7 +148,7 @@ public class PlayerSimulation
 	 */
 	public @Nullable BlockBreakEvent simulateBlockBreak(@NotNull Block block)
 	{
-		Preconditions.checkNotNull(block, "Block cannot be null");
+		Preconditions.checkNotNull(block, BLOCK_CANNOT_BE_NULL);
 		if ((playerMock.getGameMode() == GameMode.SPECTATOR || playerMock.getGameMode() == GameMode.ADVENTURE)
 				|| (playerMock.getGameMode() == GameMode.SURVIVAL && simulateBlockDamagePure(block).isCancelled()))
 		{

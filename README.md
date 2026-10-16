@@ -1,10 +1,17 @@
 <p align="center">
     <!-- Badges -->
-    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
-        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
+    <a href="https://secondlifegaming.github.io/MockMC/">
+        <img alt="Documentation" src="https://img.shields.io/badge/docs-GitHub%20Pages-blue?style=flat&logo=github" />
+    </a>
+    <a href="https://secondlifegaming.github.io/MockMC/explorer/">
+        <img alt="API Explorer" src="https://img.shields.io/badge/API%20Explorer-Paper%20%26%20Folia-brightgreen?style=flat" />
     </a>
     <a href="https://github.com/SecondLifeGaming/MockMC/releases">
         <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
+    </a>
+    <br />
+    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
+        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
     </a>
     <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC">
         <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells">
@@ -24,6 +31,17 @@
 MockMC is an automated, type-safe testing framework for the modern Minecraft ecosystem, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project.
 
 While MockBukkit is built exclusively for the Bukkit/Paper backend with handcrafted in-game simulation, MockMC expands testing across **the entire server and proxy stack — Paper, Folia (regional multithreading), Velocity, and Waterfall** — powered by an automated bytecode generation engine that provides 100% compile-safe method coverage.
+
+---
+
+## 📚 Documentation & Developer Reference
+
+Explore our interactive guides and API compatibility explorer:
+
+- 🌐 **[Developer Documentation Hub](https://secondlifegaming.github.io/MockMC/)**: Comprehensive setup guides, testing recipes, and architecture documentation.
+- 🔍 **[Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/)**: Instant version-range diffs (Added, Breaking, Deprecated) across validated Paper and Folia releases (26.2 → 26.3) covering 16,000+ API symbols.
+- 🚀 **[Multi-Version Testing Guide](https://secondlifegaming.github.io/MockMC/guides/multi-version-testing)**: How to structure tests across Paper, Folia, Velocity, and Waterfall in a single test suite.
+- 🧪 **[Your First MockMC Test](https://secondlifegaming.github.io/MockMC/guides/first-test)**: Step-by-step tutorial on bootstrapping server mocks and testing plugin events.
 
 ---
 
@@ -56,7 +74,7 @@ MockMC does not dynamically pull arbitrary snapshots; it operates on an **explic
 
 | Platform      | Pinned Target Build          | Role in MockMC          | Scope                                                            |
 | ------------- | ---------------------------- | ----------------------- | ---------------------------------------------------------------- |
-| **Paper**     | `paper-26.3-157`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
+| **Paper**     | `paper-26.3-178`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
 | **Folia**     | `folia-26.2-7`               | **Platform Extension**  | Region schedulers (`io.papermc.paper.threadedregions.*`)         |
 | **Velocity**  | `velocity-4.2.1-SNAPSHOT-36` | **Proxy Extension**     | Velocity API (`com.velocitypowered.api.*`)                       |
 | **Waterfall** | `waterfall-1.21-615`         | **Proxy Extension**     | BungeeCord/Waterfall API (`net.md_5.bungee.*`)                   |
@@ -93,7 +111,7 @@ repositories {
 dependencies {
     // Pinned release line
     testImplementation("io.github.secondlifegaming:mockmc:0.0.5")
-    testImplementation("io.papermc.paper:paper-api:26.3.build.157-beta")
+    testImplementation("io.papermc.paper:paper-api:26.3.build.178-stable")
 }
 ```
 
@@ -123,10 +141,11 @@ Add the Paper repository mapping and the library dependencies to your plugin’s
     <dependency>
         <groupId>io.papermc.paper</groupId>
         <artifactId>paper-api</artifactId>
-        <version>26.3.build.157-beta</version>
+        <version>26.3.build.178-stable</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
+```
 ```
 
 </details>

@@ -1,8 +1,18 @@
 name: Build
-
+ 
 on:
+  push:
+    branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: 'build-and-docs'
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -30,3 +40,72 @@ jobs:
       - name: Run unit tests
         timeout-minutes: 160
         run: ./gradlew testAllBackends --refresh-dependencies
+
+      - name: Upload Generated Documentation Data Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-doc-data
+          path: site/docs/public/data/
+          retention-days: 1
+
+  docs:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Download Generated Documentation Data Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-doc-data
+          path: site/docs/public/data/
+
+      - name: Validate Generated Documentation Data
+        run: |
+          test -s site/docs/public/data/explorer-meta.json || { echo "explorer-meta.json is missing or empty!"; exit 1; }
+          test -s site/docs/public/data/search-index.json || { echo "search-index.json is missing or empty!"; exit 1; }
+          test -d site/docs/public/data/pages || { echo "pages directory missing!"; exit 1; }
+          [ $(ls -1 site/docs/public/data/pages/page-*.json | wc -l) -gt 0 ] || { echo "no page chunks found!"; exit 1; }
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: 'site/package-lock.json'
+
+      - name: Install Site Dependencies
+        working-directory: site
+        run: npm ci
+
+      - name: Build VitePress Site (with dead-link checks)
+        working-directory: site
+        run: npm run docs:build
+
+      - name: Upload PR Site Preview Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitepress-preview-site
+          path: site/docs/.vitepress/dist
+          retention-days: 5
+
+      - name: Upload GitHub Pages Artifact
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/docs/.vitepress/dist
+
+  deploy-docs:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: docs
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

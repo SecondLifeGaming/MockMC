@@ -7,9 +7,11 @@ public class CraftWorld
 {
 	public CraftWorld()
 	{
+		// Dummy constructor to satisfy NBTAPI reflection
 	}
 	public CraftWorld(Object handle)
 	{
+		// Dummy handle constructor to satisfy NBTAPI reflection
 	}
 	public Object getHandle()
 	{

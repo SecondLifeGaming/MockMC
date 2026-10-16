@@ -285,7 +285,7 @@ class ServerMockTest
 	@Test
 	void getBukkitVersion_CorrectPattern()
 	{
-		assertTrue(server.getBukkitVersion().matches("\\d+\\.\\d+.*"));
+		assertTrue(java.util.regex.Pattern.compile("^\\d+\\.\\d+").matcher(server.getBukkitVersion()).find());
 	}
 
 	@Test

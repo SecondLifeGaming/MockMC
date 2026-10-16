@@ -43,7 +43,7 @@ public class MetaMiner extends JavaPlugin
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				this.getLogger().log(Level.SEVERE, e, () -> "Failed to generate data with " + dataGenerator.getClass().getSimpleName());
 				return;
 			}
 		}

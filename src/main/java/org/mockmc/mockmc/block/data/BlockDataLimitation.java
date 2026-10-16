@@ -138,6 +138,7 @@ public class BlockDataLimitation<T, U>
 			return constructor.apply(jsonElement);
 		}
 
+		@SuppressWarnings("java:S1452")
 		public static Type<?, ?> fromKey(String key)
 		{
 			return KEYS.get(key);

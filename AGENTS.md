@@ -18,16 +18,17 @@
 
 ## 🗺️ Knowledge Index
 
-| Context Trigger           | Document to Read                               | Description                                          |
-| :------------------------ | :--------------------------------------------- | :--------------------------------------------------- |
-| **New Implementation**    | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Engine pipeline, smart stub logic, JAR requirements. |
-| **Multi-Version Pipeline**| [`docs/MULTI_VERSION_ARCHITECTURE.md`](docs/MULTI_VERSION_ARCHITECTURE.md) | Canonical Paper, artifact pinning, extension bounds. |
-| **Version Matrix**        | [`docs/VERSION_SUPPORT.md`](docs/VERSION_SUPPORT.md) | Supported platform tiers and consumer coordinates.  |
-| **Coverage & Auditing**   | [`docs/GENERATOR_AND_COVERAGE.md`](docs/GENERATOR_AND_COVERAGE.md) | Structural accounting metrics and exclusions.       |
-| **Logic/Registration**    | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Metaminer internals and generated mock layout.       |
-| **Task Priority**         | [`TODO.md`](TODO.md)                           | Current phases (Phase 6 Functional Depth).           |
-| **Missing/Incorrect API** | `metaminer/.../BaseMockGenerator.java`         | Source of truth for generation.                      |
-| **Multi-Agent Workflow**  | [`AGENTS_PROTOCOL.md`](AGENTS_PROTOCOL.md)     | Auditor / Architect / Coder role definitions.        |
+| Context Trigger             | Document to Read                                                           | Description                                           |
+| :-------------------------- | :------------------------------------------------------------------------- | :---------------------------------------------------- |
+| **New Implementation**      | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)                             | Engine pipeline, smart stub logic, JAR requirements.  |
+| **Multi-Version Pipeline**  | [`docs/MULTI_VERSION_ARCHITECTURE.md`](docs/MULTI_VERSION_ARCHITECTURE.md) | Canonical Paper, artifact pinning, extension bounds.  |
+| **Version Matrix**          | [`docs/VERSION_SUPPORT.md`](docs/VERSION_SUPPORT.md)                       | Supported platform tiers and consumer coordinates.    |
+| **Coverage & Auditing**     | [`docs/GENERATOR_AND_COVERAGE.md`](docs/GENERATOR_AND_COVERAGE.md)         | Structural accounting metrics and exclusions.         |
+| **Logic/Registration**      | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)                             | Metaminer internals and generated mock layout.        |
+| **Task Priority**           | [`TODO.md`](TODO.md)                                                       | Current phases (Phase 6 Functional Depth).            |
+| **Missing/Incorrect API**   | `metaminer/.../BaseMockGenerator.java`                                     | Source of truth for generation.                       |
+| **Multi-Agent Workflow**    | [`AGENTS_PROTOCOL.md`](AGENTS_PROTOCOL.md)                                 | Auditor / Architect / Coder role definitions.         |
+| **Developer Reference RFC** | [`docs/RFC_DEVELOPER_WIKI.md`](docs/RFC_DEVELOPER_WIKI.md)                 | Version-aware developer reference & API explorer RFC. |
 
 ---
 

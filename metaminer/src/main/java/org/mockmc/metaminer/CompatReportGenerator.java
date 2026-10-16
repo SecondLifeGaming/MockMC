@@ -1,270 +1,135 @@
 package org.mockmc.metaminer;
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.MethodNode;
+import org.mockmc.metaminer.diff.CompatMarkdownRenderer;
+import org.mockmc.metaminer.diff.PairwiseDiff;
+import org.mockmc.metaminer.diff.VersionDiffEngine;
+import org.mockmc.metaminer.manifest.ApiManifest;
+import org.mockmc.metaminer.manifest.BytecodeManifestScanner;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Compares the primary API (Paper) against the fallback API (Folia) and writes {@code COMPAT.md}.
- * <p>
- * The primary API always wins at compile time. Classes that exist only in the fallback API are still
- * mocked so that plugins built against an older Folia keep working. Methods whose shape differs
- * between the two APIs can only be mocked in the primary shape, so they are listed here for review.
- * Classes are read with ASM rather than loaded, so missing optional dependencies cannot cause linkage errors.
+ * Modernized compatibility report generator that scans upstream platform JARs
+ * into canonical ApiManifest structures and computes deterministic diffs via
+ * VersionDiffEngine, emitting COMPAT.md.
  */
-public class CompatReportGenerator implements DataGenerator
-{
+public class CompatReportGenerator implements DataGenerator {
+
 	private static final Logger LOGGER = Logger.getLogger(CompatReportGenerator.class.getName());
 
-	private static final List<String> API_PREFIXES = List.of("org/bukkit/", "org/spigotmc/", "co/aikar/timings/",
-			"com/destroystokyo/paper/", "io/papermc/paper/");
-
-	private static final int MAX_LISTED_PER_SECTION = 250;
+	private static final List<String> API_PREFIXES = List.of(
+			"org.bukkit",
+			"io.papermc.paper",
+			"com.destroystokyo.paper",
+			"co.aikar.timings"
+	);
 
 	private final File dataFolder;
 
-	public CompatReportGenerator(File dataFolder)
-	{
+	public CompatReportGenerator(File dataFolder) {
 		this.dataFolder = dataFolder;
 	}
 
 	@Override
-	public void generateData() throws IOException
-	{
+	public void generateData() throws IOException {
 		File cacheDir = new File(dataFolder, "jars/cache");
 		File primary = findLatestJar(cacheDir, "remapped-paper-", "paper-api-");
 		File fallback = findLatestJar(cacheDir, "remapped-folia-", "folia-api-");
-		if (primary == null || fallback == null)
-		{
+
+		if (primary == null || fallback == null) {
 			LOGGER.log(Level.WARNING, "Skipping CompatReportGenerator: paper ({0}) or folia ({1}) not found",
-					new Object[]
-					{primary, fallback});
+					new Object[]{primary, fallback});
 			return;
 		}
-		LOGGER.log(Level.INFO, "Comparing primary {0} against fallback {1}", new Object[]
-		{primary.getName(), fallback.getName()});
 
-		Map<String, Set<String>> primaryApi = readApi(primary);
-		Map<String, Set<String>> fallbackApi = readApi(fallback);
+		LOGGER.log(Level.INFO, "Scanning and comparing primary {0} against fallback {1}",
+				new Object[]{primary.getName(), fallback.getName()});
 
-		Set<String> onlyPrimary = new TreeSet<>(primaryApi.keySet());
-		onlyPrimary.removeAll(fallbackApi.keySet());
-		Set<String> onlyFallback = new TreeSet<>(fallbackApi.keySet());
-		onlyFallback.removeAll(primaryApi.keySet());
+		BytecodeManifestScanner.ScanConfiguration fallbackConfig = new BytecodeManifestScanner.ScanConfiguration(
+				"folia",
+				extractVersion(fallback.getName()),
+				0,
+				"extension",
+				"metaminer",
+				"unknown",
+				false,
+				"none",
+				"none",
+				"ASM9_8",
+				API_PREFIXES,
+				List.of(),
+				List.of(),
+				true,
+				"Fallback extension"
+		);
 
-		Map<String, Set<String>> methodsOnlyInFallback = new TreeMap<>();
-		Map<String, Set<String>> methodsOnlyInPrimary = new TreeMap<>();
-		for (Map.Entry<String, Set<String>> entry : primaryApi.entrySet())
-		{
-			Set<String> fallbackMethods = fallbackApi.get(entry.getKey());
-			if (fallbackMethods == null)
-			{
-				continue;
-			}
-			Set<String> removed = new TreeSet<>(fallbackMethods);
-			removed.removeAll(entry.getValue());
-			if (!removed.isEmpty())
-			{
-				methodsOnlyInFallback.put(entry.getKey(), removed);
-			}
-			Set<String> added = new TreeSet<>(entry.getValue());
-			added.removeAll(fallbackMethods);
-			if (!added.isEmpty())
-			{
-				methodsOnlyInPrimary.put(entry.getKey(), added);
-			}
-		}
+		BytecodeManifestScanner.ScanConfiguration primaryConfig = new BytecodeManifestScanner.ScanConfiguration(
+				"paper",
+				extractVersion(primary.getName()),
+				0,
+				"canonical",
+				"metaminer",
+				"unknown",
+				false,
+				"none",
+				"none",
+				"ASM9_8",
+				API_PREFIXES,
+				List.of(),
+				List.of(),
+				false,
+				null
+		);
+
+		ApiManifest fallbackManifest = BytecodeManifestScanner.scanJar(fallback, fallbackConfig);
+		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primary, primaryConfig);
+
+		PairwiseDiff diff = VersionDiffEngine.computeDiff(fallbackManifest, primaryManifest);
 
 		File report = new File(dataFolder, "COMPAT.md");
-		try (PrintWriter out = new PrintWriter(report, StandardCharsets.UTF_8))
-		{
-			out.println("# API Compatibility Report");
-			out.println();
-			out.println("> Generated by `CompatReportGenerator`. Do not edit manually.");
-			out.println();
-			out.println("- **Primary API** (wins at compile time): `" + primary.getName() + "`");
-			out.println("- **Fallback API** (fills gaps only): `" + fallback.getName() + "`");
-			out.println();
-			out.println("| Category | Count |");
-			out.println("| --- | --- |");
-			out.println("| Classes only in fallback (still mocked) | " + onlyFallback.size() + " |");
-			out.println("| Classes only in primary (new) | " + onlyPrimary.size() + " |");
-			out.println("| Shared classes with methods only in fallback | " + methodsOnlyInFallback.size() + " |");
-			out.println("| Shared classes with methods only in primary | " + methodsOnlyInPrimary.size() + " |");
-			out.println();
-			writeClassSection(out, "Classes only in fallback API",
-					"Mocked from the fallback API. Plugins built for the older API keep working; add a shim if behavior is needed.",
-					onlyFallback);
-			writeClassSection(out, "Classes only in primary API",
-					"New in the primary API. Not present when running on the fallback backend.", onlyPrimary);
-			writeMethodSection(out, "Methods only in fallback API",
-					"Removed or changed in the primary API. Mocks use the primary shape, so plugins calling these on the fallback backend may fail.",
-					methodsOnlyInFallback);
-			writeMethodSection(out, "Methods only in primary API",
-					"New in the primary API. Missing when running on the fallback backend.", methodsOnlyInPrimary);
-		}
-		LOGGER.log(Level.INFO, "Compatibility report generated at {0}", report.getAbsolutePath());
+		CompatMarkdownRenderer.renderToMarkdown(diff, report, primary.getName(), fallback.getName());
+
+		LOGGER.log(Level.INFO, "Deterministic compatibility report generated at {0}", report.getAbsolutePath());
 	}
 
-	private static File findLatestJar(File dir, String... prefixes) throws IOException
-	{
+	private static String extractVersion(String jarName) {
+		String name = jarName.replace(".jar", "");
+		for (String prefix : List.of("remapped-paper-", "remapped-folia-", "paper-api-", "folia-api-")) {
+			if (name.startsWith(prefix)) {
+				return name.substring(prefix.length());
+			}
+		}
+		return name;
+	}
+
+	private static File findLatestJar(File dir, String... prefixes) {
 		List<File> found = new ArrayList<>();
 		collectJars(dir, prefixes, found);
 		return found.stream().max(Comparator.comparing(File::getPath)).orElse(null);
 	}
 
-	private static void collectJars(File dir, String[] prefixes, List<File> found) throws IOException
-	{
+	private static void collectJars(File dir, String[] prefixes, List<File> found) {
 		File[] files = dir.listFiles();
-		if (files == null)
-		{
+		if (files == null) {
 			return;
 		}
-		for (File f : files)
-		{
-			if (f.isDirectory())
-			{
+		for (File f : files) {
+			if (f.isDirectory()) {
 				collectJars(f, prefixes, found);
-			} else if (f.getName().endsWith(".jar"))
-			{
-				for (String prefix : prefixes)
-				{
-					if (f.getName().startsWith(prefix))
-					{
+			} else if (f.getName().endsWith(".jar")) {
+				for (String prefix : prefixes) {
+					if (f.getName().startsWith(prefix)) {
 						found.add(f);
 						break;
 					}
 				}
 			}
 		}
-	}
-
-	private static Map<String, Set<String>> readApi(File jar) throws IOException
-	{
-		Map<String, Set<String>> api = new TreeMap<>();
-		try (JarFile jarFile = new JarFile(jar))
-		{
-			Enumeration<JarEntry> entries = jarFile.entries();
-			while (entries.hasMoreElements())
-			{
-				JarEntry entry = entries.nextElement();
-				String name = entry.getName();
-				if (name.endsWith(".class") && !name.contains("$") && isApiClass(name))
-				{
-					readApiEntry(jarFile, entry, api);
-				}
-			}
-		}
-		return api;
-	}
-
-	private static void readApiEntry(JarFile jarFile, JarEntry entry, Map<String, Set<String>> api) throws IOException
-	{
-		try (InputStream in = jarFile.getInputStream(entry))
-		{
-			ClassNode node = new ClassNode();
-			new ClassReader(in).accept(node, ClassReader.SKIP_CODE | ClassReader.SKIP_DEBUG);
-			if ((node.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) == 0)
-			{
-				return;
-			}
-			Set<String> methods = new TreeSet<>();
-			for (MethodNode m : node.methods)
-			{
-				boolean visible = (m.access & (Opcodes.ACC_PUBLIC | Opcodes.ACC_PROTECTED)) != 0;
-				boolean synthetic = (m.access & (Opcodes.ACC_SYNTHETIC | Opcodes.ACC_BRIDGE)) != 0;
-				if (visible && !synthetic)
-				{
-					methods.add(m.name + m.desc);
-				}
-			}
-			api.put(node.name.replace('/', '.'), methods);
-		}
-	}
-
-	private static boolean isApiClass(String path)
-	{
-		for (String prefix : API_PREFIXES)
-		{
-			if (path.startsWith(prefix))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
-
-	private static void writeClassSection(PrintWriter out, String title, String note, Set<String> classes)
-	{
-		out.println("## " + title);
-		out.println();
-		out.println(note);
-		out.println();
-		if (classes.isEmpty())
-		{
-			out.println("_None._");
-			out.println();
-			return;
-		}
-		int listed = 0;
-		for (String c : classes)
-		{
-			if (listed++ >= MAX_LISTED_PER_SECTION)
-			{
-				out.println("- _... and " + (classes.size() - MAX_LISTED_PER_SECTION) + " more_");
-				break;
-			}
-			out.println("- `" + c + "`");
-		}
-		out.println();
-	}
-
-	private static void writeMethodSection(PrintWriter out, String title, String note,
-			Map<String, Set<String>> methodsByClass)
-	{
-		out.println("## " + title);
-		out.println();
-		out.println(note);
-		out.println();
-		if (methodsByClass.isEmpty())
-		{
-			out.println("_None._");
-			out.println();
-			return;
-		}
-		int listed = 0;
-		for (Map.Entry<String, Set<String>> entry : methodsByClass.entrySet())
-		{
-			if (listed++ >= MAX_LISTED_PER_SECTION)
-			{
-				out.println("- _... and " + (methodsByClass.size() - MAX_LISTED_PER_SECTION) + " more classes_");
-				break;
-			}
-			out.println("- `" + entry.getKey() + "`");
-			for (String method : entry.getValue())
-			{
-				out.println("  - `" + method + "`");
-			}
-		}
-		out.println();
 	}
 }

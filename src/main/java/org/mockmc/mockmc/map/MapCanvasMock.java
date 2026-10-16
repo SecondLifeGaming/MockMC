@@ -146,35 +146,46 @@ public class MapCanvasMock implements org.mockmc.mockmc.generated.server.org.buk
 				x = initX;
 				y += font.getHeight() + 1;
 				continue;
-			} else if (c == ChatColor.COLOR_CHAR)
+			}
+			if (c == ChatColor.COLOR_CHAR)
 			{
 				int idx = text.indexOf(';', i);
 				if (idx == -1)
 				{
 					throw new IllegalArgumentException("Text contains unterminated color string");
 				}
-				try
-				{
-					color = Byte.parseByte(text.substring(i + 1, idx));
-					i = idx;
-					continue;
-				} catch (NumberFormatException ignored)
-				{
-				}
+				color = parseColorByte(text, i + 1, idx, color);
+				i = idx;
+				continue;
 			}
 			MapFont.CharacterSprite sprite = font.getChar(text.charAt(i));
-			for (int h = 0; h < font.getHeight(); h++)
+			renderCharacterSprite(x, y, color, font.getHeight(), sprite);
+			x += sprite.getWidth() + 1;
+		}
+	}
+
+	private byte parseColorByte(String text, int start, int end, byte defaultColor)
+	{
+		try
+		{
+			return Byte.parseByte(text.substring(start, end));
+		} catch (NumberFormatException _)
+		{
+			return defaultColor;
+		}
+	}
+
+	private void renderCharacterSprite(int x, int y, byte color, int fontHeight, MapFont.CharacterSprite sprite)
+	{
+		for (int h = 0; h < fontHeight; h++)
+		{
+			for (int w = 0; w < sprite.getWidth(); w++)
 			{
-				for (int w = 0; w < sprite.getWidth(); w++)
+				if (sprite.get(h, w))
 				{
-					if (!sprite.get(h, w))
-					{
-						continue;
-					}
 					this.setPixel(x + w, y + h, color);
 				}
 			}
-			x += sprite.getWidth() + 1;
 		}
 	}
 

@@ -31,6 +31,8 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 
 	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
 
+	private static final String CRITERIA_CANNOT_BE_NULL = "Criteria cannot be null";
+
 	@NotNull
 	private final Map<String, ObjectiveMock> objectives = new HashMap<>();
 
@@ -79,7 +81,7 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 			@Nullable Component displayName, @NotNull RenderType renderType) throws IllegalArgumentException
 	{
 		Preconditions.checkNotNull(name, "Objective name cannot be null");
-		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(criteria, CRITERIA_CANNOT_BE_NULL);
 		Preconditions.checkNotNull(renderType, "RenderType cannot be null");
 		Preconditions.checkArgument(name.length() <= Short.MAX_VALUE,
 				"The name '%s' is longer than the limit of %d characters", name, Short.MAX_VALUE);
@@ -135,7 +137,7 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 	@NotNull
 	public Set<Objective> getObjectivesByCriteria(@NotNull String criteria) throws IllegalArgumentException
 	{
-		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(criteria, CRITERIA_CANNOT_BE_NULL);
 		return objectives.values().stream().filter(objective -> objective.getCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}
@@ -144,7 +146,7 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 	@NotNull
 	public Set<Objective> getObjectivesByCriteria(@NotNull Criteria criteria) throws IllegalArgumentException
 	{
-		Preconditions.checkNotNull(criteria, "Criteria cannot be null");
+		Preconditions.checkNotNull(criteria, CRITERIA_CANNOT_BE_NULL);
 		return objectives.values().stream().filter(objective -> objective.getTrackedCriteria().equals(criteria))
 				.collect(Collectors.toSet());
 	}

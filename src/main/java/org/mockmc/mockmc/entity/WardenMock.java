@@ -26,6 +26,8 @@ public class WardenMock extends MonsterMock
 			org.mockmc.mockmc.generated.server.org.bukkit.entity.WardenBaseMock
 {
 
+	private static final String ENTITY_CANNOT_BE_NULL = "Entity cannot be null";
+
 	private final Map<Entity, Integer> angerPerEntity = new HashMap<>();
 	private Location disturbanceLocation;
 	private int sonicBoomCooldown = 0;
@@ -53,14 +55,14 @@ public class WardenMock extends MonsterMock
 	@Override
 	public int getAnger(@NotNull Entity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		return angerPerEntity.getOrDefault(entity, 0);
 	}
 
 	@Override
 	public void increaseAnger(@NotNull Entity entity, int increase)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		int currentAnger = angerPerEntity.getOrDefault(entity, 0);
 		setAnger(entity, currentAnger + increase);
 	}
@@ -68,7 +70,7 @@ public class WardenMock extends MonsterMock
 	@Override
 	public void setAnger(@NotNull Entity entity, int anger)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		Preconditions.checkArgument(anger >= 0 && anger <= 150, "Anger must be between 0 and 150");
 		angerPerEntity.put(entity, anger);
 	}
@@ -76,7 +78,7 @@ public class WardenMock extends MonsterMock
 	@Override
 	public void clearAnger(@NotNull Entity entity)
 	{
-		Preconditions.checkNotNull(entity, "Entity cannot be null");
+		Preconditions.checkNotNull(entity, ENTITY_CANNOT_BE_NULL);
 		angerPerEntity.remove(entity);
 	}
 

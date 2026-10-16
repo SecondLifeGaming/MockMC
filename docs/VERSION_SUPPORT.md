@@ -21,7 +21,7 @@ MockMC classifies upstream server versions into four distinct lifecycle categori
 
 | Platform       | Pinned Version / Build      | Status Tier           | Canonical Surface                          | Tested Via                |
 | -------------- | --------------------------- | --------------------- | ------------------------------------------ | ------------------------- |
-| **Paper**      | `26.3` (Build 157)          | **Tier 1: Canonical** | `org.bukkit.*`, `io.papermc.paper.*`       | `./gradlew testPaper`     |
+| **Paper**      | `26.3` (Build 178)          | **Tier 1: Canonical** | `org.bukkit.*`, `io.papermc.paper.*`       | `./gradlew testPaper`     |
 | **Folia**      | `26.2` (Build 7)            | **Tier 2: Extension** | `io.papermc.paper.threadedregions.*`       | `./gradlew testFolia`     |
 | **Velocity**   | `4.2.1-SNAPSHOT` (Build 36) | **Tier 2: Extension** | `com.velocitypowered.api.*`                | `./gradlew testVelocity`  |
 | **Waterfall**  | `1.21` (Build 615)          | **Tier 2: Extension** | `net.md_5.bungee.*`                        | `./gradlew testWaterfall` |
@@ -42,7 +42,7 @@ MockMC classifies upstream server versions into four distinct lifecycle categori
 > [!IMPORTANT]
 > **A pinned fallback is not the same as native version parity.**
 >
-> When MockMC includes `folia-26.2-7.jar` alongside `paper-26.3-157.jar`, MockMC **does not** claim native Folia 26.3 support. Instead:
+> When MockMC includes `folia-26.2-7.jar` alongside `paper-26.3-178.jar`, MockMC **does not** claim native Folia 26.3 support. Instead:
 >
 > 1. Folia-specific threading and regional scheduling APIs (`io.papermc.paper.threadedregions.*`) are supplied by the 26.2 build so plugins compiling against Folia APIs can run tests.
 > 2. All general Bukkit and Paper APIs are supplied by Paper 26.3.
@@ -64,7 +64,7 @@ repositories {
 dependencies {
     // Current primary release line
     testImplementation("io.github.secondlifegaming:mockmc:0.0.5") // Or versioned line: mockmc-v26.2
-    testImplementation("io.papermc.paper:paper-api:26.3-R0.1-SNAPSHOT")
+    testImplementation("io.papermc.paper:paper-api:26.3.build.178-stable")
 }
 ```
 

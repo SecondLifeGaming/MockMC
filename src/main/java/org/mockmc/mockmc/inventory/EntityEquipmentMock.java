@@ -27,6 +27,8 @@ public class EntityEquipmentMock
 			org.mockmc.mockmc.generated.server.org.bukkit.inventory.EntityEquipmentBaseMock
 {
 
+	private static final String SLOT_CANNOT_BE_NULL = "Slot cannot be null";
+
 	@NotNull
 	private final LivingEntityMock holder;
 
@@ -71,14 +73,14 @@ public class EntityEquipmentMock
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_CANNOT_BE_NULL);
 		setItem(slot, item, false);
 	}
 
 	@Override
 	public void setItem(@NotNull EquipmentSlot slot, @Nullable ItemStack item, boolean silent)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_CANNOT_BE_NULL);
 		switch (slot)
 		{
 			case HEAD -> setHelmet(item, silent);
@@ -116,7 +118,7 @@ public class EntityEquipmentMock
 	@NotNull
 	public ItemStack getItem(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_CANNOT_BE_NULL);
 		return switch (slot)
 		{
 			case CHEST -> getChestplate();
@@ -394,7 +396,7 @@ public class EntityEquipmentMock
 	@Override
 	public void setDropChance(@NotNull EquipmentSlot slot, float chance)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_CANNOT_BE_NULL);
 		Preconditions.checkArgument(holder instanceof Mob, "Cannot set drop chance for non-Mob entity");
 		this.dropChances.put(slot, chance);
 	}
@@ -402,7 +404,7 @@ public class EntityEquipmentMock
 	@Override
 	public float getDropChance(@NotNull EquipmentSlot slot)
 	{
-		Preconditions.checkNotNull(slot, "Slot cannot be null");
+		Preconditions.checkNotNull(slot, SLOT_CANNOT_BE_NULL);
 		return this.dropChances.get(slot);
 	}
 

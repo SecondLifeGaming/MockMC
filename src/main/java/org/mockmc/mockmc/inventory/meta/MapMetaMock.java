@@ -34,6 +34,8 @@ public class MapMetaMock extends ItemMetaMock
 	@Nullable
 	private MapView mapView;
 
+	private static final String MAP_COLOR = "color";
+
 	@Nullable
 	private Color color;
 
@@ -208,9 +210,9 @@ public class MapMetaMock extends ItemMetaMock
 		serialMock.deserializeInternal(args);
 		serialMock.mapId = NbtParser.parseInteger(args.get("map-id"));
 		serialMock.mapView = (MapView) args.get("map-view");
-		if (args.containsKey("color"))
+		if (args.containsKey(MAP_COLOR))
 		{
-			serialMock.color = Color.fromARGB((int) args.get("color"));
+			serialMock.color = Color.fromARGB((int) args.get(MAP_COLOR));
 		}
 		Byte scalingByte = NbtParser.parseByte(args.get("scaling"));
 		if (scalingByte != null)
@@ -241,7 +243,7 @@ public class MapMetaMock extends ItemMetaMock
 		}
 		if (this.color != null)
 		{
-			serialized.put("color", this.color.asARGB());
+			serialized.put(MAP_COLOR, this.color.asARGB());
 		}
 		serialized.put("scaling", this.scaling);
 		return serialized;

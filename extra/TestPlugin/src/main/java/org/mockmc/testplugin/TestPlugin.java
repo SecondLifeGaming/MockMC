@@ -8,10 +8,15 @@ public class TestPlugin extends JavaPlugin
 
 	private static TestPlugin plugin;
 
+	private static synchronized void setInstance(TestPlugin instance)
+	{
+		plugin = instance;
+	}
+
 	@Override
 	public void onEnable()
 	{
-		plugin = this;
+		setInstance(this);
 		getLogger().info("Test plugin enabled");
 	}
 
