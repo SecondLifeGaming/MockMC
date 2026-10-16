@@ -86,6 +86,12 @@
 			<span>Loading page {{ currentPage }}...</span>
 		</div>
 
+		<!-- Error Banner if Data Fails to Load -->
+		<div v-if="errorMessage" class="error-banner">
+			<strong>Error loading explorer data:</strong> {{ errorMessage }}
+			<button class="retry-btn" @click="retryLoad">Retry</button>
+		</div>
+
 		<div class="symbol-list">
 			<div v-for="symbol in currentSymbols" :key="symbol.id" class="symbol-card">
 				<div class="symbol-header">
@@ -114,6 +120,12 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- Empty State -->
+			<div v-if="!loadingPage && currentSymbols.length === 0" class="empty-state">
+				<p>No API symbols match your current filters or search query.</p>
+				<button class="reset-btn" @click="resetFilters">Reset Filters</button>
+			</div>
 		</div>
 
 		<div v-if="displayedPages > 1" class="pagination">
@@ -135,6 +147,7 @@ const selectedStatus = ref("CHANGED");
 const searchQuery = ref("");
 const currentPage = ref(1);
 const loadingPage = ref(false);
+const errorMessage = ref(null);
 
 const availableVersions = ["26.2", "26.3"];
 
@@ -156,40 +169,57 @@ const searchIndex = ref([]);
 const searchMatches = ref([]);
 const isSearchingOrFiltering = ref(false);
 
-onMounted(async () => {
+async function initData() {
 	const baseUrl = import.meta.env.BASE_URL || "/";
 	loadingPage.value = true;
-	// 1. Fetch metadata (instant, <1KB)
-	fetch(`${baseUrl}data/explorer-meta.json`)
-		.then((r) => (r.ok ? r.json() : null))
-		.then((meta) => {
-			if (meta) {
-				totalSymbolsCount.value = meta.totalSymbols;
-				totalPagesCount.value = meta.totalPages;
-				countAdded.value = meta.countAdded;
-				countRemoved.value = meta.countRemoved;
-				countDeprecated.value = meta.countDeprecated;
-				countExtension.value = meta.countExtension || 0;
-				countStable.value = meta.countStable;
-			}
-		})
-		.catch(() => {});
+	errorMessage.value = null;
 
-	// 2. Load lightweight search index and immediately apply default filter (CHANGED)
 	try {
-		const res = await fetch(`${baseUrl}data/search-index.json`);
-		if (res.ok) {
-			searchIndex.value = await res.json();
-		}
+		// 1. Fetch metadata
+		const metaRes = await fetch(`${baseUrl}data/explorer-meta.json`);
+		if (!metaRes.ok) throw new Error(`HTTP ${metaRes.status} loading explorer-meta.json`);
+		const meta = await metaRes.json();
+		if (!meta || typeof meta.totalSymbols !== "number") throw new Error("Invalid explorer-meta schema");
+
+		totalSymbolsCount.value = meta.totalSymbols;
+		totalPagesCount.value = meta.totalPages;
+		countAdded.value = meta.countAdded;
+		countRemoved.value = meta.countRemoved;
+		countDeprecated.value = meta.countDeprecated;
+		countExtension.value = meta.countExtension || 0;
+		countStable.value = meta.countStable;
+
+		// 2. Fetch search index
+		const searchRes = await fetch(`${baseUrl}data/search-index.json`);
+		if (!searchRes.ok) throw new Error(`HTTP ${searchRes.status} loading search-index.json`);
+		const searchData = await searchRes.json();
+		if (!Array.isArray(searchData)) throw new Error("Invalid search-index schema");
+		searchIndex.value = searchData;
+
+		applyFilters();
 	} catch (e) {
-		console.error("Failed to load search index:", e);
+		console.error("Failed to load explorer data:", e);
+		errorMessage.value = e.message || "Failed to load API metadata files";
 	} finally {
 		loadingPage.value = false;
 	}
+}
 
-	// Apply initial filters (defaults to CHANGED)
-	applyFilters();
+onMounted(() => {
+	initData();
 });
+
+function retryLoad() {
+	pageCache.clear();
+	initData();
+}
+
+function resetFilters() {
+	selectedCategory.value = "ALL";
+	selectedStatus.value = "CHANGED";
+	searchQuery.value = "";
+	applyFilters();
+}
 
 async function loadPage(pageNumber) {
 	if (pageCache.has(pageNumber)) {
@@ -386,6 +416,46 @@ function getStatusText(status) {
 	border-radius: 4px;
 	font-size: 0.88rem;
 	color: var(--vp-c-text-1);
+}
+.error-banner {
+	margin-bottom: 1rem;
+	padding: 0.75rem 1rem;
+	background: var(--vp-c-red-soft, rgba(239, 68, 68, 0.14));
+	border-left: 4px solid var(--vp-c-red-1, #dc2626);
+	border-radius: 4px;
+	font-size: 0.88rem;
+	color: var(--vp-c-text-1);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.retry-btn,
+.reset-btn {
+	padding: 0.35rem 0.75rem;
+	background: var(--vp-c-bg);
+	border: 1px solid var(--vp-c-divider);
+	border-radius: 4px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	cursor: pointer;
+	color: var(--vp-c-text-1);
+}
+.retry-btn:hover,
+.reset-btn:hover {
+	border-color: var(--vp-c-brand-1);
+	color: var(--vp-c-brand-1);
+}
+.empty-state {
+	padding: 2.5rem 1rem;
+	text-align: center;
+	background: var(--vp-c-bg-soft);
+	border: 1px dashed var(--vp-c-divider);
+	border-radius: 8px;
+	color: var(--vp-c-text-2);
+}
+.empty-state p {
+	margin-bottom: 1rem;
+	font-size: 0.95rem;
 }
 .control-group {
 	display: flex;

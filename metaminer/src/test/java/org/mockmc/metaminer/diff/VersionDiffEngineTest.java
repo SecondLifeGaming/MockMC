@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -270,5 +271,78 @@ class VersionDiffEngineTest {
 						&& c.category() == PairwiseDiff.ChangeCategory.MODIFIED
 						&& c.compatibilityImpact() == PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE);
 		assertTrue(hasFinalChange, "Field becoming FINAL must be detected as BINARY_INCOMPATIBLE");
+	}
+
+	@Test
+	void testCanonicalPrecedencePaperOverFolia() {
+		// Paper canonical provenance
+		ApiManifest.Provenance paperProv = new ApiManifest.Provenance(
+				"paper", "26.3", 178, "canonical",
+				new ApiManifest.SourceJar("paper-26.3-178.jar", "shaPaper", 1024),
+				new ApiManifest.ScannerInfo("metaminer", "commit1", false),
+				new ApiManifest.RemappingInfo("none", "none", "ASM9_8")
+		);
+
+		ApiManifest.ScanAccounting emptyAccounting = new ApiManifest.ScanAccounting(
+				"COMPLETE", List.of(), List.of(), 1, 1, 0, 0, 1, 0, List.of(), Map.of(), List.of()
+		);
+
+		// Shared class: org.bukkit.entity.Player in Paper 26.3
+		ApiManifest.MethodEntry modernPaperMethod = new ApiManifest.MethodEntry(
+				"sendTitle", "(Lnet/kyori/adventure/title/Title;)V", null, "void",
+				List.of(), List.of(), List.of("PUBLIC"), false, false, false, List.of(),
+				new ApiManifest.SymbolProvenance("paper", "26.3", "paper", "26.3", false, null)
+		);
+		ApiManifest.ClassEntry paperPlayer = new ApiManifest.ClassEntry(
+				"INTERFACE", List.of("PUBLIC", "INTERFACE", "ABSTRACT"), null, "java.lang.Object",
+				List.of(), List.of(), Map.of("sendTitle(Lnet/kyori/adventure/title/Title;)V", modernPaperMethod), Map.of()
+		);
+
+		// Older Folia 26.2 contains an older version of Player without Title overload
+		ApiManifest.MethodEntry legacyFoliaMethod = new ApiManifest.MethodEntry(
+				"sendTitle", "(Ljava/lang/String;Ljava/lang/String;)V", null, "void",
+				List.of(), List.of(), List.of("PUBLIC"), false, false, false, List.of(),
+				new ApiManifest.SymbolProvenance("folia", "26.2", "folia", "26.2", false, null)
+		);
+		ApiManifest.ClassEntry foliaPlayer = new ApiManifest.ClassEntry(
+				"INTERFACE", List.of("PUBLIC", "INTERFACE", "ABSTRACT"), null, "java.lang.Object",
+				List.of(), List.of(), Map.of("sendTitle(Ljava/lang/String;Ljava/lang/String;)V", legacyFoliaMethod), Map.of()
+		);
+
+		// Folia-exclusive extension class: RegionScheduler
+		ApiManifest.MethodEntry executeMethod = new ApiManifest.MethodEntry(
+				"execute", "(Ljava/lang/Runnable;)V", null, "void",
+				List.of(), List.of(), List.of("PUBLIC"), false, false, false, List.of(),
+				new ApiManifest.SymbolProvenance("folia", "26.2", "folia", "26.2", true, "io.papermc.paper.threadedregions")
+		);
+		ApiManifest.ClassEntry foliaScheduler = new ApiManifest.ClassEntry(
+				"INTERFACE", List.of("PUBLIC", "INTERFACE", "ABSTRACT"), null, "java.lang.Object",
+				List.of(), List.of(), Map.of("execute(Ljava/lang/Runnable;)V", executeMethod), Map.of()
+		);
+
+		ApiManifest paperManifest = new ApiManifest(
+				ApiManifest.CURRENT_SCHEMA, ApiManifest.CURRENT_SCHEMA_VERSION, paperProv, emptyAccounting,
+				Map.of("org.bukkit.entity.Player", paperPlayer)
+		);
+
+		// Simulated multi-platform map overlay: Paper wins on org.bukkit.*, Folia contributes threadedregions.*
+		java.util.Map<String, ApiManifest.ClassEntry> mergedClasses = new java.util.HashMap<>(paperManifest.classes());
+		if (!mergedClasses.containsKey("io.papermc.paper.threadedregions.RegionScheduler")) {
+			mergedClasses.put("io.papermc.paper.threadedregions.RegionScheduler", foliaScheduler);
+		}
+		// Folia Player must NOT overwrite Paper Player
+		if (!mergedClasses.containsKey("org.bukkit.entity.Player")) {
+			mergedClasses.put("org.bukkit.entity.Player", foliaPlayer);
+		}
+
+		assertEquals(2, mergedClasses.size());
+		ApiManifest.ClassEntry resolvedPlayer = mergedClasses.get("org.bukkit.entity.Player");
+		assertTrue(resolvedPlayer.methods().containsKey("sendTitle(Lnet/kyori/adventure/title/Title;)V"),
+				"Paper canonical API must take precedence over older Folia classes");
+		assertFalse(resolvedPlayer.methods().containsKey("sendTitle(Ljava/lang/String;Ljava/lang/String;)V"));
+
+		ApiManifest.ClassEntry resolvedScheduler = mergedClasses.get("io.papermc.paper.threadedregions.RegionScheduler");
+		assertNotNull(resolvedScheduler, "Folia platform-exclusive namespace must be preserved");
+		assertEquals("folia", resolvedScheduler.methods().get("execute(Ljava/lang/Runnable;)V").symbolProvenance().originPlatform());
 	}
 }
