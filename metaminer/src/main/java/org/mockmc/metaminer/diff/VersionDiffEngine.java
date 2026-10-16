@@ -29,6 +29,9 @@ import java.util.Set;
 public final class VersionDiffEngine {
 
 	private static final String FLAG_PUBLIC = "PUBLIC";
+	private static final String FLAG_ABSTRACT = "ABSTRACT";
+	private static final String FLAG_STATIC = "STATIC";
+	private static final String FLAG_FINAL = "FINAL";
 	private static final String REASON_VISIBILITY_NARROWED = "visibility narrowed";
 	private static final String DEPRECATED_ANNOTATION = "java.lang.Deprecated";
 
@@ -256,8 +259,8 @@ public final class VersionDiffEngine {
 					null
 			));
 		}
-		boolean wasAbstract = fromClass.accessFlags().contains("ABSTRACT");
-		boolean isAbstract = toClass.accessFlags().contains("ABSTRACT");
+		boolean wasAbstract = fromClass.accessFlags().contains(FLAG_ABSTRACT);
+		boolean isAbstract = toClass.accessFlags().contains(FLAG_ABSTRACT);
 		if (!wasAbstract && isAbstract && !"INTERFACE".equals(toClass.kind())) {
 			changes.add(new PairwiseDiff.ChangeEntry(
 					className,
@@ -269,6 +272,23 @@ public final class VersionDiffEngine {
 							toClass.accessFlags(),
 							"Class became ABSTRACT in " + toVer,
 							"+ABSTRACT"
+					),
+					null
+			));
+		}
+		boolean wasFinal = fromClass.accessFlags().contains(FLAG_FINAL);
+		boolean isFinal = toClass.accessFlags().contains(FLAG_FINAL);
+		if (!wasFinal && isFinal && !"ENUM".equals(toClass.kind()) && !"RECORD".equals(toClass.kind())) {
+			changes.add(new PairwiseDiff.ChangeEntry(
+					className,
+					PairwiseDiff.SymbolType.CLASS,
+					PairwiseDiff.ChangeCategory.MODIFIED,
+					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+					new PairwiseDiff.Details(
+							null,
+							toClass.accessFlags(),
+							"Class became FINAL in " + toVer,
+							"+FINAL"
 					),
 					null
 			));
@@ -371,6 +391,32 @@ public final class VersionDiffEngine {
 					PairwiseDiff.ChangeCategory.MODIFIED,
 					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
 					new PairwiseDiff.Details(toMethod.descriptor(), toMethod.accessFlags(), "Method visibility narrowed in " + ctx.toVer(), REASON_VISIBILITY_NARROWED),
+					null
+			));
+		}
+
+		boolean wasStatic = fromMethod.accessFlags().contains(FLAG_STATIC);
+		boolean isStatic = toMethod.accessFlags().contains(FLAG_STATIC);
+		if (wasStatic != isStatic) {
+			ctx.changes().add(new PairwiseDiff.ChangeEntry(
+					symbol,
+					PairwiseDiff.SymbolType.METHOD,
+					PairwiseDiff.ChangeCategory.MODIFIED,
+					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+					new PairwiseDiff.Details(toMethod.descriptor(), toMethod.accessFlags(), "Method STATIC modifier changed in " + ctx.toVer(), wasStatic ? "-STATIC" : "+STATIC"),
+					null
+			));
+		}
+
+		boolean wasAbstract = fromMethod.accessFlags().contains(FLAG_ABSTRACT);
+		boolean isAbstract = toMethod.accessFlags().contains(FLAG_ABSTRACT);
+		if (!wasAbstract && isAbstract && !ctx.isInterface()) {
+			ctx.changes().add(new PairwiseDiff.ChangeEntry(
+					symbol,
+					PairwiseDiff.SymbolType.METHOD,
+					PairwiseDiff.ChangeCategory.MODIFIED,
+					PairwiseDiff.CompatibilityImpact.BINARY_INCOMPATIBLE,
+					new PairwiseDiff.Details(toMethod.descriptor(), toMethod.accessFlags(), "Method became ABSTRACT in " + ctx.toVer(), "+ABSTRACT"),
 					null
 			));
 		}
@@ -534,8 +580,8 @@ public final class VersionDiffEngine {
 					null
 			));
 		}
-		boolean wasStatic = fFrom.accessFlags().contains("STATIC");
-		boolean isStatic = fTo.accessFlags().contains("STATIC");
+		boolean wasStatic = fFrom.accessFlags().contains(FLAG_STATIC);
+		boolean isStatic = fTo.accessFlags().contains(FLAG_STATIC);
 		if (wasStatic != isStatic) {
 			changes.add(new PairwiseDiff.ChangeEntry(
 					symbol,
@@ -546,8 +592,8 @@ public final class VersionDiffEngine {
 					null
 			));
 		}
-		boolean wasFinal = fFrom.accessFlags().contains("FINAL");
-		boolean isFinal = fTo.accessFlags().contains("FINAL");
+		boolean wasFinal = fFrom.accessFlags().contains(FLAG_FINAL);
+		boolean isFinal = fTo.accessFlags().contains(FLAG_FINAL);
 		if (!wasFinal && isFinal) {
 			changes.add(new PairwiseDiff.ChangeEntry(
 					symbol,

@@ -69,15 +69,40 @@ public class DocSiteDataGenerator implements DataGenerator {
 		this.rootDir = rootDir;
 	}
 
+	private record TargetVersions(String primary, String baseline) {}
+
+	private TargetVersions resolveTargetVersions() {
+		File manifestFile = new File(rootDir, "jars/manifests/versions.json");
+		String primaryVersion = "26.3";
+		String baselineVersion = "26.2";
+
+		if (manifestFile.exists()) {
+			try (java.io.FileReader fr = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8)) {
+				com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(fr).getAsJsonObject();
+				if (root.has("targetRange")) {
+					com.google.gson.JsonObject range = root.getAsJsonObject("targetRange");
+					if (range.has("end")) primaryVersion = range.get("end").getAsString();
+					if (range.has("start")) baselineVersion = range.get("start").getAsString();
+				}
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, "Failed to parse versions.json, falling back to defaults", e);
+			}
+		}
+		return new TargetVersions(primaryVersion, baselineVersion);
+	}
+
 	@Override
 	public void generateData() throws IOException {
 		File cacheDir = new File(rootDir, "jars/cache");
-		File primaryPaper = findBestJar(cacheDir, "26.3", PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
-		File baselinePaper = findBestJar(cacheDir, "26.2", PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
-		File foliaJar = findBestJar(cacheDir, "26.2", "remapped-folia-", "folia-api-");
+		TargetVersions versions = resolveTargetVersions();
+
+		File primaryPaper = findBestJar(cacheDir, versions.primary(), PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
+		File baselinePaper = findBestJar(cacheDir, versions.baseline(), PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
+		File foliaJar = findBestJar(cacheDir, versions.baseline(), "remapped-folia-", "folia-api-");
 
 		if (primaryPaper == null) {
-			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: missing primary paper jar");
+			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: Required primary Paper JAR for version {0} not found in {1}",
+					new Object[]{versions.primary(), cacheDir.getAbsolutePath()});
 			return;
 		}
 
@@ -171,6 +196,11 @@ public class DocSiteDataGenerator implements DataGenerator {
 		for (Map.Entry<String, ApiManifest.ClassEntry> classEntry : primaryManifest.classes().entrySet()) {
 			String className = classEntry.getKey();
 			ApiManifest.ClassEntry clazz = classEntry.getValue();
+
+			// Only expose public and protected classes in public developer reference
+			if (!clazz.accessFlags().contains(ACCESS_PUBLIC) && !clazz.accessFlags().contains(ACCESS_PROTECTED)) {
+				continue;
+			}
 
 			clientSymbols.add(createClassClientSymbol(String.valueOf(idCounter++), className, clazz, changeMap.get(className)));
 			idCounter = collectClassMethods(className, clazz, changeMap, clientSymbols, idCounter);
@@ -398,6 +428,14 @@ public class DocSiteDataGenerator implements DataGenerator {
 		File publicDataDir = new File(rootDir, "site/docs/public/data");
 		File pagesDir = new File(publicDataDir, "pages");
 		pagesDir.mkdirs();
+
+		// Clean up existing page-*.json chunks to avoid stale phantom pages
+		File[] existingPages = pagesDir.listFiles((_, name) -> name.startsWith("page-") && name.endsWith(".json"));
+		if (existingPages != null) {
+			for (File p : existingPages) {
+				java.nio.file.Files.deleteIfExists(p.toPath());
+			}
+		}
 
 		int totalSymbols = clientSymbols.size();
 		int totalPages = (int) Math.ceil((double) totalSymbols / PAGE_SIZE);

@@ -12,16 +12,16 @@
 			</div>
 
 			<div class="control-group">
-				<label for="min-version-select">Min Version</label>
-				<select id="min-version-select" v-model="minVersion">
-					<option v-for="ver in availableVersions" :key="ver" :value="ver">{{ ver }}</option>
+				<label for="min-version-select">Baseline Version</label>
+				<select id="min-version-select" v-model="minVersion" disabled title="Currently validated baseline from versions.json">
+					<option value="26.2">26.2 (Validated Baseline)</option>
 				</select>
 			</div>
 
 			<div class="control-group">
-				<label for="max-version-select">Max Version</label>
-				<select id="max-version-select" v-model="maxVersion">
-					<option v-for="ver in availableVersions" :key="ver" :value="ver">{{ ver }}</option>
+				<label for="max-version-select">Target Version</label>
+				<select id="max-version-select" v-model="maxVersion" disabled title="Currently validated canonical target from versions.json">
+					<option value="26.3">26.3 (Canonical Target)</option>
 				</select>
 			</div>
 
