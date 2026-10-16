@@ -91,7 +91,7 @@ plugins {
 	id("net.kyori.blossom") version "2.2.0"
 	id("com.diffplug.spotless") version "7.0.2"
 	id("signing")
-	id("org.sonarqube") version "6.0.1.5171"
+	id("org.sonarqube") version "7.5.0.8588"
 	id("eclipse")
 	id("idea")
 }
