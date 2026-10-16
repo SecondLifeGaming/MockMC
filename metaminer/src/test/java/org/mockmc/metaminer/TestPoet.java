@@ -16,7 +16,7 @@ class TestPoet {
                 if (clazz.isInterface()) {
                     count++;
                 }
-            } catch (Throwable ignored) {
+            } catch (Throwable _) {
                 // Ignore classes that cannot be loaded
             }
         }
