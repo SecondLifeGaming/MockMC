@@ -395,7 +395,17 @@ public class PluginManagerMock extends PermissionManagerMock
 		if (parentTemporaryDirectory == null)
 		{
 			Random random = ThreadLocalRandom.current();
-			File tmpDir = Files.createTempDirectory("MockMC-" + random.nextInt(0, Integer.MAX_VALUE)).toFile();
+			java.nio.file.attribute.FileAttribute<?>[] attrs;
+			if (java.nio.file.FileSystems.getDefault().supportedFileAttributeViews().contains("posix"))
+			{
+				attrs = new java.nio.file.attribute.FileAttribute<?>[]
+				{java.nio.file.attribute.PosixFilePermissions
+						.asFileAttribute(java.nio.file.attribute.PosixFilePermissions.fromString("rwx------"))};
+			} else
+			{
+				attrs = new java.nio.file.attribute.FileAttribute<?>[0];
+			}
+			File tmpDir = Files.createTempDirectory("MockMC-" + random.nextInt(0, Integer.MAX_VALUE), attrs).toFile();
 			File prev = this.parentTemporaryDirectory.compareAndExchange(null, tmpDir);
 			if (prev != null)
 			{

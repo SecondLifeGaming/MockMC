@@ -8,6 +8,8 @@ import java.util.stream.Stream;
 public class ItemStackTestDataGenerator implements DataGenerator
 {
 
+	private static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(ItemStackTestDataGenerator.class.getName());
+
 	private final File folder;
 
 	public ItemStackTestDataGenerator(File pluginDataFolder)
@@ -26,7 +28,7 @@ public class ItemStackTestDataGenerator implements DataGenerator
 			}
 			catch (Exception e)
 			{
-				e.printStackTrace();
+				LOGGER.log(java.util.logging.Level.SEVERE, e, () -> "Failed to generate data with " + dataGenerator.getClass().getSimpleName());
 			}
 		});
 	}
