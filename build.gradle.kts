@@ -20,26 +20,48 @@ abstract class DownloadJarsTask : DefaultTask() {
 			val dest = File(jarDir, name)
 			if (!dest.exists()) {
 				println("Downloading $name...")
-				URI.create(url).toURL().openStream().use { input ->
-					dest.outputStream().use { output ->
-						(input as InputStream).copyTo(output)
+				// Download with retry and timeout to guard against transient connection drops
+				var downloaded = false
+				var lastError: Exception? = null
+				for (attempt in 1..3) {
+					try {
+						val conn = URI.create(url).toURL().openConnection()
+						conn.connectTimeout = 30000
+						conn.readTimeout = 60000
+						conn.getInputStream().use { input ->
+							dest.outputStream().use { output ->
+								(input as InputStream).copyTo(output)
+							}
+						}
+
+						// fill-data URLs are content-addressed: .../objects/<sha256>/<file>
+						val expected = url.substringBeforeLast('/').substringAfterLast('/')
+						if (Regex("[0-9a-f]{64}").matches(expected)) {
+							val digest = MessageDigest.getInstance("SHA-256")
+							dest.inputStream().use { ins ->
+								val buf = ByteArray(8192)
+								var n = ins.read(buf)
+								while (n >= 0) { digest.update(buf, 0, n); n = ins.read(buf) }
+							}
+							val actual = digest.digest().joinToString("") { "%02x".format(it) }
+							if (actual != expected) {
+								dest.delete()
+								throw GradleException("Checksum mismatch for $name: expected $expected but was $actual")
+							}
+						}
+						downloaded = true
+						break
+					} catch (e: Exception) {
+						lastError = e
+						dest.delete()
+						if (attempt < 3) {
+							println("Download failed for $name (attempt $attempt/3): ${e.message}. Retrying in 2 seconds...")
+							Thread.sleep(2000)
+						}
 					}
 				}
-
-				// fill-data URLs are content-addressed: .../objects/<sha256>/<file>
-				val expected = url.substringBeforeLast('/').substringAfterLast('/')
-				if (Regex("[0-9a-f]{64}").matches(expected)) {
-					val digest = MessageDigest.getInstance("SHA-256")
-					dest.inputStream().use { ins ->
-						val buf = ByteArray(8192)
-						var n = ins.read(buf)
-						while (n >= 0) { digest.update(buf, 0, n); n = ins.read(buf) }
-					}
-					val actual = digest.digest().joinToString("") { "%02x".format(it) }
-					if (actual != expected) {
-						dest.delete()
-						throw GradleException("Checksum mismatch for $name: expected $expected but was $actual")
-					}
+				if (!downloaded) {
+					throw GradleException("Failed to download $name after 3 attempts", lastError)
 				}
 
 				// Strip conflicting Adventure BossBar service provider from jars (like Velocity)
