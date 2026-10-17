@@ -35,6 +35,14 @@ public class BaseMockGenerator implements DataGenerator {
     private static final String RETURN_NULL = "return null";
     private static final String BRIGADIER_PACKAGE = "com.mojang.brigadier";
 
+    private static final String KEY_PLATFORMS = "platforms";
+    private static final String KEY_VERSIONS = "versions";
+    private static final String KEY_VERSION = "version";
+    private static final String PREFIX_REMAPPED = "remapped-";
+    private static final String EXT_CLASS = ".class";
+    private static final String PKG_BUNGEE = "net.md_5.bungee";
+    private static final String PKG_WATERFALL = "io.github.waterfallmc";
+
     private final File dataFolder;
     private final File jarDirectory;
     private JsonObject quirks;
@@ -81,31 +89,42 @@ public class BaseMockGenerator implements DataGenerator {
         return mapRawOrOther(type);
     }
 
-    private TypeName mapTypeVariable(TypeVariable<?> tv, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
-        if (clazz != null) {
-            TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
-            for (int i = 0; i < typeParameters.length; i++) {
-                if (typeParameters[i].equals(tv)) {
-                    return ourTypeVars[i];
-                }
+    private TypeName findClassTypeVariable(TypeVariable<?> tv, Class<?> clazz, TypeVariableName[] ourTypeVars) {
+        if (clazz == null) return null;
+        TypeVariable<?>[] typeParameters = clazz.getTypeParameters();
+        for (int i = 0; i < typeParameters.length; i++) {
+            if (typeParameters[i].equals(tv)) {
+                return ourTypeVars[i];
             }
         }
-        if (typeMap != null) {
-            java.lang.reflect.Type mapped = typeMap.get(tv);
-            if (mapped == null) {
-                String name = tv.getName();
-                java.lang.reflect.GenericDeclaration decl = tv.getGenericDeclaration();
-                String declName = decl instanceof Class<?> c ? c.getName() : null;
-                for (Map.Entry<TypeVariable<?>, java.lang.reflect.Type> entry : typeMap.entrySet()) {
-                    TypeVariable<?> key = entry.getKey();
-                    if (key.getName().equals(name)) {
-                        if (declName != null && key.getGenericDeclaration() instanceof Class<?> kc && kc.getName().equals(declName)) {
-                            mapped = entry.getValue();
-                            break;
-                        }
-                    }
-                }
+        return null;
+    }
+
+    private java.lang.reflect.Type lookupInTypeMap(TypeVariable<?> tv, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
+        java.lang.reflect.Type mapped = typeMap.get(tv);
+        if (mapped != null) {
+            return mapped;
+        }
+        String name = tv.getName();
+        java.lang.reflect.GenericDeclaration decl = tv.getGenericDeclaration();
+        String declName = decl instanceof Class<?> c ? c.getName() : null;
+        for (Map.Entry<TypeVariable<?>, java.lang.reflect.Type> entry : typeMap.entrySet()) {
+            TypeVariable<?> key = entry.getKey();
+            if (key.getName().equals(name) && declName != null && key.getGenericDeclaration() instanceof Class<?> kc && kc.getName().equals(declName)) {
+                return entry.getValue();
             }
+        }
+        return null;
+    }
+
+    private TypeName mapTypeVariable(TypeVariable<?> tv, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
+        TypeName classMapped = findClassTypeVariable(tv, clazz, ourTypeVars);
+        if (classMapped != null) {
+            return classMapped;
+        }
+
+        if (typeMap != null) {
+            java.lang.reflect.Type mapped = lookupInTypeMap(tv, typeMap);
             if (mapped != null && !tv.equals(mapped)) {
                 return mapType(mapped, clazz, ourTypeVars, typeMap);
             }
@@ -259,7 +278,7 @@ public class BaseMockGenerator implements DataGenerator {
             urls.sort(Comparator.comparingInt(this::calculateUrlPriority).thenComparing(URL::getPath));
 
             this.customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-            List<URL> primaryUrls = buildPrimaryUrls(urls, cacheDir);
+            List<URL> primaryUrls = buildPrimaryUrls(urls);
             this.primaryLoader = new URLClassLoader(primaryUrls.toArray(new URL[0]), getClass().getClassLoader());
             ClassPath classPath = ClassPath.from(customLoader);
             Set<Class<?>> toGenerate = scanPackages(classPath, customLoader);
@@ -288,16 +307,16 @@ public class BaseMockGenerator implements DataGenerator {
         }
         try (FileReader reader = new FileReader(versionsJson)) {
             JsonObject root = new Gson().fromJson(reader, JsonObject.class);
-            JsonObject platforms = root.getAsJsonObject("platforms");
+            JsonObject platforms = root.getAsJsonObject(KEY_PLATFORMS);
             if (platforms != null) {
                 if (platforms.has(PAPER)) {
-                    for (var elem : platforms.getAsJsonObject(PAPER).getAsJsonArray("versions")) {
-                        paperVersions.add(elem.getAsJsonObject().get("version").getAsString());
+                    for (var elem : platforms.getAsJsonObject(PAPER).getAsJsonArray(KEY_VERSIONS)) {
+                        paperVersions.add(elem.getAsJsonObject().get(KEY_VERSION).getAsString());
                     }
                 }
                 if (platforms.has(FOLIA)) {
-                    for (var elem : platforms.getAsJsonObject(FOLIA).getAsJsonArray("versions")) {
-                        foliaVersions.add(elem.getAsJsonObject().get("version").getAsString());
+                    for (var elem : platforms.getAsJsonObject(FOLIA).getAsJsonArray(KEY_VERSIONS)) {
+                        foliaVersions.add(elem.getAsJsonObject().get(KEY_VERSION).getAsString());
                     }
                 }
             }
@@ -331,23 +350,27 @@ public class BaseMockGenerator implements DataGenerator {
             File sJar = findServerJar(PAPER, v);
             if (sJar != null) {
                 indexInternalApiClasses(sJar, PAPER, v);
-                try {
-                    List<URL> vUrls = new ArrayList<>();
-                    File apiJar = extractInternalJar(sJar, "paper-api", cacheDir);
-                    if (apiJar != null) {
-                        vUrls.add(apiJar.toURI().toURL());
-                    }
-                    File remapped = findRemappedJar(PAPER, v, cacheDir);
-                    if (remapped != null) {
-                        vUrls.add(remapped.toURI().toURL());
-                    }
-                    if (!vUrls.isEmpty()) {
-                        paperVersionLoaders.put(v, new URLClassLoader(vUrls.toArray(new URL[0]), getClass().getClassLoader()));
-                    }
-                } catch (Exception e) {
-                    LOGGER.log(Level.FINE, "Failed building version loader for Paper {0}: {1}", new Object[]{v, e.getMessage()});
-                }
+                buildPaperVersionLoader(v, sJar, cacheDir);
             }
+        }
+    }
+
+    private void buildPaperVersionLoader(String v, File sJar, File cacheDir) {
+        try {
+            List<URL> vUrls = new ArrayList<>();
+            File apiJar = extractInternalJar(sJar, "paper-api", cacheDir);
+            if (apiJar != null) {
+                vUrls.add(apiJar.toURI().toURL());
+            }
+            File remapped = findRemappedJar(PAPER, v, cacheDir);
+            if (remapped != null) {
+                vUrls.add(remapped.toURI().toURL());
+            }
+            if (!vUrls.isEmpty()) {
+                paperVersionLoaders.put(v, new URLClassLoader(vUrls.toArray(new URL[0]), getClass().getClassLoader()));
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.FINE, "Failed building version loader for Paper {0}: {1}", new Object[]{v, e.getMessage()});
         }
     }
 
@@ -360,7 +383,7 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private File findRemappedJar(String platform, String version, File cacheDir) {
-        File[] files = cacheDir.listFiles((dir, name) -> name.startsWith("remapped-" + platform + "-" + version + "-") && name.endsWith(".jar"));
+        File[] files = cacheDir.listFiles((dir, name) -> name.startsWith(PREFIX_REMAPPED + platform + "-" + version + "-") && name.endsWith(".jar"));
         if (files != null && files.length > 0) {
             return files[0];
         }
@@ -373,8 +396,8 @@ public class BaseMockGenerator implements DataGenerator {
             var entries = jf.entries();
             while (entries.hasMoreElements()) {
                 String name = entries.nextElement().getName();
-                if (name.endsWith(".class") && !name.contains("$")) {
-                    String className = name.substring(0, name.length() - 6).replace('/', '.');
+                if (name.endsWith(EXT_CLASS) && !name.contains("$")) {
+                    String className = name.substring(0, name.length() - EXT_CLASS.length()).replace('/', '.');
                     classToPlatform.put(className, platform);
                     classToVersion.put(className, version);
                 }
@@ -396,8 +419,8 @@ public class BaseMockGenerator implements DataGenerator {
                         java.util.zip.ZipEntry ze;
                         while ((ze = zipIs.getNextEntry()) != null) {
                             String zname = ze.getName();
-                            if (zname.endsWith(".class") && !zname.contains("$")) {
-                                String className = zname.substring(0, zname.length() - 6).replace('/', '.');
+                            if (zname.endsWith(EXT_CLASS) && !zname.contains("$")) {
+                                String className = zname.substring(0, zname.length() - EXT_CLASS.length()).replace('/', '.');
                                 classToPlatform.put(className, platform);
                                 classToVersion.put(className, version);
                             }
@@ -434,31 +457,26 @@ public class BaseMockGenerator implements DataGenerator {
         return null;
     }
 
-    private List<URL> buildPrimaryUrls(List<URL> allUrls, File cacheDir) {
+    private boolean isPrimaryCandidate(String path, String primaryPaperVersion) {
+        if (path.contains(FOLIA)) {
+            return false;
+        }
+        if (path.contains("paper-api")) {
+            return path.contains(primaryPaperVersion);
+        }
+        if (path.contains("remapped-paper-")) {
+            return path.contains("remapped-paper-" + primaryPaperVersion);
+        }
+        return true;
+    }
+
+    private List<URL> buildPrimaryUrls(List<URL> allUrls) {
         String primaryPaperVersion = !paperVersions.isEmpty() ? paperVersions.get(0) : "26.3";
         List<URL> primary = new ArrayList<>();
         for (URL u : allUrls) {
-            String p = u.getPath();
-            // Exclude Folia jars
-            if (p.contains(FOLIA)) {
-                continue;
+            if (isPrimaryCandidate(u.getPath(), primaryPaperVersion)) {
+                primary.add(u);
             }
-            // Exclude fallback Paper API jars (keep only primary Paper API)
-            if (p.contains("paper-api")) {
-                if (p.contains(primaryPaperVersion)) {
-                    primary.add(u);
-                }
-                continue;
-            }
-            // Exclude older remapped Paper jars (keep only primary remapped)
-            if (p.contains("remapped-paper-")) {
-                if (p.contains("remapped-paper-" + primaryPaperVersion)) {
-                    primary.add(u);
-                }
-                continue;
-            }
-            // Include library JARs and non-API/server dependencies
-            primary.add(u);
         }
         return primary;
     }
@@ -497,7 +515,7 @@ public class BaseMockGenerator implements DataGenerator {
         paperClassNames.clear();
         foliaClassNames.clear();
 
-        File[] remappedFiles = cacheDir.listFiles((dir, name) -> name.startsWith("remapped-") && name.endsWith(".jar"));
+        File[] remappedFiles = cacheDir.listFiles((dir, name) -> name.startsWith(PREFIX_REMAPPED) && name.endsWith(".jar"));
         if (remappedFiles != null) {
             for (File rf : remappedFiles) {
                 if (rf.getName().contains(PAPER)) {
@@ -529,7 +547,7 @@ public class BaseMockGenerator implements DataGenerator {
         try (JarFile jf = new JarFile(jar)) {
             jf.stream().forEach(entry -> {
                 String name = entry.getName();
-                if (name.endsWith(".class") && !name.contains("$")) {
+                if (name.endsWith(EXT_CLASS) && !name.contains("$")) {
                     String className = name.substring(0, name.length() - 6).replace('/', '.');
                     targetSet.add(className);
                 }
@@ -544,7 +562,7 @@ public class BaseMockGenerator implements DataGenerator {
         LOGGER.log(Level.INFO, "Scanning JAR directory: {0}", jarDirectory.getAbsolutePath());
         
         List<File> jarFiles = new ArrayList<>();
-        File platformsDir = new File(jarDirectory, "platforms");
+        File platformsDir = new File(jarDirectory, KEY_PLATFORMS);
         if (platformsDir.exists()) {
             collectJarsRecursive(platformsDir, jarFiles);
         }
@@ -566,7 +584,7 @@ public class BaseMockGenerator implements DataGenerator {
 
                 if (result != null) {
                     File mappingFile = org.mockmc.metaminer.util.MappingProvider.getMappings(result.mcVersion, cacheDir);
-                    File remappedJar = new File(cacheDir, "remapped-" + jar.getName());
+                    File remappedJar = new File(cacheDir, PREFIX_REMAPPED + jar.getName());
                     processedJar = org.mockmc.metaminer.util.StandaloneRemapper.remap(result.patchedJar, mappingFile, remappedJar);
                 }
             }
@@ -586,8 +604,8 @@ public class BaseMockGenerator implements DataGenerator {
                 "com.destroystokyo.paper",
                 "io.papermc.paper",
                 "com.velocitypowered.api",
-                "net.md_5.bungee",
-                "io.github.waterfallmc",
+                PKG_BUNGEE,
+                PKG_WATERFALL,
                 BRIGADIER_PACKAGE
         };
         for (String pkg : packagesToScan) {
@@ -598,17 +616,23 @@ public class BaseMockGenerator implements DataGenerator {
         return toGenerate;
     }
 
+    private Class<?> loadClassWithFallback(String className, ClassLoader fallbackLoader) throws ClassNotFoundException {
+        if (primaryLoader != null) {
+            try {
+                return Class.forName(className, false, primaryLoader);
+            } catch (ClassNotFoundException | NoClassDefFoundError _) {
+                return Class.forName(className, false, fallbackLoader);
+            }
+        }
+        return Class.forName(className, false, fallbackLoader);
+    }
+
     private void processClassInfo(ClassPath.ClassInfo classInfo, ClassLoader fallbackLoader, Set<Class<?>> toGenerate) {
         if (classInfo.getName().startsWith("org.bukkit.craftbukkit")) {
             return;
         }
         try {
-            Class<?> c;
-            try {
-                c = primaryLoader != null ? Class.forName(classInfo.getName(), false, primaryLoader) : Class.forName(classInfo.getName(), false, fallbackLoader);
-            } catch (ClassNotFoundException | NoClassDefFoundError _) {
-                c = Class.forName(classInfo.getName(), false, fallbackLoader);
-            }
+            Class<?> c = loadClassWithFallback(classInfo.getName(), fallbackLoader);
             CodeSource cs = c.getProtectionDomain().getCodeSource();
             if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains(FOLIA) && paperClassNames.contains(c.getName())) {
                 return;
@@ -635,7 +659,7 @@ public class BaseMockGenerator implements DataGenerator {
         try (JarFile jarFile = new JarFile(jar)) {
             // Map all classes in this jar to this version
             jarFile.stream().forEach(entry -> {
-                if (entry.getName().endsWith(".class")) {
+                if (entry.getName().endsWith(EXT_CLASS)) {
                     // entry iteration placeholder
                 }
             });
@@ -669,9 +693,9 @@ public class BaseMockGenerator implements DataGenerator {
         }
         String name = clazz.getName();
         if (name.startsWith("com.velocitypowered.api")) return "velocity";
-        if (name.startsWith("net.md_5.bungee") || name.startsWith("io.github.waterfallmc")) return "waterfall";
-        if (foliaClassNames.contains(name)) return "folia";
-        return "paper";
+        if (name.startsWith(PKG_BUNGEE) || name.startsWith(PKG_WATERFALL)) return "waterfall";
+        if (foliaClassNames.contains(name)) return FOLIA;
+        return PAPER;
     }
 
     private String findNewestPaperVersion(Method m, Class<?> clazz) {
@@ -685,7 +709,7 @@ public class BaseMockGenerator implements DataGenerator {
                             return v;
                         }
                     }
-                } catch (Throwable _) {
+                } catch (Exception | LinkageError _) {
                     // Method or class not present in this version
                 }
             }
@@ -762,35 +786,39 @@ public class BaseMockGenerator implements DataGenerator {
                         clazz, sourceName, version, platform, version)
                 .addModifiers(Modifier.PUBLIC);
 
-        Deprecated d = clazz.getAnnotation(Deprecated.class);
-        boolean isPrimaryClass = isPrimaryApiClass(clazz);
-        if (d != null || (!isPrimaryClass && platform.equals("paper"))) {
-            AnnotationSpec.Builder builder = AnnotationSpec.builder(Deprecated.class);
-            if (d != null && !d.since().isEmpty()) {
-                builder.addMember(SINCE, "$S", d.since());
-            } else if (!isPrimaryClass && platform.equals("paper")) {
-                String removedIn = findRemovedInVersion(version);
-                builder.addMember(SINCE, "$S", removedIn);
-            } else {
-                builder.addMember(SINCE, "$S", version);
-            }
-            if ((d != null && d.forRemoval()) || !isPrimaryClass) {
-                builder.addMember(FOR_REMOVAL, "$L", true);
-            }
-            typeSpec.addAnnotation(builder.build());
+        applyClassDeprecation(clazz, typeSpec, platform, version, isPrimaryApiClass(clazz));
+        return typeSpec;
+    }
 
-            String replacement = getQuirkReplacement(clazz);
-            if (replacement != null) {
-                typeSpec.addJavadoc("@deprecated $L\n", replacement);
-            } else if (!isPrimaryClass && platform.equals("paper")) {
-                String removedIn = findRemovedInVersion(version);
-                typeSpec.addJavadoc("@deprecated Removed upstream in $L; preserved for binary test compatibility.\n", removedIn);
-            } else {
-                typeSpec.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
-            }
+    private void applyClassDeprecation(Class<?> clazz, TypeSpec.Builder typeSpec, String platform, String version, boolean isPrimaryClass) {
+        Deprecated d = clazz.getAnnotation(Deprecated.class);
+        if (d == null && (isPrimaryClass || !platform.equals(PAPER))) {
+            return;
         }
 
-        return typeSpec;
+        AnnotationSpec.Builder builder = AnnotationSpec.builder(Deprecated.class);
+        if (d != null && !d.since().isEmpty()) {
+            builder.addMember(SINCE, "$S", d.since());
+        } else if (!isPrimaryClass && platform.equals(PAPER)) {
+            String removedIn = findRemovedInVersion(version);
+            builder.addMember(SINCE, "$S", removedIn);
+        } else {
+            builder.addMember(SINCE, "$S", version);
+        }
+        if ((d != null && d.forRemoval()) || !isPrimaryClass) {
+            builder.addMember(FOR_REMOVAL, "$L", true);
+        }
+        typeSpec.addAnnotation(builder.build());
+
+        String replacement = getQuirkReplacement(clazz);
+        if (replacement != null) {
+            typeSpec.addJavadoc("@deprecated $L\n", replacement);
+        } else if (!isPrimaryClass && platform.equals(PAPER)) {
+            String removedIn = findRemovedInVersion(version);
+            typeSpec.addJavadoc("@deprecated Removed upstream in $L; preserved for binary test compatibility.\n", removedIn);
+        } else {
+            typeSpec.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
+        }
     }
 
     private boolean isPrimaryApiClass(Class<?> clazz) {
@@ -859,7 +887,7 @@ public class BaseMockGenerator implements DataGenerator {
         java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
         try {
             genericInterfaces = clazz.getGenericInterfaces();
-        } catch (Throwable _) {
+        } catch (Exception | LinkageError _) {
             // Some fallback interfaces may have changed type parameters across historical versions
         }
         for (java.lang.reflect.Type iface : genericInterfaces) {
@@ -892,7 +920,7 @@ public class BaseMockGenerator implements DataGenerator {
         java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
         try {
             genericInterfaces = primaryClazz.getGenericInterfaces();
-        } catch (Throwable _) {
+        } catch (Exception | LinkageError _) {
             // Ignore generic interface resolution errors between differing versions
         }
         for (java.lang.reflect.Type ifaceType : genericInterfaces) {
@@ -944,29 +972,42 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private void applyQuirksToInterfaces(Class<?> clazz, Set<java.lang.reflect.Type> interfaces) {
-        if (quirks != null && quirks.has(clazz.getName())) {
-            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
-            if (classQuirks.has(EXCLUDE_INTERFACES)) {
-                Set<String> toExclude = new HashSet<>();
-                classQuirks.getAsJsonArray(EXCLUDE_INTERFACES).forEach(e -> toExclude.add(e.getAsString()));
-                List<java.lang.reflect.Type> excludedTypes = new ArrayList<>();
-                for (java.lang.reflect.Type iface : interfaces) {
-                    Class<?> raw = getRawType(iface);
-                    if (raw != null && toExclude.contains(raw.getName())) {
-                        excludedTypes.add(iface);
-                    }
-                }
-                interfaces.removeAll(excludedTypes);
-                for (java.lang.reflect.Type excluded : excludedTypes) {
-                    for (java.lang.reflect.Type superIface : getAllGenericInterfaces(excluded)) {
-                        Class<?> rawSuper = getRawType(superIface);
-                        if (rawSuper != null && !toExclude.contains(rawSuper.getName()) && isGeneratableType(rawSuper) && !rawSuper.isSealed() && isClassInSameProtectionDomainOrPrimary(rawSuper)) {
-                            interfaces.add(superIface);
-                        }
-                    }
+        if (quirks == null || !quirks.has(clazz.getName())) {
+            return;
+        }
+        JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+        if (!classQuirks.has(EXCLUDE_INTERFACES)) {
+            return;
+        }
+        Set<String> toExclude = new HashSet<>();
+        classQuirks.getAsJsonArray(EXCLUDE_INTERFACES).forEach(e -> toExclude.add(e.getAsString()));
+        List<java.lang.reflect.Type> excludedTypes = filterInterfacesToExclude(interfaces, toExclude);
+        interfaces.removeAll(excludedTypes);
+        interfaces.addAll(findEligibleSuperInterfaces(excludedTypes, toExclude));
+    }
+
+    private List<java.lang.reflect.Type> filterInterfacesToExclude(Set<java.lang.reflect.Type> interfaces, Set<String> toExclude) {
+        List<java.lang.reflect.Type> excluded = new ArrayList<>();
+        for (java.lang.reflect.Type iface : interfaces) {
+            Class<?> raw = getRawType(iface);
+            if (raw != null && toExclude.contains(raw.getName())) {
+                excluded.add(iface);
+            }
+        }
+        return excluded;
+    }
+
+    private Set<java.lang.reflect.Type> findEligibleSuperInterfaces(List<java.lang.reflect.Type> excludedTypes, Set<String> toExclude) {
+        Set<java.lang.reflect.Type> eligible = new HashSet<>();
+        for (java.lang.reflect.Type excluded : excludedTypes) {
+            for (java.lang.reflect.Type superIface : getAllGenericInterfaces(excluded)) {
+                Class<?> rawSuper = getRawType(superIface);
+                if (rawSuper != null && !toExclude.contains(rawSuper.getName()) && isGeneratableType(rawSuper) && !rawSuper.isSealed() && isClassInSameProtectionDomainOrPrimary(rawSuper)) {
+                    eligible.add(superIface);
                 }
             }
         }
+        return eligible;
     }
 
     private Map<String, List<Method>> collectMethodsBySignature(Class<?> clazz, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
@@ -1154,10 +1195,8 @@ public class BaseMockGenerator implements DataGenerator {
         Set<String> excludedInterfaces = getExcludedInterfacesForClass(clazz);
         for (java.lang.reflect.Type ifaceType : getAllGenericInterfaces(clazz)) {
             Class<?> a = getRawType(ifaceType);
-            if (a != null && a != clazz && allGeneratable.contains(a) && declaring.isAssignableFrom(a)) {
-                if (!excludedInterfaces.contains(a.getName())) {
-                    return true;
-                }
+            if (a != null && a != clazz && allGeneratable.contains(a) && declaring.isAssignableFrom(a) && !excludedInterfaces.contains(a.getName())) {
+                return true;
             }
         }
         return false;
@@ -1262,7 +1301,7 @@ public class BaseMockGenerator implements DataGenerator {
             }
         } else {
             String platform = getPlatformForClass(clazz);
-            if (platform.equals("paper")) {
+            if (platform.equals(PAPER)) {
                 String newestVersion = findNewestPaperVersion(m, clazz);
                 String removedIn = findRemovedInVersion(newestVersion);
                 builder.addAnnotation(AnnotationSpec.builder(Deprecated.class)
@@ -1572,7 +1611,7 @@ public class BaseMockGenerator implements DataGenerator {
         java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
         try {
             genericInterfaces = raw.getGenericInterfaces();
-        } catch (Throwable _) {
+        } catch (Exception | LinkageError _) {
             // Ignore generic interface resolution errors between differing versions
         }
         for (java.lang.reflect.Type iface : genericInterfaces) {
@@ -1769,15 +1808,15 @@ public class BaseMockGenerator implements DataGenerator {
     private File findPrimaryFromManifest(File versionsJson, List<File> paperJars) {
         try (java.io.FileReader reader = new java.io.FileReader(versionsJson)) {
             com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(reader).getAsJsonObject();
-            com.google.gson.JsonObject platforms = root.getAsJsonObject("platforms");
+            com.google.gson.JsonObject platforms = root.getAsJsonObject(KEY_PLATFORMS);
             if (platforms == null || !platforms.has(PAPER)) {
                 return null;
             }
-            com.google.gson.JsonArray versions = platforms.getAsJsonObject(PAPER).getAsJsonArray("versions");
+            com.google.gson.JsonArray versions = platforms.getAsJsonObject(PAPER).getAsJsonArray(KEY_VERSIONS);
             for (var elem : versions) {
                 com.google.gson.JsonObject vObj = elem.getAsJsonObject();
                 if (vObj.has("primary") && vObj.get("primary").getAsBoolean()) {
-                    String v = vObj.get("version").getAsString();
+                    String v = vObj.get(KEY_VERSION).getAsString();
                     int b = vObj.get("build").getAsInt();
                     return matchJarVersion(paperJars, v, b);
                 }
