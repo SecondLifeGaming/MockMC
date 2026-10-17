@@ -206,58 +206,59 @@ const searchIndex = ref([]);
 const searchMatches = ref([]);
 const isSearchingOrFiltering = ref(false);
 
+function getSingleVersionDiffConfig(v, platform) {
+	const base = `${import.meta.env.BASE_URL || "/"}data/diffs/${platform}/`;
+	switch (v) {
+		case "26.2":
+			return { dir: `${base}26.1.2-26.2/`, filter: (s) => s.status !== "REMOVED" };
+		case "26.1.2":
+			return { dir: `${base}1.21.11-26.1.2/`, filter: (s) => s.status !== "REMOVED" };
+		case "1.21.11":
+			return { dir: `${base}1.20.6-1.21.11/`, filter: (s) => s.status !== "REMOVED" };
+		case "1.20.6":
+			return { dir: `${base}1.20.6-1.21.11/`, filter: (s) => s.status !== "INTRODUCED" };
+		default:
+			return { dir: `${base}26.2-26.3/`, filter: (s) => s.status !== "REMOVED" };
+	}
+}
+
+async function loadSingleVersionData() {
+	loadingPage.value = true;
+	errorMessage.value = null;
+
+	const { dir: sampleDir, filter: filterCondition } = getSingleVersionDiffConfig(minVersion.value, selectedPlatform.value);
+
+	try {
+		let searchRes = await fetch(`${sampleDir}search-index.json`);
+		if (!searchRes.ok) {
+			searchRes = await fetch(`${import.meta.env.BASE_URL || "/"}data/search-index.json`);
+		}
+		const searchData = await searchRes.json();
+		searchIndex.value = searchData.filter(filterCondition).map((s) => ({
+			...s,
+			status: "STABLE",
+		}));
+
+		totalSymbolsCount.value = searchIndex.value.length;
+		totalPagesCount.value = Math.ceil(searchIndex.value.length / 50) || 1;
+		countAdded.value = 0;
+		countRemoved.value = 0;
+		countDeprecated.value = 0;
+		countExtension.value = 0;
+		countStable.value = searchIndex.value.length;
+
+		applyFilters();
+	} catch (e) {
+		console.error("Failed to load symbols for version:", e);
+		errorMessage.value = e.message || "Failed to load API symbols";
+	} finally {
+		loadingPage.value = false;
+	}
+}
+
 async function loadData() {
 	if (minVersion.value === maxVersion.value) {
-		loadingPage.value = true;
-		errorMessage.value = null;
-
-		// Look up the precomputed diff dataset where `v` is the target (or baseline for 1.20.6)
-		const v = minVersion.value;
-		let sampleDir = `${import.meta.env.BASE_URL || "/"}data/diffs/${selectedPlatform.value}/26.2-26.3/`;
-		let filterCondition = (s) => s.status !== "REMOVED";
-
-		if (v === "26.2") {
-			sampleDir = `${import.meta.env.BASE_URL || "/"}data/diffs/${selectedPlatform.value}/26.1.2-26.2/`;
-			filterCondition = (s) => s.status !== "REMOVED";
-		} else if (v === "26.1.2") {
-			sampleDir = `${import.meta.env.BASE_URL || "/"}data/diffs/${selectedPlatform.value}/1.21.11-26.1.2/`;
-			filterCondition = (s) => s.status !== "REMOVED";
-		} else if (v === "1.21.11") {
-			sampleDir = `${import.meta.env.BASE_URL || "/"}data/diffs/${selectedPlatform.value}/1.20.6-1.21.11/`;
-			filterCondition = (s) => s.status !== "REMOVED";
-		} else if (v === "1.20.6") {
-			sampleDir = `${import.meta.env.BASE_URL || "/"}data/diffs/${selectedPlatform.value}/1.20.6-1.21.11/`;
-			// For 1.20.6 as baseline, the symbols present in 1.20.6 are those NOT introduced in 1.21.11
-			filterCondition = (s) => s.status !== "INTRODUCED";
-		}
-
-		try {
-			let searchRes = await fetch(`${sampleDir}search-index.json`);
-			if (!searchRes.ok) {
-				searchRes = await fetch(`${import.meta.env.BASE_URL || "/"}data/search-index.json`);
-			}
-			const searchData = await searchRes.json();
-			// In identical version, no symbol is removed or introduced across the range; all are STABLE
-			searchIndex.value = searchData.filter(filterCondition).map(s => ({
-				...s,
-				status: "STABLE"
-			}));
-
-			totalSymbolsCount.value = searchIndex.value.length;
-			totalPagesCount.value = Math.ceil(searchIndex.value.length / 50) || 1;
-			countAdded.value = 0;
-			countRemoved.value = 0;
-			countDeprecated.value = 0;
-			countExtension.value = 0;
-			countStable.value = searchIndex.value.length;
-
-			applyFilters();
-		} catch (e) {
-			console.error("Failed to load symbols for version:", e);
-			errorMessage.value = e.message || "Failed to load API symbols";
-		} finally {
-			loadingPage.value = false;
-		}
+		await loadSingleVersionData();
 		return;
 	}
 
