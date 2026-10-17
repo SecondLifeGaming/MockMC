@@ -63,6 +63,8 @@ public class BaseMockGenerator implements DataGenerator {
         return raw.getSimpleName().replace("$", "");
     }
 
+    private final Set<TypeVariable<?>> resolvingTypeVariables = new HashSet<>();
+
     private TypeName mapType(java.lang.reflect.Type type, Class<?> clazz, TypeVariableName[] ourTypeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
         if (type instanceof TypeVariable<?> tv) {
             return mapTypeVariable(tv, clazz, ourTypeVars, typeMap);
@@ -88,11 +90,31 @@ public class BaseMockGenerator implements DataGenerator {
                 }
             }
         }
-        if (typeMap != null && typeMap.containsKey(tv)) {
-            return mapType(typeMap.get(tv), clazz, ourTypeVars, typeMap);
+        if (typeMap != null) {
+            java.lang.reflect.Type mapped = typeMap.get(tv);
+            if (mapped == null) {
+                String name = tv.getName();
+                java.lang.reflect.GenericDeclaration decl = tv.getGenericDeclaration();
+                String declName = decl instanceof Class<?> c ? c.getName() : null;
+                for (Map.Entry<TypeVariable<?>, java.lang.reflect.Type> entry : typeMap.entrySet()) {
+                    TypeVariable<?> key = entry.getKey();
+                    if (key.getName().equals(name)) {
+                        if (declName != null && key.getGenericDeclaration() instanceof Class<?> kc && kc.getName().equals(declName)) {
+                            mapped = entry.getValue();
+                            break;
+                        }
+                    }
+                }
+            }
+            if (mapped != null && !tv.equals(mapped)) {
+                return mapType(mapped, clazz, ourTypeVars, typeMap);
+            }
         }
-        
-        // Unknown or method-level type variable. Map its bounds recursively to handle class-level substitution.
+
+        if (!resolvingTypeVariables.add(tv)) {
+            return TypeVariableName.get(tv.getName());
+        }
+
         try {
             java.lang.reflect.Type[] bounds = tv.getBounds();
             if (bounds == null || bounds.length == 0 || (bounds.length == 1 && bounds[0] == Object.class)) {
@@ -105,6 +127,8 @@ public class BaseMockGenerator implements DataGenerator {
             return TypeVariableName.get(tv.getName(), mappedBounds);
         } catch (Exception _) {
             return TypeVariableName.get(tv.getName());
+        } finally {
+            resolvingTypeVariables.remove(tv);
         }
     }
 
@@ -200,6 +224,11 @@ public class BaseMockGenerator implements DataGenerator {
 
     private final Set<String> paperClassNames = new HashSet<>();
     private final Set<String> foliaClassNames = new HashSet<>();
+    private final List<String> paperVersions = new ArrayList<>();
+    private final List<String> foliaVersions = new ArrayList<>();
+    private final Map<String, ClassLoader> paperVersionLoaders = new HashMap<>();
+    private final Map<String, String> classToPlatform = new HashMap<>();
+    private final Map<String, String> classToVersion = new HashMap<>();
 
     @Override
     public void generateData() throws java.io.IOException {
@@ -219,6 +248,8 @@ public class BaseMockGenerator implements DataGenerator {
 
             sanitizeApiJars(cacheDir);
             populateBytecodeClassNames(cacheDir);
+            loadVersionManifest();
+            buildVersionLoaders(cacheDir);
 
             File libDir = new File(cacheDir, "libraries");
             if (libDir.exists()) {
@@ -228,8 +259,8 @@ public class BaseMockGenerator implements DataGenerator {
             urls.sort(Comparator.comparingInt(this::calculateUrlPriority).thenComparing(URL::getPath));
 
             this.customLoader = new URLClassLoader(urls.toArray(new URL[0]), getClass().getClassLoader());
-            List<URL> primaryUrls = urls.stream().filter(u -> !u.getPath().contains(FOLIA)).toList();
-            this.primaryLoader = new URLClassLoader(primaryUrls.toArray(new URL[0]), this.customLoader);
+            List<URL> primaryUrls = buildPrimaryUrls(urls, cacheDir);
+            this.primaryLoader = new URLClassLoader(primaryUrls.toArray(new URL[0]), getClass().getClassLoader());
             ClassPath classPath = ClassPath.from(customLoader);
             Set<Class<?>> toGenerate = scanPackages(classPath, customLoader);
 
@@ -246,6 +277,190 @@ public class BaseMockGenerator implements DataGenerator {
             rollbackStaging(generatedDir, stagingDir, backupDir);
             throw t;
         }
+    }
+
+    private void loadVersionManifest() {
+        paperVersions.clear();
+        foliaVersions.clear();
+        File versionsJson = new File(jarDirectory, "manifests/versions.json");
+        if (!versionsJson.exists()) {
+            return;
+        }
+        try (FileReader reader = new FileReader(versionsJson)) {
+            JsonObject root = new Gson().fromJson(reader, JsonObject.class);
+            JsonObject platforms = root.getAsJsonObject("platforms");
+            if (platforms != null) {
+                if (platforms.has(PAPER)) {
+                    for (var elem : platforms.getAsJsonObject(PAPER).getAsJsonArray("versions")) {
+                        paperVersions.add(elem.getAsJsonObject().get("version").getAsString());
+                    }
+                }
+                if (platforms.has(FOLIA)) {
+                    for (var elem : platforms.getAsJsonObject(FOLIA).getAsJsonArray("versions")) {
+                        foliaVersions.add(elem.getAsJsonObject().get("version").getAsString());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LOGGER.log(Level.WARNING, "Failed to load versions manifest for version detection", e);
+        }
+    }
+
+    private void buildVersionLoaders(File cacheDir) {
+        paperVersionLoaders.clear();
+        classToPlatform.clear();
+        classToVersion.clear();
+
+        // 1. Waterfall (proxy)
+        indexJarClasses(new File(jarDirectory, "waterfall-1.21-615.jar"), "waterfall", "1.21");
+        // 2. Velocity (proxy)
+        indexJarClasses(new File(jarDirectory, "velocity-4.2.1-SNAPSHOT-36.jar"), "velocity", "4.2.1");
+
+        // 3. Folia versions (older first, newer overwrites)
+        for (int i = foliaVersions.size() - 1; i >= 0; i--) {
+            String v = foliaVersions.get(i);
+            File sJar = findServerJar(FOLIA, v);
+            if (sJar != null) {
+                indexInternalApiClasses(sJar, FOLIA, v);
+            }
+        }
+
+        // 4. Paper versions (highest precedence: older first, modern Paper overwrites)
+        for (int i = paperVersions.size() - 1; i >= 0; i--) {
+            String v = paperVersions.get(i);
+            File sJar = findServerJar(PAPER, v);
+            if (sJar != null) {
+                indexInternalApiClasses(sJar, PAPER, v);
+                try {
+                    List<URL> vUrls = new ArrayList<>();
+                    File apiJar = extractInternalJar(sJar, "paper-api", cacheDir);
+                    if (apiJar != null) {
+                        vUrls.add(apiJar.toURI().toURL());
+                    }
+                    File remapped = findRemappedJar(PAPER, v, cacheDir);
+                    if (remapped != null) {
+                        vUrls.add(remapped.toURI().toURL());
+                    }
+                    if (!vUrls.isEmpty()) {
+                        paperVersionLoaders.put(v, new URLClassLoader(vUrls.toArray(new URL[0]), getClass().getClassLoader()));
+                    }
+                } catch (Exception e) {
+                    LOGGER.log(Level.FINE, "Failed building version loader for Paper {0}: {1}", new Object[]{v, e.getMessage()});
+                }
+            }
+        }
+    }
+
+    private File findServerJar(String platform, String version) {
+        File[] files = jarDirectory.listFiles((dir, name) -> name.startsWith(platform + "-" + version + "-") && name.endsWith(".jar"));
+        if (files != null && files.length > 0) {
+            return files[0];
+        }
+        return null;
+    }
+
+    private File findRemappedJar(String platform, String version, File cacheDir) {
+        File[] files = cacheDir.listFiles((dir, name) -> name.startsWith("remapped-" + platform + "-" + version + "-") && name.endsWith(".jar"));
+        if (files != null && files.length > 0) {
+            return files[0];
+        }
+        return null;
+    }
+
+    private void indexJarClasses(File jar, String platform, String version) {
+        if (jar == null || !jar.exists()) return;
+        try (JarFile jf = new JarFile(jar)) {
+            var entries = jf.entries();
+            while (entries.hasMoreElements()) {
+                String name = entries.nextElement().getName();
+                if (name.endsWith(".class") && !name.contains("$")) {
+                    String className = name.substring(0, name.length() - 6).replace('/', '.');
+                    classToPlatform.put(className, platform);
+                    classToVersion.put(className, version);
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.FINE, "Failed indexing classes from jar {0}: {1}", new Object[]{jar.getName(), e.getMessage()});
+        }
+    }
+
+    private void indexInternalApiClasses(File serverJar, String platform, String version) {
+        try (JarFile jf = new JarFile(serverJar)) {
+            var entries = jf.entries();
+            while (entries.hasMoreElements()) {
+                var entry = entries.nextElement();
+                String name = entry.getName();
+                if (name.contains(platform + "-api") && name.endsWith(".jar")) {
+                    try (var is = jf.getInputStream(entry);
+                         var zipIs = new java.util.zip.ZipInputStream(is)) {
+                        java.util.zip.ZipEntry ze;
+                        while ((ze = zipIs.getNextEntry()) != null) {
+                            String zname = ze.getName();
+                            if (zname.endsWith(".class") && !zname.contains("$")) {
+                                String className = zname.substring(0, zname.length() - 6).replace('/', '.');
+                                classToPlatform.put(className, platform);
+                                classToVersion.put(className, version);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.FINE, "Failed indexing internal API classes from {0}: {1}", new Object[]{serverJar.getName(), e.getMessage()});
+        }
+    }
+
+    private File extractInternalJar(File serverJar, String infix, File cacheDir) {
+        try (JarFile jf = new JarFile(serverJar)) {
+            var entries = jf.entries();
+            while (entries.hasMoreElements()) {
+                var entry = entries.nextElement();
+                String name = entry.getName();
+                if (name.contains(infix) && name.endsWith(".jar")) {
+                    String baseName = new File(name).getName();
+                    File target = new File(cacheDir, "extracted-" + baseName);
+                    if (!target.exists()) {
+                        try (var is = jf.getInputStream(entry);
+                             var os = new java.io.FileOutputStream(target)) {
+                            org.apache.commons.io.IOUtils.copy(is, os);
+                        }
+                    }
+                    return target;
+                }
+            }
+        } catch (IOException e) {
+            LOGGER.log(Level.FINE, "Failed extracting {0} from {1}: {2}", new Object[]{infix, serverJar.getName(), e.getMessage()});
+        }
+        return null;
+    }
+
+    private List<URL> buildPrimaryUrls(List<URL> allUrls, File cacheDir) {
+        String primaryPaperVersion = !paperVersions.isEmpty() ? paperVersions.get(0) : "26.3";
+        List<URL> primary = new ArrayList<>();
+        for (URL u : allUrls) {
+            String p = u.getPath();
+            // Exclude Folia jars
+            if (p.contains(FOLIA)) {
+                continue;
+            }
+            // Exclude fallback Paper API jars (keep only primary Paper API)
+            if (p.contains("paper-api")) {
+                if (p.contains(primaryPaperVersion)) {
+                    primary.add(u);
+                }
+                continue;
+            }
+            // Exclude older remapped Paper jars (keep only primary remapped)
+            if (p.contains("remapped-paper-")) {
+                if (p.contains("remapped-paper-" + primaryPaperVersion)) {
+                    primary.add(u);
+                }
+                continue;
+            }
+            // Include library JARs and non-API/server dependencies
+            primary.add(u);
+        }
+        return primary;
     }
 
     private int calculateUrlPriority(URL u) {
@@ -388,7 +603,12 @@ public class BaseMockGenerator implements DataGenerator {
             return;
         }
         try {
-            Class<?> c = Class.forName(classInfo.getName(), false, primaryLoader != null ? primaryLoader : fallbackLoader);
+            Class<?> c;
+            try {
+                c = primaryLoader != null ? Class.forName(classInfo.getName(), false, primaryLoader) : Class.forName(classInfo.getName(), false, fallbackLoader);
+            } catch (ClassNotFoundException | NoClassDefFoundError _) {
+                c = Class.forName(classInfo.getName(), false, fallbackLoader);
+            }
             CodeSource cs = c.getProtectionDomain().getCodeSource();
             if (cs != null && cs.getLocation() != null && cs.getLocation().getPath().contains(FOLIA) && paperClassNames.contains(c.getName())) {
                 return;
@@ -426,17 +646,59 @@ public class BaseMockGenerator implements DataGenerator {
     }
 
     private String getVersionForClass(Class<?> clazz) {
+        String mappedVersion = classToVersion.get(clazz.getName());
+        if (mappedVersion != null) {
+            return mappedVersion;
+        }
         try {
             CodeSource codeSource = clazz.getProtectionDomain().getCodeSource();
             if (codeSource != null) {
                 File jarFile = new File(codeSource.getLocation().toURI());
-                // Try to find a better version from manifest if we haven't already
                 return jarFile.getName().replace(".jar", "");
             }
         } catch (Exception _) {
             // Ignore version detection errors
         }
-        return "Unknown";
+        return !paperVersions.isEmpty() ? paperVersions.get(0) : "26.3";
+    }
+
+    private String getPlatformForClass(Class<?> clazz) {
+        String mappedPlatform = classToPlatform.get(clazz.getName());
+        if (mappedPlatform != null) {
+            return mappedPlatform;
+        }
+        String name = clazz.getName();
+        if (name.startsWith("com.velocitypowered.api")) return "velocity";
+        if (name.startsWith("net.md_5.bungee") || name.startsWith("io.github.waterfallmc")) return "waterfall";
+        if (foliaClassNames.contains(name)) return "folia";
+        return "paper";
+    }
+
+    private String findNewestPaperVersion(Method m, Class<?> clazz) {
+        for (String v : paperVersions) {
+            ClassLoader loader = paperVersionLoaders.get(v);
+            if (loader != null) {
+                try {
+                    Class<?> loaded = loader.loadClass(clazz.getName());
+                    for (Method vm : loaded.getMethods()) {
+                        if (isMethodSignatureEquivalent(vm, m)) {
+                            return v;
+                        }
+                    }
+                } catch (Throwable _) {
+                    // Method or class not present in this version
+                }
+            }
+        }
+        return getVersionForClass(clazz);
+    }
+
+    private String findRemovedInVersion(String newestVersion) {
+        int idx = paperVersions.indexOf(newestVersion);
+        if (idx > 0) {
+            return paperVersions.get(idx - 1);
+        }
+        return !paperVersions.isEmpty() ? paperVersions.get(0) : "26.3";
     }
 
     private void collectInterfaces(Class<?> c, Set<Class<?>> toGenerate) {
@@ -484,6 +746,7 @@ public class BaseMockGenerator implements DataGenerator {
         String sourceName = clazz.getProtectionDomain().getCodeSource() != null
                 ? new File(clazz.getProtectionDomain().getCodeSource().getLocation().getPath()).getName()
                 : "Unknown";
+        String platform = getPlatformForClass(clazz);
 
         TypeSpec.Builder typeSpec = TypeSpec.interfaceBuilder(simpleName + "BaseMock")
                 .addJavadoc("""
@@ -493,32 +756,50 @@ public class BaseMockGenerator implements DataGenerator {
                         Source: $L (Version: $L)
 
                         Reason: Suppressed to prevent legacy API noise from interfering with modern build cycles.
+                        @mockmc.platform $L
+                        @mockmc.version $L
                         """,
-                        clazz, sourceName, version)
+                        clazz, sourceName, version, platform, version)
                 .addModifiers(Modifier.PUBLIC);
 
         Deprecated d = clazz.getAnnotation(Deprecated.class);
-        if (d != null) {
+        boolean isPrimaryClass = isPrimaryApiClass(clazz);
+        if (d != null || (!isPrimaryClass && platform.equals("paper"))) {
             AnnotationSpec.Builder builder = AnnotationSpec.builder(Deprecated.class);
-            if (!d.since().isEmpty()) {
+            if (d != null && !d.since().isEmpty()) {
                 builder.addMember(SINCE, "$S", d.since());
+            } else if (!isPrimaryClass && platform.equals("paper")) {
+                String removedIn = findRemovedInVersion(version);
+                builder.addMember(SINCE, "$S", removedIn);
             } else {
-                builder.addMember(SINCE, "$S", "1.0");
+                builder.addMember(SINCE, "$S", version);
             }
-            if (d.forRemoval()) {
+            if ((d != null && d.forRemoval()) || !isPrimaryClass) {
                 builder.addMember(FOR_REMOVAL, "$L", true);
             }
             typeSpec.addAnnotation(builder.build());
-            
+
             String replacement = getQuirkReplacement(clazz);
             if (replacement != null) {
                 typeSpec.addJavadoc("@deprecated $L\n", replacement);
+            } else if (!isPrimaryClass && platform.equals("paper")) {
+                String removedIn = findRemovedInVersion(version);
+                typeSpec.addJavadoc("@deprecated Removed upstream in $L; preserved for binary test compatibility.\n", removedIn);
             } else {
                 typeSpec.addJavadoc("@deprecated Suppressed to prevent legacy API noise from interfering with modern build cycles.\n");
             }
         }
 
         return typeSpec;
+    }
+
+    private boolean isPrimaryApiClass(Class<?> clazz) {
+        if (primaryLoader == null) return true;
+        try {
+            return primaryLoader.loadClass(clazz.getName()) != null;
+        } catch (ClassNotFoundException | NoClassDefFoundError _) {
+            return false;
+        }
     }
 
     private TypeVariableName[] addTypeVariables(Class<?> clazz, TypeSpec.Builder typeSpec) {
@@ -575,7 +856,13 @@ public class BaseMockGenerator implements DataGenerator {
                 }
             }
         }
-        for (java.lang.reflect.Type iface : clazz.getGenericInterfaces()) {
+        java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
+        try {
+            genericInterfaces = clazz.getGenericInterfaces();
+        } catch (Throwable _) {
+            // Some fallback interfaces may have changed type parameters across historical versions
+        }
+        for (java.lang.reflect.Type iface : genericInterfaces) {
             Class<?> raw = getRawType(iface);
             if (raw != null && raw.getTypeParameters().length > 0 && !(iface instanceof java.lang.reflect.ParameterizedType)) {
                 suppressions.add(SUPPRESS_RAWTYPES);
@@ -591,8 +878,8 @@ public class BaseMockGenerator implements DataGenerator {
 
     private void applySuperInterfaces(Class<?> clazz, TypeSpec.Builder typeSpec, TypeVariableName[] typeVars, Map<TypeVariable<?>, java.lang.reflect.Type> typeMap) {
         Set<java.lang.reflect.Type> ourInterfaces = collectOurInterfaces(clazz);
-        pruneRedundantInterfaces(ourInterfaces);
         applyQuirksToInterfaces(clazz, ourInterfaces);
+        pruneRedundantInterfaces(ourInterfaces);
 
         for (java.lang.reflect.Type iface : ourInterfaces) {
             typeSpec.addSuperinterface(getMirroredTypeName(iface, clazz, typeVars, typeMap));
@@ -602,7 +889,13 @@ public class BaseMockGenerator implements DataGenerator {
     private Set<java.lang.reflect.Type> collectOurInterfaces(Class<?> clazz) {
         Set<java.lang.reflect.Type> ourInterfaces = new HashSet<>();
         Class<?> primaryClazz = primaryLoader != null ? loadPrimaryClass(clazz) : clazz;
-        for (java.lang.reflect.Type ifaceType : primaryClazz.getGenericInterfaces()) {
+        java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
+        try {
+            genericInterfaces = primaryClazz.getGenericInterfaces();
+        } catch (Throwable _) {
+            // Ignore generic interface resolution errors between differing versions
+        }
+        for (java.lang.reflect.Type ifaceType : genericInterfaces) {
             Class<?> iface = getRawType(ifaceType);
             if (iface != null && isGeneratableType(iface) && !iface.isSealed() && isClassInSameProtectionDomainOrPrimary(iface)) {
                 ourInterfaces.add(ifaceType);
@@ -656,7 +949,22 @@ public class BaseMockGenerator implements DataGenerator {
             if (classQuirks.has(EXCLUDE_INTERFACES)) {
                 Set<String> toExclude = new HashSet<>();
                 classQuirks.getAsJsonArray(EXCLUDE_INTERFACES).forEach(e -> toExclude.add(e.getAsString()));
-                interfaces.removeIf(iface -> toExclude.contains(getRawType(iface).getName()));
+                List<java.lang.reflect.Type> excludedTypes = new ArrayList<>();
+                for (java.lang.reflect.Type iface : interfaces) {
+                    Class<?> raw = getRawType(iface);
+                    if (raw != null && toExclude.contains(raw.getName())) {
+                        excludedTypes.add(iface);
+                    }
+                }
+                interfaces.removeAll(excludedTypes);
+                for (java.lang.reflect.Type excluded : excludedTypes) {
+                    for (java.lang.reflect.Type superIface : getAllGenericInterfaces(excluded)) {
+                        Class<?> rawSuper = getRawType(superIface);
+                        if (rawSuper != null && !toExclude.contains(rawSuper.getName()) && isGeneratableType(rawSuper) && !rawSuper.isSealed() && isClassInSameProtectionDomainOrPrimary(rawSuper)) {
+                            interfaces.add(superIface);
+                        }
+                    }
+                }
             }
         }
     }
@@ -843,13 +1151,27 @@ public class BaseMockGenerator implements DataGenerator {
 
     private boolean isProvidedByGeneratableAncestor(Class<?> clazz, Method m, Set<Class<?>> allGeneratable) {
         Class<?> declaring = m.getDeclaringClass();
+        Set<String> excludedInterfaces = getExcludedInterfacesForClass(clazz);
         for (java.lang.reflect.Type ifaceType : getAllGenericInterfaces(clazz)) {
             Class<?> a = getRawType(ifaceType);
             if (a != null && a != clazz && allGeneratable.contains(a) && declaring.isAssignableFrom(a)) {
-                return true;
+                if (!excludedInterfaces.contains(a.getName())) {
+                    return true;
+                }
             }
         }
         return false;
+    }
+
+    private Set<String> getExcludedInterfacesForClass(Class<?> clazz) {
+        Set<String> toExclude = new HashSet<>();
+        if (quirks != null && quirks.has(clazz.getName())) {
+            JsonObject classQuirks = quirks.getAsJsonObject(clazz.getName());
+            if (classQuirks.has(EXCLUDE_INTERFACES)) {
+                classQuirks.getAsJsonArray(EXCLUDE_INTERFACES).forEach(e -> toExclude.add(e.getAsString()));
+            }
+        }
+        return toExclude;
     }
 
     private Method selectBestMethod(List<Method> providers) {
@@ -939,11 +1261,18 @@ public class BaseMockGenerator implements DataGenerator {
                 builder.addAnnotation(Override.class);
             }
         } else {
-            builder.addAnnotation(AnnotationSpec.builder(Deprecated.class)
-                    .addMember(SINCE, "$S", "legacy")
-                    .addMember(FOR_REMOVAL, "$L", true)
-                    .build());
-            builder.addJavadoc("Legacy or cross-server API method.\n@mockmc.version legacy\n");
+            String platform = getPlatformForClass(clazz);
+            if (platform.equals("paper")) {
+                String newestVersion = findNewestPaperVersion(m, clazz);
+                String removedIn = findRemovedInVersion(newestVersion);
+                builder.addAnnotation(AnnotationSpec.builder(Deprecated.class)
+                        .addMember(SINCE, "$S", removedIn)
+                        .addMember(FOR_REMOVAL, "$L", true)
+                        .build());
+                builder.addJavadoc("Removed upstream in $L; preserved for binary test compatibility.\n@mockmc.version $L\n", removedIn, newestVersion);
+            } else {
+                builder.addJavadoc("Platform extension API method.\n@mockmc.platform $L\n@mockmc.version $L\n", platform, getVersionForClass(clazz));
+            }
         }
 
         applyMethodAnnotations(builder, m, clazz, ourTypeVars, typeMap, classSuppressions);
@@ -1109,12 +1438,12 @@ public class BaseMockGenerator implements DataGenerator {
         Deprecated classDep = clazz.getAnnotation(Deprecated.class);
         Deprecated toApply = methodDep != null ? methodDep : classDep;
 
-        if (toApply != null) {
+        if (toApply != null && isPrimaryApiMethod(m, clazz)) {
             AnnotationSpec.Builder depBuilder = AnnotationSpec.builder(Deprecated.class);
             if (!toApply.since().isEmpty()) {
                 depBuilder.addMember(SINCE, "$S", toApply.since());
             } else {
-                depBuilder.addMember(SINCE, "$S", "1.0");
+                depBuilder.addMember(SINCE, "$S", getVersionForClass(clazz));
             }
             if (toApply.forRemoval()) {
                 depBuilder.addMember(FOR_REMOVAL, "$L", true);
@@ -1240,7 +1569,13 @@ public class BaseMockGenerator implements DataGenerator {
         Class<?> raw = getRawType(type);
         if (raw == null) return res;
 
-        for (java.lang.reflect.Type iface : raw.getGenericInterfaces()) {
+        java.lang.reflect.Type[] genericInterfaces = new java.lang.reflect.Type[0];
+        try {
+            genericInterfaces = raw.getGenericInterfaces();
+        } catch (Throwable _) {
+            // Ignore generic interface resolution errors between differing versions
+        }
+        for (java.lang.reflect.Type iface : genericInterfaces) {
             res.add(iface);
             res.addAll(getAllGenericInterfaces(iface));
         }

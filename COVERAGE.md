@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: 2026-10-16T01:24:47.325435480Z
+Generated on: 2026-10-17T07:24:13.380336431Z
 
 ## Accounted-For API Surface: 100.00%
 
-- **Total Discovered API Methods**: 12921
-- **Category A: Automated BaseMocks**: 12441
+- **Total Discovered API Methods**: 12942
+- **Category A: Automated BaseMocks**: 12462
 - **Category B: Manual Implementations**: 0
 - **Category C: Justified Exclusions**: 480
 - **Unaccounted Methods**: 0
@@ -20,6 +20,7 @@ Generated on: 2026-10-16T01:24:47.325435480Z
 | com.destroystokyo.paper.brigadier | 8 | 100% Accounted |
 | com.destroystokyo.paper.entity | 52 | 100% Accounted |
 | com.destroystokyo.paper.entity.ai | 42 | 100% Accounted |
+| com.destroystokyo.paper.event.executor.asm | 2 | 100% Accounted |
 | com.destroystokyo.paper.inventory.meta | 20 | 100% Accounted |
 | com.destroystokyo.paper.loottable | 30 | 100% Accounted |
 | com.destroystokyo.paper.network | 8 | 100% Accounted |
@@ -70,6 +71,7 @@ Generated on: 2026-10-16T01:24:47.325435480Z
 | io.papermc.paper.entity.poi | 8 | 100% Accounted |
 | io.papermc.paper.event.player | 58 | 100% Accounted |
 | io.papermc.paper.event.world.border | 2 | 100% Accounted |
+| io.papermc.paper.generated | 1 | 100% Accounted |
 | io.papermc.paper.inventory.tooltip | 8 | 100% Accounted |
 | io.papermc.paper.math | 92 | 100% Accounted |
 | io.papermc.paper.persistence | 32 | 100% Accounted |
@@ -175,7 +177,7 @@ Generated on: 2026-10-16T01:24:47.325435480Z
 | org.bukkit.map | 66 | 100% Accounted |
 | org.bukkit.material | 42 | 100% Accounted |
 | org.bukkit.metadata | 70 | 100% Accounted |
-| org.bukkit.packs | 10 | 100% Accounted |
+| org.bukkit.packs | 28 | 100% Accounted |
 | org.bukkit.permissions | 32 | 100% Accounted |
 | org.bukkit.persistence | 28 | 100% Accounted |
 | org.bukkit.plugin | 158 | 100% Accounted |

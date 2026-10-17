@@ -47,8 +47,6 @@ public class DocSiteDataGenerator implements DataGenerator {
 	private static final String STATUS_EXTENSION = "EXTENSION";
 	private static final String STATUS_STABLE = "STABLE";
 
-	private static final String TEXT_INTRODUCED_26_3 = "Introduced in 26.3";
-	private static final String TEXT_STABLE_RANGE = "Stable throughout 26.2 - 26.3";
 	private static final String TEXT_FOLIA_EXTENSION = "Folia Threaded Regions Extension (26.2)";
 
 	private static final String CSS_ADDED = "status-added";
@@ -91,52 +89,178 @@ public class DocSiteDataGenerator implements DataGenerator {
 		return new TargetVersions(primaryVersion, baselineVersion);
 	}
 
+	private List<String> resolvePlatformVersions(String platform) {
+		File manifestFile = new File(rootDir, "jars/manifests/versions.json");
+		List<String> versions = new ArrayList<>();
+		if (manifestFile.exists()) {
+			try (java.io.FileReader fr = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8)) {
+				com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(fr).getAsJsonObject();
+				if (root.has("platforms") && root.getAsJsonObject("platforms").has(platform)) {
+					com.google.gson.JsonArray verArr = root.getAsJsonObject("platforms").getAsJsonObject(platform).getAsJsonArray("versions");
+					for (com.google.gson.JsonElement el : verArr) {
+						if (el.isJsonObject() && el.getAsJsonObject().has("version")) {
+							versions.add(el.getAsJsonObject().get("version").getAsString());
+						}
+					}
+				}
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, "Failed to parse versions for " + platform + " in versions.json", e);
+			}
+		}
+		if (versions.isEmpty()) {
+			versions.addAll(List.of("26.3", "26.2", "26.1.2", "1.21.11", "1.20.6"));
+		}
+		return versions;
+	}
+
 	@Override
 	public void generateData() throws IOException {
 		File cacheDir = new File(rootDir, "jars/cache");
-		TargetVersions versions = resolveTargetVersions();
+		List<String> paperVersions = resolvePlatformVersions("paper");
+		List<String> foliaVersions = resolvePlatformVersions("folia");
+		TargetVersions defaultVersions = resolveTargetVersions();
 
-		File primaryPaper = findBestJar(cacheDir, versions.primary(), PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
-		File baselinePaper = findBestJar(cacheDir, versions.baseline(), PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
-		File foliaJar = findBestJar(cacheDir, versions.baseline(), "remapped-folia-", "folia-api-");
-
-		if (primaryPaper == null) {
-			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: Required primary Paper JAR for version {0} not found in {1}",
-					new Object[]{versions.primary(), cacheDir.getAbsolutePath()});
-			return;
-		}
-
-		BytecodeManifestScanner.ScanConfiguration primaryConfig = createScanConfig("paper", primaryPaper.getName(), "canonical", false, null);
-		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primaryPaper, primaryConfig);
-
-		Map<String, PairwiseDiff.ChangeEntry> changeMap = new HashMap<>();
-		PairwiseDiff paperDiff = null;
-
-		if (baselinePaper != null) {
-			BytecodeManifestScanner.ScanConfiguration baselineConfig = createScanConfig("paper", baselinePaper.getName(), "baseline", false, null);
-			ApiManifest baselineManifest = BytecodeManifestScanner.scanJar(baselinePaper, baselineConfig);
-			paperDiff = VersionDiffEngine.computeDiff(baselineManifest, primaryManifest);
-			for (PairwiseDiff.ChangeEntry entry : paperDiff.changes()) {
-				changeMap.put(entry.symbol(), entry);
+		// 1. Scan and cache Paper manifests
+		Map<String, ApiManifest> paperManifestCache = new HashMap<>();
+		for (String v : paperVersions) {
+			File jar = findBestJar(cacheDir, v, PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API);
+			if (jar != null) {
+				BytecodeManifestScanner.ScanConfiguration cfg = createScanConfig("paper", jar.getName(), v.equals(defaultVersions.primary()) ? "canonical" : "baseline", false, null);
+				ApiManifest manifest = BytecodeManifestScanner.scanJar(jar, cfg);
+				paperManifestCache.put(v, manifest);
 			}
 		}
 
+		// 2. Scan and cache Folia manifests
+		Map<String, ApiManifest> foliaManifestCache = new HashMap<>();
+		for (String v : foliaVersions) {
+			File jar = findBestJar(cacheDir, v, "remapped-folia-", "folia-api-");
+			if (jar != null) {
+				BytecodeManifestScanner.ScanConfiguration cfg = createScanConfig("folia", jar.getName(), "extension", false, null);
+				ApiManifest manifest = BytecodeManifestScanner.scanJar(jar, cfg);
+				foliaManifestCache.put(v, manifest);
+			}
+		}
+
+		String primaryVersion = defaultVersions.primary();
+		ApiManifest primaryPaperManifest = paperManifestCache.get(primaryVersion);
+		if (primaryPaperManifest == null) {
+			LOGGER.log(Level.WARNING, "Skipping DocSiteDataGenerator: Required primary Paper JAR for version {0} not found in {1}",
+					new Object[]{primaryVersion, cacheDir.getAbsolutePath()});
+			return;
+		}
+
+		// 3. Precompute lifecycle maps for Paper and Folia
+		PlatformLifecycle paperLifecycle = computeLifecycle(paperVersions, paperManifestCache);
+		PlatformLifecycle foliaLifecycle = computeLifecycle(foliaVersions, foliaManifestCache);
+
+		File defaultFoliaJar = findBestJar(cacheDir, defaultVersions.baseline(), "remapped-folia-", "folia-api-");
+
+		// 4. Generate Paper pairwise diffs
+		for (int t = 0; t < paperVersions.size(); t++) {
+			String targetVer = paperVersions.get(t);
+			ApiManifest targetManifest = paperManifestCache.get(targetVer);
+			if (targetManifest == null) continue;
+
+			for (int b = t + 1; b < paperVersions.size(); b++) {
+				String baselineVer = paperVersions.get(b);
+				ApiManifest baselineManifest = paperManifestCache.get(baselineVer);
+				if (baselineManifest == null) continue;
+
+				List<ClientSymbol> symbols = buildSymbolsForPair(targetManifest, baselineManifest, targetVer, baselineVer, defaultFoliaJar, paperLifecycle);
+
+				File diffDir = new File(rootDir, "site/docs/public/data/diffs/paper/" + baselineVer + "-" + targetVer);
+				writeExplorerDatasetsTo(symbols, diffDir);
+
+				if (baselineVer.equals(defaultVersions.baseline()) && targetVer.equals(defaultVersions.primary())) {
+					File publicDataDir = new File(rootDir, "site/docs/public/data");
+					writeExplorerDatasetsTo(symbols, publicDataDir);
+				}
+			}
+		}
+
+		// 5. Generate first-class Folia pairwise diffs
+		for (int t = 0; t < foliaVersions.size(); t++) {
+			String targetVer = foliaVersions.get(t);
+			ApiManifest targetManifest = foliaManifestCache.get(targetVer);
+			if (targetManifest == null) continue;
+
+			for (int b = t + 1; b < foliaVersions.size(); b++) {
+				String baselineVer = foliaVersions.get(b);
+				ApiManifest baselineManifest = foliaManifestCache.get(baselineVer);
+				if (baselineManifest == null) continue;
+
+				List<ClientSymbol> symbols = buildSymbolsForPair(targetManifest, baselineManifest, targetVer, baselineVer, null, foliaLifecycle);
+
+				File diffDir = new File(rootDir, "site/docs/public/data/diffs/folia/" + baselineVer + "-" + targetVer);
+				writeExplorerDatasetsTo(symbols, diffDir);
+			}
+		}
+	}
+
+	private record PlatformLifecycle(
+			Map<String, String> addedIn,
+			Map<String, String> removedIn,
+			Map<String, String> deprecatedIn
+	) {}
+
+	private PlatformLifecycle computeLifecycle(List<String> versionsDescending, Map<String, ApiManifest> manifests) {
+		Map<String, String> addedIn = new HashMap<>();
+		Map<String, String> removedIn = new HashMap<>();
+		Map<String, String> deprecatedIn = new HashMap<>();
+
+		// Process chronological steps from earliest to latest
+		List<String> chronological = versionsDescending.reversed();
+
+		for (int i = 0; i < chronological.size() - 1; i++) {
+			String fromVer = chronological.get(i);
+			String toVer = chronological.get(i + 1);
+
+			ApiManifest fromManifest = manifests.get(fromVer);
+			ApiManifest toManifest = manifests.get(toVer);
+			if (fromManifest == null || toManifest == null) continue;
+
+			PairwiseDiff stepDiff = VersionDiffEngine.computeDiff(fromManifest, toManifest);
+			for (PairwiseDiff.ChangeEntry change : stepDiff.changes()) {
+				String sym = change.symbol();
+				if (change.category() == PairwiseDiff.ChangeCategory.ADDED) {
+					addedIn.putIfAbsent(sym, toVer);
+				} else if (change.category() == PairwiseDiff.ChangeCategory.REMOVED) {
+					removedIn.putIfAbsent(sym, toVer);
+				} else if (change.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
+					deprecatedIn.putIfAbsent(sym, toVer);
+				}
+			}
+		}
+
+		return new PlatformLifecycle(addedIn, removedIn, deprecatedIn);
+	}
+
+	private List<ClientSymbol> buildSymbolsForPair(
+			ApiManifest targetManifest,
+			ApiManifest baselineManifest,
+			String targetVer,
+			String baselineVer,
+			File foliaJar,
+			PlatformLifecycle lifecycle
+	) throws IOException {
+		PairwiseDiff diff = VersionDiffEngine.computeDiff(baselineManifest, targetManifest);
+		Map<String, PairwiseDiff.ChangeEntry> changeMap = new HashMap<>();
+		for (PairwiseDiff.ChangeEntry entry : diff.changes()) {
+			changeMap.put(entry.symbol(), entry);
+		}
+
 		List<ClientSymbol> clientSymbols = new ArrayList<>();
-		int idCounter = collectPrimarySymbols(primaryManifest, changeMap, clientSymbols, 1);
+		int idCounter = collectPrimarySymbols(targetManifest, changeMap, clientSymbols, 1, targetVer, baselineVer, lifecycle);
 
-		if (paperDiff != null) {
-			idCounter = collectRemovedSymbols(paperDiff, clientSymbols, idCounter);
-		}
+		idCounter = collectRemovedSymbols(diff, clientSymbols, idCounter, targetVer, lifecycle);
 
-		// Process Folia extensions separately to identify platform-exclusive symbols
 		if (foliaJar != null) {
-			collectFoliaExtensions(foliaJar, primaryManifest, clientSymbols, idCounter);
+			collectFoliaExtensions(foliaJar, targetManifest, clientSymbols, idCounter);
 		}
 
-		// Sort symbols deterministically by name
 		clientSymbols.sort(Comparator.comparing(ClientSymbol::name));
 
-		// Reassign sequential IDs after sorting
 		List<ClientSymbol> reindexedSymbols = new ArrayList<>(clientSymbols.size());
 		for (int i = 0; i < clientSymbols.size(); i++) {
 			ClientSymbol s = clientSymbols.get(i);
@@ -156,8 +280,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 					s.migrationHint()
 			));
 		}
-
-		writeExplorerDatasets(reindexedSymbols);
+		return reindexedSymbols;
 	}
 
 	private static BytecodeManifestScanner.ScanConfiguration createScanConfig(
@@ -190,7 +313,10 @@ public class DocSiteDataGenerator implements DataGenerator {
 			ApiManifest primaryManifest,
 			Map<String, PairwiseDiff.ChangeEntry> changeMap,
 			List<ClientSymbol> clientSymbols,
-			int startId
+			int startId,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
 		int idCounter = startId;
 		for (Map.Entry<String, ApiManifest.ClassEntry> classEntry : primaryManifest.classes().entrySet()) {
@@ -202,9 +328,9 @@ public class DocSiteDataGenerator implements DataGenerator {
 				continue;
 			}
 
-			clientSymbols.add(createClassClientSymbol(String.valueOf(idCounter++), className, clazz, changeMap.get(className)));
-			idCounter = collectClassMethods(className, clazz, changeMap, clientSymbols, idCounter);
-			idCounter = collectClassFields(className, clazz, changeMap, clientSymbols, idCounter);
+			clientSymbols.add(createClassClientSymbol(String.valueOf(idCounter++), className, clazz, changeMap.get(className), targetVer, baselineVer, lifecycle));
+			idCounter = collectClassMethods(className, clazz, changeMap, clientSymbols, idCounter, targetVer, baselineVer, lifecycle);
+			idCounter = collectClassFields(className, clazz, changeMap, clientSymbols, idCounter, targetVer, baselineVer, lifecycle);
 		}
 		return idCounter;
 	}
@@ -213,11 +339,15 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String id,
 			String className,
 			ApiManifest.ClassEntry clazz,
-			PairwiseDiff.ChangeEntry classChange
+			PairwiseDiff.ChangeEntry classChange,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
 		boolean isAdded = classChange != null && classChange.category() == PairwiseDiff.ChangeCategory.ADDED;
+		String birthVer = lifecycle.addedIn().getOrDefault(className, targetVer);
 		String classStatus = isAdded ? STATUS_INTRODUCED : STATUS_STABLE;
-		String classStatusText = isAdded ? TEXT_INTRODUCED_26_3 : TEXT_STABLE_RANGE;
+		String classStatusText = isAdded ? "Introduced in " + birthVer : "Stable throughout " + baselineVer + " - " + targetVer;
 		String classStatusClass = isAdded ? CSS_ADDED : CSS_STABLE;
 
 		return new ClientSymbol(
@@ -238,7 +368,10 @@ public class DocSiteDataGenerator implements DataGenerator {
 			ApiManifest.ClassEntry clazz,
 			Map<String, PairwiseDiff.ChangeEntry> changeMap,
 			List<ClientSymbol> clientSymbols,
-			int startId
+			int startId,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
 		int idCounter = startId;
 		for (Map.Entry<String, ApiManifest.MethodEntry> methodEntry : clazz.methods().entrySet()) {
@@ -249,7 +382,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 			String fullSymbol = className + "#" + methodEntry.getKey();
 			PairwiseDiff.ChangeEntry methodChange = changeMap.get(fullSymbol);
-			clientSymbols.add(createMethodClientSymbol(String.valueOf(idCounter++), className, m, methodChange));
+			clientSymbols.add(createMethodClientSymbol(String.valueOf(idCounter++), className, m, methodChange, targetVer, baselineVer, lifecycle));
 		}
 		return idCounter;
 	}
@@ -259,7 +392,10 @@ public class DocSiteDataGenerator implements DataGenerator {
 			ApiManifest.ClassEntry clazz,
 			Map<String, PairwiseDiff.ChangeEntry> changeMap,
 			List<ClientSymbol> clientSymbols,
-			int startId
+			int startId,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
 		int idCounter = startId;
 		for (Map.Entry<String, ApiManifest.FieldEntry> fieldEntry : clazz.fields().entrySet()) {
@@ -270,7 +406,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 			String fullSymbol = className + "#" + f.name() + ":" + f.descriptor();
 			PairwiseDiff.ChangeEntry fieldChange = changeMap.get(fullSymbol);
-			clientSymbols.add(createFieldClientSymbol(String.valueOf(idCounter++), className, f, fieldChange));
+			clientSymbols.add(createFieldClientSymbol(String.valueOf(idCounter++), className, f, fieldChange, targetVer, baselineVer, lifecycle));
 		}
 		return idCounter;
 	}
@@ -279,20 +415,26 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String id,
 			String className,
 			ApiManifest.MethodEntry m,
-			PairwiseDiff.ChangeEntry methodChange
+			PairwiseDiff.ChangeEntry methodChange,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
+		String fullSymbol = className + "#" + m.name();
 		String mStatus = STATUS_STABLE;
-		String mStatusText = TEXT_STABLE_RANGE;
+		String mStatusText = "Stable throughout " + baselineVer + " - " + targetVer;
 		String mStatusClass = CSS_STABLE;
 
 		if (methodChange != null) {
 			if (methodChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
+				String birthVer = lifecycle.addedIn().getOrDefault(fullSymbol, targetVer);
 				mStatus = STATUS_INTRODUCED;
-				mStatusText = TEXT_INTRODUCED_26_3;
+				mStatusText = "Introduced in " + birthVer;
 				mStatusClass = CSS_ADDED;
 			} else if (methodChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
+				String depVer = lifecycle.deprecatedIn().getOrDefault(fullSymbol, targetVer);
 				mStatus = STATUS_DEPRECATED;
-				mStatusText = "Deprecated in 26.3";
+				mStatusText = "Deprecated in " + depVer;
 				mStatusClass = CSS_DEPRECATED;
 			}
 		}
@@ -300,7 +442,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 		return new ClientSymbol(
 				id,
 				"METHOD",
-				className + "#" + m.name(),
+				fullSymbol,
 				m.descriptor(),
 				mStatus,
 				mStatusText,
@@ -318,20 +460,27 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String id,
 			String className,
 			ApiManifest.FieldEntry f,
-			PairwiseDiff.ChangeEntry fieldChange
+			PairwiseDiff.ChangeEntry fieldChange,
+			String targetVer,
+			String baselineVer,
+			PlatformLifecycle lifecycle
 	) {
+		String fullSymbol = className + "#" + f.name();
 		String fStatus = STATUS_STABLE;
-		String fStatusText = TEXT_STABLE_RANGE;
+		String fStatusText = "Stable throughout " + baselineVer + " - " + targetVer;
 		String fStatusClass = CSS_STABLE;
 
 		if (fieldChange != null) {
+			String fullFieldSig = fullSymbol + ":" + f.descriptor();
 			if (fieldChange.category() == PairwiseDiff.ChangeCategory.ADDED) {
+				String birthVer = lifecycle.addedIn().getOrDefault(fullFieldSig, lifecycle.addedIn().getOrDefault(fullSymbol, targetVer));
 				fStatus = STATUS_INTRODUCED;
-				fStatusText = TEXT_INTRODUCED_26_3;
+				fStatusText = "Introduced in " + birthVer;
 				fStatusClass = CSS_ADDED;
 			} else if (fieldChange.category() == PairwiseDiff.ChangeCategory.DEPRECATED) {
+				String depVer = lifecycle.deprecatedIn().getOrDefault(fullFieldSig, lifecycle.deprecatedIn().getOrDefault(fullSymbol, targetVer));
 				fStatus = STATUS_DEPRECATED;
-				fStatusText = "Deprecated in 26.3";
+				fStatusText = "Deprecated in " + depVer;
 				fStatusClass = CSS_DEPRECATED;
 			}
 		}
@@ -339,7 +488,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 		return new ClientSymbol(
 				id,
 				"FIELD",
-				className + "#" + f.name(),
+				fullSymbol,
 				f.descriptor(),
 				fStatus,
 				fStatusText,
@@ -353,11 +502,12 @@ public class DocSiteDataGenerator implements DataGenerator {
 		);
 	}
 
-	private int collectRemovedSymbols(PairwiseDiff diff, List<ClientSymbol> clientSymbols, int startId) {
+	private int collectRemovedSymbols(PairwiseDiff diff, List<ClientSymbol> clientSymbols, int startId, String targetVer, PlatformLifecycle lifecycle) {
 		int idCounter = startId;
 		for (PairwiseDiff.ChangeEntry change : diff.changes()) {
 			if (change.category() == PairwiseDiff.ChangeCategory.REMOVED) {
 				String symbol = change.symbol();
+				String deathVer = lifecycle.removedIn().getOrDefault(symbol, targetVer);
 				String migration = change.migrationHint() != null ? change.migrationHint().replacementSymbol() : null;
 				clientSymbols.add(new ClientSymbol(
 						String.valueOf(idCounter++),
@@ -365,7 +515,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 						symbol,
 						change.details() != null ? change.details().descriptor() : "()V",
 						STATUS_REMOVED,
-						"Removed upstream in 26.3 (Binary Incompatible)",
+						"Removed upstream in " + deathVer + " (Binary Incompatible)",
 						"status-removed",
 						determineScope(symbol),
 						null, null, null, null,
@@ -424,9 +574,8 @@ public class DocSiteDataGenerator implements DataGenerator {
 		}
 	}
 
-	private void writeExplorerDatasets(List<ClientSymbol> clientSymbols) throws IOException {
-		File publicDataDir = new File(rootDir, "site/docs/public/data");
-		File pagesDir = new File(publicDataDir, "pages");
+	private void writeExplorerDatasetsTo(List<ClientSymbol> clientSymbols, File targetDir) throws IOException {
+		File pagesDir = new File(targetDir, "pages");
 		pagesDir.mkdirs();
 
 		// Clean up existing page-*.json chunks to avoid stale phantom pages
@@ -469,7 +618,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 				countStable
 		);
 
-		File metaFile = new File(publicDataDir, "explorer-meta.json");
+		File metaFile = new File(targetDir, "explorer-meta.json");
 		try (FileWriter writer = new FileWriter(metaFile, StandardCharsets.UTF_8)) {
 			GSON.toJson(meta, writer);
 		}
@@ -494,23 +643,24 @@ public class DocSiteDataGenerator implements DataGenerator {
 						s.descriptor(),
 						s.kind(),
 						s.status(),
+						s.statusText(),
 						s.scope()
 				))
 				.toList();
 
-		File searchFile = new File(publicDataDir, "search-index.json");
+		File searchFile = new File(targetDir, "search-index.json");
 		try (FileWriter writer = new FileWriter(searchFile, StandardCharsets.UTF_8)) {
 			GSON.toJson(searchIndex, writer);
 		}
 
 		// Keep fallback full symbols file
-		File fullFile = new File(publicDataDir, "explorer-symbols.json");
+		File fullFile = new File(targetDir, "explorer-symbols.json");
 		try (FileWriter writer = new FileWriter(fullFile, StandardCharsets.UTF_8)) {
 			GSON.toJson(clientSymbols, writer);
 		}
 
 		LOGGER.log(Level.INFO, "Exported {0} symbols across {1} chunked pages + lightweight search index to {2}",
-				new Object[]{totalSymbols, totalPages, publicDataDir.getAbsolutePath()});
+				new Object[]{totalSymbols, totalPages, targetDir.getAbsolutePath()});
 	}
 
 	private static String determineScope(String name) {
@@ -605,6 +755,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String descriptor,
 			String kind,
 			String status,
+			String statusText,
 			String scope
 	) {}
 

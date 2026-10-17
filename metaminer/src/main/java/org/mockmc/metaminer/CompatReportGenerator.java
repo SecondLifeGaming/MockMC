@@ -8,11 +8,14 @@ import org.mockmc.metaminer.manifest.BytecodeManifestScanner;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Modernized compatibility report generator that scans upstream platform JARs
@@ -36,26 +39,50 @@ public class CompatReportGenerator implements DataGenerator {
 		this.dataFolder = dataFolder;
 	}
 
+	private record TargetVersions(String primary, String baseline) {}
+
+	private TargetVersions resolveTargetVersions() {
+		File manifestFile = new File(dataFolder, "jars/manifests/versions.json");
+		String primaryVersion = "26.3";
+		String baselineVersion = "26.2";
+
+		if (manifestFile.exists()) {
+			try (java.io.FileReader fr = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8)) {
+				com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(fr).getAsJsonObject();
+				if (root.has("targetRange")) {
+					com.google.gson.JsonObject range = root.getAsJsonObject("targetRange");
+					if (range.has("end")) primaryVersion = range.get("end").getAsString();
+					if (range.has("start")) baselineVersion = range.get("start").getAsString();
+				}
+			} catch (Exception e) {
+				LOGGER.log(Level.WARNING, "Failed to parse versions.json for CompatReportGenerator", e);
+			}
+		}
+		return new TargetVersions(primaryVersion, baselineVersion);
+	}
+
 	@Override
 	public void generateData() throws IOException {
 		File cacheDir = new File(dataFolder, "jars/cache");
-		File primary = findLatestJar(cacheDir, "remapped-paper-", "paper-api-");
-		File fallback = findLatestJar(cacheDir, "remapped-folia-", "folia-api-");
+		TargetVersions versions = resolveTargetVersions();
 
-		if (primary == null || fallback == null) {
-			LOGGER.log(Level.WARNING, "Skipping CompatReportGenerator: paper ({0}) or folia ({1}) not found",
-					new Object[]{primary, fallback});
+		File targetPaper = findBestJar(cacheDir, versions.primary(), "remapped-paper-", "paper-api-");
+		File baselinePaper = findBestJar(cacheDir, versions.baseline(), "remapped-paper-", "paper-api-");
+
+		if (targetPaper == null || baselinePaper == null) {
+			LOGGER.log(Level.WARNING, "Skipping CompatReportGenerator: target paper ({0}) or baseline paper ({1}) not found",
+					new Object[]{targetPaper, baselinePaper});
 			return;
 		}
 
-		LOGGER.log(Level.INFO, "Scanning and comparing primary {0} against fallback {1}",
-				new Object[]{primary.getName(), fallback.getName()});
+		LOGGER.log(Level.INFO, "Scanning and comparing baseline Paper {0} against target Paper {1}",
+				new Object[]{baselinePaper.getName(), targetPaper.getName()});
 
-		BytecodeManifestScanner.ScanConfiguration fallbackConfig = new BytecodeManifestScanner.ScanConfiguration(
-				"folia",
-				extractVersion(fallback.getName()),
+		BytecodeManifestScanner.ScanConfiguration baselineConfig = new BytecodeManifestScanner.ScanConfiguration(
+				"paper",
+				extractVersion(baselinePaper.getName()),
 				0,
-				"extension",
+				"baseline",
 				"metaminer",
 				"unknown",
 				false,
@@ -65,13 +92,13 @@ public class CompatReportGenerator implements DataGenerator {
 				API_PREFIXES,
 				List.of(),
 				List.of(),
-				true,
-				"Fallback extension"
+				false,
+				null
 		);
 
-		BytecodeManifestScanner.ScanConfiguration primaryConfig = new BytecodeManifestScanner.ScanConfiguration(
+		BytecodeManifestScanner.ScanConfiguration targetConfig = new BytecodeManifestScanner.ScanConfiguration(
 				"paper",
-				extractVersion(primary.getName()),
+				extractVersion(targetPaper.getName()),
 				0,
 				"canonical",
 				"metaminer",
@@ -87,13 +114,13 @@ public class CompatReportGenerator implements DataGenerator {
 				null
 		);
 
-		ApiManifest fallbackManifest = BytecodeManifestScanner.scanJar(fallback, fallbackConfig);
-		ApiManifest primaryManifest = BytecodeManifestScanner.scanJar(primary, primaryConfig);
+		ApiManifest baselineManifest = BytecodeManifestScanner.scanJar(baselinePaper, baselineConfig);
+		ApiManifest targetManifest = BytecodeManifestScanner.scanJar(targetPaper, targetConfig);
 
-		PairwiseDiff diff = VersionDiffEngine.computeDiff(fallbackManifest, primaryManifest);
+		PairwiseDiff diff = VersionDiffEngine.computeDiff(baselineManifest, targetManifest);
 
 		File report = new File(dataFolder, "COMPAT.md");
-		CompatMarkdownRenderer.renderToMarkdown(diff, report, primary.getName(), fallback.getName());
+		CompatMarkdownRenderer.renderToMarkdown(diff, report, targetPaper.getName(), baselinePaper.getName());
 
 		LOGGER.log(Level.INFO, "Deterministic compatibility report generated at {0}", report.getAbsolutePath());
 	}
@@ -108,10 +135,34 @@ public class CompatReportGenerator implements DataGenerator {
 		return name;
 	}
 
-	private static File findLatestJar(File dir, String... prefixes) {
+	private static final Pattern BUILD_PATTERN = Pattern.compile("-(\\d+)\\.jar$");
+
+	private static File findBestJar(File dir, String targetVersion, String... prefixes) {
 		List<File> found = new ArrayList<>();
 		collectJars(dir, prefixes, found);
-		return found.stream().max(Comparator.comparing(File::getPath)).orElse(null);
+
+		List<File> matchingVersion = found.stream()
+				.filter(f -> f.getName().contains("-" + targetVersion + "-") || f.getName().contains("-" + targetVersion + "."))
+				.toList();
+
+		List<File> candidates = matchingVersion.isEmpty() ? found : matchingVersion;
+		if (candidates.isEmpty()) {
+			return null;
+		}
+
+		return candidates.stream().max(Comparator.comparingInt(CompatReportGenerator::extractBuildNumber)).orElse(null);
+	}
+
+	private static int extractBuildNumber(File file) {
+		Matcher matcher = BUILD_PATTERN.matcher(file.getName());
+		if (matcher.find()) {
+			try {
+				return Integer.parseInt(matcher.group(1));
+			} catch (NumberFormatException _) {
+				return 0;
+			}
+		}
+		return 0;
 	}
 
 	private static void collectJars(File dir, String[] prefixes, List<File> found) {
