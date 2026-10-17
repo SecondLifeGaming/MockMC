@@ -8,6 +8,8 @@ import org.mockmc.metaminer.diff.VersionDiffEngine;
 import org.mockmc.metaminer.manifest.ApiManifest;
 import org.mockmc.metaminer.manifest.BytecodeManifestScanner;
 
+import org.mockmc.metaminer.util.PlatformJarResolver;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Generates pre-chunked, indexed static JSON datasets for the VitePress API Explorer:
@@ -58,14 +58,8 @@ public class DocSiteDataGenerator implements DataGenerator {
 	private static final String ACCESS_PUBLIC = "PUBLIC";
 	private static final String ACCESS_PROTECTED = "PROTECTED";
 
-	private static final String PREFIX_REMAPPED_PAPER = "remapped-paper-";
-	private static final String PREFIX_PAPER_API = "paper-api-";
-
 	private static final String PLATFORM_PAPER = "paper";
 	private static final String PLATFORM_FOLIA = "folia";
-	private static final String KEY_PLATFORMS = "platforms";
-	private static final String PREFIX_REMAPPED_FOLIA = "remapped-folia-";
-	private static final String PREFIX_FOLIA_API = "folia-api-";
 	private static final String PREFIX_INTRODUCED_IN = "Introduced in ";
 	private static final String PREFIX_STABLE_THROUGHOUT = "Stable throughout ";
 
@@ -73,52 +67,6 @@ public class DocSiteDataGenerator implements DataGenerator {
 
 	public DocSiteDataGenerator(File rootDir) {
 		this.rootDir = rootDir;
-	}
-
-	private record TargetVersions(String primary, String baseline) {}
-
-	private TargetVersions resolveTargetVersions() {
-		File manifestFile = new File(rootDir, "jars/manifests/versions.json");
-		String primaryVersion = "26.3";
-		String baselineVersion = "26.2";
-
-		if (manifestFile.exists()) {
-			try (java.io.FileReader fr = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8)) {
-				com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(fr).getAsJsonObject();
-				if (root.has("targetRange")) {
-					com.google.gson.JsonObject range = root.getAsJsonObject("targetRange");
-					if (range.has("end")) primaryVersion = range.get("end").getAsString();
-					if (range.has("start")) baselineVersion = range.get("start").getAsString();
-				}
-			} catch (Exception e) {
-				LOGGER.log(Level.WARNING, "Failed to parse versions.json, falling back to defaults", e);
-			}
-		}
-		return new TargetVersions(primaryVersion, baselineVersion);
-	}
-
-	private List<String> resolvePlatformVersions(String platform) {
-		File manifestFile = new File(rootDir, "jars/manifests/versions.json");
-		List<String> versions = new ArrayList<>();
-		if (manifestFile.exists()) {
-			try (java.io.FileReader fr = new java.io.FileReader(manifestFile, StandardCharsets.UTF_8)) {
-				com.google.gson.JsonObject root = com.google.gson.JsonParser.parseReader(fr).getAsJsonObject();
-				if (root.has(KEY_PLATFORMS) && root.getAsJsonObject(KEY_PLATFORMS).has(platform)) {
-					com.google.gson.JsonArray verArr = root.getAsJsonObject(KEY_PLATFORMS).getAsJsonObject(platform).getAsJsonArray("versions");
-					for (com.google.gson.JsonElement el : verArr) {
-						if (el.isJsonObject() && el.getAsJsonObject().has("version")) {
-							versions.add(el.getAsJsonObject().get("version").getAsString());
-						}
-					}
-				}
-			} catch (Exception e) {
-				LOGGER.log(Level.WARNING, e, () -> "Failed to parse versions for " + platform + " in versions.json");
-			}
-		}
-		if (versions.isEmpty()) {
-			versions.addAll(List.of("26.3", "26.2", "26.1.2", "1.21.11", "1.20.6"));
-		}
-		return versions;
 	}
 
 	private Map<String, ApiManifest> scanPlatformManifests(
@@ -130,7 +78,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 	) throws IOException {
 		Map<String, ApiManifest> manifestCache = new HashMap<>();
 		for (String v : versions) {
-			File jar = findBestJar(cacheDir, v, prefixes);
+			File jar = PlatformJarResolver.findBestJar(cacheDir, v, prefixes);
 			if (jar != null) {
 				String tier;
 				if (platform.equals(PLATFORM_FOLIA)) {
@@ -151,18 +99,18 @@ public class DocSiteDataGenerator implements DataGenerator {
 	@Override
 	public void generateData() throws IOException {
 		File cacheDir = new File(rootDir, "jars/cache");
-		List<String> paperVersions = resolvePlatformVersions(PLATFORM_PAPER);
-		List<String> foliaVersions = resolvePlatformVersions(PLATFORM_FOLIA);
-		TargetVersions defaultVersions = resolveTargetVersions();
+		List<String> paperVersions = PlatformJarResolver.resolvePlatformVersions(rootDir, PLATFORM_PAPER);
+		List<String> foliaVersions = PlatformJarResolver.resolvePlatformVersions(rootDir, PLATFORM_FOLIA);
+		PlatformJarResolver.TargetVersions defaultVersions = PlatformJarResolver.resolveTargetVersions(rootDir);
 
 		// 1. Scan and cache Paper and Folia manifests
 		Map<String, ApiManifest> paperManifestCache = scanPlatformManifests(
 				cacheDir, PLATFORM_PAPER, paperVersions, defaultVersions.primary(),
-				new String[]{PREFIX_REMAPPED_PAPER, PREFIX_PAPER_API});
+				new String[]{PlatformJarResolver.PREFIX_REMAPPED_PAPER, PlatformJarResolver.PREFIX_PAPER_API});
 
 		Map<String, ApiManifest> foliaManifestCache = scanPlatformManifests(
 				cacheDir, PLATFORM_FOLIA, foliaVersions, defaultVersions.primary(),
-				new String[]{PREFIX_REMAPPED_FOLIA, PREFIX_FOLIA_API});
+				new String[]{PlatformJarResolver.PREFIX_REMAPPED_FOLIA, PlatformJarResolver.PREFIX_FOLIA_API});
 
 		String primaryVersion = defaultVersions.primary();
 		ApiManifest primaryPaperManifest = paperManifestCache.get(primaryVersion);
@@ -176,7 +124,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 		PlatformLifecycle paperLifecycle = computeLifecycle(paperVersions, paperManifestCache);
 		PlatformLifecycle foliaLifecycle = computeLifecycle(foliaVersions, foliaManifestCache);
 
-		File defaultFoliaJar = findBestJar(cacheDir, defaultVersions.baseline(), PREFIX_REMAPPED_FOLIA, PREFIX_FOLIA_API);
+		File defaultFoliaJar = PlatformJarResolver.findBestJar(cacheDir, defaultVersions.baseline(), PlatformJarResolver.PREFIX_REMAPPED_FOLIA, PlatformJarResolver.PREFIX_FOLIA_API);
 
 		// 3. Generate Paper & Folia pairwise diffs
 		generatePairwiseDiffs(PLATFORM_PAPER, paperVersions, paperManifestCache, defaultFoliaJar, paperLifecycle, defaultVersions);
@@ -189,7 +137,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 			Map<String, ApiManifest> manifests,
 			File foliaJar,
 			PlatformLifecycle lifecycle,
-			TargetVersions defaultVersions
+			PlatformJarResolver.TargetVersions defaultVersions
 	) throws IOException {
 		for (int t = 0; t < versions.size(); t++) {
 			String targetVer = versions.get(t);
@@ -309,7 +257,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 	) {
 		return new BytecodeManifestScanner.ScanConfiguration(
 				platform,
-				extractVersion(jarName),
+				PlatformJarResolver.extractVersion(jarName),
 				0,
 				tier,
 				"metaminer",
@@ -688,65 +636,6 @@ public class DocSiteDataGenerator implements DataGenerator {
 			return "Paper API (com.destroystokyo.paper)";
 		}
 		return "Canonical Bukkit / Paper (org.bukkit)";
-	}
-
-	private static String extractVersion(String jarName) {
-		String name = jarName.replace(".jar", "");
-		for (String prefix : List.of(PREFIX_REMAPPED_PAPER, PREFIX_REMAPPED_FOLIA, PREFIX_PAPER_API, PREFIX_FOLIA_API)) {
-			if (name.startsWith(prefix)) {
-				return name.substring(prefix.length());
-			}
-		}
-		return name;
-	}
-
-	private static final Pattern BUILD_PATTERN = Pattern.compile("-(\\d+)\\.jar$");
-
-	private static File findBestJar(File dir, String targetVersion, String... prefixes) {
-		List<File> found = new ArrayList<>();
-		collectJars(dir, prefixes, found);
-
-		// Filter by target version if present in filename
-		List<File> matchingVersion = found.stream()
-				.filter(f -> f.getName().contains("-" + targetVersion + "-") || f.getName().contains("-" + targetVersion + "."))
-				.toList();
-
-		List<File> candidates = matchingVersion.isEmpty() ? found : matchingVersion;
-		if (candidates.isEmpty()) {
-			return null;
-		}
-
-		// Sort by integer build number extracted from filename
-		return candidates.stream().max(Comparator.comparingInt(DocSiteDataGenerator::extractBuildNumber)).orElse(null);
-	}
-
-	private static int extractBuildNumber(File file) {
-		Matcher matcher = BUILD_PATTERN.matcher(file.getName());
-		if (matcher.find()) {
-			try {
-				return Integer.parseInt(matcher.group(1));
-			} catch (NumberFormatException _) {
-				return 0;
-			}
-		}
-		return 0;
-	}
-
-	private static void collectJars(File dir, String[] prefixes, List<File> found) {
-		File[] files = dir.listFiles();
-		if (files == null) return;
-		for (File f : files) {
-			if (f.isDirectory()) {
-				collectJars(f, prefixes, found);
-			} else if (f.getName().endsWith(".jar")) {
-				for (String prefix : prefixes) {
-					if (f.getName().startsWith(prefix)) {
-						found.add(f);
-						break;
-					}
-				}
-			}
-		}
 	}
 
 	public record ExplorerMetadata(
