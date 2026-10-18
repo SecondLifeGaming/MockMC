@@ -40,6 +40,10 @@ public class MappingProvider {
 
         String versionUrl = getVersionUrl(mcVersion);
         String mappingsUrl = getDownloadUrl(versionUrl, "server_mappings");
+        if (mappingsUrl == null) {
+            LOGGER.log(Level.INFO, "No server mappings published for {0} (runtime is already mapped); skipping remapping.", mcVersion);
+            return null;
+        }
 
         LOGGER.log(Level.INFO, "Downloading Mojang Mappings {0}...", mcVersion);
         FileUtils.copyURLToFile(URI.create(mappingsUrl).toURL(), mappingFile);
@@ -62,6 +66,10 @@ public class MappingProvider {
     private static String getDownloadUrl(String versionUrl, String type) throws IOException {
         String versionContent = IOUtils.toString(URI.create(versionUrl), StandardCharsets.UTF_8);
         JsonObject versionData = JsonParser.parseString(versionContent).getAsJsonObject();
-        return versionData.getAsJsonObject("downloads").getAsJsonObject(type).get("url").getAsString();
+        JsonObject downloads = versionData.getAsJsonObject("downloads");
+        if (downloads == null || !downloads.has(type) || !downloads.get(type).isJsonObject()) {
+            return null;
+        }
+        return downloads.getAsJsonObject(type).get("url").getAsString();
     }
 }

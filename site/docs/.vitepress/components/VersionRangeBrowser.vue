@@ -3,7 +3,7 @@
 		<div class="controls-panel">
 			<div class="control-group">
 				<label for="platform-select">Platform</label>
-				<select id="platform-select" v-model="selectedPlatform">
+				<select id="platform-select" v-model="selectedPlatform" @change="onPlatformChange">
 					<option value="paper">Paper (Canonical)</option>
 					<option value="folia">Folia (Threaded Regions)</option>
 					<option value="velocity">Velocity</option>
@@ -13,15 +13,19 @@
 
 			<div class="control-group">
 				<label for="min-version-select">Baseline Version</label>
-				<select id="min-version-select" v-model="minVersion" disabled title="Currently validated baseline from versions.json">
-					<option value="26.2">26.2 (Validated Baseline)</option>
+				<select id="min-version-select" v-model="minVersion" @change="onRangeChange">
+					<option v-for="v in platformVersions" :key="'min-' + v" :value="v">
+						{{ v }} {{ v === defaultMin ? '(Baseline)' : '' }}
+					</option>
 				</select>
 			</div>
 
 			<div class="control-group">
 				<label for="max-version-select">Target Version</label>
-				<select id="max-version-select" v-model="maxVersion" disabled title="Currently validated canonical target from versions.json">
-					<option value="26.3">26.3 (Canonical Target)</option>
+				<select id="max-version-select" v-model="maxVersion" @change="onRangeChange">
+					<option v-for="v in platformVersions" :key="'max-' + v" :value="v">
+						{{ v }} {{ v === defaultMax ? '(Target)' : '' }}
+					</option>
 				</select>
 			</div>
 
@@ -64,9 +68,10 @@
 			</div>
 		</div>
 
-		<div v-if="selectedPlatform !== 'paper'" class="unsupported-banner">
-			<strong>Platform Notice:</strong> The active manifest and range-diff validation currently indexes canonical <strong>Paper 26.2 → 26.3</strong> with Folia 26.2 regional extensions. Standalone multi-version pairwise diffing for {{ selectedPlatform.toUpperCase() }} is under active indexing.
+		<div v-if="selectedPlatform !== 'paper' && selectedPlatform !== 'folia'" class="unsupported-banner">
+			<strong>Platform Notice:</strong> The active manifest and range-diff validation currently indexes canonical <strong>Paper</strong> and <strong>Folia</strong>. Standalone multi-version pairwise diffing for {{ selectedPlatform.toUpperCase() }} is under active indexing.
 		</div>
+
 
 		<div class="summary-bar">
 			<span class="badge badge-info">
@@ -139,9 +144,12 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 
+const defaultMin = "1.20.6";
+const defaultMax = "26.3";
+
 const selectedPlatform = ref("paper");
-const minVersion = ref("26.2");
-const maxVersion = ref("26.3");
+const minVersion = ref(defaultMin);
+const maxVersion = ref(defaultMax);
 const selectedCategory = ref("ALL");
 const selectedStatus = ref("CHANGED");
 const searchQuery = ref("");
@@ -149,16 +157,45 @@ const currentPage = ref(1);
 const loadingPage = ref(false);
 const errorMessage = ref(null);
 
-const availableVersions = ["26.2", "26.3"];
+const platformVersionsMap = {
+	paper: ["26.3", "26.2", "26.1.2", "1.21.11", "1.20.6"],
+	folia: ["26.3", "26.2", "26.1.2", "1.21.11", "1.20.6"],
+	velocity: ["4.2.1"],
+	waterfall: ["1.21"]
+};
 
-// Metadata initialized from canonical explorer-meta.json (16,180 symbols)
-const totalSymbolsCount = ref(16180);
-const totalPagesCount = ref(324);
-const countAdded = ref(166);
-const countRemoved = ref(163);
-const countDeprecated = ref(0);
-const countExtension = ref(334);
-const countStable = ref(15517);
+const platformVersions = computed(() => {
+	return platformVersionsMap[selectedPlatform.value] || ["26.3", "26.2"];
+});
+
+const activeDataPath = computed(() => {
+	const baseUrl = import.meta.env.BASE_URL || "/";
+	return `${baseUrl}data/diffs/${selectedPlatform.value}/${minVersion.value}-${maxVersion.value}/`;
+});
+
+function onPlatformChange() {
+	const vers = platformVersions.value;
+	if (vers.length > 0) {
+		maxVersion.value = vers[0];
+		minVersion.value = vers[vers.length - 1];
+	}
+	pageCache.clear();
+	loadData();
+}
+
+function onRangeChange() {
+	pageCache.clear();
+	loadData();
+}
+
+// Metadata initialized from canonical explorer-meta.json (16,494 symbols for 1.20.6 -> 26.3)
+const totalSymbolsCount = ref(16494);
+const totalPagesCount = ref(330);
+const countAdded = ref(1755);
+const countRemoved = ref(1806);
+const countDeprecated = ref(2);
+const countExtension = ref(350);
+const countStable = ref(12581);
 
 // Chunks cache
 const pageCache = new Map();
@@ -169,28 +206,89 @@ const searchIndex = ref([]);
 const searchMatches = ref([]);
 const isSearchingOrFiltering = ref(false);
 
-async function initData() {
-	const baseUrl = import.meta.env.BASE_URL || "/";
+function getSingleVersionDiffConfig(v, platform) {
+	const base = `${import.meta.env.BASE_URL || "/"}data/diffs/${platform}/`;
+	switch (v) {
+		case "26.2":
+			return { dir: `${base}26.1.2-26.2/`, filter: (s) => s.status !== "REMOVED" };
+		case "26.1.2":
+			return { dir: `${base}1.21.11-26.1.2/`, filter: (s) => s.status !== "REMOVED" };
+		case "1.21.11":
+			return { dir: `${base}1.20.6-1.21.11/`, filter: (s) => s.status !== "REMOVED" };
+		case "1.20.6":
+			return { dir: `${base}1.20.6-1.21.11/`, filter: (s) => s.status !== "INTRODUCED" };
+		default:
+			return { dir: `${base}26.2-26.3/`, filter: (s) => s.status !== "REMOVED" };
+	}
+}
+
+async function loadSingleVersionData() {
+	loadingPage.value = true;
+	errorMessage.value = null;
+
+	const { dir: sampleDir, filter: filterCondition } = getSingleVersionDiffConfig(minVersion.value, selectedPlatform.value);
+
+	try {
+		let searchRes = await fetch(`${sampleDir}search-index.json`);
+		if (!searchRes.ok) {
+			searchRes = await fetch(`${import.meta.env.BASE_URL || "/"}data/search-index.json`);
+		}
+		const searchData = await searchRes.json();
+		searchIndex.value = searchData.filter(filterCondition).map((s) => ({
+			...s,
+			status: "STABLE",
+		}));
+
+		totalSymbolsCount.value = searchIndex.value.length;
+		totalPagesCount.value = Math.ceil(searchIndex.value.length / 50) || 1;
+		countAdded.value = 0;
+		countRemoved.value = 0;
+		countDeprecated.value = 0;
+		countExtension.value = 0;
+		countStable.value = searchIndex.value.length;
+
+		applyFilters();
+	} catch (e) {
+		console.error("Failed to load symbols for version:", e);
+		errorMessage.value = e.message || "Failed to load API symbols";
+	} finally {
+		loadingPage.value = false;
+	}
+}
+
+async function loadData() {
+	if (minVersion.value === maxVersion.value) {
+		await loadSingleVersionData();
+		return;
+	}
+
+	const dir = activeDataPath.value;
 	loadingPage.value = true;
 	errorMessage.value = null;
 
 	try {
 		// 1. Fetch metadata
-		const metaRes = await fetch(`${baseUrl}data/explorer-meta.json`);
-		if (!metaRes.ok) throw new Error(`HTTP ${metaRes.status} loading explorer-meta.json`);
+		const metaRes = await fetch(`${dir}explorer-meta.json`);
+		if (!metaRes.ok) {
+			// Fallback to default root data if pairwise diff is not precomputed
+			if (dir !== `${import.meta.env.BASE_URL || "/"}data/`) {
+				const fallbackRes = await fetch(`${import.meta.env.BASE_URL || "/"}data/explorer-meta.json`);
+				if (fallbackRes.ok) {
+					const fallbackMeta = await fallbackRes.json();
+					applyMeta(fallbackMeta);
+					const fallbackSearch = await (await fetch(`${import.meta.env.BASE_URL || "/"}data/search-index.json`)).json();
+					searchIndex.value = fallbackSearch;
+					applyFilters();
+					return;
+				}
+			}
+			throw new Error(`HTTP ${metaRes.status} loading explorer-meta.json`);
+		}
 		const meta = await metaRes.json();
-		if (!meta || typeof meta.totalSymbols !== "number") throw new Error("Invalid explorer-meta schema");
-
-		totalSymbolsCount.value = meta.totalSymbols;
-		totalPagesCount.value = meta.totalPages;
-		countAdded.value = meta.countAdded;
-		countRemoved.value = meta.countRemoved;
-		countDeprecated.value = meta.countDeprecated;
-		countExtension.value = meta.countExtension || 0;
-		countStable.value = meta.countStable;
+		applyMeta(meta);
 
 		// 2. Fetch search index
-		const searchRes = await fetch(`${baseUrl}data/search-index.json`);
+		const searchRes = await fetch(`${dir}search-index.json`);
 		if (!searchRes.ok) throw new Error(`HTTP ${searchRes.status} loading search-index.json`);
 		const searchData = await searchRes.json();
 		if (!Array.isArray(searchData)) throw new Error("Invalid search-index schema");
@@ -205,13 +303,24 @@ async function initData() {
 	}
 }
 
+function applyMeta(meta) {
+	if (!meta || typeof meta.totalSymbols !== "number") return;
+	totalSymbolsCount.value = meta.totalSymbols;
+	totalPagesCount.value = meta.totalPages;
+	countAdded.value = meta.countAdded;
+	countRemoved.value = meta.countRemoved;
+	countDeprecated.value = meta.countDeprecated;
+	countExtension.value = meta.countExtension || 0;
+	countStable.value = meta.countStable;
+}
+
 onMounted(() => {
-	initData();
+	loadData();
 });
 
 function retryLoad() {
 	pageCache.clear();
-	initData();
+	loadData();
 }
 
 function resetFilters() {
@@ -229,8 +338,11 @@ async function loadPage(pageNumber) {
 
 	loadingPage.value = true;
 	try {
-		const baseUrl = import.meta.env.BASE_URL || "/";
-		const res = await fetch(`${baseUrl}data/pages/page-${pageNumber}.json`);
+		const dir = activeDataPath.value;
+		let res = await fetch(`${dir}pages/page-${pageNumber}.json`);
+		if (!res.ok && dir !== `${import.meta.env.BASE_URL || "/"}data/`) {
+			res = await fetch(`${import.meta.env.BASE_URL || "/"}data/pages/page-${pageNumber}.json`);
+		}
 		if (res.ok) {
 			const data = await res.json();
 			pageCache.set(pageNumber, data);
@@ -266,7 +378,7 @@ function applyFilters() {
 	const category = selectedCategory.value;
 	const status = selectedStatus.value;
 
-	if (!query && category === "ALL" && status === "ALL") {
+	if (!query && category === "ALL" && status === "ALL" && minVersion.value !== maxVersion.value) {
 		isSearchingOrFiltering.value = false;
 		searchMatches.value = [];
 		currentPage.value = 1;
@@ -308,7 +420,7 @@ function paginateSearchResults() {
 		name: item.name,
 		descriptor: item.descriptor,
 		status: item.status,
-		statusText: getStatusText(item.status),
+		statusText: item.statusText || getStatusText(item.status),
 		statusClass: getStatusClass(item.status),
 		scope: item.scope,
 		testLink: null,
@@ -380,15 +492,15 @@ function getStatusClass(status) {
 function getStatusText(status) {
 	switch (status) {
 		case "INTRODUCED":
-			return "Introduced in 26.3";
+			return `Introduced in ${maxVersion.value}`;
 		case "REMOVED":
-			return "Removed upstream in 26.3 (Binary Incompatible)";
+			return `Removed upstream in ${maxVersion.value} (Binary Incompatible)`;
 		case "DEPRECATED":
-			return "Deprecated in 26.3";
+			return `Deprecated in ${maxVersion.value}`;
 		case "EXTENSION":
-			return "Platform Extension (Folia Threaded Regions)";
+			return "Platform Extension (Threaded Regions / Proxy)";
 		default:
-			return "Stable throughout 26.2 - 26.3";
+			return `Stable throughout ${minVersion.value} - ${maxVersion.value}`;
 	}
 }
 </script>

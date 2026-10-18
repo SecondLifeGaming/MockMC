@@ -22,8 +22,12 @@ public class StandaloneRemapper
 		if (outputJar.exists())
 			return outputJar;
 
-		LOGGER.log(Level.INFO, "Remapping {0} to Mojang names via isolated process with prioritized ASM 9.7...",
-				inputJar.getName());
+		if (mappingFile == null) {
+			LOGGER.log(Level.INFO, "No mapping file provided for {0} (pre-mapped); copying to {1}.",
+					new Object[]{inputJar.getName(), outputJar.getName()});
+			java.nio.file.Files.copy(inputJar.toPath(), outputJar.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+			return outputJar;
+		}
 
 		File tsrgFile = new File(mappingFile.getParentFile(), mappingFile.getName().replace(".txt", ".tsrg"));
 		ProGuardToTsrg.convert(mappingFile, tsrgFile);

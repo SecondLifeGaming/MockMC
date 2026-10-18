@@ -1,6 +1,6 @@
 {
   "targetRange": {
-    "start": "26.2",
+    "start": "1.20.6",
     "end": "26.3"
   },
   "platforms": {
@@ -17,6 +17,21 @@
           "version": "26.2",
           "build": 134,
           "url": "https://fill-data.papermc.io/v1/objects/3cce0a4922baf79bd8e1275ee5ff9f073f24675770e09b0d4be9442d513e7a6b/paper-26.2-134.jar"
+        },
+        {
+          "version": "26.1.2",
+          "build": 74,
+          "url": "https://fill-data.papermc.io/v1/objects/1d70b1dab9cf4a6de615209a536f3a45a2186240253c428213ce2188ab95e5f7/paper-26.1.2-74.jar"
+        },
+        {
+          "version": "1.21.11",
+          "build": 132,
+          "url": "https://fill-data.papermc.io/v1/objects/5ffef465eeeb5f2a3c23a24419d97c51afd7dbb4923ff42df9a3f58bba1ccfba/paper-1.21.11-132.jar"
+        },
+        {
+          "version": "1.20.6",
+          "build": 151,
+          "url": "https://fill-data.papermc.io/v1/objects/4b011f5adb5f6c72007686a223174fce82f31aeb4b34faf4652abc840b47e640/paper-1.20.6-151.jar"
         }
       ]
     },
@@ -24,9 +39,30 @@
       "type": "extension",
       "versions": [
         {
+          "version": "26.3",
+          "build": 3,
+          "url": "https://fill-data.papermc.io/v1/objects/0c4cc7dd82c40bd1effa8a9c4cacfad55d41b7dc38377900957c961c2952c022/folia-26.3-3.jar",
+          "primary": true
+        },
+        {
           "version": "26.2",
           "build": 7,
           "url": "https://fill-data.papermc.io/v1/objects/128a634192261cd38bb4a5dc54075018a0f896fd6c6f529e37dca6e99e32b3b3/folia-26.2-7.jar"
+        },
+        {
+          "version": "26.1.2",
+          "build": 8,
+          "url": "https://fill-data.papermc.io/v1/objects/607afd1c3320008e1ffd2eaee6780ace4419d5f8c527b75e79f259be79ebf57b/folia-26.1.2-8.jar"
+        },
+        {
+          "version": "1.21.11",
+          "build": 14,
+          "url": "https://fill-data.papermc.io/v1/objects/f52c408490a0225611e67907a3ca19f7e6da2c6bc899e715d5f46844e7103c39/folia-1.21.11-14.jar"
+        },
+        {
+          "version": "1.20.6",
+          "build": 6,
+          "url": "https://fill-data.papermc.io/v1/objects/a30625d8824b03aae64898b001b46bdc4424b0e5caee1a370af7b444d8ec361a/folia-1.20.6-6.jar"
         }
       ]
     },

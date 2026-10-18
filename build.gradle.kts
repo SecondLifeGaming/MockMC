@@ -205,11 +205,16 @@ dependencies {
 	compileOnly("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 	testImplementation("io.papermc.paper:paper-api:${property("paper.api.full-version")}")
 
-	// Remapped Server Jars from MetaMiner (Autonomous) - Paper primary, Folia secondary
-	val remappedJars = files(
-		fileTree("jars/cache") { include("remapped-paper-*.jar") },
-		fileTree("jars/cache") { include("remapped-folia-*.jar") }
-	)
+	// Remapped Server Jars from MetaMiner (Autonomous) - Paper primary first, then Folia primary, then fallbacks
+	val primaryPaperRemapped = manifestSelection["paper"]?.substringAfterLast('/')?.let { file("jars/cache/remapped-$it") }
+	val primaryFoliaRemapped = manifestSelection["folia"]?.substringAfterLast('/')?.let { file("jars/cache/remapped-$it") }
+	val fallbackRemappedJars = fileTree("jars/cache") {
+		include("remapped-paper-*.jar")
+		include("remapped-folia-*.jar")
+		if (primaryPaperRemapped != null) exclude(primaryPaperRemapped.name)
+		if (primaryFoliaRemapped != null) exclude(primaryFoliaRemapped.name)
+	}
+	val remappedJars = files(listOfNotNull(primaryPaperRemapped, primaryFoliaRemapped), fallbackRemappedJars)
 	compileOnly(remappedJars)
 	testCompileOnly(remappedJars)
 
@@ -218,11 +223,13 @@ dependencies {
 		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
+		exclude("**/com/mojang/brigadier/1.2.9/**")
 	})
 	testCompileOnly(fileTree("jars/cache/libraries") {
 		include("**/*.jar")
 		exclude("**/paper-api-*.jar")
 		exclude("**/folia-api-*.jar")
+		exclude("**/com/mojang/brigadier/1.2.9/**")
 	})
 
 	// Fallback API: declared AFTER paper-api so Paper wins for shared classes.
@@ -663,12 +670,16 @@ backendJars.forEach { (name, jarName) ->
 		}
 
 		val foliaApi = fileTree("jars/cache/libraries/dev/folia/folia-api") { include("**/*.jar") }
+		val paperFallbackApi = fileTree("jars/cache/libraries/io/papermc/paper/paper-api") {
+			include("**/*.jar")
+			exclude("**/*${project.property("paper.api.full-version")}*")
+		}
 
-		// Folia runs against its own API first so classes only present in that API resolve at runtime.
+		// Add sanitized fallback APIs so classes removed in newer upstream versions resolve at test runtime.
 		classpath = if (name == "Folia") {
-			foliaApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+			foliaApi + paperFallbackApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
 		} else {
-			sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
+			paperFallbackApi + foliaApi + sourceSets.test.get().runtimeClasspath + files(backendFile) + libraries
 		}
 		testClassesDirs = sourceSets.test.get().output.classesDirs
 
@@ -684,7 +695,18 @@ backendJars.forEach { (name, jarName) ->
 tasks.register("testAllBackends") {
 	group = "verification"
 	description = "Runs the test suite against all provided backend JARs"
-	dependsOn("testFolia", "testPaper", "testVelocity", "testWaterfall")
+	dependsOn("testPaper", "testFolia", "testVelocity", "testWaterfall")
+}
+
+// Run backend test suites sequentially to prevent CPU/memory contention across 40,000+ tests
+tasks.named("testFolia") {
+	shouldRunAfter("testPaper")
+}
+tasks.named("testVelocity") {
+	shouldRunAfter("testFolia")
+}
+tasks.named("testWaterfall") {
+	shouldRunAfter("testVelocity")
 }
 
 configurations.all {

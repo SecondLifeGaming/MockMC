@@ -4,6 +4,11 @@
       "org.bukkit.inventory.RecipeChoice$PredicateChoice"
     ]
   },
+  "org.bukkit.block.data.type.PinkPetals": {
+    "excludeInterfaces": [
+      "org.bukkit.block.data.type.FlowerBed"
+    ]
+  },
 
   "org.bukkit.Art": {
     "methodQuirks": {
