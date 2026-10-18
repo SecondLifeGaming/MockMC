@@ -695,7 +695,18 @@ backendJars.forEach { (name, jarName) ->
 tasks.register("testAllBackends") {
 	group = "verification"
 	description = "Runs the test suite against all provided backend JARs"
-	dependsOn("testFolia", "testPaper", "testVelocity", "testWaterfall")
+	dependsOn("testPaper", "testFolia", "testVelocity", "testWaterfall")
+}
+
+// Run backend test suites sequentially to prevent CPU/memory contention across 40,000+ tests
+tasks.named("testFolia") {
+	shouldRunAfter("testPaper")
+}
+tasks.named("testVelocity") {
+	shouldRunAfter("testFolia")
+}
+tasks.named("testWaterfall") {
+	shouldRunAfter("testVelocity")
 }
 
 configurations.all {
