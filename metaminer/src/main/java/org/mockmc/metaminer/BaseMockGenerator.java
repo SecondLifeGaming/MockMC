@@ -472,13 +472,9 @@ public class BaseMockGenerator implements DataGenerator {
 
     private List<URL> buildPrimaryUrls(List<URL> allUrls) {
         String primaryPaperVersion = !paperVersions.isEmpty() ? paperVersions.get(0) : "26.3";
-        List<URL> primary = new ArrayList<>();
-        for (URL u : allUrls) {
-            if (isPrimaryCandidate(u.getPath(), primaryPaperVersion)) {
-                primary.add(u);
-            }
-        }
-        return primary;
+        return allUrls.stream()
+                .filter(u -> isPrimaryCandidate(u.getPath(), primaryPaperVersion))
+                .toList();
     }
 
     private int calculateUrlPriority(URL u) {
@@ -1078,7 +1074,7 @@ public class BaseMockGenerator implements DataGenerator {
     private String getGeneratedPackageName(Class<?> clazz) {
         String pkg = clazz.getPackageName();
         String platform = "server";
-        if (pkg.startsWith("com.velocitypowered") || pkg.startsWith("net.md_5.bungee") || pkg.startsWith("io.github.waterfallmc")) {
+        if (pkg.startsWith("com.velocitypowered") || pkg.startsWith(PKG_BUNGEE) || pkg.startsWith(PKG_WATERFALL)) {
             platform = "proxy";
         }
         return "org.mockmc.mockmc.generated." + platform + "." + pkg;
@@ -1872,7 +1868,7 @@ public class BaseMockGenerator implements DataGenerator {
                 zos.closeEntry();
             }
         } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "Failed sanitizing " + jarTypeName + " jar: {0}", e.getMessage());
+            LOGGER.log(Level.WARNING, "Failed sanitizing {0} jar: {1}", new Object[]{jarTypeName, e.getMessage()});
             org.apache.commons.io.FileUtils.deleteQuietly(tmpJar);
             return;
         }
