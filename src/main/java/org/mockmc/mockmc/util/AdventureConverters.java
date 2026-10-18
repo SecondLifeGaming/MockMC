@@ -15,19 +15,19 @@ public class AdventureConverters
 	@ApiStatus.Internal
 	public static SoundCategory soundSourceToCategory(Sound.Source source)
 	{
-		return switch (source)
+		return switch (source.name())
 		{
-			case MASTER -> SoundCategory.MASTER;
-			case MUSIC -> SoundCategory.MUSIC;
-			case RECORD -> SoundCategory.RECORDS;
-			case WEATHER -> SoundCategory.WEATHER;
-			case BLOCK -> SoundCategory.BLOCKS;
-			case HOSTILE -> SoundCategory.HOSTILE;
-			case NEUTRAL -> SoundCategory.NEUTRAL;
-			case PLAYER -> SoundCategory.PLAYERS;
-			case AMBIENT -> SoundCategory.AMBIENT;
-			case VOICE -> SoundCategory.VOICE;
-			case UI -> {
+			case "MASTER" -> SoundCategory.MASTER;
+			case "MUSIC" -> SoundCategory.MUSIC;
+			case "RECORD" -> SoundCategory.RECORDS;
+			case "WEATHER" -> SoundCategory.WEATHER;
+			case "BLOCK" -> SoundCategory.BLOCKS;
+			case "HOSTILE" -> SoundCategory.HOSTILE;
+			case "NEUTRAL" -> SoundCategory.NEUTRAL;
+			case "PLAYER" -> SoundCategory.PLAYERS;
+			case "AMBIENT" -> SoundCategory.AMBIENT;
+			case "VOICE" -> SoundCategory.VOICE;
+			case "UI" -> {
 				try
 				{
 					yield SoundCategory.valueOf("UI");
@@ -36,6 +36,7 @@ public class AdventureConverters
 					yield SoundCategory.MASTER;
 				}
 			}
+			default -> SoundCategory.MASTER;
 		};
 	}
 
