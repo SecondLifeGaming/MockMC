@@ -27,7 +27,15 @@ public class AdventureConverters
 			case PLAYER -> SoundCategory.PLAYERS;
 			case AMBIENT -> SoundCategory.AMBIENT;
 			case VOICE -> SoundCategory.VOICE;
-			case UI -> SoundCategory.UI;
+			case UI -> {
+				try
+				{
+					yield SoundCategory.valueOf("UI");
+				} catch (IllegalArgumentException _)
+				{
+					yield SoundCategory.MASTER;
+				}
+			}
 		};
 	}
 
