@@ -353,7 +353,8 @@ tasks {
 					"apiNote:a:API Note:",
 					"implSpec:a:Implementation Requirements:",
 					"implNote:a:Implementation Note:",
-					"mockmc.version:a:MockMC Version:"
+					"mockmc.version:a:MockMC Version:",
+					"mockmc.platform:a:MockMC Platform:"
 				)
 				// Custom options
 				addBooleanOption("Xdoclint:all,-missing", true)
