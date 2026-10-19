@@ -1304,7 +1304,7 @@ public class BaseMockGenerator implements DataGenerator {
                         .addMember(SINCE, "$S", removedIn)
                         .addMember(FOR_REMOVAL, "$L", true)
                         .build());
-                builder.addJavadoc("Removed upstream in $L; preserved for binary test compatibility.\n@mockmc.version $L\n", removedIn, newestVersion);
+                builder.addJavadoc("Removed upstream in $L; preserved for binary test compatibility.\n@deprecated Removed upstream in $L; preserved for binary test compatibility.\n@mockmc.version $L\n", removedIn, removedIn, newestVersion);
             } else {
                 builder.addJavadoc("Platform extension API method.\n@mockmc.platform $L\n@mockmc.version $L\n", platform, getVersionForClass(clazz));
             }

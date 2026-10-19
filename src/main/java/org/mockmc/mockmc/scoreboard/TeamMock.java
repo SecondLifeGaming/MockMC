@@ -256,7 +256,7 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated See {@link #getOption(Option)}.
 	 */
 	@Override
 	@Deprecated(since = "1.9")
@@ -276,7 +276,7 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated See {@link #setOption(Option, OptionStatus)}.
 	 */
 	@Override
 	@Deprecated(since = "1.9")
@@ -295,7 +295,7 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated See {@link #getEntries()}.
 	 */
 	@Override
 	@Deprecated(since = "1.8.7")
@@ -339,6 +339,9 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 		return this.board;
 	}
 
+	/**
+	 * @deprecated See {@link #addEntry(String)}.
+	 */
 	@Override
 	@Deprecated(since = "1.8.7")
 	public void addPlayer(@NotNull OfflinePlayer offlinePlayer)
@@ -372,7 +375,7 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated See {@link #removeEntry(String)}.
 	 */
 	@Override
 	@Deprecated(since = "1.8.7")
@@ -417,7 +420,7 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated See {@link #hasEntry(String)}.
 	 */
 	@Override
 	@Deprecated(since = "1.8.7")
@@ -510,10 +513,10 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	{
 		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName)
 				.append(this.suffix());
-		TextColor color = this.color();
-		if (color != null)
+		TextColor teamColor = this.color();
+		if (teamColor != null)
 		{
-			mutableComponent.color(color);
+			mutableComponent.color(teamColor);
 		}
 		return mutableComponent;
 	}

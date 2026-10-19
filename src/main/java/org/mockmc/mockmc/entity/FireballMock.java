@@ -69,6 +69,9 @@ public class FireballMock extends ProjectileMock
 		return this.acceleration;
 	}
 
+	/**
+	 * @deprecated See {@link #setAcceleration(Vector)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20.6")
 	public void setPower(@NotNull Vector power)
@@ -76,6 +79,9 @@ public class FireballMock extends ProjectileMock
 		this.setAcceleration(power);
 	}
 
+	/**
+	 * @deprecated See {@link #getAcceleration()}.
+	 */
 	@Override
 	@Deprecated(since = "1.20.6")
 	@NotNull

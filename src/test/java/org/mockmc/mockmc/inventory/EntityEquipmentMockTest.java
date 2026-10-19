@@ -171,8 +171,8 @@ class EntityEquipmentMockTest
 	void setDropChance_NonMob()
 	{
 		ArmorStand armorStand = new ArmorStandMock(server, UUID.randomUUID());
-		EntityEquipment equipment = armorStand.getEquipment();
-		assertThrows(IllegalArgumentException.class, () -> equipment.setHelmetDropChance(0.5f));
+		EntityEquipment armorStandEquipment = armorStand.getEquipment();
+		assertThrows(IllegalArgumentException.class, () -> armorStandEquipment.setHelmetDropChance(0.5f));
 	}
 
 	@Test

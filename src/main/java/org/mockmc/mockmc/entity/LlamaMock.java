@@ -109,6 +109,7 @@ public class LlamaMock extends ChestedHorseMock
 	 *            The {@link LivingEntity} to check.
 	 * @param charge
 	 *            The charge of the attack.
+	 * @deprecated See {@link #hasAttackedWithCharge(LivingEntity, float)}.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAttacked(LivingEntity entity, float charge)
@@ -129,6 +130,7 @@ public class LlamaMock extends ChestedHorseMock
 	 *            The {@link LivingEntity} to check.
 	 * @param charge
 	 *            The charge of the attack.
+	 * @deprecated See {@link #hasAttackedWhileAggressive(LivingEntity)}.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertAgressiveAttack(LivingEntity entity, float charge)
@@ -155,6 +157,9 @@ public class LlamaMock extends ChestedHorseMock
 		return attackedMobs.containsKey(target) && attackedMobs.get(target).getRight();
 	}
 
+	/**
+	 * @deprecated See {@link #getType()}.
+	 */
 	@Override
 	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()

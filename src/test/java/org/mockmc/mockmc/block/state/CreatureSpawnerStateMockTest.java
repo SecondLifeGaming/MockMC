@@ -151,9 +151,9 @@ class CreatureSpawnerStateMockTest
 	@Test
 	void isActivated_NotPlaced_ThrowsException()
 	{
-		CreatureSpawnerStateMock spawner = new CreatureSpawnerStateMock(Material.SPAWNER);
+		CreatureSpawnerStateMock unplacedSpawner = new CreatureSpawnerStateMock(Material.SPAWNER);
 
-		assertThrowsExactly(IllegalStateException.class, spawner::isActivated);
+		assertThrowsExactly(IllegalStateException.class, unplacedSpawner::isActivated);
 	}
 
 	@Test
@@ -185,9 +185,9 @@ class CreatureSpawnerStateMockTest
 	@Test
 	void resetTimer_NotPlaced_ThrowsException()
 	{
-		CreatureSpawnerStateMock spawner = new CreatureSpawnerStateMock(Material.SPAWNER);
+		CreatureSpawnerStateMock unplacedSpawner = new CreatureSpawnerStateMock(Material.SPAWNER);
 
-		assertThrowsExactly(IllegalStateException.class, spawner::resetTimer);
+		assertThrowsExactly(IllegalStateException.class, unplacedSpawner::resetTimer);
 	}
 
 	@Test

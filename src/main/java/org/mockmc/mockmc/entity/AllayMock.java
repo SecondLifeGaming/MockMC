@@ -110,6 +110,7 @@ public class AllayMock extends CreatureMock
 	 *
 	 * @param item
 	 *            The {@link Material} to pick up
+	 * @deprecated Use modern Allay inventory/holding assertions.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item)
@@ -125,6 +126,7 @@ public class AllayMock extends CreatureMock
 	 *            The {@link Material} to pick up
 	 * @param message
 	 *            The message to display if the assertion fails
+	 * @deprecated Use modern Allay inventory/holding assertions.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertCurrentItem(@NotNull Material item, @Nullable String message)
@@ -147,6 +149,7 @@ public class AllayMock extends CreatureMock
 	 *
 	 * @param item
 	 *            The item to check.
+	 * @deprecated Use {@link #getInventory()} assertions.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item)
@@ -161,6 +164,7 @@ public class AllayMock extends CreatureMock
 	 *            The item to check.
 	 * @param s
 	 *            The message to fail with.
+	 * @deprecated Use {@link #getInventory()} assertions.
 	 */
 	@Deprecated(forRemoval = true)
 	public void assertInventoryContains(ItemStack item, String s)

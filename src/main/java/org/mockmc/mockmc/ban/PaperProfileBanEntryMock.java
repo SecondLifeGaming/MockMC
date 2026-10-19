@@ -30,6 +30,9 @@ public class PaperProfileBanEntryMock
 		this.reason = reason;
 	}
 
+	/**
+	 * @deprecated See Paper profile ban target {@link #getBanTarget()}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	@NotNull

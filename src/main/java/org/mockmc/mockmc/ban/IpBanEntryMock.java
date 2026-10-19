@@ -30,6 +30,9 @@ public class IpBanEntryMock implements org.mockmc.mockmc.generated.server.org.bu
 		this.expires = expires;
 	}
 
+	/**
+	 * @deprecated See {@link #getBanTarget()}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	@NotNull

@@ -28,6 +28,9 @@ public class ProfileBanListMock implements ProfileBanList
 	private final Map<String, BanEntry<PlayerProfile>> bans = new HashMap<>();
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
+	/**
+	 * @deprecated See {@link #getBanEntry(PlayerProfile)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public synchronized @Nullable BanEntry<PlayerProfile> getBanEntry(@NotNull String target)
@@ -43,6 +46,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return bans.getOrDefault(target.getName(), null);
 	}
 
+	/**
+	 * @deprecated See {@link #addBan(PlayerProfile, String, Date, String)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public @Nullable BanEntry<PlayerProfile> addBan(@NotNull String target, @Nullable String reason,
@@ -52,6 +58,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return addBan(profile, reason, expires, source);
 	}
 
+	/**
+	 * @deprecated See {@link #addBan(PlayerProfile, String, Date, String)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E addBan(
@@ -99,6 +108,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return this.addBan(target, reason, instant, source);
 	}
 
+	/**
+	 * @deprecated See {@link #getBanEntry(PlayerProfile)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public <E extends BanEntry<? super PlayerProfile>> @Nullable E getBanEntry(
@@ -109,6 +121,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return (E) getBanEntry(profile);
 	}
 
+	/**
+	 * @deprecated See {@link #isBanned(PlayerProfile)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public boolean isBanned(org.bukkit.profile.@NotNull PlayerProfile target)
@@ -118,6 +133,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return isBanned(profile);
 	}
 
+	/**
+	 * @deprecated See {@link #pardon(PlayerProfile)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public void pardon(org.bukkit.profile.@NotNull PlayerProfile target)
@@ -145,6 +163,9 @@ public class ProfileBanListMock implements ProfileBanList
 		return this.addBan(target, reason, instant, source);
 	}
 
+	/**
+	 * @deprecated See {@link #getEntries()}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	@SuppressWarnings("rawtypes")

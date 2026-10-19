@@ -135,12 +135,13 @@ public class SkullStateMock extends TileStateMock
 	public void setOwningPlayer(@NotNull OfflinePlayer player)
 	{
 		Preconditions.checkNotNull(player, "Player cannot be null");
-		// PlayerMock#getPlayerProfile isn't implemented yet
-		// if (player instanceof PlayerMock playerMock) {
-		// this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
-		// } else {
-		this.profile = new PlayerProfileMock(player);
-		// }
+		if (player instanceof org.mockmc.mockmc.entity.PlayerMock playerMock)
+		{
+			this.profile = (PlayerProfileMock) playerMock.getPlayerProfile();
+		} else
+		{
+			this.profile = new PlayerProfileMock(player);
+		}
 	}
 
 	@Override

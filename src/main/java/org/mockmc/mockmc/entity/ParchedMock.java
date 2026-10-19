@@ -32,6 +32,9 @@ public class ParchedMock extends AbstractSkeletonMock
 		super(server, uuid);
 	}
 
+	/**
+	 * @deprecated See {@link #getType()}.
+	 */
 	@Override
 	@Deprecated(since = "1.17", forRemoval = true)
 	public Skeleton.SkeletonType getSkeletonType()

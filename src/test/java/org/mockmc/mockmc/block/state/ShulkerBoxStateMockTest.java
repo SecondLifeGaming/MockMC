@@ -94,9 +94,9 @@ class ShulkerBoxStateMockTest extends ContainerStateMockTest
 
 	private void assertDyed(@NotNull Material shulkerBox, DyeColor color)
 	{
-		Block block = new BlockMock(shulkerBox);
-		assertInstanceOf(ShulkerBox.class, block.getState());
-		assertEquals(color, ((ShulkerBox) block.getState()).getColor());
+		Block targetBlock = new BlockMock(shulkerBox);
+		assertInstanceOf(ShulkerBox.class, targetBlock.getState());
+		assertEquals(color, ((ShulkerBox) targetBlock.getState()).getColor());
 	}
 
 	@Test

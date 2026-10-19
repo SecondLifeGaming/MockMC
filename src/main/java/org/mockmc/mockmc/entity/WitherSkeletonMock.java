@@ -32,6 +32,9 @@ public class WitherSkeletonMock extends AbstractSkeletonMock
 		super(server, uuid);
 	}
 
+	/**
+	 * @deprecated See {@link #getType()}.
+	 */
 	@Override
 	@Deprecated(since = "1.17")
 	public Skeleton.@NotNull SkeletonType getSkeletonType()

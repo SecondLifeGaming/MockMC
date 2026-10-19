@@ -50,6 +50,9 @@ public abstract class AbstractHorseMock extends AnimalsMock
 		super(server, uuid);
 	}
 
+	/**
+	 * @deprecated Different horse types are now separate entities.
+	 */
 	@Override
 	@Deprecated(since = "1.11")
 	public void setVariant(Horse.Variant variant)
@@ -152,6 +155,9 @@ public abstract class AbstractHorseMock extends AnimalsMock
 		this.owner = uuid;
 	}
 
+	/**
+	 * @deprecated See {@link #isEatingGrass()}.
+	 */
 	@Override
 	@Deprecated(since = "1.18")
 	public boolean isEatingHaystack()
@@ -159,6 +165,9 @@ public abstract class AbstractHorseMock extends AnimalsMock
 		return this.isEating;
 	}
 
+	/**
+	 * @deprecated See {@link #setEatingGrass(boolean)}.
+	 */
 	@Override
 	@Deprecated(since = "1.18")
 	public void setEatingHaystack(boolean eatingHaystack)

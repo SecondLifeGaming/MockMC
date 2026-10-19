@@ -112,13 +112,13 @@ public class PluginManagerMock extends PermissionManagerMock
 	 */
 	public void unload()
 	{
-		File parentTemporaryDirectory = this.parentTemporaryDirectory.get();
-		if (parentTemporaryDirectory == null)
+		File tempDir = this.parentTemporaryDirectory.get();
+		if (tempDir == null)
 		{
 			return;
 		}
 		// Delete the temporary directory, from the deepest file to the root.
-		try (Stream<Path> walk = Files.walk(parentTemporaryDirectory.toPath()))
+		try (Stream<Path> walk = Files.walk(tempDir.toPath()))
 		{
 			walk.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
 		} catch (IOException e)
@@ -397,8 +397,8 @@ public class PluginManagerMock extends PermissionManagerMock
 	@NotNull
 	public File getParentTemporaryDirectory() throws IOException
 	{
-		File parentTemporaryDirectory = this.parentTemporaryDirectory.get();
-		if (parentTemporaryDirectory == null)
+		File tempDir = this.parentTemporaryDirectory.get();
+		if (tempDir == null)
 		{
 			Random random = ThreadLocalRandom.current();
 			java.nio.file.attribute.FileAttribute<?>[] attrs;
@@ -422,7 +422,7 @@ public class PluginManagerMock extends PermissionManagerMock
 			}
 			return tmpDir;
 		}
-		return parentTemporaryDirectory;
+		return tempDir;
 	}
 
 	/**

@@ -521,12 +521,12 @@ public class InventoryMock implements org.mockmc.mockmc.generated.server.org.buk
 	{
 		Preconditions.checkNotNull(material, MATERIAL_CANNOT_BE_NULL);
 		HashMap<Integer, ItemStack> slots = new HashMap<>();
-		ItemStack[] items = this.getStorageContents();
-		for (int i = 0; i < items.length; i++)
+		ItemStack[] storageContents = this.getStorageContents();
+		for (int i = 0; i < storageContents.length; i++)
 		{
-			if (items[i] != null && items[i].getType() == material)
+			if (storageContents[i] != null && storageContents[i].getType() == material)
 			{
-				slots.put(i, items[i]);
+				slots.put(i, storageContents[i]);
 			}
 		}
 		return slots;

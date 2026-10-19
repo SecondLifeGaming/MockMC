@@ -132,12 +132,12 @@ public class BlockDataMockRegistry
 
 	public @Nullable Object getDefault(@NotNull Material material, @NotNull String state)
 	{
-		Map<String, Object> blockData = getDefaultData(material);
-		if (blockData == null)
+		Map<String, Object> defaultData = getDefaultData(material);
+		if (defaultData == null)
 		{
 			return null;
 		}
-		return blockData.get(state);
+		return defaultData.get(state);
 	}
 
 	public @NotNull Map<BlockDataLimitation.Type<?, ?>, BlockDataLimitation<?, ?>> getLimitations(Material material)

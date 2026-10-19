@@ -91,9 +91,9 @@ class AbstractHorseMockTest
 	@Test
 	void testSetOwnerUUID()
 	{
-		UUID owner = UUID.randomUUID();
-		horse.setOwnerUUID(owner);
-		assertEquals(owner, horse.getOwnerUniqueId());
+		UUID ownerUUID = UUID.randomUUID();
+		horse.setOwnerUUID(ownerUUID);
+		assertEquals(ownerUUID, horse.getOwnerUniqueId());
 	}
 
 	@Test
