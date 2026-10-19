@@ -42,6 +42,9 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 	@NotNull
 	private final Map<String, Team> teams = new HashMap<>();
 
+	/**
+	 * @deprecated See {@link #registerNewObjective(String, Criteria, Component)}.
+	 */
 	@Override
 	@Deprecated(since = "1.13")
 	@NotNull
@@ -92,6 +95,9 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 		return objective;
 	}
 
+	/**
+	 * @deprecated See {@link #registerNewObjective(String, String, Component)}.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
 	@NotNull
@@ -101,6 +107,10 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 		return registerNewObjective(name, criteria, displayName, RenderType.INTEGER);
 	}
 
+	/**
+	 * @deprecated See
+	 *             {@link #registerNewObjective(String, String, Component, RenderType)}.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
 	@NotNull
@@ -248,6 +258,9 @@ public class ScoreboardMock implements org.mockmc.mockmc.generated.server.org.bu
 		return team;
 	}
 
+	/**
+	 * @deprecated See {@link #getEntries()}.
+	 */
 	@Override
 	@Deprecated(since = "1.7.10")
 	@NotNull

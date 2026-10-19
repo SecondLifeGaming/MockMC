@@ -49,6 +49,9 @@ public class ScoreMock implements org.mockmc.mockmc.generated.server.org.bukkit.
 		this.player = player;
 	}
 
+	/**
+	 * @deprecated See {@link #getEntry()}.
+	 */
 	@Override
 	@Deprecated(since = "1.7.10")
 	@NotNull

@@ -70,6 +70,9 @@ public class MusicInstrumentMock extends MusicInstrument
 		return this.sound;
 	}
 
+	/**
+	 * @deprecated See {@link #key()}.
+	 */
 	@Override
 	@Deprecated(forRemoval = true, since = "1.20.5")
 	public @NotNull NamespacedKey getKey()
@@ -77,6 +80,9 @@ public class MusicInstrumentMock extends MusicInstrument
 		return this.key;
 	}
 
+	/**
+	 * @deprecated See {@link #getTranslationKey()}.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public @NotNull String translationKey()

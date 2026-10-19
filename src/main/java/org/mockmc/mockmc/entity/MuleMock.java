@@ -31,6 +31,9 @@ public class MuleMock extends ChestedHorseMock
 		super(server, uuid);
 	}
 
+	/**
+	 * @deprecated See {@link #getType()}.
+	 */
 	@Override
 	@Deprecated(since = "1.11")
 	public Horse.@NotNull Variant getVariant()

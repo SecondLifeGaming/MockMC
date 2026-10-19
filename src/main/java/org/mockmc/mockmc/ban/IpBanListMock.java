@@ -23,6 +23,9 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 	private final Map<String, BanEntry<InetAddress>> bans = new HashMap<>();
 	private static final String TARGET_CANNOT_BE_NULL = "Target cannot be null";
 
+	/**
+	 * @deprecated See {@link #getBanEntry(InetAddress)}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	public synchronized @Nullable BanEntry<InetAddress> getBanEntry(@NotNull String target)
@@ -73,6 +76,9 @@ public class IpBanListMock implements org.bukkit.ban.IpBanList
 		return this.addBan(target, reason, instant, source);
 	}
 
+	/**
+	 * @deprecated See {@link #getEntries()}.
+	 */
 	@Override
 	@Deprecated(since = "1.20")
 	@SuppressWarnings("rawtypes")

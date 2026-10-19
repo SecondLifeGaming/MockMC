@@ -104,6 +104,9 @@ public class ObjectiveMock implements org.mockmc.mockmc.generated.server.org.buk
 		this.displayName = displayName == null ? Component.empty() : displayName;
 	}
 
+	/**
+	 * @deprecated See {@link #displayName()}.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
 	@NotNull
@@ -113,6 +116,9 @@ public class ObjectiveMock implements org.mockmc.mockmc.generated.server.org.buk
 		return LegacyComponentSerializer.legacySection().serialize(displayName);
 	}
 
+	/**
+	 * @deprecated See {@link #displayName(Component)}.
+	 */
 	@Override
 	@Deprecated(since = "1.16")
 	public void setDisplayName(@NotNull String displayName) throws IllegalStateException, IllegalArgumentException
@@ -197,6 +203,9 @@ public class ObjectiveMock implements org.mockmc.mockmc.generated.server.org.buk
 		return renderType;
 	}
 
+	/**
+	 * @deprecated See {@link #getScore(String)}.
+	 */
 	@Override
 	@Deprecated(since = "1.7.10")
 	@NotNull

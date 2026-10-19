@@ -44,6 +44,9 @@ public class HopperMinecartMock extends LootableMinecart
 		this.enabled = enabled;
 	}
 
+	/**
+	 * @deprecated Hopper minecarts do not have cooldowns.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public int getPickupCooldown()
@@ -51,6 +54,9 @@ public class HopperMinecartMock extends LootableMinecart
 		throw new UnsupportedOperationException("Hopper minecarts don't have cooldowns");
 	}
 
+	/**
+	 * @deprecated Hopper minecarts do not have cooldowns.
+	 */
 	@Override
 	@Deprecated(forRemoval = true)
 	public void setPickupCooldown(int cooldown)
