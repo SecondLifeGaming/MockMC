@@ -31,7 +31,7 @@ public class PaperProfileBanEntryMock
 	}
 
 	/**
-	 * @deprecated See {@link #getBanTarget()}.
+	 * @deprecated See Paper profile ban target {@link #getBanTarget()}.
 	 */
 	@Override
 	@Deprecated(since = "1.20")

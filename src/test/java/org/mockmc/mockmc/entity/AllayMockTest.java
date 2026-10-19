@@ -206,12 +206,12 @@ class AllayMockTest
 	{
 		WorldMock world = serverMock.addSimpleWorld("world");
 		Location location = new Location(world, 0, 0, 0);
-		Allay allayMock = world.spawn(location, Allay.class, _ ->
+		Allay spawnedAllay = world.spawn(location, Allay.class, _ ->
 		{
 		});
-		Allay duplicate = allayMock.duplicateAllay();
+		Allay duplicate = spawnedAllay.duplicateAllay();
 		assertNotNull(duplicate);
-		assertNotEquals(allayMock, duplicate);
+		assertNotEquals(spawnedAllay, duplicate);
 		assertEquals(CreatureSpawnEvent.SpawnReason.DUPLICATION, duplicate.getEntitySpawnReason());
 	}
 

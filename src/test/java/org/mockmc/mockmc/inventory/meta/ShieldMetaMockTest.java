@@ -199,17 +199,17 @@ class ShieldMetaMockTest
 	@Test
 	void testSerialization()
 	{
-		ShieldMetaMock meta = new ShieldMetaMock();
-		assertEquals(meta, ShieldMetaMock.deserialize(meta.serialize()));
+		ShieldMetaMock localMeta = new ShieldMetaMock();
+		assertEquals(localMeta, ShieldMetaMock.deserialize(localMeta.serialize()));
 
-		meta.setBaseColor(DyeColor.CYAN);
-		assertEquals(meta, ShieldMetaMock.deserialize(meta.serialize()));
+		localMeta.setBaseColor(DyeColor.CYAN);
+		assertEquals(localMeta, ShieldMetaMock.deserialize(localMeta.serialize()));
 
-		meta.addPattern(patterns.get(0));
-		meta.addPattern(patterns.get(1));
-		meta.addPattern(patterns.get(2));
-		ShieldMetaMock meta2 = ShieldMetaMock.deserialize(meta.serialize());
-		assertEquals(meta, meta2);
+		localMeta.addPattern(patterns.get(0));
+		localMeta.addPattern(patterns.get(1));
+		localMeta.addPattern(patterns.get(2));
+		ShieldMetaMock meta2 = ShieldMetaMock.deserialize(localMeta.serialize());
+		assertEquals(localMeta, meta2);
 
 		assertEquals(3, meta2.numberOfPatterns());
 		assertEquals(patterns.get(1), meta2.getPattern(1));

@@ -382,10 +382,10 @@ class EntityMockTest
 	@Test
 	void getWorld_LocationSet_GetsWorldSameAsInLocation()
 	{
-		WorldMock world = server.addSimpleWorld("world");
+		WorldMock customWorld = server.addSimpleWorld("customWorld");
 		WorldMock otherWorld = server.addSimpleWorld("otherWorld");
-		entity.teleport(world.getSpawnLocation());
-		assertEquals(world, entity.getWorld());
+		entity.teleport(customWorld.getSpawnLocation());
+		assertEquals(customWorld, entity.getWorld());
 		entity.teleport(otherWorld.getSpawnLocation());
 		assertEquals(otherWorld, entity.getWorld());
 	}
@@ -504,8 +504,9 @@ class EntityMockTest
 	@Test
 	void entityDamage_By_Player()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		double initialHealth = zombie.getHealth();
 		zombie.damage(4, player1);
@@ -524,8 +525,9 @@ class EntityMockTest
 	@Test
 	void entityDamage_preventedByInvulnerable()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		double initialHealth = zombie.getHealth();
 		zombie.setInvulnerable(true);
@@ -537,8 +539,9 @@ class EntityMockTest
 	@Test
 	void entityDamage_creativeDamagesInvulnerable()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		player1.setGameMode(GameMode.CREATIVE);
 		zombie.setInvulnerable(true);
@@ -551,8 +554,9 @@ class EntityMockTest
 	@Test
 	void testIsInvisibleDefault()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 
 		assertFalse(zombie.isInvisible());
 	}
@@ -560,8 +564,9 @@ class EntityMockTest
 	@Test
 	void testSetInvisible()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 
 		zombie.setInvisible(true);
 		assertTrue(zombie.isInvisible());
@@ -570,8 +575,9 @@ class EntityMockTest
 	@Test
 	void hasNoPhysics_Default_False()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 
 		assertFalse(zombie.hasNoPhysics());
 	}
@@ -579,8 +585,9 @@ class EntityMockTest
 	@Test
 	void setNoPhysics()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntity zombie = (LivingEntity) world.spawnEntity(new Location(world, 10, 10, 10), EntityType.ZOMBIE);
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntity zombie = (LivingEntity) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
+				EntityType.ZOMBIE);
 
 		zombie.setNoPhysics(true);
 		assertTrue(zombie.hasNoPhysics());
@@ -589,8 +596,8 @@ class EntityMockTest
 	@Test
 	void entityDamage_Event_Triggered()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntityMock zombie = (LivingEntityMock) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
 				EntityType.ZOMBIE);
 		PlayerMock player1 = server.addPlayer();
 		zombie.simulateDamage(4, player1);
@@ -759,8 +766,8 @@ class EntityMockTest
 	@Test
 	void lastDamageCause()
 	{
-		World world = new WorldMock(Material.GRASS_BLOCK, 10);
-		LivingEntityMock zombie = (LivingEntityMock) world.spawnEntity(new Location(world, 10, 10, 10),
+		World grassWorld = new WorldMock(Material.GRASS_BLOCK, 10);
+		LivingEntityMock zombie = (LivingEntityMock) grassWorld.spawnEntity(new Location(grassWorld, 10, 10, 10),
 				EntityType.ZOMBIE);
 		assertNull(zombie.getLastDamageCause());
 		zombie.simulateDamage(1, (Entity) null);
@@ -1204,8 +1211,8 @@ class EntityMockTest
 	@Test
 	void getWidthImplemented()
 	{
-		EntityMock entity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
-		assertDoesNotThrow(entity::getWidth);
+		EntityMock batEntity = (EntityMock) world.spawnEntity(new Location(world, 0, 0, 0), EntityType.BAT);
+		assertDoesNotThrow(batEntity::getWidth);
 	}
 
 	@Test

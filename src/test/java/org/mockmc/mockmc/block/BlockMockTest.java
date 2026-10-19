@@ -181,17 +181,17 @@ class BlockMockTest
 	void getLocation_CustomLocation_LocationSet()
 	{
 		WorldMock world = new WorldMock();
-		Location location = new Location(world, 5, 2, 1);
-		block = new BlockMock(Material.AIR, location);
-		assertEquals(location, block.getLocation());
+		Location customLocation = new Location(world, 5, 2, 1);
+		block = new BlockMock(Material.AIR, customLocation);
+		assertEquals(customLocation, block.getLocation());
 	}
 
 	@Test
 	void getLocation_CustomLocation_ApplyToProvided()
 	{
 		WorldMock world = new WorldMock();
-		Location location = new Location(world, 5, 2, 1);
-		block = new BlockMock(Material.AIR, location);
+		Location customLocation = new Location(world, 5, 2, 1);
+		block = new BlockMock(Material.AIR, customLocation);
 		Location location2 = new Location(null, 0, 0, 0);
 		block.getLocation(location2);
 		assertEquals(block.getLocation(), location2);

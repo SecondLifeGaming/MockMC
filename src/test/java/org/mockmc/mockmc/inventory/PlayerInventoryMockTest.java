@@ -44,8 +44,8 @@ class PlayerInventoryMockTest
 	void getHolder_HolderSet_GetsHolder()
 	{
 		PlayerMock player = server.addPlayer();
-		PlayerInventoryMock inventory = new PlayerInventoryMock(player);
-		assertSame(player, inventory.getHolder());
+		PlayerInventoryMock playerInventory = new PlayerInventoryMock(player);
+		assertSame(player, playerInventory.getHolder());
 	}
 
 	@SuppressWarnings("deprecation")

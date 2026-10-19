@@ -1718,14 +1718,15 @@ class ItemMetaMockTest
 	class Serialization
 	{
 
-		private final ItemMetaMock meta = (ItemMetaMock) ItemStack.of(Material.DIAMOND_PICKAXE).getItemMeta();
+		private final ItemMetaMock serializationMeta = (ItemMetaMock) ItemStack.of(Material.DIAMOND_PICKAXE)
+				.getItemMeta();
 
 		@Test
 		void givenCustomName()
 		{
-			meta.customName(Component.text("custom-name"));
+			serializationMeta.customName(Component.text("custom-name"));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"display-name\":\"\\\"custom-name\\\"\"}";
 			assertJsonEqual(expected, actual);
@@ -1734,8 +1735,8 @@ class ItemMetaMockTest
 		@Test
 		void givenItemName()
 		{
-			meta.itemName(Component.text("item-name"));
-			Map<String, Object> actual = meta.serialize();
+			serializationMeta.itemName(Component.text("item-name"));
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-name\":\"\\\"item-name\\\"\"}";
 			assertJsonEqual(expected, actual);
@@ -1744,9 +1745,9 @@ class ItemMetaMockTest
 		@Test
 		void givenLore()
 		{
-			meta.lore(List.of(Component.text("Line 1"), Component.text("Line 2")));
+			serializationMeta.lore(List.of(Component.text("Line 1"), Component.text("Line 2")));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = """
 					{
@@ -1760,9 +1761,9 @@ class ItemMetaMockTest
 		@Test
 		void givenCustomModelData()
 		{
-			meta.setCustomModelData(42);
+			serializationMeta.setCustomModelData(42);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"custom-model-data\":42}";
 			assertJsonEqual(expected, actual);
@@ -1771,9 +1772,9 @@ class ItemMetaMockTest
 		@Test
 		void givenEnchantable()
 		{
-			meta.setEnchantable(10);
+			serializationMeta.setEnchantable(10);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"enchantable\":10}";
 			assertJsonEqual(expected, actual);
@@ -1782,9 +1783,9 @@ class ItemMetaMockTest
 		@Test
 		void givenBlockData()
 		{
-			meta.setBlockData(Map.of("test", "123"));
+			serializationMeta.setBlockData(Map.of("test", "123"));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"BlockStateTag\":{\"test\":\"123\"}}";
 			assertJsonEqual(expected, actual);
@@ -1793,9 +1794,9 @@ class ItemMetaMockTest
 		@Test
 		void givenEnchantment()
 		{
-			meta.addEnchant(Enchantment.UNBREAKING, 3, true);
+			serializationMeta.addEnchant(Enchantment.UNBREAKING, 3, true);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = """
 					{
@@ -1811,9 +1812,9 @@ class ItemMetaMockTest
 		{
 			NamespacedKey key = NamespacedKey.minecraft("attack_damage");
 			AttributeModifier modifier = new AttributeModifier(key, 5.0, AttributeModifier.Operation.ADD_NUMBER);
-			meta.addAttributeModifier(Attribute.ATTACK_DAMAGE, modifier);
+			serializationMeta.addAttributeModifier(Attribute.ATTACK_DAMAGE, modifier);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			assertTrue(actual.containsKey("attribute-modifiers"));
 		}
@@ -1821,9 +1822,9 @@ class ItemMetaMockTest
 		@Test
 		void givenRepairCost()
 		{
-			meta.setRepairCost(5);
+			serializationMeta.setRepairCost(5);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"repair-cost\":5}";
 			assertJsonEqual(expected, actual);
@@ -1832,9 +1833,9 @@ class ItemMetaMockTest
 		@Test
 		void givenItemFlags()
 		{
-			meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
+			serializationMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES, ItemFlag.HIDE_UNBREAKABLE);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = """
 					{
@@ -1848,9 +1849,9 @@ class ItemMetaMockTest
 		@Test
 		void givenTooltipStyle()
 		{
-			meta.setTooltipStyle(NamespacedKey.fromString("test:tooltip-style"));
+			serializationMeta.setTooltipStyle(NamespacedKey.fromString("test:tooltip-style"));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"tool-tip-style\":\"test:tooltip-style\"}";
 			assertJsonEqual(expected, actual);
@@ -1859,9 +1860,9 @@ class ItemMetaMockTest
 		@Test
 		void givenItemModel()
 		{
-			meta.setItemModel(NamespacedKey.fromString("test:item-model"));
+			serializationMeta.setItemModel(NamespacedKey.fromString("test:item-model"));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"item-model\":\"test:item-model\"}";
 			assertJsonEqual(expected, actual);
@@ -1870,9 +1871,9 @@ class ItemMetaMockTest
 		@Test
 		void givenUnbreakable()
 		{
-			meta.setUnbreakable(true);
+			serializationMeta.setUnbreakable(true);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Unbreakable\":true}";
 			assertJsonEqual(expected, actual);
@@ -1881,9 +1882,9 @@ class ItemMetaMockTest
 		@Test
 		void givenEnchantmentGlintOverride()
 		{
-			meta.setEnchantmentGlintOverride(true);
+			serializationMeta.setEnchantmentGlintOverride(true);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"enchantment-glint-override\":true}";
 			assertJsonEqual(expected, actual);
@@ -1892,9 +1893,9 @@ class ItemMetaMockTest
 		@Test
 		void givenGlider()
 		{
-			meta.setGlider(true);
+			serializationMeta.setGlider(true);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"glider\":true}";
 			assertJsonEqual(expected, actual);
@@ -1903,9 +1904,9 @@ class ItemMetaMockTest
 		@Test
 		void givenDamageResistant()
 		{
-			meta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
+			serializationMeta.setDamageResistant(DamageTypeTags.BYPASSES_ARMOR);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"damage-resistant\":\"minecraft:bypasses_armor\"}";
 			assertJsonEqual(expected, actual);
@@ -1914,9 +1915,9 @@ class ItemMetaMockTest
 		@Test
 		void givenMaxStackSize()
 		{
-			meta.setMaxStackSize(15);
+			serializationMeta.setMaxStackSize(15);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-stack-size\":15}";
 			assertJsonEqual(expected, actual);
@@ -1925,9 +1926,9 @@ class ItemMetaMockTest
 		@Test
 		void givenRarity()
 		{
-			meta.setRarity(ItemRarity.EPIC);
+			serializationMeta.setRarity(ItemRarity.EPIC);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"rarity\":\"EPIC\"}";
 			assertJsonEqual(expected, actual);
@@ -1936,9 +1937,9 @@ class ItemMetaMockTest
 		@Test
 		void givenUseRemainder()
 		{
-			meta.setUseRemainder(ItemStack.of(Material.DIAMOND));
+			serializationMeta.setUseRemainder(ItemStack.of(Material.DIAMOND));
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"use-remainder\":{\"type\":\"DIAMOND\",\"id\":\"minecraft:diamond\",\"amount\":1,\"count\":1,\"components\":{\"meta-type\":\"UNSPECIFIC\"},\"meta\":{\"meta-type\":\"UNSPECIFIC\"}}}";
 			assertJsonEqual(expected, actual);
@@ -1949,7 +1950,7 @@ class ItemMetaMockTest
 		@Disabled("Component serialization is not implemented yet.")
 		void givenUnimplementedComponent(String name, String expectedJson)
 		{
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 			assertJsonEqual(expectedJson, actual);
 		}
 
@@ -1965,9 +1966,9 @@ class ItemMetaMockTest
 		@Test
 		void givenDamage()
 		{
-			meta.setDamage(50);
+			serializationMeta.setDamage(50);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"Damage\":50}";
 			assertJsonEqual(expected, actual);
@@ -1976,9 +1977,9 @@ class ItemMetaMockTest
 		@Test
 		void givenMaxDamage()
 		{
-			meta.setMaxDamage(75);
+			serializationMeta.setMaxDamage(75);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = "{\"meta-type\":\"UNSPECIFIC\",\"max-damage\":75}";
 			assertJsonEqual(expected, actual);
@@ -1988,9 +1989,9 @@ class ItemMetaMockTest
 		void givenPersistentData()
 		{
 			NamespacedKey key = NamespacedKey.minecraft("test-key");
-			meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "value");
+			serializationMeta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "value");
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = """
 					        {
@@ -2006,13 +2007,13 @@ class ItemMetaMockTest
 		@Test
 		void givenMultipleFields()
 		{
-			meta.customName(Component.text("Pickaxe"));
-			meta.setUnbreakable(true);
-			meta.setCustomModelData(99);
-			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-			meta.addEnchant(Enchantment.UNBREAKING, 1, true);
+			serializationMeta.customName(Component.text("Pickaxe"));
+			serializationMeta.setUnbreakable(true);
+			serializationMeta.setCustomModelData(99);
+			serializationMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			serializationMeta.addEnchant(Enchantment.UNBREAKING, 1, true);
 
-			Map<String, Object> actual = meta.serialize();
+			Map<String, Object> actual = serializationMeta.serialize();
 
 			String expected = """
 					{

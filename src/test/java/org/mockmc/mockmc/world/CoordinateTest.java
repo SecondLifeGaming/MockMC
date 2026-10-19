@@ -86,8 +86,8 @@ class CoordinateTest
 	@Test
 	void toChunkCoordinate()
 	{
-		Coordinate coordinate = new Coordinate(83, -15, -150);
-		ChunkCoordinate chunk = coordinate.toChunkCoordinate();
+		Coordinate coord = new Coordinate(83, -15, -150);
+		ChunkCoordinate chunk = coord.toChunkCoordinate();
 		assertEquals(5, chunk.x);
 		assertEquals(-10, chunk.z);
 	}
@@ -95,8 +95,8 @@ class CoordinateTest
 	@Test
 	void toLocalCoordinate()
 	{
-		Coordinate coordinate = new Coordinate(83, -15, -150);
-		Coordinate local = coordinate.toLocalCoordinate();
+		Coordinate coord = new Coordinate(83, -15, -150);
+		Coordinate local = coord.toLocalCoordinate();
 		assertEquals(new Coordinate(3, -15, 10), local);
 	}
 

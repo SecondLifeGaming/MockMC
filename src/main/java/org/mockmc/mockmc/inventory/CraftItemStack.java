@@ -5,6 +5,10 @@ package org.mockmc.mockmc.inventory;
  */
 public class CraftItemStack
 {
+	private CraftItemStack()
+	{
+	}
+
 	public static Object asNMSCopy(org.bukkit.inventory.ItemStack item)
 	{
 		return item;

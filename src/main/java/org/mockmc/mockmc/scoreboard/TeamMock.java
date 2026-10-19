@@ -513,10 +513,10 @@ public class TeamMock implements org.mockmc.mockmc.generated.server.org.bukkit.s
 	{
 		Component mutableComponent = Component.empty().append(this.prefix()).append(formattedName)
 				.append(this.suffix());
-		TextColor color = this.color();
-		if (color != null)
+		TextColor teamColor = this.color();
+		if (teamColor != null)
 		{
-			mutableComponent.color(color);
+			mutableComponent.color(teamColor);
 		}
 		return mutableComponent;
 	}

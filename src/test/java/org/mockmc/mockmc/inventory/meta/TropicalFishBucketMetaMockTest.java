@@ -43,20 +43,20 @@ class TropicalFishBucketMetaMockTest
 	@Test
 	void hasVariant_AnyValueSet_True()
 	{
-		TropicalFishBucketMetaMock meta = new TropicalFishBucketMetaMock();
-		assertFalse(meta.hasVariant());
-		meta.setPatternColor(DyeColor.CYAN);
-		assertTrue(meta.hasVariant());
+		TropicalFishBucketMetaMock bucketMeta = new TropicalFishBucketMetaMock();
+		assertFalse(bucketMeta.hasVariant());
+		bucketMeta.setPatternColor(DyeColor.CYAN);
+		assertTrue(bucketMeta.hasVariant());
 
-		meta = new TropicalFishBucketMetaMock();
-		assertFalse(meta.hasVariant());
-		meta.setBodyColor(DyeColor.CYAN);
-		assertTrue(meta.hasVariant());
+		bucketMeta = new TropicalFishBucketMetaMock();
+		assertFalse(bucketMeta.hasVariant());
+		bucketMeta.setBodyColor(DyeColor.CYAN);
+		assertTrue(bucketMeta.hasVariant());
 
-		meta = new TropicalFishBucketMetaMock();
-		assertFalse(meta.hasVariant());
-		meta.setPattern(TropicalFish.Pattern.BETTY);
-		assertTrue(meta.hasVariant());
+		bucketMeta = new TropicalFishBucketMetaMock();
+		assertFalse(bucketMeta.hasVariant());
+		bucketMeta.setPattern(TropicalFish.Pattern.BETTY);
+		assertTrue(bucketMeta.hasVariant());
 	}
 
 	@Test

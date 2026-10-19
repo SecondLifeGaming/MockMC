@@ -207,10 +207,10 @@ public class StructureMock implements org.mockmc.mockmc.generated.server.org.buk
 		Preconditions.checkArgument(world != null, "World of corner1 Location cannot be null");
 		Location origin = new Location(world, Math.min(corner1.getBlockX(), corner2.getBlockX()),
 				Math.min(corner1.getBlockY(), corner2.getBlockY()), Math.min(corner1.getBlockZ(), corner2.getBlockZ()));
-		BlockVector size = new BlockVector(Math.abs(corner1.getBlockX() - corner2.getBlockX()),
+		BlockVector dimensions = new BlockVector(Math.abs(corner1.getBlockX() - corner2.getBlockX()),
 				Math.abs(corner1.getBlockY() - corner2.getBlockY()),
 				Math.abs(corner1.getBlockZ() - corner2.getBlockZ()));
-		this.fill(origin, size, includeEntities);
+		this.fill(origin, dimensions, includeEntities);
 	}
 
 	@Override

@@ -33,7 +33,7 @@ public class MockMCProfileBanEntry
 	}
 
 	/**
-	 * @deprecated See {@link #getBanTarget()}.
+	 * @deprecated See Bukkit profile ban target {@link #getBanTarget()}.
 	 */
 	@Override
 	@Deprecated(since = "1.20")

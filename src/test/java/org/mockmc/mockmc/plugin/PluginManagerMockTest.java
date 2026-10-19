@@ -110,16 +110,16 @@ class PluginManagerMockTest
 	@Test
 	void getPlugin_PluginName_Plugin()
 	{
-		Plugin plugin = pluginManager.getPlugin("MockMCTestPlugin");
-		assertNotNull(plugin);
-		assertInstanceOf(TestPlugin.class, plugin);
+		Plugin retrievedPlugin = pluginManager.getPlugin("MockMCTestPlugin");
+		assertNotNull(retrievedPlugin);
+		assertInstanceOf(TestPlugin.class, retrievedPlugin);
 	}
 
 	@Test
 	void getPlugin_UnknownName_Nothing()
 	{
-		Plugin plugin = pluginManager.getPlugin("NoPlugin");
-		assertNull(plugin);
+		Plugin retrievedPlugin = pluginManager.getPlugin("NoPlugin");
+		assertNull(retrievedPlugin);
 	}
 
 	@Test
@@ -224,13 +224,13 @@ class PluginManagerMockTest
 	@Test
 	void disablePlugin_LoadedPlugin_PluginDisabled()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
-		assertTrue(plugin.isEnabled());
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
+		assertTrue(targetPlugin.isEnabled());
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 
-		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
-		assertTrue(plugin.onDisableExecuted);
+		assertFalse(targetPlugin.isEnabled(), "Plugin was not disabled");
+		assertTrue(targetPlugin.onDisableExecuted);
 	}
 
 	@Test
@@ -252,28 +252,28 @@ class PluginManagerMockTest
 	@Test
 	void disablePlugin_PluginDisableEvent_IsFired()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 
 		assertThat(pluginManager,
-				hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(plugin)));
+				hasFiredFilteredEvent(PluginDisableEvent.class, event -> event.getPlugin().equals(targetPlugin)));
 	}
 
 	@Test
 	void disablePlugin_Unloaded_PluginDisableEvent_NotFired()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
-		JavaPluginUtils.setEnabled(plugin, false);
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
+		JavaPluginUtils.setEnabled(targetPlugin, false);
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 		assertThat(pluginManager, hasNotFiredEventInstance(PluginDisableEvent.class));
 	}
 
 	@Test
 	void disablePlugin_TasksCanceled()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
 		BukkitRunnable runnable = new BukkitRunnable()
 		{
 			@Override
@@ -282,9 +282,9 @@ class PluginManagerMockTest
 				// No-op for test
 			}
 		};
-		runnable.runTaskTimer(plugin, 1, 1);
+		runnable.runTaskTimer(targetPlugin, 1, 1);
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 
 		assertTrue(runnable.isCancelled());
 	}
@@ -292,11 +292,11 @@ class PluginManagerMockTest
 	@Test
 	void disablePlugin_ServicesUnregistered()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
-		server.getServicesManager().register(Object.class, new Object(), plugin, ServicePriority.High);
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
+		server.getServicesManager().register(Object.class, new Object(), targetPlugin, ServicePriority.High);
 		assertTrue(server.getServicesManager().isProvidedFor(Object.class));
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 
 		assertFalse(server.getServicesManager().isProvidedFor(Object.class));
 	}
@@ -304,27 +304,27 @@ class PluginManagerMockTest
 	@Test
 	void disablePlugin_DisablesPluginChannels()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
-		server.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
-		server.getMessenger().registerIncomingPluginChannel(plugin, "BungeeCord", (channel, player, message) ->
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
+		server.getMessenger().registerOutgoingPluginChannel(targetPlugin, "BungeeCord");
+		server.getMessenger().registerIncomingPluginChannel(targetPlugin, "BungeeCord", (channel, player, message) ->
 		{
 		});
-		assertTrue(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
-		assertTrue(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
+		assertTrue(server.getMessenger().isOutgoingChannelRegistered(targetPlugin, "BungeeCord"));
+		assertTrue(server.getMessenger().isIncomingChannelRegistered(targetPlugin, "BungeeCord"));
 
-		pluginManager.disablePlugin(plugin);
+		pluginManager.disablePlugin(targetPlugin);
 
-		assertFalse(server.getMessenger().isOutgoingChannelRegistered(plugin, "BungeeCord"));
-		assertFalse(server.getMessenger().isIncomingChannelRegistered(plugin, "BungeeCord"));
+		assertFalse(server.getMessenger().isOutgoingChannelRegistered(targetPlugin, "BungeeCord"));
+		assertFalse(server.getMessenger().isIncomingChannelRegistered(targetPlugin, "BungeeCord"));
 	}
 
 	@Test
 	void clearPlugins_LoadedPlugins_AllPluginsRemove()
 	{
-		TestPlugin plugin = MockMC.load(TestPlugin.class);
-		assertTrue(plugin.isEnabled());
+		TestPlugin targetPlugin = MockMC.load(TestPlugin.class);
+		assertTrue(targetPlugin.isEnabled());
 		pluginManager.clearPlugins();
-		assertFalse(plugin.isEnabled(), "Plugin was not disabled");
+		assertFalse(targetPlugin.isEnabled(), "Plugin was not disabled");
 		Plugin[] plugins = pluginManager.getPlugins();
 		assertEquals(0, plugins.length);
 	}

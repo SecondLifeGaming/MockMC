@@ -22,6 +22,10 @@ public class MethodDataScanner
 	private static final Set<String> METHOD_NAME_BLACKLIST = Set.of("hashCode", "toString", "getKeyOrNull", "implHashCode",
 			"implToString", "wait", "getDeclaringClass", "notify", "notifyAll", "getClass", "values");
 
+	private MethodDataScanner()
+	{
+	}
+
 	public static JsonObject findMethodData(Object object)
 	{
 		Class<?> kClass = object.getClass();

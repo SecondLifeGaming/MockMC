@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class EnchantmentMockTest
 {
 
-	private final static String NAMESPACE = "mock_bukkit";
+	private static final String NAMESPACE = "mock_bukkit";
 	private NamespacedKey key;
 	private int maxLevel;
 	private int minLevel;

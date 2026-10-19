@@ -110,7 +110,7 @@ public record WrittenBookContentMock(Filtered<String> title, String author, int 
 		{
 			Component component = page.asComponent();
 			validatePageLength(component);
-			// TODO: this.pages.add(Filterable.passThrough(PaperAdventure.asVanilla()));
+			this.pages.add(Filtered.of(component, null));
 			return this;
 		}
 
@@ -119,9 +119,7 @@ public record WrittenBookContentMock(Filtered<String> title, String author, int 
 		{
 			for (ComponentLike page : pages)
 			{
-				Component component = page.asComponent();
-				validatePageLength(component);
-				// this.pages.add(Filterable.passThrough(PaperAdventure.asVanilla(component)));
+				addPage(page);
 			}
 
 			return this;
@@ -139,8 +137,7 @@ public record WrittenBookContentMock(Filtered<String> title, String author, int 
 				validatePageLength(filtered);
 			}
 
-			// this.pages.add(new Filterable(PaperAdventure.asVanilla(raw),
-			// Optional.ofNullable(filtered).map(PaperAdventure::asVanilla)));
+			this.pages.add(Filtered.of(raw, filtered));
 			return this;
 		}
 

@@ -342,9 +342,9 @@ class BeaconStateMockTest
 	@Test
 	void testUpdateTierMinWorldHeight()
 	{
-		Block block = this.world.getBlockAt(0, 0, 0);
-		block.setType(Material.BEACON);
-		BeaconStateMock beacon1 = new BeaconStateMock(block);
+		Block targetBlock = this.world.getBlockAt(0, 0, 0);
+		targetBlock.setType(Material.BEACON);
+		BeaconStateMock beacon1 = new BeaconStateMock(targetBlock);
 
 		createBase(4);
 
