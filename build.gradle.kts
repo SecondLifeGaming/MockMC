@@ -153,6 +153,21 @@ sonar {
 		property("sonar.test.exclusions", "**/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
 		property("sonar.coverage.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
 		property("sonar.cpd.exclusions", "**/generated/**/*,src/main/java/org/mockmc/mockmc/generated/**/*,src/test/java/org/mockmc/mockmc/generated/**/*")
+
+		// Category 2: MockMC Architecture Realities
+		property("sonar.issue.ignore.multicriteria", "ruleS110,ruleS1133,ruleS2176")
+
+		// S110: Deep inheritance tree required to mirror Minecraft entity and block state hierarchies
+		property("sonar.issue.ignore.multicriteria.ruleS110.ruleKey", "java:S110")
+		property("sonar.issue.ignore.multicriteria.ruleS110.resourceKey", "**/entity/**/*,**/block/state/**/*")
+
+		// S1133: Deprecated APIs are permanent fixtures for multi-version testing compatibility
+		property("sonar.issue.ignore.multicriteria.ruleS1133.ruleKey", "java:S1133")
+		property("sonar.issue.ignore.multicriteria.ruleS1133.resourceKey", "**/*")
+
+		// S2176: Static deserialize method required by Bukkit ConfigurationSerializable contract
+		property("sonar.issue.ignore.multicriteria.ruleS2176.ruleKey", "java:S2176")
+		property("sonar.issue.ignore.multicriteria.ruleS2176.resourceKey", "**/inventory/meta/**/*")
 	}
 }
 
