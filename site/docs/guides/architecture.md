@@ -12,7 +12,7 @@ MockMC operates under an **"Engine-First" mission**: achieving 100% automated AP
 
 ```mermaid
 flowchart TD
-    UpstreamJAR["Upstream Platform JAR (Paper 26.3, Folia 26.2)"] --> Cracker["JarCracker & StandaloneRemapper"]
+    UpstreamJAR["Upstream Platform JARs (Paper, Folia, Velocity, Waterfall)"] --> Cracker["JarCracker & StandaloneRemapper"]
     Cracker --> RemappedJAR["Remapped Bytecode JAR"]
     RemappedJAR --> Scanner["BytecodeManifestScanner"]
     Scanner --> Manifest["api-manifest-*.json"]

@@ -2,14 +2,14 @@
 
 This document outlines the strategic phases for achieving 100% automated API mirroring and high-fidelity logic simulation.
 
-## 🚀 Phase 6: Multi-Version Expansion & Functional Depth (CURRENT)
+## Phase 6: Multi-Version Expansion & Functional Depth (CURRENT)
 
-_Focus: Validating the multi-version architecture (Paper 26.3 + Folia 26.2 proof of concept) and expanding behavioral mock depth._
+_Focus: Validating the multi-version architecture across Minecraft 1.20.6 through 26.3 (Paper, Folia, Velocity, Waterfall) and expanding behavioral mock depth._
 
-### 1. Architectural Validation (26.2 - 26.3 Multi-Version Contract)
+### 1. Architectural Validation (1.20.6 – 26.3 Multi-Version Contract)
 
 - [x] **Canonical Tier Establishment**: Paper 26.3 established as the primary source of truth for Bukkit/Paper API surface.
-- [x] **Platform Scope Restriction**: Folia 26.2 restricted strictly to `io.papermc.paper.threadedregions.*`, preventing downgrade of canonical Paper classes.
+- [x] **Platform Scope Restriction**: Folia restricted strictly to `io.papermc.paper.threadedregions.*`, preventing downgrade of canonical Paper classes.
 - [x] **Autonomous Unbundling & Remapping**: Decoupled from build-time Paperweight; `JarCracker` and `StandaloneRemapper` support Java 25 bytecode.
 - [x] **Multi-Backend Test Verification**: Distinct test tasks (`testPaper`, `testFolia`, `testVelocity`, `testWaterfall`, `testAllBackends`) in Gradle.
 - [x] **Architectural Documentation**: Published `MULTI_VERSION_ARCHITECTURE.md`, `VERSION_SUPPORT.md`, and `GENERATOR_AND_COVERAGE.md`.
@@ -23,13 +23,52 @@ _Note on API versioning: While the compile API surface targets Paper 26.3, core 
     - [ ] `GameRule`: Extend dynamic game rule registration support.
     - [ ] `PluginManager`: Enhance event firing for Paper-specific events.
 
-### 3. Planned Multi-Version Expansion & Automation (Future Milestones)
+### 3. Multi-Version Expansion & Automation
 
-- [ ] **Automated Historical Fallback Scanning**: Expand MetaMiner to automatically scan older baseline JARs for removed methods and generate `@Deprecated(forRemoval = true, since = "...")` stubs tagged with `@mockmc.version`.
+- [x] **Historical Fallback Scanning**: Extended MetaMiner and `JarCracker` to unbundle and scan 1.20.6, 1.21.11, 26.1.2, 26.2, and 26.3.
+- [x] **Automated ABI Diffing**: Generated `COMPAT.md` tracking 4,000+ API changes between 1.20.6-151 and 26.3-206.
 - [ ] **CI Coverage Auditing**: Integrate `COVERAGE.md` verification into CI to fail builds if unaccounted methods > 0.
-- [x] **Maven Central Publishing**: CI/CD pipeline configured (`feat/maven-central`); GPG signing via in-memory key, `secrets: inherit` propagation to reusable workflow. Pending successful end-to-end run.
+- [x] **Maven Central Publishing**: CI/CD pipeline configured (`feat/maven-central`); GPG signing via in-memory key.
 
-## 🌐 Phase 7: Automated Developer Reference & API Explorer (PLANNED RFC)
+## Phase 8: Ecosystem & Toolchain to 1.0.0 (PLANNED)
+
+_Focus: Transforming MockMC into an indispensable, SSS-tier developer platform with native IDE extensions, Language Server Protocol (LSP), and Model Context Protocol (MCP) server._
+
+### 8.1: MockMC Language Server Protocol (LSP) Engine
+
+- [ ] Design and implement standalone Java-based LSP server embedding MockMC's `VersionDiffEngine` and bytecode manifests.
+- [ ] Real-time diagnostic publisher: Highlight Bukkit/Paper API calls in user code with inline warnings when a method was added, removed, or changed within the plugin's declared `targetRange` (e.g., `targetRange: 1.20.6..26.3`).
+- [ ] Code actions / Quick-fixes: Provide automated migrations when calling deprecated or removed APIs.
+- [ ] Hover tooltips: Display symbol lifecycle timelines (e.g. `Introduced in 1.21.11`, `Removed in 26.3`).
+- [ ] Reference RFC: [`docs/RFC_LSP_IDE_EXTENSION.md`](docs/RFC_LSP_IDE_EXTENSION.md).
+
+### 8.2: IDE Extensions (IntelliJ IDEA & VS Code)
+
+- [ ] **IntelliJ IDEA Plugin**:
+    - [ ] Native Kotlin/Java IntelliJ inspection engine wrapping MockMC API manifests.
+    - [ ] Project gutter icons for mock test runners and Folia region inspection.
+    - [ ] One-click "Check Target Version Compatibility" tool window.
+- [ ] **VS Code Extension**:
+    - [ ] Language client connecting to the MockMC LSP binary.
+    - [ ] Syntax decorations, problems panel integration, and quick-fix suggestions.
+
+### 8.3: MockMC Model Context Protocol (MCP) Server
+
+- [ ] Standalone MCP server exposing MockMC's API intelligence tools to AI pair programmers (Gemini, Claude, Antigravity, Cursor):
+    - [ ] `check_symbol_compatibility(symbol, minVersion, maxVersion)`
+    - [ ] `find_breaking_changes(fromVersion, toVersion, platform)`
+    - [ ] `query_api_symbol(query, platform)`
+    - [ ] `suggest_test_scaffold(eventOrCommand, platform)`
+- [ ] Containerized deployment: Multi-stage Docker image published to GitHub Packages (`ghcr.io/secondlifegaming/mockmc-mcp:latest`) for isolated stdio execution.
+- [ ] Reference RFC: [`docs/RFC_MCP_SERVER.md`](docs/RFC_MCP_SERVER.md).
+
+### 8.4: 1.0.0 Production Readiness & Final Hardening
+
+- [ ] Zero unaccounted methods across all supported platforms in `COVERAGE.md`.
+- [ ] Complete state machine simulation for modern data components and custom item types.
+- [ ] Unified documentation hub with automated CI deployments and search index.
+
+## Phase 7: Automated Developer Reference & API Explorer (PLANNED RFC)
 
 _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an automated, version-aware Minecraft plugin developer reference and interactive API explorer. See [`docs/RFC_DEVELOPER_WIKI.md`](docs/RFC_DEVELOPER_WIKI.md)._
 
@@ -76,7 +115,7 @@ _Focus: Turning MockMC's bytecode discovery and diff infrastructure into an auto
 - [x] **Content Sanitization & CSP**: Hardened Content Security Policy (`default-src 'self'`, sanitized script/style execution, and no-referrer policy).
 - [x] **Automated GitHub Pages Deployment**: Created `.github/workflows/docs.yml` building and publishing the documentation and explorer on `master` pushes.
 
-## ✅ Phase 5: Autonomous Modernization (COMPLETE)
+## Phase 5: Autonomous Modernization (COMPLETE)
 
 _Focus: Full decoupling from legacy build tools and Java 25 readiness._
 
@@ -90,7 +129,7 @@ _Focus: Full decoupling from legacy build tools and Java 25 readiness._
 
 ---
 
-## 🏛️ Completed Phases Archive
+## Completed Phases Archive
 
 <details>
 <summary>Phase 4: Functional Depth & UX</summary>

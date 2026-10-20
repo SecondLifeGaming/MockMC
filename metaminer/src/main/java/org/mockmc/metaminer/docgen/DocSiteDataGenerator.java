@@ -534,15 +534,18 @@ public class DocSiteDataGenerator implements DataGenerator {
 	}
 
 	private void writeExplorerDatasetsTo(List<ClientSymbol> clientSymbols, File targetDir) throws IOException {
-		File pagesDir = new File(targetDir, "pages");
-		pagesDir.mkdirs();
+		targetDir.mkdirs();
 
-		// Clean up existing page-*.json chunks to avoid stale phantom pages
-		File[] existingPages = pagesDir.listFiles((_, name) -> name.startsWith("page-") && name.endsWith(".json"));
-		if (existingPages != null) {
-			for (File p : existingPages) {
-				java.nio.file.Files.deleteIfExists(p.toPath());
+		// Clean up legacy pages directory if present to prevent disk bloat
+		File pagesDir = new File(targetDir, "pages");
+		if (pagesDir.exists() && pagesDir.isDirectory()) {
+			File[] files = pagesDir.listFiles();
+			if (files != null) {
+				for (File f : files) {
+					java.nio.file.Files.deleteIfExists(f.toPath());
+				}
 			}
+			java.nio.file.Files.deleteIfExists(pagesDir.toPath());
 		}
 
 		int totalSymbols = clientSymbols.size();
@@ -582,19 +585,7 @@ public class DocSiteDataGenerator implements DataGenerator {
 			GSON.toJson(meta, writer);
 		}
 
-		// 2. Write paginated chunks: page-1.json, page-2.json, ...
-		for (int page = 1; page <= totalPages; page++) {
-			int fromIndex = (page - 1) * PAGE_SIZE;
-			int toIndex = Math.min(fromIndex + PAGE_SIZE, totalSymbols);
-			List<ClientSymbol> pageItems = clientSymbols.subList(fromIndex, toIndex);
-
-			File pageFile = new File(pagesDir, "page-" + page + ".json");
-			try (FileWriter writer = new FileWriter(pageFile, StandardCharsets.UTF_8)) {
-				GSON.toJson(pageItems, writer);
-			}
-		}
-
-		// 3. Write lightweight search index via stream
+		// 2. Write lightweight search index via stream
 		List<SearchIndexItem> searchIndex = clientSymbols.stream()
 				.map(s -> new SearchIndexItem(
 						s.id(),
@@ -612,14 +603,31 @@ public class DocSiteDataGenerator implements DataGenerator {
 			GSON.toJson(searchIndex, writer);
 		}
 
+		// 3. Write lightweight changed symbols index (~50-150 KB) for instant "Changed in Range" filtering
+		List<SearchIndexItem> changedSymbols = searchIndex.stream()
+				.filter(s -> !STATUS_STABLE.equals(s.status()))
+				.toList();
+		File changedFile = new File(targetDir, "changed-symbols.json");
+		try (FileWriter writer = new FileWriter(changedFile, StandardCharsets.UTF_8)) {
+			GSON.toJson(changedSymbols, writer);
+		}
+
+		// 4. Write bootstrap first-page (~15 KB) for instant initial render on slow 3G networks
+		int firstPageLimit = Math.min(PAGE_SIZE, totalSymbols);
+		List<ClientSymbol> firstPageSymbols = clientSymbols.subList(0, firstPageLimit);
+		File firstPageFile = new File(targetDir, "first-page.json");
+		try (FileWriter writer = new FileWriter(firstPageFile, StandardCharsets.UTF_8)) {
+			GSON.toJson(firstPageSymbols, writer);
+		}
+
 		// Keep fallback full symbols file
 		File fullFile = new File(targetDir, "explorer-symbols.json");
 		try (FileWriter writer = new FileWriter(fullFile, StandardCharsets.UTF_8)) {
 			GSON.toJson(clientSymbols, writer);
 		}
 
-		LOGGER.log(Level.INFO, "Exported {0} symbols across {1} chunked pages + lightweight search index to {2}",
-				new Object[]{totalSymbols, totalPages, targetDir.getAbsolutePath()});
+		LOGGER.log(Level.INFO, "Exported {0} symbols ({1} changed) [meta + changed + index] to {2}",
+				new Object[]{totalSymbols, changedSymbols.size(), targetDir.getAbsolutePath()});
 	}
 
 	private static String determineScope(String name) {
@@ -674,4 +682,9 @@ public class DocSiteDataGenerator implements DataGenerator {
 			String testScopeNote,
 			String migrationHint
 	) {}
+
+	public static void main(String[] args) throws IOException {
+		File dataFolder = new File(args.length > 0 ? args[0] : ".");
+		new DocSiteDataGenerator(dataFolder).generateData();
+	}
 }

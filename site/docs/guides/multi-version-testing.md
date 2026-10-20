@@ -4,13 +4,13 @@ Modern Minecraft servers differ significantly in their threading and concurrency
 
 ## 1. Pinned Extension Scope Contract
 
-MockMC targets **Paper 26.3** as its canonical Bukkit/Paper source of truth, while providing **Folia 26.2** region scheduling via strictly scoped package extensions:
+MockMC targets canonical Paper as its primary source of truth, while providing Folia region scheduling via strictly scoped package extensions:
 
 - `io.papermc.paper.threadedregions.RegionizedServer`
 - `io.papermc.paper.threadedregions.scheduler.FoliaRegionScheduler`
 - `io.papermc.paper.threadedregions.ThreadedRegionizer`
 
-This isolation ensures Folia 26.2 classes never downgrade modern Paper 26.3 interfaces.
+This isolation ensures Folia extension classes never overwrite or downgrade canonical Paper interfaces.
 
 ---
 

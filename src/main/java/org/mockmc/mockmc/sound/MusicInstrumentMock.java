@@ -81,7 +81,8 @@ public class MusicInstrumentMock extends MusicInstrument
 	}
 
 	/**
-	 * @deprecated Inherited from {@link org.bukkit.MusicInstrument#translationKey()}.
+	 * @deprecated Inherited from
+	 *             {@link org.bukkit.MusicInstrument#translationKey()}.
 	 */
 	@Override
 	@Deprecated(forRemoval = true)

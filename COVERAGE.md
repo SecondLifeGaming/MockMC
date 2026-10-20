@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: 2026-10-17T23:04:08.101440165Z
+Generated on: 2026-10-20T08:06:33.487221826Z
 
 ## Accounted-For API Surface: 100.00%
 
-- **Total Discovered API Methods**: 12942
-- **Category A: Automated BaseMocks**: 12462
+- **Total Discovered API Methods**: 12943
+- **Category A: Automated BaseMocks**: 12463
 - **Category B: Manual Implementations**: 0
 - **Category C: Justified Exclusions**: 480
 - **Unaccounted Methods**: 0
@@ -137,7 +137,7 @@ Generated on: 2026-10-17T23:04:08.101440165Z
 | org.bukkit.ban | 16 | 100% Accounted |
 | org.bukkit.block | 812 | 100% Accounted |
 | org.bukkit.block.banner | 6 | 100% Accounted |
-| org.bukkit.block.data | 162 | 100% Accounted |
+| org.bukkit.block.data | 163 | 100% Accounted |
 | org.bukkit.block.data.type | 372 | 100% Accounted |
 | org.bukkit.block.sign | 16 | 100% Accounted |
 | org.bukkit.boss | 70 | 100% Accounted |
