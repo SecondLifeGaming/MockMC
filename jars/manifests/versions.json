@@ -9,8 +9,8 @@
       "versions": [
         {
           "version": "26.3",
-          "build": 178,
-          "url": "https://fill-data.papermc.io/v1/objects/5dd0c8fb20a96eb7c98f3c4b1c890e99ef6db56fd689a2cf06975a3471fda757/paper-26.3-178.jar",
+          "build": 206,
+          "url": "https://fill-data.papermc.io/v1/objects/4208a692538104ec88699c0e078b2b89842920a10472ebb37e72cdda27c0d80e/paper-26.3-206.jar",
           "primary": true
         },
         {
@@ -70,9 +70,9 @@
       "type": "proxy",
       "versions": [
         {
-          "version": "4.2.1",
-          "build": 36,
-          "url": "https://fill-data.papermc.io/v1/objects/62a06a6bbf3c48b72473ac64a1bdea38e940b82780a99998e83b42d34022b42c/velocity-4.2.1-SNAPSHOT-36.jar"
+          "version": "4.3.0",
+          "build": 44,
+          "url": "https://fill-data.papermc.io/v1/objects/85be73b90f295acd8d5d45a00ad10bac791d4b72b7554172612a89565ebaaa8f/velocity-4.3.0-44.jar"
         }
       ]
     },

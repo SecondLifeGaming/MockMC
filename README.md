@@ -1,191 +1,211 @@
 <p align="center">
-    <!-- Badges -->
-    <a href="https://secondlifegaming.github.io/MockMC/">
-        <img alt="Documentation" src="https://img.shields.io/badge/docs-GitHub%20Pages-blue?style=flat&logo=github" />
-    </a>
-    <a href="https://secondlifegaming.github.io/MockMC/explorer/">
-        <img alt="API Explorer" src="https://img.shields.io/badge/API%20Explorer-Paper%20%26%20Folia-brightgreen?style=flat" />
-    </a>
-    <a href="https://github.com/SecondLifeGaming/MockMC/releases">
-        <img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" />
-    </a>
+    <a href="https://secondlifegaming.github.io/MockMC/"><img alt="Documentation & API Explorer" src="https://img.shields.io/badge/docs%20%26%20explorer-GitHub%20Pages-blue?style=flat&logo=github" /></a>
+    <a href="https://github.com/SecondLifeGaming/MockMC/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/SecondLifeGaming/MockMC?color=1bcc94&logo=github&label=GitHub%20Packages" /></a>
     <br />
-    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml">
-        <img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" />
-    </a>
-    <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC">
-        <img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells">
-    </a>
-    <a href="https://sonarcloud.io/component_measures?id=SecondLifeGaming_MockMC&metric=sqale_rating&view=list">
-        <img alt="Maintainability" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=sqale_rating">
-    </a>
-    <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=SecondLifeGaming_MockMC">
-        <img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=bugs">
-    </a>
-    <!-- Logo -->
+    <a href="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml"><img alt="Build Status" src="https://github.com/SecondLifeGaming/MockMC/actions/workflows/build.yml/badge.svg" /></a>
+    <a href="https://sonarcloud.io/project/issues?resolved=false&types=CODE_SMELL&id=SecondLifeGaming_MockMC"><img alt="Code Smells" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=code_smells" /></a>
+    <a href="https://sonarcloud.io/component_measures?id=SecondLifeGaming_MockMC&metric=sqale_rating&view=list"><img alt="Maintainability" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=sqale_rating" /></a>
+    <a href="https://sonarcloud.io/project/issues?resolved=false&types=BUG&id=SecondLifeGaming_MockMC"><img alt="Bugs" src="https://sonarcloud.io/api/project_badges/measure?project=SecondLifeGaming_MockMC&metric=bugs" /></a>
+    <br />
     <hr />
-        <img alt="MockMC logo" title="MockMC" src="logo.png"/>
+    <img alt="MockMC logo" title="MockMC" src="logo.png" />
     <hr />
 </p>
 
-MockMC is an automated, type-safe testing framework for the modern Minecraft ecosystem, forked from the excellent [MockBukkit](https://github.com/MockBukkit/MockBukkit) project.
+**MockMC** is an automated multi-platform testing framework and API compatibility engine for the modern Minecraft ecosystem. It covers the full server and proxy stack **Paper**, **Folia** (regional multithreading), **Velocity**, and **Waterfall** spanning **Minecraft 1.20.6 through 26.3**.
 
-While MockBukkit is built exclusively for the Bukkit/Paper backend with handcrafted in-game simulation, MockMC expands testing across **the entire server and proxy stack — Paper, Folia (regional multithreading), Velocity, and Waterfall** — powered by an automated bytecode generation engine that provides 100% compile-safe method coverage.
-
----
-
-## 📚 Documentation & Developer Reference
-
-Explore our interactive guides and API compatibility explorer:
-
-- 🌐 **[Developer Documentation Hub](https://secondlifegaming.github.io/MockMC/)**: Comprehensive setup guides, testing recipes, and architecture documentation.
-- 🔍 **[Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/)**: Instant version-range diffs (Added, Breaking, Deprecated) across validated Paper and Folia releases (26.2 → 26.3) covering 16,000+ API symbols.
-- 🚀 **[Multi-Version Testing Guide](https://secondlifegaming.github.io/MockMC/guides/multi-version-testing)**: How to structure tests across Paper, Folia, Velocity, and Waterfall in a single test suite.
-- 🧪 **[Your First MockMC Test](https://secondlifegaming.github.io/MockMC/guides/first-test)**: Step-by-step tutorial on bootstrapping server mocks and testing plugin events.
+Powered by an autonomous bytecode analysis engine (`metaminer`), MockMC generates 100% compile-safe method mirrors directly from upstream server JARs, eliminating boilerplate stub maintenance so tests never crash on unmocked interface methods.
 
 ---
 
-## ⚖️ MockBukkit vs. MockMC: Which Should You Use?
+## Key Highlights
 
-| Feature                    | MockBukkit                                                                            | MockMC                                                                                     |
-| :------------------------- | :------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------- |
-| **Ecosystem Reach**        | **Paper & Bukkit only** (single backend server focus).                                | **Full Platform Stack**: **Paper**, **Folia** (regional threading), **Velocity**, and **Waterfall**. |
-| **Primary Goal**           | Deep in-game behavioral simulation (physics, complex event lifecycles, recipe logic). | **Multi-platform test coverage** and rapid adaptation to new APIs with **100% compile safety**. |
-| **Folia Support**          | ❌ None (`RegionScheduler`, `AsyncScheduler` unsupported).                           | ✅ **Supported**: Synchronously executes Folia regional schedulers in tests.               |
-| **Proxy Testing**          | ❌ None (no Velocity or BungeeCord APIs).                                             | ✅ **Supported**: Full API mirrors for `com.velocitypowered.api` and `net.md_5.bungee`.    |
-| **Method Implementation**  | Handcrafted behavior for each method.                                                 | Automated **Smart Stubs** generated directly from server bytecode via JavaPoet.            |
-| **New Release Turnaround** | Requires manual coding of new API methods before tests can compile.                   | **Automated Pipeline**: Regenerates the full API surface automatically from upstream JARs. |
-| **Unimplemented Methods**  | Often throws `UnimplementedOperationException`.                                       | Safe defaults (`false`, `0`, `Optional.empty()`, empty collections).                       |
-| **Behavior Guarantee**     | Simulates vanilla state progression.                                                  | Simulates registered behavior; unmapped methods return safe non-crashing defaults.         |
-
-> [!TIP]
-> **Rule of Thumb:**
->
-> - **Use MockBukkit if:** You are building exclusively for a single Paper/Bukkit server and need deep simulation of vanilla Minecraft mechanics (e.g. block physics, complex entity AI, vanilla crafting).
-> - **Use MockMC if:** 
->   1. You develop **cross-platform plugins** targeting **Velocity, Waterfall/BungeeCord, or Folia** alongside Paper.
->   2. You want your tests to **compile and run cleanly against modern Paper/Folia builds** without failing on unmocked interface methods or platform-specific schedulers.
+- **Full Platform Stack**: First-class support for **Paper**, **Folia** (with regional scheduler execution), **Velocity**, and **Waterfall** in a single test harness.
+- **Modern Minecraft Support (1.20.6 → 26.3)**: Built directly on the modern Data Component and Mojang-mapped architecture.
+- **Engine-First (Zero Manual Stubs)**: `metaminer` inspects upstream bytecode and generates non-crashing Smart Stubs with safe defaults (`false`, `0`, `Optional.empty()`, empty collections). Manual mocks focus purely on behavioral state progression.
+- **Descriptor-Level ABI Diff Engine**: Computes exact bytecode and source breakages across server versions, tracking binary breakages (`NoSuchMethodError`) before your plugin hits production.
+- **Interactive Version-Range Explorer**: Web-based offline search & diff explorer over 16,000+ API symbols across Paper and Folia releases.
 
 ---
 
-## 🗺️ Version Support Matrix & Pinned Compatibility Contract
+## Quick Start
 
-MockMC does not dynamically pull arbitrary snapshots; it operates on an **explicitly pinned multi-tier contract**. The latest Paper target serves as the canonical Bukkit and Paper API baseline, while supplementary platform artifacts supply platform-exclusive namespaces:
+You can add MockMC to your test suite via **Direct JAR (Zero Auth)**, **Local Clone (`mavenLocal`)**, or **GitHub Packages**:
 
-| Platform      | Pinned Target Build          | Role in MockMC          | Scope                                                            |
-| ------------- | ---------------------------- | ----------------------- | ---------------------------------------------------------------- |
-| **Paper**     | `paper-26.3-178`             | **Canonical Authority** | Full Bukkit and Paper API (`org.bukkit.*`, `io.papermc.paper.*`) |
-| **Folia**     | `folia-26.2-7`               | **Platform Extension**  | Region schedulers (`io.papermc.paper.threadedregions.*`)         |
-| **Velocity**  | `velocity-4.2.1-SNAPSHOT-36` | **Proxy Extension**     | Velocity API (`com.velocitypowered.api.*`)                       |
-| **Waterfall** | `waterfall-1.21-615`         | **Proxy Extension**     | BungeeCord/Waterfall API (`net.md_5.bungee.*`)                   |
+### Option 1: Direct Release JAR (Recommended / Zero Auth)
 
-_For complete details on artifact pinning, classloader isolation, and upgrade lifecycles, see [`docs/MULTI_VERSION_ARCHITECTURE.md`](docs/MULTI_VERSION_ARCHITECTURE.md) and [`docs/VERSION_SUPPORT.md`](docs/VERSION_SUPPORT.md)._
+Download the target release JAR (e.g. `mockmc-v26.3-0.1.1.jar`) directly from [GitHub Releases](https://github.com/SecondLifeGaming/MockMC/releases) and drop it into your project's `libs/` folder:
 
----
+```kotlin
+// build.gradle.kts
+dependencies {
+    testImplementation(files("libs/mockmc-v26.3-0.1.1.jar"))
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+}
 
-## ⚙️ How It Works: "Engine First"
-
-MockMC decouples API compilation from manual implementation:
-
-1. **Autonomous Bytecode Remapping**: The [`metaminer`](/metaminer) engine inspects target server JARs (`Paper`, `Folia`, `Velocity`) and remaps them without external build plugins.
-2. **Automated API Mirrors**: JavaPoet generates `*BaseMock` interfaces with non-crashing Smart Stubs for every discovered interface method.
-3. **Layered Behavior**: Manual implementations focus strictly on stateful behavior (player simulation, custom matchers, inventory state); the generator handles the remaining 95% of boilerplate.
+tasks.test {
+    useJUnitPlatform()
+}
+```
 
 ---
 
-## Usage
+### Option 2: Clone or Fork (`mavenLocal`)
 
-MockMC is published to Maven Central for frictionless public resolution. Visual tracking releases are also mirrored directly to GitHub Packages.
+Build and publish MockMC directly to your local Maven repository in seconds:
 
-<details>
-<summary><h3>Adding MockMC via Gradle (Kotlin DSL)</h3></summary>
+```bash
+git clone https://github.com/SecondLifeGaming/MockMC.git
+cd MockMC
+./gradlew publishToMavenLocal
+```
 
-Add the Paper public repository and drop MockMC into your dependencies block:
+Then in your plugin's `build.gradle.kts`:
 
 ```kotlin
 repositories {
+    mavenLocal()
     mavenCentral()
-    maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    // Pinned release line
-    testImplementation("io.github.secondlifegaming:mockmc:0.0.5")
-    testImplementation("io.papermc.paper:paper-api:26.3.build.178-stable")
-}
-```
-
-</details>
-
-<details>
-<summary><h3>Adding MockMC via Maven</h3></summary>
-
-Add the Paper repository mapping and the library dependencies to your plugin’s `pom.xml`:
-
-```xml
-<repositories>
-    <repository>
-        <id>papermc</id>
-        <url>https://repo.papermc.io/repository/maven-public/</url>
-    </repository>
-</repositories>
-
-<dependencies>
-    <dependency>
-        <groupId>io.github.secondlifegaming</groupId>
-        <artifactId>mockmc</artifactId>
-        <version>0.0.5</version>
-        <scope>test</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>io.papermc.paper</groupId>
-        <artifactId>paper-api</artifactId>
-        <version>26.3.build.178-stable</version>
-        <scope>test</scope>
-    </dependency>
-</dependencies>
-```
-```
-
-</details>
-
-### Quick Start
-
-Initialize the mock server pipeline inside your unit test setup:
-
-```java
-private ServerMock server;
-private MyPlugin plugin;
-
-@BeforeEach
-public void setUp() {
-    server = MockMC.mock();
-    plugin = MockMC.load(MyPlugin.class);
-}
-
-@AfterEach
-public void tearDown() {
-    MockMC.unmock();
+    testImplementation("io.github.secondlifegaming:mockmc-v26.3:0.1.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
 }
 ```
 
 ---
 
-## 🛡️ Smart Stub Defaults & Behavioral Limitations
+### Option 3: GitHub Packages Repository
 
-When an API method does not yet have an explicit behavioral simulation in a manual mock, generated mocks automatically return safe defaults instead of throwing `UnimplementedOperationException`:
+If resolving via GitHub Packages, supply your GitHub username and personal access token (with `read:packages` scope) via environment variables or `~/.gradle/gradle.properties`:
 
-| Return Type                             | Default Value                                       |
-| :-------------------------------------- | :-------------------------------------------------- |
-| **Primitives (`boolean`, `int`, etc.)** | `false`, `0`, etc.                                  |
-| **Optionals**                           | `Optional.empty()`                                  |
-| **Collections / Lists / Sets**          | Empty, immutable collection                         |
-| **Adventure Components**                | `Component.empty()`                                 |
-| **Objects / Interfaces**                | `null` (or isolated default mock where appropriate) |
+```kotlin
+// build.gradle.kts
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://maven.pkg.github.com/SecondLifeGaming/MockMC") {
+        credentials {
+            username = providers.environmentVariable("GITHUB_ACTOR").orElse(providers.gradleProperty("gpr.user")).orNull
+            password = providers.environmentVariable("GITHUB_TOKEN").orElse(providers.gradleProperty("gpr.key")).orNull
+        }
+    }
+}
 
-> [!WARNING]
-> **Limitations of Safe Defaults:**
-> A safe default (such as returning `false`, `0`, or `null`) prevents runtime test crashes when your plugin calls peripheral server methods. However, **it does not simulate active server state progression**. If your test asserts on the downstream side effects of an unmocked method (for example, world physics or mob AI reactions), you must explicitly mock or assert that behavior in your test setup.
->
-> See [`docs/GENERATOR_AND_COVERAGE.md`](docs/GENERATOR_AND_COVERAGE.md) for how MockMC accounts for structural API surface versus functional simulation depth.
+dependencies {
+    // Replace <version> with target release tag (e.g. 0.1.1)
+    testImplementation("io.github.secondlifegaming:mockmc-v26.3:<version>")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+}
+```
+
+### Maven (`pom.xml`)
+
+```xml
+<dependency>
+    <groupId>io.github.secondlifegaming</groupId>
+    <artifactId>mockmc-v26.3</artifactId>
+    <version>${mockmc.version}</version>
+    <scope>test</scope>
+</dependency>
+```
+
+### Writing a Test
+
+```java
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockmc.mockmc.MockMCExtension;
+import org.mockmc.mockmc.MockMCInject;
+import org.mockmc.mockmc.ServerMock;
+import org.mockmc.mockmc.entity.PlayerMock;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+@ExtendWith(MockMCExtension.class)
+class MyPluginTest {
+
+    @MockMCInject
+    private ServerMock server;
+
+    @Test
+    void testCommandExecution() {
+        PlayerMock player = server.addPlayer("Steve");
+        player.performCommand("spawn");
+
+        player.assertSaid("Teleported to spawn!");
+        assertTrue(player.isOnline());
+    }
+}
+```
+
+---
+
+## Supported Platforms & Version Matrix
+
+MockMC maintains an explicitly pinned multi-tier contract across upstream server lines:
+
+| Platform      | Supported Version Span | Primary Target Build | Role & Scope                                                                        |
+| :------------ | :--------------------- | :------------------- | :---------------------------------------------------------------------------------- |
+| **Paper**     | `1.20.6` – `26.3`      | `paper-26.3-206`     | **Canonical Authority**: Bukkit & Paper APIs (`org.bukkit.*`, `io.papermc.paper.*`) |
+| **Folia**     | `1.20.6` – `26.3`      | `folia-26.3-3`       | **Platform Extension**: Regional scheduling (`io.papermc.paper.threadedregions.*`)  |
+| **Velocity**  | `4.x`                  | `velocity-4.3.0-44`  | **Proxy Extension**: Velocity proxy API (`com.velocitypowered.api.*`)               |
+| **Waterfall** | `1.21`                 | `waterfall-1.21-615` | **Proxy Extension**: BungeeCord API (`net.md_5.bungee.*`)                           |
+
+- **Zero-Downgrade Invariant**: Extension platforms (Folia, Velocity) supply platform-specific namespaces without overriding or downgrading canonical Paper classes.
+- **Historical Fallbacks**: Deprecated or removed signatures across the 1.20.6–26.3 range are maintained with `@Deprecated(forRemoval = true)` stubs.
+
+---
+
+## Documentation & Developer Reference
+
+- **[Interactive API Explorer & Documentation](https://secondlifegaming.github.io/MockMC/)**: Query method descriptors, view lifecycle status, and compare breaking changes across 1.20.6–26.3.
+- **[API Compatibility Report (COMPAT.md)](COMPAT.md)**: Machine-generated descriptor-level diff covering 4,000+ API changes.
+
+---
+
+## The Road to 1.0.0
+
+MockMC is expanding beyond unit testing into a comprehensive API intelligence and developer toolchain:
+
+1. **Native Language Server & IDE Plugins (IntelliJ & VS Code)**:
+    - Live cross-version compatibility inspection directly in the editor.
+    - Highlights Bukkit/Paper API calls that break or do not exist on older targets within your declared version range (e.g. `1.20.6..26.3`).
+    - See [RFC: Native Language Server Protocol & IDE Extensions](docs/RFC_LSP_IDE_EXTENSION.md).
+
+2. **MockMC MCP Server (Model Context Protocol)**:
+    - Exposes MockMC's bytecode manifest, descriptor diff engine, and test mappings to AI pair programmers (Claude, Gemini, Antigravity, Cursor).
+    - Allows agents to autonomously verify cross-version ABI safety, inspect deprecation replacements, and draft verified test cases.
+    - See [RFC: Model Context Protocol (MCP) Server](docs/RFC_MCP_SERVER.md).
+
+3. **Deepened Functional State Simulation**:
+    - Continuous transition of peripheral stubs into stateful simulation machines (registries, custom item components, Folia scheduler ticking).
+
+---
+
+## Building & Contributing
+
+Prerequisites: **JDK 25**
+
+```bash
+# Download and verify target platform JARs
+./gradlew downloadJars
+
+# Compile and run all backend test suites
+./gradlew compileJava compileTestJava
+./gradlew testAllBackends
+
+# Re-run bytecode analysis & smart stub generator
+./gradlew :metaminer:runGenerator
+./gradlew spotlessApply
+```
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) and [AGENTS_PROTOCOL.md](AGENTS_PROTOCOL.md) before submitting pull requests.
+
+---
+
+## License
+
+MockMC is licensed under the [MIT License](LICENSE).

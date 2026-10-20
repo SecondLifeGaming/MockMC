@@ -48,12 +48,13 @@ All exclusions are maintained centrally in [`ClassExclusions.java`](../metaminer
 
 ## Source Artifacts Scanned
 
-Coverage reports are produced against the explicit set of pinned JARs selected by `jars/manifests/versions.json` (validated for the 26.2–26.3 range only):
+Coverage reports are produced against the explicit set of pinned JARs selected by `jars/manifests/versions.json` (spanning the 1.20.6–26.3 range):
 
-- `jars/paper-26.3-178.jar`
-- `jars/folia-26.2-7.jar`
-- `jars/velocity-4.2.1-SNAPSHOT-36.jar`
+- `jars/paper-26.3-206.jar`
+- `jars/folia-26.3-3.jar`
+- `jars/velocity-4.3.0-44.jar`
 - `jars/waterfall-1.21-615.jar`
+- Historical baseline jars (`paper-1.20.6-151`, `paper-1.21.11-132`, `paper-26.1.2-74`, `paper-26.2-134`)
 - Remapped and unbundled libraries in `jars/cache/libraries/`
 
 ---

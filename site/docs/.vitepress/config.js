@@ -12,39 +12,34 @@ export default defineConfig({
   themeConfig: {
     siteTitle: 'MockMC',
     nav: [
-      { text: 'Guide', link: '/guides/getting-started' },
-      { text: 'Multi-Version Testing', link: '/guides/multi-version-testing' },
-      { text: 'API Explorer', link: '/explorer/' },
-      { text: 'Architecture', link: '/guides/architecture' },
-      { text: 'GitHub', link: 'https://github.com/secondlifegaming/MockMC' }
+      { text: 'API Explorer', link: '/' },
+      { text: 'Diff Viewer', link: '/explorer/diff-viewer' },
+      { text: 'Guides', link: '/guides/getting-started' },
+      { text: 'Architecture & RFCs', link: '/guides/architecture' },
+      { text: 'GitHub', link: 'https://github.com/SecondLifeGaming/MockMC' }
     ],
     sidebar: [
       {
-        text: 'Getting Started',
+        text: 'API Intelligence & Diffs',
         items: [
-          { text: 'Introduction & Setup', link: '/guides/getting-started' },
-          { text: 'Your First MockMC Test', link: '/guides/first-test' }
-        ]
-      },
-      {
-        text: 'Testing Recipes',
-        items: [
-          { text: 'Multi-Version Testing (Paper & Folia)', link: '/guides/multi-version-testing' },
-          { text: 'Player & Inventory Simulation', link: '/guides/player-simulation' }
-        ]
-      },
-      {
-        text: 'API & Compatibility Explorer',
-        items: [
-          { text: 'Interactive API Explorer', link: '/explorer/' },
+          { text: 'Interactive API Explorer', link: '/' },
           { text: 'Compatibility Diff Viewer', link: '/explorer/diff-viewer' }
         ]
       },
       {
-        text: 'Engine Architecture',
+        text: 'Testing Recipes & Guides',
         items: [
-          { text: 'MetaMiner & Engine First', link: '/guides/architecture' },
-          { text: 'Manifest Specification (RFC)', link: '/guides/manifest-specification' }
+          { text: 'Getting Started & Installation', link: '/guides/getting-started' },
+          { text: 'Your First MockMC Test', link: '/guides/first-test' },
+          { text: 'Player & Inventory Simulation', link: '/guides/player-simulation' },
+          { text: 'Multi-Version & Folia Testing', link: '/guides/multi-version-testing' }
+        ]
+      },
+      {
+        text: 'Engine Architecture & RFCs',
+        items: [
+          { text: 'MetaMiner Architecture', link: '/guides/architecture' },
+          { text: 'Manifest Specification & RFCs', link: '/guides/manifest-specification' }
         ]
       }
     ],

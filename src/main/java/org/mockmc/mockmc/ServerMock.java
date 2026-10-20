@@ -327,7 +327,7 @@ public class ServerMock extends ServerMockBase
 			if (preLoginEvent.getLoginResult() != AsyncPlayerPreLoginEvent.Result.ALLOWED)
 			{
 				PlayerConnectionCloseEvent playerConnectionCloseEvent = new PlayerConnectionCloseEvent(
-						player.getUniqueId(), player.getName(), player.getAddress().getAddress(), false);
+						player.getUniqueId(), player.getName(), player.getAddress(), false);
 				getPluginManager().callEvent(playerConnectionCloseEvent);
 				playerList.disconnectPlayer(player);
 				return;
@@ -343,7 +343,7 @@ public class ServerMock extends ServerMockBase
 		if (playerLoginEvent.getResult() != PlayerLoginEvent.Result.ALLOWED)
 		{
 			PlayerConnectionCloseEvent playerConnectionCloseEvent = new PlayerConnectionCloseEvent(player.getUniqueId(),
-					player.getName(), player.getAddress().getAddress(), false);
+					player.getName(), player.getAddress(), false);
 			getPluginManager().callEvent(playerConnectionCloseEvent);
 			playerList.disconnectPlayer(player);
 			return;
@@ -355,7 +355,7 @@ public class ServerMock extends ServerMockBase
 		if (hasWhitelist() && !getWhitelistedPlayers().contains(player))
 		{
 			PlayerConnectionCloseEvent playerConnectionCloseEvent = new PlayerConnectionCloseEvent(player.getUniqueId(),
-					player.getName(), player.getAddress().getAddress(), false);
+					player.getName(), player.getAddress(), false);
 			getPluginManager().callEvent(playerConnectionCloseEvent);
 			playerList.disconnectPlayer(player);
 			return;

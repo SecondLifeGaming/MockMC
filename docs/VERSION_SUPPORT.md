@@ -8,70 +8,111 @@ This document defines the official support matrix, version tiers, and compatibil
 
 MockMC classifies upstream server versions into four distinct lifecycle categories:
 
-| Status Tier                        | Definition                                                                                                                | Build Guarantee                                                                             |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| **Tier 1: Canonical**              | The primary upstream release defining the canonical API surface. All common Bukkit and Paper classes mirror this version. | 100% compile safety, multi-backend automated testing, active behavioral improvements.       |
-| **Tier 2: Extension**              | Platform-exclusive releases (Folia, proxies) pinned to their latest stable build.                                         | 100% compile safety for platform-exclusive namespaces; zero downgrade to canonical classes. |
-| **Tier 3: Fallback**               | Older releases whose deprecated or removed signatures are maintained via `@Deprecated` smart stubs.                       | Compile safety for legacy call sites; no behavioral expansion.                              |
-| **Tier 4: Experimental / Planned** | Candidate versions under architectural validation or awaiting upstream release.                                           | Subject to change as upstream APIs stabilize.                                               |
+| Status Tier | Definition | Build Guarantee |
+| :--- | :--- | :--- |
+| **Tier 1: Canonical** | The primary upstream release defining the canonical API surface. All common Bukkit and Paper classes mirror this version. | 100% compile safety, multi-backend automated testing, active behavioral improvements. |
+| **Tier 2: Extension** | Platform-exclusive releases (Folia, proxies) pinned to their latest stable build. | 100% compile safety for platform-exclusive namespaces; zero downgrade to canonical classes. |
+| **Tier 3: Fallback** | Historical releases whose deprecated or removed signatures are maintained via `@Deprecated` smart stubs. | Compile safety for legacy call sites across 1.20.6–26.3. |
+| **Tier 4: Experimental / Planned** | Candidate versions under architectural validation or awaiting upstream release. | Subject to change as upstream APIs stabilize. |
 
 ---
 
-## Current Target Matrix
+## Supported Version Matrix (1.20.6 – 26.3)
 
-| Platform       | Pinned Version / Build      | Status Tier           | Canonical Surface                          | Tested Via                |
-| -------------- | --------------------------- | --------------------- | ------------------------------------------ | ------------------------- |
-| **Paper**      | `26.3` (Build 178)          | **Tier 1: Canonical** | `org.bukkit.*`, `io.papermc.paper.*`       | `./gradlew testPaper`     |
-| **Folia**      | `26.2` (Build 7)            | **Tier 2: Extension** | `io.papermc.paper.threadedregions.*`       | `./gradlew testFolia`     |
-| **Velocity**   | `4.2.1-SNAPSHOT` (Build 36) | **Tier 2: Extension** | `com.velocitypowered.api.*`                | `./gradlew testVelocity`  |
-| **Waterfall**  | `1.21` (Build 615)          | **Tier 2: Extension** | `net.md_5.bungee.*`                        | `./gradlew testWaterfall` |
-| **Paper 26.2** | Legacy fallback             | **Tier 3: Fallback**  | Select deprecated methods                  | Automated BaseMocks       |
-| **Folia 26.3** | Awaiting upstream build     | **Tier 4: Planned**   | Scheduled for Tier 1 parity once published | —                         |
+MockMC provides full API mirroring and compatibility intelligence across **Minecraft 1.20.6 through 26.3**:
 
----
-
-## Validation Scope
-
-> [!NOTE]
-> This branch validates the **26.2–26.3 range only** (Paper 26.3 canonical, Folia 26.2 extension). `jars/manifests/versions.json` declares this range and is the authoritative artifact source; arbitrary historical version ranges have not been validated.
+| Platform | Pinned Version / Build | Status Tier | Canonical Surface / Scope | Tested Via |
+| :--- | :--- | :--- | :--- | :--- |
+| **Paper** | `26.3` (Build 206) | **Tier 1: Canonical** | `org.bukkit.*`, `io.papermc.paper.*` | `./gradlew testPaper` |
+| **Folia** | `26.3` (Build 3) | **Tier 2: Extension** | `io.papermc.paper.threadedregions.*` | `./gradlew testFolia` |
+| **Velocity** | `4.3.0` (Build 44) | **Tier 2: Extension** | `com.velocitypowered.api.*` | `./gradlew testVelocity` |
+| **Waterfall** | `1.21` (Build 615) | **Tier 2: Extension** | `net.md_5.bungee.*` | `./gradlew testWaterfall` |
+| **Paper Historical** | `1.20.6`, `1.21.11`, `26.1.2`, `26.2` | **Tier 3: Fallback** | Historical diffing, ABI breaking change tracking, `@Deprecated` fallbacks | Automated BaseMocks & Diff Engine |
+| **Folia Historical** | `1.20.6`, `1.21.11`, `26.1.2`, `26.2` | **Tier 3: Fallback** | Historical regional scheduler tracking | Scoped BaseMocks |
 
 ---
 
-## Important Distinction: Pinned Fallback vs. Native Support
+## Validation Scope & Provenance
+
+MockMC validates the entire modern component era spanning **1.20.6 through 26.3**. 
+
+`jars/manifests/versions.json` is the authoritative manifest declaring all pinned builds with SHA-256 hashes. Precomputed pairwise diffs and range diffs for every intermediate version step are generated directly from upstream bytecode and indexed in the [Interactive API Explorer](https://secondlifegaming.github.io/MockMC/explorer/).
+
+---
+
+## Extension Isolation Contract
 
 > [!IMPORTANT]
-> **A pinned fallback is not the same as native version parity.**
+> **Zero Downgrade Invariant**
 >
-> When MockMC includes `folia-26.2-7.jar` alongside `paper-26.3-178.jar`, MockMC **does not** claim native Folia 26.3 support. Instead:
->
-> 1. Folia-specific threading and regional scheduling APIs (`io.papermc.paper.threadedregions.*`) are supplied by the 26.2 build so plugins compiling against Folia APIs can run tests.
-> 2. All general Bukkit and Paper APIs are supplied by Paper 26.3.
-> 3. Once upstream Folia publishes a 26.3 build, Folia will be bumped to 26.3 without structural disruption.
+> 1. General Bukkit and Paper APIs are exclusively governed by the canonical Paper build (`paper-26.3-206.jar`).
+> 2. Folia-specific threading and regional scheduling APIs (`io.papermc.paper.threadedregions.*`) are supplied by the Folia extension build.
+> 3. MetaMiner strictly enforces that platform extension passes cannot overwrite, modify, or downgrade any method or class emitted by the canonical tier.
+> 4. Proxy platforms (`com.velocitypowered.api.*` and `net.md_5.bungee.*`) live in distinct package namespaces and are fully decoupled from server backends.
 
 ---
 
-## Artifact Coordinates & Consumer Configuration
+## Consumer Configuration
 
-### Current Stable Artifact (Paper 26.3 Line)
+### Option 1: Direct Release JAR (Zero Auth)
+
+Drop the release JAR into your `libs/` folder:
+
+```kotlin
+// build.gradle.kts
+dependencies {
+    testImplementation(files("libs/mockmc-v26.3-0.1.1.jar"))
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+}
+```
+
+### Option 2: Clone or Fork (`mavenLocal`)
+
+```bash
+git clone https://github.com/SecondLifeGaming/MockMC.git
+cd MockMC
+./gradlew publishToMavenLocal
+```
+
+```kotlin
+// build.gradle.kts
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/")
+}
+
+dependencies {
+    testImplementation("io.github.secondlifegaming:mockmc-v26.3:0.1.1")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
+}
+```
+
+### Option 3: GitHub Packages Repository
 
 ```kotlin
 // build.gradle.kts
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
+    maven("https://maven.pkg.github.com/SecondLifeGaming/MockMC") {
+        credentials {
+            username = providers.environmentVariable("GITHUB_ACTOR").orElse(providers.gradleProperty("gpr.user")).orNull
+            password = providers.environmentVariable("GITHUB_TOKEN").orElse(providers.gradleProperty("gpr.key")).orNull
+        }
+    }
 }
 
 dependencies {
-    // Current primary release line
-    testImplementation("io.github.secondlifegaming:mockmc:0.0.5") // Or versioned line: mockmc-v26.2
-    testImplementation("io.papermc.paper:paper-api:26.3.build.178-stable")
+    // Current release line (e.g. 0.1.1)
+    testImplementation("io.github.secondlifegaming:mockmc-v26.3:<version>")
+    testImplementation("org.junit.jupiter:junit-jupiter:6.0.3")
 }
 ```
 
 ### Upstream Version Bump Schedule
 
 When a new major Minecraft/Paper release occurs:
-
-1. Paper is upgraded first as the canonical baseline.
-2. Proxy APIs (Velocity, Waterfall) are verified for backward-compatible interface contracts.
-3. Extension platforms (Folia) follow as soon as upstream provides a bootable JAR.
+1. Paper is updated first as the canonical baseline in `jars/manifests/versions.json`.
+2. MetaMiner regenerates the base stubs via `./gradlew :metaminer:runGenerator`.
+3. Proxy and extension platforms (Velocity, Folia) are updated once stable builds are published upstream.

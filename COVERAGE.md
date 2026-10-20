@@ -1,11 +1,11 @@
 # MockMC API Coverage Report
 
-Generated on: 2026-10-17T23:04:08.101440165Z
+Generated on: 2026-10-20T18:59:49.169890365Z
 
 ## Accounted-For API Surface: 100.00%
 
-- **Total Discovered API Methods**: 12942
-- **Category A: Automated BaseMocks**: 12462
+- **Total Discovered API Methods**: 12964
+- **Category A: Automated BaseMocks**: 12484
 - **Category B: Manual Implementations**: 0
 - **Category C: Justified Exclusions**: 480
 - **Unaccounted Methods**: 0
@@ -23,7 +23,7 @@ Generated on: 2026-10-17T23:04:08.101440165Z
 | com.destroystokyo.paper.event.executor.asm | 2 | 100% Accounted |
 | com.destroystokyo.paper.inventory.meta | 20 | 100% Accounted |
 | com.destroystokyo.paper.loottable | 30 | 100% Accounted |
-| com.destroystokyo.paper.network | 8 | 100% Accounted |
+| com.destroystokyo.paper.network | 10 | 100% Accounted |
 | com.destroystokyo.paper.profile | 54 | 100% Accounted |
 | com.destroystokyo.paper.util | 6 | 100% Accounted |
 | com.velocitypowered.api.command | 23 | 100% Accounted |
@@ -40,7 +40,7 @@ Generated on: 2026-10-17T23:04:08.101440165Z
 | com.velocitypowered.api.proxy.server | 4 | 100% Accounted |
 | com.velocitypowered.api.scheduler | 6 | 100% Accounted |
 | com.velocitypowered.api.util | 5 | 100% Accounted |
-| io.papermc.paper | 68 | 100% Accounted |
+| io.papermc.paper | 70 | 100% Accounted |
 | io.papermc.paper.advancement | 18 | 100% Accounted |
 | io.papermc.paper.annotation | 0 | 100% Accounted |
 | io.papermc.paper.ban | 2 | 100% Accounted |
@@ -131,13 +131,13 @@ Generated on: 2026-10-17T23:04:08.101440165Z
 | net.md_5.bungee.protocol | 76 | 100% Accounted |
 | net.md_5.bungee.protocol.channel | 3 | 100% Accounted |
 | net.md_5.bungee.tab | 7 | 100% Accounted |
-| org.bukkit | 1758 | 100% Accounted |
+| org.bukkit | 1762 | 100% Accounted |
 | org.bukkit.advancement | 52 | 100% Accounted |
 | org.bukkit.attribute | 34 | 100% Accounted |
 | org.bukkit.ban | 16 | 100% Accounted |
 | org.bukkit.block | 812 | 100% Accounted |
 | org.bukkit.block.banner | 6 | 100% Accounted |
-| org.bukkit.block.data | 162 | 100% Accounted |
+| org.bukkit.block.data | 164 | 100% Accounted |
 | org.bukkit.block.data.type | 372 | 100% Accounted |
 | org.bukkit.block.sign | 16 | 100% Accounted |
 | org.bukkit.boss | 70 | 100% Accounted |
@@ -149,7 +149,7 @@ Generated on: 2026-10-17T23:04:08.101440165Z
 | org.bukkit.conversations | 40 | 100% Accounted |
 | org.bukkit.damage | 30 | 100% Accounted |
 | org.bukkit.enchantments | 52 | 100% Accounted |
-| org.bukkit.entity | 3454 | 100% Accounted |
+| org.bukkit.entity | 3466 | 100% Accounted |
 | org.bukkit.entity.boat | 0 | 100% Accounted |
 | org.bukkit.entity.minecart | 42 | 100% Accounted |
 | org.bukkit.event | 16 | 100% Accounted |

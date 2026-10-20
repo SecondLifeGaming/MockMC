@@ -20,23 +20,23 @@ To prevent cross-version pollution and maintain strict compilation guarantees, M
 
 ## Pinned Platform Artifacts (The Current Baseline)
 
-MockMC currently pins the following target platform builds in `build.gradle.kts`:
+MockMC pins the target platform builds in `jars/manifests/versions.json`:
 
 | Platform      | Pinned Artifact                  | Release Line     | Scope / Authority                                                                          |
 | ------------- | -------------------------------- | ---------------- | ------------------------------------------------------------------------------------------ |
-| **Paper**     | `paper-26.3-178.jar`             | 26.3 (Primary)   | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
-| **Folia**     | `folia-26.2-7.jar`               | 26.2 (Extension) | **Platform-exclusive scope only**: `io.papermc.paper.threadedregions.*`.                   |
-| **Velocity**  | `velocity-4.2.1-SNAPSHOT-36.jar` | 4.2.1            | Proxy API: `com.velocitypowered.api.*`.                                                    |
+| **Paper**     | `paper-26.3-206.jar`             | 26.3 (Primary)   | **Canonical source of truth** for Bukkit and Paper (`org.bukkit.*`, `io.papermc.paper.*`). |
+| **Folia**     | `folia-26.3-3.jar`               | 26.3 (Extension) | **Platform-exclusive scope only**: `io.papermc.paper.threadedregions.*`.                   |
+| **Velocity**  | `velocity-4.3.0-44.jar`          | 4.3.0            | Proxy API: `com.velocitypowered.api.*`.                                                    |
 | **Waterfall** | `waterfall-1.21-615.jar`         | 1.21             | Proxy API: `net.md_5.bungee.*`.                                                            |
 
-### The Paper 26.3 + Folia 26.2 Pairing
+### Platform Tiering & Historical Multi-Version Range (1.20.6 – 26.3)
 
-A frequent point of confusion is why MockMC pairs Paper 26.3 with Folia 26.2:
+MockMC tracks the full modern component era spanning **1.20.6 through 26.3**.
 
-- **Upstream Version Lag**: Upstream Folia releases track upstream Paper releases with a development delay. During the 26.3 cycle, Paper published stable 26.3 builds before Folia released an official 26.3 build.
-- **Architectural Isolation**: Rather than holding Paper back to 26.2, MockMC promotes Paper 26.3 to the primary canonical tier. Folia 26.2 is scanned exclusively for its regional scheduler namespace (`io.papermc.paper.threadedregions.*`).
-- **Zero Downgrade Invariant**: MetaMiner enforces that Folia 26.2 classes are forbidden from modifying or downgrading any class already emitted by Paper 26.3.
-- **Seamless Upgrade Path**: When upstream Folia publishes a 26.3 build, bumping the version and hash in `build.gradle.kts` promotes Folia to 26.3 with zero changes to manual mocks or the generator pipeline.
+- **Canonical Authority**: Paper 26.3 defines the primary compile surface.
+- **Architectural Isolation**: Platform extensions like Folia supply regional threading namespaces (`io.papermc.paper.threadedregions.*`), while Velocity and Waterfall provide proxy APIs in their own respective packages.
+- **Zero Downgrade Invariant**: MetaMiner enforces that platform extension passes and historical scans can never modify or downgrade classes emitted by canonical Paper.
+- **Pairwise & Range Diffs**: Bytecode manifests across all pinned versions in `versions.json` feed the diff engine to identify binary and source breaks.
 
 ---
 
@@ -46,14 +46,14 @@ The generator scans and processes bytecode in three strictly ordered passes:
 
 ```
 +-----------------------------------------------------------------------+
-|  Pass 1: Canonical Paper Pass (paper-26.3-178)                         |
+|  Pass 1: Canonical Paper Pass (paper-26.3-206)                         |
 |  - Generates org.bukkit.* and io.papermc.paper.*                      |
 |  - Canonical authority for all shared server classes                   |
 +-----------------------------------------------------------------------+
                                   |
                                   v
 +-----------------------------------------------------------------------+
-|  Pass 2: Platform Extension Pass (folia-26.2, velocity, waterfall)     |
+|  Pass 2: Platform Extension Pass (folia-26.3, velocity, waterfall)     |
 |  - Folia: Restricted strictly to io.papermc.paper.threadedregions.*   |
 |  - Velocity: Generates proxy/com/velocitypowered/api/**               |
 |  - Waterfall: Generates proxy/net/md_5/bungee/**                      |
